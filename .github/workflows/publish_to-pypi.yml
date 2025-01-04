@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
@@ -24,11 +24,12 @@ jobs:
         pip install build twine
 
     - name: Build the package
+      working-directory: ./source  # Wechsle in den Unterordner "source"
       run: python -m build
 
     - name: Publish to PyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-      run: |
-        python -m twine upload dist/*
+      working-directory: ./source  # Wechsle in den Unterordner "source"
+      run: python -m twine upload dist/*
