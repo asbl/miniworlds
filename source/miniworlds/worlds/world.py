@@ -1,6 +1,7 @@
 import math
 import pygame
 import sys
+import asyncio
 from typing import Tuple, Union, Optional, List, cast, Callable
 
 import miniworlds.appearances.appearance as appearance
@@ -740,9 +741,9 @@ class World(world_base.WorldBase):
         self.is_running = True
         if event:
             self.app.event_manager.to_event_queue(event, data)
-        self.app.run(
+        asyncio.run(self.app.run(
             self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
-        )
+        ))
 
     def init_display(self):
         if not self.is_display_initialized:

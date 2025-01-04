@@ -80,7 +80,7 @@ class App:
         self.repaint_areas: List = []
 
 
-    def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
+    async def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
         """
         runs the main_loop
         Args:
@@ -98,11 +98,7 @@ class App:
         self.init_app()
         self.prepare_mainloop()
         if not self._mainloop_started:
-            if asyncio.get_event_loop().is_running():
-                await self._update()
-            else:
-                asyncio.run(self.start_mainloop())
-
+            await self.start_mainloop()
         else:
             for world in self.running_worlds:
                 world.dirty = 1
