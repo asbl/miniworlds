@@ -11,7 +11,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="miniworlds",
-    version="3.0.2.6",
+    version="3.0.2.8",
     description="Create 2D worlds and Games",
     long_description=long_description,
     long_description_content_type="text/markdown",
