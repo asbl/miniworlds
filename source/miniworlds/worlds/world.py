@@ -741,9 +741,19 @@ class World(world_base.WorldBase):
         self.is_running = True
         if event:
             self.app.event_manager.to_event_queue(event, data)
-        self.app.run(
+        
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            # Starte main() in der laufenden Event-Loop
+            asyncio.ensure_future(self.app.run(
             self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
-        )
+        ))
+        else:
+            asyncio.run(self.app.run(
+            self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
+        ))
+    
+        
 
     def init_display(self):
         if not self.is_display_initialized:
