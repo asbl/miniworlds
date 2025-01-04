@@ -32,7 +32,7 @@ setup(
         exclude=["contrib", "docs", "tests", "examples"]
     ),  # Required
     package_dir={"miniworlds": "miniworlds"},
-    install_requires=["pygame-ce>=2.5.2", "numpy", ],
+    install_requires=["pygame-ce", "numpy", ],
     include_package_data=True,
     package_data={"miniworlds": ["py.typed"]},
 )

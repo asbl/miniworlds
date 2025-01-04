@@ -2,6 +2,7 @@ import __main__
 import os
 import sys
 import warnings
+import asyncio
 
 import pkg_resources # type: ignore
 import pygame
@@ -113,12 +114,12 @@ class App:
     def start_mainloop(self):
         self._mainloop_started = True
         while not self._quit:
-            self._update()
+            asyncio.run(self._update())
         if not self._unittest:
             pygame.display.quit()
             sys.exit(self._exit_code)
 
-    def _update(self):
+    async def _update(self):
         """This is the mainloop. This function is called until the app quits.
         """
         self.event_manager.pygame_events_to_event_queue()
@@ -128,6 +129,7 @@ class App:
             self.event_manager.handle_event_queue()
             self.worlds_manager.reload_all_worlds()
             self.display_repaint()
+            await asyncio.sleep(0) # do not forget that one, it must be called on every frame
 
     def quit(self, exit_code=0):
         self._exit_code = exit_code
