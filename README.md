@@ -52,6 +52,21 @@ Angry-Birds-like
 NEW: Hex Boardgame:
 
 [![video](docs/source/_images/hexboard.png)](docs/source/_static/hex_boardgame_short.mp4)
+
 ## Links
 
 [Codeberg](https://codeberg.org/a_siebel/miniworlds) | [Documentation](http://miniworlds.de/) | [PyPi](https://pypi.org/project/miniworlds/) | [Cookbook](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/)
+
+## Docs
+
+### Development:
+
+
+Upload new version to pypi:
+
+```
+git tag v3.0.1.1  
+# Replace version number and set this number in source/setup.conf
+
+git push origin v3.0.1.1
+```

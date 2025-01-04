@@ -25,6 +25,12 @@ var/
 *.egg
 */test/output
 
+#Emsrippten
+emsdk
+emsdk/*
+*/emsdk
+*/emsdk/*
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
