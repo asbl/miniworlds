@@ -98,7 +98,12 @@ class App:
         self.init_app()
         self.prepare_mainloop()
         if not self._mainloop_started:
-            await self.start_mainloop()
+            loop = asyncio.get_running_loop()
+            if loop.is_running():
+                # Starte main() in der laufenden Event-Loop
+                asyncio.ensure_future(self.start_mainloop)
+            else:
+                asyncio.run(self.start_mainloop)
         else:
             for world in self.running_worlds:
                 world.dirty = 1
