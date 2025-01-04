@@ -98,7 +98,7 @@ class App:
         self.init_app()
         self.prepare_mainloop()
         if not self._mainloop_started:
-            self.start_mainloop()
+            asyncio.run(self.start_mainloop())
         else:
             for world in self.running_worlds:
                 world.dirty = 1
@@ -113,10 +113,10 @@ class App:
             world.dirty = 1
             world.background.set_dirty("all", 2)
 
-    def start_mainloop(self):
+    async def start_mainloop(self):
         self._mainloop_started = True
         while not self._quit:
-            asyncio.run(self._update())
+            await self._update()
         if not self._unittest:
             pygame.display.quit()
             sys.exit(self._exit_code)
