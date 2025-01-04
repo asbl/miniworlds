@@ -80,7 +80,7 @@ class App:
         self.repaint_areas: List = []
 
 
-    async def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
+    def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
         """
         runs the main_loop
         Args:
