@@ -4,7 +4,7 @@ import sys
 import warnings
 import asyncio
 
-import pkg_resources # type: ignore
+
 import pygame
 from typing import List, cast, Optional
 
@@ -55,8 +55,10 @@ class App:
             print("can't check if run() is present (This can happen if you are using jupyter notebooks. Resuming)")
 
     def _output_start(self):
-        version = pkg_resources.require("miniworlds")[0].version
-        print("Show new miniworlds v.{0} Window".format(version))
+        if sys.platform != 'emscripten':
+            import pkg_resources # type: ignore
+            version = pkg_resources.require("miniworlds")[0].version
+            print("Show new miniworlds v.{0} Window".format(version))
 
     def __init__(self, title):
         self._output_start()
