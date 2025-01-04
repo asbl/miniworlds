@@ -21,7 +21,7 @@ It is a 2D engine inspired by greenfoot and gamegrid based on pygame.
 * Music and sound effects
 * Integrated GUI elements like console for output, toolbar, ...
 * Load and Save to SQLite Databases
-* Integrated Physics-Engine based on Pymunk
+* Extension for physics-Engine based on Pymunk available
 * Open Source  
 * miniworlds is a 2D Engine based on Python 3, pygame and pymunk.
 
