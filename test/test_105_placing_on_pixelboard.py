@@ -1,7 +1,7 @@
 from miniworlds import Actor, World, App
 import imgcompare
 import unittest
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 
 def diff(ia, ib):
     percentage = imgcompare.image_diff_percent(ia, ib)

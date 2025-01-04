@@ -1,5 +1,5 @@
 from miniworlds import Actor, World, App
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random

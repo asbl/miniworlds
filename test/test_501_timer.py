@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, TiledWorld, LoopActionTimer
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random

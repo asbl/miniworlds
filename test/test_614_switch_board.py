@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, World
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random
@@ -18,7 +18,6 @@ class Test614(unittest.TestCase):
                     self.actor = Actor((10,10), origin = "topleft")
                     self.actor.color = (255, 0, 0)
                     self.actor.direction = "right"
-                    print(self.event_manager.registered_events)
                     
                 def act_test(self):
                     print("act", self.frame)
@@ -36,8 +35,6 @@ class Test614(unittest.TestCase):
                     self.add_background((255,255,255,255))
                     self.actor = Actor((80,80), origin = "topleft")
                     self.actor.color = (0,255,0)
-                    #self.actor.add_costume("1.png")
-                    #print(self.actor.costume, self.actor.costume.image)
                     self.actor.costume.set_dirty("all", 2)
                     self.actor.dirty = 1
                     print("actor created at", self.actor.get_local_rect())
@@ -70,4 +67,7 @@ class Test614(unittest.TestCase):
     def test_main(self):
         with self.assertRaises(SystemExit):
             self.world.run()
+
+if __name__ == "__main__":
+    unittest.main()
 

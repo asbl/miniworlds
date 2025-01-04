@@ -1,6 +1,6 @@
 from miniworlds import TiledWorld, Actor, App
 import unittest
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 
 class Test103(unittest.TestCase):
 

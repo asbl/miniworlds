@@ -1,5 +1,5 @@
 from miniworlds import App, World, Text, OriginException
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 
 class Test116(unittest.TestCase):

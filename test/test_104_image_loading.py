@@ -1,6 +1,6 @@
 from miniworlds import Actor, World, App
 import unittest
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 
 class Test104(unittest.TestCase):
     

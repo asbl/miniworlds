@@ -1,5 +1,5 @@
 from miniworlds import App, TiledWorld, Actor, CostumeOutOfBoundsError
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random

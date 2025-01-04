@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, Toolbar, Button, Label, Label, loop
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random
@@ -31,7 +31,7 @@ class Test610(unittest.TestCase):
                 button.margin_left = 10
                 button.margin_right = 10
                 button.set_background_color((200,200,0))
-                toolbar.add(button, "button 2")
+                toolbar.add(button)
 
                 button = Label("Toolbar Label")
                 button.text = "Changed Label"
@@ -56,7 +56,7 @@ class Test610(unittest.TestCase):
 
                 label = Label("Remove")
                 toolbar.add(label)
-                toolbar.remove_widget(label)
+                toolbar.remove(label)
 
                 label = Label("0")
                 toolbar.add(label)

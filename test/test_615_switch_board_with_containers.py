@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, World, Console
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random
@@ -22,6 +22,7 @@ class Test615(unittest.TestCase):
                     if self.frame == 20:
                         print("world 1 is running", self.frame)
                         world2 = World2(400, 600)
+                        self.attach_world(world2)
                         self.switch_world(world2)
                         
                 
@@ -32,7 +33,9 @@ class Test615(unittest.TestCase):
                     print("world 2 was created")  
                     
                 def act(self):
-                    self.test()           
+                    self.test()
+                    
+                
             world = World1(400,600)
             return world
         

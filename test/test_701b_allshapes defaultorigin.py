@@ -1,6 +1,6 @@
 from miniworlds import App, World, Actor, CostumeOutOfBoundsError
 import miniworlds
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random

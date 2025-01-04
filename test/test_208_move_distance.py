@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, World
-from screenshot_tester import ScreenshotTester
+from .screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random
@@ -14,11 +14,11 @@ class Test208(unittest.TestCase):
             @world.register
             def setup_environment(self, test):
                 tkn = Actor((0,0), origin = "topleft")
-                tkn.move_right(1)
+                tkn.move_in_direction("right", 1)
                 tkn2 = Actor((0,40), origin = "topleft")
-                tkn2.move_right(40)
+                tkn2.move_in_direction("right", 40)
                 tkn3 = Actor((0,80), origin = "topleft")
-                tkn3.move_right(80)
+                tkn3.move_in_direction("right", 80)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()
