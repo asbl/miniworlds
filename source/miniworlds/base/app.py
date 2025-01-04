@@ -98,7 +98,11 @@ class App:
         self.init_app()
         self.prepare_mainloop()
         if not self._mainloop_started:
-            asyncio.run(self.start_mainloop())
+            if asyncio.get_event_loop().is_running():
+                await self._update()
+            else:
+                asyncio.run(self.start_mainloop())
+
         else:
             for world in self.running_worlds:
                 world.dirty = 1
