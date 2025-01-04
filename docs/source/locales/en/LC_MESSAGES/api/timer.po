@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/api/timer.md:1
+msgid "Timer"
+msgstr "Temporizador"
+
+#: ../../source/api/timer.md:4
+msgid ".. autoclass:: miniworlds.tools.timer.Timer    :members:"
+msgstr ".. autoclass:: miniworlds.tools.timer.Timer    :members:"
+
+#: ../../source/api/timer.md:7 ../../source/api/timer.md:17
+#: ../../source/api/timer.md:26
+msgid ".. autoclasstoc::"
+msgstr ".. autoclasstoc::"
+
+#: ../../source/api/timer.md:11
+msgid "ActionTimer ###########"
+msgstr "ActionTimer ###########"
+
+#: ../../source/api/timer.md:14
+msgid ".. autoclass:: miniworlds.tools.timer.ActionTimer    :members:"
+msgstr ".. autoclass:: miniworlds.tools.timer.ActionTimer    :members:"
+
+#: ../../source/api/timer.md:20
+msgid "LoopActionTimer ###############"
+msgstr "LoopActionTimer ###############"
+
+#: ../../source/api/timer.md:23
+msgid ".. autoclass:: miniworlds.tools.timer.LoopActionTimer    :members:"
+msgstr ".. autoclass:: miniworlds.tools.timer.LoopActionTimer    :members:"

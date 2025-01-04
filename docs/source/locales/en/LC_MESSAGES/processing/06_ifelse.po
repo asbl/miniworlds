@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/processing/06_ifelse.md:1
+msgid "Verzweigungen"
+msgstr "Branches"
+
+#: ../../source/processing/06_ifelse.md:3
+msgid ""
+"Verzweigungen brauchst du immer dann, wenn du Bedingungen überprüfen willst "
+"und davon der Programmfluss abhängen soll."
+msgstr ""
+"Branches you always need when you want to check conditions and the program "
+"flow should depend on them."
+
+#: ../../source/processing/06_ifelse.md:5
+msgid "Erstes Beispiel"
+msgstr "First example"
+
+#: ../../source/processing/06_ifelse.md:7
+msgid ""
+"Willst du z.B. in deinem Spiel überpfüen, ob ein bestimmter Punktestand "
+"erreicht wurde, so geht dies mit einer Anweisung"
+msgstr ""
+"Do you want to check in your game, if a certain score was reached, this can "
+"be done with an instruction"
+
+#: ../../source/processing/06_ifelse.md:14
+msgid "Allgemeine Syntax"
+msgstr "General Syntax"
+
+#: ../../source/processing/06_ifelse.md:16
+msgid "Allgemein ist dies die Syntax für Verzweigungen:"
+msgstr "In general, this is the syntax for branches:"
+
+#: ../../source/processing/06_ifelse.md:22
+msgid "Boolsche Ausdrücke"
+msgstr "Boolean expressions"
+
+#: ../../source/processing/06_ifelse.md:24
+msgid ""
+"Eine Bedingung ist ein Ausdruck, der den Wert `True` oder `False` besitzen  "
+"kann - Man nennt solche Ausdrücke *boolsche Ausdrücke*."
+msgstr ""
+"A condition is an expression that can have the value `True` or `False` - "
+"Such expressions are called *boolean expressions*."
+
+#: ../../source/processing/06_ifelse.md:27
+msgid ""
+"Die einfachsten boolschen Ausdrücke sind `True` und `False`. Weitere "
+"Ausdrücke erhälst du i.d.R. mit **Vergleichen**, z.B.:"
+msgstr ""
+"The simplest boolean expressions are `True` and `False`. Additional "
+"expressions you receive generally using **comparisons**, e.g.:"
+
+#: ../../source/processing/06_ifelse.md:38
+msgid ""
+"Die Ausdrücke können beliebig kompliziert sein und Variablen enthalten."
+msgstr "The expressions can be arbitrarily complicated and contain variables."
+
+#: ../../source/processing/06_ifelse.md:41
+msgid ""
+"Achtung: Bei Vergleichen verwendet man immer ein doppeltes "
+"Gleichheitszeichen anstelle eines einfachen Gleichheitszeichen"
+msgstr ""
+"Attention: When comparing, always use a double equal sign instead of a "
+"single equal sign"
+
+#: ../../source/processing/06_ifelse.md:44
+msgid "Vergleiche"
+msgstr "Compare"
+
+#: ../../source/processing/06_ifelse.md:46
+msgid "Folgende Vergleiche kannst du verwenden:"
+msgstr "You can use the following comparisons:"
+
+#: ../../source/processing/06_ifelse.md:48
+msgid "`<`: Kleiner als"
+msgstr "<: Leshalan"
+
+#: ../../source/processing/06_ifelse.md:49
+msgid "`<=` : Kleiner als oder gleich"
+msgstr "`<=` : Less than or equal to"
+
+#: ../../source/processing/06_ifelse.md:50
+msgid "`==`: Gleich"
+msgstr "`==`: Equal"
+
+#: ../../source/processing/06_ifelse.md:51
+msgid "`>=`: Größer als oder gleich"
+msgstr "`>=`: Greater than or equal"
+
+#: ../../source/processing/06_ifelse.md:52
+msgid "`>` Größer als"
+msgstr ">`Më shumë se`"
+
+#: ../../source/processing/06_ifelse.md:54
+msgid "Code Blöcke"
+msgstr "Code Blocks"
+
+#: ../../source/processing/06_ifelse.md:56
+msgid ""
+"Willst du mehrere Anweisungen abhängig von der Bedingung durchführen, so "
+"geht dies mit Hilfe von Code-Blöcken. Code-Blöcke sind stets gleichweit "
+"eingerückt und alle Anweisungen die entsprechend eingerückt sind, werden"
+msgstr ""
+"Do you want to perform multiple instructions depending on the condition, "
+"this is done with the help of code blocks. Code blocks are always indented "
+"the same distance and all instructions that are indented accordingly are "
+"executed"
+
+#: ../../source/processing/06_ifelse.md:58
+msgid "Beispiel:"
+msgstr "Example:"
+
+#: ../../source/processing/06_ifelse.md:67
+msgid ""
+"Unabhängig von der Punktzahl wird die letzte Code-Zeile auf jeden Fall "
+"ausgeführt. Die beiden eingerückten Zeilen werden allerdings nur ausgeführt,"
+" wenn der Punktestand größer als 100 ist."
+msgstr ""
+"Regardless of the score, the last line of code will be executed in any case."
+" The two indented lines, however, will only be executed if the score is "
+"greater than 100."
+
+#: ../../source/processing/06_ifelse.md:69
+msgid "Elif und Else"
+msgstr "Elif and Else"
+
+#: ../../source/processing/06_ifelse.md:71
+msgid "Mit elif und else kannst du Alternativen einbauen. Dies geht z.B. so:"
+msgstr ""
+"With elif and else you can build in alternatives. This works for example "
+"like this:"
+
+#: ../../source/processing/06_ifelse.md:83
+msgid "Die allgemeine Syntax ist:"
+msgstr "The general syntax is:"
+
+#: ../../source/processing/06_ifelse.md:94
+msgid ""
+"Sowohl elif als auch else können dabei weggelassen werden. Es sind auch "
+"mehrere elif-Blöcke möglich."
+msgstr ""
+"Both elif and else can be omitted. Multiple elif blocks are also possible."
+
+#: ../../source/processing/06_ifelse.md:96
+msgid "Ausführliches Beispiel"
+msgstr "Detailed example"
+
+#: ../../source/processing/06_ifelse.md:98
+msgid ""
+"Ein Rechteck soll sich von rechts nach links bewegen. Wenn es die linke "
+"Seite erreicht, soll es wieder ganz rechts auftauchen."
+msgstr ""
+"A rectangle should move from right to left. When it reaches the left side, "
+"it should reappear all the way to the right."
+
+#: ../../source/processing/06_ifelse.md:100
+msgid "Die erste Variante sieht so aus:"
+msgstr "The first variant looks like this:"
+
+#: ../../source/processing/06_ifelse.md:117
+msgid "Es fehlt noch der entscheidende Teil."
+msgstr "The decisive part is still missing."
+
+#: ../../source/processing/06_ifelse.md:119
+msgid "Diesen kann man so formulieren:"
+msgstr "This can be formulated like this:"
+
+#: ../../source/processing/06_ifelse.md:121
+msgid ""
+"`Falls die x-Koordinate den Wert 0 erreicht, setze das Rechteck wieder nach "
+"rechts`"
+msgstr ""
+"If the x-coordinate reaches the value of 0, move the rectangle back to the "
+"right"
+
+#: ../../source/processing/06_ifelse.md:123
+msgid "Dies kann man direkt in Python übersetzen:"
+msgstr "This can be translated directly into Python:"
+
+#: ../../source/processing/06_ifelse.md:141
+msgid "Ein weiteres Beispiel - Ein simples Flappy-Bird"
+msgstr "Another example - A simple Flappy Bird"
+
+#: ../../source/processing/06_ifelse.md:143
+msgid "Wir wollen eine Art (einfaches) Flappy-Bird programmieren."
+msgstr "We want to program a kind (simple) Flappy Bird."
+
+#: ../../source/processing/06_ifelse.md:145
+msgid ""
+"Unser Hauptcharakter soll ein Ball sein, der bei Tastendruck sich nach oben "
+"bewegt. Dies können wir wie folgt realisieren:"
+msgstr ""
+"Our main character should be a ball, which moves upwards when a key is "
+"pressed. We can realize this as follows:"
+
+#: ../../source/processing/06_ifelse.md:172
+msgid "Der Ball fällt und fällt immer schneller."
+msgstr "The ball falls and falls faster and faster."
+
+#: ../../source/processing/06_ifelse.md:174
+msgid "In der Zeile:"
+msgstr "In the line:"
+
+#: ../../source/processing/06_ifelse.md:181
+msgid ""
+"wird die Geschwindigkeit erhöht, mit der der Ball fällt.  Im ersten Schritt "
+"soll sich der Ball nach oben bewegen können, wenn eine Taste gedrückt wird."
+msgstr ""
+"will the speed be increased at which the ball falls. In the first step, the "
+"ball should be able to move upwards when a key is pressed."
+
+#: ../../source/processing/06_ifelse.md:212
+msgid "Kolissionen"
+msgstr "Kolissionen"
+
+#: ../../source/processing/06_ifelse.md:214
+msgid ""
+"Nun wollen wir nicht nur einfach Positionen vergleichen, sondern auch die "
+"Lage von Objekten zueinander."
+msgstr ""
+"Now we not only want to compare positions, but also the location of objects "
+"in relation to each other."
+
+#: ../../source/processing/06_ifelse.md:216
+msgid "Dafür können wir verschiedene `sensor`-Methoden verwenden."
+msgstr "For this, we can use various `sensor` methods."
+
+#: ../../source/processing/06_ifelse.md:218
+msgid "Dies geht z.B. so:"
+msgstr "This goes e.g. like this:"
+
+#: ../../source/processing/06_ifelse.md:251
+msgid "Die Logik befindet sich in folgenden Zeilen:"
+msgstr "The logic is in the following lines:"
+
+#: ../../source/processing/06_ifelse.md:259
+msgid ""
+"Die erste Zeile überprüft mit einem Sensor, welches Actor an der eigenen "
+"Position gefunden wurde (und gibt das erste gefundene Actor zurück). "
+"Anschließend wird das so gefundene Actor mit dem Rechteck verglichen. Wenn "
+"dies die gleichen Objekte sind, dann wird das Spiel abgebrochen."
+msgstr ""
+"The first line checks with a sensor which Actor was found at its own "
+"position (and returns the first found Actor). Then the found Actor is "
+"compared with the rectangle. If these are the same objects, the game will be"
+" aborted."
+
+#: ../../source/processing/06_ifelse.md:262
+msgid "So sieht das Flappy-Bird-Spiel nun aus:"
+msgstr "This is what the Flappy Bird game looks like now:"

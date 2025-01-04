@@ -1,0 +1,54 @@
+msgid "Nachrichten"
+msgstr "Messages"
+
+msgid "Nachrichten senden"
+msgstr "Sending Messages"
+
+msgid ""
+"Mit **`send_message(self, message)`** kannst du eine Nachricht an alle "
+"Objekte in deiner Welt senden.  Diese Nachrichten können von anderen "
+"Objekten empfangen und verarbeitet werden, wenn sie auf das entsprechende"
+" Ereignis hören."
+msgstr ""
+"With **`send_message(self, message)`**, you can send a message to all objects in your world. These messages can be received and processed by other objects if they are listening for the corresponding event."
+
+msgid "Beispiel:"
+msgstr "Example:"
+
+msgid ""
+"In diesem Beispiel sendet player 1 eine Nachricht, dass er sich bewegt "
+"hat."
+msgstr ""
+"In this example, player 1 sends a message indicating that they have moved."
+
+msgid "Nachrichten empfangen"
+msgstr "Receiving Messages"
+
+msgid ""
+"Mit dem decorator `register_message(\"message\")` kannst du eine "
+"Nachricht registrieren:"
+msgstr ""
+"With the decorator `register_message(\"message\")`, you can register a message:"
+
+msgid ""
+"Im folgenden Beispiel wird die Nachricht, die player1 versendet, von "
+"player2 empfangen. Er bewegt sich immer dann in die Richtung von player1,"
+" wenn dieser sich bewegt"
+msgstr ""
+"In the following example, the message sent by player1 is received by player2. Player2 moves toward player1 whenever player1 moves."
+
+msgid "Erklärung:"
+msgstr "Explanation:"
+
+msgid ""
+"In diesem Beispiel sendet **player1** die Nachricht `\"p1moved\"`, wenn "
+"die Taste <kbd>A</kbd> gedrückt wird."
+msgstr ""
+"In this example, **player1** sends the message `\"p1moved\"` when the <kbd>A</kbd> key is pressed."
+
+msgid ""
+"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  "
+"Sobald **player1** sich bewegt, empfängt **player2** die Nachricht und "
+"bewegt sich in Richtung von **player1**."
+msgstr ""
+"**player2** has a method registered to listen for this message. Whenever **player1** moves, **player2** receives the message and moves toward **player1**."

@@ -1,0 +1,40 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 08:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/impressum.md:1
+msgid "Impressum"
+msgstr "Imprint"
+
+#: ../../source/impressum.md:4
+msgid "Andreas Siebel"
+msgstr "Andreas Siebel"
+
+#: ../../source/impressum.md:6
+msgid "Auf der Schießmauer 5"
+msgstr "On the shooting wall 5"
+
+#: ../../source/impressum.md:8
+msgid "61250 Usingen"
+msgstr "61250 Usingen"
+
+#: ../../source/impressum.md:10
+msgid "Mail: andreas.siebel@it-teaching.de"
+msgstr "Mail: andreas.siebel@it-teaching.de"

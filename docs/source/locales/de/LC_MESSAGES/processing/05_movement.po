@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/processing/05_movement.md:1
+msgid "Bewegung"
+msgstr "Movement"
+
+#: ../../source/processing/05_movement.md:3
+msgid ""
+"In diesem Kapitel setzen wir Elemente in Bewegung. Dabei helfen uns auch "
+"Variablen."
+msgstr ""
+"In this chapter, we set elements in motion. Variables also help us in this."
+
+#: ../../source/processing/05_movement.md:5
+msgid "Einfache Bewegungen"
+msgstr "Simple movements"
+
+#: ../../source/processing/05_movement.md:7
+msgid ""
+"Eine einfache Bewegung kannst du realisieren, indem du bei einem Objekt die "
+"Attribute x und y veränderst."
+msgstr ""
+"A simple movement you can realize by changing the attributes x and y of an "
+"object."
+
+#: ../../source/processing/05_movement.md:20
+msgid "Ausgabe:"
+msgstr "Issue:"
+
+#: ../../source/processing/05_movement.md:22
+#: ../../source/processing/05_movement.md:52
+msgid "moving"
+msgstr "bewegend"
+
+#: ../../source/processing/05_movement.md:24
+msgid "Der Modulo-Operator"
+msgstr "The Modulo Operator"
+
+#: ../../source/processing/05_movement.md:26
+msgid ""
+"Für sich wiederholende Bewegungen ist der Modulo-Operator besonders "
+"hilfreich."
+msgstr ""
+"For themselves repeating movements is the modulo operator especially "
+"helpful."
+
+#: ../../source/processing/05_movement.md:28
+msgid "Python kennt 3 Arten von Divisionen:"
+msgstr "Python knows 3 types of divisions:"
+
+#: ../../source/processing/05_movement.md:30
+msgid ""
+"13 / 3 liefert das Ergebnis 4.3333333333 13 // 3 liefert das "
+"**ganzzzahlige** Ergebnis 4 13 % 3 liefert den Rest der Division 13 / 3, "
+"also 1 zurück."
+msgstr ""
+"13 / 3 delivers the result 4.3333333333 13 // 3 delivers the **integer** "
+"result 4 13 % 3 delivers the remainder of the division 13 / 3, which is 1."
+
+#: ../../source/processing/05_movement.md:34
+msgid ""
+"Das der Rest niemals größer als der Dividend sein kann, kann uns bei "
+"Animationen helfen:"
+msgstr ""
+"That the remainder can never be greater than the dividend can help us with "
+"animations:"
+
+#: ../../source/processing/05_movement.md:50
+msgid ""
+"Die Variable x zählt immer weiter nach oben, da der Rest der Division von x "
+"und 100 niemals größer als 100 werden kann, wandert der Punkt wieder zurück."
+msgstr ""
+"The variable x always counts further up, as the remainder of the division of"
+" x and 100 can never be greater than 100, the point moves back again."

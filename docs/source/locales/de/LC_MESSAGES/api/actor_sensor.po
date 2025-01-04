@@ -1,0 +1,44 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/api/actor_sensor.md:1
+msgid "Actor > Sensor"
+msgstr "Schauspieler > Sensor"
+
+#: ../../source/api/actor_sensor.md:3
+msgid "Sensor"
+msgstr "Sensor"
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:1
+#: miniworlds.actors.sensors.sensor_actor.Sensor:1 of
+msgid "A sensors attached to a actor."
+msgstr "Ein Sensor angebracht an einem Schauspieler."
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:3
+#: miniworlds.actors.sensors.sensor_actor.Sensor:3 of
+msgid "The sensors is not visible and will not detect the actor itself."
+msgstr ""
+"Die Sensoren sind nicht sichtbar und werden den Schauspieler selbst nicht "
+"erkennen."
+
+#: ../../source/api/actor_sensor.md:10
+msgid "Circle Sensor"
+msgstr "Kreissensor"

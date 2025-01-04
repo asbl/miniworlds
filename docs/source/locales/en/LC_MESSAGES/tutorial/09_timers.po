@@ -1,0 +1,180 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/tutorial/09_timers.md:1
+msgid "Timer"
+msgstr "Timer"
+
+#: ../../source/tutorial/09_timers.md:3
+msgid "Mit **Timern** kannst du Ereignisse **zeitgesteuert** ausführen."
+msgstr "With **timers** you can execute events **time-controlled**."
+
+#: ../../source/tutorial/09_timers.md:5
+msgid ""
+"Das bedeutet, dass eine Aktion nicht sofort, sondern mit einer Verzögerung "
+"von Millisekunden oder Sekunden  gestartet wird."
+msgstr ""
+"Das bedeutet, dass eine Aktion nicht sofort, sondern mit einer Verzögerung von Millisekunden oder Sekunden gestartet wird. \n"
+"Translates to:\n"
+"SinEf koS nEri(O* tiFuiSin, SiO SiiO SiFiSinFnF koS SinE \n"
+"\n"
+"*Placeholder for non-translatable text."
+
+#: ../../source/tutorial/09_timers.md:8
+msgid ""
+"Timer sind nützlich, wenn du beispielsweise möchtest, dass eine Aktion erst "
+"nach einer bestimmten Zeit stattfindet."
+msgstr ""
+"Timers are useful, if you for example want that an action only after a "
+"certain time takes place."
+
+#: ../../source/tutorial/09_timers.md:11
+msgid ""
+"Python bietet in der `time`-Bibliothek die Funktion `time.sleep(...)` an, um"
+" Verzögerungen zu erzeugen.  Diese Methode solltest du jedoch **nicht** "
+"verwenden, da sie zu globalen Verzögerungen  führt und unerwünschte "
+"Seiteneffekte verursachen kann."
+msgstr ""
+"Python offers in the `time` library the function `time.sleep(...)` to create"
+" delays. However, you should **not** use this method, as it leads to global "
+"delays and can cause undesirable side effects."
+
+#: ../../source/tutorial/09_timers.md:16
+msgid "Einen Timer starten"
+msgstr "Start a timer"
+
+#: ../../source/tutorial/09_timers.md:18
+msgid "Um einen Timer zu starten, kannst du folgendes Beispiel verwenden:"
+msgstr "To start a timer, you can use the following example:"
+
+#: ../../source/tutorial/09_timers.md:26
+msgid "Erklärung"
+msgstr "Explanation"
+
+#: ../../source/tutorial/09_timers.md:28
+msgid "Nach 24 Frames wird der Timer ausgelöst."
+msgstr "After 24 frames, the timer is triggered."
+
+#: ../../source/tutorial/09_timers.md:29
+msgid "Die Methode `player.move` wird dann ausgeführt."
+msgstr "The method `player.move` is then executed."
+
+#: ../../source/tutorial/09_timers.md:33
+msgid "Verschiedene Timer-Typen"
+msgstr "Different types of timers"
+
+#: ../../source/tutorial/09_timers.md:35
+msgid ""
+"Es gibt verschiedene Timer-Typen, die je nach Anwendungsfall genutzt werden "
+"können:"
+msgstr ""
+"There are different types of timers that can be used depending on the use "
+"case:"
+
+#: ../../source/tutorial/09_timers.md:37
+msgid "ActionTimer"
+msgstr "ActionTimer"
+
+#: ../../source/tutorial/09_timers.md:39
+msgid ""
+"Der **ActionTimer** führt nach einer vorgegebenen Zeit eine Methode aus und "
+"entfernt sich danach automatisch.  Er eignet sich für Aktionen, die einmalig"
+" nach einer Verzögerung ausgeführt werden sollen."
+msgstr ""
+"The **ActionTimer** performs a method after a predefined time and then "
+"removes itself automatically. It is suitable for actions that should be "
+"executed once after a delay."
+
+#: ../../source/tutorial/09_timers.md:46
+msgid ""
+"In diesem Beispiel wird die Funktion `move` des Objekts `player` nach 24 "
+"Frames einmalig ausgeführt."
+msgstr ""
+"In this example, the function `move` of the object `player` is executed once"
+" after 24 frames."
+
+#: ../../source/tutorial/09_timers.md:48
+msgid "LoopActionTimer"
+msgstr "LoopActionTimer"
+
+#: ../../source/tutorial/09_timers.md:50
+msgid ""
+"Der **LoopActionTimer** funktioniert ähnlich wie der ActionTimer,  "
+"wiederholt jedoch die Aktion in regelmäßigen Abständen. Dieser Timer ist "
+"ideal für wiederkehrende Aktionen."
+msgstr ""
+"The **LoopActionTimer** functions similar to the ActionTimer, but repeats "
+"the action at regular intervals. This timer is ideal for recurring actions."
+
+#: ../../source/tutorial/09_timers.md:57
+msgid ""
+"In diesem Fall wird die Methode `move` des Objekts `player` alle 24 Frames "
+"ausgeführt."
+msgstr ""
+"In this case, the method `move` of the object `player` is executed every 24 "
+"frames."
+
+#: ../../source/tutorial/09_timers.md:59
+msgid ""
+"Um einen LoopActionTimer zu stoppen, kannst du ihn wie folgt entfernen:"
+msgstr "To stop a LoopActionTimer, you can remove it as follows:"
+
+#: ../../source/tutorial/09_timers.md:69
+msgid "Timer mit Events verknüpfen"
+msgstr "Link timer with events"
+
+#: ../../source/tutorial/09_timers.md:71
+msgid ""
+"Ähnlich wie bei Sensoren kannst du Timer so konfigurieren, dass Methoden auf"
+" bestimmte Timer-Ereignisse reagieren.  Dazu registrierst du Methoden, die "
+"bei einem Timer-Ereignis ausgeführt werden sollen."
+msgstr ""
+"Similar to sensors, you can configure timers to respond to specific timer "
+"events. To do this, register methods that should be executed when a timer "
+"event occurs."
+
+#: ../../source/tutorial/09_timers.md:74
+msgid "Ein Beispiel für eine solche Methode sieht wie folgt aus:"
+msgstr "An example of such a method looks as follows:"
+
+#: ../../source/tutorial/09_timers.md:82
+msgid ""
+"In diesem Fall wird die Methode `moving` nach 24 Frames aufgerufen und führt"
+" die Aktion `player.move()` aus."
+msgstr ""
+"In this case, the method `moving` is called after 24 frames and executes the"
+" action `player.move()`."
+
+#: ../../source/tutorial/09_timers.md:84
+msgid ""
+"Um einen **LoopTimer** zu registrieren, der regelmäßig ausgeführt wird, "
+"kannst du folgendes Beispiel verwenden:"
+msgstr ""
+"To register a **LoopTimer** that runs regularly, you can use the following "
+"example:"
+
+#: ../../source/tutorial/09_timers.md:93
+msgid ""
+"Hier wird die Methode `moving` alle 48 Frames wiederholt ausgeführt und "
+"lässt den Actor sich nach links drehen und bewegen."
+msgstr ""
+"Here the method `moving` is executed every 48 frames and makes the actor "
+"turn and move to the left."

@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/concepts/concept_functions.md:1
+msgid "Konzept: Funktionen und Code-Blöcke"
+msgstr "Concept: Functions and code blocks"
+
+#: ../../source/concepts/concept_functions.md:3
+msgid "Funktionen und Decorators"
+msgstr "Functions and decorators"
+
+#: ../../source/concepts/concept_functions.md:5
+msgid "Im letzten Kapitel wurde folgender Code verwendet:"
+msgstr "In the last chapter the following code was used:"
+
+#: ../../source/concepts/concept_functions.md:14
+msgid ""
+"In der zweiten Zeile wird eine Funktion definiert, die bestimmte Anweisungen"
+" durchführt (dazu später mehr)."
+msgstr ""
+"In the second line, a function is defined that performs certain instructions"
+" (more on that later)."
+
+#: ../../source/concepts/concept_functions.md:16
+msgid ""
+"In der ersten Zeile wird diese Funktion mit einem Decorator versehen. Dieser"
+" Decorator \"heftet\" die Funktion an das World an. Immer wenn das System "
+"die Funktion `world.on_setup` aufrufen will, wird die von dir definierte "
+"Funktion aufgerufen. Auf diese Weise kannst du später Funktionen definieren,"
+" die auf beliebige Ereignisse reagieren, z.B. Tastendrücke, ..."
+msgstr ""
+"In the first line, this function is provided with a decorator. This "
+"decorator \"attaches\" the function to the World. Whenever the system wants "
+"to call the function `world.on_setup`, the function defined by you will be "
+"called. This way, you can define functions later that respond to any events,"
+" e.g. key presses, ..."
+
+#: ../../source/concepts/concept_functions.md:19
+msgid "Einrückung und Code-Blöcke"
+msgstr "Indentation and code blocks"
+
+#: ../../source/concepts/concept_functions.md:21
+msgid ""
+"Die dritte und vierte Zeile des Programmcodes oben sind eingerückt. Dies "
+"bedeutet, dass bei Aufruf die beiden eingerückten Zeilen aufgerufen werden."
+msgstr ""
+"Die dritte und vierte Zeile des Programmcodes oben sind eingerückt. Dies "
+"bedeutet, dass bei Aufruf die beiden eingerückten Zeilen aufgerufen werden."
+
+#: ../../source/concepts/concept_functions.md:23
+msgid ""
+"Code-Blöcke dienen in Python immer dazu, zu definieren wann eine bestimmte "
+"Verzweigung in deinem Programm beginnt und wann sie endet. Alles was gleich "
+"weit eingerückt wird gehört zu einem gemeinsamen Code-Block."
+msgstr ""
+"Code blocks always serve in Python to define when a particular branch starts"
+" in your program and when it ends. Everything that is indented equally "
+"belongs to a common code block."
+
+#: ../../source/concepts/concept_functions.md:25
+msgid "Coding-Standards Wie weit sollte eingerückt werden?"
+msgstr "Coding-Standards How far should be indented?"
+
+#: ../../source/concepts/concept_functions.md:27
+msgid ""
+"Die Programmiersprache Python selbst definiert nicht, wie weit ein Code-"
+"Block eingerückt werden soll, ob du drei, vier oder fünf Zeichen verwendest "
+"ist egal - Entscheidend ist, dass alle Zeilen *gleich weit* eingerückt sind."
+msgstr ""
+"The programming language Python itself does not define how far an indented "
+"code block should be, whether you use three, four, or five characters "
+"doesn't matter - what matters is that all lines are *indented equally*."
+
+#: ../../source/concepts/concept_functions.md:29
+msgid ""
+"Es gibt in Python aber bestimmte Coding-Standards, auf die sich "
+"Programmierer geeinigt haben, damit Code immer ähnlich aussieht."
+msgstr ""
+"There are in Python but certain coding standards, to which programmers have "
+"agreed, so that code always looks similar."
+
+#: ../../source/concepts/concept_functions.md:31
+msgid ""
+"So hat man sich darauf geeinigt, dass man Code immer 4 Zeichen einrückt. Du "
+"kannst dies für dich natürlich anders handhaben - Spätestens wenn ihr im "
+"Team arbeitet, ist es aber hilfreich sich an solche Konventionen zu halten."
+msgstr ""
+"So it was agreed that one always indents code by 4 characters. You can of "
+"course handle this differently for yourself - but it is helpful to stick to "
+"such conventions, especially when working in a team."
+
+#: ../../source/concepts/concept_functions.md:33
+msgid ""
+"In Python sind Funktionen und Konventionen in sogenannten PEPs (\"Python "
+"Enhancement Proposal) definiert. Style Guides findest du z.B. in [PEP "
+"8](https://www.python.org/dev/peps/pep-0008/)."
+msgstr ""
+"In Python functions and conventions are defined in so-called PEPs (\"Python "
+"Enhancement Proposal\"). Style Guides can be found e.g. in [PEP "
+"8](https://www.python.org/dev/peps/pep-0008/)."
+
+#: ../../source/concepts/concept_functions.md:35
+msgid ""
+"Neben der Einrückung findest du dort noch viel mehr, z.B. schreibt man `a = "
+"a + 3` anstatt `a=a+3`, weil ersteres leichter zu lesen ist. die "
+"Programmiersprache zwingt dich nicht dazu, aber so ist der Code für andere "
+"Programmierer besser zu lesen."
+msgstr ""
+"Beside the indentation you will find much more there, e.g. one writes `a = a"
+" + 3` instead of `a=a+3`, because the former is easier to read. The "
+"programming language does not force you to do so, but the code is easier to "
+"read for other programmers."
+
+#: ../../source/concepts/concept_functions.md:37
+msgid ""
+"Viele moderne Editoren können dich durch Autoformatierung und Linting darin "
+"unterstützen, **sauberen** Code zu schreiben."
+msgstr ""
+"Many modern editors can support you in writing **clean** code through "
+"autoformatting and linting."

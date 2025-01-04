@@ -1,0 +1,5085 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/api/actor.md:1
+msgid "Actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:1 of
+msgid ""
+"Actors are objects on your world. Actors can move around the world and have "
+"sensors to detect other actors."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:3 of
+msgid "The appearance of a actor is determined by its costume."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:6 miniworlds.actors.actor.Actor.add_costume:9
+#: miniworlds.actors.actor.Actor.animate_loop:6
+#: miniworlds.actors.actor.Actor.border:10
+#: miniworlds.actors.actor.Actor.border_color:17
+#: miniworlds.actors.actor.Actor.bounce_from_border:14
+#: miniworlds.actors.actor.Actor.costume_count:4
+#: miniworlds.actors.actor.Actor.detect:13
+#: miniworlds.actors.actor.Actor.detect_actors_at:4
+#: miniworlds.actors.actor.Actor.direction:31
+#: miniworlds.actors.actor.Actor.flip_x:8
+#: miniworlds.actors.actor.Actor.height:6
+#: miniworlds.actors.actor.Actor.is_flipped:9
+#: miniworlds.actors.actor.Actor.is_rotatable:9
+#: miniworlds.actors.actor.Actor.move:11
+#: miniworlds.actors.actor.Actor.move_to:11
+#: miniworlds.actors.actor.Actor.on_clicked_left:4
+#: miniworlds.actors.actor.Actor.on_clicked_right:4
+#: miniworlds.actors.actor.Actor.on_detecting_actor:7
+#: miniworlds.actors.actor.Actor.on_detecting_borders:7
+#: miniworlds.actors.actor.Actor.on_detecting_world:4
+#: miniworlds.actors.actor.Actor.on_key_down:8
+#: miniworlds.actors.actor.Actor.on_key_pressed:10
+#: miniworlds.actors.actor.Actor.on_mouse_left:12
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:4
+#: miniworlds.actors.actor.Actor.on_mouse_motion:11
+#: miniworlds.actors.actor.Actor.on_mouse_right:12
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:4
+#: miniworlds.actors.actor.Actor.point_towards_position:10
+#: miniworlds.actors.actor.Actor.register_message:7
+#: miniworlds.actors.actor.Actor.send_message:6
+#: miniworlds.actors.actor.Actor.set_direction:19
+#: miniworlds.actors.actor.Actor.stop_animation:6
+#: miniworlds.actors.actor.Actor.stroke_color:17
+#: miniworlds.actors.actor.Actor.switch_costume:8
+#: miniworlds.actors.actor.Actor.turn_left:11
+#: miniworlds.actors.actor.Actor.turn_right:6
+#: miniworlds.actors.actor.Actor.undo_move:8
+#: miniworlds.actors.actor.Actor.width:6 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:7 of
+msgid "Create a actor:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:19 of
+msgid "Create a actor with an image:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:31 of
+msgid "Create actor as instance from an custom class"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:46 of
+msgid "Create a Actor at current mouse position:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:62 of
+msgid "See: :doc:`Actor <../api/actor>`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:63 of
+msgid "See: :doc:`Shapes <../api/actor_shapes>`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor:64 of
+msgid "See: :doc:`TextActors and NumberActors <../api/actor_text>`"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Public Data Attributes:"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`actor_count <miniworlds.actors.actor.Actor.actor_count>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`class_image <miniworlds.actors.actor.Actor.class_image>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`origin <miniworlds.actors.actor.Actor.origin>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`collision_type <miniworlds.actors.actor.Actor.collision_type>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.collision_type:1 of
+msgid "collision_type specifies how collisions should be checked:"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_blockable <miniworlds.actors.actor.Actor.is_blockable>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.is_blockable:1
+#: miniworlds.actors.actor.Actor.is_blocking:1 of
+msgid ""
+"A actor with the property ``is_blockable`` cannot move through actors with "
+"the property ``is_blocking``."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_blocking <miniworlds.actors.actor.Actor.is_blocking>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`layer <miniworlds.actors.actor.Actor.layer>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.layer:1 of
+msgid ""
+"Defines the layer on which the actor is drawn if several actors overlap."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`last_position <miniworlds.actors.actor.Actor.last_position>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.last_position:1
+#: of
+msgid "Actor position in last frame"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`last_direction <miniworlds.actors.actor.Actor.last_direction>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costume_count <miniworlds.actors.actor.Actor.costume_count>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costume_count:1
+#: of
+msgid "Returns number of costumes of actor, 0 if actor has no costume"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_flipped <miniworlds.actors.actor.Actor.is_flipped>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid "When a actor is mirrored, it is mirrored across the y-axis."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costume <miniworlds.actors.actor.Actor.costume>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costume:1 of
+msgid "Gets the costume of actor"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costumes <miniworlds.actors.actor.Actor.costumes>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costumes:1 of
+msgid "Gets the costume manager"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`orientation <miniworlds.actors.actor.Actor.orientation>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`direction <miniworlds.actors.actor.Actor.direction>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.direction:1 of
+msgid ""
+"Directions are handled exactly as in the Scratch programming language, see: "
+"`Scratch Wiki <https://en.scratch-wiki.info/wiki/Direction_(value)>`_"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`direction_at_unit_circle "
+"<miniworlds.actors.actor.Actor.direction_at_unit_circle>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.direction_at_unit_circle:1 of
+msgid ""
+"Gets the direction as value in unit circle (0° right, 90° top, 180° left...)"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`dirty <miniworlds.actors.actor.Actor.dirty>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.dirty:1 of
+msgid "If actor is dirty, it will be repainted."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`size <miniworlds.actors.actor.Actor.size>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.size:1 of
+msgid "Size of the actor"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`width <miniworlds.actors.actor.Actor.width>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.width:1 of
+msgid "The width of the actor in pixels."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.height:1 of
+msgid "The height of the actor in pixels."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`x <miniworlds.actors.actor.Actor.x>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.x:1 of
+msgid "The x-value of a actor"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`y <miniworlds.actors.actor.Actor.y>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.y:1 of
+msgid "The y-value of a actor"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`class_name <miniworlds.actors.actor.Actor.class_name>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft_x <miniworlds.actors.actor.Actor.topleft_x>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_x:1
+#: miniworlds.actors.actor.Actor.topleft_y:1 of
+msgid "x-value of actor topleft-position"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft <miniworlds.actors.actor.Actor.topleft>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`local_center <miniworlds.actors.actor.Actor.local_center>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.local_center:1
+#: of
+msgid "x-value of actor center-position inside the current camera-screen"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center_x <miniworlds.actors.actor.Actor.center_x>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.center_x:1 of
+msgid "x-value of actor center-position"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center_y <miniworlds.actors.actor.Actor.center_y>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.center_y:1 of
+msgid "y-value of actor center-position"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center <miniworlds.actors.actor.Actor.center>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_rotatable <miniworlds.actors.actor.Actor.is_rotatable>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid "Defines if the costume of a actor should be rotatable."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`static <miniworlds.actors.actor.Actor.static>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.static:1 of
+msgid ""
+"Should actor react to events? You can turn this option off for additional "
+"performance boost."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`fill_color <miniworlds.actors.actor.Actor.fill_color>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.color:1
+#: miniworlds.actors.actor.Actor.fill_color:1 of
+msgid "The fill color of actor as rgba value, e.g. (255, 0, 0) for red."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_filled <miniworlds.actors.actor.Actor.is_filled>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.is_filled:1 of
+msgid "Is actor filled with color?"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`border_color <miniworlds.actors.actor.Actor.border_color>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.border_color:1
+#: miniworlds.actors.actor.Actor.stroke_color:1 of
+msgid "border color of actor."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`stroke_color <miniworlds.actors.actor.Actor.stroke_color>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`border <miniworlds.actors.actor.Actor.border>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.border:1 of
+msgid "The border-size of actor."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1 ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.visible:1 of
+msgid ""
+"You can make this sprite disappear without removing it from the group assign"
+" 0 for invisible and 1 for visible"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`rect <miniworlds.actors.actor.Actor.rect>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid "The surrounding Rectangle as pygame.Rect."
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`world <miniworlds.actors.actor.Actor.world>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`image <miniworlds.actors.actor.Actor.image>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.image:1 of
+msgid "The image of the actor:"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`position_manager "
+"<miniworlds.actors.actor.Actor.position_manager>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`sensor_manager <miniworlds.actors.actor.Actor.sensor_manager>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`costume_manager <miniworlds.actors.actor.Actor.costume_manager>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`position <miniworlds.actors.actor.Actor.position>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.position:1 of
+msgid "The position of the actor as Position(x, y)"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`is_display_initialized "
+"<miniworlds.actors.actor.Actor.is_display_initialized>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`actor_id <miniworlds.actors.actor.Actor.actor_id>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`children <miniworlds.actors.actor.Actor.children>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`speed <miniworlds.actors.actor.Actor.speed>`\\"
+msgstr ""
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`ask <miniworlds.actors.actor.Actor.ask>`\\"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.visible>`\\"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`layer <miniworlds.actors.actor.pygame.sprite.DirtySprite.layer>`\\"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+"Layer property can only be set before the sprite is added to a group, after "
+"that it is read only and a sprite's layer in a group should be set via the "
+"group's change_layer() method."
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ":py:obj:`layer <miniworlds.actors.actor.pygame.sprite.Sprite.layer>`\\"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid "Dynamic, read only property for protected _layer attribute."
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Public Methods:"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <miniworlds.actors.actor.Actor.__init__>`\\ "
+"\\(\\[position\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`switch_origin <miniworlds.actors.actor.Actor.switch_origin>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`create_on_world <miniworlds.actors.actor.Actor.create_on_world>`\\ "
+"\\(world\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.create_on_world:1 of
+msgid "Creates a actor to a specific world"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`from_topleft <miniworlds.actors.actor.Actor.from_topleft>`\\ "
+"\\(topleft\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.from_center:1
+#: miniworlds.actors.actor.Actor.from_topleft:1 of
+msgid "Creates a actor with center at center_position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`from_center <miniworlds.actors.actor.Actor.from_center>`\\ "
+"\\(center\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`flip_x <miniworlds.actors.actor.Actor.flip_x>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Flips the actor by 180° degrees."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`add_costume <miniworlds.actors.actor.Actor.add_costume>`\\ "
+"\\(\\[source\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Adds a new costume to actor."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`add_costumes <miniworlds.actors.actor.Actor.add_costumes>`\\ "
+"\\(sources\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.add_costumes:1
+#: of
+msgid "Adds multiple costumes"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`remove_costume <miniworlds.actors.actor.Actor.remove_costume>`\\ "
+"\\(\\[source\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.remove_costume:1 of
+msgid "Removes a costume from actor"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`switch_costume <miniworlds.actors.actor.Actor.switch_costume>`\\ "
+"\\(source\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.switch_costume:1 of
+msgid "Switches the costume of actor"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_costume <miniworlds.actors.actor.Actor.set_costume>`\\ "
+"\\(costume\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`reset_costumes <miniworlds.actors.actor.Actor.reset_costumes>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_background_color "
+"<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(color\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`next_costume <miniworlds.actors.actor.Actor.next_costume>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.next_costume:1
+#: of
+msgid "Switches to the next costume of actor"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`turn_left <miniworlds.actors.actor.Actor.turn_left>`\\ "
+"\\(\\[degrees\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.turn_left:1 of
+msgid ""
+"Turns actor by *degrees* degrees left :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`turn_right <miniworlds.actors.actor.Actor.turn_right>`\\ "
+"\\(\\[degrees\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.turn_right:1 of
+msgid "Turns actor by *degrees* degrees right"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_direction <miniworlds.actors.actor.Actor.set_direction>`\\ "
+"\\(direction\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.set_direction:1
+#: of
+msgid "Actor points in given direction."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`point_towards_position "
+"<miniworlds.actors.actor.Actor.point_towards_position>`\\ \\(destination\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.point_towards_position:1 of
+msgid "Actor points towards a given position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`point_towards_actor "
+"<miniworlds.actors.actor.Actor.point_towards_actor>`\\ \\(other\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.point_towards_actor:1 of
+msgid "Actor points towards another actor."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`scale_width <miniworlds.actors.actor.Actor.scale_width>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`scale_height <miniworlds.actors.actor.Actor.scale_height>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`move <miniworlds.actors.actor.Actor.move>`\\ \\(\\[distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move:1 of
+msgid "Moves actor *distance* steps in current direction"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_vector <miniworlds.actors.actor.Actor.move_vector>`\\ "
+"\\(vector\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move_vector:1
+#: of
+msgid "Moves actor in direction defined by the vector"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_back <miniworlds.actors.actor.Actor.move_back>`\\ "
+"\\(distance\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`undo_move <miniworlds.actors.actor.Actor.undo_move>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Undo the last move."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_towards <miniworlds.actors.actor.Actor.move_towards>`\\ "
+"\\(target\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_in_direction "
+"<miniworlds.actors.actor.Actor.move_in_direction>`\\ \\(direction\\[\\, "
+"distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.move_in_direction:1 of
+msgid "Moves actor *distance* steps into a *direction* or towards a position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`move_to <miniworlds.actors.actor.Actor.move_to>`\\ \\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move_to:1 of
+msgid "Moves actor *distance* to a specific world_posiition"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`remove <miniworlds.actors.actor.Actor.remove>`\\ \\(\\[kill\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.remove:1 of
+msgid "Removes this actor from world"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`before_remove <miniworlds.actors.actor.Actor.before_remove>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`bounce_from_border "
+"<miniworlds.actors.actor.Actor.bounce_from_border>`\\ \\(borders\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.bounce_from_border:1 of
+msgid "The actor \"bounces\" from a border."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_all <miniworlds.actors.actor.Actor.detect_all>`\\ "
+"\\(\\[actors\\, direction\\, distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Detects if actors are on actor position."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect <miniworlds.actors.actor.Actor.detect>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_borders <miniworlds.actors.actor.Actor.detect_borders>`\\ "
+"\\(\\[distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_borders:1 of
+msgid "Detects borders"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_left_border "
+"<miniworlds.actors.actor.Actor.detect_left_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_left_border:1 of
+msgid "Does the actor touch the left border?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_right_border "
+"<miniworlds.actors.actor.Actor.detect_right_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_right_border:1 of
+msgid "Does the actor touch the right border?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_top_border "
+"<miniworlds.actors.actor.Actor.detect_top_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_top_border:1
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:1 of
+msgid "Does the actor touch the lower border?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detecting_bottom_border "
+"<miniworlds.actors.actor.Actor.detecting_bottom_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_color <miniworlds.actors.actor.Actor.detect_color>`\\ "
+"\\(\\[color\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_color:1
+#: of
+msgid "Detects colors in world-background at actor center-position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_color_at <miniworlds.actors.actor.Actor.detect_color_at>`\\ "
+"\\(\\[direction\\, distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_color_at:1 of
+msgid "Detects colors in world-background at actor-position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actors_at "
+"<miniworlds.actors.actor.Actor.detect_actors_at>`\\ \\(\\[direction\\, "
+"distance\\, actors\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_actors_at:1 of
+msgid "Detects a actor in given direction and distance."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actor_at <miniworlds.actors.actor.Actor.detect_actor_at>`\\ "
+"\\(\\[direction\\, distance\\, actors\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actors_in_front "
+"<miniworlds.actors.actor.Actor.detect_actors_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actor_in_front "
+"<miniworlds.actors.actor.Actor.detect_actor_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_point <miniworlds.actors.actor.Actor.detect_point>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_point:1
+#: of
+msgid "Is the actor colliding with a specific (global) point?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_pixel <miniworlds.actors.actor.Actor.detect_pixel>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_pixel:1
+#: of
+msgid "Is the actor colliding with a pixel?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_rect <miniworlds.actors.actor.Actor.detect_rect>`\\ "
+"\\(rect\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_rect:1
+#: miniworlds.actors.actor.Actor.detect_world:1 of
+msgid "Is the actor colliding with a static rect?"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`detect_world <miniworlds.actors.actor.Actor.detect_world>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`bounce_from_actor "
+"<miniworlds.actors.actor.Actor.bounce_from_actor>`\\ \\(other\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`animate <miniworlds.actors.actor.Actor.animate>`\\ \\(\\[speed\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`animate_costume <miniworlds.actors.actor.Actor.animate_costume>`\\ "
+"\\(costume\\[\\, speed\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`animate_loop <miniworlds.actors.actor.Actor.animate_loop>`\\ "
+"\\(\\[speed\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.animate_loop:1
+#: of
+msgid "Animates a costume with a looping animation"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`stop_animation <miniworlds.actors.actor.Actor.stop_animation>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Stops current animation."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`send_message <miniworlds.actors.actor.Actor.send_message>`\\ "
+"\\(message\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.send_message:1
+#: of
+msgid "Sends a message to world."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_key_down <miniworlds.actors.actor.Actor.on_key_down>`\\ "
+"\\(key\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.on_key_down:1
+#: of
+msgid "**on_key_down**  is called one time when a key is pressed down."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_key_pressed <miniworlds.actors.actor.Actor.on_key_pressed>`\\ "
+"\\(key\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "**on_key_pressed** is called when while key is pressed."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`on_key_up <miniworlds.actors.actor.Actor.on_key_up>`\\ \\(key\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_over <miniworlds.actors.actor.Actor.on_mouse_over>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_mouse_leave:1
+#: miniworlds.actors.actor.Actor.on_mouse_over:1 of
+msgid ""
+"on_mouse_over is called, when mouse is moved over actor :type position: "
+":param position: The mouse position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_left <miniworlds.actors.actor.Actor.on_mouse_left>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "on_mouse_left is called when left mouse button was pressed."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_right <miniworlds.actors.actor.Actor.on_mouse_right>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when right mouse button was pressed."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_motion <miniworlds.actors.actor.Actor.on_mouse_motion>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when mouse moves."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_left_released "
+"<miniworlds.actors.actor.Actor.on_mouse_left_released>`\\ \\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:1 of
+msgid "Method is called when left mouse key is released."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_right_released "
+"<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when right mouse key is released."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_clicked_left <miniworlds.actors.actor.Actor.on_clicked_left>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_clicked_left:1
+#: miniworlds.actors.actor.Actor.on_clicked_right:1 of
+msgid "The mouse is on top of a actor and mouse was clicked."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_clicked_right "
+"<miniworlds.actors.actor.Actor.on_clicked_right>`\\ \\(position\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_world "
+"<miniworlds.actors.actor.Actor.on_detecting_world>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_world:1
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:1 of
+msgid "`on_detecting_world` is called, when actor is on the world"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_not_detecting_world "
+"<miniworlds.actors.actor.Actor.on_not_detecting_world>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_actor "
+"<miniworlds.actors.actor.Actor.on_detecting_actor>`\\ \\(actor\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_actor:1 of
+msgid ""
+"*on_detect_actor* is called, when actor is detects a actor on same position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_borders "
+"<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(borders\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_borders:1 of
+msgid "*on_detecting_border* is called, when actor is near a border"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`fill <miniworlds.actors.actor.Actor.fill>`\\ \\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.fill:1 of
+msgid "Set fill color for borders and lines"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`hide <miniworlds.actors.actor.Actor.hide>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.hide:1 of
+msgid "Hides a actor (the actor will be invisible)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`show <miniworlds.actors.actor.Actor.show>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.show:1 of
+msgid "Displays a actor ( an invisible actor will be visible)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register <miniworlds.actors.actor.Actor.register>`\\ "
+"\\(method\\[\\, force\\, name\\]\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "This method is used for the @register decorator."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register_message "
+"<miniworlds.actors.actor.Actor.register_message>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.register_message:1 of
+msgid ""
+"Registers a method to an object to handle specific `on_message` events."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register_sensor <miniworlds.actors.actor.Actor.register_sensor>`\\ "
+"\\(\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.register_sensor:1 of
+msgid "This method is used for the @register_sensor decorator."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_local_rect <miniworlds.actors.actor.Actor.get_local_rect>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`__str__ <miniworlds.actors.actor.Actor.__str__>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid "Return str(self)."
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_world <miniworlds.actors.actor.Actor.set_world>`\\ "
+"\\(new\\_world\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`new_costume <miniworlds.actors.actor.Actor.new_costume>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_costume_class "
+"<miniworlds.actors.actor.Actor.get_costume_class>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_position <miniworlds.actors.actor.Actor.set_position>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_distance_to <miniworlds.actors.actor.Actor.get_distance_to>`\\ "
+"\\(obj\\)"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.get_distance_to:1 of
+msgid "Gets the distance to another actor or a position"
+msgstr ""
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_shape_change <miniworlds.actors.actor.Actor.on_shape_change>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__init__>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`__repr__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__repr__>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1 ../../None:4:<autosummary>:1
+msgid "Return repr(self)."
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <miniworlds.actors.actor.pygame.sprite.Sprite.__init__>`\\"
+" \\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add <miniworlds.actors.actor.pygame.sprite.Sprite.add>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "add the sprite to groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove <miniworlds.actors.actor.pygame.sprite.Sprite.remove>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the sprite from groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.add_internal>`\\ \\(group\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "For adding this sprite to a group internally."
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.remove_internal>`\\ "
+"\\(group\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "For removing this sprite from a group internally."
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`update <miniworlds.actors.actor.pygame.sprite.Sprite.update>`\\ "
+"\\(\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "method to control sprite behavior"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ":py:obj:`kill <miniworlds.actors.actor.pygame.sprite.Sprite.kill>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the Sprite from all Groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`groups <miniworlds.actors.actor.pygame.sprite.Sprite.groups>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "list of Groups that contain this Sprite"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`alive <miniworlds.actors.actor.pygame.sprite.Sprite.alive>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "does the sprite belong to any groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__repr__ <miniworlds.actors.actor.pygame.sprite.Sprite.__repr__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Private Data Attributes:"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_world <miniworlds.actors.actor.Actor._world>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_sensor_manager <miniworlds.actors.actor.Actor._sensor_manager>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_position_manager "
+"<miniworlds.actors.actor.Actor._position_manager>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_costume_manager "
+"<miniworlds.actors.actor.Actor._costume_manager>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_collision_type <miniworlds.actors.actor.Actor._collision_type>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_layer <miniworlds.actors.actor.Actor._layer>`\\"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_is_acting <miniworlds.actors.actor.Actor._is_acting>`\\"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Private Methods:"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`_validate_arguments "
+"<miniworlds.actors.actor.Actor._validate_arguments>`\\ \\(position\\, "
+"\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`_set_visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._set_visible>`\\ "
+"\\(val\\)"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid "set the visible value (0 or 1) and makes the sprite dirty"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`_get_visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._get_visible>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:4:<autosummary>:1
+msgid "return the visible value of that sprite"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:1 of
+msgid ""
+"Adds a new costume to actor. The costume can be switched with "
+"self.switch_costume(index)"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Rückgabetyp"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:4
+#: miniworlds.actors.actor.Actor.add_costumes:4
+#: miniworlds.actors.actor.Actor.switch_costume:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\``"
+msgstr ""
+
+#: ../../source/api/actor.md:1
+msgid "Actor"
+msgstr "Schauspieler"
+
+#: miniworlds.actors.actor.Actor:1 of
+msgid ""
+"Actors are objects on your world. Actors can move around the world and have "
+"sensors to detect other actors."
+msgstr ""
+"Schauspieler sind Objekte auf deiner Welt. Schauspieler können sich in der "
+"Welt bewegen und Sensoren haben, um andere Schauspieler zu erkennen."
+
+#: miniworlds.actors.actor.Actor:3 of
+msgid "The appearance of a actor is determined by its costume."
+msgstr "Das Aussehen eines Schauspielers wird durch sein Kostüm bestimmt."
+
+#: miniworlds.actors.actor.Actor:6 miniworlds.actors.actor.Actor.add_costume:9
+#: miniworlds.actors.actor.Actor.animate_loop:6
+#: miniworlds.actors.actor.Actor.border:10
+#: miniworlds.actors.actor.Actor.border_color:17
+#: miniworlds.actors.actor.Actor.bounce_from_border:14
+#: miniworlds.actors.actor.Actor.costume_count:4
+#: miniworlds.actors.actor.Actor.detect:13
+#: miniworlds.actors.actor.Actor.detect_actors_at:4
+#: miniworlds.actors.actor.Actor.direction:31
+#: miniworlds.actors.actor.Actor.flip_x:8
+#: miniworlds.actors.actor.Actor.height:6
+#: miniworlds.actors.actor.Actor.is_flipped:9
+#: miniworlds.actors.actor.Actor.is_rotatable:9
+#: miniworlds.actors.actor.Actor.move:11
+#: miniworlds.actors.actor.Actor.move_to:11
+#: miniworlds.actors.actor.Actor.on_clicked_left:4
+#: miniworlds.actors.actor.Actor.on_clicked_right:4
+#: miniworlds.actors.actor.Actor.on_detecting_actor:7
+#: miniworlds.actors.actor.Actor.on_detecting_borders:7
+#: miniworlds.actors.actor.Actor.on_detecting_world:4
+#: miniworlds.actors.actor.Actor.on_key_down:8
+#: miniworlds.actors.actor.Actor.on_key_pressed:10
+#: miniworlds.actors.actor.Actor.on_mouse_left:12
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:4
+#: miniworlds.actors.actor.Actor.on_mouse_motion:11
+#: miniworlds.actors.actor.Actor.on_mouse_right:12
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:4
+#: miniworlds.actors.actor.Actor.point_towards_position:10
+#: miniworlds.actors.actor.Actor.register_message:7
+#: miniworlds.actors.actor.Actor.send_message:6
+#: miniworlds.actors.actor.Actor.set_direction:19
+#: miniworlds.actors.actor.Actor.stop_animation:6
+#: miniworlds.actors.actor.Actor.stroke_color:17
+#: miniworlds.actors.actor.Actor.switch_costume:8
+#: miniworlds.actors.actor.Actor.turn_left:11
+#: miniworlds.actors.actor.Actor.turn_right:6
+#: miniworlds.actors.actor.Actor.undo_move:8
+#: miniworlds.actors.actor.Actor.width:6 of
+msgid "Examples"
+msgstr "Beispiele"
+
+#: miniworlds.actors.actor.Actor:7 of
+msgid "Create a actor:"
+msgstr "Erstelle einen Schauspieler:"
+
+#: miniworlds.actors.actor.Actor:19 of
+msgid "Create a actor with an image:"
+msgstr "Erstellen Sie einen Schauspieler mit einem Bild:"
+
+#: miniworlds.actors.actor.Actor:31 of
+msgid "Create actor as instance from an custom class"
+msgstr ""
+"Erstelle Schauspieler als Instanz aus einer benutzerdefinierten Klasse"
+
+#: miniworlds.actors.actor.Actor:46 of
+msgid "Create a Actor at current mouse position:"
+msgstr "Erstellen Sie einen Schauspieler an der aktuellen Mausposition:"
+
+#: miniworlds.actors.actor.Actor:62 of
+msgid "See: :doc:`Actor <../api/actor>`"
+msgstr "Siehe: :doc:`Actor <../api/actor>`"
+
+#: miniworlds.actors.actor.Actor:63 of
+msgid "See: :doc:`Shapes <../api/actor_shapes>`"
+msgstr "Siehe: :doc:`Shapes <../api/actor_shapes>`"
+
+#: miniworlds.actors.actor.Actor:64 of
+msgid "See: :doc:`TextActors and NumberActors <../api/actor_text>`"
+msgstr "Siehe: :doc:`TextActors und NumberActors <../api/actor_text>`"
+
+#: ../../source/api/actor.md
+msgid "Public Data Attributes:"
+msgstr "Öffentliche Datenattribute:"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`actor_count <miniworlds.actors.actor.Actor.actor_count>`\\"
+msgstr ":py:obj:`actor_count <miniworlds.actors.actor.Actor.actor_count>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`class_image <miniworlds.actors.actor.Actor.class_image>`\\"
+msgstr ":py:obj:`class_image <miniworlds.actors.actor.Actor.class_image>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`origin <miniworlds.actors.actor.Actor.origin>`\\"
+msgstr ":py:obj:`Ursprung <miniworlds.actors.actor.Actor.origin>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`collision_type <miniworlds.actors.actor.Actor.collision_type>`\\"
+msgstr ""
+":py:obj:`collision_type <miniworlds.actors.actor.Actor.collision_type>`\\"
+
+#: ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.collision_type:1 of
+msgid "collision_type specifies how collisions should be checked:"
+msgstr "collision_type legt fest, wie Kollisionen überprüft werden sollen:"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_blockable <miniworlds.actors.actor.Actor.is_blockable>`\\"
+msgstr ":py:obj:`is_blockable <miniworlds.actors.actor.Actor.is_blockable>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.is_blockable:1
+#: miniworlds.actors.actor.Actor.is_blocking:1 of
+msgid ""
+"A actor with the property ``is_blockable`` cannot move through actors with "
+"the property ``is_blocking``."
+msgstr ""
+"Ein Schauspieler mit der Eigenschaft \"is_blockable\" kann nicht durch "
+"Schauspieler mit der Eigenschaft \"is_blocking\" hindurchgehen."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_blocking <miniworlds.actors.actor.Actor.is_blocking>`\\"
+msgstr ":py:obj:`is_blocking <miniworlds.actors.actor.Actor.is_blocking>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`layer <miniworlds.actors.actor.Actor.layer>`\\"
+msgstr ":py:obj:`layer <miniworlds.actors.actor.Actor.layer>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.layer:1 of
+msgid ""
+"Defines the layer on which the actor is drawn if several actors overlap."
+msgstr ""
+"Definiert die Ebene, auf der der Schauspieler gezeichnet wird, wenn mehrere "
+"Schauspieler sich überlappen."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`last_position <miniworlds.actors.actor.Actor.last_position>`\\"
+msgstr ":py:obj:`last_position <miniworlds.actors.actor.Actor.last_position>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.last_position:1
+#: of
+msgid "Actor position in last frame"
+msgstr "Schauspielerposition im letzten Bild"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`last_direction <miniworlds.actors.actor.Actor.last_direction>`\\"
+msgstr ""
+":py:obj:`last_direction <miniworlds.actors.actor.Actor.last_direction>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costume_count <miniworlds.actors.actor.Actor.costume_count>`\\"
+msgstr ":py:obj:`costume_count <miniworlds.actors.actor.Actor.costume_count>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costume_count:1
+#: of
+msgid "Returns number of costumes of actor, 0 if actor has no costume"
+msgstr ""
+"Gibt Anzahl der Kostüme des Schauspielers zurück, 0 wenn Schauspieler kein "
+"Kostüm hat"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_flipped <miniworlds.actors.actor.Actor.is_flipped>`\\"
+msgstr ":py:obj:`is_flipped <miniworlds.actors.actor.Actor.is_flipped>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid "When a actor is mirrored, it is mirrored across the y-axis."
+msgstr ""
+"Wenn ein Schauspieler gespiegelt wird, wird er über die y-Achse gespiegelt."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costume <miniworlds.actors.actor.Actor.costume>`\\"
+msgstr ":py:obj:`Kostüm <miniworlds.actors.actor.Actor.costume>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costume:1 of
+msgid "Gets the costume of actor"
+msgstr "Bekommt das Kostüm des Schauspielers"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`costumes <miniworlds.actors.actor.Actor.costumes>`\\"
+msgstr ":py:obj:`Kostüme <miniworlds.actors.actor.Actor.costumes>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.costumes:1 of
+msgid "Gets the costume manager"
+msgstr "Holt den Kostümverwalter"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`orientation <miniworlds.actors.actor.Actor.orientation>`\\"
+msgstr ":py:obj:`Ausrichtung <miniworlds.actors.actor.Actor.orientation>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`direction <miniworlds.actors.actor.Actor.direction>`\\"
+msgstr ":py:obj:`Richtung <miniworlds.actors.actor.Actor.direction>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.direction:1 of
+msgid ""
+"Directions are handled exactly as in the Scratch programming language, see: "
+"`Scratch Wiki <https://en.scratch-wiki.info/wiki/Direction_(value)>`_"
+msgstr ""
+"Anweisungen werden genauso behandelt wie in der Scratch-Programmiersprache, "
+"siehe: 'Scratch Wiki <https://en.scratch-wiki.info/wiki/Direction_(value)>'_"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`direction_at_unit_circle "
+"<miniworlds.actors.actor.Actor.direction_at_unit_circle>`\\"
+msgstr ""
+":py:obj:`direction_at_unit_circle "
+"<miniworlds.actors.actor.Actor.direction_at_unit_circle>`\\"
+
+#: ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.direction_at_unit_circle:1 of
+msgid ""
+"Gets the direction as value in unit circle (0° right, 90° top, 180° left...)"
+msgstr ""
+"Bekommt die Richtung als Wert im Einheitskreis (0° rechts, 90° oben, 180° "
+"links...)"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`dirty <miniworlds.actors.actor.Actor.dirty>`\\"
+msgstr ":py:obj:`dirty <miniworlds.actors.actor.Actor.dirty>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.dirty:1 of
+msgid "If actor is dirty, it will be repainted."
+msgstr "Wenn Schauspieler schmutzig ist, wird es neu lackiert."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`size <miniworlds.actors.actor.Actor.size>`\\"
+msgstr ":py:obj:`Größe <miniworlds.actors.actor.Actor.size>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.size:1 of
+msgid "Size of the actor"
+msgstr "Größe des Schauspielers"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`width <miniworlds.actors.actor.Actor.width>`\\"
+msgstr ":py:obj:`Breite <miniworlds.actors.actor.Actor.width>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.width:1 of
+msgid "The width of the actor in pixels."
+msgstr "Die Breite des Schauspielers in Pixeln."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
+msgstr ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.height:1 of
+msgid "The height of the actor in pixels."
+msgstr "Die Höhe des Schauspielers in Pixel."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`x <miniworlds.actors.actor.Actor.x>`\\"
+msgstr ":py:obj:`x <miniworlds.actors.actor.Actor.x>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.x:1 of
+msgid "The x-value of a actor"
+msgstr "Der x-Wert eines Schauspielers"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`y <miniworlds.actors.actor.Actor.y>`\\"
+msgstr ":py:obj:`y <miniworlds.actors.actor.Actor.y>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.y:1 of
+msgid "The y-value of a actor"
+msgstr "Der y-Wert eines Schauspielers."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`class_name <miniworlds.actors.actor.Actor.class_name>`\\"
+msgstr ":py:obj:`class_name <miniworlds.actors.actor.Actor.class_name>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft_x <miniworlds.actors.actor.Actor.topleft_x>`\\"
+msgstr ":py:obj:`topleft_x <miniworlds.actors.actor.Actor.topleft_x>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_x:1
+#: miniworlds.actors.actor.Actor.topleft_y:1 of
+msgid "x-value of actor topleft-position"
+msgstr "x-Wert der Schauspieler topleft-Position"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
+msgstr ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`topleft <miniworlds.actors.actor.Actor.topleft>`\\"
+msgstr ":py:obj:`topleft <miniworlds.actors.actor.Actor.topleft>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`local_center <miniworlds.actors.actor.Actor.local_center>`\\"
+msgstr ":py:obj:`local_center <miniworlds.actors.actor.Actor.local_center>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.local_center:1
+#: of
+msgid "x-value of actor center-position inside the current camera-screen"
+msgstr ""
+"x-Wert der Schauspieler-Mittelposition innerhalb des aktuellen Kamera-"
+"Bildschirms"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center_x <miniworlds.actors.actor.Actor.center_x>`\\"
+msgstr ":py:obj:`center_x <miniworlds.actors.actor.Actor.center_x>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.center_x:1 of
+msgid "x-value of actor center-position"
+msgstr "x-Wert der Schauspieler-Mittelposition"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center_y <miniworlds.actors.actor.Actor.center_y>`\\"
+msgstr ":py:obj:`center_y <miniworlds.actors.actor.Actor.center_y>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.center_y:1 of
+msgid "y-value of actor center-position"
+msgstr "y-Wert der Schauspieler-Mittenposition"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`center <miniworlds.actors.actor.Actor.center>`\\"
+msgstr ":py:obj:`center <miniworlds.actors.actor.Actor.center>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_rotatable <miniworlds.actors.actor.Actor.is_rotatable>`\\"
+msgstr ":py:obj:`is_rotatable <miniworlds.actors.actor.Actor.is_rotatable>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid "Defines if the costume of a actor should be rotatable."
+msgstr "Definiert, ob das Kostüm eines Schauspielers drehbar sein sollte."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`static <miniworlds.actors.actor.Actor.static>`\\"
+msgstr ":py:obj:`static <miniworlds.actors.actor.Actor.static>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.static:1 of
+msgid ""
+"Should actor react to events? You can turn this option off for additional "
+"performance boost."
+msgstr ""
+"Soll Schauspieler auf Ereignisse reagieren? Sie können diese Option "
+"ausschalten, um die Leistung weiter zu verbessern."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`fill_color <miniworlds.actors.actor.Actor.fill_color>`\\"
+msgstr ":py:obj:`fill_color <miniworlds.actors.actor.Actor.fill_color>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.color:1
+#: miniworlds.actors.actor.Actor.fill_color:1 of
+msgid "The fill color of actor as rgba value, e.g. (255, 0, 0) for red."
+msgstr ""
+"Die Füllfarbe des Schauspielers als rgba-Wert, z.B. (255, 0, 0) für Rot."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
+msgstr ":py:obj:`Farbe <miniworlds.actors.actor.Actor.color>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`is_filled <miniworlds.actors.actor.Actor.is_filled>`\\"
+msgstr ":py:obj:`is_filled <miniworlds.actors.actor.Actor.is_filled>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.is_filled:1 of
+msgid "Is actor filled with color?"
+msgstr "Ist der Schauspieler mit Farbe gefüllt?"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`border_color <miniworlds.actors.actor.Actor.border_color>`\\"
+msgstr ":py:obj:`border_color <miniworlds.actors.actor.Actor.border_color>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.border_color:1
+#: miniworlds.actors.actor.Actor.stroke_color:1 of
+msgid "border color of actor."
+msgstr "Rahmenfarbe des Schauspielers."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`stroke_color <miniworlds.actors.actor.Actor.stroke_color>`\\"
+msgstr ":py:obj:`stroke_color <miniworlds.actors.actor.Actor.stroke_color>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`border <miniworlds.actors.actor.Actor.border>`\\"
+msgstr ":py:obj:`Rand <miniworlds.actors.actor.Actor.border>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.border:1 of
+msgid "The border-size of actor."
+msgstr "Die Grenzgröße des Schauspielers."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
+msgstr ":py:obj:`sichtbar <miniworlds.actors.actor.Actor.visible>`\\"
+
+#: ../../None:4:<autosummary>:1 ../../None:53:<autosummary>:1
+#: miniworlds.actors.actor.Actor.visible:1 of
+msgid ""
+"You can make this sprite disappear without removing it from the group assign"
+" 0 for invisible and 1 for visible"
+msgstr ""
+"Du kannst diesen Sprite verschwinden lassen, ohne ihn aus der Gruppe zu "
+"entfernen. Weise 0 für unsichtbar und 1 für sichtbar zu."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`rect <miniworlds.actors.actor.Actor.rect>`\\"
+msgstr ":py:obj:`rect <miniworlds.actors.actor.Actor.rect>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid "The surrounding Rectangle as pygame.Rect."
+msgstr "Das umgebende Rechteck als pygame.Rect."
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`world <miniworlds.actors.actor.Actor.world>`\\"
+msgstr ":py:obj:`world <miniworlds.actors.actor.Actor.world>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`image <miniworlds.actors.actor.Actor.image>`\\"
+msgstr ":py:obj:`Bild <miniworlds.actors.actor.Actor.image>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.image:1 of
+msgid "The image of the actor:"
+msgstr "Das Bild des Schauspielers:"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`position_manager "
+"<miniworlds.actors.actor.Actor.position_manager>`\\"
+msgstr ""
+":py:obj:`position_manager "
+"<miniworlds.actors.actor.Actor.position_manager>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`sensor_manager <miniworlds.actors.actor.Actor.sensor_manager>`\\"
+msgstr ""
+":py:obj:`sensor_manager <miniworlds.actors.actor.Actor.sensor_manager>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`costume_manager <miniworlds.actors.actor.Actor.costume_manager>`\\"
+msgstr ""
+":py:obj:`costume_manager <miniworlds.actors.actor.Actor.costume_manager>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`position <miniworlds.actors.actor.Actor.position>`\\"
+msgstr ":py:obj:`position <miniworlds.actors.actor.Actor.position>`\\"
+
+#: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.position:1 of
+msgid "The position of the actor as Position(x, y)"
+msgstr "Die Position des Schauspielers als Position(x, y)"
+
+#: ../../None:53:<autosummary>:1
+msgid ""
+":py:obj:`is_display_initialized "
+"<miniworlds.actors.actor.Actor.is_display_initialized>`\\"
+msgstr ""
+":py:obj:`is_display_initialized "
+"<miniworlds.actors.actor.Actor.is_display_initialized>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`actor_id <miniworlds.actors.actor.Actor.actor_id>`\\"
+msgstr ":py:obj:`actor_id <miniworlds.actors.actor.Actor.actor_id>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`children <miniworlds.actors.actor.Actor.children>`\\"
+msgstr ":py:obj:`Kinder <miniwelten.schauspieler.Schauspieler.Kinder>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`speed <miniworlds.actors.actor.Actor.speed>`\\"
+msgstr ":py:obj:`Geschwindigkeit <miniworlds.actors.actor.Actor.speed>`\\"
+
+#: ../../None:53:<autosummary>:1
+msgid ":py:obj:`ask <miniworlds.actors.actor.Actor.ask>`\\"
+msgstr ":py:obj:`ask <miniworlds.actors.actor.Actor.ask>`\\"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.visible>`\\"
+msgstr ""
+":py:obj:`sichtbar "
+"<miniworlds.schauspieler.schauspieler.pygame.sprite.DirtySprite.visible>`\\"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`layer <miniworlds.actors.actor.pygame.sprite.DirtySprite.layer>`\\"
+msgstr ""
+":py:obj:`Ebene <miniworlds.actors.actor.pygame.sprite.DirtySprite.layer>`\\"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+"Layer property can only be set before the sprite is added to a group, after "
+"that it is read only and a sprite's layer in a group should be set via the "
+"group's change_layer() method."
+msgstr ""
+"Ebenenattribut kann nur festgelegt werden, bevor der Sprite einer Gruppe "
+"hinzugefügt wird, danach ist es schreibgeschützt und die Ebene eines Sprites"
+" in einer Gruppe sollte über die Methode change_layer() der Gruppe "
+"festgelegt werden."
+
+#: ../../None:3:<autosummary>:1
+msgid ":py:obj:`layer <miniworlds.actors.actor.pygame.sprite.Sprite.layer>`\\"
+msgstr ""
+":py:obj:`Schicht <miniworlds.actors.actor.pygame.sprite.Sprite.layer>`\\"
+
+#: ../../None:3:<autosummary>:1
+msgid "Dynamic, read only property for protected _layer attribute."
+msgstr ""
+"Dynamisches, schreibgeschütztes Attribut für geschütztes _layer Attribut."
+
+#: ../../source/api/actor.md
+msgid "Public Methods:"
+msgstr "Öffentliche Methoden:"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <miniworlds.actors.actor.Actor.__init__>`\\ "
+"\\(\\[position\\]\\)"
+msgstr ""
+":py:obj:`__init__ <miniworlds.actors.actor.Actor.__init__>`\\ "
+"\\(\\[position\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`switch_origin <miniworlds.actors.actor.Actor.switch_origin>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`switch_origin <miniworlds.actors.actor.Actor.switch_origin>`\\ "
+"\\(Wert\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`create_on_world <miniworlds.actors.actor.Actor.create_on_world>`\\ "
+"\\(world\\)"
+msgstr ""
+":py:obj:`create_on_world <miniworlds.actors.actor.Actor.create_on_world>`\\ "
+"\\(Welt\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.create_on_world:1 of
+msgid "Creates a actor to a specific world"
+msgstr "Erstellt ein Schauspieler zu einer spezifischen Welt."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`from_topleft <miniworlds.actors.actor.Actor.from_topleft>`\\ "
+"\\(topleft\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`from_topleft <miniworlds.actors.actor.Actor.from_topleft>`\\ "
+"\\(topleft\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.from_center:1
+#: miniworlds.actors.actor.Actor.from_topleft:1 of
+msgid "Creates a actor with center at center_position"
+msgstr "Erstellt einen Schauspieler mit Zentrum am center_position"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`from_center <miniworlds.actors.actor.Actor.from_center>`\\ "
+"\\(center\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`from_center <miniworlds.actors.actor.Actor.from_center>`\\ "
+"\\(center\\_position\\, \\*args\\, \\*\\*kwargs\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`flip_x <miniworlds.actors.actor.Actor.flip_x>`\\ \\(\\)"
+msgstr ":py:obj:`flip_x <miniworlds.actors.actor.Actor.flip_x>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Flips the actor by 180° degrees."
+msgstr "Kippt den Schauspieler um 180° Grad."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`add_costume <miniworlds.actors.actor.Actor.add_costume>`\\ "
+"\\(\\[source\\]\\)"
+msgstr ""
+":py:obj:`add_costume <miniworlds.actors.actor.Actor.add_costume>`\\ "
+"\\(\\[source\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Adds a new costume to actor."
+msgstr "Fügt ein neues Kostüm zum Schauspieler hinzu."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`add_costumes <miniworlds.actors.actor.Actor.add_costumes>`\\ "
+"\\(sources\\)"
+msgstr ""
+":py:obj:`add_costumes <miniworlds.actors.actor.Actor.add_costumes>`\\ "
+"\\(Quellen\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.add_costumes:1
+#: of
+msgid "Adds multiple costumes"
+msgstr "Fügt mehrere Kostüme hinzu"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`remove_costume <miniworlds.actors.actor.Actor.remove_costume>`\\ "
+"\\(\\[source\\]\\)"
+msgstr ""
+":py:obj:`remove_costume <miniworlds.actors.actor.Actor.remove_costume>`\\ "
+"\\(\\[source\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.remove_costume:1 of
+msgid "Removes a costume from actor"
+msgstr "Entfernt ein Kostüm von Schauspieler"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`switch_costume <miniworlds.actors.actor.Actor.switch_costume>`\\ "
+"\\(source\\)"
+msgstr ""
+":py:obj:`switch_costume <miniworlds.actors.actor.Actor.switch_costume>`\\ "
+"\\(Quelle\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.switch_costume:1 of
+msgid "Switches the costume of actor"
+msgstr "Wechselt das Kostüm des Schauspielers"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_costume <miniworlds.actors.actor.Actor.set_costume>`\\ "
+"\\(costume\\)"
+msgstr ""
+":py:obj:`set_costume <miniworlds.actors.actor.Actor.set_costume>`\\ "
+"\\(Kostüm\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`reset_costumes <miniworlds.actors.actor.Actor.reset_costumes>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`reset_costumes <miniworlds.actors.actor.Actor.reset_costumes>`\\ "
+"\\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_background_color "
+"<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(color\\)"
+msgstr ""
+":py:obj:`set_background_color "
+"<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(Farbe\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`next_costume <miniworlds.actors.actor.Actor.next_costume>`\\ \\(\\)"
+msgstr ""
+":py:obj:`next_costume <miniworlds.actors.actor.Actor.next_costume>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.next_costume:1
+#: of
+msgid "Switches to the next costume of actor"
+msgstr "Schaltet zum nächsten Kostüm des Schauspielers um"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`turn_left <miniworlds.actors.actor.Actor.turn_left>`\\ "
+"\\(\\[degrees\\]\\)"
+msgstr ""
+":py:obj:`turn_left <miniworlds.actors.actor.Actor.turn_left>`\\ "
+"\\(\\[degrees\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.turn_left:1 of
+msgid ""
+"Turns actor by *degrees* degrees left :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+"Wird Schauspieler um *Grad* Grad nach links gedreht :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`turn_right <miniworlds.actors.actor.Actor.turn_right>`\\ "
+"\\(\\[degrees\\]\\)"
+msgstr ""
+":py:obj:`turn_right <miniworlds.actors.actor.Actor.turn_right>`\\ "
+"\\(\\[grad\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.turn_right:1 of
+msgid "Turns actor by *degrees* degrees right"
+msgstr "Wird Schauspieler um *Grad* Grad rechts"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_direction <miniworlds.actors.actor.Actor.set_direction>`\\ "
+"\\(direction\\)"
+msgstr ""
+":py:obj:`set_direction <miniworlds.actors.actor.Actor.set_direction>`\\ "
+"\\(Richtung\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.set_direction:1
+#: of
+msgid "Actor points in given direction."
+msgstr "Schauspieler zeigt in gegebene Richtung."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`point_towards_position "
+"<miniworlds.actors.actor.Actor.point_towards_position>`\\ \\(destination\\)"
+msgstr ""
+":py:obj:`point_towards_position "
+"<miniworlds.actors.actor.Actor.point_towards_position>`\\ \\(Ziel\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.point_towards_position:1 of
+msgid "Actor points towards a given position"
+msgstr "Schauspieler deutet auf eine gegebene Position hin."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`point_towards_actor "
+"<miniworlds.actors.actor.Actor.point_towards_actor>`\\ \\(other\\)"
+msgstr ""
+":py:obj:`point_towards_actor "
+"<miniworlds.actors.actor.Actor.point_towards_actor>`\\ \\(other\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.point_towards_actor:1 of
+msgid "Actor points towards another actor."
+msgstr "Schauspieler zeigt auf anderen Schauspieler."
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(value\\)"
+msgstr ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(Wert\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`scale_width <miniworlds.actors.actor.Actor.scale_width>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`scale_width <miniworlds.actors.actor.Actor.scale_width>`\\ "
+"\\(Wert\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`scale_height <miniworlds.actors.actor.Actor.scale_height>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`scale_height <miniworlds.actors.actor.Actor.scale_height>`\\ "
+"\\(Wert\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`move <miniworlds.actors.actor.Actor.move>`\\ \\(\\[distance\\]\\)"
+msgstr ":py:obj:`bewegen <miniworlds.actors.actor.Actor.move>`\\ \\(\\[Entfernung\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move:1 of
+msgid "Moves actor *distance* steps in current direction"
+msgstr "Bewegt Schauspieler *Entfernung* Schritte in aktueller Richtung"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_vector <miniworlds.actors.actor.Actor.move_vector>`\\ "
+"\\(vector\\)"
+msgstr ""
+":py:obj:`move_vector <miniworlds.actors.actor.Actor.move_vector>`\\ "
+"\\(Vektor\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move_vector:1
+#: of
+msgid "Moves actor in direction defined by the vector"
+msgstr "Bewegungen Schauspieler in Richtung definiert durch den Vektor"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_back <miniworlds.actors.actor.Actor.move_back>`\\ "
+"\\(distance\\)"
+msgstr ""
+":py:obj:`move_back <miniworlds.actors.actor.Actor.move_back>`\\ "
+"\\(Entfernung\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`undo_move <miniworlds.actors.actor.Actor.undo_move>`\\ \\(\\)"
+msgstr ":py:obj:`undo_move <miniworlds.actors.actor.Actor.undo_move>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Undo the last move."
+msgstr "Rückgängig machen Sie den letzten Zug."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_towards <miniworlds.actors.actor.Actor.move_towards>`\\ "
+"\\(target\\)"
+msgstr ""
+":py:obj:`move_towards <miniworlds.actors.actor.Actor.move_towards>`\\ "
+"\\(target\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`move_in_direction "
+"<miniworlds.actors.actor.Actor.move_in_direction>`\\ \\(direction\\[\\, "
+"distance\\]\\)"
+msgstr ""
+":py:obj:`move_in_direction "
+"<miniworlds.actors.actor.Actor.move_in_direction>`\\ \\(Richtung\\[\\, "
+"Abstand\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.move_in_direction:1 of
+msgid "Moves actor *distance* steps into a *direction* or towards a position"
+msgstr ""
+"Bewegt den Schauspieler *Entfernung* Schritte in eine *Richtung* oder in "
+"Richtung einer Position"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`move_to <miniworlds.actors.actor.Actor.move_to>`\\ \\(position\\)"
+msgstr ":py:obj:`move_to <miniworlds.actors.actor.Actor.move_to>`\\ \\(position\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.move_to:1 of
+msgid "Moves actor *distance* to a specific world_posiition"
+msgstr "Bewegt Schauspieler *Entfernung* zu einer bestimmten world_posiition"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`remove <miniworlds.actors.actor.Actor.remove>`\\ \\(\\[kill\\]\\)"
+msgstr ":py:obj:`entfernen <miniworlds.actors.actor.Actor.remove>`\\ \\(\\[töten\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.remove:1 of
+msgid "Removes this actor from world"
+msgstr "Entfernt diesen Schauspieler aus der Welt"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`before_remove <miniworlds.actors.actor.Actor.before_remove>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`before_remove <miniworlds.actors.actor.Actor.before_remove>`\\ "
+"\\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`bounce_from_border "
+"<miniworlds.actors.actor.Actor.bounce_from_border>`\\ \\(borders\\)"
+msgstr ""
+":py:obj:`bounce_from_border "
+"<miniworlds.actors.actor.Actor.bounce_from_border>`\\ \\(Grenzen\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.bounce_from_border:1 of
+msgid "The actor \"bounces\" from a border."
+msgstr "Der Schauspieler \"prallt\" von einer Grenze ab."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_all <miniworlds.actors.actor.Actor.detect_all>`\\ "
+"\\(\\[actors\\, direction\\, distance\\]\\)"
+msgstr ""
+":py:obj:`detect_all <miniworlds.actors.actor.Actor.detect_all>`\\ "
+"\\(\\[actors\\, direction\\, distance\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Detects if actors are on actor position."
+msgstr "Erkennt, ob Schauspieler auf Schauspielerposition sind."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect <miniworlds.actors.actor.Actor.detect>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`erkennen <miniworlds.actors.actor.Actor.detect>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_borders <miniworlds.actors.actor.Actor.detect_borders>`\\ "
+"\\(\\[distance\\]\\)"
+msgstr ""
+":py:obj:`detect_borders <miniworlds.actors.actor.Actor.detect_borders>`\\ "
+"\\(\\[distance\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_borders:1 of
+msgid "Detects borders"
+msgstr "Erkennt Grenzen"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_left_border "
+"<miniworlds.actors.actor.Actor.detect_left_border>`\\ \\(\\)"
+msgstr ""
+":py:obj:`detect_left_border "
+"<miniworlds.actors.actor.Actor.detect_left_border>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_left_border:1 of
+msgid "Does the actor touch the left border?"
+msgstr "Berührt der Schauspieler die linke Grenze?"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_right_border "
+"<miniworlds.actors.actor.Actor.detect_right_border>`\\ \\(\\)"
+msgstr ""
+":py:obj:`detect_right_border "
+"<miniworlds.actors.actor.Actor.detect_right_border>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_right_border:1 of
+msgid "Does the actor touch the right border?"
+msgstr "Berührt der Schauspieler den rechten Rand?"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_top_border "
+"<miniworlds.actors.actor.Actor.detect_top_border>`\\ \\(\\)"
+msgstr ""
+":py:obj:`detect_top_border "
+"<miniworlds.actors.actor.Actor.detect_top_border>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_top_border:1
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:1 of
+msgid "Does the actor touch the lower border?"
+msgstr "Berührt der Schauspieler die untere Grenze?"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detecting_bottom_border "
+"<miniworlds.actors.actor.Actor.detecting_bottom_border>`\\ \\(\\)"
+msgstr ""
+":py:obj:`detecting_bottom_border "
+"<miniworlds.actors.actor.Actor.detecting_bottom_border>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_color <miniworlds.actors.actor.Actor.detect_color>`\\ "
+"\\(\\[color\\]\\)"
+msgstr ""
+":py:obj:`detect_color <miniworlds.actors.actor.Actor.detect_color>`\\ "
+"\\(\\[color\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_color:1
+#: of
+msgid "Detects colors in world-background at actor center-position"
+msgstr "Erkennt Farben in der Welt-Hintergrund am Schauspieler-Mitteposition"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_color_at <miniworlds.actors.actor.Actor.detect_color_at>`\\ "
+"\\(\\[direction\\, distance\\]\\)"
+msgstr ""
+":py:obj:`detect_color_at <miniworlds.actors.actor.Actor.detect_color_at>`\\ "
+"\\(\\[direction\\, distance\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_color_at:1 of
+msgid "Detects colors in world-background at actor-position"
+msgstr "Erkennt Farben in Welt-Hintergrund an Schauspieler-Position"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actors_at "
+"<miniworlds.actors.actor.Actor.detect_actors_at>`\\ \\(\\[direction\\, "
+"distance\\, actors\\]\\)"
+msgstr ""
+":py:obj:`detect_actors_at "
+"<miniworlds.actors.actor.Actor.detect_actors_at>`\\ \\(\\[direction\\, "
+"distance\\, actors\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detect_actors_at:1 of
+msgid "Detects a actor in given direction and distance."
+msgstr "Erkennt einen Schauspieler in gegebener Richtung und Entfernung."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actor_at <miniworlds.actors.actor.Actor.detect_actor_at>`\\ "
+"\\(\\[direction\\, distance\\, actors\\]\\)"
+msgstr ""
+":py:obj:`detect_actor_at <miniworlds.actors.actor.Actor.detect_actor_at>`\\ "
+"\\(\\[direction\\, distance\\, actors\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actors_in_front "
+"<miniworlds.actors.actor.Actor.detect_actors_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+msgstr ""
+":py:obj:`detect_actors_in_front "
+"<miniworlds.actors.actor.Actor.detect_actors_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_actor_in_front "
+"<miniworlds.actors.actor.Actor.detect_actor_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+msgstr ""
+":py:obj:`detect_actor_in_front "
+"<miniworlds.actors.actor.Actor.detect_actor_in_front>`\\ \\(\\[actors\\, "
+"distance\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_point <miniworlds.actors.actor.Actor.detect_point>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`detect_point <miniworlds.actors.actor.Actor.detect_point>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_point:1
+#: of
+msgid "Is the actor colliding with a specific (global) point?"
+msgstr "Kollidiert der Schauspieler mit einem spezifischen (globalen) Punkt?"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_pixel <miniworlds.actors.actor.Actor.detect_pixel>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`detect_pixel <miniworlds.actors.actor.Actor.detect_pixel>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_pixel:1
+#: of
+msgid "Is the actor colliding with a pixel?"
+msgstr "Kollidiert der Schauspieler mit einem Pixel?"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`detect_rect <miniworlds.actors.actor.Actor.detect_rect>`\\ "
+"\\(rect\\)"
+msgstr ""
+":py:obj:`detect_rect <miniworlds.actors.actor.Actor.detect_rect>`\\ "
+"\\(rect\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.detect_rect:1
+#: miniworlds.actors.actor.Actor.detect_world:1 of
+msgid "Is the actor colliding with a static rect?"
+msgstr "Kollidiert der Schauspieler mit einem statischen Rechteck?"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`detect_world <miniworlds.actors.actor.Actor.detect_world>`\\ \\(\\)"
+msgstr ""
+":py:obj:`detect_world <miniworlds.actors.actor.Actor.detect_world>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`bounce_from_actor "
+"<miniworlds.actors.actor.Actor.bounce_from_actor>`\\ \\(other\\)"
+msgstr ""
+":py:obj:`bounce_from_actor "
+"<miniworlds.actors.actor.Actor.bounce_from_actor>`\\ \\(other\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`animate <miniworlds.actors.actor.Actor.animate>`\\ \\(\\[speed\\]\\)"
+msgstr ""
+":py:obj:`animate <miniworlds.actors.actor.Actor.animate>`\\ "
+"\\(\\[Geschwindigkeit\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`animate_costume <miniworlds.actors.actor.Actor.animate_costume>`\\ "
+"\\(costume\\[\\, speed\\]\\)"
+msgstr ""
+":py:obj:`animate_costume <miniworlds.actors.actor.Actor.animate_costume>`\\ "
+"\\(Kostüm\\[\\, Geschwindigkeit\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`animate_loop <miniworlds.actors.actor.Actor.animate_loop>`\\ "
+"\\(\\[speed\\]\\)"
+msgstr ""
+":py:obj:`animate_loop <miniworlds.actors.actor.Actor.animate_loop>`\\ "
+"\\(\\[Geschwindigkeit\\]\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.animate_loop:1
+#: of
+msgid "Animates a costume with a looping animation"
+msgstr "Animiert ein Kostüm mit einer Schleifenanimation"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`stop_animation <miniworlds.actors.actor.Actor.stop_animation>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`stop_animation <miniworlds.actors.actor.Actor.stop_animation>`\\ "
+"\\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Stops current animation."
+msgstr "Stoppt aktuelle Animation."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`send_message <miniworlds.actors.actor.Actor.send_message>`\\ "
+"\\(message\\)"
+msgstr ""
+":py:obj:`send_message <miniworlds.actors.actor.Actor.send_message>`\\ "
+"\\(Nachricht\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.send_message:1
+#: of
+msgid "Sends a message to world."
+msgstr "Sendet eine Nachricht an Welt."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_key_down <miniworlds.actors.actor.Actor.on_key_down>`\\ "
+"\\(key\\)"
+msgstr ""
+":py:obj:`on_key_down <miniworlds.actors.actor.Actor.on_key_down>`\\ "
+"\\(Schlüssel\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.on_key_down:1
+#: of
+msgid "**on_key_down**  is called one time when a key is pressed down."
+msgstr ""
+"**on_key_down** wird einmal aufgerufen, wenn eine Taste gedrückt wird."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_key_pressed <miniworlds.actors.actor.Actor.on_key_pressed>`\\ "
+"\\(key\\)"
+msgstr ""
+":py:obj:`on_key_pressed <miniworlds.actors.actor.Actor.on_key_pressed>`\\ "
+"\\(Schlüssel\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "**on_key_pressed** is called when while key is pressed."
+msgstr "**on_key_pressed** wird aufgerufen, wenn während Taste gedrückt wird."
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`on_key_up <miniworlds.actors.actor.Actor.on_key_up>`\\ \\(key\\)"
+msgstr ":py:obj:`on_key_up <miniworlds.actors.actor.Actor.on_key_up>`\\ \\(Taste\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_over <miniworlds.actors.actor.Actor.on_mouse_over>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_over <miniworlds.actors.actor.Actor.on_mouse_over>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_mouse_leave:1
+#: miniworlds.actors.actor.Actor.on_mouse_over:1 of
+msgid ""
+"on_mouse_over is called, when mouse is moved over actor :type position: "
+":param position: The mouse position"
+msgstr ""
+"on_mouse_over wird aufgerufen, wenn die Maus über Schauspieler:Typ Position:"
+" :param Position: Die Mausposition bewegt wird"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_left <miniworlds.actors.actor.Actor.on_mouse_left>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_left <miniworlds.actors.actor.Actor.on_mouse_left>`\\ "
+"\\(Position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "on_mouse_left is called when left mouse button was pressed."
+msgstr ""
+"on_mouse_left wird aufgerufen, wenn die linke Maustaste gedrückt wurde."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_right <miniworlds.actors.actor.Actor.on_mouse_right>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_right <miniworlds.actors.actor.Actor.on_mouse_right>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when right mouse button was pressed."
+msgstr "Methode wird aufgerufen, wenn rechte Maustaste gedrückt wurde."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_motion <miniworlds.actors.actor.Actor.on_mouse_motion>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_motion <miniworlds.actors.actor.Actor.on_mouse_motion>`\\ "
+"\\(Position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when mouse moves."
+msgstr "Methode wird aufgerufen, wenn Maus bewegt."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_left_released "
+"<miniworlds.actors.actor.Actor.on_mouse_left_released>`\\ \\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_left_released "
+"<miniworlds.actors.actor.Actor.on_mouse_left_released>`\\ \\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:1 of
+msgid "Method is called when left mouse key is released."
+msgstr "Methode wird aufgerufen, wenn linke Maustaste losgelassen wird."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_mouse_right_released "
+"<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(position\\)"
+msgstr ""
+":py:obj:`on_mouse_right_released "
+"<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Method is called when right mouse key is released."
+msgstr ""
+"Die Methode wird aufgerufen, wenn die rechte Maustaste losgelassen wird."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_clicked_left <miniworlds.actors.actor.Actor.on_clicked_left>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`on_clicked_left <miniworlds.actors.actor.Actor.on_clicked_left>`\\ "
+"\\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_clicked_left:1
+#: miniworlds.actors.actor.Actor.on_clicked_right:1 of
+msgid "The mouse is on top of a actor and mouse was clicked."
+msgstr ""
+"Die Maus befindet sich oben auf einem Schauspieler und die Maus wurde "
+"angeklickt."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_clicked_right "
+"<miniworlds.actors.actor.Actor.on_clicked_right>`\\ \\(position\\)"
+msgstr ""
+":py:obj:`on_clicked_right "
+"<miniworlds.actors.actor.Actor.on_clicked_right>`\\ \\(position\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_world "
+"<miniworlds.actors.actor.Actor.on_detecting_world>`\\ \\(\\)"
+msgstr ""
+":py:obj:`on_detecting_world "
+"<miniworlds.actors.actor.Actor.on_detecting_world>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_world:1
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:1 of
+msgid "`on_detecting_world` is called, when actor is on the world"
+msgstr ""
+"`on_detecting_world` wird aufgerufen, wenn der Schauspieler auf der Welt ist"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_not_detecting_world "
+"<miniworlds.actors.actor.Actor.on_not_detecting_world>`\\ \\(\\)"
+msgstr ""
+":py:obj:`on_not_detecting_world "
+"<miniworlds.actors.actor.Actor.on_not_detecting_world>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_actor "
+"<miniworlds.actors.actor.Actor.on_detecting_actor>`\\ \\(actor\\)"
+msgstr ""
+":py:obj:`on_detecting_actor "
+"<miniworlds.actors.actor.Actor.on_detecting_actor>`\\ \\(Schauspieler\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_actor:1 of
+msgid ""
+"*on_detect_actor* is called, when actor is detects a actor on same position"
+msgstr ""
+"*on_detect_actor* wird aufgerufen, wenn Schauspieler einen Schauspieler an "
+"derselben Position erkennt."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_detecting_borders "
+"<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(borders\\)"
+msgstr ""
+":py:obj:`on_detecting_borders "
+"<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(borders\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_detecting_borders:1 of
+msgid "*on_detecting_border* is called, when actor is near a border"
+msgstr ""
+"*on_detecting_border* wird aufgerufen, wenn der Schauspieler sich in der "
+"Nähe einer Grenze befindet"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`fill <miniworlds.actors.actor.Actor.fill>`\\ \\(value\\)"
+msgstr ":py:obj:`full <miniworlds.actors.actor.Actor.fill>`\\ \\(Wert\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.fill:1 of
+msgid "Set fill color for borders and lines"
+msgstr "Setze Füllfarbe für Rahmen und Linien"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`hide <miniworlds.actors.actor.Actor.hide>`\\ \\(\\)"
+msgstr ":py:obj:`verstecke <miniworlds.actors.actor.Actor.hide>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.hide:1 of
+msgid "Hides a actor (the actor will be invisible)"
+msgstr "Versteckt einen Schauspieler (der Schauspieler wird unsichtbar sein)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`show <miniworlds.actors.actor.Actor.show>`\\ \\(\\)"
+msgstr ":py:obj:`show <miniworlds.actors.actor.Actor.show>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1 miniworlds.actors.actor.Actor.show:1 of
+msgid "Displays a actor ( an invisible actor will be visible)"
+msgstr ""
+"Zeigt einen Schauspieler (ein unsichtbarer Schauspieler wird sichtbar)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register <miniworlds.actors.actor.Actor.register>`\\ "
+"\\(method\\[\\, force\\, name\\]\\)"
+msgstr ""
+":py:obj:`registrieren <miniworlds.actors.actor.Actor.register>`\\ "
+"\\(method\\[\\, force\\, name\\]\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "This method is used for the @register decorator."
+msgstr "Diese Methode wird für den @register Dekorator verwendet."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register_message "
+"<miniworlds.actors.actor.Actor.register_message>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`register_message "
+"<miniworlds.actors.actor.Actor.register_message>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.register_message:1 of
+msgid ""
+"Registers a method to an object to handle specific `on_message` events."
+msgstr ""
+"Registriert eine Methode bei einem Objekt, um spezifische "
+"`on_message`-Ereignisse zu behandeln."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`register_sensor <miniworlds.actors.actor.Actor.register_sensor>`\\ "
+"\\(\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`register_sensor <miniworlds.actors.actor.Actor.register_sensor>`\\ "
+"\\(\\*args\\, \\*\\*kwargs\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.register_sensor:1 of
+msgid "This method is used for the @register_sensor decorator."
+msgstr "Diese Methode wird für den @register_sensor-Decorator verwendet."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_local_rect <miniworlds.actors.actor.Actor.get_local_rect>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`get_local_rect <miniworlds.actors.actor.Actor.get_local_rect>`\\ "
+"\\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`__str__ <miniworlds.actors.actor.Actor.__str__>`\\ \\(\\)"
+msgstr ":py:obj:`__str__ <miniworlds.actors.actor.Actor.__str__>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid "Return str(self)."
+msgstr "Gib str(self) zurück."
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_world <miniworlds.actors.actor.Actor.set_world>`\\ "
+"\\(new\\_world\\)"
+msgstr ""
+":py:obj:`set_world <miniworlds.actors.actor.Actor.set_world>`\\ "
+"\\(new\\_world\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ":py:obj:`new_costume <miniworlds.actors.actor.Actor.new_costume>`\\ \\(\\)"
+msgstr ":py:obj:`new_costume <miniworlds.actors.actor.Actor.new_costume>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_costume_class "
+"<miniworlds.actors.actor.Actor.get_costume_class>`\\ \\(\\)"
+msgstr ""
+":py:obj:`get_costume_class "
+"<miniworlds.actors.actor.Actor.get_costume_class>`\\ \\(\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`set_position <miniworlds.actors.actor.Actor.set_position>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`set_position <miniworlds.actors.actor.Actor.set_position>`\\ "
+"\\(value\\)"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`get_distance_to <miniworlds.actors.actor.Actor.get_distance_to>`\\ "
+"\\(obj\\)"
+msgstr ""
+":py:obj:`get_distance_to <miniworlds.actors.actor.Actor.get_distance_to>`\\ "
+"\\(obj\\)"
+
+#: ../../None:87:<autosummary>:1
+#: miniworlds.actors.actor.Actor.get_distance_to:1 of
+msgid "Gets the distance to another actor or a position"
+msgstr ""
+"Erhält die Entfernung zu einem anderen Schauspieler oder einer Position"
+
+#: ../../None:87:<autosummary>:1
+msgid ""
+":py:obj:`on_shape_change <miniworlds.actors.actor.Actor.on_shape_change>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`on_shape_change <miniworlds.actors.actor.Actor.on_shape_change>`\\ "
+"\\(\\)"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__init__>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+":py:obj:`__init__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__init__>`\\ "
+"\\(\\*groups\\)"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`__repr__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__repr__>`\\ \\(\\)"
+msgstr ""
+":py:obj:`__repr__ "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite.__repr__>`\\ \\(\\)"
+
+#: ../../None:12:<autosummary>:1 ../../None:4:<autosummary>:1
+msgid "Return repr(self)."
+msgstr "Gib repr(self) zurück."
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <miniworlds.actors.actor.pygame.sprite.Sprite.__init__>`\\"
+" \\(\\*groups\\)"
+msgstr ""
+":py:obj:`__init__ <miniworlds.actors.actor.pygame.sprite.Sprite.__init__>`\\"
+" \\(\\*groups\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add <miniworlds.actors.actor.pygame.sprite.Sprite.add>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+":py:obj:`add <miniworlds.actors.actor.pygame.sprite.Sprite.add>`\\ "
+"\\(\\*groups\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "add the sprite to groups"
+msgstr "Füge den Sprite zu Gruppen hinzu"
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove <miniworlds.actors.actor.pygame.sprite.Sprite.remove>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+":py:obj:`remove <miniworlds.actors.actor.pygame.sprite.Sprite.remove>`\\ "
+"\\(\\*Gruppen\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the sprite from groups"
+msgstr "entfernen Sie den Sprite aus Gruppen"
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.add_internal>`\\ \\(group\\)"
+msgstr ""
+":py:obj:`add_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.add_internal>`\\ \\(Gruppe\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "For adding this sprite to a group internally."
+msgstr "Für das Hinzufügen dieses Sprites intern zu einer Gruppe."
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.remove_internal>`\\ "
+"\\(group\\)"
+msgstr ""
+":py:obj:`remove_internal "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.remove_internal>`\\ "
+"\\(Gruppe\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "For removing this sprite from a group internally."
+msgstr "Zum Entfernen dieses Sprites aus einer Gruppe intern."
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`update <miniworlds.actors.actor.pygame.sprite.Sprite.update>`\\ "
+"\\(\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`aktualisierung "
+"<miniworlds.actors.actor.pygame.sprite.Sprite.update>`\\ \\(\\*args\\, "
+"\\*\\*kwargs\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "method to control sprite behavior"
+msgstr "Methode zur Steuerung des Sprite-Verhaltens"
+
+#: ../../None:12:<autosummary>:1
+msgid ":py:obj:`kill <miniworlds.actors.actor.pygame.sprite.Sprite.kill>`\\ \\(\\)"
+msgstr ":py:obj:`kill <miniworlds.actors.actor.pygame.sprite.Sprite.kill>`\\ \\(\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the Sprite from all Groups"
+msgstr "Entferne den Sprite aus allen Gruppen."
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`groups <miniworlds.actors.actor.pygame.sprite.Sprite.groups>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`Gruppen <miniworlds.actors.actor.pygame.sprite.Sprite.groups>`\\ "
+"\\(\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "list of Groups that contain this Sprite"
+msgstr "Liste der Gruppen, die diesen Sprite enthalten"
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`alive <miniworlds.actors.actor.pygame.sprite.Sprite.alive>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`lebendig <miniworlds.actors.actor.pygame.sprite.Sprite.alive>`\\ "
+"\\(\\)"
+
+#: ../../None:12:<autosummary>:1
+msgid "does the sprite belong to any groups"
+msgstr "Gehört das Sprite zu irgendwelchen Gruppen?"
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__repr__ <miniworlds.actors.actor.pygame.sprite.Sprite.__repr__>`\\"
+" \\(\\)"
+msgstr ""
+":py:obj:`__repr__ <miniworlds.actors.actor.pygame.sprite.Sprite.__repr__>`\\"
+" \\(\\)"
+
+#: ../../source/api/actor.md
+msgid "Private Data Attributes:"
+msgstr "Private Daten Attribute:"
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_world <miniworlds.actors.actor.Actor._world>`\\"
+msgstr ":py:obj:`_world <miniworlds.actors.actor.Actor._world>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_sensor_manager <miniworlds.actors.actor.Actor._sensor_manager>`\\"
+msgstr ""
+":py:obj:`_sensor_manager <miniworlds.actors.actor.Actor._sensor_manager>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_position_manager "
+"<miniworlds.actors.actor.Actor._position_manager>`\\"
+msgstr ""
+":py:obj:`_position_manager "
+"<miniworlds.actors.actor.Actor._position_manager>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_costume_manager "
+"<miniworlds.actors.actor.Actor._costume_manager>`\\"
+msgstr ""
+":py:obj:`_costume_manager "
+"<miniworlds.actors.actor.Actor._costume_manager>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ""
+":py:obj:`_collision_type <miniworlds.actors.actor.Actor._collision_type>`\\"
+msgstr ""
+":py:obj:`_collision_type <miniworlds.actors.actor.Actor._collision_type>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_layer <miniworlds.actors.actor.Actor._layer>`\\"
+msgstr ":py:obj:`_layer <miniworlds.actors.actor.Actor._layer>`\\"
+
+#: ../../None:9:<autosummary>:1
+msgid ":py:obj:`_is_acting <miniworlds.actors.actor.Actor._is_acting>`\\"
+msgstr ":py:obj:`_is_acting <miniworlds.actors.actor.Actor._is_acting>`\\"
+
+#: ../../source/api/actor.md
+msgid "Private Methods:"
+msgstr "Private Methoden:"
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`_validate_arguments "
+"<miniworlds.actors.actor.Actor._validate_arguments>`\\ \\(position\\, "
+"\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+":py:obj:`_validate_arguments "
+"<miniworlds.actors.actor.Actor._validate_arguments>`\\ \\(Position\\, "
+"\\*args\\, \\*\\*kwargs\\)"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`_set_visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._set_visible>`\\ "
+"\\(val\\)"
+msgstr ""
+":py:obj:`_set_sichtbar "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._set_visible>`\\ "
+"\\(val\\)"
+
+#: ../../None:4:<autosummary>:1
+msgid "set the visible value (0 or 1) and makes the sprite dirty"
+msgstr "setze den sichtbaren Wert (0 oder 1) und mache den Sprite schmutzig"
+
+#: ../../None:4:<autosummary>:1
+msgid ""
+":py:obj:`_get_visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._get_visible>`\\ \\(\\)"
+msgstr ""
+":py:obj:`_get_visible "
+"<miniworlds.actors.actor.pygame.sprite.DirtySprite._get_visible>`\\ \\(\\)"
+
+#: ../../None:4:<autosummary>:1
+msgid "return the visible value of that sprite"
+msgstr "Gib den sichtbaren Wert dieses Sprites zurück"
+
+#: miniworlds.actors.actor.Actor.add_costume:1 of
+msgid ""
+"Adds a new costume to actor. The costume can be switched with "
+"self.switch_costume(index)"
+msgstr ""
+"Fügt dem Schauspieler ein neues Kostüm hinzu. Das Kostüm kann mit "
+"self.switch_costume(index) gewechselt werden."
+
+#: ../../source/api/actor.md
+msgid "Rückgabetyp"
+msgstr "Return type"
+
+#: miniworlds.actors.actor.Actor.add_costume:4
+#: miniworlds.actors.actor.Actor.add_costumes:4
+#: miniworlds.actors.actor.Actor.switch_costume:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\``"
+
+#: ../../source/api/actor.md
+msgid "Parameter"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:6 of
+msgid "Path to the first image of new costume or Tuple with color-value"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:10 of
+msgid "Add first costume from image:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:23
+#: miniworlds.actors.actor.Actor.add_costume:41
+#: miniworlds.actors.actor.Actor.add_costume:68
+#: miniworlds.actors.actor.Actor.border:35
+#: miniworlds.actors.actor.Actor.bounce_from_border:34
+#: miniworlds.actors.actor.Actor.color:51
+#: miniworlds.actors.actor.Actor.detect:39
+#: miniworlds.actors.actor.Actor.fill_color:51
+#: miniworlds.actors.actor.Actor.flip_x:35
+#: miniworlds.actors.actor.Actor.is_flipped:31
+#: miniworlds.actors.actor.Actor.is_rotatable:37
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:29
+#: miniworlds.actors.actor.Actor.turn_left:27
+#: miniworlds.actors.actor.Actor.turn_right:22 of
+msgid "Output:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:25
+#: miniworlds.actors.actor.Actor.add_costume:43 of
+msgid "Create Actor with image as costume"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:29 of
+msgid "Add first costume from color:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:48 of
+msgid "Create two costumes and switch between costumes"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:70 of
+msgid "Create multiple costumes and switch between costumes"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Rückgabe"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.add_costume:74 of
+msgid "The new costume."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.animate_loop:3 of
+msgid "Switches through all costume-images every ``speed``-frame."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.animate_loop:18 of
+msgid "Every ``speed`` frame, the image is switched. Defaults to 10."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border:3 of
+msgid "The value is 0, if actor has no border."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border:7 of
+msgid ""
+"You can also set border with ``costume.border`` or you can set the border "
+"with ``world.default_border``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border:11 of
+msgid "Set border of actor:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border:37
+#: miniworlds.actors.actor.Actor.color:53
+#: miniworlds.actors.actor.Actor.fill_color:53 of
+msgid "Set borders"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:3
+#: miniworlds.actors.actor.Actor.stroke_color:3 of
+msgid ""
+"The border-color is a rgba value, for example (255, 0, 0) for red, (0, 255, "
+"0) for green and (255, 0, 0, 100)."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:5
+#: miniworlds.actors.actor.Actor.stroke_color:5 of
+msgid ""
+"If the color-value has 4 values, the last value defines the transparency:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:6
+#: miniworlds.actors.actor.Actor.stroke_color:6 of
+msgid "0: Full transparent,"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:7
+#: miniworlds.actors.actor.Actor.stroke_color:7 of
+msgid "255: No transparency"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:12
+#: miniworlds.actors.actor.Actor.stroke_color:12 of
+msgid "You must also set :py:attr:`Actor.border` to a value > 0"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:14
+#: miniworlds.actors.actor.Actor.stroke_color:14 of
+msgid "Aliases:  :py:attr:`Actor.stroke_color`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.border_color:18
+#: miniworlds.actors.actor.Actor.stroke_color:18 of
+msgid "See :py:attr:`Actor.border`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:3 of
+msgid ""
+"The direction is set according to the principle input angle = output angle. "
+":rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:9 of
+msgid "You must check for borders first!"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:11 of
+msgid "A list of borders as strings e.g. [\"left\", \"right\"]"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:43 of
+msgid "The actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:3 of
+msgid "`default`: tile for Tiledworlds, 'mask' for Pixelworlds"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:5 of
+msgid "`tile`: Are actors on the same tile? (only TiledWorld)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:7 of
+msgid ""
+"`rect`: Are actors colliding when checking their bounding - boxes? (Only "
+"PixelWorld)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:9 of
+msgid ""
+"`static-rect`: Are actors colliding when checking circle with radius = "
+"bounding-box-radius.(Only PixelWorld)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:11 of
+msgid ""
+"`circle`: Are actors colliding when checking circle with radius = bounding-"
+"box-radius.(Only PixelWorld)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.collision_type:13 of
+msgid ""
+"`mask`: Are actors colliding when checking if their image masks are "
+"overlapping."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.color:3
+#: miniworlds.actors.actor.Actor.fill_color:3 of
+msgid ""
+"When ``fill_color`` is set to a color, the attribute ``is_filled`` of "
+"costume (See: :py:attr:`.appearances.appearance.Appearance.is_filled`) is "
+"set to ``True``."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.color:8
+#: miniworlds.actors.actor.Actor.fill_color:8 of
+msgid "Aliases: :py:attr:`Actor.color`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.color:12
+#: miniworlds.actors.actor.Actor.fill_color:12 of
+msgid ""
+"If you fill a costume with an image, the image will be completely "
+"overwritten, even if `fill_color` is transparent."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.color:15
+#: miniworlds.actors.actor.Actor.fill_color:15 of
+msgid "This behaviour may change in later releases!"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.color:17
+#: miniworlds.actors.actor.Actor.fill_color:17 of
+msgid "Examples:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.costume_count:5 of
+msgid "Add costume and count costumes"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.costume_count:17 of
+msgid "_description_"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.costumes:3 of
+msgid "The costume manager can be iterated to get all costumes"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.create_on_world:3 of
+msgid "overwritten in subclasses"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:1 of
+msgid ""
+"Detects if actors are on actor position. Returns the first found actor."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:6 of
+msgid ""
+"filter by actor type. Enter a class_name of actors to look for "
+"heredirection: int = 0, distance: int = 0"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:7
+#: miniworlds.actors.actor.Actor.detect_actors_at:24
+#: miniworlds.actors.actor.Actor.detect_all:7 of
+msgid "The direction in which actors should be detected."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:8
+#: miniworlds.actors.actor.Actor.detect_actors_at:26
+#: miniworlds.actors.actor.Actor.detect_all:8 of
+msgid ""
+"The distance in which actors should be detected (Start-Point is "
+"actor.center)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:10 of
+msgid "First actor found by Sensor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect:14 of
+msgid "The green robot pushes the yellow robot:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_actor_at:2
+#: miniworlds.actors.actor.Actor.detect_actor_in_front:2
+#: miniworlds.actors.actor.Actor.set_world:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_actors_at:27
+#: miniworlds.actors.actor.Actor.detect_actors_in_front:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_actors_at:28 of
+msgid "A list of actors"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_all:1 of
+msgid "Detects if actors are on actor position. Returns a list of actors."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_all:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_all:6 of
+msgid "filter by actor type. Enter a class_name of actors to look for here"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_all:10 of
+msgid "All actors found by Sensor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_borders:3 of
+msgid ""
+"Args: :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_borders:7 of
+msgid ""
+"distance: Specifies the distance in front of the actuator to which the "
+"sensors reacts."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_borders:9
+#: miniworlds.actors.actor.Actor.detect_left_border:5
+#: miniworlds.actors.actor.Actor.detect_right_border:5
+#: miniworlds.actors.actor.Actor.detect_top_border:5
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:5 of
+msgid "True if border was found."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color:3
+#: miniworlds.actors.actor.Actor.detect_left_border:3
+#: miniworlds.actors.actor.Actor.detect_pixel:3
+#: miniworlds.actors.actor.Actor.detect_point:3
+#: miniworlds.actors.actor.Actor.detect_right_border:3
+#: miniworlds.actors.actor.Actor.detect_top_border:3
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color:5 of
+msgid "color as tuple"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color:7 of
+msgid "True, if color was found"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color_at:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
+"\\:py\\:class\\:\\`\\~typing.List\\`\\]`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color_at:5 of
+msgid "Specifies the direction where the sensors is searching."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color_at:6 of
+msgid ""
+"Specifies the distance in front of the actuator to which the sensors reacts."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_color_at:8 of
+msgid "All colors found by Sensor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_pixel:5 of
+msgid "True if pixel is below actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_point:5 of
+msgid ""
+"If your want to check if an actor detects a specific pixel, use detect_pixel"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.detect_point:7 of
+msgid "True if point is below actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:4 of
+msgid "The default direction is ``0°``. All actors are looking ``\"up\"``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:6 of
+msgid "Move on world"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:10 of
+msgid "**Values for Direction**"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:12 of
+msgid "``0°`` or ``\"up\"``: up"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:13 of
+msgid "``90°`` or ``\"right\"``: Move right"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:14 of
+msgid "``-90°`` or ``\"left\"``: Move left"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:15 of
+msgid "``180°`` or ``\"down\"``: Move down"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:16 of
+msgid "``\"forward\"``: Current direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:18 of
+msgid "Sets direction of the actor."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:20 of
+msgid "You can use an integer or a string to describe the direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:22
+#: miniworlds.actors.actor.Actor.move_in_direction:5
+#: miniworlds.actors.actor.Actor.set_direction:10 of
+msgid "Options"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:23
+#: miniworlds.actors.actor.Actor.set_direction:11 of
+msgid "``0``, ``\"up\"`` - Look up"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:24
+#: miniworlds.actors.actor.Actor.set_direction:12 of
+msgid "``90``, ``\"right\"``, - Look right"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:25
+#: miniworlds.actors.actor.Actor.set_direction:13 of
+msgid "``-90``, ``\"left\"``, - Look left"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:26
+#: miniworlds.actors.actor.Actor.set_direction:14 of
+msgid "``-180``, ``180``, ``\"down\"`` - Look down"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:32
+#: miniworlds.actors.actor.Actor.set_direction:20 of
+msgid "Move in a direction with WASD-Keys"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:47 of
+msgid "Move 45°:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.direction:71 of
+msgid "Move -45°:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.dirty:3 of
+msgid "1 if actor is dirty/0 otherwise"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.flip_x:1 of
+msgid ""
+"Flips the actor by 180° degrees. The costume is flipped and the actor's "
+"direction changed by 180 degrees. :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.flip_x:9 of
+msgid "Flip a actor in Example flipthefish.py"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.from_center:3
+#: miniworlds.actors.actor.Actor.from_topleft:3 of
+msgid "Arg`s:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.from_center:4
+#: miniworlds.actors.actor.Actor.from_topleft:4 of
+msgid "center_position: Center of actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.get_costume_class:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.get_distance_to:3
+#: miniworlds.actors.actor.Actor.set_direction:5 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.get_distance_to:5 of
+msgid "Actor or Position"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.get_distance_to:7 of
+msgid ""
+"The distance between actor (measured from actor.center) to actor or "
+"position."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.get_local_rect:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.height:3 of
+msgid ""
+"When the height of a actor is changed, the width is scaled proportionally."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.height:7
+#: miniworlds.actors.actor.Actor.width:7 of
+msgid "Create a actor and scale width/height proportionally:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.height:30
+#: miniworlds.actors.actor.Actor.width:30 of
+msgid "Textured image"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.image:5 of
+msgid ""
+"Warning: You should not directly draw on the image (with pygame functions) "
+"as the image will be reloaded during animations"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_flipped:1 of
+msgid ""
+"When a actor is mirrored, it is mirrored across the y-axis. You can use this"
+" property in 2D platformer games to change the direction of actor."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_flipped:6 of
+msgid "It may be necessary to set ``is_rotatable = True``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_flipped:10 of
+msgid "Flip a costume after 100 frames."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_flipped:44 of
+msgid "True, if actor is flipped"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_rotatable:1 of
+msgid ""
+"Defines if the costume of a actor should be rotatable. The actor can still "
+"be rotated with the ``direction`` property, but its costume won't be changed"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_rotatable:6 of
+msgid "You can also use ``actor.costume.is_rotatable``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.is_rotatable:10 of
+msgid "Create a rotatable and a not rotatable actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.last_position:3 of
+msgid "Can be used to track changes."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move:5 of
+msgid ""
+"Number of steps to move. If distance = 0, the actor speed will be used."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move:8
+#: miniworlds.actors.actor.Actor.move_vector:3
+#: miniworlds.actors.actor.Actor.undo_move:5 of
+msgid "The moved actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move:12 of
+msgid "if actor is on the world, move forward:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:6 of
+msgid "0, \"up\" - Look up"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:7 of
+msgid "90, \"right\", - Look right"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:8 of
+msgid "-90, \"left\", - Look left"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:9 of
+msgid "-180, 180, \"down\" - Look down"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:13 of
+msgid "Direction as angle"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:14 of
+msgid "Detects obj \"distance\" steps in front of current actor."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_in_direction:16
+#: miniworlds.actors.actor.Actor.move_to:8 of
+msgid "The actor itself"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_to:3 of
+msgid ""
+"The position to which the actor should move. The position can be a 2-tuple "
+"(x, y)"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_to:12 of
+msgid "move to (3, 2) on mouse_click"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.next_costume:3
+#: miniworlds.actors.actor.Actor.switch_costume:27 of
+msgid "The new costume"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:5
+#: miniworlds.actors.actor.Actor.on_clicked_right:5 of
+msgid "Registering a on_click event:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:15
+#: miniworlds.actors.actor.Actor.on_clicked_right:15
+#: miniworlds.actors.actor.Actor.on_mouse_left:30
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:38
+#: miniworlds.actors.actor.Actor.on_mouse_motion:29
+#: miniworlds.actors.actor.Actor.on_mouse_right:15
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:4 of
+msgid "Actual mouse position as tuple (x,y)"
+msgstr ""
+
+#: ../../source/api/actor.md
+msgid "Verursacht"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:18
+#: miniworlds.actors.actor.Actor.on_clicked_right:18
+#: miniworlds.actors.actor.Actor.on_detecting_actor:18
+#: miniworlds.actors.actor.Actor.on_detecting_borders:17
+#: miniworlds.actors.actor.Actor.on_detecting_world:13
+#: miniworlds.actors.actor.Actor.on_key_down:34
+#: miniworlds.actors.actor.Actor.on_key_pressed:30
+#: miniworlds.actors.actor.Actor.on_mouse_left:33
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:41
+#: miniworlds.actors.actor.Actor.on_mouse_motion:32
+#: miniworlds.actors.actor.Actor.on_mouse_right:18
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:7
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:13 of
+msgid "The error is raised when method is not overwritten or registered."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_detecting_actor:3 of
+msgid "The found actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_detecting_actor:8 of
+msgid "Register detect_actor event"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_detecting_borders:3 of
+msgid "A list of strings with found borders, e.g.: ['left', 'top']"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_detecting_borders:8 of
+msgid "Register on_detecting_border_event:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_detecting_world:5
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:5 of
+msgid "Register on_detecting_world method:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:4 of
+msgid ""
+"Instead of **on_key_down** you can use **on_key_down_letter**, e.g. "
+"**on_key_down_a** or **on_key_down_w** , if you want to handle an "
+"on_key_down event for a specific letter."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:9 of
+msgid "Register a key_down event:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:20 of
+msgid "Register on_key_down_a event"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:31 of
+msgid ""
+"The typed key as list (e.g. ['A', 'a']) containing both uppercase and "
+"lowercase of typed letter."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:1 of
+msgid ""
+"**on_key_pressed** is called when while key is pressed. If you hold the key,"
+" on_key_pressed is repeatedly called again and again until the key is "
+"released."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:6 of
+msgid ""
+"Like `on_key_down` the method can be called in the variant "
+"`on_key_pressed_[letter]` (e.g. `on_key_pressed_w(self)`)."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:11 of
+msgid "Register on_key_pressed event:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:26 of
+msgid ""
+"The typed key as list (e.g. ['C', 'c', 'D', 'd']) containing both uppercase "
+"and lowercase"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:1 of
+msgid ""
+"on_mouse_left is called when left mouse button was pressed. You must "
+"*register* or *implement* this method as an event."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:6 of
+msgid ""
+"The event is triggered, when mouse-left was clicked, even when the current "
+"mouse position is not related to actor position."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:9
+#: miniworlds.actors.actor.Actor.on_mouse_motion:8
+#: miniworlds.actors.actor.Actor.on_mouse_right:9 of
+msgid ""
+"You can use :py:meth:`Actor.detect_pixel` to check, if the mouse_position is"
+" *inside* the actor."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:13
+#: miniworlds.actors.actor.Actor.on_mouse_motion:12 of
+msgid "A circle will be moved, if you click on circle."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:5 of
+msgid "You can use on_mouse_left_release to implement a drag_and_drop event"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_motion:1 of
+msgid ""
+"Method is called when mouse moves. You must *register* or *implement* this "
+"method as an event."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_motion:5 of
+msgid ""
+"The event is triggered, when mouse is moved, even when the current mouse "
+"position is not related to actor position."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:1 of
+msgid ""
+"Method is called when right mouse button was pressed. You must *register* or"
+" *implement* this method as an event."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:6 of
+msgid ""
+"The event is triggered, when mouse was clicked,even when the current mouse "
+"position is not related to actor position."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:13 of
+msgid "See: :py:meth:`Actor.on_mouse_left`."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:1 of
+msgid ""
+"Method is called when right mouse key is released. See "
+":py:meth:`Actor.on_mouse_left_released`."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:5 of
+msgid "The other actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:7
+#: miniworlds.actors.actor.Actor.point_towards_position:7 of
+msgid "The new direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_position:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_position:5 of
+msgid "The position to which the actor should pointing"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.point_towards_position:11 of
+msgid "Point towards mouse_position:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.rect:1 of
+msgid ""
+"The surrounding Rectangle as pygame.Rect. The rect coordinates describes the"
+" local coordinates and depend on the camera view."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.rect:3 of
+msgid ""
+"If the actor is rotated, the rect vertices are not the vertices of the actor"
+" image."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register:1 of
+msgid ""
+"This method is used for the @register decorator. It adds a method to an "
+"object"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register:3 of
+msgid "The method which should be added to the actor"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register:5 of
+msgid "Should register forced, even if method is not handling a valid event?"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register:6 of
+msgid "Registers method with specific name"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register_message:3 of
+msgid ""
+"This decorator links a method to a specific event message, triggering it "
+"automatically when the designated message is received."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register_message:8 of
+msgid "Example of two actors who are communicating."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.register_message:24 of
+msgid "The specific message event this method will react to."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.remove:3 of
+msgid ""
+"Examples: :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.remove:7 of
+msgid "Removes robots in thecrash.py :"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.remove_costume:3 of
+msgid ""
+"The index of the new costume or costume-object. Defaults to actual costume"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.send_message:3 of
+msgid "The message can be received with the ``on_message``-event"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.send_message:7 of
+msgid "Send and receive messages:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.send_message:30 of
+msgid "A string containing the message."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.set_direction:3 of
+msgid "You can use a integer or a string to describe the direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.stop_animation:1 of
+msgid "Stops current animation. Costume ``is_animated`` is set to False"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.switch_costume:5 of
+msgid "Number of costume or Costume object"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.switch_costume:9 of
+msgid "Switch a costume:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.turn_left:7
+#: miniworlds.actors.actor.Actor.turn_right:31 of
+msgid "Options:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.turn_left:8
+#: miniworlds.actors.actor.Actor.turn_right:32 of
+msgid ""
+"You can set the value actor.is_rotatable = False if you don't want the actor"
+" to be rotated."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.turn_left:36
+#: miniworlds.actors.actor.Actor.turn_right:34 of
+msgid "degrees in left direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.turn_left:38
+#: miniworlds.actors.actor.Actor.turn_right:36 of
+msgid "New direction"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.undo_move:1 of
+msgid ""
+"Undo the last move. Moves the actor to the last position and resets "
+"direction."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.undo_move:9 of
+msgid "move_back when field is blocked:"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.width:3 of
+msgid ""
+"When the width of a actor is changed, the height is scaled proportionally."
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+"Parameter\n"
+"\n"
+"Parameter"
+
+#: miniworlds.actors.actor.Actor.add_costume:6 of
+msgid "Path to the first image of new costume or Tuple with color-value"
+msgstr "Pfad zum ersten Bild des neuen Kostüms oder Tupel mit Farbwert"
+
+#: miniworlds.actors.actor.Actor.add_costume:10 of
+msgid "Add first costume from image:"
+msgstr "Füge erstes Kostüm vom Bild hinzu:"
+
+#: miniworlds.actors.actor.Actor.add_costume:23
+#: miniworlds.actors.actor.Actor.add_costume:41
+#: miniworlds.actors.actor.Actor.add_costume:68
+#: miniworlds.actors.actor.Actor.border:35
+#: miniworlds.actors.actor.Actor.bounce_from_border:34
+#: miniworlds.actors.actor.Actor.color:51
+#: miniworlds.actors.actor.Actor.detect:39
+#: miniworlds.actors.actor.Actor.fill_color:51
+#: miniworlds.actors.actor.Actor.flip_x:35
+#: miniworlds.actors.actor.Actor.is_flipped:31
+#: miniworlds.actors.actor.Actor.is_rotatable:37
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:29
+#: miniworlds.actors.actor.Actor.turn_left:27
+#: miniworlds.actors.actor.Actor.turn_right:22 of
+msgid "Output:"
+msgstr "Ausgabe:"
+
+#: miniworlds.actors.actor.Actor.add_costume:25
+#: miniworlds.actors.actor.Actor.add_costume:43 of
+msgid "Create Actor with image as costume"
+msgstr "Erstelle Schauspieler mit Bild als Kostüm"
+
+#: miniworlds.actors.actor.Actor.add_costume:29 of
+msgid "Add first costume from color:"
+msgstr "Füge das erste Kostüm von Farbe hinzu:"
+
+#: miniworlds.actors.actor.Actor.add_costume:48 of
+msgid "Create two costumes and switch between costumes"
+msgstr "Erstellen Sie zwei Kostüme und wechseln Sie zwischen den Kostümen."
+
+#: miniworlds.actors.actor.Actor.add_costume:70 of
+msgid "Create multiple costumes and switch between costumes"
+msgstr "Erstellen Sie mehrere Kostüme und wechseln Sie zwischen Kostümen"
+
+#: ../../source/api/actor.md
+msgid "Rückgabe"
+msgstr "Return"
+
+#: miniworlds.actors.actor.Actor.add_costume:74 of
+msgid "The new costume."
+msgstr "Das neue Kostüm."
+
+#: miniworlds.actors.actor.Actor.animate_loop:3 of
+msgid "Switches through all costume-images every ``speed``-frame."
+msgstr "Schaltet durch alle Kostüm-Bilder bei jedem \"Geschwindigkeit\"-Frame."
+
+#: miniworlds.actors.actor.Actor.animate_loop:18 of
+msgid "Every ``speed`` frame, the image is switched. Defaults to 10."
+msgstr "Jedes \"speed\" Rahmen wird das Bild umgeschaltet. Standardmäßig auf 10."
+
+#: miniworlds.actors.actor.Actor.border:3 of
+msgid "The value is 0, if actor has no border."
+msgstr "Der Wert beträgt 0, wenn der Schauspieler keine Grenze hat."
+
+#: miniworlds.actors.actor.Actor.border:7 of
+msgid ""
+"You can also set border with ``costume.border`` or you can set the border "
+"with ``world.default_border``"
+msgstr ""
+"Du kannst auch den Rand mit ``Kostümrand`` oder den Rand mit "
+"``Welt.standard_rand`` setzen"
+
+#: miniworlds.actors.actor.Actor.border:11 of
+msgid "Set border of actor:"
+msgstr "Setze Grenze des Schauspielers:"
+
+#: miniworlds.actors.actor.Actor.border:37
+#: miniworlds.actors.actor.Actor.color:53
+#: miniworlds.actors.actor.Actor.fill_color:53 of
+msgid "Set borders"
+msgstr "Setze Grenzen"
+
+#: miniworlds.actors.actor.Actor.border_color:3
+#: miniworlds.actors.actor.Actor.stroke_color:3 of
+msgid ""
+"The border-color is a rgba value, for example (255, 0, 0) for red, (0, 255, "
+"0) for green and (255, 0, 0, 100)."
+msgstr ""
+"Die border-color ist ein rgba Wert, zum Beispiel (255, 0, 0) für Rot, (0, "
+"255, 0) für Grün und (255, 0, 0, 100)."
+
+#: miniworlds.actors.actor.Actor.border_color:5
+#: miniworlds.actors.actor.Actor.stroke_color:5 of
+msgid ""
+"If the color-value has 4 values, the last value defines the transparency:"
+msgstr ""
+"Wenn der Farbwert 4 Werte hat, definiert der letzte Wert die Transparenz:"
+
+#: miniworlds.actors.actor.Actor.border_color:6
+#: miniworlds.actors.actor.Actor.stroke_color:6 of
+msgid "0: Full transparent,"
+msgstr "0: Volle transparente,"
+
+#: miniworlds.actors.actor.Actor.border_color:7
+#: miniworlds.actors.actor.Actor.stroke_color:7 of
+msgid "255: No transparency"
+msgstr "255: Keine Transparenz"
+
+#: miniworlds.actors.actor.Actor.border_color:12
+#: miniworlds.actors.actor.Actor.stroke_color:12 of
+msgid "You must also set :py:attr:`Actor.border` to a value > 0"
+msgstr "Sie müssen auch :py:attr:`Actor.border` auf einen Wert > 0 setzen"
+
+#: miniworlds.actors.actor.Actor.border_color:14
+#: miniworlds.actors.actor.Actor.stroke_color:14 of
+msgid "Aliases:  :py:attr:`Actor.stroke_color`"
+msgstr "Aliase:  :py:attr:`Actor.stroke_color`"
+
+#: miniworlds.actors.actor.Actor.border_color:18
+#: miniworlds.actors.actor.Actor.stroke_color:18 of
+msgid "See :py:attr:`Actor.border`"
+msgstr "Siehe :py:attr:`Actor.border`"
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:3 of
+msgid ""
+"The direction is set according to the principle input angle = output angle. "
+":rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+"Die Richtung wird gemäß dem Prinzip Eingangswinkel = Ausgangswinkel "
+"eingestellt. :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:9 of
+msgid "You must check for borders first!"
+msgstr "Sie müssen zuerst nach Grenzen suchen!"
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:11 of
+msgid "A list of borders as strings e.g. [\"left\", \"right\"]"
+msgstr "Eine Liste von Grenzen als Strings z.B. [\"links\", \"rechts\"]"
+
+#: miniworlds.actors.actor.Actor.bounce_from_border:43 of
+msgid "The actor"
+msgstr "Der Schauspieler"
+
+#: miniworlds.actors.actor.Actor.collision_type:3 of
+msgid "`default`: tile for Tiledworlds, 'mask' for Pixelworlds"
+msgstr "Standard: Kachel für Tiledworlds, 'Maske' für Pixelworlds"
+
+#: miniworlds.actors.actor.Actor.collision_type:5 of
+msgid "`tile`: Are actors on the same tile? (only TiledWorld)"
+msgstr "`Kachel`: Sind Schauspieler auf derselben Kachel? (nur Tiled World)"
+
+#: miniworlds.actors.actor.Actor.collision_type:7 of
+msgid ""
+"`rect`: Are actors colliding when checking their bounding - boxes? (Only "
+"PixelWorld)"
+msgstr ""
+"`Rechteck`: Kollidieren Schauspieler beim Überprüfen ihrer "
+"Begrenzungsrahmen? (Nur PixelWorld)"
+
+#: miniworlds.actors.actor.Actor.collision_type:9 of
+msgid ""
+"`static-rect`: Are actors colliding when checking circle with radius = "
+"bounding-box-radius.(Only PixelWorld)"
+msgstr ""
+"`static-rect`: Kollidieren Schauspieler bei Überprüfung Kreis mit Radius = "
+"bounding-box-radius. (Nur PixelWorld)"
+
+#: miniworlds.actors.actor.Actor.collision_type:11 of
+msgid ""
+"`circle`: Are actors colliding when checking circle with radius = bounding-"
+"box-radius.(Only PixelWorld)"
+msgstr ""
+"`Kreis`: Treffen sich Schauspieler, wenn Kreis mit Radius = "
+"Begrenzungsrahmen-Radius überprüft wird. (Nur PixelWorld)"
+
+#: miniworlds.actors.actor.Actor.collision_type:13 of
+msgid ""
+"`mask`: Are actors colliding when checking if their image masks are "
+"overlapping."
+msgstr ""
+"`Maske`: Kollidieren Schauspieler, wenn sie überprüfen, ob ihre Bildmasken "
+"sich überschneiden."
+
+#: miniworlds.actors.actor.Actor.color:3
+#: miniworlds.actors.actor.Actor.fill_color:3 of
+msgid ""
+"When ``fill_color`` is set to a color, the attribute ``is_filled`` of "
+"costume (See: :py:attr:`.appearances.appearance.Appearance.is_filled`) is "
+"set to ``True``."
+msgstr ""
+"Wenn \"fill_color\" auf eine Farbe eingestellt ist, wird das Attribut "
+"\"is_filled\" des Kostüms auf \"True\" gesetzt (See: "
+":py:attr:`.appearances.appearance.Appearance.is_filled`)."
+
+#: miniworlds.actors.actor.Actor.color:8
+#: miniworlds.actors.actor.Actor.fill_color:8 of
+msgid "Aliases: :py:attr:`Actor.color`"
+msgstr "Aliasse: :py:attr:`Actor.color`"
+
+#: miniworlds.actors.actor.Actor.color:12
+#: miniworlds.actors.actor.Actor.fill_color:12 of
+msgid ""
+"If you fill a costume with an image, the image will be completely "
+"overwritten, even if `fill_color` is transparent."
+msgstr ""
+"Wenn Sie ein Kostüm mit einem Bild füllen, wird das Bild vollständig "
+"überschrieben, auch wenn `fill_color` transparent ist."
+
+#: miniworlds.actors.actor.Actor.color:15
+#: miniworlds.actors.actor.Actor.fill_color:15 of
+msgid "This behaviour may change in later releases!"
+msgstr "Dieses Verhalten kann sich in späteren Versionen ändern!"
+
+#: miniworlds.actors.actor.Actor.color:17
+#: miniworlds.actors.actor.Actor.fill_color:17 of
+msgid "Examples:"
+msgstr "Beispiele:"
+
+#: miniworlds.actors.actor.Actor.costume_count:5 of
+msgid "Add costume and count costumes"
+msgstr "Füge Kostüm hinzu und zähle Kostüme"
+
+#: miniworlds.actors.actor.Actor.costume_count:17 of
+msgid "_description_"
+msgstr "Beschreibung"
+
+#: miniworlds.actors.actor.Actor.costumes:3 of
+msgid "The costume manager can be iterated to get all costumes"
+msgstr ""
+"Der Kostümmanager kann durchlaufen werden, um alle Kostüme zu erhalten."
+
+#: miniworlds.actors.actor.Actor.create_on_world:3 of
+msgid "overwritten in subclasses"
+msgstr "überschrieben in Unterklassen"
+
+#: miniworlds.actors.actor.Actor.detect:1 of
+msgid ""
+"Detects if actors are on actor position. Returns the first found actor."
+msgstr ""
+"Erkennt, ob Schauspieler auf Schauspielerposition sind. Gibt den ersten "
+"gefundenen Schauspieler zurück."
+
+#: miniworlds.actors.actor.Actor.detect:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+
+#: miniworlds.actors.actor.Actor.detect:6 of
+msgid ""
+"filter by actor type. Enter a class_name of actors to look for "
+"heredirection: int = 0, distance: int = 0"
+msgstr ""
+"Filtern nach Schauspielertyp. Geben Sie einen Klassennamen von Schauspielern"
+" ein, um hier zu suchenRichtung: int = 0, Entfernung: int = 0"
+
+#: miniworlds.actors.actor.Actor.detect:7
+#: miniworlds.actors.actor.Actor.detect_actors_at:24
+#: miniworlds.actors.actor.Actor.detect_all:7 of
+msgid "The direction in which actors should be detected."
+msgstr "Die Richtung, in der Schauspieler erkannt werden sollten."
+
+#: miniworlds.actors.actor.Actor.detect:8
+#: miniworlds.actors.actor.Actor.detect_actors_at:26
+#: miniworlds.actors.actor.Actor.detect_all:8 of
+msgid ""
+"The distance in which actors should be detected (Start-Point is "
+"actor.center)"
+msgstr ""
+"Die Entfernung, in der Schauspieler erkannt werden sollten (Startpunkt ist "
+"actor.center)"
+
+#: miniworlds.actors.actor.Actor.detect:10 of
+msgid "First actor found by Sensor"
+msgstr "Erster Schauspieler gefunden von Sensor"
+
+#: miniworlds.actors.actor.Actor.detect:14 of
+msgid "The green robot pushes the yellow robot:"
+msgstr "Der grüne Roboter schiebt den gelben Roboter:"
+
+#: miniworlds.actors.actor.Actor.detect_actor_at:2
+#: miniworlds.actors.actor.Actor.detect_actor_in_front:2
+#: miniworlds.actors.actor.Actor.set_world:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+
+#: miniworlds.actors.actor.Actor.detect_actors_at:27
+#: miniworlds.actors.actor.Actor.detect_actors_in_front:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+
+#: miniworlds.actors.actor.Actor.detect_actors_at:28 of
+msgid "A list of actors"
+msgstr "Eine Liste von Schauspielern"
+
+#: miniworlds.actors.actor.Actor.detect_all:1 of
+msgid "Detects if actors are on actor position. Returns a list of actors."
+msgstr ""
+"Erkennt, ob Schauspieler auf Schauspielerposition sind. Gibt eine Liste von "
+"Schauspielern zurück."
+
+#: miniworlds.actors.actor.Actor.detect_all:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+
+#: miniworlds.actors.actor.Actor.detect_all:6 of
+msgid "filter by actor type. Enter a class_name of actors to look for here"
+msgstr ""
+"Filtern nach Schauspielertyp. Gib hier eine class_name von Schauspielern "
+"ein, nach der gesucht werden soll."
+
+#: miniworlds.actors.actor.Actor.detect_all:10 of
+msgid "All actors found by Sensor"
+msgstr "Alle Schauspieler gefunden von Sensor"
+
+#: miniworlds.actors.actor.Actor.detect_borders:3 of
+msgid ""
+"Args: :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
+msgstr ""
+"Args: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``\n"
+"\n"
+"Args: :Rückgabetyp: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
+
+#: miniworlds.actors.actor.Actor.detect_borders:7 of
+msgid ""
+"distance: Specifies the distance in front of the actuator to which the "
+"sensors reacts."
+msgstr ""
+"Abstand: Legt den Abstand vor dem Aktor fest, auf den die Sensoren "
+"reagieren."
+
+#: miniworlds.actors.actor.Actor.detect_borders:9
+#: miniworlds.actors.actor.Actor.detect_left_border:5
+#: miniworlds.actors.actor.Actor.detect_right_border:5
+#: miniworlds.actors.actor.Actor.detect_top_border:5
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:5 of
+msgid "True if border was found."
+msgstr "Wahr, wenn Rand gefunden wurde."
+
+#: miniworlds.actors.actor.Actor.detect_color:3
+#: miniworlds.actors.actor.Actor.detect_left_border:3
+#: miniworlds.actors.actor.Actor.detect_pixel:3
+#: miniworlds.actors.actor.Actor.detect_point:3
+#: miniworlds.actors.actor.Actor.detect_right_border:3
+#: miniworlds.actors.actor.Actor.detect_top_border:3
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+
+#: miniworlds.actors.actor.Actor.detect_color:5 of
+msgid "color as tuple"
+msgstr "Farbe als Tupel"
+
+#: miniworlds.actors.actor.Actor.detect_color:7 of
+msgid "True, if color was found"
+msgstr "Wahr, wenn Farbe gefunden wurde"
+
+#: miniworlds.actors.actor.Actor.detect_color_at:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
+"\\:py\\:class\\:\\`\\~typing.List\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
+"\\:py\\:class\\:\\`\\~typing.List\\`\\]`"
+
+#: miniworlds.actors.actor.Actor.detect_color_at:5 of
+msgid "Specifies the direction where the sensors is searching."
+msgstr "Gibt die Richtung an, in der der Sensor sucht."
+
+#: miniworlds.actors.actor.Actor.detect_color_at:6 of
+msgid ""
+"Specifies the distance in front of the actuator to which the sensors reacts."
+msgstr ""
+"Legt die Entfernung vor dem Aktuator fest, auf die die Sensoren reagieren."
+
+#: miniworlds.actors.actor.Actor.detect_color_at:8 of
+msgid "All colors found by Sensor"
+msgstr "Alle Farben gefunden von Sensor"
+
+#: miniworlds.actors.actor.Actor.detect_pixel:5 of
+msgid "True if pixel is below actor"
+msgstr "Wahr, wenn der Pixel unter dem Schauspieler liegt."
+
+#: miniworlds.actors.actor.Actor.detect_point:5 of
+msgid ""
+"If your want to check if an actor detects a specific pixel, use detect_pixel"
+msgstr ""
+"Wenn Sie überprüfen möchten, ob ein Schauspieler ein bestimmtes Pixel "
+"erkennt, verwenden Sie detect_pixel."
+
+#: miniworlds.actors.actor.Actor.detect_point:7 of
+msgid "True if point is below actor"
+msgstr "Wahr, wenn Punkt unter Schauspieler ist"
+
+#: miniworlds.actors.actor.Actor.direction:4 of
+msgid "The default direction is ``0°``. All actors are looking ``\"up\"``"
+msgstr ""
+"Die Standardrichtung ist ``0°``. Alle Schauspieler schauen ``\"nach "
+"oben\"``."
+
+#: miniworlds.actors.actor.Actor.direction:6 of
+msgid "Move on world"
+msgstr "Bewegen auf welt"
+
+#: miniworlds.actors.actor.Actor.direction:10 of
+msgid "**Values for Direction**"
+msgstr "Werte für Richtung"
+
+#: miniworlds.actors.actor.Actor.direction:12 of
+msgid "``0°`` or ``\"up\"``: up"
+msgstr "``0°`` oder ``\"up\"``: hoch"
+
+#: miniworlds.actors.actor.Actor.direction:13 of
+msgid "``90°`` or ``\"right\"``: Move right"
+msgstr "``90°`` oder ``\"rechts\"``: Nach rechts bewegen"
+
+#: miniworlds.actors.actor.Actor.direction:14 of
+msgid "``-90°`` or ``\"left\"``: Move left"
+msgstr "``-90°`` oder ``\"links\"``: Bewegen nach links"
+
+#: miniworlds.actors.actor.Actor.direction:15 of
+msgid "``180°`` or ``\"down\"``: Move down"
+msgstr "``180°`` oder ``\"nach unten'': Nach unten bewegen"
+
+#: miniworlds.actors.actor.Actor.direction:16 of
+msgid "``\"forward\"``: Current direction"
+msgstr "\"weiterleiten\": aktuelle Richtung"
+
+#: miniworlds.actors.actor.Actor.direction:18 of
+msgid "Sets direction of the actor."
+msgstr "Legt die Richtung des Schauspielers fest."
+
+#: miniworlds.actors.actor.Actor.direction:20 of
+msgid "You can use an integer or a string to describe the direction"
+msgstr ""
+"Sie können eine Ganzzahl oder einen String verwenden, um die Richtung zu "
+"beschreiben."
+
+#: miniworlds.actors.actor.Actor.direction:22
+#: miniworlds.actors.actor.Actor.move_in_direction:5
+#: miniworlds.actors.actor.Actor.set_direction:10 of
+msgid "Options"
+msgstr "Optionen"
+
+#: miniworlds.actors.actor.Actor.direction:23
+#: miniworlds.actors.actor.Actor.set_direction:11 of
+msgid "``0``, ``\"up\"`` - Look up"
+msgstr "``0``, ``\"hoch\"`` - Schau nach oben"
+
+#: miniworlds.actors.actor.Actor.direction:24
+#: miniworlds.actors.actor.Actor.set_direction:12 of
+msgid "``90``, ``\"right\"``, - Look right"
+msgstr "``90``, ``\"rechts\"``, - Schau rechts"
+
+#: miniworlds.actors.actor.Actor.direction:25
+#: miniworlds.actors.actor.Actor.set_direction:13 of
+msgid "``-90``, ``\"left\"``, - Look left"
+msgstr "``-90``, ``\"links\"``, - Schau nach links"
+
+#: miniworlds.actors.actor.Actor.direction:26
+#: miniworlds.actors.actor.Actor.set_direction:14 of
+msgid "``-180``, ``180``, ``\"down\"`` - Look down"
+msgstr "``-180``, ``180``, ``\"down\"`` - Nach unten schauen"
+
+#: miniworlds.actors.actor.Actor.direction:32
+#: miniworlds.actors.actor.Actor.set_direction:20 of
+msgid "Move in a direction with WASD-Keys"
+msgstr "Bewegen Sie sich in eine Richtung mit den WASD-Tasten"
+
+#: miniworlds.actors.actor.Actor.direction:47 of
+msgid "Move 45°:"
+msgstr "Bewegen Sie 45°:"
+
+#: miniworlds.actors.actor.Actor.direction:71 of
+msgid "Move -45°:"
+msgstr "Bewegen Sie -45°:"
+
+#: miniworlds.actors.actor.Actor.dirty:3 of
+msgid "1 if actor is dirty/0 otherwise"
+msgstr "1 wenn Schauspieler schmutzig ist/0 sonst"
+
+#: miniworlds.actors.actor.Actor.flip_x:1 of
+msgid ""
+"Flips the actor by 180° degrees. The costume is flipped and the actor's "
+"direction changed by 180 degrees. :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+"Kippt den Schauspieler um 180° Grad. Das Kostüm wird umgedreht und die "
+"Richtung des Schauspielers um 180 Grad geändert. :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+
+#: miniworlds.actors.actor.Actor.flip_x:9 of
+msgid "Flip a actor in Example flipthefish.py"
+msgstr "Flip ein Schauspieler in Beispiel flipthefish.py"
+
+#: miniworlds.actors.actor.Actor.from_center:3
+#: miniworlds.actors.actor.Actor.from_topleft:3 of
+msgid "Arg`s:"
+msgstr "Arg's:"
+
+#: miniworlds.actors.actor.Actor.from_center:4
+#: miniworlds.actors.actor.Actor.from_topleft:4 of
+msgid "center_position: Center of actor"
+msgstr "center_position: Mitte des Schauspielers"
+
+#: miniworlds.actors.actor.Actor.get_costume_class:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`Typ\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
+
+#: miniworlds.actors.actor.Actor.get_distance_to:3
+#: miniworlds.actors.actor.Actor.set_direction:5 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+
+#: miniworlds.actors.actor.Actor.get_distance_to:5 of
+msgid "Actor or Position"
+msgstr "Schauspieler oder Position"
+
+#: miniworlds.actors.actor.Actor.get_distance_to:7 of
+msgid ""
+"The distance between actor (measured from actor.center) to actor or "
+"position."
+msgstr ""
+"Der Abstand zwischen Schauspieler (gemessen von actor.center) zu "
+"Schauspieler oder Position."
+
+#: miniworlds.actors.actor.Actor.get_local_rect:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
+
+#: miniworlds.actors.actor.Actor.height:3 of
+msgid ""
+"When the height of a actor is changed, the width is scaled proportionally."
+msgstr ""
+"Wenn die Höhe eines Schauspielers geändert wird, wird die Breite "
+"proportional skaliert."
+
+#: miniworlds.actors.actor.Actor.height:7
+#: miniworlds.actors.actor.Actor.width:7 of
+msgid "Create a actor and scale width/height proportionally:"
+msgstr ""
+"Erstellen Sie einen Schauspieler und skalieren Sie Breite/Höhe proportional:"
+
+#: miniworlds.actors.actor.Actor.height:30
+#: miniworlds.actors.actor.Actor.width:30 of
+msgid "Textured image"
+msgstr "Strukturiertes Bild"
+
+#: miniworlds.actors.actor.Actor.image:5 of
+msgid ""
+"Warning: You should not directly draw on the image (with pygame functions) "
+"as the image will be reloaded during animations"
+msgstr ""
+"Warnung: Sie sollten nicht direkt auf das Bild zeichnen (mit Pygame-"
+"Funktionen), da das Bild während der Animationen neu geladen wird."
+
+#: miniworlds.actors.actor.Actor.is_flipped:1 of
+msgid ""
+"When a actor is mirrored, it is mirrored across the y-axis. You can use this"
+" property in 2D platformer games to change the direction of actor."
+msgstr ""
+"Wenn ein Schauspieler gespiegelt wird, wird er entlang der y-Achse "
+"gespiegelt. Sie können diese Eigenschaft in 2D-Plattformspielen verwenden, "
+"um die Richtung des Schauspielers zu ändern."
+
+#: miniworlds.actors.actor.Actor.is_flipped:6 of
+msgid "It may be necessary to set ``is_rotatable = True``"
+msgstr "Es kann notwendig sein, ``is_rotatable = True`` festzulegen."
+
+#: miniworlds.actors.actor.Actor.is_flipped:10 of
+msgid "Flip a costume after 100 frames."
+msgstr "Kippen Sie ein Kostüm nach 100 Bildern um."
+
+#: miniworlds.actors.actor.Actor.is_flipped:44 of
+msgid "True, if actor is flipped"
+msgstr "Wahr, wenn Schauspieler umgedreht wird"
+
+#: miniworlds.actors.actor.Actor.is_rotatable:1 of
+msgid ""
+"Defines if the costume of a actor should be rotatable. The actor can still "
+"be rotated with the ``direction`` property, but its costume won't be changed"
+msgstr ""
+"Definiert, ob das Kostüm eines Schauspielers drehbar sein sollte. Der "
+"Schauspieler kann immer noch mit der Eigenschaft \"direction\" gedreht "
+"werden, aber sein Kostüm wird nicht geändert."
+
+#: miniworlds.actors.actor.Actor.is_rotatable:6 of
+msgid "You can also use ``actor.costume.is_rotatable``"
+msgstr "Sie können auch ``actor.costume.is_rotatable`` verwenden."
+
+#: miniworlds.actors.actor.Actor.is_rotatable:10 of
+msgid "Create a rotatable and a not rotatable actor"
+msgstr "Erstellen Sie einen drehbaren und einen nicht drehbaren Schauspieler"
+
+#: miniworlds.actors.actor.Actor.last_position:3 of
+msgid "Can be used to track changes."
+msgstr "Kann verwendet werden, um Änderungen zu verfolgen."
+
+#: miniworlds.actors.actor.Actor.move:5 of
+msgid ""
+"Number of steps to move. If distance = 0, the actor speed will be used."
+msgstr ""
+"Anzahl der Schritte, die bewegt werden sollen. Wenn Entfernung = 0 ist, wird"
+" die Schauspielergeschwindigkeit verwendet."
+
+#: miniworlds.actors.actor.Actor.move:8
+#: miniworlds.actors.actor.Actor.move_vector:3
+#: miniworlds.actors.actor.Actor.undo_move:5 of
+msgid "The moved actor"
+msgstr "Der bewegte Schauspieler"
+
+#: miniworlds.actors.actor.Actor.move:12 of
+msgid "if actor is on the world, move forward:"
+msgstr "Wenn der Schauspieler auf der Welt ist, gehe vorwärts:"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:6 of
+msgid "0, \"up\" - Look up"
+msgstr "0, \"hoch\" - Schau nach oben"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:7 of
+msgid "90, \"right\", - Look right"
+msgstr "90, \"rechts\", - Schau nach rechts"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:8 of
+msgid "-90, \"left\", - Look left"
+msgstr "-90, \"links\", - Blick links"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:9 of
+msgid "-180, 180, \"down\" - Look down"
+msgstr "-180, 180, \"unten\" - Schau nach unten"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:13 of
+msgid "Direction as angle"
+msgstr "Richtung als Winkel"
+
+#: miniworlds.actors.actor.Actor.move_in_direction:14 of
+msgid "Detects obj \"distance\" steps in front of current actor."
+msgstr "Entdeckt obj \"Entfernung\" Schritte vor dem aktuellen Schauspieler."
+
+#: miniworlds.actors.actor.Actor.move_in_direction:16
+#: miniworlds.actors.actor.Actor.move_to:8 of
+msgid "The actor itself"
+msgstr "Der Schauspieler selbst"
+
+#: miniworlds.actors.actor.Actor.move_to:3 of
+msgid ""
+"The position to which the actor should move. The position can be a 2-tuple "
+"(x, y)"
+msgstr ""
+"Die Position, zu der der Schauspieler sich bewegen soll. Die Position kann "
+"ein 2-Tupel (x, y) sein."
+
+#: miniworlds.actors.actor.Actor.move_to:12 of
+msgid "move to (3, 2) on mouse_click"
+msgstr "bewegen Sie sich zu (3, 2) auf Mausklick"
+
+#: miniworlds.actors.actor.Actor.next_costume:3
+#: miniworlds.actors.actor.Actor.switch_costume:27 of
+msgid "The new costume"
+msgstr "Das neue Kostüm"
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:5
+#: miniworlds.actors.actor.Actor.on_clicked_right:5 of
+msgid "Registering a on_click event:"
+msgstr "Registrieren eines on_click Ereignisses:"
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:15
+#: miniworlds.actors.actor.Actor.on_clicked_right:15
+#: miniworlds.actors.actor.Actor.on_mouse_left:30
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:38
+#: miniworlds.actors.actor.Actor.on_mouse_motion:29
+#: miniworlds.actors.actor.Actor.on_mouse_right:15
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:4 of
+msgid "Actual mouse position as tuple (x,y)"
+msgstr "Aktuelle Mausposition als Tupel (x,y)"
+
+#: ../../source/api/actor.md
+msgid "Verursacht"
+msgstr "Causes"
+
+#: miniworlds.actors.actor.Actor.on_clicked_left:18
+#: miniworlds.actors.actor.Actor.on_clicked_right:18
+#: miniworlds.actors.actor.Actor.on_detecting_actor:18
+#: miniworlds.actors.actor.Actor.on_detecting_borders:17
+#: miniworlds.actors.actor.Actor.on_detecting_world:13
+#: miniworlds.actors.actor.Actor.on_key_down:34
+#: miniworlds.actors.actor.Actor.on_key_pressed:30
+#: miniworlds.actors.actor.Actor.on_mouse_left:33
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:41
+#: miniworlds.actors.actor.Actor.on_mouse_motion:32
+#: miniworlds.actors.actor.Actor.on_mouse_right:18
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:7
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:13 of
+msgid "The error is raised when method is not overwritten or registered."
+msgstr ""
+"Der Fehler wird ausgelöst, wenn die Methode nicht überschrieben oder "
+"registriert ist."
+
+#: miniworlds.actors.actor.Actor.on_detecting_actor:3 of
+msgid "The found actor"
+msgstr "Der gefundene Schauspieler"
+
+#: miniworlds.actors.actor.Actor.on_detecting_actor:8 of
+msgid "Register detect_actor event"
+msgstr "Registrieren Sie detect_actor Ereignis"
+
+#: miniworlds.actors.actor.Actor.on_detecting_borders:3 of
+msgid "A list of strings with found borders, e.g.: ['left', 'top']"
+msgstr ""
+"Eine Liste von Zeichenfolgen mit gefundenen Grenzen, z. B.: ['left', 'top']"
+
+#: miniworlds.actors.actor.Actor.on_detecting_borders:8 of
+msgid "Register on_detecting_border_event:"
+msgstr "Registrieren Sie sich am_detecting_border_event:"
+
+#: miniworlds.actors.actor.Actor.on_detecting_world:5
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:5 of
+msgid "Register on_detecting_world method:"
+msgstr "Registrieren Sie die on_detecting_world Methode:"
+
+#: miniworlds.actors.actor.Actor.on_key_down:4 of
+msgid ""
+"Instead of **on_key_down** you can use **on_key_down_letter**, e.g. "
+"**on_key_down_a** or **on_key_down_w** , if you want to handle an "
+"on_key_down event for a specific letter."
+msgstr ""
+"Anstatt **on_key_down** können Sie **on_key_down_letter** verwenden, z.B. "
+"**on_key_down_a** oder **on_key_down_w**, wenn Sie ein on_key_down Ereignis "
+"für einen bestimmten Buchstaben behandeln möchten."
+
+#: miniworlds.actors.actor.Actor.on_key_down:9 of
+msgid "Register a key_down event:"
+msgstr "Registrieren Sie ein key_down Ereignis:"
+
+#: miniworlds.actors.actor.Actor.on_key_down:20 of
+msgid "Register on_key_down_a event"
+msgstr "Registrieren Sie das on_key_down_a Ereignis"
+
+#: miniworlds.actors.actor.Actor.on_key_down:31 of
+msgid ""
+"The typed key as list (e.g. ['A', 'a']) containing both uppercase and "
+"lowercase of typed letter."
+msgstr ""
+"Der getippte Schlüssel als Liste (z.B. ['A', 'a']), die sowohl Groß- als "
+"auch Kleinbuchstaben des getippten Buchstabens enthält."
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:1 of
+msgid ""
+"**on_key_pressed** is called when while key is pressed. If you hold the key,"
+" on_key_pressed is repeatedly called again and again until the key is "
+"released."
+msgstr ""
+"**on_key_pressed** wird aufgerufen, wenn die Taste gedrückt ist. Wenn Sie "
+"die Taste gedrückt halten, wird **on_key_pressed** wiederholt immer wieder "
+"aufgerufen, bis die Taste losgelassen wird."
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:6 of
+msgid ""
+"Like `on_key_down` the method can be called in the variant "
+"`on_key_pressed_[letter]` (e.g. `on_key_pressed_w(self)`)."
+msgstr ""
+"Wie `on_key_down` kann die Methode in der Variante "
+"`on_key_pressed_[Buchstabe]` aufgerufen werden (z.B. "
+"`on_key_pressed_w(self)`)."
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:11 of
+msgid "Register on_key_pressed event:"
+msgstr "Registrieren Sie das on_key_pressed Ereignis:"
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:26 of
+msgid ""
+"The typed key as list (e.g. ['C', 'c', 'D', 'd']) containing both uppercase "
+"and lowercase"
+msgstr ""
+"Der eingegebene Schlüssel als Liste (z.B. ['C', 'c', 'D', 'd']), die sowohl "
+"Großbuchstaben als auch Kleinbuchstaben enthält."
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:1 of
+msgid ""
+"on_mouse_left is called when left mouse button was pressed. You must "
+"*register* or *implement* this method as an event."
+msgstr ""
+"on_mouse_left wird aufgerufen, wenn linke Maustaste gedrückt wurde. Sie "
+"müssen diese Methode als ein Ereignis *registrieren* oder *implementieren*."
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:6 of
+msgid ""
+"The event is triggered, when mouse-left was clicked, even when the current "
+"mouse position is not related to actor position."
+msgstr ""
+"Das Ereignis wird ausgelöst, wenn die Maus links angeklickt wurde, auch wenn"
+" die aktuelle Mausposition nicht mit der Position des Akteurs zusammenhängt."
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:9
+#: miniworlds.actors.actor.Actor.on_mouse_motion:8
+#: miniworlds.actors.actor.Actor.on_mouse_right:9 of
+msgid ""
+"You can use :py:meth:`Actor.detect_pixel` to check, if the mouse_position is"
+" *inside* the actor."
+msgstr ""
+"Sie können :py:meth:`Actor.detect_pixel` verwenden, um zu überprüfen, ob die"
+" mouse_position *innerhalb* des Akteurs liegt."
+
+#: miniworlds.actors.actor.Actor.on_mouse_left:13
+#: miniworlds.actors.actor.Actor.on_mouse_motion:12 of
+msgid "A circle will be moved, if you click on circle."
+msgstr "Ein Kreis wird verschoben, wenn Sie auf den Kreis klicken."
+
+#: miniworlds.actors.actor.Actor.on_mouse_left_released:5 of
+msgid "You can use on_mouse_left_release to implement a drag_and_drop event"
+msgstr ""
+"Sie können on_mouse_left_release verwenden, um ein drag_and_drop-Ereignis zu"
+" implementieren."
+
+#: miniworlds.actors.actor.Actor.on_mouse_motion:1 of
+msgid ""
+"Method is called when mouse moves. You must *register* or *implement* this "
+"method as an event."
+msgstr ""
+"Methode wird aufgerufen, wenn Maus sich bewegt. Sie müssen diese Methode als"
+" Ereignis *registrieren* oder *implementieren*."
+
+#: miniworlds.actors.actor.Actor.on_mouse_motion:5 of
+msgid ""
+"The event is triggered, when mouse is moved, even when the current mouse "
+"position is not related to actor position."
+msgstr ""
+"Das Ereignis wird ausgelöst, wenn die Maus bewegt wird, auch wenn die "
+"aktuelle Mausposition nicht mit der Akteurposition zusammenhängt."
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:1 of
+msgid ""
+"Method is called when right mouse button was pressed. You must *register* or"
+" *implement* this method as an event."
+msgstr ""
+"Methode wird aufgerufen, wenn die rechte Maustaste gedrückt wurde. Sie "
+"müssen diese Methode als Ereignis *registrieren* oder *implementieren*."
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:6 of
+msgid ""
+"The event is triggered, when mouse was clicked,even when the current mouse "
+"position is not related to actor position."
+msgstr ""
+"Das Ereignis wird ausgelöst, wenn die Maus geklickt wurde, auch wenn die "
+"aktuelle Mausposition nicht mit der Position des Akteurs zusammenhängt."
+
+#: miniworlds.actors.actor.Actor.on_mouse_right:13 of
+msgid "See: :py:meth:`Actor.on_mouse_left`."
+msgstr "Siehe: :py:meth:`Actor.on_mouse_left`."
+
+#: miniworlds.actors.actor.Actor.on_mouse_right_released:1 of
+msgid ""
+"Method is called when right mouse key is released. See "
+":py:meth:`Actor.on_mouse_left_released`."
+msgstr ""
+"Methode wird aufgerufen, wenn die rechte Maustaste losgelassen wird. Siehe "
+":py:meth:`Actor.on_mouse_left_released`."
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:5 of
+msgid "The other actor"
+msgstr "Der andere Schauspieler"
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:7
+#: miniworlds.actors.actor.Actor.point_towards_position:7 of
+msgid "The new direction"
+msgstr "Die neue Richtung"
+
+#: miniworlds.actors.actor.Actor.point_towards_position:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+
+#: miniworlds.actors.actor.Actor.point_towards_position:5 of
+msgid "The position to which the actor should pointing"
+msgstr "Die Position, auf die der Schauspieler zeigen sollte"
+
+#: miniworlds.actors.actor.Actor.point_towards_position:11 of
+msgid "Point towards mouse_position:"
+msgstr "Punkt in Richtung Mausposition:"
+
+#: miniworlds.actors.actor.Actor.rect:1 of
+msgid ""
+"The surrounding Rectangle as pygame.Rect. The rect coordinates describes the"
+" local coordinates and depend on the camera view."
+msgstr ""
+"Das umgebende Rechteck als pygame.Rect. Die Rechteck-Koordinaten beschreiben"
+" die lokalen Koordinaten und hängen von der Kameransicht ab."
+
+#: miniworlds.actors.actor.Actor.rect:3 of
+msgid ""
+"If the actor is rotated, the rect vertices are not the vertices of the actor"
+" image."
+msgstr ""
+"Wenn der Schauspieler gedreht wird, sind die Rechteck-Ecken nicht die Ecken "
+"des Schauspielerbildes."
+
+#: miniworlds.actors.actor.Actor.register:1 of
+msgid ""
+"This method is used for the @register decorator. It adds a method to an "
+"object"
+msgstr ""
+"Diese Methode wird für den @register-Decorator verwendet. Es fügt eine "
+"Methode zu einem Objekt hinzu."
+
+#: miniworlds.actors.actor.Actor.register:3 of
+msgid "The method which should be added to the actor"
+msgstr "Die Methode, die dem Schauspieler hinzugefügt werden sollte"
+
+#: miniworlds.actors.actor.Actor.register:5 of
+msgid "Should register forced, even if method is not handling a valid event?"
+msgstr ""
+"Sollte sich erzwingen, auch wenn Methode kein gültiges Ereignis behandelt?"
+
+#: miniworlds.actors.actor.Actor.register:6 of
+msgid "Registers method with specific name"
+msgstr "Registriert Methode mit speziellem Namen"
+
+#: miniworlds.actors.actor.Actor.register_message:3 of
+msgid ""
+"This decorator links a method to a specific event message, triggering it "
+"automatically when the designated message is received."
+msgstr ""
+"Dieser Dekorateur verknüpft eine Methode mit einer spezifischen "
+"Ereignisnachricht und löst sie automatisch aus, wenn die vorgesehene "
+"Nachricht empfangen wird."
+
+#: miniworlds.actors.actor.Actor.register_message:8 of
+msgid "Example of two actors who are communicating."
+msgstr "Beispiel von zwei Schauspielern, die miteinander kommunizieren."
+
+#: miniworlds.actors.actor.Actor.register_message:24 of
+msgid "The specific message event this method will react to."
+msgstr ""
+"Die spezifische Nachrichtenereignis, auf das diese Methode reagieren wird."
+
+#: miniworlds.actors.actor.Actor.remove:3 of
+msgid ""
+"Examples: :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
+msgstr ""
+"Examples: :0125_type: "
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
+
+#: miniworlds.actors.actor.Actor.remove:7 of
+msgid "Removes robots in thecrash.py :"
+msgstr "Entfernt Roboter in thecrash.py:"
+
+#: miniworlds.actors.actor.Actor.remove_costume:3 of
+msgid ""
+"The index of the new costume or costume-object. Defaults to actual costume"
+msgstr ""
+"Der Index des neuen Kostüms oder Kostümobjekts. Standardmäßig auf aktuelles "
+"Kostüm zurücksetzen."
+
+#: miniworlds.actors.actor.Actor.send_message:3 of
+msgid "The message can be received with the ``on_message``-event"
+msgstr "Die Nachricht kann mit dem \"on_message\"-Ereignis empfangen werden."
+
+#: miniworlds.actors.actor.Actor.send_message:7 of
+msgid "Send and receive messages:"
+msgstr "Senden und Empfangen von Nachrichten:"
+
+#: miniworlds.actors.actor.Actor.send_message:30 of
+msgid "A string containing the message."
+msgstr "Ein String, der die Nachricht enthält."
+
+#: miniworlds.actors.actor.Actor.set_direction:3 of
+msgid "You can use a integer or a string to describe the direction"
+msgstr ""
+"Sie können einen Integer oder einen String verwenden, um die Richtung zu "
+"beschreiben."
+
+#: miniworlds.actors.actor.Actor.stop_animation:1 of
+msgid "Stops current animation. Costume ``is_animated`` is set to False"
+msgstr ""
+"Stoppt aktuelle Animation. Kostüm ``is_animated`` ist auf Falsch gesetzt."
+
+#: miniworlds.actors.actor.Actor.switch_costume:5 of
+msgid "Number of costume or Costume object"
+msgstr "Anzahl der Kostüme oder Kostümobjekt"
+
+#: miniworlds.actors.actor.Actor.switch_costume:9 of
+msgid "Switch a costume:"
+msgstr "Wechseln Sie ein Kostüm:"
+
+#: miniworlds.actors.actor.Actor.turn_left:7
+#: miniworlds.actors.actor.Actor.turn_right:31 of
+msgid "Options:"
+msgstr "Optionen:"
+
+#: miniworlds.actors.actor.Actor.turn_left:8
+#: miniworlds.actors.actor.Actor.turn_right:32 of
+msgid ""
+"You can set the value actor.is_rotatable = False if you don't want the actor"
+" to be rotated."
+msgstr ""
+"Sie können den Wert actor.is_rotatable = False festlegen, wenn Sie nicht "
+"möchten, dass der Schauspieler gedreht wird."
+
+#: miniworlds.actors.actor.Actor.turn_left:36
+#: miniworlds.actors.actor.Actor.turn_right:34 of
+msgid "degrees in left direction"
+msgstr "Grad in linken Richtung"
+
+#: miniworlds.actors.actor.Actor.turn_left:38
+#: miniworlds.actors.actor.Actor.turn_right:36 of
+msgid "New direction"
+msgstr "Neue Richtung"
+
+#: miniworlds.actors.actor.Actor.undo_move:1 of
+msgid ""
+"Undo the last move. Moves the actor to the last position and resets "
+"direction."
+msgstr ""
+"Rückgängig machen Sie den letzten Zug. Bewegt den Schauspieler an die letzte"
+" Position und setzt die Richtung zurück."
+
+#: miniworlds.actors.actor.Actor.undo_move:9 of
+msgid "move_back when field is blocked:"
+msgstr "move_back wenn Feld blockiert ist:"
+
+#: miniworlds.actors.actor.Actor.width:3 of
+msgid ""
+"When the width of a actor is changed, the height is scaled proportionally."
+msgstr ""
+"Wenn die Breite eines Schauspielers geändert wird, wird die Höhe "
+"proportional skaliert."

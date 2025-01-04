@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/tutorial/06_01_sensors2.md:2
+msgid "Weitere Sensoren"
+msgstr "More sensors"
+
+#: ../../source/tutorial/06_01_sensors2.md:4
+msgid "Überprüfung der Spielfeldgrenzen"
+msgstr "Review of the playing field boundaries"
+
+#: ../../source/tutorial/06_01_sensors2.md:6
+msgid ""
+"Du kannst auch Sensoren verwenden, um zu überprüfen, ob sich ein Akteur an "
+"den Rändern oder außerhalb des Spielfelds befindet:"
+msgstr ""
+"You can also use sensors to check whether an actor is at the edges or "
+"outside of the playing field:"
+
+#: ../../source/tutorial/06_01_sensors2.md:8
+msgid "Ist die Figur nicht mehr auf dem Spielfeld?###"
+msgstr "Is the figure no longer on the playing field?"
+
+#: ../../source/tutorial/06_01_sensors2.md:10
+msgid ""
+"Diese Funktion überprüft, ob eine Figur noch in der aktuellen Welt ist."
+msgstr "This function checks if a figure is still in the current world."
+
+#: ../../source/tutorial/06_01_sensors2.md:18
+msgid "Beispiel: Ein Fisch, der an den Spielfeldrändern zurückschwimmt"
+msgstr "Example: A fish that swims back to the edges of the playing field"
+
+#: ../../source/tutorial/06_01_sensors2.md:20
+msgid ""
+"Das folgende Programm simuliert einen Fisch, der an den Spielfeldrändern "
+"automatisch umkehrt:"
+msgstr ""
+"The following program simulates a fish that automatically reverses at the "
+"edges of the playing field."
+
+#: ../../source/tutorial/06_01_sensors2.md:47
+msgid "Ausgabe"
+msgstr "Issue"
+
+#: ../../source/tutorial/06_01_sensors2.md:54
+msgid "Erklärung"
+msgstr "Explanation"
+
+#: ../../source/tutorial/06_01_sensors2.md:56
+msgid ""
+"Die Methode `on_not_detecting_world` wird nur aufgerufen, wenn erkannt wird,"
+" dass sich der Fisch nicht mehr in  der Welt befindet. er wird mit move_back"
+" wieder zurückbewegt und anschließend gedreht."
+msgstr ""
+"The method `on_not_detecting_world` is only called when it is recognized "
+"that the fish is no longer in the world. it is moved back with move_back and"
+" then rotated."
+
+#: ../../source/tutorial/06_01_sensors2.md:60
+msgid "Überprüfung auf Spielfeldgrenzen"
+msgstr "Check on field boundaries"
+
+#: ../../source/tutorial/06_01_sensors2.md:62
+msgid ""
+"Man kann auch überprüfen, ob die Grenzen des Spielfeldes erreicht oder "
+"berührt werden:"
+msgstr ""
+"One can also check if the boundaries of the playing field are reached or "
+"touched:"
+
+#: ../../source/tutorial/06_01_sensors2.md:64
+msgid "Ist die Figur an den Grenzen des Spielfelds?**"
+msgstr "Is the figure at the borders of the playing field?"
+
+#: ../../source/tutorial/06_01_sensors2.md:72
+msgid "Erklärung:"
+msgstr "Explanation:"
+
+#: ../../source/tutorial/06_01_sensors2.md:73
+msgid ""
+"Wenn sich eine Figur an den Rändern des Spielfelds befindet (z.B. an der "
+"Position `(0,0)`), wird ausgegeben:  `Borders are here! ['right', 'top']`."
+msgstr ""
+"If a figure is located at the edges of the playing field (e.g. at position "
+"`(0,0)`), the output is: `Borders are here! ['right', 'top']`."

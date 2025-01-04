@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/patterns/04_level_loading.md:1
+msgid "Level Loading"
+msgstr "Ebene Laden"
+
+#: ../../source/patterns/04_level_loading.md:3
+msgid ""
+"Ein typischer Anwendungsfall: Du möchtest ein neues Level starten, wenn die "
+"Bildschirmfigur den Rand erreicht oder durch eine Tür geht, usw."
+msgstr ""
+"A typical use case: You want to start a new level when the screen character "
+"reaches the edge or goes through a door, etc."
+
+#: ../../source/patterns/04_level_loading.md:5
+msgid "Dies geht folgendermaßen:"
+msgstr "This works as follows:"
+
+#: ../../source/patterns/04_level_loading.md:7
+msgid ""
+"Speichere dein Level in einer Datenbank, einer Textdatei oder einer "
+"einfachen Liste."
+msgstr "Save your level in a database, a text file, or a simple list."
+
+#: ../../source/patterns/04_level_loading.md:8
+msgid ""
+"Du brauchst eine **Funktion**, die dein Level lädt, sobald etwas passiert "
+"(du erreichst den Rand, berührst ein Actor, ...)"
+msgstr ""
+"You need a **function** that loads your level as soon as something happens "
+"(you reach the edge, touch an actor, ...)"
+
+#: ../../source/patterns/04_level_loading.md:10
+msgid "Speichern deines Levels als Liste"
+msgstr "Save your level as a list"
+
+#: ../../source/patterns/04_level_loading.md:12
+msgid ""
+"Du kannst dein Level in einer mehrdimensionalen Liste speichern. In einem "
+"ganz einfachen Fall könnte dies z.B. so aussehen:"
+msgstr ""
+"You can save your level in a multi-dimensional list. In a very simple case, "
+"this could look like this, for example:"
+
+#: ../../source/patterns/04_level_loading.md:20
+msgid ""
+"Du brauchst dann eine Übersetzung in Actors, `w` steht hier für eine `Wall`,"
+" `d` für eine `Door`."
+msgstr ""
+"You then need a translation into Actors, `w` stands here for a `Wall`, `d` for a `Door`. \n"
+"\n"
+"Du brauchst dann eine Übersetzung in Actors, `w` steht hier für eine `Wall`, `d` für eine `Door`."
+
+#: ../../source/patterns/04_level_loading.md:22
+msgid ""
+"Die Räume kannst du dann in einer Liste oder als Dictionary speichern, z.B. "
+"so als Liste:"
+msgstr ""
+"The rooms you can then save in a list or as a dictionary, e.g. like this as "
+"a list:"
+
+#: ../../source/patterns/04_level_loading.md:28
+msgid "...oder so als Dictionary:"
+msgstr "...oder so als Wörterbuch:"
+
+#: ../../source/patterns/04_level_loading.md:34
+msgid "Anlegen von Klassen für die einzelnen Objekte"
+msgstr "Creating classes for the individual objects"
+
+#: ../../source/patterns/04_level_loading.md:36
+msgid ""
+"Damit ein Objekt einer *bestimmten Art* erzeugt werden kann, ist es "
+"sinnvoll, eine Klasse für dieses Objekt zu speichern."
+msgstr ""
+"In order to create an object of a *specific type*, it makes sense to save a "
+"class for this object."
+
+#: ../../source/patterns/04_level_loading.md:38
+msgid "Dies könnte z.B. so aussehen:"
+msgstr "This could for example look like this:"
+
+#: ../../source/patterns/04_level_loading.md:46
+msgid ""
+"Die Klasse `Wall` definiert Objekte, sich wie Actors verhalten, aber von dem"
+" Standard-Actor insofern unterscheidet, dass diese immer als Kostüm ein Bild"
+" mit einer Wand besitzen."
+msgstr ""
+"The class `Wall` defines objects that behave like actors, but differ from "
+"the standard actor in that they always have an image of a wall as a costume."
+
+#: ../../source/patterns/04_level_loading.md:48
+msgid "Übersetzen der Liste"
+msgstr "Translate the list"
+
+#: ../../source/patterns/04_level_loading.md:50
+msgid "Die Liste kannst du nun in Actors übersetzen:"
+msgstr "The list you can now translate into Actors:"
+
+#: ../../source/patterns/04_level_loading.md:67
+msgid ""
+"Zunächst werden in der ersten For-Schleife alle Actors bis auf das Player-"
+"Objekt gelöscht"
+msgstr ""
+"First, in the first for loop, all actors except the player object are "
+"deleted."
+
+#: ../../source/patterns/04_level_loading.md:69
+msgid ""
+"In der zweiten Schleife wird nun über die Listen iteriert. Dabei wird "
+"jedesmal, wenn ein entsprechender Actor in der String-Liste gefunden wird, "
+"ein entsprechendes Actor angelegt."
+msgstr ""
+"In the second loop, the lists are now iterated over. Each time a "
+"corresponding Actor is found in the string list, a corresponding Actor is "
+"created."
+
+#: ../../source/patterns/04_level_loading.md:71
+msgid "Wechseln des Raums"
+msgstr "Changing rooms"
+
+#: ../../source/patterns/04_level_loading.md:73
+msgid ""
+"Mit der Vorarbeit ist es einfach den Raum zu wechseln: Du musst einfach nur "
+"die Methode setup_room an geeigneter Stelle aufrufen um den Raum zu "
+"wechseln, z.B. so:"
+msgstr ""
+"With the preparation, it is easy to change the room: You just have to call "
+"the method setup_room at an appropriate location to change the room, for "
+"example like this:"
+
+#: ../../source/patterns/04_level_loading.md:83
+msgid "So könnte das ganze Programm aussehen:"
+msgstr "So könnte das ganze Programm aussehen:"
+
+#: ../../source/patterns/04_level_loading.md:164
+msgid ""
+"Sobald ein Spieler auf der Tür steht und die Leertaste drückt, wird der Raum"
+" gewechselt."
+msgstr ""
+"As soon as a player is on the door and presses the space bar, the room will "
+"be changed."
+
+#: ../../source/patterns/04_level_loading.md:166
+msgid "![Room switching](../_images/room_switching.png)"
+msgstr "![Raumwechsel](../_images/room_switching.png)"
+
+#: ../../source/patterns/04_level_loading.md:166
+msgid "Room switching"
+msgstr "Raumwechsel"

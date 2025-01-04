@@ -1,0 +1,41 @@
+from miniworlds import App, World, Actor, CostumeOutOfBoundsError
+from screenshot_tester import ScreenshotTester
+import unittest
+import os
+import random
+
+
+class Test126(unittest.TestCase):
+    """Test:
+    
+    A World with green background and an actor in it.
+    """
+
+    def setUp(self):
+        def test_code():
+            world = World(100,60)
+            # Here comes your code
+            @world.register
+            def setup_environment(self, test):       
+                world.add_background((0,255,0))
+                actor = Actor((10, 10))
+                actor.add_costume("images/player.png")
+                actor.origin = "topleft"
+            return world
+        App.reset(unittest=True, file=__file__)
+        world = test_code()
+        """ Setup screenshot tester"""
+        TEST_FRAMES = [1]
+        QUIT_FRAME = 1
+        tester = ScreenshotTester(TEST_FRAMES, QUIT_FRAME, self)
+        tester.setup(world)
+        if hasattr(world, "setup_environment"):
+            world.setup_environment(self)
+
+    def test_main(self):
+        with self.assertRaises(SystemExit):
+            self.world.run()
+
+
+if __name__ == "__main__":
+    unittest.main()

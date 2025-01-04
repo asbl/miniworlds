@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/concepts/concept_self.md:1
+msgid "Das Schlüsselwort self"
+msgstr "The keyword self"
+
+#: ../../source/concepts/concept_self.md:3
+msgid ""
+"In dem code oben hast du gesehen, dass die Methode ``act`` als Parameter das"
+" Schlüsselwort ``self`` erwartet."
+msgstr ""
+"In the code above you saw that the method \"act\" expects the keyword "
+"\"self\" as a parameter."
+
+#: ../../source/concepts/concept_self.md:5
+msgid ""
+"Alle Methoden die zu einem Objekt gehören erhalten dieses Schlüsselwort "
+"immer als ersten Paramerer."
+msgstr ""
+"All methods that belong to an object always receive this keyword as the "
+"first parameter."
+
+#: ../../source/concepts/concept_self.md:7
+msgid ""
+"Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf "
+"Attribute und Methoden des Objekts selbst zurückgegriffen werden."
+msgstr ""
+"Subsequently, within the method, attributes and methods of the object itself"
+" can be accessed using this keyword."
+
+#: ../../source/concepts/concept_self.md:9
+msgid "Beispiel:"
+msgstr "Example:"
+
+#: ../../source/concepts/concept_self.md:11
+msgid "Dieser Code"
+msgstr "This code"
+
+#: ../../source/concepts/concept_self.md:19
+msgid "ist äquivalent zu diesem Code:"
+msgstr "is equivalent to this code:"
+
+#: ../../source/concepts/concept_self.md:27
+msgid ""
+"`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode "
+"registriert wurde."
+msgstr ""
+"`self` refers here to the `player` object on which the method was "
+"registered."

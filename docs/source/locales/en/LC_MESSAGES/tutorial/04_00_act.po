@@ -1,0 +1,59 @@
+Hier ist die Übersetzung der Strings:
+
+```po
+msgid "Act"
+msgstr "Act"
+
+msgid ""
+"Bisher hast du gelernt, wie man Welten erstellt und Akteure auf ihnen "
+"platziert.  Nun werden wir Dinge in Bewegung setzen:"
+msgstr ""
+"So far, you've learned how to create worlds and place actors within them. Now we will set things in motion:"
+
+msgid "Die `act()`-Methode"
+msgstr "The `act()` Method"
+
+msgid ""
+"Die `act()`-Methode steuert das Verhalten deiner Welt und aller Akteure."
+"  Sie wird in jedem Frame (alle `world.step`-Zeiteinheiten) aufgerufen, "
+"bis das Programm beendet wird."
+msgstr ""
+"The `act()` method controls the behavior of your world and all actors. It is called every frame (every `world.step` time unit) until the program ends."
+
+msgid "![First Actor](../_images/act.png)"
+msgstr "![First Actor](../_images/act.png)"
+
+msgid "First Actor"
+msgstr "First Actor"
+
+msgid "Beispiel: Bewegender Actor"
+msgstr "Example: Moving Actor"
+
+msgid ""
+"Wenn du einen `Actor` erstellst, kannst du die Methode `act()` mit dem "
+"Decorator `@register` registrieren:"
+msgstr ""
+"When you create an `Actor`, you can register the `act()` method with the `@register` decorator:"
+
+msgid "Erklärung"
+msgstr "Explanation"
+
+msgid ""
+"Die `act()`-Methode bewegt den `player` in jedem Frame um einen Schritt "
+"nach oben."
+msgstr ""
+"The `act()` method moves the `player` up by one step in each frame."
+
+msgid ""
+"Neu ist hier der Befehl `self`: Damit kann ein Objekt auf sich zugreifen."
+" Der Befehl `self.y = self.y - 1` bedeutet also, dass das Objekt player "
+"seine  \"eigene\" y-Koordinate um 1 verringert."
+msgstr ""
+"New here is the command `self`, which allows an object to access itself. The command `self.y = self.y - 1` means that the player object decreases its \"own\" y-coordinate by 1."
+
+msgid ""
+"Weitere Details zu Methoden und der Nutzung von `self` findest du "
+"[hier](concept_self.md)."
+msgstr ""
+"Further details on methods and the use of `self` can be found [here](concept_self.md)."
+```

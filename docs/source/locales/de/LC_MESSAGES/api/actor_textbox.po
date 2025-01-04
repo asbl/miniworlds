@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/api/actor_textbox.md:1
+msgid "Actor > Textbox"
+msgstr "Schauspieler > Textfeld"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:1 of
+msgid "Generates a textbox with fixed width and height"
+msgstr "Erzeugt eine Textbox mit fester Breite und Höhe"
+
+#: ../../source/api/actor_textbox.md
+msgid "Parameter"
+msgstr ""
+"Parameter\n"
+"\n"
+"Parameter"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:3 of
+msgid "The topleft position of textbox"
+msgstr "Die obere linke Position des Textfeldes"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:5 of
+msgid "The width of the textbox"
+msgstr "Die Breite des Textfeldes"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:7 of
+msgid "The height of the textbox"
+msgstr "Die Höhe des Textfelds"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:9 of
+msgid "Does the textbox has a border?"
+msgstr "Hat das Textfeld einen Rahmen?"
+
+#: miniworlds.actors.texts.textbox.TextBox.__init__:11 of
+msgid "The font size"
+msgstr "Die Schriftgröße"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line:1 of
+msgid "Creates a new text-line"
+msgstr "Erstellt eine neue Textzeile"
+
+#: ../../source/api/actor_textbox.md
+msgid "Rückgabetyp"
+msgstr "Return type"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line:5 of
+msgid "position of line"
+msgstr "Position der Linie"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line:7 of
+msgid "Text of line. Defaults to \"\"."
+msgstr "Text der Zeile. Standardeinstellung \"\"."
+
+#: ../../source/api/actor_textbox.md
+msgid "Rückgabe"
+msgstr "Return"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line:10 of
+msgid "A Text-Actor"
+msgstr "Ein Text-Schauspieler"
+
+#: miniworlds.actors.texts.textbox.TextBox.create_line_actors:1 of
+msgid ""
+"creates the lines actor - One actor per line. Split long lines after words."
+msgstr ""
+"erstellt die Zeilen Schauspieler - Ein Schauspieler pro Zeile. Lange Zeilen "
+"nach Wörtern aufteilen."

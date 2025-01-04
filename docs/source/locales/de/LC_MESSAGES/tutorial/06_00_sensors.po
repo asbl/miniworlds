@@ -1,0 +1,190 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/tutorial/06_00_sensors.md:1
+msgid "Sensoren"
+msgstr "Sensors"
+
+#: ../../source/tutorial/06_00_sensors.md:3
+msgid ""
+"Actors verfügen über **Sensoren**, mit denen sie ihre Umwelt abtasten  "
+"können und z.B andere Actors an ihrer Position aufspüren können."
+msgstr ""
+"Schauspieler haben **Sensoren**, mit denen sie ihre Umgebung scannen können "
+"und z.B. andere Schauspieler an ihrer Position lokalisieren können."
+
+#: ../../source/tutorial/06_00_sensors.md:6
+msgid "Es gibt zwei Möglichkeiten, Sensoren zu verwenden:"
+msgstr "There are two possibilities to use sensors:"
+
+#: ../../source/tutorial/06_00_sensors.md:8
+msgid "Du kannst Objekte \"aktiv\" aufspüren."
+msgstr "You can track objects \"actively.\""
+
+#: ../../source/tutorial/06_00_sensors.md:9
+msgid "Du kannst Events registrieren, die durch Sensoren getriggert werden."
+msgstr "You can register events triggered by sensors."
+
+#: ../../source/tutorial/06_00_sensors.md:11
+msgid "Objekte aufspüren"
+msgstr "Find objects"
+
+#: ../../source/tutorial/06_00_sensors.md:13
+msgid ""
+"Du kannst Objekte aufspüren, indem du die Sensoren eines Akteurs direkt "
+"nutzt. Hier ein Beispiel, wie das funktioniert:"
+msgstr ""
+"You can track objects by directly using the sensors of an actor. Here's an "
+"example of how it works:"
+
+#: ../../source/tutorial/06_00_sensors.md:36
+#: ../../source/tutorial/06_00_sensors.md:115
+msgid "Ausgabe"
+msgstr "Issue"
+
+#: ../../source/tutorial/06_00_sensors.md:45
+#: ../../source/tutorial/06_00_sensors.md:124
+msgid "Erklärung"
+msgstr "Explanation"
+
+#: ../../source/tutorial/06_00_sensors.md:47
+msgid ""
+"In der `act()`-Methode des Rechtecks wird der Sensor **`self.detect()`** "
+"verwendet,  um zu prüfen, ob sich an der aktuellen Position ein anderer "
+"Akteur befindet. Wenn das Rechteck ein Objekt erkennt, ändert es seine "
+"Farbe. Die Variable actor enthält den gefundenen Actor. Wenn kein Akteur "
+"gefunden wird, gibt die Methode `None` zurück."
+msgstr ""
+"In the `act()` method of the rectangle, the sensor **`self.detect()`** is "
+"used to check if another actor is located at the current position. If the "
+"rectangle detects an object, it changes its color. The variable actor "
+"contains the found Actor. If no actor is found, the method returns `None`."
+
+#: ../../source/tutorial/06_00_sensors.md:50
+msgid ""
+"Die Anweisung `if actor` ist eine Abkürzung für `if actor != None`. Man kann"
+" so überprüfen, ob eine Variable einen Wert enthält."
+msgstr ""
+"The instruction `if actor` is a shortcut for `if actor != None`. One can "
+"check if a variable contains a value like this."
+
+#: ../../source/tutorial/06_00_sensors.md:55
+msgid "Ereignisse registrieren"
+msgstr "Events aufnehmen"
+
+#: ../../source/tutorial/06_00_sensors.md:57
+msgid ""
+"Im obigen Beispiel wurde **aktiv** nach Akteuren gesucht.  Alternativ kannst"
+" du ein Ereignis registrieren, das automatisch aufgerufen wird, wenn der "
+"Sensor etwas entdeckt:"
+msgstr ""
+"Im above example was **active** searched for actors. Alternatively you can "
+"register an event which is automatically called when the sensor detects "
+"something:"
+
+#: ../../source/tutorial/06_00_sensors.md:79
+msgid "Erklärung:"
+msgstr "Explanation:"
+
+#: ../../source/tutorial/06_00_sensors.md:81
+msgid ""
+"Die registrierte Methode **`on_detecting(self, other)`** wird aufgerufen, "
+"sobald der Akteur ein anderes Objekt an seiner Position entdeckt."
+msgstr ""
+"The registered method **`on_detecting(self, other)`** is called as soon as "
+"the actor detects another object at its position."
+
+#: ../../source/tutorial/06_00_sensors.md:82
+msgid ""
+"Der Parameter **`other`** repräsentiert das gefundene Objekt, sodass du "
+"herausfinden kannst, welcher Akteur entdeckt wurde."
+msgstr ""
+"The parameter **`other`** represents the found object, so you can find out "
+"which actor was discovered."
+
+#: ../../source/tutorial/06_00_sensors.md:84
+msgid "Unterschiedliche Objekte erkennen"
+msgstr "Recognize different objects"
+
+#: ../../source/tutorial/06_00_sensors.md:86
+msgid ""
+"Mit Sensoren und **if-else-Verzweigungen** kannst du bestimmen, welches "
+"spezifische Objekt gefunden wurde:"
+msgstr ""
+"Mit Sensoren un 2-if-4-Verzweigungen k£nst du bestimmen, welches spezifische"
+" Objekt gefunden wurde:"
+
+#: ../../source/tutorial/06_00_sensors.md:126
+msgid ""
+"In der Methode **`on_detecting`** wird überprüft, ob das erkannte Objekt "
+"**`c1`** oder **`c2`** ist, und die Farbe des Rechtecks wird entsprechend "
+"angepasst."
+msgstr ""
+"In the method **`on_detecting`** wird überprüft, ob das erkannte Objekt "
+"**`c1`** oder **`c2`** ist, und die Farbe des Rechtecks wird entsprechend "
+"angepasst."
+
+#: ../../source/tutorial/06_00_sensors.md:129
+msgid ""
+"**Hinweis: Globale Variablen**: Normalerweise sind Variablen nur innerhalb "
+"einer Methode bekannt. Der Zugriff auf globale Variablen, wie in diesem "
+"Beispiel, ist zwar einfach, kann jedoch unerwünschte Seiteneffekte "
+"verursachen. Im Tutorial *classes_first* lernst du, wie du solche Zugriffe "
+"vermeiden kannst."
+msgstr ""
+"**Hinweis: Globale Variablen**: Normalerweise sind Variablen nur innerhalb "
+"einer Methode bekannt. Der Zugriff auf globale Variablen, wie in diesem "
+"Beispiel, ist zwar einfach, kann jedoch unerwünschte Seiteneffekte "
+"verursachen. Im Tutorial *classes_first* lernst du, wie du solche Zugriffe "
+"vermeiden kannst."
+
+#: ../../source/tutorial/06_00_sensors.md:132
+msgid "Beispiel: Kollision mit Wänden verhindern"
+msgstr "Example: Avoid collision with walls"
+
+#: ../../source/tutorial/06_00_sensors.md:134
+msgid ""
+"Mit Sensoren kannst du auch verhindern, dass sich Objekte durch Wände "
+"bewegen. Hier ein Beispiel:"
+msgstr ""
+"With sensors you can also prevent objects from moving through walls. Here is"
+" an example:"
+
+#: ../../source/tutorial/06_00_sensors.md:169
+msgid "FAQ"
+msgstr "Q&A"
+
+#: ../../source/tutorial/06_00_sensors.md:171
+msgid "**Meine Kollisionen werden nicht erkannt, was kann ich tun?**"
+msgstr "My collisions are not detected, what can I do?"
+
+#: ../../source/tutorial/06_00_sensors.md:173
+msgid ""
+"Teste zuerst, ob die Methode überhaupt aufgerufen wird. Füge dazu eine "
+"`print`-Anweisung ein:"
+msgstr ""
+"Test first if the method is even called. Add a `print` statement for that."
+
+#: ../../source/tutorial/06_00_sensors.md:181
+msgid ""
+"Falls die `print`-Anweisung nicht aufgerufen wird, funktioniert der Sensor "
+"nicht."
+msgstr "If the `print` statement is not called, the sensor does not work."

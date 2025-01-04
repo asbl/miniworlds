@@ -1,0 +1,1663 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/api/world.md:1 ../../source/api/world.md:5
+msgid "World"
+msgstr "Dinasynydd"
+
+#: ../../source/api/world.md:3
+msgid "Die Basisklasse für all deine Welten."
+msgstr "The base class for all your worlds."
+
+#: miniworlds.worlds.world.World:1 of
+msgid "A world is a playing field on which actors can move."
+msgstr "Un mundo es un campo de juego en el que los actores pueden moverse."
+
+#: miniworlds.worlds.world.World:3 of
+msgid ""
+"A world has a `background` and provides basic functions for the positioning "
+"of actors and for the collision detection of actors, which can be queried "
+"via the sensors of the actors."
+msgstr "N/A"
+
+#: miniworlds.worlds.world.World:6 of
+msgid ""
+"You can create your own world by creating a class that inherits from World "
+"or you can directly create a world object of type `World` or one of its "
+"child classes (`TiledWorld`, `PhysicsWorld`, ...)."
+msgstr ""
+"Puedes crear tu propio mundo creando una clase que hereda de World o puedes "
+"crear directamente un objeto mundo de tipo `World` o una de sus clases hijas"
+" (`TiledWorld`, `PhysicsWorld`, ...)."
+
+#: miniworlds.worlds.world.World:9 of
+msgid "*World*"
+msgstr "*Şegirt*"
+
+#: miniworlds.worlds.world.World:11 of
+msgid "A world for pixel accurate games."
+msgstr "Uma mundo para jogos precisos de pixels."
+
+#: miniworlds.worlds.world.World:13 of
+msgid "The position of a actor on a World is the pixel at topleft of actor."
+msgstr ""
+"The position of a actor on a World is the pixel at topleft of actor. \n"
+"\n"
+"Ang posisyon ng isang aktor sa isang Daigdig ay ang piksel sa itaas-kaliwang sulok ng aktor."
+
+#: miniworlds.worlds.world.World:15 of
+msgid "New actors are created with top-left corner of actor rect at position."
+msgstr "Nuw axturz ar cr33td wid tup-l3ft korn3r ov axtur r3kt at pozishun."
+
+#: miniworlds.worlds.world.World:17 of
+msgid "Two actors collide when their sprites overlap."
+msgstr "Two actors collide when their sprites overlap."
+
+#: miniworlds.worlds.world.World:19 of
+msgid "Asteroids"
+msgstr "Asteroider"
+
+#: miniworlds.worlds.world.World:22 of
+msgid "**Other worlds:**"
+msgstr "Ibang mundo:"
+
+#: miniworlds.worlds.world.World:24 of
+msgid ""
+"TiledWorld: For worlds using Tiles, like rogue-like rpgs, see "
+":doc:`TiledWorld <../api/world.tiledworld>`)"
+msgstr ""
+"TiledWorld: Por mundos usando Tiles, como rpgs rogue-like, ver: "
+"doc/'TiledWorld <../api/world.tiledworld>`"
+
+#: miniworlds.worlds.world.World:26 of
+msgid ""
+"PhysicsWorld: For worlds using the PhysicsEngine, see :doc:`PhysicsWorld "
+"<../api/world_physicsworld>`)"
+msgstr ""
+"PhysicsWorld: Para mundos que usam o PhysicsEngine, veja: doc/PhysicsWorld "
+"<../api/world_physicsworld>"
+
+#: miniworlds.worlds.world.World:30
+#: miniworlds.worlds.world.World.add_background:11
+#: miniworlds.worlds.world.World.default_border:8
+#: miniworlds.worlds.world.World.default_border_color:10
+#: miniworlds.worlds.world.World.detect_actors:10
+#: miniworlds.worlds.world.World.fps:7
+#: miniworlds.worlds.world.World.get_mouse_position:8
+#: miniworlds.worlds.world.World.reset:5 miniworlds.worlds.world.World.run:5
+#: miniworlds.worlds.world.World.set_background:11
+#: miniworlds.worlds.world.World.size:4 miniworlds.worlds.world.World.step:10
+#: miniworlds.worlds.world.World.switch_background:9 of
+msgid "Examples"
+msgstr "Examples"
+
+#: miniworlds.worlds.world.World:31 of
+msgid "Creating a TiledWorld Object:"
+msgstr "Kujtim i një Objekti World të Tegulluar:"
+
+#: miniworlds.worlds.world.World:43 of
+msgid "Creating a TiledWorld-Subclass."
+msgstr "Paglikha ng isang TiledWorld-Subclass."
+
+#: miniworlds.worlds.world.World:56 of
+msgid "Creating a World Object:"
+msgstr "Buat Objek Dunia"
+
+#: miniworlds.worlds.world.World:66 of
+msgid "Creating a World Subclass"
+msgstr "Krijo një nënklasë botërore"
+
+#: miniworlds.worlds.world.World:80 of
+msgid "See: :doc:`World <../api/world>`"
+msgstr "Ver: :doc:`Mundo <../api/world>`"
+
+#: miniworlds.worlds.world.World:81 of
+msgid "See: :doc:`TiledWorld <../api/world.tiledworld>`"
+msgstr "See: :doc:`TiledWorld <../api/world.tiledworld>`"
+
+#: ../../source/api/world.md miniworlds.worlds.world.World.play_music
+#: miniworlds.worlds.world.World.save_to_db of
+msgid "Parameter"
+msgstr "Parametro"
+
+#: miniworlds.worlds.world.World:83 of
+msgid "columns of new world (default: 40)"
+msgstr "colonne di nuovo mondo (predefinito: 40)"
+
+#: miniworlds.worlds.world.World:84 of
+msgid "rows of new world (default:40)"
+msgstr "filas de nuevo mundo (predeterminado: 40)"
+
+#: miniworlds.worlds.world.World:85 of
+msgid "Size of tiles (1 for normal worlds, can differ for Tiledworlds)"
+msgstr ""
+"Saiz ng mga tiles (1 para sa normal worlds, maaaring magkaiba para sa "
+"Tiledworlds)"
+
+#: ../../source/api/world.md
+msgid "Public Data Attributes:"
+msgstr "Publico Datos Atributos:"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
+msgstr ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`surface <miniworlds.worlds.world.World.surface>`\\"
+msgstr ":en:obj:`surface <miniworlds.worlds.world.World.surface>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`class_name <miniworlds.worlds.world.World.class_name>`\\"
+msgstr ":py:obj:`class_name <miniworlds.worlds.world.World.class_name>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`step <miniworlds.worlds.world.World.step>`\\"
+msgstr ":py:obj:`step <miniworlds.worlds.world.World.step>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.step:1 of
+msgid "Step defines how often the method ``act()`` will be called."
+msgstr "Step define cómo a menudo se llamará al método \"act()\"."
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`fps <miniworlds.worlds.world.World.fps>`\\"
+msgstr ":py:obj:`fps <miniworlds.worlds.world.World.fps>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.fps:1 of
+msgid "Frames per second shown on the screen."
+msgstr "Kuadros per segundo mostrados en la pantalla."
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`world_size_x <miniworlds.worlds.world.World.world_size_x>`\\"
+msgstr ":py:obj:`world_size_x <miniworlds.worlds.world.World.world_size_x>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.world_size_x:1
+#: of
+msgid "The x-world_size (defaults to view_size)"
+msgstr "Ang x-world_size (naka-default sa view_size)"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`world_size_y <miniworlds.worlds.world.World.world_size_y>`\\"
+msgstr ":py:obj:`world_size_y <miniworlds.worlds.world.World.world_size_y>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.world_size_y:1
+#: of
+msgid "The y-world_size (defaults to view_size)"
+msgstr "Y-lume_size (oletusarvo view_size)"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
+msgstr ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
+msgstr ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
+msgstr ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.size:1 of
+msgid "Set the size of world"
+msgstr "Mettre la taille du monde"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`default_fill_color "
+"<miniworlds.worlds.world.World.default_fill_color>`\\"
+msgstr ""
+":py:obj:`default_fill_color "
+"<miniworlds.worlds.world.World.default_fill_color>`\\"
+
+#: ../../None:41:<autosummary>:1 ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.default_fill:1
+#: miniworlds.worlds.world.World.default_fill_color:1 of
+msgid "Set default fill color for borders and lines"
+msgstr "Festlegen Standardfüllfarbe für Grenzen und Linien"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`default_is_filled "
+"<miniworlds.worlds.world.World.default_is_filled>`\\"
+msgstr ""
+":py:obj:`default_is_filled "
+"<miniworlds.worlds.world.World.default_is_filled>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`default_stroke_color "
+"<miniworlds.worlds.world.World.default_stroke_color>`\\"
+msgstr ""
+":py:obj:`default_stroke_color "
+"<miniworlds.worlds.world.World.default_stroke_color>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid "Set default stroke color for borders and lines."
+msgstr "Definir color de trazo predeterminado para bordes y líneas."
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`default_border_color "
+"<miniworlds.worlds.world.World.default_border_color>`\\"
+msgstr ""
+":py:obj:`default_border_color "
+"<miniworlds.worlds.world.World.default_border_color>`\\"
+
+#: ../../None:41:<autosummary>:1
+#: miniworlds.worlds.world.World.default_border_color:1 of
+msgid "Set default border color for borders and lines."
+msgstr "Establecer color de borde predeterminado para bordes y líneas."
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`default_border <miniworlds.worlds.world.World.default_border>`\\"
+msgstr ""
+":py:obj:`default_border <miniworlds.worlds.world.World.default_border>`\\"
+
+#: ../../None:41:<autosummary>:1
+#: miniworlds.worlds.world.World.default_border:1 of
+msgid "Sets default border color for actors"
+msgstr ""
+"Sets default border color for actors\n"
+"Mengatur warna batas default untuk para aktor"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
+msgstr ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.backgrounds:1
+#: of
+msgid "Returns all backgrounds of the world as list."
+msgstr ""
+"Returns all backgrounds of the world as list. \n"
+"\n"
+"Ritorna tutti gli sfondi del mondo come elenco."
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
+msgstr ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
+
+#: ../../None:41:<autosummary>:1 ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.background:1
+#: miniworlds.worlds.world.World.get_background:1 of
+msgid "Returns the current background"
+msgstr "Mengembalikan latar belakang saat ini"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`has_background <miniworlds.worlds.world.World.has_background>`\\"
+msgstr ""
+":py:obj:`has_background <miniworlds.worlds.world.World.has_background>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`registered_events "
+"<miniworlds.worlds.world.World.registered_events>`\\"
+msgstr ""
+":en:obj:`registered_events "
+"<miniworlds.worlds.world.World.registered_events>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`image <miniworlds.worlds.world.World.image>`\\"
+msgstr ":py:obj:`imagem <miniworlds.worlds.world.World.image>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.image:1 of
+msgid "The current displayed image"
+msgstr "Ang kasalukuyang display ng larawan"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
+msgstr ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`color <miniworlds.worlds.world.World.color>`\\"
+msgstr ":py:obj:`color <miniworlds.worlds.world.World.color>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`window <miniworlds.worlds.world.World.window>`\\"
+msgstr ":en: :py:obj:`窗口<miniworlds.worlds.world.World.window>`\\"
+
+#: ../../None:41:<autosummary>:1 miniworlds.worlds.world.World.window:1 of
+msgid "Gets the parent window"
+msgstr "Gets the parent window"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`actors <miniworlds.worlds.world.World.actors>`\\"
+msgstr ":py:obj:`aktorai <miniworlds.worlds.world.World.actors>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`event_manager <miniworlds.worlds.world.World.event_manager>`\\"
+msgstr ":py:obj:`event_manager <miniworlds.worlds.world.World.event_manager>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`backgrounds_manager "
+"<miniworlds.worlds.world.World.backgrounds_manager>`\\"
+msgstr ""
+":py:obj:`backgrounds_manager "
+"<miniworlds.worlds.world.World.backgrounds_manager>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`mouse_manager <miniworlds.worlds.world.World.mouse_manager>`\\"
+msgstr ":en:obj:`mouse_manager <miniworlds.worlds.world.World.mouse_manager>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`ask <miniworlds.worlds.world.World.ask>`\\"
+msgstr ":py:obj:`ask <miniworlds.worlds.world.World.ask>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`is_display_initialized "
+"<miniworlds.worlds.world.World.is_display_initialized>`\\"
+msgstr ""
+":py:obj:`is_display_initialized "
+"<miniworlds.worlds.world.World.is_display_initialized>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`is_running <miniworlds.worlds.world.World.is_running>`\\"
+msgstr ":en:obj:`is_running <miniworlds.worlds.world.World.is_running>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`is_listening <miniworlds.worlds.world.World.is_listening>`\\"
+msgstr ":py:obj:`is_listening <miniworlds.worlds.world.World.is_listening>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`frame <miniworlds.worlds.world.World.frame>`\\"
+msgstr ":py:obj:`frame <miniworlds.worlds.world.World.frame>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`clock <miniworlds.worlds.world.World.clock>`\\"
+msgstr ":py:obj:`clock <miniworlds.worlds.world.World.clock>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`app <miniworlds.worlds.world.World.app>`\\"
+msgstr ":py:obj:`app <miniworlds.worlds.world.World.app>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`music <miniworlds.worlds.world.World.music>`\\"
+msgstr ":py:obj:`musique <miniworlds.worlds.world.World.music>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`sound <miniworlds.worlds.world.World.sound>`\\"
+msgstr ":py:obj:`sound <miniworlds.worlds.world.World.sound>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`collision_manager "
+"<miniworlds.worlds.world.World.collision_manager>`\\"
+msgstr ""
+":py:obj:`collision_manager "
+"<miniworlds.worlds.world.World.collision_manager>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ":py:obj:`timed_objects <miniworlds.worlds.world.World.timed_objects>`\\"
+msgstr ":en:obj:`timed_objects <miniworlds.worlds.world.World.timed_objects>`\\"
+
+#: ../../None:41:<autosummary>:1
+msgid ""
+":py:obj:`dynamic_actors <miniworlds.worlds.world.World.dynamic_actors>`\\"
+msgstr ""
+":py:obj:`dynamic_actors <miniworlds.worlds.world.World.dynamic_actors>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`surface <miniworlds.worlds.world_base.WorldBase.surface>`\\"
+msgstr ":py:obj:`surface <miniworlds.worlds.world_base.WorldBase.surface>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
+msgstr ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
+msgstr ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`rect <miniworlds.worlds.world_base.WorldBase.rect>`\\"
+msgstr ":en:obj:`rect <miniworlds.worlds.world_base.WorldBase.rect>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`topleft <miniworlds.worlds.world_base.WorldBase.topleft>`\\"
+msgstr ":py:obj:`topleft <miniworlds.worlds.world_base.WorldBase.topleft>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`window_docking_position "
+"<miniworlds.worlds.world_base.WorldBase.window_docking_position>`\\"
+msgstr ""
+":en:obj:`window_docking_position "
+"<miniworlds.worlds.world_base.WorldBase.window_docking_position>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
+msgstr ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
+
+#: ../../None:10:<autosummary>:1
+msgid ":py:obj:`height <miniworlds.worlds.world_base.WorldBase.height>`\\"
+msgstr ":py:obj:`altura <miniworlds.worlds.world_base.WorldBase.height>`\\"
+
+#: ../../source/api/world.md
+msgid "Public Methods:"
+msgstr "Metodi pubblici:"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`validate_parameters "
+"<miniworlds.worlds.world.World.validate_parameters>`\\ \\(x\\, y\\)"
+msgstr ""
+":py:obj:`validate_parameters "
+"<miniworlds.worlds.world.World.validate_parameters>`\\ \\(x\\, y\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`__init__ <miniworlds.worlds.world.World.__init__>`\\ \\(\\[x\\, y\\]\\)"
+msgstr ":py:obj:`__init__ <miniworlds.worlds.world.World.__init__>` [x, y]"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`add_right <miniworlds.worlds.world.World.add_right>`\\ "
+"\\(world\\[\\, size\\]\\)"
+msgstr ""
+":py:obj:`add_right <miniworlds.worlds.world.World.add_right>`\\ "
+"\\(world\\[\\, size\\]\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`add_bottom <miniworlds.worlds.world.World.add_bottom>`\\ "
+"\\(world\\[\\, size\\]\\)"
+msgstr ""
+":en:obj:`add_bottom <miniworlds.worlds.world.World.add_bottom>`\\ "
+"\\(world\\[\\, size\\]\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`remove_world <miniworlds.worlds.world.World.remove_world>`\\ "
+"\\(container\\)"
+msgstr ""
+":py:obj:`remove_world <miniworlds.worlds.world.World.remove_world>`\\ "
+"\\(container\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_world_connector "
+"<miniworlds.worlds.world.World.get_world_connector>`\\ \\(actor\\)"
+msgstr ""
+":en:obj:`get_world_connector "
+"<miniworlds.worlds.world.World.get_world_connector>`\\ \\(actor\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`detect_position <miniworlds.worlds.world.World.detect_position>`\\ "
+"\\(pos\\)"
+msgstr ""
+":py:obj:`detect_position <miniworlds.worlds.world.World.detect_position>`\\ "
+"\\(pos\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.detect_position:1 of
+msgid "Checks if position is in the world."
+msgstr "Vérifie si la position est dans le monde."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
+"\\(rect\\)"
+msgstr ""
+":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
+"\\(rect\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.contains_rect:1
+#: of
+msgid "Detects if rect is completely on the world."
+msgstr "Detects if rect est complètement sur le monde."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
+"\\(value\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
+msgstr ":en:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
+msgstr ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.borders:1 of
+msgid "Gets all borders from a source (`Position` or `Rect`)."
+msgstr "Obtém todas as bordas de uma origem (`Position` ou `Rect`)."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`default_fill <miniworlds.worlds.world.World.default_fill>`\\ "
+"\\(value\\)"
+msgstr ""
+":py:obj:`default_fill <miniworlds.worlds.world.World.default_fill>`\\ "
+"\\(value\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_background <miniworlds.worlds.world.World.get_background>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`get_background <miniworlds.worlds.world.World.get_background>`\\ "
+"\\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`switch_background "
+"<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
+msgstr ""
+":en:obj:`switch_background "
+"<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.switch_background:1 of
+msgid "Switches the background"
+msgstr "Switches the background"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`remove_background "
+"<miniworlds.worlds.world.World.remove_background>`\\ \\(\\[background\\]\\)"
+msgstr ""
+":py:obj:`remove_background "
+"<miniworlds.worlds.world.World.remove_background>`\\ \\(\\[background\\]\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.remove_background:1 of
+msgid "Removes a background from world"
+msgstr "Lagtækur bakgrunn af heimi"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\ "
+"\\(source\\)"
+msgstr ""
+":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\ "
+"\\(source\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.add_background:1
+#: miniworlds.worlds.world.World.set_background:1 of
+msgid "Adds a new background to the world"
+msgstr "Adds a new background to the world"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\ "
+"\\(source\\)"
+msgstr ""
+":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\ "
+"\\(source\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`start <miniworlds.worlds.world.World.start>`\\ \\(\\)"
+msgstr ":py:obj:`start <miniworlds.worlds.world.World.start>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.start:1 of
+msgid "Starts the world, if world is not running."
+msgstr "Starts the mundo, if mundo is not running."
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[frames\\]\\)"
+msgstr ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[frames\\]\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.stop:1 of
+msgid "Stops the world."
+msgstr "S'atura el món."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`start_listening <miniworlds.worlds.world.World.start_listening>`\\ "
+"\\(\\)"
+msgstr ""
+":en:obj:`start_listening <miniworlds.worlds.world.World.start_listening>`\\ "
+"\\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`stop_listening <miniworlds.worlds.world.World.stop_listening>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`stop_listening <miniworlds.worlds.world.World.stop_listening>`\\ "
+"\\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
+"fit\\_desktop\\, replit\\, ...\\]\\)"
+msgstr ""
+":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
+"fit\\_desktop\\, replit\\, ...\\]\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "The method show() should always be called at the end of your program."
+msgstr "The method show() should always be called at the end of your program."
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`init_display <miniworlds.worlds.world.World.init_display>`\\ \\(\\)"
+msgstr ""
+":en:obj:`init_display <miniworlds.worlds.world.World.init_display>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`play_sound <miniworlds.worlds.world.World.play_sound>`\\ \\(path\\)"
+msgstr ""
+":py:obj:`play_sound <miniworlds.worlds.world.World.play_sound>`\\ \\(path\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.play_sound:1 of
+msgid "plays sound from path"
+msgstr "spiller lyd fra sti"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`stop_sounds <miniworlds.worlds.world.World.stop_sounds>`\\ \\(\\)"
+msgstr ":py:obj:`stop_sounds <miniworlds.worlds.world.World.stop_sounds>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`play_music <miniworlds.worlds.world.World.play_music>`\\ \\(path\\)"
+msgstr ""
+":py:obj:`play_music <miniworlds.worlds.world.World.play_music>`\\ \\(path\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.play_music:1 of
+msgid "plays a music from path"
+msgstr "plays a music from path"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`stop_music <miniworlds.worlds.world.World.stop_music>`\\ \\(\\)"
+msgstr ":py:obj:`stop_music <miniworlds.worlds.world.World.stop_music>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.stop_music:1 of
+msgid "stops a music"
+msgstr "arrêts une musique"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_mouse_position "
+"<miniworlds.worlds.world.World.get_mouse_position>`\\ \\(\\)"
+msgstr ""
+":en:\"get_mouse_position <miniworlds.worlds.world.World.get_mouse_position> "
+"\\()"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.get_mouse_position:1 of
+msgid "Gets the current mouse_position"
+msgstr "Obtém a posição atual do mouse"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`get_mouse_x <miniworlds.worlds.world.World.get_mouse_x>`\\ \\(\\)"
+msgstr ":py:obj:`get_mouse_x <miniworlds.worlds.world.World.get_mouse_x>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.get_mouse_x:1
+#: of
+msgid "Gets x-coordinate of mouse-position"
+msgstr "Fær x-kaða af músarstöðinni"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`get_mouse_y <miniworlds.worlds.world.World.get_mouse_y>`\\ \\(\\)"
+msgstr ":py:obj:`get_mouse_y <miniworlds.worlds.world.World.get_mouse_y>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.get_mouse_y:1
+#: of
+msgid "Gets y-coordinate of mouse-position"
+msgstr "Gets y-coordinate of mouse-position"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_prev_mouse_position "
+"<miniworlds.worlds.world.World.get_prev_mouse_position>`\\ \\(\\)"
+msgstr ""
+":enbobj:`get_prev_mouse_position "
+"<miniworlds.worlds.world.World.get_prev_mouse_position>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.get_prev_mouse_position:1 of
+msgid "gets mouse-position of last frame"
+msgstr "mendapatkan posisi mouse dari frame terakhir"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`is_mouse_pressed "
+"<miniworlds.worlds.world.World.is_mouse_pressed>`\\ \\(\\)"
+msgstr ""
+":py:obj:`is_mouse_pressed "
+"<miniworlds.worlds.world.World.is_mouse_pressed>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.is_mouse_pressed:1 of
+msgid "Returns True, if mouse is pressed"
+msgstr "Kung ang mouse ay pindutin ang True"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`is_mouse_left_pressed "
+"<miniworlds.worlds.world.World.is_mouse_left_pressed>`\\ \\(\\)"
+msgstr ""
+":py:obj:`is_mouse_left_pressed "
+"<miniworlds.worlds.world.World.is_mouse_left_pressed>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.is_mouse_left_pressed:1 of
+msgid "Returns True, if mouse left button is pressed"
+msgstr "Kembali True, jika tombol kiri mouse ditekan"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`is_mouse_right_pressed "
+"<miniworlds.worlds.world.World.is_mouse_right_pressed>`\\ \\(\\)"
+msgstr ""
+":py:obj:`is_mouse_right_pressed "
+"<miniworlds.worlds.world.World.is_mouse_right_pressed>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.is_mouse_right_pressed:1 of
+msgid "Returns True, if mouse right button is pressed"
+msgstr "Vrati True, ako je pritisnut desni taster miša"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`is_in_world <miniworlds.worlds.world.World.is_in_world>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`is_in_world <miniworlds.worlds.world.World.is_in_world>`\\ "
+"\\(position\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
+"\\(message\\[\\, data\\]\\)"
+msgstr ""
+":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
+"\\(message\\[\\, data\\]\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.send_message:1
+#: of
+msgid "Sends broadcast message"
+msgstr "Sendet Rundfunknachricht"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`quit <miniworlds.worlds.world.World.quit>`\\ \\(\\[exit\\_code\\]\\)"
+msgstr ":py:obj:`wi`ed <miniworlds.liands.world.World.quit>`\\ \\(\\[exit\\_code\\]\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.quit:1 of
+msgid "quits app and closes the window"
+msgstr "tengdur app og lokaðu gluggann"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`reset <miniworlds.worlds.world.World.reset>`\\ \\(\\)"
+msgstr ":en:obj:`reset <miniworlds.worlds.world.World.reset>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.reset:1 of
+msgid ""
+"Resets the world Creates a new world with init-function - recreates all "
+"actors and actors on the world."
+msgstr ""
+"Đặt lại thế giới Tạo một thế giới mới với hàm khởi tạo - tạo lại tất cả các "
+"diễn viên và diễn viên trên thế giới."
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`clear <miniworlds.worlds.world.World.clear>`\\ \\(\\)"
+msgstr ":py:obj:`iziphumo <miniworlds.worlds.world.World.clear>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`switch_world <miniworlds.worlds.world.World.switch_world>`\\ "
+"\\(new\\_world\\[\\, reset\\]\\)"
+msgstr ""
+":en:obj:`switch_world <miniworlds.worlds.world.World.switch_world>`\\ "
+"\\(new\\_world\\[\\, reset\\]\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.switch_world:1
+#: of
+msgid "Switches to another world"
+msgstr "Ang nkakaiba sa ibang mundo"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_color_from_pixel "
+"<miniworlds.worlds.world.World.get_color_from_pixel>`\\ \\(position\\)"
+msgstr ""
+":py:obj:`get_color_from_pixel "
+"<miniworlds.worlds.world.World.get_color_from_pixel>`\\ \\(posisyon\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.get_color_from_pixel:1 of
+msgid "Returns the color at a specific position"
+msgstr "Vuelve el color en una posición específica"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_from_pixel <miniworlds.worlds.world.World.get_from_pixel>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`get_from_pixel <miniworlds.worlds.world.World.get_from_pixel>`\\ "
+"\\(position\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.get_from_pixel:1 of
+msgid "Gets Position from pixel"
+msgstr "Obtiene posición desde píxel"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`to_pixel <miniworlds.worlds.world.World.to_pixel>`\\ \\(position\\)"
+msgstr ""
+":py:obj:`to_pixel <miniworlds.worlds.world.World.to_pixel>`\\ \\(posisyon\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`on_setup <miniworlds.worlds.world.World.on_setup>`\\ \\(\\)"
+msgstr ":py:obj:`on_setup <miniworlds.worlds.world.World.on_setup>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.on_setup:1 of
+msgid "Overwrite or register this method to call `on_setup`-Actions"
+msgstr "Sobrescriba o registre este método para llamar a `on_setup`-Acciones"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ "
+"\\(actor\\, position\\)"
+msgstr ""
+":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ "
+"\\(actor\\, position\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "Adds a Actor to the world."
+msgstr "Adiciona um Ator ao mundo."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
+"\\(position\\)"
+msgstr ""
+":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
+"\\(position\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.detect_actors:1
+#: of
+msgid "Gets all actors which are found at a specific position."
+msgstr "Obtém todos os atores que são encontrados em uma posição específica."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_actors_from_pixel "
+"<miniworlds.worlds.world.World.get_actors_from_pixel>`\\ \\(pixel\\)"
+msgstr ""
+":en:obj:`get_actors_from_pixel "
+"<miniworlds.worlds.world.World.get_actors_from_pixel>`\\ \\(pixel\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`repaint <miniworlds.worlds.world.World.repaint>`\\ \\(\\)"
+msgstr ":en:obj:`repaint <miniworlds.worlds.world.World.repaint>`\\ \\(\\)"
+
+#: ../../None:15:<autosummary>:1 ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.repaint:1 of
+msgid "Implemented in subclasses"
+msgstr "Mpíomhánaithe in fo-amarlaı́"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`update <miniworlds.worlds.world.World.update>`\\ \\(\\)"
+msgstr ":py:obj:`update <miniworlds.worlds.world.World.update>`\\ \\(\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.update:1 of
+msgid "The mainloop, called once per frame."
+msgstr "The mainloop, kaldet en gang per ramme."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`handle_event <miniworlds.worlds.world.World.handle_event>`\\ "
+"\\(event\\[\\, data\\]\\)"
+msgstr ""
+":py:obj:`handle_event <miniworlds.worlds.world.World.handle_event>`\\ "
+"\\(event\\[\\, data\\]\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "Event handling"
+msgstr "Event kadai"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`register <miniworlds.worlds.world.World.register>`\\ \\(method\\)"
+msgstr ":py:obj:`register <miniworlds.worlds.world.World.register>`\\ \\(method\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "Used as decorator e.g. @register def method."
+msgstr "Utilizado como decorador, por exemplo @register def método."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`unregister <miniworlds.worlds.world.World.unregister>`\\ "
+"\\(method\\)"
+msgstr ""
+":py:obj:`unregister <miniworlds.worlds.world.World.unregister>`\\ "
+"\\(method\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`direction <miniworlds.worlds.world.World.direction>`\\ \\(point1\\,"
+" point2\\)"
+msgstr ""
+":py:obj:`direction <miniworlds.worlds.world.World.direction>`\\ \\(point1\\,"
+" point2\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`distance_to <miniworlds.worlds.world.World.distance_to>`\\ "
+"\\(pos1\\, pos2\\)"
+msgstr ""
+":py:obj:`distance_to <miniworlds.worlds.world.World.distance_to>`\\ "
+"\\(pos1\\, pos2\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`direction_to <miniworlds.worlds.world.World.direction_to>`\\ "
+"\\(pos1\\, pos2\\)"
+msgstr ""
+":py:obj:`direction_to <miniworlds.worlds.world.World.direction_to>`\\ "
+"\\(pos1\\, pos2\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`load_world_from_db "
+"<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
+msgstr ""
+":py:obj:`load_world_from_db "
+"<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
+
+#: ../../None:64:<autosummary>:1
+#: miniworlds.worlds.world.World.load_world_from_db:1 of
+msgid "Loads a sqlite db file."
+msgstr "Charget une fichier db sqlite."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`load_actors_from_db "
+"<miniworlds.worlds.world.World.load_actors_from_db>`\\ \\(file\\, "
+"actor\\_classes\\)"
+msgstr ""
+":en:obj:`load_actors_from_db "
+"<miniworlds.worlds.world.World.load_actors_from_db>`\\ \\(file\\, "
+"actor\\_classes\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "Loads all actors from db."
+msgstr "7136 3087 23 2053 3523."
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
+msgstr ""
+":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid "Saves the current world an all actors to database."
+msgstr "Guarda il mondo corrente e tutti gli attori nel database."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`screenshot <miniworlds.worlds.world.World.screenshot>`\\ "
+"\\(\\[filename\\]\\)"
+msgstr ""
+":py:obj:`screenshot <miniworlds.worlds.world.World.screenshot>`\\ "
+"\\(\\[filename\\]\\)"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.screenshot:1 of
+msgid "Creates a screenshot in given file."
+msgstr "Tüketilen dosyada bir ekran görüntüsü oluşturur."
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_columns_by_width "
+"<miniworlds.worlds.world.World.get_columns_by_width>`\\ \\(width\\)"
+msgstr ""
+":py:obj:`get_columns_by_width "
+"<miniworlds.worlds.world.World.get_columns_by_width>`\\ \\(width\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ""
+":py:obj:`get_rows_by_height "
+"<miniworlds.worlds.world.World.get_rows_by_height>`\\ \\(height\\)"
+msgstr ""
+":py:obj:`get_rows_by_height "
+"<miniworlds.worlds.world.World.get_rows_by_height>`\\ \\(height\\)"
+
+#: ../../None:64:<autosummary>:1
+msgid ":py:obj:`get_events <miniworlds.worlds.world.World.get_events>`\\ \\(\\)"
+msgstr ":en:obj:`get_events <miniworlds.worlds.world.World.get_events>`()"
+
+#: ../../None:64:<autosummary>:1 miniworlds.worlds.world.World.get_events:1 of
+msgid "Gets a set of all events you can register"
+msgstr "Gets a set of all events you can register"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`__init__ <miniworlds.worlds.world_base.WorldBase.__init__>`\\ "
+"\\(\\)"
+msgstr ""
+":en:obj:`__init__ <miniworlds.worlds.world_base.WorldBase.__init__>`\\ "
+"\\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`on_change <miniworlds.worlds.world_base.WorldBase.on_change>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`on_change <miniworlds.worlds.world_base.WorldBase.on_change>`\\ "
+"\\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid "implemented in subclasses"
+msgstr "implemented in subclasses"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`add_to_window "
+"<miniworlds.worlds.world_base.WorldBase.add_to_window>`\\ \\(app\\, "
+"dock\\[\\, size\\]\\)"
+msgstr ""
+":py:obj:`add_to_window "
+"<miniworlds.worlds.world_base.WorldBase.add_to_window>`\\ \\(app\\, "
+"dock\\[\\, size\\]\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`update_width_and_height "
+"<miniworlds.worlds.world_base.WorldBase.update_width_and_height>`\\ \\(\\)"
+msgstr ""
+":py:obj:`update_width_and_height "
+"<miniworlds.worlds.world_base.WorldBase.update_width_and_height>`\\ \\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ":py:obj:`repaint <miniworlds.worlds.world_base.WorldBase.repaint>`\\ \\(\\)"
+msgstr ":py:obj:`repaint <miniworlds.worlds.world_base.WorldBase.repaint>`\\ \\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`blit_surface_to_window_surface "
+"<miniworlds.worlds.world_base.WorldBase.blit_surface_to_window_surface>`\\ "
+"\\(\\)"
+msgstr ""
+":py:obj:`blit_surface_to_window_surface "
+"<miniworlds.worlds.world_base.WorldBase.blit_surface_to_window_surface>`\\ "
+"\\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`remove <miniworlds.worlds.world_base.WorldBase.remove>`\\ "
+"\\(actor\\)"
+msgstr ""
+":py:obj:`remove <miniworlds.worlds.world_base.WorldBase.remove>`\\ "
+"\\(actor\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`handle_event "
+"<miniworlds.worlds.world_base.WorldBase.handle_event>`\\ \\(event\\, data\\)"
+msgstr ""
+":py:obj:`handle_event "
+"<miniworlds.worlds.world_base.WorldBase.handle_event>`\\ \\(event\\, data\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`get_event <miniworlds.worlds.world_base.WorldBase.get_event>`\\ "
+"\\(event\\, data\\)"
+msgstr ""
+":py:obj:`get_event <miniworlds.worlds.world_base.WorldBase.get_event>`\\ "
+"\\(event\\, data\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ":py:obj:`update <miniworlds.worlds.world_base.WorldBase.update>`\\ \\(\\)"
+msgstr ":py:obj:`update <miniworlds.worlds.world_base.WorldBase.update>`\\ \\(\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`get_local_position "
+"<miniworlds.worlds.world_base.WorldBase.get_local_position>`\\ "
+"\\(position\\)"
+msgstr ""
+":en:obj:`get_local_position "
+"<miniworlds.worlds.world_base.WorldBase.get_local_position>`\\ "
+"\\(position\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`on_new_actor "
+"<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
+msgstr ""
+":py:obj:`on_new_actor "
+"<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
+
+#: ../../None:15:<autosummary>:1
+msgid ""
+":py:obj:`on_remove_actor "
+"<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
+msgstr ""
+":py:obj:`on_remove_actor "
+"<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
+
+#: ../../source/api/world.md
+msgid "Private Data Attributes:"
+msgstr "Private Data Atributos:"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_abc_impl <miniworlds.worlds.world.World._abc_impl>`\\"
+msgstr ":py:obj:`_abc_impl <miniworlds.worlds.world.World._abc_impl>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_fps <miniworlds.worlds.world.World._fps>`\\"
+msgstr ":py:obj:`_fps <miniworlds.worlds.world.World._fps>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_key_pressed <miniworlds.worlds.world.World._key_pressed>`\\"
+msgstr ":py:obj:`_key_pressed <miniworlds.worlds.world.World._key_pressed>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_animated <miniworlds.worlds.world.World._animated>`\\"
+msgstr ":en:py:obj:`_animated <miniworlds.worlds.world.World._animated>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_is_filled <miniworlds.worlds.world.World._is_filled>`\\"
+msgstr ":py:obj:`_is_filled <miniworlds.worlds.world.World._is_filled>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_orientation <miniworlds.worlds.world.World._orientation>`\\"
+msgstr ":en:obj:`_orientation <miniworlds.worlds.world.World._orientation>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_static <miniworlds.worlds.world.World._static>`\\"
+msgstr ":py:obj:`_static <miniworlds.worlds.world.World._static>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ":py:obj:`_step <miniworlds.worlds.world.World._step>`\\"
+msgstr ":en:obj:`_step <miniworlds.worlds.world.World._step>`\\"
+
+#: ../../None:11:<autosummary>:1
+msgid ""
+":py:obj:`_registered_methods "
+"<miniworlds.worlds.world.World._registered_methods>`\\"
+msgstr ""
+":en:obj:`_registered_methods "
+"<miniworlds.worlds.world.World._registered_methods>`\\"
+
+#: ../../None:3:<autosummary>:1
+msgid ":py:obj:`_abc_impl <miniworlds.worlds.world_base.WorldBase._abc_impl>`\\"
+msgstr ""
+":py: obj:`_abc_impl<miniworlds.worlds.world_base.WorldBase._abc_impl>`\\"
+
+#: ../../None:3:<autosummary>:1
+msgid ":py:obj:`_abc_impl <abc.ABC._abc_impl>`\\"
+msgstr ":py:obj:`_abc_impl <abc.ABC._abc_impl>`\\"
+
+#: ../../source/api/world.md
+msgid "Private Methods:"
+msgstr "Métodos Privados:"
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`_get_camera_manager_class "
+"<miniworlds.worlds.world.World._get_camera_manager_class>`\\ \\(\\)"
+msgstr ""
+":py:obj:`_get_camera_manager_class "
+"<miniworlds.worlds.world.World._get_camera_manager_class>`\\ \\(\\)"
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`_get_world_connector_class "
+"<miniworlds.worlds.world.World._get_world_connector_class>`\\ \\(\\)"
+msgstr ""
+":py:obj:`_get_world_connector_class "
+"<miniworlds.worlds.world.World._get_world_connector_class>`\\ \\(\\)"
+
+#: ../../None:8:<autosummary>:1
+msgid "needed by get_world_connector in parent class"
+msgstr "necesario por get_world_connector en clase padre"
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`_create_event_manager "
+"<miniworlds.worlds.world.World._create_event_manager>`\\ \\(\\)"
+msgstr ""
+":enlace: ` _create_event_manager "
+"<miniworlds.worlds.world.World._create_event_manager>`\\ \\(\\)"
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`_update_all_costumes "
+"<miniworlds.worlds.world.World._update_all_costumes>`\\ \\(\\)"
+msgstr ""
+":py:obj:`_update_all_costumes "
+"<miniworlds.worlds.world.World._update_all_costumes>`\\ \\(\\)"
+
+#: ../../None:8:<autosummary>:1
+msgid "updates costumes for all actors on the world"
+msgstr "mises à jour des costumes pour tous les acteurs du monde"
+
+#: ../../None:8:<autosummary>:1
+msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
+msgstr ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
+
+#: ../../None:8:<autosummary>:1
+msgid "Overwritten in subclasses, e.g. physics_world."
+msgstr "Sobrescrito em subclasses, por exemplo, physics_world."
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`_tick_timed_objects "
+"<miniworlds.worlds.world.World._tick_timed_objects>`\\ \\(\\)"
+msgstr ""
+":py:obj:`_tick_timed_objects "
+"<miniworlds.worlds.world.World._tick_timed_objects>`\\ \\(\\)"
+
+#: miniworlds.worlds.world.World.add_background:3
+#: miniworlds.worlds.world.World.set_background:3 of
+msgid ""
+"If multiple backgrounds are added, the last adds background will be set as "
+"active background."
+msgstr ""
+"Se múltiplos fundos forem adicionados, o último fundo adicionado será "
+"definido como fundo ativo."
+
+#: ../../source/api/world.md
+msgid "Rückgabetyp"
+msgstr "Return type"
+
+#: miniworlds.worlds.world.World.add_background:5
+#: miniworlds.worlds.world.World.get_background:4
+#: miniworlds.worlds.world.World.set_background:5
+#: miniworlds.worlds.world.World.switch_background:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
+
+#: miniworlds.worlds.world.World.add_background:7
+#: miniworlds.worlds.world.World.set_background:7 of
+msgid ""
+"The path to the first image of the background or a color (e.g. (255,0,0) for"
+" red or \"images/my_background.png\" as path to a background."
+msgstr ""
+"The path to the first image of the background or a color (e.g. (255,0,0) for"
+" red or \"images/my_background.png\" as path to a background."
+
+#: miniworlds.worlds.world.World.add_background:12
+#: miniworlds.worlds.world.World.set_background:12 of
+msgid "Add multiple Backgrounds:"
+msgstr "Fr enxuru xru plak unrevev:"
+
+#: ../../source/api/world.md
+msgid "Rückgabe"
+msgstr "Return"
+
+#: miniworlds.worlds.world.World.add_background:23
+#: miniworlds.worlds.world.World.set_background:23 of
+msgid "The new created background."
+msgstr "O fundo recém-criado."
+
+#: miniworlds.worlds.world.World.borders:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+
+#: miniworlds.worlds.world.World.borders:5 of
+msgid "Position or rect"
+msgstr "Puesto o rectificar"
+
+#: miniworlds.worlds.world.World.borders:7 of
+msgid ""
+"A list of borders, e.g. [\"left\", \"top\"], if rect is touching the left a "
+"top border."
+msgstr ""
+"A list of borders, e.g. [\"left\", \"top\"], if rect is touching the left a "
+"top border."
+
+#: miniworlds.worlds.world.World.contains_rect:3 of
+msgid "A rectangle as tuple (top, left, width, height)"
+msgstr "Un rectangle comme un tuple (haut, gauche, largeur, hauteur)"
+
+#: miniworlds.worlds.world.World.default_border:5 of
+msgid "You must also set a border for actor."
+msgstr "Dùnann tú teorainn a shocrú freisin don aisteoir."
+
+#: miniworlds.worlds.world.World.default_border:9 of
+msgid "Set default border for actors:"
+msgstr ""
+"Set default border for actors: \n"
+"ຕັ້ງ​ບລີກ​ຟຽນ​ຫຼື​ກຽວ​ຂ້ອຍ​ສຸ​ປິນ​ສຽງ:"
+
+#: miniworlds.worlds.world.World.default_border_color:5 of
+msgid ""
+"``world.default_border_color`` does not have an effect, if no border is set."
+msgstr ""
+"``world.default_border_color`` ne Memi bir Temasi ayarlanmadı ise bir etkisi"
+" yoktur."
+
+#: miniworlds.worlds.world.World.default_border_color:7 of
+msgid "You must also set ``world.border`` > 0."
+msgstr "Dapat din itakda ang ``world.border``> 0."
+
+#: miniworlds.worlds.world.World.default_border_color:11 of
+msgid "Create actors with and without with border"
+msgstr "Looja näitlejaid koos ja ilma piirjoonteta"
+
+#: miniworlds.worlds.world.World.default_border_color:35
+#: miniworlds.worlds.world.World.get_mouse_position:26
+#: miniworlds.worlds.world.World.run:15 miniworlds.worlds.world.World.step:30
+#: miniworlds.worlds.world.World.switch_background:37 of
+msgid "Output:"
+msgstr "Salida:"
+
+#: miniworlds.worlds.world.World.default_border_color:37 of
+msgid "borders"
+msgstr "grensar"
+
+#: miniworlds.worlds.world.World.default_stroke_color:1 of
+msgid ""
+"Set default stroke color for borders and lines. (equivalent to border-color)"
+msgstr ""
+"Set default stroke color for borders and lines. (equivalente to border-"
+"color)"
+
+#: miniworlds.worlds.world.World.detect_actors:3
+#: miniworlds.worlds.world.World.load_actors_from_db:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+
+#: miniworlds.worlds.world.World.detect_actors:5 of
+msgid "Position, where actors should be searched."
+msgstr "Posisyon, kung saan dapat hanapin ang mga aktor."
+
+#: miniworlds.worlds.world.World.detect_actors:7 of
+msgid "A list of actors"
+msgstr "Una lista de actores"
+
+#: miniworlds.worlds.world.World.detect_actors:11 of
+msgid "Get all actors at mouse position:"
+msgstr "Obtenga todos los actores en la posición del ratón:"
+
+#: miniworlds.worlds.world.World.detect_position:3 of
+msgid "True, if Position is in the world."
+msgstr "Benar, jika Posisi berada di dunia."
+
+#: miniworlds.worlds.world.World.direction_to:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+
+#: miniworlds.worlds.world.World.fps:3 of
+msgid ""
+"This controls how often the screen is redrawn. However, the game logic can "
+"be called more often or less often independently of this with "
+"``world.speed.``"
+msgstr ""
+"This controls how often the screen is redrawn. However, the game logic can "
+"be called more often or less often independently of this with "
+"``world.speed.``"
+
+#: miniworlds.worlds.world.World.get_color_from_pixel:3 of
+msgid "Examples: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`tuple\\``"
+msgstr "Halimbawa: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`tuple\\``"
+
+#: miniworlds.worlds.world.World.get_color_from_pixel:20 of
+msgid "Output: (255, 0, 0, 255)"
+msgstr "Salida: (255, 0, 0, 255)"
+
+#: miniworlds.worlds.world.World.get_color_from_pixel:22 of
+msgid "get color of red screen"
+msgstr "ottieni colore schermo rosso"
+
+#: miniworlds.worlds.world.World.get_color_from_pixel:26 of
+msgid "The position to search for"
+msgstr "La posición a buscar"
+
+#: miniworlds.worlds.world.World.get_color_from_pixel:28 of
+msgid "The color"
+msgstr "Ang kulay"
+
+#: miniworlds.worlds.world.World.get_from_pixel:3 of
+msgid ""
+"PixelWorld: the pixel position is returned TiledWorld: the tile-position is "
+"returned"
+msgstr ""
+"PixelWorld: ang posisyon ng pixel ay ibabalik TiledWorld: ang tile-position "
+"ay ibabalik"
+
+#: miniworlds.worlds.world.World.get_from_pixel:7 of
+msgid "Position as pixel coordinates"
+msgstr "Posición como coordenadas de píxel"
+
+#: miniworlds.worlds.world.World.get_from_pixel:8
+#: miniworlds.worlds.world.World.get_mouse_position:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`tuple\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`tuple\\`\\]`"
+
+#: miniworlds.worlds.world.World.get_from_pixel:9 of
+msgid ""
+"The pixel position, if position is on the world, None if position is not on "
+"World."
+msgstr ""
+"Ang posisyon ng pixel, kung ang posisyon ay sa mundong ito, Wala kung ang "
+"posisyon ay hindi nasa Mundo."
+
+#: miniworlds.worlds.world.World.get_mouse_position:5 of
+msgid ""
+"Returns the mouse position if mouse is on the world. Returns None otherwise"
+msgstr ""
+"Kthe pozicionin e miut nëse miu ndodhet në botë. Kthehet Asgjë në të "
+"kundërt."
+
+#: miniworlds.worlds.world.World.get_mouse_position:9 of
+msgid "Create circles at current mouse position:"
+msgstr "Krijo rrethet në pozicionin aktual të mousit:"
+
+#: miniworlds.worlds.world.World.get_mouse_position:28 of
+msgid "Circles at mouse-position"
+msgstr "Circles at μοuse-position"
+
+#: miniworlds.worlds.world.World.get_mouse_x:4
+#: miniworlds.worlds.world.World.get_mouse_y:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+
+#: miniworlds.worlds.world.World.get_world_connector:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.manager.world\\_connector.WorldConnector\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.manager.world\\_connector.WorldConnector\\``"
+
+#: miniworlds.worlds.world.World.is_in_world:2
+#: miniworlds.worlds.world.World.is_mouse_left_pressed:4
+#: miniworlds.worlds.world.World.is_mouse_pressed:4
+#: miniworlds.worlds.world.World.is_mouse_right_pressed:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+
+#: miniworlds.worlds.world.World.load_actors_from_db:1 of
+msgid ""
+"Loads all actors from db. Usually you load the actors in __init__() or in "
+"on_setup()"
+msgstr ""
+"Charges tous les acteurs de la base de données. Habituellement, vous chargez"
+" les acteurs dans __init__() ou dans on_setup()"
+
+#: miniworlds.worlds.world.World.load_actors_from_db:5 of
+msgid "reference to db file"
+msgstr "referencia al archivo db"
+
+#: miniworlds.worlds.world.World.load_actors_from_db:7 of
+msgid "a list of all Actor Classes which should be imported."
+msgstr "uma lista de todas as Classes de Ator que devem ser importadas."
+
+#: miniworlds.worlds.world.World.load_actors_from_db:10 of
+msgid "All Actors"
+msgstr "Todos los actores"
+
+#: miniworlds.worlds.world.World.play_music:3 of
+msgid "The path to the music"
+msgstr "La ruta hacia la música"
+
+#: miniworlds.worlds.world.World.play_music:5
+#: miniworlds.worlds.world.World.save_to_db:6
+#: miniworlds.worlds.world.World.stop_music:3 of
+msgid "Returns:"
+msgstr "Kembali:"
+
+#: miniworlds.worlds.world.World.register:1 of
+msgid "Used as decorator e.g. @register def method..."
+msgstr "Utilisée comme décorateur ex. @register def méthode..."
+
+#: miniworlds.worlds.world.World.register:7 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Callable\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Callable\\``"
+
+#: miniworlds.worlds.world.World.remove_background:3 of
+msgid ""
+"The index of the new background. Defaults to -1 (last background) or an "
+"Appearance"
+msgstr ""
+"El índice del nuevo fondo. Por defecto es -1 (último fondo) o un Apariencia"
+
+#: miniworlds.worlds.world.World.reset:6 of
+msgid "Restarts flappy the bird game after collision with pipe:"
+msgstr ""
+"Restarts flappy the bird game after collision with pipe: \n"
+"Sugunnauður aftur flappy fúglinn leikur eftir samrekstur við rör:"
+
+#: miniworlds.worlds.world.World.run:1 of
+msgid ""
+"The method show() should always be called at the end of your program. It "
+"starts the mainloop."
+msgstr ""
+"Metoda show() by měla být vždy volána na konci vašeho programu. Spouští "
+"hlavní smyčku."
+
+#: miniworlds.worlds.world.World.run:6 of
+msgid "A minimal miniworlds-program:"
+msgstr "Un programa de minimundos mínimo:"
+
+#: miniworlds.worlds.world.World.run:17 of
+msgid "Minimal program"
+msgstr "Programa mínimo"
+
+#: miniworlds.worlds.world.World.save_to_db:1 of
+msgid ""
+"Saves the current world an all actors to database. The file is stored as db "
+"file and can be opened with sqlite."
+msgstr ""
+"Saves the current world an all actors to database. The file is stored as db "
+"file and can be opened with sqlite."
+
+#: miniworlds.worlds.world.World.save_to_db:4 of
+msgid "The file as relative location"
+msgstr "El archivo como ubicación relativa"
+
+#: miniworlds.worlds.world.World.screenshot:3 of
+msgid ""
+"The location of the file. The folder must exist. Defaults to "
+"\"screenshot.jpg\"."
+msgstr ""
+"ဖိုင်အရည်အချင်း။ မှမြံပါပေးမှုသတ္တရသည်။ \"screenshot.jpg\" အသံဖို့မြင်သည်။"
+
+#: miniworlds.worlds.world.World.send_message:3 of
+msgid "A message can be received by the world or any actor on world"
+msgstr ""
+"Uma mensagem pode ser recebida pelo mundo ou por qualquer ator no mundo"
+
+#: miniworlds.worlds.world.World.size:5 of
+msgid "Create a world with 800 columns and 600 rows:"
+msgstr "Kriju një botë me 800 kolona dhe 600 rreshta:"
+
+#: miniworlds.worlds.world.World.step:3 of
+msgid "If e.g. ``step = 30``, the game logic will be called every 30th-frame."
+msgstr ""
+"If e.g. ``step = 30``, the game logic will be called every 30th-frame."
+
+#: miniworlds.worlds.world.World.step:7 of
+msgid "You can adjust the frame-rate with ``world.fps``"
+msgstr "Puede ajustar la velocidad de cuadros con ``world.fps``"
+
+#: miniworlds.worlds.world.World.step:11 of
+msgid "Set speed and fps."
+msgstr "Set velocidad y fps."
+
+#: miniworlds.worlds.world.World.step:32 of
+msgid "``` 3 6 9 12 15 ```"
+msgstr "``` 3 6 9 12 15 ```"
+
+#: miniworlds.worlds.world.World.stop:3 of
+msgid ""
+"If ``frames`` is set, world will be stopped in n frames. . Defaults to 0."
+msgstr ""
+"If ``frames`` är inställd, kommer världen att stoppas i n ramar. Förvalt "
+"till 0."
+
+#: miniworlds.worlds.world.World.switch_background:5 of
+msgid ""
+"The index of the new background or an Appearance. If index = -1, the next "
+"background will be selected"
+msgstr ""
+"Le index de la nouvelle arrière-plan ou une Apparence. Si index = -1, le "
+"prochain arrière-plan sera sélectionné"
+
+#: miniworlds.worlds.world.World.switch_background:10 of
+msgid "Switch between different backgrounds:"
+msgstr "Cambie entre diferentes fondos:"
+
+#: miniworlds.worlds.world.World.switch_background:39 of
+msgid "Switch background"
+msgstr "Cambia antecedentes"
+
+#: miniworlds.worlds.world.World.switch_background:43 of
+msgid "The new background"
+msgstr "The new background"
+
+#: miniworlds.worlds.world.World.switch_world:3 of
+msgid "_description_"
+msgstr "_paglalarawan_"
+
+#: miniworlds.worlds.world.World.update:3 of
+msgid "Called in app.update() when update() from all containers is called."
+msgstr ""
+"Appelé dans app.update() lorsque update() est appelé depuis tous les "
+"conteneurs."
+
+#: miniworlds.worlds.world.World.window:3 of
+msgid "The window"
+msgstr "Ang bintana"
+
+#~ msgid "Parameter"
+#~ msgstr ""
+
+#~ msgid "Rückgabetyp"
+#~ msgstr ""
+
+#~ msgid "Rückgabe"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""

@@ -1,0 +1,1355 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 08:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/patterns/01_drag_and_drop.md:1
+msgid "Drag and Drop"
+msgstr "Arrastra y suelta"
+
+#: ../../source/patterns/01_drag_and_drop.md:3
+msgid ""
+"Um ein Actor zu verschieben, müssen die Events `on_mouse_left` sowie "
+"`on_mouse_left_released` registriert werden. Dann benötigt man eine Variable"
+" (z.B. `dragged`), in der man den Zustand speichert, d.h. ob ein Objekt "
+"gerade verschoben wird."
+msgstr ""
+"To move an Actor, the events `on_mouse_left` and `on_mouse_left_released` "
+"must be registered. Then you need a variable (e.g. `dragged`) to store the "
+"state, i.e. whether an object is currently being moved."
+
+#: ../../source/patterns/01_drag_and_drop.md:11
+msgid ""
+"Wenn die Maus geklicked wird, dann wird der Zustannd der Variable "
+"`dragged`auf `True` gesetzt."
+msgstr ""
+"When the mouse is clicked, the state of the variable `dragged` is set to "
+"`True`."
+
+#: ../../source/patterns/01_drag_and_drop.md:12
+msgid ""
+"Wenn die Maus losgelassen wird, dann wird das Actor nur dann verschoben, "
+"wenn `dragged` auf `True` gesetzt ist. Danach wird `dragged` wieder auf "
+"`False` gesetzt."
+msgstr ""
+"When the mouse is released, the actor will only be moved if `dragged` is set"
+" to `True`. After that, `dragged` is set back to `False`."
+
+#: ../../source/patterns/01_drag_and_drop.md:14
+msgid "Beispiele:"
+msgstr "Examples:"
+
+#: ../../source/patterns/01_drag_and_drop.md:16
+msgid "Kreise verschieben:"
+msgstr "Move circles:"
+
+#: ../../source/patterns/01_drag_and_drop.md:40
+msgid "Drag and Drop auf einem TiledWorld:"
+msgstr "Ziehen und Ablegen auf einer Fliesenwelt:"
+
+#: ../../source/patterns/02_scrolling.md:1
+msgid "Scrolling"
+msgstr "Pagsasalin"
+
+#: ../../source/patterns/02_scrolling.md:3
+msgid "Oft möchtest du den Bildschirm \"scrollen lassen."
+msgstr "Often you want to scroll the screen."
+
+#: ../../source/patterns/02_scrolling.md:10
+msgid ""
+"Die einfachste Möglichkeit dazu ist es einen Hintergrund zu \"verschieben\":"
+msgstr "The simplest way to do this is to \"move\" a background:"
+
+#: ../../source/patterns/02_scrolling.md:12
+msgid ""
+"Damit dies wirklich gut funktioniert, musst du den Hintergrund als \"Actor "
+"anlegen\" und benötigst zwei Hintergründe."
+msgstr ""
+"So that this really works well, you have to create the background as an "
+"\"actor\" and need two backgrounds."
+
+#: ../../source/patterns/02_scrolling.md:14
+msgid "![scrolling background](../_images/scrolling.png)"
+msgstr "![pagpapadyak background](../_images/pagpadyak.png)"
+
+#: ../../source/patterns/02_scrolling.md:14
+msgid "scrolling background"
+msgstr "лисање позадине"
+
+#: ../../source/patterns/02_scrolling.md:16
+msgid ""
+"Beide Hintergründe wandern von rechts nach links (oder von oben nach unten, "
+"links nach rechts, ... - Je nach Spiel) - Sobald ein Hintergrund das "
+"Spielfeld verlassen würde, wird er wieder ganz rechts angefügt."
+msgstr ""
+"Both backgrounds move from right to left (or from top to bottom, left to "
+"right, ... - Depending on the game) - As soon as a background would leave "
+"the game field, it is added back to the far right."
+
+#: ../../source/patterns/02_scrolling.md:18
+msgid ""
+"Auf diese Weise entsteht der Eindruck einer \"unendlich langen Landschaft\"."
+msgstr "In this way arises the impression of an \"infinitely long landscape\"."
+
+#: ../../source/patterns/02_scrolling.md:20
+msgid "Im Code kann man dies wie folgt umsetzen:"
+msgstr "In code you can implement this as follows:"
+
+#: ../../source/patterns/02_scrolling.md:22
+msgid ""
+"Lege mden Hintergrund zweimal mit dem gleichen Hintergrund an und platziere "
+"diese nebeneinander."
+msgstr ""
+"Place the background twice with the same background and place them side by "
+"side."
+
+#: ../../source/patterns/02_scrolling.md:23
+msgid ""
+"Es kann sinnvoll sein die Hintergründe in einer Liste zu speichern, da du "
+"sie dann gemeinsam bewegen kannst."
+msgstr ""
+"It can be useful to store the backgrounds in a list, as you can then move "
+"them together."
+
+#: ../../source/patterns/02_scrolling.md:35
+msgid ""
+"In der `world.act`-Methode die jedes Frame einmal aufgerufen wird, kannst "
+"den Bildschirm langsam verschieben:"
+msgstr ""
+"In the `world.act` method that is called once per frame, you can slowly move"
+" the screen:"
+
+#: ../../source/patterns/02_scrolling.md:47
+msgid "Als Code sieht dies so aus:"
+msgstr "As code this looks like this:"
+
+#: ../../source/patterns/02_scrolling.md:92
+msgid ""
+"Notiz: Die Idee stammt von dem Blog "
+"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html)"
+" - Jörg Kantereit hat dort dieses Snippet mit Pygame Zero programmiert."
+msgstr ""
+"Note: The idea comes from the blog "
+"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html)"
+" - Jörg Kantereit programmed this snippet with Pygame Zero there."
+
+#: ../../source/patterns/03_game_over.md:1
+msgid "Game Over"
+msgstr "Juego Terminado"
+
+#: ../../source/patterns/03_game_over.md:3
+msgid "Typischerweise passiert bei einem Game-Over-Event folgendes:"
+msgstr "Typically happens at a game over event as follows:"
+
+#: ../../source/patterns/03_game_over.md:5
+msgid "Das Spiel wird angehalten"
+msgstr "The game is paused"
+
+#: ../../source/patterns/03_game_over.md:6
+msgid "Ein Text erscheint (ggf. mit einer High-Score)"
+msgstr "A text appears (possibly with a high score)"
+
+#: ../../source/patterns/03_game_over.md:7
+msgid "Es gibt eine Möglichkeit das Spiel neu zu starten."
+msgstr "There is a way to restart the game."
+
+#: ../../source/patterns/03_game_over.md:9
+msgid ""
+"Zunächst macht es dazu Sinn eine Methode zu erstellen, die alle Actors "
+"erstellt, die beim Start eines Spiels erstellt werden sollen:"
+msgstr ""
+"First, it makes sense to create a method that creates all actors that should"
+" be created at the start of a game:"
+
+#: ../../source/patterns/03_game_over.md:30
+msgid ""
+"In dieser Methode wird z.B. ein Spieler-Objekt erstellt und auch bereits "
+"Events an dieses Spieler-Objekt registriert. Wenn z.B. ein anderes Actor "
+"aufgespürt wird, dann wird die `game_over`-Methode getriggert."
+msgstr ""
+"In this method, for example, a player object is created and events are "
+"already registered for this player object. If another actor is detected, the"
+" `game_over` method is triggered."
+
+#: ../../source/patterns/03_game_over.md:33
+msgid "In der `game_over`-Methode wird das World angehalten:"
+msgstr "In the `game_over` method, the World is paused:"
+
+#: ../../source/patterns/03_game_over.md:43
+msgid ""
+"Global wird überprüft, ob die SPACE-Taste gedrückt wird - Wenn das World "
+"angehalten wird, wird die `restart`-Methode getriggert:"
+msgstr ""
+"Global checks if the SPACE key is pressed - If the world is paused, the "
+"`restart` method is triggered:"
+
+#: ../../source/patterns/03_game_over.md:53
+msgid ""
+"Die restart-Methode löscht alle Actors, startet das World erneut und ruft "
+"`setup` auf"
+msgstr ""
+"The restart method deletes all actors, restarts the world, and calls `setup`"
+
+#: ../../source/patterns/03_game_over.md:66
+msgid "Insgesamt sieht dies dann so aus:"
+msgstr "Overall, this looks like this:"
+
+#: ../../source/patterns/04_level_loading.md:1
+msgid "Level Loading"
+msgstr "Livello caricamento"
+
+#: ../../source/patterns/04_level_loading.md:3
+msgid ""
+"Ein typischer Anwendungsfall: Du möchtest ein neues Level starten, wenn die "
+"Bildschirmfigur den Rand erreicht oder durch eine Tür geht, usw."
+msgstr ""
+"A typical use case: You want to start a new level when the screen figure "
+"reaches the edge or goes through a door, etc."
+
+#: ../../source/patterns/04_level_loading.md:5
+msgid "Dies geht folgendermaßen:"
+msgstr "This goes as follows:"
+
+#: ../../source/patterns/04_level_loading.md:7
+msgid ""
+"Speichere dein Level in einer Datenbank, einer Textdatei oder einer "
+"einfachen Liste."
+msgstr "Save your level in a database, a text file, or a simple list."
+
+#: ../../source/patterns/04_level_loading.md:8
+msgid ""
+"Du brauchst eine **Funktion**, die dein Level lädt, sobald etwas passiert "
+"(du erreichst den Rand, berührst ein Actor, ...)"
+msgstr ""
+"You need a function that loads your level as soon as something happens (you "
+"reach the edge, touch an actor, ...)"
+
+#: ../../source/patterns/04_level_loading.md:10
+msgid "Speichern deines Levels als Liste"
+msgstr "Save your level as a list"
+
+#: ../../source/patterns/04_level_loading.md:12
+msgid ""
+"Du kannst dein Level in einer mehrdimensionalen Liste speichern. In einem "
+"ganz einfachen Fall könnte dies z.B. so aussehen:"
+msgstr ""
+"You can save your level in a multidimensional list. In a very simple case, "
+"this could look like this, for example:"
+
+#: ../../source/patterns/04_level_loading.md:20
+msgid ""
+"Du brauchst dann eine Übersetzung in Actors, `w` steht hier für eine `Wall`,"
+" `d` für eine `Door`."
+msgstr ""
+"You then need a translation into Actors, `w` stands here for a `Wall`, `d` "
+"for a `Door`."
+
+#: ../../source/patterns/04_level_loading.md:22
+msgid ""
+"Die Räume kannst du dann in einer Liste oder als Dictionary speichern, z.B. "
+"so als Liste:"
+msgstr ""
+"The spaces you can then save in a list or as a dictionary, e.g. like as a "
+"list:"
+
+#: ../../source/patterns/04_level_loading.md:28
+msgid "...oder so als Dictionary:"
+msgstr "...or like as Dictionary:"
+
+#: ../../source/patterns/04_level_loading.md:34
+msgid "Anlegen von Klassen für die einzelnen Objekte"
+msgstr "Creating classes for the individual objects"
+
+#: ../../source/patterns/04_level_loading.md:36
+msgid ""
+"Damit ein Objekt einer *bestimmten Art* erzeugt werden kann, ist es "
+"sinnvoll, eine Klasse für dieses Objekt zu speichern."
+msgstr ""
+"So that an object of a *specific type* can be generated, it makes sense to "
+"store a class for this object."
+
+#: ../../source/patterns/04_level_loading.md:38
+msgid "Dies könnte z.B. so aussehen:"
+msgstr "This could e.g. look like this:"
+
+#: ../../source/patterns/04_level_loading.md:46
+msgid ""
+"Die Klasse `Wall` definiert Objekte, sich wie Actors verhalten, aber von dem"
+" Standard-Actor insofern unterscheidet, dass diese immer als Kostüm ein Bild"
+" mit einer Wand besitzen."
+msgstr ""
+"The class `Wall` defines objects that behave like Actors, but differs from "
+"the standard Actor in that they always have an image of a wall as a costume."
+
+#: ../../source/patterns/04_level_loading.md:48
+msgid "Übersetzen der Liste"
+msgstr "Translate the list"
+
+#: ../../source/patterns/04_level_loading.md:50
+msgid "Die Liste kannst du nun in Actors übersetzen:"
+msgstr "The list can now be translated into Actors:"
+
+#: ../../source/patterns/04_level_loading.md:67
+msgid ""
+"Zunächst werden in der ersten For-Schleife alle Actors bis auf das Player-"
+"Objekt gelöscht"
+msgstr ""
+"First, in the first for loop, all actors except the player object are "
+"deleted."
+
+#: ../../source/patterns/04_level_loading.md:69
+msgid ""
+"In der zweiten Schleife wird nun über die Listen iteriert. Dabei wird "
+"jedesmal, wenn ein entsprechender Actor in der String-Liste gefunden wird, "
+"ein entsprechendes Actor angelegt."
+msgstr ""
+"In the second loop, the lists are now iterated over. Each time a "
+"corresponding Actor is found in the string list, a corresponding Actor is "
+"created."
+
+#: ../../source/patterns/04_level_loading.md:71
+msgid "Wechseln des Raums"
+msgstr "Change of space"
+
+#: ../../source/patterns/04_level_loading.md:73
+msgid ""
+"Mit der Vorarbeit ist es einfach den Raum zu wechseln: Du musst einfach nur "
+"die Methode setup_room an geeigneter Stelle aufrufen um den Raum zu "
+"wechseln, z.B. so:"
+msgstr ""
+"With the preparation, it is easy to change the room: You just have to call "
+"the method setup_room at an appropriate place to change the room, for "
+"example, like this:"
+
+#: ../../source/patterns/04_level_loading.md:83
+msgid "So könnte das ganze Programm aussehen:"
+msgstr "This is how the whole program could look:"
+
+#: ../../source/patterns/04_level_loading.md:164
+msgid ""
+"Sobald ein Spieler auf der Tür steht und die Leertaste drückt, wird der Raum"
+" gewechselt."
+msgstr ""
+"Once a player is standing on the door and presses the space bar, the room "
+"will change."
+
+#: ../../source/patterns/04_level_loading.md:166
+msgid "![Room switching](../_images/room_switching.png)"
+msgstr "![Paglipat ng kuwarto](../_images/room_switching.png)"
+
+#: ../../source/patterns/04_level_loading.md:166
+msgid "Room switching"
+msgstr "Kambario keitimas"
+
+#: ../../source/patterns/05_database.md:1
+msgid "Daten aus der Datenbank laden"
+msgstr "Load data from the database"
+
+#: ../../source/patterns/05_database.md:4
+msgid ""
+"In diesem Artikel wirst du lernen, wie man ein Datenmodell erstellt und "
+"dieses mit einer Datenbank synchronisiert. Du kannst dies für vielfältige "
+"Zwecke einsetzen, z.B. Fragen und Antworten in einem Quiz-Spiel, eine High-"
+"Score, Laden von Spieldaten, ..."
+msgstr ""
+"In this article, you will learn how to create a data model and synchronize "
+"it with a database. You can use this for various purposes, e.g. questions "
+"and answers in a quiz game, a high-score, loading game data, ..."
+
+#: ../../source/patterns/05_database.md:6
+msgid "Erster Schritt: Erstellen des Modells:"
+msgstr "First step: Creating the model:"
+
+#: ../../source/patterns/05_database.md:8
+msgid ""
+"Erstelle in einer neuen Datei ein Modell für deine Daten, *so wie du sie in "
+"Python* speichern würdest."
+msgstr ""
+"Create in a new file a model for your data, *just like you would in Python*."
+
+#: ../../source/patterns/05_database.md:10
+msgid ""
+"Eine Highscore z.B. könntest du als einfache Liste speichern, in der du "
+"Namen und Punktezahl speicherst, z.B. so:"
+msgstr ""
+"A highscore for example could be saved as a simple list, in which you save "
+"names and points, for example like this:"
+
+#: ../../source/patterns/05_database.md:16
+msgid ""
+"Die Reihenfolge der Daten spielt noch keine Rolle, denn du kannst diese ja "
+"jederzeit sortieren"
+msgstr ""
+"The order of the data does not play a role yet, because you can sort it at "
+"any time"
+
+#: ../../source/patterns/05_database.md:18
+msgid "Deine Klasse könnte also erstmal so aussehen:"
+msgstr "Your class could therefore look like this:"
+
+#: ../../source/patterns/05_database.md:20
+msgid "Datei: highscore_model.py:"
+msgstr "File: highscore_model.py:"
+
+#: ../../source/patterns/05_database.md:30
+msgid ""
+"Die Klasse enthält ein Attribut `scores`, welches entweder aus dem Parameter"
+" der __init__-Methode gelesen wird oder eine leere Liste enthält."
+msgstr ""
+"The class contains an attribute `scores`, which is either read from the "
+"parameter of the __init__ method or contains an empty list."
+
+#: ../../source/patterns/05_database.md:32
+msgid "Einrichten der Datenbank"
+msgstr "Setting up the database"
+
+#: ../../source/patterns/05_database.md:34
+msgid ""
+"Mit dem Programm DBBrowser for sqlite kannst du die Datenbank einrichten."
+msgstr "With the program DBBrowser for sqlite you can set up the database."
+
+#: ../../source/patterns/05_database.md:36
+msgid "Richte einer Tabelle und 3 Feldern ein: Name, Score und ID."
+msgstr "Set up a table with 3 fields: Name, Score, and ID."
+
+#: ../../source/patterns/05_database.md:38
+msgid "![Database](../_images/database1.png)"
+msgstr "![Database](../_images/database1.png)"
+
+#: ../../source/patterns/05_database.md:38
+#: ../../source/patterns/05_database.md:49
+msgid "Database"
+msgstr "Database"
+
+#: ../../source/patterns/05_database.md:41
+msgid "Warum benötige ich eine ID?"
+msgstr "Why do I need an ID?"
+
+#: ../../source/patterns/05_database.md:43
+msgid ""
+"Wenn du dein Programm später erweitern willst, dann können die einzelnen "
+"Datensätze in der Tabelle nur identifiziert werden, wenn du ein eindeutiges "
+"Attribut ergänzt. Daher ist es sinnvoll eine *ID* zu ergänzen."
+msgstr ""
+"If you want to expand your program later, then the individual data records "
+"in the table can only be identified if you add a unique attribute. "
+"Therefore, it makes sense to add an *ID*."
+
+#: ../../source/patterns/05_database.md:47
+msgid ""
+"Speichere Beispieldaten in die Datenbank, damit du damit später das Einlesen"
+" testen kannst:"
+msgstr "Save sample data in the database so you can test the reading later:"
+
+#: ../../source/patterns/05_database.md:49
+msgid "![Database](../_images/database2.png)"
+msgstr "![មូល ទិន្នន័យ](../_images/database2.png)"
+
+#: ../../source/patterns/05_database.md:52
+msgid "Aus der Datenbank lesen"
+msgstr "Read from the database"
+
+#: ../../source/patterns/05_database.md:54
+msgid ""
+"Als nächstes kannst du eine Methode zum Lesen der Daten implementieren."
+msgstr "Next you can implement a method for reading the data."
+
+#: ../../source/patterns/05_database.md:56
+msgid "Füge dazu folgende Klasse deiner Datenbank hinzu:"
+msgstr "Add the following class to your database:"
+
+#: ../../source/patterns/05_database.md:70
+msgid ""
+"Die Methode ist eine `classmethod` - Diese Methoden dienen dazu, Objekte "
+"einer Klasse (wie eine Art *Factory*) zu erzeugen, in diesem Fall wird ein "
+"neues Highscore-Objekt mit Daten aus der Datenbank erzeugt."
+msgstr ""
+"The method is a `classmethod` - These methods are used to create objects of "
+"a class (like a kind of *Factory*), in this case a new highscore object is "
+"created with data from the database."
+
+#: ../../source/patterns/05_database.md:72
+msgid ""
+"Zunächst wird dazu eine Verbindung aufgebaut. Hier muss der Dateiname zu "
+"deiner sqlite3-Datenbank angegegeben werden."
+msgstr ""
+"First a connection is established. Here the file name must be specified for "
+"your sqlite3 database."
+
+#: ../../source/patterns/05_database.md:74
+msgid ""
+"Anschließend wird ein Cursor erstellt, der SQL-Abfragen aus der Datenbank "
+"auslesen und diese ausführen kann."
+msgstr ""
+"Following, a cursor is created, which can read SQL queries from the database"
+" and execute them."
+
+#: ../../source/patterns/05_database.md:76
+msgid ""
+"Mit `cursor.fetchone` bzw. `cursor.fetchall()` können diese Daten dann "
+"zurückgegeben werden."
+msgstr ""
+"With `cursor.fetchone` or `cursor.fetchall()` these data can then be "
+"returned."
+
+#: ../../source/patterns/05_database.md:79
+msgid "Aufgabe: Sortiere die Ergebnisse der Highscore absteigend."
+msgstr "Task: Sort the results of the highscore in descending order."
+
+#: ../../source/patterns/05_database.md:82
+msgid ""
+"Du kannst dein Programm testen, indem du am Ende der Datei ein Highscore-"
+"Objekt erzeugst. Vergiss aber nicht dies zu löschen, wenn du die Datei "
+"später importierst!"
+msgstr ""
+"You can test your program by creating a high score object at the end of the "
+"file. But don't forget to delete this when you import the file later!"
+
+#: ../../source/patterns/05_database.md:89
+msgid "In die Datenbank schreiben"
+msgstr "Write to the database"
+
+#: ../../source/patterns/05_database.md:91
+msgid "Ergänze folgende Funktion, um in die Datenbank zu schreiben:"
+msgstr "Add the following function to write to the database:"
+
+#: ../../source/patterns/05_database.md:104
+msgid ""
+"Hier wird wieder zunächst eine Verbindung aufgebaut und ein Cursor erstellt,"
+" der diesesmal eine INSERT-Anfrage an die Datenbank stellt, um einen neuen "
+"Datensatz hinzuzufügen."
+msgstr ""
+"Here is again first a connection established and a cursor created, which "
+"this time a INSERT query to the database makes, to a new record to add."
+
+#: ../../source/patterns/05_database.md:106
+msgid ""
+"Damit die lokalen Daten und die Daten in der Datenbank synchron bleiben, "
+"wird der Datensatz auch in der Tabelle gelöscht."
+msgstr ""
+"So that the local data and the data in the database remain synchronized, the"
+" record is also deleted in the table."
+
+#: ../../source/patterns/05_database.md:108
+msgid "CRUD"
+msgstr "CRUD"
+
+#: ../../source/patterns/05_database.md:110
+msgid "Als CRUD bezeichnet man:"
+msgstr "As CRUD is called:"
+
+#: ../../source/patterns/05_database.md:112
+msgid "**C**reate, einen Datensatz anlegen,"
+msgstr "**E**rstellen, create a record,"
+
+#: ../../source/patterns/05_database.md:113
+msgid "**R**ead, Datensatz lesen,"
+msgstr "Lesen, read data record,"
+
+#: ../../source/patterns/05_database.md:114
+msgid "**U**pdate, Datensatz aktualisieren"
+msgstr "**A**ktualisieren, Datensatz aktualisieren"
+
+#: ../../source/patterns/05_database.md:115
+msgid "**D**elete oder Destroy, Datensatz löschen."
+msgstr "**L**öschen oder zerstören, Datensatz löschen."
+
+#: ../../source/patterns/05_database.md:117
+msgid ""
+"Dies sind die Operationen über die du dir Gedanken machen musst, wenn du "
+"eine Verbindung zur Datenbank herstellen möchtest."
+msgstr ""
+"These are the operations you have to think about when you want to establish "
+"a connection to the database."
+
+#: ../../source/patterns/05_database.md:119
+msgid "Create"
+msgstr "Skapa"
+
+#: ../../source/patterns/05_database.md:121
+msgid "Die Create-Funktion wurde mit der Funktion `create` implementiert."
+msgstr "The create function was implemented with the create function."
+
+#: ../../source/patterns/05_database.md:123
+msgid "Read"
+msgstr "Ler"
+
+#: ../../source/patterns/05_database.md:125
+msgid ""
+"Mit der Funktion `from_db` wurde die komplette Tabelle `Highscore` in "
+"unserer Datenbank in die Liste `self.scores` geladen."
+msgstr ""
+"With the function `from_db`, the complete table `Highscore` was loaded into "
+"the list `self.scores` in our database."
+
+#: ../../source/patterns/05_database.md:127
+msgid "Update"
+msgstr "Actualización"
+
+#: ../../source/patterns/05_database.md:129
+msgid ""
+"Einen Datensatz kannst du aktualisieren (Wenn ein Spieler das Spiel z.B. "
+"wiederholt.)"
+msgstr "You can update a record (If a player repeats the game.)"
+
+#: ../../source/patterns/05_database.md:131
+msgid "Ergänze dazu folgende Methode:"
+msgstr "Add the following method:"
+
+#: ../../source/patterns/05_database.md:147
+msgid "Delete"
+msgstr "Tɔmva"
+
+#: ../../source/patterns/05_database.md:149
+msgid "Ergänze folgende Methode:"
+msgstr "Add the following method:"
+
+#: ../../source/patterns/05_database.md:164
+msgid "Kompletter Code:"
+msgstr "Complete code:"
+
+#: ../../source/patterns/05_database.md:222
+msgid "Dein Modell in deine Anwendung einbinden."
+msgstr "Your model in your application integrate."
+
+#: ../../source/patterns/05_database.md:224
+msgid ""
+"Wenn du dein Modell geschrieben hast, kannst du dies in deinem Basisprogramm"
+" einbinden."
+msgstr ""
+"When you have written your model, you can integrate this in your base "
+"program."
+
+#: ../../source/patterns/05_database.md:226
+msgid ""
+"Hier wurde z.B. ein Programm geschrieben, bei welchem man Kugeln ausweichen "
+"muss. Sobald du getroffen wirst. Das Spiel sieht zunächst so aus:"
+msgstr ""
+"Here was e.g. a program written, in which one must dodge balls. As soon as "
+"you get hit. The game looks like this at first:"
+
+#: ../../source/patterns/05_database.md:278
+msgid "![Highscore](../_images/db1.png)"
+msgstr "![Puntuación más alta](../_images/db1.png)"
+
+#: ../../source/patterns/05_database.md:278
+#: ../../source/patterns/05_database.md:324
+msgid "Highscore"
+msgstr "Highscore"
+
+#: ../../source/patterns/05_database.md:280
+msgid "Dieses Spiel braucht nun zwei Funktionalitäten:"
+msgstr "This game now needs two functionalities:"
+
+#: ../../source/patterns/05_database.md:282
+msgid "Nach Spielende wird das Spiel gelöscht."
+msgstr "After the game, the game will be deleted."
+
+#: ../../source/patterns/05_database.md:283
+msgid "Es wird die Highscore angezeigt."
+msgstr "The high score will be displayed."
+
+#: ../../source/patterns/05_database.md:285
+msgid "Ändere dafür zunächst die act-Methode:"
+msgstr "Change the act method for that first."
+
+#: ../../source/patterns/05_database.md:306
+msgid ""
+"Die letzte if-Anweisung beinhaltet die Funktionalität. Das World wird "
+"gelöscht, es wird nach einer neuen Highscore gefragt die dann mit der "
+"Funktion `new_highscore` angezeigt wird."
+msgstr ""
+"The last if statement includes the functionality. The World will be deleted,"
+" a new highscore will be requested and then displayed with the function "
+"`new_highscore`."
+
+#: ../../source/patterns/05_database.md:308
+msgid "Diese sieht so aus:"
+msgstr "This looks like:"
+
+#: ../../source/patterns/05_database.md:322
+msgid ""
+"Zuerst wird die aktuelle Highscore geladen, dann wird ein neuer Eintrag "
+"erstellt und dann die ersten 10 Elemente der Highscore mit Hilfe neuer "
+"Actors auf dem Bildschirm ausgegeben."
+msgstr ""
+"First the current highscore is loaded, then a new entry is created and then "
+"the first 10 elements of the highscore are output on the screen using new "
+"Actors."
+
+#: ../../source/patterns/05_database.md:324
+msgid "![Highscore](../_images/db2.png)"
+msgstr "![Pinakamataas na marka](../_mga_larawan/db2.png)"
+
+#: ../../source/patterns/05_database.md:327
+msgid ""
+"Den kompletten Code findest du "
+"[hier](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+msgstr ""
+"You can find the complete code [here] "
+"(https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+
+#: ../../source/patterns/flappy_physics.md:1
+msgid "Tutorial: Flappy Bird"
+msgstr "Tutorial: Flappy Bird"
+
+#: ../../source/patterns/flappy_physics.md:3
+msgid ""
+"In diesem Kapitel erstellen wir Schritt für Schritt ein Flappy Bird-Spiel "
+"unter Verwendung der `miniworlds_physics` Engine."
+msgstr ""
+"In this chapter we create step by step a Flappy Bird game using the "
+"`miniworlds_physics` Engine."
+
+#: ../../source/patterns/flappy_physics.md:5
+msgid "![Flappy Bird Spiel](../_images/patterns_flappy.png)"
+msgstr "![Flappy Bird Game](../_images/patterns_flappy.png)"
+
+#: ../../source/patterns/flappy_physics.md:5
+msgid "Flappy Bird Spiel"
+msgstr "Flappy Bird game"
+
+#: ../../source/patterns/flappy_physics.md:9
+msgid "Schritt 1: Importieren der Physik-Engine"
+msgstr "Step 1: Importing the physics engine"
+
+#: ../../source/patterns/flappy_physics.md:11
+msgid ""
+"Installiere das Paket `miniworlds_physics` genauso, wie du `miniworlds` "
+"installiert hast. Danach importierst du die `PhysicsWorld`:"
+msgstr ""
+"Install the package `miniworlds_physics` in the same way you installed "
+"`miniworlds`. Then you import the `PhysicsWorld`:"
+
+#: ../../source/patterns/flappy_physics.md:25
+msgid "Schritt 2: Röhren (Pipes) erstellen"
+msgstr "Step 2: Create pipes"
+
+#: ../../source/patterns/flappy_physics.md:27
+msgid "Röhren hinzufügen und in einer Liste speichern"
+msgstr "Add tubes and save in a list"
+
+#: ../../source/patterns/flappy_physics.md:29
+msgid ""
+"Füge mehrere Röhren (Pipes) hinzu und speichere sie in einer Liste, um "
+"später ihre Eigenschaften leichter ändern zu können:"
+msgstr ""
+"Add multiple tubes (pipes) and save them in a list to be able to change "
+"their properties more easily later:"
+
+#: ../../source/patterns/flappy_physics.md:40
+#: ../../source/patterns/flappy_physics.md:66
+#: ../../source/patterns/flappy_physics.md:88
+#: ../../source/patterns/flappy_physics.md:112
+msgid "Erklärung:"
+msgstr "Explanation:"
+
+#: ../../source/patterns/flappy_physics.md:42
+msgid ""
+"Es werden vier Röhren erstellt, die in der Liste `pipes[]` gespeichert "
+"werden."
+msgstr "Four tubes are created and stored in the list `pipes[]`."
+
+#: ../../source/patterns/flappy_physics.md:44
+msgid "Eigenschaften der Röhren festlegen"
+msgstr "Set properties of the tubes"
+
+#: ../../source/patterns/flappy_physics.md:46
+msgid "Verwende eine Schleife, um Eigenschaften für alle Röhren festzulegen:"
+msgstr "Use a loop to set properties for all tubes:"
+
+#: ../../source/patterns/flappy_physics.md:59
+msgid ""
+"Für die 2. und 4. Röhre (die von oben nach unten zeigen) wird die "
+"Orientierung um 180 Grad gedreht:"
+msgstr ""
+"For the 2nd and 4th tube (those showing from top to bottom) the orientation "
+"is rotated by 180 degrees:"
+
+#: ../../source/patterns/flappy_physics.md:67
+msgid ""
+"**pipe.physics.simulation**: Mit `manual` wird festgelegt, dass die "
+"Schwerkraft keine Wirkung auf die Röhre hat."
+msgstr ""
+"**pipe.physics.simulation**: With `manual`, it is determined that gravity "
+"has no effect on the pipe."
+
+#: ../../source/patterns/flappy_physics.md:68
+msgid ""
+"**pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der "
+"Geschwindigkeit."
+msgstr ""
+"pipe.physics.velocity_x: The movement is done by changing the velocity."
+
+#: ../../source/patterns/flappy_physics.md:69
+msgid ""
+"**pipe.origin**: Der Referenzpunkt ist die obere linke Ecke der Röhre, was "
+"das Verschieben vereinfacht."
+msgstr ""
+"**pipe.origin**: The reference point is the upper left corner of the tube, "
+"which simplifies the movement."
+
+#: ../../source/patterns/flappy_physics.md:71
+msgid "Methoden für die Röhren registrieren"
+msgstr "Methods for registering tubes"
+
+#: ../../source/patterns/flappy_physics.md:73
+msgid "Nun fügen wir den Röhren zwei wichtige Methoden hinzu:"
+msgstr "Now add the tubes two important methods."
+
+#: ../../source/patterns/flappy_physics.md:89
+msgid ""
+"**act**: Diese Methode prüft, ob die Röhre vom Spieler überquert wurde."
+msgstr ""
+"**action**: This method checks whether the tube was crossed by the player."
+
+#: ../../source/patterns/flappy_physics.md:90
+msgid ""
+"**on_detecting_left_border**: Wenn die Röhre den linken Bildschirmrand "
+"erreicht, wird sie an eine zufällige Position rechts verschoben."
+msgstr ""
+"**on_detecting_left_border**: When the tube reaches the left edge of the "
+"screen, it will be moved to a random position on the right."
+
+#: ../../source/patterns/flappy_physics.md:94
+msgid "Schritt 3: Den Vogel (Bird) erstellen"
+msgstr "Step 3: Create the bird"
+
+#: ../../source/patterns/flappy_physics.md:96
+msgid "Attribute festlegen"
+msgstr "Set attribute"
+
+#: ../../source/patterns/flappy_physics.md:98
+msgid "Der Vogel wird als `Actor` erstellt und seine Attribute festgelegt:"
+msgstr "The bird is created as an `Actor` and its attributes are set:"
+
+#: ../../source/patterns/flappy_physics.md:113
+msgid ""
+"**bird.physics.simulation**: Der Vogel wird durch die Schwerkraft "
+"beeinflusst."
+msgstr "**bird.physics.simulation**: The bird is influenced by gravity."
+
+#: ../../source/patterns/flappy_physics.md:114
+msgid ""
+"**bird.physics.size**: Ein kleinerer Kollisionsbereich macht das Spiel etwas"
+" einfacher."
+msgstr ""
+"**bird.physics.size**: A smaller collision area makes the game a bit easier."
+
+#: ../../source/patterns/flappy_physics.md:116
+msgid "Methoden für den Vogel registrieren"
+msgstr "Methods for registering the bird"
+
+#: ../../source/patterns/flappy_physics.md:118
+msgid "Erkennen des Spielfeldrands"
+msgstr "Recognizing the game field edge"
+
+#: ../../source/patterns/flappy_physics.md:120
+msgid ""
+"Wenn der Vogel den Bildschirm verlässt, endet das Spiel mit einer \"Game "
+"Over\"-Nachricht:"
+msgstr ""
+"When the bird leaves the screen, the game ends with a \"Game Over\" message."
+
+#: ../../source/patterns/flappy_physics.md:131
+msgid "Erkennen von Kollisionen mit Röhren"
+msgstr "Detecting collisions with tubes"
+
+#: ../../source/patterns/flappy_physics.md:133
+msgid "Berührt der Vogel eine Röhre, endet ebenfalls das Spiel:"
+msgstr "Touches the bird a tube, ends also the game:"
+
+#: ../../source/patterns/flappy_physics.md:144
+msgid "Erkennen von Benutzereingaben"
+msgstr "Recognizing user inputs"
+
+#: ../../source/patterns/flappy_physics.md:146
+msgid "Wenn die Leertaste gedrückt wird, bewegt sich der Vogel nach oben:"
+msgstr "When the spacebar is pressed, the bird moves upwards:"
+
+#: ../../source/patterns/flappy_physics.md:158
+msgid "Schritt 4: Punktestand hinzufügen"
+msgstr "Step 4: Add score"
+
+#: ../../source/patterns/flappy_physics.md:160
+msgid ""
+"Die Punktanzeige wird statisch festgelegt, damit sie nicht von der Physik "
+"beeinflusst wird:"
+msgstr ""
+"The point display is statically fixed so that it is not influenced by "
+"physics."
+
+#: ../../source/patterns/flappy_physics.md:169
+msgid ""
+"In der `act`-Methode der Röhren wird der Punktestand jedes Mal erhöht, wenn "
+"der Spieler eine Röhre überquert:"
+msgstr ""
+"In the `act` method of the pipes, the score is increased every time the "
+"player crosses a pipe:"
+
+#: ../../source/patterns/flappy_physics.md:181
+msgid "Kompletter Code"
+msgstr "Complete code"
+
+#: ../../source/patterns/maze_game.md:1
+msgid "Tutorial: Labyrinth-Spiel"
+msgstr "Tutorial: Labyrinth Game"
+
+#: ../../source/patterns/maze_game.md:3
+msgid ""
+"In diesem Kapitel erstellen wir Schritt für Schritt gemeinsam ein Labyrinth-"
+"Spiel."
+msgstr "In this chapter we create step by step together a labyrinth game."
+
+#: ../../source/patterns/maze_game.md:5
+msgid "![Labyrinth-Spiel - Erster Schritt](../_images/maze_tiles.png)"
+msgstr "![Labyrinth game - First step](../_images/maze_tiles.png)"
+
+#: ../../source/patterns/maze_game.md:5
+msgid "Labyrinth-Spiel - Erster Schritt"
+msgstr "Labyrinth game - First step"
+
+#: ../../source/patterns/maze_game.md:7
+msgid ""
+"Die Technik, eine Kachelkarte (Tilemap) zu erstellen, ist in vielen Spielen "
+"gängig. Nachdem du es hier gelernt hast, wirst du in der Lage sein, diese "
+"Technik in deine eigenen Projekte zu integrieren."
+msgstr ""
+"The technique to create a tile map (Tilemap) is common in many games. After "
+"you have learned it here, you will be able to integrate this technique into "
+"your own projects."
+
+#: ../../source/patterns/maze_game.md:9
+msgid ""
+"**Basierend auf**: `https://github.com/electronstudio/pygame-zero-book`"
+msgstr "Based on: `https://github.com/electronstudio/pygame-zero-book`"
+
+#: ../../source/patterns/maze_game.md:10
+msgid "**Lizenz:** Attribution-NonCommercial-ShareAlike 4.0 International"
+msgstr "**License:** Attribution-NonCommercial-ShareAlike 4.0 International"
+
+#: ../../source/patterns/maze_game.md:12
+msgid "Schritt 1: Schauspieler aus einer Kachelkarte laden"
+msgstr "Step 1: Load actor from a tile card"
+
+#: ../../source/patterns/maze_game.md:14
+msgid ""
+"Eine Kachelkarte verwendet eine kleine Anzahl von Bildern (Kacheln), die "
+"mehrmals gezeichnet werden, um ein großes Spiellevel (die Karte) zu "
+"erstellen. Dies spart Arbeit beim Erstellen vieler Grafiken und erleichtert "
+"Änderungen am Level-Design. In diesem Beispiel erstellen wir ein Labyrinth-"
+"Level."
+msgstr ""
+"A tile map uses a small number of images (tiles) that are drawn multiple "
+"times to create a large game level (the map). This saves work in creating "
+"many graphics and facilitates changes to the level design. In this example, "
+"we create a maze level."
+
+#: ../../source/patterns/maze_game.md:16
+msgid ""
+"Wir benötigen drei Bilddateien: `player.png`, `wall.png`. Diese müssen im "
+"Ordner `mu_code/images` gespeichert werden."
+msgstr ""
+"We need three image files: `player.png`, `wall.png`. These must be saved in "
+"the folder `mu_code/images`."
+
+#: ../../source/patterns/maze_game.md:26
+msgid "Jetzt können wir den Rahmen für unser Spiel programmieren:"
+msgstr "Now we can program the framework for our game:"
+
+#: ../../source/patterns/maze_game.md:28
+msgid "Eine Welt erstellen"
+msgstr "Create a world"
+
+#: ../../source/patterns/maze_game.md:30
+msgid "Verwende dieses Grundgerüst für dein Spiel:"
+msgstr "Use this framework for your game:"
+
+#: ../../source/patterns/maze_game.md:32
+msgid ""
+"In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte "
+"Welten bereitstellt. In der letzten Zeile musst du unbedingt `world.run()` "
+"aufrufen, um das Spiel zu starten."
+msgstr ""
+"In line 2 a `TiledWorld` is created, which provides the logic for tiled "
+"worlds. In the last line, you must definitely call `world.run()` to start "
+"the game."
+
+#: ../../source/patterns/maze_game.md:45
+msgid "Schauspieler-Unterklassen erstellen"
+msgstr "Create actor subclasses"
+
+#: ../../source/patterns/maze_game.md:47
+msgid "Erstelle Schauspieler-Unterklassen für jeden **Typ** von Schauspieler:"
+msgstr "Create actor subclasses for each **type** of actor:"
+
+#: ../../source/patterns/maze_game.md:60
+msgid ""
+"`self.add_costume` fügt dem Schauspieler ein Kostüm hinzu, das auf einem "
+"Bild basiert (z. B. \"player\", \"wall\" – Dateiendungen wie `.png` oder "
+"`.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, "
+"a)-Tupel angegeben wird."
+msgstr ""
+"`self.add_costume` adds a costume to the actor based on an image (e.g. "
+"\"player\", \"wall\" - file extensions like `.png` or `.jpeg` may be "
+"omitted) or on a color specified as (r, g, b, a) tuple."
+
+#: ../../source/patterns/maze_game.md:62
+msgid "Eine Kachelkarte erstellen"
+msgstr "Create a tile map"
+
+#: ../../source/patterns/maze_game.md:64
+msgid ""
+"Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Schauspieler "
+"bestimmt."
+msgstr "A tile map is a 2D list that determines the positions of the actors."
+
+#: ../../source/patterns/maze_game.md:66
+msgid "0: Leer"
+msgstr "0: Basa"
+
+#: ../../source/patterns/maze_game.md:67
+msgid "1: Wand"
+msgstr "1: Bagay"
+
+#: ../../source/patterns/maze_game.md:68
+msgid "2: Spieler"
+msgstr "2: Player"
+
+#: ../../source/patterns/maze_game.md:85
+msgid "Objekte für jede Zelle der Kachelkarte erstellen"
+msgstr "Create objects for each cell of the tile map"
+
+#: ../../source/patterns/maze_game.md:87
+msgid ""
+"Für jede Zelle der Kachelkarte kann ein Schauspieler erzeugt werden. Die "
+"Klasse für jeden Schauspieler wird aus der Kachelkarte abgerufen."
+msgstr ""
+"For each cell of the tile map, an actor can be created. The class for each "
+"actor is retrieved from the tile map."
+
+#: ../../source/patterns/maze_game.md:99
+msgid "Schritt 2: Bewegung"
+msgstr "Step 2: Movement"
+
+#: ../../source/patterns/maze_game.md:101
+msgid "Spieler bewegen"
+msgstr "Players move"
+
+#: ../../source/patterns/maze_game.md:103
+msgid ""
+"Füge folgenden Code zur `Player`-Klasse hinzu, um den Spieler zu bewegen:"
+msgstr "Add the following code to the `Player` class to move the player:"
+
+#: ../../source/patterns/maze_game.md:122
+msgid "Bewegung blockieren"
+msgstr "Block movement"
+
+#: ../../source/patterns/maze_game.md:124
+msgid ""
+"Verwende die Methode `move_back()`, um die Bewegung des Spielers zu "
+"blockieren, wenn er auf eine Wand trifft:"
+msgstr ""
+"Use the method `move_back()` to block the player's movement when he hits a "
+"wall:"
+
+#: ../../source/patterns/maze_game.md:140
+msgid "Einen Gegner erstellen"
+msgstr "Create an opponent"
+
+#: ../../source/patterns/maze_game.md:142
+msgid "Erstelle eine Gegner-Klasse, die den Spieler jagt:"
+msgstr "Create a opponent class that chases the player:"
+
+#: ../../source/patterns/maze_game.md:161
+msgid "Zusammenfassung"
+msgstr "Summary"
+
+#: ../../source/patterns/maze_game.md:163
+msgid ""
+"In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen "
+"Schauspielern und Kachelkarten erstellt. Mit dieser Grundlage kannst du "
+"weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner "
+"hinzufügen!"
+msgstr ""
+"In this tutorial you have created a simple maze game with moving actors and "
+"tile cards. With this foundation you can add more features like points, "
+"level increases or more complex enemies!"
+
+#: ../../source/patterns/red_baron.md:1
+msgid "Tutorial: Roter Baron"
+msgstr "Tutorial: Red Baron"
+
+#: ../../source/patterns/red_baron.md:3
+msgid ""
+"In diesem Kapitel erstellen wir Schritt für Schritt einen Side-Scrolling-"
+"Shooter."
+msgstr "In this chapter we create step by step a side-scrolling shooter."
+
+#: ../../source/patterns/red_baron.md:10
+msgid ""
+"Die Techniken zur Erstellung von Parallax-Hintergründen, der Verwaltung von "
+"Geschwindigkeit und Bewegung sowie das Generieren von Gegnern sind in "
+"Spielen weit verbreitet. Nachdem du sie hier gesehen hast, solltest du in "
+"der Lage sein, sie in deinen eigenen Projekten zu verwenden."
+msgstr ""
+"The techniques for creating parallax backgrounds, managing speed and "
+"movement, as well as generating enemies are widely used in games. After you "
+"have seen them here, you should be able to use them in your own projects."
+
+#: ../../source/patterns/red_baron.md:12
+msgid ""
+"**Basierend auf**: "
+"`https://github.com/kantel/pygamezero/tree/master/tappyplane`"
+msgstr ""
+"Based on: `https://github.com/kantel/pygamezero/tree/master/tappyplane`"
+
+#: ../../source/patterns/red_baron.md:13
+msgid "**Lizenz**: Attribution-NonCommercial-ShareAlike 4.0 International"
+msgstr "**License**: Attribution-NonCommercial-ShareAlike 4.0 International"
+
+#: ../../source/patterns/red_baron.md:14
+msgid "Voraussetzug: Kenntis im Umgang mit Klasse."
+msgstr "Prerequisite: Knowledge in handling class."
+
+#: ../../source/patterns/red_baron.md:16
+msgid "Schritt 1: Grundgerüst erstellen"
+msgstr "Step 1: Create basic structure"
+
+#: ../../source/patterns/red_baron.md:18
+msgid ""
+"Erstelle ein Grundgerüst: Du benötigst eine Welt, in der Akteure platziert "
+"werden können."
+msgstr ""
+"Create a basic structure: You need a world where actors can be placed."
+
+#: ../../source/patterns/red_baron.md:20
+msgid "Deine letzte Zeile muss `world.run()` sein."
+msgstr "Your last line must be `world.run()`."
+
+#: ../../source/patterns/red_baron.md:31
+msgid "Ordner vorbereiten"
+msgstr "Prepare folder"
+
+#: ../../source/patterns/red_baron.md:33
+msgid ""
+"Du musst Bilder für Hintergründe, Spieler und Gegner im Verzeichnis `images`"
+" innerhalb deines Code-Verzeichnisses ablegen."
+msgstr ""
+"You must place pictures for backgrounds, players, and enemies in the "
+"directory `images` within your code directory."
+
+#: ../../source/patterns/red_baron.md:49
+msgid ""
+"(Die Bilder findest du in diesem Repository: [miniworlds-cookbook - red "
+"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+msgstr ""
+"(The pictures can be found in this repository: [miniworlds-cookbook - red "
+"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+
+#: ../../source/patterns/red_baron.md:51
+msgid "Hintergründe erstellen"
+msgstr "Create backgrounds"
+
+#: ../../source/patterns/red_baron.md:53
+msgid ""
+"Mit dem folgenden Code kannst du zwei Hintergründe generieren, die einen "
+"**endlos scrollenden** Effekt erzeugen."
+msgstr ""
+"With the following code you can generate two backgrounds that create an "
+"**endless scrolling** effect."
+
+#: ../../source/patterns/red_baron.md:55
+msgid ""
+"Erstelle zwei Hintergründe, die nebeneinander den gesamten Bildschirm "
+"füllen:"
+msgstr "Create two backgrounds that fill the entire screen side by side:"
+
+#: ../../source/patterns/red_baron.md:67
+msgid "Nun animieren wir die Hintergründe:"
+msgstr "Now we animate the backgrounds:"
+
+#: ../../source/patterns/red_baron.md:69
+msgid "Beide Hintergründe bewegen sich konstant von rechts nach links."
+msgstr "Both backgrounds move constantly from right to left."
+
+#: ../../source/patterns/red_baron.md:70
+msgid ""
+"Wenn ein Hintergrund den linken Bildschirmrand verlässt, wird er nach rechts"
+" verschoben."
+msgstr ""
+"If a background leaves the left edge of the screen, it will be shifted to "
+"the right."
+
+#: ../../source/patterns/red_baron.md:85
+msgid "Dies erzeugt einen **endlos scrollenden** Hintergrund."
+msgstr "This generates an **endlessly scrolling** background."
+
+#: ../../source/patterns/red_baron.md:87
+msgid "Schritt 2: Flugzeug-Klasse erstellen"
+msgstr "Step 2: Create airplane class"
+
+#: ../../source/patterns/red_baron.md:89
+msgid "Flugzeug-Klasse erstellen"
+msgstr "Create airplane class"
+
+#: ../../source/patterns/red_baron.md:91
+msgid "Erstelle eine `Plane`-Klasse als Vorlage für deinen Spieler:"
+msgstr "Create a `Plane` class as a template for your player:"
+
+#: ../../source/patterns/red_baron.md:99
+msgid "Instanz der Flugzeug-Klasse erstellen"
+msgstr "Instance of the airplane class create"
+
+#: ../../source/patterns/red_baron.md:101
+msgid ""
+"Erstelle am Ende deines Codes, vor `world.run()`, eine Instanz dieser "
+"Klasse:"
+msgstr ""
+"Create at the end of your code, before `world.run()`, an instance of this "
+"class:"
+
+#: ../../source/patterns/red_baron.md:107
+msgid "Physik hinzufügen"
+msgstr "Add physics"
+
+#: ../../source/patterns/red_baron.md:109
+msgid ""
+"Nun fügen wir der Flugzeug-Klasse Physik hinzu. Modifiziere die "
+"`on_setup()`-Methode der Klasse:"
+msgstr ""
+"Now we add airplane class physics. Modify the `on_setup()` method of the "
+"class:"
+
+#: ../../source/patterns/red_baron.md:118
+msgid ""
+"`velocity_y` beschreibt die aktuelle Geschwindigkeit des Flugzeugs in "
+"y-Richtung."
+msgstr ""
+"`velocity_y` describes the current speed of the plane in the y-direction."
+
+#: ../../source/patterns/red_baron.md:119
+msgid ""
+"`gravity` repräsentiert die Schwerkraft, die die Geschwindigkeit des "
+"Flugzeugs beeinflusst."
+msgstr ""
+"`gravity` represents the gravity that affects the speed of the aircraft."
+
+#: ../../source/patterns/red_baron.md:121
+msgid "Physik simulieren"
+msgstr "Simulate physics"
+
+#: ../../source/patterns/red_baron.md:123
+msgid "Die Physik wird in der `act()`-Methode der Klasse simuliert:"
+msgstr "Physics is simulated in the `act()` method of the class:"
+
+#: ../../source/patterns/red_baron.md:132
+msgid ""
+"Dies fügt die Geschwindigkeit zu den y-Koordinaten des Flugzeugs hinzu. Die "
+"Schwerkraft verringert die Geschwindigkeit kontinuierlich, während die "
+"Reibung die Bewegung glättet."
+msgstr ""
+"This adds speed to the y-coordinates of the aircraft. Gravity continuously "
+"reduces speed, while friction smoothes the movement."
+
+#: ../../source/patterns/red_baron.md:134
+msgid "Kraft bei Tastendruck hinzufügen"
+msgstr "Add force with key press"
+
+#: ../../source/patterns/red_baron.md:136
+msgid ""
+"Verwende das `on_key_down`-Event, um eine Aufwärtskraft auf den Actor "
+"anzuwenden:"
+msgstr "Use the `on_key_down` event to apply an upward force to the Actor."
+
+#: ../../source/patterns/red_baron.md:143
+msgid "Schritt 3: Gegner hinzufügen"
+msgstr "Step 3: Add opponent"
+
+#: ../../source/patterns/red_baron.md:145
+msgid "Importiere `randint` und `choice`, um zufällig Gegner zu generieren:"
+msgstr "Import `randint` and `choice` to generate enemies randomly:"
+
+#: ../../source/patterns/red_baron.md:151
+msgid "Gegner-Klasse erstellen"
+msgstr "Create opponent class"
+
+#: ../../source/patterns/red_baron.md:153
+msgid "Füge eine Gegner-Klasse als Vorlage hinzu:"
+msgstr "Add an opponent class as a template:"
+
+#: ../../source/patterns/red_baron.md:166
+msgid ""
+"Die Methode `reset()` setzt die Position des Gegners zufällig innerhalb "
+"eines bestimmten Bereichs."
+msgstr ""
+"The method `reset()` sets the position of the opponent randomly within a "
+"certain range."
+
+#: ../../source/patterns/red_baron.md:168
+msgid "Gegner zur Welt hinzufügen"
+msgstr "Add opponent to the world"
+
+#: ../../source/patterns/red_baron.md:170
+msgid ""
+"Erstelle mehrere Instanzen der Gegner-Klasse mit einer Schleife und füge sie"
+" der Welt hinzu:"
+msgstr ""
+"Create multiple instances of the enemy class with a loop and add them to the"
+" world:"
+
+#: ../../source/patterns/red_baron.md:180
+msgid "Gegner bewegen"
+msgstr "Opponent move"
+
+#: ../../source/patterns/red_baron.md:182
+msgid "Modifiziere die `on_setup()`-Methode der Gegner-Klasse:"
+msgstr "Modify the `on_setup()` method of the enemy class:"
+
+#: ../../source/patterns/red_baron.md:190
+msgid ""
+"Die `speed`-Eigenschaft gibt an, wie viele Schritte sich der Gegner in jeder"
+" Frame in x-Richtung bewegt."
+msgstr ""
+"The `speed` property indicates how many steps the opponent moves in each "
+"frame in the x-direction."
+
+#: ../../source/patterns/red_baron.md:192
+msgid "Füge eine `act()`-Methode hinzu, um die Bewegung zu simulieren:"
+msgstr "Add an `act()` method to simulate the movement:"
+
+#: ../../source/patterns/red_baron.md:201
+msgid "Schritt 4: Schießen hinzufügen"
+msgstr "Step 4: Add shooting"
+
+#: ../../source/patterns/red_baron.md:203
+msgid "Erstelle eine `Bullet`-Klasse, um die Schussfunktion hinzuzufügen:"
+msgstr "Create a `Bullet` class to add the shooting function:"
+
+#: ../../source/patterns/red_baron.md:224
+msgid ""
+"Mit den Methoden `on_detecting_enemy` und `on_detecting_not_on_world` können"
+" Kugeln Gegner erkennen und bei Verlassen der Welt entfernt werden."
+msgstr ""
+"With the methods `on_detecting_enemy` and `on_detecting_not_on_world`, "
+"bullets can detect enemies and be removed when leaving the world."
+
+#: ../../source/patterns/red_baron.md:226
+msgid "Komplettcode:"
+msgstr "Complete code:"

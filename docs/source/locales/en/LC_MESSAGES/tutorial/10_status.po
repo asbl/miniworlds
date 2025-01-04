@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/tutorial/10_status.md:1
+msgid "Text und Zahlen"
+msgstr "Text and numbers"
+
+#: ../../source/tutorial/10_status.md:3
+msgid "Punktestand/Spielstatus"
+msgstr "Point score/game status"
+
+#: ../../source/tutorial/10_status.md:5
+msgid ""
+"In vielen Spielen möchtest du den aktuellen Punktestand oder andere "
+"Statusanzeigen einblenden."
+msgstr ""
+"In many games, you want to display the current score or other status "
+"indicators."
+
+#: ../../source/tutorial/10_status.md:7
+msgid ""
+"**Miniworlds** bietet dafür spezielle Actors wie **Text**- oder "
+"**Number**-Actors, die dir helfen, Informationen anzuzeigen."
+msgstr ""
+"**Miniworlds** provides special Actors like **Text** or **Number** Actors "
+"that help you to display information."
+
+#: ../../source/tutorial/10_status.md:9
+msgid "Text erstellen"
+msgstr "Create text"
+
+#: ../../source/tutorial/10_status.md:11
+msgid "Um einen Text anzuzeigen, kannst du folgendermaßen vorgehen:"
+msgstr "To display a text, you can proceed as follows:"
+
+#: ../../source/tutorial/10_status.md:17
+msgid "`position`: Ein Tupel, das die obere linke Ecke des Textes definiert."
+msgstr "`position`: A tuple that defines the upper left corner of the text."
+
+#: ../../source/tutorial/10_status.md:18
+msgid "`string`: Der anzuzeigende Text."
+msgstr "`string`: The text to be displayed."
+
+#: ../../source/tutorial/10_status.md:21
+msgid ""
+"In einer normalen **World** wird der Text automatisch skaliert.  In einer "
+"**Tiledworld** wird der Text in einer Kachel angezeigt, was bei längeren "
+"Texten zu Platzproblemen führen kann."
+msgstr ""
+"In a normal **World** the text is automatically scaled. In a **Tiledworld** "
+"the text is shown in a tile, which can lead to space problems with longer "
+"texts."
+
+#: ../../source/tutorial/10_status.md:25
+msgid "Beispiel:"
+msgstr "Example:"
+
+#: ../../source/tutorial/10_status.md:36
+msgid "Textbeispiel"
+msgstr "Example text"
+
+#: ../../source/tutorial/10_status.md:40
+msgid "Text ändern"
+msgstr "Change text"
+
+#: ../../source/tutorial/10_status.md:42
+msgid ""
+"Du kannst den angezeigten Text jederzeit mit dem Attribut `text` anpassen."
+msgstr ""
+"You can adjust the displayed text at any time with the `text` attribute."
+
+#: ../../source/tutorial/10_status.md:44
+msgid "Das folgende Beispiel zeigt den zuletzt gedrückten Tastendruck an:"
+msgstr "The following example shows the last key press:"
+
+#: ../../source/tutorial/10_status.md:60
+msgid "Text mit Tasteneingabe"
+msgstr "Text with key input"
+
+#: ../../source/tutorial/10_status.md:64
+msgid "Zahlen anzeigen"
+msgstr "Show numbers"
+
+#: ../../source/tutorial/10_status.md:66
+msgid ""
+"Um Zahlen auf dem Bildschirm anzuzeigen, kannst du **Number-Actors** "
+"verwenden. Die Funktionsweise ähnelt der von Text-Actors. Im folgenden "
+"Beispiel wird die angezeigte Zahl bei jedem Tastendruck um 1 erhöht:"
+msgstr ""
+"To display numbers on the screen, you can use **Number-Actors**. The "
+"functionality is similar to that of Text-Actors. In the following example, "
+"the displayed number is increased by 1 with each key press:"

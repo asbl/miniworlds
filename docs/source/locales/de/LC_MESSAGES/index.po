@@ -1,0 +1,164 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/index.md:406
+msgid "Tutorial"
+msgstr "Tutorial"
+
+#: ../../source/index.md:428
+msgid "Weitere Tutorials"
+msgstr "More Tutorials"
+
+#: ../../source/index.md:437
+msgid "Konzepte"
+msgstr "Concepts"
+
+#: ../../source/index.md:453
+msgid "Anleitungen"
+msgstr "Instructions"
+
+#: ../../source/index.md:469
+msgid "API > Basics"
+msgstr "API > Grundlagen"
+
+#: ../../source/index.md:482
+msgid "API > Actor Classes"
+msgstr "API > Schauspielerklassen"
+
+#: ../../source/index.md:496
+msgid "API > World Classes"
+msgstr "API > Weltklassen"
+
+#: ../../source/index.md:509
+msgid "API > Sound & Music"
+msgstr "API > Sound & Musik"
+
+#: ../../source/index.md:519
+msgid "Helpers"
+msgstr "Helfer"
+
+#: ../../source/index.md:529
+msgid "Impressum"
+msgstr "Imprint"
+
+#: ../../source/index.md:1
+msgid "miniworlds"
+msgstr "miniwelten"
+
+#: ../../source/index.md:3
+msgid ""
+"**miniworlds** ist eine in Python und Pygame geschriebene Spiel-Engine, die "
+"für SchülerInnen entwickelt wurde, um 2D-Miniwelten und Spiele zu erstellen."
+msgstr ""
+"**miniworlds** is a game engine written in Python and Pygame, developed for "
+"students to create 2D miniworlds and games."
+
+#: ../../source/index.md:5
+msgid ""
+"Die Erstellung der ersten Spiele mit **minigames** ist einfach und macht "
+"Spaß."
+msgstr "The creation of the first games with minigames is easy and fun."
+
+#: ../../source/index.md:7
+msgid "miniworlds und miniworldmaker"
+msgstr "miniwelten und miniweltmacher"
+
+#: ../../source/index.md:9
+msgid ""
+"**miniworlds** ist das Nachfolgeprojekt des **miniworldmakers**. Sehr vieles"
+" ist ähnlich, manche Bezeichnungen und Funktionen unterscheiden sich vom "
+"miniworldmaker. (z.B. aus Tokens wurden Actors, aus Boards wurden Worlds)"
+msgstr ""
+"**miniworlds** is the successor project of **miniworldmakers**. Very much is"
+" similar, some designations and functions differ from the miniworldmaker. "
+"(e.g. Tokens became Actors, Boards became Worlds)"
+
+#: ../../source/index.md:15
+msgid "Beispiele"
+msgstr "Examples"
+
+#: ../../source/index.md:17 ../../source/index.md:19
+msgid "Zwei Actors, die per Tastatur gesteuert werden"
+msgstr "Two actors controlled by keyboard"
+
+#: ../../source/index.md:43 ../../source/index.md:47
+msgid "Example: Two actors"
+msgstr "Zwei Schauspieler"
+
+#: ../../source/index.md:50
+msgid "Skeetshooting"
+msgstr "Skeetshooting"
+
+#: ../../source/index.md:52
+msgid "Ein zufällig platziertes Ziel kann mit der Maus \"abgeschossen\" werden."
+msgstr "A randomly placed target can be \"fired\" with the mouse."
+
+#: ../../source/index.md:86 ../../source/index.md:90 ../../source/index.md:183
+#: ../../source/index.md:187
+msgid "Example: Skeetshooting"
+msgstr "Skeetshooting"
+
+#: ../../source/index.md:93
+msgid "Aircrafts"
+msgstr "Flugzeuge"
+
+#: ../../source/index.md:95
+msgid ""
+"Klassisches Spiel, bei dem man ein Flugzeug steuert und Gegner abwehrt und "
+"ausweicht."
+msgstr ""
+"Classic game where one pilots an airplane and fends off and dodges enemies."
+
+#: ../../source/index.md:190
+msgid "RPG with console and sidebar"
+msgstr "RPG mit Konsole und Seitenleiste"
+
+#: ../../source/index.md:382 ../../source/index.md:386
+msgid "Example: RPG"
+msgstr "Beach resort"
+
+#: ../../source/index.md:391
+msgid "Credits"
+msgstr "Guthaben"
+
+#: ../../source/index.md:394
+msgid ""
+"`Greenfoot <https://www.greenfoot.org/>`_  Miniworlds ist stark von "
+"Greenfoot inspiriert."
+msgstr ""
+"Greenfoot <https://www.greenfoot.org/>`_ Miniworlds ist stark von Greenfoot "
+"inspiriert."
+
+#: ../../source/index.md:397
+msgid ""
+"`Kenney Assets <https://www.kenney.nl/assets>`_  Die meisten Bilder der "
+"Beispiele basieren auf Kenney Assets"
+msgstr ""
+"Kenney Assets <https://www.kenney.nl/assets>`_ Die meisten Bilder der "
+"Beispiele basieren auf Kenney Assets"
+
+#: ../../source/index.md:400
+msgid "Links"
+msgstr "Verknüpfungen"
+
+#: ../../source/index.md:403
+msgid "`Codeberg Repository <https://codeberg.org/a_siebel/miniworlds>`_"
+msgstr "Codeberg-Repository <https://codeberg.org/a_siebel/miniworlds>`_"

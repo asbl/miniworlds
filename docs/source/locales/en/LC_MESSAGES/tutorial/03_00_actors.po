@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: de <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/tutorial/03_00_actors.md:1
+msgid "Actors"
+msgstr "Akteure"
+
+#: ../../source/tutorial/03_00_actors.md:3
+msgid "Actors: Building Blocks of Your World"
+msgstr "Akteure: Die Bausteine deiner Welt"
+
+#: ../../source/tutorial/03_00_actors.md:5
+msgid ""
+"An Actor is anything in your world that can move or be modified. It could be"
+" a character controlled by the player, or an object like a wall or obstacle."
+" In Miniworlds, every Actor is a standalone object displayed in the world "
+"and can interact with other objects."
+msgstr ""
+"Ein Akteur ist alles in deiner Welt, was sich bewegen oder verändert werden "
+"kann. Es kann ein vom Spieler gesteuerter Charakter sein oder ein Objekt wie"
+" eine Wand oder ein Hindernis. In Miniworlds ist jeder Akteur ein "
+"eigenständiges Objekt, das in der Welt angezeigt wird und mit anderen "
+"Objekten interagieren kann."
+
+#: ../../source/tutorial/03_00_actors.md:10
+msgid "Creating an Actor"
+msgstr "Einen Akteur erstellen"
+
+#: ../../source/tutorial/03_00_actors.md:12
+msgid ""
+"Let's start by placing an Actor in your world. First, we'll create a simple "
+"world with a background and place an Actor."
+msgstr ""
+"Lass uns damit beginnen, einen Akteur in deiner Welt zu platzieren. Zuerst "
+"erstellen wir eine einfache Welt mit einem Hintergrund und platzieren einen "
+"Akteur."
+
+#: ../../source/tutorial/03_00_actors.md:15
+msgid "Here's how:"
+msgstr "So geht's:"
+
+#: ../../source/tutorial/03_00_actors.md:33
+#: ../../source/tutorial/03_00_actors.md:37
+#: ../../source/tutorial/03_00_actors.md:97
+#: ../../source/tutorial/03_00_actors.md:101
+msgid "Output"
+msgstr "Ausgabe"
+
+#: ../../source/tutorial/03_00_actors.md:40
+#: ../../source/tutorial/03_00_actors.md:201
+msgid "Explanation:"
+msgstr "Erklärung:"
+
+#: ../../source/tutorial/03_00_actors.md:42
+msgid ""
+"We create an Actor at position x=100, y=40. It appears as a purple rectangle"
+" since it doesn't yet have a costume."
+msgstr ""
+"Wir erstellen einen Akteur an der Position x=100, y=40. Er erscheint als "
+"violettes Rechteck, da er noch kein Kostüm hat."
+
+#: ../../source/tutorial/03_00_actors.md:44
+msgid "Note that the *origin* of the coordinate system is *top-left*."
+msgstr ""
+"Beachte, dass der *Ursprung* des Koordinatensystems *oben links* liegt."
+
+#: ../../source/tutorial/03_00_actors.md:45
+msgid "The Coordinate System"
+msgstr "Das Koordinatensystem"
+
+#: ../../source/tutorial/03_00_actors.md:49
+msgid "Example: The Coordinate System"
+msgstr "Beispiel: Das Koordinatensystem"
+
+#: ../../source/tutorial/03_00_actors.md:51
+msgid "The position (100, 20) refers to the **center** of the Actor."
+msgstr "Die Position (100, 20) bezieht sich auf die **Mitte** des Akteurs."
+
+#: ../../source/tutorial/03_00_actors.md:53
+msgid "Costumes"
+msgstr "Kostüme"
+
+#: ../../source/tutorial/03_00_actors.md:55
+msgid ""
+"Every Actor in Miniworlds can wear a costume that determines its external "
+"appearance."
+msgstr ""
+"Jeder Akteur in Miniworlds kann ein Kostüm tragen, das sein äußeres "
+"Erscheinungsbild bestimmt."
+
+#: ../../source/tutorial/03_00_actors.md:57
+msgid ""
+"A costume is simply an image you assign to an Actor to give it a visual "
+"identity."
+msgstr ""
+"Ein Kostüm ist einfach ein Bild, das du einem Akteur zuweist, um ihm eine "
+"visuelle Identität zu geben."
+
+#: ../../source/tutorial/03_00_actors.md:59
+msgid "Step 1: Prepare Images"
+msgstr "Schritt 1: Bilder vorbereiten"
+
+#: ../../source/tutorial/03_00_actors.md:61
+msgid ""
+"Before you can add a costume to an Actor, you need to copy the relevant "
+"images to the images folder of your project. A typical project structure "
+"might look like this:"
+msgstr ""
+"Bevor du einem Akteur ein Kostüm hinzufügen kannst, musst du die "
+"entsprechenden Bilder in den Bilderordner deines Projekts kopieren. Eine "
+"typische Projektstruktur könnte so aussehen:"
+
+#: ../../source/tutorial/03_00_actors.md:73
+msgid "Step 2: Add Costume"
+msgstr "Schritt 2: Kostüm hinzufügen"
+
+#: ../../source/tutorial/03_00_actors.md:75
+msgid ""
+"Once your images are prepared, you can assign an image as a costume to your "
+"Actor using the `add_costume()` method."
+msgstr ""
+"Sobald deine Bilder vorbereitet sind, kannst du einem Akteur mithilfe der "
+"Methode `add_costume()` ein Bild als Kostüm zuweisen."
+
+#: ../../source/tutorial/03_00_actors.md:95
+msgid "Output:"
+msgstr "Ausgabe:"
+
+#: ../../source/tutorial/03_00_actors.md:104
+msgid "Explanation"
+msgstr "Erklärung"
+
+#: ../../source/tutorial/03_00_actors.md:105
+msgid ""
+"After running the code, you see an Actor with the costume `knight.png`."
+msgstr ""
+"Nach Ausführung des Codes siehst du einen Akteur mit dem Kostüm "
+"`knight.png`."
+
+#: ../../source/tutorial/03_00_actors.md:108
+msgid "Bonus: Experiment with Your Own Costumes!"
+msgstr "Bonus: Experimentiere mit deinen eigenen Kostümen!"
+
+#: ../../source/tutorial/03_00_actors.md:110
+msgid "Now that you know how to assign costumes, you can get creative:"
+msgstr ""
+"Jetzt, wo du weißt, wie man Kostüme zuweist, kannst du kreativ werden:"
+
+#: ../../source/tutorial/03_00_actors.md:112
+msgid "Create custom images and save them in the images folder."
+msgstr "Erstelle eigene Bilder und speichere sie im Bilderordner."
+
+#: ../../source/tutorial/03_00_actors.md:113
+msgid "Change the position and appearance of your Actors."
+msgstr "Ändere die Position und das Aussehen deiner Akteure."
+
+#: ../../source/tutorial/03_00_actors.md:115
+msgid ""
+"For example, try creating an Actor at a new position and assigning it a "
+"different image:"
+msgstr ""
+"Versuche zum Beispiel, einen Akteur an einer neuen Position zu erstellen und"
+" ihm ein anderes Bild zuzuweisen:"
+
+#: ../../source/tutorial/03_00_actors.md:126
+msgid "Summary:"
+msgstr "Zusammenfassung:"
+
+#: ../../source/tutorial/03_00_actors.md:128
+msgid "Actors receive a costume using the add_costume() method."
+msgstr "Akteure erhalten ein Kostüm durch die Methode add_costume()."
+
+#: ../../source/tutorial/03_00_actors.md:129
+msgid "The images must be stored in the correct folder to be found."
+msgstr ""
+"Die Bilder müssen im richtigen Ordner gespeichert sein, damit sie gefunden "
+"werden können."
+
+#: ../../source/tutorial/03_00_actors.md:130
+msgid ""
+"You can place and design as many Actors with different costumes in the world"
+" as you like."
+msgstr ""
+"Du kannst so viele Akteure mit verschiedenen Kostümen in der Welt platzieren"
+" und gestalten, wie du möchtest."
+
+#: ../../source/tutorial/03_00_actors.md:133
+msgid "FAQ"
+msgstr "FAQ"
+
+#: ../../source/tutorial/03_00_actors.md:135
+msgid "FAQ: Common Issues and Solutions"
+msgstr "FAQ: Häufige Probleme und Lösungen"
+
+#: ../../source/tutorial/03_00_actors.md:137
+msgid "My Actor is misaligned, what can I do?"
+msgstr "Mein Akteur ist falsch ausgerichtet, was kann ich tun?"
+
+#: ../../source/tutorial/03_00_actors.md:139
+msgid ""
+"If your Actor is facing the wrong direction, there are two simple solutions:"
+msgstr ""
+"Wenn dein Akteur in die falsche Richtung zeigt, gibt es zwei einfache "
+"Lösungen:"
+
+#: ../../source/tutorial/03_00_actors.md:141
+msgid "Problem Description"
+msgstr "Problembeschreibung"
+
+#: ../../source/tutorial/03_00_actors.md:143
+msgid "Problem"
+msgstr "Problem"
+
+#: ../../source/tutorial/03_00_actors.md:156
+#: ../../source/tutorial/03_00_actors.md:164
+msgid "Actor Orientation"
+msgstr "Ausrichtung des Akteurs"
+
+#: ../../source/tutorial/03_00_actors.md:160
+msgid ""
+"The orientation of the image is facing upward, but Miniworlds expects images"
+" oriented to the right."
+msgstr ""
+"Die Ausrichtung des Bildes zeigt nach oben, aber Miniworlds erwartet nach "
+"rechts ausgerichtete Bilder."
+
+#: ../../source/tutorial/03_00_actors.md:168
+msgid "Therefore, in the example, the Actor is facing the wrong direction."
+msgstr "Daher zeigt der Akteur im Beispiel in die falsche Richtung."
+
+#: ../../source/tutorial/03_00_actors.md:171
+msgid "Solution"
+msgstr "Lösung"
+
+#: ../../source/tutorial/03_00_actors.md:173
+msgid ""
+"**Rotate the image**: You can rotate the image in an image editing program "
+"so it points in the desired direction (typically upwards)."
+msgstr ""
+"**Bild drehen**: Du kannst das Bild in einem Bildbearbeitungsprogramm "
+"drehen, sodass es in die gewünschte Richtung zeigt (typischerweise nach "
+"oben)."
+
+#: ../../source/tutorial/03_00_actors.md:176
+msgid ""
+"**Adjust orientation in code**: Alternatively, you can change the costume's "
+"orientation directly in Miniworlds. Use the `orientation` attribute to "
+"rotate the costume:"
+msgstr ""
+"**Ausrichtung im Code anpassen**: Alternativ kannst du die Ausrichtung des "
+"Kostüms direkt in Miniworlds ändern. Verwende das Attribut `orientation`, um"
+" das Kostüm zu drehen:"
+
+#: ../../source/tutorial/03_00_actors.md:183
+msgid ""
+"You can also use other values, such as -90 or 180, to adjust the orientation"
+" depending on how your original image is aligned."
+msgstr ""
+"Du kannst auch andere Werte wie -90 oder 180 verwenden, um die Ausrichtung "
+"anzupassen, je nachdem wie dein ursprüngliches Bild ausgerichtet ist."
+
+#: ../../source/tutorial/03_00_actors.md:186
+msgid "The example above could be corrected as follows:"
+msgstr "Das obige Beispiel könnte wie folgt korrigiert werden:"
+
+#: ../../source/tutorial/03_00_actors.md:203
+msgid ""
+"The image is rotated -90° to the left from the expected position. With this "
+"adjustment, the image is now correctly aligned."
+msgstr ""
+"Das Bild wird von der erwarteten Position um -90° nach links gedreht. Mit "
+"dieser Anpassung ist das Bild nun korrekt ausgerichtet."
+
+#: ../../source/tutorial/03_00_actors.md:206
+#: ../../source/tutorial/03_00_actors.md:208
+msgid "How do I prevent the costume from rotating with the Actor?"
+msgstr "Wie verhindere ich, dass sich das Kostüm mit dem Akteur dreht?"
+
+#: ../../source/tutorial/03_00_actors.md:210
+msgid ""
+"If you want the costume not to rotate, even when the Actor moves or rotates,"
+" you can disable the costume's rotation. Set the `is_rotatable` attribute to"
+" False:"
+msgstr ""
+"Wenn du nicht möchtest, dass sich das Kostüm dreht, auch wenn sich der "
+"Akteur bewegt oder dreht, kannst du die Drehung des Kostüms deaktivieren. "
+"Setze das Attribut `is_rotatable` auf False:"

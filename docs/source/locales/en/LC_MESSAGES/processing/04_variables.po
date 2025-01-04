@@ -1,0 +1,287 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: ../../source/processing/04_variables.md:1
+msgid "Werte und Variablen"
+msgstr "Values and variables"
+
+#: ../../source/processing/04_variables.md:3
+msgid ""
+"Ein `Wert` ist etwas, dass im Computer gespeichert wird und von einem "
+"Computer-Programm manipuliert werden kann. Im Folgenden werden Werte als "
+"``Objekte`` bezeichnet und die Wörter werden synonym verwendet."
+msgstr ""
+"A 'value' is something that is stored in the computer and can be manipulated"
+" by a computer program. In the following, values are referred to as "
+"``objects`` and the words are used synonymously."
+
+#: ../../source/processing/04_variables.md:6
+msgid ""
+"In anderen Programmiersprachen unterscheidet man primitive Datentypen, die "
+"nur verändert werden können und **Objekte**, welche oft auch Attribute und "
+"Methoden mitbringen, wie z.B. die Klasse ``world``, welche das Attribut "
+"``size`` besitzt und deren Hintergrund mit der Methode `add_background` "
+"verwendet werden kann."
+msgstr ""
+"In other programming languages, primitive data types that can only be "
+"modified and **objects**, which often also bring attributes and methods, "
+"such as the class ``world``, which has the attribute ``size`` and whose "
+"background can be used with the method `add_background`."
+
+#: ../../source/processing/04_variables.md:8
+msgid ""
+"Python hat die einfache Philosphie: Alles ist ein Objekt - Daher wird hier "
+"generell der Begriff *Wert* verwendet."
+msgstr ""
+"Python has the simple philosophy: Everything is an object - Therefore here "
+"generally the term *value* is used."
+
+#: ../../source/processing/04_variables.md:11
+msgid ""
+"Jeder Wert hat einen Datentyp, welchen du abfragen kannst, z.B. liefert "
+"folgendes Programm:"
+msgstr ""
+"Each value has a data type, which you can query, e.g. the following program "
+"provides:"
+
+#: ../../source/processing/04_variables.md:25
+msgid "Die folgende Ausgabe auf der Kommandozeile:"
+msgstr "The following output on the command line:"
+
+#: ../../source/processing/04_variables.md:33
+msgid "Variablen"
+msgstr "Variables"
+
+#: ../../source/processing/04_variables.md:35
+msgid ""
+"Damit im Computer erstellte Objekte wiedergefunden werden können, muss man "
+"speichern, wo diese zu finden ist. Auf technischer Ebene speichert man dazu "
+"den *Speicherplatz* eines Objekts im Rechner. In einer Programmiersprache "
+"wie Python verwenden wir einen Namen um Objekte wiederzufinden."
+msgstr ""
+"So that computer-created objects can be found again, you have to save where "
+"they are. On a technical level, the *storage location* of an object is saved"
+" in the computer. In a programming language like Python, we use a name to "
+"find objects again."
+
+#: ../../source/processing/04_variables.md:41
+msgid ""
+"speichert die Linie unter dem Namen line. Wenn du jetzt den Namen line "
+"verwendest, kannst du auf die Variable zugreifen und das Objekt verändern."
+msgstr ""
+"saves the line under the name line. If you now use the name line, you can "
+"access the variable and change the object."
+
+#: ../../source/processing/04_variables.md:43
+msgid ""
+"Du hast z.B. in den vorherigen Kapiteln schon die Farbe einer Linie "
+"verändert:"
+msgstr ""
+"You have, for example, already changed the color of a line in the previous "
+"chapters."
+
+#: ../../source/processing/04_variables.md:49
+msgid "Genauso kannst du z.B. auch mit Zahlen rechnen"
+msgstr "Just like you can also calculate with numbers"
+
+#: ../../source/processing/04_variables.md:57
+msgid "Zuweisungen"
+msgstr "Assignments"
+
+#: ../../source/processing/04_variables.md:59
+msgid "Zuweisungen schreibt man als:"
+msgstr "Assignments are written as:"
+
+#: ../../source/processing/04_variables.md:64
+msgid "Die bedeutet:"
+msgstr "The meaning:"
+
+#: ../../source/processing/04_variables.md:66
+msgid "Zuerst wird das Ergebnis auf der rechten Seite ausgewertet."
+msgstr "First the result on the right side is evaluated."
+
+#: ../../source/processing/04_variables.md:68
+msgid ""
+"Dann wird das Ergebnis in die Variable auf der linken Seite gespeichert."
+msgstr "Then the result is stored in the variable on the left side."
+
+#: ../../source/processing/04_variables.md:70
+msgid "Nach folgendem Programm:"
+msgstr "According to the following program:"
+
+#: ../../source/processing/04_variables.md:78
+msgid "hat a den Wert 3, b den Wert 4 und c den Wert 7."
+msgstr "hat the value 3, b the value 4, and c the value 7."
+
+#: ../../source/processing/04_variables.md:80
+msgid ""
+"Genauso kannst du aber auch Werte von Objekten, z.B. die Position eines "
+"Kreises verändern. Das folgende Programm lässt dich einen Kreis mit den "
+"Tasten a und d nach links oder rechts bewegen. Die x-Position ist über den "
+"Namen ``circle.x`` zugreifbar und kann auch so verändert werden."
+msgstr ""
+"Similarly, you can also change values of objects, e.g. the position of a "
+"circle. The following program allows you to move a circle to the left or "
+"right with the keys a and d. The x-position is accessible via the name "
+"\"circle.x\" and can also be changed like that."
+
+#: ../../source/processing/04_variables.md:100
+msgid ""
+"Die Zeile ``circle.x = circle.x + 1`` sagt folgendes: Berechne zuerst den "
+"Wert ``circle.x + 1`` (d.h. erhöhe die x-Koordinate des Kreises um 1.) und "
+"speichere das Ergebnis dieser Berechnung wieder in ``circle.x``."
+msgstr ""
+"The line \"circle.x = circle.x + 1\" says the following: First, calculate "
+"the value \"circle.x + 1\" (i.e. increase the x-coordinate of the circle by "
+"1) and save the result of this calculation back into \"circle.x\"."
+
+#: ../../source/processing/04_variables.md:103
+msgid ""
+"Das = bedeutet nicht das der Ausdruck links und rechts mathematisch gleich "
+"ist.  Stattdessen wird das Ergebnis der rechten Seite zuerst ausgewertet und"
+" das Ergebnis dieser Berechnung in die Variable auf der linken Seite "
+"gespeichert."
+msgstr ""
+"The = does not mean that the expression on the left and right are "
+"mathematically equal. Instead, the result of the right side is first "
+"evaluated and the result of this calculation is stored in the variable on "
+"the left side."
+
+#: ../../source/processing/04_variables.md:106
+msgid "Man liest den Ausdruck ``a = b`` als b wird a **zugewiesen**."
+msgstr "One reads the expression \"a = b\" as b will a **assigned**."
+
+#: ../../source/processing/04_variables.md:108
+msgid ""
+"Manche Programmiersprachen verwenden statt dem = Zeichen ein anderes Zeichen"
+" um Verwirrung bei Programmieranfängern zu vermeiden."
+msgstr ""
+"Some programming languages use a different character instead of the = sign "
+"to avoid confusion among programming beginners."
+
+#: ../../source/processing/04_variables.md:111
+msgid "Verwendung"
+msgstr "Use"
+
+#: ../../source/processing/04_variables.md:113
+msgid ""
+"Überall wo du bisher eine Zahl oder einen Text verwendet hast, kannst du "
+"auch direkt Variablen einsetzen, z.B."
+msgstr ""
+"Everywhere where you previously used a number or a text, you can also "
+"directly use variables, e.g."
+
+#: ../../source/processing/04_variables.md:121
+msgid ""
+"Dies funktioniert immer dann, wenn der **Datentyp** der Variablen mit dem "
+"erwarteten **Datentyp** übereinstimmt."
+msgstr ""
+"This works always when the **data type** of the variable matches the "
+"expected **data type**."
+
+#: ../../source/processing/04_variables.md:124
+msgid "Folgender Code z.B. führt z.B. zu einem Fehler:"
+msgstr "The following code for example leads for example to an error:"
+
+#: ../../source/processing/04_variables.md:132
+msgid ""
+"Line erwartet ein Tupel und erhält aber nur eine Integer-Variable. Daher "
+"wird folgender Fehler ausgegeben"
+msgstr ""
+"Line expects a tuple but receives only an integer variable. Therefore, the "
+"following error is output"
+
+#: ../../source/processing/04_variables.md:138
+msgid ""
+"Der Fehler versucht dir einen Hinweis zu geben, was du falsch gemacht hast, "
+"oft hilft es also die Fehlermeldungen zu lesen."
+msgstr ""
+"The error tries to give you a hint about what you did wrong, so it often "
+"helps to read the error messages."
+
+#: ../../source/processing/04_variables.md:141
+msgid "Gültigkeitsbereich - Scope"
+msgstr "Gültigkeitsbereich - Bereich"
+
+#: ../../source/processing/04_variables.md:143
+msgid ""
+"Wenn Programmierer größere Programme schreiben -und das auch oft im Team-, "
+"dann kommt dem Namen von Variablen eine besondere Bedeutung zu: Wie "
+"verhindert man, dass andere Programmierer die eigenen Variablennamen "
+"verwenden und dadurch sogar unvorhergesehene Nebenwirkungen verursachen "
+"können?"
+msgstr ""
+"When programmers write larger programs - and this often in a team -, then "
+"the name of variables is of special importance: How do you prevent other "
+"programmers from using your variable names and thereby even causing "
+"unforeseen side effects?"
+
+#: ../../source/processing/04_variables.md:145
+msgid ""
+"Die Antwort darauf sind \"Gültigkeitsbereiche: Eine Variable hat "
+"unterschiedliche Gültigkeitsbereiche, je nachdem wo sie definiert wurde:"
+msgstr ""
+"The answer to this is \"Scope: A variable has different scopes depending on "
+"where it was defined:"
+
+#: ../../source/processing/04_variables.md:147
+msgid ""
+"Eine Variable die innerhalb einer Funktion eingeführt wird hat einen lokalen"
+" Gültigkeitsbereich. Sie ist innerhalb dieser Funktion **lokal** sichtbar, "
+"aber nicht innerhalb von anderen Funktionen."
+msgstr ""
+"A variable introduced within a function has a local scope. It is visible "
+"**locally** within this function, but not within other functions."
+
+#: ../../source/processing/04_variables.md:149
+msgid ""
+"Eine Variable die außerhalb einer Funktion definiert wurde, ist **global** "
+"sichtbar und kann in allen Funktionen deines Programms verwendet werden. "
+"**Achtung**: Wenn man auf globale Variablen zugreifen und diese verändern "
+"will, muss man das Schlüsselwort global verwenden."
+msgstr ""
+"A variable that was defined outside a function is **globally** visible and "
+"can be used in all functions of your program. **Attention**: When accessing "
+"and modifying global variables, you must use the keyword global."
+
+#: ../../source/processing/04_variables.md:151
+msgid "Folgendes funktioniert:"
+msgstr "The following works:"
+
+#: ../../source/processing/04_variables.md:163
+msgid "Es wird der Wert 3 ausgegeben."
+msgstr "The value 3 will be output."
+
+#: ../../source/processing/04_variables.md:166
+msgid ""
+"Dies funktioniert aber nicht, da bei der Zuweisung a als lokale Variable "
+"interpretiert wird (die nicht definiert wurde)"
+msgstr ""
+"This however does not work, as when assigning a is interpreted as a local "
+"variable (which was not defined)"
+
+#: ../../source/processing/04_variables.md:181
+msgid ""
+"Dies funktioniert wieder, da a als globale Variable definiert wird und daher"
+" auch auf die globale Variable zugegriffen wird."
+msgstr ""
+"This works again, as a is defined as a global variable and therefore also "
+"accesses the global variable."
