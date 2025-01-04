@@ -9,7 +9,6 @@ import miniworlds.appearances.appearance as appearance
 import miniworlds.appearances.costume as costume_mod
 import miniworlds.appearances.costumes_manager as costumes_manager
 import miniworlds.worlds.world as world_mod
-import miniworlds.base.dialogs as ask
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 import miniworlds.worlds.manager.position_manager as actor_position_manager
 import miniworlds.tools.actor_inspection as actor_inspection
@@ -157,7 +156,6 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         pygame.sprite.DirtySprite.__init__(self)
         Actor.actor_count += 1
         self.speed: int = 1
-        self.ask: "ask.Ask" = ask.Ask(self.world)
         self._dirty = 1
         self.origin = kwargs.get("origin") if kwargs.get("origin") else "center"
         self._visible = True

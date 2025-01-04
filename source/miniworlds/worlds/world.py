@@ -18,7 +18,6 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.world_connector as world_connector
 import miniworlds.worlds.data.export_factory as export_factory
 import miniworlds.worlds.data.import_factory as import_factory
-import miniworlds.base.dialogs as ask
 import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
 import miniworlds.tools.world_inspection as world_inspection
@@ -150,7 +149,6 @@ class World(world_base.WorldBase):
         self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(
             self
         )
-        self.ask: "ask.Ask" = ask.Ask(self)
         self.is_display_initialized: bool = False
         self._fps: int = 60
         self._key_pressed: bool = False
