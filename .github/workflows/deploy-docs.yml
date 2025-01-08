@@ -36,10 +36,12 @@ jobs:
         pip install apeye==1.1.0
 
     - name: Build documentation
+      working-directory: ./docs  # Wechsle in den Unterordner "source"
       run: |
-        python -m sphinx -b html docs/source docs/_build/html
+        python -m sphinx -b html source _build/html
 
     - name: Debug environment
+      working-directory: ./docs  # Wechsle in den Unterordner "source"
       run: |
         echo "Inspecting shell and environment..."
         echo "Shell: $SHELL"
@@ -50,6 +52,7 @@ jobs:
         which bash || echo "bash is missing"
 
     - name: Deploy to Webspace
+      working-directory: ./docs  # Wechsle in den Unterordner "source"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
         SERVER_PORT: ${{ secrets.PORT }}
@@ -64,4 +67,4 @@ jobs:
         ssh-keyscan -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
         ssh -v -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" echo "SSH connection successful"
 
-        rsync --progress -avz -e "ssh -p $SERVER_PORT" docs/_build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+        rsync --progress -avz -e "ssh -p $SERVER_PORT" _build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
