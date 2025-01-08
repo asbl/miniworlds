@@ -40,7 +40,7 @@ jobs:
         SERVER_PATH: ${{ secrets.PATH }}
       run: |
         export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-        echo "PATH restored: $PATH"
+        echo "PATH  restored: $PATH"
         test -d ~/.ssh || install -d -m 700 ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
