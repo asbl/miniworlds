@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     
     steps:
     - name: Checkout repository
@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to Webspace
       working-directory: ./docs  # Wechsle in den Unterordner "docs"
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         SERVER_PORT: ${{ secrets.PORT }}
         SERVER_USER: ${{ secrets.USER }}
         SERVER_HOST: ${{ secrets.SERVER_NAME }}
