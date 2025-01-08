@@ -30,6 +30,13 @@ jobs:
       run: |
         python -m sphinx -b html source _build/html
 
+    - name: Debug environment after Sphinx
+      run: |
+        echo "PATH: $PATH"
+        env
+        which bash || echo "bash not found"
+        which mkdir || echo "mkdir not found"
+        
     - name: Deploy to Webspace
       working-directory: ./docs  # Wechsle in den Unterordner "docs"
       env:
