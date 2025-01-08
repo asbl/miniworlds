@@ -30,18 +30,6 @@ jobs:
       run: |
         (python -m sphinx -b html source _build/html)
 
-    - name: Restore environment
-      run: |
-        export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-        echo "PATH restored: $PATH"
-
-    - name: Debug environment after Sphinx
-      run: |
-        echo "PATH: $PATH"
-        env
-        which bash || echo "bash not found"
-        which mkdir || echo "mkdir not found"
-        
     - name: Deploy to Webspace
       working-directory: ./docs  # Wechsle in den Unterordner "docs"
       env:
@@ -51,6 +39,8 @@ jobs:
         SERVER_HOST: ${{ secrets.SERVER_NAME }}
         SERVER_PATH: ${{ secrets.PATH }}
       run: |
+        export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+        echo "PATH restored: $PATH"
         test -d ~/.ssh || install -d -m 700 ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
