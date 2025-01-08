@@ -8,21 +8,11 @@ on:
 
 jobs:
   build-docs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
-    - name: Debug environment
-      run: |
-        echo "Inspecting shell and environment..."
-        echo "Shell: $SHELL"
-        echo "PATH: $PATH"
-        env
-        ls /bin /usr/bin /usr/local/bin
-        which mkdir || echo "mkdir is missing"
-        which bash || echo "bash is missing"
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -36,23 +26,12 @@ jobs:
         pip install apeye==1.1.0
 
     - name: Build documentation
-      working-directory: ./docs  # Wechsle in den Unterordner "source"
+      working-directory: ./docs  # Wechsle in den Unterordner "docs"
       run: |
         python -m sphinx -b html source _build/html
 
-    - name: Debug environment
-      working-directory: ./docs  # Wechsle in den Unterordner "source"
-      run: |
-        echo "Inspecting shell and environment..."
-        echo "Shell: $SHELL"
-        echo "PATH: $PATH"
-        env
-        ls /bin /usr/bin /usr/local/bin
-        which mkdir || echo "mkdir is missing"
-        which bash || echo "bash is missing"
-
     - name: Deploy to Webspace
-      working-directory: ./docs  # Wechsle in den Unterordner "source"
+      working-directory: ./docs  # Wechsle in den Unterordner "docs"
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
         SERVER_PORT: ${{ secrets.PORT }}
