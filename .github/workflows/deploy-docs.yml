@@ -25,10 +25,9 @@ jobs:
         pip install sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox sphinxcontrib-mermaid autoclasstoc
         pip install apeye==1.1.0
 
-    - name: Build documentation
-      working-directory: ./docs  # Wechsle in den Unterordner "docs"
+    - name: Build documentation in subshell
       run: |
-        python -m sphinx -b html source _build/html
+        (python -m sphinx -b html source _build/html)
 
     - name: Restore environment
       run: |
