@@ -39,10 +39,9 @@ jobs:
         SERVER_HOST: ${{ secrets.SERVER_NAME }}
         SERVER_PATH: ${{ secrets.PATH }}
       run: |
-        mkdir -p ~/.ssh
+        test -d ~/.ssh || install -d -m 700 ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-
         ssh-keyscan -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
         ssh -v -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" echo "SSH connection successful"
 
