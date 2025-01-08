@@ -1,0 +1,15 @@
+[
+    "index.html",
+    "miniworlds.whl",
+    "miniworlds-3-py3-none-any.whl",
+    "files.json",
+    "main.py",
+    "serve.py",
+    "__pycache__/serve.cpython-312.pyc",
+    "__pycache__/aircrafts.cpython-311.pyc",
+    "__pycache__/aircrafts.cpython-312.pyc",
+    "images/ship.png",
+    "images/sky.jpg",
+    "images/clouds.png",
+    "images/enemy.png"
+]

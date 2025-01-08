@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js"></script>
+  <title>miniworlds in Pyodide</title>
+</head>
+
+<body>
+  <h1>miniworlds in Pyodide</h1>
+  <p>Das Spiel sollte unten im Canvas-Fenster ausgeführt werden.</p>
+  <!-- Canvas-Element für SDL2 -->
+  <canvas id="canvas" width="800" height="600" style="border: 1px solid black;"></canvas>
+
+
+  <script type="module">
+
+    async function main() {
+      try {
+
+        // Load the Pyodide library
+        let pyodide = await loadPyodide();
+        console.log("Pyodide loaded");
+
+        // Install necessary packages
+        await pyodide.loadPackage("micropip");
+        await pyodide.loadPackage("sqlite3");
+
+        const miniworldsWheelURL = "http://localhost:8000/miniworlds-3-py3-none-any.whl";
+        await pyodide.runPythonAsync(`
+            import micropip
+            import os
+            await micropip.install('pygame-ce')
+            await micropip.install('${miniworldsWheelURL}')
+            print("miniworlds library was installed...")
+          `);
+
+        // Configure the SDL2 canvas element
+        const canvasElement = document.getElementById("canvas");
+        // SDL2 mit dem Canvas verbinden
+        pyodide.canvas.setCanvas2D(canvasElement);
+
+        const fileResponse = await fetch(`/main.py`);
+        console.log("fetched main.py")
+        const content = await fileResponse.text();
+        console.log("content")
+        console.log(content)
+        pyodide.FS.writeFile("/main.py", content); // Datei speichern
+        console.log("saved main.py")
+
+        // Execute the Python code
+        await pyodide.runPythonAsync(`
+            print("Load Python script in main.py file...")
+            print("Current working directory:", os.getcwd()) 
+            with open("/main.py", "r") as file:
+                code = file.read()
+            exec(code)
+          `);
+
+        console.log("Python script executed successfully");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    main();
+  </script>
+
+</body>
+
+</html>

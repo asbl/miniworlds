@@ -33,3 +33,9 @@ debug-x11:
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         {{image}} bash
     xhost -local:root
+
+build-local:
+	cd source/ && python -m build 
+
+make-docs:
+    cd docs && make docs

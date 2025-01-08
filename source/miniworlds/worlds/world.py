@@ -752,7 +752,9 @@ class World(world_base.WorldBase):
             asyncio.run(self.app.run(
             self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
         ))
-    
+        #await self.app.run(
+        #    self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
+        #)
         
 
     def init_display(self):
@@ -1044,10 +1046,10 @@ class World(world_base.WorldBase):
     def repaint(self):
         self.background.repaint()  # called 1/frame in container.repaint()
 
-    def update(self):
+    async def update(self):
         """The mainloop, called once per frame.
 
-        Called in app.update() when update() from all containers is called.
+        Called in app.update() when reload_all_worlds is called.
         """
         if self.is_running or self.frame == 0:
             # Acting for all actors@static
@@ -1064,6 +1066,7 @@ class World(world_base.WorldBase):
             self._tick_timed_objects()
         self.frame = self.frame + 1
         self.clock.tick(self.fps)
+        await asyncio.sleep(0)
         self.event_manager.update()
 
     def _update_all_costumes(self):

@@ -1,0 +1,52 @@
+name: Build Sphinx Documentation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox[all] sphinxcontrib-mermaid autoclasstoc
+
+    - name: Build documentation
+      run: |
+        cd docs  # Passe den Pfad zu deinem "docs"-Ordner an
+        make html
+
+    # 6. Deploy zur Webspace via SSH
+    - name: Deploy to Webspace
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
+        SERVER_PORT: ${{ secrets.PORT }}
+        SERVER_USER: ${{ secrets.USER }}
+        SERVER_HOST: ${{ secrets.SERVER_NAME }}
+        SERVER_PATH: ${{ secrets.PATH }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+        # Server-Schlüssel zu known_hosts hinzufügen
+        ssh-keyscan -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
+
+        # Test SSH Connection
+        ssh -v -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" echo "SSH connection successful"
+
+        # Rsync mit sshpass
+        rsync --progress -avz -e "ssh -p $SERVER_PORT" public/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"

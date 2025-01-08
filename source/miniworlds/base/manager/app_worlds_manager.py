@@ -23,14 +23,14 @@ class WorldsManager:
                 return world
         return None
 
-    def reload_all_worlds(self):
+    async def reload_all_worlds(self):
         """Called in mainloop, triggered 1/frame.
 
         If dirty, worlds are updated and repainted.
         """
         for world in self.worlds:
             if world.dirty:
-                world.update()
+                await world.update()
                 world.repaint()
                 world.blit_surface_to_window_surface()
 

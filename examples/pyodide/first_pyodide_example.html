@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js"></script>
+  <title>miniworlds in Pyodide</title>
+</head>
+<body>
+  <h1>miniworlds in Pyodide</h1>
+  <p>Das Spiel sollte unten im Canvas-Fenster ausgeführt werden.</p>
+  <!-- Canvas-Element für SDL2 -->
+  <canvas id="canvas" width="800" height="600" style="border: 1px solid black;"></canvas>
+
+  <script type="module">
+    async function main() {
+      // Lade die Pyodide-Bibliothek
+      let pyodide = await loadPyodide();
+      console.log("Pyodide geladen");
+      const miniworldsWheelURL = "http://localhost:8000/miniworlds-3.0.2.11-py3-none-any.whl";
+
+      // Installiere notwendige Pakete
+      await pyodide.loadPackage("micropip");
+      await pyodide.loadPackage("sqlite3");
+
+      // Python-Pakete installieren
+      await pyodide.runPythonAsync(`
+        import micropip
+        await micropip.install('pygame-ce')
+        await micropip.install('${miniworldsWheelURL}')
+      `);
+
+      let sdl2Canvas = document.getElementById("canvas")
+
+      sdl2Canvas.id = "canvas";
+      pyodide.canvas.setCanvas2D(sdl2Canvas);
+
+      const fileCheck = pyodide.FS.readFile("main.py", { encoding: "utf8" });
+
+      // Führe das Python-Programm aus
+      await pyodide.runPythonAsync(`
+      if pyodide.FS.analyzePath("main.py").exists:
+          with open("pyodide_code.py", "r") as file:
+              code = file.read()
+          exec(code)
+      else:
+          print("Datei main.py nicht gefunden")
+    `);
+    }
+
+    main()
+  </script>
+</body>
+</html>

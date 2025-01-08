@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 import miniworlds.base.app as app
@@ -17,6 +18,8 @@ class FileManager:
 
     @staticmethod
     def get_path_with_file_ending(path, file_endings):
+        if sys.platform == 'emscripten':
+            path = '/' + path
         # 1. search for file
         if app.App.path:
             relative_path = app.App.path + "/" + path

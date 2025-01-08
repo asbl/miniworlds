@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js"></script>
+  <title>miniworlds in Pyodide</title>
+</head>
+
+<body>
+  <h1>miniworlds in Pyodide</h1>
+  <p>Das Spiel sollte unten im Canvas-Fenster ausgeführt werden.</p>
+  <!-- Canvas-Element für SDL2 -->
+  <canvas id="canvas" width="800" height="600" style="border: 1px solid black;"></canvas>
+
+
+  <script type="module">
+
+    async function loadFilesIntoPyodide(pyodide) {
+      try {
+        // Schritt 1: Laden der files.json Datei
+        const response = await fetch("/files.json");
+        const fileList = await response.json();
+
+        // Schritt 2: Dateien nacheinander laden und kopieren
+        for (const fileName of fileList) {
+          const fileResponse = await fetch(`/${fileName}`);
+          if (fileResponse.ok) {
+            const content = new Uint8Array(await fileResponse.arrayBuffer());
+
+            // Verzeichnisstruktur im Pyodide-Dateisystem sicherstellen
+            const directory = fileName.substring(0, fileName.lastIndexOf('/'));
+            console.log("create directory", directory)
+            if (directory && !pyodide.FS.analyzePath(directory).exists) {
+              pyodide.FS.mkdirTree(directory);
+              console.log("directory", directory, "created")
+            }
+
+            // Datei in das Pyodide-Dateisystem schreiben
+            pyodide.FS.writeFile(`/${fileName}`, content);
+            console.log(`Copied ${fileName} to Pyodide FS`);
+          } else {
+            console.error(`Failed to load ${fileName}`);
+          }
+        }
+
+        console.log("All files copied to Pyodide FS.");
+      } catch (error) {
+        console.error("Error copying files to Pyodide FS:", error);
+      }
+    }
+
+    async function main() {
+      try {
+
+        // Load the Pyodide library
+        let pyodide = await loadPyodide();
+        console.log("Pyodide loaded");
+
+        // Install necessary packages
+        await pyodide.loadPackage("micropip");
+        await pyodide.loadPackage("sqlite3");
+
+        const miniworldsWheelURL = "http://localhost:8000/miniworlds-3.0.2.11-py3-none-any.whl";
+        await pyodide.runPythonAsync(`
+            import micropip
+            import os
+            await micropip.install('pygame-ce')
+            await micropip.install('${miniworldsWheelURL}')
+            print("miniworlds library was installed...")
+          `);
+
+        // Configure the SDL2 canvas element
+        const canvasElement = document.getElementById("canvas");
+        // SDL2 mit dem Canvas verbinden
+        pyodide.canvas.setCanvas2D(canvasElement);
+
+        await loadFilesIntoPyodide(pyodide);
+
+        // Execute the Python code
+        await pyodide.runPythonAsync(`
+            print("Load Python script in main.py file...")
+            print("Current working directory:", os.getcwd()) 
+            with open("/main.py", "r") as file:
+                code = file.read()
+            exec(code)
+          `);
+
+        console.log("Python script executed successfully");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    main();
+  </script>
+
+</body>
+
+</html>

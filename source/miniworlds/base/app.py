@@ -52,7 +52,8 @@ class App:
                         This must be the last line in your code 
                         \ne.g.:\nworld.run()\n if your world-object is named world.""")
         except AttributeError:
-            print("can't check if run() is present (This can happen if you are using jupyter notebooks. Resuming)")
+            if sys.platform != 'emscripten':
+                print("can't check if run() is present (This can happen if you are using jupyter notebooks. Resuming)")
 
     def _output_start(self):
         if sys.platform != 'emscripten':
@@ -94,11 +95,17 @@ class App:
         self.window.fullscreen = fullscreen
         self.window.fit_desktop = fit_desktop
         self.window.replit = replit
+        print("...")
         # Start the main-loop
         self.init_app()
+        print("init completed")
         self.prepare_mainloop()
+        print("mainloop prepared")
         if not self._mainloop_started:
-            await self.start_mainloop();
+            if sys.platform == 'emscripten':
+                await self.start_mainloop();
+            else:
+                asyncio.run(self.start_mainloop());
         else:
             for world in self.running_worlds:
                 world.dirty = 1
@@ -115,6 +122,7 @@ class App:
 
     async def start_mainloop(self):
         self._mainloop_started = True
+        print("start mainloop")
         while not self._quit:
             await self._update()
         if not self._unittest:
@@ -124,12 +132,13 @@ class App:
     async def _update(self):
         """This is the mainloop. This function is called until the app quits.
         """
+        print("update")
         self.event_manager.pygame_events_to_event_queue()
         if self.window.dirty:
             self.resize()
         if not self._quit:
             self.event_manager.handle_event_queue()
-            self.worlds_manager.reload_all_worlds()
+            await self.worlds_manager.reload_all_worlds()
             self.display_repaint()
             await asyncio.sleep(0) # do not forget that one, it must be called on every frame
 
