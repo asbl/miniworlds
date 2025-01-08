@@ -26,7 +26,7 @@ jobs:
 
     - name: Build documentation
       run: |
-        python -m sphinx -b html source/docs source/docs/_build/html
+        python -m sphinx -b html /docs/source/ /docs/_build/html
 
     - name: Deploy to Webspace
       env:
@@ -43,4 +43,4 @@ jobs:
         ssh-keyscan -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
         ssh -v -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" echo "SSH connection successful"
 
-        rsync --progress -avz -e "ssh -p $SERVER_PORT" source/docs/_build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+        rsync --progress -avz -e "ssh -p $SERVER_PORT" /docs/_build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
