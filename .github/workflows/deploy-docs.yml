@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/opt/hostedtoolcache/Python/3.9.21/x64/bin:$PATH"
-
 jobs:
   build-docs:
     runs-on: ubuntu-24.04
@@ -42,6 +39,8 @@ jobs:
         SERVER_HOST: ${{ secrets.SERVER_NAME }}
         SERVER_PATH: ${{ secrets.PATH }}
       run: |
+        export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+        echo "PATH restored: $PATH"
         test -d ~/.ssh || install -d -m 700 ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
