@@ -17,6 +17,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Reset shell environment
+      run: |
+        export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+        echo "PATH: $PATH"
+
+    - name: Debug environment
+      run: |
+        echo "Inspecting shell and environment..."
+        echo "Shell: $SHELL"
+        echo "PATH: $PATH"
+        env
+        ls /bin /usr/bin /usr/local/bin
+        which mkdir || echo "mkdir is missing"
+        which bash || echo "bash is missing"
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -32,13 +47,6 @@ jobs:
       run: |
         python -m sphinx -b html docs/source docs/_build/html
 
-    - name: Debug environment
-      run: |
-        echo "Inspecting shell and environment..."
-        echo "Shell: $SHELL"
-        which mkdir || echo "mkdir is missing"
-        ls /bin /usr/bin | grep mkdir || echo "mkdir is not in standard locations"
-        
     - name: Deploy to Webspace
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
