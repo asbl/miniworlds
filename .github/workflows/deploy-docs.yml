@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox[all] sphinxcontrib-mermaid autoclasstoc
+        pip install sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox sphinxcontrib-mermaid autoclasstoc
 
     - name: Build documentation
       run: |
