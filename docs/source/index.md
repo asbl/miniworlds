@@ -400,8 +400,8 @@ Example: RPG
 Links
 =====
 
-* `Github Repository <https://github.com/asbl/miniworlds>`_
-
+* [Github Repository](https://github.com/asbl/miniworlds)
+* [Beispiele](https://github.com/asbl/miniworlds_examples) 
 
 ```{toctree}
 ---
