@@ -400,7 +400,7 @@ Example: RPG
 Links
 =====
 
-* `Codeberg Repository <https://codeberg.org/a_siebel/miniworlds>`_
+* `Github Repository <https://github.com/asbl/miniworlds>`_
 
 
 ```{toctree}
