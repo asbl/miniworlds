@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:1
 msgid "Positionierung und Ausrichtung von Actors"
-msgstr "Positioning und Ausrichtung von Schauspielern"
+msgstr "Positioning und Ausrichtung von Actorn"
 
 #: ../../source/tutorial/03_01_actors_position.md:3
 msgid ""
@@ -43,7 +43,7 @@ msgstr "First a short repetition of the essential concepts:"
 msgid "Du kannst einen Actor an einer beliebigen Position erstellen:"
 msgstr ""
 "You can create an actor at any position: \n"
-"Sie können einen Schauspieler an einer beliebigen Position erstellen:"
+"Sie können einen Actor an einer beliebigen Position erstellen:"
 
 #: ../../source/tutorial/03_01_actors_position.md:13
 msgid "Das Koordinatensystem hat seinen Ursprung oben links:"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:22
 msgid "Position eines Actors nachträglich ändern"
-msgstr "Position eines Schauspielers nachträglich ändern"
+msgstr "Position eines Actors nachträglich ändern"
 
 #: ../../source/tutorial/03_01_actors_position.md:24
 msgid ""

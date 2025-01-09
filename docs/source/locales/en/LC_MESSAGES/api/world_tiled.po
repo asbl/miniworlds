@@ -1722,7 +1722,7 @@ msgstr "Return"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:7 of
 msgid "A list of actors"
-msgstr "Eine Liste von Schauspielern"
+msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:11 of
 msgid "Get all actors at mouse position:"

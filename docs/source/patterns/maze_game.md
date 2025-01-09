@@ -9,7 +9,7 @@ Die Technik, eine Kachelkarte (Tilemap) zu erstellen, ist in vielen Spielen gän
 * **Basierend auf**: `https://github.com/electronstudio/pygame-zero-book`
 * **Lizenz:** Attribution-NonCommercial-ShareAlike 4.0 International
 
-## Schritt 1: Schauspieler aus einer Kachelkarte laden
+## Schritt 1: Actor aus einer Kachelkarte laden
 
 Eine Kachelkarte verwendet eine kleine Anzahl von Bildern (Kacheln), die mehrmals gezeichnet werden, um ein großes Spiellevel (die Karte) zu erstellen. Dies spart Arbeit beim Erstellen vieler Grafiken und erleichtert Änderungen am Level-Design. In diesem Beispiel erstellen wir ein Labyrinth-Level.
 
@@ -42,9 +42,9 @@ world.add_background((0, 0, 0, 255))
 world.run()
 ```
 
-### Schauspieler-Unterklassen erstellen
+### Actor-Unterklassen erstellen
 
-Erstelle Schauspieler-Unterklassen für jeden **Typ** von Schauspieler:
+Erstelle Actor-Unterklassen für jeden **Typ** von Actor:
 
 ```python
 class Player(Actor):
@@ -57,11 +57,11 @@ class Wall(Actor):
         self.add_costume("wall")
 ```
 
-`self.add_costume` fügt dem Schauspieler ein Kostüm hinzu, das auf einem Bild basiert (z. B. "player", "wall" – Dateiendungen wie `.png` oder `.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, a)-Tupel angegeben wird.
+`self.add_costume` fügt dem Actor ein Kostüm hinzu, das auf einem Bild basiert (z. B. "player", "wall" – Dateiendungen wie `.png` oder `.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, a)-Tupel angegeben wird.
 
 ### Eine Kachelkarte erstellen
 
-Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Schauspieler bestimmt.
+Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Actor bestimmt.
 
 - 0: Leer
 - 1: Wand
@@ -84,7 +84,7 @@ maze = [
 
 ### Objekte für jede Zelle der Kachelkarte erstellen
 
-Für jede Zelle der Kachelkarte kann ein Schauspieler erzeugt werden. Die Klasse für jeden Schauspieler wird aus der Kachelkarte abgerufen.
+Für jede Zelle der Kachelkarte kann ein Actor erzeugt werden. Die Klasse für jeden Actor wird aus der Kachelkarte abgerufen.
 
 ```python
 @world.register
@@ -160,4 +160,4 @@ class Enemy(Actor):
 
 ### Zusammenfassung
 
-In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Schauspielern und Kachelkarten erstellt. Mit dieser Grundlage kannst du weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner hinzufügen!
+In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Actorn und Kachelkarten erstellt. Mit dieser Grundlage kannst du weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner hinzufügen!

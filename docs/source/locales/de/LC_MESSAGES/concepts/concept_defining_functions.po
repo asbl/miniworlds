@@ -120,7 +120,7 @@ msgid ""
 "Actors."
 msgstr ""
 "Häufig willst du komplizierte Dinge automatisieren, z.B. das Anlegen von "
-"Schauspielern."
+"Actorn."
 
 #: ../../source/concepts/concept_defining_functions.md:67
 msgid ""
@@ -223,7 +223,7 @@ msgstr "Gesichter"
 
 #: ../../source/concepts/concept_defining_functions.md:143
 msgid "Actors automatisiert erstellen"
-msgstr "Schauspieler automatisch erstellen"
+msgstr "Actor automatisch erstellen"
 
 #: ../../source/concepts/concept_defining_functions.md:145
 msgid "Mit Hilfe von Funktionen kannst du das erstellen von Actors abkürzen:"

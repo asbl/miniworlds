@@ -30,7 +30,7 @@ msgstr "The base class for all your worlds."
 #: miniworlds.worlds.world.World:1 of
 msgid "A world is a playing field on which actors can move."
 msgstr ""
-"Eine Welt ist ein Spielfeld, auf dem Schauspieler sich bewegen können."
+"Eine Welt ist ein Spielfeld, auf dem Actor sich bewegen können."
 
 #: miniworlds.worlds.world.World:3 of
 msgid ""
@@ -39,8 +39,8 @@ msgid ""
 "via the sensors of the actors."
 msgstr ""
 "Eine Welt hat einen `Hintergrund` und bietet grundlegende Funktionen für die"
-" Positionierung von Schauspielern und für die Kollisionserkennung von "
-"Schauspielern, die über die Sensoren der Schauspieler abgefragt werden "
+" Positionierung von Actorn und für die Kollisionserkennung von "
+"Actorn, die über die Sensoren der Actor abgefragt werden "
 "können."
 
 #: miniworlds.worlds.world.World:6 of
@@ -64,18 +64,18 @@ msgstr "Eine Welt für pixelgenaue Spiele."
 #: miniworlds.worlds.world.World:13 of
 msgid "The position of a actor on a World is the pixel at topleft of actor."
 msgstr ""
-"Die Position eines Schauspielers in einer Welt ist das Pixel oben links des "
-"Schauspielers."
+"Die Position eines Actors in einer Welt ist das Pixel oben links des "
+"Actors."
 
 #: miniworlds.worlds.world.World:15 of
 msgid "New actors are created with top-left corner of actor rect at position."
 msgstr ""
-"Neue Schauspieler werden mit der oberen linken Ecke des Schauspieler-"
+"Neue Actor werden mit der oberen linken Ecke des Actor-"
 "Rechtecks an Position erstellt."
 
 #: miniworlds.worlds.world.World:17 of
 msgid "Two actors collide when their sprites overlap."
-msgstr "Zwei Schauspieler kollidieren, wenn ihre Sprites sich überschneiden."
+msgstr "Zwei Actor kollidieren, wenn ihre Sprites sich überschneiden."
 
 #: miniworlds.worlds.world.World:19 of
 msgid "Asteroids"
@@ -283,7 +283,7 @@ msgstr ""
 #: ../../None:41:<autosummary>:1
 #: miniworlds.worlds.world.World.default_border:1 of
 msgid "Sets default border color for actors"
-msgstr "Setzt Standard-Rahmenfarbe für Schauspieler fest"
+msgstr "Setzt Standard-Rahmenfarbe für Actor fest"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
@@ -344,7 +344,7 @@ msgstr "Holt das übergeordnete Fenster"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`actors <miniworlds.worlds.world.World.actors>`\\"
-msgstr ":py:obj:`Schauspieler <miniworlds.worlds.world.World.actors>`\\"
+msgstr ":py:obj:`Actor <miniworlds.worlds.world.World.actors>`\\"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`event_manager <miniworlds.worlds.world.World.event_manager>`\\"
@@ -817,7 +817,7 @@ msgid ""
 "actors and actors on the world."
 msgstr ""
 "Setzt die Welt zurück Erstellt eine neue Welt mit der Init-Funktion - "
-"erstellt alle Schauspieler und Schauspieler auf der Welt neu."
+"erstellt alle Actor und Actor auf der Welt neu."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`clear <miniworlds.worlds.world.World.clear>`\\ \\(\\)"
@@ -883,11 +883,11 @@ msgid ""
 "\\(actor\\, position\\)"
 msgstr ""
 ":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ "
-"\\(Schauspieler\\, Position\\)"
+"\\(Actor\\, Position\\)"
 
 #: ../../None:64:<autosummary>:1
 msgid "Adds a Actor to the world."
-msgstr "Fügt einen Schauspieler der Welt hinzu."
+msgstr "Fügt einen Actor der Welt hinzu."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -901,7 +901,7 @@ msgstr ""
 #: of
 msgid "Gets all actors which are found at a specific position."
 msgstr ""
-"Erhalte alle Schauspieler, die an einer bestimmten Position gefunden werden."
+"Erhalte alle Actor, die an einer bestimmten Position gefunden werden."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1005,7 +1005,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Loads all actors from db."
-msgstr "Lädt alle Schauspieler aus db."
+msgstr "Lädt alle Actor aus db."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
@@ -1014,7 +1014,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Saves the current world an all actors to database."
-msgstr "Speichert die aktuelle Welt und alle Schauspieler in der Datenbank."
+msgstr "Speichert die aktuelle Welt und alle Actor in der Datenbank."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1112,7 +1112,7 @@ msgid ""
 "\\(actor\\)"
 msgstr ""
 ":py:obj:`remove <miniworlds.worlds.world_base.WorldBase.remove>`\\ "
-"\\(Schauspieler\\)"
+"\\(Actor\\)"
 
 #: ../../None:15:<autosummary>:1
 msgid ""
@@ -1255,7 +1255,7 @@ msgstr ""
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "Aktualisierungen Kostüme für alle Schauspieler auf der Welt"
+msgstr "Aktualisierungen Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
@@ -1340,11 +1340,11 @@ msgstr "Ein Rechteck als Tupel (oben, links, Breite, Höhe)"
 
 #: miniworlds.worlds.world.World.default_border:5 of
 msgid "You must also set a border for actor."
-msgstr "Du musst auch einen Rand für den Schauspieler festlegen."
+msgstr "Du musst auch einen Rand für den Actor festlegen."
 
 #: miniworlds.worlds.world.World.default_border:9 of
 msgid "Set default border for actors:"
-msgstr "Standardgrenze für Schauspieler festlegen:"
+msgstr "Standardgrenze für Actor festlegen:"
 
 #: miniworlds.worlds.world.World.default_border_color:5 of
 msgid ""
@@ -1359,7 +1359,7 @@ msgstr "Sie müssen auch \"world.border\" > 0 setzen."
 
 #: miniworlds.worlds.world.World.default_border_color:11 of
 msgid "Create actors with and without with border"
-msgstr "Erstelle Schauspieler mit und ohne Rand"
+msgstr "Erstelle Actor mit und ohne Rand"
 
 #: miniworlds.worlds.world.World.default_border_color:35
 #: miniworlds.worlds.world.World.get_mouse_position:26
@@ -1390,15 +1390,15 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.detect_actors:5 of
 msgid "Position, where actors should be searched."
-msgstr "Position, wo Schauspieler gesucht werden sollen."
+msgstr "Position, wo Actor gesucht werden sollen."
 
 #: miniworlds.worlds.world.World.detect_actors:7 of
 msgid "A list of actors"
-msgstr "Eine Liste von Schauspielern"
+msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.world.World.detect_actors:11 of
 msgid "Get all actors at mouse position:"
-msgstr "Erhalte alle Schauspieler an der Mausposition:"
+msgstr "Erhalte alle Actor an der Mausposition:"
 
 #: miniworlds.worlds.world.World.detect_position:3 of
 msgid "True, if Position is in the world."
@@ -1505,8 +1505,8 @@ msgid ""
 "Loads all actors from db. Usually you load the actors in __init__() or in "
 "on_setup()"
 msgstr ""
-"Lädt alle Schauspieler aus der Datenbank. Normalerweise lädst du die "
-"Schauspieler in __init__() oder in on_setup()"
+"Lädt alle Actor aus der Datenbank. Normalerweise lädst du die "
+"Actor in __init__() oder in on_setup()"
 
 #: miniworlds.worlds.world.World.load_actors_from_db:5 of
 msgid "reference to db file"
@@ -1518,7 +1518,7 @@ msgstr "eine Liste aller Schauspielklassen, die importiert werden sollen."
 
 #: miniworlds.worlds.world.World.load_actors_from_db:10 of
 msgid "All Actors"
-msgstr "Alle Schauspieler"
+msgstr "Alle Actor"
 
 #: miniworlds.worlds.world.World.play_music:3 of
 msgid "The path to the music"
@@ -1571,7 +1571,7 @@ msgid ""
 "Saves the current world an all actors to database. The file is stored as db "
 "file and can be opened with sqlite."
 msgstr ""
-"Speichert die aktuelle Welt und alle Schauspieler in der Datenbank. Die "
+"Speichert die aktuelle Welt und alle Actor in der Datenbank. Die "
 "Datei wird als db-Datei gespeichert und kann mit sqlite geöffnet werden."
 
 #: miniworlds.worlds.world.World.save_to_db:4 of

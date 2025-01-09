@@ -28,8 +28,8 @@ msgid ""
 "Actors verfügen über **Sensoren**, mit denen sie ihre Umwelt abtasten  "
 "können und z.B andere Actors an ihrer Position aufspüren können."
 msgstr ""
-"Schauspieler haben **Sensoren**, mit denen sie ihre Umgebung scannen können "
-"und z.B. andere Schauspieler an ihrer Position lokalisieren können."
+"Actor haben **Sensoren**, mit denen sie ihre Umgebung scannen können "
+"und z.B. andere Actor an ihrer Position lokalisieren können."
 
 #: ../../source/tutorial/06_00_sensors.md:6
 msgid "Es gibt zwei Möglichkeiten, Sensoren zu verwenden:"

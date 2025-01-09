@@ -349,7 +349,7 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid "border color of actor"
-msgstr "Randfarbe des Schauspielers"
+msgstr "Randfarbe des Actors"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid "The border-size of actor."
-msgstr "Die Grenzgröße des Schauspielers."
+msgstr "Die Grenzgröße des Actors."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
@@ -874,7 +874,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
-msgstr "Wenn auf True gesetzt, wird Kostüm mit Schauspieler Richtung gedreht."
+msgstr "Wenn auf True gesetzt, wird Kostüm mit Actor Richtung gedreht."
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -911,7 +911,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Setzt den Schauspieler auf die Größe der Eltern ohne Beibehaltung des "
+"Setzt den Actor auf die Größe der Eltern ohne Beibehaltung des "
 "Seitenverhältnisses."
 
 #: ../../None:23:<autosummary>:1

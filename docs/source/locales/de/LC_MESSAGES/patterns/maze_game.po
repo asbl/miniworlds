@@ -59,7 +59,7 @@ msgstr ""
 "Bedingungen 4.0 International"
 
 #: ../../source/patterns/maze_game.md:12
-msgid "Schritt 1: Schauspieler aus einer Kachelkarte laden"
+msgid "Schritt 1: Actor aus einer Kachelkarte laden"
 msgstr "Step 1: Load actor from a tile card"
 
 #: ../../source/patterns/maze_game.md:14
@@ -109,16 +109,16 @@ msgstr ""
 "In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte Welten bereitstellt. In der letzten Zeile musst du unbedingt `world.run()` aufrufen, um das Spiel zu starten."
 
 #: ../../source/patterns/maze_game.md:45
-msgid "Schauspieler-Unterklassen erstellen"
+msgid "Actor-Unterklassen erstellen"
 msgstr "Actor subclasses erstellen"
 
 #: ../../source/patterns/maze_game.md:47
-msgid "Erstelle Schauspieler-Unterklassen für jeden **Typ** von Schauspieler:"
+msgid "Erstelle Actor-Unterklassen für jeden **Typ** von Actor:"
 msgstr "Create actor subclasses for each **type** of actor:"
 
 #: ../../source/patterns/maze_game.md:60
 msgid ""
-"`self.add_costume` fügt dem Schauspieler ein Kostüm hinzu, das auf einem "
+"`self.add_costume` fügt dem Actor ein Kostüm hinzu, das auf einem "
 "Bild basiert (z. B. \"player\", \"wall\" – Dateiendungen wie `.png` oder "
 "`.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, "
 "a)-Tupel angegeben wird."
@@ -133,7 +133,7 @@ msgstr "Create a tile card"
 
 #: ../../source/patterns/maze_game.md:64
 msgid ""
-"Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Schauspieler "
+"Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Actor "
 "bestimmt."
 msgstr "A tile map is a 2D list that determines the positions of the actors."
 
@@ -155,8 +155,8 @@ msgstr "Create objects for each cell of the tile map."
 
 #: ../../source/patterns/maze_game.md:87
 msgid ""
-"Für jede Zelle der Kachelkarte kann ein Schauspieler erzeugt werden. Die "
-"Klasse für jeden Schauspieler wird aus der Kachelkarte abgerufen."
+"Für jede Zelle der Kachelkarte kann ein Actor erzeugt werden. Die "
+"Klasse für jeden Actor wird aus der Kachelkarte abgerufen."
 msgstr ""
 "For each cell of the tile map, an actor can be created. The class for each "
 "actor is retrieved from the tile map."
@@ -201,7 +201,7 @@ msgstr "Summary"
 #: ../../source/patterns/maze_game.md:163
 msgid ""
 "In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen "
-"Schauspielern und Kachelkarten erstellt. Mit dieser Grundlage kannst du "
+"Actorn und Kachelkarten erstellt. Mit dieser Grundlage kannst du "
 "weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner "
 "hinzufügen!"
 msgstr ""

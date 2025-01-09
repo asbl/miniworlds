@@ -205,7 +205,7 @@ msgstr ""
 
 #: ../../None:41:<autosummary>:1
 msgid "Sets default border color for actors"
-msgstr "Legt Standard-Rahmenfarbe für Schauspieler fest"
+msgstr "Legt Standard-Rahmenfarbe für Actor fest"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
@@ -263,7 +263,7 @@ msgstr "Holt das Elternfenster"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`actors <miniworlds.worlds.world.World.actors>`\\"
-msgstr ":py:obj:`Schauspieler <miniworlds.worlds.world.World.actors>`\\"
+msgstr ":py:obj:`Actor <miniworlds.worlds.world.World.actors>`\\"
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`event_manager <miniworlds.worlds.world.World.event_manager>`\\"
@@ -525,7 +525,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_new_actor "
-"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(Schauspieler\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(Actor\\)"
 
 #: ../../None:18:<autosummary>:1
 msgid ""
@@ -534,7 +534,7 @@ msgid ""
 msgstr ""
 ":py:obj:`on_remove_actor "
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ "
-"\\(Schauspieler\\)"
+"\\(Actor\\)"
 
 #: ../../None:3:<autosummary>:1
 msgid ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(actor\\)"
@@ -582,7 +582,7 @@ msgid ""
 "<miniworlds.worlds.world.World.get_world_connector>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`get_world_connector "
-"<miniworlds.worlds.world.World.get_world_connector>`\\ \\(Schauspieler\\)"
+"<miniworlds.worlds.world.World.get_world_connector>`\\ \\(Actor\\)"
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -878,7 +878,7 @@ msgid ""
 "actors and actors on the world."
 msgstr ""
 "Setzt die Welt zurück Erstellt eine neue Welt mit init-Funktion - erstellt "
-"alle Schauspieler und Schauspieler weltweit neu."
+"alle Actor und Actor weltweit neu."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`clear <miniworlds.worlds.world.World.clear>`\\ \\(\\)"
@@ -945,7 +945,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Adds a Actor to the world."
-msgstr "Fügt einen Schauspieler der Welt hinzu."
+msgstr "Fügt einen Actor der Welt hinzu."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -958,7 +958,7 @@ msgstr ""
 #: ../../None:64:<autosummary>:1
 msgid "Gets all actors which are found at a specific position."
 msgstr ""
-"Holt alle Schauspieler, die an einer bestimmten Position gefunden werden."
+"Holt alle Actor, die an einer bestimmten Position gefunden werden."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1058,7 +1058,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Loads all actors from db."
-msgstr "Lädt alle Schauspieler aus db."
+msgstr "Lädt alle Actor aus db."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
@@ -1067,7 +1067,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Saves the current world an all actors to database."
-msgstr "Speichert die aktuelle Welt und alle Schauspieler in der Datenbank."
+msgstr "Speichert die aktuelle Welt und alle Actor in der Datenbank."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1208,7 +1208,7 @@ msgid ""
 msgstr ""
 ":py:obj:`on_remove_actor "
 "<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ "
-"\\(Schauspieler\\)"
+"\\(Actor\\)"
 
 #: ../../source/api/world_console.md
 msgid "Private Data Attributes:"
@@ -1357,7 +1357,7 @@ msgstr ""
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "Aktualisierungen Kostüme für alle Schauspieler auf der Welt"
+msgstr "Aktualisierungen Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"

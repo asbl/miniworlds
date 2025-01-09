@@ -900,7 +900,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Stelle den Schauspieler auf die Größe der Eltern, **ohne** Seitenverhältnis "
+"Stelle den Actor auf die Größe der Eltern, **ohne** Seitenverhältnis "
 "beizubehalten."
 
 #: ../../None:23:<autosummary>:1

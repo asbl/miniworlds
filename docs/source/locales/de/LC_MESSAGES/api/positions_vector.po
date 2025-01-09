@@ -113,7 +113,7 @@ msgstr ""
 #: miniworlds.positions.vector.Vector.from_position:1
 #: miniworlds.positions.vector.Vector.from_positions:1 of
 msgid "Create a vector from actor and position"
-msgstr "Erstelle einen Vektor aus Schauspieler und Position"
+msgstr "Erstelle einen Vektor aus Actor und Position"
 
 #: ../../None:29:<autosummary>:1
 msgid ""
@@ -170,7 +170,7 @@ msgstr ""
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_direction:1 of
 msgid "Creates a vector from actor direction"
-msgstr "Erstellt einen Vektor aus der Richtung des Schauspielers"
+msgstr "Erstellt einen Vektor aus der Richtung des Actors"
 
 #: ../../None:29:<autosummary>:1
 msgid ""
@@ -183,7 +183,7 @@ msgstr ""
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_position:1 of
 msgid "Creates a vector from actor position"
-msgstr "Erstellt einen Vektor aus der Schauspielerposition"
+msgstr "Erstellt einen Vektor aus der Actorposition"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`rotate <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"

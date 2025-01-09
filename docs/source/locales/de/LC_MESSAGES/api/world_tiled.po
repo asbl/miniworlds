@@ -27,7 +27,7 @@ msgstr "Welt > KachelWelt"
 msgid ""
 "from typing A TiledWorld is a World where each Actor is placed in one Tile."
 msgstr ""
-"beim Tippen ist eine geflieste Welt eine Welt, in der jeder Schauspieler in "
+"beim Tippen ist eine geflieste Welt eine Welt, in der jeder Actor in "
 "einem Kachel platziert ist."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:4 of
@@ -43,7 +43,7 @@ msgid ""
 "Each Actor on a TiledWorld can be placed on a Tile, on a Corner between "
 "Tiles or on an Edge between Tiles."
 msgstr ""
-"Jeder Schauspieler auf einer Fliesenwelt kann auf einer Fliese, an einer "
+"Jeder Actor auf einer Fliesenwelt kann auf einer Fliese, an einer "
 "Ecke zwischen Fliesen oder an einer Kante zwischen Fliesen platziert werden."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:12
@@ -57,7 +57,7 @@ msgstr "Beispiele"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:13 of
 msgid "Create Actor on Tile, Corner and Edge:"
-msgstr "Erstellen Sie Schauspieler auf Fliese, Ecke und Kante:"
+msgstr "Erstellen Sie Actor auf Fliese, Ecke und Kante:"
 
 #: ../../source/api/world_tiled.md
 msgid "Public Data Attributes:"
@@ -214,7 +214,7 @@ msgstr ""
 
 #: ../../None:41:<autosummary>:1
 msgid "Sets default border color for actors"
-msgstr "Legt Standardrahmenfarbe für Schauspieler fest."
+msgstr "Legt Standardrahmenfarbe für Actor fest."
 
 #: ../../None:41:<autosummary>:1
 msgid ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
@@ -489,7 +489,7 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:1 of
 msgid "Gets all actors which are found at a specific position."
 msgstr ""
-"Erhalte alle Schauspieler, die an einer bestimmten Position gefunden wurden."
+"Erhalte alle Actor, die an einer bestimmten Position gefunden wurden."
 
 #: ../../None:29:<autosummary>:1
 msgid ""
@@ -560,7 +560,7 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:1 of
 msgid "Returns the World's borders, if actor is near a Border."
 msgstr ""
-"Gibt die Grenzen der Welt zurück, wenn der Schauspieler in der Nähe einer "
+"Gibt die Grenzen der Welt zurück, wenn der Actor in der Nähe einer "
 "Grenze ist."
 
 #: ../../None:29:<autosummary>:1
@@ -576,7 +576,7 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors_at_position:1
 #: of
 msgid "Sensing actors at same position"
-msgstr "Sensing-Schauspieler an gleicher Position"
+msgstr "Sensing-Actor an gleicher Position"
 
 #: ../../None:29:<autosummary>:1
 msgid ""
@@ -592,7 +592,7 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actor_at_position:1
 #: of
 msgid "Sensing single actor at same position"
-msgstr "Erkennen einziger Schauspieler an gleicher Position"
+msgstr "Erkennen einziger Actor an gleicher Position"
 
 #: ../../None:29:<autosummary>:1
 msgid ""
@@ -1087,7 +1087,7 @@ msgid ""
 "actors and actors on the world."
 msgstr ""
 "Setzt die Welt zurück Erstellt eine neue Welt mit Init-Funktion - erstellt "
-"alle Schauspieler und Schauspieler in der Welt neu."
+"alle Actor und Actor in der Welt neu."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`clear <miniworlds.worlds.world.World.clear>`\\ \\(\\)"
@@ -1150,11 +1150,11 @@ msgid ""
 "\\(actor\\, position\\)"
 msgstr ""
 ":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ "
-"\\(Schauspieler\\, Position\\)"
+"\\(Actor\\, Position\\)"
 
 #: ../../None:64:<autosummary>:1
 msgid "Adds a Actor to the world."
-msgstr "Fügt einen Schauspieler der Welt hinzu."
+msgstr "Fügt einen Actor der Welt hinzu."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1264,7 +1264,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Loads all actors from db."
-msgstr "Lädt alle Schauspieler aus db."
+msgstr "Lädt alle Actor aus db."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
@@ -1273,7 +1273,7 @@ msgstr ""
 
 #: ../../None:64:<autosummary>:1
 msgid "Saves the current world an all actors to database."
-msgstr "Speichert die aktuelle Welt und alle Schauspieler in die Datenbank."
+msgstr "Speichert die aktuelle Welt und alle Actor in die Datenbank."
 
 #: ../../None:64:<autosummary>:1
 msgid ""
@@ -1408,7 +1408,7 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_new_actor "
-"<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(Schauspieler\\)"
+"<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(Actor\\)"
 
 #: ../../None:15:<autosummary>:1
 msgid ""
@@ -1619,7 +1619,7 @@ msgstr ""
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "Aktualisierungen Kostüme für alle Schauspieler auf der Welt"
+msgstr "Aktualisierungen Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
@@ -1693,7 +1693,7 @@ msgstr ""
 msgid ""
 "Faster than sensing_actors, but only the first found actor is recognized."
 msgstr ""
-"Schneller als sensing_actors, aber nur der zuerst gefundene Schauspieler "
+"Schneller als sensing_actors, aber nur der zuerst gefundene Actor "
 "wird erkannt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:3
@@ -1708,7 +1708,7 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:5 of
 msgid "Position, where actors should be searched."
-msgstr "Position, wo Schauspieler gesucht werden sollen."
+msgstr "Position, wo Actor gesucht werden sollen."
 
 #: ../../source/api/world_tiled.md
 msgid "Rückgabe"
@@ -1716,11 +1716,11 @@ msgstr "Return"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:7 of
 msgid "A list of actors"
-msgstr "Eine Liste von Schauspielern"
+msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:11 of
 msgid "Get all actors at mouse position:"
-msgstr "Holen Sie alle Schauspieler an der Mausposition:"
+msgstr "Holen Sie alle Actor an der Mausposition:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_position:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
@@ -1732,7 +1732,7 @@ msgstr "Löst CornerNotFoundError aus, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:7 of
 msgid "Get corner from actor:"
-msgstr "Holen Sie sich Ecke vom Schauspieler:"
+msgstr "Holen Sie sich Ecke vom Actor:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:13 of
 msgid "Get corner from world-position and direction"
@@ -1778,7 +1778,7 @@ msgstr "Wirft einen EdgeNotFoundError-Fehler, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:7 of
 msgid "Get edge from actor:"
-msgstr "Erhalten Sie den Vorteil vom Schauspieler:"
+msgstr "Erhalten Sie den Vorteil vom Actor:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:13 of
 msgid "Get edge from world-position and direction"
@@ -1794,7 +1794,7 @@ msgstr "Wirft TileNotFoundError, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:7 of
 msgid "Get tile from actor:"
-msgstr "Holen Sie sich Kachel vom Schauspieler:"
+msgstr "Holen Sie sich Kachel vom Actor:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:13 of
 msgid "Full example:"

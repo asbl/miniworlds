@@ -40,7 +40,7 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance:1 of
 msgid "Base class of actor costumes and world backgrounds"
-msgstr "Basisklasse von Schauspielerkostümen und Welt-Hintergründen"
+msgstr "Basisklasse von Actorkostümen und Welt-Hintergründen"
 
 #: miniworlds.appearances.appearance.Appearance:3 of
 msgid ""
@@ -305,7 +305,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.border_color:1 of
 msgid "border color of actor"
-msgstr "Randfarbe des Schauspielers"
+msgstr "Randfarbe des Actors"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
@@ -314,7 +314,7 @@ msgstr ":py:obj:`Rahmen <miniworlds.appearances.appearance.Aussehen.border>`\\"
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.border:1 of
 msgid "The border-size of actor."
-msgstr "Die Randgröße des Schauspielers."
+msgstr "Die Randgröße des Actors."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
@@ -737,7 +737,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
 msgstr ""
-"Wenn auf True gesetzt, wird das Kostüm mit der Schauspielerrichtung gedreht."
+"Wenn auf True gesetzt, wird das Kostüm mit der Actorrichtung gedreht."
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -774,7 +774,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Setzt den Schauspieler auf Größe der Eltern **ohne** Beibehaltung des "
+"Setzt den Actor auf Größe der Eltern **ohne** Beibehaltung des "
 "Seitenverhältnisses."
 
 #: ../../None:23:<autosummary>:1
@@ -956,7 +956,7 @@ msgid ""
 "The actor will be removed after the animation - This can be used for "
 "explosions."
 msgstr ""
-"Der Schauspieler wird nach der Animation entfernt - Dies kann für "
+"Der Actor wird nach der Animation entfernt - Dies kann für "
 "Explosionen verwendet werden."
 
 #: miniworlds.appearances.appearance.Appearance.alpha:20
@@ -975,7 +975,7 @@ msgstr "typisiert"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:23 of
 msgid "defines transparency of Actor"
-msgstr "definiert Transparenz des Schauspielers"
+msgstr "definiert Transparenz des Actors"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:25 of
 msgid "0"
@@ -995,7 +995,7 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.border:3 of
 msgid "The value is 0, if actor has no border"
-msgstr "Der Wert beträgt 0, wenn der Schauspieler keinen Rahmen hat"
+msgstr "Der Wert beträgt 0, wenn der Actor keinen Rahmen hat"
 
 #: miniworlds.appearances.appearance.Appearance.border:5 of
 msgid "int"
@@ -1074,7 +1074,7 @@ msgid ""
 "Both actors are moving up. The image of t2 is correctly aligned. t1 is "
 "looking in the wrong direction."
 msgstr ""
-"Beide Schauspieler bewegen sich nach oben. Das Bild von t2 ist korrekt "
+"Beide Actor bewegen sich nach oben. Das Bild von t2 ist korrekt "
 "ausgerichtet. t1 schaut in die falsche Richtung."
 
 #: miniworlds.appearances.appearance.Appearance.register:1 of

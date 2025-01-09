@@ -21,18 +21,18 @@ msgstr ""
 
 #: ../../source/api/actor_number.md:1
 msgid "Actor > Number"
-msgstr "Schauspieler > Nummer"
+msgstr "Actor > Nummer"
 
 #: miniworlds.actors.texts.number.Number:1 of
 msgid "A number actor shows a Number."
-msgstr "Ein Zahlen-Schauspieler zeigt eine Nummer."
+msgstr "Ein Zahlen-Actor zeigt eine Nummer."
 
 #: miniworlds.actors.texts.number.Number:3 of
 msgid ""
 "You have to set the size of the actor with self.size() manually so that the "
 "complete text can be seen."
 msgstr ""
-"Du musst die Größe des Schauspielers mit self.size() manuell einstellen, "
+"Du musst die Größe des Actors mit self.size() manuell einstellen, "
 "damit der vollständige Text gesehen werden kann."
 
 #: ../../source/api/actor_number.md

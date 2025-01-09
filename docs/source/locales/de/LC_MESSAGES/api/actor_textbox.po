@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/actor_textbox.md:1
 msgid "Actor > Textbox"
-msgstr "Schauspieler > Textfeld"
+msgstr "Actor > Textfeld"
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:1 of
 msgid "Generates a textbox with fixed width and height"
@@ -82,11 +82,11 @@ msgstr "Return"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:10 of
 msgid "A Text-Actor"
-msgstr "Ein Text-Schauspieler"
+msgstr "Ein Text-Actor"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line_actors:1 of
 msgid ""
 "creates the lines actor - One actor per line. Split long lines after words."
 msgstr ""
-"erstellt die Zeilen Schauspieler - Ein Schauspieler pro Zeile. Lange Zeilen "
+"erstellt die Zeilen Actor - Ein Actor pro Zeile. Lange Zeilen "
 "nach Wörtern aufteilen."

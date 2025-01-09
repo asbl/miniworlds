@@ -1348,7 +1348,7 @@ msgstr ""
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "aktualisiert Kostüme für alle Schauspieler auf der Welt"
+msgstr "aktualisiert Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"

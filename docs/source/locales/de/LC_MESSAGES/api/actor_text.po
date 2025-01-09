@@ -21,18 +21,18 @@ msgstr ""
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
-msgstr "Schauspieler > Text"
+msgstr "Actor > Text"
 
 #: miniworlds.actors.texts.text.Text:1 of
 msgid "A Text-Actor is a actor which contains a Text."
-msgstr "Ein Text-Schauspieler ist ein Schauspieler, der einen Text enthält."
+msgstr "Ein Text-Actor ist ein Actor, der einen Text enthält."
 
 #: miniworlds.actors.texts.text.Text:3 of
 msgid ""
 "You have to set the size of the actor with self.size() manually so that the "
 "complete text can be seen."
 msgstr ""
-"Sie müssen die Größe des Schauspielers manuell mit self.size() festlegen, "
+"Sie müssen die Größe des Actors manuell mit self.size() festlegen, "
 "damit der gesamte Text gesehen werden kann."
 
 #: ../../source/api/actor_text.md
@@ -80,7 +80,7 @@ msgstr "Beispiele:"
 
 #: miniworlds.actors.texts.text.Text.font_size:5 of
 msgid "Sets size of actor to 10::"
-msgstr "Legt Größe des Schauspielers auf 10 fest::"
+msgstr "Legt Größe des Actors auf 10 fest::"
 
 #: miniworlds.actors.texts.text.Text.get_text:1 of
 msgid "Gets the currently displayed text"
@@ -96,7 +96,7 @@ msgstr "Der aktuell angezeigte Text"
 
 #: miniworlds.actors.texts.text.Text.set_text:1 of
 msgid "Sets the text of the actor"
-msgstr "Setzt den Text des Schauspielers"
+msgstr "Setzt den Text des Actors"
 
 #: miniworlds.actors.texts.text.Text.set_text:3 of
 msgid "The text"

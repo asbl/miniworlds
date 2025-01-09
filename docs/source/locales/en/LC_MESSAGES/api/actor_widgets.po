@@ -1623,7 +1623,7 @@ msgstr ""
 #: ../../None:87:<autosummary>:1
 msgid "*on_detecting_border* is called, when actor is near a border"
 msgstr ""
-"*on_detecting_border* wird aufgerufen, wenn der Schauspieler in der Nähe "
+"*on_detecting_border* wird aufgerufen, wenn der Actor in der Nähe "
 "einer Grenze ist."
 
 #: ../../None:87:<autosummary>:1

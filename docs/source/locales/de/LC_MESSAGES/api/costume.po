@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/costume.md:1
 msgid "Actor > Costume"
-msgstr "Schauspieler > Kostüm"
+msgstr "Actor > Kostüm"
 
 #: ../../source/api/costume.md:3
 msgid ""
@@ -44,16 +44,16 @@ msgid ""
 "Every actor has a costume which defines the \"look\" of the actor. You can "
 "switch the images in a costume to animate the actor."
 msgstr ""
-"Jeder Schauspieler hat ein Kostüm, das das \"Aussehen\" des Schauspielers "
+"Jeder Actor hat ein Kostüm, das das \"Aussehen\" des Actors "
 "definiert. Sie können die Bilder in einem Kostüm austauschen, um den "
-"Schauspieler zu animieren."
+"Actor zu animieren."
 
 #: miniworlds.appearances.costume.Costume:6 of
 msgid ""
 "A costume is created if you add an image to an actor with "
 "actor.add_image(path_to_image)"
 msgstr ""
-"Ein Kostüm wird erstellt, wenn Sie einem Schauspieler ein Bild hinzufügen "
+"Ein Kostüm wird erstellt, wenn Sie einem Actor ein Bild hinzufügen "
 "mit actor.add_image(path_to_image)"
 
 #: ../../source/api/costume.md
@@ -80,7 +80,7 @@ msgstr ""
 #: miniworlds.appearances.costume.Costume.info_overlay:1 of
 msgid "Shows info overlay (Rectangle around the actor and Direction marker)"
 msgstr ""
-"Zeigt Info-Overlay (Rechteck um den Schauspieler und Richtungsmarkierung) an"
+"Zeigt Info-Overlay (Rechteck um den Actor und Richtungsmarkierung) an"
 
 #: ../../None:5:<autosummary>:1
 msgid ""
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid "border color of actor"
-msgstr "Rahmenfarbe des Schauspielers"
+msgstr "Rahmenfarbe des Actors"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
@@ -336,7 +336,7 @@ msgstr ":py:obj:`Rand <miniworlds.auftritt.auftritt.Erscheinung.border>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "The border-size of actor."
-msgstr "Die Grenzgröße des Schauspielers."
+msgstr "Die Grenzgröße des Actors."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
@@ -377,7 +377,7 @@ msgid ""
 "\\(actor\\)"
 msgstr ""
 ":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ "
-"\\(Schauspieler\\)"
+"\\(Actor\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid ""
@@ -853,7 +853,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
 msgstr ""
-"Wenn auf Wahr gesetzt, wird das Kostüm mit der Schauspielerrichtung gedreht."
+"Wenn auf Wahr gesetzt, wird das Kostüm mit der Actorrichtung gedreht."
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -890,7 +890,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Setzt den Schauspieler auf Größe **ohne** Beibehaltung des "
+"Setzt den Actor auf Größe **ohne** Beibehaltung des "
 "Seitenverhältnisses."
 
 #: ../../None:23:<autosummary>:1
@@ -1026,7 +1026,7 @@ msgstr "Erhält Argumente für äußere Form"
 
 #: ../../docstring miniworlds.appearances.costume.Costume.parent:1 of
 msgid "the parent of a costume is the associated actor."
-msgstr "der Elternteil eines Kostüms ist der zugehörige Schauspieler."
+msgstr "der Elternteil eines Kostüms ist der zugehörige Actor."
 
 #: ../../source/api/costume.md
 msgid "Parameter"

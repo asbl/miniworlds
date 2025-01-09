@@ -264,7 +264,7 @@ msgstr ":py:obj:`orientierung <miniworlds.actors.actor.Actor.orientation>`\\"
 msgid ":py:obj:`direction <miniworlds.actors.actor.Actor.direction>`\\"
 msgstr ""
 ":py:obj:`direktion "
-"<miniwelten.actoren.schauspieler.Schauspieler.richtung>`\\"
+"<miniwelten.actoren.schauspieler.Actor.richtung>`\\"
 
 #: ../../None:53:<autosummary>:1 miniworlds.actors.actor.Actor.direction:1
 #: miniworlds.actors.shapes.shapes.Line.direction:1 of

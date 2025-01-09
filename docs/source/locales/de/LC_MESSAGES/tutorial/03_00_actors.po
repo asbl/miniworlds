@@ -21,11 +21,11 @@ msgstr ""
 
 #: ../../source/tutorial/03_00_actors.md:1
 msgid "Actors"
-msgstr "Schauspieler"
+msgstr "Actors"
 
 #: ../../source/tutorial/03_00_actors.md:3
 msgid "Actors: Grundbausteine deiner Welt"
-msgstr "Schauspieler: Grundbausteine deiner Welt"
+msgstr "Actors: Grundbausteine deiner Welt"
 
 #: ../../source/tutorial/03_00_actors.md:5
 msgid ""
@@ -186,7 +186,7 @@ msgstr "Summary:"
 
 #: ../../source/tutorial/03_00_actors.md:128
 msgid "Actors erhalten ein Kostüm durch die Methode add_costume()."
-msgstr "Schauspieler erhalten ein Kostüm durch die Methode add_costume()."
+msgstr "Actors erhalten ein Kostüm durch die Methode add_costume()."
 
 #: ../../source/tutorial/03_00_actors.md:129
 msgid ""
@@ -216,7 +216,7 @@ msgid "Mein Actor ist falsch ausgerichtet, was kann ich tun?"
 msgstr ""
 "My Actor is incorrectly aligned, what can I do? \n"
 "\n"
-"Mein Schauspieler ist falsch ausgerichtet, was kann ich tun?"
+"Mein Actor ist falsch ausgerichtet, was kann ich tun?"
 
 #: ../../source/tutorial/03_00_actors.md:139
 msgid ""
@@ -237,7 +237,7 @@ msgstr "Problem"
 #: ../../source/tutorial/03_00_actors.md:156
 #: ../../source/tutorial/03_00_actors.md:164
 msgid "Ausrichtung des Actors"
-msgstr "Alignment des Schauspielers"
+msgstr "Alignment des Actors"
 
 #: ../../source/tutorial/03_00_actors.md:160
 msgid ""

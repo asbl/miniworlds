@@ -2088,7 +2088,7 @@ msgid ""
 "If your want to check if an actor detects a specific pixel, use detect_pixel"
 msgstr ""
 "If your want to check if an actor detects a specific pixel, use detect_pixel\n"
-"Wenn Sie überprüfen möchten, ob ein Schauspieler ein bestimmtes Pixel erkennt, verwenden Sie detect_pixel"
+"Wenn Sie überprüfen möchten, ob ein Actor ein bestimmtes Pixel erkennt, verwenden Sie detect_pixel"
 
 #: miniworlds.actors.actor.Actor.detect_point:7 of
 msgid "True if point is below actor"
