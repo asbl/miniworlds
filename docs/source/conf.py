@@ -14,6 +14,8 @@
 #
 import os
 import sys
+import datetime
+
 
 sys.path.insert(0, os.path.abspath('../../'))
 sys.path.insert(0, os.path.abspath('../../miniworlds'))
@@ -106,7 +108,8 @@ locale_dirs = ['locales/']
 gettext_compact = False
 
 html_context = {
-  'languages': [["en", "link to en"], ["de", "link to de"]]
+  'languages': [["en", "link to en"], ["de", "link to de"]],
+  'build_date': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 }
 
 # List of patterns, relative to source directory, that match files and
