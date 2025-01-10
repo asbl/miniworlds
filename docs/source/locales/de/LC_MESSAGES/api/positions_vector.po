@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -29,9 +29,7 @@ msgstr "Beschreibt einen zweidimensionalen Vektor."
 
 #: miniworlds.positions.vector.Vector:3 of
 msgid "It is used to describe a position, acceleration or velocity."
-msgstr ""
-"Es wird verwendet, um eine Position, Beschleunigung oder Geschwindigkeit zu "
-"beschreiben."
+msgstr "Es wird verwendet, um eine Position, Beschleunigung oder Geschwindigkeit zu beschreiben."
 
 #: miniworlds.positions.vector.Vector:7
 #: miniworlds.positions.vector.Vector.add:11
@@ -42,7 +40,7 @@ msgstr "Beispiele"
 
 #: miniworlds.positions.vector.Vector:8 of
 msgid "Create a circle which follows the mouse."
-msgstr "Erstellen Sie einen Kreis, der der Maus folgt."
+msgstr "Erstelle einen Kreis, der der Maus folgt."
 
 #: ../../source/api/positions_vector.md
 msgid "Public Data Attributes:"
@@ -70,76 +68,46 @@ msgstr ":py:obj:`y <miniworlds.positions.vector.Vector.y>`\\"
 
 #: ../../None:5:<autosummary>:1 miniworlds.positions.vector.Vector.y:1 of
 msgid "the y component of the vector"
-msgstr "die y-komponente des vektors"
+msgstr "die y-Komponente des Vektors"
 
 #: ../../source/api/positions_vector.md
 msgid "Public Methods:"
 msgstr "Öffentliche Methoden:"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ \\(x\\, "
-"y\\)"
-msgstr ""
-":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ \\(x\\, "
-"y\\)"
+msgid ":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ \\(x\\, y\\)"
+msgstr ":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ \\(x\\, y\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ "
-"\\(item\\)"
-msgstr ""
-":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ "
-"\\(item\\)"
+msgid ":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ \\(item\\)"
+msgstr ":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ \\(item\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ "
-"\\(\\)"
-msgstr ""
-":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ "
-"\\(\\)"
+msgid ":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ \\(\\)"
+msgstr ":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_positions "
-"<miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
-msgstr ""
-":py:obj:`from_positions "
-"<miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
+msgid ":py:obj:`from_positions <miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
+msgstr ":py:obj:`from_positions <miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_and_position:1
 #: miniworlds.positions.vector.Vector.from_position:1
 #: miniworlds.positions.vector.Vector.from_positions:1 of
 msgid "Create a vector from actor and position"
-msgstr "Erstelle einen Vektor aus Actor und Position"
+msgstr "Erstellen Sie einen Vektor aus Akteur und Position"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_position <miniworlds.positions.vector.Vector.from_position>`\\"
-" \\(position\\)"
-msgstr ""
-":py:obj:`from_position <miniworlds.positions.vector.Vector.from_position>`\\"
-" \\(position\\)"
+msgid ":py:obj:`from_position <miniworlds.positions.vector.Vector.from_position>`\\ \\(position\\)"
+msgstr ":py:obj:`from_position <miniworlds.positions.vector.Vector.from_position>`\\ \\(position\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_actor_and_position "
-"<miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, "
-"pos\\)"
-msgstr ""
-":py:obj:`from_actor_and_position "
-"<miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, "
-"pos\\)"
+msgid ":py:obj:`from_actor_and_position <miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, pos\\)"
+msgstr ":py:obj:`from_actor_and_position <miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, pos\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ "
-"\\(t1\\, t2\\)"
-msgstr ""
-":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ "
-"\\(t1\\, t2\\)"
+msgid ":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ \\(t1\\, t2\\)"
+msgstr ":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ \\(t1\\, t2\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actors:1 of
@@ -147,84 +115,62 @@ msgid "Create a vector from two actors."
 msgstr "Erstellen Sie einen Vektor aus zwei Akteuren."
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_direction "
-"<miniworlds.positions.vector.Vector.from_direction>`\\ \\(direction\\)"
-msgstr ""
-":py:obj:`from_direction "
-"<miniworlds.positions.vector.Vector.from_direction>`\\ \\(direction\\)"
+msgid ":py:obj:`from_direction <miniworlds.positions.vector.Vector.from_direction>`\\ \\(direction\\)"
+msgstr ":py:obj:`from_direction <miniworlds.positions.vector.Vector.from_direction>`\\ \\(Richtung\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_direction:1 of
 msgid "Creates a vector from miniworlds direction."
-msgstr "Erzeugt einen Vektor aus der Richtung der Miniwelten."
+msgstr "Erstellt einen Vektor aus der Richtung der Miniwelten."
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_actor_direction "
-"<miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
-msgstr ""
-":py:obj:`from_actor_direction "
-"<miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
+msgid ":py:obj:`from_actor_direction <miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
+msgstr ":py:obj:`from_actor_direction <miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_direction:1 of
 msgid "Creates a vector from actor direction"
-msgstr "Erstellt einen Vektor aus der Richtung des Actors"
+msgstr "Erstellt einen Vektor aus der Richtung des Akteurs"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`from_actor_position "
-"<miniworlds.positions.vector.Vector.from_actor_position>`\\ \\(actor\\)"
-msgstr ""
-":py:obj:`from_actor_position "
-"<miniworlds.positions.vector.Vector.from_actor_position>`\\ \\(actor\\)"
+msgid ":py:obj:`from_actor_position <miniworlds.positions.vector.Vector.from_actor_position>`\\ \\(actor\\)"
+msgstr ":py:obj:`from_actor_position <miniworlds.positions.vector.Vector.from_actor_position>`\\ \\(actor\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_position:1 of
 msgid "Creates a vector from actor position"
-msgstr "Erstellt einen Vektor aus der Actorposition"
+msgstr "Erstellt einen Vektor aus der Position des Akteurs"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`rotate <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"
-msgstr ":py:obj:`drehen <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"
+msgstr ":py:obj:`rotate <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.rotate:1
 #: of
 msgid "rotates Vector by theta degrees"
-msgstr "rotiert Vektor um theta Grad"
+msgstr "dreht Vektor um theta Grad"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`to_direction <miniworlds.positions.vector.Vector.to_direction>`\\ "
-"\\(\\)"
-msgstr ""
-":py:obj:`to_direction <miniworlds.positions.vector.Vector.to_direction>`\\ "
-"\\(\\)"
+msgid ":py:obj:`to_direction <miniworlds.positions.vector.Vector.to_direction>`\\ \\(\\)"
+msgstr ":py:obj:`to_direction <miniworlds.positions.vector.Vector.to_direction>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.to_direction:1 of
 msgid "Returns miniworlds direction from vector."
-msgstr "Gibt Miniweltenrichtung vom Vektor zurück."
+msgstr "Gibt die Richtung der Miniwelten aus dem Vektor zurück."
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ "
-"\\(\\)"
-msgstr ""
-":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ "
-"\\(\\)"
+msgid ":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ \\(\\)"
+msgstr ":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`normalize <miniworlds.positions.vector.Vector.normalize>`\\ \\(\\)"
-msgstr ""
-":py:obj:`normalisieren <miniworlds.positions.vector.Vector.normalisieren>`\\"
-" \\(\\)"
+msgstr ":py:obj:`normalize <miniworlds.positions.vector.Vector.normalize>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1
 #: miniworlds.positions.vector.Vector.normalize:1 of
 msgid "sets length of vector to 1"
-msgstr "setzt Länge des Vektors auf 1"
+msgstr "setzt die Länge des Vektors auf 1"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`length <miniworlds.positions.vector.Vector.length>`\\ \\(\\)"
@@ -233,7 +179,7 @@ msgstr ":py:obj:`Länge <miniworlds.positions.vector.Vector.length>`\\ \\(\\)"
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.length:1
 #: of
 msgid "returns length of vector"
-msgstr "gibt länge des Vektors zurück"
+msgstr "gibt die Länge des Vektors zurück"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`neg <miniworlds.positions.vector.Vector.neg>`\\ \\(\\)"
@@ -241,29 +187,21 @@ msgstr ":py:obj:`neg <miniworlds.positions.vector.Vector.neg>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.neg:1 of
 msgid "returns -v for Vector v"
-msgstr "Gibt -v für Vektor v zurück"
+msgstr "gibt -v für Vektor v zurück"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ "
-"\\(other\\)"
-msgstr ""
-":py:obj:`multiplizieren <miniworlds.positions.vector.Vector.multiply>`\\ "
-"\\(anderes\\)"
+msgid ":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ \\(other\\)"
+msgstr ":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ \\(other\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.multiply:1
 #: of
 msgid ""
-"product self * other: * returns product, if ``other`` is scalar (return-"
-"type: Vector) :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+"product self * other: * returns product, if ``other`` is scalar (return-type: Vector) :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
 "\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\]`"
 msgstr ""
-"Produkt Selbst * Andere: * gibt Produkt zurück, wenn „andere“ skalar ist "
-"(Rückgabetyp: Vektor) :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+"Produkt selbst * andere: * gibt das Produkt zurück, wenn ``andere`` ein Skalar ist (Rückgabetyp: Vektor) :rtype: "
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
 "\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\]`"
 
 #: ../../None:29:<autosummary>:1
@@ -271,12 +209,8 @@ msgid ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
 msgstr ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
 
 #: ../../None:29:<autosummary>:1
-msgid ""
-":py:obj:`add_to_position "
-"<miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
-msgstr ""
-":py:obj:`add_to_position "
-"<miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
+msgid ":py:obj:`add_to_position <miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
+msgstr ":py:obj:`add_to_position <miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`__str__ <miniworlds.positions.vector.Vector.__str__>`\\ \\(\\)"
@@ -292,31 +226,27 @@ msgstr ":py:obj:`__neg__ <miniworlds.positions.vector.Vector.__neg__>`\\ \\(\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ \\(other\\)"
-msgstr ""
-":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ \\(other\\)"
+msgstr ":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ \\(andere\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ \\(other\\)"
-msgstr ""
-":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ \\(other\\)"
+msgstr ":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ \\(other\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ \\(other\\)"
-msgstr ""
-":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ "
-"\\(anderer\\)"
+msgstr ":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ \\(andere\\)"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`sub <miniworlds.positions.vector.Vector.sub>`\\ \\(other\\)"
-msgstr ":py:obj:`sub <miniworlds.positions.vector.Vector.sub>`\\ \\(other\\)"
+msgstr ":py:obj:`sub <miniworlds.positions.vector.Vector.sub>`\\ \\(andere\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.sub:1 of
 msgid "adds vector `other` from self."
-msgstr "fügt Vektor `andere` von selbst hinzu."
+msgstr "addiert den Vektor `other` zu sich selbst."
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`add <miniworlds.positions.vector.Vector.add>`\\ \\(other\\)"
-msgstr ":py:obj:`add <miniworlds.positions.vector.Vector.add>`\\ \\(other\\)"
+msgstr ":py:obj:`add <miniworlds.positions.vector.Vector.add>`\\ \\(andere\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.add:1 of
 msgid "adds vector `other` to self."
@@ -328,11 +258,11 @@ msgstr ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ \\(Wert\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.limit:1 of
 msgid "limits length of vector to value"
-msgstr "Begrenzt Länge des Vektors auf Wert"
+msgstr "begrenzt die Länge des Vektors auf den Wert"
 
 #: ../../source/api/positions_vector.md
 msgid "Rückgabetyp"
-msgstr "Return type"
+msgstr "Returntyp"
 
 #: miniworlds.positions.vector.Vector.add:3
 #: miniworlds.positions.vector.Vector.dot:2
@@ -345,17 +275,12 @@ msgstr "Return type"
 #: miniworlds.positions.vector.Vector.limit:4
 #: miniworlds.positions.vector.Vector.rotate:4
 #: miniworlds.positions.vector.Vector.sub:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
-msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
 
 #: ../../source/api/positions_vector.md
 msgid "Parameter"
-msgstr ""
-"Parameter\n"
-"\n"
-"Parameter"
+msgstr "Parameter"
 
 #: miniworlds.positions.vector.Vector.add:5
 #: miniworlds.positions.vector.Vector.sub:5 of
@@ -364,12 +289,12 @@ msgstr "anderer Vektor"
 
 #: ../../source/api/positions_vector.md
 msgid "Rückgabe"
-msgstr "Return"
+msgstr "Rückgabe"
 
 #: miniworlds.positions.vector.Vector.add:8
 #: miniworlds.positions.vector.Vector.sub:8 of
 msgid "`self` + `other`"
-msgstr "`selbst` + `anderer`"
+msgstr "`self` + `other`"
 
 #: miniworlds.positions.vector.Vector.add:12 of
 msgid "Add two vectors:"
@@ -380,40 +305,35 @@ msgstr "Füge zwei Vektoren hinzu:"
 #: miniworlds.positions.vector.Vector.neg:14
 #: miniworlds.positions.vector.Vector.sub:21 of
 msgid "Alternative:"
-msgstr "Alternative: Alternative"
+msgstr "Alternative:"
 
 #: miniworlds.positions.vector.Vector.add_to_position:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+"\\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+"\\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.positions.vector.Vector.from_actor_and_position:3
 #: miniworlds.positions.vector.Vector.from_position:3
 #: miniworlds.positions.vector.Vector.from_positions:3 of
 msgid "The vector describes is generated from: actor2.center - position"
-msgstr "Der Vektor beschreibt wird erzeugt aus: actor2.center - position"
+msgstr "Der Vektor wird erzeugt aus: actor2.center - position"
 
 #: miniworlds.positions.vector.Vector.from_actor_direction:3
 #: miniworlds.positions.vector.Vector.neg:3
 #: miniworlds.positions.vector.Vector.normalize:3 of
-msgid ""
-"Examples: :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
-msgstr ""
-"Beispiele: :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+msgid "Examples: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+msgstr "Beispiele: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
 
 #: miniworlds.positions.vector.Vector.from_actor_direction:7 of
 msgid "Creates rotating rectangle"
-msgstr "Erzeugt rotierendes Rechteck"
+msgstr "Erstellt ein rotierendes Rechteck"
 
 #: miniworlds.positions.vector.Vector.from_actors:3 of
 msgid "The vector describes is generated from: actor2.center - actor1.center"
-msgstr ""
-"Der Vektor beschreibt wird generiert aus: actor2.center - actor1.center."
+msgstr "Der Vektor wird erzeugt aus: actor2.center - actor1.center"
 
 #: miniworlds.positions.vector.Vector.length:3 of
 msgid "Examples: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
@@ -425,9 +345,7 @@ msgstr "Länge des Vektors"
 
 #: miniworlds.positions.vector.Vector.multiply:5 of
 msgid "returns dot-product, if ``other`` is vector (return-type: float)"
-msgstr ""
-"gibt das Skalarprodukt zurück, wenn \"andere\" ein Vektor ist (Rückgabetyp: "
-"float)"
+msgstr "gibt das Skalarprodukt zurück, wenn ``other`` ein Vektor ist (Rückgabetyp: float)"
 
 #: miniworlds.positions.vector.Vector.multiply:6 of
 msgid "a scalar or vector"
@@ -435,19 +353,19 @@ msgstr "ein Skalar oder Vektor"
 
 #: miniworlds.positions.vector.Vector.multiply:10 of
 msgid "Product and dot-product:"
-msgstr "Produkt und Punktprodukt:"
+msgstr "Produkt und Skalarprodukt:"
 
 #: miniworlds.positions.vector.Vector.neg:7 of
 msgid "Inverse of vector:"
-msgstr "Inverse von Vektor:"
+msgstr "Inverse des Vektors:"
 
 #: miniworlds.positions.vector.Vector.normalize:7 of
 msgid "Normalized vector with length 1:"
-msgstr "Normalisierter Vektor mit Länge 1:"
+msgstr "Normalisierter Vektor mit der Länge 1:"
 
 #: miniworlds.positions.vector.Vector.sub:12 of
 msgid "Subtracts two vectors:"
-msgstr "Zieht zwei Vektoren voneinander ab:"
+msgstr "Subtrahiert zwei Vektoren:"
 
 #: miniworlds.positions.vector.Vector.to_direction:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"

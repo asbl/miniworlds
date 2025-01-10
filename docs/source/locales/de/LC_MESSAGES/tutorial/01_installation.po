@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -24,37 +24,32 @@ msgid "Installation"
 msgstr "Installation"
 
 #: ../../source/tutorial/01_installation.md:3
-msgid ""
-"Du kannst miniworlds auf deinem Computer oder mit Hilfe von Thonny "
-"installieren:"
-msgstr ""
-"You can install miniworlds on your computer or with the help of Thonny."
+msgid "Du kannst miniworlds auf deinem Computer oder mit Hilfe von Thonny installieren:"
+msgstr "You can install miniworlds on your computer or with the help of Thonny:"
 
 #: ../../source/tutorial/01_installation.md:6
 msgid "Auf deinem Computer"
-msgstr "On your computer"
+msgstr "Auf deinem Computer"
 
 #: ../../source/tutorial/01_installation.md:8
 msgid "Installiere zuerst Python."
 msgstr "Installiere zuerst Python."
 
 #: ../../source/tutorial/01_installation.md:10
-msgid ""
-"Python kannst du z.B. unter [Python.org](https://www.python.org) "
-"herunterladen."
-msgstr "Python you can e.g. at [Python.org](https://www.python.org) download."
+msgid "Python kannst du z.B. unter [Python.org](https://www.python.org) herunterladen."
+msgstr "Python kannst du z.B. unter [Python.org](https://www.python.org) herunterladen."
 
 #: ../../source/tutorial/01_installation.md:13
 msgid ""
-"Alternativ kannst du auch die Entwicklungsumgebung "
-"[Thonny](https://thonny.org/) installieren - Diese bringt Python direkt mit."
+"Alternativ kannst du auch die Entwicklungsumgebung [Thonny](https://thonny.org/) installieren - Diese bringt Python "
+"direkt mit."
 msgstr ""
-"Alternatively, you can also install the development environment "
-"[Thonny](https://thonny.org/) - This comes with Python directly."
+"Alternatively, you can also install the development environment [Thonny](https://thonny.org/) - This comes with Python "
+"directly."
 
 #: ../../source/tutorial/01_installation.md:17
 msgid "Installiere das Framework mit:"
-msgstr "Install the framework with:"
+msgstr "Installiere das Framework mit:"
 
 #: ../../source/tutorial/01_installation.md:23
 msgid "Installiere eine geeignete Entwicklungsumgebung, z.B.:"
@@ -70,19 +65,17 @@ msgstr "[Pycharm](https://www.jetbrains.com/de-de/pycharm/)"
 
 #: ../../source/tutorial/01_installation.md:28
 msgid "\\...jetzt kannst du loslegen."
-msgstr "...now you can get started."
+msgstr "\\...now you can get started."
 
 #: ../../source/tutorial/01_installation.md:30
 msgid "Mit Thonny"
-msgstr "With Thonny"
+msgstr "Mit Thonny"
 
 #: ../../source/tutorial/01_installation.md:32
 msgid ""
-"Klicke zunächst auf \\\"Extras -\\> Verwalte Pakete\\\". Gib dann im "
-"Suchfeld \\\"miniworlds\\\" ein und installiere den miniworlds"
-msgstr ""
-"Click first on \"Extras -> Manage Packages\". Then enter \"miniworlds\" in "
-"the search field and install the miniworlds"
+"Klicke zunächst auf \\\"Extras -\\> Verwalte Pakete\\\". Gib dann im Suchfeld \\\"miniworlds\\\" ein und installiere "
+"den miniworlds"
+msgstr "Click zuerst auf \"Extras -\\> Verwalte Pakete\". Gib dann im Suchfeld \"miniworlds\" ein und installiere den miniworlds"
 
 #: ../../source/tutorial/01_installation.md:35
 msgid "![miniworlds](../_images/install01.png)"
@@ -90,4 +83,4 @@ msgstr "![miniworlds](../_images/install01.png)"
 
 #: ../../source/tutorial/01_installation.md:35
 msgid "miniworlds"
-msgstr "miniwelten"
+msgstr "Miniwelten"

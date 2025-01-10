@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/tutorial/04_02_messages.md:1
 msgid "Nachrichten"
-msgstr "News"
+msgstr "Nachrichten"
 
 #: ../../source/tutorial/04_02_messages.md:3
 msgid "Nachrichten senden"
@@ -29,14 +29,11 @@ msgstr "Send messages"
 
 #: ../../source/tutorial/04_02_messages.md:5
 msgid ""
-"Mit **`send_message(self, message)`** kannst du eine Nachricht an alle "
-"Objekte in deiner Welt senden.  Diese Nachrichten können von anderen "
-"Objekten empfangen und verarbeitet werden, wenn sie auf das entsprechende "
-"Ereignis hören."
+"Mit **`send_message(self, message)`** kannst du eine Nachricht an alle Objekte in deiner Welt senden.  Diese "
+"Nachrichten können von anderen Objekten empfangen und verarbeitet werden, wenn sie auf das entsprechende Ereignis hören."
 msgstr ""
-"With **`send_message(self, message)`** you can send a message to all objects"
-" in your world. These messages can be received and processed by other "
-"objects if they listen for the corresponding event."
+"With **`send_message(self, message)`** you can send a message to all objects in your world. These messages can be "
+"received and processed by other objects if they are listening for the corresponding event."
 
 #: ../../source/tutorial/04_02_messages.md:8
 #: ../../source/tutorial/04_02_messages.md:23
@@ -44,49 +41,37 @@ msgid "Beispiel:"
 msgstr "Example:"
 
 #: ../../source/tutorial/04_02_messages.md:10
-msgid ""
-"In diesem Beispiel sendet player 1 eine Nachricht, dass er sich bewegt hat."
-msgstr "In this example, player 1 sends a message that he has moved."
+msgid "In diesem Beispiel sendet player 1 eine Nachricht, dass er sich bewegt hat."
+msgstr "In diesem Beispiel sendet Spieler 1 eine Nachricht, dass er sich bewegt hat."
 
 #: ../../source/tutorial/04_02_messages.md:19
 msgid "Nachrichten empfangen"
-msgstr "Receive messages"
+msgstr "Nachrichten empfangen"
 
 #: ../../source/tutorial/04_02_messages.md:21
-msgid ""
-"Mit dem decorator `register_message(\"message\")` kannst du eine Nachricht "
-"registrieren:"
-msgstr ""
-"With the decorator `register_message(\"message\")` you can register a "
-"message:"
+msgid "Mit dem decorator `register_message(\"message\")` kannst du eine Nachricht registrieren:"
+msgstr "Mit dem Dekorator `register_message(\"message\")` kannst du eine Nachricht registrieren:"
 
 #: ../../source/tutorial/04_02_messages.md:25
 msgid ""
-"Im folgenden Beispiel wird die Nachricht, die player1 versendet, von player2"
-" empfangen. Er bewegt sich immer dann in die Richtung von player1, wenn "
-"dieser sich bewegt"
+"Im folgenden Beispiel wird die Nachricht, die player1 versendet, von player2 empfangen. Er bewegt sich immer dann in "
+"die Richtung von player1, wenn dieser sich bewegt"
 msgstr ""
-"In the following example, the message sent by player1 is received by "
-"player2. He moves in the direction of player1 whenever he moves"
+"In the following example, the message sent by player1 is received by player2. He always moves in the direction of "
+"player1 whenever player1 moves."
 
 #: ../../source/tutorial/04_02_messages.md:40
 msgid "Erklärung:"
 msgstr "Explanation:"
 
 #: ../../source/tutorial/04_02_messages.md:42
-msgid ""
-"In diesem Beispiel sendet **player1** die Nachricht `\"p1moved\"`, wenn die "
-"Taste <kbd>A</kbd> gedrückt wird."
-msgstr ""
-"In this example, **player1** sends the message `\"p1moved\"` when the key "
-"<kbd>A</kbd> is pressed."
+msgid "In diesem Beispiel sendet **player1** die Nachricht `\"p1moved\"`, wenn die Taste <kbd>A</kbd> gedrückt wird."
+msgstr "In diesem Beispiel sendet **player1** die Nachricht „p1moved“, wenn die Taste <kbd>A</kbd> gedrückt wird."
 
 #: ../../source/tutorial/04_02_messages.md:43
 msgid ""
-"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  "
-"Sobald **player1** sich bewegt, empfängt **player2** die Nachricht und "
-"bewegt sich in Richtung von **player1**."
+"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  Sobald **player1** sich bewegt, empfängt "
+"**player2** die Nachricht und bewegt sich in Richtung von **player1**."
 msgstr ""
-"**player2** has registered a method that listens for this message. Once **player1** moves, **player2** receives the message and moves towards **player1**. \n"
-"\n"
-"**player2** hat eine Methode registriert, die auf diese Nachricht hört. Sobald **player1** sich bewegt, empfängt **player2** die Nachricht und bewegt sich in Richtung von **player1**."
+"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  Sobald **player1** sich bewegt, empfängt "
+"**player2** die Nachricht und bewegt sich in Richtung von **player1**."

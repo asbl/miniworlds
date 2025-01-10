@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,51 +21,36 @@ msgstr ""
 
 #: ../../source/tutorial/10_01_status2.md:1
 msgid "Das Programm stoppen"
-msgstr "Stop the program"
+msgstr "Stoppe das Programm"
 
 #: ../../source/tutorial/10_01_status2.md:3
 msgid ""
-"Bei einem Spielende oder einem Levelwechsel gibt es oft bestimmte Aktionen, "
-"die durchgeführt werden müssen,  wie z.B. das Spielfeld zurückzusetzen oder "
-"das Spiel zu pausieren. Dafür stehen folgende Befehle zur Verfügung:"
+"Bei einem Spielende oder einem Levelwechsel gibt es oft bestimmte Aktionen, die durchgeführt werden müssen,  wie z.B. "
+"das Spielfeld zurückzusetzen oder das Spiel zu pausieren. Dafür stehen folgende Befehle zur Verfügung:"
 msgstr ""
-"At the end of a game or a level change, there are often certain actions that"
-" need to be performed, such as resetting the game board or pausing the game."
-" The following commands are available for this:"
+"At the end of a game or a level change, there are often certain actions that need to be performed, such as resetting "
+"the playing field or pausing the game. The following commands are available for this:"
 
 #: ../../source/tutorial/10_01_status2.md:6
-msgid ""
-"**`world.stop()`**: Stoppt das Spielfeld. Es werden keine weiteren Aktionen "
-"ausgeführt und keine Events mehr abgefragt."
-msgstr ""
-"**`world.stop()`**: Stop the playing field. No further actions are performed"
-" and no more events are queried."
+msgid "**`world.stop()`**: Stoppt das Spielfeld. Es werden keine weiteren Aktionen ausgeführt und keine Events mehr abgefragt."
+msgstr "**`world.stop()`**: Stops the playing field. No further actions are performed and no events are queried. "
 
 #: ../../source/tutorial/10_01_status2.md:7
-msgid ""
-"**`world.start()`**: Setzt einen vorherigen `stop`-Befehl zurück und lässt "
-"das Spiel weiterlaufen."
-msgstr ""
-"**`world.start()`**: Sets a previous `stop` command back and lets the game "
-"continue."
+msgid "**`world.start()`**: Setzt einen vorherigen `stop`-Befehl zurück und lässt das Spiel weiterlaufen."
+msgstr "**`world.start()`**: Resets a previous `stop` command and allows the game to continue."
 
 #: ../../source/tutorial/10_01_status2.md:8
-msgid ""
-"**`world.is_running`**: Mit dieser Variable kannst du überprüfen, ob das "
-"Spielfeld gerade aktiv ist."
-msgstr ""
-"**`world.is_running`**: With this variable you can check if the game field "
-"is currently active."
+msgid "**`world.is_running`**: Mit dieser Variable kannst du überprüfen, ob das Spielfeld gerade aktiv ist."
+msgstr "**`world.is_running`**: Mit dieser Variable kannst du überprüfen, ob das Spielfeld gerade aktiv ist."
 
 #: ../../source/tutorial/10_01_status2.md:9
 msgid "**`world.clear()`**: Entfernt alle Figuren vom Spielfeld."
-msgstr "**`world.clear()`**: Removes all figures from the playing field."
+msgstr "**`world.clear()`**: Entfernt alle Figuren vom Spielfeld."
 
 #: ../../source/tutorial/10_01_status2.md:10
 msgid ""
-"**`world.reset()`**: Löscht das aktuelle Spielfeld und erstellt ein neues, "
-"indem alle Figuren wie in der Methode `world.on_setup()` definiert, neu "
-"erzeugt werden."
+"**`world.reset()`**: Löscht das aktuelle Spielfeld und erstellt ein neues, indem alle Figuren wie in der Methode "
+"`world.on_setup()` definiert, neu erzeugt werden."
 msgstr ""
-"**`world.reset()`**: Deletes the current playing field and creates a new one"
-" by recreating all characters as defined in the method `world.on_setup()`."
+"**`world.reset()`**: Löscht das aktuelle Spielfeld und erstellt ein neues, indem alle Figuren wie in der Methode "
+"`world.on_setup()` definiert, neu erzeugt werden."

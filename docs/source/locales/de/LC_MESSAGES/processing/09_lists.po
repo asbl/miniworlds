@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,104 +21,81 @@ msgstr ""
 
 #: ../../source/processing/09_lists.md:1
 msgid "Listen"
-msgstr "Hören"
+msgstr "Hör zu"
 
 #: ../../source/processing/09_lists.md:3
-msgid ""
-"Oft wollen wir viele ähnliche Elemente gleichzeitig zugreifen z.B. Monate:"
-msgstr ""
-"Häufig möchten wir gleichzeitig auf viele ähnliche Elemente zugreifen, z.B. "
-"Monate:"
+msgid "Oft wollen wir viele ähnliche Elemente gleichzeitig zugreifen z.B. Monate:"
+msgstr "Oft wollen wir auf viele ähnliche Elemente gleichzeitig zugreifen, z.B. Monate:"
 
 #: ../../source/processing/09_lists.md:5
 msgid ""
-"Angenommen wir wollen die durchschnittlichen Monatstemperaturen in einer "
-"Stadt speichern und haben folgende Daten gemessen:"
-msgstr ""
-"Assuming we want to store the average monthly temperatures in a city and "
-"have measured the following data:"
+"Angenommen wir wollen die durchschnittlichen Monatstemperaturen in einer Stadt speichern und haben folgende Daten "
+"gemessen:"
+msgstr "Suppose we want to store the average monthly temperatures in a city and have measured the following data:"
 
 #: ../../source/processing/09_lists.md:23
 msgid ""
-"Wenn die Daten weiter verarbeitet werden sollen, dann wird dies sehr "
-"unpraktisch, da wir jedesmal jeden einzelnen Wert \"anfassen\" müssen. Daher"
-" verwendet man stattdessen Listen."
+"Wenn die Daten weiter verarbeitet werden sollen, dann wird dies sehr unpraktisch, da wir jedesmal jeden einzelnen Wert "
+"\"anfassen\" müssen. Daher verwendet man stattdessen Listen."
 msgstr ""
-"If the data should be processed further, then this becomes very impractical,"
-" because we have to \"touch\" each individual value every time. Therefore, "
-"lists are used instead."
+"If the data is to be further processed, it becomes very impractical because we have to \"touch\" each individual value "
+"every time. Therefore, lists are used instead."
 
 #: ../../source/processing/09_lists.md:26
 msgid ""
-"Man verwendet daher für diesen Einsatzzweck Listen, bei der gleichartige "
-"Elemente unter einem gemeinsamen **Namen** zusammengefasst werden und mit "
-"Hilfe eines **Index** zugreifbar sind."
+"Man verwendet daher für diesen Einsatzzweck Listen, bei der gleichartige Elemente unter einem gemeinsamen **Namen** "
+"zusammengefasst werden und mit Hilfe eines **Index** zugreifbar sind."
 msgstr ""
-"One uses therefore for this purpose lists, in which similar elements under a"
-" common **name** are summarized and accessible with the help of an "
-"**index**."
+"Therefore, lists are used for this purpose, where similar elements are grouped under a common **name** and can be "
+"accessed using an **index**."
 
 #: ../../source/processing/09_lists.md:28
 msgid "Was sind Listen?"
-msgstr "Was sind Listen?"
+msgstr "What are lists?"
 
 #: ../../source/processing/09_lists.md:30
 msgid ""
-"Listen sind eine Zusammenfassung von Daten, bei der jedes Datum durch einen "
-"Index identifiziert wird. Die einzelnen Werte einer Liste nennt man "
-"*Elemente*."
+"Listen sind eine Zusammenfassung von Daten, bei der jedes Datum durch einen Index identifiziert wird. Die einzelnen "
+"Werte einer Liste nennt man *Elemente*."
 msgstr ""
-"Listen are a summary of data where each date is identified by an index. The "
-"individual values of a list are called *elements*."
+"Lists sind eine Zusammenfassung von Daten, bei der jedes Datum durch einen Index identifiziert wird. Die einzelnen "
+"Werte einer Liste nennt man *Elemente*."
 
 #: ../../source/processing/09_lists.md:32
 msgid "Listen erzeugen"
-msgstr "Hören erzeugen"
+msgstr "Listen erstellen"
 
 #: ../../source/processing/09_lists.md:34
 msgid ""
-"Man kann in Python Listen auf verschiedene Art und Weise erzeugen. Die "
-"einfachste Möglichkeit ist es, Listen mit Hilfe von eckigen Klammern zu "
-"erzeugen:"
+"Man kann in Python Listen auf verschiedene Art und Weise erzeugen. Die einfachste Möglichkeit ist es, Listen mit Hilfe "
+"von eckigen Klammern zu erzeugen:"
 msgstr ""
-"One can generate lists in Python in various ways. The simplest way is to "
-"generate lists using square brackets:"
+"In Python kann man Listen auf verschiedene Arten und Weisen erzeugen. Die einfachste Möglichkeit ist es, Listen mit "
+"Hilfe von eckigen Klammern zu erzeugen:"
 
 #: ../../source/processing/09_lists.md:41
-msgid ""
-"Listen können selbst unterschiedliche Datentypen enthalten, d.h. auch dies "
-"ist eine Liste:"
-msgstr ""
-"Listen können selbst unterschiedliche Datentypen enthalten, d.h. auch dies "
-"ist eine Liste:"
+msgid "Listen können selbst unterschiedliche Datentypen enthalten, d.h. auch dies ist eine Liste:"
+msgstr "Listen können selbst unterschiedliche Datentypen enthalten, d.h. auch dies ist eine Liste:"
 
 #: ../../source/processing/09_lists.md:47
-msgid ""
-"Wie du siehst, ist es sogar möglich (und oft notwendig) eine Liste innerhalb"
-" einer Liste zu erstellen."
-msgstr ""
-"As you can see, it is even possible (and often necessary) to create a list "
-"within a list."
+msgid "Wie du siehst, ist es sogar möglich (und oft notwendig) eine Liste innerhalb einer Liste zu erstellen."
+msgstr "As you can see, it is even possible (and often necessary) to create a list within a list."
 
 #: ../../source/processing/09_lists.md:49
 msgid "Länge einer Liste"
-msgstr "Length of a list"
+msgstr "Length einer Liste"
 
 #: ../../source/processing/09_lists.md:51
 msgid "Die Länge einer Liste kannst du mit der Funktion len() berechnen:"
-msgstr "The length of a list can be calculated with the function len()."
+msgstr "You can calculate the length of a list with the function len():"
 
 #: ../../source/processing/09_lists.md:58
 msgid "Auf Elemente zugreifen"
-msgstr "Accessing elements"
+msgstr "Access elements"
 
 #: ../../source/processing/09_lists.md:60
-msgid ""
-"Mit Hilfe des `Index` kannst du auf Elemente einer Liste zugreifen. die "
-"Syntax dafür ist folgende"
-msgstr ""
-"Using the `Index` you can access elements of a list. the syntax for this is "
-"as follows."
+msgid "Mit Hilfe des `Index` kannst du auf Elemente einer Liste zugreifen. die Syntax dafür ist folgende"
+msgstr "Using the `index`, you can access elements of a list. The syntax for this is as follows"
 
 #: ../../source/processing/09_lists.md:66
 msgid "z.B."
@@ -126,85 +103,75 @@ msgstr "z.B."
 
 #: ../../source/processing/09_lists.md:75
 msgid "Listenelemente verändern"
-msgstr "Listenelemente verändern"
+msgstr "Listenelemente ändern"
 
 #: ../../source/processing/09_lists.md:77
 msgid "Du kannst mit Hilfe des Index auch Listenelemente verändern:"
-msgstr "You can also change list elements using the index."
+msgstr "You can also change list elements using the index:"
 
 #: ../../source/processing/09_lists.md:85
 msgid "append()"
-msgstr "anhängen()"
+msgstr "append()"
 
 #: ../../source/processing/09_lists.md:87
 msgid ""
-"Listen in Python haben eine **dynamische** Größe und können verändert "
-"werden. So kannst du jederzeit mit append() ein Element an eine Liste "
-"anhängen:"
+"Listen in Python haben eine **dynamische** Größe und können verändert werden. So kannst du jederzeit mit append() ein "
+"Element an eine Liste anhängen:"
 msgstr ""
-"Listen in Python have a **dynamic** size and can be changed. So you can "
-"always append an element to a list with append()"
+"Listen in Python haben eine **dynamische** Größe und können verändert werden. So kannst du jederzeit mit append() ein "
+"Element an eine Liste anhängen:"
 
 #: ../../source/processing/09_lists.md:95
 msgid "in"
-msgstr "im"
+msgstr "in"
 
 #: ../../source/processing/09_lists.md:97
-msgid ""
-"Mit dem Schlüsselwort `in` kannst du überprüfen, ob ein Element in einer "
-"Liste enthalten ist."
-msgstr ""
-"Using the keyword `in`, you can check if an element is contained in a list."
+msgid "Mit dem Schlüsselwort `in` kannst du überprüfen, ob ein Element in einer Liste enthalten ist."
+msgstr "Mit dem Schlüsselwort `in` kannst du überprüfen, ob ein Element in einer Liste enthalten ist."
 
 #: ../../source/processing/09_lists.md:105
 msgid ""
-"Dies ist ein bedeutender Unterschied zu anderen Programmiersprachen, die als"
-" Datenstruktur anstelle von Listen *Arrays* kennen. Arrays sind nicht "
-"veränderbar und haben eine feste Länge."
+"Dies ist ein bedeutender Unterschied zu anderen Programmiersprachen, die als Datenstruktur anstelle von Listen *Arrays* "
+"kennen. Arrays sind nicht veränderbar und haben eine feste Länge."
 msgstr ""
-"This is a significant difference to other programming languages that know "
-"*Arrays* as a data structure instead of lists. Arrays are not changeable and"
-" have a fixed length."
+"This is a significant difference from other programming languages that know *arrays* as a data structure instead of "
+"lists. Arrays are immutable and have a fixed length."
 
 #: ../../source/processing/09_lists.md:107
 msgid "Beispiel : Monate"
-msgstr "Example: Monate"
+msgstr "Example : Monate"
 
 #: ../../source/processing/09_lists.md:109
 msgid ""
-"Am Beispiel der Monate schauen wir uns dies nochmal genauer an. Anstelle von"
-" einzelnen Variablen kann man die Monate als Liste anlegen:"
+"Am Beispiel der Monate schauen wir uns dies nochmal genauer an. Anstelle von einzelnen Variablen kann man die Monate "
+"als Liste anlegen:"
 msgstr ""
-"Am Beispiel der Monate schauen wir uns dies nochmal genauer an. Anstelle von"
-" einzelnen Variablen kann man die Monate als Liste anlegen:"
+"Anhand des Beispiels der Monate schauen wir uns dies nochmal genauer an. Anstelle von einzelnen Variablen kann man die "
+"Monate als Liste anlegen:"
 
 #: ../../source/processing/09_lists.md:127
 msgid "Alternativ könnte man die Liste auch so anlegen:"
-msgstr "Alternatively, the list could also be created like this:"
+msgstr "Alternativ könnte man die Liste auch so anlegen:"
 
 #: ../../source/processing/09_lists.md:132
 msgid "Wenn wir die Liste ausgeben, erhalten wir folgendes:"
-msgstr "When we print the list, we get the following:"
+msgstr "Wenn wir die Liste ausgeben, erhalten wir folgendes:"
 
 #: ../../source/processing/09_lists.md:139
 msgid "Wir können auf die einzelnen Listenelemente mit einem Index zugreifen:"
-msgstr "We can access the individual list elements with an index."
+msgstr "We can access the individual list elements with an index:"
 
 #: ../../source/processing/09_lists.md:149
-msgid ""
-"Und wir können mit einer Schleife über die Liste iterieren. So können wir "
-"z.B. die Durchschnittstemperatur berechnen:"
-msgstr ""
-"And we can iterate over the list with a loop. So we can, for example, "
-"calculate the average temperature:"
+msgid "Und wir können mit einer Schleife über die Liste iterieren. So können wir z.B. die Durchschnittstemperatur berechnen:"
+msgstr "And we can iterate over the list with a loop. This way, we can calculate the average temperature, for example:"
 
 #: ../../source/processing/09_lists.md:158
 msgid "Dies können wir nutzen, um die Daten zu visualisieren:"
-msgstr "This we can use to the data to visualize:"
+msgstr "We can use this to visualize the data:"
 
 #: ../../source/processing/09_lists.md:189
 msgid "![months](../_images/months.png)"
-msgstr "![Monate](../_images/months.png)"
+msgstr "![months](../_images/months.png)"
 
 #: ../../source/processing/09_lists.md:189
 msgid "months"
@@ -215,38 +182,27 @@ msgid "Grafische Objekte speichern"
 msgstr "Save graphic objects"
 
 #: ../../source/processing/09_lists.md:193
-msgid ""
-"Wir können auch Objekte in Arrays speichern. Dies wird z.B. oft bei der "
-"Kollissionserkennung benötigt."
-msgstr ""
-"We can also store objects in arrays. This is often needed for collision "
-"detection."
+msgid "Wir können auch Objekte in Arrays speichern. Dies wird z.B. oft bei der Kollissionserkennung benötigt."
+msgstr "We can also store objects in arrays. This is often needed for collision detection, for example."
 
 #: ../../source/processing/09_lists.md:195
 msgid ""
-"z.B. wollen wir ein Programm schreiben, bei denen grüne Kreise eingesammelt "
-"und rote Punkte vermieden werden sollen. Dies können wir folgendermaßen mit "
-"Listen umsetzen:"
+"z.B. wollen wir ein Programm schreiben, bei denen grüne Kreise eingesammelt und rote Punkte vermieden werden sollen. "
+"Dies können wir folgendermaßen mit Listen umsetzen:"
 msgstr ""
-"z.B. want we a program write, at which green circles collected and red dots "
-"avoided be should. This can we as follows with lists implement:"
+"Zum Beispiel wollen wir ein Programm schreiben, bei dem grüne Kreise eingesammelt und rote Punkte vermieden werden "
+"sollen. Dies können wir folgendermaßen mit Listen umsetzen:"
 
 #: ../../source/processing/09_lists.md:236
-msgid ""
-"Wenn man die grünen Kreise anklickt, wird der Punktestand um 1 erhöht, "
-"ansonsten um 1 verringert."
-msgstr ""
-"If one clicks on the green circles, the score is increased by 1, otherwise "
-"decreased by 1."
+msgid "Wenn man die grünen Kreise anklickt, wird der Punktestand um 1 erhöht, ansonsten um 1 verringert."
+msgstr "When you click on the green circles, the score increases by 1, otherwise it decreases by 1."
 
 #: ../../source/processing/09_lists.md:238
 msgid ""
-"Die Kollissionserkennung funktioniert mit Hilfe von Listen: die Kreise "
-"werden jeweils in die Liste red_circles und green_circles hinzugefügt - Auf "
-"diese Weise kann man mit `circle in green_circles` überprüfen, ob ein Kreis "
-"in einer dieser beiden Listen enthalten ist."
+"Die Kollissionserkennung funktioniert mit Hilfe von Listen: die Kreise werden jeweils in die Liste red_circles und "
+"green_circles hinzugefügt - Auf diese Weise kann man mit `circle in green_circles` überprüfen, ob ein Kreis in einer "
+"dieser beiden Listen enthalten ist."
 msgstr ""
-"The collision detection works with the help of lists: the circles are added "
-"to the red_circles and green_circles lists respectively - This way one can "
-"check with 'circle in green_circles' if a circle is contained in one of "
-"these two lists."
+"The collision detection works with the help of lists: the circles are each added to the list red_circles and "
+"green_circles - In this way, you can check with `circle in green_circles` whether a circle is contained in one of these "
+"two lists."

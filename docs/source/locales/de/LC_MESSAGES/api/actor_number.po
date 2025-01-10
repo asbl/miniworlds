@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,31 +21,24 @@ msgstr ""
 
 #: ../../source/api/actor_number.md:1
 msgid "Actor > Number"
-msgstr "Actor > Nummer"
+msgstr "Darsteller > Nummer"
 
 #: miniworlds.actors.texts.number.Number:1 of
 msgid "A number actor shows a Number."
-msgstr "Ein Zahlen-Actor zeigt eine Nummer."
+msgstr "Ein Zahlenakteur zeigt eine Zahl."
 
 #: miniworlds.actors.texts.number.Number:3 of
-msgid ""
-"You have to set the size of the actor with self.size() manually so that the "
-"complete text can be seen."
-msgstr ""
-"Du musst die Größe des Actors mit self.size() manuell einstellen, "
-"damit der vollständige Text gesehen werden kann."
+msgid "You have to set the size of the actor with self.size() manually so that the complete text can be seen."
+msgstr "Sie müssen die Größe des Akteurs mit self.size() manuell einstellen, damit der vollständige Text sichtbar ist."
 
 #: ../../source/api/actor_number.md
 #: miniworlds.actors.texts.number.Number.set_value of
 msgid "Parameter"
-msgstr ""
-"Parameter\n"
-"\n"
-"Parameter"
+msgstr "Parameter"
 
 #: miniworlds.actors.texts.number.Number:6 of
 msgid "Top-Left position of Number."
-msgstr "Oben-links-position von Nummer."
+msgstr "Oben-links Position der Nummer."
 
 #: miniworlds.actors.texts.number.Number:7 of
 msgid "The initial number"
@@ -53,7 +46,7 @@ msgstr "Die Anfangszahl"
 
 #: miniworlds.actors.texts.number.Number:8 of
 msgid "The size of the font (default: 80)"
-msgstr "Die Größe der Schriftart (standardmäßig: 80)"
+msgstr "Die Schriftgröße (Standard: 80)"
 
 #: miniworlds.actors.texts.number.Number:11
 #: miniworlds.actors.texts.number.Number.get_value:6
@@ -63,38 +56,37 @@ msgstr "Beispiele"
 
 #: miniworlds.actors.texts.number.Number:12 of
 msgid "Sets a new NumberActor to display the score.::"
-msgstr "Setzt einen neuen NumberActor ein, um den Punktestand anzuzeigen."
+msgstr "Setzt einen neuen NumberActor, um die Punktzahl anzuzeigen.::"
 
 #: miniworlds.actors.texts.number.Number:16
 #: miniworlds.actors.texts.number.Number.get_value:7 of
 msgid "Gets the number stored in the NumberActor::"
-msgstr "Holt die Nummer, die im NumberActor:: gespeichert ist."
+msgstr "Ruft die in NumberActor gespeicherte Zahl ab::"
 
 #: miniworlds.actors.texts.number.Number:20
 #: miniworlds.actors.texts.number.Number.set_value:7 of
 msgid "Sets the number stored in the NumberActor::"
-msgstr "Setzt die Nummer, die im NumberActor:: gespeichert ist."
+msgstr "Legt die in NumberActor:: gespeicherte Zahl fest"
 
 #: miniworlds.actors.texts.number.Number.add:1 of
 msgid "add the sprite to groups"
-msgstr "fuege das sprite zu gruppen hinzu"
+msgstr "füge den Sprite zu Gruppen hinzu"
 
 #: miniworlds.actors.texts.number.Number.add:3 of
 msgid "Sprite.add(*groups): return None"
-msgstr "Sprite.add(*Gruppen): gibt None zurück"
+msgstr "Sprite.add(*groups): return None"
 
 #: miniworlds.actors.texts.number.Number.add:5 of
 msgid ""
-"Any number of Group instances can be passed as arguments. The Sprite will be"
-" added to the Groups it is not already a member of."
+"Any number of Group instances can be passed as arguments. The Sprite will be added to the Groups it is not already a "
+"member of."
 msgstr ""
-"Eine beliebige Anzahl von Gruppeninstanzen kann als Argumente übergeben "
-"werden. Der Sprite wird zu den Gruppen hinzugefügt, denen er noch nicht "
-"angehört."
+"Eine beliebige Anzahl von Gruppeninstanzen kann als Argumente übergeben werden. Der Sprite wird zu den Gruppen "
+"hinzugefügt, denen er noch nicht angehört."
 
 #: miniworlds.actors.texts.number.Number.get_value of
 msgid "Rückgabetyp"
-msgstr "Return-Typ"
+msgstr "Rückgabetyp"
 
 #: miniworlds.actors.texts.number.Number.get_value:1 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
@@ -102,7 +94,7 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
 #: miniworlds.actors.texts.number.Number.get_value of
 msgid "Rückgabe"
-msgstr "Return"
+msgstr "Rückgabe"
 
 #: miniworlds.actors.texts.number.Number.get_value:3 of
 msgid "The current number"
@@ -114,7 +106,7 @@ msgstr "Erhöht die Zahl um eins"
 
 #: miniworlds.actors.texts.number.Number.set_value:1 of
 msgid "Sets the number"
-msgstr "Legt die Nummer fest"
+msgstr "Legt die Anzahl fest"
 
 #: miniworlds.actors.texts.number.Number.set_value:3 of
 msgid "The number which should be displayed"

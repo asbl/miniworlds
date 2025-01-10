@@ -1,106 +1,84 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: ../../source/patterns/02_scrolling.md:1
 msgid "Scrolling"
-msgstr "Nalilipat"
+msgstr "Scrolling"
 
 #: ../../source/patterns/02_scrolling.md:3
 msgid "Oft möchtest du den Bildschirm \"scrollen lassen."
-msgstr "Often you want to have the screen \"scrolled."
+msgstr "Often you want to let the screen \"scroll."
 
 #: ../../source/patterns/02_scrolling.md:10
-msgid ""
-"Die einfachste Möglichkeit dazu ist es einen Hintergrund zu \"verschieben\":"
-msgstr "The simplest way to do this is to \"move\" a background:"
+msgid "Die einfachste Möglichkeit dazu ist es einen Hintergrund zu \"verschieben\":"
+msgstr "The easiest way to do this is to \"move\" a background:"
 
 #: ../../source/patterns/02_scrolling.md:12
-msgid ""
-"Damit dies wirklich gut funktioniert, musst du den Hintergrund als \"Actor "
-"anlegen\" und benötigst zwei Hintergründe."
-msgstr ""
-"So that this really works well, you have to create the background as "
-"\"actor\" and need two backgrounds."
+msgid "Damit dies wirklich gut funktioniert, musst du den Hintergrund als \"Actor anlegen\" und benötigst zwei Hintergründe."
+msgstr "To make this work really well, you need to set the background as \"Actor\" and you need two backgrounds."
 
 #: ../../source/patterns/02_scrolling.md:14
 msgid "![scrolling background](../_images/scrolling.png)"
-msgstr "![nagbabalik background](../_images/scrolling.png)"
+msgstr "![scrolling background](../_images/scrolling.png)"
 
 #: ../../source/patterns/02_scrolling.md:14
 msgid "scrolling background"
-msgstr "arrière-plan défilant"
+msgstr "scrolling background"
 
 #: ../../source/patterns/02_scrolling.md:16
 msgid ""
-"Beide Hintergründe wandern von rechts nach links (oder von oben nach unten, "
-"links nach rechts, ... - Je nach Spiel) - Sobald ein Hintergrund das "
-"Spielfeld verlassen würde, wird er wieder ganz rechts angefügt."
+"Beide Hintergründe wandern von rechts nach links (oder von oben nach unten, links nach rechts, ... - Je nach Spiel) - "
+"Sobald ein Hintergrund das Spielfeld verlassen würde, wird er wieder ganz rechts angefügt."
 msgstr ""
-"Both backgrounds move from right to left (or from top to bottom, left to "
-"right, ... - Depending on the game) - As soon as a background would leave "
-"the playing field, it is attached again all the way to the right."
+"Both backgrounds move from right to left (or from top to bottom, left to right, ... - depending on the game) - As soon "
+"as a background would leave the playing field, it is reattached on the far right."
 
 #: ../../source/patterns/02_scrolling.md:18
-msgid ""
-"Auf diese Weise entsteht der Eindruck einer \"unendlich langen Landschaft\"."
-msgstr "In this way arises the impression of an \"infinitely long landscape\"."
+msgid "Auf diese Weise entsteht der Eindruck einer \"unendlich langen Landschaft\"."
+msgstr "This creates the impression of an \"infinitely long landscape\"."
 
 #: ../../source/patterns/02_scrolling.md:20
 msgid "Im Code kann man dies wie folgt umsetzen:"
-msgstr "In code can one this as follows implement:"
+msgstr "In code, this can be implemented as follows:"
 
 #: ../../source/patterns/02_scrolling.md:22
-msgid ""
-"Lege mden Hintergrund zweimal mit dem gleichen Hintergrund an und platziere "
-"diese nebeneinander."
-msgstr ""
-"Read the background twice with the same background and place them next to "
-"each other."
+msgid "Lege mden Hintergrund zweimal mit dem gleichen Hintergrund an und platziere diese nebeneinander."
+msgstr "Create the background twice with the same background and place them side by side."
 
 #: ../../source/patterns/02_scrolling.md:23
-msgid ""
-"Es kann sinnvoll sein die Hintergründe in einer Liste zu speichern, da du "
-"sie dann gemeinsam bewegen kannst."
-msgstr ""
-"It can be useful to save the backgrounds in a list, as you can then move "
-"them together."
+msgid "Es kann sinnvoll sein die Hintergründe in einer Liste zu speichern, da du sie dann gemeinsam bewegen kannst."
+msgstr "It may be useful to store the backgrounds in a list, as you can then move them together."
 
 #: ../../source/patterns/02_scrolling.md:35
-msgid ""
-"In der `world.act`-Methode die jedes Frame einmal aufgerufen wird, kannst "
-"den Bildschirm langsam verschieben:"
-msgstr ""
-"In the `world.act` method that is called once per frame, you can slowly move"
-" the screen:"
+msgid "In der `world.act`-Methode die jedes Frame einmal aufgerufen wird, kannst den Bildschirm langsam verschieben:"
+msgstr "In the `world.act` method, which is called once per frame, you can slowly move the screen:"
 
 #: ../../source/patterns/02_scrolling.md:47
 msgid "Als Code sieht dies so aus:"
-msgstr "As code this looks like:"
+msgstr "As code, this looks like:"
 
 #: ../../source/patterns/02_scrolling.md:92
 msgid ""
-"Notiz: Die Idee stammt von dem Blog "
-"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html)"
-" - Jörg Kantereit hat dort dieses Snippet mit Pygame Zero programmiert."
+"Notiz: Die Idee stammt von dem Blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html) - "
+"Jörg Kantereit hat dort dieses Snippet mit Pygame Zero programmiert."
 msgstr ""
-"Note: The idea comes from the blog "
-"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html)"
-" - Jörg Kantereit programmed this snippet with Pygame Zero there."
+"Note: The idea comes from the blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html) - "
+"Jörg Kantereit programmed this snippet with Pygame Zero there."

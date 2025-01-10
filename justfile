@@ -38,4 +38,4 @@ build-local:
 	cd source/ && python -m build 
 
 make-docs:
-    cd docs && make docs
+    cd docs && make gettext && sphinx-intl update -p build/gettext -l de -l en &&  make docs

@@ -14,7 +14,6 @@
 #
 import os
 import sys
-import datetime
 
 
 sys.path.insert(0, os.path.abspath('../../'))
@@ -108,8 +107,7 @@ locale_dirs = ['locales/']
 gettext_compact = False
 
 html_context = {
-  'languages': [["en", "link to en"], ["de", "link to de"]],
-  'build_date': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+  'languages': [["en", "link to en"], ["de", "link to de"]]
 }
 
 # List of patterns, relative to source directory, that match files and

@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,22 +21,19 @@ msgstr ""
 
 #: ../../source/api/actor_textbox.md:1
 msgid "Actor > Textbox"
-msgstr "Actor > Textfeld"
+msgstr "Schauspieler > Textfeld"
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:1 of
 msgid "Generates a textbox with fixed width and height"
-msgstr "Erzeugt eine Textbox mit fester Breite und Höhe"
+msgstr "Erzeugt ein Textfeld mit fester Breite und Höhe"
 
 #: ../../source/api/actor_textbox.md
 msgid "Parameter"
-msgstr ""
-"Parameter\n"
-"\n"
-"Parameter"
+msgstr "Parameter"
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:3 of
 msgid "The topleft position of textbox"
-msgstr "Die obere linke Position des Textfeldes"
+msgstr "Die obere linke Position des Textfelds"
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:5 of
 msgid "The width of the textbox"
@@ -60,13 +57,11 @@ msgstr "Erstellt eine neue Textzeile"
 
 #: ../../source/api/actor_textbox.md
 msgid "Rückgabetyp"
-msgstr "Return type"
+msgstr "Returntyp"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
-msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:5 of
 msgid "position of line"
@@ -74,19 +69,16 @@ msgstr "Position der Linie"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:7 of
 msgid "Text of line. Defaults to \"\"."
-msgstr "Text der Zeile. Standardeinstellung \"\"."
+msgstr "Text der Zeile. Standardmäßig „“."
 
 #: ../../source/api/actor_textbox.md
 msgid "Rückgabe"
-msgstr "Return"
+msgstr "Rückgabe"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:10 of
 msgid "A Text-Actor"
-msgstr "Ein Text-Actor"
+msgstr "Ein Text-Schauspieler"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line_actors:1 of
-msgid ""
-"creates the lines actor - One actor per line. Split long lines after words."
-msgstr ""
-"erstellt die Zeilen Actor - Ein Actor pro Zeile. Lange Zeilen "
-"nach Wörtern aufteilen."
+msgid "creates the lines actor - One actor per line. Split long lines after words."
+msgstr "erstellt die Zeilen Schauspieler - Ein Schauspieler pro Zeile. Lange Zeilen nach Wörtern trennen."

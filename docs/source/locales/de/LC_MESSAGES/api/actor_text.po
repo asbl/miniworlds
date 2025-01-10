@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,34 +21,27 @@ msgstr ""
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
-msgstr "Actor > Text"
+msgstr "Schauspieler > Text"
 
 #: miniworlds.actors.texts.text.Text:1 of
 msgid "A Text-Actor is a actor which contains a Text."
-msgstr "Ein Text-Actor ist ein Actor, der einen Text enthält."
+msgstr "Ein Text-Akteur ist ein Akteur, der einen Text enthält."
 
 #: miniworlds.actors.texts.text.Text:3 of
-msgid ""
-"You have to set the size of the actor with self.size() manually so that the "
-"complete text can be seen."
-msgstr ""
-"Sie müssen die Größe des Actors manuell mit self.size() festlegen, "
-"damit der gesamte Text gesehen werden kann."
+msgid "You have to set the size of the actor with self.size() manually so that the complete text can be seen."
+msgstr "Sie müssen die Größe des Akteurs mit self.size() manuell einstellen, damit der vollständige Text sichtbar ist."
 
 #: ../../source/api/actor_text.md
 msgid "Parameter"
-msgstr ""
-"Parameter\n"
-"\n"
-"Parameter"
+msgstr "Parameter"
 
 #: miniworlds.actors.texts.text.Text:6 of
 msgid "Top-Left position of Text."
-msgstr "Obere linke Position des Textes."
+msgstr "Oben-links Position des Textes."
 
 #: miniworlds.actors.texts.text.Text:7 of
 msgid "The initial text"
-msgstr "Der anfängliche Text"
+msgstr "Der ursprüngliche Text"
 
 #: miniworlds.actors.texts.text.Text:10 of
 msgid "Examples"
@@ -56,23 +49,23 @@ msgstr "Beispiele"
 
 #: miniworlds.actors.texts.text.Text:11 of
 msgid "Create a new texts::"
-msgstr "Erstelle einen neuen Text:"
+msgstr "Erstellen Sie neue Texte::"
 
 #: miniworlds.actors.texts.text.Text.__init__:1 of
 msgid "_summary_"
-msgstr "Zusammenfassung"
+msgstr "_Zusammenfassung_"
 
 #: miniworlds.actors.texts.text.Text.__init__:3 of
 msgid "_description_. Defaults to (0,0)."
-msgstr "Beschreibung. Standardmäßig auf (0,0) festgelegt."
+msgstr "_description_. Standardmäßig (0,0)."
 
 #: miniworlds.actors.texts.text.Text.__init__:5 of
 msgid "The text (otherwise empty string \"\")"
-msgstr "Der Text (sonst leerer String)"
+msgstr "Der Text (ansonsten leerer String \"\")"
 
 #: miniworlds.actors.texts.text.Text.font_size:1 of
 msgid "Set font size to a value, e.g. 10, 12, ..."
-msgstr "Setzen Sie die Schriftgröße auf einen Wert, z.B. 10, 12, ..."
+msgstr "Stellen Sie die Schriftgröße auf einen Wert ein, z. B. 10, 12, ..."
 
 #: miniworlds.actors.texts.text.Text.font_size:3 of
 msgid "Examples:"
@@ -80,15 +73,15 @@ msgstr "Beispiele:"
 
 #: miniworlds.actors.texts.text.Text.font_size:5 of
 msgid "Sets size of actor to 10::"
-msgstr "Legt Größe des Actors auf 10 fest::"
+msgstr "Setzt die Größe des Akteurs auf 10::"
 
 #: miniworlds.actors.texts.text.Text.get_text:1 of
 msgid "Gets the currently displayed text"
-msgstr "Erhält den aktuell angezeigten Text"
+msgstr "Ruft den aktuell angezeigten Text ab"
 
 #: ../../source/api/actor_text.md
 msgid "Rückgabe"
-msgstr "Return"
+msgstr "Rückgabe"
 
 #: miniworlds.actors.texts.text.Text.get_text:3 of
 msgid "The currently displayed text"
@@ -96,7 +89,7 @@ msgstr "Der aktuell angezeigte Text"
 
 #: miniworlds.actors.texts.text.Text.set_text:1 of
 msgid "Sets the text of the actor"
-msgstr "Setzt den Text des Actors"
+msgstr "Legt den Text des Akteurs fest"
 
 #: miniworlds.actors.texts.text.Text.set_text:3 of
 msgid "The text"

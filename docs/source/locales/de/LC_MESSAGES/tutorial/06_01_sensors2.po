@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,44 +21,37 @@ msgstr ""
 
 #: ../../source/tutorial/06_01_sensors2.md:2
 msgid "Weitere Sensoren"
-msgstr "More sensors"
+msgstr "Additional sensors"
 
 #: ../../source/tutorial/06_01_sensors2.md:4
 msgid "Überprüfung der Spielfeldgrenzen"
-msgstr "Review of the playing field boundaries"
+msgstr "Checking the field boundaries"
 
 #: ../../source/tutorial/06_01_sensors2.md:6
 msgid ""
-"Du kannst auch Sensoren verwenden, um zu überprüfen, ob sich ein Akteur an "
-"den Rändern oder außerhalb des Spielfelds befindet:"
-msgstr ""
-"You can also use sensors to check if an actor is at the edges or outside of "
-"the playing field."
+"Du kannst auch Sensoren verwenden, um zu überprüfen, ob sich ein Akteur an den Rändern oder außerhalb des Spielfelds "
+"befindet:"
+msgstr "You can also use sensors to check if an actor is at the edges or outside the playing field:"
 
 #: ../../source/tutorial/06_01_sensors2.md:8
 msgid "Ist die Figur nicht mehr auf dem Spielfeld?###"
-msgstr "Is the figure no longer on the playing field?"
+msgstr "Is the piece no longer on the field?###"
 
 #: ../../source/tutorial/06_01_sensors2.md:10
-msgid ""
-"Diese Funktion überprüft, ob eine Figur noch in der aktuellen Welt ist."
+msgid "Diese Funktion überprüft, ob eine Figur noch in der aktuellen Welt ist."
 msgstr "This function checks if a figure is still in the current world."
 
 #: ../../source/tutorial/06_01_sensors2.md:18
 msgid "Beispiel: Ein Fisch, der an den Spielfeldrändern zurückschwimmt"
-msgstr "Example: A fish that swims back to the edges of the playing field"
+msgstr "Example: A fish that swims back at the edges of the playing field"
 
 #: ../../source/tutorial/06_01_sensors2.md:20
-msgid ""
-"Das folgende Programm simuliert einen Fisch, der an den Spielfeldrändern "
-"automatisch umkehrt:"
-msgstr ""
-"The following program simulates a fish that automatically reverses direction"
-" at the edges of the playing field."
+msgid "Das folgende Programm simuliert einen Fisch, der an den Spielfeldrändern automatisch umkehrt:"
+msgstr "The following program simulates a fish that automatically turns around at the edges of the playing field:"
 
 #: ../../source/tutorial/06_01_sensors2.md:47
 msgid "Ausgabe"
-msgstr "Output"
+msgstr "Ausgabe"
 
 #: ../../source/tutorial/06_01_sensors2.md:54
 msgid "Erklärung"
@@ -66,29 +59,23 @@ msgstr "Explanation"
 
 #: ../../source/tutorial/06_01_sensors2.md:56
 msgid ""
-"Die Methode `on_not_detecting_world` wird nur aufgerufen, wenn erkannt wird,"
-" dass sich der Fisch nicht mehr in  der Welt befindet. er wird mit move_back"
-" wieder zurückbewegt und anschließend gedreht."
+"Die Methode `on_not_detecting_world` wird nur aufgerufen, wenn erkannt wird, dass sich der Fisch nicht mehr in  der "
+"Welt befindet. er wird mit move_back wieder zurückbewegt und anschließend gedreht."
 msgstr ""
-"The method `on_not_detecting_world` is only called when it is detected that "
-"the fish is no longer in the world. it will be moved back with move_back and"
-" then rotated."
+"The Methode `on_not_detecting_world` wird nur aufgerufen, wenn erkannt wird, dass sich der Fisch nicht mehr in der Welt "
+"befindet. Er wird mit move_back wieder zurückbewegt und anschließend gedreht."
 
 #: ../../source/tutorial/06_01_sensors2.md:60
 msgid "Überprüfung auf Spielfeldgrenzen"
-msgstr "Check on field boundaries"
+msgstr "Checking for field boundaries"
 
 #: ../../source/tutorial/06_01_sensors2.md:62
-msgid ""
-"Man kann auch überprüfen, ob die Grenzen des Spielfeldes erreicht oder "
-"berührt werden:"
-msgstr ""
-"One can also check whether the boundaries of the playing field are reached "
-"or touched:"
+msgid "Man kann auch überprüfen, ob die Grenzen des Spielfeldes erreicht oder berührt werden:"
+msgstr "You can also check if the boundaries of the playing field are reached or touched:"
 
 #: ../../source/tutorial/06_01_sensors2.md:64
 msgid "Ist die Figur an den Grenzen des Spielfelds?**"
-msgstr "Ist die Figur an den Grenzen des Spielfelds?"
+msgstr "Is the piece at the edges of the playing field?**"
 
 #: ../../source/tutorial/06_01_sensors2.md:72
 msgid "Erklärung:"
@@ -96,8 +83,8 @@ msgstr "Explanation:"
 
 #: ../../source/tutorial/06_01_sensors2.md:73
 msgid ""
-"Wenn sich eine Figur an den Rändern des Spielfelds befindet (z.B. an der "
-"Position `(0,0)`), wird ausgegeben:  `Borders are here! ['right', 'top']`."
+"Wenn sich eine Figur an den Rändern des Spielfelds befindet (z.B. an der Position `(0,0)`), wird ausgegeben:  `Borders "
+"are here! ['right', 'top']`."
 msgstr ""
-"If a figure is at the edges of the game board (e.g. at position `(0,0)`), "
-"the output will be: `Borders are here! ['right', 'top']`."
+"If a piece is at the edges of the playing field (e.g., at position `(0,0)`), it will output: `Borders are here! "
+"['right', 'top']`."

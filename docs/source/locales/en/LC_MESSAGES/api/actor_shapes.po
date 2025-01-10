@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 #, fuzzy
 msgid ""
@@ -11,96 +11,90 @@ msgstr ""
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: ../../source/api/actor_shapes.md:1
 msgid "Actor > Shapes"
-msgstr "Aktor > Formen"
+msgstr ""
 
 #: ../../source/api/actor_shapes.md:3
 msgid "Shape"
-msgstr "Bild."
+msgstr ""
 
 #: ../../source/api/actor_shapes.md:5
 msgid "Base class for shapes"
-msgstr "Класс-основа для форм"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:1 of
 msgid ""
-"Shape is the parent class for various geometric objects that can be created."
+"Shape is the parent class for various geometric objects that can be "
+"created."
 msgstr ""
-"Forma es la clase principal para varios objetos geométricos que se pueden "
-"crear."
 
 #: miniworlds.actors.shapes.shapes.Shape:3 of
 msgid "Each geometric object has the following properties:"
-msgstr "Each geometric object has the following properties:"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:5 of
 msgid "border: The border thickness of the object."
-msgstr "grense: Objektets grensetykkelse."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:6 of
 msgid "is_filled: True/False if the object should be filled."
 msgstr ""
-"is_filled: True/False if the object should be filled. \n"
-"is_filled: Verdadero/Falso si el objeto debe ser llenado."
 
 #: miniworlds.actors.shapes.shapes.Shape:7 of
 msgid "fill_color: The fill color of the object"
-msgstr "fill_color: La couleur de remplissage de l'objet"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:8 of
 msgid "border_color: The border color of the object."
-msgstr "border_color: La couleur de la bordure de l'objet."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:10 of
 msgid "Shapes"
 msgstr ""
-"Shapes\n"
-"Formen"
 
 #: ../../source/api/actor_shapes.md:12
 msgid "Point"
-msgstr "Punto"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Point:1 of
 msgid "A point is a Circle with Radius 1"
-msgstr "Un punto es un círculo con radio 1"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Point.__init__:1 of
 msgid "Init a Point at specified position"
-msgstr "Inisyalisa ang isang Punto sa itinakdang posisyon"
+msgstr ""
 
-#: ../../source/api/actor_shapes.md:20
-#: miniworlds.actors.shapes.shapes.Circle:4 of
+#: ../../source/api/actor_shapes.md:20 miniworlds.actors.shapes.shapes.Circle:4
+#: of
 msgid "Circle"
-msgstr "Circle"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle:1 of
 msgid "A circular shape, definied by position and radius"
-msgstr "Een ronde vorm, gedefinieerd door positie en straal"
+msgstr ""
 
 #: ../../source/api/actor_shapes.md
 msgid "Parameter"
-msgstr "Parámetro"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle:8 of
 msgid ""
 "The position as 2-tuple. The circle is created with its center at the "
 "position"
 msgstr ""
-"La posición como 2-tupla. El círculo se crea con su centro en la posición"
 
 #: miniworlds.actors.shapes.shapes.Circle:9 of
 msgid "The radius of the circle"
-msgstr "El radio del círculo"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle:12
 #: miniworlds.actors.shapes.shapes.Ellipse:12
@@ -109,255 +103,235 @@ msgstr "El radio del círculo"
 #: miniworlds.actors.shapes.shapes.Polygon:6
 #: miniworlds.actors.shapes.shapes.Rectangle:12 of
 msgid "Examples"
-msgstr "Mga halimbawa"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle:13 of
 msgid "Create a circle at center position (200,100) with radius 20:"
-msgstr "Krijo nje rreth në pozicionin qendror (200,100) me rreze 20:"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle:19 of
 msgid "Create a circle at topleft position"
-msgstr "Kriju një rreth në pozicionin sipër majtas"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle.from_center:1 of
 msgid "Creates a circle with center at position"
-msgstr "Lumikha ng isang bilog na may sentro sa posisyon"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle.from_topleft:1 of
 msgid "Creates a circle with topleft at position"
-msgstr "Luo ympyrä, jonka vasemmassa yläkulmassa on sijainti"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Circle.radius:1 of
 msgid ""
-"The radius of the circle. If you change the circle-size (e.g. with self.size"
-" = (x, y), the radius value will be changed too."
+"The radius of the circle. If you change the circle-size (e.g. with "
+"self.size = (x, y), the radius value will be changed too."
 msgstr ""
-"Lo radio de la circle. sí cambias lo tamaño de la circle (por ejemplo con "
-"self.size = (x, y), el valor de radio se cambiará también."
 
 #: ../../source/api/actor_shapes.md:26
 #: miniworlds.actors.shapes.shapes.Ellipse:3 of
 msgid "Ellipse"
-msgstr "Ellipse"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Ellipse:1 of
 msgid "An elliptic shape."
 msgstr ""
-"An elliptic shape. \n"
-"Une forme elliptique."
 
 #: miniworlds.actors.shapes.shapes.Ellipse:7 of
 msgid "The position as 2-tuple. The ellipse is created at topleft position"
 msgstr ""
-"La posición como 2-tupla. La elipse se crea en la posición superior "
-"izquierda"
 
 #: miniworlds.actors.shapes.shapes.Ellipse:8 of
 msgid "The width of the ellipse"
-msgstr "Էլիպսի լայնությունը"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Ellipse:9 of
 msgid "The height of the ellipse"
-msgstr "La altura de la elipse"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Ellipse:13 of
 msgid ""
-"Create an ellipse at topleft position (200,100) with width 20 and height 30"
+"Create an ellipse at topleft position (200,100) with width 20 and height "
+"30"
 msgstr ""
-"Skep 'n ellips by die boonste-uitsig posisie (200,100) met 'n wydte van 20 "
-"en 'n hoogte van 30"
 
 #: miniworlds.actors.shapes.shapes.Ellipse:19 of
 msgid ""
-"Create an ellipse at center-position (200,100) width width 10 and height 10"
-msgstr "Bikri ah efu at center-position (200,100) onif width 10 and height 10"
+"Create an ellipse at center-position (200,100) width width 10 and height "
+"10"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Ellipse:25 of
 msgid ""
-"(Alternative) Create an ellipse at center-position (200,100) with width 10 "
-"and height 10"
+"(Alternative) Create an ellipse at center-position (200,100) with width "
+"10 and height 10"
 msgstr ""
-"(Alternative) Lumikotou ellipse at keskus-sijaintiin (200,100) leveydellä 10"
-" ja korkeudella 10"
 
 #: miniworlds.actors.shapes.shapes.Ellipse.from_center:1 of
 msgid "Creates an ellipse with center at position"
-msgstr "Luo ellipsi keskipisteessä sijaitsevassa sijainnissa"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Ellipse.from_topleft:1 of
 msgid "Creates an ellipse with topleft at position"
-msgstr "Skapar en ellips med övre vänster vid position"
+msgstr ""
 
 #: ../../source/api/actor_shapes.md:33 miniworlds.actors.shapes.shapes.Line:3
 #: miniworlds.actors.shapes.shapes.Rectangle:3 of
 msgid "Line"
-msgstr "Line"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line:1 of
 msgid "A Line-Shape defined by start_position and end_position."
-msgstr "একটি লাইন-আকৃতি যা start_position এবং end_position দ্বারা সংজ্ঞায়িত।"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line:7 of
 msgid "The start_position as 2-tuple."
-msgstr "La start_position como tupla de 2 elementos."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line:8 of
 msgid "The end_position as 2-tuple."
-msgstr "La end_position como 2-tuple."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line:12
 #: miniworlds.actors.shapes.shapes.Line:18 of
 msgid "Create a line from (200, 100) to (400, 100)"
-msgstr "Krijo një vijë nga (200, 100) në (400, 100)"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.border:1
 #: miniworlds.actors.shapes.shapes.Line.line_width:1
 #: miniworlds.actors.shapes.shapes.Line.thickness:1 of
 msgid "-> see border"
-msgstr "-> voir la frontière"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:1 of
 msgid ""
-"Directions are handled exactly as in the Scratch programming language, see: "
-"`Scratch Wiki <https://en.scratch-wiki.info/wiki/Direction_(value)>`_"
-msgstr ""
-"Funguo zinashughulikiwa kwa usahihi kama katika lugha ya programu ya "
-"Scratch, angalia: `Scratch Wiki <https://en.scratch-"
+"Directions are handled exactly as in the Scratch programming language, "
+"see: `Scratch Wiki <https://en.scratch-"
 "wiki.info/wiki/Direction_(value)>`_"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:4 of
 msgid "The default direction is ``0°``. All actors are looking ``\"up\"``"
 msgstr ""
-"The default direction is ``0°``. All actors are looking ``\"up\"``\n"
-"\n"
-"L'orientation par défaut est ``0°``. Tous les acteurs regardent ``\"en haut\"``"
 
 #: miniworlds.actors.shapes.shapes.Line.direction:6 of
 msgid "Move on world"
-msgstr "Mover en el mundo"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:10 of
 msgid "**Values for Direction**"
-msgstr "Valores para Direção"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:12 of
 msgid "``0°`` or ``\"up\"``: up"
-msgstr "``0°`` o ``\"up\"``: arriba"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:13 of
 msgid "``90°`` or ``\"right\"``: Move right"
-msgstr "``90°`` o ``\"right\"``: Move right"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:14 of
 msgid "``-90°`` or ``\"left\"``: Move left"
-msgstr "``-90°`` o ``sinistra``: Muovi a sinistra"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:15 of
 msgid "``180°`` or ``\"down\"``: Move down"
-msgstr "``180°`` o ``\"abajo\"``: Mover abajo"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:16 of
 msgid "``\"forward\"``: Current direction"
-msgstr "\"forward\": Direksyon kasalukuyan"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:18 of
 msgid "Sets direction of the actor."
-msgstr "Ajusta dirección del actor."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:20 of
 msgid "You can use an integer or a string to describe the direction"
-msgstr "Mond ka, ose një numër ose një fjali përshkrimi nga drejtimi"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:22 of
 msgid "Options"
-msgstr "Opções"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:23 of
 msgid "``0``, ``\"up\"`` - Look up"
-msgstr "``0``, ``\"up\"`` - Tìm kiếm"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:24 of
 msgid "``90``, ``\"right\"``, - Look right"
-msgstr "``90``, ``\"høyre\"``, - Se til høyre"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:25 of
 msgid "``-90``, ``\"left\"``, - Look left"
-msgstr "``-90``, ``\"gauche\"``, - Regarde à gauche"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:26 of
 msgid "``-180``, ``180``, ``\"down\"`` - Look down"
-msgstr "``-180``, ``180``, ``\"down\"`` - Kilala sa ibaba"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:32 of
 msgid "Move in a direction with WASD-Keys"
-msgstr "Moverse en una dirección con las teclas WASD"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:47 of
 msgid "Move 45°:"
-msgstr "Liikuta 45°:"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:71 of
 msgid "Move -45°:"
-msgstr "Mover -45°:"
+msgstr ""
 
 #: ../../source/api/actor_shapes.md:39
 msgid "Rectangle"
-msgstr "Rektangulo"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle:1 of
 msgid "A rectangular shape defined by position, width and height"
-msgstr "Una forma rectangular definida por posición, ancho y alto"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle:7 of
 msgid "Topleft Position of Rect"
-msgstr "Topleft Position of Rect"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle:8 of
 msgid "The height of the rect"
-msgstr "La hauteur de la rect"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle:9 of
 msgid "The width of the rect"
-msgstr "The width of the rect"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle:13 of
 msgid ""
 "Create a rect with the topleft position (200, 100), the width 20 and the "
 "height 10"
 msgstr ""
-"Buat sebuah rect dengan posisi topleft (200, 100), lebarnya 20 dan tingginya"
-" 10"
 
 #: miniworlds.actors.shapes.shapes.Rectangle.from_center:1 of
 msgid "Creates a rectangle with center at position"
-msgstr "Cria um retângulo com centro na posição"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Rectangle.from_topleft:1 of
 msgid "Creates a rectangle with topleft at position"
-msgstr "Skapar en rektangel med övre vänstra hörnet på position"
+msgstr ""
 
 #: ../../source/api/actor_shapes.md:46
 msgid "Polygon"
-msgstr "Polígono"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Polygon:1 of
 msgid "A Polygon-Shape."
-msgstr "Un Polígono-Forma."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Polygon:3 of
 msgid "A list of points"
-msgstr "Seznam bodov."
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Polygon:7 of
 msgid "Example Creation of a polygon"
-msgstr "Ejemplo Creación de un polígono"
+msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Polygon:12 of
 msgid "Example Creation of a filled polygon"
-msgstr "Exemple Création d'un polygone rempli"
+msgstr ""
 
-#~ msgid "Parameter"
-#~ msgstr ""
-
-#~ msgid "Parameters"
-#~ msgstr ""

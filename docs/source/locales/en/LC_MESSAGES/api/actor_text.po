@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 #, fuzzy
 msgid ""
@@ -11,109 +11,93 @@ msgstr ""
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
-msgstr "Actor > Tekst"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:1 of
 msgid "A Text-Actor is a actor which contains a Text."
-msgstr "Un Text-Actor est un acteur qui contient un Texte."
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:3 of
 msgid ""
-"You have to set the size of the actor with self.size() manually so that the "
-"complete text can be seen."
+"You have to set the size of the actor with self.size() manually so that "
+"the complete text can be seen."
 msgstr ""
-"Dapat mo i-set ang laki ng aktor gamit ang self.size() nang manu-mano para "
-"mas maipakita ang buong teksto."
 
 #: ../../source/api/actor_text.md
 msgid "Parameter"
-msgstr "Parameter"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:6 of
 msgid "Top-Left position of Text."
-msgstr "Posisi Teratas-Kiri Teks."
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:7 of
 msgid "The initial text"
-msgstr "The initial text"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:10 of
 msgid "Examples"
-msgstr "Examples"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text:11 of
 msgid "Create a new texts::"
-msgstr "Skep een nuwe teks:"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.__init__:1 of
 msgid "_summary_"
-msgstr "_resumo_"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.__init__:3 of
 msgid "_description_. Defaults to (0,0)."
 msgstr ""
-"_description_. Defaults to (0,0). \n"
-"\n"
-"_translation_. A'nn itiile ii."
 
 #: miniworlds.actors.texts.text.Text.__init__:5 of
 msgid "The text (otherwise empty string \"\")"
-msgstr "The text (otherwise empty string \"\")"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.font_size:1 of
 msgid "Set font size to a value, e.g. 10, 12, ..."
-msgstr "Ρύθμιση μεγέθους γραμματοσειράς σε μια τιμή, π.χ. 10, 12, ..."
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.font_size:3 of
 msgid "Examples:"
-msgstr "Mga Halimbawa:"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.font_size:5 of
 msgid "Sets size of actor to 10::"
-msgstr "Configure el tamaño del actor a 10:"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_text:1 of
 msgid "Gets the currently displayed text"
-msgstr "Obtiene el texto actualmente mostrado"
+msgstr ""
 
 #: ../../source/api/actor_text.md
 msgid "Rückgabe"
-msgstr "Return"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_text:3 of
 msgid "The currently displayed text"
-msgstr "Ang kasalukuyang ipinapakita na tekstong"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.set_text:1 of
 msgid "Sets the text of the actor"
-msgstr "Establece el texto del actor"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.set_text:3 of
 msgid "The text"
-msgstr "The text"
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.text:1 of
 msgid "changes the text."
-msgstr "schimbă textul"
+msgstr ""
 
-#~ msgid "Parameter"
-#~ msgstr ""
-
-#~ msgid "Rückgabe"
-#~ msgstr ""
-
-#~ msgid "Parameters"
-#~ msgstr ""
-
-#~ msgid "Returns"
-#~ msgstr ""

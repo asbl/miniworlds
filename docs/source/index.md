@@ -534,5 +534,3 @@ hidden: true
 ---
 impressum
 ```
-
-Last updated: {{ build_date }}

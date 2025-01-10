@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,35 +25,25 @@ msgstr "Interaktion"
 
 #: ../../source/processing/03_interactionmd.md:4
 msgid "on_setup und act"
-msgstr "bei_setup und handeln"
+msgstr "on_setup und act"
 
 #: ../../source/processing/03_interactionmd.md:7
-msgid ""
-"Bisher hast du Befehle einfach untereinander geschrieben und die Befehle "
-"wurden dann von oben nach unten abgearbeitet."
-msgstr ""
-"So far you have simply written commands to each other and the commands were "
-"then executed from top to bottom."
+msgid "Bisher hast du Befehle einfach untereinander geschrieben und die Befehle wurden dann von oben nach unten abgearbeitet."
+msgstr "So far, you have simply written commands one below the other, and the commands were then processed from top to bottom."
 
 #: ../../source/processing/03_interactionmd.md:9
-msgid ""
-"Wenn du ein interaktives Programm schreiben willst, dann musst du dies etwas"
-" durchbrechen."
-msgstr ""
-"If you want to write an interactive program, then you must break this "
-"somewhat."
+msgid "Wenn du ein interaktives Programm schreiben willst, dann musst du dies etwas durchbrechen."
+msgstr "If you want to write an interactive program, then you have to break this down a bit."
 
 #: ../../source/processing/03_interactionmd.md:11
 msgid ""
-"Dazu kannst du Methoden **registrieren**, die zu bestimmten Zeiten "
-"aufgerufen werden oder auf bestimmte Ereignisse reagieren."
-msgstr ""
-"In addition, you can **register** methods that are called at specific times "
-"or in response to specific events."
+"Dazu kannst du Methoden **registrieren**, die zu bestimmten Zeiten aufgerufen werden oder auf bestimmte Ereignisse "
+"reagieren."
+msgstr "To do this, you can **register** methods that are called at specific times or respond to specific events."
 
 #: ../../source/processing/03_interactionmd.md:13
 msgid "Wir fangen mit zwei einfachen Methoden an, `on_setup` und `act`"
-msgstr "We start with two simple methods, `on_setup` and `act`"
+msgstr "Wir fangen mit zwei einfachen Methoden an, `on_setup` und `act`"
 
 #: ../../source/processing/03_interactionmd.md:15
 msgid "`on_setup` wird einmal aufgerufen, wenn das `World` erstellt wurde."
@@ -61,7 +51,7 @@ msgstr "`on_setup` is called once when the `World` has been created."
 
 #: ../../source/processing/03_interactionmd.md:17
 msgid "`act` wird immer und immer wieder aufgerufen, einmal pro Zeiteinheit."
-msgstr "`act` is called over and over again, once per unit of time."
+msgstr "`act` wird immer und immer wieder aufgerufen, einmal pro Zeiteinheit."
 
 #: ../../source/processing/03_interactionmd.md:19
 msgid "Das folgende Programm:"
@@ -69,91 +59,65 @@ msgstr "The following program:"
 
 #: ../../source/processing/03_interactionmd.md:36
 msgid "liefert z.B. folgende Ausgabe"
-msgstr "liefert z.B. folgende Ausgabe"
+msgstr "gibt z.B. folgende Ausgabe"
 
 #: ../../source/processing/03_interactionmd.md:45
 msgid "Code-Blöcke"
-msgstr "Code blocks"
+msgstr "Code-Blöcke"
 
 #: ../../source/processing/03_interactionmd.md:46
-msgid ""
-"Die Zeile ``def on_setup(self):`` endet mit einem Doppelpunkt. Darunter "
-"siehst du einen Codeblock:"
-msgstr ""
-"The line \"def on_setup(self):\" ends with a colon. Below you see a code "
-"block:"
+msgid "Die Zeile ``def on_setup(self):`` endet mit einem Doppelpunkt. Darunter siehst du einen Codeblock:"
+msgstr "The line ``def on_setup(self):`` ends with a colon. Below it, you see a code block:"
 
 #: ../../source/processing/03_interactionmd.md:48
-msgid ""
-"Die Inhalte der Funktion sind alle *eingerückt*, alles was gleich weit "
-"eingerückt ist, gehört zu einem Block."
-msgstr ""
-"The contents of the function are all *indented*, everything that is indented"
-" equally belongs to one block."
+msgid "Die Inhalte der Funktion sind alle *eingerückt*, alles was gleich weit eingerückt ist, gehört zu einem Block."
+msgstr "The contents of the function are all *indented*, everything that is indented to the same level belongs to a block."
 
 #: ../../source/processing/03_interactionmd.md:65
-msgid ""
-"Beim Aufruf von ``on_setup`` werden die vier Zeilen darunter aufgerufen, "
-"nicht aber die 5. Zeile."
-msgstr ""
-"When calling \"on_setup\", the four lines below are executed, but not the "
-"5th line."
+msgid "Beim Aufruf von ``on_setup`` werden die vier Zeilen darunter aufgerufen, nicht aber die 5. Zeile."
+msgstr "When calling ``on_setup``, the four lines below are called, but not the 5th line."
 
 #: ../../source/processing/03_interactionmd.md:67
 msgid ""
-".. note::   In der Regel verwendet man in Python *4 Leerzeichen*, wenn man "
-"einen Codeblock einrückt.   Es ist zwar kein Fehler, wenn du nur 3,2,1 oder "
-"5 Leerzeichen oder ein Tab verwendest, solange du immer gleich    weit "
-"einrückst - Dies wird von erfahrenen Programmierern aber als schlecher Stil "
-"empfunden."
+".. note::   In der Regel verwendet man in Python *4 Leerzeichen*, wenn man einen Codeblock einrückt.   Es ist zwar kein "
+"Fehler, wenn du nur 3,2,1 oder 5 Leerzeichen oder ein Tab verwendest, solange du immer gleich    weit einrückst - Dies "
+"wird von erfahrenen Programmierern aber als schlecher Stil empfunden."
 msgstr ""
-".. beachten:: In general, *4 spaces* are used in Python when indenting a "
-"code block. It is not wrong to use only 3, 2, 1, or 5 spaces or a tab, as "
-"long as you always indent the same distance - This is considered bad style "
-"by experienced programmers."
+".. note::   In der Regel verwendet man in Python *4 Leerzeichen*, wenn man einen Codeblock einrückt.   Es ist zwar kein "
+"Fehler, wenn du nur 3,2,1 oder 5 Leerzeichen oder ein Tab verwendest, solange du immer gleich    weit einrückst - Dies "
+"wird von erfahrenen Programmierern aber als schlechter Stil empfunden."
 
 #: ../../source/processing/03_interactionmd.md:72
 msgid "Frame Rate - Wie oft wird act() aufgerufen"
-msgstr "Frame Rate - How often is act() called?"
+msgstr "Bildrate - Wie oft wird act() aufgerufen"
 
 #: ../../source/processing/03_interactionmd.md:75
 msgid ""
-"Man kann einstellen, wie oft ``act()`` aufgerufen wird, indem man die "
-"Attribute ``world.fps`` und ``world.speed`` konfiguriert."
-msgstr ""
-"One can set how often ``act()`` is called by configuring the attributes "
-"``world.fps`` and ``world.speed``."
+"Man kann einstellen, wie oft ``act()`` aufgerufen wird, indem man die Attribute ``world.fps`` und ``world.speed`` "
+"konfiguriert."
+msgstr "You can set how often ``act()`` is called by configuring the attributes ``world.fps`` and ``world.speed``."
 
 #: ../../source/processing/03_interactionmd.md:77
 msgid ""
-"``world.fps`` definiert die ``frame rate``. Analog zu einem Daumenkino, bei "
-"dem du mit festgelegter Geschwindigkeit die Seiten umblätterst,  definiert "
-"die Framerate wie oft pro Sekunde das Bild neu gezeichnet wird. "
-"``world.fps`` hat den Standardwert 60, d.h. es werden 60 Bilder pro Sekunde "
-"angezeigt."
+"``world.fps`` definiert die ``frame rate``. Analog zu einem Daumenkino, bei dem du mit festgelegter Geschwindigkeit die "
+"Seiten umblätterst,  definiert die Framerate wie oft pro Sekunde das Bild neu gezeichnet wird. ``world.fps`` hat den "
+"Standardwert 60, d.h. es werden 60 Bilder pro Sekunde angezeigt."
 msgstr ""
-"``world.fps`` defines the frame rate. Analogous to a flipbook, where you "
-"turn the pages at a set speed, the frame rate defines how many times per "
-"second the image is redrawn. ``world.fps`` has a default value of 60, "
-"meaning 60 frames per second are displayed."
+"``world.fps`` defines the ``frame rate``. Similar to a flipbook, where you turn the pages at a set speed, the frame "
+"rate defines how often the image is redrawn per second. ``world.fps`` has a default value of 60, meaning 60 frames are "
+"displayed per second."
 
 #: ../../source/processing/03_interactionmd.md:81
-msgid ""
-"Im Attribut ``world.frame`` wird der aktuelle frame gespeichert. Die Frames "
-"seit Programmstart werden hochgezählt."
-msgstr ""
-"Im Attribut \"world.frame\" wird der aktuelle Frame gespeichert. Die Frames "
-"seit Programmstart werden hochgezählt."
+msgid "Im Attribut ``world.frame`` wird der aktuelle frame gespeichert. Die Frames seit Programmstart werden hochgezählt."
+msgstr "Im Attribut ``world.frame`` wird der aktuelle Frame gespeichert. Die Frames seit Programmstart werden hochgezählt."
 
 #: ../../source/processing/03_interactionmd.md:83
 msgid ""
-"``world.speed`` definiert wie oft die Programmlogik (z.B. act) pro Sekunde "
-"aufgerufen wird.  Ein Wert von 60 bedeutet, dass die act()-Methode jeden 60."
-" Frame aufgerufen wird."
+"``world.speed`` definiert wie oft die Programmlogik (z.B. act) pro Sekunde aufgerufen wird.  Ein Wert von 60 bedeutet, "
+"dass die act()-Methode jeden 60. Frame aufgerufen wird."
 msgstr ""
-"``world.speed`` defines how often the program logic (e.g. act) is called per"
-" second. A value of 60 means that the act() method is called every 60th "
-"frame."
+"``world.speed`` defines how often the program logic (e.g. act) is called per second. A value of 60 means that the act() "
+"method is called every 60th frame."
 
 #: ../../source/processing/03_interactionmd.md:104
 msgid "Das Programm oben hat die Ausgabe:"
@@ -161,20 +125,19 @@ msgstr "The program above has the output:"
 
 #: ../../source/processing/03_interactionmd.md:115
 msgid ""
-"Es wird sehr langsam hochgezählt, weil genau ein Frame pro Sekunde "
-"abgespielt wird und jeden 3. Frame (also alle 3 Sekunden) die Funktion "
-"``act()`` aufgerufen wird."
+"Es wird sehr langsam hochgezählt, weil genau ein Frame pro Sekunde abgespielt wird und jeden 3. Frame (also alle 3 "
+"Sekunden) die Funktion ``act()`` aufgerufen wird."
 msgstr ""
-"It is counted up very slowly because exactly one frame per second is played "
-"and every 3rd frame (so every 3 seconds) the function \"act()\" is called."
+"It counts up very slowly because exactly one frame per second is played, and every 3rd frame (i.e., every 3 seconds) "
+"the function ``act()`` is called."
 
 #: ../../source/processing/03_interactionmd.md:121
 msgid ""
-"Achtung: Es kann zu unvorhergesehenen Nebenwirkungen führen, wenn man Code "
-"falsch einrückt, betrachte z.B. folgendes Programm:"
+"Achtung: Es kann zu unvorhergesehenen Nebenwirkungen führen, wenn man Code falsch einrückt, betrachte z.B. folgendes "
+"Programm:"
 msgstr ""
-"Attention: It can lead to unforeseen side effects if code is incorrectly "
-"indented, consider for example the following program:"
+"Warning: It can lead to unforeseen side effects if code is indented incorrectly, consider the following program for "
+"example:"
 
 #: ../../source/processing/03_interactionmd.md:143
 msgid "Das Programm hat die Ausgabe:"
@@ -182,39 +145,33 @@ msgstr "The program has the output:"
 
 #: ../../source/processing/03_interactionmd.md:156
 msgid ""
-"Dies liegt daran, dass zuerst ``on_setup()`` ausgeführt wird, nachdem in "
-"Zeile 3 das World erstellt wurde. Anschließend werden die beiden nicht "
-"eingerückten Befehle ausgeführt und sobald ``run()`` gestartet wird, wird "
-"die Funktion ``act()`` aufgerufen. Achte darauf, dass deine Anweisungen sich"
-" innerhalb der Code-Blöcke von act und on_setup befinden."
+"Dies liegt daran, dass zuerst ``on_setup()`` ausgeführt wird, nachdem in Zeile 3 das World erstellt wurde. Anschließend "
+"werden die beiden nicht eingerückten Befehle ausgeführt und sobald ``run()`` gestartet wird, wird die Funktion "
+"``act()`` aufgerufen. Achte darauf, dass deine Anweisungen sich innerhalb der Code-Blöcke von act und on_setup befinden."
 msgstr ""
-"This is because first \"on_setup()\" is executed after the World was created"
-" in line 3. Then the two non-indented commands are executed, and once "
-"\"run()\" is started, the function \"act()\" is called. Make sure your "
-"instructions are inside the code blocks of act and on_setup."
+"This is because ``on_setup()`` is executed first after the World is created in line 3. Then the two non-indented "
+"commands are executed, and as soon as ``run()`` starts, the ``act()`` function is called. Make sure your instructions "
+"are within the code blocks of act and on_setup."
 
 #: ../../source/processing/03_interactionmd.md:160
 msgid "Maus-Interaktionen"
-msgstr "Mouse interactions"
+msgstr "Maus-Interaktionen"
 
 #: ../../source/processing/03_interactionmd.md:163
 msgid ""
-"Interaktionen finden im miniworlds über **Events** statt. Events können "
-"durch unterschiedlichste Systemereignisse aufgerufen werden, z.B. wenn der "
-"Benutzer eine Eingabe mit der Tastatur oder mit der Maus getätigt hat."
+"Interaktionen finden im miniworlds über **Events** statt. Events können durch unterschiedlichste Systemereignisse "
+"aufgerufen werden, z.B. wenn der Benutzer eine Eingabe mit der Tastatur oder mit der Maus getätigt hat."
 msgstr ""
-"Interactions take place in miniworlds via **Events**. Events can be "
-"triggered by a wide variety of system events, e.g. when the user has made an"
-" input with the keyboard or with the mouse."
+"Interaktionen finden in den Miniwelten über **Events** statt. Events können durch unterschiedlichste Systemereignisse "
+"aufgerufen werden, z.B. wenn der Benutzer eine Eingabe mit der Tastatur oder mit der Maus getätigt hat."
 
 #: ../../source/processing/03_interactionmd.md:166
 msgid "Zunächst schauen wir uns Mausinteraktionen an:"
-msgstr "First we look at mouse interactions:"
+msgstr "First, let's take a look at mouse interactions:"
 
 #: ../../source/processing/03_interactionmd.md:168
-msgid ""
-"Mit der Methode ``get_mouse_position`` kannst du die Mausposition abfragen:"
-msgstr "With the method \"get_mouse_position\" you can query the mouse position."
+msgid "Mit der Methode ``get_mouse_position`` kannst du die Mausposition abfragen:"
+msgstr "Mit der Methode ``get_mouse_position`` kannst du die Mausposition abfragen:"
 
 #: ../../source/processing/03_interactionmd.md:186
 msgid "Der Kreis folgt nun deiner Mausposition:"
@@ -223,15 +180,11 @@ msgstr "The circle now follows your mouse position:"
 #: ../../source/processing/03_interactionmd.md:188
 #: ../../source/processing/03_interactionmd.md:208
 msgid "Get the mouse position"
-msgstr "Erhalte die Mausposition"
+msgstr "Ermittle die Mausposition"
 
 #: ../../source/processing/03_interactionmd.md:190
-msgid ""
-"Wenn du Linien zeichnen möchtest, benötigst du die aktuelle und die letzte "
-"Mausposition. Dies geht z.B. wie folgt:"
-msgstr ""
-"If you want to draw lines, you need the current and the last mouse position."
-" This can be done as follows:"
+msgid "Wenn du Linien zeichnen möchtest, benötigst du die aktuelle und die letzte Mausposition. Dies geht z.B. wie folgt:"
+msgstr "To draw lines, you need the current and the last mouse position. This can be done as follows, for example:"
 
 #: ../../source/processing/03_interactionmd.md:210
 msgid "Listener-Methoden"
@@ -239,21 +192,19 @@ msgstr "Listener-Methoden"
 
 #: ../../source/processing/03_interactionmd.md:213
 msgid ""
-"Schön wäre es, wenn wir noch auf spezifische Events reagieren können, z.B. "
-"auf Tastendrücke oder Mausklicks.  Dafür können wir bestimmte Listener-"
-"Methoden registrieren, z.B. ``on_mouse_pressed``"
+"Schön wäre es, wenn wir noch auf spezifische Events reagieren können, z.B. auf Tastendrücke oder Mausklicks.  Dafür "
+"können wir bestimmte Listener-Methoden registrieren, z.B. ``on_mouse_pressed``"
 msgstr ""
-"It would be nice if we could still respond to specific events, e.g. to "
-"button presses or mouse clicks. For this, we can register certain listener "
-"methods, e.g. \"on_mouse_pressed\""
+"It would be nice if we could also react to specific events, such as key presses or mouse clicks. For this, we can "
+"register certain listener methods, such as ``on_mouse_pressed``"
 
 #: ../../source/processing/03_interactionmd.md:240
 msgid "Get the mouse position, color changing"
-msgstr "Holen Sie sich die Mausposition, Farbwechsel"
+msgstr "Holen Sie sich die Mausposition, Farbänderung"
 
 #: ../../source/processing/03_interactionmd.md:242
 msgid "Tastaturabgaben abfragen"
-msgstr "Query keyboard inputs"
+msgstr "Query-Tastatureingaben"
 
 #: ../../source/processing/03_interactionmd.md:244
 msgid "Du kannst auch Angaben von der Tastatur abfragen:"
@@ -261,13 +212,11 @@ msgstr "You can also query information from the keyboard:"
 
 #: ../../source/processing/03_interactionmd.md:269
 msgid ""
-"Dieses Programm reagiert auf die Tasten a und b, beim Drücken der Taste "
-"<kbd>a</kbd> wird eine rote Ellipse gezeichnet, beim Drücken der Taste "
-"<kbd>b</kbd> eine grüne Ellipse."
+"Dieses Programm reagiert auf die Tasten a und b, beim Drücken der Taste <kbd>a</kbd> wird eine rote Ellipse gezeichnet, "
+"beim Drücken der Taste <kbd>b</kbd> eine grüne Ellipse."
 msgstr ""
-"0i0e5 0e0ro0o 00o3r0i3o 0u0 die 05135e0 0 u0 0525 0555e0 0 , beim 05ücke0 "
-"0er 0550e <kbd>a</kbd> wird eine rote Ellipse gezeichnet, beim 05ücke0 0er "
-"0550e 0550b<kbd> 0 eine grüne Ellipse."
+"This program responds to the keys a and b, pressing the <kbd>a</kbd> key draws a red ellipse, pressing the <kbd>b</kbd> "
+"key draws a green ellipse."
 
 #: ../../source/processing/03_interactionmd.md:271
 msgid "Arbeiten mit dem Zufall"
@@ -275,20 +224,18 @@ msgstr "Working with chance"
 
 #: ../../source/processing/03_interactionmd.md:273
 msgid ""
-"Python stellt mit der random Bibliothek einige Möglichkeiten zur Verfügung, "
-"wie man interessante graphische Effekte erzeugen kann:"
-msgstr ""
-"Python provides with the random library some possibilities, like one "
-"interesting graphical effects can generate:"
+"Python stellt mit der random Bibliothek einige Möglichkeiten zur Verfügung, wie man interessante graphische Effekte "
+"erzeugen kann:"
+msgstr "Python provides several possibilities with the random library to create interesting graphical effects:"
 
 #: ../../source/processing/03_interactionmd.md:275
 msgid "So wird z.B. ein Kreis in einer zufälligen Farbe erstellt:"
-msgstr "So wird z.B. ein Kreis in einer zufälligen Farbe erstellt:"
+msgstr "For example, a circle is created in a random color:"
 
 #: ../../source/processing/03_interactionmd.md:295
 msgid "Ausgabe:"
-msgstr "Issue:"
+msgstr "Output:"
 
 #: ../../source/processing/03_interactionmd.md:297
 msgid "changing colors"
-msgstr "ändernde Farben"
+msgstr "Farben ändern"

@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Spiel vorbei"
 
 #: ../../source/patterns/03_game_over.md:3
 msgid "Typischerweise passiert bei einem Game-Over-Event folgendes:"
-msgstr "Typically happens at a game-over event the following:"
+msgstr "Typically, the following happens during a game-over event:"
 
 #: ../../source/patterns/03_game_over.md:5
 msgid "Das Spiel wird angehalten"
@@ -37,45 +37,38 @@ msgstr "A text appears (possibly with a high score)"
 
 #: ../../source/patterns/03_game_over.md:7
 msgid "Es gibt eine Möglichkeit das Spiel neu zu starten."
-msgstr "There is a possibility to restart the game."
+msgstr "There is a way to restart the game."
 
 #: ../../source/patterns/03_game_over.md:9
 msgid ""
-"Zunächst macht es dazu Sinn eine Methode zu erstellen, die alle Actors "
-"erstellt, die beim Start eines Spiels erstellt werden sollen:"
-msgstr ""
-"First, it makes sense to create a method that creates all actors that should"
-" be created at the start of a game:"
+"Zunächst macht es dazu Sinn eine Methode zu erstellen, die alle Actors erstellt, die beim Start eines Spiels erstellt "
+"werden sollen:"
+msgstr "First, it makes sense to create a method that creates all the actors that should be created at the start of a game:"
 
 #: ../../source/patterns/03_game_over.md:30
 msgid ""
-"In dieser Methode wird z.B. ein Spieler-Objekt erstellt und auch bereits "
-"Events an dieses Spieler-Objekt registriert. Wenn z.B. ein anderes Actor "
-"aufgespürt wird, dann wird die `game_over`-Methode getriggert."
+"In dieser Methode wird z.B. ein Spieler-Objekt erstellt und auch bereits Events an dieses Spieler-Objekt registriert. "
+"Wenn z.B. ein anderes Actor aufgespürt wird, dann wird die `game_over`-Methode getriggert."
 msgstr ""
-"In this method, for example, a player object is created and events are "
-"already registered to this player object. If another actor is detected, the "
-"`game_over` method is triggered."
+"In this method, for example, a player object is created and events are already registered to this player object. If, "
+"for example, another actor is detected, then the `game_over` method is triggered."
 
 #: ../../source/patterns/03_game_over.md:33
 msgid "In der `game_over`-Methode wird das World angehalten:"
-msgstr "In the `game_over` method the World is paused."
+msgstr "In der `game_over`-Methode wird die Welt angehalten:"
 
 #: ../../source/patterns/03_game_over.md:43
 msgid ""
-"Global wird überprüft, ob die SPACE-Taste gedrückt wird - Wenn das World "
-"angehalten wird, wird die `restart`-Methode getriggert:"
+"Global wird überprüft, ob die SPACE-Taste gedrückt wird - Wenn das World angehalten wird, wird die `restart`-Methode "
+"getriggert:"
 msgstr ""
-"Global is checked if the SPACE key is pressed - If the World is paused, the "
-"`restart` method is triggered:"
+"Es wird global überprüft, ob die SPACE-Taste gedrückt wird - Wenn die Welt angehalten wird, wird die `restart`-Methode "
+"ausgelöst:"
 
 #: ../../source/patterns/03_game_over.md:53
-msgid ""
-"Die restart-Methode löscht alle Actors, startet das World erneut und ruft "
-"`setup` auf"
-msgstr ""
-"The restart method deletes all Actors, restarts the World and calls `setup`"
+msgid "Die restart-Methode löscht alle Actors, startet das World erneut und ruft `setup` auf"
+msgstr "The restart method deletes all actors, restarts the world, and calls `setup`"
 
 #: ../../source/patterns/03_game_over.md:66
 msgid "Insgesamt sieht dies dann so aus:"
-msgstr "Overall, this looks like this:"
+msgstr "Overall sieht dies dann so aus:"

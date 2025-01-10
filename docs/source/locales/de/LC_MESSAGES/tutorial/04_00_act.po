@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,75 +21,58 @@ msgstr ""
 
 #: ../../source/tutorial/04_00_act.md:1
 msgid "Act"
-msgstr "Handlung"
+msgstr "Handeln"
 
 #: ../../source/tutorial/04_00_act.md:3
 msgid ""
-"Bisher hast du gelernt, wie man Welten erstellt und Akteure auf ihnen "
-"platziert.  Nun werden wir Dinge in Bewegung setzen:"
-msgstr ""
-"So far you have learned how to create worlds and place actors on them. Now "
-"we will set things in motion."
+"Bisher hast du gelernt, wie man Welten erstellt und Akteure auf ihnen platziert.  Nun werden wir Dinge in Bewegung "
+"setzen:"
+msgstr "So far, you have learned how to create worlds and place actors on them. Now we will set things in motion:"
 
 #: ../../source/tutorial/04_00_act.md:6
 msgid "Die `act()`-Methode"
-msgstr "The `act()` method"
+msgstr "The `act()`-Methode"
 
 #: ../../source/tutorial/04_00_act.md:8
 msgid ""
-"Die `act()`-Methode steuert das Verhalten deiner Welt und aller Akteure.  "
-"Sie wird in jedem Frame (alle `world.step`-Zeiteinheiten) aufgerufen, bis "
-"das Programm beendet wird."
+"Die `act()`-Methode steuert das Verhalten deiner Welt und aller Akteure.  Sie wird in jedem Frame (alle "
+"`world.step`-Zeiteinheiten) aufgerufen, bis das Programm beendet wird."
 msgstr ""
-"The `act()` method controls the behavior of your world and all actors. It is"
-" called in every frame (every `world.step` time units) until the program "
-"ends."
+"The `act()` method controls the behavior of your world and all actors. It is called in every frame (every `world.step` "
+"time unit) until the program ends."
 
 #: ../../source/tutorial/04_00_act.md:11
 msgid "![First Actor](../_images/act.png)"
-msgstr "![Erster Actor](../_images/act.png)"
+msgstr "![First Actor](../_images/act.png)"
 
 #: ../../source/tutorial/04_00_act.md:11
 msgid "First Actor"
-msgstr "Erster Actor"
+msgstr "Erster Schauspieler"
 
 #: ../../source/tutorial/04_00_act.md:13
 msgid "Beispiel: Bewegender Actor"
-msgstr "Example: Moving actor"
+msgstr "Example: Moving Actor"
 
 #: ../../source/tutorial/04_00_act.md:15
-msgid ""
-"Wenn du einen `Actor` erstellst, kannst du die Methode `act()` mit dem "
-"Decorator `@register` registrieren:"
-msgstr ""
-"When you create an `Actor`, you can register the method `act()` with the "
-"decorator `@register`:"
+msgid "Wenn du einen `Actor` erstellst, kannst du die Methode `act()` mit dem Decorator `@register` registrieren:"
+msgstr "When you create an `Actor`, you can register the `act()` method with the `@register` decorator:"
 
 #: ../../source/tutorial/04_00_act.md:32
 msgid "Erklärung"
 msgstr "Explanation"
 
 #: ../../source/tutorial/04_00_act.md:34
-msgid ""
-"Die `act()`-Methode bewegt den `player` in jedem Frame um einen Schritt nach"
-" oben."
-msgstr "The `act()` method moves the `player` up by one step in each frame."
+msgid "Die `act()`-Methode bewegt den `player` in jedem Frame um einen Schritt nach oben."
+msgstr "The `act()` method moves the `player` one step up in each frame."
 
 #: ../../source/tutorial/04_00_act.md:35
 msgid ""
-"Neu ist hier der Befehl `self`: Damit kann ein Objekt auf sich zugreifen. "
-"Der Befehl `self.y = self.y - 1` bedeutet also, dass das Objekt player seine"
-"  \"eigene\" y-Koordinate um 1 verringert."
+"Neu ist hier der Befehl `self`: Damit kann ein Objekt auf sich zugreifen. Der Befehl `self.y = self.y - 1` bedeutet "
+"also, dass das Objekt player seine  \"eigene\" y-Koordinate um 1 verringert."
 msgstr ""
-"New here is the command `self`: With it, an object can access itself. The "
-"command `self.y = self.y - 1` means that the object player decreases its "
-"\"own\" y-coordinate by 1."
+"New here is the command `self`: This allows an object to access itself. The command `self.y = self.y - 1` means that "
+"the object player decreases its \"own\" y-coordinate by 1."
 
 #: ../../source/tutorial/04_00_act.md:40
-msgid ""
-"Weitere Details zu Methoden und der Nutzung von `self` findest du "
-"[hier](concept_self.md)."
-msgstr ""
-"Further details on methods and the use of `self` can be found [here](concept_self.md). \n"
-"\n"
-"Weitere Details zu Methoden und der Nutzung von `self` findest du [hier](concept_self.md)."
+msgid "Weitere Details zu Methoden und der Nutzung von `self` findest du [hier](concept_self.md)."
+msgstr "More details on methods and the use of `self` can be found [here](concept_self.md)."

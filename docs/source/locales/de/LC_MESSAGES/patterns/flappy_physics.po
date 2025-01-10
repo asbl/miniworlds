@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,49 +25,45 @@ msgstr "Anleitung: Flappy Bird"
 
 #: ../../source/patterns/flappy_physics.md:3
 msgid ""
-"In diesem Kapitel erstellen wir Schritt für Schritt ein Flappy Bird-Spiel "
-"unter Verwendung der `miniworlds_physics` Engine."
+"In diesem Kapitel erstellen wir Schritt für Schritt ein Flappy Bird-Spiel unter Verwendung der `miniworlds_physics` "
+"Engine."
 msgstr ""
-"In this chapter we will create step by step a Flappy Bird game using the "
-"`miniworlds_physics` Engine."
+"In diesem Kapitel erstellen wir Schritt für Schritt ein Flappy Bird-Spiel unter Verwendung der `miniworlds_physics` "
+"Engine."
 
 #: ../../source/patterns/flappy_physics.md:5
 msgid "![Flappy Bird Spiel](../_images/patterns_flappy.png)"
-msgstr "![Flappy Bird game](../_images/patterns_flappy.png)"
+msgstr "![Flappy Bird Spiel](../_images/patterns_flappy.png)"
 
 #: ../../source/patterns/flappy_physics.md:5
 msgid "Flappy Bird Spiel"
-msgstr "Flappy Bird game"
+msgstr "Flappy-Bird-Spiel"
 
 #: ../../source/patterns/flappy_physics.md:9
 msgid "Schritt 1: Importieren der Physik-Engine"
-msgstr ""
-"Step 1: Importing the physics engine\n"
-"Schritt 1: Importieren der Physik-Engine"
+msgstr "Step 1: Importing the physics engine"
 
 #: ../../source/patterns/flappy_physics.md:11
 msgid ""
-"Installiere das Paket `miniworlds_physics` genauso, wie du `miniworlds` "
-"installiert hast. Danach importierst du die `PhysicsWorld`:"
+"Installiere das Paket `miniworlds_physics` genauso, wie du `miniworlds` installiert hast. Danach importierst du die "
+"`PhysicsWorld`:"
 msgstr ""
-"Install the package `miniworlds_physics` just like you installed "
-"`miniworlds`. After that, import the `PhysicsWorld`:"
+"Installiere das Paket `miniworlds_physics` genauso, wie du `miniworlds` installiert hast. Danach importierst du die "
+"`PhysicsWorld`:"
 
 #: ../../source/patterns/flappy_physics.md:25
 msgid "Schritt 2: Röhren (Pipes) erstellen"
-msgstr "Step 2: Tubes erstellen"
+msgstr "Schritt 2: Röhren (Pipes) erstellen"
 
 #: ../../source/patterns/flappy_physics.md:27
 msgid "Röhren hinzufügen und in einer Liste speichern"
-msgstr "Add tubes and store them in a list"
+msgstr "Add tubes and save in a list"
 
 #: ../../source/patterns/flappy_physics.md:29
 msgid ""
-"Füge mehrere Röhren (Pipes) hinzu und speichere sie in einer Liste, um "
-"später ihre Eigenschaften leichter ändern zu können:"
-msgstr ""
-"Add multiple tubes (pipes) and save them in a list to be able to change "
-"their properties more easily later:"
+"Füge mehrere Röhren (Pipes) hinzu und speichere sie in einer Liste, um später ihre Eigenschaften leichter ändern zu "
+"können:"
+msgstr "Add multiple pipes and store them in a list to easily change their properties later:"
 
 #: ../../source/patterns/flappy_physics.md:40
 #: ../../source/patterns/flappy_physics.md:66
@@ -77,129 +73,96 @@ msgid "Erklärung:"
 msgstr "Explanation:"
 
 #: ../../source/patterns/flappy_physics.md:42
-msgid ""
-"Es werden vier Röhren erstellt, die in der Liste `pipes[]` gespeichert "
-"werden."
-msgstr "Four tubes are created and stored in the list `pipes[]`."
+msgid "Es werden vier Röhren erstellt, die in der Liste `pipes[]` gespeichert werden."
+msgstr "Four pipes are created and stored in the list `pipes[]`."
 
 #: ../../source/patterns/flappy_physics.md:44
 msgid "Eigenschaften der Röhren festlegen"
-msgstr "Properties of the tubes specify"
+msgstr "Set tube properties"
 
 #: ../../source/patterns/flappy_physics.md:46
 msgid "Verwende eine Schleife, um Eigenschaften für alle Röhren festzulegen:"
 msgstr "Use a loop to set properties for all tubes:"
 
 #: ../../source/patterns/flappy_physics.md:59
-msgid ""
-"Für die 2. und 4. Röhre (die von oben nach unten zeigen) wird die "
-"Orientierung um 180 Grad gedreht:"
-msgstr ""
-"For the 2nd and 4th tube (those showing from top to bottom) the orientation "
-"is rotated by 180 degrees."
+msgid "Für die 2. und 4. Röhre (die von oben nach unten zeigen) wird die Orientierung um 180 Grad gedreht:"
+msgstr "For the 2nd and 4th tube (which point from top to bottom), the orientation is rotated by 180 degrees:"
 
 #: ../../source/patterns/flappy_physics.md:67
-msgid ""
-"**pipe.physics.simulation**: Mit `manual` wird festgelegt, dass die "
-"Schwerkraft keine Wirkung auf die Röhre hat."
-msgstr ""
-"**pipe.physics.simulation**: With `manual` it is determined that gravity has"
-" no effect on the pipe."
+msgid "**pipe.physics.simulation**: Mit `manual` wird festgelegt, dass die Schwerkraft keine Wirkung auf die Röhre hat."
+msgstr "**pipe.physics.simulation**: Mit `manual` wird festgelegt, dass die Schwerkraft keine Wirkung auf das Rohr hat."
 
 #: ../../source/patterns/flappy_physics.md:68
-msgid ""
-"**pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der "
-"Geschwindigkeit."
-msgstr ""
-"**pipe.physics.velocity_x**: The movement occurs by changing the velocity.  \n"
-"\n"
-"**pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der Geschwindigkeit."
+msgid "**pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der Geschwindigkeit."
+msgstr "**pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der Geschwindigkeit."
 
 #: ../../source/patterns/flappy_physics.md:69
-msgid ""
-"**pipe.origin**: Der Referenzpunkt ist die obere linke Ecke der Röhre, was "
-"das Verschieben vereinfacht."
-msgstr ""
-"**pipe.origin**: The reference point is the top left corner of the pipe, "
-"making it easier to move."
+msgid "**pipe.origin**: Der Referenzpunkt ist die obere linke Ecke der Röhre, was das Verschieben vereinfacht."
+msgstr "**pipe.origin**: Der Referenzpunkt ist die obere linke Ecke des Rohrs, was das Verschieben vereinfacht."
 
 #: ../../source/patterns/flappy_physics.md:71
 msgid "Methoden für die Röhren registrieren"
-msgstr "Methods for registering tubes"
+msgstr "Register methods for the tubes"
 
 #: ../../source/patterns/flappy_physics.md:73
 msgid "Nun fügen wir den Röhren zwei wichtige Methoden hinzu:"
-msgstr "Now we add the tubes two important methods."
+msgstr "Now we add two important methods to the tubes:"
 
 #: ../../source/patterns/flappy_physics.md:89
-msgid ""
-"**act**: Diese Methode prüft, ob die Röhre vom Spieler überquert wurde."
-msgstr ""
-"**act**: This method checks if the tube was passed by the player. \n"
-"\n"
-"**act**: Diese Methode prüft, ob die Röhre vom Spieler überquert wurde."
+msgid "**act**: Diese Methode prüft, ob die Röhre vom Spieler überquert wurde."
+msgstr "**act**: Diese Methode überprüft, ob die Röhre vom Spieler überquert wurde."
 
 #: ../../source/patterns/flappy_physics.md:90
 msgid ""
-"**on_detecting_left_border**: Wenn die Röhre den linken Bildschirmrand "
-"erreicht, wird sie an eine zufällige Position rechts verschoben."
+"**on_detecting_left_border**: Wenn die Röhre den linken Bildschirmrand erreicht, wird sie an eine zufällige Position "
+"rechts verschoben."
 msgstr ""
-"**on_detecting_left_border**: When the tube reaches the left screen edge, it"
-" will be moved to a random position on the right."
+"**on_detecting_left_border**: When the tube reaches the left edge of the screen, it is moved to a random position on "
+"the right."
 
 #: ../../source/patterns/flappy_physics.md:94
 msgid "Schritt 3: Den Vogel (Bird) erstellen"
-msgstr "Step 3: Create the bird"
+msgstr "Schritt 3: Den Vogel (Bird) erstellen"
 
 #: ../../source/patterns/flappy_physics.md:96
 msgid "Attribute festlegen"
-msgstr "Setze das Attribut fest"
+msgstr "Set attribute"
 
 #: ../../source/patterns/flappy_physics.md:98
 msgid "Der Vogel wird als `Actor` erstellt und seine Attribute festgelegt:"
-msgstr "The bird is created as an 'Actor' and its attributes are set:"
+msgstr "The bird is created as an `Actor` and its attributes are set:"
 
 #: ../../source/patterns/flappy_physics.md:113
-msgid ""
-"**bird.physics.simulation**: Der Vogel wird durch die Schwerkraft "
-"beeinflusst."
-msgstr ""
-"**bird.physics.simulation**: The bird is influenced by gravity. \n"
-"\n"
-"**Vogel wird durch die Schwerkraft beeinflusst**"
+msgid "**bird.physics.simulation**: Der Vogel wird durch die Schwerkraft beeinflusst."
+msgstr "**bird.physics.simulation**: The bird is affected by gravity."
 
 #: ../../source/patterns/flappy_physics.md:114
-msgid ""
-"**bird.physics.size**: Ein kleinerer Kollisionsbereich macht das Spiel etwas"
-" einfacher."
-msgstr "**bird.physics.size**: ᖴᖇoᑎtäՇՇ мᗩḳεຖ ՇՅε ѕթïεl εïռfäᖇεг."
+msgid "**bird.physics.size**: Ein kleinerer Kollisionsbereich macht das Spiel etwas einfacher."
+msgstr "**bird.physics.size**: Ein kleinerer Kollisionsbereich macht das Spiel etwas einfacher."
 
 #: ../../source/patterns/flappy_physics.md:116
 msgid "Methoden für den Vogel registrieren"
-msgstr "Methods to register the bird"
+msgstr "Register methods for the bird"
 
 #: ../../source/patterns/flappy_physics.md:118
 msgid "Erkennen des Spielfeldrands"
-msgstr "Recognize the edge of the playing field"
+msgstr "Detecting the edge of the playing field"
 
 #: ../../source/patterns/flappy_physics.md:120
-msgid ""
-"Wenn der Vogel den Bildschirm verlässt, endet das Spiel mit einer \"Game "
-"Over\"-Nachricht:"
-msgstr ""
-"When the bird leaves the screen, the game ends with a \"Game Over\" message."
+msgid "Wenn der Vogel den Bildschirm verlässt, endet das Spiel mit einer \"Game Over\"-Nachricht:"
+msgstr "When the bird leaves the screen, the game ends with a \"Game Over\" message:"
 
 #: ../../source/patterns/flappy_physics.md:131
 msgid "Erkennen von Kollisionen mit Röhren"
-msgstr "Recognizing collisions with tubes"
+msgstr "Detection von Kollisionen mit Röhren"
 
 #: ../../source/patterns/flappy_physics.md:133
 msgid "Berührt der Vogel eine Röhre, endet ebenfalls das Spiel:"
-msgstr "Touches the bird a tube, also ends the game:"
+msgstr "If the bird touches a pipe, the game also ends:"
 
 #: ../../source/patterns/flappy_physics.md:144
 msgid "Erkennen von Benutzereingaben"
-msgstr "Recognizing user inputs"
+msgstr "Detecting user input"
 
 #: ../../source/patterns/flappy_physics.md:146
 msgid "Wenn die Leertaste gedrückt wird, bewegt sich der Vogel nach oben:"
@@ -207,23 +170,16 @@ msgstr "When the space bar is pressed, the bird moves up:"
 
 #: ../../source/patterns/flappy_physics.md:158
 msgid "Schritt 4: Punktestand hinzufügen"
-msgstr "Step 4: add points"
+msgstr "Step 4: Punktestand hinzufügen"
 
 #: ../../source/patterns/flappy_physics.md:160
-msgid ""
-"Die Punktanzeige wird statisch festgelegt, damit sie nicht von der Physik "
-"beeinflusst wird:"
-msgstr ""
-"The point display is set statically so that it is not influenced by physics."
+msgid "Die Punktanzeige wird statisch festgelegt, damit sie nicht von der Physik beeinflusst wird:"
+msgstr "The score display is statically set so that it is not affected by physics:"
 
 #: ../../source/patterns/flappy_physics.md:169
-msgid ""
-"In der `act`-Methode der Röhren wird der Punktestand jedes Mal erhöht, wenn "
-"der Spieler eine Röhre überquert:"
-msgstr ""
-"In the `act` method of the tubes, the score is increased every time the "
-"player crosses a tube:"
+msgid "In der `act`-Methode der Röhren wird der Punktestand jedes Mal erhöht, wenn der Spieler eine Röhre überquert:"
+msgstr "In der `act`-Methode der Röhren wird der Punktestand jedes Mal erhöht, wenn der Spieler eine Röhre überquert:"
 
 #: ../../source/patterns/flappy_physics.md:181
 msgid "Kompletter Code"
-msgstr "Complete code"
+msgstr "Vollständiger Code"

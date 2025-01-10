@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:1
 msgid "Events"
-msgstr "Ereignisse"
+msgstr "Veranstaltungen"
 
 #: ../../source/tutorial/04_01_events.md:3
 msgid "Mach dein Spiel interaktiv"
@@ -29,94 +29,76 @@ msgstr "Make your game interactive"
 
 #: ../../source/tutorial/04_01_events.md:5
 msgid ""
-"In diesem Abschnitt erfährst du, wie du deinem Spiel Interaktivität "
-"verleihst, indem du auf Tastatur-Eingaben, Mausaktionen oder Kollisionen "
-"reagierst."
+"In diesem Abschnitt erfährst du, wie du deinem Spiel Interaktivität verleihst, indem du auf Tastatur-Eingaben, "
+"Mausaktionen oder Kollisionen reagierst."
 msgstr ""
-"In this section you will learn how to give your game interactivity by "
-"responding to keyboard inputs, mouse actions, or collisions."
+"In this section, you will learn how to add interactivity to your game by responding to keyboard inputs, mouse actions, "
+"or collisions."
 
 #: ../../source/tutorial/04_01_events.md:7
 msgid "Was sind Events?"
-msgstr "Was sind Ereignisse?"
+msgstr "What are events?"
 
 #: ../../source/tutorial/04_01_events.md:9
 msgid ""
-"**Events** (Ereignisse) sind der Schlüssel zu interaktiven Spielen. Sie "
-"ermöglichen es, auf Benutzeraktionen zu reagieren, wie Tastendrücke oder "
-"Mausbewegungen, und verändern dynamisch das Verhalten deiner Akteure."
+"**Events** (Ereignisse) sind der Schlüssel zu interaktiven Spielen. Sie ermöglichen es, auf Benutzeraktionen zu "
+"reagieren, wie Tastendrücke oder Mausbewegungen, und verändern dynamisch das Verhalten deiner Akteure."
 msgstr ""
-"**Ereignisse** (Events) are the key to interactive games. They allow you to "
-"respond to user actions, such as keystrokes or mouse movements, and "
-"dynamically change the behavior of your actors."
+"**Events** (Ereignisse) sind der Schlüssel zu interaktiven Spielen. Sie ermöglichen es, auf Benutzeraktionen zu "
+"reagieren, wie Tastendrücke oder Mausbewegungen, und verändern dynamisch das Verhalten deiner Akteure."
 
 #: ../../source/tutorial/04_01_events.md:11
-msgid ""
-"**`on_setup()`**: Wird am Anfang aufgerufen, um deine Welt zu initialisieren"
-" und vorzubereiten."
-msgstr ""
-"**`on_setup()`**: Called at the beginning to initialize and prepare your "
-"world."
+msgid "**`on_setup()`**: Wird am Anfang aufgerufen, um deine Welt zu initialisieren und vorzubereiten."
+msgstr "**`on_setup()`**: Wird am Anfang aufgerufen, um deine Welt zu initialisieren und vorzubereiten."
 
 #: ../../source/tutorial/04_01_events.md:12
-msgid ""
-"**`act()`**: Diese Methode wird in jedem Frame aufgerufen und aktualisiert "
-"die Welt sowie die Akteure."
-msgstr ""
-"**`act()`**: This method is called in each frame and updates the world and "
-"the actors."
+msgid "**`act()`**: Diese Methode wird in jedem Frame aufgerufen und aktualisiert die Welt sowie die Akteure."
+msgstr "**`act()`**: Diese Methode wird in jedem Frame aufgerufen und aktualisiert die Welt sowie die Akteure."
 
 #: ../../source/tutorial/04_01_events.md:13
 msgid ""
-"Es gibt spezielle Event-Methoden wie **`on_key_pressed`**, "
-"**`on_mouse_left`** oder **`on_clicked_left`**, um auf verschiedene "
-"Benutzeraktionen zu reagieren."
+"Es gibt spezielle Event-Methoden wie **`on_key_pressed`**, **`on_mouse_left`** oder **`on_clicked_left`**, um auf "
+"verschiedene Benutzeraktionen zu reagieren."
 msgstr ""
-"There are specific event methods like **`on_key_pressed`**, "
-"**`on_mouse_left`** or **`on_clicked_left`** to respond to various user "
-"actions."
+"There are special event methods like **`on_key_pressed`**, **`on_mouse_left`**, or **`on_clicked_left`** to respond to "
+"various user actions."
 
 #: ../../source/tutorial/04_01_events.md:15
 msgid "Events registrieren"
-msgstr "Registrieren von Ereignissen"
+msgstr "Veranstaltungen registrieren"
 
 #: ../../source/tutorial/04_01_events.md:17
 msgid ""
-"Damit ein Akteur oder die Welt auf ein Event reagieren kann, musst du die "
-"entsprechende Methode registrieren. Die Registrierung funktioniert ähnlich "
-"wie bei der `act()`-Methode."
+"Damit ein Akteur oder die Welt auf ein Event reagieren kann, musst du die entsprechende Methode registrieren. Die "
+"Registrierung funktioniert ähnlich wie bei der `act()`-Methode."
 msgstr ""
-"So that an actor or the world can react to an event, you must register the "
-"corresponding method. Registration works similarly to the `act()` method."
+"In order for an actor or the world to react to an event, you must register the corresponding method. The registration "
+"works similarly to the `act()` method."
 
 #: ../../source/tutorial/04_01_events.md:19
 msgid "Beispiel: Einfache Tasteneingabe"
-msgstr "Beispiel: Simple key input"
+msgstr "Example: Simple key input"
 
 #: ../../source/tutorial/04_01_events.md:27
 #: ../../source/tutorial/04_01_events.md:66
 msgid "Erklärung:"
-msgstr "Explanation:"
+msgstr "Erklärung:"
 
 #: ../../source/tutorial/04_01_events.md:29
 msgid ""
-"Diese Methode wird ausgeführt, sobald die Taste <kbd>w</kbd> gedrückt wird. "
-"Der Akteur `player` bewegt sich dabei um einen Schritt nach oben."
-msgstr ""
-"This method is executed as soon as the key <kbd>w</kbd> is pressed. The "
-"actor `player` moves one step up."
+"Diese Methode wird ausgeführt, sobald die Taste <kbd>w</kbd> gedrückt wird. Der Akteur `player` bewegt sich dabei um "
+"einen Schritt nach oben."
+msgstr "This method is executed when the <kbd>w</kbd> key is pressed. The actor `player` moves one step upwards."
 
 #: ../../source/tutorial/04_01_events.md:31
 msgid "Beispiel: Steuerung mit mehreren Tasten"
-msgstr "Example: control with multiple buttons"
+msgstr "Example: Control with multiple buttons"
 
 #: ../../source/tutorial/04_01_events.md:33
 msgid ""
-"Im nächsten Beispiel wird ein Akteur über die Tasten <kbd>W</kbd>, "
-"<kbd>A</kbd>, <kbd>S</kbd> und <kbd>D</kbd> gesteuert."
-msgstr ""
-"In the next example, a player is controlled using the keys <kbd>W</kbd>, "
-"<kbd>A</kbd>, <kbd>S</kbd>, and <kbd>D</kbd>."
+"Im nächsten Beispiel wird ein Akteur über die Tasten <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd> und <kbd>D</kbd> "
+"gesteuert."
+msgstr "In the next example, an actor is controlled using the keys <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, and <kbd>D</kbd>."
 
 #: ../../source/tutorial/04_01_events.md:68
 msgid "In diesem Beispiel wird der Akteur wie folgt gesteuert:"
@@ -124,7 +106,7 @@ msgstr "In this example, the actor is controlled as follows:"
 
 #: ../../source/tutorial/04_01_events.md:70
 msgid "<kbd>W</kbd>: Bewegt den Akteur nach oben."
-msgstr "<kbd>W</kbd>: Moves the actor upwards."
+msgstr "<kbd>W</kbd>: Moves the actor up."
 
 #: ../../source/tutorial/04_01_events.md:71
 msgid "<kbd>A</kbd>: Bewegt den Akteur nach links."
@@ -136,44 +118,32 @@ msgstr "<kbd>D</kbd>: Moves the actor to the right."
 
 #: ../../source/tutorial/04_01_events.md:73
 msgid "<kbd>S</kbd>: Bewegt den Akteur nach unten."
-msgstr "<kbd>S</kbd>: Moves the actor downwards."
+msgstr "<kbd>S</kbd>: Moves the actor down."
 
 #: ../../source/tutorial/04_01_events.md:75
 msgid "Unterschied: `on_key_down` vs. `on_key_pressed`"
 msgstr "Unterschied: `on_key_down` vs. `on_key_pressed`"
 
 #: ../../source/tutorial/04_01_events.md:77
-msgid ""
-"Es gibt zwei Arten von Tastatur-Events, um auf Tasteninteraktionen zu "
-"reagieren:"
-msgstr ""
-"There are two types of keyboard events to respond to key interactions:"
+msgid "Es gibt zwei Arten von Tastatur-Events, um auf Tasteninteraktionen zu reagieren:"
+msgstr "There are two types of keyboard events to respond to key interactions:"
 
 #: ../../source/tutorial/04_01_events.md:79
-msgid ""
-"**`on_key_down(self, key)`**: Wird genau einmal aufgerufen, wenn eine Taste "
-"gedrückt wird."
-msgstr ""
-"**`on_key_down(self, key)`**: Called exactly once when a key is pressed."
+msgid "**`on_key_down(self, key)`**: Wird genau einmal aufgerufen, wenn eine Taste gedrückt wird."
+msgstr "**`on_key_down(self, key)`**: Wird genau einmal aufgerufen, wenn eine Taste gedrückt wird."
 
 #: ../../source/tutorial/04_01_events.md:80
-msgid ""
-"**`on_key_pressed(self, key)`**: Wird fortlaufend aufgerufen, solange die "
-"Taste gedrückt gehalten wird."
-msgstr ""
-"**`on_key_pressed(self, key)`**: Is called continuously as long as the key "
-"is held down."
+msgid "**`on_key_pressed(self, key)`**: Wird fortlaufend aufgerufen, solange die Taste gedrückt gehalten wird."
+msgstr "**`on_key_pressed(self, key)`**: Wird fortlaufend aufgerufen, solange die Taste gedrückt gehalten wird."
 
 #: ../../source/tutorial/04_01_events.md:82
 msgid "Beispiel: Unterschiedliche Tastatur-Events"
-msgstr "Example: Different keyboard events"
+msgstr "Example: Different Keyboard Events"
 
 #: ../../source/tutorial/04_01_events.md:110
 msgid ""
-"Du kannst entweder konkrete Tasten wie `on_key_down_b(self)` abfragen oder "
-"allgemeine Tastatur-Ereignisse mit `on_key_down(self, key)` verarbeiten, um "
-"alle Tastatureingaben zu erkennen."
+"Du kannst entweder konkrete Tasten wie `on_key_down_b(self)` abfragen oder allgemeine Tastatur-Ereignisse mit "
+"`on_key_down(self, key)` verarbeiten, um alle Tastatureingaben zu erkennen."
 msgstr ""
-"You can either query specific keys like `on_key_down_b(self)` or process "
-"general keyboard events with `on_key_down(self, key)` to detect all keyboard"
-" inputs."
+"You can either query specific keys like `on_key_down_b(self)` or handle general keyboard events with `on_key_down(self, "
+"key)` to detect all keyboard inputs."

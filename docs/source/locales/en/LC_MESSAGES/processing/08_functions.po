@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: ../../source/processing/08_functions.md:1
@@ -24,177 +24,135 @@ msgid "Funktionen"
 msgstr "Functions"
 
 #: ../../source/processing/08_functions.md:3
-msgid ""
-"Du hast bisher Methoden verwendet, die zu einem World oder einem Actor "
-"gehören, z.B. ``on_setup``, ``act``."
-msgstr ""
-"You have used methods so far that belong to a World or an Actor, e.g. "
-"``on_setup``, ``act``."
+msgid "Du hast bisher Methoden verwendet, die zu einem World oder einem Actor gehören, z.B. ``on_setup``, ``act``."
+msgstr "You have used methods that belong to a World or an Actor so far, e.g., ``on_setup``, ``act``."
 
 #: ../../source/processing/08_functions.md:5
 msgid ""
-"Jetzt lernst du eigene Funktionen zu erstellen. Funktionen sind "
-"`Unterprogramme` die dir ermöglichen, Code wiederzuverwenden,  anstatt ihn "
-"immer wieder zu schreiben."
+"Jetzt lernst du eigene Funktionen zu erstellen. Funktionen sind `Unterprogramme` die dir ermöglichen, Code "
+"wiederzuverwenden,  anstatt ihn immer wieder zu schreiben."
 msgstr ""
-"Now you learn to create your own functions. Functions are `subprograms` that"
-" allow you to reuse code instead of writing it over and over again."
+"Now you are learning to create your own functions. Functions are `subprograms` that allow you to reuse code instead of "
+"writing it over and over again."
 
 #: ../../source/processing/08_functions.md:8
 msgid "Erstes Beispiel"
 msgstr "First example"
 
 #: ../../source/processing/08_functions.md:10
-msgid ""
-"du möchtest vier rote Kreise erstellen, so wie im folgenden Bild "
-"dargestellt:"
+msgid "du möchtest vier rote Kreise erstellen, so wie im folgenden Bild dargestellt:"
 msgstr "you want to create four red circles, as shown in the following image:"
 
 #: ../../source/processing/08_functions.md:13
 msgid "Dies geht z.B. so:"
-msgstr "This goes e.g. like this:"
+msgstr "This goes, for example, like this:"
 
 #: ../../source/processing/08_functions.md:32
 msgid "![4 red circles](../_images/processing/4red_circles.png)"
-msgstr "![4 gorffennol coch](../_images/prosesu/4coch_ceirclau.png)"
+msgstr "![4 red circles](../_images/processing/4red_circles.png)"
 
 #: ../../source/processing/08_functions.md:32
 msgid "4 red circles"
-msgstr "4 melyni aplink degtukai"
+msgstr "4 red circles"
 
 #: ../../source/processing/08_functions.md:34
 msgid ""
-"Das Programm ist korrekt. Wenn nun aber alle vier Kreise grün sein sollen, "
-"dann musst du das Programm an vier Stellen verändern."
+"Das Programm ist korrekt. Wenn nun aber alle vier Kreise grün sein sollen, dann musst du das Programm an vier Stellen "
+"verändern."
 msgstr ""
-"The program is correct. But if now all four circles should be green, then "
-"you have to change the program at four points."
+"The program is correct. However, if all four circles are to be green, then you need to change the program in four "
+"places."
 
 #: ../../source/processing/08_functions.md:37
-msgid ""
-"Stattdessen kann man das Erstellen des Kreises und das festlegen der Farbe "
-"in Unterprogramme auslagern:"
-msgstr ""
-"Instead, you can outsource the creation of the circle and the setting of the"
-" color to subroutines:"
+msgid "Stattdessen kann man das Erstellen des Kreises und das festlegen der Farbe in Unterprogramme auslagern:"
+msgstr "Instead, you can outsource the creation of the circle and the setting of the color to subroutines:"
 
 #: ../../source/processing/08_functions.md:56
 msgid "Hier wurde eine Funtion `create_circle` definiert."
-msgstr "Here was a function `create_circle` defined."
+msgstr "A function `create_circle` was defined here."
 
 #: ../../source/processing/08_functions.md:58
 msgid "Die Funktion hat den **Namen**  `create_circle`"
-msgstr "The function has the **name** `create_circle`"
+msgstr "The function is named **Namen** `create_circle`"
 
 #: ../../source/processing/08_functions.md:59
-msgid ""
-"Die Funktion erhält als **Übergabeparameter** die Werte `x` und `y` - An "
-"dieser Stelle soll der Kreis erstellt werden."
-msgstr ""
-"The function receives the **input parameter** values `x` and `y` - At this "
-"point the circle should be created."
+msgid "Die Funktion erhält als **Übergabeparameter** die Werte `x` und `y` - An dieser Stelle soll der Kreis erstellt werden."
+msgstr "The function receives the values `x` and `y` as **parameters** - At this point, the circle should be created."
 
 #: ../../source/processing/08_functions.md:60
-msgid ""
-"Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend"
-" eine Farbe zugewiesen."
-msgstr ""
-"In the **method body**, first a circle is created and then a color is "
-"assigned to it."
+msgid "Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend eine Farbe zugewiesen."
+msgstr "In the **method body**, a circle is first created and then assigned a color."
 
 #: ../../source/processing/08_functions.md:61
-msgid ""
-"Die Funktion wird mit Hilfe ihres **Namens** und mit Übergabe der "
-"**Argumente** (z.B. 20, 20) aufgerufen."
-msgstr ""
-"The function is called with the help of its **name** and by passing the "
-"**arguments** (e.g. 20, 20)."
+msgid "Die Funktion wird mit Hilfe ihres **Namens** und mit Übergabe der **Argumente** (z.B. 20, 20) aufgerufen."
+msgstr "The function is called using its **name** and passing the **arguments** (e.g., 20, 20)."
 
 #: ../../source/processing/08_functions.md:63
 msgid "Allgemein: Definieren von Funktionen"
-msgstr "General: Defining functions"
+msgstr "General: Defining Functions"
 
 #: ../../source/processing/08_functions.md:65
-msgid ""
-"Oft willst du komplizierte Dinge automatisieren, z.B. das Anlegen von "
-"Actors."
-msgstr ""
-"Often you want to automate complicated things, e.g. the creation of actors."
+msgid "Oft willst du komplizierte Dinge automatisieren, z.B. das Anlegen von Actors."
+msgstr "Often you want to automate complicated things, e.g., the creation of actors."
 
 #: ../../source/processing/08_functions.md:67
-msgid ""
-"Dies geht, indem du Funktionen selbst definierst - Dies geht im Allgemeinen "
-"so:"
-msgstr ""
-"This goes by defining functions yourself - This generally works like this:"
+msgid "Dies geht, indem du Funktionen selbst definierst - Dies geht im Allgemeinen so:"
+msgstr "This is done by defining functions yourself - This is generally done like this:"
 
 #: ../../source/processing/08_functions.md:74
 msgid "z.B.:"
-msgstr "z.B.: → e.g."
+msgstr "e.g.:"
 
 #: ../../source/processing/08_functions.md:83
-msgid ""
-"Deine Funktion besteht aus einer *Signatur* und einem *Funktionskörper*."
+msgid "Deine Funktion besteht aus einer *Signatur* und einem *Funktionskörper*."
 msgstr "Your function consists of a *signature* and a *function body*."
 
 #: ../../source/processing/08_functions.md:85
 msgid ""
-"Die Signatur ist die erste Zeile der Funktion. Sie enthält alle "
-"Informationen die du brauchst um die Funktion aufzurufen. Dies ist der "
-"**Name** und **Parameter**. Der Name dieser Funktion ist `create_actor`, die"
-" Parameter sind `x`und `y`.  Parameter werden benötigt um der Funktion "
-"weitere Informationen zu übergeben. Im Beispiel wird die Information "
-"übergeben, *wo* das Objekt erstellt werden soll."
+"Die Signatur ist die erste Zeile der Funktion. Sie enthält alle Informationen die du brauchst um die Funktion "
+"aufzurufen. Dies ist der **Name** und **Parameter**. Der Name dieser Funktion ist `create_actor`, die Parameter sind "
+"`x`und `y`.  Parameter werden benötigt um der Funktion weitere Informationen zu übergeben. Im Beispiel wird die "
+"Information übergeben, *wo* das Objekt erstellt werden soll."
 msgstr ""
-"The signature is the first line of the function. It contains all the "
-"information you need to call the function. This is the **Name** and "
-"**Parameters**. The name of this function is `create_actor`, the parameters "
-"are `x` and `y`. Parameters are needed to pass additional information to the"
-" function. In the example, the information is passed *where* the object "
-"should be created."
+"The signature is the first line of the function. It contains all the information you need to call the function. This "
+"includes the **name** and **parameters**. The name of this function is `create_actor`, and the parameters are `x` and "
+"`y`. Parameters are needed to pass additional information to the function. In the example, the information is passed "
+"about *where* the object should be created."
 
 #: ../../source/processing/08_functions.md:91
 msgid ""
-"Der Funktionskörper ist ein Code-Block. Er enthält alle Befehle, die bei "
-"Aufruf der Funktion  nacheinander abgearbeitet werden. Hier wird beim "
-"Funktionsaufruf zuerst ein Kreis erzeugt und anschließend  werden die Farbe "
-"des Kreises festgelegt."
+"Der Funktionskörper ist ein Code-Block. Er enthält alle Befehle, die bei Aufruf der Funktion  nacheinander abgearbeitet "
+"werden. Hier wird beim Funktionsaufruf zuerst ein Kreis erzeugt und anschließend  werden die Farbe des Kreises "
+"festgelegt."
 msgstr ""
-"The functional body is a code block. It contains all commands that are "
-"executed one after the other when the function is called. Here, a circle is "
-"first created when the function is called, and then the color of the circle "
-"is set."
+"The function body is a code block. It contains all the commands that are executed sequentially when the function is "
+"called. Here, a circle is first created when the function is called, and then the color of the circle is set."
 
 #: ../../source/processing/08_functions.md:95
-msgid ""
-"Die Befehle werden beim Aufruf der Funktion von oben nach unten "
-"abgearbeitet."
-msgstr ""
-"The commands are executed from top to bottom when the function is called."
+msgid "Die Befehle werden beim Aufruf der Funktion von oben nach unten abgearbeitet."
+msgstr "The commands are processed from top to bottom when the function is called."
 
 #: ../../source/processing/08_functions.md:97
 msgid "Aufruf von Funktionen"
-msgstr "Call of functions"
+msgstr "Calling functions"
 
 #: ../../source/processing/08_functions.md:99
 msgid ""
-"Eine Funktion wird mit Hilfe des Namens aufgerufen. Dabei übergibst du der "
-"Funktion die  als Parameter definierten Argumente."
-msgstr ""
-"A function is called using the name. In doing so, you pass the arguments "
-"defined as parameters to the function."
+"Eine Funktion wird mit Hilfe des Namens aufgerufen. Dabei übergibst du der Funktion die  als Parameter definierten "
+"Argumente."
+msgstr "A function is called using its name. You pass the arguments defined as parameters to the function."
 
 #: ../../source/processing/08_functions.md:102
 msgid "Allgemein schreibt man: `method_name(<parameter>)`"
-msgstr "Generally we write: `method_name(<parameter>)`"
+msgstr "Generally, one writes: `method_name(<parameter>)`"
 
 #: ../../source/processing/08_functions.md:105
 msgid "Dies kann z.B. so aussehen:"
-msgstr "This can e.g. look like this:"
+msgstr "This can look like this, for example:"
 
 #: ../../source/processing/08_functions.md:111
 msgid "Hier wird ein Actor an der Position `x=4` und `y=2` angelegt."
-msgstr "Here is an actor created at position `x=4` and `y=2`."
+msgstr "Here, an actor is created at position `x=4` and `y=2`."
 
 #: ../../source/processing/08_functions.md:113
 msgid "Komplexe Figuren zeichen"
@@ -202,15 +160,13 @@ msgstr "Draw complex figures"
 
 #: ../../source/processing/08_functions.md:115
 msgid "Mit  Hilfe von Funktionen kannst du komplexe Figuren zeichnen:"
-msgstr "With functions you can draw complex figures:"
+msgstr "With the help of functions, you can draw complex figures:"
 
 #: ../../source/processing/08_functions.md:138
 msgid ""
-"In der Funktion `create_face` wird ein Gesicht erzeugt.  Dieses kann "
-"anschließend an unterschiedlichen Stellen erzeugt werden."
-msgstr ""
-"In the function `create_face`, a face is generated. This can then be "
-"generated in different places."
+"In der Funktion `create_face` wird ein Gesicht erzeugt.  Dieses kann anschließend an unterschiedlichen Stellen erzeugt "
+"werden."
+msgstr "In the function `create_face`, a face is created.  This can then be generated in different places."
 
 #: ../../source/processing/08_functions.md:141
 msgid "![faces](../_images/processing/face3.png)"
@@ -218,20 +174,16 @@ msgstr "![faces](../_images/processing/face3.png)"
 
 #: ../../source/processing/08_functions.md:141
 msgid "faces"
-msgstr "caras"
+msgstr "faces"
 
 #: ../../source/processing/08_functions.md:143
 msgid "Eigenschaften und Methoden registrieren."
-msgstr "Properties and methods register."
+msgstr "Register properties and methods."
 
 #: ../../source/processing/08_functions.md:145
 msgid "Das folgende Programm erstellt automatisch \"Regentropfen\"."
-msgstr "The following program creates \"raindrops\" automatically."
+msgstr "The following program automatically creates \"raindrops\"."
 
 #: ../../source/processing/08_functions.md:147
-msgid ""
-"In der funktion raindrop werden nicht nur Eigenschaften für jeden Tropfen "
-"festgelegt, sondern auch Methoden registriert."
-msgstr ""
-"In the function raindrop, not only properties are set for each drop, but "
-"also methods are registered."
+msgid "In der funktion raindrop werden nicht nur Eigenschaften für jeden Tropfen festgelegt, sondern auch Methoden registriert."
+msgstr "In the function raindrop, not only are properties set for each drop, but methods are also registered."

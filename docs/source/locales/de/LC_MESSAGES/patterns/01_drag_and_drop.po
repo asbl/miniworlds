@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,35 +25,28 @@ msgstr "Ziehen und Ablegen"
 
 #: ../../source/patterns/01_drag_and_drop.md:3
 msgid ""
-"Um ein Actor zu verschieben, müssen die Events `on_mouse_left` sowie "
-"`on_mouse_left_released` registriert werden. Dann benötigt man eine Variable"
-" (z.B. `dragged`), in der man den Zustand speichert, d.h. ob ein Objekt "
-"gerade verschoben wird."
+"Um ein Actor zu verschieben, müssen die Events `on_mouse_left` sowie `on_mouse_left_released` registriert werden. Dann "
+"benötigt man eine Variable (z.B. `dragged`), in der man den Zustand speichert, d.h. ob ein Objekt gerade verschoben "
+"wird."
 msgstr ""
-"To move an Actor, the events `on_mouse_left` and `on_mouse_left_released` "
-"must be registered. Then you need a variable (e.g. `dragged`) in which you "
-"save the state, i.e. whether an object is currently being moved."
+"To move an actor, the events `on_mouse_left` and `on_mouse_left_released` must be registered. Then you need a variable "
+"(e.g. `dragged`) to store the state, i.e. whether an object is currently being moved."
 
 #: ../../source/patterns/01_drag_and_drop.md:11
-msgid ""
-"Wenn die Maus geklicked wird, dann wird der Zustannd der Variable "
-"`dragged`auf `True` gesetzt."
-msgstr ""
-"0125:\n"
-"W3nn d1e Maus geklicked wird, dann wird d2r Zustannd d2r Variable `dragged` auf `True` g2s2tt."
+msgid "Wenn die Maus geklicked wird, dann wird der Zustannd der Variable `dragged`auf `True` gesetzt."
+msgstr "When the mouse is clicked, the state of the variable `dragged` is set to `True`."
 
 #: ../../source/patterns/01_drag_and_drop.md:12
 msgid ""
-"Wenn die Maus losgelassen wird, dann wird das Actor nur dann verschoben, "
-"wenn `dragged` auf `True` gesetzt ist. Danach wird `dragged` wieder auf "
-"`False` gesetzt."
+"Wenn die Maus losgelassen wird, dann wird das Actor nur dann verschoben, wenn `dragged` auf `True` gesetzt ist. Danach "
+"wird `dragged` wieder auf `False` gesetzt."
 msgstr ""
-"When the mouse is released, the actor will only be moved if 'dragged' is set"
-" to 'True'. After that, 'dragged' is set back to 'False'."
+"When the mouse is released, the actor is only moved if `dragged` is set to `True`. Afterwards, `dragged` is set back to "
+"`False`."
 
 #: ../../source/patterns/01_drag_and_drop.md:14
 msgid "Beispiele:"
-msgstr "Examples:"
+msgstr "Beispiele:"
 
 #: ../../source/patterns/01_drag_and_drop.md:16
 msgid "Kreise verschieben:"
@@ -61,4 +54,4 @@ msgstr "Move circles:"
 
 #: ../../source/patterns/01_drag_and_drop.md:40
 msgid "Drag and Drop auf einem TiledWorld:"
-msgstr "Ziehen und Ablegen auf einer Kachelwelt:"
+msgstr "Drag and Drop in einer TiledWorld:"

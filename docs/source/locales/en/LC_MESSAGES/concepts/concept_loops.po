@@ -1,36 +1,35 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:22+0200\n"
+"POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
 
 #: ../../source/concepts/concept_loops.md:1
 msgid "Konzept: Schleifen"
-msgstr "Concept: loops"
+msgstr "Concept: Loops"
 
 #: ../../source/concepts/concept_loops.md:3
 msgid "Die for-Schleife"
 msgstr "The for loop"
 
 #: ../../source/concepts/concept_loops.md:5
-msgid ""
-"Die for-schleife wiederholt -vereinfacht gesprochen- einen Befehl n-mal:"
-msgstr "The for loop repeats -simplified spoken- a command n times:"
+msgid "Die for-schleife wiederholt -vereinfacht gesprochen- einen Befehl n-mal:"
+msgstr "The for loop repeats -simply put- a command n times:"
 
 #: ../../source/concepts/concept_loops.md:7
 #: ../../source/concepts/concept_loops.md:29
@@ -40,7 +39,7 @@ msgstr "Example"
 
 #: ../../source/concepts/concept_loops.md:9
 msgid "Die folgende Schleife wird 5-mal durchlaufen:"
-msgstr "The following loop will be executed 5 times:"
+msgstr "The following loop will run 5 times:"
 
 #: ../../source/concepts/concept_loops.md:16
 #: ../../source/concepts/concept_loops.md:36
@@ -49,15 +48,11 @@ msgstr "The program gives the following output"
 
 #: ../../source/concepts/concept_loops.md:25
 msgid "Die Zählervariable"
-msgstr "The counting variable"
+msgstr "The counter variable"
 
 #: ../../source/concepts/concept_loops.md:27
-msgid ""
-"Man kann die Variable i als Zählervariable verwenden. Sie zählt (von 0 "
-"beginnend) hoch:"
-msgstr ""
-"One can use the variable i as a count variable. It counts (starting from 0) "
-"up:"
+msgid "Man kann die Variable i als Zählervariable verwenden. Sie zählt (von 0 beginnend) hoch:"
+msgstr "The variable i can be used as a counter variable. It counts up (starting from 0):"
 
 #: ../../source/concepts/concept_loops.md:45
 msgid "Allgemeine Form:"
@@ -65,30 +60,27 @@ msgstr "General form:"
 
 #: ../../source/concepts/concept_loops.md:47
 msgid "Allgemein schreibt man:"
-msgstr "In general, one writes:"
+msgstr "Generally, one writes:"
 
 #: ../../source/concepts/concept_loops.md:54
 msgid "oder"
-msgstr "or"
+msgstr "oder"
 
 #: ../../source/concepts/concept_loops.md:61
-msgid ""
-"Man kann jeweils angeben wie oft die Schleife durchlaufen wird oder "
-"bestimmte Bereiche angeben:"
-msgstr ""
-"One can specify how often the loop will be run or specify certain areas:"
+msgid "Man kann jeweils angeben wie oft die Schleife durchlaufen wird oder bestimmte Bereiche angeben:"
+msgstr "You can specify how often the loop is run or specify certain ranges:"
 
 #: ../../source/concepts/concept_loops.md:63
 msgid "Beispiele: Mit Schleifen zeichnen"
-msgstr "Examples: Draw with loops"
+msgstr "Examples: Drawing with loops"
 
 #: ../../source/concepts/concept_loops.md:65
 msgid "Mit Schleifen kann man zeichnen:"
-msgstr "With loops, one can draw:"
+msgstr "With loops, you can draw:"
 
 #: ../../source/concepts/concept_loops.md:78
 msgid "circles"
-msgstr "círculos"
+msgstr "circles"
 
 #: ../../source/concepts/concept_loops.md:80
 msgid "Schachbrettmuster"
@@ -96,23 +88,19 @@ msgstr "Checkerboard pattern"
 
 #: ../../source/concepts/concept_loops.md:82
 msgid ""
-"Mit dem module-Operator kann man überprüfen, ob ein Ergebnis, durch 2 "
-"teilbar ist, nämlich  ``x teilbar durch 2 genau dann wenn x % 2 == 0`"
+"Mit dem module-Operator kann man überprüfen, ob ein Ergebnis, durch 2 teilbar ist, nämlich  ``x teilbar durch 2 genau "
+"dann wenn x % 2 == 0`"
 msgstr ""
-"With the module operator, you can check if a result is divisible by 2, "
-"namely ``x divisible by 2 if x % 2 == 0`"
+"With the modulo operator, you can check if a result is divisible by 2, namely ``x divisible by 2 if and only if x % 2 "
+"== 0`"
 
 #: ../../source/concepts/concept_loops.md:85
-msgid ""
-"Dies kann man nutzen um schachbrettartige Muster zu zeichnen, indem man "
-"Schleifen mit einer if-Abfrage kombiniert:"
-msgstr ""
-"This can be used to draw checkerboard-like patterns by combining loops with "
-"an if statement:"
+msgid "Dies kann man nutzen um schachbrettartige Muster zu zeichnen, indem man Schleifen mit einer if-Abfrage kombiniert:"
+msgstr "This can be used to draw checkerboard patterns by combining loops with an if statement:"
 
 #: ../../source/concepts/concept_loops.md:102
 msgid "checkers"
-msgstr "verifica"
+msgstr "checkers"
 
 #: ../../source/concepts/concept_loops.md:104
 msgid "Graphen"
@@ -120,21 +108,19 @@ msgstr "Graphen"
 
 #: ../../source/concepts/concept_loops.md:106
 msgid "Auch Graphen lassen sich auf diese Art zeichnen:"
-msgstr "Also graphs can be drawn in this way:"
+msgstr "Graphs can also be drawn in this way:"
 
 #: ../../source/concepts/concept_loops.md:122
 msgid "graphs"
-msgstr "grafiken"
+msgstr "graphs"
 
 #: ../../source/concepts/concept_loops.md:124
 msgid "Verschachtelte Schleifen"
 msgstr "Nested loops"
 
 #: ../../source/concepts/concept_loops.md:126
-msgid ""
-"Mit Hilfe von verschachtelten Schleifen kannst du mehrdimensionale Muster "
-"zeichnen."
-msgstr "Using nested loops, you can draw multi-dimensional patterns."
+msgid "Mit Hilfe von verschachtelten Schleifen kannst du mehrdimensionale Muster zeichnen."
+msgstr "With the help of nested loops, you can draw multidimensional patterns."
 
 #: ../../source/concepts/concept_loops.md:140
 msgid "nested loop"
@@ -150,11 +136,11 @@ msgstr "The while loop generally has the following structure:"
 
 #: ../../source/concepts/concept_loops.md:151
 msgid ""
-"Solange die Bedingung wahr ist, wird die Schleife immer wieder wiederholt. "
-"Dadurch ist es auch möglich Endlosschleifen zu erstellen."
+"Solange die Bedingung wahr ist, wird die Schleife immer wieder wiederholt. Dadurch ist es auch möglich Endlosschleifen "
+"zu erstellen."
 msgstr ""
-"As long as the condition is true, the loop will be repeated over and over "
-"again. This also makes it possible to create infinite loops."
+"As long as the condition is true, the loop will repeat over and over again. This also makes it possible to create "
+"infinite loops."
 
 #: ../../source/concepts/concept_loops.md:153
 msgid "Beispiel:"
@@ -166,70 +152,61 @@ msgstr "The following program generates a random pattern:"
 
 #: ../../source/concepts/concept_loops.md:171
 msgid "random color circles"
-msgstr "random colour circles"
+msgstr "random color circles"
 
 #: ../../source/concepts/concept_loops.md:173
 msgid "Die mainloop"
-msgstr "The mainloop"
+msgstr "The main loop"
 
 #: ../../source/concepts/concept_loops.md:175
-msgid ""
-"Dein ganzes Programm läuft streng genommen innerhalb einer while Schleife:"
-msgstr "Your whole program runs strictly speaking within a while loop."
+msgid "Dein ganzes Programm läuft streng genommen innerhalb einer while Schleife:"
+msgstr "Your entire program technically runs within a while loop:"
 
 #: ../../source/concepts/concept_loops.md:183
 msgid ""
-"Die for-Schleife ist hierfür nicht geeignet, da man für diese im Vorhinein "
-"wissen muss, wie viele Schleifendurchläufe durchlaufen werden sollen."
-msgstr ""
-"The for loop is not suitable for this, as you have to know in advance how "
-"many loop runs should be passed through."
+"Die for-Schleife ist hierfür nicht geeignet, da man für diese im Vorhinein wissen muss, wie viele Schleifendurchläufe "
+"durchlaufen werden sollen."
+msgstr "The for loop is not suitable for this, as you need to know in advance how many iterations should be executed."
 
 #: ../../source/concepts/concept_loops.md:186
 msgid "Schleifen innerhalb von registrierten Methoden"
-msgstr "Looping inside registered methods"
+msgstr "Loops within registered methods"
 
 #: ../../source/concepts/concept_loops.md:188
 msgid ""
-"Wenn du innerhalb der `act`-Methode oder einer Ereignis-Methode eine "
-"Schleife ausführen willst, dann musst du folgendes wissen:"
-msgstr ""
-"If you want to execute a loop within the `act` method or an event method, "
-"then you must know the following:"
+"Wenn du innerhalb der `act`-Methode oder einer Ereignis-Methode eine Schleife ausführen willst, dann musst du folgendes "
+"wissen:"
+msgstr "If you want to run a loop within the `act` method or an event method, then you need to know the following:"
 
 #: ../../source/concepts/concept_loops.md:190
 msgid ""
-"Die komplette Schleife innerhalb einer solchen Methode wird innerhalb eines "
-"einzigen Frames ausgeführt. Eine Schleife ist hier also nicht geeignet, um "
-"z.B. eine Figur zu bewegen, da diese ja jeden Frame neu gezeichnet wird - "
-"Eine Schleife läuft aber komplett innerhalb eines Frames ab."
+"Die komplette Schleife innerhalb einer solchen Methode wird innerhalb eines einzigen Frames ausgeführt. Eine Schleife "
+"ist hier also nicht geeignet, um z.B. eine Figur zu bewegen, da diese ja jeden Frame neu gezeichnet wird - Eine "
+"Schleife läuft aber komplett innerhalb eines Frames ab."
 msgstr ""
-"The complete loop within such a method is executed within a single frame. A "
-"loop is not suitable here to move a figure, for example, since it is redrawn"
-" every frame - But a loop runs completely within a frame."
+"The entire loop within such a method is executed within a single frame. Therefore, a loop is not suitable here for "
+"moving a figure, for example, since it is redrawn every frame - However, a loop runs completely within a frame."
 
 #: ../../source/concepts/concept_loops.md:194
 msgid ""
-"Am Beispiel einer Ampel-Anlage kann man dies gut veranschaulichen. Man kann "
-"den Ablauf der Schleife gut mit einem Zustandsdiagramm visualisieren."
+"Am Beispiel einer Ampel-Anlage kann man dies gut veranschaulichen. Man kann den Ablauf der Schleife gut mit einem "
+"Zustandsdiagramm visualisieren."
 msgstr ""
-"At the example of a traffic light system this can be illustrated well. One "
-"can the sequence of the loop well with a state diagram visualize."
+"An example of a traffic light system can illustrate this well. The loop process can be effectively visualized with a "
+"state diagram."
 
 #: ../../source/concepts/concept_loops.md:206
 msgid "In Code kann man dies wie folgt umsetzen:"
-msgstr "In Code kann man dies wie folgt umsetzen:"
+msgstr "In code, this can be implemented as follows:"
 
 #: ../../source/concepts/concept_loops.md:230
 msgid "In der mainloop wird die While-Schleife durch die mainloop \"ersetzt\":"
-msgstr "In the mainloop the while loop is \"replaced\" by the mainloop"
+msgstr "In the main loop, the while loop is \"replaced\" by the main loop:"
 
 #: ../../source/concepts/concept_loops.md:272
 msgid ""
-"Wie man sieht ist der Programmcode nur an einzelnen Stellen verändert "
-"wurden, der Programmablauf bleibt der gleiche.  Die `while`-Schleife wird "
-"hier durch die `act`-Methode ersetzt."
+"Wie man sieht ist der Programmcode nur an einzelnen Stellen verändert wurden, der Programmablauf bleibt der gleiche.  "
+"Die `while`-Schleife wird hier durch die `act`-Methode ersetzt."
 msgstr ""
-"As one sees, the program code was only changed at individual points, the "
-"program flow remains the same. The `while` loop is replaced here by the "
-"`act` method."
+"As you can see, the program code has only been changed in certain places, the program flow remains the same. The "
+"`while` loop is replaced here by the `act` method. "

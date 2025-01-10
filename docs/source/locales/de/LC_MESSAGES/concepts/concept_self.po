@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -24,28 +24,18 @@ msgid "Das Schlüsselwort self"
 msgstr "The keyword self"
 
 #: ../../source/concepts/concept_self.md:3
-msgid ""
-"In dem code oben hast du gesehen, dass die Methode ``act`` als Parameter das"
-" Schlüsselwort ``self`` erwartet."
-msgstr ""
-"In the code above you saw that the method \"act\" expects the keyword "
-"\"self\" as a parameter."
+msgid "In dem code oben hast du gesehen, dass die Methode ``act`` als Parameter das Schlüsselwort ``self`` erwartet."
+msgstr "In dem Code oben hast du gesehen, dass die Methode ``act`` als Parameter das Schlüsselwort ``self`` erwartet."
 
 #: ../../source/concepts/concept_self.md:5
-msgid ""
-"Alle Methoden die zu einem Objekt gehören erhalten dieses Schlüsselwort "
-"immer als ersten Paramerer."
-msgstr ""
-"All methods that belong to an object always receive this keyword as the "
-"first parameter."
+msgid "Alle Methoden die zu einem Objekt gehören erhalten dieses Schlüsselwort immer als ersten Paramerer."
+msgstr "All methods that belong to an object always receive this keyword as the first parameter."
 
 #: ../../source/concepts/concept_self.md:7
 msgid ""
-"Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf "
-"Attribute und Methoden des Objekts selbst zurückgegriffen werden."
-msgstr ""
-"Subsequently, within the method, attributes and methods of the object itself"
-" can be accessed using this keyword."
+"Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf Attribute und Methoden des Objekts selbst "
+"zurückgegriffen werden."
+msgstr "Then, within the method, attributes and methods of the object itself can be accessed using this keyword."
 
 #: ../../source/concepts/concept_self.md:9
 msgid "Beispiel:"
@@ -53,16 +43,12 @@ msgstr "Example:"
 
 #: ../../source/concepts/concept_self.md:11
 msgid "Dieser Code"
-msgstr "This code"
+msgstr "Dieser Code"
 
 #: ../../source/concepts/concept_self.md:19
 msgid "ist äquivalent zu diesem Code:"
-msgstr "is equivalent to this code:"
+msgstr "ist gleichbedeutend mit diesem Code:"
 
 #: ../../source/concepts/concept_self.md:27
-msgid ""
-"`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode "
-"registriert wurde."
-msgstr ""
-"`self` refers here to the `player` object on which the method was "
-"registered."
+msgid "`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode registriert wurde."
+msgstr "`self` refers to the `player` object where the method was registered. "

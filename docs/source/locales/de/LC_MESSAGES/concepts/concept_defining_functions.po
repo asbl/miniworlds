@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
-#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+# 
 #, fuzzy
 msgid ""
 msgstr ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-25 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: gpt-po v1.1.1\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -21,38 +21,31 @@ msgstr ""
 
 #: ../../source/concepts/concept_defining_functions.md:1
 msgid "Konzept: Funktionen, Parameter und Rückgabewert"
-msgstr "Concept: Functions, parameters, and return value"
+msgstr "Concept: Funktionen, Parameter und Rückgabewert"
 
 #: ../../source/concepts/concept_defining_functions.md:3
-msgid ""
-"Du hast bisher Methoden verwendet, die zu einem World oder einem Actor "
-"gehören, z.B. ``on_setup``, ``act``."
-msgstr ""
-"You have so far used methods that belong to a World or an Actor, e.g. "
-"\"on_setup\", \"act\"."
+msgid "Du hast bisher Methoden verwendet, die zu einem World oder einem Actor gehören, z.B. ``on_setup``, ``act``."
+msgstr "You have used methods so far that belong to a World or an Actor, e.g., ``on_setup``, ``act``."
 
 #: ../../source/concepts/concept_defining_functions.md:5
 msgid ""
-"Jetzt lernst du eigene Funktionen zu erstellen. Funktionen sind "
-"`Unterprogramme` die dir ermöglichen, Code wiederzuverwenden,  anstatt ihn "
-"immer wieder zu schreiben."
+"Jetzt lernst du eigene Funktionen zu erstellen. Funktionen sind `Unterprogramme` die dir ermöglichen, Code "
+"wiederzuverwenden,  anstatt ihn immer wieder zu schreiben."
 msgstr ""
-"Now you learn to create own functions. Functions are `subprograms` that "
-"allow you to reuse code instead of writing it again and again."
+"Now you are learning to create your own functions. Functions are `subprograms` that allow you to reuse code instead of "
+"writing it over and over again."
 
 #: ../../source/concepts/concept_defining_functions.md:8
 msgid "Erstes Beispiel"
-msgstr "First example"
+msgstr "Erstes Beispiel"
 
 #: ../../source/concepts/concept_defining_functions.md:10
-msgid ""
-"du möchtest vier rote Kreise erstellen, so wie im folgenden Bild "
-"dargestellt:"
-msgstr "you want to create four red circles, as shown in the following image:"
+msgid "du möchtest vier rote Kreise erstellen, so wie im folgenden Bild dargestellt:"
+msgstr "You want to create four red circles, as shown in the following image:"
 
 #: ../../source/concepts/concept_defining_functions.md:13
 msgid "Dies geht z.B. so:"
-msgstr "This goes for example like this:"
+msgstr "Das geht zum Beispiel so:"
 
 #: ../../source/concepts/concept_defining_functions.md:32
 msgid "![4 red circles](../_images/processing/4red_circles.png)"
@@ -64,158 +57,120 @@ msgstr "4 rote Kreise"
 
 #: ../../source/concepts/concept_defining_functions.md:34
 msgid ""
-"Das Programm ist korrekt. Wenn nun aber alle vier Kreise grün sein sollen, "
-"dann musst du das Programm an vier Stellen verändern."
+"Das Programm ist korrekt. Wenn nun aber alle vier Kreise grün sein sollen, dann musst du das Programm an vier Stellen "
+"verändern."
 msgstr ""
-"The program is correct. If now however all four circles green should be, "
-"then must you the program at four places change."
+"The program is correct. However, if all four circles are supposed to be green, then you need to change the program in "
+"four places."
 
 #: ../../source/concepts/concept_defining_functions.md:37
-msgid ""
-"Stattdessen kann man das Erstellen des Kreises und das festlegen der Farbe "
-"in Unterprogramme auslagern:"
-msgstr ""
-"Instead, one can outsource the creation of the circle and the setting of the"
-" color to subprograms:"
+msgid "Stattdessen kann man das Erstellen des Kreises und das festlegen der Farbe in Unterprogramme auslagern:"
+msgstr "Instead, you can outsource the creation of the circle and the setting of the color to subroutines:"
 
 #: ../../source/concepts/concept_defining_functions.md:56
 msgid "Hier wurde eine Funtion `create_circle` definiert."
-msgstr "Here was a function `create_circle` defined."
+msgstr "Here, a function `create_circle` was defined."
 
 #: ../../source/concepts/concept_defining_functions.md:58
 msgid "Die Funktion hat den **Namen**  `create_circle`"
-msgstr "The function has the **name** `create_circle`"
+msgstr "The function is called **create_circle**"
 
 #: ../../source/concepts/concept_defining_functions.md:59
-msgid ""
-"Die Funktion erhält als **Übergabeparameter** die Werte `x` und `y` - An "
-"dieser Stelle soll der Kreis erstellt werden."
-msgstr ""
-"The function receives the values `x` and `y` as **parameters** - At this "
-"point the circle should be created."
+msgid "Die Funktion erhält als **Übergabeparameter** die Werte `x` und `y` - An dieser Stelle soll der Kreis erstellt werden."
+msgstr "The function receives the values `x` and `y` as **parameters** - At this point, the circle should be created."
 
 #: ../../source/concepts/concept_defining_functions.md:60
-msgid ""
-"Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend"
-" eine Farbe zugewiesen."
-msgstr ""
-"Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend"
-" eine Farbe zugewiesen."
+msgid "Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend eine Farbe zugewiesen."
+msgstr "Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend eine Farbe zugewiesen."
 
 #: ../../source/concepts/concept_defining_functions.md:61
-msgid ""
-"Die Funktion wird mit Hilfe ihres **Namens** und mit Übergabe der "
-"**Argumente** (z.B. 20, 20) aufgerufen."
-msgstr ""
-"The function is called with the help of its **name** and by passing the "
-"**arguments** (e.g. 20, 20)."
+msgid "Die Funktion wird mit Hilfe ihres **Namens** und mit Übergabe der **Argumente** (z.B. 20, 20) aufgerufen."
+msgstr "The function is called using its **name** and passing the **arguments** (e.g. 20, 20)."
 
 #: ../../source/concepts/concept_defining_functions.md:63
 msgid "Allgemein: Definieren von Funktionen"
-msgstr "General: Defining functions"
+msgstr "General: Definieren von Funktionen"
 
 #: ../../source/concepts/concept_defining_functions.md:65
-msgid ""
-"Oft willst du komplizierte Dinge automatisieren, z.B. das Anlegen von "
-"Actors."
-msgstr ""
-"Häufig willst du komplizierte Dinge automatisieren, z.B. das Anlegen von "
-"Actorn."
+msgid "Oft willst du komplizierte Dinge automatisieren, z.B. das Anlegen von Actors."
+msgstr "Often you want to automate complicated things, such as creating actors."
 
 #: ../../source/concepts/concept_defining_functions.md:67
-msgid ""
-"Dies geht, indem du Funktionen selbst definierst - Dies geht im Allgemeinen "
-"so:"
-msgstr ""
-"This goes by defining functions yourself - This generally works like this:"
+msgid "Dies geht, indem du Funktionen selbst definierst - Dies geht im Allgemeinen so:"
+msgstr "This is done by defining functions yourself - This is generally done like this:"
 
 #: ../../source/concepts/concept_defining_functions.md:74
 msgid "z.B.:"
-msgstr "For example:"
+msgstr "z.B.:"
 
 #: ../../source/concepts/concept_defining_functions.md:82
-msgid ""
-"Deine Funktion besteht aus einer *Signatur* und einem *Funktionskörper*."
+msgid "Deine Funktion besteht aus einer *Signatur* und einem *Funktionskörper*."
 msgstr "Your function consists of a *signature* and a *function body*."
 
 #: ../../source/concepts/concept_defining_functions.md:84
 msgid ""
-"Die Signatur ist die erste Zeile der Funktion. Sie enthält alle "
-"Informationen die du brauchst um die Funktion aufzurufen. Dies ist der "
-"**Name** und **Parameter**. Der Name dieser Funktion ist `create_actor`, die"
-" Parameter sind `x`und `y`.  Parameter werden benötigt um der Funktion "
-"weitere Informationen zu übergeben. Im Beispiel wird die Information "
-"übergeben, *wo* das Objekt erstellt werden soll."
+"Die Signatur ist die erste Zeile der Funktion. Sie enthält alle Informationen die du brauchst um die Funktion "
+"aufzurufen. Dies ist der **Name** und **Parameter**. Der Name dieser Funktion ist `create_actor`, die Parameter sind "
+"`x`und `y`.  Parameter werden benötigt um der Funktion weitere Informationen zu übergeben. Im Beispiel wird die "
+"Information übergeben, *wo* das Objekt erstellt werden soll."
 msgstr ""
-"The Signature is the first line of the function. It contains all the "
-"information you need to call the function. This is the **Name** and "
-"**Parameters**. The name of this function is `create_actor`, the parameters "
-"are `x` and `y`. Parameters are needed to pass additional information to the"
-" function. In the example, the information is passed on *where* the object "
-"should be created."
+"The signature is the first line of the function. It contains all the information you need to call the function. This "
+"includes the **name** and **parameters**. The name of this function is `create_actor`, and the parameters are `x` and "
+"`y`. Parameters are needed to pass additional information to the function. In the example, the information about "
+"*where* the object should be created is passed. "
 
 #: ../../source/concepts/concept_defining_functions.md:90
 msgid ""
-"Der Funktionskörper ist ein Code-Block. Er enthält alle Befehle, die bei "
-"Aufruf der Funktion  nacheinander abgearbeitet werden. Hier wird beim "
-"Funktionsaufruf zuerst ein Kreis erzeugt und anschließend  werden die Farbe "
-"des Kreises festgelegt."
+"Der Funktionskörper ist ein Code-Block. Er enthält alle Befehle, die bei Aufruf der Funktion  nacheinander abgearbeitet "
+"werden. Hier wird beim Funktionsaufruf zuerst ein Kreis erzeugt und anschließend  werden die Farbe des Kreises "
+"festgelegt."
 msgstr ""
-"The functional body is a code block. It contains all commands that are "
-"executed one after the other when the function is called. Here, a circle is "
-"first created when the function is called, and then the color of the circle "
-"is set."
+"The function body is a block of code. It contains all the commands that are executed sequentially when the function is "
+"called. Here, a circle is first created when the function is called, and then the color of the circle is set. "
 
 #: ../../source/concepts/concept_defining_functions.md:94
-msgid ""
-"Die Befehle werden beim Aufruf der Funktion von oben nach unten "
-"abgearbeitet."
-msgstr ""
-"The commands are executed from top to bottom when the function is called."
+msgid "Die Befehle werden beim Aufruf der Funktion von oben nach unten abgearbeitet."
+msgstr "The commands are processed from top to bottom when the function is called."
 
 #: ../../source/concepts/concept_defining_functions.md:96
 msgid "Aufruf von Funktionen"
-msgstr "Call of functions"
+msgstr "Calling functions"
 
 #: ../../source/concepts/concept_defining_functions.md:98
 msgid ""
-"Eine Funktion wird mit Hilfe des Namens aufgerufen. Dabei übergibst du der "
-"Funktion die  als Parameter definierten Argumente."
-msgstr ""
-"A function is called using the name. Thereby you pass the arguments defined "
-"as parameters to the function."
+"Eine Funktion wird mit Hilfe des Namens aufgerufen. Dabei übergibst du der Funktion die  als Parameter definierten "
+"Argumente."
+msgstr "A function is called using the name. You pass the arguments defined as parameters to the function."
 
 #: ../../source/concepts/concept_defining_functions.md:101
 msgid "Allgemein schreibt man: `method_name(<parameter>)`"
-msgstr "Im Allgemeinen schreibt man: `method_name(<parameter>)`"
+msgstr "In der Regel schreibt man: `method_name(<parameter>)`"
 
 #: ../../source/concepts/concept_defining_functions.md:104
 msgid "Dies kann z.B. so aussehen:"
-msgstr "This can e.g. look like this:"
+msgstr "Dies kann z.B. so aussehen:"
 
 #: ../../source/concepts/concept_defining_functions.md:110
 msgid "Hier wird ein Actor an der Position `x=4` und `y=2` angelegt."
-msgstr "Here an Actor is created at position `x=4` and `y=2`."
+msgstr "Here, an actor is created at position `x=4` and `y=2`."
 
 #: ../../source/concepts/concept_defining_functions.md:112
 msgid "Komplexe Figuren zeichen"
-msgstr "Complex figures draw"
+msgstr "Draw complex figures"
 
 #: ../../source/concepts/concept_defining_functions.md:114
 msgid "Mit  Hilfe von Funktionen kannst du komplexe Figuren zeichnen:"
-msgstr "With the help of functions, you can draw complex figures."
+msgstr "Mit Hilfe von Funktionen kannst du komplexe Figuren zeichnen:"
 
 #: ../../source/concepts/concept_defining_functions.md:137
 msgid ""
-"In der Funktion `create_face` wird ein Gesicht erzeugt.  Dieses kann "
-"anschließend an unterschiedlichen Stellen erzeugt werden."
-msgstr ""
-"In the function `create_face` a face is generated. This can then be created "
-"at different locations."
+"In der Funktion `create_face` wird ein Gesicht erzeugt.  Dieses kann anschließend an unterschiedlichen Stellen erzeugt "
+"werden."
+msgstr "In the function `create_face`, a face is created. This can then be generated in different places."
 
 #: ../../source/concepts/concept_defining_functions.md:140
 msgid "![faces](../_images/processing/face3.png)"
-msgstr "![Gesichter](../_images/processing/face3.png)"
+msgstr "![faces](../_images/processing/face3.png)"
 
 #: ../../source/concepts/concept_defining_functions.md:140
 msgid "faces"
@@ -223,27 +178,23 @@ msgstr "Gesichter"
 
 #: ../../source/concepts/concept_defining_functions.md:143
 msgid "Actors automatisiert erstellen"
-msgstr "Actor automatisch erstellen"
+msgstr "Actors automatisch erstellen"
 
 #: ../../source/concepts/concept_defining_functions.md:145
 msgid "Mit Hilfe von Funktionen kannst du das erstellen von Actors abkürzen:"
-msgstr "With help of functions you can the creation of Actors shorten:"
+msgstr "Mit Hilfe von Funktionen kannst du das Erstellen von Actors abkürzen:"
 
 #: ../../source/concepts/concept_defining_functions.md:147
-msgid ""
-"Es werden hier 10 Actors mit 10 Befehlen angelegt. Ohne Funktionen hättest "
-"du 30 Befehle benötigt."
-msgstr ""
-"Here 10 Actors are created with 10 commands. Without functions you would "
-"have needed 30 commands."
+msgid "Es werden hier 10 Actors mit 10 Befehlen angelegt. Ohne Funktionen hättest du 30 Befehle benötigt."
+msgstr "10 Akteure werden hier mit 10 Befehlen angelegt. Ohne Funktionen hättest du 30 Befehle benötigt."
 
 #: ../../source/concepts/concept_defining_functions.md:179
 msgid "Ausgabe:"
-msgstr "Issue:"
+msgstr "Ausgabe:"
 
 #: ../../source/concepts/concept_defining_functions.md:181
 msgid "![walls](../_images/walls.png)"
-msgstr "![Wände](../_images/walls.png)"
+msgstr "![walls](../_images/walls.png)"
 
 #: ../../source/concepts/concept_defining_functions.md:181
 msgid "walls"
@@ -251,63 +202,53 @@ msgstr "Wände"
 
 #: ../../source/concepts/concept_defining_functions.md:183
 msgid "Eigenschaften und Methoden registrieren."
-msgstr "Properties and methods register."
+msgstr "Register properties and methods."
 
 #: ../../source/concepts/concept_defining_functions.md:185
 msgid "Das folgende Programm erstellt automatisch \"Regentropfen\"."
 msgstr "The following program automatically creates \"raindrops\"."
 
 #: ../../source/concepts/concept_defining_functions.md:187
-msgid ""
-"In der funktion raindrop werden nicht nur Eigenschaften für jeden Tropfen "
-"festgelegt, sondern auch Methoden registriert."
-msgstr ""
-"In the function raindrop, properties are not only defined for each drop, but"
-" also methods are registered."
+msgid "In der funktion raindrop werden nicht nur Eigenschaften für jeden Tropfen festgelegt, sondern auch Methoden registriert."
+msgstr "In the raindrop function, not only are properties set for each drop, but methods are also registered."
 
 #: ../../source/concepts/concept_defining_functions.md:221
 msgid "Rückgabewerte"
 msgstr "Return values"
 
 #: ../../source/concepts/concept_defining_functions.md:223
-msgid ""
-"Die bisherigen Funktionen haben ein Unterprogramm ausgeführt und dabei ggf. "
-"Informationen über Parameter erhalten."
-msgstr ""
-"The previous functions have executed a subroutine and possibly received "
-"information about parameters."
+msgid "Die bisherigen Funktionen haben ein Unterprogramm ausgeführt und dabei ggf. Informationen über Parameter erhalten."
+msgstr "The previous functions executed a subroutine and possibly received information via parameters."
 
 #: ../../source/concepts/concept_defining_functions.md:225
 msgid "Mit Hilfe von Rückgabewerten kannst du auch Informationen zurückgeben."
-msgstr "Using return values, you can also return information."
+msgstr "With the help of return values, you can also return information."
 
 #: ../../source/concepts/concept_defining_functions.md:227
 msgid "Im einfachen Fall sieht dies so aus:"
-msgstr "Im 2897 Fall sieht dies so aus:"
+msgstr "In the simple case, it looks like this:"
 
 #: ../../source/concepts/concept_defining_functions.md:239
 msgid ""
-"In der letzten Zeile passiert folgendes: Bevor die Funktion `print` "
-"ausgeführt werden kann, muss die  Funktion `is_even` ausgewertet werden. Das"
-" Ergebnis der Funktion (Hier: `True`) wird dann  anstelle des "
-"Funktionsaufrufs eingesetzt."
+"In der letzten Zeile passiert folgendes: Bevor die Funktion `print` ausgeführt werden kann, muss die  Funktion "
+"`is_even` ausgewertet werden. Das Ergebnis der Funktion (Hier: `True`) wird dann  anstelle des Funktionsaufrufs "
+"eingesetzt."
 msgstr ""
-"In the last line the following happens: Before the function `print` can be "
-"executed, the function `is_even` must be evaluated. The result of the "
-"function (Here: `True`) is then used instead of the function call."
+"In der letzten Zeile passiert folgendes: Bevor die Funktion `print` ausgeführt werden kann, muss die Funktion `is_even` "
+"ausgewertet werden. Das Ergebnis der Funktion (Hier: `True`) wird dann anstelle des Funktionsaufrufs eingesetzt."
 
 #: ../../source/concepts/concept_defining_functions.md:243
 msgid ""
-"Das folgende Programm erstelllt zufällig Kreise. Wenn diese links von der "
-"Mitte sind,  werden sie rot eingefärbt, ansonsten weiß."
+"Das folgende Programm erstelllt zufällig Kreise. Wenn diese links von der Mitte sind,  werden sie rot eingefärbt, "
+"ansonsten weiß."
 msgstr ""
-"The following program randomly creates circles. If they are to the left of "
-"the center, they will be colored red, otherwise white."
+"The following program randomly creates circles. If they are to the left of the center, they are colored red, otherwise "
+"white."
 
 #: ../../source/concepts/concept_defining_functions.md:269
 msgid "![is left](../_images/processing/is_left.png)"
-msgstr "![ist links](../_images/processing/is_left.png)"
+msgstr "![is left](../_images/processing/is_left.png)"
 
 #: ../../source/concepts/concept_defining_functions.md:269
 msgid "is left"
-msgstr "ist links"
+msgstr "ist übrig"
