@@ -57,7 +57,7 @@ msgstr "Eine Welt für pixelgenaue Spiele."
 
 #: miniworlds.worlds.world.World:13 of
 msgid "The position of a actor on a World is the pixel at topleft of actor."
-msgstr "Die Position eines Schauspielers in einer Welt ist das Pixel oben links des Schauspielers."
+msgstr "Die Position eines Actors in einer Welt ist das Pixel oben links des Actors."
 
 #: miniworlds.worlds.world.World:15 of
 msgid "New actors are created with top-left corner of actor rect at position."
@@ -65,7 +65,7 @@ msgstr "Neue Akteure werden erstellt, wobei die obere linke Ecke des Akteursrech
 
 #: miniworlds.worlds.world.World:17 of
 msgid "Two actors collide when their sprites overlap."
-msgstr "Zwei Schauspieler kollidieren, wenn sich ihre Sprites überlappen."
+msgstr "Zwei Actor kollidieren, wenn sich ihre Sprites überlappen."
 
 #: miniworlds.worlds.world.World:19 of
 msgid "Asteroids"
@@ -696,7 +696,7 @@ msgstr ":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ \\
 
 #: ../../None:64:<autosummary>:1
 msgid "Adds a Actor to the world."
-msgstr "Fügt einen Schauspieler zur Welt hinzu."
+msgstr "Fügt einen Actor zur Welt hinzu."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ \\(position\\)"
@@ -939,7 +939,7 @@ msgstr ":py:obj:`_update_all_costumes <miniworlds.worlds.world.World._update_all
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "aktualisiert Kostüme für alle Schauspieler auf der Welt"
+msgstr "aktualisiert Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
@@ -1056,11 +1056,11 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.detect_actors:5 of
 msgid "Position, where actors should be searched."
-msgstr "Position, wo Schauspieler gesucht werden sollten."
+msgstr "Position, wo Actor gesucht werden sollten."
 
 #: miniworlds.worlds.world.World.detect_actors:7 of
 msgid "A list of actors"
-msgstr "Eine Liste von Schauspielern"
+msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.world.World.detect_actors:11 of
 msgid "Get all actors at mouse position:"
@@ -1157,11 +1157,11 @@ msgstr "Verweis auf die Datenbankdatei"
 
 #: miniworlds.worlds.world.World.load_actors_from_db:7 of
 msgid "a list of all Actor Classes which should be imported."
-msgstr "eine Liste aller Schauspielerklassen, die importiert werden sollen."
+msgstr "eine Liste aller Actorklassen, die importiert werden sollen."
 
 #: miniworlds.worlds.world.World.load_actors_from_db:10 of
 msgid "All Actors"
-msgstr "Alle Schauspieler"
+msgstr "Alle Actor"
 
 #: miniworlds.worlds.world.World.play_music:3 of
 msgid "The path to the music"

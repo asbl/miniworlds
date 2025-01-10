@@ -47,7 +47,7 @@ msgstr "![First Actor](../_images/act.png)"
 
 #: ../../source/tutorial/04_00_act.md:11
 msgid "First Actor"
-msgstr "Erster Schauspieler"
+msgstr "Erster Actor"
 
 #: ../../source/tutorial/04_00_act.md:13
 msgid "Beispiel: Bewegender Actor"

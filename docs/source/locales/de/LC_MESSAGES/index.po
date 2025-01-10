@@ -95,7 +95,7 @@ msgstr "Zwei Akteure, die per Tastatur gesteuert werden"
 
 #: ../../source/index.md:43 ../../source/index.md:47
 msgid "Example: Two actors"
-msgstr "Beispiel: Zwei Schauspieler"
+msgstr "Beispiel: Zwei Actor"
 
 #: ../../source/index.md:50
 msgid "Skeetshooting"

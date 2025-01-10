@@ -21,11 +21,11 @@ msgstr ""
 
 #: ../../source/tutorial/03_00_actors.md:1
 msgid "Actors"
-msgstr "Schauspieler"
+msgstr "Actor"
 
 #: ../../source/tutorial/03_00_actors.md:3
 msgid "Actors: Grundbausteine deiner Welt"
-msgstr "Schauspieler: Grundbausteine deiner Welt"
+msgstr "Actor: Grundbausteine deiner Welt"
 
 #: ../../source/tutorial/03_00_actors.md:5
 msgid ""

@@ -81,7 +81,7 @@ msgstr "![Kostüme für den Actor](../_images/costumes.png)"
 
 #: ../../source/tutorial/07_animations.md:46
 msgid "Kostüme für den Actor"
-msgstr "Kostüme für den Schauspieler"
+msgstr "Kostüme für den Actor"
 
 #: ../../source/tutorial/07_animations.md:48
 msgid "Um eine Animation zu erstellen, musst du zunächst mehrere Bilder zu einem Kostüm hinzufügen (siehe oben)."

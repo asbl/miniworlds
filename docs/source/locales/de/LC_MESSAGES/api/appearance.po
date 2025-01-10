@@ -43,7 +43,7 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance:1 of
 msgid "Base class of actor costumes and world backgrounds"
-msgstr "Basisklasse von Schauspielerkostümen und Welt-Hintergründen"
+msgstr "Basisklasse von Actorkostümen und Welt-Hintergründen"
 
 #: miniworlds.appearances.appearance.Appearance:3 of
 msgid ""
@@ -485,7 +485,7 @@ msgstr ":py:obj:`_set_rotatable <miniworlds.appearances.appearance.Appearance._s
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
-msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Schauspielerrichtung gedreht"
+msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Actorrichtung gedreht"
 
 #: ../../None:23:<autosummary>:1
 msgid ":py:obj:`_set_centered <miniworlds.appearances.appearance.Appearance._set_centered>`\\ \\(value\\)"
@@ -695,7 +695,7 @@ msgstr "Spiegelt das Kostüm oder den Hintergrund. Das Bild wird über die y-Ach
 
 #: miniworlds.appearances.appearance.Appearance.is_flipped:5 of
 msgid "Flips actor:"
-msgstr "Flippt Schauspieler:"
+msgstr "Flippt Actor:"
 
 #: miniworlds.appearances.appearance.Appearance.is_textured:5 of
 msgid "Texture the board with the given image:"
@@ -716,7 +716,7 @@ msgstr "bool"
 
 #: miniworlds.appearances.appearance.Appearance.orientation:5 of
 msgid "Both actors are moving up. The image of t2 is correctly aligned. t1 is looking in the wrong direction."
-msgstr "Beide Schauspieler steigen auf. Das Bild von t2 ist korrekt ausgerichtet. t1 schaut in die falsche Richtung."
+msgstr "Beide Actor steigen auf. Das Bild von t2 ist korrekt ausgerichtet. t1 schaut in die falsche Richtung."
 
 #: miniworlds.appearances.appearance.Appearance.register:1 of
 msgid "Register method for decorator. Registers method to actor or background."

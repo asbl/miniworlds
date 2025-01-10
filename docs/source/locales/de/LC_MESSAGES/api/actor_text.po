@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
-msgstr "Schauspieler > Text"
+msgstr "Actor > Text"
 
 #: miniworlds.actors.texts.text.Text:1 of
 msgid "A Text-Actor is a actor which contains a Text."

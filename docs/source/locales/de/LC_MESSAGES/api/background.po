@@ -569,7 +569,7 @@ msgstr ":py:obj:`_set_rotatable <miniworlds.appearances.appearance.Appearance._s
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
-msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Richtung des Schauspielers gedreht"
+msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Richtung des Actors gedreht"
 
 #: ../../None:23:<autosummary>:1
 msgid ":py:obj:`_set_centered <miniworlds.appearances.appearance.Appearance._set_centered>`\\ \\(value\\)"

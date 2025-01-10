@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/costume.md:1
 msgid "Actor > Costume"
-msgstr "Schauspieler > Kostüm"
+msgstr "Actor > Kostüm"
 
 #: ../../source/api/costume.md:3
 msgid "Ein **Kostüm** ist eine Kindklasse der **Appearance**-Klasse. Die meisten Funktionen findest du daher dort."
@@ -40,12 +40,12 @@ msgid ""
 "Every actor has a costume which defines the \"look\" of the actor. You can switch the images in a costume to animate "
 "the actor."
 msgstr ""
-"Jeder Schauspieler hat ein Kostüm, das das \"Aussehen\" des Schauspielers definiert. Sie können die Bilder in einem "
-"Kostüm wechseln, um den Schauspieler zu animieren."
+"Jeder Actor hat ein Kostüm, das das \"Aussehen\" des Actors definiert. Sie können die Bilder in einem "
+"Kostüm wechseln, um den Actor zu animieren."
 
 #: miniworlds.appearances.costume.Costume:6 of
 msgid "A costume is created if you add an image to an actor with actor.add_image(path_to_image)"
-msgstr "Ein Kostüm wird erstellt, wenn Sie einem Schauspieler mit actor.add_image(path_to_image) ein Bild hinzufügen"
+msgstr "Ein Kostüm wird erstellt, wenn Sie einem Actor mit actor.add_image(path_to_image) ein Bild hinzufügen"
 
 #: ../../source/api/costume.md
 msgid "Public Data Attributes:"
@@ -259,7 +259,7 @@ msgstr "Öffentliche Methoden:"
 
 #: ../../None:10:<autosummary>:1
 msgid ":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ \\(actor\\)"
-msgstr ":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ \\(Schauspieler\\)"
+msgstr ":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ \\(Actor\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid ":py:obj:`after_init <miniworlds.appearances.costume.Costume.after_init>`\\ \\(\\)"
@@ -541,7 +541,7 @@ msgstr ":py:obj:`_set_rotatable <miniworlds.appearances.appearance.Appearance._s
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
-msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Richtung des Schauspielers gedreht"
+msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Richtung des Actors gedreht"
 
 #: ../../None:23:<autosummary>:1
 msgid ":py:obj:`_set_centered <miniworlds.appearances.appearance.Appearance._set_centered>`\\ \\(value\\)"
@@ -641,7 +641,7 @@ msgstr "Ruft Argumente für die äußere Form ab"
 
 #: ../../docstring miniworlds.appearances.costume.Costume.parent:1 of
 msgid "the parent of a costume is the associated actor."
-msgstr "Das übergeordnete Element eines Kostüms ist der zugehörige Schauspieler."
+msgstr "Das übergeordnete Element eines Kostüms ist der zugehörige Actor."
 
 #: ../../source/api/costume.md
 msgid "Parameter"

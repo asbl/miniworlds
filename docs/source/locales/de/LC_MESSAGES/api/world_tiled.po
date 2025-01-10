@@ -838,7 +838,7 @@ msgstr ":py:obj:`add_to_world <miniworlds.worlds.world.World.add_to_world>`\\ \\
 
 #: ../../None:64:<autosummary>:1
 msgid "Adds a Actor to the world."
-msgstr "Fügt einen Schauspieler zur Welt hinzu."
+msgstr "Fügt einen Actor zur Welt hinzu."
 
 #: ../../None:64:<autosummary>:1
 msgid ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ \\(position\\)"
@@ -1138,7 +1138,7 @@ msgstr ":py:obj:`_update_all_costumes <miniworlds.worlds.world.World._update_all
 
 #: ../../None:8:<autosummary>:1
 msgid "updates costumes for all actors on the world"
-msgstr "aktualisiert Kostüme für alle Schauspieler auf der Welt"
+msgstr "aktualisiert Kostüme für alle Actor auf der Welt"
 
 #: ../../None:8:<autosummary>:1
 msgid ":py:obj:`_act_all <miniworlds.worlds.world.World._act_all>`\\ \\(\\)"
@@ -1211,7 +1211,7 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:5 of
 msgid "Position, where actors should be searched."
-msgstr "Position, wo Schauspieler gesucht werden sollten."
+msgstr "Position, wo Actor gesucht werden sollten."
 
 #: ../../source/api/world_tiled.md
 msgid "Rückgabe"
@@ -1219,7 +1219,7 @@ msgstr "Rückgabe"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:7 of
 msgid "A list of actors"
-msgstr "Eine Liste von Schauspielern"
+msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:11 of
 msgid "Get all actors at mouse position:"
