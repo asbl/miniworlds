@@ -10,8 +10,7 @@ class Rect(pygame.Rect):
     @classmethod
     def create(cls, rect: Union[tuple, pygame.Rect]):
         if type(rect) == tuple:
-            cls(rect[0], rect[1], 1, 1)
-            return rect
+            return cls(rect[0], rect[1], 1, 1)
         elif type(rect) == pygame.Rect:
             return cls(rect.x, rect.y, rect.width, rect.height)
         else:
