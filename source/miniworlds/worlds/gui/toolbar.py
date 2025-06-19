@@ -222,7 +222,7 @@ class Toolbar(gui.GUI):
     def update_width_and_height(self):
         super().screen_width
 
-    def update(self):
+    async def update(self):
         super().update()
         for widget in self.timed_widgets:
             widget.update()

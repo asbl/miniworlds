@@ -7,6 +7,7 @@ import asyncio
 
 import pygame
 from typing import List, cast, Optional
+from importlib.metadata import version, PackageNotFoundError
 
 import miniworlds.appearances.managers.image_manager as image_manager
 import miniworlds.base.manager.app_event_manager as event_manager
@@ -58,8 +59,11 @@ class App:
     def _output_start(self):
         if sys.platform != 'emscripten':
             import pkg_resources # type: ignore
-            version = pkg_resources.require("miniworlds")[0].version
-            print("Show new miniworlds v.{0} Window".format(version))
+            try:
+                version_str = version("miniworlds")
+            except PackageNotFoundError:
+                version_str = "unknown"
+            print("Show new miniworlds v.{0} Window".format(version_str))
 
     def __init__(self, title):
         self._output_start()
@@ -102,10 +106,11 @@ class App:
         self.prepare_mainloop()
         print("mainloop prepared")
         if not self._mainloop_started:
-            if sys.platform == 'emscripten':
-                await self.start_mainloop();
-            else:
-                asyncio.run(self.start_mainloop());
+            #if sys.platform == 'emscripten':
+            #    await self.start_mainloop()
+            #else:
+            await self.start_mainloop()
+                # asyncio.run(self.start_mainloop())
         else:
             for world in self.running_worlds:
                 world.dirty = 1
@@ -132,7 +137,6 @@ class App:
     async def _update(self):
         """This is the mainloop. This function is called until the app quits.
         """
-        print("update")
         self.event_manager.pygame_events_to_event_queue()
         if self.window.dirty:
             self.resize()
