@@ -98,7 +98,7 @@ class WorldBase(ABC):
     def window_docking_position(self):
         return self.docking_position
 
-    def update(self):
+    async def update(self):
         """
         Implemented in subclasses
         """
