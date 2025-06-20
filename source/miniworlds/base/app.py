@@ -58,14 +58,21 @@ class App:
 
     def _output_start(self):
         if sys.platform != 'emscripten':
-            import pkg_resources # type: ignore
+            try:
+                from importlib.metadata import version, PackageNotFoundError
+            except ImportError:
+                # Für Python <3.8 (z. B. falls rückwärtskompatibel): `importlib-metadata` installieren
+                from importlib_metadata import version, PackageNotFoundError
+
             try:
                 version_str = version("miniworlds")
             except PackageNotFoundError:
                 version_str = "unknown"
-            print("Show new miniworlds v.{0} Window".format(version_str))
 
-    def __init__(self, title):
+            print(f"Show new miniworlds v.{version_str} Window")
+
+    def __init__(self, title, world):
+        App.init = True
         self._output_start()
         self.check_for_run_method()
         self.worlds_manager: "worlds_manager.WorldsManager" = worlds_manager.WorldsManager(self)
@@ -78,6 +85,8 @@ class App:
         self.music_manager: "music_manager.MusicManager" = music_manager.MusicManager(self)
         self.window: "window_mod.Window" = window_mod.Window(title, self.worlds_manager, self.event_manager)
         App.running_app = self
+        App.running_world = world
+        App.running_worlds.append(world)
         App.window = self.window
         self._exit_code: int = 0
         if App.path:

@@ -16,7 +16,7 @@ class Test615(unittest.TestCase):
                     print("world 1 was created")
                     actor = Actor((10,10), origin ="topleft")
                     self.console = Console()
-                    self.add_bottom(self.console, size = 200)
+                    self.add_world_bottom(self.console, size = 200)
                     
                 def act_test(self):
                     if self.frame == 20:

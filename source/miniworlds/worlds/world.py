@@ -2,6 +2,7 @@ import math
 import pygame
 import sys
 import asyncio
+import time
 from typing import Tuple, Union, Optional, List, cast, Callable
 
 import miniworlds.appearances.appearance as appearance
@@ -167,11 +168,7 @@ class World(world_base.WorldBase):
         self.frame: int = 0
         self.clock: pygame.time.Clock = pygame.time.Clock()
         if not app.App.init:
-            app.App.init = True
-            self.app: "app.App" = app.App("miniworlds")
-            app.App.running_app = self.app
-            app.App.running_world = self
-            app.App.running_worlds.append(self)
+            self.app: "app.App" = app.App("miniworlds", self)
         else:
             self.app = app.App.running_app
         self.music: "world_music_manager.MusicManager" = (
@@ -193,34 +190,42 @@ class World(world_base.WorldBase):
         self.app.worlds_manager.add_topleft(self)
         self.reload_costumes_queue = []
 
-    def add_right(self, world, size: int = 100):
-        new_world = world
-        new_world.camera.disable_resize()
-        new_world.camera.screen_topleft = (self.window.width, 0)
-        new_world.camera.height = self.window.height
-        new_world.camera.width = size
-        _container = self.app.worlds_manager.add_world(new_world, "right", size)
-        app_mod.App.running_worlds.append(new_world)
-        new_world.camera.enable_resize()
-        new_world.on_change()
-        new_world.on_setup()
-        return new_world
+    def add_world_right(self, world: "World", size: int = 100):
+        """Adds a world to the right of the current world.
 
-    def add_bottom(self, world: "World", size: int = 100):
-        new_world = world
-        new_world.camera.disable_resize()
-        new_world.camera.screen_topleft = (0, self.window.height,)
-        new_world.camera.width = self.window.width
-        new_world.camera.height = size
-        _container = self.app.worlds_manager.add_world(new_world, "bottom", size)
-        app_mod.App.running_worlds.append(new_world)
-        new_world.camera.enable_resize()
-        new_world.on_change()
-        new_world.on_setup()
-        return new_world
+        Args:
+            world: The world instance to add.
+            size: Width of the new world in pixels (default: 100).
 
-    def remove_world(self, container: "world_base.WorldBase"):
-        return self.app.worlds_manager.remove_world(container)
+        Returns:
+            The added world.
+        """
+        return self.app.worlds_manager.add_world(world, "right", size)
+
+
+    def add_world_bottom(self, world: "World", size: int = 100):
+        """Adds a world below the current world.
+
+        Args:
+            world: The world instance to add.
+            size: Height of the new world in pixels (default: 100).
+
+        Returns:
+            The added world.
+        """
+        return self.app.worlds_manager.add_world(world, "bottom", size)
+
+
+    def remove_world(self, world: "World"):
+        """Removes a world from the layout and updates the window.
+
+        Args:
+            world: The world instance to remove.
+
+        Returns:
+            None
+        """
+        return self.app.worlds_manager.remove_world(world)
 
     @staticmethod
     def _get_camera_manager_class():
@@ -1053,6 +1058,7 @@ class World(world_base.WorldBase):
         Called in app.update() when reload_all_worlds is called.
         """
         if self.is_running or self.frame == 0:
+            start = time.perf_counter()
             # Acting for all actors@static
             if self.frame > 0 and self.frame % self.step == 0:
                 self._act_all()
@@ -1065,10 +1071,13 @@ class World(world_base.WorldBase):
             # update all costumes on current background
             self._update_all_costumes()
             self._tick_timed_objects()
-        self.frame = self.frame + 1
-        self.clock.tick(self.fps)
-        await asyncio.sleep(0)
+        self.frame += 1
+        #self.clock.tick(self.fps)
         self.event_manager.update()
+        elapsed = time.perf_counter() - start
+        wait = max(0, (1 / self.fps) - elapsed)
+        await asyncio.sleep(wait)
+        
 
     def _update_all_costumes(self):
         """updates costumes for all actors on the world"""
