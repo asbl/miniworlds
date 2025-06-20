@@ -1,5 +1,5 @@
 from miniworlds import App, World, Actor, Toolbar, Button, Label, Label, loop
-from .screenshot_tester import ScreenshotTester
+from test.screenshot_tester import ScreenshotTester
 import unittest
 import os
 import random
@@ -88,7 +88,7 @@ class Test610(unittest.TestCase):
                     label.text = str(percent)
                     if percent < 100:
                         percent += 10
-                world.add_right(toolbar, size = 200)
+                world.add_world_right(toolbar, size = 200)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

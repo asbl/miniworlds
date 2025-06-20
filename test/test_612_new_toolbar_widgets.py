@@ -14,7 +14,7 @@ class Test612(unittest.TestCase):
             @world.register
             def setup_environment(self, test):
                 toolbar = Toolbar()
-                world.add_right(toolbar, size = 300)
+                world.add_world_right(toolbar, size = 300)
                 
                 toolbar.margin_left =  20
                 toolbar.margin_right = 10

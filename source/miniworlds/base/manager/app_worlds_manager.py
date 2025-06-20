@@ -1,7 +1,6 @@
 from typing import List, cast, Tuple
 import pygame
 import miniworlds.base.app as app
-import miniworlds.base.window as window_mod
 import miniworlds.worlds.world_base as base_world
 from miniworlds.base.exceptions import MiniworldsError
 
@@ -46,130 +45,142 @@ class WorldsManager:
         return new_world
 
     def add_world(
-        self, world: "base_world.BaseWorld", dock: str, size: int|None = None
+            self,
+            world: "base_world.BaseWorld",
+            dock: str,
+            size: int | None = None
     ) -> "base_world.BaseWorld":
-        """Adds a new container
+        """Adds a new world to the layout and initializes it at the given docking position.
 
         Args:
-            container (container.Container): The container
-            dock (str): The position: "top_left", "right" or "bottom"
-            size (int, optional): Size in pixels. Defaults to attribute
-            `default_size`of container
-
-        Raises:
-            MiniworldsError: Raises error if container is already in
-            world containers.
+            world: The world instance to add.
+            dock: Docking position – one of "top_left", "right", or "bottom".
+            size: Optional pixel size for docking (used for height or width depending on position).
 
         Returns:
-            container.Container: The container
+            The world that was added.
+
+        Raises:
+            MiniworldsError: If the world is already in the layout.
         """
-        if world not in self.worlds:
-            world.docking_position = dock
-            self.worlds.append(world)
-            world.add_to_window(self.app, dock, size)
-            for world in self.worlds:
-                world.dirty = 1
-            for world in self.app.running_worlds:
-                for actor in world.actors:
-                    actor.dirty = 1
-        else:
-            raise MiniworldsError("Container already in world.worlds")
+        if world in self.worlds:
+            raise MiniworldsError("World already exists in worlds list.")
+
+        # Set docking position and prepare camera
+        world.docking_position = dock
+        world.add_to_window(self.app, dock, size)
+
+        # Set camera screen position based on docking
+        if dock == "right":
+            world.camera.screen_topleft = (self.app.window.width, 0)
+            world.camera.height = self.app.window.height
+            world.camera.width = size
+        elif dock == "bottom":
+            world.camera.screen_topleft = (0, self.app.window.height)
+            world.camera.height = size or world.camera.height
+            world.camera.width = self.app.window.width
+
+        world.camera.disable_resize()
+
+        # Register world
+        self.worlds.append(world)
+        app.App.running_worlds.append(world)
+
+        # Trigger world setup and state updates
+        world.on_change()
+        world.on_setup()
+
+        world.camera.enable_resize()
+
+        # Mark all worlds and their actors as dirty (to trigger redraw)
+        for w in self.worlds:
+            w.dirty = 1
+        for w in self.app.running_worlds:
+            for actor in w.actors:
+                actor.dirty = 1
+
+        # Resize the application window layout
         self.app.resize()
         return world
+
+    def _deactivate_world(self, world: "base_world.BaseWorld"):
+        world.stop()
+        world.stop_listening()
+        world.app.event_manager.event_queue.clear()
+        if world in app.App.running_worlds:
+            app.App.running_worlds.remove(world)
+
+    def _activate_world(self, world: "base_world.BaseWorld", reset: bool, setup: bool):
+        app.App.running_world = world
+        app.App.running_worlds.append(world)
+        world._app = self.app
+        world._window = self.app.window
+        world.init_display()
+        world.is_running = True
+        if reset:
+            world.reset()
+        if setup:
+            world.on_setup()
+        world.background.set_dirty("all", 2)
+        world.start_listening()
+
+    def _finalize_world_switch(self, old_world, new_world):
+        self.app.image = new_world.image
+        self._replace_world_in_worlds_list(old_world, new_world)
+        self._update_all_worlds()
+        self.app.resize()
+        self.app.prepare_mainloop()
+
+    def _replace_world_in_worlds_list(
+            self,
+            old_world: "base_world.BaseWorld",
+            new_world: "base_world.BaseWorld",
+    ) -> "base_world.BaseWorld":
+        """intern: Replaces a world in the worlds list"""
+        for i, world in enumerate(self.worlds):
+            if world == old_world:
+                dock = old_world.docking_position
+                self.worlds[i] = new_world
+                new_world.docking_position = dock
+                if dock == "top_left":
+                    self.topleft = new_world
+                break
+        return new_world
 
     def switch_world(self, new_world, reset = True, setup = True):
         #remove old world and stop events
         old_world = self.app.running_world
-        old_world.stop()
-        old_world.stop_listening()
-        old_world.app.event_manager.event_queue.clear()
-        #self.app.worlds_manager.switch_world(new_world)
-        app.App.running_worlds.remove(old_world)
-        app.App.running_world = new_world
-        app.App.running_worlds.append(new_world)
-        new_world._app = old_world._app
-        # Start listening to new world
-        new_world.init_display()
-        new_world.is_running = True
-        new_world._window = self.app.window
-        if reset:
-            new_world.reset()
-        if setup:
-            new_world.on_setup()
-        new_world.background.set_dirty("all", 2)
-        new_world.start_listening()
-
-        self.app.image = new_world.image
-        self.switch_container(old_world, new_world)
-        #for world in self.worlds:
-        #    if world != new_world:
-        #        self.remove_world(world)
-        self.app.prepare_mainloop()
+        self._deactivate_world(old_world)
+        self._activate_world(new_world, reset, setup)
+        self._finalize_world_switch(old_world, new_world)
 
     def worlds_right(self):
-        """List of all containers with docking_position "right", 
+        """List of all worlds with docking_position "right", 
         ordered by display-position"""
         return [self.topleft] + [
             world for world in self.worlds if world.docking_position == "right"
         ]
 
     def worlds_bottom(self):
-        """List of all containers with docking_position "bottom",
+        """List of all worlds with docking_position "bottom",
         ordered by display-position"""
         return [self.topleft] + [
             world for world in self.worlds if world.docking_position == "bottom"
         ]
-        
-    def switch_container(
-        self,
-        container: "base_world.BaseWorld",
-        new_container: "base_world.BaseWorld",
-    ) -> "base_world.BaseWorld":
-        """Switches a container (e.g. replace a world with another world)
-
-        Args:
-            container: The container which should be replaced
-            new_container: The container which should be inserted
-        """
-        for i, world in enumerate(self.worlds):
-            if world == container:
-                dock = container.docking_position
-                self.worlds[i] = new_container
-                new_container.docking_position = dock
-                if dock == "top_left":
-                    self.topleft = new_container
-                break
-        self.update_containers()
-        self.app.resize()
-        return new_container
 
     def get_topleft(self) -> "base_world.BaseWorld":
-        for container in self.worlds:
-            if container.docking_position == "top_left":
-                return container
-        raise MiniworldsError("Container top_left is missing!")
-
-    def containers_right(self):
-        """List of all containers with docking_position "right", 
-        ordered by display-position"""
-        return [self.topleft] + [
-            world for world in self.worlds if world.docking_position == "right"
-        ]
-
-    def containers_bottom(self):
-        """List of all containers with docking_position "bottom",
-        ordered by display-position"""
-        return [self.topleft] + [
-            world for world in self.worlds if world.docking_position == "bottom"
-        ]
+        for world in self.worlds:
+            if world.docking_position == "top_left":
+                return world
+        raise MiniworldsError("World top_left is missing!")
 
     def remove_world(self, world):
-        """Removes a container and updates window."""
+        """Removes a world and updates window."""
         if world in self.worlds:
             self.worlds.remove(world)
         for world in self.worlds:
             world.dirty = 1
-        self.update_containers()
+        self._update_all_worlds()
         self.app.resize()
         
     def reset(self):
@@ -178,8 +189,8 @@ class WorldsManager:
             if world.docking_position != "top_left":
                 self.remove_world(world)
 
-    def update_containers(self):
-        """updates container widths and heights if a container was changed"""
+    def _update_all_worlds(self):
+        """updates all world widths and heights if a world was changed"""
         top_left = 0
         for world in self.worlds_right():
             if world:
@@ -192,30 +203,31 @@ class WorldsManager:
                 top_left += world.camera.height
 
     def recalculate_total_width(self) -> int:
-        """Recalculates container width"""
-        containers_width: int = 0
-        for container in self.worlds:
-            if container.window_docking_position == "top_left":
-                containers_width = container.camera.width
-            elif container.window_docking_position == "right":
-                containers_width += container.camera.width
-        self.total_width = containers_width
+        """Recalculates total width of all docked worlds."""
+        total_width: int = 0
+        for world in self.worlds:
+            if world.window_docking_position == "top_left":
+                total_width = world.camera.width
+            elif world.window_docking_position == "right":
+                total_width += world.camera.width
+        self.total_width = total_width
         return self.total_width
 
+
     def recalculate_total_height(self) -> int:
-        """Recalculates container height"""
-        containers_height = 0
-        for container in self.worlds:
-            if container.window_docking_position == "top_left":
-                containers_height = container.camera.height
-            elif container.window_docking_position == "bottom":
-                containers_height += container.camera.height
-        self.total_height = containers_height
+        """Recalculates total height of all docked worlds."""
+        total_height = 0
+        for world in self.worlds:
+            if world.window_docking_position == "top_left":
+                total_height = world.camera.height
+            elif world.window_docking_position == "bottom":
+                total_height += world.camera.height
+        self.total_height = total_height
         return self.total_height
 
 
     def recalculate_dimensions(self) -> Tuple[int, int]:
         """Updates container sizes and recalculates dimensions"""
-        self.update_containers()
+        self._update_all_worlds()
         self.worlds_total_width = self.recalculate_total_width()
         self.worlds_total_height = self.recalculate_total_height()

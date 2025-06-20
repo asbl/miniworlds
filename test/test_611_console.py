@@ -21,7 +21,7 @@ class Test611(unittest.TestCase):
                 def newline():
                     console.newline(f"newline at frame {world.frame}")
 
-                world.add_bottom(console)
+                world.add_world_bottom(console)
 
                 @world.register
                 def on_message(self, message):

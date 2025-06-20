@@ -2,6 +2,21 @@
 
 1. Source `prepare.sh`
 
+## Run tests
+
+Run all tests:
+
+```
+invoke run-tests
+```
+
+Run a single test:
+
+Example:
+```
+python -m test.test_610_toolbar_widgets 
+```
+
 ## Docs
 
 
