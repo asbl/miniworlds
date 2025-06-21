@@ -2,7 +2,7 @@ import collections
 import inspect
 import logging
 from collections import defaultdict
-from typing import Any, Optional
+from typing import Any, Optional, Callable
 
 import miniworlds.tools.inspection as inspection
 import miniworlds.tools.actor_class_inspection as actor_class_inspection
@@ -30,10 +30,6 @@ class EventManager:
         self.registry = event_registry.EventRegistry(world, self.definition)
         self.registry.setup()
         self.handler = event_handler.EventHandler(world, self.registry)
-
-
-        #self.registered_events = defaultdict(set)
-        #self.__class__.members = self._get_members_for_instance(world)
         self.focus_actor: Optional[actor_mod.Actor] = None
         self._last_focus_actor = None
 
@@ -49,14 +45,13 @@ class EventManager:
     def register_sensor_event(self, member, instance, message):
         self.registry.register_sensor_event(member, instance, message)
 
-
-
     def register_events_for_actor(self, actor):
         self.registry.register_events_for_actor(actor)
 
     def unregister_instance(self, instance) -> collections.defaultdict:
         return self.registry.unregister_instance(instance)
-    def can_register_to_actor(self, method):
+
+    def can_register_to_actor(self, method: Callable):
         return method.__name__ in self.definition.actor_class_events_set
 
     def copy_registered_events(self, key):
