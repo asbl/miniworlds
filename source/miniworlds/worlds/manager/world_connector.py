@@ -125,8 +125,12 @@ class WorldConnector():
 
     def register_event_methods(self, method_dict: Dict[str, callable]):
         if method_dict:
-            for event, method in method_dict.items():
-                self.actor.register(method)
+            for event, method_data in method_dict.items():
+                if isinstance(method_data, set):
+                    for method in method_data:
+                        self.actor.register(method)
+                else:
+                    self.actor.register(method_data)
 
     def init_sensor_manager(self):
         self.actor._sensor_manager = self.get_sensor_manager_class()(self.actor, self.world)

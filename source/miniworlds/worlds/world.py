@@ -1057,6 +1057,7 @@ class World(world_base.WorldBase):
 
         Called in app.update() when reload_all_worlds is called.
         """
+        start = 0
         if self.is_running or self.frame == 0:
             start = time.perf_counter()
             # Acting for all actors@static

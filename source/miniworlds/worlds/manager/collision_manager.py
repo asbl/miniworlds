@@ -39,6 +39,7 @@ class CollisionManager:
         for found_actor in _all_found_actors:  # found other actor
             method_caller.call_method(method, found_actor, found_actor.__class__)
 
+
     def _handle_on_detecting_actors_by_filter(self, actor, method, actors):
         #  Get all actors which are colliding with actor
         _all_found_actors = actor.sensor_manager.detect_actors(filter=actors)

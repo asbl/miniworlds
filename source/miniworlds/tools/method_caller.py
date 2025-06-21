@@ -33,11 +33,16 @@ def check_signature(method: callable, arguments: tuple, allow_none=False):
 
 
 def call_method(method: callable, arguments: Optional[tuple], allow_none=True):
-    check_signature(method, arguments, allow_none=True)
-    if arguments is None:
-        method()
-    else:
-        if isinstance(arguments, Iterable):
-            method(*arguments)
+    try:
+        check_signature(method, arguments, allow_none=True)
+        if arguments is None:
+            method()
         else:
-            method(arguments)
+            if isinstance(arguments, Iterable):
+                method(*arguments)
+            else:
+                method(arguments)
+    except (ReferenceError, AttributeError) as e:
+        # do nothing, if object does not exist.
+        pass
+        print("Method caller prevented an error")

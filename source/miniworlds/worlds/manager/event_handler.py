@@ -9,38 +9,29 @@ import miniworlds.actors.actor as actor_mod
 from miniworlds.base.exceptions import MissingActorPartsError
 
 class EventHandler:
+    """
+    Handles all events (keyboard, mouse, message, etc.) for the game world.
+    Uses an event registry to dispatch to the appropriate bound methods.
+    """
 
     def __init__(self, world, registry):
+        """Initialize with a reference to the world and the event registry."""
         self.world = world
         self.event_registry = registry
         self.focus_actor: Optional[actor_mod.Actor] = None
         self._last_focus_actor = None
         self.executed_events: set = set()
+        # Dispatch map for fast event routing
+        self._event_dispatch_map = {}
+        self._key_event_prefixes = ()
 
-    def act_all(self):
-        registered_act_methods = self.event_registry.registered_events["act"].copy()
-        # acting
-        for method in registered_act_methods:
-            # act method
-            instance = method.__self__
-            if instance._is_acting:
-                method_caller.call_method(method, None, False)
-        del registered_act_methods
+        self._init_event_dispatch_map()
 
-    def handle_event(self, event: str, data: Any):
-        """Call specific event handlers (e.g. "on_mouse_left", "on_mouse_right", ...) for actors
-
-        Args:
-            event: A string-identifier for the event, e.g. `reset`, `setup`, `switch_world`
-            data: Data for the event, e.g. the mouse-position, the pressed key, ...
+    def _init_event_dispatch_map(self):
         """
-
-        event = "on_" + event
-        if not self.can_handle_event(event):
-            return
-        # Handle different events
-        self.executed_events.add(event)
-        if event in [
+        Initializes the static event-to-handler dispatch map.
+        """
+        mouse_events = {
             "on_mouse_left",
             "on_mouse_right",
             "on_mouse_left_released",
@@ -49,19 +40,55 @@ class EventHandler:
             "on_clicked_left",
             "on_clicked_right",
             "on_mouse_leave",
-        ]:
-            return self.handle_mouse_event(event, data)
-        if event.startswith("on_key"):
+        }
+
+        # Register mouse events
+        self._event_dispatch_map = {event: self.handle_mouse_event for event in mouse_events}
+
+        # Register special events like messages or sensors
+        self._event_dispatch_map.update({
+            "on_message": self.handle_message_event,
+            "on_sensor": self.handle_message_event,
+        })
+
+        # Register key prefixes to handle dynamic key events
+        self._key_event_prefixes = ("on_key_down", "on_key_up", "on_key_pressed")
+
+    def act_all(self):
+        """Calls all registered 'act' methods for actors currently acting."""
+        registered_act_methods = self.event_registry.registered_events["act"].copy()
+        for method in registered_act_methods:
+            instance = method.__self__
+            if instance._is_acting:
+                method_caller.call_method(method, None, False)
+        del registered_act_methods
+
+    def handle_event(self, event: str, data: Any):
+        """
+        Main dispatcher for all event types using a dispatch map.
+        Tries to route the event to a specific handler function, otherwise falls back to the default handler.
+        """
+        event = f"on_{event}"
+
+        if not self.can_handle_event(event):
+            return
+
+        self.executed_events.add(event)
+
+        # Direct dispatch if a handler is registered for this event
+        handler = self._event_dispatch_map.get(event)
+        if handler:
+            return handler(event, data)
+
+        # Handle dynamic key events (e.g. on_key_down_w)
+        if event.startswith(self._key_event_prefixes):
             return self.handle_key_event(event, data)
-        if event == "on_message":
-            return self.handle_message_event(event, data)
-        if event == "on_sensor":
-            return self.handle_message_event(event, data)
-        # If none of the events above is triggered, handle
-        # all other events in a default way.
+
+        # Fall back to default event handler
         return self.default_event_handler(event, data)
 
     def default_event_handler(self, event: str, data: Any):
+        """Handles any generic events that are not mouse, key or message events."""
         registered_events = self.event_registry.registered_events[event].copy()
         for method in registered_events:
             if type(data) in [list, str, tuple]:
@@ -73,12 +100,11 @@ class EventHandler:
         del registered_events
 
     def can_handle_event(self, event):
-        """ True, if event can be auto handled.
-        False, if event needs manual handling."""
+        """Checks whether the event should be handled automatically by the event system."""
         if event == "setup":
-            return False # Setup is not handled by event manager
+            return False
         if event in self.executed_events:
-            return False # events shouldn't be called more than once per tick
+            return False
         registered_event_keys = self.event_registry.registered_events.keys()
         if (
                 event not in registered_event_keys
@@ -93,34 +119,31 @@ class EventHandler:
                 and "on_mouse enter" in registered_event_keys
                 and not event.startswith("on_mouse_motion")
                 and "on_mouse_leave" in registered_event_keys
-
         ):
             return False
         else:
             return True
 
     def handle_message_event(self, event, data):
+        """Handles 'on_message' or 'message' events by calling registered message handlers."""
         if not self.event_registry.registered_events["message"] == set():
             message_methods = self.event_registry.registered_events["message"][data]
-            # if message_dict == set():
-            #   return
             for method in message_methods:
                 method_caller.call_method(method, (data,))
         else:
             message_methods = self.event_registry.registered_events["on_message"]
             for method in message_methods:
-                # Handle on_key_down, on_key_pressed, ....
                 if event == method.__name__:
                     method_caller.call_method(method, (data,))
 
     def handle_key_event(self, event, data):
+        """Dispatches key events (e.g. on_key_down, on_key_pressed_w, etc.) to matching methods."""
         key_methods = (
             self.event_registry.registered_events["on_key_down"]
             .copy()
             .union(self.event_registry.registered_events["on_key_up"].copy())
             .union(self.event_registry.registered_events["on_key_pressed"].copy())
         )
-        # collect specific items:
         specific_key_methods = set()
         for e, values in self.event_registry.registered_events.items():
             if e.startswith("on_key_down_"):
@@ -130,15 +153,14 @@ class EventHandler:
             if e.startswith("on_key_up_"):
                 specific_key_methods = specific_key_methods.union(values)
         for method in key_methods:
-            # Handle on_key_down, on_key_pressed, ....
             if event == method.__name__:
                 method_caller.call_method(method, (data,))
-        # Handle on_key_pressed_w, on_key_pressed_a, ....
         for method in specific_key_methods:
             if method.__name__ == event:
                 method_caller.call_method(method, None)
 
     def handle_mouse_event(self, event, data):
+        """Handles mouse-related events (clicks, motion, etc.)."""
         if not self.world.camera.is_in_screen(data):
             return False
         mouse_methods = set()
@@ -147,18 +169,16 @@ class EventHandler:
                 mouse_methods = mouse_methods.union(values)
         for method in mouse_methods:
             method_caller.call_method(method, (data,))
-        # Handle additional events like clicked on actor or mouse mouse over
         if event in ["on_mouse_motion"]:
             return self.handle_mouse_over_event(event, data)
         if event in ["on_mouse_left", "on_mouse_right"]:
             self.handle_click_on_actor_event(event, data)
 
     def handle_mouse_over_event(self, event, data):
+        """Handles mouse-over and hover-related events for actors."""
         if not self.world.camera.is_in_screen(data):
             return False
-        pos = self.world.camera.get_global_coordinates_for_world(
-            data
-        )  # get global mouse pos by window
+        pos = self.world.camera.get_global_coordinates_for_world(data)
         all_mouse_over_methods = (
             self.event_registry.registered_events["on_mouse_over"]
             .union(self.event_registry.registered_events["on_mouse_enter"])
@@ -168,12 +188,10 @@ class EventHandler:
         if not all_mouse_over_methods:
             return
         for method in all_mouse_over_methods:
-            break  # get the first method
+            break
         actor = method.__self__
-
         if not hasattr(actor, "_mouse_over"):
             actor._mouse_over = False
-        # Store state in actor._mouse over -> Call handle_mouse_enter and mouse_event methods
         is_detecting_pixel = actor.detect_pixel(pos)
         if is_detecting_pixel and not actor._mouse_over:
             self.handle_mouse_enter_event(event, data)
@@ -185,26 +203,25 @@ class EventHandler:
             actor._mouse_over = True
         else:
             actor._mouse_over = False
-        # Handle the mouse over
         if actor._mouse_over:
             for method in mouse_over_methods:
                 method_caller.call_method(method, (data,))
         del mouse_over_methods
 
     def handle_mouse_enter_event(self, event, data):
+        """Calls all registered 'on_mouse_enter' methods for matching actors."""
         mouse_over_methods = self.event_registry.registered_events["on_mouse_enter"].copy()
         for method in mouse_over_methods:
             method_caller.call_method(method, (data,))
 
     def handle_mouse_leave_event(self, event, data):
+        """Calls all registered 'on_mouse_leave' methods for matching actors."""
         mouse_over_methods = self.event_registry.registered_events["on_mouse_leave"].copy()
         for method in mouse_over_methods:
             method_caller.call_method(method, (data,))
 
     def handle_click_on_actor_event(self, event, data):
-        """handles specific methods ``on_clicked_left``,``on_clicked_left``,
-        which are called, if actor is detecting mouse position
-        """
+        """Handles actor-specific click detection and dispatches 'on_clicked' events."""
         pos = data
         if event == "on_mouse_left":
             on_click_methods = (
@@ -232,6 +249,7 @@ class EventHandler:
         self.call_focus_methods(actors)
 
     def set_new_focus(self, actors):
+        """Sets the focus_actor based on which actor was clicked or hovered."""
         self._last_focus_actor = self.focus_actor
         if self._last_focus_actor:
             self._last_focus_actor.has_focus = False
@@ -244,6 +262,7 @@ class EventHandler:
         self.focus_actor = None
 
     def call_focus_methods(self, actors: list):
+        """Handles 'on_focus' and 'on_focus_lost' for actors gaining or losing focus."""
         focus_methods = self.event_registry.registered_events["on_focus"].copy()
         unfocus_methods = self.event_registry.registered_events["on_focus_lost"].copy()
         self.set_new_focus(actors)
