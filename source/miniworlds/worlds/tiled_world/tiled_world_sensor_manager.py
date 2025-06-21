@@ -1,5 +1,5 @@
 import math
-from typing import Union, Tuple
+from typing import Union, Tuple, Optional
 
 import miniworlds.worlds.manager.sensor_manager as worldsensor
 import miniworlds.worlds.tiled_world.tiled_world as world_module
@@ -100,8 +100,8 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
             position
         )
 
-    def detect_color_at(self, direction: int = 0, distance: int = 1) -> list:
-        if direction == 0:
+    def detect_color_at(self, direction: Optional[int] = 0, distance: int = 0) -> Tuple:
+        if not direction:
             direction = self.actor.direction
         destination = self.get_destination(self.actor.position, direction, distance)
         destination = self.world.to_pixel(destination)
