@@ -130,12 +130,19 @@ class SensorManager:
         return []
 
     @staticmethod
-    def _filter_actors_by_list(actor_list: List["actor_mod.Actor"], actors):
-        result = []
-        for actor in actor_list:
-            if actor in actors:
-                return result.append(actor)
-        return result
+    def _filter_actors_by_list(actor_list: List["actor_mod.Actor"], actors: List["actor_mod.Actor"]) -> List[
+        "actor_mod.Actor"]:
+        """
+        Filters the actor_list to include only those actors that are present in the 'actors' list.
+
+        Args:
+            actor_list: The list of detected actors.
+            actors: The list of actors to match against.
+
+        Returns:
+            A list of actors that are present in both lists.
+        """
+        return [actor for actor in actor_list if actor in actors]
 
     def _remove_self_from_actor_list(self, actor_list: List["actor_mod.Actor"]):
         if actor_list and self.actor in actor_list:
@@ -153,14 +160,38 @@ class SensorManager:
     def detect_rect(self, rect):
         return self.actor.position_manager.get_global_rect().colliderect(rect)
 
-    def detect_color(self, source: Union[tuple, list]) -> bool:
-        return self.detect_color_at(0, 0) == source
+    def detect_color(
+            self,
+            source: Union[Tuple[int, int, int], Tuple[int, int, int, int]],
+            direction: Optional[int] = None,
+            distance: int = 0,
+    ) -> bool:
+        """
+        Checks if the color at a given direction and distance matches the target color.
+
+        Args:
+            source: The color to match, e.g. (255, 0, 0) or (255, 0, 0, 255)
+            direction: The direction in which to check (in degrees)
+            distance: How far ahead to check (default is 1 pixel)
+
+        Returns:
+            True if the color at the given location matches the source color, else False.
+        """
+        sampled_color = self.detect_color_at(direction, distance)
+        return sampled_color == source
 
     def detect_colors(self, source: list) -> bool:
         for color in source:
             if self.detect_color_at(0, 0) == color:
                 return True
         return False
+
+    def detect_color_at(self, direction: Optional[int] = 0, distance: int = 0) -> list:
+        # Overwritten in tiled_sensor_manager
+        if not direction:
+            direction = self.actor.direction
+        destination = self.get_destination(self.actor.center, direction, distance)
+        return self.world.background.get_color(destination)
 
     @staticmethod
     def get_destination(
@@ -214,11 +245,7 @@ class SensorManager:
             else:
                 return []
 
-    def detect_color_at(self, direction: int = 0, distance: int = 1) -> list:
-        if not direction:
-            direction = self.actor.direction
-        destination = self.get_destination(self.actor.center, direction, distance)
-        return self.world.background.get_color(destination)
+
 
     def get_destination_rect(self, distance: int) -> "world_rect.Rect":
         destination_pos = self.get_destination(
@@ -246,8 +273,19 @@ class SensorManager:
         ]
 
     @staticmethod
-    def filter_actor_list(a_list, actor_type):
-        return [actor for actor in a_list if type(actor_mod.Actor) == actor_type]
+    def filter_actor_list(a_list: List["actor_mod.Actor"], actor_type: Type["actor_mod.Actor"]) -> List[
+        "actor_mod.Actor"]:
+        """
+        Filters the actor list by class type, including subclasses.
+
+        Args:
+            a_list: List of Actor instances.
+            actor_type: The class or superclass to match against.
+
+        Returns:
+            A list of actors that are instances of the given type or its subclasses.
+        """
+        return [actor for actor in a_list if isinstance(actor, actor_type)]
 
     def detect_actors(
         self,
