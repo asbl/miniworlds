@@ -21,11 +21,7 @@ class SensorManager:
 
     def __init__(self, actor: "actor_mod.Actor", world: "world_mod.World"):
         self.actor: "actor_mod.Actor" = actor
-
-    @property
-    def world(self):
-        return self.actor.world
-
+        self.world:  "world_mod.World" = world
 
     def self_remove(self):
         """
@@ -294,9 +290,9 @@ class SensorManager:
             ]
         ] = None,
     ) -> list:
-        self.actor.world.init_display()
+        self.world.backgrounds_manager.init_display()
 
-        group = pygame.sprite.Group(self.actor.world.camera.get_actors_in_view())
+        group = pygame.sprite.Group(self.world.camera.get_actors_in_view())
         actors = pygame.sprite.spritecollide(
             self.actor, group, False, pygame.sprite.collide_rect
         )
@@ -329,8 +325,8 @@ class SensorManager:
         return self.filter_actors(detected_actors, filter)
 
     def detect_actor(self, filter) -> Union["actor_mod.Actor", None]:
-        self.actor.world.init_display()
-        group = pygame.sprite.Group(self.actor.world.camera.get_actors_in_view())
+        self.world.backgrounds_manager.init_display()
+        group = pygame.sprite.Group(self.world.camera.get_actors_in_view())
         actors = pygame.sprite.spritecollide(
             self.actor, group, False, pygame.sprite.collide_rect
         )

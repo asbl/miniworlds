@@ -135,60 +135,76 @@ class World(world_base.WorldBase):
         self,
         x: Union[int, Tuple[int, int]] = 400,
         y: int = 400,
-    ):
+        ):
+        # --- Parameter validation ---
         self.validate_parameters(x, y)
 
+        # --- Core state ---
         self._was_setup = False
         self.is_tiled = False
-        self._is_acting = True  # Is act() Method called, false when actor is removed
+        self._is_acting = True  # Whether the act() method is active
+
+        # --- Camera setup ---
         self.camera = self._get_camera_manager_class()(x, y, self)
+
+        # --- Actor management ---
         self.actors: "pygame.sprite.LayeredDirty" = pygame.sprite.LayeredDirty()
+
+        # --- Event system ---
         self.event_manager: event_manager.EventManager = self._create_event_manager()
+
+        # --- Superclass initialization ---
         super().__init__()
-        self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = (
-            backgrounds_manager.BackgroundsManager(self)
-        )
-        self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(
-            self
-        )
-        self.is_display_initialized: bool = False
+
+        # --- Timing and frame control ---
+        self.clock: pygame.time.Clock = pygame.time.Clock()
         self._fps: int = 60
+        self._step: int = 1
+        self.frame: int = 0
+
+        # --- State flags ---
         self._key_pressed: bool = False
         self._animated: bool = False
         self._is_filled: bool = False
         self._orientation: int = 0
         self._static: bool = False
-        self._step: int = 1  # All actors are acting on n:th frame with n = self.step
         self._default_is_filled = False
         self._default_fill_color = None
         self._default_border_color = None
         self._default_border = None
         self.is_running: bool = True
         self.is_listening: bool = True
-        self.frame: int = 0
-        self.clock: pygame.time.Clock = pygame.time.Clock()
+        self.actors_fixed_size: bool = False
+
+        # --- Actor & animation systems ---
+        self.timed_objects: list = []
+        self.dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
+        self._registered_methods: List[Callable] = []
+        self.reload_costumes_queue: list = []
+
+        # --- Rendering and backgrounds ---
+        self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
+        self.background = background_mod.Background(self)
+        self.background.update()
+        
+        # --- Input handling ---
+        self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
+
+        # --- Application & managers ---
         if not app.App.init:
             self.app: "app.App" = app.App("miniworlds", self)
         else:
             self.app = app.App.running_app
-        self.music: "world_music_manager.MusicManager" = (
-            world_music_manager.MusicManager(self.app)
-        )
-        self.sound: "world_sound_manager.SoundManager" = (
-            world_sound_manager.SoundManager(self.app)
-        )
-        self.background = background_mod.Background(self)
-        self.background.update()
-        self.collision_manager: "coll_manager.CollisionManager" = (
-            coll_manager.CollisionManager(self)
-        )
-        self.timed_objects: list = []
+
+        self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
+        self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
+        self.collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
+
+        # --- Register world in application ---
         self.app.event_manager.to_event_queue("setup", None)
-        self.dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
-        self._registered_methods: List[Callable] = []
-        self.actors_fixed_size = False
         self.app.worlds_manager.add_topleft(self)
-        self.reload_costumes_queue = []
+
+
 
     def add_world_right(self, world: "World", size: int = 100):
         """Adds a world to the right of the current world.
@@ -742,7 +758,7 @@ class World(world_base.WorldBase):
         if hasattr(self, "on_setup") and not self._was_setup:
             self.on_setup()
             self._was_setup = True
-        self.init_display()
+        self.backgrounds_manager.init_display()
         self.is_running = True
         if event:
             self.app.event_manager.to_event_queue(event, data)
@@ -762,11 +778,6 @@ class World(world_base.WorldBase):
         #    self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
         #)
         
-
-    def init_display(self):
-        if not self.is_display_initialized:
-            self.is_display_initialized = True
-            self.background.set_dirty("all", self.background.LOAD_NEW_IMAGE)
 
     def play_sound(self, path: str):
         """plays sound from path"""
@@ -1073,7 +1084,7 @@ class World(world_base.WorldBase):
             self.collision_manager.handle_all_collisions()
             self.mouse_manager.update_positions()
             if self.frame == 0:
-                self.init_display()
+                self.backgrounds_manager.init_display()
             # run animations
             self.background.update()
             # update all costumes on current background

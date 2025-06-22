@@ -115,7 +115,7 @@ class WorldsManager:
         app.App.running_worlds.append(world)
         world._app = self.app
         world._window = self.app.window
-        world.init_display()
+        world.backgrounds_manager.init_display()
         world.is_running = True
         if reset:
             world.reset()

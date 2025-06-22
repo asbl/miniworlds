@@ -23,8 +23,14 @@ class AppearancesManager:
         self.is_scaled_to_height = None
         self.has_appearance = False
         self._iter_index = 0
+        self.is_display_initialized = False
         # defaults
         self._border = None
+
+    def init_display(self):
+        if not self.is_display_initialized:
+            self.is_display_initialized = True
+            self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
 
     @property
     def image(self) -> pygame.Surface:

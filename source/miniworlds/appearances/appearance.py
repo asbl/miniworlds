@@ -1016,7 +1016,7 @@ class Appearance(metaclass=MetaAppearance):
 
     def set_dirty(self, value="all", status=1):
         if self.parent and hasattr(self, "transformations_manager"):
-            if value and self.images and self.parent.is_display_initialized:
+            if value and self.images and self.get_manager().is_display_initialized:
                 self._update_draw_shape()
                 self.transformations_manager.flag_reload_actions_for_transformation_pipeline(
                     value
@@ -1024,6 +1024,10 @@ class Appearance(metaclass=MetaAppearance):
             if status >= self._dirty:
                 self._dirty = status
                 self.parent.dirty = 1
+
+    @abstractmethod
+    def get_manager(self):
+        """Implemented in subclasses Costume and Background"""
 
     @property
     @abstractmethod

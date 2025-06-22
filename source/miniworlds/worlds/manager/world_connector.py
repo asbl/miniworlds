@@ -61,8 +61,8 @@ class WorldConnector():
             self.actor._has_costume_manager = True
 
     def add_to_world(self, position: Tuple[float,float] = (0, 0)) -> "actor_mod.Actor":
-        if self.world.is_display_initialized:
-            self.actor.is_display_initialized = True
+        if self.world.backgrounds_manager.is_display_initialized:
+            self.actor.costume_manager.is_display_initialized = True
         self.actor._world = self.world
         self.init_managers(position)
         self.world.camera.clear_camera_cache()

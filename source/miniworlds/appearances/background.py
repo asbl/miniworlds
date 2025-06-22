@@ -72,11 +72,15 @@ class Background(appearance_mod.Appearance):
     def set_dirty(self, value="all", status=1):
         super().set_dirty(value, status)
         self._blit_to_window_surface()
-        if self.world and self.world.is_display_initialized:
+        if self.world and self.get_manager().is_display_initialized:
             for actor in self.world.actors:
-                actor.is_display_initialized = True
+                actor.costume_manager.is_display_initialized = True
                 if actor.costume:
                     actor.costume.set_dirty("all", self.LOAD_NEW_IMAGE)
+
+
+    def get_manager(self):
+        return self.world.backgrounds_manager
 
     @property
     def world(self) -> "world_mod.World":

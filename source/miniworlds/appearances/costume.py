@@ -27,6 +27,9 @@ class Costume(appear.Appearance):
             transformations_costume_manager.TransformationsCostumeManager(self)
         )
 
+    def get_manager(self):
+        return self.actor.costume_manager
+
     @property
     def world(self) -> "world.World":
         return self.parent.world
