@@ -1057,6 +1057,13 @@ class World(world_base.WorldBase):
 
         Called in app.update() when reload_all_worlds is called.
         """
+
+        if not self.is_running and self.frame != 0:
+            self.frame += 1
+            self.event_manager.update()
+            return
+
+
         start = 0
         if self.is_running or self.frame == 0:
             start = time.perf_counter()

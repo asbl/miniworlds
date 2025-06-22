@@ -216,7 +216,7 @@ class Positionmanager:
         """gets center position"""
         return self.position
 
-    def set_position(self, value: Tuple[float]) -> "actor_mod.Actor":
+    def set_position(self, value: Tuple[float, float]) -> "actor_mod.Actor":
         """sets topleft position
 
         Args:
@@ -226,15 +226,15 @@ class Positionmanager:
             exceptions.NoValidWorldPositionError: Raised, when no valid world position was given
 
         Returns:
-            "actor_mod.Actor": The Actor
+            "actor_mod.Actor": The current actor
         """
-        if not value or not isinstance(value, Tuple):
+        if not value or not isinstance(value, tuple):
             raise exceptions.NoValidWorldPositionError(value)
         self.last_position = self.get_position()
         self.position = value
         if self.last_position != self.get_position():
             self.actor.dirty = 1
-        return self.position
+        return self
 
     def store_origin(self):
         if self.origin == "center":
@@ -296,22 +296,12 @@ class Positionmanager:
         if distance == 0:
             distance = self.actor.speed
         # set destination
-        if distance >= 0:
-            destination = self.actor.sensor_manager.get_destination(
-            self.get_position(), self.get_direction(), distance
-        )
-        elif distance < 0:
-            destination = self.actor.sensor_manager.get_destination(
-            self.get_position(), -self.get_direction(), distance
-        )
+        direction = self.get_direction() if distance >= 0 else -self.get_direction()
+        destination = self.actor.sensor_manager.get_destination(self.get_position(), direction, distance)
+
         if self.is_blockable:
             found_actors = self.actor.sensor_manager.detect_actors_at_destination(destination)
-            found_blocking = False
-            for actor in found_actors:
-                if actor.is_blocking:
-                    found_blocking = True
-                    break
-            if not found_blocking:
+            if not any(actor.is_blocking for actor in found_actors):
                 self.set_position(destination)
         else:
             self.set_position(destination)
@@ -535,22 +525,24 @@ class Positionmanager:
                 direction = 0
             return direction
 
+    @staticmethod
     def is_close(
-        pos1: Tuple[float, float], pos2: Tuple[float, float], error: float = 1
+        pos1: Tuple[float, float],
+        pos2: Tuple[float, float],
+        error: float = 1.0
     ) -> bool:
-        """Is a position close to another position
+        """
+        Checks whether two positions are close to each other within a given tolerance.
 
         Args:
-            pos1 (Tuple[float, float]): The first position
-            pos2 (Tuple[float, float]): The second position
-            error (float): Allowed error in difference between the two positions. Defaults to 1
+            pos1: The first (x, y) position.
+            pos2: The second (x, y) position.
+            error: The maximum allowed difference between positions on both axes.
 
         Returns:
-            bool: True, if positions are close to each other
+            True if both the x and y coordinates differ by less than 'error'.
         """
-        if abs(pos1[0] - pos2[0]) < error and abs(pos2[1] - pos2[1]) < error:
-            return True
-        return False
+        return abs(pos1[0] - pos2[0]) < error and abs(pos1[1] - pos2[1]) < error
 
     def get_screen_position(self, coordinates):
         return (coordinates[0] + self.actor.world.topleft[0], coordinates[1] + self.actor.world.topleft[1])
