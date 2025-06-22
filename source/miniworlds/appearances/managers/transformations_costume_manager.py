@@ -6,7 +6,9 @@ import miniworlds.appearances.managers.transformations_manager as transformation
 class TransformationsCostumeManager(transformations_manager.TransformationsManager):
     def __init__(self, appearance):
         super().__init__(appearance)
-        self.transformations_pipeline.append(("info_overlay", self.transformation_info_overlay, "info_overlay"))
+        self.transformations_pipeline.extend([
+            {"key": "info_overlay", "func": self.transformation_info_overlay, "attr": "info_overlay", "is_optional": True},
+        ])
 
     def transformation_info_overlay(self, image: pygame.Surface, appearance) -> pygame.Surface:
         parent = appearance.parent
