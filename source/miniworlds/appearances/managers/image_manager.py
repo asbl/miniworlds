@@ -1,230 +1,200 @@
 import os
 from pathlib import Path
-from typing import List, Union, Tuple, Dict
+from typing import List, Union, Tuple, Dict, Optional, TypedDict
 
 import pygame
 
 import miniworlds.base.manager.app_file_manager as file_manager
-from miniworlds.base.exceptions import ImageIndexNotExistsError
-from miniworlds.base.exceptions import MiniworldsError
+from miniworlds.base.exceptions import ImageIndexNotExistsError, MiniworldsError
+
+
+class ImageDictEntry(TypedDict):
+    """Typed structure for entries in images_list."""
+    image: pygame.Surface
+    type: int
+    source: Union[str, Tuple, None]
 
 
 class ImageManager:
-    """Handles loading and caching of images."""
+    """Manages loading, storing, and switching images for an appearance."""
 
-    _images_dict = {}  # dict with key: image_path, value: loaded image
+    # Global image cache to avoid redundant disk loads
+    _images_dict: Dict[str, pygame.Surface] = {}
 
+    # Default folder for image resources
     IMAGE_FOLDER = "./images/"
-    # types
-    IMAGE = 1
-    COLOR = 2
-    SURFACE = 3
+
+    # Image source types
+    IMAGE = 1     # loaded from file
+    COLOR = 2     # generated from a color tuple
+    SURFACE = 3   # passed as an existing surface
 
     def __init__(self, appearance):
-        self.animation_frame = 0
-        self.current_animation_images = None
-        self.image_index = 0  # current_image index (for animations) in self.image_lists
-        self.images_list: List[
-            Dict
-        ] = []  # Original images - remove or add image surfaces here
         self.appearance = appearance
+        self.image_index = 0
+        self.images_list: List[ImageDictEntry] = []
+        self.current_animation_images: Optional[List[ImageDictEntry]] = None
+        self.animation_frame = 0
         self.has_image = False
         self.add_default_image()
 
     @staticmethod
-    def load_image(path):
-        """
-        Loads an image from a path.
+    def load_image(path: Union[str, Path]) -> pygame.Surface:
+        """Loads an image from disk with caching."""
+        canonical_path = str(path).replace("/", os.sep).replace("\\", os.sep)
 
-        Args:
-            path: The path to image
+        if canonical_path in ImageManager._images_dict:
+            return ImageManager._images_dict[canonical_path]
 
-        Returns:
-            The image loaded
-
-        """
         try:
-            canonical_path = str(path).replace("/", os.sep).replace("\\", os.sep)
-            if canonical_path in ImageManager._images_dict.keys():
-                # load image from img_dict
-                _image = ImageManager._images_dict[canonical_path]
-            else:
-                try:
-                    _image = pygame.image.load(canonical_path).convert_alpha()
-                    ImageManager._images_dict[canonical_path] = _image
-                except pygame.error:
-                    raise FileExistsError(
-                        "File '{0}' does not exist. Check your path to the image.".format(
-                            path
-                        )
-                    )
-            return _image
-        except FileExistsError:
-            raise FileExistsError(
-                "File '{0}' does not exist. Check your path to the image.".format(path)
-            )
+            image = pygame.image.load(canonical_path).convert_alpha()
+        except pygame.error:
+            raise FileExistsError(f"File '{path}' does not exist or is invalid.")
+
+        ImageManager._images_dict[canonical_path] = image
+        return image
 
     def find_image_file(self, path: str) -> str:
-        """Finds a file by a given relative path (e.g. images/myimage.jpg)
-
-        The method tries to correct a path if file ending is missing but image is present.
-
-        Args:
-            path (str): path to image, e.g. images/myimage.jpg.
-
-        Returns:
-            str: the corrected path
-        """
+        """Resolves image path using the application's file manager."""
         return file_manager.FileManager.get_image_path(path)
 
     @staticmethod
-    def cache_images_in_image_folder():
-        """is called on program start.
-        Loads all images in folder path/images
-        """
-        jpgs = list(Path(ImageManager.IMAGE_FOLDER).rglob("*.[jJ][pP][gG]"))
-        jpegs = list(Path(ImageManager.IMAGE_FOLDER).rglob("*.[jJ][pP][eE][gG]"))
-        pngs = list(Path(ImageManager.IMAGE_FOLDER).rglob("*.[pP][nN][gG]"))
-        images = jpgs + jpegs + pngs
+    def cache_images_in_image_folder() -> None:
+        """Pre-loads all images in the default folder into memory."""
+        extensions = ["*.jpg", "*.jpeg", "*.png"]
+        images = []
+        for ext in extensions:
+            images.extend(Path(ImageManager.IMAGE_FOLDER).rglob(ext))
         for img_path in images:
             ImageManager.load_image(img_path)
 
-    def add_first_image(self, source):
-        if len(self.images_list) == 1:
-            image = self.images_list.pop(0)
-            del image
-        self._add_scaling(source)
-        self.add_image_from_source(source)
-
-    def add_default_image(self):
-        """called in init"""
-        if not self.has_image and len(self.images_list) == 0:
+    def add_default_image(self) -> int:
+        """Adds a 1x1 image filled with the appearance's fill color if no image exists yet."""
+        if not self.has_image and not self.images_list:
             self.appearance.is_scaled = True
             surf = pygame.Surface((1, 1), pygame.SRCALPHA)
             surf.fill(self.appearance.fill_color)
-            self.images_list.append({"image": surf, "type": ImageManager.COLOR})
+            self.images_list.append({
+                "image": surf,
+                "type": self.COLOR,
+                "source": self.appearance.fill_color
+            })
             self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
-            return len(self.images_list) - 1
+        return len(self.images_list) - 1
 
-    def add_image(self, source: Union[str, pygame.Surface, Tuple]) -> int:
-        """Adds an image to the appearance
+    def add_first_image(self, source: Union[str, list, pygame.Surface, Tuple]) -> None:
+        """Handles scaling logic when the first image is added."""
+        if len(self.images_list) == 1:
+            self.images_list.pop(0)
+        self._add_scaling(source)
+        self.add_image_from_source(source)
 
-        Args:
-            source (str): Path to the image relative to actual directory
-
-        Returns:
-            Index of the created image.
-        """
+    def add_image(self, source: Union[str, pygame.Surface, Tuple, List[str]]) -> int:
+        """Adds an image from the given source (path, color, surface, or list)."""
         if not self.has_image and source:
             self.add_first_image(source)
             self.has_image = True
         elif source:
             return self.add_image_from_source(source)
         else:
-            raise MiniworldsError("unexpected behaviour")
+            raise MiniworldsError("Unexpected image addition behavior.")
 
-    def add_image_from_source(self, source: Union[str, list, pygame.Surface, tuple]):
-        if type(source) == str:
+    def add_image_from_source(self, source: Union[str, list, pygame.Surface, Tuple]) -> int:
+        """Routes source to correct method depending on its type."""
+        if isinstance(source, str):
             return self.add_image_from_path(source)
-        elif type(source) == list:
+        elif isinstance(source, list):
             return self.add_image_from_paths(source)
-        elif type(source) == pygame.Surface:
+        elif isinstance(source, pygame.Surface):
             return self.add_image_from_surface(source)
-        elif type(source) == tuple:
+        elif isinstance(source, tuple):
             return self.add_image_from_color(source)
+        else:
+            raise MiniworldsError(f"Unsupported image source type: {type(source)}")
 
-    def _add_scaling(self, source: Union[str, list, pygame.Surface, tuple]) -> None:
-        """adds scaling for image by source.
-        This is called when first image is created.
-        (overwritten in image_background_manager)
-        """
-        if type(source) == str:
+    def _add_scaling(self, source: Union[str, list, pygame.Surface, Tuple]) -> None:
+        """Adjusts scaling flags based on image source type."""
+        if isinstance(source, (str, list)):
             self.appearance.is_upscaled = True
-        if type(source) == list:
-            self.appearance.is_upscaled = True
-        if type(source) == pygame.Surface:
-            pass
-        if type(source) == tuple:
+        elif isinstance(source, tuple):
             self.appearance.is_scaled = True
 
     @staticmethod
-    def get_surface_from_color(color: tuple) -> pygame.Surface:
+    def get_surface_from_color(color: Tuple) -> pygame.Surface:
+        """Generates a surface filled with a single color."""
         surf = pygame.Surface((1, 1), pygame.SRCALPHA)
         surf.fill(color)
         return surf
 
-    def add_image_from_color(self, color: tuple) -> int:
-        surf = ImageManager.get_surface_from_color(color)
-        self.images_list.append(
-            {"image": surf, "type": ImageManager.COLOR, "source": color}
-        )
+    def add_image_from_color(self, color: Tuple) -> int:
+        """Adds a new surface filled with the given color."""
+        surf = self.get_surface_from_color(color)
+        self.images_list.append({"image": surf, "type": self.COLOR, "source": color})
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
         return len(self.images_list) - 1
 
-    def get_source_from_current_image(self) -> Union[str, pygame.Surface, tuple]:
-        """Returns color, path or surface"""
+    def get_source_from_current_image(self) -> Union[str, pygame.Surface, Tuple]:
+        """Returns the original source of the current image."""
         return self.images_list[self.image_index]["source"]
 
     def is_image(self) -> bool:
-        """Returns true, if current image is image (not color, or any surface)"""
-        return self.images_list[self.image_index]["type"] == ImageManager.IMAGE
+        """Checks if current image was loaded from a file (not a color or surface)."""
+        return self.images_list[self.image_index]["type"] == self.IMAGE
 
-    def add_image_from_paths(self, paths: str) -> int:
+    def add_image_from_paths(self, paths: List[str]) -> int:
+        """Adds multiple images from file paths."""
         for path in paths:
             self.add_image_from_path(path)
         return len(self.images_list) - 1
 
     def add_image_from_path(self, path: str) -> int:
-        path = self.find_image_file(path)
-        # set image by path
-        _image = self.load_image(path)
-        self.images_list.append(
-            {"image": _image, "type": ImageManager.IMAGE, "source": path}
-        )
+        """Adds an image from a file path."""
+        real_path = self.find_image_file(path)
+        image = self.load_image(real_path)
+        self.images_list.append({
+            "image": image,
+            "type": self.IMAGE,
+            "source": real_path
+        })
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
         return len(self.images_list) - 1
 
-    def add_image_from_appearance(self, appearance, index):
-        appearance.image_manager.get_surface(index)
-
-    def add_image_from_surface(self, surface) -> int:
-        """Adds an image to the appearance
-
-        Args:
-            surface: A pygame Surface
-
-        Returns:
-            Index of the created image.
-        """
-        self.images_list.append(
-            {"image": surface, "type": ImageManager.SURFACE, "source": None}
-        )
+    def add_image_from_surface(self, surface: pygame.Surface) -> int:
+        """Adds an existing surface as an image."""
+        self.images_list.append({
+            "image": surface,
+            "type": self.SURFACE,
+            "source": None
+        })
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
         return len(self.images_list) - 1
 
-    def get_surface(self, index):
+    def get_surface(self, index: int) -> ImageDictEntry:
+        """Returns the image dictionary entry at the given index."""
         try:
             return self.images_list[index]
-        except Exception:
+        except IndexError:
             raise ImageIndexNotExistsError(index, self)
 
-    def replace_image(self, image, type, source):
+    def replace_image(self, image: pygame.Surface, type: int, source: Union[str, Tuple, None]) -> None:
+        """Replaces the current image entry with a new one."""
         self.images_list[self.image_index] = {
             "image": image,
             "type": type,
-            "source": source,
+            "source": source
         }
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
 
-    def reset_image_index(self):
+    def reset_image_index(self) -> None:
+        """Resets image index after animations."""
         if self.current_animation_images:
             self.image_index = len(self.images_list) - 1
 
-    def next_image(self):
-        """Switches to the next image of the appearance."""
+    def next_image(self) -> None:
+        """Advances to the next image (for animations)."""
         if self.appearance.is_animated:
             if self.image_index < len(self.images_list) - 1:
-                self.image_index = self.image_index + 1
+                self.image_index += 1
             else:
                 if not self.appearance.loop:
                     self.appearance.is_animated = False
@@ -232,24 +202,18 @@ class ImageManager:
                 self.image_index = 0
             self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
 
-    def first_image(self):
-        """Switches to the first image of the appearance."""
+    def first_image(self) -> None:
+        """Resets to the first image."""
         self.image_index = 0
-        # self.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
 
-    def load_image_from_image_index(self):
-        if (
-            self.images_list
-            and self.image_index < len(self.images_list)
-            and self.images_list[self.image_index]
-        ):
-            # if there is an image list load image by index
-            image = self.images_list[self.image_index]["image"]
-        else:  # no image files - Render raw surface
-            image = self.load_surface()
-        return image
+    def load_image_from_image_index(self) -> pygame.Surface:
+        """Returns the current image surface."""
+        if self.images_list and self.image_index < len(self.images_list):
+            return self.images_list[self.image_index]["image"]
+        return self.load_surface()
 
-    def set_image_index(self, value) -> bool:
+    def set_image_index(self, value: int) -> bool:
+        """Changes the current image index to a specific value."""
         if value == -1:
             value = len(self.images_list) - 1
         if 0 <= value < len(self.images_list):
@@ -258,25 +222,27 @@ class ImageManager:
             if old_index != self.image_index:
                 self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
             return True
-        else:
-            raise ImageIndexNotExistsError(value, self)
+        raise ImageIndexNotExistsError(value, self)
 
     def load_surface(self) -> pygame.Surface:
+        """Returns a blank fallback surface if image loading fails."""
         if not self.appearance.surface_loaded:
             image = pygame.Surface(
                 (self.appearance.parent.width, self.appearance.parent.height),
-                pygame.SRCALPHA,
+                pygame.SRCALPHA
             )
             image.set_alpha(255)
             return image
 
-    def end_animation(self, appearance):
+    def end_animation(self, appearance) -> None:
+        """Ends the animation and resets relevant state."""
         appearance.is_animated = False
         appearance.loop = False
         appearance.set_image(0)
         self.animation_frame = 0
 
-    def remove_last_image(self):
+    def remove_last_image(self) -> None:
+        """Removes the last image in the list."""
         del self.images_list[-1]
         self.appearance.set_image(-1)
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
