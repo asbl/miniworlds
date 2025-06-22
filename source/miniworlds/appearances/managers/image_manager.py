@@ -39,6 +39,11 @@ class ImageManager:
         self.add_default_image()
 
     @staticmethod
+    def _normalize_path(path: str) -> str:
+        return str(path).replace("/", os.sep).replace("\\", os.sep)
+
+
+    @staticmethod
     def load_image(path: Union[str, Path]) -> pygame.Surface:
         """Loads an image from disk with caching."""
         canonical_path = str(path).replace("/", os.sep).replace("\\", os.sep)
@@ -148,14 +153,17 @@ class ImageManager:
         return len(self.images_list) - 1
 
     def add_image_from_path(self, path: str) -> int:
-        """Adds an image from a file path."""
-        real_path = self.find_image_file(path)
-        image = self.load_image(real_path)
-        self.images_list.append({
-            "image": image,
-            "type": self.IMAGE,
-            "source": real_path
-        })
+        path = self._normalize_path(self.find_image_file(path))
+        
+        # Avoid duplicate entries
+        for idx, entry in enumerate(self.images_list):
+            if entry["type"] == ImageManager.IMAGE and entry["source"] == path:
+                return idx  # already exists
+
+        _image = self.load_image(path)
+        self.images_list.append(
+            {"image": _image, "type": ImageManager.IMAGE, "source": path}
+        )
         self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
         return len(self.images_list) - 1
 
