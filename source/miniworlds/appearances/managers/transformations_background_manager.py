@@ -5,7 +5,9 @@ import miniworlds.appearances.managers.transformations_manager as transformation
 class TransformationsBackgroundManager(transformations_manager.TransformationsManager):
     def __init__(self, appearance):
         super().__init__(appearance)
-        self.transformations_pipeline.append(("grid", self.transformation_grid, "grid"))
+        self.transformations_pipeline.extend([
+            {"key": "grid", "func": self.transformation_grid, "attr": "grid", "is_optional": False},
+        ])
 
     def get_size(self):
         size = (self.appearance.parent.camera.width, self.appearance.parent.camera.height)
