@@ -11,6 +11,8 @@ import miniworlds.actors.actor as actor_mod
 
 import miniworlds.base.exceptions as exceptions
 
+ActorFilterType = Union[str, "actor_mod.Actor", Type["actor_mod.Actor"], List["actor_mod.Actor"]]
+
 
 class SensorManager:
     """A Sensor manager connects an actor to a world.
@@ -32,22 +34,28 @@ class SensorManager:
     def filter_actors(
         self,
         detected_actors: List["actor_mod.Actor"],
-        actors: Union[
-            str, "actor_mod.Actor", Type["actor_mod.Actor"], List["actor_mod.Actor"]
-        ],
-    ):
+        actors: Optional[ActorFilterType]
+    ) -> List["actor_mod.Actor"]:
         """
-        Filters a list of actors
-        :param detected_actors: a list of actors
-        :param actors: list of actor filters
-        :return:
+        Filters a list of detected actors based on a given filter.
+
+        Args:
+            detected_actors (List[Actor]): The list of actors to be filtered.
+            actors (Optional[FilterType]): The filter criteria, which can be:
+                - a string (e.g. actor tag or name),
+                - a single Actor instance,
+                - an Actor class,
+                - a list of Actor instances.
+
+        Returns:
+            List[Actor]: A filtered list of actors matching the criteria.
         """
-        if detected_actors:
-            detected_actors = self._filter_actor_list(detected_actors, actors)
-        if detected_actors and len(detected_actors) >= 1:
-            return detected_actors
-        else:
-            return []
+        if not detected_actors or actors is None:
+            return detected_actors or []
+
+        filtered = self._filter_actor_list(detected_actors, actors)
+        return filtered if filtered else []
+
 
     def filter_first_actor(
         self,
@@ -66,31 +74,41 @@ class SensorManager:
     def _filter_actor_list(
         self,
         actor_list: Optional[List["actor_mod.Actor"]],
-        filter: Union[
-            str, "actor_mod.Actor", Type["actor_mod.Actor"], List["actor_mod.Actor"]
-        ],
+        filter: ActorFilterType
     ) -> List["actor_mod.Actor"]:
-        # if actor_list is None, return empty list
+        """
+        Applies a filter to a list of actors. Supports filtering by:
+        - class name (str),
+        - actor instance,
+        - actor class (type),
+        - list of actor instances.
+
+        Args:
+            actor_list (Optional[List[Actor]]): The list of actors to filter.
+            filter (FilterType): The filter condition.
+
+        Returns:
+            List[Actor]: The filtered list of actors.
+        """
         if actor_list is None:
             return []
-        # Filter actors by class name or type
+
         if not filter:
             return actor_list
+
         if isinstance(filter, str):
-            actor_list = self._filter_actors_by_classname(actor_list, filter)
+            return self._filter_actors_by_classname(actor_list, filter)
+
         elif isinstance(filter, actor_mod.Actor):
-            actor_list = self._filter_actors_by_instance(actor_list, filter)
-        elif isinstance(filter, list):
-            actor_list = self._filter_actors_by_list(actor_list, filter)
+            return self._filter_actors_by_instance(actor_list, filter)
+
+        elif isinstance(filter, list) and all(isinstance(a, actor_mod.Actor) for a in filter):
+            return self._filter_actors_by_list(actor_list, filter)
+
         elif inspect.isclass(filter) and issubclass(filter, actor_mod.Actor):
-            actor_list = self._filter_actors_by_class(actor_list, filter)
-        else:
-            raise exceptions.WrongFilterType(filter)
+            return self._filter_actors_by_class(actor_list, filter)
 
-        if actor_list is None:
-            return []
-
-        return actor_list
+        raise WrongFilterType(filter)
 
     def _filter_actors_by_class(
         self,
@@ -190,11 +208,24 @@ class SensorManager:
 
     @staticmethod
     def get_destination(
-        start, direction: float, distance: float
+        start: Tuple[float, float], direction: float, distance: float
     ) -> Tuple[float, float]:
-        exact_position_x = start[0] + math.sin(math.radians(direction)) * distance
-        exact_position_y = start[1] - math.cos(math.radians(direction)) * distance
-        return (exact_position_x, exact_position_y)
+        """
+        Computes a new (x, y) position starting from `start`, moving `distance` units in the `direction` (degrees).
+
+        Args:
+            start (Tuple[float, float]): Starting position (x, y).
+            direction (float): Direction in degrees (0° = north/up, 90° = east/right).
+            distance (float): Distance to move.
+
+        Returns:
+            Tuple[float, float]: New position (x, y).
+        """
+        radians = math.radians(direction)
+        x = start[0] + math.sin(radians) * distance
+        y = start[1] - math.cos(radians) * distance
+        return (x, y)
+
 
     def get_borders_from_rect(self, rect):
         """
@@ -240,16 +271,25 @@ class SensorManager:
             else:
                 return []
 
+    def get_destination_rect(self, distance: Union[int, float]) -> world_rect.Rect:
+        """
+        Returns the rectangular area (Rect) at a position `distance` units away from the actor,
+        in the direction the actor is currently facing.
 
+        Args:
+            distance (int | float): Distance to move from the actor's current position.
 
-    def get_destination_rect(self, distance: int) -> "world_rect.Rect":
-        destination_pos = self.get_destination(
+        Returns:
+            world_rect.Rect: A rectangle at the destination position with the actor's size.
+        """
+        destination = self.get_destination(
             self.actor.position, self.actor.direction, distance
         )
-        rect = world_rect.Rect.from_position(
-            destination_pos, dimensions=self.actor.size, world=self.world
+        return world_rect.Rect.from_position(
+            destination,
+            dimensions=self.actor.size,
+            world=self.world
         )
-        return rect
 
     def get_line_in_direction(self, start, direction: Union[int, float], distance: int):
         return [self.get_destination(start, direction, i) for i in range(distance)]
@@ -282,30 +322,43 @@ class SensorManager:
         """
         return [actor for actor in a_list if isinstance(actor, actor_type)]
 
-    def detect_actors(
-        self,
-        filter: Optional[
-            Union[
-                str, "actor_mod.Actor", Type["actor_mod.Actor"], List["actor_mod.Actor"]
-            ]
-        ] = None,
-    ) -> list:
+    def detect_actors(self, filter: Optional[ActorFilterType] = None) -> List["actor_mod.Actor"]:
+        """
+        Detects all actors in the current view that collide with this actor, optionally filtered by a given criterion.
+
+        The method checks for sprite collisions between the current actor and all actors in the camera view,
+        removes the actor itself from the result, optionally filters by collision type, and then applies
+        a user-defined filter.
+
+        Args:
+            filter (Optional[FilterType]): A filter to narrow down detected actors. This can be:
+                - a string tag
+                - an actor instance
+                - an actor class
+                - a list of specific actors
+
+        Returns:
+            List[Actor]: A list of actors that collide with the current actor and match the filter.
+        """
         self.world.backgrounds_manager.init_display()
 
-        group = pygame.sprite.Group(self.world.camera.get_actors_in_view())
-        actors = pygame.sprite.spritecollide(
-            self.actor, group, False, pygame.sprite.collide_rect
+        visible_actors = self.world.camera.get_actors_in_view()
+        collided = pygame.sprite.spritecollide(
+            self.actor,
+            pygame.sprite.Group(visible_actors),
+            False,
+            pygame.sprite.collide_rect
         )
-        group.empty()
-        detected_actors = self._remove_self_from_actor_list(actors)
+
+        detected_actors = self._remove_self_from_actor_list(collided)
+
         if detected_actors:
             detected_actors = self._detect_actor_by_collision_type(
-                detected_actors, self.actor.collision_type
+                detected_actors,
+                self.actor.collision_type
             )
-        if filter:
-            return self.filter_actors(detected_actors, filter)
-        else:
-            return self.filter_actors(detected_actors, filter)
+
+        return self.filter_actors(detected_actors, filter)
 
     def detect_actors_at(
         self, filter=None, direction: int = 0, distance: int = 1
@@ -325,19 +378,38 @@ class SensorManager:
         return self.filter_actors(detected_actors, filter)
 
     def detect_actor(self, filter) -> Union["actor_mod.Actor", None]:
-        self.world.backgrounds_manager.init_display()
-        group = pygame.sprite.Group(self.world.camera.get_actors_in_view())
-        actors = pygame.sprite.spritecollide(
-            self.actor, group, False, pygame.sprite.collide_rect
-        )
-        group.empty()
-        detected_actors = self._remove_self_from_actor_list(actors)
+        """
+        Detects the first actor in view that collides with the current actor and matches the given filter.
+
+        This method  collects all actors currently visible to the camera,
+        checks for collisions with the current actor, and applies an optional filter to identify a relevant actor.
+
+        Args:
+            filter (Optional[Callable[[Actor], bool]]): A filter function that returns True for actors
+                that should be considered. If no filter is provided, all colliding actors are considered.
+
+        Returns:
+            Optional[Actor]: The first detected actor that matches the filter, or None if no match is found.
+        """
+        if not self.world.backgrounds_manager.is_display_initialized:
+            return
+        
+        visible_actors = self.world.camera.get_actors_in_view()
+
+        collided_actors = [
+            actor for actor in visible_actors
+            if pygame.sprite.collide_rect(self.actor, actor)
+        ]
+
+        detected_actors = self._remove_self_from_actor_list(collided_actors)
+
         if detected_actors:
             detected_actors = self._detect_actor_by_collision_type(
                 detected_actors, self.actor.collision_type
             )
-        del actors
+
         return self.filter_first_actor(detected_actors, filter)
+
 
     def _detect_actor_by_collision_type(self, actors, collision_type) -> List:
         if collision_type == "circle":

@@ -173,7 +173,6 @@ class World(world_base.WorldBase):
         self._default_border_color = None
         self._default_border = None
         self.is_running: bool = True
-        self.is_listening: bool = True
         self.actors_fixed_size: bool = False
 
         # --- Actor & animation systems ---
