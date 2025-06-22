@@ -20,7 +20,6 @@ class SensorManager:
     """
 
     def __init__(self, actor: "actor_mod.Actor", world: "world_mod.World"):
-        super().__init__()
         self.actor: "actor_mod.Actor" = actor
 
     @property

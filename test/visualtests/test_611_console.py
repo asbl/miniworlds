@@ -10,7 +10,6 @@ class Test611(unittest.TestCase):
     def setUp(self):
         def test_code():
             world = World()
-            #@TODO: Fix test
             # Here comes your code
             @world.register
             def setup_environment(self, test):
