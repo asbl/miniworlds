@@ -450,3 +450,34 @@ class SensorManager:
         else:
             vec = world_vector.Vector.from_actor_and_position(self.actor, obj)
         return vec.length()
+
+    def contains_rect_any(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]) -> bool:
+        """
+        Returns True if any part of the rectangle is inside the world.
+
+        Useful for detecting partial overlaps or visibility at the edges.
+        """
+        rectangle = world_rect.Rect.create(rect)
+        return self.detect_position(rectangle.topleft) or self.detect_position(rectangle.bottomright)
+
+
+    def contains_rect_all(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]) -> bool:
+        """
+        Returns True if the entire rectangle is fully inside the world.
+
+        Useful when ensuring that an object is completely within bounds.
+        """
+        rectangle = world_rect.Rect.create(rect)
+        return self.detect_position(rectangle.topleft) and self.detect_position(rectangle.bottomright)
+
+    
+    def contains_position(self, pos):
+        """Checks if position is in the world.
+
+        Returns:
+            True, if Position is in the world.
+        """
+        if 0 <= pos[0] < self.world.world_size_x and 0 <= pos[1] < self.world.world_size_y:
+            return True
+        else:
+            return False
