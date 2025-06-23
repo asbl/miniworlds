@@ -9,7 +9,6 @@ import miniworlds.worlds.tiled_world.tile as tile_mod
 import miniworlds.worlds.tiled_world.corner as corner_mod
 import miniworlds.worlds.tiled_world.edge as edge_mod
 import miniworlds.actors.actor as actor_mod
-import miniworlds.base.exceptions as exceptions
 
 
 class TiledWorldPositionManager(actor_position_manager.Positionmanager):
@@ -17,116 +16,85 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         self,
         actor: "actor_mod.Actor",
         world: "tiled_world.TiledWorld",
-        position: [int, int],
+        position: Tuple[int, int],
     ):
         super().__init__(actor, world, position)
-        self._size = (1, 1)
-        self._scaled_size = (1, 1)
+        self._size: Tuple[int, int] = (1, 1)
+        self._scaled_size: Tuple[int, int] = (1, 1)
 
-    def get_global_rect(self):
-        if self.actor.costume:
-            rect = self.actor.costume.get_rect()
+    def get_global_rect(self) -> pygame.Rect:
+        size = self.get_size()
+        rect = (
+            self.actor.costume.get_rect()
+            if self.actor.costume
+            else pygame.Rect(0, 0, *size)
+        )
+
+        position = self.actor.position
+
+        if self.actor.world.is_tile(position):
+            rect.topleft = tile_mod.Tile.from_position(position, self.actor.world).to_pixel()
+        elif self.actor.world.is_corner(position):
+            rect.center = corner_mod.Corner.from_position(position, self.actor.world).to_pixel()
+        elif self.actor.world.is_edge(position):
+            rect.center = edge_mod.Edge.from_position(position, self.actor.world).to_pixel()
         else:
-            rect = pygame.Rect(0, 0, self.get_size()[0], self.get_size()[1])
-        if self.actor.world.is_tile(self.actor.position):
-            rect.topleft = tile_mod.Tile.from_position(
-                self.actor.position, self.actor.world
-            ).to_pixel()
-            return rect
-        elif self.actor.world.is_corner(self.actor.position):
-            rect.center = corner_mod.Corner.from_position(
-                self.actor.position, self.actor.world
-            ).to_pixel()
-            return rect
-        elif self.actor.world.is_edge(self.actor.position):
-            rect.center = edge_mod.Edge.from_position(
-                self.actor.position, self.actor.world
-            ).to_pixel()
-            return rect
-        else:
-            rect.topleft = (-self.get_size()[0], -self.get_size()[1])
+            rect.topleft = (-size[0], -size[1])
+
         return rect
 
-    def get_local_rect(self):
-        rect = self.get_global_rect()
-        # Move actor-rect to camera local coordinates, 
-        # depending if actor is on a tile, edge or corner
-        if self.actor.world.is_tile(self.actor.position):
-            rect.topleft = self.actor.world.camera.get_local_position(
-                    self.get_global_rect().topleft
-                )
-        elif self.actor.world.is_corner(self.actor.position):
-            rect.center = self.actor.world.camera.get_local_position(
-                    self.get_global_rect().topleft
-                )
-        elif self.actor.world.is_edge(self.actor.position):
-            rect.center = self.actor.world.camera.get_local_position(
-                    self.get_global_rect().topleft
-                )
-        return rect
+    def get_local_rect(self) -> pygame.Rect:
+        global_rect = self.get_global_rect()
+        local_pos = self.actor.world.camera.get_local_position(global_rect.topleft)
 
-    def get_size(self):
+        if self.actor.world.is_tile(self.actor.position):
+            global_rect.topleft = local_pos
+        else:
+            global_rect.center = local_pos
+
+        return global_rect
+
+    def get_size(self) -> Tuple[int, int]:
         if self.actor.world:
-            return (
-                self.actor.world.tile_size * self._scaled_size[0],
-                self.actor.world.tile_size * self._scaled_size[1],
-            )
-        else:
-            return 0
+            tile_size = self.actor.world.tile_size
+            return tile_size * self._scaled_size[0], tile_size * self._scaled_size[1]
+        return (0, 0)
 
-    def set_size(self, value: Union[int, Tuple], scale=True):
-        if isinstance(value, int) or isinstance(value, float):  # convert int to tuple
+    def set_size(self, value: Union[int, float, Tuple[int, int]], scale: bool = True):
+        if isinstance(value, (int, float)):
             value = (value, value)
+
         if scale and value != self._scaled_size and self.actor.costume:
             self._scaled_size = value
             self.actor.costume.set_dirty("scale", costume.Costume.RELOAD_ACTUAL_IMAGE)
 
-    def set_center(self, value):
+    def set_center(self, value: Tuple[int, int]):
         self.position = value
 
-    def point_towards_position(self, destination) -> float:
-        """
-        Actor points towards a given position
+    def point_towards_position(self, destination: Tuple[float, float]) -> float:
+        """Rotates the actor to face a specific destination position."""
+        x_diff = destination[0] - self.actor.position[0]
+        y_diff = destination[1] - self.actor.position[1]
 
-        Args:
-            destination: The position to which the actor should pointing
-
-        Returns:
-            The new direction
-
-        """
-        pos = self.actor.position
-        x = destination[0] - pos[0]
-        y = destination[1] - pos[1]
-        if x != 0:
-            m = y / x
-            if x < 0:
-                # destination is left
-                self.actor.direction = math.degrees(math.atan(m)) - 90
-            else:
-                # destination is right
-                self.actor.direction = math.degrees(math.atan(m)) + 90
-            return self.actor.direction
+        if x_diff != 0:
+            angle = math.degrees(math.atan2(y_diff, x_diff))
+            self.actor.direction = angle + 90
         else:
-            m = 0
-            if destination[1] > self.actor.position[1]:
-                self.actor.direction = 180
-                return self.actor.direction
-            else:
-                self.actor.direction = 0
-                return self.actor.direction
+            self.actor.direction = 180 if y_diff > 0 else 0
 
-    def move_towards_position(self, position, distance=1):
-        if self.actor.position == position:
-            return self
-        else:
-            direction = self.direction_from_two_points(self.actor.position, position)
+        return self.actor.direction
+
+    def move_towards_position(self, target: Tuple[int, int], distance: float = 1):
+        if self.actor.position != target:
+            direction = self.direction_from_two_points(self.actor.position, target)
             self.set_direction(direction)
             self.move(distance)
-            return self
+        return self
 
     def store_origin(self):
+        """Overwrite base class"""
         pass
 
     def restore_origin(self):
+        """Overwrite base class"""
         pass

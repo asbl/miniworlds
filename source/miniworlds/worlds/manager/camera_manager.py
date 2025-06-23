@@ -120,6 +120,9 @@ class CameraManager(pygame.sprite.Sprite):
 
     @topleft.setter
     def topleft(self, value: Tuple[int, int]):
+        self._set_topleft(value)
+
+    def _set_topleft(self, value: Tuple[int, int]):
         if self._strict:
             value = (self._limit_x(value[0]), self._limit_y(value[1]))
         if value != self._topleft:

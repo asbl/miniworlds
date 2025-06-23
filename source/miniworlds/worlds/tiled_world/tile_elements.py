@@ -2,40 +2,33 @@ from __future__ import annotations
 
 import abc
 import math
-from abc import abstractmethod
-from typing import List, Dict, Type, Tuple
-from typing import TYPE_CHECKING
+from typing import List, Dict, Tuple, TYPE_CHECKING
 
 import miniworlds.base.app as app
 import miniworlds.worlds.tiled_world.tile as tile_mod
+
 if TYPE_CHECKING:
     import miniworlds.worlds.world as world_mod
 
 
 class TileBase(abc.ABC):
-    """Base Class for Tiles AND TileDelimiters (Corners, Edges)
+    """Base class for Tiles and TileDelimiters (like Corners, Edges)."""
 
-    Tiles are defined by a position. Multiple positions can be stores, if Tile can be described by multiple
-    positions (e.g. in a Hex-world), multiple positions are stores per Tile.
-    """
+    corner_vectors: dict = {}
+    tile_vectors: dict = {}
 
-    corner_vectors: dict = None
-    tile_vectors: dict = None
-
-    def __init__(self, position, world: "world_mod.World" = None):
+    def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
         self.int_coord = self._internal_coordinates()
-        if world:
-            self.world = world
-        else:
-            self.world = app.App.running_world
+        self.world = world or app.App.running_world
         self.position = position
         self._world_position = position
-        self.positions = [(self.position)]
+        self.positions = [self.position]
 
     @classmethod
-    @abstractmethod
-    def from_position(cls, position, world: "world_mod.World"):
+    @abc.abstractmethod
+    def from_position(cls, position: Tuple[int, int], world: world_mod.World) -> TileBase:
+        """Create a tile from a world-relative position."""
         pass
 
     @staticmethod
@@ -47,145 +40,136 @@ class TileBase(abc.ABC):
         return TileDelimiter
 
     @classmethod
-    def from_pixel(cls, pixel_position, world) -> "TileBase":
-        min_value = math.inf
-        nearest_world_position = None
-        for world_pos, pixel in cls.get_position_pixel_dict(world).items():
-            distance = math.sqrt(pow(pixel_position[0] - pixel[0], 2) + pow(pixel_position[1] - pixel[1], 2))
-            if distance < min_value:
-                min_value = distance
-                nearest_world_position = world_pos
-        return cls.from_position(nearest_world_position, world)
+    def from_pixel(cls, pixel_position: Tuple[float, float], world: world_mod.World) -> TileBase:
+        """Find the nearest tile to a given pixel coordinate."""
+        nearest_pos = min(
+            cls.get_position_pixel_dict(world).items(),
+            key=lambda item: math.dist(pixel_position, item[1]),
+        )[0]
+        return cls.from_position(nearest_pos, world)
 
     @staticmethod
-    def get_position_pixel_dict(world) -> dict:
+    def get_position_pixel_dict(world: world_mod.World) -> dict:
+        """Returns a mapping of tile positions to pixel coordinates."""
         pass
 
     @staticmethod
-    def get_local_center_coordinate(world: "world_mod.World") -> Tuple[float, float]:
-        return world.tile_size / 2, world.tile_size / 2
+    def get_local_center_coordinate(world: world_mod.World) -> Tuple[float, float]:
+        """Returns the center point offset for a tile, in local pixel coordinates."""
+        ts = world.tile_size
+        return ts / 2, ts / 2
 
     @staticmethod
     def _internal_coordinates() -> Tuple[float, float]:
-        return tuple
+        """Returns internal coordinates, if needed (override in subclass)."""
+        return 0.0, 0.0
 
-    def merge(self, other):
-        assert other.position == self.position
+    def merge(self, other: TileBase):
+        """Merge tile positions from another tile at the same location."""
+        assert other.position == self.position, "Tiles must share the same position to merge."
         for pos in other.positions:
             if pos not in self.positions:
                 self.positions.append(pos)
 
-    def get_actors(self):
-        actors = []
-        for tkn in self.world.actors:
-            if tkn.position == self.position:
-                actors.append(tkn)
-        return actors
+    def get_actors(self) -> List:
+        """Returns all actors currently on this tile."""
+        return [actor for actor in self.world.actors if actor.position == self.position]
 
     def add_actor(self, actor):
+        """Places an actor on this tile."""
         actor.position = self.position
 
-    def get_neighbour_tiles(self) -> List["tile_mod.Tile"]:
-        if hasattr(self, "_tiles") and self._neighbour_tiles:  # cached at end of this function
+    def get_neighbour_tiles(self) -> List[tile_mod.Tile]:
+        """Returns neighboring tiles around this tile."""
+        if self._neighbour_tiles is not None:
             return self._neighbour_tiles
+
         neighbours = []
-        for tile, vectors in self.tile_vectors.items():
-            for vector in vectors:
-                if self.world.is_tile(self.position + vector):
-                    neighbour = self.world.get_tile(self.position + vector)
-                    if neighbour and neighbour not in neighbours:
-                        neighbours.append(neighbour)
+        for direction, vector in self.tile_vectors.items():
+            new_pos = tuple(self.position[i] + vector[i] for i in range(2))
+            if self.world.is_tile(new_pos):
+                tile = self.world.get_tile(new_pos)
+                if tile and tile not in neighbours:
+                    neighbours.append(tile)
+
         self._neighbour_tiles = neighbours
-        return self._neighbour_tiles
+        return neighbours
 
     def get_local_corner_points(self):
-        points = []
-        for corner_str, vector in self.corner_vectors.items():
-            corner = self._get_corner_cls()(self._world_position, corner_str, self.world)
-            offset = corner.get_local_coordinate_for_tile(self)
-            points.append(offset)
-        return points
+        """Returns corner point offsets for rendering."""
+        return [
+            self._get_corner_cls()(self._world_position, direction, self.world)
+            .get_local_coordinate_for_tile(self)
+            for direction, vector in self.corner_vectors.items()
+        ]
 
 
 class TileDelimiter(TileBase):
-    """Base Class for corners and edges
+    """Base class for corners and edges (tile delimiters)."""
 
-    Delimiters are defined by:
-      * The position of a Tile
-      * A direction
-    """
+    angles: Dict[str, int] = {}
+    direction_angles: Dict[str, int] = {}
 
-    @classmethod
-    def from_position(cls, position, world: "world_mod.World"):
-        return cls.from_position(position, world)
-
-    angles: Dict[str, int] = dict()
-    direction_angles: Dict[str, int] = dict()
-
-    def __init__(self, position, direction, world):
+    def __init__(self, position, direction: str, world):
         super().__init__(position, world)
-        internal_coordinates = position
-        self.tile = self.world.get_tile(internal_coordinates)
-        self.direction = self.direction_vectors()[direction]
-        self.position = self.tile.position + self.direction
-        self.positions = [(self.position, self.direction)]
+        self.tile = self.world.get_tile(position)
         self.direction_str = direction
-        self.angle = self.direction_angles[self.direction_str]
+        self.direction = self.direction_vectors()[direction]
+        self.position = tuple(self.tile.position[i] + self.direction[i] for i in range(2))
+        self.positions = [(self.position, self.direction)]
+        self.angle = self.direction_angles[direction]
 
     @classmethod
-    def get_direction_from_string(cls, direction_string):
-        return cls.direction_vectors()[direction_string]
+    def from_position(cls, position, world):
+        """Create a tile delimiter (override expected)."""
+        return cls(position, direction="default", world=world)
 
-    def _get_direction_string(self, direction) -> str:
-        if type(direction) == tuple:
-            for dir_string, dir_vector in self.direction_vectors().items():
-                if direction == dir_vector:
-                    return dir_string
-        else:
-            raise TypeError("Direction must be tuple")
-
-    def get_local_coordinate_for_tile(self, tile):
-        tile_pos = tile.to_pixel()
-        delimiter_pos = self.to_pixel()
-        local = delimiter_pos - tile_pos
-        return local
-
-    def get_local_coordinate_for_base_tile(self) -> Tuple[float, float]:
-        """Gets pixel offset based on tile
-
-        Returns:
-            Offset as position (x, y and y coordinate measured )
-        """
-        center = TileBase.get_local_center_coordinate(self.world)
-
-        if self.angles:
-            direction_tuple = self.direction
-            direction = self._get_direction_string(direction_tuple)
-            angle_nr = self.angles[direction]
-            base_size = self.world.tile_size
-            start_angle = self.start_angle()
-            angle = 2.0 * math.pi * (start_angle - angle_nr) / len(self.angles)
-            offset = base_size / 2 * math.cos(angle), base_size / 2 * math.sin(angle)
-            return offset + center
-        else:
-            return center
-
-    def to_pixel(self) -> Tuple[float, float]:
-        local = self.get_local_coordinate_for_base_tile()
-        tile_pos = self.tile.to_pixel()
-        return tile_pos + local
-
-    @staticmethod
-    @abstractmethod
-    def direction_vectors() -> dict:
-        return None
-
-    def start_angle(self) -> int:
+    @classmethod
+    @abc.abstractmethod
+    def direction_vectors(cls) -> Dict[str, Tuple[int, int]]:
+        """Returns the available directions."""
         pass
 
-    def get_angle(self, direction) -> int:
+    def get_direction(self):
+        return self.direction_angles[self.direction_str]
+
+    def get_local_coordinate_for_tile(self, tile) -> Tuple[float, float]:
+        """Returns pixel offset of delimiter relative to given tile."""
+        dx = self.to_pixel()[0] - tile.to_pixel()[0]
+        dy = self.to_pixel()[1] - tile.to_pixel()[1]
+        return dx, dy
+
+    def get_local_coordinate_for_base_tile(self) -> Tuple[float, float]:
+        """Returns offset in pixels from base tile center."""
+        center = TileBase.get_local_center_coordinate(self.world)
+        if self.angles:
+            direction = self._get_direction_string(self.direction)
+            angle_index = self.angles[direction]
+            angle_rad = 2.0 * math.pi * (self.start_angle() - angle_index) / len(self.angles)
+            radius = self.world.tile_size / 2
+            return (
+                center[0] + radius * math.cos(angle_rad),
+                center[1] + radius * math.sin(angle_rad),
+            )
+        return center
+
+    def to_pixel(self) -> Tuple[float, float]:
+        """Returns absolute pixel position of this delimiter."""
+        base_pixel = self.tile.to_pixel()
+        offset = self.get_local_coordinate_for_base_tile()
+        return base_pixel[0] + offset[0], base_pixel[1] + offset[1]
+
+    def _get_direction_string(self, direction: Tuple[int, int]) -> str:
+        """Returns the string key for a direction vector."""
+        for name, vec in self.direction_vectors().items():
+            if vec == direction:
+                return name
+        raise ValueError(f"Unknown direction vector: {direction}")
+
+    def get_angle(self, direction: str) -> int:
+        """Returns angle for a given direction string."""
         return self.angles[direction]
 
-    def get_direction(self):
-        dir_str = self._get_direction_string(self.direction)
-        return self.direction_angles[dir_str]
+    def start_angle(self) -> int:
+        """Override: starting angle offset for layouting (e.g. hex rotation)."""
+        return 0
