@@ -6,36 +6,73 @@ import miniworlds.actors.actor as actor_mod
 
 
 class TiledCameraManager(camera_manager.CameraManager):
+    """
+    CameraManager implementation for tile-based worlds.
+    Converts tile coordinates into pixel-based camera viewports.
+    """
 
     @property
-    def width(self):
+    def width(self) -> int:
+        """
+        Returns:
+            Camera view width in pixels.
+        """
         return self.view[0] * self.world.tile_size
 
     @width.setter
-    def width(self, value):
+    def width(self, value: int):
+        """
+        Sets the width of the camera view in tiles.
+
+        Args:
+            value (int): New width in tiles.
+        """
         self._set_width(value)
 
     @property
-    def height(self):
+    def height(self) -> int:
+        """
+        Returns:
+            Camera view height in pixels.
+        """
         return self.view[1] * self.world.tile_size
 
     @height.setter
-    def height(self, value):
+    def height(self, value: int):
+        """
+        Sets the height of the camera view in tiles.
+
+        Args:
+            value (int): New height in tiles.
+        """
         self._set_height(value)
 
     @property
-    def topleft(self):
+    def topleft(self) -> tuple[int, int]:
+        """
+        Returns:
+            Top-left corner of the camera view in pixels.
+        """
         return (
             self._topleft[0] * self.world.tile_size,
             self._topleft[1] * self.world.tile_size,
         )
 
     @topleft.setter
-    def topleft(self, value):
+    def topleft(self, value: tuple[int, int]):
+        """
+        Sets the top-left corner of the camera in tile coordinates.
+
+        Args:
+            value (tuple): Tile coordinates for top-left corner.
+        """
         self._set_topleft(value)
 
     def get_rect(self) -> pygame.Rect:
-        """Gets rect of camera view."""
+        """
+        Returns:
+            pygame.Rect: The full camera viewport in pixel coordinates.
+        """
         return pygame.Rect(
             self.topleft[0],
             self.topleft[1],
@@ -44,7 +81,13 @@ class TiledCameraManager(camera_manager.CameraManager):
         )
 
     def from_actor(self, actor: "actor_mod.Actor") -> None:
-        """Gets camera from actor center-position"""
+        """
+        Centers the camera on the given actor's position.
+
+        Args:
+            actor (Actor): The actor to center the camera on.
+        """
+        print("from actor", actor.center, actor.position, self.view)
         if actor.center:
             position = actor.position
             width = self.view[0] // 2
@@ -57,10 +100,27 @@ class TiledCameraManager(camera_manager.CameraManager):
         else:
             self.topleft = (0, 0)
 
-    def _limit_x(self, value):
+    def _limit_x(self, value: int) -> int:
+        """
+        Constrains horizontal camera movement within world bounds.
+
+        Args:
+            value (int): Proposed X tile index.
+
+        Returns:
+            int: Corrected X tile index within limits.
+        """
         if value < 0:
             return 0
         elif value >= self.world_size_x - self.view[0]:
             return self.world_size_x - self.view[0]
+        else:
+            return value
+
+    def _limit_y(self, value: int) -> int:
+        if value < 0:
+            return 0
+        elif value >= self.world_size_y - self.view[1]:
+            return self.world_size_y - self.view[1]
         else:
             return value
