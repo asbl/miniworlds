@@ -1,19 +1,19 @@
 from __future__ import annotations
 
 from collections import OrderedDict
-from typing import List, Optional, Tuple
-from typing import TYPE_CHECKING
+from typing import List, Optional, Tuple, TYPE_CHECKING
+
 import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 import miniworlds.base.app as app
 
 if TYPE_CHECKING:
-    import miniworlds.worlds.tiled_world.corner as corner
-    import miniworlds.worlds.tiled_world.tiled_world as tiled_world_mod
-
+    from miniworlds.worlds.tiled_world.corner import Corner
+    from miniworlds.worlds.tiled_world.tiled_world import TiledWorld
+    from miniworlds.positions.vector import Vector
 
 
 class Tile(tile_elements.TileBase):
-    tile_vectors = {
+    tile_vectors: dict[str, Tuple[int, int]] = {
         "w": (+1, 0),
         "nw": (+1, +1),
         "no": (-1, +1),
@@ -22,47 +22,44 @@ class Tile(tile_elements.TileBase):
         "sw": (+1, -1),
     }
 
-    corner_vectors = OrderedDict(
-        [
-            ("nw", (+0.5, +0.5)),
-            ("no", (-0.5, +0.5)),
-            ("so", (-0.5, -0.5)),
-            ("sw", (+0.5, -0.5)),
-        ]
-    )
+    corner_vectors: OrderedDict[str, Tuple[float, float]] = OrderedDict([
+        ("nw", (+0.5, +0.5)),
+        ("no", (-0.5, +0.5)),
+        ("so", (-0.5, -0.5)),
+        ("sw", (+0.5, -0.5)),
+    ])
 
-    edge_vectors = {
+    edge_vectors: dict[str, Tuple[float, float]] = {
         "w": (-0.5, 0),
         "o": (+0.5, 0),
         "s": (0, +0.5),
         "n": (0, -0.5),
     }
 
+    def __init__(self, position: Tuple[int, int], world: Optional[TiledWorld] = None):
+        super().__init__(position, world)
+        self._cached_corners: Optional[List[Corner]] = None  # Cache explizit und privat
+
     @classmethod
-    def from_position(cls, position, world: "tiled_world_mod.TiledWorld" = None) -> "tile_elements.TileBase":
+    def from_position(cls, position: Tuple[int, int], world: TiledWorld) -> Tile:
         return world.get_tile(position)
 
     @classmethod
-    def from_actor(cls, actor):
+    def from_actor(cls, actor) -> Tile:
         return actor.world.get_tile(actor.position)
 
-    def __init__(self, position, world=None):
-        super().__init__(position, world)
-        self.tiles = []
-        self.corners = []
-        self.edges = []
+    def get_neighbour_corners(self) -> List[Corner]:
+        if self._cached_corners is not None:
+            return self._cached_corners
 
-    def get_neighbour_corners(self) -> List["corner.Corner"]:
-        if self.corners:
-            return self.corners
-        else:
-            neighbours = []
-            for corner, vector in self.corner_vectors.items():
-                neighbour = self.world.get_corner(self.position + vector)
-                if neighbour:
-                    neighbours.append(neighbour)
-            self.corners = neighbours
-            return self.corners
+        neighbours = []
+        for vector in self.corner_vectors.values():
+            corner = self.world.get_corner(self.position + vector)
+            if corner:
+                neighbours.append(corner)
+
+        self._cached_corners = neighbours
+        return neighbours
 
     def to_pixel(self) -> Tuple[float, float]:
         x = self.position[0] * self.world.tile_size
@@ -70,26 +67,26 @@ class Tile(tile_elements.TileBase):
         return x, y
 
     @staticmethod
-    def get_position_pixel_dict(world):
+    def get_position_pixel_dict(world: TiledWorld) -> dict:
         return world.get_center_points()
-
-    def to_center(self):
-        topleft = self.to_pixel()
-        return topleft + self.get_local_center_coordinate(self.world)
+        
+    def to_center(self) -> Tuple[float, float]:
+        x, y = self.to_pixel()
+        dx, dy = self.get_local_center_coordinate(self.world)
+        return x + dx, y + dy
 
     @classmethod
-    def from_pixel(cls, pixel_position,
-                   world: Optional["tiled_world_mod.TiledWorld"] = None) -> "tile_elements.TileBase":
-        if not world:
+    def from_pixel(cls, pixel_position: Tuple[float, float], world: Optional[TiledWorld] = None) -> Tile:
+        if world is None:
             world = app.App.running_world
-        x = pixel_position[0] // world.tile_size
-        y = pixel_position[1] // world.tile_size
-        return cls((x, y), world=None)
+        x = int(pixel_position[0] // world.tile_size)
+        y = int(pixel_position[1] // world.tile_size)
+        return cls((x, y), world)
 
-    def __sub__(self, other):
-        import miniworlds.positions.vector as world_vector #t
-        return world_vector.Vector(self.position[0] - other.position[0], self.position[1] - other.position[1])
+    def __sub__(self, other: Tile) -> Vector:
+        from miniworlds.positions.vector import Vector
+        return Vector(self.position[0] - other.position[0], self.position[1] - other.position[1])
 
-    def distance_to(self, other):
-        vec = self - other
-        return vec.length()
+    def distance_to(self, other: Tile) -> float:
+        return (self - other).length()
+
