@@ -52,7 +52,7 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         """
         target_position = self.actor.position
         actor_list: list = list()
-        if self.world and self.world.detect_position(target_position):
+        if self.world and self.contains_position(target_position):
             actor_list = self.world.detect_actors(target_position)
         if not actor_list:
             actor_list = []

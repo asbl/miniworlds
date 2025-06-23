@@ -257,27 +257,30 @@ class World(world_base.WorldBase):
     def _create_event_manager(self):
         return event_manager.EventManager(self)
 
-    def detect_position(self, pos):
+    def contains_position(self, pos):
         """Checks if position is in the world.
 
         Returns:
             True, if Position is in the world.
         """
-        if 0 <= pos[0] < self.world_size_x and 0 <= pos[1] < self.world_size_y:
-            return True
-        else:
-            return False
+        return self.sensor_manager.contains_position(pos)
 
-    def contains_rect(self, rect: Union[tuple, pygame.Rect]):
-        """Detects if rect is completely on the world.
-
-        Args:
-            rect: A rectangle as tuple (top, left, width, height)
+    def contains_rect(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
         """
-        rectangle = world_rect.Rect.create(rect)
-        topleft_on_the_world = self.detect_position(rectangle.topleft)
-        bottom_right_on_the_world = self.detect_position(rectangle.bottomright)
-        return topleft_on_the_world or bottom_right_on_the_world
+        Returns True if the entire rectangle is fully inside the world.
+
+        Useful when ensuring that an object is completely within bounds.
+        """
+        return self.sensor_manager.contains_rect_all(rect)
+
+    def contains_rect_any(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
+        """
+        Returns True if any part of the rectangle is inside the world.
+
+        Useful when ensuring that an object is completely within bounds.
+        """
+        return self.sensor_manager.contains_rect_any_(rect)
+
 
     @property
     def surface(self):

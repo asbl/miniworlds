@@ -370,10 +370,6 @@ class TiledWorld(world.World):
     def _get_world_connector_class():
         return tiled_world_connector.TiledWorldConnector
 
-    def detect_position(self, position: Tuple[float, float]) -> bool:
-        """Returns True if a position is on the world."""
-        return super().detect_position(position)
-
     def borders(self, value: Union[tuple, Tuple[float, float], pygame.Rect]) -> list:
         """
         Returns the World's borders, if actor is near a Border.
