@@ -30,10 +30,13 @@ class Shape(actor.Actor):
 
     def __init__(self, position: Tuple[float, float] = (0, 0), *args, **kwargs):
         super().__init__(position, *args, **kwargs)
+        self.costume_manager.has_appearance = True
 
     def new_costume(self):
         return shape_costume.ShapeCostume(self)
 
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return shape_costume.ShapeCostume
 
 class Circle(Shape):
     """
@@ -66,6 +69,7 @@ class Circle(Shape):
     def __init__(self, position=(0, 0), radius: float = 10, *args, **kwargs):
         self._radius = radius
         super().__init__(position, *args, **kwargs)
+        self.costume = shape_costume.CircleCostume(self)
         self.position_manager.set_size((self._radius * 2, self._radius * 2), scale = False)
         
     @property
@@ -86,9 +90,6 @@ class Circle(Shape):
         self.physics.can_move = True
         self.physics.stable = False
 
-    def new_costume(self):
-        return shape_costume.CircleCostume(self)
-
     @classmethod
     def from_topleft(cls, position: tuple, radius: int, **kwargs):
         """Creates a circle with topleft at position"""
@@ -102,6 +103,12 @@ class Circle(Shape):
         circle = cls(position, radius, **kwargs)
         circle.origin = "center"
         return circle
+
+    def new_costume(self):
+        return shape_costume.CircleCostume(self)
+
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return shape_costume.CircleCostume
 
 
 class Point(Circle):
@@ -173,6 +180,11 @@ class Ellipse(Shape):
         ellipse.origin = "center"
         return ellipse
 
+    def new_costume(self):
+        return shape_costume.EllipseCostume(self)
+
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return shape_costume.EllipseCostume
 
 class Arc(Ellipse):
     """
@@ -365,6 +377,11 @@ class Line(Shape):
 
     line_width = thickness
 
+    def new_costume(self):
+        return shape_costume.LineCostume(self)
+
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return shape_costume.LineCostume
 
 class Rectangle(Shape):
     """
@@ -427,6 +444,13 @@ class Rectangle(Shape):
         rectangle = cls(position, width, height)
         rectangle.center = rectangle.position
         return rectangle
+
+
+    def new_costume(self):
+        return shape_costume.RectangleCostume(self)
+
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return shape_costume.RectangleCostume
 
 
 class Polygon(Shape):

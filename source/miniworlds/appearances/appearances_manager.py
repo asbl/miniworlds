@@ -1,4 +1,6 @@
 from typing import Union, Tuple, List
+from abc import ABC, abstractmethod
+
 
 import miniworlds
 import miniworlds.appearances.appearance as appearance_mod
@@ -8,7 +10,8 @@ from miniworlds.base.exceptions import MiniworldsError
 import pygame
 
 
-class AppearancesManager:
+
+class AppearancesManager(ABC):
     def __init__(self, parent):
         self.appearances_list = []
         self.parent = parent
@@ -103,6 +106,7 @@ class AppearancesManager:
             appearance.add_image(source)
         return appearance
 
+    @abstractmethod
     def create_appearance(self) -> "appearance_mod.Appearance":
         """Returns a new appearance (Background instance or Costume instance)"""
         pass
@@ -371,5 +375,7 @@ class AppearancesManager:
         for appearance in self.appearances_list:
             appearance.border = value
 
-    def get_actual_appearance(self):
+    def get_actual_appearance(self) -> "appearance_mod.Appearance":
+        if not self.appearance:
+            self._add_default_appearance()
         return self.appearance

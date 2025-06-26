@@ -26,7 +26,7 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         size = self.get_size()
         rect = (
             self.actor.costume.get_rect()
-            if self.actor.costume
+            if self.actor.has_costume()
             else pygame.Rect(0, 0, *size)
         )
 

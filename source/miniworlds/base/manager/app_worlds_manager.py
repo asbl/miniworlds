@@ -121,7 +121,7 @@ class WorldsManager:
         if reset:
             world.reset()
         if setup:
-            world.event_handler.setup_world()
+            world.event_manager.setup_world()
         world.background.set_dirty("all", 2)
         world.start_listening()
 

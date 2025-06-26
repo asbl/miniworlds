@@ -43,7 +43,8 @@ class CostumesManager(appearances_manager.AppearancesManager):
         Returns:
             costume_mod-Costume: the new created costume.
         """
-        new_costume = self.actor.new_costume()
+        world_connector = self.actor.world.get_world_connector(self.actor)
+        new_costume = world_connector.create_costume()
         return new_costume
 
     @property

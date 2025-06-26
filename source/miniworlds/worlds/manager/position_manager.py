@@ -37,11 +37,16 @@ class Positionmanager:
         return self._origin
 
     @origin.setter
-    def origin(self, value):
-        if value not in ["center", "topleft"]:
+    def origin(self, value: str) -> None:
+        """Set the origin. Only 'center' or 'topleft' are allowed."""
+        if value not in {"center", "topleft"}:
             raise exceptions.OriginException(self.actor)
+
         self._origin = value
-        self.actor.costume.origin_changed()
+
+        costume = self.actor.costume
+        if costume:
+            costume.origin_changed()
 
     def switch_origin(self, value: str):
         if self.origin == "center" and value == "topleft":
@@ -58,54 +63,66 @@ class Positionmanager:
         return self.actor
 
     def get_global_rect(self) -> pygame.Rect:
-        """Global rect is the the position of the actor on the global
-        world.
-        This position can be outside the current screen.
+        """Returns the global rect of the actor in the world space.
+        
+        This rect may lie outside the visible screen.
 
         Returns:
-            pygame.Rect: A rect with the token coordinates.
+            pygame.Rect: A rect with the actor's global coordinates.
         """
-        if self.actor.costume:
-            _rect = self.actor.costume.get_rect()
+        print("has costume", self.actor.costume_manager.has_costume)
+        if self.actor.costume_manager.has_costume:
+            costume = self.actor.costume
+            rect = costume.get_rect()
         else:
-            _rect = pygame.Rect(0, 0, self.actor.size[0], self.actor.size[1])
+            width, height = self.actor.size
+            rect = pygame.Rect(0, 0, width, height)
+
         if self.origin == "center":
-            _rect.center = self.get_center()
+            rect.center = self.get_center()
         elif self.origin == "topleft":
-            _rect.topleft = self.get_topleft()
-        return _rect
+            rect.topleft = self.get_topleft()
+        print("rect", rect)
+        return rect
 
     def get_local_rect(self) -> pygame.Rect:
         """
-        Local rect is the position of the actor on the view
-        (defined by camera view)
+        Returns the position of the actor on the screen (camera view).
+        
+        The local rect is derived from the global position and transformed
+        into the camera's coordinate system.
         """
-        _rect = self.get_global_rect()
+        rect = self.get_global_rect()
+
+        camera = self.actor.world.camera
         if self.origin == "center":
-            _rect.center = self.actor.world.camera.get_local_position(
-                self.get_center()
-            )
+            rect.center = camera.get_local_position(self.get_center())
         elif self.origin == "topleft":
-            _rect.topleft = self.actor.world.camera.get_local_position(
-                self.get_topleft()
-            )
+            rect.topleft = camera.get_local_position(self.get_topleft())
         else:
-            raise Exception
-        return _rect
-    
+            raise ValueError(f"Unsupported origin type: {self.origin!r}")
+        
+        return rect
+
     def get_screen_rect(self) -> pygame.Rect:
         """
-        Screen rect is the position of the actor inside the current screen.
-        (defined by camera view and window position of world)
+        Returns the position of the actor on the physical screen.
+        
+        The screen rect is based on global coordinates, transformed
+        by the camera and the world's window position.
         """
-        _rect = self.get_global_rect()
+        rect = self.get_global_rect()
+        camera = self.actor.world.camera
+
         if self.origin == "center":
-            _rect.center = self.actor.world.camera.get_screen_position(self.get_center())
+            rect.center = camera.get_screen_position(self.get_center())
         elif self.origin == "topleft":
-            _rect.topleft = self.actor.world.camera.get_screen_position(self.get_topleft())
+            rect.topleft = camera.get_screen_position(self.get_topleft())
         else:
-            raise Exception
-        return _rect
+            raise ValueError(f"Unsupported origin type: {self.origin!r}")
+
+        return rect
+
     
     def get_direction(self):
         direction = (self._direction + 180) % 360 - 180
