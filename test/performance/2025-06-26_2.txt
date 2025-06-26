@@ -1,0 +1,190 @@
+         8497437 function calls (8497337 primitive calls) in 5.536 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   361800    1.304    0.000    1.304    0.000 {built-in method builtins.print}
+   180900    0.542    0.000    2.757    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:65(get_global_rect)
+    89100    0.308    0.000    2.282    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:236(set_position)
+   361100    0.223    0.000    0.309    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:937(get_image)
+   360900    0.199    0.000    0.475    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:570(costume)
+    90202    0.181    0.000    0.181    0.000 {method 'blit' of 'pygame.surface.Surface' objects}
+    89100    0.155    0.000    2.621    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:312(move)
+    90900    0.153    0.000    1.590    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:88(get_local_rect)
+   271000    0.151    0.000    0.391    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:613(image)
+   361200    0.148    0.000    0.223    0.000 {built-in method builtins.getattr}
+   812700    0.135    0.000    0.135    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2392(costume_manager)
+   180900    0.131    0.000    0.441    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:901(get_rect)
+    90000    0.118    0.000    1.856    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:728(dirty)
+    90000    0.106    0.000    1.656    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:183(is_actor_in_view)
+      100    0.103    0.001    2.236    0.022 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:1137(draw)
+   271800    0.094    0.000    0.127    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:275(get_center)
+   361100    0.086    0.000    0.086    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:1006(dirty)
+      100    0.083    0.001    0.469    0.005 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:1100(_update_all_costumes)
+    89100    0.082    0.000    0.131    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/sensor_manager.py:209(get_destination)
+      100    0.068    0.001    0.068    0.001 {built-in method pygame.display.update}
+   543600    0.068    0.000    0.068    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:35(origin)
+      100    0.068    0.001    2.759    0.028 /home/andreas/code-git/miniworlds/test/performance/maincprofile.py:34(act)
+   180900    0.066    0.000    0.066    0.000 {method 'get_rect' of 'pygame.surface.Surface' objects}
+    90000    0.059    0.000    0.059    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:143(get_rect)
+    90100    0.056    0.000    0.141    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:976(_load_image)
+    89100    0.056    0.000    2.691    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:1088(move)
+   360900    0.054    0.000    0.054    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearances_manager.py:378(get_actual_appearance)
+    90900    0.053    0.000    1.657    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2324(rect)
+   267300    0.051    0.000    0.051    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:251(<genexpr>)
+    90000    0.049    0.000    0.195    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearances_manager.py:38(image)
+   360000    0.048    0.000    0.048    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2378(position_manager)
+   361800    0.045    0.000    0.045    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/costumes_manager.py:60(has_costume)
+   360900    0.045    0.000    0.045    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2346(world)
+    90000    0.044    0.000    0.251    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2365(image)
+    90000    0.044    0.000    0.102    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:139(rect)
+    90000    0.040    0.000    1.696    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:186(is_actor_repainted)
+   267300    0.039    0.000    0.039    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:232(get_position)
+    90100    0.039    0.000    0.180    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:969(update)
+    90000    0.036    0.000    0.036    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2237(visible)
+    90900    0.024    0.000    0.024    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:156(get_local_position)
+    90000    0.023    0.000    0.023    0.000 {method 'colliderect' of 'pygame.rect.Rect' objects}
+    89100    0.021    0.000    0.021    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/position_manager.py:127(get_direction)
+    89100    0.019    0.000    0.019    0.000 {built-in method math.radians}
+    89100    0.016    0.000    0.016    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:2385(sensor_manager)
+    90100    0.016    0.000    0.016    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearance.py:519(is_animated)
+    89100    0.015    0.000    0.015    0.000 {built-in method math.sin}
+    89100    0.015    0.000    0.015    0.000 {built-in method math.cos}
+      201    0.015    0.000    0.015    0.000 {method 'poll' of 'select.epoll' objects}
+  200/100    0.002    0.000    0.008    0.000 /usr/lib/python3.13/inspect.py:2479(_signature_from_callable)
+      201    0.002    0.000    3.248    0.016 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:1066(update)
+      201    0.002    0.000    5.591    0.028 /usr/lib/python3.13/asyncio/base_events.py:1954(_run_once)
+        1    0.002    0.002    0.033    0.033 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:1229(_draw_dirty_internal)
+      201    0.002    0.000    5.573    0.028 {method 'run' of '_contextvars.Context' objects}
+      100    0.002    0.000    0.004    0.000 /usr/lib/python3.13/inspect.py:2375(_signature_from_function)
+      100    0.002    0.000    0.002    0.000 {built-in method pygame.event.get}
+        1    0.002    0.002    0.017    0.017 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:1272(_find_dirty_area)
+      100    0.001    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:89(_handle_actor_detecting_actor_methods)
+      300    0.001    0.000    5.569    0.019 /home/andreas/code-git/miniworlds/source/miniworlds/base/app.py:146(_update)
+      100    0.001    0.000    2.238    0.022 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/background.py:128(repaint)
+      200    0.001    0.000    0.001    0.000 {built-in method pygame.mouse.get_pos}
+       99    0.001    0.000    0.001    0.000 {method 'copy' of 'list' objects}
+      200    0.001    0.000    0.001    0.000 /usr/lib/python3.13/asyncio/base_events.py:846(_call_soon)
+      100    0.001    0.000    0.003    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/base/manager/app_event_manager.py:54(pygame_events_to_event_queue)
+      100    0.001    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:119(_handle_actor_not_detecting_actor_methods)
+      200    0.001    0.000    0.001    0.000 /usr/lib/python3.13/inspect.py:3016(__init__)
+      201    0.001    0.000    5.500    0.027 /home/andreas/code-git/miniworlds/source/miniworlds/base/manager/app_worlds_manager.py:25(reload_all_worlds)
+     2700    0.001    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/actors/actor.py:718(dirty)
+      400    0.001    0.000    0.001    0.000 /usr/lib/python3.13/asyncio/tasks.py:703(sleep)
+      100    0.001    0.000    2.770    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/event_handler.py:57(act_all)
+      100    0.001    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:383(sprites)
+      100    0.001    0.000    0.001    0.000 /usr/lib/python3.13/inspect.py:2097(_signature_bound_method)
+      100    0.001    0.000    0.001    0.000 /usr/lib/python3.13/inspect.py:2728(__init__)
+      201    0.001    0.000    5.573    0.028 /usr/lib/python3.13/asyncio/events.py:87(_run)
+      100    0.000    0.000    0.004    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:14(handle_all_collisions)
+      201    0.000    0.000    0.015    0.000 /usr/lib/python3.13/selectors.py:435(select)
+      200    0.000    0.000    0.000    0.000 {built-in method pygame.time.get_ticks}
+      100    0.000    0.000    0.010    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/tools/method_caller.py:17(check_signature)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:146(get_screen_rect)
+      100    0.000    0.000    0.012    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world_base.py:69(blit_surface_to_window_surface)
+      100    0.000    0.000    0.069    0.001 /home/andreas/code-git/miniworlds/source/miniworlds/base/app.py:166(display_repaint)
+      200    0.000    0.000    0.000    0.000 {method 'set_clip' of 'pygame.surface.Surface' objects}
+      200    0.000    0.000    0.002    0.000 /usr/lib/python3.13/asyncio/base_events.py:817(call_soon)
+     1100    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+      100    0.000    0.000    0.009    0.000 /usr/lib/python3.13/inspect.py:3347(signature)
+      100    0.000    0.000    0.002    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/mouse_manager.py:17(get_mouse_position)
+      400    0.000    0.000    0.000    0.000 {method 'copy' of 'set' objects}
+      201    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/events.py:36(__init__)
+      100    0.000    0.000    2.769    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/tools/method_caller.py:35(call_method)
+      200    0.000    0.000    5.569    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/base/app.py:137(start_mainloop)
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:764(unwrap)
+      100    0.000    0.000    0.009    0.000 /usr/lib/python3.13/inspect.py:3068(from_callable)
+      603    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+      100    0.000    0.000    2.238    0.022 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:1063(repaint)
+      300    0.000    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:560(background)
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:176(get_annotations)
+      199    0.000    0.000    0.002    0.000 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:440(__iter__)
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/enum.py:695(__call__)
+      600    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/background.py:85(world)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:165(_handle_actor_detecting_border_methods)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:193(_handle_actor_detecting_on_the_world_methods)
+     1797    0.000    0.000    0.000    0.000 {method 'collidelist' of 'pygame.rect.Rect' objects}
+      203    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:766(time)
+      300    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:576(get_background)
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:3084(replace)
+      100    0.000    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/base/manager/app_worlds_manager.py:18(get_world_by_pixel)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world_base.py:87(rect)
+      200    0.000    0.000    5.570    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/base/app.py:97(run)
+      100    0.000    0.000    2.770    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/event_manager.py:38(act_all)
+      203    0.000    0.000    0.000    0.000 {built-in method time.monotonic}
+      900    0.000    0.000    0.000    0.000 {method 'clip' of 'pygame.rect.Rect' objects}
+      201    0.000    0.000    0.000    0.000 {built-in method time.perf_counter}
+      100    0.000    0.000    2.770    0.028 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:1113(_act_all)
+     1000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+      300    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+      201    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:285(surface)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:209(_handle_actor_detecting_not_on_the_world_methods)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:1117(_tick_timed_objects)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/collision_manager.py:22(_handle_sensor_events)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/event_manager.py:62(update)
+      201    0.000    0.000    0.000    0.000 {method 'popleft' of 'collections.deque' objects}
+      400    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+      200    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:3063(<genexpr>)
+      897    0.000    0.000    0.000    0.000 {method 'union_ip' of 'pygame.rect.Rect' objects}
+      100    0.000    0.000    0.000    0.000 {method 'isidentifier' of 'str' objects}
+      200    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:386(isfunction)
+      200    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+      100    0.000    0.000    0.002    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/mouse_manager.py:13(update_positions)
+      100    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+      100    0.000    0.000    0.000    0.000 {method 'union' of 'set' objects}
+      398    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/tasks.py:691(__sleep0)
+      100    0.000    0.000    0.000    0.000 {method 'get_clip' of 'pygame.surface.Surface' objects}
+      199    0.000    0.000    0.000    0.000 {built-in method builtins.iter}
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/base/manager/app_event_manager.py:20(handle_event_queue)
+      100    0.000    0.000    0.000    0.000 {method 'values' of 'mappingproxy' objects}
+      100    0.000    0.000    0.000    0.000 {method '__contains__' of 'frozenset' objects}
+      100    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+      101    0.000    0.000    0.000    0.000 {method 'clear' of 'set' objects}
+      201    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:548(_check_closed)
+      100    0.000    0.000    0.000    0.000 {method 'collidepoint' of 'pygame.rect.Rect' objects}
+      201    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/selector_events.py:740(_process_events)
+       99    0.000    0.000    0.001    0.000 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:856(sprites)
+      300    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/backgrounds_manager.py:13(background)
+      100    0.000    0.000    0.000    0.000 {method 'items' of 'mappingproxy' objects}
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world_base.py:107(width)
+      100    0.000    0.000    0.000    0.000 {method 'clear' of 'list' objects}
+      100    0.000    0.000    0.000    0.000 {built-in method sys.getrecursionlimit}
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world_base.py:111(height)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/event_manager.py:59(copy_registered_events)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/base/window.py:65(surface)
+      101    0.000    0.000    0.000    0.000 {method 'clear' of 'collections.deque' objects}
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/enum.py:1154(__new__)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/base/manager/app_event_manager.py:42(add_special_chars)
+      100    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/venv/lib/python3.13/site-packages/pygame/sprite.py:1304(clear)
+      203    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:2052(get_debug)
+      200    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:3076(parameters)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:293(step)
+      200    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:2793(kind)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:57(height)
+      100    0.000    0.000    0.000    0.000 /usr/lib/python3.13/inspect.py:2781(name)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/world.py:340(fps)
+      100    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/worlds/manager/camera_manager.py:42(width)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:799(call_at)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/events.py:157(cancel)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:457(create_future)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:775(call_later)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/futures.py:310(_set_result_unless_cancelled)
+        1    0.000    0.000    0.000    0.000 {method 'set_result' of '_asyncio.Future' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/events.py:113(__init__)
+        1    0.000    0.000    0.000    0.000 {built-in method _heapq.heappop}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/events.py:73(cancel)
+        1    0.000    0.000    0.000    0.000 {built-in method _contextvars.copy_context}
+        1    0.000    0.000    0.000    0.000 {built-in method _heapq.heappush}
+        1    0.000    0.000    0.000    0.000 {method 'cancelled' of '_asyncio.Future' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method _asyncio.get_running_loop}
+        1    0.000    0.000    0.000    0.000 {built-in method math.ceil}
+        1    0.000    0.000    0.000    0.000 /home/andreas/code-git/miniworlds/source/miniworlds/appearances/appearances_manager.py:33(init_display)
+        1    0.000    0.000    0.000    0.000 {built-in method math.isnan}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.13/asyncio/base_events.py:1949(_timer_handle_cancelled)
+
+
