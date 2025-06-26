@@ -228,13 +228,14 @@ class Positionmanager:
         Returns:
             "actor_mod.Actor": The current actor
         """
-        if not value or not isinstance(value, tuple):
-            raise exceptions.NoValidWorldPositionError(value)
-        self.last_position = self.get_position()
+        old_position = self.get_position()
+        self.last_position = old_position
         self.position = value
-        if self.last_position != self.get_position():
+        if tuple(int(x) for x in self.last_position) != tuple(int(x) for x in self.get_position()):
             self.actor.dirty = 1
+
         return self
+
 
     def store_origin(self):
         if self.origin == "center":
@@ -292,11 +293,11 @@ class Positionmanager:
             raise Exception
 
     def move(self, distance: int = 0) -> "actor_mod.Actor":
-        # Set distance
         if distance == 0:
             distance = self.actor.speed
-        # set destination
-        direction = self.get_direction() if distance >= 0 else -self.get_direction()
+
+        direction_raw = self.get_direction()
+        direction = direction_raw if distance >= 0 else -direction_raw
         destination = self.actor.sensor_manager.get_destination(self.get_position(), direction, distance)
 
         if self.is_blockable:
@@ -305,8 +306,9 @@ class Positionmanager:
                 self.set_position(destination)
         else:
             self.set_position(destination)
-            self.last_direction = self.get_direction()
+            self.last_direction = direction_raw  
         return self.actor
+
 
     def move_towards_position(
         self, position: Tuple[float, float], distance=1
@@ -338,7 +340,6 @@ class Positionmanager:
                 f"No valid type in method move_in_direction - Expected int, str, Position or tuple, got {type(direction)}"
             )
     
-
     def undo_move(self) -> "actor_mod.Actor":
         self.set_position(self.last_position)
         return self.actor

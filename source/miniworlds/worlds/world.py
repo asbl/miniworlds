@@ -757,9 +757,7 @@ class World(world_base.WorldBase):
 
         """
         self.app.prepare_mainloop()
-        if hasattr(self, "on_setup") and not self._was_setup:
-            self.on_setup()
-            self._was_setup = True
+        self.event_manager.setup_world()
         self.backgrounds_manager.init_display()
         self.is_running = True
         if event:
