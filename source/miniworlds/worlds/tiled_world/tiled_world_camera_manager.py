@@ -87,7 +87,6 @@ class TiledCameraManager(camera_manager.CameraManager):
         Args:
             actor (Actor): The actor to center the camera on.
         """
-        print("from actor", actor.center, actor.position, self.view)
         if actor.center:
             position = actor.position
             width = self.view[0] // 2

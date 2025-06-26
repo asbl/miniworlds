@@ -17,6 +17,12 @@ class TileBase(abc.ABC):
     corner_vectors: dict = {}
     tile_vectors: dict = {}
 
+    # Cache: maps world id to a dict of tile positions and their corresponding pixel coordinates
+    _position_pixel_cache: Dict[int, Dict[Tuple[int, int], Tuple[float, float]]] = {}
+
+    # Cache: maps world id to a list of (tile position, pixel coordinate) tuples for fast iteration
+    _position_pixel_list_cache: Dict[int, List[Tuple[Tuple[int, int], Tuple[float, float]]]] = {}
+
     def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
         self.int_coord = self._internal_coordinates()
@@ -41,11 +47,35 @@ class TileBase(abc.ABC):
 
     @classmethod
     def from_pixel(cls, pixel_position: Tuple[float, float], world: world_mod.World) -> TileBase:
-        """Find the nearest tile to a given pixel coordinate."""
+        """
+        Finds the nearest tile to a given pixel coordinate.
+
+        This method uses caching to avoid redundant recalculation of the mapping
+        between tile grid positions and their corresponding pixel coordinates for
+        a given world. It also uses squared distance instead of Euclidean distance
+        for better performance.
+
+        Args:
+            pixel_position (Tuple[float, float]): The (x, y) pixel position.
+            world (world_mod.World): The world instance containing the tile layout.
+
+        Returns:
+            TileBase: The tile object closest to the given pixel position.
+        """
+        world_id = id(world)
+
+        if world_id not in cls._position_pixel_cache:
+            # Compute and cache the pixel positions for all tiles in the world
+            position_pixel_dict = cls.get_position_pixel_dict(world)
+            cls._position_pixel_cache[world_id] = position_pixel_dict
+            cls._position_pixel_list_cache[world_id] = list(position_pixel_dict.items())
+
+        # Find the tile position with the smallest squared distance to the pixel
         nearest_pos = min(
-            cls.get_position_pixel_dict(world).items(),
-            key=lambda item: math.dist(pixel_position, item[1]),
+            cls._position_pixel_list_cache[world_id],
+            key=lambda item: (item[1][0] - pixel_position[0]) ** 2 + (item[1][1] - pixel_position[1]) ** 2
         )[0]
+
         return cls.from_position(nearest_pos, world)
 
     @staticmethod

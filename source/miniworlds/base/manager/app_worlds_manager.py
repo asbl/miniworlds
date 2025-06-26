@@ -88,7 +88,7 @@ class WorldsManager:
 
         # Trigger world setup and state updates
         world.on_change()
-        world.on_setup()
+        world.event_manager.setup_world()
 
         world.camera.enable_resize()
 
@@ -102,6 +102,7 @@ class WorldsManager:
         # Resize the application window layout
         self.app.resize()
         return world
+
 
     def _deactivate_world(self, world: "base_world.BaseWorld"):
         world.stop()
@@ -120,7 +121,7 @@ class WorldsManager:
         if reset:
             world.reset()
         if setup:
-            world.on_setup()
+            world.event_handler.setup_world()
         world.background.set_dirty("all", 2)
         world.start_listening()
 

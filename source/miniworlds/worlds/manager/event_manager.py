@@ -26,12 +26,14 @@ class EventManager:
     setup = False
 
     def __init__(self, world):
+        self.world = world
         self.definition = event_definition.EventDefinition()
         self.registry = event_registry.EventRegistry(world, self.definition)
         self.registry.setup()
         self.handler = event_handler.EventHandler(world, self.registry)
         self.focus_actor: Optional[actor_mod.Actor] = None
         self._last_focus_actor = None
+        self._setup_completed = False
 
     def act_all(self):
         self.handler.act_all()
@@ -59,3 +61,8 @@ class EventManager:
 
     def update(self):
         self.handler.executed_events.clear()
+
+    def setup_world(self):
+        if hasattr(self.world, "setup_world") and not self._setup_completed:
+            self.world.on_setup()
+            self._setup_completed = True

@@ -24,8 +24,8 @@ class EventHandler:
         # Dispatch map for fast event routing
         self._event_dispatch_map = {}
         self._key_event_prefixes = ()
-
         self._init_event_dispatch_map()
+
 
     def _init_event_dispatch_map(self):
         """
