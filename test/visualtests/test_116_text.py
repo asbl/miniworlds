@@ -14,6 +14,7 @@ class Test116(unittest.TestCase):
 
                 # topleft at 10, 10
                 t1 = Text.from_topleft((10,10), text = "1: topleft")
+                print(t1, t1.costume, t1.costumes)
                 t1.font_size = 50
                 
                 # centered at 100, 50

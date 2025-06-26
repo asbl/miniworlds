@@ -63,6 +63,6 @@ class EventManager:
         self.handler.executed_events.clear()
 
     def setup_world(self):
-        if hasattr(self.world, "setup_world") and not self._setup_completed:
+        if hasattr(self.world, "on_setup") and not self._setup_completed:
             self.world.on_setup()
             self._setup_completed = True

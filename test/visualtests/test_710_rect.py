@@ -23,6 +23,8 @@ class Test710(unittest.TestCase):
                 Rectangle((10,100), 180, 80)
                 r = Rectangle(center, 180, 80)
                 r.turn_left(45)
+                print(r.position, r.costume)
+                print(r.costume.get_image())
 
                 # R2
                 world.default_fill_color = (255,0,0,100)

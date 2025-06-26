@@ -28,7 +28,6 @@ class TextCostume(costume.Costume):
             self.border,
         ]
         
-
     def _update_draw_shape(self):
         super()._update_draw_shape()
         """Sets self.size by costume.font_size"""

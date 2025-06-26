@@ -1097,19 +1097,18 @@ class World(world_base.WorldBase):
         wait = max(0, (1 / self.fps) - elapsed)
         await asyncio.sleep(wait)
         
-
     def _update_all_costumes(self):
-        """updates costumes for all actors on the world"""
-        [
-            actor.costume.update()
-            for actor in self.reload_costumes_queue
-            if actor.costume
-        ]
-        self.reload_costumes_queue = []
-        # Dynamic actors are updated every frame
-        # All other actors are updated when they are created.
+        """Updates the costumes of all actors in the world."""
+
+        for actor in self.reload_costumes_queue:
+            if actor.costume:
+                actor.costume.update()
+        self.reload_costumes_queue.clear()
+
         if hasattr(self, "dynamic_actors"):
-            [actor.costume.update() for actor in self.dynamic_actors if actor.costume]
+            for actor in self.dynamic_actors:
+                if actor.costume:
+                    actor.costume.update()
 
     def _act_all(self):
         """Overwritten in subclasses, e.g. physics_world"""

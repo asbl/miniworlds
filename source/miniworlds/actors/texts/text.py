@@ -123,3 +123,6 @@ class Text(actor.Actor):
     @value.setter
     def value(self, new_value):
         self.set_text(new_value)
+
+    def get_costume_class(self) -> type["costume_mod.Costume"]:
+        return text_costume.TextCostume

@@ -569,9 +569,16 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
 
     @property
     def costume(self) -> costume_mod.Costume:
-        """Gets the costume of actor"""
-        if hasattr(self, "costume_manager") and self.costume_manager is not None:
-            return self.costume_manager.get_actual_appearance()
+        """Gets the costume of the actor, if available."""
+        cm = getattr(self, "costume_manager", None)
+        if cm is not None: # not None instead of if cm:, because len(cm) can be zero
+            return cm.get_actual_appearance()
+
+    def has_costume(self):
+        cm = getattr(self, "costume_manager", None)
+        if not cm or not cm.has_appearance:
+            return False
+
 
     @costume.setter
     def costume(self, value):
