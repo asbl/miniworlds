@@ -28,6 +28,7 @@ class TiledCameraManager(camera_manager.CameraManager):
             value (int): New width in tiles.
         """
         self._set_width(value)
+        self.dirty = True
 
     @property
     def height(self) -> int:
@@ -46,6 +47,7 @@ class TiledCameraManager(camera_manager.CameraManager):
             value (int): New height in tiles.
         """
         self._set_height(value)
+        self.dirty = True
 
     @property
     def topleft(self) -> tuple[int, int]:
@@ -67,6 +69,7 @@ class TiledCameraManager(camera_manager.CameraManager):
             value (tuple): Tile coordinates for top-left corner.
         """
         self._set_topleft(value)
+        self.dirty = True
 
     def get_rect(self) -> pygame.Rect:
         """

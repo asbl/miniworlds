@@ -67,7 +67,7 @@ class WorldBase(ABC):
         pass
 
     def blit_surface_to_window_surface(self):
-        self._app.window.surface.blit(self.surface, self.camera.get_screen_rect())
+        self._app.window.surface.blit(self.surface, self.camera.screen_rect)
 
     def remove(self, actor):
         """

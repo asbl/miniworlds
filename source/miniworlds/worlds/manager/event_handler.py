@@ -92,7 +92,7 @@ class EventHandler:
         registered_events = self.event_registry.registered_events[event].copy()
         for method in registered_events:
             if type(data) in [list, str, tuple]:
-                if type(data) == tuple and not self.world.camera.get_screen_rect().collidepoint(data):
+                if type(data) == tuple and not self.world.camera.screen_rect.collidepoint(data):
                     return
                 data = [data]
             method_caller.call_method(method, data, allow_none=False)

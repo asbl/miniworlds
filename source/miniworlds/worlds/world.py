@@ -1074,7 +1074,6 @@ class World(world_base.WorldBase):
             self.event_manager.update()
             return
 
-
         start = 0
         if self.is_running or self.frame == 0:
             start = time.perf_counter()
@@ -1090,6 +1089,7 @@ class World(world_base.WorldBase):
             # update all costumes on current background
             self._update_all_costumes()
             self._tick_timed_objects()
+            self.camera.update()
         self.frame += 1
         #self.clock.tick(self.fps)
         self.event_manager.update()

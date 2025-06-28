@@ -134,7 +134,7 @@ class SingleWidget(widget_base.BaseWidget):
 
     @property
     def position(self):
-        return self.position_manager.get_position()
+        return self.position_manager.position
 
     @position.setter
     def position(self, value):
@@ -143,7 +143,7 @@ class SingleWidget(widget_base.BaseWidget):
 
     @property
     def topleft(self):
-        return self.position_manager.get_position()
+        return self.position_manager.position
 
     @topleft.setter
     def topleft(self, value):
