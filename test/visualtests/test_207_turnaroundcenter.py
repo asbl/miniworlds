@@ -25,6 +25,7 @@ class Test207(unittest.TestCase):
                 tkn.size= (10, 100)
                 assert(tkn.position == (50,50))
                 assert(tkn.center == (55,100))
+                print(tkn.rect)
                 assert(tkn.rect == pygame.Rect(50,50,10,100))
 
                 tkn2 = Actor(origin = "center")

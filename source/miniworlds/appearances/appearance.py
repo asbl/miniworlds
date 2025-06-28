@@ -77,6 +77,7 @@ class Appearance(metaclass=MetaAppearance):
         self.loop = False
         self.animation_length = 0
         self._animation_start_frame = 0
+        self._cached_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
 
     def _set_defaults(
         self,
@@ -899,7 +900,12 @@ class Appearance(metaclass=MetaAppearance):
             return None
 
     def get_rect(self):
-        return self.image.get_rect()
+        frame = self.actor.world.frame
+        if frame < self._cached_rect[0]:
+            return self._cached_rect[1]
+        rect = self.image.get_rect()
+        self._cached_rect = (frame, rect)
+        return rect
 
     def draw(self, source, position, width, height):
         if isinstance(source, str):

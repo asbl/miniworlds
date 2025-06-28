@@ -17,7 +17,9 @@ class CameraManager(pygame.sprite.Sprite):
         self._topleft: Tuple[int, int] = (0, 0)        # Camera top-left in world coordinates
         self._world_size_x = view_x
         self._world_size_y = view_y
-        self.view = (view_x, view_y)
+        self.view: Tuple = (view_x, view_y)
+        self._cached_rect = self.get_rect()
+        self._cached_screen_rect = self.get_screen_rect()
 
         # Actor tracking
         self.view_actors_last_frame: Set = set()
@@ -29,6 +31,8 @@ class CameraManager(pygame.sprite.Sprite):
         self._resize = True
         self._disable_resize = False
         self._strict = True  # Constrain camera inside world
+        self.dirty = False
+        
 
     # --- Resize Control ---
     def disable_resize(self):
@@ -52,6 +56,7 @@ class CameraManager(pygame.sprite.Sprite):
             self._world_size_x = value
         self.view = (value, self.view[1])
         self._resize = True
+        self.dirty = True
         self.reload_camera()
 
     @property
@@ -67,6 +72,7 @@ class CameraManager(pygame.sprite.Sprite):
             self._world_size_y = value
         self.view = (self.view[0], value)
         self._resize = True
+        self.dirty = True
         self.reload_camera()
 
     @property
@@ -77,6 +83,7 @@ class CameraManager(pygame.sprite.Sprite):
     def world_size_x(self, value: int):
         self.view = (min(self.view[0], value), self.view[1])
         self._world_size_x = value
+        self.dirty = True
         self.reload_camera()
 
     @property
@@ -87,6 +94,7 @@ class CameraManager(pygame.sprite.Sprite):
     def world_size_y(self, value: int):
         self.view = (self.view[0], min(self.view[1], value))
         self._world_size_y = value
+        self.dirty = True
         self.reload_camera()
 
     @property
@@ -105,6 +113,7 @@ class CameraManager(pygame.sprite.Sprite):
     @x.setter
     def x(self, value: int):
         self.topleft = (value, self._topleft[1])
+        self.dirty = True
 
     @property
     def y(self) -> int:
@@ -113,6 +122,7 @@ class CameraManager(pygame.sprite.Sprite):
     @y.setter
     def y(self, value: int):
         self.topleft = (self._topleft[0], value)
+        self.dirty = True
 
     @property
     def topleft(self) -> Tuple[int, int]:
@@ -128,6 +138,7 @@ class CameraManager(pygame.sprite.Sprite):
         if value != self._topleft:
             self._topleft = value
             self.reload_actors_in_view()
+        self.dirty = True
 
     def _limit_x(self, value: int) -> int:
         return max(0, min(value, self._world_size_x - self.view[0]))
@@ -138,7 +149,22 @@ class CameraManager(pygame.sprite.Sprite):
     # --- Geometry Helpers ---
     @property
     def rect(self) -> pygame.Rect:
-        return self.get_rect()
+        if self.dirty:
+            return self.get_rect()
+        else:
+            return self._cached_rect
+
+    @property
+    def screen_rect(self) -> pygame.Rect:
+        if self.dirty:
+            return self.get_screen_rect()
+        else:
+            return self._cached_screen_rect
+
+
+    def cache_rects(self):
+        self._cached_rect = self.get_rect()
+        self._cached_screen_rect = self.get_screen_rect()
 
     def get_rect(self) -> pygame.Rect:
         return pygame.Rect(*self._topleft, *self.view)
@@ -164,15 +190,20 @@ class CameraManager(pygame.sprite.Sprite):
         for actor in self.get_actors_in_view():
             actor.dirty = 1  # Mark for re-rendering
 
-    def get_actors_in_view(self) -> Set["actor_mod.Actor"]:
-        """Returns all actors currently visible in the camera's view."""
-        if self.world.frame == self._view_update_frame:
-            return self._view_active_actors
+    def get_actors_in_view(self):
+        # Collect all actors and compute their global rects only once
+        actor_rect_pairs = [
+            (actor, actor.position_manager.get_global_rect())
+            for actor in self.world.actors
+        ]
 
+        # Keep only actors whose rects intersect with the current view rect
         current_frame_actors = {
-            actor for actor in self.world.actors if self.is_actor_in_view(actor)
+            actor for actor, rect in actor_rect_pairs
+            if self.rect.colliderect(rect)
         }
 
+        # Update internal state as usual
         self.view_actors_last_frame = self._view_actors_actual_frame
         self._view_actors_actual_frame = current_frame_actors
         self._view_active_actors = current_frame_actors.union(self.view_actors_last_frame)
@@ -198,7 +229,7 @@ class CameraManager(pygame.sprite.Sprite):
             self.topleft = (0, 0)
 
     def is_in_screen(self, pixel: Tuple[int, int]) -> bool:
-        return bool(pixel) and self.get_screen_rect().collidepoint(pixel)
+        return bool(pixel) and self.screen_rect.collidepoint(pixel)
 
     # --- Internal System Calls ---
     def reload_camera(self):
@@ -213,3 +244,8 @@ class CameraManager(pygame.sprite.Sprite):
         """Reset the internal actor-view cache."""
         self._view_actors_actual_frame.clear()
         self._view_update_frame = -1
+
+    def update(self):
+        if self.dirty:
+            self.cache_rects()
+            self.dirty = False

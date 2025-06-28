@@ -574,10 +574,12 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         if cm is not None: # not None instead of if cm:, because len(cm) can be zero
             return cm.get_actual_appearance()
 
-    def has_costume(self):
+    def has_costume(self) -> bool:
         cm = getattr(self, "costume_manager", None)
         if not cm or not cm.has_appearance:
             return False
+        else:
+            return True
 
 
     @costume.setter
@@ -1009,7 +1011,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
     @property
     def x(self) -> float:
         """The x-value of a actor"""
-        return self.position_manager.get_position()[0]
+        return self.position_manager.position[0]
 
     @x.setter
     def x(self, value: float):
@@ -1018,7 +1020,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
     @property
     def y(self) -> float:
         """The y-value of a actor"""
-        return self.position_manager.get_position()[1]
+        return self.position_manager.position[1]
 
     @y.setter
     def y(self, value: float):
@@ -2396,7 +2398,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
     @property
     def position(self) -> Tuple[float, float]:
         """The position of the actor as Position(x, y)"""
-        return self.position_manager.get_position()
+        return self.position_manager.position
 
     @position.setter
     def position(self, value: Tuple[float, float]):

@@ -23,6 +23,13 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         self._scaled_size: Tuple[int, int] = (1, 1)
 
     def get_global_rect(self) -> pygame.Rect:
+        """Returns the global rect of the actor in the world space.
+        
+        This rect may lie outside the visible screen.
+
+        Returns:
+            pygame.Rect: A rect with the actor's global coordinates.
+        """
         size = self.get_size()
         rect = (
             self.actor.costume.get_rect()

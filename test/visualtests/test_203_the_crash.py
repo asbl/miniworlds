@@ -16,10 +16,12 @@ class Test203(unittest.TestCase):
                     robot1.add_costume("images/robo_green.png")
                     robot1.costume.orientation = - 90
                     robot1.direction = "right"
+                    print("robot 1", robot1.position, robot1.rect)
                     robot2 = Robot(position=(4, 0))
                     robot2.add_costume("images/robo_yellow.png")
                     robot2.costume.orientation = - 90
                     robot2.direction = "left"
+                    print("robot 2", robot2.position, robot2.rect)
                     self.add_background("images/water.png")
                     self.init_test()
 
@@ -32,6 +34,7 @@ class Test203(unittest.TestCase):
 
                 def act(self):
                     self.move()
+                    print(self, "moved to", self.position, self.rect, self.costume.image)
                     other = self.detect(actors=Robot)
                     if other:
                         print("sensed", self, other, self.world.actors)

@@ -31,6 +31,8 @@ class Positionmanager:
         self.is_blockable = False
         self.is_blocking = False
         self._stored_origin = (0, 0)
+        self._cached_global_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
+        self._cached_local_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
 
     @property
     def origin(self):
@@ -50,14 +52,14 @@ class Positionmanager:
 
     def switch_origin(self, value: str):
         if self.origin == "center" and value == "topleft":
-            self.set_position(self._shift_center_to_topleft(self.get_position()))
+            self.set_position(self._shift_center_to_topleft(self.position))
             self.origin = "topleft"
         elif self.origin == "topleft" and value == "center":
-            self.set_position(self._shift_topleft_to_center(self.get_position()))
+            self.set_position(self._shift_topleft_to_center(self.position))
             self.origin = "center"
 
     def move_vector(self, vector: "world_vector.Vector") -> "actor_mod.Actor":
-        position = self.get_position()
+        position = self.position
         position = vector.add_to_position(position)
         self.set_position(position)
         return self.actor
@@ -70,7 +72,10 @@ class Positionmanager:
         Returns:
             pygame.Rect: A rect with the actor's global coordinates.
         """
-        print("has costume", self.actor.costume_manager.has_costume)
+        frame = self.actor.world.frame
+        if frame < self._cached_global_rect[0]:
+            return self._cached_global_rect
+
         if self.actor.costume_manager.has_costume:
             costume = self.actor.costume
             rect = costume.get_rect()
@@ -82,7 +87,7 @@ class Positionmanager:
             rect.center = self.get_center()
         elif self.origin == "topleft":
             rect.topleft = self.get_topleft()
-        print("rect", rect)
+        self._cached_global_rect = (frame, rect)
         return rect
 
     def get_local_rect(self) -> pygame.Rect:
@@ -92,6 +97,10 @@ class Positionmanager:
         The local rect is derived from the global position and transformed
         into the camera's coordinate system.
         """
+        frame = self.actor.world.frame
+        if frame < self._cached_local_rect[0]:
+            return self._cached_local_rect
+        
         rect = self.get_global_rect()
 
         camera = self.actor.world.camera
@@ -101,7 +110,7 @@ class Positionmanager:
             rect.topleft = camera.get_local_position(self.get_topleft())
         else:
             raise ValueError(f"Unsupported origin type: {self.origin!r}")
-        
+        self._cached_local_rect = (frame, rect)
         return rect
 
     def get_screen_rect(self) -> pygame.Rect:
@@ -123,29 +132,50 @@ class Positionmanager:
 
         return rect
 
-    
     def get_direction(self):
         direction = (self._direction + 180) % 360 - 180
         return direction
 
-    def set_direction(self, direction: Union[int, float, str, float]):
-        if type(direction) not in [
-            int,
-            float,
-            str,
-            world_vector.Vector,
-        ]:
+    def set_direction(self, direction: Union[int, float, str, "world_vector.Vector"]):
+        """
+        Set the actor's current facing direction and trigger a visual update if changed.
+
+        This method accepts various direction representations such as:
+        - Numerical degrees (int or float)
+        - String identifiers (e.g., "left", "right", "up", "down")
+        - Vector instances representing direction
+
+        The direction is validated, stored, and compared to the previous direction.
+        If a change is detected, the actor's costume is rotated accordingly.
+        The origin is temporarily preserved during the transformation to avoid position drift.
+
+        Parameters:
+            direction (int | float | str | Vector): 
+                The new direction to apply.
+
+        Raises:
+            ValueError: If the provided direction type is unsupported.
+
+        Returns:
+            Union[int, float, Vector]: 
+                The validated direction that was set.
+        """
+        if type(direction) not in [int, float, str, world_vector.Vector]:
             raise ValueError(
-                f"Direction must be int, float or Vector but is {type(direction)}"
+                f"Direction must be int, float, str, or Vector but is {type(direction)}"
             )
+        
         direction = self.validate_direction(direction)
         self.store_origin()
         self.last_direction = self.get_direction()
         self._direction = direction
+
         if self.last_direction != self.get_direction():
             self.actor.costume.rotated()
+
         self.restore_origin()
         return self._direction
+
 
     def get_size(self):
         return self._size
@@ -229,10 +259,6 @@ class Positionmanager:
         shift_y = self.get_size()[1] / 2.0
         return (value[0] + shift_x, value[1] + shift_y)
 
-    def get_position(self) -> Tuple[float, float]:
-        """gets center position"""
-        return self.position
-
     def set_position(self, value: Tuple[float, float]) -> "actor_mod.Actor":
         """sets topleft position
 
@@ -245,14 +271,13 @@ class Positionmanager:
         Returns:
             "actor_mod.Actor": The current actor
         """
-        old_position = self.get_position()
+        old_position = self.position
         self.last_position = old_position
         self.position = value
-        if tuple(int(x) for x in self.last_position) != tuple(int(x) for x in self.get_position()):
+        if tuple(int(x) for x in self.last_position) != tuple(int(x) for x in self.position):
             self.actor.dirty = 1
 
         return self
-
 
     def store_origin(self):
         if self.origin == "center":
@@ -315,8 +340,7 @@ class Positionmanager:
 
         direction_raw = self.get_direction()
         direction = direction_raw if distance >= 0 else -direction_raw
-        destination = self.actor.sensor_manager.get_destination(self.get_position(), direction, distance)
-
+        destination = self.actor.sensor_manager.get_destination(self.position, direction, distance)
         if self.is_blockable:
             found_actors = self.actor.sensor_manager.detect_actors_at_destination(destination)
             if not any(actor.is_blocking for actor in found_actors):
@@ -330,7 +354,7 @@ class Positionmanager:
     def move_towards_position(
         self, position: Tuple[float, float], distance=1
     ) -> "actor_mod.Actor":
-        if self.__class__.is_close(self.get_position(), position):
+        if self.__class__.is_close(self.position, position):
             return self.actor
         else:
             direction = self.direction_from_two_points(self.actor.position, position)
@@ -459,7 +483,7 @@ class Positionmanager:
 
     @property
     def x(self) -> float:
-        return self.get_position()[0]
+        return self.get_position[0]
 
     @x.setter
     def x(self, value) -> float:
@@ -467,7 +491,7 @@ class Positionmanager:
 
     @property
     def y(self) -> float:
-        return self.get_position()[1]
+        return self.get_position[1]
 
     @y.setter
     def y(self, value: float):
@@ -561,6 +585,3 @@ class Positionmanager:
             True if both the x and y coordinates differ by less than 'error'.
         """
         return abs(pos1[0] - pos2[0]) < error and abs(pos1[1] - pos2[1]) < error
-
-    def get_screen_position(self, coordinates):
-        return (coordinates[0] + self.actor.world.topleft[0], coordinates[1] + self.actor.world.topleft[1])
