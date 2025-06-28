@@ -180,3 +180,11 @@ class Background(appearance_mod.Appearance):
         """
         size = (self.parent.camera.width, self.parent.camera.height)
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), self.border]
+
+    def get_rect(self):
+        frame = self.world.frame if self.world else 0
+        if frame < self._cached_rect[0]:
+            return self._cached_rect[1]
+        rect = self.image.get_rect()
+        self._cached_rect = (frame, rect)
+        return rect

@@ -119,3 +119,12 @@ class Costume(appear.Appearance):
             and self.actor.collision_type == "mask"
         ):
             self.actor.mask = pygame.mask.from_surface(self.actor.image, threshold=100)
+
+
+    def get_rect(self):
+        frame = self.actor.world.frame if self.actor else 0
+        if frame < self._cached_rect[0]:
+            return self._cached_rect[1]
+        rect = self.image.get_rect()
+        self._cached_rect = (frame, rect)
+        return rect
