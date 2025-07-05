@@ -203,7 +203,17 @@ class World(world_base.WorldBase):
         self.app.event_manager.to_event_queue("setup", None)
         self.app.worlds_manager.add_topleft(self)
 
+    def add_right(self, world, size = 100):
+        """
+        Alias of add_world_right
+        """
+        return self.add_world_right(world, size)
 
+    def add_bottom(self, world, size = 100):
+        """
+        Alias of add_world_bottom
+        """
+        return self.add_world_bottom(world, size)
 
     def add_world_right(self, world: "World", size: int = 100):
         """Adds a world to the right of the current world.
@@ -1070,10 +1080,8 @@ class World(world_base.WorldBase):
         """
 
         if not self.is_running and self.frame != 0:
-            self.frame += 1
             self.event_manager.update()
             return
-
         start = 0
         if self.is_running or self.frame == 0:
             start = time.perf_counter()

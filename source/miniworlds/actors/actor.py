@@ -1087,7 +1087,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
     def center(self, value: Tuple[float, float]):
         self.position_manager.set_center(value)
 
-    def move(self, distance: int = 0):
+    def move(self, distance: int = 0, direction: int = 0):
         """Moves actor *distance* steps in current direction
 
         .. image:: ../_images/move.png
@@ -1111,6 +1111,8 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
                         if self.detecting_world():
                             self.move()
         """
+        if direction != 0:
+            self.position_manager.set_direction(direction)
         return self.position_manager.move(distance)
 
     def move_vector(self, vector):

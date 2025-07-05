@@ -11,6 +11,7 @@ class TiledCameraManager(camera_manager.CameraManager):
     Converts tile coordinates into pixel-based camera viewports.
     """
 
+
     @property
     def width(self) -> int:
         """
@@ -72,16 +73,7 @@ class TiledCameraManager(camera_manager.CameraManager):
         self.dirty = True
 
     def get_rect(self) -> pygame.Rect:
-        """
-        Returns:
-            pygame.Rect: The full camera viewport in pixel coordinates.
-        """
-        return pygame.Rect(
-            self.topleft[0],
-            self.topleft[1],
-            self.width,
-            self.height,
-        )
+        return pygame.Rect(*self.topleft, self.width, self.height)
 
     def from_actor(self, actor: "actor_mod.Actor") -> None:
         """
@@ -94,7 +86,6 @@ class TiledCameraManager(camera_manager.CameraManager):
             position = actor.position
             width = self.view[0] // 2
             height = self.view[1] // 2
-
             self.topleft = (
                 position[0] - width,
                 position[1] - height,
@@ -126,3 +117,7 @@ class TiledCameraManager(camera_manager.CameraManager):
             return self.world_size_y - self.view[1]
         else:
             return value
+
+    def update(self):
+        self.reload_camera()
+        self.dirty = True

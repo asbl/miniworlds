@@ -8,6 +8,6 @@ class CircleSensor(shapes.Circle, sensor_base.SensorBase):
     The sensors is not visible and will not detect the actor itself.
     """
 
-    def __init__(self, actor: "actor_mod.Actor", distance):
-        shapes.Circle.__init__(self)
-        sensor_base.SensorBase.__init__(self, actor, distance)
+    def __init__(self, actor: "actor_mod.Actor", distance, **kwargs):
+        super().__init__(actor=actor, distance=distance, **kwargs)
+

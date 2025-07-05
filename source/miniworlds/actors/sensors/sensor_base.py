@@ -26,7 +26,7 @@ class SensorBase(actor_mod.Actor):
     def _get_from_args(self, args, kwargs):
         actor = args[0] if len(args) > 0 else None
         distance = args[1] if len(args) > 1 else 0
-        positioning  = args[2] if len(args) > 2 else "relative "
+        positioning  = args[2] if len(args) > 2 else "relative"
         direction = args[3] if len(args) > 3 else 0
 
         actor = kwargs.pop("actor") if "actor" in kwargs else actor
@@ -45,6 +45,7 @@ class SensorBase(actor_mod.Actor):
         return actor, distance, positioning , direction
 
     def act(self):
+        
         if not self.watch_actor:
             self.remove()
         if self.positioning  == "relative":
