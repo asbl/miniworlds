@@ -1,3 +1,6 @@
 [submodule "examples"]
 	path = examples
 	url = git@github.com:asbl/miniworlds_examples.git
+[submodule "physics"]
+	path = physics
+	url = git@github.com:asbl/miniworlds-physics.git
