@@ -44,4 +44,4 @@ def call_method(method: callable, arguments: Optional[tuple], allow_none=True):
                 method(arguments)
     except (ReferenceError, AttributeError) as e:
         # do nothing, if object does not exist.
-        raise Exception("Method caller threw an error", e)
+        raise Exception("Method caller threw an error", method, arguments, allow_none) from e

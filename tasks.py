@@ -47,7 +47,12 @@ def debug_x11(c):
 @task
 def build_local(c):
     """Lokalen Build der source/ ausführen"""
-    c.run("cd source && python install -e .")
+    c.run("cd source && pip install -e .")
+
+@task
+def build_physics(c):
+    """Lokalen Build der source/ ausführen"""
+    c.run("cd physics/source && pip install -e .")
 
 @task
 def make_docs(c):

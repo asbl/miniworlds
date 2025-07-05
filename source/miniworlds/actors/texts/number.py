@@ -79,7 +79,7 @@ class Number(text.Text):
 
     def inc(self):
         """Increases the number by one"""
-        set_textself.number += 1
+        self.number += 1
         self.update_text()
 
     def update_text(self):

@@ -80,29 +80,31 @@ class WorldsManager:
             world.camera.height = size or world.camera.height
             world.camera.width = self.app.window.width
 
+        
         world.camera.disable_resize()
+
+        frame = self.app.running_world.frame
+        print("add world", self.app.running_world.frame)
 
         # Register world
         self.worlds.append(world)
         app.App.running_worlds.append(world)
-
+        
         # Trigger world setup and state updates
         world.on_change()
+        self.app.resize() # must be called before setup
         world.event_manager.setup_world()
 
-        world.camera.enable_resize()
-
         # Mark all worlds and their actors as dirty (to trigger redraw)
-        for w in self.worlds:
-            w.dirty = 1
+        world.camera.enable_resize()
+        
         for w in self.app.running_worlds:
             for actor in w.actors:
                 actor.dirty = 1
-
-        # Resize the application window layout
-        self.app.resize()
-        return world
-
+        if frame != 0:
+            for w in self.worlds:
+                w.dirty = 1
+        return world      
 
     def _deactivate_world(self, world: "base_world.BaseWorld"):
         world.stop()

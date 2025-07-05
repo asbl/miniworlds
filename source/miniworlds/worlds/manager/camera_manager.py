@@ -13,7 +13,7 @@ class CameraManager(pygame.sprite.Sprite):
         self.world = world
 
         # Viewport settings
-        self.screen_topleft: Tuple[int, int] = (0, 0)  # Where the camera starts on the screen
+        self.screen_topleft: Tuple[int, int] = (0, 0)  # Where the camera starts on the screen (usually (0,0) )
         self._topleft: Tuple[int, int] = (0, 0)        # Camera top-left in world coordinates
         self._world_size_x = view_x
         self._world_size_y = view_y
@@ -161,6 +161,9 @@ class CameraManager(pygame.sprite.Sprite):
         else:
             return self._cached_screen_rect
 
+    @property
+    def center(self):
+        return (self.topleft[0]+ self.view[0] / 2, self.topleft[1]+ self.view[1] / 2)
 
     def cache_rects(self):
         self._cached_rect = self.get_rect()
@@ -175,15 +178,15 @@ class CameraManager(pygame.sprite.Sprite):
     def get_screen_position(self, pos: Tuple[int, int]) -> Tuple[int, int]:
         """Converts global world position to screen position."""
         return (
-            self.screen_topleft[0] + pos[0] - self._topleft[0],
-            self.screen_topleft[1] + pos[1] - self._topleft[1]
+            self.screen_topleft[0] + pos[0] - self.topleft[0],
+            self.screen_topleft[1] + pos[1] - self.topleft[1]
         )
 
     def get_local_position(self, pos: Tuple[int, int]) -> Tuple[int, int]:
-        return pos[0] - self._topleft[0], pos[1] - self._topleft[1]
+        return pos[0] - self.topleft[0], pos[1] - self.topleft[1]
 
     def get_global_coordinates_for_world(self, pos: Tuple[int, int]) -> Tuple[int, int]:
-        return pos[0] + self._topleft[0], pos[1] + self._topleft[1]
+        return pos[0] + self.topleft[0], pos[1] + self.topleft[1]
 
     # --- Actor Handling ---
     def reload_actors_in_view(self):
