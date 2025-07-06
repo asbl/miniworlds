@@ -200,9 +200,9 @@ class CollisionManager:
         )
         for method in methods:
             # get detect world method from actor
-            is_on_the_world = method.__self__.detect_world()
+            is_inside_world = method.__self__.is_inside_world()
             # call listener if no world detected
-            if is_on_the_world:
+            if is_inside_world:
                 method_caller.call_method(method, None)
         del methods
 
@@ -218,8 +218,8 @@ class CollisionManager:
         )
         for method in methods:
             # get detect world method from actor
-            is_not_in_the_world = not method.__self__.detect_world()
+            is_not_inside_world = not method.__self__.is_inside_world()
             # call listener if no world detected
-            if is_not_in_the_world:
+            if is_not_inside_world:
                 method_caller.call_method(method, None)
         del methods

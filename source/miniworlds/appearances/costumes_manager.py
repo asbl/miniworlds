@@ -1,10 +1,12 @@
-from typing import Union, List, cast
+from typing import Union, List, cast, TYPE_CHECKING
 
 import miniworlds.appearances.appearance as appearance_mod
 import miniworlds.appearances.appearances_manager as appearances_manager
 import miniworlds.appearances.costume as costume_mod
-import miniworlds.actors.actor as actor_mod
 
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
+    import miniworlds.actors.actor as actor_mod
 
 class CostumesManager(appearances_manager.AppearancesManager):
 

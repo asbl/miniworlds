@@ -27,7 +27,7 @@ class Test301(unittest.TestCase):
                 robo.direction = "right"
                 @robo.register
                 def act(self):
-                    if self.detect_world():
+                    if self.is_inside_world():
                         self.move()
                 @robo.register
                 def on_not_detecting_world(self):

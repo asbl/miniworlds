@@ -75,6 +75,9 @@ class TiledCameraManager(camera_manager.CameraManager):
     def get_rect(self) -> pygame.Rect:
         return pygame.Rect(*self.topleft, self.width, self.height)
 
+    def get_world_rect(self) -> pygame.Rect:
+        return pygame.Rect(*self._topleft, self.world_size_x * self.world.tile_size, self.world_size_y * self.world.tile_size) 
+
     def from_actor(self, actor: "actor_mod.Actor") -> None:
         """
         Centers the camera on the given actor's position.

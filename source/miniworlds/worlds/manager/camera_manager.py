@@ -149,6 +149,9 @@ class CameraManager(pygame.sprite.Sprite):
     # --- Geometry Helpers ---
     @property
     def rect(self) -> pygame.Rect:
+        """
+        This rect has topleft position at (0,0), regardless of world position in layout
+        """
         if self.dirty:
             return self.get_rect()
         else:
@@ -156,10 +159,20 @@ class CameraManager(pygame.sprite.Sprite):
 
     @property
     def screen_rect(self) -> pygame.Rect:
+        """
+        This rect depends on the position of the world in the layout
+        """
         if self.dirty:
             return self.get_screen_rect()
         else:
             return self._cached_screen_rect
+
+    @property
+    def world_rect(self) -> pygame.Rect:
+        """
+        This rect has topleft at (0,0) and widht and height of the complete world
+        """
+        return self.get_world_rect()
 
     @property
     def center(self):
@@ -174,6 +187,9 @@ class CameraManager(pygame.sprite.Sprite):
 
     def get_screen_rect(self) -> pygame.Rect:
         return pygame.Rect(*self.screen_topleft, *self.view)
+
+    def get_world_rect(self) -> pygame.Rect:
+        return pygame.Rect(*self._topleft, self.world_size_x, self.world_size_y) 
 
     def get_screen_position(self, pos: Tuple[int, int]) -> Tuple[int, int]:
         """Converts global world position to screen position."""

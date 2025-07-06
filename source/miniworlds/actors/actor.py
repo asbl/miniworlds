@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union, List, Tuple, Optional, cast, Type
+from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
 import pygame.rect
 import collections
 import sys
@@ -8,7 +8,6 @@ import miniworlds.base.app as app
 import miniworlds.appearances.appearance as appearance
 import miniworlds.appearances.costume as costume_mod
 import miniworlds.appearances.costumes_manager as costumes_manager
-import miniworlds.worlds.world as world_mod
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 import miniworlds.worlds.manager.position_manager as actor_position_manager
 import miniworlds.tools.actor_inspection as actor_inspection
@@ -23,6 +22,10 @@ from miniworlds.base.exceptions import (
     Missingworldsensor,
     MissingPositionManager,
 )
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
+
 
 
 class Meta(type):
@@ -1590,9 +1593,9 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         """Is the actor colliding with a static rect?"""
         return self.sensor_manager.detect_rect(rect)
 
-    def detect_world(self):
-        """Is the actor colliding with a static rect?"""
-        return self.sensor_manager.detect_rect(self.world.rect)
+    def is_inside_world(self):
+        """Is the actor colliding with current ...."""
+        return self.sensor_manager.detect_rect(self.world.camera.get_world_rect())
 
     def bounce_from_actor(self, other: "Actor"):
         self.position_manager.bounce_from_actor(other)

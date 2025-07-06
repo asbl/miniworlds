@@ -1,16 +1,18 @@
 import abc
 from abc import abstractmethod
-from typing import Union, Tuple, List
+from typing import Union, Tuple, List, TYPE_CHECKING
 
 import miniworlds.appearances.managers.font_manager as font_manager
 import miniworlds.appearances.managers.image_manager as image_manager
 import miniworlds.appearances.managers.transformations_manager as transformations_manager
-import miniworlds.worlds.world as world
 import miniworlds.tools.binding as binding
 import miniworlds.tools.color as color_mod
 import numpy
 import pygame
 from miniworlds.base.exceptions import MiniworldsError
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
 
 
 class MetaAppearance(abc.ABCMeta):

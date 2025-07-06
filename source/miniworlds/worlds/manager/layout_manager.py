@@ -1,8 +1,11 @@
+import pygame
+
 class LayoutManager:
 
     def __init__(self, world, app):
         self.world = world  
         self.app = app  
+        self.docking_position = None  # Set in add_to_window
     
     def add_right(self, world: "World", size: int = 100):
         """Adds a world to the right of the current world.
@@ -53,3 +56,10 @@ class LayoutManager:
     @property
     def window_docking_position(self):
         return self.docking_position
+
+    def _add_to_window(self, app, dock, size: int = 100):
+        self.world._app = app
+        self.app = app
+        self.world._window = self.world._app.window
+        self.docking_position = dock
+        self.world._image = pygame.Surface((self.world.width, self.world.height))

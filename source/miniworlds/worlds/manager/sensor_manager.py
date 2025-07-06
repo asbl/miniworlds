@@ -1,15 +1,19 @@
 import math
-from typing import List, Union, Type, Optional, Tuple
+from typing import List, Union, Type, Optional, Tuple, TYPE_CHECKING
 import pygame
 import inspect
 
 import miniworlds.positions.rect as world_rect
 import miniworlds.positions.vector as world_vector
 import miniworlds.tools.actor_class_inspection as actor_class_inspection
-import miniworlds.worlds.world as world_mod
-import miniworlds.actors.actor as actor_mod
+
 
 import miniworlds.base.exceptions as exceptions
+import miniworlds.actors.actor as actor_mod
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
+    
 
 ActorFilterType = Union[str, "actor_mod.Actor", Type["actor_mod.Actor"], List["actor_mod.Actor"]]
 
