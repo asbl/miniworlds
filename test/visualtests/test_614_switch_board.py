@@ -27,7 +27,7 @@ class Test614(unittest.TestCase):
                         print("switch to world 2", self.frame)
                         world2 = World2(400, 600)
                         self.attach_world(world2)
-                        self.switch_world(world2)
+                        self.layout.switch_world(world2)
                         
                 
             class World2(World):

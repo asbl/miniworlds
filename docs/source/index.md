@@ -206,14 +206,14 @@ def on_setup(self):
     self.add_background("images/bg")
     self.background.set_mode(mode="textured", texture_size=(200, 200))
 
-world.toolbar = world.add_world_right(toolbar, size=180)
+world.toolbar = world.layout.add_right(toolbar, size=180)
 
 console = Console()
-world.console = world.add_world_bottom(console, size=100)
+world.console = world.layout.add_bottom(console, size=100)
 world.console.newline("You enter a new world")
 
 pager = PagerHorizontal(console)
-world.add_world_bottom(pager, size=60)
+world.layout.add_bottom(pager, size=60)
 
 def create_grass(pos):
     g = Actor(pos)

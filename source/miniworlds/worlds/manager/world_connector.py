@@ -127,7 +127,7 @@ class WorldConnector():
         if hasattr(self.actor, "on_setup") and not self.actor._was_setup:
             self.actor.on_setup()
             self.actor._was_setup = True
-            self.world.reload_costumes_queue.append(self.actor)
+            self.world.mainloop.reload_costumes_queue.append(self.actor)
 
         self.world.event_manager.register_events_for_actor(self.actor)
         self.world.on_new_actor(self.actor)
@@ -161,8 +161,8 @@ class WorldConnector():
         unregistered_methods = self.world.event_manager.unregister_instance(self.actor)
 
         # Remove from reload queue if present
-        if self in self.world.reload_costumes_queue:
-            self.world.background.reload_costumes_queue.remove(self)
+        if self in self.world.mainloop.reload_costumes_queue:
+            self.world.background.mainloop.reload_costumes_queue.remove(self)
 
         # Remove from dynamic actors if not static
         if not self.actor._static:
