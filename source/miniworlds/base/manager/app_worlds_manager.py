@@ -7,15 +7,14 @@ from miniworlds.base.exceptions import MiniworldsError
 if TYPE_CHECKING:
     import miniworlds.worlds.world as world_mod
     import miniworlds.actors.actor as actor_mod
-    import miniworlds.worlds.world_base as base_world
 
 class WorldsManager:
     def __init__(self, miniworlds_app: "app.App") -> None:
-        self.worlds: List["base_world.BaseWorld"] = []
+        self.worlds: List["worlds_mod.World"] = []
         self.total_width: int = 0
         self.total_height: int = 0
         self.app: "app.App" = miniworlds_app
-        self.topleft : base_world.BaseWorld|None  = None
+        self.topleft : "worlds_mod.World"|None  = None
         self.worlds_total_height: int = 0
         self.worlds_total_width: int = 0
 
@@ -38,8 +37,8 @@ class WorldsManager:
                 world.mainloop.blit_surface_to_window_surface()
                 
     def add_topleft(
-        self, new_world: "base_world.BaseWorld"
-    ) -> "base_world.BaseWorld":
+        self, new_world: "world_mod.World"
+    ) -> "world_mod.World":
         """Adds the topleft corner if it does not exist."""
         for world in self.worlds:
             if world.layout.docking_position == "top_left":
@@ -50,10 +49,10 @@ class WorldsManager:
 
     def add_world(
             self,
-            world: "base_world.BaseWorld",
+            world: "world_mod.World",
             dock: str,
             size: int | None = None
-    ) -> "base_world.BaseWorld":
+    ) -> "world_mod.World":
         """Adds a new world to the layout and initializes it at the given docking position.
 
         Args:
@@ -83,15 +82,17 @@ class WorldsManager:
             world.camera.screen_topleft = (0, self.app.window.height)
             world.camera.height = size or world.camera.height
             world.camera.width = self.app.window.width
+        elif dock == "top_left":
+            world.camera.screen_topleft = (0, 0)
+            #world.camera.height = world.camera.height
+            #world.camera.width = world.camera.width
 
-        
         world.camera.disable_resize()
-
         frame = self.app.running_world.frame
-        print("add world", self.app.running_world.frame)
 
         # Register world
-        self.worlds.append(world)
+        if world not in self.worlds:
+            self.worlds.append(world)
         app.App.running_worlds.append(world)
         
         # Trigger world setup and state updates
@@ -110,14 +111,14 @@ class WorldsManager:
                 w.dirty = 1
         return world      
 
-    def _deactivate_world(self, world: "base_world.BaseWorld"):
+    def _deactivate_world(self, world: "world_mod.World"):
         world.stop()
         world.stop_listening()
         world.app.event_manager.event_queue.clear()
         if world in app.App.running_worlds:
             app.App.running_worlds.remove(world)
 
-    def _activate_world(self, world: "base_world.BaseWorld", reset: bool, setup: bool):
+    def _activate_world(self, world: "world_mod.World", reset: bool, setup: bool):
         app.App.running_world = world
         app.App.running_worlds.append(world)
         world._app = self.app
@@ -140,9 +141,9 @@ class WorldsManager:
 
     def _replace_world_in_worlds_list(
             self,
-            old_world: "base_world.BaseWorld",
-            new_world: "base_world.BaseWorld",
-    ) -> "base_world.BaseWorld":
+            old_world: "world_mod.World",
+            new_world: "world_mod.World",
+    ) -> "world_mod.World":
         """intern: Replaces a world in the worlds list"""
         for i, world in enumerate(self.worlds):
             if world == old_world:
@@ -175,13 +176,13 @@ class WorldsManager:
             world for world in self.worlds if world.layout.docking_position == "bottom"
         ]
 
-    def get_topleft(self) -> "base_world.BaseWorld":
+    def get_topleft(self) -> "world_mod.World":
         for world in self.worlds:
             if world.layout.docking_position == "top_left":
                 return world
         raise MiniworldsError("World top_left is missing!")
 
-    def remove_world(self, world):
+    def remove_world(self, world: "world_mod.World"):
         """Removes a world and updates window."""
         if world in self.worlds:
             self.worlds.remove(world)
@@ -213,9 +214,9 @@ class WorldsManager:
         """Recalculates total width of all docked worlds."""
         total_width: int = 0
         for world in self.worlds:
-            if world.layout.window_docking_position == "top_left":
+            if world.layout.docking_position == "top_left":
                 total_width = world.camera.width
-            elif world.layout.window_docking_position == "right":
+            elif world.layout.docking_position == "right":
                 total_width += world.camera.width
         self.total_width = total_width
         return self.total_width
@@ -225,9 +226,9 @@ class WorldsManager:
         """Recalculates total height of all docked worlds."""
         total_height = 0
         for world in self.worlds:
-            if world.layout.window_docking_position == "top_left":
+            if world.layout.docking_position == "top_left":
                 total_height = world.camera.height
-            elif world.layout.window_docking_position == "bottom":
+            elif world.layout.docking_position == "bottom":
                 total_height += world.camera.height
         self.total_height = total_height
         return self.total_height

@@ -424,7 +424,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
 
                 from miniworlds import *
 
-                world = World((100,60))
+                world = World(100,60))
                 actor = Actor((10,10))
                 costume = actor.add_costume("images/player.png")
 
@@ -443,7 +443,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
 
                 from miniworlds import *
 
-                world = World((100,60))
+                world = World(100,60))
                 actor = Actor((10,10))
                 costume = actor.add_costume((255,255,0))
 
@@ -462,7 +462,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
 
                 from miniworlds import *
 
-                world = World((100,60))
+                world = World(100,60))
                 actor = Actor((10,10))
                 world.speed = 30
                 costume1 = actor.add_costume((255,255,0))

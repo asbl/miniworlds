@@ -13,7 +13,7 @@ Jeder Wert hat einen Datentyp, welchen du abfragen kannst, z.B. liefert folgende
 ``` python
 from miniworlds import *
 import random
-world = World((100,100))
+world = World(100,100))
 
 print(type("Hello World"))
 print(type(Line((10,10), (100,100))))
@@ -82,7 +82,7 @@ Genauso kannst du aber auch Werte von Objekten, z.B. die Position eines Kreises 
 ``` python
 from miniworlds import *
 import random
-world = World((100,100))
+world = World(100,100))
 
 circle = Circle((50,50), 20)
 
@@ -152,7 +152,7 @@ Die Antwort darauf sind "Gültigkeitsbereiche: Eine Variable hat unterschiedlich
 
   ``` python
   from miniworlds import *
-  world = World((100,100))
+  world = World(100,100))
   a = 3
   @world.register
   def on_key_pressed_a(self):
@@ -168,7 +168,7 @@ Die Antwort darauf sind "Gültigkeitsbereiche: Eine Variable hat unterschiedlich
   ``` python
 
   from miniworlds import *
-  world = World((100,100))
+  world = World(100,100))
   a = 3
   @world.register
   def on_key_pressed_a(self):
@@ -183,7 +183,7 @@ Die Antwort darauf sind "Gültigkeitsbereiche: Eine Variable hat unterschiedlich
   ``` python
 
   from miniworlds import *
-  world = World((100,100))
+  world = World(100,100))
   a = 3
   @world.register
   def on_key_pressed_a(self):

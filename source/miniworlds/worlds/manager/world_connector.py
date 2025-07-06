@@ -115,7 +115,7 @@ class WorldConnector():
         self.init_managers(position)
         self.world.camera.clear_camera_cache()
 
-        if self.actor not in self.world.actors:  # @todo: Confirm necessity
+        if self.actor not in self.world.actors: 
             self.world.actors.add(self.actor)
 
         self.set_static(self.actor.static)
@@ -181,7 +181,6 @@ class WorldConnector():
             self._delete_removed_actor()
 
         return unregistered_methods
-
 
 
     def set_world(self, old_world: "world_mod.World", new_world: "world_mod.World", position: Tuple[float, float] = (0, 0)):

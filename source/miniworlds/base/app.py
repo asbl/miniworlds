@@ -72,7 +72,7 @@ class App:
             print(f"Show new miniworlds v.{version_str} Window")
 
     def __init__(self, title, world):
-        App.init = True
+        
         self._output_start()
         self.check_for_run_method()
         self.worlds_manager: "worlds_manager.WorldsManager" = worlds_manager.WorldsManager(self)
@@ -83,7 +83,7 @@ class App:
         self.event_manager: "event_manager.AppEventManager" = event_manager.AppEventManager(self)
         self.sound_manager: "sound_manager.SoundManager" = sound_manager.SoundManager(self)
         self.music_manager: "music_manager.MusicManager" = music_manager.MusicManager(self)
-        self.window: "window_mod.Window" = window_mod.Window(title, self.worlds_manager, self.event_manager)
+        self.window: "window_mod.Window" = window_mod.Window(title, self, self.worlds_manager, self.event_manager)
         App.running_app = self
         App.running_world = world
         App.running_worlds.append(world)
@@ -92,6 +92,7 @@ class App:
         if App.path:
             self.path = App.path
         self.repaint_areas: List = []
+        print("init end")
 
 
     async def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
@@ -103,6 +104,7 @@ class App:
             fit_desktop: True or false
             replit: True or false
         """
+        print("run start")
         self.image = image
         self.window = cast(window_mod.Window, self.window)
         self.window.fullscreen = fullscreen
@@ -111,15 +113,10 @@ class App:
         print("...")
         # Start the main-loop
         self.init_app()
-        print("init completed")
+        App.init = True
         self.prepare_mainloop()
-        print("mainloop prepared")
         if not self._mainloop_started:
-            #if sys.platform == 'emscripten':
-            #    await self.start_mainloop()
-            #else:
             await self.start_mainloop()
-                # asyncio.run(self.start_mainloop())
         else:
             for world in self.running_worlds:
                 world.dirty = 1

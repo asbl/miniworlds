@@ -310,7 +310,7 @@ Zeichne ein Gesicht mit Grundformen
 ``` python
 from miniworlds import *
 import random
-world = World((100,100))
+world = World(100,100))
 world.size = (100, 100)
 Circle.from_center((50,50),50)
 Arc.from_center((50,80),40,20, 180, 360)

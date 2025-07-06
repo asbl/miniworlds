@@ -9,7 +9,7 @@ Eine einfache Bewegung kannst du realisieren, indem du bei einem Objekt die Attr
 ``` python
 from miniworlds import *
 import random
-world = World((100,100))
+world = World(100,100))
 c = Circle((0,50), 20)
 @world.register
 def act(self):
@@ -36,7 +36,7 @@ Das der Rest niemals größer als der Dividend sein kann, kann uns bei Animation
 ``` python
 from miniworlds import *
 import random
-world = World((100,100))
+world = World(100,100))
 c = Circle((0,50), 20)
 x = 0
 @world.register

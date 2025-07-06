@@ -9,10 +9,12 @@ class Window:
     def __init__(
         self,
         title,
+        app,
         worlds_manager: "worlds_manager_mod.WorldsManager",
         event_manager: "event_manager_mod.AppEventManager",
     ):
         self.title: str = title
+        self.app = app
         self.worlds_manager: "worlds_manager_mod.WorldsManager" = worlds_manager
         self.event_manager: "event_manager_mod.AppEventManager" = event_manager
         self.default_size: int = 200
@@ -21,6 +23,7 @@ class Window:
         self._fullscreen: bool = False
         self._fit_desktop = False
         self._replit = False
+        self.mode = False
         pygame.display.set_caption(title)
         my_path = os.path.abspath(os.path.dirname(__file__))
         try:
@@ -83,23 +86,29 @@ class Window:
         elif self.replit:
             self._surface = pygame.display.set_mode((800, 600), pygame.SCALED)
         else:
-            info = pygame.display.Info()
-            x, y = (
-                max((info.current_w - self.width) / 2, 0),
-                max((info.current_h - self.height) / 2, 0),
-            )
-            os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (x, y)
-            self._surface = pygame.display.set_mode((self.width, self.height))
+            
+            if self.app.init:
+                info = pygame.display.Info()
+                x, y = (
+                    max((info.current_w - self.width) / 2, 0),
+                    max((info.current_h - self.height) / 2, 0),
+                )
+                os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (x, y)
+                self._surface = pygame.display.set_mode((self.width, self.height))
+            else:
+                if not self.mode:
+                    self._surface = pygame.display.set_mode((1, 1))
+                    self.mode = True
         self._surface.set_alpha(None)
 
     @property
     def width(self) -> int:
-        """Gets total width from container manager"""
+        """Gets total width from worlds manager"""
         return self.worlds_manager.worlds_total_width
 
     @property
     def height(self) -> int:
-        """Gets total height from container manager"""
+        """Gets total height from worlds manager"""
         return self.worlds_manager.worlds_total_height
 
     def reset(self):
