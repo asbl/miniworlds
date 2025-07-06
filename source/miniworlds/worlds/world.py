@@ -20,7 +20,6 @@ import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
-import miniworlds.worlds.manager.world_connector as world_connector
 import miniworlds.worlds.data.export_factory as export_factory
 import miniworlds.worlds.data.import_factory as import_factory
 import miniworlds.positions.rect as world_rect
@@ -129,7 +128,7 @@ class World(world_base.WorldBase):
     subclasses = None
 
     def validate_parameters(self, x, y):
-        if not isinstance(x, Union[float, int]) or not isinstance(y, Union[float, int]):
+        if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
             raise TypeError(
                 f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
             )
@@ -183,8 +182,6 @@ class World(world_base.WorldBase):
         self.dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
         self._registered_methods: List[Callable] = []
 
-
-
         # --- Application & managers ---
         if not app.App.init:
             self.app: "app.App" = app.App("miniworlds", self)
@@ -210,25 +207,6 @@ class World(world_base.WorldBase):
         # --- Register world in application ---
         self.app.event_manager.to_event_queue("setup", None)
         self.app.worlds_manager.add_topleft(self)
-
-    @staticmethod
-    def _get_mainloopmanager_class():
-        return mainloop_manager.MainloopManager
-
-    @staticmethod
-    def _get_camera_manager_class():
-        return world_camera_manager.CameraManager
-
-    @staticmethod
-    def _get_world_connector_class():
-        """needed by get_world_connector in parent class"""
-        return world_connector.WorldConnector
-
-    def get_world_connector(self, actor) -> world_connector.WorldConnector:
-        return self._get_world_connector_class()(self, actor)
-
-    def _create_event_manager(self):
-        return event_manager.EventManager(self)
 
     def contains_position(self, pos):
         """Checks if position is in the world.
@@ -1078,11 +1056,6 @@ class World(world_base.WorldBase):
         """
         pygame.image.save(self.app.window.surface, filename)
 
-    def get_columns_by_width(self, width):
-        return width
-
-    def get_rows_by_height(self, height):
-        return height
 
     def get_events(self):
         """Gets a set of all events you can register"""

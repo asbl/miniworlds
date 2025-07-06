@@ -5,6 +5,7 @@ import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.world as world_mod
 
 
+
 class ActorClassInspection:
     def __init__(self, generator):
         """Inspects a actor or a actor class

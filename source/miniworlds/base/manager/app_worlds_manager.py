@@ -1,9 +1,13 @@
-from typing import List, cast, Tuple
+from typing import List, cast, Tuple, TYPE_CHECKING
 import pygame
 import miniworlds.base.app as app
-import miniworlds.worlds.world_base as base_world
+
 from miniworlds.base.exceptions import MiniworldsError
 
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
+    import miniworlds.actors.actor as actor_mod
+    import miniworlds.worlds.world_base as base_world
 
 class WorldsManager:
     def __init__(self, miniworlds_app: "app.App") -> None:
@@ -18,7 +22,7 @@ class WorldsManager:
     def get_world_by_pixel(self, pixel_x: int, pixel_y: int):
         """Gets world by pixel coordinates."""
         for world in self.worlds:
-            if world.rect.collidepoint((pixel_x, pixel_y)):
+            if world.camera.get_screen_rect().collidepoint((pixel_x, pixel_y)):
                 return world
         return None
 
@@ -68,7 +72,7 @@ class WorldsManager:
 
         # Set docking position and prepare camera
         world.layout.docking_position = dock
-        world.add_to_window(self.app, dock, size)
+        world.layout._add_to_window(self.app, dock, size)
 
         # Set camera screen position based on docking
         if dock == "right":

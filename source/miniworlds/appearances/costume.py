@@ -1,9 +1,11 @@
-from typing import Union
+from typing import Union, TYPE_CHECKING
 import pygame
 
 import miniworlds.appearances.appearance as appear
 import miniworlds.appearances.managers.transformations_costume_manager as transformations_costume_manager
-import miniworlds.worlds.world as world
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
 
 
 class Costume(appear.Appearance):
