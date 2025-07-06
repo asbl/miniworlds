@@ -88,7 +88,7 @@ class Test610(unittest.TestCase):
                     label.text = str(percent)
                     if percent < 100:
                         percent += 10
-                world.add_world_right(toolbar, size = 200)
+                world.layout.add_right(toolbar, size = 200)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

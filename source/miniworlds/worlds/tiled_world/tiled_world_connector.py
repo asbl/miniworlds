@@ -49,7 +49,7 @@ class TiledWorldConnector(world_connector.WorldConnector):
 
         if self.actor not in self.world.static_actors_dict[pos]:
             self.world.static_actors_dict[pos].append(self.actor)
-            self.world.reload_costumes_queue.append(self.actor)
+            self.world.mainloop. reload_costumes_queue.append(self.actor)
 
     def remove_static_actor(self):
         """

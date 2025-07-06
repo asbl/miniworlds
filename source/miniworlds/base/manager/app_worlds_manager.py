@@ -29,16 +29,16 @@ class WorldsManager:
         """
         for world in self.worlds:
             if world.dirty:
-                await world.update()
-                world.repaint()
-                world.blit_surface_to_window_surface()
-
+                await world.mainloop.update()
+                world.mainloop.repaint()
+                world.mainloop.blit_surface_to_window_surface()
+                
     def add_topleft(
         self, new_world: "base_world.BaseWorld"
     ) -> "base_world.BaseWorld":
         """Adds the topleft corner if it does not exist."""
         for world in self.worlds:
-            if world.docking_position == "top_left":
+            if world.layout.docking_position == "top_left":
                 return self.get_topleft()
         self.topleft = new_world
         self.add_world(new_world, "top_left")
@@ -67,7 +67,7 @@ class WorldsManager:
             raise MiniworldsError("World already exists in worlds list.")
 
         # Set docking position and prepare camera
-        world.docking_position = dock
+        world.layout.docking_position = dock
         world.add_to_window(self.app, dock, size)
 
         # Set camera screen position based on docking
@@ -142,9 +142,9 @@ class WorldsManager:
         """intern: Replaces a world in the worlds list"""
         for i, world in enumerate(self.worlds):
             if world == old_world:
-                dock = old_world.docking_position
+                dock = old_world.layout.docking_position
                 self.worlds[i] = new_world
-                new_world.docking_position = dock
+                new_world.layout.docking_position = dock
                 if dock == "top_left":
                     self.topleft = new_world
                 break
@@ -161,19 +161,19 @@ class WorldsManager:
         """List of all worlds with docking_position "right", 
         ordered by display-position"""
         return [self.topleft] + [
-            world for world in self.worlds if world.docking_position == "right"
+            world for world in self.worlds if world.layout.docking_position == "right"
         ]
 
     def worlds_bottom(self):
         """List of all worlds with docking_position "bottom",
         ordered by display-position"""
         return [self.topleft] + [
-            world for world in self.worlds if world.docking_position == "bottom"
+            world for world in self.worlds if world.layout.docking_position == "bottom"
         ]
 
     def get_topleft(self) -> "base_world.BaseWorld":
         for world in self.worlds:
-            if world.docking_position == "top_left":
+            if world.layout.docking_position == "top_left":
                 return world
         raise MiniworldsError("World top_left is missing!")
 
@@ -189,7 +189,7 @@ class WorldsManager:
     def reset(self):
         for world in self.worlds:
             world.clear()
-            if world.docking_position != "top_left":
+            if world.layout.docking_position != "top_left":
                 self.remove_world(world)
 
     def _update_all_worlds(self):
@@ -209,9 +209,9 @@ class WorldsManager:
         """Recalculates total width of all docked worlds."""
         total_width: int = 0
         for world in self.worlds:
-            if world.window_docking_position == "top_left":
+            if world.layout.window_docking_position == "top_left":
                 total_width = world.camera.width
-            elif world.window_docking_position == "right":
+            elif world.layout.window_docking_position == "right":
                 total_width += world.camera.width
         self.total_width = total_width
         return self.total_width
@@ -221,9 +221,9 @@ class WorldsManager:
         """Recalculates total height of all docked worlds."""
         total_height = 0
         for world in self.worlds:
-            if world.window_docking_position == "top_left":
+            if world.layout.window_docking_position == "top_left":
                 total_height = world.camera.height
-            elif world.window_docking_position == "bottom":
+            elif world.layout.window_docking_position == "bottom":
                 total_height += world.camera.height
         self.total_height = total_height
         return self.total_height

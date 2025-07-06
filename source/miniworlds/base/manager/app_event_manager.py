@@ -25,9 +25,9 @@ class AppEventManager:
         while self.event_queue:
             element = self.event_queue.pop()
             [
-                ct.handle_event(element[0], element[1])
-                for ct in self.app.worlds_manager.worlds
-                if ct.is_listening
+                world.mainloop.handle_event(element[0], element[1])
+                for world in self.app.worlds_manager.worlds
+                if world.is_listening
             ]
         self.event_queue.clear()
 

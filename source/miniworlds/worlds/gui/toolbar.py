@@ -5,7 +5,7 @@ import miniworlds.base.app as app_mod
 import miniworlds.worlds.gui.gui as gui
 import miniworlds.actors.widgets.widget_base as widget_base
 import miniworlds.actors.widgets.widget_parts as widget_parts
-
+import miniworlds.worlds.gui.toolbar_mainloop_manager as toolbar_mainloop_manager
 
 
 class Toolbar(gui.GUI):
@@ -67,6 +67,10 @@ class Toolbar(gui.GUI):
         self.max_widgets = 0
         self.max_row_height = 0
         self.fixed_camera = False
+
+    @staticmethod
+    def _get_mainloopmanager_class():
+        return toolbar_mainloop_manager.ToolbarMainloopManager
 
     def on_change(self):
         if hasattr(self, "widgets"):
@@ -221,11 +225,6 @@ class Toolbar(gui.GUI):
 
     def update_width_and_height(self):
         super().screen_width
-
-    async def update(self):
-        await super().update()
-        for widget in self.timed_widgets:
-            widget.update()
 
     def send_message(self, text):
         app_mod.App.running_app.event_manager.to_event_queue("message", text)

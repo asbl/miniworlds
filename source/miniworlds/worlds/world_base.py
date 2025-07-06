@@ -10,7 +10,6 @@ class WorldBase(ABC):
     def __init__(self):
         self.dirty = 1
         self.is_listening = True
-        self._surface = pygame.Surface((1, 1))
         self.registered_events = {"mouse_left", "mouse_right"}
         # private
         self._window = None  # Set in add_to_window
@@ -19,14 +18,6 @@ class WorldBase(ABC):
         self.screen_top_left_y = 0  # Set in add_to_window
         self.docking_position = None  # Set in add_to_windows
         self._image = None
-
-    @property
-    def surface(self):
-        return self._surface
-
-    @surface.setter
-    def surface(self, value):
-        self._surface = value
 
     def on_change(self):
         """implemented in subclasses"""
@@ -60,29 +51,11 @@ class WorldBase(ABC):
     def size(self):
         return self.screen_width, self.screen_height
 
-    def repaint(self):
-        """
-        Implemented in subclasses
-        """
-        pass
-
-    def blit_surface_to_window_surface(self):
-        self._app.window.surface.blit(self.surface, self.camera.screen_rect)
-
     def remove(self, actor):
         """
         Implemented in subclasses
         """
         actor.remove()
-
-    def handle_event(self, event, data):
-        self.get_event(event, data)
-
-    def get_event(self, event, data):
-        """
-        Implemented in subclasses
-        """
-        pass
 
     @property
     def rect(self):
@@ -93,10 +66,6 @@ class WorldBase(ABC):
     @property
     def topleft(self):
         return self.screen_top_left_x, self.screen_top_left_y
-
-    @property
-    def window_docking_position(self):
-        return self.docking_position
 
     async def update(self):
         """

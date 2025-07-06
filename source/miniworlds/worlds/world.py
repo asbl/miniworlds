@@ -14,6 +14,9 @@ import miniworlds.worlds.manager.collision_manager as coll_manager
 import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.mouse_manager as mouse_manager
 import miniworlds.worlds.manager.music_manager as world_music_manager
+import miniworlds.worlds.manager.layout_manager as layout_manager
+import miniworlds.worlds.manager.data_manager as data_manager
+import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
@@ -179,21 +182,26 @@ class World(world_base.WorldBase):
         self.timed_objects: list = []
         self.dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
         self._registered_methods: List[Callable] = []
-        self.reload_costumes_queue: list = []
 
-        # --- Rendering and backgrounds ---
-        self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
-        self.background = background_mod.Background(self)
-        self.background.update()
-        
-        # --- Input handling ---
-        self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
+
 
         # --- Application & managers ---
         if not app.App.init:
             self.app: "app.App" = app.App("miniworlds", self)
         else:
             self.app = app.App.running_app
+
+        # --- Rendering and backgrounds ---
+        self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
+        self.layout : "layout_manager.Layoutmanager" = layout_manager.LayoutManager(self, self.app)
+        self.data : "data_manager.DataManager" = data_manager.DataManager(self, self.app)
+        self.mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
+        self.background = background_mod.Background(self)
+        self.background.update()
+        
+        # --- Input handling ---
+        self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
+
 
         self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
         self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
@@ -203,54 +211,9 @@ class World(world_base.WorldBase):
         self.app.event_manager.to_event_queue("setup", None)
         self.app.worlds_manager.add_topleft(self)
 
-    def add_right(self, world, size = 100):
-        """
-        Alias of add_world_right
-        """
-        return self.add_world_right(world, size)
-
-    def add_bottom(self, world, size = 100):
-        """
-        Alias of add_world_bottom
-        """
-        return self.add_world_bottom(world, size)
-
-    def add_world_right(self, world: "World", size: int = 100):
-        """Adds a world to the right of the current world.
-
-        Args:
-            world: The world instance to add.
-            size: Width of the new world in pixels (default: 100).
-
-        Returns:
-            The added world.
-        """
-        return self.app.worlds_manager.add_world(world, "right", size)
-
-
-    def add_world_bottom(self, world: "World", size: int = 100):
-        """Adds a world below the current world.
-
-        Args:
-            world: The world instance to add.
-            size: Height of the new world in pixels (default: 100).
-
-        Returns:
-            The added world.
-        """
-        return self.app.worlds_manager.add_world(world, "bottom", size)
-
-
-    def remove_world(self, world: "World"):
-        """Removes a world from the layout and updates the window.
-
-        Args:
-            world: The world instance to remove.
-
-        Returns:
-            None
-        """
-        return self.app.worlds_manager.remove_world(world)
+    @staticmethod
+    def _get_mainloopmanager_class():
+        return mainloop_manager.MainloopManager
 
     @staticmethod
     def _get_camera_manager_class():
@@ -291,10 +254,6 @@ class World(world_base.WorldBase):
         """
         return self.sensor_manager.contains_rect_any_(rect)
 
-
-    @property
-    def surface(self):
-        return self.background.surface
 
     @property
     def class_name(self) -> str:
@@ -745,49 +704,54 @@ class World(world_base.WorldBase):
         data=None,
     ):
         """
-        The method show() should always be called at the end of your program.
-        It starts the mainloop.
+        Starts the main application loop of the Miniworlds engine.
 
-        Examples:
+        This method should be called at the end of a Miniworlds program to initialize and start the world,
+        event system, background rendering, and main application coroutine.
 
-            A minimal miniworlds-program:
+        It automatically handles environments like standard Python scripts, REPLs, or Jupyter notebooks
+        by safely managing the asyncio event loop.
 
-            .. code-block:: python
-
-                from miniworlds import *
-                world = TiledWorld()
-                actor = Actor()
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/min.png
-                :width: 200px
-                :alt: Minimal program
-
+        Args:
+            fullscreen (bool): Whether to launch the application in fullscreen mode.
+            fit_desktop (bool): Whether the app should fit to desktop resolution.
+            replit (bool): Whether the app is running inside Replit (adjusts behavior accordingly).
+            event (str, optional): An optional initial event to queue before starting the loop.
+            data (any, optional): Data associated with the initial event.
         """
+
+        # Prepare all components necessary for running the app
         self.app.prepare_mainloop()
         self.event_manager.setup_world()
         self.backgrounds_manager.init_display()
         self.is_running = True
+
+        # If an event is passed, add it to the event queue
         if event:
             self.app.event_manager.to_event_queue(event, data)
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        #loop = asyncio.get_event_loop()
-        if loop.is_running():
-            # Starte main() in der laufenden Event-Loop
-            asyncio.ensure_future(self.app.run(
-            self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
-        ))
-        else:
-            asyncio.run(self.app.run(
-            self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
-        ))
-        #await self.app.run(
-        #    self.image, fullscreen=fullscreen, fit_desktop=fit_desktop, replit=replit
-        #)
-        
+
+        # Define the main coroutine that runs the app
+        async def main():
+            await self.app.run(
+                self.image,
+                fullscreen=fullscreen,
+                fit_desktop=fit_desktop,
+                replit=replit
+            )
+
+        try:
+            # Try to run the main coroutine in a clean, auto-managed event loop (Python 3.7+)
+            asyncio.run(main())
+        except RuntimeError as e:
+            # Fallback for environments where an event loop is already running (e.g. Jupyter, REPL)
+            if "event loop is running" in str(e):
+                loop = asyncio.get_event_loop()
+                # Schedule the task in the already running event loop
+                loop.create_task(main())
+                # Note: We do not block with run_until_complete() in running loops like Jupyter
+            else:
+                # Re-raise unexpected runtime errors
+                raise
 
     def play_sound(self, path: str):
         """plays sound from path"""
@@ -934,16 +898,6 @@ class World(world_base.WorldBase):
         for actor in self.actors:
             actor.remove()
         
-
-    def switch_world(self, new_world: "World", reset: bool = False):
-        """Switches to another world
-
-        Args:
-            new_world (World): _description_
-        """
-        self.app.worlds_manager.switch_world(new_world, reset)
-        
-
     def get_color_from_pixel(self, position: Tuple[float, float]) -> tuple:
         """
         Returns the color at a specific position
@@ -1003,10 +957,6 @@ class World(world_base.WorldBase):
     def on_setup(self):
         """Overwrite or register this method to call `on_setup`-Actions"""
         pass
-
-    #def __str__(self):
-    #    return f"{self.__class__.__name__} with {self.columns} columns and {self.rows} rows"
-    
 
     @property
     def has_background(self) -> bool:
@@ -1070,71 +1020,6 @@ class World(world_base.WorldBase):
         """The current displayed image"""
         return self.backgrounds_manager.image
 
-    def repaint(self):
-        self.background.repaint()  # called 1/frame in container.repaint()
-
-    async def update(self):
-        """The mainloop, called once per frame.
-
-        Called in app.update() when reload_all_worlds is called.
-        """
-
-        if not self.is_running and self.frame != 0:
-            self.event_manager.update()
-            return
-        start = 0
-        if self.is_running or self.frame == 0:
-            start = time.perf_counter()
-            # Acting for all actors@static
-            if self.frame > 0 and self.frame % self.step == 0:
-                self._act_all()
-            self.collision_manager.handle_all_collisions()
-            self.mouse_manager.update_positions()
-            if self.frame == 0:
-                self.backgrounds_manager.init_display()
-            # run animations
-            self.background.update()
-            # update all costumes on current background
-            self._update_all_costumes()
-            self._tick_timed_objects()
-            self.camera.update()
-        self.frame += 1
-        #self.clock.tick(self.fps)
-        self.event_manager.update()
-        elapsed = time.perf_counter() - start
-        wait = max(0, (1 / self.fps) - elapsed)
-        await asyncio.sleep(wait)
-        
-    def _update_all_costumes(self):
-        """Updates the costumes of all actors in the world."""
-
-        for actor in self.reload_costumes_queue:
-            if actor.costume:
-                actor.costume.update()
-        self.reload_costumes_queue.clear()
-
-        if hasattr(self, "dynamic_actors"):
-            for actor in self.dynamic_actors:
-                if actor.costume:
-                    actor.costume.update()
-
-    def _act_all(self):
-        """Overwritten in subclasses, e.g. physics_world"""
-        self.event_manager.act_all()
-
-    def _tick_timed_objects(self):
-        [obj.tick() for obj in self.timed_objects]
-
-    def handle_event(self, event, data=None):
-        """
-        Event handling
-
-        Args:
-            event (str): The event which was thrown, e.g. "key_up", "act", "reset", ...
-            data: The data of the event (e.g. ["S","s"], (155,3), ...
-        """
-        self.event_manager.handler.handle_event(event, data)
-
     def register(self, method: Callable) -> Callable:
         """
         Used as decorator
@@ -1184,42 +1069,6 @@ class World(world_base.WorldBase):
 
         """
         return self._window
-
-    def load_world_from_db(self, file: str):
-        """
-        Loads a sqlite db file.
-        """
-        return import_factory.ImportWorldFromDB(file, self.__class__).load()
-
-    def load_actors_from_db(
-        self, file: str, actor_classes: list
-    ) -> List["actor_mod.Actor"]:
-        """Loads all actors from db. Usually you load the actors in __init__() or in on_setup()
-
-        Args:
-            file (str): reference to db file
-            actor_classes (list): a list of all Actor Classes which should be imported.
-
-        Returns:
-            [type]: All Actors
-        """
-        return import_factory.ImportActorsFromDB(file, actor_classes).load()
-
-    def save_to_db(self, file):
-        """
-        Saves the current world an all actors to database.
-        The file is stored as db file and can be opened with sqlite.
-
-        Args:
-            file: The file as relative location
-
-        Returns:
-
-        """
-        export = export_factory.ExportWorldToDBFactory(file, self)
-        export.remove_file()
-        export.save()
-        export_factory.ExportActorsToDBFactory(file, self.actors).save()
 
     def screenshot(self, filename: str = "screenshot.jpg"):
         """Creates a screenshot in given file.
