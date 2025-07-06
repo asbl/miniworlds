@@ -13,7 +13,6 @@ class Test224(unittest.TestCase):
             # Here comes your code
             @world.register
             def setup_environment(self, test):
-                world = World(100, 100)
                 t = Actor((50, 50))
                 t.add_costume("images/arrow.png")
                 t.size = (100,100)

@@ -239,7 +239,7 @@ class SingleWidget(widget_base.BaseWidget):
         if self._img_widget and self._img_widget in self.children:
             self.remove_child(self._img_widget)
         self._img_widget = widget_parts.WidgetImage()
-        self._img_widget.world
+        self._img_widget.world = self.world
         self._img_widget.add_costume(_img_source)
         self._img_widget.width = self._img_width
         self._img_widget.height = self._widget_text.height

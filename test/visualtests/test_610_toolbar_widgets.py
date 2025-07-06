@@ -18,20 +18,22 @@ class Test610(unittest.TestCase):
                 toolbar.margin_right = 10
                 toolbar.background_color = (255,0,255)
 
-                button = Button("Toolbar Button")
-                button.text = "Changed Text"
-                button.set_image("images/arrow.png")
-                button.set_border((0,0,0,255), 2)
-                button.margin_bottom = 30
-                toolbar.add(button)
+                button1 = Button("Toolbar Button")
+                button1.text = "Changed Text"
+                button1.set_image("images/arrow.png")
+                button1.set_border((0,0,0,255), 2)
+                button1.margin_bottom = 30
+                toolbar.add(button1)
+                print("Changed Text", button1.position)
 
-                button = Button("Toolbar Button")
-                button.text = "Changed Text 2"
-                button.set_image("images/arrow.png")
-                button.margin_left = 10
-                button.margin_right = 10
-                button.set_background_color((200,200,0))
-                toolbar.add(button)
+                button2 = Button("Toolbar Button")
+                button2.text = "Changed Text 2"
+                button2.set_image("images/arrow.png")
+                button2.margin_left = 10
+                button2.margin_right = 10
+                button2.set_background_color((200,200,0))
+                toolbar.add(button2)
+                print("Changed Text 2", button2.position)
 
                 button = Label("Toolbar Label")
                 button.text = "Changed Label"
@@ -89,6 +91,8 @@ class Test610(unittest.TestCase):
                     if percent < 100:
                         percent += 10
                 world.layout.add_right(toolbar, size = 200)
+                print("Changed Text", button1.position)
+                print("Changed Text 2", button2.position)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

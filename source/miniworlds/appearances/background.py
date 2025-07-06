@@ -155,7 +155,7 @@ class Background(appearance_mod.Appearance):
         if self.world in app.App.running_worlds:
             self.world.app.window.surface.blit(
                 self.image, self.world.camera.screen_topleft
-            )  # @DEBUG: Position changed from (0, 0)
+            ) 
             self.world.app.add_display_to_repaint_areas()
             self.repaint()
 

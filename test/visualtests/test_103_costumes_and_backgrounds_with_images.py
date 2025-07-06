@@ -6,14 +6,18 @@ class Test103(unittest.TestCase):
 
     def setUp(self):
         def test_code():
+            print("run test...")
             world = TiledWorld()
+            print("---------------> world dimensions", world, world.height, world.width, world.image)
             # Black world
             @world.register
             def setup_environment(self, test):
+                print("setup environment")
                 world.add_background((200, 200, 200, 255))
                 world.columns = 5
                 world.rows = 5
                 world.tile_size = 40
+                print("background added")
 
                 # Actor1 at position (2,1) with player costume
                 actor1 = Actor(position=(2, 1))

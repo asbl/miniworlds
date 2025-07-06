@@ -129,13 +129,13 @@ class Appearance(metaclass=MetaAppearance):
 
             .. code-block:: python
 
-                from miniworldmaker import *
+                from miniworlds import *
 
-                board = Board()
+                world = World()
                 background = board.add_background("images/1.png")
                 background.add_image("images/2.png")
                 background.set_image(1)
-                board.run()
+                world.run()
 
         """
         if isinstance(source, int):
@@ -240,12 +240,12 @@ class Appearance(metaclass=MetaAppearance):
 
             .. code-block:: python
 
-                from miniworldmaker import *
+                from miniworlds import *
 
-                board = Board()
+                world = World()
                 background = board.add_background("images/stone.png")
                 background.is_textured = True
-                board.run()
+                world.run()
 
             .. image:: ../_images/is_textured.png
                 :alt: Textured image>
@@ -254,13 +254,13 @@ class Appearance(metaclass=MetaAppearance):
 
             .. code-block:: python
 
-                from miniworldmaker import *
+                from miniworlds import *
 
-                board = Board()
+                world = World()
                 background = board.add_background("images/stone.png")
                 background.is_textured = True
                 background.texture_size = (15,15)
-                board.run()
+                world.run()
 
             .. image:: ../_images/is_textured1.png
                 :alt: Textured image
@@ -321,9 +321,9 @@ class Appearance(metaclass=MetaAppearance):
 
             .. code-block:: python
 
-                from miniworldmaker import *
+                from miniworlds import *
 
-                board = Board()
+                world = World()
                 token = Token()
                 token.add_costume("images/alien1.png")
                 token.height= 400
@@ -336,7 +336,7 @@ class Appearance(metaclass=MetaAppearance):
                             self.costume.is_flipped = False
                         else:
                             self.costume.is_flipped = True
-                board.run()
+                world.run()
 
             .. image:: ../_images/flip1.png
                 :alt: Textured image

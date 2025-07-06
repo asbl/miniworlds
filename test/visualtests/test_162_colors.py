@@ -13,7 +13,6 @@ class Test162(unittest.TestCase):
             # Here comes your code
             @world.register
             def setup_environment(self, test):
-                world = World(100, 100)
                 c = Actor((50,50), origin = "topleft")
                 c.color = (255,0,0)
                 world.color = (0,255,0)

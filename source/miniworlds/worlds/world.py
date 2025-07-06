@@ -183,11 +183,10 @@ class World(world_base.WorldBase):
         self._registered_methods: List[Callable] = []
 
         # --- Application & managers ---
-        if not app.App.init:
+        if not app.App.running_app:
             self.app: "app.App" = app.App("miniworlds", self)
         else:
             self.app = app.App.running_app
-
         # --- Rendering and backgrounds ---
         self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
         self.layout : "layout_manager.Layoutmanager" = layout_manager.LayoutManager(self, self.app)
@@ -195,7 +194,6 @@ class World(world_base.WorldBase):
         self.mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
         self.background = background_mod.Background(self)
         self.background.update()
-        
         # --- Input handling ---
         self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
 
@@ -203,7 +201,6 @@ class World(world_base.WorldBase):
         self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
         self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
         self.collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
-
         # --- Register world in application ---
         self.app.event_manager.to_event_queue("setup", None)
         self.app.worlds_manager.add_topleft(self)
@@ -886,7 +883,7 @@ class World(world_base.WorldBase):
 
                 from miniworlds import *
 
-                world = World((100,60))
+                world = World(100,60))
 
                 @world.register
                 def on_setup(self):
@@ -908,7 +905,8 @@ class World(world_base.WorldBase):
             The color
 
         """
-        return self.app.window.surface.get_at((int(position[0]), int(position[1])))
+        print("self.app.window.surface", self.app.window.surface)
+        return self.background.image.get_at((int(position[0]), int(position[1])))
 
     def get_from_pixel(self, position: Tuple) -> Optional[tuple]:
         """Gets Position from pixel
