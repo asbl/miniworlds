@@ -13,21 +13,21 @@ class Test708(unittest.TestCase):
             # Here comes your code
             @world.register
             def setup_environment(self, test):
-                world.default_fill_color = (255,255,255,100)
+                world.draw.default_fill_color = (255,255,255,100)
 
                 # White ellipse at left center
                 Ellipse.from_topleft((0,100), 200, 100)
 
                 # Red Ellipse in the center of the screen
-                world.default_fill_color = (255,0,0,100)
+                world.draw.default_fill_color = (255,0,0,100)
                 Ellipse.from_center((100,100),20, 10)
 
                 # Green Ellipse - top left at center of screen
-                world.default_fill_color = (0,255,0,100)
+                world.draw.default_fill_color = (0,255,0,100)
                 e = Ellipse.from_center((100,100),10, 10)
 
                 # Green Ellipse at center - top left at center of screen
-                world.default_fill_color = (0,255,0,50)
+                world.draw.default_fill_color = (0,255,0,50)
                 e = Ellipse.from_center((100,100),18.1, 18.1)
                 
             return world

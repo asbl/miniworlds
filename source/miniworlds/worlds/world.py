@@ -15,6 +15,7 @@ import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.mouse_manager as mouse_manager
 import miniworlds.worlds.manager.music_manager as world_music_manager
 import miniworlds.worlds.manager.layout_manager as layout_manager
+import miniworlds.worlds.manager.draw_manager as draw_manager
 import miniworlds.worlds.manager.data_manager as data_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
@@ -25,7 +26,6 @@ import miniworlds.worlds.data.import_factory as import_factory
 import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
 import miniworlds.tools.world_inspection as world_inspection
-import miniworlds.tools.color as color
 import miniworlds.tools.timer as timer
 import miniworlds.base.app as app_mod
 
@@ -167,13 +167,6 @@ class World(world_base.WorldBase):
         # --- State flags ---
         self._key_pressed: bool = False
         self._animated: bool = False
-        self._is_filled: bool = False
-        self._orientation: int = 0
-        self._static: bool = False
-        self._default_is_filled = False
-        self._default_fill_color = None
-        self._default_border_color = None
-        self._default_border = None
         self.is_running: bool = True
         self.actors_fixed_size: bool = False
 
@@ -195,9 +188,8 @@ class World(world_base.WorldBase):
         self.background = background_mod.Background(self)
         self.background.update()
         # --- Input handling ---
-        self.mouse_manager: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
-
-
+        self.mouse: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
+        self.draw: "draw_manager.DrawManager" = draw_manager.DrawManager(self)
         self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
         self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
         self.collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
@@ -383,118 +375,6 @@ class World(world_base.WorldBase):
         self.world_size_y = value[1]
         self.camera.width = value[0]
         self.camera.height = value[1]
-
-    @property
-    def default_fill_color(self):
-        """Set default fill color for borders and lines"""
-        return self._default_fill_color
-
-    @default_fill_color.setter
-    def default_fill_color(self, value):
-        self._default_fill_color = color.Color(value).get()
-
-    def default_fill(self, value):
-        """Set default fill color for borders and lines"""
-        self._is_filled = value
-        if self.default_is_filled is not None and self.default_is_filled:
-            self._default_fill_color = color.Color(value).get()
-
-    @property
-    def default_is_filled(self):
-        return self._default_is_filled
-
-    @default_is_filled.setter
-    def default_is_filled(self, value):
-        self.default_fill(value)
-
-    @property
-    def default_stroke_color(self):
-        """Set default stroke color for borders and lines. (equivalent to border-color)"""
-        return self.default_border_color
-
-    @default_stroke_color.setter
-    def default_stroke_color(self, value):
-        """Set default stroke color for borders and lines. (equivalent to border-color)"""
-        self.default_border_color = value
-
-    @property
-    def default_border_color(self):
-        """Set default border color for borders and lines.
-
-        .. note::
-
-          ``world.default_border_color`` does not have an effect, if no border is set.
-
-            You must also set ``world.border`` > 0.
-
-        Examples:
-
-            Create actors with and without with border
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(210,80)
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
-
-                t = Actor((10,10))
-
-                t2 = Actor ((60, 10))
-                t2.border_color = (0,255, 0)
-                t2.border = 5 # overwrites default border
-
-                t3 = Actor ((110, 10))
-                t3.border = None # removes border
-
-                t4 = Actor ((160, 10))
-                t4.add_costume("images/player.png") # border for sprite
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/border_color.png
-                :width: 200px
-                :alt: borders
-
-        """
-        return self._default_border_color
-
-    @default_border_color.setter
-    def default_border_color(self, value):
-        self._default_border_color = value
-
-    @property
-    def default_border(self):
-        """Sets default border color for actors
-
-        .. note::
-
-          You must also set a border for actor.
-
-        Examples:
-
-            Set default border for actors:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(210,80)
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
-
-                t = Actor((10,10))
-
-                world.run()
-        """
-        return self._default_border
-
-    @default_border.setter
-    def default_border(self, value):
-        self._default_border = value
 
     @property
     def backgrounds(self) -> list:
@@ -728,100 +608,6 @@ class World(world_base.WorldBase):
                 # Re-raise unexpected runtime errors
                 raise
 
-    def play_sound(self, path: str):
-        """plays sound from path"""
-        self.app.sound_manager.play_sound(path)
-
-    def stop_sounds(self):
-        self.app.sound_manager.stop()
-
-    def play_music(self, path: str):
-        """plays a music from path
-
-        Args:
-            path: The path to the music
-
-        Returns:
-
-        """
-        self.music.play(path)
-
-    def stop_music(self):
-        """stops a music
-
-        Returns:
-
-        """
-        self.music.stop()
-
-    def get_mouse_position(self) -> Optional[tuple]:
-        """
-        Gets the current mouse_position
-
-        Returns:
-            Returns the mouse position if mouse is on the world. Returns None otherwise
-
-        Examples:
-
-            Create circles at current mouse position:
-
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = PixelWorld()
-
-                @world.register
-                def act(self):
-                    c = Circle(world.get_mouse_position(), 40)
-                    c.color = (255,255,255, 100)
-                    c.border = None
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/mousepos.png
-                :width: 200px
-                :alt: Circles at mouse-position
-
-
-        """
-        return self.mouse_manager.mouse_position
-
-    def get_mouse_x(self) -> int:
-        """Gets x-coordinate of mouse-position"""
-        if self.mouse_manager.mouse_position:
-            return self.mouse_manager.mouse_position[0]
-        else:
-            return 0
-
-    def get_mouse_y(self) -> int:
-        """Gets y-coordinate of mouse-position"""
-        if self.mouse_manager.mouse_position:
-            return self.mouse_manager.mouse_position[1]
-        else:
-            return 0
-
-    def get_prev_mouse_position(self):
-        """gets mouse-position of last frame"""
-        return self.mouse_manager.prev_mouse_position
-
-    def is_mouse_pressed(self) -> bool:
-        """Returns True, if mouse is pressed"""
-        return (
-            self.mouse_manager.mouse_left_is_clicked()
-            or self.mouse_manager.mouse_left_is_clicked()
-        )
-
-    def is_mouse_left_pressed(self) -> bool:
-        """Returns True, if mouse left button is pressed"""
-        return self.mouse_manager.mouse_left_is_clicked()
-
-    def is_mouse_right_pressed(self) -> bool:
-        """Returns True, if mouse right button is pressed"""
-        return self.mouse_manager.mouse_right_is_clicked()
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
         if (
@@ -873,41 +659,6 @@ class World(world_base.WorldBase):
         for actor in self.actors:
             actor.remove()
         
-    def get_color_from_pixel(self, position: Tuple[float, float]) -> tuple:
-        """
-        Returns the color at a specific position
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60))
-
-                @world.register
-                def on_setup(self):
-                    self.add_background((255,0,0))
-                    print(self.get_color_from_pixel((5,5)))
-
-                world.run()
-
-            Output: (255, 0, 0, 255)
-
-            .. image:: ../_images/get_color.png
-                :width: 100px
-                :alt: get color of red screen
-
-        Args:
-            position: The position to search for
-
-        Returns:
-            The color
-
-        """
-        print("self.app.window.surface", self.app.window.surface)
-        return self.background.image.get_at((int(position[0]), int(position[1])))
-
     def get_from_pixel(self, position: Tuple) -> Optional[tuple]:
         """Gets Position from pixel
 
@@ -1012,20 +763,6 @@ class World(world_base.WorldBase):
         self._registered_methods.remove(method)
         world_inspection.WorldInspection(self).unbind_method(method)
 
-    @property
-    def fill_color(self):
-        return self.background.fill_color
-
-    @fill_color.setter
-    def fill_color(self, value):
-        self.background.fill(value)
-
-    # Alias
-    color = fill_color
-
-    def direction(self, point1, point2):
-        pass
-
     @staticmethod
     def distance_to(pos1: Tuple[float, float], pos2: Tuple[float, float]):
         return math.sqrt((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2)
@@ -1035,17 +772,6 @@ class World(world_base.WorldBase):
     ) -> float:
         return position_manager.Positionmanager.direction_from_two_points(pos1, pos2)
 
-    @property
-    def window(self) -> "app_mod.App":
-        """
-        Gets the parent window
-
-        Returns:
-            The window
-
-        """
-        return self._window
-
     def screenshot(self, filename: str = "screenshot.jpg"):
         """Creates a screenshot in given file.
 
@@ -1053,7 +779,6 @@ class World(world_base.WorldBase):
             filename: The location of the file. The folder must exist. Defaults to "screenshot.jpg".
         """
         pygame.image.save(self.app.window.surface, filename)
-
 
     def get_events(self):
         """Gets a set of all events you can register"""

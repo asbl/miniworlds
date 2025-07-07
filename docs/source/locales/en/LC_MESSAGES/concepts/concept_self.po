@@ -35,7 +35,7 @@ msgstr "All methods that belong to an object always receive this keyword as the 
 msgid ""
 "Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf Attribute und Methoden des Objekts selbst "
 "zurückgegriffen werden."
-msgstr "Subsequently, within the method, attributes and methods of the object itself can be accessed using this keyword."
+msgstr "Subsequently, within the method, attributes and methods of the object itself can be accessed using this keyworld."
 
 #: ../../source/concepts/concept_self.md:9
 msgid "Beispiel:"

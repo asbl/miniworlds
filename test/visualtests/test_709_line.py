@@ -13,7 +13,7 @@ class Test709(unittest.TestCase):
             # Here comes your code
             @world.register
             def setup_environment(self, test):
-                world.default_stroke_color = (0,100,0,100)
+                world.draw.default_stroke_color = (0,100,0,100)
 
                 Line((0,0), (100,0))
 

@@ -77,14 +77,14 @@ msgid ""
 msgstr ""
 
 #: ../../source/index.md:7
-msgid "miniworlds und miniworldmaker"
+msgid "miniworlds und miniworlds"
 msgstr ""
 
 #: ../../source/index.md:9
 msgid ""
-"**miniworlds** ist das Nachfolgeprojekt des **miniworldmakers**. Sehr "
+"**miniworlds** ist das Nachfolgeprojekt des **miniworldss**. Sehr "
 "vieles ist ähnlich, manche Bezeichnungen und Funktionen unterscheiden "
-"sich vom miniworldmaker. (z.B. aus Tokens wurden Actors, aus Boards "
+"sich vom miniworlds. (z.B. aus Tokens wurden Actors, aus Boards "
 "wurden Worlds)"
 msgstr ""
 

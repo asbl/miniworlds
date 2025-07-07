@@ -126,3 +126,12 @@ class Text(actor.Actor):
 
     def get_costume_class(self) -> type["costume_mod.Costume"]:
         return text_costume.TextCostume
+    
+    @classmethod
+    def from_topleft(
+        cls, position: Tuple[float, float] = (0, 0), text: str = "", **kwargs
+    ):
+        """Creates a circle with topleft at position"""
+        text = cls(position, text, **kwargs)
+        text.origin = "topleft"
+        return text

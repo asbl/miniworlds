@@ -51,7 +51,7 @@ Angry-Birds-like
 
 NEW: Hex Boardgame:
 
-[![video](docs/source/_images/hexboard.png)](docs/source/_static/hex_boardgame_short.mp4)
+[![video](docs/source/_images/hexworld.png)](docs/source/_static/hex_boardgame_short.mp4)
 
 ## Links
 

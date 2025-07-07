@@ -14,7 +14,7 @@ class Test138(unittest.TestCase):
             @world.register
             def setup_environment(self, test):
                 self.add_background((255, 0, 0))
-                assert self.get_color_from_pixel((5, 5)) == (255, 0, 0, 255)
+                assert self.draw.get_color_from_pixel((5, 5)) == (255, 0, 0, 255)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

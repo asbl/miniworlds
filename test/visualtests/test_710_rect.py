@@ -14,8 +14,8 @@ class Test710(unittest.TestCase):
             @world.register
             def setup_environment(self, test):
                 
-                world.fill_color = (0,0,0)
-                world.default_fill_color = (255,255,255,255)
+                world.draw.fill_color = (0,0,0)
+                world.draw.default_fill_color = (255,255,255,255)
                 
                 center= (100, 100)
 
@@ -27,16 +27,16 @@ class Test710(unittest.TestCase):
                 print(r.costume.get_image())
 
                 # R2
-                world.default_fill_color = (255,0,0,100)
+                world.draw.default_fill_color = (255,0,0,100)
                 Rectangle.from_center(center,20, 10)
                 
                 # R3
-                world.default_fill_color = (0,255,0,100)
+                world.draw.efault_fill_color = (0,255,0,100)
                 e = Rectangle(center,10, 10)
                 e.center = e.position
 
                 # R4
-                world.default_fill_color = (255,255,0,50)
+                world.draw.default_fill_color = (255,255,0,50)
                 e = Rectangle(center,30, 30)
                 e.center = e.position
             return world

@@ -80,7 +80,6 @@ class EventRegistry:
         """
         # Retrieve the bound method from the instance by method name
         method = inspection.Inspection(instance).get_instance_method(member)
-        print("register", method)
         if not method:
             return  # Exit early if the method doesn't exist or isn't bound
 

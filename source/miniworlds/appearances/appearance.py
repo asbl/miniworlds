@@ -331,7 +331,7 @@ class Appearance(metaclass=MetaAppearance):
                 token.is_rotatable = False
                 @token.register
                 def act(self):
-                    if self.board.frame % 100 == 0:
+                    if self.world.frame % 100 == 0:
                         if self.costume.is_flipped:
                             self.costume.is_flipped = False
                         else:

@@ -131,7 +131,7 @@ class WorldsManager:
         world.start_listening()
 
     def _finalize_world_switch(self, old_world, new_world):
-        self.app.image = new_world.image
+        self.app.image = new_world.backgrounds_manager.image
         self._replace_world_in_worlds_list(old_world, new_world)
         self._update_all_worlds()
         self.app.resize()

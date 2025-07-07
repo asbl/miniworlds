@@ -1,4 +1,4 @@
-from typing import Tuple, Union
+from typing import Tuple, Union, TYPE_CHECKING
 
 import pygame
 import pygame.gfxdraw
@@ -11,6 +11,9 @@ from miniworlds.base.exceptions import (
     LineFirstArgumentError,
     LineSecondArgumentError,
 )
+
+if TYPE_CHECKING:
+    import miniworlds.appearances.costume as costume_mod
 
 
 class Shape(actor.Actor):
@@ -32,10 +35,10 @@ class Shape(actor.Actor):
         super().__init__(position, *args, **kwargs)
         self.costume_manager.has_appearance = True
 
-    def new_costume(self):
+    def new_costume(self) -> "shape_costume.ShapeCostume":
         return shape_costume.ShapeCostume(self)
 
-    def get_costume_class(self) -> type["costume_mod.Costume"]:
+    def get_costume_class(self) -> "shape_costume.ShapeCostume":
         return shape_costume.ShapeCostume
 
 class Circle(Shape):
@@ -432,11 +435,9 @@ class Rectangle(Shape):
         self, position=(0, 0), width: float = 10, height: float = 10, *args, **kwargs
     ):
         args = (width, height, *args)
-        print("create rectangle", position, width, height)
         super().__init__(position, *args, **kwargs)
         self.costume = shape_costume.RectangleCostume(self)
         self.size = (width, height)
-        self.origin = "topleft"
 
     def _validate_arguments(self, position, *args, **kwargs):
         super()._validate_arguments(position, *args, **kwargs)
@@ -459,7 +460,8 @@ class Rectangle(Shape):
     @classmethod
     def from_topleft(cls, position: tuple, width: float, height: float):
         """Creates a rectangle with topleft at position"""
-        rectangle = cls(position, width, height).center
+        rectangle = cls(position, width, height)
+        rectangle.topleft = position
         return rectangle
 
     @classmethod
