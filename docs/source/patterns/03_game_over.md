@@ -22,7 +22,7 @@ def setup():
         else:
             setup()
     @player.register
-    def on_detect_actor(self, other):
+    def on_detecting_actor(self, other):
         if other in enemies:
             game_over()
 ```
@@ -88,7 +88,7 @@ def setup():
         else:
             setup()
     @player.register
-    def on_detect_actor(self, other):
+    def on_detecting_actor(self, other):
         if other in enemies:
             game_over()
 

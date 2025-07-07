@@ -37,6 +37,7 @@ class EventRegistry:
         """
         # Retrieve the bound method from the instance using reflection
         method = inspection.Inspection(instance).get_instance_method(member)
+        self.event_definition.update()
         if method:
             # Loop through all known event names defined in the event definition
             for defined_event in self.event_definition.class_events_set:
@@ -79,7 +80,7 @@ class EventRegistry:
         """
         # Retrieve the bound method from the instance by method name
         method = inspection.Inspection(instance).get_instance_method(member)
-
+        print("register", method)
         if not method:
             return  # Exit early if the method doesn't exist or isn't bound
 

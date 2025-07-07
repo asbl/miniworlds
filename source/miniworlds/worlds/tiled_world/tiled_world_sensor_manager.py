@@ -116,3 +116,7 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         else:
             tile2 = self.actor.world.get_tile(obj)
         return tile1.distance_to(tile2)
+
+
+    def get_actors_at_position(self, position):
+        return [actor for actor in self.world.actors if actor.position == position]

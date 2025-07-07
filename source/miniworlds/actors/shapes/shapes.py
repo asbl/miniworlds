@@ -234,6 +234,28 @@ class Arc(Ellipse):
         self._end_angle = value
         self.costume.set_dirty("draw_shapes", self.costume.RELOAD_ACTUAL_IMAGE)
 
+    @classmethod
+    def from_center(
+        cls,
+        position: tuple,
+        width: float,
+        height: float,
+        start_angle: float = 0,
+        end_angle: float = 360,
+        **kwargs
+    ):
+        """Creates an arc with center at position"""
+        arc = cls(
+            position,
+            width,
+            height,
+            start_angle=start_angle,
+            end_angle=end_angle,
+            **kwargs
+        )
+        arc.origin = "center"
+        return arc
+
 
 class Line(Shape):
     """A Line-Shape defined by start_position and end_position.
@@ -410,9 +432,11 @@ class Rectangle(Shape):
         self, position=(0, 0), width: float = 10, height: float = 10, *args, **kwargs
     ):
         args = (width, height, *args)
+        print("create rectangle", position, width, height)
         super().__init__(position, *args, **kwargs)
         self.costume = shape_costume.RectangleCostume(self)
         self.size = (width, height)
+        self.origin = "topleft"
 
     def _validate_arguments(self, position, *args, **kwargs):
         super()._validate_arguments(position, *args, **kwargs)
