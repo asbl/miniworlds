@@ -74,16 +74,16 @@ msgid "Die Erstellung der ersten Spiele mit **minigames** ist einfach und macht 
 msgstr "Die Erstellung der ersten Spiele mit **minigames** ist einfach und macht Spaß."
 
 #: ../../source/index.md:7
-msgid "miniworlds und miniworldmaker"
-msgstr "miniworlds und miniworldmaker"
+msgid "miniworlds und miniworlds"
+msgstr "miniworlds und miniworlds"
 
 #: ../../source/index.md:9
 msgid ""
-"**miniworlds** ist das Nachfolgeprojekt des **miniworldmakers**. Sehr vieles ist ähnlich, manche Bezeichnungen und "
-"Funktionen unterscheiden sich vom miniworldmaker. (z.B. aus Tokens wurden Actors, aus Boards wurden Worlds)"
+"**miniworlds** ist das Nachfolgeprojekt des **miniworldss**. Sehr vieles ist ähnlich, manche Bezeichnungen und "
+"Funktionen unterscheiden sich vom miniworlds. (z.B. aus Tokens wurden Actors, aus Boards wurden Worlds)"
 msgstr ""
-"**miniworlds** is the successor project of **miniworldmakers**. Many things are similar, some names and functions "
-"differ from miniworldmaker. (e.g., Tokens became Actors, Boards became Worlds)"
+"**miniworlds** is the successor project of **miniworldss**. Many things are similar, some names and functions "
+"differ from miniworlds. (e.g., Tokens became Actors, Boards became Worlds)"
 
 #: ../../source/index.md:15
 msgid "Beispiele"

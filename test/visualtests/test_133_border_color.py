@@ -13,8 +13,8 @@ class Test133(unittest.TestCase):
             # Here comes your code
             @world.register
             def setup_environment(self, test):
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
+                world.draw.default_border_color = (0,0, 255)
+                world.draw.default_border = 1
 
                 t = Actor((10,10), origin = "topleft")
 

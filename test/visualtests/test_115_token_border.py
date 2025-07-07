@@ -15,8 +15,8 @@ class Test115(unittest.TestCase):
                     self.rows = 5
                     self.tile_size = 40
                     self.add_background("images/soccer_green.jpg")
-                    self.default_border_color = (255,100,100,255)
-                    self.default_border = 5
+                    self.draw.default_border_color = (255,100,100,255)
+                    self.draw.default_border = 5
                     
                     actor = Actor()
                     actor.position = (0, 0)

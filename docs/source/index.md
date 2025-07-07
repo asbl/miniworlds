@@ -4,10 +4,10 @@
 
 Die Erstellung der ersten Spiele mit **minigames** ist einfach und macht Spaß.
 
-:::{admonition} miniworlds und miniworldmaker
+:::{admonition} miniworlds und miniworlds
 
-**miniworlds** ist das Nachfolgeprojekt des **miniworldmakers**. Sehr vieles ist ähnlich, manche Bezeichnungen
-und Funktionen unterscheiden sich vom miniworldmaker.
+**miniworlds** ist das Nachfolgeprojekt des **miniworldss**. Sehr vieles ist ähnlich, manche Bezeichnungen
+und Funktionen unterscheiden sich vom miniworlds.
 (z.B. aus Tokens wurden Actors, aus Boards wurden Worlds)
 
 :::

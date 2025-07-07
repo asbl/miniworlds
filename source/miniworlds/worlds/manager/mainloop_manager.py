@@ -26,7 +26,7 @@ class MainloopManager:
             if self.world.frame > 0 and self.world.frame % self.world.step == 0:
                 self.world.event_manager.act_all()
             self.world.collision_manager.handle_all_collisions()
-            self.world.mouse_manager.update_positions()
+            self.world.mouse._update_positions()
             if self.world.frame == 0:
                 self.world.backgrounds_manager.init_display()
             # run animations

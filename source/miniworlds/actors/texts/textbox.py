@@ -54,7 +54,7 @@ class TextBox(parent_actor.ParentActor):
         dummy = self.create_line((0, 0))
         font = dummy.costume.font_manager.font
         words = [
-            word.split(" ") for word in self.text.splitlines()
+            world.split(" ") for word in self.text.splitlines()
         ]  # 2D array where each row is a list of words.
         x, y = self.position
         for line in words:

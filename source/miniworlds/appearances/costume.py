@@ -52,16 +52,16 @@ class Costume(appear.Appearance):
         self.border_color = (100, 100, 255)
 
     def _set_world_default_values(self):
-        if self.actor.world.default_fill_color:
-            self.fill_color = self.world.default_fill_color
-        if self.actor.world.default_is_filled:
-            self._is_filled = self.world.default_is_filled
-        if self.actor.world.default_stroke_color:
-            self.border_color = self.world.default_stroke_color
-        if self.actor.world.default_border_color:
-            self.border_color = self.world.default_border_color
-        if self.actor.world.default_border:
-            self.border = self.actor.world.default_border
+        if self.actor.world.draw.default_fill_color:
+            self.fill_color = self.world.draw.default_fill_color
+        if self.actor.world.draw.default_is_filled:
+            self._is_filled = self.world.draw.default_is_filled
+        if self.actor.world.draw.default_stroke_color:
+            self.border_color = self.world.draw.default_stroke_color
+        if self.actor.world.draw.default_border_color:
+            self.border_color = self.world.draw.default_border_color
+        if self.actor.world.draw.default_border:
+            self.border = self.actor.world.draw.default_border
 
     @property
     def info_overlay(self):

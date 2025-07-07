@@ -584,7 +584,6 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         else:
             return True
 
-
     @costume.setter
     def costume(self, value):
         self.costume_manager.appearance = value

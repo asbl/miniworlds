@@ -7,7 +7,7 @@ It is a 2D engine inspired by greenfoot and gamegrid based on pygame.
 
 ### Examples
 
-Two actors that can be controlled with the keyboard.
+Two actors that can be controlled with the keyworld.
 
 ```python
 from miniworlds import World, Actor

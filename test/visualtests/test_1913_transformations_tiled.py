@@ -73,7 +73,7 @@ class Test1913(unittest.TestCase):
         world = test_code()
         """ Setup screenshot tester"""
         TEST_FRAMES = [1]
-        QUIT_FRAME = 90
+        QUIT_FRAME = 5
         tester = ScreenshotTester(TEST_FRAMES, QUIT_FRAME, self)
         tester.setup(world)
         if hasattr(world, "setup_environment"):

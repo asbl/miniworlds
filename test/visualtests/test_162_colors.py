@@ -15,7 +15,7 @@ class Test162(unittest.TestCase):
             def setup_environment(self, test):
                 c = Actor((50,50), origin = "topleft")
                 c.color = (255,0,0)
-                world.color = (0,255,0)
+                world.draw.color = (0,255,0)
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

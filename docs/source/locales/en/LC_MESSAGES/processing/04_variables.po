@@ -205,7 +205,7 @@ msgid ""
 "das Schlüsselwort global verwenden."
 msgstr ""
 "A variable defined outside a function is **globally** visible and can be used in all functions of your program. "
-"**Note**: If you want to access and modify global variables, you must use the global keyword."
+"**Note**: If you want to access and modify global variables, you must use the global keyworld."
 
 #: ../../source/processing/04_variables.md:151
 msgid "Folgendes funktioniert:"
