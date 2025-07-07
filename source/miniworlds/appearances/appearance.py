@@ -132,7 +132,7 @@ class Appearance(metaclass=MetaAppearance):
                 from miniworlds import *
 
                 world = World()
-                background = board.add_background("images/1.png")
+                background = world.add_background("images/1.png")
                 background.add_image("images/2.png")
                 background.set_image(1)
                 world.run()
@@ -243,7 +243,7 @@ class Appearance(metaclass=MetaAppearance):
                 from miniworlds import *
 
                 world = World()
-                background = board.add_background("images/stone.png")
+                background = world.add_background("images/stone.png")
                 background.is_textured = True
                 world.run()
 
@@ -257,7 +257,7 @@ class Appearance(metaclass=MetaAppearance):
                 from miniworlds import *
 
                 world = World()
-                background = board.add_background("images/stone.png")
+                background = world.add_background("images/stone.png")
                 background.is_textured = True
                 background.texture_size = (15,15)
                 world.run()

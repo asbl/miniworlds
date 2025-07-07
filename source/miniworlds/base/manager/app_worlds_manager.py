@@ -84,8 +84,6 @@ class WorldsManager:
             world.camera.width = self.app.window.width
         elif dock == "top_left":
             world.camera.screen_topleft = (0, 0)
-            #world.camera.height = world.camera.height
-            #world.camera.width = world.camera.width
 
         world.camera.disable_resize()
         frame = self.app.running_world.frame

@@ -1149,6 +1149,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
                     self.undo_move()
 
         """
+        print("undo move")
         return self.position_manager.undo_move()
 
     def move_towards(self, target: Union[Tuple[float, float], "Actor"]):
@@ -2022,7 +2023,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         raise NotImplementedOrRegisteredError(self.on_detecting_world)
 
     def on_detecting_actor(self, actor: "Actor"):
-        """*on_detect_actor* is called, when actor is detects a actor on same position
+        """*on_detecting_actor* is called, when actor is detects a actor on same position
 
         Args:
             actor (Actor): The found actor
@@ -2034,7 +2035,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
             .. code-block::
 
                 @player.register
-                def on_detect_actor(self, actor):
+                def on_detecting_actor(self, actor):
                     print("Player 1: detecting actor:")
                     if actor == player2:
                     print("Am i detecting player2?" + str(actor == player2))

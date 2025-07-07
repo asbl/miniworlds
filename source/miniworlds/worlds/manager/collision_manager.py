@@ -97,12 +97,11 @@ class CollisionManager:
         """
         class_events = self.world.event_manager.definition.class_events["on_detecting"]
         registry = self.world.event_manager.registry.registered_events
-
         for event in class_events:
             # Copy to avoid modification during iteration
             methods = list(registry[event])  # set → list is faster than .copy()
-
             for method in methods:
+                
                 actor = method.__self__
                 method_name_parts = method.__name__.split("_")
 

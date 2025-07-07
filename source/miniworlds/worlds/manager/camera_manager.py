@@ -18,7 +18,6 @@ class CameraManager(pygame.sprite.Sprite):
         self._world_size_x = view_x
         self._world_size_y = view_y
         self.view: Tuple = (view_x, view_y) # view size in pixels
-        print("view ", self.view)
         self._cached_rect = self.get_rect()
         self._cached_screen_rect = self.get_screen_rect()
 

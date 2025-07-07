@@ -54,6 +54,7 @@ class EventManager:
         return self.registry.unregister_instance(instance)
 
     def can_register_to_actor(self, method: Callable):
+        self.definition.update()
         return method.__name__ in self.definition.actor_class_events_set
 
     def copy_registered_events(self, key):

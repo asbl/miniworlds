@@ -24,6 +24,9 @@ class EventDefinition:
         self.class_events_set = set()
         self.setup_event_list()  # setup static event set/dict
 
+    def update(self):
+        self.setup_event_list()
+
     def setup_event_list(self):
         specific_key_events = []
         for key, value in keys.KEYS.items():
