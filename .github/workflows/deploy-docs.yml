@@ -26,8 +26,8 @@ jobs:
         pip install apeye==1.1.0
         pip install -r requirements.txt
 
-    - name: Install local Python package (for autodoc)
-      run: pip install -e .
+    - name: Install local Python package (from source/)
+      run: pip install -e source
 
     - name: Build i18n documentation (EN & DE)
       working-directory: docs
@@ -42,10 +42,10 @@ jobs:
         sphinx-intl build
 
         # Schritt 4: Baue HTML-Dokumentation für Englisch
-        sphinx-build -b html -D language=en source build/html/en
+        sphinx-build -b html -nWT -D language=en source build/html/en
 
         # Schritt 5: Baue HTML-Dokumentation für Deutsch
-        sphinx-build -b html -D language=de source build/html/de
+        sphinx-build -b html -nWT -D language=de source build/html/de
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
