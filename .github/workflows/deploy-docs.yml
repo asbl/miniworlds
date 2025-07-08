@@ -46,7 +46,7 @@ jobs:
         echo "PYTHONPATH=$PYTHONPATH"
 
         # Schritt 1: Extrahiere Texte
-        make gettext
+         make SPHINXBUILD="python -m sphinx.cmd.build" gettext
 
         # Schritt 2: Aktualisiere PO-Dateien
         sphinx-intl update -p build/gettext -l en -l de
@@ -54,12 +54,8 @@ jobs:
         # Schritt 3: Kompiliere MO-Dateien
         sphinx-intl build
 
-        # Schritt 4: Baue HTML-Dokumentation (mit Logausgabe sichtbar)
-        echo "Building EN documentation:"
-        python -m sphinx.cmd.build -b html -nT -D language=en source build/html/en || true
-
-        echo "Building DE documentation:"
-        python -m sphinx.cmd.build -b html -nT -D language=de source build/html/de || true
+        make SPHINXBUILD="python -m sphinx.cmd.build" SPHINXOPTS="-D language=en" html
+        make SPHINXBUILD="python -m sphinx.cmd.build" SPHINXOPTS="-D language=de" html
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
