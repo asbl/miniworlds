@@ -55,10 +55,10 @@ jobs:
 
         # Schritt 4: Baue HTML-Dokumentation (mit Logausgabe sichtbar)
         echo "Building EN documentation:"
-        python -m sphinx.cmd.build -b html -nWT -D language=en source build/html/en || true
+        python -m sphinx.cmd.build -b html -nT -D language=en source build/html/en || true
 
         echo "Building DE documentation:"
-        python -m sphinx.cmd.build -b html -nWT -D language=de source build/html/de || true
+        python -m sphinx.cmd.build -b html -nT -D language=de source build/html/de || true
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
