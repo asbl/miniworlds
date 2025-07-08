@@ -76,4 +76,4 @@ jobs:
         
         ssh -p "$SERVER_PORT" "$SERVER_USER@$SERVER_HOST" "mkdir -p $SERVER_PATH"
         echo "Deploying to: $SERVER_PATH"
-        rsync --progress -avz -e "ssh -p $SERVER_PORT" _build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
+        rsync --progress -avz -e "ssh -p $SERVER_PORT" build/html/ "$SERVER_USER@$SERVER_HOST:$SERVER_PATH"
