@@ -22,13 +22,27 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox sphinxcontrib-mermaid autoclasstoc
+        pip install sphinx-intl sphinx_toolbox sphinx sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinx-toolbox sphinxcontrib-mermaid autoclasstoc
         pip install apeye==1.1.0
 
-    - name: Build documentation in subshell
-      working-directory: docs  # Wechsle in den Unterordner "docs"
+    - name: Build i18n documentation (EN & DE)
+      working-directory: docs
       run: |
-        (python -m sphinx -b html source _build/html)
+        # Schritt 1: Extrahiere Texte
+        make gettext
+
+        # Schritt 2: Aktualisiere PO-Dateien
+        sphinx-intl update -p build/gettext -l en -l de
+
+        # Schritt 3: Kompiliere MO-Dateien
+        sphinx-intl build
+
+        # Schritt 4: Baue HTML-Dokumentation für Englisch
+        sphinx-build -b html -D language=en source build/html/en
+
+        # Schritt 5: Baue HTML-Dokumentation für Deutsch
+        sphinx-build -b html -D language=de source build/html/de
+
 
     - name: Deploy to Webspace
       working-directory: docs  # Wechsle in den Unterordner "docs"
