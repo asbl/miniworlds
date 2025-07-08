@@ -16,6 +16,8 @@ jobs:
 
     - name: Set up Python
       uses: actions/setup-python@v4
+      env:
+        PYTHONPATH: ${{ github.workspace }}/source
       with:
         python-version: '3.9'
 
@@ -25,7 +27,7 @@ jobs:
         pip install sphinx sphinx-intl sphinx-toolbox sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinxcontrib-mermaid autoclasstoc
         pip install apeye==1.1.0
         pip install -r requirements.txt
-        cd source && pip install -e .
+        pip install -e .
 
     - name: Build i18n documentation (EN & DE)
       working-directory: docs
