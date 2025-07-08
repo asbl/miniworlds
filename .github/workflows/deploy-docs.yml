@@ -8,15 +8,12 @@ on:
 
 jobs:
   build-docs:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install make
-      run: sudo apt-get update && sudo apt-get install -y make
-      
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -30,23 +27,15 @@ jobs:
         pip install -r requirements.txt
         pip install -e source
 
-    - name: Debug PATH and Python
-      run: |
-        echo "Python path: $(which python)"
-        echo "Python version: $(python --version)"
-        echo "Installed packages:"
-        pip list
-
     - name: Build i18n documentation (EN & DE)
       working-directory: docs
       env:
         PYTHONPATH: ${{ github.workspace }}/source
       run: |
-        # Sicherstellen, dass der Code importierbar ist
         echo "PYTHONPATH=$PYTHONPATH"
 
         # Schritt 1: Extrahiere Texte
-        make SPHINXBUILD="python -m sphinx.cmd.build" gettext
+        python -m sphinx.cmd.build -b gettext source build/gettext
 
         # Schritt 2: Aktualisiere PO-Dateien
         sphinx-intl update -p build/gettext -l en -l de
@@ -54,8 +43,9 @@ jobs:
         # Schritt 3: Kompiliere MO-Dateien
         sphinx-intl build
 
-        make SPHINXBUILD="python -m sphinx.cmd.build" SPHINXOPTS="-D language=en" html
-        make SPHINXBUILD="python -m sphinx.cmd.build" SPHINXOPTS="-D language=de" html
+        # Schritt 4: HTML-Build für EN & DE
+        python -m sphinx.cmd.build -b html -D language=en source build/html/en
+        python -m sphinx.cmd.build -b html -D language=de source build/html/de
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
