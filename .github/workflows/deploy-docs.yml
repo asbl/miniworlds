@@ -25,9 +25,7 @@ jobs:
         pip install sphinx sphinx-intl sphinx-toolbox sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinxcontrib-mermaid autoclasstoc
         pip install apeye==1.1.0
         pip install -r requirements.txt
-
-    - name: Install local Python package (from source/)
-      run: pip install -e source
+        pip install -e source
 
     - name: Debug PATH and Python
       run: |
