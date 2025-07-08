@@ -1,27 +1,27 @@
-# Das Schlüsselwort self
+# The Keyword `self`
 
-In dem code oben hast du gesehen, dass die Methode ``act`` als Parameter das Schlüsselwort ``self`` erwartet. 
+In the code above, you saw that the `act` method takes `self` as a parameter.
 
-Alle Methoden die zu einem Objekt gehören erhalten dieses Schlüsselwort immer als ersten Paramerer.
+All methods that belong to an object **always** receive `self` as their first parameter.
 
-Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf Attribute und Methoden des Objekts selbst zurückgegriffen werden.
+Inside the method, you can then use `self` to access the **attributes and methods** of the object itself.
 
-Beispiel:
+### Example:
 
-Dieser Code
+This code:
 
-``` python
+```python
 @player.register
 def act(self):
     self.direction = "right"
 ```
 
-ist äquivalent zu diesem Code:
+is equivalent to:
 
-``` python
+```python
 @player.register
 def act(self):
     player.direction = "right"
 ```
 
-`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode registriert wurde.
+Here, `self` refers to the `player` object where the method was registered.

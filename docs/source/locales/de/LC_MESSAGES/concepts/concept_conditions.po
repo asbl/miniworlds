@@ -2,238 +2,210 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/concepts/concept_conditions.md:1
-msgid "Konzept: Verzweigungen"
-msgstr "Concept: Branches"
+msgid "Concept: Branching"
+msgstr "Konzept: Verzweigungen"
 
 #: ../../source/concepts/concept_conditions.md:3
-msgid "Verzweigungen brauchst du immer dann, wenn du Bedingungen überprüfen willst und davon der Programmfluss abhängen soll."
-msgstr "You need branches whenever you want to check conditions and the program flow should depend on them."
-
-#: ../../source/concepts/concept_conditions.md:5
-msgid "Erstes Beispiel"
-msgstr "Erstes Beispiel"
+msgid ""
+"You need **branches** whenever the flow of your program should depend on "
+"certain conditions."
+msgstr ""
+"Du brauchst **Verzweigungen**, wenn der Ablauf deines Programms von bestimmten "
+"Bedingungen abhängen soll."
 
 #: ../../source/concepts/concept_conditions.md:7
-msgid "Willst du z.B. in deinem Spiel überpfüen, ob ein bestimmter Punktestand erreicht wurde, so geht dies mit einer Anweisung"
-msgstr ""
-"If you want to check in your game, for example, whether a certain score has been reached, you can do this with an "
-"instruction"
+msgid "First Example"
+msgstr "Erstes Beispiel"
 
-#: ../../source/concepts/concept_conditions.md:14
-msgid "Allgemeine Syntax"
+#: ../../source/concepts/concept_conditions.md:9
+msgid ""
+"For example, in a game you might want to check if a certain number of "
+"points has been reached:"
+msgstr ""
+"In einem Spiel möchtest du vielleicht überprüfen, ob eine bestimmte Punktzahl "
+"erreicht wurde:"
+
+#: ../../source/concepts/concept_conditions.md:18
+msgid "General Syntax"
 msgstr "Allgemeine Syntax"
 
-#: ../../source/concepts/concept_conditions.md:16
-msgid "Allgemein ist dies die Syntax für Verzweigungen:"
-msgstr "In der Regel ist dies die Syntax für Verzweigungen:"
+#: ../../source/concepts/concept_conditions.md:20
+msgid "This is the general syntax of a conditional statement:"
+msgstr "Das ist die allgemeine Syntax einer Bedingung:"
 
-#: ../../source/concepts/concept_conditions.md:23
-msgid "Boolsche Ausdrücke"
-msgstr "Boolean-Ausdrücke"
+#: ../../source/concepts/concept_conditions.md:29
+msgid "Boolean Expressions"
+msgstr "Boolesche Ausdrücke"
 
-#: ../../source/concepts/concept_conditions.md:25
+#: ../../source/concepts/concept_conditions.md:31
 msgid ""
-"Eine Bedingung ist ein Ausdruck, der den Wert `True` oder `False` besitzen  kann - Man nennt solche Ausdrücke *boolsche "
-"Ausdrücke*."
+"A condition is an expression that evaluates to either `True` or `False` –"
+" such expressions are called **boolean expressions**."
 msgstr ""
-"A condition is an expression that can have the value `True` or `False` - Such expressions are called *boolean "
-"expressions*."
+"Eine Bedingung ist ein Ausdruck, der entweder `True` oder `False` ergibt – "
+"solche Ausdrücke nennt man **boolesche Ausdrücke**."
 
-#: ../../source/concepts/concept_conditions.md:28
+#: ../../source/concepts/concept_conditions.md:33
 msgid ""
-"Die einfachsten boolschen Ausdrücke sind `True` und `False`. Weitere Ausdrücke erhälst du i.d.R. mit **Vergleichen**, "
-"z.B.:"
+"The simplest ones are `True` and `False`. More useful expressions are "
+"based on **comparisons**:"
 msgstr ""
-"The simplest boolean expressions are `True` and `False`. You usually get more expressions with **comparisons**, for "
-"example:"
+"Die einfachsten sind `True` und `False`. Nützlichere Ausdrücke basieren auf "
+"**Vergleichen**:"
 
-#: ../../source/concepts/concept_conditions.md:39
-msgid "Die Ausdrücke können beliebig kompliziert sein und Variablen enthalten."
-msgstr "Expressions can be arbitrarily complex and contain variables."
-
-#: ../../source/concepts/concept_conditions.md:42
-msgid ""
-"Achtung: Bei Vergleichen verwendet man immer ein doppeltes Gleichheitszeichen anstelle eines einfachen "
-"Gleichheitszeichen"
-msgstr ""
-"Warning: Bei Vergleichen verwendet man immer ein doppeltes Gleichheitszeichen anstelle eines einfachen "
-"Gleichheitszeichen"
-
-#: ../../source/concepts/concept_conditions.md:45
-msgid "Vergleiche"
-msgstr "Vergleiche"
+#: ../../source/concepts/concept_conditions.md:44
+msgid "You can build arbitrarily complex expressions involving variables."
+msgstr "Du kannst beliebig komplexe Ausdrücke mit Variablen bilden."
 
 #: ../../source/concepts/concept_conditions.md:47
-msgid "Folgende Vergleiche kannst du verwenden:"
-msgstr "You can use the following comparisons:"
-
-#: ../../source/concepts/concept_conditions.md:49
-msgid "`<`: Kleiner als"
-msgstr "`<`: Kleiner als"
-
-#: ../../source/concepts/concept_conditions.md:50
-msgid "`<=` : Kleiner als oder gleich"
-msgstr "`<=` : Kleiner oder gleich"
-
-#: ../../source/concepts/concept_conditions.md:51
-msgid "`==`: Gleich"
-msgstr "`==`: Gleich"
+msgid ""
+"⚠️ Attention: For comparisons use **double equals (`==`)** – not a single"
+" equals (`=`), which is used for assignment!"
+msgstr ""
+"⚠️ Achtung: Für Vergleiche benutzt man **zwei Gleichheitszeichen (`==`)** – "
+"nicht ein einzelnes (`=`), das für Zuweisungen verwendet wird!"
 
 #: ../../source/concepts/concept_conditions.md:52
-msgid "`>=`: Größer als oder gleich"
-msgstr "`>=`: Größer als oder gleich"
+msgid "Comparison Operators"
+msgstr "Vergleichsoperatoren"
 
-#: ../../source/concepts/concept_conditions.md:53
-msgid "`>` Größer als"
-msgstr "`>` Größer als"
+#: ../../source/concepts/concept_conditions.md:54
+msgid "You can use the following comparison operators:"
+msgstr "Du kannst die folgenden Vergleichsoperatoren verwenden:"
 
-#: ../../source/concepts/concept_conditions.md:55
-msgid "Code Blöcke"
-msgstr "Code-Blöcke"
+#: ../../source/concepts/concept_conditions.md:56
+msgid "`<`  : less than"
+msgstr "`<`  : kleiner als"
 
 #: ../../source/concepts/concept_conditions.md:57
-msgid ""
-"Willst du mehrere Anweisungen abhängig von der Bedingung durchführen, so geht dies mit Hilfe von Code-Blöcken. "
-"Code-Blöcke sind stets gleichweit eingerückt und alle Anweisungen die entsprechend eingerückt sind, werden"
-msgstr ""
-"If you want to execute multiple instructions depending on the condition, you can do this with the help of code blocks. "
-"Code blocks are always indented equally, and all instructions that are indented accordingly are"
+msgid "`<=` : less than or equal"
+msgstr "`<=` : kleiner oder gleich"
+
+#: ../../source/concepts/concept_conditions.md:58
+msgid "`==`: equal"
+msgstr "`==` : gleich"
 
 #: ../../source/concepts/concept_conditions.md:59
-msgid "Beispiel:"
-msgstr "Example:"
+msgid "`>=`: greater than or equal"
+msgstr "`>=` : größer oder gleich"
+
+#: ../../source/concepts/concept_conditions.md:60
+msgid "`>`  : greater than"
+msgstr "`>`  : größer als"
+
+#: ../../source/concepts/concept_conditions.md:64
+msgid "Code Blocks"
+msgstr "Code-Blöcke"
+
+#: ../../source/concepts/concept_conditions.md:66
+msgid ""
+"If you want to execute **multiple lines of code** when the condition is "
+"met, you use **code blocks**, i.e., **indented** lines below the `if` "
+"statement."
+msgstr ""
+"Wenn du **mehrere Zeilen Code** ausführen willst, wenn die Bedingung erfüllt ist, "
+"benutzt du **Code-Blöcke**, d. h. **eingerückte** Zeilen unterhalb der `if`-Anweisung."
 
 #: ../../source/concepts/concept_conditions.md:68
+msgid "Example:"
+msgstr "Beispiel:"
+
+#: ../../source/concepts/concept_conditions.md:77
 msgid ""
-"Unabhängig von der Punktzahl wird die letzte Code-Zeile auf jeden Fall ausgeführt. Die beiden eingerückten Zeilen "
-"werden allerdings nur ausgeführt, wenn der Punktestand größer als 100 ist."
+"The last line is always executed. The indented lines only run if `points "
+"> 100`."
 msgstr ""
-"Regardless of the score, the last line of code will be executed in any case. However, the two indented lines will only "
-"be executed if the score is greater than 100."
+"Die letzte Zeile wird immer ausgeführt. Die eingerückten Zeilen nur, wenn `points > 100`."
 
-#: ../../source/concepts/concept_conditions.md:70
-msgid "Elif und Else"
-msgstr "Elif und Else"
+#: ../../source/concepts/concept_conditions.md:81
+msgid "`elif` and `else`"
+msgstr "`elif` und `else`"
 
-#: ../../source/concepts/concept_conditions.md:72
-msgid "Mit elif und else kannst du Alternativen einbauen. Dies geht z.B. so:"
-msgstr "Mit elif und else kannst du Alternativen einbauen. Dies geht z.B. so:"
-
-#: ../../source/concepts/concept_conditions.md:84
-msgid "Die allgemeine Syntax ist:"
-msgstr "The general syntax is:"
+#: ../../source/concepts/concept_conditions.md:83
+msgid "With `elif` and `else`, you can build **alternatives**:"
+msgstr "Mit `elif` und `else` kannst du **Alternativen** formulieren:"
 
 #: ../../source/concepts/concept_conditions.md:95
-msgid "Sowohl elif als auch else können dabei weggelassen werden. Es sind auch mehrere elif-Blöcke möglich."
-msgstr "Both elif and else can be omitted. Multiple elif blocks are also possible."
+msgid "Syntax:"
+msgstr "Syntax:"
 
-#: ../../source/concepts/concept_conditions.md:97
-msgid "Ausführliches Beispiel"
-msgstr "Detailed example"
+#: ../../source/concepts/concept_conditions.md:106
+msgid "You can skip `elif` or `else`, and use multiple `elif`s if needed."
+msgstr "`elif` oder `else` sind optional, und du kannst mehrere `elif` verwenden."
 
-#: ../../source/concepts/concept_conditions.md:99
+#: ../../source/concepts/concept_conditions.md:110
+msgid "Detailed Example – Moving a Rectangle"
+msgstr "Detailliertes Beispiel – Ein Rechteck bewegen"
+
+#: ../../source/concepts/concept_conditions.md:112
 msgid ""
-"Ein Rechteck soll sich von rechts nach links bewegen. Wenn es die linke Seite erreicht, soll es wieder ganz rechts "
-"auftauchen."
-msgstr "A rectangle should move from right to left. When it reaches the left side, it should reappear on the far right."
-
-#: ../../source/concepts/concept_conditions.md:101
-msgid "Die erste Variante sieht so aus:"
-msgstr "The first variant looks like this:"
-
-#: ../../source/concepts/concept_conditions.md:118
-msgid "Es fehlt noch der entscheidende Teil."
-msgstr "The crucial part is still missing."
-
-#: ../../source/concepts/concept_conditions.md:120
-msgid "Diesen kann man so formulieren:"
-msgstr "This can be formulated as follows:"
-
-#: ../../source/concepts/concept_conditions.md:122
-msgid "`Falls die x-Koordinate den Wert 0 erreicht, setze das Rechteck wieder nach rechts`"
-msgstr "`If the x-coordinate reaches the value 0, move the rectangle back to the right`"
-
-#: ../../source/concepts/concept_conditions.md:124
-msgid "Dies kann man direkt in Python übersetzen:"
-msgstr "Dies kann man direkt in Python übersetzen:"
-
-#: ../../source/concepts/concept_conditions.md:142
-msgid "Ein weiteres Beispiel - Ein simples Flappy-Bird"
-msgstr "Ein weiteres Beispiel - Ein einfaches Flappy-Bird"
-
-#: ../../source/concepts/concept_conditions.md:144
-msgid "Wir wollen eine Art (einfaches) Flappy-Bird programmieren."
-msgstr "We want to program a kind of (simple) Flappy Bird."
-
-#: ../../source/concepts/concept_conditions.md:146
-msgid ""
-"Unser Hauptcharakter soll ein Ball sein, der bei Tastendruck sich nach oben bewegt. Dies können wir wie folgt "
-"realisieren:"
-msgstr "Our main character should be a ball that moves upwards when a key is pressed. We can achieve this as follows:"
-
-#: ../../source/concepts/concept_conditions.md:173
-msgid "Der Ball fällt und fällt immer schneller."
-msgstr "The ball falls and falls faster and faster."
-
-#: ../../source/concepts/concept_conditions.md:175
-msgid "In der Zeile:"
-msgstr "In der Zeile:"
-
-#: ../../source/concepts/concept_conditions.md:182
-msgid ""
-"wird die Geschwindigkeit erhöht, mit der der Ball fällt.  Im ersten Schritt soll sich der Ball nach oben bewegen "
-"können, wenn eine Taste gedrückt wird."
+"A rectangle moves from right to left. If it reaches the left edge, it "
+"should reappear on the right."
 msgstr ""
-"the speed at which the ball falls is increased. In the first step, the ball should be able to move upwards when a key "
-"is pressed."
+"Ein Rechteck bewegt sich von rechts nach links. Wenn es den linken Rand erreicht, "
+"soll es wieder rechts erscheinen."
 
-#: ../../source/concepts/concept_conditions.md:213
-msgid "Kolissionen"
+#: ../../source/concepts/concept_conditions.md:114
+msgid "Version 1:"
+msgstr "Version 1:"
+
+#: ../../source/concepts/concept_conditions.md:129
+msgid "Now let’s reset the position:"
+msgstr "Jetzt setzen wir die Position zurück:"
+
+#: ../../source/concepts/concept_conditions.md:141
+msgid "Another Example – A Simple Flappy Bird"
+msgstr "Ein weiteres Beispiel – Ein einfaches Flappy Bird"
+
+#: ../../source/concepts/concept_conditions.md:143
+msgid ""
+"We want a **ball** to move up when a key is pressed, and fall down "
+"otherwise (gravity)."
+msgstr ""
+"Ein **Ball** soll beim Tastendruck nach oben fliegen und sonst herunterfallen "
+"(Gravitation)."
+
+#: ../../source/concepts/concept_conditions.md:174
+msgid ""
+"The ball falls, and gets faster due to gravity. When a key is pressed, it"
+" jumps up."
+msgstr ""
+"Der Ball fällt und wird durch die Gravitation schneller. Wenn eine Taste gedrückt wird, "
+"springt er nach oben."
+
+#: ../../source/concepts/concept_conditions.md:178
+msgid "Collisions"
 msgstr "Kollisionen"
 
-#: ../../source/concepts/concept_conditions.md:215
-msgid "Nun wollen wir nicht nur einfach Positionen vergleichen, sondern auch die Lage von Objekten zueinander."
-msgstr "Now we want not only to compare positions, but also the relative location of objects to each other."
-
-#: ../../source/concepts/concept_conditions.md:217
-msgid "Dafür können wir verschiedene `sensor`-Methoden verwenden."
-msgstr "We can use different `sensor` methods for that."
-
-#: ../../source/concepts/concept_conditions.md:219
-msgid "Dies geht z.B. so:"
-msgstr "This works, for example, like this:"
-
-#: ../../source/concepts/concept_conditions.md:252
-msgid "Die Logik befindet sich in folgenden Zeilen:"
-msgstr "The logic is in the following lines:"
-
-#: ../../source/concepts/concept_conditions.md:260
+#: ../../source/concepts/concept_conditions.md:180
 msgid ""
-"Die erste Zeile überprüft mit einem Sensor, welches Actor an der eigenen Position gefunden wurde (und gibt das erste "
-"gefundene Actor zurück). Anschließend wird das so gefundene Actor mit dem Rechteck verglichen. Wenn dies die gleichen "
-"Objekte sind, dann wird das Spiel abgebrochen."
+"You can also check whether **two objects touch each other** using "
+"**sensor methods** like `detect_actor()`:"
 msgstr ""
-"The first line checks with a sensor which actor was found at its own position (and returns the first found actor). Then "
-"the actor found in this way is compared with the rectangle. If these are the same objects, then the game is aborted."
+"Du kannst auch prüfen, ob **zwei Objekte sich berühren**, mit Hilfe von "
+"**Sensor-Methoden** wie `detect_actor()`:"
 
-#: ../../source/concepts/concept_conditions.md:263
-msgid "So sieht das Flappy-Bird-Spiel nun aus:"
-msgstr "This is what the Flappy Bird game looks like now:"
+#: ../../source/concepts/concept_conditions.md:194
+msgid "This checks if the ball collides with the rectangle. If so, the game ends."
+msgstr "Dies prüft, ob der Ball mit dem Rechteck kollidiert. Falls ja, endet das Spiel."
+
+#: ../../source/concepts/concept_conditions.md:198
+msgid "Final Result – Flappy Bird Prototype"
+msgstr "Endergebnis – Flappy-Bird-Prototyp"

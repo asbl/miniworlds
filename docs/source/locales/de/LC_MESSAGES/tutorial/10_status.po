@@ -2,99 +2,106 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/10_status.md:1
-msgid "Text und Zahlen"
+msgid "Text and Numbers"
 msgstr "Text und Zahlen"
 
 #: ../../source/tutorial/10_status.md:3
-msgid "Punktestand/Spielstatus"
-msgstr "Score/Spielstatus"
+msgid "Score / Game Status"
+msgstr "Punktestand / Spielstatus"
 
 #: ../../source/tutorial/10_status.md:5
-msgid "In vielen Spielen möchtest du den aktuellen Punktestand oder andere Statusanzeigen einblenden."
-msgstr "In many games, you want to display the current score or other status indicators."
+msgid ""
+"In many games, you’ll want to display the current score or other status "
+"indicators."
+msgstr ""
+"In vielen Spielen möchtest du den aktuellen Punktestand oder andere "
+"Statusanzeigen einblenden."
 
 #: ../../source/tutorial/10_status.md:7
 msgid ""
-"**Miniworlds** bietet dafür spezielle Actors wie **Text**- oder **Number**-Actors, die dir helfen, Informationen "
-"anzuzeigen."
+"**Miniworlds** provides special actor types like **Text** and **Number** "
+"actors that help you display this information easily."
 msgstr ""
-"**Miniworlds** bietet dafür spezielle Akteure wie **Text**- oder **Number**-Akteure, die dir helfen, Informationen "
-"anzuzeigen."
-
-#: ../../source/tutorial/10_status.md:9
-msgid "Text erstellen"
-msgstr "Text erstellen"
+"**Miniworlds** bietet dafür spezielle Akteurstypen wie **Text**- und "
+"**Number**-Akteure, mit denen du solche Informationen leicht anzeigen kannst."
 
 #: ../../source/tutorial/10_status.md:11
-msgid "Um einen Text anzuzeigen, kannst du folgendermaßen vorgehen:"
-msgstr "To display a text, you can proceed as follows:"
+msgid "Creating Text"
+msgstr "Text erstellen"
 
-#: ../../source/tutorial/10_status.md:17
-msgid "`position`: Ein Tupel, das die obere linke Ecke des Textes definiert."
-msgstr "`position`: A tuple that defines the top-left corner of the text."
+#: ../../source/tutorial/10_status.md:13
+msgid "To display text, you can use the following:"
+msgstr "Um Text anzuzeigen, kannst du Folgendes verwenden:"
 
-#: ../../source/tutorial/10_status.md:18
-msgid "`string`: Der anzuzeigende Text."
+#: ../../source/tutorial/10_status.md:19
+msgid "`position`: A tuple that defines the top-left corner of the text."
+msgstr "`position`: Ein Tupel, das die obere linke Ecke des Texts definiert."
+
+#: ../../source/tutorial/10_status.md:20
+msgid "`string`: The text to display."
 msgstr "`string`: Der anzuzeigende Text."
 
-#: ../../source/tutorial/10_status.md:21
+#: ../../source/tutorial/10_status.md:22
 msgid ""
-"In einer normalen **World** wird der Text automatisch skaliert.  In einer **Tiledworld** wird der Text in einer Kachel "
-"angezeigt, was bei längeren Texten zu Platzproblemen führen kann."
+"\\:::{note} In a regular **World**, the text is automatically scaled. In "
+"a **TiledWorld**, the text is shown inside a tile, which can cause space "
+"issues for longer text. \\:::"
 msgstr ""
-"In einer normalen **World** wird der Text automatisch skaliert.  In einer **Tiledworld** wird der Text in einer Kachel "
-"angezeigt, was bei längeren Texten zu Platzproblemen führen kann."
+"\\:::{note} In einer normalen **World** wird der Text automatisch skaliert. "
+"In einer **TiledWorld** wird der Text innerhalb einer Kachel dargestellt, "
+"was bei längeren Texten zu Platzproblemen führen kann. \\:::"
 
-#: ../../source/tutorial/10_status.md:25
-msgid "Beispiel:"
-msgstr "Example:"
+#: ../../source/tutorial/10_status.md:27
+msgid "Example:"
+msgstr "Beispiel:"
 
-#: ../../source/tutorial/10_status.md:36
-msgid "Textbeispiel"
+#: ../../source/tutorial/10_status.md:38
+msgid "Text example"
 msgstr "Textbeispiel"
 
-#: ../../source/tutorial/10_status.md:40
-msgid "Text ändern"
+#: ../../source/tutorial/10_status.md:42
+msgid "Changing Text"
 msgstr "Text ändern"
 
-#: ../../source/tutorial/10_status.md:42
-msgid "Du kannst den angezeigten Text jederzeit mit dem Attribut `text` anpassen."
-msgstr "You can adjust the displayed text at any time using the `text` attribute."
-
 #: ../../source/tutorial/10_status.md:44
-msgid "Das folgende Beispiel zeigt den zuletzt gedrückten Tastendruck an:"
-msgstr "The following example shows the last key press:"
+msgid "You can update the displayed text at any time using the `text` attribute."
+msgstr "Du kannst den angezeigten Text jederzeit über das Attribut `text` ändern."
 
-#: ../../source/tutorial/10_status.md:60
-msgid "Text mit Tasteneingabe"
+#: ../../source/tutorial/10_status.md:46
+msgid "The following example shows the most recently pressed key:"
+msgstr "Das folgende Beispiel zeigt die zuletzt gedrückte Taste an:"
+
+#: ../../source/tutorial/10_status.md:62
+msgid "Text with key input"
 msgstr "Text mit Tasteneingabe"
 
-#: ../../source/tutorial/10_status.md:64
-msgid "Zahlen anzeigen"
-msgstr "Show numbers"
-
 #: ../../source/tutorial/10_status.md:66
+msgid "Displaying Numbers"
+msgstr "Zahlen anzeigen"
+
+#: ../../source/tutorial/10_status.md:68
 msgid ""
-"Um Zahlen auf dem Bildschirm anzuzeigen, kannst du **Number-Actors** verwenden. Die Funktionsweise ähnelt der von "
-"Text-Actors. Im folgenden Beispiel wird die angezeigte Zahl bei jedem Tastendruck um 1 erhöht:"
+"To show numbers on screen, you can use **Number actors**. They work "
+"similarly to text actors. In the following example, the number increases "
+"by 1 every time a key is pressed:"
 msgstr ""
-"To display numbers on the screen, you can use **Number-Actors**. The functionality is similar to that of Text-Actors. "
-"In the following example, the displayed number increases by 1 with each keystroke:"
+"Um Zahlen auf dem Bildschirm anzuzeigen, kannst du **Number-Akteure** verwenden. "
+"Sie funktionieren ähnlich wie Text-Akteure. Im folgenden Beispiel erhöht sich "
+"die angezeigte Zahl bei jedem Tastendruck um 1:"

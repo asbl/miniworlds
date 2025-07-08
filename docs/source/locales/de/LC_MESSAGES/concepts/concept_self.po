@@ -2,53 +2,62 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/concepts/concept_self.md:1
-msgid "Das Schlüsselwort self"
-msgstr "The keyword self"
+msgid "The Keyword `self`"
+msgstr "Das Schlüsselwort `self`"
 
 #: ../../source/concepts/concept_self.md:3
-msgid "In dem code oben hast du gesehen, dass die Methode ``act`` als Parameter das Schlüsselwort ``self`` erwartet."
-msgstr "In dem Code oben hast du gesehen, dass die Methode ``act`` als Parameter das Schlüsselwort ``self`` erwartet."
+msgid ""
+"In the code above, you saw that the `act` method takes `self` as a "
+"parameter."
+msgstr ""
+"Im obigen Code hast du gesehen, dass die Methode `act` das Schlüsselwort `self` als Parameter erwartet."
 
 #: ../../source/concepts/concept_self.md:5
-msgid "Alle Methoden die zu einem Objekt gehören erhalten dieses Schlüsselwort immer als ersten Paramerer."
-msgstr "All methods that belong to an object always receive this keyword as the first parameter."
+msgid ""
+"All methods that belong to an object **always** receive `self` as their "
+"first parameter."
+msgstr ""
+"Alle Methoden, die zu einem Objekt gehören, erhalten **immer** `self` als ersten Parameter."
 
 #: ../../source/concepts/concept_self.md:7
 msgid ""
-"Anschließend kann innerhalb der Methode mit diesem Schlüsselwort auf Attribute und Methoden des Objekts selbst "
-"zurückgegriffen werden."
-msgstr "Then, within the method, attributes and methods of the object itself can be accessed using this keyworld."
+"Inside the method, you can then use `self` to access the **attributes and"
+" methods** of the object itself."
+msgstr ""
+"Innerhalb der Methode kannst du `self` verwenden, um auf die **Attribute und Methoden** des Objekts selbst zuzugreifen."
 
 #: ../../source/concepts/concept_self.md:9
-msgid "Beispiel:"
-msgstr "Example:"
+msgid "Example:"
+msgstr "Beispiel:"
 
 #: ../../source/concepts/concept_self.md:11
-msgid "Dieser Code"
-msgstr "Dieser Code"
+msgid "This code:"
+msgstr "Dieser Code:"
 
 #: ../../source/concepts/concept_self.md:19
-msgid "ist äquivalent zu diesem Code:"
-msgstr "ist gleichbedeutend mit diesem Code:"
+msgid "is equivalent to:"
+msgstr "ist gleichbedeutend mit:"
 
 #: ../../source/concepts/concept_self.md:27
-msgid "`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode registriert wurde."
-msgstr "`self` refers to the `player` object where the method was registered. "
+msgid ""
+"Here, `self` refers to the `player` object where the method was "
+"registered."
+msgstr "`self` bezieht sich hier auf das `player`-Objekt, bei dem die Methode registriert wurde."

@@ -1,67 +1,80 @@
-# Konzept: Naming und Variablen
+# Concept: Naming and Variables
 
 ## Naming
 
-Im ersten Kapitel hast du Anweisungen der folgenden Art gesehen:
+In the first chapter, you saw instructions like this:
 
-``` python
+```python
 world = miniworlds.World()
 ```
 
-Das `=` Zeichen hat hier eine andere Funktion als in der Mathematik. 
+Here, the `=` sign does **not** have the same meaning as in mathematics.
 
-* Zuerst wird die rechte Seite der Anweisung durchgeführt. In diesem Fall wird ein TiledWorld()-Objekt erzeugt.
+* First, the right side of the statement is executed. In this case, a `TiledWorld()` object is created.
+* Second, the created object is stored under the name `world`.
+  You can later refer to this object using its name.
 
-* Im zweiten Schritt, wird das erzeugte Objekt mit dem Namen `world` gespeichert. Du kannst später über diesen `Namen` immer wieder auf das erzeugte Objekt zugreifen.
+Names in programming have a special purpose: they act as **storage** for objects and data.
+By assigning a name to an object, you can reuse or modify it later.
 
-Namen haben also in einer Programmiersprache eine ganz besondere Bedeutung, sie dienen dir als ein Speicher für Objekte und Daten. Indem du Objekten einen Namen gibst, kannst du später wieder auf diese zugreifen. Man nennt solche Namen auch **Variablen**, denn das Objekt auf das über den Namen zugegriffen werden kann, kann meist auf verschiedene Arten verändert werden.
+Such names are called **variables**, because the data they refer to can change.
 
-Im einfachen Fall kann dies so aussehen:
+---
 
-``` python
+### Simple Example
+
+```python
 a = 3
 b = 2
 c = a + b
 ```
 
-Indem du Werte unter dem Namen a und b gespeichert hast, kannst du später wieder darauf zugreifen. In der letzten Zeile wird zuerst `a + b` gerechnet und das Ergebnis in `c` gespeichert. Als Ergebnis wird `5` ausgegeben.
+You store values in `a` and `b`, and later use them to compute `c`.
+The result will be `5`.
 
-Variablen können jederzeit neue Werte speichern - Der alte Wert geht dabei verloren:
+Variables can also be **overwritten** — the old value is lost:
 
-``` python
+```python
 a = 3
 a = 2
 c = a + a
 print(c)
 ```
 
-Das Programm gibt `4` aus, da der Wert 3 in der zweiten Zeile überschrieben wird und verloren ist.
+This prints `4`, because `a` was overwritten with the value `2`.
 
-## Das World-Objekt
+---
 
-Das World ist ein Objekt und bringt verschiedene Attribute und Methoden mit, 
-auf die du zugreifen kannst, z.B. `rows`, `columns` und `tile_size`.
+## The World Object
 
-### Attribute
+The `World` is an object that has various **attributes** and **methods**.
 
-Auf Attribute greifst du mit der Syntax `objektname.attributsname` zu.
+### Attributes
 
-Beispiel: 
+You can access attributes using dot notation:
+`object_name.attribute_name`
 
-``` python
+Example:
+
+```python
 world.rows = 4
 ```
 
-Dieser Code speichert den Wert 4 in `world.rows` - Das World-Objekt hat danach also 4 Zeilen.
+This sets the number of rows in the world to 4.
 
-### Methoden
+---
 
-Methoden sind Befehle, die ein Objekt ausführen kann, z.B. `world.add_background()` um 
-Auf Methoden greifst du mit der Syntax  `objektname.methodenname()`zu. Manchmal stehen in der Klammer noch Variablen
+### Methods
 
-Beispiel:
+Methods are actions an object can perform, for example:
+`world.add_background()` adds a background to the world.
 
-``` python
-world.add_background("images/my_background.png)
+You access methods with:
+`object_name.method_name()`
+Sometimes, arguments are passed in parentheses.
+
+Example:
+
+```python
+world.add_background("images/my_background.png")
 ```
-

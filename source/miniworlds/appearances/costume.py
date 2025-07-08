@@ -21,10 +21,10 @@ class Costume(appear.Appearance):
         super().__init__()
         self.parent = actor  #: the parent of a costume is the associated actor.
         self.actor = self.parent
-        self.info_overlay = False
-        self.is_rotatable = False
-        self.fill_color = None
-        self.border_color = None
+        self._info_overlay = False # managed by property
+        self._is_rotatable = False # managed by property in appearance
+        self._fill_color = None # managed by property in appearance
+        self._border_color = None # managed by property in appearance
         self.transformations_manager = (
             transformations_costume_manager.TransformationsCostumeManager(self)
         )
@@ -33,7 +33,7 @@ class Costume(appear.Appearance):
         return self.actor.costume_manager
 
     @property
-    def world(self) -> "world.World":
+    def world(self) -> "world_mod.World":
         return self.parent.world
 
     def after_init(self):
@@ -99,18 +99,18 @@ class Costume(appear.Appearance):
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), self.border]
 
     def rotated(self):
-        if self.world.camera.is_actor_repainted(self.actor):
+        if self.actor._is_actor_repainted():
             self.set_dirty("rotate", self.RELOAD_ACTUAL_IMAGE)
 
     def origin_changed(self):
-        if self.world.camera.is_actor_repainted(self.actor):
+        if self.actor._is_actor_repainted():
             self.set_dirty("origin_changed", self.RELOAD_ACTUAL_IMAGE)
 
     def resized(self):
         self.set_dirty("scale", self.RELOAD_ACTUAL_IMAGE)
 
     def visibility_changed(self):
-        if self.world.camera.is_actor_repainted(self.actor):
+        if self.actor._is_actor_repainted():
             self.set_dirty("all", self.RELOAD_ACTUAL_IMAGE)
 
     def set_dirty(self, value="all", status=1):

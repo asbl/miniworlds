@@ -108,12 +108,12 @@ class WorldConnector():
         Returns:
             actor_mod.Actor: The actor instance that was added to the world.
         """
-        if self.world.backgrounds_manager.is_display_initialized:
-            self.actor.costume_manager.is_display_initialized = True
+        if self.world.backgrounds._is_display_initialized:
+            self.actor.costume_manager._is_display_initialized = True
 
         self.actor._world = self.world
         self.init_managers(position)
-        self.world.camera.clear_camera_cache()
+        self.world.camera._clear_camera_cache()
 
         if self.actor not in self.world.actors: 
             self.world.actors.add(self.actor)
@@ -127,7 +127,7 @@ class WorldConnector():
         if hasattr(self.actor, "on_setup") and not self.actor._was_setup:
             self.actor.on_setup()
             self.actor._was_setup = True
-            self.world.mainloop.reload_costumes_queue.append(self.actor)
+            self.world._mainloop.reload_costumes_queue.append(self.actor)
 
         self.world.event_manager.register_events_for_actor(self.actor)
         self.world.on_new_actor(self.actor)
@@ -148,7 +148,7 @@ class WorldConnector():
         """
         self.actor.before_remove()
         self.actor._is_acting = False
-        self.world.camera.clear_camera_cache()
+        self.world.camera._clear_camera_cache()
 
         # Mark any colliding actors as dirty (trigger visual update)
         try:
@@ -161,8 +161,8 @@ class WorldConnector():
         unregistered_methods = self.world.event_manager.unregister_instance(self.actor)
 
         # Remove from reload queue if present
-        if self in self.world.mainloop.reload_costumes_queue:
-            self.world.background.mainloop.reload_costumes_queue.remove(self)
+        if self in self.world._mainloop.reload_costumes_queue:
+            self.world.mainloop.reload_costumes_queue.remove(self)
 
         # Remove from dynamic actors if not static
         if not self.actor._static:
@@ -241,9 +241,9 @@ class WorldConnector():
             self.add_dynamic_actor()
 
     def remove_dynamic_actor(self):
-        if self.actor in self.world.dynamic_actors:
-            self.world.dynamic_actors.remove(self.actor)
+        if self.actor in self.world._dynamic_actors:
+            self.world._dynamic_actors.remove(self.actor)
 
     def add_dynamic_actor(self):
-        if self.actor not in self.world.dynamic_actors:
-            self.world.dynamic_actors.add(self.actor)
+        if self.actor not in self.world._dynamic_actors:
+            self.world._dynamic_actors.add(self.actor)

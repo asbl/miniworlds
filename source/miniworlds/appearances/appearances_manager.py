@@ -17,7 +17,6 @@ class AppearancesManager(ABC):
         self.parent = parent
         self.appearance = None
         self._rect = None
-        self.is_rotatable = None
         self.is_animated = None
         self.animation_speed = 10
         self.is_upscaled = None
@@ -26,13 +25,13 @@ class AppearancesManager(ABC):
         self.is_scaled_to_height = None
         self.has_appearance = False
         self._iter_index = 0
-        self.is_display_initialized = False
+        self._is_display_initialized = False
         # defaults
         self._border = None
 
-    def init_display(self):
-        if not self.is_display_initialized:
-            self.is_display_initialized = True
+    def _init_display(self):
+        if not self._is_display_initialized:
+            self._is_display_initialized = True
             self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
 
     @property
@@ -127,19 +126,20 @@ class AppearancesManager(ABC):
     ) -> "appearance_mod.Appearance":
         self.appearance = appearance
         self.appearances_list.append(appearance)
-        appearance._set_defaults(
-            rotatable=self.is_rotatable,
+        self._set_appearance_defaults()
+        self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
+        return appearance
+
+    def _set_appearance_defaults(self):
+        self.appearance._set_defaults(
             is_animated=self.is_animated,
             animation_speed=self.animation_speed,
             is_upscaled=self.is_upscaled,
             is_scaled_to_width=self.is_scaled_to_width,
             is_scaled_to_height=self.is_scaled_to_height,
             is_scaled=self.is_scaled,
-            is_flipped=self.is_flipped,
             border=self.border,
         )
-        self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
-        return appearance
 
     def next_appearance(self) -> "appearance_mod.Appearance":
         """Switches to next appearance
@@ -203,10 +203,6 @@ class AppearancesManager(ABC):
     def set_animation_speed(self, value):
         self.animation_speed = value
         self._set_all("animation_speed", value)
-
-    def set_rotatable(self, value):
-        self.is_rotatable = value
-        self._set_all("is_rotatable", value)
 
     def set_upscaled(self, value):
         self.is_upscaled = value
@@ -311,10 +307,6 @@ class AppearancesManager(ABC):
         self.appearance.animation_speed = speed
         self.appearance.animate()
 
-    def get_world(self):
-        """Implemented in subclasses"""
-        pass
-
     def animate_appearance(self, appearance: "appearance_mod.Appearance", speed: int):
         if appearance is None:
             raise miniworlds_exception.CostumeIsNoneError()
@@ -355,15 +347,6 @@ class AppearancesManager(ABC):
     def animation_speed(self, value):
         for appearance in self.appearances_list:
             appearance.animation_speed = value
-
-    @property
-    def is_flipped(self):
-        return self.appearance._is_flipped
-
-    @is_flipped.setter
-    def is_flipped(self, value):
-        for appearance in self.appearances_list:
-            appearance.is_flipped = value
 
     @property
     def border(self):

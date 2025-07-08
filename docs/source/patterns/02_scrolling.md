@@ -1,28 +1,21 @@
 # Scrolling
 
-Oft möchtest du den Bildschirm "scrollen lassen.
+Often, you want the screen to “scroll.”
 
- <video controls loop width=100%>
-  <source src="../_static/scrolling.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video> 
+The simplest way to achieve this is by “moving” the background.
 
-Die einfachste Möglichkeit dazu ist es einen Hintergrund zu "verschieben":
+For it to work smoothly, the background must be created as an `Actor`, and you’ll need **two backgrounds**.
 
-Damit dies wirklich gut funktioniert, musst du den Hintergrund als "Actor anlegen" und benötigst zwei Hintergründe.
+Both backgrounds move from right to left (or top to bottom, left to right, etc.—depending on your game). As soon as one background leaves the screen, it is repositioned on the right.
 
-![scrolling background](../_images/scrolling.png)
+This creates the illusion of an “endless” landscape.
 
-Beide Hintergründe wandern von rechts nach links (oder von oben nach unten, links nach rechts, ... - Je nach Spiel) - Sobald ein Hintergrund das Spielfeld verlassen würde, wird er wieder ganz rechts angefügt.
+In code, this can be implemented like this:
 
-Auf diese Weise entsteht der Eindruck einer "unendlich langen Landschaft".
+* Create the background twice using the same background image and place them side by side.
+* It’s helpful to store both backgrounds in a list so you can move them together.
 
-Im Code kann man dies wie folgt umsetzen:
-
-* Lege mden Hintergrund zweimal mit dem gleichen Hintergrund an und platziere diese nebeneinander.
-* Es kann sinnvoll sein die Hintergründe in einer Liste zu speichern, da du sie dann gemeinsam bewegen kannst.
-
-``` python
+```python
 back0 = Actor()
 back0.add_costume(BACKGROUND)
 back0.size = WIDTH, HEIGHT
@@ -32,22 +25,20 @@ back1.add_costume(BACKGROUND)
 backs = [back0, back1]
 ```
 
-In der `world.act`-Methode die jedes Frame einmal aufgerufen wird, kannst den Bildschirm langsam verschieben:
+In the `world.act` method (which is called every frame), you can scroll the screen:
 
-``` python
+```python
 @world.register
 def act(self):
     for back in backs:
         back.x -= 1
-        if back.x <= - WIDTH:
+        if back.x <= -WIDTH:
             back.x = WIDTH
 ```
 
+Full example:
 
-Als Code sieht dies so aus:
-
-``` python
-
+```python
 from miniworlds import *
 
 WIDTH, HEIGHT = 800, 400
@@ -74,7 +65,7 @@ walker.count = 0
 def act(self):
     for back in backs:
         back.x -= 1
-        if back.x <= - WIDTH:
+        if back.x <= -WIDTH:
             back.x = WIDTH
     walker.count += walker.speed
     if walker.count > 11:
@@ -85,8 +76,8 @@ def act(self):
 def on_key_down(self, keys):
     if "q" in keys:
         world.quit
-        
+
 world.run()
 ```
 
-Notiz: Die Idee stammt von dem Blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html) - Jörg Kantereit hat dort dieses Snippet mit Pygame Zero programmiert.
+Note: The idea comes from the blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html), where Jörg Kantereit originally implemented this snippet using Pygame Zero.

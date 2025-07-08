@@ -121,6 +121,6 @@ class TiledCameraManager(camera_manager.CameraManager):
         else:
             return value
 
-    def update(self):
-        self.reload_camera()
+    def _update(self):
+        self._reload_camera()
         self.dirty = True

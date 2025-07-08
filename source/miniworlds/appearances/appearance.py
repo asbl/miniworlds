@@ -81,38 +81,15 @@ class Appearance(metaclass=MetaAppearance):
         self._animation_start_frame = 0
         self._cached_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
 
-    def _set_defaults(
-        self,
-        rotatable,
-        is_animated,
-        animation_speed,
-        is_upscaled,
-        is_scaled_to_width,
-        is_scaled_to_height,
-        is_scaled,
-        is_flipped,
-        border,
-    ) -> "Appearance":
-        if rotatable:
-            self._is_rotatable = rotatable
-        if is_animated:
-            self._is_animated = is_animated
-        if animation_speed:
-            self._animation_speed = animation_speed
-        if is_upscaled:
-            self._is_upscaled = is_upscaled
-        if is_scaled_to_width:
-            self._is_scaled_to_width = is_scaled_to_width
-        if is_scaled_to_height:
-            self._is_scaled_to_height = is_scaled_to_height
-        if is_scaled:
-            self._is_scaled = is_scaled
-        if is_flipped:
-            self._is_flipped = is_flipped
-        if border is not None:
-            self._border = border
+    def _set_defaults(self, **kwargs) -> "Appearance":
+        for key, value in kwargs.items():
+            if value is not None:
+                attr_name = f"_{key}"
+                if hasattr(self, attr_name):
+                    setattr(self, attr_name, value)
         self.set_dirty("all", self.LOAD_NEW_IMAGE)
         return self
+
 
     def set_image(self, source: Union[int, "Appearance", tuple]) -> bool:
         """Sets the displayed image of costume/background to selected index
@@ -1024,7 +1001,7 @@ class Appearance(metaclass=MetaAppearance):
 
     def set_dirty(self, value="all", status=1):
         if self.parent and hasattr(self, "transformations_manager"):
-            if value and self.images and self.get_manager().is_display_initialized:
+            if value and self.images and self.get_manager()._is_display_initialized:
                 self._update_draw_shape()
                 self.transformations_manager.flag_reload_actions_for_transformation_pipeline(
                     value
@@ -1039,7 +1016,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     @abstractmethod
-    def world(self) -> "world.World":
+    def world(self) -> "world_mod.World":
         """Implemented in subclasses Costume and Background"""
 
     def _update_draw_shape(self) -> None:

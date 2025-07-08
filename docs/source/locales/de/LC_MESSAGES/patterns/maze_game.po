@@ -2,177 +2,185 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 08:34+0100\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/maze_game.md:1
-msgid "Tutorial: Labyrinth-Spiel"
-msgstr "Tutorial: Labyrinth-Spiel"
+msgid "Tutorial: Maze Game"
+msgstr "Anleitung: Labyrinth-Spiel"
 
 #: ../../source/patterns/maze_game.md:3
-msgid "In diesem Kapitel erstellen wir Schritt für Schritt gemeinsam ein Labyrinth-Spiel."
-msgstr "In diesem Kapitel erstellen wir Schritt für Schritt gemeinsam ein Labyrinth-Spiel."
+msgid "In this chapter, we’ll build a maze game step by step."
+msgstr "In diesem Kapitel erstellen wir Schritt für Schritt ein Labyrinth-Spiel."
 
 #: ../../source/patterns/maze_game.md:5
-msgid "![Labyrinth-Spiel - Erster Schritt](../_images/maze_tiles.png)"
-msgstr "![Labyrinth-Spiel - Erster Schritt](../_images/maze_tiles.png)"
+msgid "![Maze Game – Step One](../_images/maze_tiles.png)"
+msgstr "![Labyrinth-Spiel – Erster Schritt](../_images/maze_tiles.png)"
 
 #: ../../source/patterns/maze_game.md:5
-msgid "Labyrinth-Spiel - Erster Schritt"
-msgstr "Labyrinth-Spiel - Erster Schritt"
+msgid "Maze Game – Step One"
+msgstr "Labyrinth-Spiel – Erster Schritt"
 
 #: ../../source/patterns/maze_game.md:7
 msgid ""
-"Die Technik, eine Kachelkarte (Tilemap) zu erstellen, ist in vielen Spielen gängig. Nachdem du es hier gelernt hast, "
-"wirst du in der Lage sein, diese Technik in deine eigenen Projekte zu integrieren."
+"The technique of creating a tilemap is common in many games. Once you've "
+"learned it here, you can apply it in your own projects."
 msgstr ""
-"The technique of creating a tilemap is common in many games. Once you have learned it here, you will be able to "
-"integrate this technique into your own projects."
+"Die Technik, eine Kachelkarte (Tilemap) zu erstellen, ist in vielen Spielen üblich. "
+"Sobald du sie hier gelernt hast, kannst du sie in eigenen Projekten anwenden."
 
 #: ../../source/patterns/maze_game.md:9
-msgid "**Basierend auf**: `https://github.com/electronstudio/pygame-zero-book`"
+msgid "**Based on**: `https://github.com/electronstudio/pygame-zero-book`"
 msgstr "**Basierend auf**: `https://github.com/electronstudio/pygame-zero-book`"
 
 #: ../../source/patterns/maze_game.md:10
-msgid "**Lizenz:** Attribution-NonCommercial-ShareAlike 4.0 International"
-msgstr "**Lizenz:** Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen 4.0 International"
-
-#: ../../source/patterns/maze_game.md:12
-msgid "Schritt 1: Actor aus einer Kachelkarte laden"
-msgstr "Schritt 1: Actor aus einer Kachelkarte laden"
+msgid "**License**: Attribution-NonCommercial-ShareAlike 4.0 International"
+msgstr "**Lizenz**: Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen 4.0 International"
 
 #: ../../source/patterns/maze_game.md:14
-msgid ""
-"Eine Kachelkarte verwendet eine kleine Anzahl von Bildern (Kacheln), die mehrmals gezeichnet werden, um ein großes "
-"Spiellevel (die Karte) zu erstellen. Dies spart Arbeit beim Erstellen vieler Grafiken und erleichtert Änderungen am "
-"Level-Design. In diesem Beispiel erstellen wir ein Labyrinth-Level."
-msgstr ""
-"A tile map uses a small number of images (tiles) that are drawn multiple times to create a large game level (the map). "
-"This saves work in creating many graphics and makes it easier to make changes to the level design. In this example, we "
-"create a maze level."
+msgid "Step 1: Load Actors from a Tilemap"
+msgstr "Schritt 1: Actor aus einer Kachelkarte laden"
 
 #: ../../source/patterns/maze_game.md:16
-msgid "Wir benötigen drei Bilddateien: `player.png`, `wall.png`. Diese müssen im Ordner `mu_code/images` gespeichert werden."
-msgstr "We need three image files: `player.png`, `wall.png`. These must be stored in the `mu_code/images` folder."
+msgid ""
+"A tilemap uses a small number of images (tiles) that are drawn multiple "
+"times to create a large game level (the map). This saves effort in "
+"creating graphics and makes level design easier to manage. In this "
+"example, we’ll create a maze level."
+msgstr ""
+"Eine Kachelkarte verwendet eine kleine Anzahl von Bildern (Kacheln), die mehrfach "
+"gezeichnet werden, um ein großes Spiellevel zu erstellen. Das spart Aufwand bei der "
+"Grafikerstellung und macht das Leveldesign übersichtlicher. In diesem Beispiel "
+"erstellen wir ein Labyrinth-Level."
 
-#: ../../source/patterns/maze_game.md:26
-msgid "Jetzt können wir den Rahmen für unser Spiel programmieren:"
-msgstr "Now we can program the framework for our game:"
+#: ../../source/patterns/maze_game.md:18
+msgid ""
+"You need three image files: `player.png` and `wall.png`. Save them in the"
+" `mu_code/images` folder:"
+msgstr ""
+"Du benötigst zwei Bilddateien: `player.png` und `wall.png`. Speichere sie im Ordner "
+"`mu_code/images`:"
 
 #: ../../source/patterns/maze_game.md:28
-msgid "Eine Welt erstellen"
-msgstr "Create a world"
+msgid "Now let’s set up the framework for the game."
+msgstr "Jetzt richten wir das Grundgerüst für das Spiel ein."
 
 #: ../../source/patterns/maze_game.md:30
-msgid "Verwende dieses Grundgerüst für dein Spiel:"
-msgstr "Use this framework for your game:"
+msgid "Create a World"
+msgstr "Eine Welt erstellen"
 
 #: ../../source/patterns/maze_game.md:32
-msgid ""
-"In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte Welten bereitstellt. In der letzten Zeile "
-"musst du unbedingt `world.run()` aufrufen, um das Spiel zu starten."
-msgstr ""
-"In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte Welten bereitstellt. In der letzten Zeile "
-"musst du unbedingt `world.run()` aufrufen, um das Spiel zu starten."
+msgid "Use this basic structure for your game:"
+msgstr "Nutze diese Grundstruktur für dein Spiel:"
 
-#: ../../source/patterns/maze_game.md:45
-msgid "Actor-Unterklassen erstellen"
-msgstr "Create Actor subclasses"
+#: ../../source/patterns/maze_game.md:34
+msgid ""
+"In line 2, a `TiledWorld` is created, which provides logic for tile-based"
+" worlds. You must call `world.run()` at the end to start the game."
+msgstr ""
+"In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte Welten "
+"bereitstellt. Am Ende musst du `world.run()` aufrufen, um das Spiel zu starten."
 
 #: ../../source/patterns/maze_game.md:47
-msgid "Erstelle Actor-Unterklassen für jeden **Typ** von Actor:"
-msgstr "Create Actor-Subklassen für jeden **Typ** von Actor:"
+msgid "Create Actor Subclasses"
+msgstr "Actor-Unterklassen erstellen"
 
-#: ../../source/patterns/maze_game.md:60
-msgid ""
-"`self.add_costume` fügt dem Actor ein Kostüm hinzu, das auf einem Bild basiert (z. B. \"player\", \"wall\" – "
-"Dateiendungen wie `.png` oder `.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, a)-Tupel "
-"angegeben wird."
-msgstr ""
-"`self.add_costume` fügt dem Actor ein Kostüm hinzu, das auf einem Bild basiert (z. B. \"player\", \"wall\" – "
-"Dateiendungen wie `.png` oder `.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, a)-Tupel "
-"angegeben wird."
+#: ../../source/patterns/maze_game.md:49
+msgid "Create a subclass for each **type** of actor:"
+msgstr "Erstelle eine Unterklasse für jeden **Typ** von Actor:"
 
 #: ../../source/patterns/maze_game.md:62
-msgid "Eine Kachelkarte erstellen"
-msgstr "Create a tile map"
+msgid ""
+"`self.add_costume` adds a costume to the actor, based on an image (e.g. "
+"`\"player\"`, `\"wall\"` – file extensions like `.png` or `.jpeg` can be "
+"omitted), or a color defined as an (r, g, b, a) tuple."
+msgstr ""
+"`self.add_costume` fügt dem Actor ein Kostüm hinzu – entweder basierend auf einem Bild "
+"(z. B. `\"player\"`, `\"wall\"`, wobei die Endung `.png` weggelassen werden kann) "
+"oder einer Farbe als (r, g, b, a)-Tupel."
 
 #: ../../source/patterns/maze_game.md:64
-msgid "Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Actor bestimmt."
-msgstr "A tile map is a 2D list that determines the positions of the actors."
+msgid "Create a Tilemap"
+msgstr "Eine Kachelkarte erstellen"
 
 #: ../../source/patterns/maze_game.md:66
-msgid "0: Leer"
-msgstr "0: Leer"
-
-#: ../../source/patterns/maze_game.md:67
-msgid "1: Wand"
-msgstr "1: Wand"
+msgid "A tilemap is a 2D list that defines where each actor should be placed."
+msgstr "Eine Kachelkarte ist eine 2D-Liste, die bestimmt, wo jeder Actor platziert wird."
 
 #: ../../source/patterns/maze_game.md:68
-msgid "2: Spieler"
+msgid "0: Empty"
+msgstr "0: Leer"
+
+#: ../../source/patterns/maze_game.md:69
+msgid "1: Wall"
+msgstr "1: Wand"
+
+#: ../../source/patterns/maze_game.md:70
+msgid "2: Player"
 msgstr "2: Spieler"
 
-#: ../../source/patterns/maze_game.md:85
-msgid "Objekte für jede Zelle der Kachelkarte erstellen"
-msgstr "Create objects for each cell of the tile map"
-
 #: ../../source/patterns/maze_game.md:87
+msgid "Create Objects for Each Tile"
+msgstr "Objekte für jede Kachel erzeugen"
+
+#: ../../source/patterns/maze_game.md:89
 msgid ""
-"Für jede Zelle der Kachelkarte kann ein Actor erzeugt werden. Die Klasse für jeden Actor wird aus der Kachelkarte "
-"abgerufen."
-msgstr "For each cell of the tile map, an actor can be created. The class for each actor is retrieved from the tile map."
-
-#: ../../source/patterns/maze_game.md:99
-msgid "Schritt 2: Bewegung"
-msgstr "Step 2: Bewegung"
-
-#: ../../source/patterns/maze_game.md:101
-msgid "Spieler bewegen"
-msgstr "Move player"
+"Create actors for each tile. The class to be instantiated is looked up "
+"from the `tiles` list:"
+msgstr ""
+"Erzeuge Actor für jede Kachel. Die zu erstellende Klasse wird aus der Liste `tiles` bestimmt:"
 
 #: ../../source/patterns/maze_game.md:103
-msgid "Füge folgenden Code zur `Player`-Klasse hinzu, um den Spieler zu bewegen:"
-msgstr "Add the following code to the `Player` class to move the player:"
+msgid "Step 2: Movement"
+msgstr "Schritt 2: Bewegung"
 
-#: ../../source/patterns/maze_game.md:122
-msgid "Bewegung blockieren"
-msgstr "Block movement"
+#: ../../source/patterns/maze_game.md:105
+msgid "Move the Player"
+msgstr "Spieler bewegen"
 
-#: ../../source/patterns/maze_game.md:124
-msgid "Verwende die Methode `move_back()`, um die Bewegung des Spielers zu blockieren, wenn er auf eine Wand trifft:"
-msgstr "Use the method `move_back()` to block the player's movement when they hit a wall:"
+#: ../../source/patterns/maze_game.md:107
+msgid "Add this to the `Player` class to move the player:"
+msgstr "Füge dies zur `Player`-Klasse hinzu, um den Spieler zu bewegen:"
 
-#: ../../source/patterns/maze_game.md:140
-msgid "Einen Gegner erstellen"
-msgstr "Create an opponent"
+#: ../../source/patterns/maze_game.md:126
+msgid "Block Movement"
+msgstr "Bewegung blockieren"
 
-#: ../../source/patterns/maze_game.md:142
-msgid "Erstelle eine Gegner-Klasse, die den Spieler jagt:"
-msgstr "Create an enemy class that hunts the player:"
+#: ../../source/patterns/maze_game.md:128
+msgid "Use the `move_back()` method to prevent movement into walls:"
+msgstr "Verwende die Methode `move_back()`, um Bewegungen in Wände zu verhindern:"
 
-#: ../../source/patterns/maze_game.md:161
-msgid "Zusammenfassung"
+#: ../../source/patterns/maze_game.md:146
+msgid "Create an Enemy"
+msgstr "Einen Gegner erstellen"
+
+#: ../../source/patterns/maze_game.md:148
+msgid "Create an `Enemy` class that follows the player:"
+msgstr "Erstelle eine `Enemy`-Klasse, die dem Spieler folgt:"
+
+#: ../../source/patterns/maze_game.md:169
+msgid "Summary"
 msgstr "Zusammenfassung"
 
-#: ../../source/patterns/maze_game.md:163
+#: ../../source/patterns/maze_game.md:171
 msgid ""
-"In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Actorn und Kachelkarten erstellt. Mit dieser "
-"Grundlage kannst du weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner hinzufügen!"
+"In this tutorial, you built a basic maze game with movable actors and a "
+"tilemap. With this foundation, you can add more features like scoring, "
+"levels, or smarter enemies!"
 msgstr ""
-"In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Actorn und Kachelkarten erstellt. Mit dieser "
-"Grundlage kannst du weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner hinzufügen!"
+"In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Actorn "
+"und einer Kachelkarte erstellt. Mit dieser Grundlage kannst du weitere Funktionen wie "
+"Punktzahlen, Level oder intelligentere Gegner hinzufügen!"

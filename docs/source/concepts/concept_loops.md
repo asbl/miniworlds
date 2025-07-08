@@ -1,19 +1,20 @@
-# Konzept: Schleifen
+# Concept: Loops
 
-## Die for-Schleife
+## The `for` Loop
 
-Die for-schleife wiederholt -vereinfacht gesprochen- einen Befehl n-mal:
+The `for` loop repeats a command *n* times.
 
-### Beispiel
+### Example
 
-Die folgende Schleife wird 5-mal durchlaufen:
+The following loop runs 5 times:
 
-``` python
+```python
 for i in range(5):
     print("I'm in a loop!")
 ```
 
-Das Programm gibt folgende Ausgabe
+Output:
+
 ```
 I'm in a loop!
 I'm in a loop!
@@ -22,18 +23,19 @@ I'm in a loop!
 I'm in a loop!
 ```
 
-## Die Zählervariable
+---
 
-Man kann die Variable i als Zählervariable verwenden. Sie zählt (von 0 beginnend) hoch:
+## The Loop Variable
 
-### Beispiel
+You can use the variable `i` as a counter. It starts at 0 and increases:
 
-``` python
+```python
 for i in range(5):
     print(i)
 ```
 
-Das Programm gibt folgende Ausgabe
+Output:
+
 ```
 0
 1
@@ -42,49 +44,49 @@ Das Programm gibt folgende Ausgabe
 4
 ```
 
-## Allgemeine Form:
+---
 
-Allgemein schreibt man:
+## General Form
 
-``` python
+```python
 for i in range(max):
-    <codeblock>
+    <code block>
 ```
 
-oder
+or
 
-``` python
+```python
 for i in range(min, max):
-    <codeblock>
+    <code block>
 ```
 
-Man kann jeweils angeben wie oft die Schleife durchlaufen wird oder bestimmte Bereiche angeben:
+This lets you loop a set number of times or through a specific range.
 
-### Beispiele: Mit Schleifen zeichnen
+---
 
-Mit Schleifen kann man zeichnen:
+### Drawing with Loops
 
-``` python
+```python
 import miniworlds 
 
 world = miniworlds.World(200, 200)
 
 for i in range(4):
     miniworlds.Circle((20 + 50 * i, 50), 20)
-    
+
 world.run()
 ```
 
-<img src="../_images/processing/for_circles.png" alt="circles" width="260px">
+This draws four circles in a row.
 
-### Schachbrettmuster
+---
 
-Mit dem module-Operator kann man überprüfen, ob ein Ergebnis, durch 2 teilbar ist, nämlich 
-``x teilbar durch 2 genau dann wenn x % 2 == 0`
+### Checkerboard Pattern
 
-Dies kann man nutzen um schachbrettartige Muster zu zeichnen, indem man Schleifen mit einer if-Abfrage kombiniert:
+Use the modulo operator `%` to test if a number is even:
+`x is divisible by 2 ⇨ x % 2 == 0`
 
-``` python
+```python
 from miniworlds import *
 
 world = World(200, 50)
@@ -92,40 +94,37 @@ world = World(200, 50)
 for i in range(4):
     rect = Rectangle((50 * i, 0), 50, 50)
     if i % 2 == 0:
-        rect.color = (255,0,0, 255)
+        rect.color = (255, 0, 0, 255)
     else:
         rect.color = (255, 255, 255, 255)
-    
+
 world.run()
 ```
 
-<img src="../_images/processing/checkers1.png" alt="checkers" width="260px">
+---
 
-### Graphen
+### Graphs
 
-Auch Graphen lassen sich auf diese Art zeichnen:
-
-``` python
+```python
 from miniworlds import *
 
 world = World(400, 400)
 
-
 for x in range(400):
-    gl = 0.5*x + 50
+    gl = 0.5 * x + 50
     y = 400 - gl
     Point((x, y))
-    
+
 world.run()
 ```
 
-<img src="../_images/processing/graph.png" alt="graphs" width="260px">
+---
 
-### Verschachtelte Schleifen
+### Nested Loops
 
-Mit Hilfe von verschachtelten Schleifen kannst du mehrdimensionale Muster zeichnen.
+You can use nested loops to draw 2D patterns:
 
-``` python
+```python
 from miniworlds import *
 
 world = World(200, 200)
@@ -133,80 +132,83 @@ world = World(200, 200)
 for i in range(4):
     for j in range(4):
         Circle((20 + 50 * i, 20 + 50 * j), 20)
-    
+
 world.run()
 ```
 
-<img src="../_images/processing/nested.png" alt="nested loop" width="260px">
+---
 
-## Die while-Schleife
+## The `while` Loop
 
-Die while-Schleife hat allgemein folgenden Aufbau:
+General syntax:
 
-``` python
-while <Bedingung>:
-    <code-block>
+```python
+while <condition>:
+    <code block>
 ```
 
-* Solange die Bedingung wahr ist, wird die Schleife immer wieder wiederholt. Dadurch ist es auch möglich Endlosschleifen zu erstellen.
+As long as the condition is `True`, the loop repeats. Be careful — this can create infinite loops.
 
-Beispiel:
+### Example: Random Pattern
 
-Das folgende Programm generiert ein zufälliges Muster:
-
-``` python
+```python
 from miniworlds import *
 import random
+
 world = World(255, 60)
 x = 0
 
 while x < 255:
     c = Circle((x, 30), 20)
-    c.color = (x,0,0,random.randint(0,255))
-    x = x + random.randint(10,50)
-    
+    c.color = (x, 0, 0, random.randint(0, 255))
+    x = x + random.randint(10, 50)
+
 world.run()
 ```
 
-<img src="../_images/processing/colorcircles.png" alt="random color circles" width="260px">
+---
 
-## Die mainloop
+## The Main Loop
 
-Dein ganzes Programm läuft streng genommen innerhalb einer while Schleife:
+Your program essentially runs inside a loop like this:
 
 ```python
-while <no quit>
-  <draw images on screen>
-  <handle logic and events>
+while <no quit>:
+    <draw screen>
+    <handle events>
 ```
 
-Die for-Schleife ist hierfür nicht geeignet, da man für diese im Vorhinein wissen muss, wie viele Schleifendurchläufe
-durchlaufen werden sollen.
+A `for` loop is not suitable for this because you must know in advance how many iterations there will be.
 
-## Schleifen innerhalb von registrierten Methoden
+---
 
-Wenn du innerhalb der `act`-Methode oder einer Ereignis-Methode eine Schleife ausführen willst, dann musst du folgendes wissen:
+## Loops Inside Registered Methods
 
-Die komplette Schleife innerhalb einer solchen Methode wird innerhalb eines einzigen Frames ausgeführt. Eine Schleife ist hier also nicht geeignet, um z.B. eine Figur zu bewegen, da diese ja jeden Frame neu gezeichnet wird - Eine Schleife läuft aber komplett innerhalb eines Frames ab.
+If you use loops inside `act()` or an event method, you should know:
 
-### Beispiel
+**The entire loop runs within a single frame!**
+That means it’s not suitable for animation — which depends on changes from frame to frame.
 
-Am Beispiel einer Ampel-Anlage kann man dies gut veranschaulichen. Man kann den Ablauf der Schleife gut mit einem Zustandsdiagramm visualisieren.
+---
 
-```{mermaid}
+### Example: Traffic Light State Machine
+
+A simple state diagram:
+
+```mermaid
 stateDiagram
     [*] --> Green
-
     Green --> GreenYellow
     GreenYellow --> Red
     Red --> RedYellow
     RedYellow --> Green
 ```
 
-In Code kann man dies wie folgt umsetzen:
+---
 
-``` python
+#### Incorrect Approach: `while` loop (runs instantly)
 
+```python
 from miniworlds import *
 
 state = "green"
@@ -224,50 +226,53 @@ while True:
     elif state == "red-yellow":
         state = "green"
         print("red-yellow")
+
 world.run()
 ```
 
-In der mainloop wird die While-Schleife durch die mainloop "ersetzt":
+---
 
-``` python
+#### Correct Approach: Use `act()` instead
+
+```python
 from miniworlds import *
 
-world = World(100,240)
+world = World(100, 240)
 state = "green"
-g = Circle ((50,40), 40)
-y = Circle ((50,120), 40)
-r = Circle ((50,200), 40)
+g = Circle((50, 40), 40)
+y = Circle((50, 120), 40)
+r = Circle((50, 200), 40)
 
 @world.register
 def act(self):
     global state
     if world.frame % 20 == 0:
         if state == "green":
-            g.color = (0,255,0)
-            y.color = (255,255,255)
-            r.color = (255,255,255)
+            g.color = (0, 255, 0)
+            y.color = (255, 255, 255)
+            r.color = (255, 255, 255)
             state = "green-yellow"
             print("green")
         elif state == "green-yellow":
-            g.color = (0,255,0)
-            y.color = (255,255,0)
-            r.color = (255,255,255)
+            g.color = (0, 255, 0)
+            y.color = (255, 255, 0)
+            r.color = (255, 255, 255)
             state = "red"
             print("green-yellow")
         elif state == "red":
-            g.color = (255,255,255)
-            y.color = (255,255,255)
-            r.color = (255,0,0)
+            g.color = (255, 255, 255)
+            y.color = (255, 255, 255)
+            r.color = (255, 0, 0)
             state = "red-yellow"
             print("red")
         elif state == "red-yellow":
-            g.color = (255,255,255)
-            y.color = (255,255,0)
-            r.color = (255,0,0)
+            g.color = (255, 255, 255)
+            y.color = (255, 255, 0)
+            r.color = (255, 0, 0)
             state = "green"
             print("red-yellow")
+
 world.run()
 ```
 
-Wie man sieht ist der Programmcode nur an einzelnen Stellen verändert wurden, der Programmablauf bleibt der gleiche. 
-Die `while`-Schleife wird hier durch die `act`-Methode ersetzt.
+The program flow is the same, but the infinite loop is replaced by the `act()` method, which runs frame by frame.

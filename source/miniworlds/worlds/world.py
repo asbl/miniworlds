@@ -59,9 +59,9 @@ class World(world_base.WorldBase):
     **Other worlds:**
 
     * TiledWorld: For worlds using Tiles, like rogue-like rpgs, see
-      :doc:`TiledWorld <../api/world.tiledworld>`)
+      :doc:`TiledWorld </api/world_tiled>`)
     * PhysicsWorld: For worlds using the PhysicsEngine, see
-      :doc:`PhysicsWorld <../api/world_physicsworld>`)
+      :doc:`PhysicsWorld </api/world_physics>`)
 
     Examples:
 
@@ -115,8 +115,8 @@ class World(world_base.WorldBase):
 
     See also:
 
-        * See: :doc:`World <../api/world>`
-        * See: :doc:`TiledWorld <../api/world.tiledworld>`
+        * See: :doc:`World </api/world>`
+        * See: :doc:`TiledWorld </api/world_tiled>`
 
 
     Args:
@@ -127,7 +127,7 @@ class World(world_base.WorldBase):
 
     subclasses = None
 
-    def validate_parameters(self, x, y):
+    def _validate_parameters(self, x, y):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
             raise TypeError(
                 f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
@@ -139,7 +139,7 @@ class World(world_base.WorldBase):
         y: int = 400,
         ):
         # --- Parameter validation ---
-        self.validate_parameters(x, y)
+        self._validate_parameters(x, y)
 
         # --- Core state ---
         self._was_setup = False
@@ -171,8 +171,8 @@ class World(world_base.WorldBase):
         self.actors_fixed_size: bool = False
 
         # --- Actor & animation systems ---
-        self.timed_objects: list = []
-        self.dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
+        self._timed_objects: list = []
+        self._dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
         self._registered_methods: List[Callable] = []
 
         # --- Application & managers ---
@@ -181,10 +181,10 @@ class World(world_base.WorldBase):
         else:
             self.app = app.App.running_app
         # --- Rendering and backgrounds ---
-        self.backgrounds_manager: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
+        self.backgrounds: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
         self.layout : "layout_manager.Layoutmanager" = layout_manager.LayoutManager(self, self.app)
         self.data : "data_manager.DataManager" = data_manager.DataManager(self, self.app)
-        self.mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
+        
         self.background = background_mod.Background(self)
         self.background.update()
         # --- Input handling ---
@@ -192,7 +192,10 @@ class World(world_base.WorldBase):
         self.draw: "draw_manager.DrawManager" = draw_manager.DrawManager(self)
         self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
         self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
-        self.collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
+        
+         # --- Internal ---
+        self._mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
+        self._collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
         # --- Register world in application ---
         self.app.event_manager.to_event_queue("setup", None)
         self.app.worlds_manager.add_topleft(self)
@@ -377,11 +380,6 @@ class World(world_base.WorldBase):
         self.camera.height = value[1]
 
     @property
-    def backgrounds(self) -> list:
-        """Returns all backgrounds of the world as list."""
-        return self.backgrounds_manager.backgrounds
-
-    @property
     def background(self) -> "background_mod.Background":
         """Returns the current background"""
         return self.get_background()
@@ -390,16 +388,16 @@ class World(world_base.WorldBase):
     def background(self, source):
         try:
             if isinstance(source, appearance.Appearance):
-                self.backgrounds_manager.background = source
+                self.backgrounds.background = source
             else:
-                self.backgrounds_manager.add_background(source)
+                self.backgrounds.add_background(source)
         except (FileNotFoundError, FileExistsError) as e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             raise exc_value.with_traceback(None)
 
     def get_background(self) -> "background_mod.Background":
         """Returns the current background"""
-        return self.backgrounds_manager.background
+        return self.backgrounds.background
 
     def switch_background(
         self, background: Union[int, "appearance.Appearance"]
@@ -452,7 +450,7 @@ class World(world_base.WorldBase):
         try:
             return cast(
                 background_mod.Background,
-                self.backgrounds_manager.switch_appearance(background),
+                self.backgrounds.switch_appearance(background),
             )
         except FileNotFoundError as e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -464,7 +462,7 @@ class World(world_base.WorldBase):
         Args:
             background: The index of the new background. Defaults to -1 (last background) or an Appearance
         """
-        return self.backgrounds_manager.remove_appearance(background)
+        return self.backgrounds.remove_appearance(background)
 
     def set_background(self, source: Union[str, tuple]) -> "background_mod.Background":
         """Adds a new background to the world
@@ -479,7 +477,7 @@ class World(world_base.WorldBase):
 
             Add multiple Backgrounds:
 
-            .. code-block:: pythonlist
+            .. code-block:: python
 
                 from miniworlds import *
 
@@ -492,7 +490,7 @@ class World(world_base.WorldBase):
             The new created background.
         """
         try:
-            return self.backgrounds_manager.set_background(source)
+            return self.backgrounds.set_background(source)
         except FileNotFoundError as e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             raise exc_value.with_traceback(None)
@@ -511,7 +509,7 @@ class World(world_base.WorldBase):
 
             Add multiple Backgrounds:
 
-            .. code-block:: pythonlist
+            .. code-block:: python
 
                 from miniworlds import *
 
@@ -524,7 +522,7 @@ class World(world_base.WorldBase):
             The new created background.
         """
         try:
-            return self.backgrounds_manager.add_background(source)
+            return self.backgrounds.add_background(source)
         except FileNotFoundError as e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             raise exc_value.with_traceback(None)
@@ -578,7 +576,7 @@ class World(world_base.WorldBase):
         # Prepare all components necessary for running the app
         self.app.prepare_mainloop()
         self.event_manager.setup_world()
-        self.backgrounds_manager.init_display()
+        self.backgrounds._init_display()
         self.is_running = True
 
         # If an event is passed, add it to the event queue
@@ -654,7 +652,7 @@ class World(world_base.WorldBase):
     def clear(self):
         self.app.event_manager.event_queue.clear()
         for background in self.backgrounds:
-            self.backgrounds_manager.remove_appearance(background)
+            self.backgrounds.remove_appearance(background)
         # Remove all actors
         for actor in self.actors:
             actor.remove()
@@ -687,7 +685,7 @@ class World(world_base.WorldBase):
 
     @property
     def has_background(self) -> bool:
-        return self.backgrounds_manager.has_appearance()
+        return self.backgrounds.has_appearance()
 
     @property
     def registered_events(self) -> set:
@@ -696,16 +694,6 @@ class World(world_base.WorldBase):
     @registered_events.setter
     def registered_events(self, value):
         return  # setter is defined so that world_event_manager is not overwritten by world parent class container
-
-    def add_to_world(self, actor, position: tuple):
-        """Adds a Actor to the world.
-        Is called in __init__-Method if position is set.
-
-        Args:
-            actor: The actor, which should be added to the world.
-            position: The position on the world where the actor should be added.
-        """
-        self.get_world_connector(actor).add_to_world(position)
 
     def detect_actors(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
         """Gets all actors which are found at a specific position.
@@ -745,7 +733,7 @@ class World(world_base.WorldBase):
     @property
     def image(self) -> pygame.Surface:
         """The current displayed image"""
-        return self.backgrounds_manager.image
+        return self.backgrounds.image
 
     def register(self, method: Callable) -> Callable:
         """

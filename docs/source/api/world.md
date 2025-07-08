@@ -1,6 +1,6 @@
 # World
 
-Die Basisklasse für all deine Welten.
+The base class for all of your worlds
 
 ## World
 

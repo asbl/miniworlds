@@ -2,230 +2,168 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/red_baron.md:1
-msgid "Tutorial: Roter Baron"
-msgstr "Tutorial: Roter Baron"
+msgid "Tutorial: Red Baron"
+msgstr "Anleitung: Roter Baron"
 
 #: ../../source/patterns/red_baron.md:3
-msgid "In diesem Kapitel erstellen wir Schritt für Schritt einen Side-Scrolling-Shooter."
+msgid "In this chapter, we’ll build a side-scrolling shooter step by step."
 msgstr "In diesem Kapitel erstellen wir Schritt für Schritt einen Side-Scrolling-Shooter."
 
 #: ../../source/patterns/red_baron.md:10
 msgid ""
-"Die Techniken zur Erstellung von Parallax-Hintergründen, der Verwaltung von Geschwindigkeit und Bewegung sowie das "
-"Generieren von Gegnern sind in Spielen weit verbreitet. Nachdem du sie hier gesehen hast, solltest du in der Lage sein, "
-"sie in deinen eigenen Projekten zu verwenden."
+"The techniques of creating parallax backgrounds, handling speed and "
+"movement, and generating enemies are common in games. After this "
+"tutorial, you’ll be able to apply them in your own projects."
 msgstr ""
-"The techniques for creating parallax backgrounds, managing speed and movement, and generating enemies are widely used "
-"in games. After seeing them here, you should be able to use them in your own projects."
+"Die Techniken zum Erstellen von Parallax-Hintergründen, zur Steuerung von Geschwindigkeit "
+"und Bewegung sowie zur Erzeugung von Gegnern sind in vielen Spielen üblich. "
+"Nach diesem Tutorial wirst du sie in deinen eigenen Projekten anwenden können."
 
 #: ../../source/patterns/red_baron.md:12
-msgid "**Basierend auf**: `https://github.com/kantel/pygamezero/tree/master/tappyplane`"
-msgstr "**Basierend auf**: `https://github.com/kantel/pygamezero/tree/master/tappyplane`"
+msgid ""
+"**Based on**: "
+"`https://github.com/kantel/pygamezero/tree/master/tappyplane`"
+msgstr ""
+"**Basierend auf**: "
+"`https://github.com/kantel/pygamezero/tree/master/tappyplane`"
 
 #: ../../source/patterns/red_baron.md:13
-msgid "**Lizenz**: Attribution-NonCommercial-ShareAlike 4.0 International"
-msgstr "**Lizenz**: Namensnennung-Nicht kommerziell-Weitergabe unter gleichen Bedingungen 4.0 International"
+msgid "**License**: Attribution-NonCommercial-ShareAlike 4.0 International"
+msgstr "**Lizenz**: Namensnennung-NichtKommerziell-Weitergabe unter gleichen Bedingungen 4.0 International"
 
 #: ../../source/patterns/red_baron.md:14
-msgid "Voraussetzug: Kenntis im Umgang mit Klasse."
-msgstr "Prerequisite: Knowledge in handling class."
-
-#: ../../source/patterns/red_baron.md:16
-msgid "Schritt 1: Grundgerüst erstellen"
-msgstr "Step 1: Create the basic framework"
+msgid "**Prerequisite**: Basic knowledge of classes"
+msgstr "**Voraussetzung**: Grundkenntnisse in Klassen"
 
 #: ../../source/patterns/red_baron.md:18
-msgid "Erstelle ein Grundgerüst: Du benötigst eine Welt, in der Akteure platziert werden können."
-msgstr "Create a basic framework: You need a world where actors can be placed."
+msgid "Step 1: Set Up the Framework"
+msgstr "Schritt 1: Grundgerüst erstellen"
 
 #: ../../source/patterns/red_baron.md:20
-msgid "Deine letzte Zeile muss `world.run()` sein."
-msgstr "Deine letzte Zeile muss `world.run()` sein."
-
-#: ../../source/patterns/red_baron.md:31
-msgid "Ordner vorbereiten"
-msgstr "Ordner vorbereiten"
+msgid ""
+"You need a world where actors can be placed. The final line must be "
+"`world.run()`:"
+msgstr ""
+"Du brauchst eine Welt, in der Akteure platziert werden können. Die letzte Zeile muss "
+"`world.run()` sein:"
 
 #: ../../source/patterns/red_baron.md:33
-msgid ""
-"Du musst Bilder für Hintergründe, Spieler und Gegner im Verzeichnis `images` innerhalb deines Code-Verzeichnisses "
-"ablegen."
-msgstr "You need to place images for backgrounds, players, and opponents in the `images` directory within your code directory."
+msgid "Prepare the Folder"
+msgstr "Ordner vorbereiten"
 
-#: ../../source/patterns/red_baron.md:49
+#: ../../source/patterns/red_baron.md:35
 msgid ""
-"(Die Bilder findest du in diesem Repository: [miniworlds-cookbook - red "
-"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+"Place your images for background, player, and enemies in the `images` "
+"folder:"
 msgstr ""
-"(Die Bilder findest du in diesem Repository: [miniworlds-cookbook - red "
-"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+"Lege deine Bilder für den Hintergrund, den Spieler und die Gegner im Ordner `images` ab:"
 
 #: ../../source/patterns/red_baron.md:51
-msgid "Hintergründe erstellen"
-msgstr "Create backgrounds"
-
-#: ../../source/patterns/red_baron.md:53
-msgid "Mit dem folgenden Code kannst du zwei Hintergründe generieren, die einen **endlos scrollenden** Effekt erzeugen."
-msgstr "Mit dem folgenden Code kannst du zwei Hintergründe generieren, die einen **endlos scrollenden** Effekt erzeugen."
+msgid ""
+"(You can find the images here: [miniworlds-cookbook - red "
+"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+msgstr ""
+"(Die Bilder findest du hier: [miniworlds-cookbook – red "
+"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
 
 #: ../../source/patterns/red_baron.md:55
-msgid "Erstelle zwei Hintergründe, die nebeneinander den gesamten Bildschirm füllen:"
-msgstr "Create two backgrounds that fill the entire screen side by side:"
+msgid "Create Backgrounds"
+msgstr "Hintergründe erstellen"
 
-#: ../../source/patterns/red_baron.md:67
-msgid "Nun animieren wir die Hintergründe:"
-msgstr "Jetzt animieren wir die Hintergründe:"
+#: ../../source/patterns/red_baron.md:57
+msgid "Create two backgrounds side by side to simulate infinite scrolling:"
+msgstr "Erstelle zwei Hintergründe nebeneinander, um endloses Scrollen zu simulieren:"
 
 #: ../../source/patterns/red_baron.md:69
-msgid "Beide Hintergründe bewegen sich konstant von rechts nach links."
-msgstr "Both backgrounds move constantly from right to left."
+msgid "To animate them:"
+msgstr "Um sie zu animieren:"
 
-#: ../../source/patterns/red_baron.md:70
-msgid "Wenn ein Hintergrund den linken Bildschirmrand verlässt, wird er nach rechts verschoben."
-msgstr "When a background leaves the left edge of the screen, it is moved to the right."
-
-#: ../../source/patterns/red_baron.md:85
-msgid "Dies erzeugt einen **endlos scrollenden** Hintergrund."
-msgstr "This creates an **endlessly scrolling** background."
-
-#: ../../source/patterns/red_baron.md:87
-msgid "Schritt 2: Flugzeug-Klasse erstellen"
+#: ../../source/patterns/red_baron.md:86
+msgid "Step 2: Create the Plane Class"
 msgstr "Schritt 2: Flugzeug-Klasse erstellen"
 
-#: ../../source/patterns/red_baron.md:89
-msgid "Flugzeug-Klasse erstellen"
-msgstr "Create airplane class"
+#: ../../source/patterns/red_baron.md:88
+msgid "Define the Plane Class"
+msgstr "Flugzeug-Klasse definieren"
 
-#: ../../source/patterns/red_baron.md:91
-msgid "Erstelle eine `Plane`-Klasse als Vorlage für deinen Spieler:"
-msgstr "Create a `Plane` class as a template for your player:"
+#: ../../source/patterns/red_baron.md:96
+msgid "Create an Instance"
+msgstr "Instanz erstellen"
 
-#: ../../source/patterns/red_baron.md:99
-msgid "Instanz der Flugzeug-Klasse erstellen"
-msgstr "Create instance of the airplane class"
+#: ../../source/patterns/red_baron.md:98
+msgid "At the end of your code:"
+msgstr "Am Ende deines Codes:"
 
-#: ../../source/patterns/red_baron.md:101
-msgid "Erstelle am Ende deines Codes, vor `world.run()`, eine Instanz dieser Klasse:"
-msgstr "Create an instance of this class at the end of your code, before `world.run()`: "
-
-#: ../../source/patterns/red_baron.md:107
-msgid "Physik hinzufügen"
+#: ../../source/patterns/red_baron.md:104
+msgid "Add Physics"
 msgstr "Physik hinzufügen"
 
-#: ../../source/patterns/red_baron.md:109
-msgid "Nun fügen wir der Flugzeug-Klasse Physik hinzu. Modifiziere die `on_setup()`-Methode der Klasse:"
-msgstr "Jetzt fügen wir der Flugzeug-Klasse Physik hinzu. Modifiziere die `on_setup()`-Methode der Klasse:"
+#: ../../source/patterns/red_baron.md:106
+#: ../../source/patterns/red_baron.md:165
+msgid "Extend `on_setup()`:"
+msgstr "`on_setup()` erweitern:"
 
-#: ../../source/patterns/red_baron.md:118
-msgid "`velocity_y` beschreibt die aktuelle Geschwindigkeit des Flugzeugs in y-Richtung."
-msgstr "`velocity_y` describes the current speed of the aircraft in the y-direction."
-
-#: ../../source/patterns/red_baron.md:119
-msgid "`gravity` repräsentiert die Schwerkraft, die die Geschwindigkeit des Flugzeugs beeinflusst."
-msgstr "`gravity` repräsentiert die Schwerkraft, die die Geschwindigkeit des Flugzeugs beeinflusst."
-
-#: ../../source/patterns/red_baron.md:121
-msgid "Physik simulieren"
+#: ../../source/patterns/red_baron.md:115
+msgid "Simulate Physics"
 msgstr "Physik simulieren"
 
-#: ../../source/patterns/red_baron.md:123
-msgid "Die Physik wird in der `act()`-Methode der Klasse simuliert:"
-msgstr "The physics is simulated in the `act()` method of the class:"
+#: ../../source/patterns/red_baron.md:124
+msgid "Add Upward Force on Key Press"
+msgstr "Aufwärtskraft bei Tastendruck hinzufügen"
 
-#: ../../source/patterns/red_baron.md:132
-msgid ""
-"Dies fügt die Geschwindigkeit zu den y-Koordinaten des Flugzeugs hinzu. Die Schwerkraft verringert die Geschwindigkeit "
-"kontinuierlich, während die Reibung die Bewegung glättet."
-msgstr ""
-"This adds the speed to the y-coordinates of the aircraft. Gravity continuously decreases the speed, while friction "
-"smooths the movement."
+#: ../../source/patterns/red_baron.md:133
+msgid "Step 3: Add Enemies"
+msgstr "Schritt 3: Gegner hinzufügen"
 
-#: ../../source/patterns/red_baron.md:134
-msgid "Kraft bei Tastendruck hinzufügen"
-msgstr "Add force on key press"
+#: ../../source/patterns/red_baron.md:135
+msgid "Import:"
+msgstr "Importieren:"
 
-#: ../../source/patterns/red_baron.md:136
-msgid "Verwende das `on_key_down`-Event, um eine Aufwärtskraft auf den Actor anzuwenden:"
-msgstr "Use the `on_key_down` event to apply an upward force to the actor:"
-
-#: ../../source/patterns/red_baron.md:143
-msgid "Schritt 3: Gegner hinzufügen"
-msgstr "Step 3: Add opponent"
-
-#: ../../source/patterns/red_baron.md:145
-msgid "Importiere `randint` und `choice`, um zufällig Gegner zu generieren:"
-msgstr "Importiere `randint` und `choice`, um zufällig Gegner zu generieren:"
-
-#: ../../source/patterns/red_baron.md:151
-msgid "Gegner-Klasse erstellen"
-msgstr "Create Opponent Class"
+#: ../../source/patterns/red_baron.md:141
+msgid "Create Enemy Class"
+msgstr "Gegner-Klasse erstellen"
 
 #: ../../source/patterns/red_baron.md:153
-msgid "Füge eine Gegner-Klasse als Vorlage hinzu:"
-msgstr "Add an opponent class as a template:"
+msgid "Add Enemies"
+msgstr "Gegner hinzufügen"
 
-#: ../../source/patterns/red_baron.md:166
-msgid "Die Methode `reset()` setzt die Position des Gegners zufällig innerhalb eines bestimmten Bereichs."
-msgstr "The `reset()` method randomly sets the opponent's position within a specific range."
+#: ../../source/patterns/red_baron.md:163
+msgid "Move Enemies"
+msgstr "Gegner bewegen"
 
-#: ../../source/patterns/red_baron.md:168
-msgid "Gegner zur Welt hinzufügen"
-msgstr "Add opponent to the world"
+#: ../../source/patterns/red_baron.md:173
+msgid "Then:"
+msgstr "Dann:"
 
-#: ../../source/patterns/red_baron.md:170
-msgid "Erstelle mehrere Instanzen der Gegner-Klasse mit einer Schleife und füge sie der Welt hinzu:"
-msgstr "Create multiple instances of the enemy class with a loop and add them to the world:"
+#: ../../source/patterns/red_baron.md:184
+msgid "Step 4: Add Shooting"
+msgstr "Schritt 4: Schießen hinzufügen"
 
-#: ../../source/patterns/red_baron.md:180
-msgid "Gegner bewegen"
-msgstr "Move opponent"
+#: ../../source/patterns/red_baron.md:186
+msgid "Create the Bullet class:"
+msgstr "Erstelle die Bullet-Klasse:"
 
-#: ../../source/patterns/red_baron.md:182
-msgid "Modifiziere die `on_setup()`-Methode der Gegner-Klasse:"
-msgstr "Modify the `on_setup()` method of the enemy class:"
+#: ../../source/patterns/red_baron.md:209
+msgid "Full Example Code"
+msgstr "Kompletter Beispielcode"
 
-#: ../../source/patterns/red_baron.md:190
-msgid "Die `speed`-Eigenschaft gibt an, wie viele Schritte sich der Gegner in jeder Frame in x-Richtung bewegt."
-msgstr "The `speed` property specifies how many steps the opponent moves in the x-direction in each frame."
-
-#: ../../source/patterns/red_baron.md:192
-msgid "Füge eine `act()`-Methode hinzu, um die Bewegung zu simulieren:"
-msgstr "Add a `act()` method to simulate the movement:"
-
-#: ../../source/patterns/red_baron.md:201
-msgid "Schritt 4: Schießen hinzufügen"
-msgstr "Step 4: Add shooting"
-
-#: ../../source/patterns/red_baron.md:203
-msgid "Erstelle eine `Bullet`-Klasse, um die Schussfunktion hinzuzufügen:"
-msgstr "Create a `Bullet` class to add the shooting function:"
-
-#: ../../source/patterns/red_baron.md:224
-msgid ""
-"Mit den Methoden `on_detecting_enemy` und `on_detecting_not_on_world` können Kugeln Gegner erkennen und bei Verlassen "
-"der Welt entfernt werden."
-msgstr ""
-"With the methods `on_detecting_enemy` and `on_detecting_not_on_world`, bullets can detect enemies and be removed when "
-"leaving the world."
-
-#: ../../source/patterns/red_baron.md:226
-msgid "Komplettcode:"
-msgstr "Vollständiger Code:"
+#: ../../source/patterns/red_baron.md:211
+msgid "..."
+msgstr "..."

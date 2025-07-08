@@ -1,40 +1,36 @@
-# Die erste Welt
+# The First World
 
-In diesem Abschnitt werden wir unsere erste "Welt" in Miniworlds erstellen. Eine Welt ist der Grundbaustein für alles, 
-was du in deiner Anwendung sehen oder steuern möchtest – von einem simplen Spielfeld bis hin zu komplexeren Welten 
-wie in Videospielen. Lass uns direkt loslegen:
+In this section, we’ll create our first “world” in Miniworlds. A world is the basic building block for everything you want to see or control in your application — from a simple game field to more complex worlds like those in video games. Let’s dive right in:
 
-## Erste Schritte
+## Getting Started
 
-Um eine Welt zu erstellen, brauchst du nur ein paar Zeilen Code:
+To create a world, you only need a few lines of code:
 
 ```python
 from miniworlds import World
 
-# Erstellen einer neuen Welt mit den Maßen 600x300 Pixel
+# Create a new world with dimensions 600x300 pixels
 world = World(600, 300)
 
-# Starte die Welt, um sie anzuzeigen
+# Start the world to display it
 world.run()
 ```
 
-### Was passiert in diesem Code?
+### What happens in this code?
 
-* Bibliothek importieren: In der ersten Zeile importierst du die miniworlds-Bibliothek, die alle benötigten Funktionen bereitstellt.
-* Welt erstellen: Die Methode miniworlds.World(600, 300) erstellt eine neue Welt. 
-  Hiermit legst du die Größe der Welt fest: Sie ist 600 Pixel breit und 300 Pixel hoch.
-* Welt starten: world.run() startet die Welt und zeigt sie auf dem Bildschirm an. 
-  Stell dir diese Zeile wie den "Play"-Button vor – erst danach wird deine Welt sichtbar.
+* **Import the library**: The first line imports the Miniworlds library, which provides all the necessary functions.
+* **Create a world**: The method `miniworlds.World(600, 300)` creates a new world. This defines the world’s size: 600 pixels wide and 300 pixels tall.
+* **Start the world**: `world.run()` starts the world and displays it on screen. You can think of this line like pressing “Play” — the world becomes visible only after this.
 
-Schau dir das folgende Bild an, das den ersten Schritt zeigt:
+Take a look at the following image showing the first step:
 
 ![First miniworlds Example](../_images/01firstworld.png)
 
-## Hintergrund hinzufügen
+## Adding a Background
 
-Damit die Welt nicht leer aussieht, kannst du ihr ein Bild als Hintergrund hinzufügen. 
-Dazu brauchst du ein Bild, das du im images-Ordner deines Projekts speicherst. 
-Die Ordnerstruktur deines Projekts könnte folgendermaßen aussehen:
+To avoid having an empty world, you can add an image as a background.
+You’ll need an image saved in the `images` folder of your project.
+Your project structure might look like this:
 
 ```
 project/
@@ -43,40 +39,40 @@ project/
     └── grass.png
 ```
 
-Nachdem du dein Bild (z.B. grass.png) in den Ordner images gelegt hast, 
-kannst du es mit der Methode add_background der Welt hinzufügen:
+Once you’ve placed your image (e.g., `grass.png`) in the `images` folder,
+you can add it to your world using the `add_background` method:
 
 ```python
 import miniworlds
 
-# Welt erstellen
+# Create world
 world = miniworlds.World(600, 300)
 
-# Bild als Hintergrund hinzufügen
+# Add image as background
 world.add_background("images/grass.png")
 
-# Welt starten
+# Start world
 world.run()
 ```
+
 ![First miniworlds Example](../_images/pixel_addbackground.png)
 
-### Was passiert hier?
+### What’s happening here?
 
-* Die Methode add_background("images/grass.png") lädt das Bild grass.png aus dem angegebenen Pfad und 
-  setzt es als Hintergrund für deine Welt.
+* The method `add_background("images/grass.png")` loads the image `grass.png` from the specified path
+  and sets it as the background for your world.
 
+\:::{note}
 
+There are different types of `Worlds` in Miniworlds.
+The `TiledWorld` is specifically designed for games using tiled layouts, such as top-down RPGs.
 
-:::{note}
+\:::
 
-Es gibt verschiedene Arten von `Worlds` in miniworlds. 
-Die `TiledWorld` ist speziell für Spiele auf gekachelten Flächen gedacht, z.B. Top-Down RPGs.
-:::
+\:::{seealso}
+[Concept: Naming and Variables](../concepts/concept_naming)
+\:::
 
-:::{seealso}
-[Konzept: Naming und Variablen](../concepts/concept_naming)
-:::
-
-:::{seealso}
-[Konzept: Importe](../concepts/concept_imports)
-:::
+\:::{seealso}
+[Concept: Imports](../concepts/concept_imports)
+\:::

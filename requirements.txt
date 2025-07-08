@@ -11,3 +11,4 @@ myst_parser
 sphinxcontrib.mermaid
 autoclasstoc
 sphinx_toolbox
+sphinx_book_theme

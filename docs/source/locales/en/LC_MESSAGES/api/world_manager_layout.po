@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-08 09:37+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/world_manager_layout.md:1
+msgid "World > Camera"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager:1 of
+msgid ""
+"LayoutManager handles the positioning and management of World objects "
+"within an application window."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager:3 of
+msgid ""
+"It is accessed via `world.layout` and delegates layout behavior (e.g., "
+"docking, switching, removing) to the underlying `App` and "
+"`WorldsManager`."
+msgstr ""
+
+#: ../../source/api/world_manager_layout.md
+msgid "Public Data Attributes:"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`window_docking_position "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position>`\\"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position:1
+#: of
+msgid "Returns the docking position of this world in the window layout."
+msgstr ""
+
+#: ../../source/api/world_manager_layout.md
+msgid "Public Methods:"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.__init__>`\\ "
+"\\(world\\, app\\)"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:1 of
+msgid "Initialize a LayoutManager for a given world and application."
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+msgid ""
+":py:obj:`add_right "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.add_right>`\\ "
+"\\(world\\[\\, size\\]\\)"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:1 of
+msgid "Adds a new world to the right side of the current world."
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+msgid ""
+":py:obj:`add_bottom "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom>`\\ "
+"\\(world\\[\\, size\\]\\)"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:1 of
+msgid "Adds a new world below the current world."
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+msgid ""
+":py:obj:`remove_world "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world>`\\ "
+"\\(world\\)"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:1 of
+msgid "Removes a world from the current layout."
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+msgid ""
+":py:obj:`switch_world "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world>`\\ "
+"\\(new\\_world\\[\\, reset\\]\\)"
+msgstr ""
+
+#: ../../None:7:<autosummary>:1
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:1 of
+msgid "Switches focus to another world."
+msgstr ""
+
+#: ../../source/api/world_manager_layout.md
+msgid "Private Methods:"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`_add_to_window "
+"<miniworlds.worlds.manager.layout_manager.LayoutManager._add_to_window>`\\"
+" \\(app\\, dock\\[\\, size\\]\\)"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid "Internal method to integrate this world into the window system."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world of
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:3 of
+msgid "The World instance that owns this layout manager."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:4 of
+msgid "The application instance managing all worlds."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:7
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:11
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:11
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:8
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:9
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position:6
+#: of
+msgid "Example"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world of
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:3
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:5
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:5 of
+msgid "The World instance to dock."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:6 of
+msgid "Height of the added world in pixels (default: 100)."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position
+#: of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:8
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:8 of
+msgid "The newly added World instance."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:6 of
+msgid "Width of the added world in pixels (default: 100)."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:3
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:5 of
+msgid "The World instance to remove."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:5 of
+msgid "The World instance to activate."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:6 of
+msgid "Whether to reset the world state (default: False)."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position:3
+#: of
+msgid "A string such as \"right\" or \"bottom\", or None if undocked."
+msgstr ""
+

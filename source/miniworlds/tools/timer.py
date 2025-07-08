@@ -8,7 +8,7 @@ class Timed():
 
     def __init__(self):
         self.world = app.App.running_world
-        self.world.timed_objects.append(self)
+        self.world._timed_objects.append(self)
         self.running = True
 
     def tick(self):
@@ -17,8 +17,8 @@ class Timed():
     def unregister(self):
         """remove timer from world
         """
-        if self in self.world.timed_objects:
-            self.world.timed_objects.remove(self)
+        if self in self.world._timed_objects:
+            self.world._timed_objects.remove(self)
         del (self)
 
 

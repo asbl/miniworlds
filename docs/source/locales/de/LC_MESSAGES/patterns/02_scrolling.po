@@ -2,83 +2,91 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/02_scrolling.md:1
 msgid "Scrolling"
 msgstr "Scrollen"
 
 #: ../../source/patterns/02_scrolling.md:3
-msgid "Oft möchtest du den Bildschirm \"scrollen lassen."
-msgstr "Oft möchtest du den Bildschirm „scrollen“ lassen."
+msgid "Often, you want the screen to “scroll.”"
+msgstr "Oft möchtest du, dass sich der Bildschirm „scrollt“."
 
-#: ../../source/patterns/02_scrolling.md:10
-msgid "Die einfachste Möglichkeit dazu ist es einen Hintergrund zu \"verschieben\":"
-msgstr "The easiest way to do this is to \"move\" a background:"
+#: ../../source/patterns/02_scrolling.md:5
+msgid "The simplest way to achieve this is by “moving” the background."
+msgstr "Die einfachste Möglichkeit dafür ist es, den Hintergrund zu „verschieben“."
 
-#: ../../source/patterns/02_scrolling.md:12
-msgid "Damit dies wirklich gut funktioniert, musst du den Hintergrund als \"Actor anlegen\" und benötigst zwei Hintergründe."
-msgstr "To make this work really well, you need to create the background as an \"actor\" and you need two backgrounds."
+#: ../../source/patterns/02_scrolling.md:7
+msgid ""
+"For it to work smoothly, the background must be created as an `Actor`, "
+"and you’ll need **two backgrounds**."
+msgstr ""
+"Damit es flüssig funktioniert, muss der Hintergrund als `Actor` erstellt werden, "
+"und du brauchst **zwei Hintergründe**."
 
-#: ../../source/patterns/02_scrolling.md:14
-msgid "![scrolling background](../_images/scrolling.png)"
-msgstr "![scrollender Hintergrund](../_images/scrolling.png)"
+#: ../../source/patterns/02_scrolling.md:9
+msgid ""
+"Both backgrounds move from right to left (or top to bottom, left to "
+"right, etc.—depending on your game). As soon as one background leaves the"
+" screen, it is repositioned on the right."
+msgstr ""
+"Beide Hintergründe bewegen sich von rechts nach links (oder von oben nach unten, "
+"links nach rechts – je nach Spiel). Sobald ein Hintergrund den Bildschirm verlässt, "
+"wird er rechts wieder angefügt."
 
-#: ../../source/patterns/02_scrolling.md:14
-msgid "scrolling background"
-msgstr "scrollender Hintergrund"
+#: ../../source/patterns/02_scrolling.md:11
+msgid "This creates the illusion of an “endless” landscape."
+msgstr "So entsteht der Eindruck einer „endlosen“ Landschaft."
+
+#: ../../source/patterns/02_scrolling.md:13
+msgid "In code, this can be implemented like this:"
+msgstr "Im Code kann das wie folgt umgesetzt werden:"
+
+#: ../../source/patterns/02_scrolling.md:15
+msgid ""
+"Create the background twice using the same background image and place "
+"them side by side."
+msgstr "Erstelle den Hintergrund zweimal mit demselben Bild und platziere sie nebeneinander."
 
 #: ../../source/patterns/02_scrolling.md:16
 msgid ""
-"Beide Hintergründe wandern von rechts nach links (oder von oben nach unten, links nach rechts, ... - Je nach Spiel) - "
-"Sobald ein Hintergrund das Spielfeld verlassen würde, wird er wieder ganz rechts angefügt."
-msgstr ""
-"Both backgrounds move from right to left (or from top to bottom, left to right, ... - depending on the game) - As soon "
-"as a background would leave the playing field, it is reattached on the far right."
+"It’s helpful to store both backgrounds in a list so you can move them "
+"together."
+msgstr "Es ist hilfreich, beide Hintergründe in einer Liste zu speichern, um sie gemeinsam zu bewegen."
 
-#: ../../source/patterns/02_scrolling.md:18
-msgid "Auf diese Weise entsteht der Eindruck einer \"unendlich langen Landschaft\"."
-msgstr "This creates the impression of an \"infinitely long landscape\"."
-
-#: ../../source/patterns/02_scrolling.md:20
-msgid "Im Code kann man dies wie folgt umsetzen:"
-msgstr "Im Code kann man dies wie folgt umsetzen:"
-
-#: ../../source/patterns/02_scrolling.md:22
-msgid "Lege mden Hintergrund zweimal mit dem gleichen Hintergrund an und platziere diese nebeneinander."
-msgstr "Create the background twice with the same background and place them side by side."
-
-#: ../../source/patterns/02_scrolling.md:23
-msgid "Es kann sinnvoll sein die Hintergründe in einer Liste zu speichern, da du sie dann gemeinsam bewegen kannst."
-msgstr "It may be useful to store the backgrounds in a list, as you can then move them together."
-
-#: ../../source/patterns/02_scrolling.md:35
-msgid "In der `world.act`-Methode die jedes Frame einmal aufgerufen wird, kannst den Bildschirm langsam verschieben:"
-msgstr "In der `world.act`-Methode, die jedes Frame einmal aufgerufen wird, kannst du den Bildschirm langsam verschieben:"
-
-#: ../../source/patterns/02_scrolling.md:47
-msgid "Als Code sieht dies so aus:"
-msgstr "Als Code sieht dies so aus:"
-
-#: ../../source/patterns/02_scrolling.md:92
+#: ../../source/patterns/02_scrolling.md:28
 msgid ""
-"Notiz: Die Idee stammt von dem Blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html) - "
-"Jörg Kantereit hat dort dieses Snippet mit Pygame Zero programmiert."
+"In the `world.act` method (which is called every frame), you can scroll "
+"the screen:"
 msgstr ""
-"Note: The idea comes from the blog [schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html) - "
-"Jörg Kantereit programmed this snippet with Pygame Zero there."
+"In der Methode `world.act`, die in jedem Frame aufgerufen wird, kannst du "
+"den Bildschirm scrollen:"
+
+#: ../../source/patterns/02_scrolling.md:39
+msgid "Full example:"
+msgstr "Vollständiges Beispiel:"
+
+#: ../../source/patterns/02_scrolling.md:83
+msgid ""
+"Note: The idea comes from the blog "
+"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html),"
+" where Jörg Kantereit originally implemented this snippet using Pygame "
+"Zero."
+msgstr ""
+"Hinweis: Die Idee stammt vom Blog "
+"[schockwellenreiter](http://blog.schockwellenreiter.de/2022/05/2022051502.html), "
+"wo Jörg Kantereit diesen Code ursprünglich mit Pygame Zero umgesetzt hat."

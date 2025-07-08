@@ -1,130 +1,128 @@
-# Interaktion 
+# Interaction
 
+## `on_setup` and `act`
 
-## on_setup und act
+Until now, you've written commands sequentially, and they were executed from top to bottom.
 
+If you want to write an interactive program, you'll need to break away from that pattern.
 
-Bisher hast du Befehle einfach untereinander geschrieben und die Befehle wurden dann von oben nach unten abgearbeitet.
+You can **register** methods that are called at certain times or in response to specific events.
 
-Wenn du ein interaktives Programm schreiben willst, dann musst du dies etwas durchbrechen.
+We’ll start with two simple methods: `on_setup` and `act`:
 
-Dazu kannst du Methoden **registrieren**, die zu bestimmten Zeiten aufgerufen werden oder auf bestimmte Ereignisse reagieren.
+* `on_setup` is called **once** when the `World` is created.
+* `act` is called **continuously**, once per time unit (or frame).
 
-Wir fangen mit zwei einfachen Methoden an, `on_setup` und `act`
+The following program:
 
-  * `on_setup` wird einmal aufgerufen, wenn das `World` erstellt wurde.
-
-  * `act` wird immer und immer wieder aufgerufen, einmal pro Zeiteinheit.
-
-Das folgende Programm:
-
-``` python
+```python
 from miniworlds import *
 
 world = World()
-world.size = (120,210)
+world.size = (120, 210)
 
 @world.register
 def on_setup(self):
     print("setup")
-  
+
 @world.register
 def act(self):
     print("act")
 ```
 
-liefert z.B. folgende Ausgabe
+Produces the output:
 
 ```
 setup
 act
 act
 act
-```    
+```
 
-## Code-Blöcke
-Die Zeile ``def on_setup(self):`` endet mit einem Doppelpunkt. Darunter siehst du einen Codeblock:
+---
 
-Die Inhalte der Funktion sind alle *eingerückt*, alles was gleich weit eingerückt ist, gehört zu einem Block.
+## Code Blocks
 
-``` python
+The line `def on_setup(self):` ends with a colon. Below it is a **code block**.
+
+The contents of the function are **indented**. Everything with the same indentation belongs to the same block.
+
+```python
 from miniworlds import *
 
 world = World()
-world.size = (120,210)
+world.size = (120, 210)
 
 @world.register
 def on_setup(self):
-    print("Dies ")
-    print("ist ")
-    print("Teil ")
-    print("eines Codeblocks ")
-print("Dies aber nicht")
+    print("This ")
+    print("is ")
+    print("part ")
+    print("of a code block")
+print("But this is not")
 ```
 
-Beim Aufruf von ``on_setup`` werden die vier Zeilen darunter aufgerufen, nicht aber die 5. Zeile.
+When `on_setup` is called, only the indented four lines are executed—not the last one.
 
-.. note::
-  In der Regel verwendet man in Python *4 Leerzeichen*, wenn man einen Codeblock einrückt.
-  Es ist zwar kein Fehler, wenn du nur 3,2,1 oder 5 Leerzeichen oder ein Tab verwendest, solange du immer gleich 
-  weit einrückst - Dies wird von erfahrenen Programmierern aber als schlecher Stil empfunden.
+> **Note**: In Python, it's standard to use **4 spaces** for indentation.
+> Technically, any consistent indentation (2, 3, 5 spaces or tabs) is valid, but using 4 spaces is considered good style.
 
-## Frame Rate - Wie oft wird act() aufgerufen
+---
 
+## Frame Rate – How Often Is `act()` Called?
 
-Man kann einstellen, wie oft ``act()`` aufgerufen wird, indem man die Attribute ``world.fps`` und ``world.speed`` konfiguriert.
+You can configure how often `act()` is called using the `world.fps` and `world.speed` attributes:
 
-* ``world.fps`` definiert die ``frame rate``. Analog zu einem Daumenkino, bei dem du mit festgelegter Geschwindigkeit die Seiten umblätterst, 
-  definiert die Framerate wie oft pro Sekunde das Bild neu gezeichnet wird.
-  ``world.fps`` hat den Standardwert 60, d.h. es werden 60 Bilder pro Sekunde angezeigt.
+* `world.fps` sets the **frame rate** (frames per second). Like a flipbook, this defines how often the screen is redrawn.
+  Default is 60 frames per second.
 
-* Im Attribut ``world.frame`` wird der aktuelle frame gespeichert. Die Frames seit Programmstart werden hochgezählt.
-  
-* ``world.speed`` definiert wie oft die Programmlogik (z.B. act) pro Sekunde aufgerufen wird. 
-  Ein Wert von 60 bedeutet, dass die act()-Methode jeden 60. Frame aufgerufen wird.
+* `world.frame` stores the current frame number. It counts upward from the start.
 
-``` python
-  from miniworlds import *
+* `world.speed` defines how often `act()` is called per second. A value of 60 means `act()` is called once every 60 frames.
 
-  world = World()
-  world.size = (120,210)
-
-  @world.register
-  def on_setup(self):
-      world.fps = 1
-      world.speed = 3
-      
-  @world.register
-  def act(self):
-      print(world.frame)
-
-  world.run()
-```
-
-Das Programm oben hat die Ausgabe:
-
-```
-  3
-  6
-  9
-  12
-  15
-```
-
-
-Es wird sehr langsam hochgezählt, weil genau ein Frame pro Sekunde abgespielt wird und jeden 3. Frame
-(also alle 3 Sekunden) die Funktion ``act()`` aufgerufen wird.
-
-
-````{warning}
-
-  Achtung: Es kann zu unvorhergesehenen Nebenwirkungen führen, wenn man Code falsch einrückt, betrachte z.B. folgendes Programm:
-
-``` python
+```python
 from miniworlds import *
 
 world = World()
-world.size = (120,210)
+world.size = (120, 210)
+
+@world.register
+def on_setup(self):
+    world.fps = 1
+    world.speed = 3
+
+@world.register
+def act(self):
+    print(world.frame)
+
+world.run()
+```
+
+This will produce:
+
+```
+3
+6
+9
+12
+15
+```
+
+Because only **1 frame per second** is rendered, and `act()` is triggered every 3rd frame—so every 3 seconds.
+
+---
+
+## ⚠️ Warning: Incorrect Indentation
+
+Be careful with indentation, as incorrect placement can lead to unexpected behavior.
+
+Example:
+
+```python
+from miniworlds import *
+
+world = World()
+world.size = (120, 210)
 
 @world.register
 def on_setup(self):
@@ -137,10 +135,10 @@ def act(self):
     print(3)
 print(4)
 
-world.run()  
+world.run()
 ```
 
-Das Programm hat die Ausgabe:
+Output:
 
 ```
 1
@@ -151,148 +149,157 @@ Das Programm hat die Ausgabe:
 3
 ```
 
-````
+Explanation:
 
-Dies liegt daran, dass zuerst ``on_setup()`` ausgeführt wird, nachdem in Zeile 3 das World erstellt wurde.
-Anschließend werden die beiden nicht eingerückten Befehle ausgeführt und sobald ``run()`` gestartet wird, wird die Funktion
-``act()`` aufgerufen. Achte darauf, dass deine Anweisungen sich innerhalb der Code-Blöcke von act und on_setup befinden.
+* `on_setup()` is called immediately after creating the `World`.
+* Then the two unindented `print()` statements are run.
+* Finally, after `run()` is started, `act()` is triggered repeatedly.
 
-## Maus-Interaktionen 
+Make sure your statements are inside the correct code blocks.
 
+---
 
-Interaktionen finden im miniworlds über **Events** statt. Events können durch unterschiedlichste Systemereignisse aufgerufen werden,
-z.B. wenn der Benutzer eine Eingabe mit der Tastatur oder mit der Maus getätigt hat.
+## Mouse Interactions
 
-Zunächst schauen wir uns Mausinteraktionen an:
+In **miniworlds**, interactions occur via **events**, such as keyboard and mouse input.
 
-Mit der Methode ``get_mouse_position`` kannst du die Mausposition abfragen:
+You can use `get_mouse_position()` to retrieve the current mouse position:
 
- ``` python
+```python
 from miniworlds import *
 
 world = World()
 
 @world.register
 def on_setup(self):
-    world.size = (200,200)
+    world.size = (200, 200)
 
 @world.register
 def act(self):
-    Ellipse(world.get_mouse_position(), 10, 10) 
+    Ellipse(world.get_mouse_position(), 10, 10)
 
 world.run()
 ```
 
-Der Kreis folgt nun deiner Mausposition:
+This draws a circle that follows the mouse:
 
 <img src="../_images/processing/mouse1.png" alt="Get the mouse position" width="260px">
 
-Wenn du Linien zeichnen möchtest, benötigst du die aktuelle und die letzte Mausposition. Dies geht z.B. wie folgt:
+To draw lines, you need the current and previous mouse position:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
 
 @world.register
 def on_setup(self):
-    world.size = (200,200)
+    world.size = (200, 200)
 
 @world.register
 def act(self):
-    Line(world.get_prev_mouse_position(), world.get_mouse_position()) 
+    Line(world.get_prev_mouse_position(), world.get_mouse_position())
 
 world.run()
 ```
 
-<img src="../_images/processing/lines1.png" alt="Get the mouse position" width="260px">
+<img src="../_images/processing/lines1.png" alt="Draw lines using mouse" width="260px">
 
-## Listener-Methoden
+---
 
+## Listener Methods
 
-Schön wäre es, wenn wir noch auf spezifische Events reagieren können, z.B. auf Tastendrücke oder Mausklicks. 
-Dafür können wir bestimmte Listener-Methoden registrieren, z.B. ``on_mouse_pressed``
+You can respond to specific events like mouse clicks by registering **listener methods**, e.g., `on_mouse_left`:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
 
 @world.register
 def on_setup(self):
-    world.size = (200,200)
+    world.size = (200, 200)
 
 @world.register
 def act(self):
-    Ellipse(world.get_mouse_position(), 10, 10) 
+    Ellipse(world.get_mouse_position(), 10, 10)
 
 @world.register
 def on_mouse_left(self, position):
     world.fill_color = (255, 0, 0)
-  
+
 @world.register
 def on_mouse_right(self, position):
     world.fill_color = (255, 255, 255)
-  
+
 world.run()
 ```
 
-<img src="../_images/processing/mouse2.png" alt="Get the mouse position, color changing" width="260px">
+<img src="../_images/processing/mouse2.png" alt="Mouse click to change color" width="260px">
 
-## Tastaturabgaben abfragen
+---
 
-Du kannst auch Angaben von der Tastatur abfragen:
+## Keyboard Input
 
-``` python
+You can also respond to keyboard input:
+
+```python
 from miniworlds import *
 
 world = World()
 
 @world.register
 def on_setup(self):
-    world.size = (200,200)
+    world.size = (200, 200)
 
 @world.register
 def on_key_down_a(self):
-    a = Ellipse.from_center((100, 100), 100, 100) 
+    a = Ellipse.from_center((100, 100), 100, 100)
     a.fill_color = (255, 0, 0)
 
 @world.register
 def on_key_down_b(self):
-    a = Ellipse.from_center((100, 100), 100, 100) 
+    a = Ellipse.from_center((100, 100), 100, 100)
     a.fill_color = (0, 255, 0)
 
-    
 world.run()
 ```
 
-Dieses Programm reagiert auf die Tasten a und b, beim Drücken der Taste <kbd>a</kbd> wird eine rote Ellipse gezeichnet, beim Drücken der Taste <kbd>b</kbd> eine grüne Ellipse.
+This program responds to pressing **A** or **B**:
 
-### Arbeiten mit dem Zufall
+* <kbd>a</kbd>: red ellipse
+* <kbd>b</kbd>: green ellipse
 
-Python stellt mit der random Bibliothek einige Möglichkeiten zur Verfügung, wie man interessante graphische Effekte erzeugen kann:
+---
 
-So wird z.B. ein Kreis in einer zufälligen Farbe erstellt:
+### Using Randomness
 
-``` python
+Python's `random` library lets you create interesting visual effects.
+
+For example, this creates a circle with a random color:
+
+```python
 from miniworlds import *
 import random
+
 world = World()
 
 @world.register
 def on_setup(self):
-    world.size = (200,200)
+    world.size = (200, 200)
 
 @world.register
 def on_key_down_a(self):
-    a = Ellipse.from_center((100, 100), 100, 100) 
-    a.fill_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    a = Ellipse.from_center((100, 100), 100, 100)
+    a.fill_color = (
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255)
+    )
 
-    
 world.run()
 ```
 
-Ausgabe:
+Output:
 
-<img src="../_images/processing/changing_colors.gif" alt="changing colors" width="260px"/>
-
+<img src="../_images/processing/changing_colors.gif" alt="changing colors" width="260px">

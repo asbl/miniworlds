@@ -1,32 +1,32 @@
 # Tutorial: Flappy Bird
 
-In diesem Kapitel erstellen wir Schritt für Schritt ein Flappy Bird-Spiel unter Verwendung der `miniworlds_physics` Engine.
+In this chapter, we will create a Flappy Bird game step-by-step using the `miniworlds_physics` engine.
 
-![Flappy Bird Spiel](../_images/patterns_flappy.png)
+![Flappy Bird Game](../_images/patterns_flappy.png)
 
 ---
 
-## Schritt 1: Importieren der Physik-Engine
+## Step 1: Importing the Physics Engine
 
-Installiere das Paket `miniworlds_physics` genauso, wie du `miniworlds` installiert hast. Danach importierst du die `PhysicsWorld`:
+Install the `miniworlds_physics` package just like you installed `miniworlds`. Then, import `PhysicsWorld`:
 
 ```python
 import random
 from miniworlds import Actor, Number, Text
-from miniworlds_physics import PhysicsWorld  # Import der Physik-Engine
+from miniworlds_physics import PhysicsWorld  # Import the physics engine
 
 world = PhysicsWorld(800, 600)
-# Dein Code kommt hier hin
+# Your code goes here
 world.run()
 ```
 
 ---
 
-## Schritt 2: Röhren (Pipes) erstellen
+## Step 2: Creating the Pipes
 
-### Röhren hinzufügen und in einer Liste speichern
+### Add Pipes and Store Them in a List
 
-Füge mehrere Röhren (Pipes) hinzu und speichere sie in einer Liste, um später ihre Eigenschaften leichter ändern zu können:
+Add several pipes and store them in a list so their properties can be managed easily:
 
 ```python
 pipes = [
@@ -37,13 +37,9 @@ pipes = [
 ]
 ```
 
-#### Erklärung:
+### Set Pipe Properties
 
-* Es werden vier Röhren erstellt, die in der Liste `pipes[]` gespeichert werden.
-
-### Eigenschaften der Röhren festlegen
-
-Verwende eine Schleife, um Eigenschaften für alle Röhren festzulegen:
+Use a loop to set properties for all pipes:
 
 ```python
 for pipe in pipes:
@@ -51,26 +47,21 @@ for pipe in pipes:
     pipe.add_costume("images/pipe1.png")
     pipe.size = (50, 280)
     pipe.passed = False
-    pipe.physics.simulation = "manual"  # Manuelle Steuerung
-    pipe.physics.velocity_x = -150  # Geschwindigkeit der Pipes
-    pipe.origin = "topleft"  # Oben links als Referenzpunkt
+    pipe.physics.simulation = "manual"
+    pipe.physics.velocity_x = -150
+    pipe.origin = "topleft"
 ```
 
-Für die 2. und 4. Röhre (die von oben nach unten zeigen) wird die Orientierung um 180 Grad gedreht:
+For the 2nd and 4th pipes (which face down), rotate them 180 degrees:
 
 ```python
 pipes[1].costume.orientation = -180
 pipes[3].costume.orientation = -180
 ```
 
-#### Erklärung:
-* **pipe.physics.simulation**: Mit `manual` wird festgelegt, dass die Schwerkraft keine Wirkung auf die Röhre hat.
-* **pipe.physics.velocity_x**: Die Bewegung erfolgt durch Ändern der Geschwindigkeit.
-* **pipe.origin**: Der Referenzpunkt ist die obere linke Ecke der Röhre, was das Verschieben vereinfacht.
+### Register Pipe Methods
 
-### Methoden für die Röhren registrieren
-
-Nun fügen wir den Röhren zwei wichtige Methoden hinzu:
+Add two important methods to the pipes:
 
 ```python
 for pipe in pipes:
@@ -85,17 +76,13 @@ for pipe in pipes:
         self.passed = False
 ```
 
-#### Erklärung:
-* **act**: Diese Methode prüft, ob die Röhre vom Spieler überquert wurde.
-* **on_detecting_left_border**: Wenn die Röhre den linken Bildschirmrand erreicht, wird sie an eine zufällige Position rechts verschoben.
-
 ---
 
-## Schritt 3: Den Vogel (Bird) erstellen
+## Step 3: Creating the Bird
 
-### Attribute festlegen
+### Set Bird Attributes
 
-Der Vogel wird als `Actor` erstellt und seine Attribute festgelegt:
+The bird is an `Actor` with physics:
 
 ```python
 bird = Actor()
@@ -109,15 +96,11 @@ bird.physics.shape_type = "circle"
 bird.is_rotatable = False
 ```
 
-#### Erklärung:
-* **bird.physics.simulation**: Der Vogel wird durch die Schwerkraft beeinflusst.
-* **bird.physics.size**: Ein kleinerer Kollisionsbereich macht das Spiel etwas einfacher.
+### Register Bird Methods
 
-### Methoden für den Vogel registrieren
+#### Detect Screen Borders
 
-#### Erkennen des Spielfeldrands
-
-Wenn der Vogel den Bildschirm verlässt, endet das Spiel mit einer "Game Over"-Nachricht:
+If the bird hits the top or bottom, end the game:
 
 ```python
 @bird.register
@@ -128,9 +111,9 @@ def on_detecting_borders(self, borders):
         world.stop()
 ```
 
-#### Erkennen von Kollisionen mit Röhren
+#### Detect Collisions with Pipes
 
-Berührt der Vogel eine Röhre, endet ebenfalls das Spiel:
+If the bird hits a pipe, end the game:
 
 ```python
 @bird.register
@@ -141,9 +124,9 @@ def on_detecting_actor(self, other):
         world.stop()
 ```
 
-#### Erkennen von Benutzereingaben
+#### Detect Key Input
 
-Wenn die Leertaste gedrückt wird, bewegt sich der Vogel nach oben:
+When the space bar is pressed, the bird moves upward:
 
 ```python
 @bird.register
@@ -155,9 +138,9 @@ def on_key_down_space(self):
 
 ---
 
-## Schritt 4: Punktestand hinzufügen
+## Step 4: Adding a Score
 
-Die Punktanzeige wird statisch festgelegt, damit sie nicht von der Physik beeinflusst wird:
+The score is shown with a static `Number` object:
 
 ```python
 score = Number()
@@ -166,7 +149,7 @@ score.size = (40, 40)
 score.physics.simulation = "static"
 ```
 
-In der `act`-Methode der Röhren wird der Punktestand jedes Mal erhöht, wenn der Spieler eine Röhre überquert:
+In the pipe’s `act` method, increase the score:
 
 ```python
 @pipe.register
@@ -178,7 +161,7 @@ def act(self):
 
 ---
 
-## Kompletter Code
+## Complete Code
 
 ```python
 import random

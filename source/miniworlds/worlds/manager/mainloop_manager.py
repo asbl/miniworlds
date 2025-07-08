@@ -25,16 +25,16 @@ class MainloopManager:
             # Acting for all actors@static
             if self.world.frame > 0 and self.world.frame % self.world.step == 0:
                 self.world.event_manager.act_all()
-            self.world.collision_manager.handle_all_collisions()
+            self.world._collision_manager._handle_all_collisions()
             self.world.mouse._update_positions()
             if self.world.frame == 0:
-                self.world.backgrounds_manager.init_display()
+                self.world.backgrounds._init_display()
             # run animations
             self.world.background.update()
             # update all costumes on current background
             self._update_all_costumes()
             self._tick_timed_objects()
-            self.world.camera.update()
+            self.world.camera._update()
         self.world.frame += 1
         self.world.event_manager.update()
         elapsed = time.perf_counter() - start
@@ -48,13 +48,13 @@ class MainloopManager:
                 actor.costume.update()
         self.reload_costumes_queue.clear()
 
-        if hasattr(self.world, "dynamic_actors"):
-            for actor in self.world.dynamic_actors:
+        if hasattr(self.world, "_dynamic_actors"):
+            for actor in self.world._dynamic_actors:
                 if actor.costume:
                     actor.costume.update()
 
     def _tick_timed_objects(self):
-        [obj.tick() for obj in self.world.timed_objects]
+        [obj.tick() for obj in self.world._timed_objects]
 
     def handle_event(self, event, data=None):
         """

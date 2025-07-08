@@ -1,14 +1,14 @@
 # Game Over
 
-Typischerweise passiert bei einem Game-Over-Event folgendes:
+Typically, the following happens during a game over event:
 
-1. Das Spiel wird angehalten
-2. Ein Text erscheint (ggf. mit einer High-Score)
-3. Es gibt eine Möglichkeit das Spiel neu zu starten.
+1. The game is paused
+2. A text appears (optionally with a high score)
+3. There is an option to restart the game
 
-Zunächst macht es dazu Sinn eine Methode zu erstellen, die alle Actors erstellt, die beim Start eines Spiels erstellt werden sollen:
+First, it makes sense to define a method that creates all actors needed at the start of a game:
 
-``` python
+```python
 def setup():
     player = Circle(40,100)
     @player.register
@@ -27,22 +27,22 @@ def setup():
             game_over()
 ```
 
-In dieser Methode wird z.B. ein Spieler-Objekt erstellt und auch bereits Events an dieses Spieler-Objekt registriert.
-Wenn z.B. ein anderes Actor aufgespürt wird, dann wird die `game_over`-Methode getriggert.
+This method creates a player object and already registers events to that player.
+For example, if another actor is detected, the `game_over` method is triggered.
 
-In der `game_over`-Methode wird das World angehalten:
+In the `game_over` method, the world is paused:
 
-``` python
+```python
 def game_over():
     global running
-    running  = False
+    running = False
     Text(100,100, "Game Over")
     world.stop()
 ```
 
-Global wird überprüft, ob die SPACE-Taste gedrückt wird - Wenn das World angehalten wird, wird die `restart`-Methode getriggert:
+Globally, we check whether the SPACE key is pressed – if the world is stopped, the `restart` method is triggered:
 
-``` python
+```python
 @world.register
 def on_key_down(self, keys):
     global running
@@ -50,9 +50,9 @@ def on_key_down(self, keys):
         restart()
 ```
 
-Die restart-Methode löscht alle Actors, startet das World erneut und ruft `setup` auf
+The `restart` method removes all actors, restarts the world, and calls `setup`:
 
-``` python
+```python
 def restart():
     global running
     enemies = []
@@ -63,10 +63,9 @@ def restart():
     setup()
 ```
 
-Insgesamt sieht dies dann so aus:
+Complete example:
 
-
-``` python
+```python
 from miniworlds import *
 import random
 

@@ -32,9 +32,9 @@ class WorldsManager:
         """
         for world in self.worlds:
             if world.dirty:
-                await world.mainloop.update()
-                world.mainloop.repaint()
-                world.mainloop.blit_surface_to_window_surface()
+                await world._mainloop.update()
+                world._mainloop.repaint()
+                world._mainloop.blit_surface_to_window_surface()
                 
     def add_topleft(
         self, new_world: "world_mod.World"
@@ -85,7 +85,7 @@ class WorldsManager:
         elif dock == "top_left":
             world.camera.screen_topleft = (0, 0)
 
-        world.camera.disable_resize()
+        world.camera._disable_resize()
         frame = self.app.running_world.frame
 
         # Register world
@@ -99,7 +99,7 @@ class WorldsManager:
         world.event_manager.setup_world()
 
         # Mark all worlds and their actors as dirty (to trigger redraw)
-        world.camera.enable_resize()
+        world.camera._enable_resize()
         
         for w in self.app.running_worlds:
             for actor in w.actors:
@@ -121,7 +121,7 @@ class WorldsManager:
         app.App.running_worlds.append(world)
         world._app = self.app
         world._window = self.app.window
-        world.backgrounds_manager.init_display()
+        world.backgrounds._init_display()
         world.is_running = True
         if reset:
             world.reset()
@@ -131,7 +131,7 @@ class WorldsManager:
         world.start_listening()
 
     def _finalize_world_switch(self, old_world, new_world):
-        self.app.image = new_world.backgrounds_manager.image
+        self.app.image = new_world.backgrounds.image
         self._replace_world_in_worlds_list(old_world, new_world)
         self._update_all_worlds()
         self.app.resize()

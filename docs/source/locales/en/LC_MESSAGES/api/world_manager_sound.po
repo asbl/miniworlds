@@ -1,0 +1,306 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-08 13:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/world_manager_sound.md:1
+msgid "World > Sound"
+msgstr ""
+
+#: ../../source/api/world_manager_sound.md
+msgid "Public Methods:"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
+"\\(app\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`play "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
+"\\(path\\[\\, volume\\]\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:1 of
+msgid "Plays a sound from the given path."
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`register "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
+"\\(path\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:1 of
+msgid "Registers a sound for later use."
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`is_registered "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.is_registered>`\\ "
+"\\(path\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:1 of
+msgid "Checks if a sound is already registered."
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`stop "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.stop>`\\ \\(path\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:1 of
+msgid "Stops a playing sound."
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+msgid ""
+":py:obj:`is_playing "
+"<miniworlds.worlds.manager.sound_manager.SoundManager.is_playing>`\\ "
+"\\(path\\)"
+msgstr ""
+
+#: ../../None:8:<autosummary>:1
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:1 of
+msgid "Checks if the given sound is currently playing."
+msgstr ""
+
+#: ../../source/api/world_manager_sound.md
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop of
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:3
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: ../../source/api/world_manager_sound.md
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop of
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:5
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:5
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:5
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:5 of
+msgid "The path to the sound."
+msgstr ""
+
+#: ../../source/api/world_manager_sound.md
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:7 of
+msgid "True if the sound is currently playing, False otherwise."
+msgstr ""
+
+#: ../../source/api/world_manager_sound.md
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop of
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:10
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:10
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:7
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:7 of
+msgid "If path is empty."
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:13
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:13
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:11
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:10
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:10 of
+msgid "Example"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:14 of
+msgid "if world.sound.is_playing(\"sounds/explosion.wav\"):"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_playing:15
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:11 of
+msgid "world.sound.stop(\"sounds/explosion.wav\")"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:7 of
+msgid "True if the sound is already registered, False otherwise."
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:14 of
+msgid "if not world.sound.is_registered(\"sounds/explosion.wav\"):"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.is_registered:15
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:11 of
+msgid "world.sound.register(\"sounds/explosion.wav\")"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:3
+#: miniworlds.worlds.manager.sound_manager.SoundManager.register:3
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:6 of
+msgid "Volume to play the sound (0 min, 100 max)."
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:8 of
+msgid "If path is empty or volume is out of range."
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.play:12 of
+msgid "world.sound.play(\"sounds/explosion.wav\", volume=80)"
+msgstr ""
+
+#: miniworlds.worlds.manager.sound_manager.SoundManager.stop:5 of
+msgid "The path to the sound to stop."
+msgstr ""
+
+#~ msgid "Public Methods:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`__init__ "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
+#~ "\\(app\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`play "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
+#~ "\\(path\\[\\, volume\\]\\)"
+#~ msgstr ""
+
+#~ msgid "Plays a sound from the given path."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`register "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
+#~ "\\(path\\)"
+#~ msgstr ""
+
+#~ msgid "Registers a sound for later use."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`is_registered "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.is_registered>`\\"
+#~ " \\(path\\)"
+#~ msgstr ""
+
+#~ msgid "Checks if a sound is already registered."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`stop "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.stop>`\\ "
+#~ "\\(path\\)"
+#~ msgstr ""
+
+#~ msgid "Stops a playing sound."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`is_playing "
+#~ "<miniworlds.worlds.manager.sound_manager.SoundManager.is_playing>`\\"
+#~ " \\(path\\)"
+#~ msgstr ""
+
+#~ msgid "Checks if the given sound is currently playing."
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "The path to the sound."
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "True if the sound is currently playing, False otherwise."
+#~ msgstr ""
+
+#~ msgid "Raises"
+#~ msgstr ""
+
+#~ msgid "If path is empty."
+#~ msgstr ""
+
+#~ msgid "Example"
+#~ msgstr ""
+
+#~ msgid "if world.sound.is_playing(\"sounds/explosion.wav\"):"
+#~ msgstr ""
+
+#~ msgid "world.sound.stop(\"sounds/explosion.wav\")"
+#~ msgstr ""
+
+#~ msgid "True if the sound is already registered, False otherwise."
+#~ msgstr ""
+
+#~ msgid "if not world.sound.is_registered(\"sounds/explosion.wav\"):"
+#~ msgstr ""
+
+#~ msgid "world.sound.register(\"sounds/explosion.wav\")"
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid "Volume to play the sound (0 min, 100 max)."
+#~ msgstr ""
+
+#~ msgid "If path is empty or volume is out of range."
+#~ msgstr ""
+
+#~ msgid "world.sound.play(\"sounds/explosion.wav\", volume=80)"
+#~ msgstr ""
+
+#~ msgid "The path to the sound to stop."
+#~ msgstr ""
+

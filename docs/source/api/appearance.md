@@ -1,13 +1,10 @@
 # Appearance
 
-Elternklasse von **Background** und **Costume**.
+**Appearance** is the parent-class of **Background** and **Costume**
 
-In der Regel hast arbeitest du nicht direkt mit Objekten dieser Klasse, allerdings **sind** Backrounds und Costumes
-auch **Appearances**, d.h. Objekte beider Klassen verfügen über die Attribute und Methoden,
-die in dieser Klasse definiert sind.
+**Backgrounds** and **Costumes** are also **Appearances** - All objects of these types inherit all attributes and methods who are defined in this class.
 
-Appearance
-==========
+## Appearance
 
 ```{eval-rst}
 .. autoclass:: miniworlds.appearances.appearance.Appearance

@@ -1,40 +1,33 @@
-# Konzept: Funktionen, Parameter und Rückgabewert
+# Concept: Functions, Parameters, and Return Values
 
-Du hast bisher Methoden verwendet, die zu einem World oder einem Actor gehören, z.B. ``on_setup``, ``act``.
+So far, you’ve used methods like `on_setup` or `act`, which belong to a `World` or an `Actor`.
+Now you’ll learn how to create your **own functions**. Functions are *subroutines* that allow you to **reuse code** instead of repeating it.
 
-Jetzt lernst du eigene Funktionen zu erstellen. Funktionen sind `Unterprogramme` die dir ermöglichen, Code wiederzuverwenden, 
-anstatt ihn immer wieder zu schreiben.
+---
 
-## Erstes Beispiel
+## First Example
 
-du möchtest vier rote Kreise erstellen, so wie im folgenden Bild dargestellt:
+You want to create four red circles like this:
 
-
-Dies geht z.B. so:
-
-``` python
+```python
 import miniworlds 
 
 world = miniworlds.World(80, 80)
 
-c1 = Circle((20,20), 20)
+c1 = Circle((20, 20), 20)
 c1.color = (255, 0, 0)
-c2 = Circle((60,20), 20)
+c2 = Circle((60, 20), 20)
 c2.color = (255, 0, 0)
-c3 = Circle((60,60), 20)
+c3 = Circle((60, 60), 20)
 c3.color = (255, 0, 0)
-c4 = Circle((20,60), 20)
+c4 = Circle((20, 60), 20)
 c4.color = (255, 0, 0)
 
 world.run()
 ```
 
-![4 red circles](../_images/processing/4red_circles.png)
-
-Das Programm ist korrekt. Wenn nun aber alle vier Kreise grün sein sollen, dann musst du das Programm an vier
-Stellen verändern.
-
-Stattdessen kann man das Erstellen des Kreises und das festlegen der Farbe in Unterprogramme auslagern:
+This works, but if you want to make **all four green**, you’d need to change **four lines**.
+Instead, you can use a function:
 
 ```python
 import miniworlds 
@@ -44,7 +37,7 @@ world = World(80, 80)
 def create_circle(x, y):
     c = miniworlds.Circle((x, y), 20)
     c.color = (255, 0, 0)
-    
+
 create_circle(20, 20)
 create_circle(60, 20)
 create_circle(60, 60)
@@ -53,65 +46,52 @@ create_circle(20, 60)
 world.run()
 ```
 
-Hier wurde eine Funtion `create_circle` definiert.
+---
 
-* Die Funktion hat den **Namen**  `create_circle`
-* Die Funktion erhält als **Übergabeparameter** die Werte `x` und `y` - An dieser Stelle soll der Kreis erstellt werden.
-* Im **Methodenkörper** wird zuerst ein Kreis erstellt und diesem anschließend eine Farbe zugewiesen.
-* Die Funktion wird mit Hilfe ihres **Namens** und mit Übergabe der **Argumente** (z.B. 20, 20) aufgerufen.
+## General: Defining Functions
 
-## Allgemein: Definieren von Funktionen
+When you want to automate complex tasks—like creating multiple actors—you define a function:
 
-Oft willst du komplizierte Dinge automatisieren, z.B. das Anlegen von Actors. 
-
-Dies geht, indem du Funktionen selbst definierst - Dies geht im Allgemeinen so:
-
-``` python
-def function_name(<parameter>):
-    <code_block>
+```python
+def function_name(parameters):
+    code_block
 ```
 
-z.B.:
+Example:
 
-``` python
+```python
 def create_circle(x, y):
     c = Circle((x, y), 20)
     c.color = (255, 0, 0)
 ```
 
-Deine Funktion besteht aus einer *Signatur* und einem *Funktionskörper*.
+**Explanation:**
 
-* Die Signatur ist die erste Zeile der Funktion. Sie enthält alle Informationen
-  die du brauchst um die Funktion aufzurufen. Dies ist der **Name** und **Parameter**.
-  Der Name dieser Funktion ist `create_actor`, die Parameter sind `x`und `y`. 
-  Parameter werden benötigt um der Funktion weitere Informationen zu übergeben. Im Beispiel wird
-  die Information übergeben, *wo* das Objekt erstellt werden soll.
+* **Function name**: `create_circle`
+* **Parameters**: `x`, `y` → passed in when calling the function
+* **Function body**: runs from top to bottom when the function is called
 
-* Der Funktionskörper ist ein Code-Block. Er enthält alle Befehle, die bei Aufruf der Funktion 
-  nacheinander abgearbeitet werden. Hier wird beim Funktionsaufruf zuerst ein Kreis erzeugt und anschließend 
-  werden die Farbe des Kreises festgelegt. 
-  
-  Die Befehle werden beim Aufruf der Funktion von oben nach unten abgearbeitet.
+---
 
-## Aufruf von Funktionen
+## Calling Functions
 
-Eine Funktion wird mit Hilfe des Namens aufgerufen. Dabei übergibst du der Funktion die 
-als Parameter definierten Argumente. 
+To use a function, write:
 
-Allgemein schreibt man:
-`method_name(<parameter>)`
-
-Dies kann z.B. so aussehen:
-
-``` python
-create_actor(4,2)
+```python
+function_name(arguments)
 ```
 
-Hier wird ein Actor an der Position `x=4` und `y=2` angelegt.
+For example:
 
-## Komplexe Figuren zeichen
+```python
+create_actor(4, 2)
+```
 
-Mit  Hilfe von Funktionen kannst du komplexe Figuren zeichnen:
+---
+
+## Drawing Complex Figures
+
+You can use functions to draw complex figures easily:
 
 ```python
 import miniworlds 
@@ -120,13 +100,13 @@ world = miniworlds.World(400, 220)
 
 def create_face(x, y):
     c = miniworlds.Circle((x, y), 40)
-    c.color = (255,255,0)
-    c = miniworlds.Circle((x + 15, y - 10), 10)
-    c = miniworlds.Circle((x - 15, y - 10), 10)
+    c.color = (255, 255, 0)
+    miniworlds.Circle((x + 15, y - 10), 10)
+    miniworlds.Circle((x - 15, y - 10), 10)
     a = Arc((x, y + 20), 40, 20, 180, 360)
     a.center = a.position
     a.color = (255, 0, 0)
-    
+
 create_face(60, 60)
 create_face(260, 60)
 create_face(160, 160)
@@ -134,19 +114,13 @@ create_face(160, 160)
 world.run()
 ```
 
-In der Funktion `create_face` wird ein Gesicht erzeugt. 
-Dieses kann anschließend an unterschiedlichen Stellen erzeugt werden.
+---
 
-![faces](../_images/processing/face3.png)
+## Creating Actors Automatically
 
+This example shows how you can place multiple actors efficiently using functions:
 
-## Actors automatisiert erstellen
-
-Mit Hilfe von Funktionen kannst du das erstellen von Actors abkürzen:
-
-Es werden hier 10 Actors mit 10 Befehlen angelegt. Ohne Funktionen hättest du 30 Befehle benötigt.
-
-``` python
+```python
 import miniworlds 
 
 world = miniworlds.TiledWorld()
@@ -154,101 +128,88 @@ world.rows = 8
 
 def create_actor(x, y):
     t = Actor()
-    t.position = (x,y)
+    t.position = (x, y)
     t.add_costume("images/player.png")
 
 def create_wall(x, y):
     t = Actor()
-    t.position = (x,y)
+    t.position = (x, y)
     t.add_costume("images/wall.png")
-    
-create_actor(4,2)
-create_wall(4,4)
-create_wall(5,4)
-create_wall(6,4)
-create_wall(6,3)
-create_wall(6,2)
-create_wall(6,1)
-create_wall(5,1)
-create_wall(4,1)
-create_wall(3,1)
+
+create_actor(4, 2)
+create_wall(4, 4)
+create_wall(5, 4)
+create_wall(6, 4)
+create_wall(6, 3)
+create_wall(6, 2)
+create_wall(6, 1)
+create_wall(5, 1)
+create_wall(4, 1)
+create_wall(3, 1)
 
 world.run()
 ```
 
-Ausgabe: 
+---
 
-![walls](../_images/walls.png)
+## Registering Behavior in Functions
 
-## Eigenschaften und Methoden registrieren.
-
-Das folgende Programm erstellt automatisch "Regentropfen".
-
-In der funktion raindrop werden nicht nur Eigenschaften für jeden Tropfen festgelegt, sondern auch Methoden registriert.
+This example creates random **raindrops**, where each has behaviors (registered with `@c.register`) defined **within** the function:
 
 ```python
 import miniworlds 
 import random
 
 world = miniworlds.World()
-world.add_background((80,180,255))
-def raindrop(x,y):
+world.add_background((80, 180, 255))
+
+def raindrop(x, y):
     c = miniworlds.Circle((x, y), random.randint(10, 20))
-    speed = random.randint(1,5)
-    c.color = (0,0,random.randint(100,255), 100)
+    c.color = (0, 0, random.randint(100, 255), 100)
     c.static = True
+
     @c.register
     def act(self):
-        self.move_down(random.randint(1,3))
+        self.move_down(random.randint(1, 3))
+
     @c.register
     def on_detecting_not_on_world(self):
         self.remove()
-        
+
 @world.register
 def act(self):
     if world.frame % 5 == 0:
-        raindrop(random.randint(0,400),0)
-    
+        raindrop(random.randint(0, 400), 0)
 
 world.run()
 ```
 
- <video controls loop width=450px>
-  <source src="../_static/raindrops.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video> 
+---
 
-## Rückgabewerte
+## Return Values
 
-Die bisherigen Funktionen haben ein Unterprogramm ausgeführt und dabei ggf. Informationen über Parameter erhalten.
+So far, functions just did something.
+With a **return value**, you can get information **back** from a function.
 
-Mit Hilfe von Rückgabewerten kannst du auch Informationen zurückgeben.
+Example:
 
-Im einfachen Fall sieht dies so aus:
-
-``` python
+```python
 def is_even(x):
     if x % 2 == 0:
         return True
     else:
         return False
 
-print(is_even(4))
+print(is_even(4))  # Output: True
 ```
 
-In der letzten Zeile passiert folgendes: Bevor die Funktion `print` ausgeführt werden kann, muss die 
-Funktion `is_even` ausgewertet werden. Das Ergebnis der Funktion (Hier: `True`) wird dann 
-anstelle des Funktionsaufrufs eingesetzt.
+Another example: color a circle red if it’s on the **left half** of the screen.
 
-Das folgende Programm erstelllt zufällig Kreise. Wenn diese links von der Mitte sind, 
-werden sie rot eingefärbt, ansonsten weiß.
-
-``` python 
+```python
 import miniworlds 
 import random
 
 world = miniworlds.World(400, 50)
-        
 
 def is_left(obj):
     if obj.x <= 200:
@@ -257,13 +218,11 @@ def is_left(obj):
         return False
 
 for i in range(20):
-    x = random.randint(0,400)
+    x = random.randint(0, 400)
     y = 25
     c = miniworlds.Circle((x, y), 10)
     if is_left(c):
-        c.color = (255,0,0)
+        c.color = (255, 0, 0)
 
 world.run()
 ```
-
-![is left](../_images/processing/is_left.png)

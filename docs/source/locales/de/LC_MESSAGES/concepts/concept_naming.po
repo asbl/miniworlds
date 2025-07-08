@@ -2,120 +2,125 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/concepts/concept_naming.md:1
-msgid "Konzept: Naming und Variablen"
-msgstr "Concept: Benennung und Variablen"
+msgid "Concept: Naming and Variables"
+msgstr "Konzept: Benennung und Variablen"
 
 #: ../../source/concepts/concept_naming.md:3
 msgid "Naming"
 msgstr "Benennung"
 
 #: ../../source/concepts/concept_naming.md:5
-msgid "Im ersten Kapitel hast du Anweisungen der folgenden Art gesehen:"
-msgstr "In Chapter One, you saw instructions of the following kind:"
+msgid "In the first chapter, you saw instructions like this:"
+msgstr "Im ersten Kapitel hast du Anweisungen wie diese gesehen:"
 
 #: ../../source/concepts/concept_naming.md:11
-msgid "Das `=` Zeichen hat hier eine andere Funktion als in der Mathematik."
-msgstr "The `=` sign has a different function here than in mathematics."
+msgid "Here, the `=` sign does **not** have the same meaning as in mathematics."
+msgstr "Hier hat das `=`-Zeichen **nicht** die gleiche Bedeutung wie in der Mathematik."
 
 #: ../../source/concepts/concept_naming.md:13
-msgid "Zuerst wird die rechte Seite der Anweisung durchgeführt. In diesem Fall wird ein TiledWorld()-Objekt erzeugt."
-msgstr "First, the right side of the statement is executed. In this case, a TiledWorld() object is created."
-
-#: ../../source/concepts/concept_naming.md:15
 msgid ""
-"Im zweiten Schritt, wird das erzeugte Objekt mit dem Namen `world` gespeichert. Du kannst später über diesen `Namen` "
-"immer wieder auf das erzeugte Objekt zugreifen."
+"First, the right side of the statement is executed. In this case, a "
+"`TiledWorld()` object is created."
 msgstr ""
-"In the second step, the created object is saved with the name `world`. You can always access the created object later "
-"using this `name`."
+"Zuerst wird die rechte Seite der Anweisung ausgeführt. In diesem Fall wird ein Objekt vom Typ `TiledWorld()` erzeugt."
+
+#: ../../source/concepts/concept_naming.md:14
+msgid ""
+"Second, the created object is stored under the name `world`. You can "
+"later refer to this object using its name."
+msgstr ""
+"Anschließend wird das erzeugte Objekt unter dem Namen `world` gespeichert. Du kannst später über diesen Namen auf das Objekt zugreifen."
 
 #: ../../source/concepts/concept_naming.md:17
 msgid ""
-"Namen haben also in einer Programmiersprache eine ganz besondere Bedeutung, sie dienen dir als ein Speicher für Objekte "
-"und Daten. Indem du Objekten einen Namen gibst, kannst du später wieder auf diese zugreifen. Man nennt solche Namen "
-"auch **Variablen**, denn das Objekt auf das über den Namen zugegriffen werden kann, kann meist auf verschiedene Arten "
-"verändert werden."
+"Names in programming have a special purpose: they act as **storage** for "
+"objects and data. By assigning a name to an object, you can reuse or "
+"modify it later."
 msgstr ""
-"Names haben also in einer Programmiersprache eine ganz besondere Bedeutung, sie dienen dir als ein Speicher für Objekte "
-"und Daten. Indem du Objekten einen Namen gibst, kannst du später wieder auf diese zugreifen. Man nennt solche Namen "
-"auch **Variablen**, denn das Objekt auf das über den Namen zugegriffen werden kann, kann meist auf verschiedene Arten "
-"verändert werden."
+"Namen haben in der Programmierung eine besondere Funktion: Sie dienen als **Speicher** für Objekte und Daten. Wenn du einem Objekt einen Namen gibst, kannst du später darauf zugreifen oder es verändern."
 
-#: ../../source/concepts/concept_naming.md:19
-msgid "Im einfachen Fall kann dies so aussehen:"
-msgstr "Im einfachsten Fall kann dies so aussehen:"
-
-#: ../../source/concepts/concept_naming.md:27
+#: ../../source/concepts/concept_naming.md:20
 msgid ""
-"Indem du Werte unter dem Namen a und b gespeichert hast, kannst du später wieder darauf zugreifen. In der letzten Zeile "
-"wird zuerst `a + b` gerechnet und das Ergebnis in `c` gespeichert. Als Ergebnis wird `5` ausgegeben."
-msgstr ""
-"By storing values under the names a and b, you can access them again later. In the last line, `a + b` is calculated "
-"first and the result is stored in `c`. The result `5` is output."
+"Such names are called **variables**, because the data they refer to can "
+"change."
+msgstr "Solche Namen nennt man **Variablen**, weil sich die damit verknüpften Daten ändern können."
 
-#: ../../source/concepts/concept_naming.md:29
-msgid "Variablen können jederzeit neue Werte speichern - Der alte Wert geht dabei verloren:"
-msgstr "Variables können jederzeit neue Werte speichern - Der alte Wert geht dabei verloren:"
+#: ../../source/concepts/concept_naming.md:24
+msgid "Simple Example"
+msgstr "Einfaches Beispiel"
 
-#: ../../source/concepts/concept_naming.md:38
-msgid "Das Programm gibt `4` aus, da der Wert 3 in der zweiten Zeile überschrieben wird und verloren ist."
-msgstr "The program outputs `4` because the value 3 is overwritten in the second line and is lost."
-
-#: ../../source/concepts/concept_naming.md:40
-msgid "Das World-Objekt"
-msgstr "The World object"
-
-#: ../../source/concepts/concept_naming.md:42
+#: ../../source/concepts/concept_naming.md:32
 msgid ""
-"Das World ist ein Objekt und bringt verschiedene Attribute und Methoden mit,  auf die du zugreifen kannst, z.B. `rows`, "
-"`columns` und `tile_size`."
+"You store values in `a` and `b`, and later use them to compute `c`. The "
+"result will be `5`."
 msgstr ""
-"Die Welt ist ein Objekt und bringt verschiedene Attribute und Methoden mit, auf die du zugreifen kannst, z.B. `rows`, "
-"`columns` und `tile_size`."
+"Du speicherst Werte in `a` und `b` und verwendest sie später, um `c` zu berechnen. Das Ergebnis ist `5`."
 
-#: ../../source/concepts/concept_naming.md:45
-msgid "Attribute"
-msgstr "Attribut"
+#: ../../source/concepts/concept_naming.md:35
+msgid "Variables can also be **overwritten** — the old value is lost:"
+msgstr "Variablen können auch **überschrieben** werden – der alte Wert geht dabei verloren:"
 
-#: ../../source/concepts/concept_naming.md:47
-msgid "Auf Attribute greifst du mit der Syntax `objektname.attributsname` zu."
-msgstr "You access attributes using the syntax `objectname.attributename`."
+#: ../../source/concepts/concept_naming.md:44
+msgid "This prints `4`, because `a` was overwritten with the value `2`."
+msgstr "Das Programm gibt `4` aus, weil `a` mit dem Wert `2` überschrieben wurde."
 
-#: ../../source/concepts/concept_naming.md:49
-#: ../../source/concepts/concept_naming.md:62
-msgid "Beispiel:"
-msgstr "Example:"
+#: ../../source/concepts/concept_naming.md:48
+msgid "The World Object"
+msgstr "Das World-Objekt"
 
-#: ../../source/concepts/concept_naming.md:55
-msgid "Dieser Code speichert den Wert 4 in `world.rows` - Das World-Objekt hat danach also 4 Zeilen."
-msgstr "This code stores the value 4 in `world.rows` - The World object then has 4 rows. "
+#: ../../source/concepts/concept_naming.md:50
+msgid "The `World` is an object that has various **attributes** and **methods**."
+msgstr "Das `World`-Objekt besitzt verschiedene **Attribute** und **Methoden**."
+
+#: ../../source/concepts/concept_naming.md:52
+msgid "Attributes"
+msgstr "Attribute"
+
+#: ../../source/concepts/concept_naming.md:54
+msgid "You can access attributes using dot notation: `object_name.attribute_name`"
+msgstr "Auf Attribute greifst du mit der Punktnotation zu: `objekt_name.attribut_name`"
 
 #: ../../source/concepts/concept_naming.md:57
-msgid "Methoden"
+#: ../../source/concepts/concept_naming.md:76
+msgid "Example:"
+msgstr "Beispiel:"
+
+#: ../../source/concepts/concept_naming.md:63
+msgid "This sets the number of rows in the world to 4."
+msgstr "Dies legt fest, dass die Welt 4 Zeilen hat."
+
+#: ../../source/concepts/concept_naming.md:67
+msgid "Methods"
 msgstr "Methoden"
 
-#: ../../source/concepts/concept_naming.md:59
+#: ../../source/concepts/concept_naming.md:69
 msgid ""
-"Methoden sind Befehle, die ein Objekt ausführen kann, z.B. `world.add_background()` um  Auf Methoden greifst du mit der "
-"Syntax  `objektname.methodenname()`zu. Manchmal stehen in der Klammer noch Variablen"
+"Methods are actions an object can perform, for example: "
+"`world.add_background()` adds a background to the world."
 msgstr ""
-"Methods are commands that an object can execute, e.g., `world.add_background()` to access methods you use the syntax "
-"`objectname.methodname()`. Sometimes there are variables in the parentheses"
+"Methoden sind Aktionen, die ein Objekt ausführen kann, zum Beispiel: `world.add_background()` fügt der Welt einen Hintergrund hinzu."
+
+#: ../../source/concepts/concept_naming.md:72
+msgid ""
+"You access methods with: `object_name.method_name()` Sometimes, arguments"
+" are passed in parentheses."
+msgstr ""
+"Du greifst auf Methoden zu mit: `objekt_name.methoden_name()` — manchmal werden Argumente in den Klammern übergeben."

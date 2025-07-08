@@ -1,10 +1,27 @@
-<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
-  <div class="rst-other-versions">
-    <dl>
-      <dt>{{ _('Languages') }}</dt>
-        {% for the_language, url in languages %}
-          <dd><a href="{{ url }}/index.html">{{ the_language }}</a></dd>
-        {% endfor %}
-    </dl>
+<div class="versions" data-toggle="rst-versions" role="note" aria-label="versions">
+  <div class="other-versions">
+<dl>
+  <dt>{{ _('Languages') }}</dt>
+  {% for code, lang in languages %}
+    {% if code != language %}
+      {% set new_url = pathto('', 1) ~ '../' ~ code ~ '/' ~ pagename ~ '.html' %}
+      <dd><a href="{{ new_url }}">{{ code }}</a></dd>
+    {% endif %}
+  {% endfor %}
+</dl>
   </div>
 </div>
+<style>
+.other-versions dl {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* optional, falls es bei kleiner Bildschirmbreite umbrechen soll */
+  gap: 1rem; /* Abstand zwischen den Elementen */
+}
+
+.other-versions dt,
+.other-versions dd {
+  margin: 0;
+}
+
+</style>

@@ -344,7 +344,7 @@ class SensorManager:
         Returns:
             List[Actor]: A list of actors that collide with the current actor and match the filter.
         """
-        self.world.backgrounds_manager.init_display()
+        self.world.backgrounds._init_display()
 
         visible_actors = self.world.camera.get_actors_in_view()
         collided = pygame.sprite.spritecollide(
@@ -395,7 +395,7 @@ class SensorManager:
         Returns:
             Optional[Actor]: The first detected actor that matches the filter, or None if no match is found.
         """
-        if not self.world.backgrounds_manager.is_display_initialized:
+        if not self.world.backgrounds._is_display_initialized:
             return
         
         visible_actors = self.world.camera.get_actors_in_view()

@@ -2,76 +2,94 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 21:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/04_02_messages.md:1
-msgid "Nachrichten"
+msgid "Messages"
 msgstr "Nachrichten"
 
 #: ../../source/tutorial/04_02_messages.md:3
-msgid "Nachrichten senden"
-msgstr "Send messages"
+msgid "Sending Messages"
+msgstr "Nachrichten senden"
 
 #: ../../source/tutorial/04_02_messages.md:5
 msgid ""
-"Mit **`send_message(self, message)`** kannst du eine Nachricht an alle Objekte in deiner Welt senden.  Diese "
-"Nachrichten können von anderen Objekten empfangen und verarbeitet werden, wenn sie auf das entsprechende Ereignis hören."
+"With **`send_message(self, message)`**, you can send a message to all "
+"objects in your world. These messages can be received and handled by "
+"other objects that are listening for that specific event."
 msgstr ""
-"With **`send_message(self, message)`** you can send a message to all objects in your world. These messages can be "
-"received and processed by other objects if they are listening for the corresponding event."
+"Mit **`send_message(self, message)`** kannst du eine Nachricht an alle "
+"Objekte in deiner World senden. Diese Nachrichten können von anderen "
+"Objekten empfangen und verarbeitet werden, wenn sie auf dieses bestimmte "
+"Event hören."
 
 #: ../../source/tutorial/04_02_messages.md:8
-#: ../../source/tutorial/04_02_messages.md:23
-msgid "Beispiel:"
-msgstr "Example:"
+#: ../../source/tutorial/04_02_messages.md:24
+msgid "Example:"
+msgstr "Beispiel:"
 
 #: ../../source/tutorial/04_02_messages.md:10
-msgid "In diesem Beispiel sendet player 1 eine Nachricht, dass er sich bewegt hat."
-msgstr "In diesem Beispiel sendet Spieler 1 eine Nachricht, dass er sich bewegt hat."
+msgid "In this example, player 1 sends a message when they move:"
+msgstr "In diesem Beispiel sendet player1 eine Nachricht, sobald er sich bewegt:"
 
-#: ../../source/tutorial/04_02_messages.md:19
-msgid "Nachrichten empfangen"
+#: ../../source/tutorial/04_02_messages.md:20
+msgid "Receiving Messages"
 msgstr "Nachrichten empfangen"
 
-#: ../../source/tutorial/04_02_messages.md:21
-msgid "Mit dem decorator `register_message(\"message\")` kannst du eine Nachricht registrieren:"
-msgstr "Mit dem Dekorator `register_message(\"message\")` kannst du eine Nachricht registrieren:"
-
-#: ../../source/tutorial/04_02_messages.md:25
+#: ../../source/tutorial/04_02_messages.md:22
 msgid ""
-"Im folgenden Beispiel wird die Nachricht, die player1 versendet, von player2 empfangen. Er bewegt sich immer dann in "
-"die Richtung von player1, wenn dieser sich bewegt"
+"You can register a handler for a message using the "
+"`@register_message(\"message\")` decorator:"
 msgstr ""
-"In the following example, the message sent by player1 is received by player2. He always moves in the direction of "
-"player1 whenever player1 moves."
+"Du kannst einen Handler für eine Nachricht mit dem Dekorator "
+"`@register_message(\"message\")` registrieren:"
 
-#: ../../source/tutorial/04_02_messages.md:40
-msgid "Erklärung:"
-msgstr "Explanation:"
+#: ../../source/tutorial/04_02_messages.md:26
+msgid ""
+"In the following example, the message sent by player1 is received by "
+"player2. Player2 then moves toward player1 whenever player1 moves."
+msgstr ""
+"Im folgenden Beispiel wird die Nachricht, die player1 sendet, von player2"
+" empfangen. Player2 bewegt sich dann in Richtung von player1, sobald sich"
+" player1 bewegt."
 
-#: ../../source/tutorial/04_02_messages.md:42
-msgid "In diesem Beispiel sendet **player1** die Nachricht `\"p1moved\"`, wenn die Taste <kbd>A</kbd> gedrückt wird."
-msgstr "In diesem Beispiel sendet **player1** die Nachricht „p1moved“, wenn die Taste <kbd>A</kbd> gedrückt wird."
+#: ../../source/tutorial/04_02_messages.md:41
+msgid "Explanation:"
+msgstr "Erklärung:"
 
 #: ../../source/tutorial/04_02_messages.md:43
 msgid ""
-"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  Sobald **player1** sich bewegt, empfängt "
-"**player2** die Nachricht und bewegt sich in Richtung von **player1**."
+"In this example, **player1** sends the message `\"p1moved\"` when the "
+"<kbd>A</kbd> key is pressed."
 msgstr ""
-"**player2** hat eine Methode registriert, die auf diese Nachricht hört.  Sobald **player1** sich bewegt, empfängt "
-"**player2** die Nachricht und bewegt sich in Richtung von **player1**."
+"In diesem Beispiel sendet **player1** die Nachricht `\"p1moved\"`, wenn "
+"die Taste <kbd>A</kbd> gedrückt wird."
+
+#: ../../source/tutorial/04_02_messages.md:44
+msgid ""
+"**player2** has a method registered to listen for that message. As soon "
+"as **player1** moves, **player2** receives the message and moves toward "
+"**player1**."
+msgstr ""
+"**player2** hat eine Methode registriert, die auf diese Nachricht hört. "
+"Sobald sich **player1** bewegt, empfängt **player2** die Nachricht und "
+"bewegt sich in Richtung **player1**."
+
+#~ msgid "Hier ist die englische Übersetzung des Abschnitts **„Nachrichten“**:"
+#~ msgstr "Here is the English translation of the section **\"Messages\"**:"
+

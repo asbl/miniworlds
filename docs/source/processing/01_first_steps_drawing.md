@@ -1,37 +1,34 @@
-# Zeichnen mit dem miniworlds - Grundlagen
+# Drawing with Miniworlds – Basics
 
+## Foreword
 
-## Vorwort
+This tutorial is heavily inspired by the fantastic lecture notes by Prof. Dr. Michael Kipp: [https://michaelkipp.de/processing/](https://michaelkipp.de/processing/), which are based on Processing.
 
+The Miniworlds version of Processing borrows several ideas and concepts but implements them in slightly different ways.
+In this tutorial, you’ll learn programming with Miniworlds using its *Processing mode*, which is modeled after the popular visual programming environment.
 
-Dieses Tutorial ist stark inspiriert vom großartigen Vorlesungsskript von Prof. Dr. Michael Kipp https://michaelkipp.de/processing/, welches sich auf Processing bezieht. 
+---
 
-Der miniworlds-Port von processing übernimmt einige Ideen und Konzepte von Processing, setzt dies aber oft auf leicht abweichende Art um. In diesem Tutorial lernst du das Programmieren mit dem miniworlds kennen. Der miniworlds hat einen *Processing*-Modus, der sich an der populären Grafikprogrammierumgebung orientiert.
+## How Does Drawing Work on a Computer?
 
-## Wie zeichnet man auf einem PC?
+Monitors consist of a grid of tiny squares. These are so small they appear as points to us. These tiny squares are called *pixels*.
 
-Monitore bestehen aus einem Gitter kleinester Quadrate. Diese Quadrate sind so klein, dass sie für uns wie Punkte aussehen. Man nennt diese kleinsten Quadrate *Pixel*.
-
-Die Pixel sind in einem *Koordinatensystem* angeordnet. Dieses ist allerdings leicht anders aufgebaut, denn in der Regel ist der Ursprung in der oberen linken Ecke:
+Pixels are arranged in a *coordinate system*, which usually starts in the **top-left corner**:
 
 <img src="../_images/processing/coordinates.png" alt="coordinates" width="260px">
 
 ```{note}
-Informatiker zählen in der Regel beginnend mit 0, d.h. die obere linke Ecke hat die Koordinaten (0,0). Ist das Bildschirmfenster 800x600 groß, 
-so hat die untere rechte Ecke die Koordinaten (799, 599)
+Computer scientists usually start counting at 0.  
+That means the top-left corner is (0, 0), and if the screen is 800×600 pixels, the bottom-right corner is (799, 599).
 ```
 
-## Das erste Programm
-
-
-Ein miniworlds-Programm besteht aus mehreren Teilen:
-
-```{code-block} python
----
-emphasize-lines: 1,2,6
-lineno-start: 1
 ---
 
+## The First Program
+
+A Miniworlds program typically consists of the following parts:
+
+```python
 from miniworlds import *
 world = World()
 
@@ -40,100 +37,99 @@ world = World()
 world.run()
 ```
 
-* 1: Die miniworlds Bibliothek wird importiert
-* 2: Ein Spielfeld wird erstellt.
-* 6: Am Ende wird die mainloop gestartet, dies muss immer die letzte Zeile deines Programms sein.
+* **Line 1**: Imports the Miniworlds library
+* **Line 2**: Creates the game world
+* **Last line**: Starts the main loop with `world.run()` – this must always be the final line of your program
 
-Dazwischen findet sich ein *Kommentar* - Kommentare beginnen immer mit einer # und werden vom Computer ignoriert und sind für **Menschen** gemacht. Sie dienen dazu, Programmierern Hinweise zu geben, hier z.B. das an diese Stelle dein eigener Code kommt.
+Everything in between can be your own code or comments.
+Comments start with `#` and are ignored by the computer. They are written for **humans** to help understand the code.
 
-Dieser könnte z.B. so aussehen:
+Example:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
 
-Point((10,10))
+Point((10, 10))
 
 world.run()
 ```
 
 <img src="../_images/processing/pixel.png" alt="A pixel" width="260px">
 
-Du kannst auch die Größe des Worlds anpassen, indem du dem World beim erstellen zwei Argumente übergibst:
+You can also set the window size by passing width and height to `World`:
 
-``` python
+```python
 from miniworlds import *
 
 world = World(200, 400)
 world.run()
 ```
 
-## Zeichnen geometrischer Grundformen.
+---
 
-Als nächstes lernst du, geometrische Grundformen zu zeichnen.
+## Drawing Basic Shapes
 
-### Linien
+### Lines
 
-Die Syntax zum Zeichnen einer Linie sieht folgendermaßen aus:
+Syntax:
 
-``` python
-  Line(startpoint, endpoint)
+```python
+Line(startpoint, endpoint)
 ```
 
-Die Parameter `startpoint` und `endpoint` sind jeweils Tupel, z.B. (1, 2) für x=1 und y=2.
+Both `startpoint` and `endpoint` are tuples, e.g., `(1, 2)`.
 
-Wenn du eine Linie von (10,10) zu (100, 200) zeichnen willst so musst du z.B. folgendes schreiben:
+Draw a line from (10, 10) to (100, 200):
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
-Line((10,10), (100, 200))
+Line((10, 10), (100, 200))
 world.run()
 ```
 
 ![A line](../_images/processing/line2.png)
 
-### Kreise
+---
 
-Kreise kannst du allgemein folgendermaßen erstellen:
+### Circles
 
-``` python
-  Line(position, radius)
+```python
+Circle(position, radius)
 ```
 
-:::{note}
-Die übergebene Position bei Kreisen ist der *Mittelpunkt* des Kreises
-:::
+```{note}
+The position refers to the **center** of the circle.
+```
 
-Wenn du einen Kreis an der Stelle (100,200) mit Radius 20 erstellen willst, musst du folgendes schreiben:
+Example:
 
-
-``` python
+```python
 from miniworlds import *
 
 world = World()
-Circle((100,200), 20)
+Circle((100, 200), 20)
 world.run()
-
 ```
 
 ![A circle](../_images/processing/circle.png)
 
-### Rechteck
+---
 
-Ein Rechteck wird beschrieben durch Position, Breite und Höhe:
+### Rectangles
 
-``` python
+```python
 Rectangle(position, width, height)
 ```
 
-Der Parameter `position` beschreibt die obere linke Ecke des Rechtecks.
+* `position` is the **center** corner of the rectangle
 
-Willst du ein Rechteck an der Position (100, 100) mit Breite 20 und Höhe 100 zeichnen, so musst du folgendes schreiben:
+Example:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
@@ -143,38 +139,43 @@ world.run()
 
 ![A rectangle](../_images/processing/rectangle.png)
 
-### Ellipse
+It is often easier to draw a rectangle starting from the top-left position. You can do this with the method `from_center`:
 
-Ellipsen werden im Prinzip wie Rechtecke beschrieben, d.h. die Ellipse wird dann so gezeichnet, dass sie genau in das Rechteck hineinpasst. `width` und `height` beziehen sich hier jeweils auf den Durchmesser der Ellipse
+```
+Rectangle.from_center((100, 100), 20, 100)
+```
 
-``` python 
+---
+
+### Ellipses
+
+```python
 Ellipse(position, width, height)
 ```
 
-Willst du eine Ellipse an der Position (100, 100) mit Breite 20 und Höhe 100 zeichnen, so musst du folgendes schreiben:
+Like rectangles, but the shape is oval and fits inside the given rectangle.
 
-``` python
+Example:
+
+```python
 from miniworlds import *
 
 world = World()
 Ellipse((100, 100), 20, 100)
 world.run()
-
 ```
 
 ![An ellipse](../_images/processing/ellipse.png)
 
-### Rechteck und Ellipse in die Mitte verschieben.
+---
 
+### Centered Rectangles and Ellipses
 
-Oft will man ein Rechteck oder eine Ellipse nicht an der oberen linken Position erstellen, sondern am Mittelpunkt. Es gibt mehrere Möglichkeiten, wie man dies erreichen kann, ohne die Position manuell auszurechnen.
+#### 1. `from_center`
 
-#### 1. from_center
+Use `.from_center()` to draw an ellipse centered on a point:
 
-
-Mit der Klassenmethode from_center kannst du eine Ellipse am Zentrum erstellen.
-
-``` python  
+```python
 from miniworlds import *
 
 world = World()
@@ -184,141 +185,135 @@ world.run()
 
 <img src="../_images/processing/from_center.png" alt="from_center Method" width="260px"/>
 
-#### 2. Verschieben mit ellipse.center
+#### 2. Using `.center`
 
-Du kannst die Ellipse nach dem Verschieben an den Mittelpunkt verschieben;
+You can manually center an ellipse like this:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
-Ellipse((50, 100), 100, 200)
-ellipse.center = ellipse.position
+ellipse = Ellipse((0, 0), 100, 200)
+ellipse.center = (50, 100)
 world.run()
 ```
 
+---
 
-## Komplexere geometrische Grundformen
+## More Complex Shapes
 
+### Arcs
 
-### Arc
-
-Kreisbögen und Kreisausschnitte zeichnest du mit folgendem Befehl:
-
-``` python
+```python
 Arc(position, width, height, start_angle, end_angle)
 ```
 
-Bedeutung der Parameter:
-
-* ``position``: Die Position als 2-Tupel
-
-* ``width``, ``height``: Breite und Höhe bei Erstellung einer Ellipse. Wähle beide gleich, damit sich der Radius für einen Kreisbogen ergibt oder wähle unterschiedle Werte, damit sich der Bogen und Ausschnitt einer Ellipse ergibt.
-  
-* ``start_angle``, ``end_angle``: Die Winkel des Ausschnitts. Die Winkel werden von einer gedachten Linie *gegen den Uhrzeigersinn* gemessen.
+* `position`: center of bounding box
+* `width` and `height`: ellipse size
+* `start_angle`, `end_angle`: angles in degrees, counterclockwise from the right
 
 <img src="../_images/processing/arc.png" alt="Arc - Start and Endangle" width="260px"/>
 
-#### Beispiel:
+Example:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
-a1 = Arc.from_center((200, 200), 200, 200, 30, 242)
+Arc.from_center((200, 200), 200, 200, 30, 242)
 world.run()
 ```
+
+---
 
 ### Triangle
 
-
-Ein Dreieck erstellst du mit folgendem Befehl:
-
-``` python
-Triangle(p1,p2, p3)
+```python
+Triangle(p1, p2, p3)
 ```
 
-p1, p2 und p3 sind Punkte, die du jeweils als Tupel schreiben kannst.
+Each point is a tuple like `(x, y)`.
 
-#### Beispiel:
+Example:
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
-Triangle((10,10), (100,100), (200,10))
+Triangle((10, 10), (100, 100), (200, 10))
 world.run()
 ```
+
+---
 
 ### Polygon
 
-
-Ein Polygon (d.h. ein n-Eck) erstellst du mit folgendem Befehl:
-
-``` python
+```python
 Polygon(pointlist)
 ```
 
-``pointlist`` ist eine Liste von Punkten. Das Dreieck aus dem vorherigen Beispiel kannst du z.B. folgendermaßen als Polygon erstellen:
+`pointlist` is a list of tuples.
+For example, a triangle as a polygon:
 
-#### Beispiel:
-
-``` python
+```python
 from miniworlds import *
 
 world = World()
-Polygon([(10,10), (100,100), (200,10)])
+Polygon([(10, 10), (100, 100), (200, 10)])
 world.run()
 ```
 
-`````{admonition} Training
+---
 
-````{admonition} Übung 1.1: Haus mit Grundformen
-  
+## 🧠 Training Exercises
 
-Zeichne ein Haus mit Grundformen:
+### Exercise 1.1 – House with Shapes
+
+Draw a house using basic shapes:
 
 ![House](../_images/processing/house2.png)
 
-
 <details>
-<summary><a>Lösungsansatz</a></summary>
+<summary><strong>Solution hint</strong></summary>
 
-``` python
+```python
 from miniworlds import *
 
 world = World()
-world.size = (120,210)
-Rectangle((10,100), 100, 100)
-Triangle((10,100), (60, 50), (110, 100))
+world.size = (120, 210)
+Rectangle((10, 100), 100, 100)
+Triangle((10, 100), (60, 50), (110, 100))
 
 world.run()
 ```
+
 </details>
 
-````
+---
 
-````{admonition} Übung 1.2: Gesicht
+### Exercise 1.2 – Face
 
-Zeichne ein Gesicht mit Grundformen
+Draw a face using basic shapes:
 
 ![Face](../_images/processing/face1.png)
 
 <details>
-<summary><a>Lösungsansatz</a></summary>
+<summary><strong>Solution hint</strong></summary>
 
-``` python
+```python
 from miniworlds import *
 import random
-world = World(100,100))
+
+world = World()
 world.size = (100, 100)
-Circle.from_center((50,50),50)
-Arc.from_center((50,80),40,20, 180, 360)
-Circle.from_center((30,30),10)
-Circle.from_center((70,30),10)
-Line((50,50),(50,70))
+
+Circle.from_center((50, 50), 50)
+Arc.from_center((50, 80), 40, 20, 180, 360)
+Circle.from_center((30, 30), 10)
+Circle.from_center((70, 30), 10)
+Line((50, 50), (50, 70))
+
 world.run()
 ```
+
 </details>
-````
-`````

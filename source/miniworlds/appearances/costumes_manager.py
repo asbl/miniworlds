@@ -9,6 +9,9 @@ if TYPE_CHECKING:
     import miniworlds.actors.actor as actor_mod
 
 class CostumesManager(appearances_manager.AppearancesManager):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.is_rotatable = None
 
     @property
     def actor(self) -> "actor_mod.Actor":
@@ -73,11 +76,35 @@ class CostumesManager(appearances_manager.AppearancesManager):
     def _add_appearance_to_manager(self, appearance):
         return super()._add_appearance_to_manager(appearance)
 
-    def get_world(self):
-        return self.actor.world
-
     def remove_from_world(self):
         for costume in self.appearances_list:
             costume.parent = None
             costume.actor = None
             del costume
+
+    @property
+    def is_flipped(self):
+        return self.appearance._is_flipped
+
+    @is_flipped.setter
+    def is_flipped(self, value):
+        for costume in self.appearances_list:
+            costume.is_flipped = value
+
+    def set_rotatable(self, value):
+        self.is_rotatable = value
+        self._set_all("is_rotatable", value)
+
+    def _set_appearance_defaults(self):
+        self.appearance._set_defaults(
+            rotatable=self.is_rotatable,
+            is_animated=self.is_animated,
+            animation_speed=self.animation_speed,
+            is_upscaled=self.is_upscaled,
+            is_scaled_to_width=self.is_scaled_to_width,
+            is_scaled_to_height=self.is_scaled_to_height,
+            is_scaled=self.is_scaled,
+            border=self.border,
+            is_flipped=self.is_flipped
+        )
+

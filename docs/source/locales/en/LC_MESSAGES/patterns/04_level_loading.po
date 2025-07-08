@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/04_level_loading.md:1
 msgid "Level Loading"
@@ -25,114 +25,234 @@ msgstr "Level Loading"
 
 #: ../../source/patterns/04_level_loading.md:3
 msgid ""
-"Ein typischer Anwendungsfall: Du möchtest ein neues Level starten, wenn die Bildschirmfigur den Rand erreicht oder "
-"durch eine Tür geht, usw."
+"A common use case: You want to load a new level when a character reaches "
+"the edge of the screen or enters a door, etc."
 msgstr ""
-"A typical use case: You want to start a new level when the on-screen character reaches the edge or goes through a door, "
-"etc."
 
 #: ../../source/patterns/04_level_loading.md:5
-msgid "Dies geht folgendermaßen:"
-msgstr "This goes as follows:"
+msgid "You can do this as follows:"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:7
-msgid "Speichere dein Level in einer Datenbank, einer Textdatei oder einer einfachen Liste."
-msgstr "Save your level in a database, a text file, or a simple list."
+msgid "Store your level in a database, a text file, or a simple list."
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:8
 msgid ""
-"Du brauchst eine **Funktion**, die dein Level lädt, sobald etwas passiert (du erreichst den Rand, berührst ein Actor, "
-"...)"
-msgstr "You need a **function** that loads your level as soon as something happens (you reach the edge, touch an actor, ...)"
+"You need a **function** that loads the level when something happens (you "
+"reach the edge, touch an actor, ...)"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:10
-msgid "Speichern deines Levels als Liste"
-msgstr "Saving your level as a list"
+msgid "Storing your level as a list"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:12
 msgid ""
-"Du kannst dein Level in einer mehrdimensionalen Liste speichern. In einem ganz einfachen Fall könnte dies z.B. so "
-"aussehen:"
-msgstr "You can store your level in a multidimensional list. In a very simple case, it might look like this:"
+"You can store your level in a two-dimensional list. A very simple case "
+"might look like this:"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:20
-msgid "Du brauchst dann eine Übersetzung in Actors, `w` steht hier für eine `Wall`, `d` für eine `Door`."
-msgstr "You then need a translation in Actors, `w` stands for a `Wall`, `d` for a `Door`."
+msgid ""
+"You then need a translation to actors — `w` stands for `Wall`, `d` for "
+"`Door`."
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:22
-msgid "Die Räume kannst du dann in einer Liste oder als Dictionary speichern, z.B. so als Liste:"
-msgstr "You can then store the rooms in a list or as a dictionary, for example, like this as a list:"
+msgid "You can store your rooms in a list or a dictionary, for example:"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:28
-msgid "...oder so als Dictionary:"
-msgstr "...or like this as a dictionary:"
+msgid "...or like this:"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:34
-msgid "Anlegen von Klassen für die einzelnen Objekte"
-msgstr "Creating classes for the individual objects"
+msgid "Creating classes for individual objects"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:36
-msgid ""
-"Damit ein Objekt einer *bestimmten Art* erzeugt werden kann, ist es sinnvoll, eine Klasse für dieses Objekt zu "
-"speichern."
-msgstr "In order to create an object of a *specific type*, it makes sense to store a class for this object."
+msgid "To create objects of a specific kind, it's useful to define a class:"
+msgstr ""
 
-#: ../../source/patterns/04_level_loading.md:38
-msgid "Dies könnte z.B. so aussehen:"
-msgstr "This could look like this, for example:"
+#: ../../source/patterns/04_level_loading.md:44
+msgid "Translating the list"
+msgstr ""
 
 #: ../../source/patterns/04_level_loading.md:46
-msgid ""
-"Die Klasse `Wall` definiert Objekte, sich wie Actors verhalten, aber von dem Standard-Actor insofern unterscheidet, "
-"dass diese immer als Kostüm ein Bild mit einer Wand besitzen."
+msgid "You can now translate the list into actors:"
 msgstr ""
-"The class `Wall` defines objects that behave like actors but differ from the standard actor in that they always have an "
-"image of a wall as a costume."
 
-#: ../../source/patterns/04_level_loading.md:48
-msgid "Übersetzen der Liste"
-msgstr "Translating the list"
-
-#: ../../source/patterns/04_level_loading.md:50
-msgid "Die Liste kannst du nun in Actors übersetzen:"
-msgstr "You can now translate the list into Actors:"
-
-#: ../../source/patterns/04_level_loading.md:67
-msgid "Zunächst werden in der ersten For-Schleife alle Actors bis auf das Player-Objekt gelöscht"
-msgstr "First, all actors except the player object are deleted in the first for loop"
-
-#: ../../source/patterns/04_level_loading.md:69
-msgid ""
-"In der zweiten Schleife wird nun über die Listen iteriert. Dabei wird jedesmal, wenn ein entsprechender Actor in der "
-"String-Liste gefunden wird, ein entsprechendes Actor angelegt."
-msgstr ""
-"In the second loop, the lists are now iterated over. Each time a corresponding actor is found in the string list, a "
-"corresponding actor is created."
-
-#: ../../source/patterns/04_level_loading.md:71
-msgid "Wechseln des Raums"
-msgstr "Changing the room"
-
-#: ../../source/patterns/04_level_loading.md:73
-msgid ""
-"Mit der Vorarbeit ist es einfach den Raum zu wechseln: Du musst einfach nur die Methode setup_room an geeigneter Stelle "
-"aufrufen um den Raum zu wechseln, z.B. so:"
-msgstr ""
-"With the preliminary work, it is easy to change the room: You just have to call the setup_room method at the "
-"appropriate place to change the room, for example, like this:"
-
-#: ../../source/patterns/04_level_loading.md:83
-msgid "So könnte das ganze Programm aussehen:"
-msgstr "This is how the entire program could look:"
-
-#: ../../source/patterns/04_level_loading.md:164
-msgid "Sobald ein Spieler auf der Tür steht und die Leertaste drückt, wird der Raum gewechselt."
-msgstr "Once a player stands on the door and presses the space bar, the room will change."
-
-#: ../../source/patterns/04_level_loading.md:166
-msgid "![Room switching](../_images/room_switching.png)"
-msgstr "![Room switching](../_images/room_switching.png)"
-
-#: ../../source/patterns/04_level_loading.md:166
-msgid "Room switching"
+#: ../../source/patterns/04_level_loading.md:63
+#, fuzzy
+msgid "Switching rooms"
 msgstr "Room switching"
+
+#: ../../source/patterns/04_level_loading.md:65
+msgid ""
+"With the groundwork done, switching rooms is easy — just call "
+"`setup_room` at the right moment:"
+msgstr ""
+
+#: ../../source/patterns/04_level_loading.md:75
+msgid "Complete example:"
+msgstr ""
+
+#: ../../source/patterns/04_level_loading.md:156
+msgid "When the player is on the door and presses the spacebar, the room changes."
+msgstr ""
+
+#~ msgid ""
+#~ "Ein typischer Anwendungsfall: Du möchtest "
+#~ "ein neues Level starten, wenn die "
+#~ "Bildschirmfigur den Rand erreicht oder "
+#~ "durch eine Tür geht, usw."
+#~ msgstr ""
+#~ "A typical use case: You want to"
+#~ " start a new level when the "
+#~ "on-screen character reaches the edge "
+#~ "or goes through a door, etc."
+
+#~ msgid "Dies geht folgendermaßen:"
+#~ msgstr "This goes as follows:"
+
+#~ msgid ""
+#~ "Speichere dein Level in einer Datenbank,"
+#~ " einer Textdatei oder einer einfachen "
+#~ "Liste."
+#~ msgstr "Save your level in a database, a text file, or a simple list."
+
+#~ msgid ""
+#~ "Du brauchst eine **Funktion**, die dein"
+#~ " Level lädt, sobald etwas passiert "
+#~ "(du erreichst den Rand, berührst ein "
+#~ "Actor, ...)"
+#~ msgstr ""
+#~ "You need a **function** that loads "
+#~ "your level as soon as something "
+#~ "happens (you reach the edge, touch "
+#~ "an actor, ...)"
+
+#~ msgid "Speichern deines Levels als Liste"
+#~ msgstr "Saving your level as a list"
+
+#~ msgid ""
+#~ "Du kannst dein Level in einer "
+#~ "mehrdimensionalen Liste speichern. In einem"
+#~ " ganz einfachen Fall könnte dies z.B."
+#~ " so aussehen:"
+#~ msgstr ""
+#~ "You can store your level in a "
+#~ "multidimensional list. In a very simple"
+#~ " case, it might look like this:"
+
+#~ msgid ""
+#~ "Du brauchst dann eine Übersetzung in "
+#~ "Actors, `w` steht hier für eine "
+#~ "`Wall`, `d` für eine `Door`."
+#~ msgstr ""
+#~ "You then need a translation in "
+#~ "Actors, `w` stands for a `Wall`, "
+#~ "`d` for a `Door`."
+
+#~ msgid ""
+#~ "Die Räume kannst du dann in einer"
+#~ " Liste oder als Dictionary speichern, "
+#~ "z.B. so als Liste:"
+#~ msgstr ""
+#~ "You can then store the rooms in"
+#~ " a list or as a dictionary, for"
+#~ " example, like this as a list:"
+
+#~ msgid "...oder so als Dictionary:"
+#~ msgstr "...or like this as a dictionary:"
+
+#~ msgid "Anlegen von Klassen für die einzelnen Objekte"
+#~ msgstr "Creating classes for the individual objects"
+
+#~ msgid ""
+#~ "Damit ein Objekt einer *bestimmten Art*"
+#~ " erzeugt werden kann, ist es "
+#~ "sinnvoll, eine Klasse für dieses Objekt"
+#~ " zu speichern."
+#~ msgstr ""
+#~ "In order to create an object of"
+#~ " a *specific type*, it makes sense"
+#~ " to store a class for this "
+#~ "object."
+
+#~ msgid "Dies könnte z.B. so aussehen:"
+#~ msgstr "This could look like this, for example:"
+
+#~ msgid ""
+#~ "Die Klasse `Wall` definiert Objekte, "
+#~ "sich wie Actors verhalten, aber von "
+#~ "dem Standard-Actor insofern unterscheidet, "
+#~ "dass diese immer als Kostüm ein "
+#~ "Bild mit einer Wand besitzen."
+#~ msgstr ""
+#~ "The class `Wall` defines objects that"
+#~ " behave like actors but differ from"
+#~ " the standard actor in that they "
+#~ "always have an image of a wall "
+#~ "as a costume."
+
+#~ msgid "Übersetzen der Liste"
+#~ msgstr "Translating the list"
+
+#~ msgid "Die Liste kannst du nun in Actors übersetzen:"
+#~ msgstr "You can now translate the list into Actors:"
+
+#~ msgid ""
+#~ "Zunächst werden in der ersten For-"
+#~ "Schleife alle Actors bis auf das "
+#~ "Player-Objekt gelöscht"
+#~ msgstr ""
+#~ "First, all actors except the player "
+#~ "object are deleted in the first "
+#~ "for loop"
+
+#~ msgid ""
+#~ "In der zweiten Schleife wird nun "
+#~ "über die Listen iteriert. Dabei wird "
+#~ "jedesmal, wenn ein entsprechender Actor "
+#~ "in der String-Liste gefunden wird, "
+#~ "ein entsprechendes Actor angelegt."
+#~ msgstr ""
+#~ "In the second loop, the lists are"
+#~ " now iterated over. Each time a "
+#~ "corresponding actor is found in the "
+#~ "string list, a corresponding actor is"
+#~ " created."
+
+#~ msgid "Wechseln des Raums"
+#~ msgstr "Changing the room"
+
+#~ msgid ""
+#~ "Mit der Vorarbeit ist es einfach "
+#~ "den Raum zu wechseln: Du musst "
+#~ "einfach nur die Methode setup_room an"
+#~ " geeigneter Stelle aufrufen um den "
+#~ "Raum zu wechseln, z.B. so:"
+#~ msgstr ""
+#~ "With the preliminary work, it is "
+#~ "easy to change the room: You just"
+#~ " have to call the setup_room method"
+#~ " at the appropriate place to change"
+#~ " the room, for example, like this:"
+
+#~ msgid "So könnte das ganze Programm aussehen:"
+#~ msgstr "This is how the entire program could look:"
+
+#~ msgid ""
+#~ "Sobald ein Spieler auf der Tür "
+#~ "steht und die Leertaste drückt, wird "
+#~ "der Raum gewechselt."
+#~ msgstr ""
+#~ "Once a player stands on the door"
+#~ " and presses the space bar, the "
+#~ "room will change."
+
+#~ msgid "![Room switching](../_images/room_switching.png)"
+#~ msgstr "![Room switching](../_images/room_switching.png)"
+

@@ -1,35 +1,31 @@
 # Installation
 
-Du kannst miniworlds auf deinem Computer oder mit Hilfe von Thonny
-installieren:
+You can install **miniworlds** on your computer or using **Thonny**:
 
-## Auf deinem Computer
+## On your computer
 
-1. Installiere zuerst Python.
+1. First, install Python.
 
-   Python kannst du z.B. unter [Python.org](https://www.python.org)
-   herunterladen.
+   You can download Python from [Python.org](https://www.python.org).
 
-   Alternativ kannst du auch die Entwicklungsumgebung
-   [Thonny](https://thonny.org/) installieren - Diese bringt Python
-   direkt mit.
+   Alternatively, you can install the development environment
+   [Thonny](https://thonny.org/) – it comes with Python included.
 
-2. Installiere das Framework mit:
+2. Install the framework with:
 
-``` python 
+```python
 pip install miniworlds
 ```
 
-1. Installiere eine geeignete Entwicklungsumgebung, z.B.:
+3. Install a suitable development environment, for example:
 
-   - [Thonny](https://thonny.org/)
-   - [Pycharm](https://www.jetbrains.com/de-de/pycharm/)
+   * [Thonny](https://thonny.org/)
+   * [Pycharm](https://www.jetbrains.com/pycharm/)
 
-\...jetzt kannst du loslegen.
+…now you’re ready to get started!
 
-## Mit Thonny
+## With Thonny
 
-Klicke zunächst auf \"Extras -\> Verwalte Pakete\". Gib dann im Suchfeld \"miniworlds\" ein und installiere den
-miniworlds
+First click on **"Tools → Manage Packages"**. Then enter `"miniworlds"` in the search field and install **miniworlds**.
 
 ![miniworlds](../_images/install01.png)

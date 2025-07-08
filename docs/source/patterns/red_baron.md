@@ -1,36 +1,38 @@
-# Tutorial: Roter Baron
+# Tutorial: Red Baron
 
-In diesem Kapitel erstellen wir Schritt für Schritt einen Side-Scrolling-Shooter.
+In this chapter, we’ll build a side-scrolling shooter step by step.
 
 <video controls loop width=100%>
   <source src="../_static/red_baron.mp4" type="video/mp4">
-  Dein Browser unterstützt das Video-Tag nicht.
+  Your browser does not support the video tag.
 </video>
 
-Die Techniken zur Erstellung von Parallax-Hintergründen, der Verwaltung von Geschwindigkeit und Bewegung sowie das Generieren von Gegnern sind in Spielen weit verbreitet. Nachdem du sie hier gesehen hast, solltest du in der Lage sein, sie in deinen eigenen Projekten zu verwenden.
+The techniques of creating parallax backgrounds, handling speed and movement, and generating enemies are common in games. After this tutorial, you’ll be able to apply them in your own projects.
 
-* **Basierend auf**: `https://github.com/kantel/pygamezero/tree/master/tappyplane`
-* **Lizenz**: Attribution-NonCommercial-ShareAlike 4.0 International
-* Voraussetzug: Kenntis im Umgang mit Klasse.
-* 
-## Schritt 1: Grundgerüst erstellen
+* **Based on**: `https://github.com/kantel/pygamezero/tree/master/tappyplane`
+* **License**: Attribution-NonCommercial-ShareAlike 4.0 International
+* **Prerequisite**: Basic knowledge of classes
 
-Erstelle ein Grundgerüst: Du benötigst eine Welt, in der Akteure platziert werden können.
+---
 
-Deine letzte Zeile muss `world.run()` sein.
+## Step 1: Set Up the Framework
+
+You need a world where actors can be placed. The final line must be `world.run()`:
 
 ```python
 from miniworlds import World, Actor, timer, Text
 world = World(800, 480)
 
-// dein Code hier
+// your code here
 
 world.run()
 ```
 
-## Ordner vorbereiten
+---
 
-Du musst Bilder für Hintergründe, Spieler und Gegner im Verzeichnis `images` innerhalb deines Code-Verzeichnisses ablegen.
+## Prepare the Folder
+
+Place your images for background, player, and enemies in the `images` folder:
 
 ```
 my_code
@@ -46,13 +48,13 @@ my_code
 |----shipyellow.png
 ```
 
-(Die Bilder findest du in diesem Repository: [miniworlds-cookbook - red baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))
+(You can find the images here: [miniworlds-cookbook - red baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))
 
-## Hintergründe erstellen
+---
 
-Mit dem folgenden Code kannst du zwei Hintergründe generieren, die einen **endlos scrollenden** Effekt erzeugen.
+## Create Backgrounds
 
-Erstelle zwei Hintergründe, die nebeneinander den gesamten Bildschirm füllen:
+Create two backgrounds side by side to simulate infinite scrolling:
 
 ```python
 back0 = Actor()
@@ -64,10 +66,7 @@ back1.add_costume("background")
 backs = [back0, back1]
 ```
 
-Nun animieren wir die Hintergründe:
-
-* Beide Hintergründe bewegen sich konstant von rechts nach links.
-* Wenn ein Hintergrund den linken Bildschirmrand verlässt, wird er nach rechts verschoben.
+To animate them:
 
 ```python
 @world.register
@@ -82,13 +81,11 @@ def act(self):
             ground.x = world.width
 ```
 
-Dies erzeugt einen **endlos scrollenden** Hintergrund.
+---
 
-## Schritt 2: Flugzeug-Klasse erstellen
+## Step 2: Create the Plane Class
 
-### Flugzeug-Klasse erstellen
-
-Erstelle eine `Plane`-Klasse als Vorlage für deinen Spieler:
+### Define the Plane Class
 
 ```python
 class Plane(Actor):
@@ -96,17 +93,17 @@ class Plane(Actor):
         self.add_costume("planered1")
 ```
 
-### Instanz der Flugzeug-Klasse erstellen
+### Create an Instance
 
-Erstelle am Ende deines Codes, vor `world.run()`, eine Instanz dieser Klasse:
+At the end of your code:
 
 ```python
 plane = Plane(100, world.height / 2)
 ```
 
-### Physik hinzufügen
+### Add Physics
 
-Nun fügen wir der Flugzeug-Klasse Physik hinzu. Modifiziere die `on_setup()`-Methode der Klasse:
+Extend `on_setup()`:
 
 ```python
     def on_setup(self):
@@ -115,46 +112,36 @@ Nun fügen wir der Flugzeug-Klasse Physik hinzu. Modifiziere die `on_setup()`-Me
         self.velocity_y = 0
 ```
 
-* `velocity_y` beschreibt die aktuelle Geschwindigkeit des Flugzeugs in y-Richtung.
-* `gravity` repräsentiert die Schwerkraft, die die Geschwindigkeit des Flugzeugs beeinflusst.
-
-#### Physik simulieren
-
-Die Physik wird in der `act()`-Methode der Klasse simuliert:
+### Simulate Physics
 
 ```python
     def act(self):
         self.velocity_y += self.gravity
-        self.velocity_y *= 0.9  # Reibung
+        self.velocity_y *= 0.9  # friction
         self.y += self.velocity_y
 ```
 
-Dies fügt die Geschwindigkeit zu den y-Koordinaten des Flugzeugs hinzu. Die Schwerkraft verringert die Geschwindigkeit kontinuierlich, während die Reibung die Bewegung glättet.
-
-### Kraft bei Tastendruck hinzufügen
-
-Verwende das `on_key_down`-Event, um eine Aufwärtskraft auf den Actor anzuwenden:
+### Add Upward Force on Key Press
 
 ```python
     def on_key_down_w(self):
         self.velocity_y -= 5
 ```
 
-## Schritt 3: Gegner hinzufügen
+---
 
-Importiere `randint` und `choice`, um zufällig Gegner zu generieren:
+## Step 3: Add Enemies
+
+Import:
 
 ```python
 from random import randint, choice
 ```
 
-### Gegner-Klasse erstellen
-
-Füge eine Gegner-Klasse als Vorlage hinzu:
+### Create Enemy Class
 
 ```python
 class Enemy(Actor):
-    
     def on_setup(self):
         self.add_costume(choice(enemyships))
 
@@ -163,11 +150,7 @@ class Enemy(Actor):
         self.y = randint(25, world.height - 85)
 ```
 
-Die Methode `reset()` setzt die Position des Gegners zufällig innerhalb eines bestimmten Bereichs.
-
-### Gegner zur Welt hinzufügen
-
-Erstelle mehrere Instanzen der Gegner-Klasse mit einer Schleife und füge sie der Welt hinzu:
+### Add Enemies
 
 ```python
 enemies = []
@@ -177,9 +160,9 @@ for _ in range(10):
     enemies.append(enemy)
 ```
 
-### Gegner bewegen
+### Move Enemies
 
-Modifiziere die `on_setup()`-Methode der Gegner-Klasse:
+Extend `on_setup()`:
 
 ```python
 def on_setup(self):
@@ -187,9 +170,7 @@ def on_setup(self):
     self.speed = -1.5
 ```
 
-Die `speed`-Eigenschaft gibt an, wie viele Schritte sich der Gegner in jeder Frame in x-Richtung bewegt.
-
-Füge eine `act()`-Methode hinzu, um die Bewegung zu simulieren:
+Then:
 
 ```python
 def act(self):
@@ -198,9 +179,11 @@ def act(self):
         self.reset()
 ```
 
-## Schritt 4: Schießen hinzufügen
+---
 
-Erstelle eine `Bullet`-Klasse, um die Schussfunktion hinzuzufügen:
+## Step 4: Add Shooting
+
+Create the Bullet class:
 
 ```python
 class Bullet(Actor):
@@ -221,138 +204,8 @@ class Bullet(Actor):
         self.remove()
 ```
 
-Mit den Methoden `on_detecting_enemy` und `on_detecting_not_on_world` können Kugeln Gegner erkennen und bei Verlassen der Welt entfernt werden.
+---
 
-## Komplettcode:
+## Full Example Code
 
-```python
-from miniworlds import World, Actor, timer, Text
-from random import randint, choice
-
-# based on https://github.com/kantel/pygamezero/tree/master/tappyplane
-
-
-class RedBaronWorld(World):
-    def on_setup(self):
-        self.size = (800, 480)
-        bottom_ground = self.height - 35
-        nr_enemies = 10
-
-        # Add backgrounds
-        back0 = Actor(origin="topleft")
-        back0.add_costume("background")
-        back0.size = self.width, self.height
-        back1 = Actor((self.width, 0), origin="topleft")
-        back1.size = self.width, self.height
-        back1.add_costume("background")
-        self.backs = [back0, back1]
-
-        ground0 = Actor((0, bottom_ground), origin="topleft")
-        ground0.add_costume("groundgrass")
-        ground0.width = self.width
-        ground0.costume.is_scaled = True
-        ground1 = Actor((self.width, bottom_ground), origin="topleft")
-        ground1.add_costume("groundgrass")
-        ground1.width = self.width
-        ground1.costume.is_scaled = True
-        self.grounds = [ground0, ground1]
-        self.ground_level = self.height - 85
-        self.plane = Plane((100, self.height / 2))
-
-        enemies = []
-        for _ in range(nr_enemies):
-            enemy = Enemy()
-            enemy.reset()
-            enemies.append(enemy)
-
-    def act(self):
-        for back in self.backs:
-            back.x -= 1
-            if back.x <= -self.width:
-                back.x = self.width
-        for ground in self.grounds:
-            ground.x -= 2
-            if ground.x <= -self.width:
-                ground.x = self.width
-                
-    def on_key_down_space(self):
-        if not self.is_running:
-            self.reset()
-            self.run()
-
-
-class Plane(Actor):
-    def on_setup(self):
-        self.add_costume("planered1")
-        self.gravity = 0.1
-        self.velocity_y = 0
-        self.fire = False
-
-    def act(self):
-        self.velocity_y += self.gravity
-        self.velocity_y *= 0.9  # friction
-        self.y += self.velocity_y
-        if self.y >= self.world.ground_level:
-            self.y = self.world.ground_level
-            self.velocity_y = 0
-        if self.y <= 20:
-            self.y = 20
-            self.velocity_y = 0
-
-    def on_key_down_w(self):
-        self.velocity_y -= 5
-
-    def on_key_down_d(self):
-        if not self.fire:
-            self.fire = True
-            bullet = Bullet()
-
-            @timer(frames=30)
-            def downtime():
-                self.fire = False
-
-    def on_detecting_enemy(self, other):
-        text = Text((self.world.width / 2, self.world.height / 2), "GAME OVER")
-        text.color = (0, 0, 0)
-        self.world.stop()
-
-
-class Bullet(Actor):
-    def on_setup(self):
-        self.add_costume("laserred")
-        self.x = self.world.plane.x
-        self.y = self.world.plane.y
-        self.speed = 25
-        self.fire = False
-
-    def act(self):
-        self.x += self.speed
-
-    def on_detecting_enemy(self, enemy):
-        enemy.reset()
-
-    def on_not_detecting_world(self):
-        self.remove()
-
-
-class Enemy(Actor):
-
-    enemy_ships = ["shipbeige", "shipblue", "shipgreen", "shippink", "shipyellow"]
-
-    def on_setup(self):
-        self.add_costume(choice(self.enemy_ships))
-        self.speed = -1.5
-
-    def reset(self):
-        self.x = randint(self.world.width + 50, self.world.width + 500)
-        self.y = randint(25, self.world.ground_level)
-
-    def act(self):
-        self.x += self.speed
-        if self.x <= -self.world.width:
-            self.reset()
-
-
-level1 = RedBaronWorld()
-level1.run()
-```
+...

@@ -1,24 +1,24 @@
-# Sensoren
+# Sensors
 
-Actors verfügen über **Sensoren**, mit denen sie ihre Umwelt abtasten 
-können und z.B andere Actors an ihrer Position aufspüren können.
+Actors have **sensors** that allow them to scan their environment — for example, to detect other actors at their position.
 
-Es gibt zwei Möglichkeiten, Sensoren zu verwenden:
+There are two ways to use sensors:
 
-1. Du kannst Objekte "aktiv" aufspüren.
-2. Du kannst Events registrieren, die durch Sensoren getriggert werden.
+1. You can **actively** detect other objects.
+2. You can **register events** that are triggered by sensor detection.
 
-## Objekte aufspüren
+## Actively Detecting Objects
 
-Du kannst Objekte aufspüren, indem du die Sensoren eines Akteurs direkt nutzt. Hier ein Beispiel, wie das funktioniert:
+You can actively detect objects by using an actor’s sensors directly.
+Here’s an example of how it works:
 
 ```python
 import miniworlds 
 
 world = miniworlds.World(200, 100)
 
-r = miniworlds.Rectangle((10,10), 50, 100)
-c = miniworlds.Circle((200,50), 20)
+r = miniworlds.Rectangle((10, 10), 50, 100)
+c = miniworlds.Circle((200, 50), 20)
 
 @c.register
 def act(self):
@@ -26,44 +26,41 @@ def act(self):
 
 @r.register
 def act(self):
-    actor = self.detect()  # Sensor erkennt Objekte an der aktuellen Position
+    actor = self.detect()  # Sensor detects objects at current position
     if actor:
-        self.color = (255, 0, 0)  # Ändert die Farbe, wenn ein Objekt erkannt wird
+        self.color = (255, 0, 0)  # Change color if an object is detected
 
 world.run()
 ```
 
-### Ausgabe
-
+### Output
 
 <video controls loop width=300px>
   <source src="../_static/sensor.webm" type="video/webm">
-  Dein Browser unterstützt das Video-Tag nicht.
+  Your browser does not support the video tag.
 </video>
 
+### Explanation
 
-### Erklärung
+* In the rectangle’s `act()` method, the sensor **`self.detect()`** checks if there’s another actor at the same position.
+* If another actor is detected, the rectangle changes color.
+* The variable `actor` contains the detected object, or `None` if nothing is found.
+* The line `if actor` is shorthand for `if actor != None`.
 
-  * In der `act()`-Methode des Rechtecks wird der Sensor **`self.detect()`** verwendet, 
-  um zu prüfen, ob sich an der aktuellen Position ein anderer Akteur befindet. Wenn das Rechteck ein Objekt erkennt, ändert es seine Farbe.
- Die Variable actor enthält den gefundenen Actor. Wenn kein Akteur gefunden wird, gibt die Methode `None` zurück.
-  * Die Anweisung `if actor` ist eine Abkürzung für `if actor != None`. Man kann so überprüfen,
-  ob eine Variable einen Wert enthält.
+---
 
+## Registering Detection Events
 
-
-## Ereignisse registrieren
-
-Im obigen Beispiel wurde **aktiv** nach Akteuren gesucht. 
-Alternativ kannst du ein Ereignis registrieren, das automatisch aufgerufen wird, wenn der Sensor etwas entdeckt:
+In the example above, actors **actively** checked for collisions.
+Alternatively, you can register a method that is automatically triggered when a sensor detects something:
 
 ```python
 from miniworlds import World, Rectangle, Circle
 
 world = World(200, 100)
 
-r = Rectangle((10,10), 50, 100)
-c = Circle((200,50), 20)
+r = Rectangle((10, 10), 50, 100)
+c = Circle((200, 50), 20)
 
 @c.register
 def act(self):
@@ -71,29 +68,31 @@ def act(self):
 
 @r.register
 def on_detecting(self, other):
-    self.color = (255, 0, 0)  # Ändert die Farbe, wenn ein Objekt erkannt wird
+    self.color = (255, 0, 0)  # Change color when another object is detected
 
 world.run()
 ```
 
-### Erklärung:
+### Explanation:
 
-- Die registrierte Methode **`on_detecting(self, other)`** wird aufgerufen, sobald der Akteur ein anderes Objekt an seiner Position entdeckt.
-- Der Parameter **`other`** repräsentiert das gefundene Objekt, sodass du herausfinden kannst, welcher Akteur entdeckt wurde.
+* The method **`on_detecting(self, other)`** is called automatically when an object is detected.
+* The `other` parameter refers to the detected object, allowing you to identify what was found.
 
-## Unterschiedliche Objekte erkennen
+---
 
-Mit Sensoren und **if-else-Verzweigungen** kannst du bestimmen, welches spezifische Objekt gefunden wurde:
+## Detecting Specific Objects
+
+Using sensors along with **if-else statements**, you can distinguish which object was detected:
 
 ```python
 import miniworlds 
 
 world = miniworlds.World(200, 100)
 
-r = miniworlds.Rectangle((10,10), 50, 100)
+r = miniworlds.Rectangle((10, 10), 50, 100)
 
-c1 = miniworlds.Circle((200,50), 20)
-c2 = miniworlds.Circle((120,50), 20)
+c1 = miniworlds.Circle((200, 50), 20)
+c2 = miniworlds.Circle((120, 50), 20)
 
 @c1.register
 def act(self):
@@ -106,32 +105,36 @@ def act(self):
 @r.register
 def on_detecting(self, other):
     if other == c1:
-        self.color = (255, 0, 0)  # Rotes Rechteck bei Erkennung von c1
+        self.color = (255, 0, 0)  # Turn red when detecting c1
     elif other == c2:
-        self.color = (0, 255, 0)  # Grünes Rechteck bei Erkennung von c2
+        self.color = (0, 255, 0)  # Turn green when detecting c2
 
 world.run()
 ```
-### Ausgabe
 
+### Output
 
 <video controls loop width=300px>
   <source src="../_static/sensor2.webm" type="video/webm">
-  Dein Browser unterstützt das Video-Tag nicht.
+  Your browser does not support the video tag.
 </video>
 
+### Explanation
 
-### Erklärung
-
-In der Methode **`on_detecting`** wird überprüft, ob das erkannte Objekt **`c1`** oder **`c2`** ist, und die Farbe des Rechtecks wird entsprechend angepasst.
+In the **`on_detecting`** method, the actor checks whether it has detected **`c1`** or **`c2`** and changes color accordingly.
 
 ```{note}
-**Hinweis: Globale Variablen**: Normalerweise sind Variablen nur innerhalb einer Methode bekannt. Der Zugriff auf globale Variablen, wie in diesem Beispiel, ist zwar einfach, kann jedoch unerwünschte Seiteneffekte verursachen. Im Tutorial *classes_first* lernst du, wie du solche Zugriffe vermeiden kannst.
+**Note: Global Variables** — Normally, variables are only accessible within a method.  
+Accessing global variables (as in this example) is simple but can cause unwanted side effects.  
+You’ll learn how to avoid this in the *classes_first* tutorial.
 ```
 
-## Beispiel: Kollision mit Wänden verhindern
+---
 
-Mit Sensoren kannst du auch verhindern, dass sich Objekte durch Wände bewegen. Hier ein Beispiel:
+## Example: Prevent Actors from Passing Through Walls
+
+Sensors can also be used to prevent actors from walking through walls.
+Here’s an example:
 
 ```python
 import miniworlds 
@@ -144,33 +147,35 @@ world.speed = 30
 player = miniworlds.Actor()
 player.add_costume("images/player_1.png")
 
-wall = miniworlds.Actor((4,0))
+wall = miniworlds.Actor((4, 0))
 wall.add_costume("images/wall.png")
 
 @player.register
 def act(self):
-    if player.position != (0,4):
+    if player.position != (0, 4):
         player.direction = "right"
         player.move()
 
 @player.register
 def on_detecting(self, other):
     if other == wall:
-        self.move_back()  # Der Akteur bewegt sich zurück, wenn er eine Wand erkennt
+        self.move_back()  # Move back when wall is detected
 
 world.run()
 ```
 
 <video controls loop width=300px>
   <source src="../_static/wall.webm" type="video/webm">
-  Dein Browser unterstützt das Video-Tag nicht.
+  Your browser does not support the video tag.
 </video>
+
+---
 
 ## FAQ
 
-**Meine Kollisionen werden nicht erkannt, was kann ich tun?**
+**My collision detection doesn’t work — what can I do?**
 
-Teste zuerst, ob die Methode überhaupt aufgerufen wird. Füge dazu eine `print`-Anweisung ein:
+First, test whether your method is even being called. Add a `print` statement like this:
 
 ```python
 @player.register
@@ -178,4 +183,4 @@ def on_detecting(self, actor):
     print(actor)
 ```
 
-Falls die `print`-Anweisung nicht aufgerufen wird, funktioniert der Sensor nicht.
+If nothing prints, the sensor is not working as expected.

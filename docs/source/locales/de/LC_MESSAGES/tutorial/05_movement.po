@@ -2,86 +2,93 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/05_movement.md:1
-msgid "Bewegungen"
-msgstr "Movements"
+msgid "Movement"
+msgstr "Bewegung"
 
 #: ../../source/tutorial/05_movement.md:3
-msgid "Grundlagen"
-msgstr "Basics"
+msgid "Basics"
+msgstr "Grundlagen"
 
 #: ../../source/tutorial/05_movement.md:5
-msgid "Bevor wir tiefer in die Bewegungsfunktionen eintauchen, hier eine kurze Wiederholung der wichtigsten Konzepte:"
-msgstr "Before we dive deeper into the movement functions, here is a brief review of the key concepts:"
+msgid ""
+"Before we dive deeper into movement functions, here’s a quick recap of "
+"the core concepts:"
+msgstr ""
+"Bevor wir tiefer in die Bewegungsfunktionen eintauchen, hier eine kurze Wiederholung "
+"der wichtigsten Konzepte:"
 
 #: ../../source/tutorial/05_movement.md:7
 msgid ""
-"Mit **`self.direction`**, **`self.x`**, **`self.y`** und **`self.position`** kannst du die Position und Ausrichtung  "
-"eines Akteurs direkt steuern."
+"You can directly control an actor’s position and orientation using "
+"**`self.direction`**, **`self.x`**, **`self.y`**, and "
+"**`self.position`**."
 msgstr ""
-"With **`self.direction`**, **`self.x`**, **`self.y`**, and **`self.position`**, you can directly control the position "
-"and orientation of an actor."
+"Du kannst die Position und Ausrichtung eines Actors direkt mit "
+"**`self.direction`**, **`self.x`**, **`self.y`** und **`self.position`** steuern."
 
-#: ../../source/tutorial/05_movement.md:10
+#: ../../source/tutorial/05_movement.md:9
 msgid ""
-"Darüber hinaus gibt es spezielle Methoden, mit denen du einen Akteur geradeaus oder in bestimmte Richtungen bewegen "
-"kannst."
-msgstr "Additionally, there are special methods that allow you to move an actor straight or in specific directions."
+"In addition, Miniworlds provides special methods that let an actor move "
+"straight ahead or in specific directions."
+msgstr ""
+"Zusätzlich stellt Miniworlds spezielle Methoden bereit, mit denen sich ein Actor "
+"geradeaus oder in bestimmte Richtungen bewegen kann."
 
-#: ../../source/tutorial/05_movement.md:12
-msgid "Die `move()`-Funktion"
+#: ../../source/tutorial/05_movement.md:11
+msgid "The `move()` Function"
 msgstr "Die Funktion `move()`"
 
-#: ../../source/tutorial/05_movement.md:14
+#: ../../source/tutorial/05_movement.md:13
 msgid ""
-"Die Methode **`move()`** bewegt deinen Akteur in die Richtung, in die er gerade schaut (basierend auf der aktuellen "
-"**`direction`**). Wenn du die **`direction`** vorher änderst, passt sich die Bewegung automatisch an die neue "
-"Ausrichtung an."
+"The **`move()`** method moves your actor forward in the direction they "
+"are currently facing (based on **`direction`**). If you change the "
+"**`direction`** beforehand, the movement will automatically follow the "
+"new orientation."
 msgstr ""
-"The **`move()`** method moves your actor in the direction they are currently facing (based on the current "
-"**`direction`**). If you change the **`direction`** beforehand, the movement automatically adjusts to the new "
-"orientation."
+"Die Methode **`move()`** bewegt deinen Actor in die Richtung, in die er aktuell schaut "
+"(basierend auf **`direction`**). Wenn du die **`direction`** vorher änderst, folgt die Bewegung automatisch der neuen Ausrichtung."
 
 #: ../../source/tutorial/05_movement.md:23
-msgid "`turn_left()` und `turn_right()`"
+msgid "`turn_left()` and `turn_right()`"
 msgstr "`turn_left()` und `turn_right()`"
 
 #: ../../source/tutorial/05_movement.md:25
 msgid ""
-"Mit **`turn_left()`** und **`turn_right()`** kannst du den Akteur um eine bestimmte Gradzahl nach links oder rechts "
-"drehen."
+"With **`turn_left()`** and **`turn_right()`**, you can rotate the actor "
+"by a specified number of degrees to the left or right:"
 msgstr ""
-"With **`turn_left()`** and **`turn_right()`**, you can rotate the actor by a certain number of degrees to the left or "
-"right."
+"Mit **`turn_left()`** und **`turn_right()`** kannst du den Actor um eine bestimmte "
+"Gradzahl nach links oder rechts drehen:"
 
 #: ../../source/tutorial/05_movement.md:27
-msgid "**`player.turn_left(degrees)`**: Dreht den Akteur um **degrees** Grad nach links."
-msgstr "**`player.turn_left(degrees)`**: Dreht den Spieler um **degrees** Grad nach links."
+msgid "**`player.turn_left(degrees)`**: Rotates the actor **left** by `degrees`"
+msgstr "**`player.turn_left(degrees)`**: Dreht den Actor um `degrees` Grad nach **links**"
 
 #: ../../source/tutorial/05_movement.md:28
-msgid "**`player.turn_right(degrees)`**: Dreht den Akteur um **degrees** Grad nach rechts."
-msgstr "**`player.turn_right(degrees)`**: Dreht den Spieler um **degrees** Grad nach rechts."
+msgid "**`player.turn_right(degrees)`**: Rotates the actor **right** by `degrees`"
+msgstr "**`player.turn_right(degrees)`**: Dreht den Actor um `degrees` Grad nach **rechts**"
 
 #: ../../source/tutorial/05_movement.md:30
-msgid "Beispiel:"
-msgstr "Example:"
+msgid "Example:"
+msgstr "Beispiel:"
 
 #: ../../source/tutorial/05_movement.md:60
 msgid "`move_in_direction()`"
@@ -89,20 +96,24 @@ msgstr "`move_in_direction()`"
 
 #: ../../source/tutorial/05_movement.md:62
 msgid ""
-"Alternativ zur Standardbewegung kannst du den Akteur mit **`move_in_direction()`** in eine beliebige Richtung bewegen, "
-"indem du einen Winkel angibst."
-msgstr ""
-"As an alternative to the standard movement, you can move the actor in any direction with **`move_in_direction()`** by "
+"As an alternative to regular movement, you can use "
+"**`move_in_direction()`** to move the actor in any direction by "
 "specifying an angle."
+msgstr ""
+"Als Alternative zur Standardbewegung kannst du **`move_in_direction()`** verwenden, "
+"um den Actor durch Angabe eines Winkels in eine beliebige Richtung zu bewegen."
 
 #: ../../source/tutorial/05_movement.md:64
-msgid "Beispiel: Bewegung schräg nach oben"
-msgstr "Example: Diagonal movement upwards"
+msgid "Example: Diagonal movement"
+msgstr "Beispiel: Diagonale Bewegung"
 
 #: ../../source/tutorial/05_movement.md:86
-msgid "Beispiel: Bewegung in Richtung des Mauszeigers"
-msgstr "Example: Movement towards the mouse pointer"
+msgid "Example: Move toward the mouse pointer"
+msgstr "Beispiel: Bewegung in Richtung des Mauszeigers"
 
 #: ../../source/tutorial/05_movement.md:88
-msgid "Das folgende Beispiel zeigt, wie der Akteur mithilfe von **`move_in_direction()`** der Position des Mauszeigers folgt:"
-msgstr "The following example shows how the actor follows the position of the mouse pointer using **`move_in_direction()`**:"
+msgid ""
+"The following example shows how to make the actor follow the mouse "
+"pointer using **`move_in_direction()`**:"
+msgstr ""
+"Das folgende Beispiel zeigt, wie du mit **`move_in_direction()`** den Actor dem Mauszeiger folgen lassen kannst."

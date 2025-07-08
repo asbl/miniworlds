@@ -2,211 +2,397 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/processing/07_loops.md:1
-msgid "Schleifen"
-msgstr "Loops"
+msgid "Loops"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:3
-msgid "Die for-Schleife"
-msgstr "Die for-Schleife"
+msgid "The for Loop"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:5
-msgid "Die for-schleife wiederholt -vereinfacht gesprochen- einen Befehl n-mal:"
-msgstr "Die for-Schleife wiederholt -vereinfacht gesprochen- einen Befehl n-mal:"
+msgid "The `for` loop – simply put – repeats a command `n` times:"
+msgstr ""
 
-#: ../../source/processing/07_loops.md:7
-#: ../../source/processing/07_loops.md:30
-#: ../../source/processing/07_loops.md:194
-msgid "Beispiel"
-msgstr "Example"
+#: ../../source/processing/07_loops.md:7 ../../source/processing/07_loops.md:30
+#: ../../source/processing/07_loops.md:156
+msgid "Example"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:9
-msgid "Die folgende Schleife wird 5-mal durchlaufen:"
-msgstr "The following loop will run 5 times:"
+msgid "The following loop runs 5 times:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:16
-#: ../../source/processing/07_loops.md:37
-msgid "Das Programm gibt folgende Ausgabe"
-msgstr "The program produces the following output"
+msgid "This program produces the output:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:26
-msgid "Die Zählervariable"
+#, fuzzy
+msgid "The Counter Variable"
 msgstr "The counter variable"
 
 #: ../../source/processing/07_loops.md:28
-msgid "Man kann die Variable i als Zählervariable verwenden. Sie zählt (von 0 beginnend) hoch:"
-msgstr "You can use the variable i as a counter variable. It counts up (starting from 0):"
+msgid "You can use the variable `i` as a counter. It increases (starting at 0):"
+msgstr ""
+
+#: ../../source/processing/07_loops.md:37
+msgid "This program prints:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:47
-msgid "Allgemeine Form:"
-msgstr "General form:"
+msgid "General Form"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:49
-msgid "Allgemein schreibt man:"
-msgstr "In der Regel schreibt man:"
+msgid "Generally, you write:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:56
-msgid "oder"
+#, fuzzy
+msgid "or"
 msgstr "oder"
 
 #: ../../source/processing/07_loops.md:63
-msgid "Man kann jeweils angeben wie oft die Schleife durchlaufen wird oder bestimmte Bereiche angeben:"
-msgstr "You can specify how often the loop is executed or specify certain ranges:"
+msgid "You can specify how many times the loop runs or define a specific range."
+msgstr ""
 
 #: ../../source/processing/07_loops.md:65
-msgid "Beispiele: Mit Schleifen zeichnen"
-msgstr "Beispiele: Mit Schleifen zeichnen"
+msgid "Examples: Drawing with Loops"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:67
-msgid "Mit Schleifen kann man zeichnen:"
-msgstr "With loops, you can draw:"
+msgid "You can use loops to draw:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:80
 msgid "circles"
 msgstr "Kreise"
 
 #: ../../source/processing/07_loops.md:82
-msgid "Schachbrettmuster"
-msgstr "Checkerboard pattern"
+msgid "Checkerboard Pattern"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:84
 msgid ""
-"Mit dem module-Operator kann man überprüfen, ob ein Ergebnis, durch 2 teilbar ist, nämlich  ``x teilbar durch 2 genau "
-"dann wenn x % 2 == 0`"
+"Using the modulo operator, you can check if a number is divisible by 2: "
+"`x is divisible by 2 if x % 2 == 0`."
 msgstr ""
-"Mit dem Modulo-Operator kann man überprüfen, ob ein Ergebnis durch 2 teilbar ist, nämlich  ``x teilbar durch 2 genau "
-"dann, wenn x % 2 == 0`"
 
 #: ../../source/processing/07_loops.md:87
-msgid "Dies kann man nutzen um schachbrettartige Muster zu zeichnen, indem man Schleifen mit einer if-Abfrage kombiniert:"
-msgstr "This can be used to draw checkerboard patterns by combining loops with an if statement:"
+msgid ""
+"This can be used to create checkerboard-like patterns by combining loops "
+"with `if` statements:"
+msgstr ""
 
 #: ../../source/processing/07_loops.md:104
 msgid "checkers"
 msgstr "Dame"
 
 #: ../../source/processing/07_loops.md:106
-msgid "Graphen"
-msgstr "Graphen"
+#, fuzzy
+msgid "Graphs"
+msgstr "Diagramme"
 
 #: ../../source/processing/07_loops.md:108
-msgid "Auch Graphen lassen sich auf diese Art zeichnen:"
-msgstr "Auch Graphen lassen sich auf diese Art zeichnen:"
+msgid "You can also draw graphs this way:"
+msgstr ""
 
-#: ../../source/processing/07_loops.md:124
+#: ../../source/processing/07_loops.md:123
 msgid "graphs"
 msgstr "Diagramme"
 
-#: ../../source/processing/07_loops.md:126
-msgid "Verschachtelte Schleifen"
-msgstr "Nested loops"
+#: ../../source/processing/07_loops.md:125
+#, fuzzy
+msgid "Nested Loops"
+msgstr "verschachtelte Schleife"
 
-#: ../../source/processing/07_loops.md:128
-msgid "Mit Hilfe von verschachtelten Schleifen kannst du mehrdimensionale Muster zeichnen."
-msgstr "With the help of nested loops, you can draw multidimensional patterns."
+#: ../../source/processing/07_loops.md:127
+msgid "Using nested loops, you can draw multi-dimensional patterns:"
+msgstr ""
 
-#: ../../source/processing/07_loops.md:142
+#: ../../source/processing/07_loops.md:141
 msgid "nested loop"
 msgstr "verschachtelte Schleife"
 
-#: ../../source/processing/07_loops.md:144
-msgid "Die while-Schleife"
-msgstr "Die while-Schleife"
-
-#: ../../source/processing/07_loops.md:146
-msgid "Die while-Schleife hat allgemein folgenden Aufbau:"
-msgstr "Die while-Schleife hat allgemein folgenden Aufbau:"
-
-#: ../../source/processing/07_loops.md:153
-msgid ""
-"Solange die Bedingung wahr ist, wird die Schleife immer wieder wiederholt. Dadurch ist es auch möglich Endlosschleifen "
-"zu erstellen."
+#: ../../source/processing/07_loops.md:145
+msgid "The while Loop"
 msgstr ""
-"As long as the condition is true, the loop will be repeated over and over again. This also makes it possible to create "
-"infinite loops."
 
-#: ../../source/processing/07_loops.md:155
-msgid "Beispiel:"
-msgstr "Example:"
+#: ../../source/processing/07_loops.md:147
+msgid "The `while` loop has the following structure:"
+msgstr ""
 
-#: ../../source/processing/07_loops.md:157
-msgid "Das folgende Programm generiert ein zufälliges Muster:"
-msgstr "The following program generates a random pattern:"
+#: ../../source/processing/07_loops.md:154
+msgid ""
+"As long as the condition is true, the loop repeats. This allows for "
+"infinite loops if the condition is never false."
+msgstr ""
 
-#: ../../source/processing/07_loops.md:173
+#: ../../source/processing/07_loops.md:158
+msgid "The following program generates a random pattern:"
+msgstr ""
+
+#: ../../source/processing/07_loops.md:175
 msgid "random color circles"
 msgstr "zufällige Farbkreise"
 
-#: ../../source/processing/07_loops.md:175
-msgid "Die mainloop"
+#: ../../source/processing/07_loops.md:179
+#, fuzzy
+msgid "The Main Loop"
 msgstr "Die Hauptschleife"
 
-#: ../../source/processing/07_loops.md:177
-msgid "Dein ganzes Programm läuft streng genommen innerhalb einer while Schleife:"
-msgstr "Your entire program technically runs within a while loop:"
-
-#: ../../source/processing/07_loops.md:185
-msgid ""
-"Die for-Schleife ist hierfür nicht geeignet, da man für diese im Vorhinein wissen muss, wie viele Schleifendurchläufe "
-"durchlaufen werden sollen."
-msgstr "The for loop is not suitable for this because you need to know in advance how many iterations should be executed. "
-
-#: ../../source/processing/07_loops.md:188
-msgid "Schleifen innerhalb von registrierten Methoden"
-msgstr "Loops innerhalb von registrierten Methoden"
-
-#: ../../source/processing/07_loops.md:190
-msgid ""
-"Wenn du innerhalb der `act`-Methode oder einer Ereignis-Methode eine Schleife ausführen willst, dann musst du folgendes "
-"wissen:"
-msgstr "If you want to run a loop within the `act` method or an event method, then you need to know the following:"
-
-#: ../../source/processing/07_loops.md:192
-msgid ""
-"Die komplette Schleife innerhalb einer solchen Methode wird innerhalb eines einzigen Frames ausgeführt. Eine Schleife "
-"ist hier also nicht geeignet, um z.B. eine Figur zu bewegen, da diese ja jeden Frame neu gezeichnet wird - Eine "
-"Schleife läuft aber komplett innerhalb eines Frames ab."
+#: ../../source/processing/07_loops.md:181
+msgid "Your entire program technically runs inside a `while` loop:"
 msgstr ""
-"The entire loop within such a method is executed within a single frame. Therefore, a loop is not suitable here for "
-"moving a figure, for example, since it is redrawn every frame - However, a loop runs completely within a frame. "
 
-#: ../../source/processing/07_loops.md:196
+#: ../../source/processing/07_loops.md:189
 msgid ""
-"Am Beispiel einer Ampel-Anlage kann man dies gut veranschaulichen. Man kann den Ablauf der Schleife gut mit einem "
-"Zustandsdiagramm visualisieren."
+"The `for` loop is not suited for this since you need to know ahead of "
+"time how many iterations will occur."
 msgstr ""
-"This can be well illustrated using the example of a traffic light system. The loop process can be effectively "
-"visualized with a state diagram."
 
-#: ../../source/processing/07_loops.md:208
-msgid "In Code kann man dies wie folgt umsetzen:"
-msgstr "In Code kann man dies wie folgt umsetzen:"
+#: ../../source/processing/07_loops.md:193
+msgid "Loops Inside Registered Methods"
+msgstr ""
 
-#: ../../source/processing/07_loops.md:232
-msgid "In der mainloop wird die While-Schleife durch die mainloop \"ersetzt\":"
-msgstr "In the mainloop wird die While-Schleife durch die mainloop \"ersetzt\":"
-
-#: ../../source/processing/07_loops.md:274
+#: ../../source/processing/07_loops.md:195
 msgid ""
-"Wie man sieht ist der Programmcode nur an einzelnen Stellen verändert wurden, der Programmablauf bleibt der gleiche.  "
-"Die `while`-Schleife wird hier durch die `act`-Methode ersetzt."
+"If you want to use a loop inside an `act` method or an event handler, "
+"keep in mind:"
 msgstr ""
-"As you can see, the program code has only been changed in certain places, the program flow remains the same. The "
-"`while` loop is replaced here by the `act` method. "
+
+#: ../../source/processing/07_loops.md:197
+msgid ""
+"The entire loop is executed within **one frame**. This means loops are "
+"not suitable for controlling animations across frames (like moving a "
+"figure frame by frame). Instead, `act()` is called once per frame."
+msgstr ""
+
+#: ../../source/processing/07_loops.md:199
+msgid "Example: Traffic Light"
+msgstr ""
+
+#: ../../source/processing/07_loops.md:201
+msgid "A traffic light system can be modeled as a **state diagram**:"
+msgstr ""
+
+#: ../../source/processing/07_loops.md:213
+msgid "Translated to code with a `while` loop:"
+msgstr ""
+
+#: ../../source/processing/07_loops.md:237
+msgid "In a miniworlds program, this becomes part of the `act()` method:"
+msgstr ""
+
+#~ msgid "Schleifen"
+#~ msgstr "Loops"
+
+#~ msgid "Die for-Schleife"
+#~ msgstr "Die for-Schleife"
+
+#~ msgid ""
+#~ "Die for-schleife wiederholt -vereinfacht "
+#~ "gesprochen- einen Befehl n-mal:"
+#~ msgstr ""
+#~ "Die for-Schleife wiederholt -vereinfacht "
+#~ "gesprochen- einen Befehl n-mal:"
+
+#~ msgid "Beispiel"
+#~ msgstr "Example"
+
+#~ msgid "Die folgende Schleife wird 5-mal durchlaufen:"
+#~ msgstr "The following loop will run 5 times:"
+
+#~ msgid "Das Programm gibt folgende Ausgabe"
+#~ msgstr "The program produces the following output"
+
+#~ msgid ""
+#~ "Man kann die Variable i als "
+#~ "Zählervariable verwenden. Sie zählt (von "
+#~ "0 beginnend) hoch:"
+#~ msgstr ""
+#~ "You can use the variable i as "
+#~ "a counter variable. It counts up "
+#~ "(starting from 0):"
+
+#~ msgid "Allgemeine Form:"
+#~ msgstr "General form:"
+
+#~ msgid "Allgemein schreibt man:"
+#~ msgstr "In der Regel schreibt man:"
+
+#~ msgid ""
+#~ "Man kann jeweils angeben wie oft "
+#~ "die Schleife durchlaufen wird oder "
+#~ "bestimmte Bereiche angeben:"
+#~ msgstr ""
+#~ "You can specify how often the loop"
+#~ " is executed or specify certain "
+#~ "ranges:"
+
+#~ msgid "Beispiele: Mit Schleifen zeichnen"
+#~ msgstr "Beispiele: Mit Schleifen zeichnen"
+
+#~ msgid "Mit Schleifen kann man zeichnen:"
+#~ msgstr "With loops, you can draw:"
+
+#~ msgid "Schachbrettmuster"
+#~ msgstr "Checkerboard pattern"
+
+#~ msgid ""
+#~ "Mit dem module-Operator kann man "
+#~ "überprüfen, ob ein Ergebnis, durch 2 "
+#~ "teilbar ist, nämlich  ``x teilbar durch"
+#~ " 2 genau dann wenn x % 2 "
+#~ "== 0`"
+#~ msgstr ""
+#~ "Mit dem Modulo-Operator kann man "
+#~ "überprüfen, ob ein Ergebnis durch 2 "
+#~ "teilbar ist, nämlich  ``x teilbar durch"
+#~ " 2 genau dann, wenn x % 2 "
+#~ "== 0`"
+
+#~ msgid ""
+#~ "Dies kann man nutzen um "
+#~ "schachbrettartige Muster zu zeichnen, indem"
+#~ " man Schleifen mit einer if-Abfrage"
+#~ " kombiniert:"
+#~ msgstr ""
+#~ "This can be used to draw "
+#~ "checkerboard patterns by combining loops "
+#~ "with an if statement:"
+
+#~ msgid "Graphen"
+#~ msgstr "Graphen"
+
+#~ msgid "Auch Graphen lassen sich auf diese Art zeichnen:"
+#~ msgstr "Auch Graphen lassen sich auf diese Art zeichnen:"
+
+#~ msgid "Verschachtelte Schleifen"
+#~ msgstr "Nested loops"
+
+#~ msgid ""
+#~ "Mit Hilfe von verschachtelten Schleifen "
+#~ "kannst du mehrdimensionale Muster zeichnen."
+#~ msgstr "With the help of nested loops, you can draw multidimensional patterns."
+
+#~ msgid "Die while-Schleife"
+#~ msgstr "Die while-Schleife"
+
+#~ msgid "Die while-Schleife hat allgemein folgenden Aufbau:"
+#~ msgstr "Die while-Schleife hat allgemein folgenden Aufbau:"
+
+#~ msgid ""
+#~ "Solange die Bedingung wahr ist, wird "
+#~ "die Schleife immer wieder wiederholt. "
+#~ "Dadurch ist es auch möglich "
+#~ "Endlosschleifen zu erstellen."
+#~ msgstr ""
+#~ "As long as the condition is true,"
+#~ " the loop will be repeated over "
+#~ "and over again. This also makes it"
+#~ " possible to create infinite loops."
+
+#~ msgid "Beispiel:"
+#~ msgstr "Example:"
+
+#~ msgid "Das folgende Programm generiert ein zufälliges Muster:"
+#~ msgstr "The following program generates a random pattern:"
+
+#~ msgid ""
+#~ "Dein ganzes Programm läuft streng "
+#~ "genommen innerhalb einer while Schleife:"
+#~ msgstr "Your entire program technically runs within a while loop:"
+
+#~ msgid ""
+#~ "Die for-Schleife ist hierfür nicht "
+#~ "geeignet, da man für diese im "
+#~ "Vorhinein wissen muss, wie viele "
+#~ "Schleifendurchläufe durchlaufen werden sollen."
+#~ msgstr ""
+#~ "The for loop is not suitable for"
+#~ " this because you need to know "
+#~ "in advance how many iterations should"
+#~ " be executed. "
+
+#~ msgid "Schleifen innerhalb von registrierten Methoden"
+#~ msgstr "Loops innerhalb von registrierten Methoden"
+
+#~ msgid ""
+#~ "Wenn du innerhalb der `act`-Methode oder"
+#~ " einer Ereignis-Methode eine Schleife "
+#~ "ausführen willst, dann musst du "
+#~ "folgendes wissen:"
+#~ msgstr ""
+#~ "If you want to run a loop "
+#~ "within the `act` method or an "
+#~ "event method, then you need to "
+#~ "know the following:"
+
+#~ msgid ""
+#~ "Die komplette Schleife innerhalb einer "
+#~ "solchen Methode wird innerhalb eines "
+#~ "einzigen Frames ausgeführt. Eine Schleife "
+#~ "ist hier also nicht geeignet, um "
+#~ "z.B. eine Figur zu bewegen, da "
+#~ "diese ja jeden Frame neu gezeichnet "
+#~ "wird - Eine Schleife läuft aber "
+#~ "komplett innerhalb eines Frames ab."
+#~ msgstr ""
+#~ "The entire loop within such a "
+#~ "method is executed within a single "
+#~ "frame. Therefore, a loop is not "
+#~ "suitable here for moving a figure, "
+#~ "for example, since it is redrawn "
+#~ "every frame - However, a loop runs"
+#~ " completely within a frame. "
+
+#~ msgid ""
+#~ "Am Beispiel einer Ampel-Anlage kann "
+#~ "man dies gut veranschaulichen. Man kann"
+#~ " den Ablauf der Schleife gut mit "
+#~ "einem Zustandsdiagramm visualisieren."
+#~ msgstr ""
+#~ "This can be well illustrated using "
+#~ "the example of a traffic light "
+#~ "system. The loop process can be "
+#~ "effectively visualized with a state "
+#~ "diagram."
+
+#~ msgid "In Code kann man dies wie folgt umsetzen:"
+#~ msgstr "In Code kann man dies wie folgt umsetzen:"
+
+#~ msgid "In der mainloop wird die While-Schleife durch die mainloop \"ersetzt\":"
+#~ msgstr "In the mainloop wird die While-Schleife durch die mainloop \"ersetzt\":"
+
+#~ msgid ""
+#~ "Wie man sieht ist der Programmcode "
+#~ "nur an einzelnen Stellen verändert "
+#~ "wurden, der Programmablauf bleibt der "
+#~ "gleiche.  Die `while`-Schleife wird hier "
+#~ "durch die `act`-Methode ersetzt."
+#~ msgstr ""
+#~ "As you can see, the program code"
+#~ " has only been changed in certain "
+#~ "places, the program flow remains the "
+#~ "same. The `while` loop is replaced "
+#~ "here by the `act` method. "
+

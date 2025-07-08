@@ -56,8 +56,25 @@ def build_physics(c):
 
 @task
 def make_docs(c):
-    """Sphinx-Dokumentation erstellen"""
-    c.run("cd docs && make gettext && sphinx-intl update -p build/gettext -l de -l en && make docs")
+    """Mehrsprachige Sphinx-Dokumentation erstellen (EN + DE)"""
+    with c.cd("docs"):
+        # Schritt 1: gettext extrahieren
+        c.run("make gettext", pty=True)
+
+        # Schritt 2: PO-Dateien aktualisieren
+        c.run("sphinx-intl update -p build/gettext -l en -l de", pty=True)
+
+        # Schritt 3: Kompilieren der .mo-Dateien
+        c.run("sphinx-intl build", pty=True)
+
+        # Schritt 4: HTML für Englisch bauen
+        c.run("sphinx-build -b html -D language=en source build/html/en", pty=True)
+
+        # Schritt 5: HTML für Deutsch bauen
+        c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
+
+def upload_docs(c):
+    pass
 
 @task
 def checkout_examples(c):

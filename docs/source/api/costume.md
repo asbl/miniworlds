@@ -1,7 +1,7 @@
 # Actor > Costume
 
-Ein **Kostüm** ist eine Kindklasse der **Appearance**-Klasse.
-Die meisten Funktionen findest du daher dort.
+A **Costume** is a child class of the **Appearance**-Class.
+Most of it's methods and attributes you can therefore find in the baseclass **Appearance**
 
 
 ## Costume

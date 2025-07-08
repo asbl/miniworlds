@@ -5,13 +5,13 @@ import miniworlds.tools.actor_class_inspection as actor_class_inspection
 class CollisionManager:
     """The class handles all collisions of actors.
 
-    The method ``handle_all_collisions`` is called every frame (in World.update())
+    The method ``_handle_all_collisions`` is called every frame (in World.update())
     """
 
     def __init__(self, world):
         self.world = world
 
-    def handle_all_collisions(self):
+    def _handle_all_collisions(self):
         self._handle_actor_detecting_actor_methods()
         self._handle_actor_not_detecting_actor_methods()
         self._handle_actor_detecting_border_methods()

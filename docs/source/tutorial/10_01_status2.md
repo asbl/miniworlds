@@ -1,11 +1,10 @@
-## Das Programm stoppen
+## Stopping the Program
 
-Bei einem Spielende oder einem Levelwechsel gibt es oft bestimmte Aktionen, die durchgeführt werden müssen, 
-wie z.B. das Spielfeld zurückzusetzen oder das Spiel zu pausieren. Dafür stehen folgende Befehle zur Verfügung:
+At the end of a game or during a level transition, certain actions often need to be performed —
+like resetting the game field or pausing the game. The following commands are available for that purpose:
 
-- **`world.stop()`**: Stoppt das Spielfeld. Es werden keine weiteren Aktionen ausgeführt und keine Events mehr abgefragt.
-- **`world.start()`**: Setzt einen vorherigen `stop`-Befehl zurück und lässt das Spiel weiterlaufen.
-- **`world.is_running`**: Mit dieser Variable kannst du überprüfen, ob das Spielfeld gerade aktiv ist.
-- **`world.clear()`**: Entfernt alle Figuren vom Spielfeld.
-- **`world.reset()`**: Löscht das aktuelle Spielfeld und erstellt ein neues, indem alle Figuren wie in der Methode `world.on_setup()` definiert, neu erzeugt werden.
-
+* **`world.stop()`**: Stops the world. No more actions will be executed and no events will be processed.
+* **`world.start()`**: Resumes the game after a previous `stop()` command.
+* **`world.is_running`**: A boolean variable you can use to check if the world is currently active.
+* **`world.clear()`**: Removes all actors from the world.
+* **`world.reset()`**: Clears the current world and re-creates it by calling everything defined in the `world.on_setup()` method.

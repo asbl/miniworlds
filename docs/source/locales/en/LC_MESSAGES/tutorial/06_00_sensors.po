@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,142 +17,329 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/06_00_sensors.md:1
-msgid "Sensoren"
+#, fuzzy
+msgid "Sensors"
 msgstr "Sensors"
 
 #: ../../source/tutorial/06_00_sensors.md:3
 msgid ""
-"Actors verfügen über **Sensoren**, mit denen sie ihre Umwelt abtasten  können und z.B andere Actors an ihrer Position "
-"aufspüren können."
+"Actors have **sensors** that allow them to scan their environment — for "
+"example, to detect other actors at their position."
 msgstr ""
-"Actors have **sensors** that allow them to scan their environment and, for example, detect other actors at their "
-"position."
 
-#: ../../source/tutorial/06_00_sensors.md:6
-msgid "Es gibt zwei Möglichkeiten, Sensoren zu verwenden:"
-msgstr "There are two ways to use sensors:"
+#: ../../source/tutorial/06_00_sensors.md:5
+msgid "There are two ways to use sensors:"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:7
+msgid "You can **actively** detect other objects."
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:8
-msgid "Du kannst Objekte \"aktiv\" aufspüren."
-msgstr "You can track objects \"actively\"."
+msgid "You can **register events** that are triggered by sensor detection."
+msgstr ""
 
-#: ../../source/tutorial/06_00_sensors.md:9
-msgid "Du kannst Events registrieren, die durch Sensoren getriggert werden."
-msgstr "You can register events triggered by sensors."
+#: ../../source/tutorial/06_00_sensors.md:10
+msgid "Actively Detecting Objects"
+msgstr ""
 
-#: ../../source/tutorial/06_00_sensors.md:11
-msgid "Objekte aufspüren"
-msgstr "Locate objects"
-
-#: ../../source/tutorial/06_00_sensors.md:13
-msgid "Du kannst Objekte aufspüren, indem du die Sensoren eines Akteurs direkt nutzt. Hier ein Beispiel, wie das funktioniert:"
-msgstr "You can track objects by directly using an actor's sensors. Here's an example of how it works:"
+#: ../../source/tutorial/06_00_sensors.md:12
+msgid ""
+"You can actively detect objects by using an actor’s sensors directly. "
+"Here’s an example of how it works:"
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:36
 #: ../../source/tutorial/06_00_sensors.md:115
-msgid "Ausgabe"
-msgstr "Output"
+msgid "Output"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:43
+#: ../../source/tutorial/06_00_sensors.md:122
+msgid "Explanation"
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:45
-#: ../../source/tutorial/06_00_sensors.md:124
-msgid "Erklärung"
-msgstr "Explanation"
+msgid ""
+"In the rectangle’s `act()` method, the sensor **`self.detect()`** checks "
+"if there’s another actor at the same position."
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:46
+msgid "If another actor is detected, the rectangle changes color."
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:47
 msgid ""
-"In der `act()`-Methode des Rechtecks wird der Sensor **`self.detect()`** verwendet,  um zu prüfen, ob sich an der "
-"aktuellen Position ein anderer Akteur befindet. Wenn das Rechteck ein Objekt erkennt, ändert es seine Farbe. Die "
-"Variable actor enthält den gefundenen Actor. Wenn kein Akteur gefunden wird, gibt die Methode `None` zurück."
+"The variable `actor` contains the detected object, or `None` if nothing "
+"is found."
 msgstr ""
-"In the `act()` method of the rectangle, the sensor **`self.detect()`** is used to check if there is another actor at "
-"the current position. If the rectangle detects an object, it changes its color. The variable actor contains the found "
-"Actor. If no actor is found, the method returns `None`."
 
-#: ../../source/tutorial/06_00_sensors.md:50
-msgid ""
-"Die Anweisung `if actor` ist eine Abkürzung für `if actor != None`. Man kann so überprüfen, ob eine Variable einen Wert "
-"enthält."
-msgstr "The statement `if actor` is a shorthand for `if actor != None`. This way, you can check if a variable contains a value."
-
-#: ../../source/tutorial/06_00_sensors.md:55
-msgid "Ereignisse registrieren"
-msgstr "Register events"
-
-#: ../../source/tutorial/06_00_sensors.md:57
-msgid ""
-"Im obigen Beispiel wurde **aktiv** nach Akteuren gesucht.  Alternativ kannst du ein Ereignis registrieren, das "
-"automatisch aufgerufen wird, wenn der Sensor etwas entdeckt:"
+#: ../../source/tutorial/06_00_sensors.md:48
+msgid "The line `if actor` is shorthand for `if actor != None`."
 msgstr ""
-"In the above example, **actors** were actively searched for. Alternatively, you can register an event that is "
-"automatically triggered when the sensor detects something:"
+
+#: ../../source/tutorial/06_00_sensors.md:52
+msgid "Registering Detection Events"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:54
+msgid ""
+"In the example above, actors **actively** checked for collisions. "
+"Alternatively, you can register a method that is automatically triggered "
+"when a sensor detects something:"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:76
+msgid "Explanation:"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:78
+msgid ""
+"The method **`on_detecting(self, other)`** is called automatically when "
+"an object is detected."
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:79
-msgid "Erklärung:"
-msgstr "Explanation:"
-
-#: ../../source/tutorial/06_00_sensors.md:81
 msgid ""
-"Die registrierte Methode **`on_detecting(self, other)`** wird aufgerufen, sobald der Akteur ein anderes Objekt an "
-"seiner Position entdeckt."
+"The `other` parameter refers to the detected object, allowing you to "
+"identify what was found."
 msgstr ""
-"The registered method **`on_detecting(self, other)`** is called as soon as the actor detects another object at its "
-"position."
 
-#: ../../source/tutorial/06_00_sensors.md:82
-msgid ""
-"Der Parameter **`other`** repräsentiert das gefundene Objekt, sodass du herausfinden kannst, welcher Akteur entdeckt "
-"wurde."
-msgstr "The parameter **`other`** represents the found object, allowing you to determine which actor was discovered."
-
-#: ../../source/tutorial/06_00_sensors.md:84
-msgid "Unterschiedliche Objekte erkennen"
-msgstr "Recognize different objects"
-
-#: ../../source/tutorial/06_00_sensors.md:86
-msgid "Mit Sensoren und **if-else-Verzweigungen** kannst du bestimmen, welches spezifische Objekt gefunden wurde:"
-msgstr "With sensors and **if-else branches**, you can determine which specific object was found:"
-
-#: ../../source/tutorial/06_00_sensors.md:126
-msgid ""
-"In der Methode **`on_detecting`** wird überprüft, ob das erkannte Objekt **`c1`** oder **`c2`** ist, und die Farbe des "
-"Rechtecks wird entsprechend angepasst."
+#: ../../source/tutorial/06_00_sensors.md:83
+msgid "Detecting Specific Objects"
 msgstr ""
-"In the method **`on_detecting`**, it is checked whether the detected object is **`c1`** or **`c2`**, and the color of "
-"the rectangle is adjusted accordingly."
 
-#: ../../source/tutorial/06_00_sensors.md:129
+#: ../../source/tutorial/06_00_sensors.md:85
 msgid ""
-"**Hinweis: Globale Variablen**: Normalerweise sind Variablen nur innerhalb einer Methode bekannt. Der Zugriff auf "
-"globale Variablen, wie in diesem Beispiel, ist zwar einfach, kann jedoch unerwünschte Seiteneffekte verursachen. Im "
-"Tutorial *classes_first* lernst du, wie du solche Zugriffe vermeiden kannst."
+"Using sensors along with **if-else statements**, you can distinguish "
+"which object was detected:"
 msgstr ""
-"**Note: Global Variables**: Normally, variables are only known within a method. Accessing global variables, as in this "
-"example, is straightforward but can cause unwanted side effects. In the *classes_first* tutorial, you will learn how to "
-"avoid such accesses."
 
-#: ../../source/tutorial/06_00_sensors.md:132
-msgid "Beispiel: Kollision mit Wänden verhindern"
-msgstr "Example: Prevent collision with walls"
+#: ../../source/tutorial/06_00_sensors.md:124
+msgid ""
+"In the **`on_detecting`** method, the actor checks whether it has "
+"detected **`c1`** or **`c2`** and changes color accordingly."
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:127
+msgid ""
+"**Note: Global Variables** — Normally, variables are only accessible "
+"within a method.   Accessing global variables (as in this example) is "
+"simple but can cause unwanted side effects.   You’ll learn how to avoid "
+"this in the *classes_first* tutorial."
+msgstr ""
 
 #: ../../source/tutorial/06_00_sensors.md:134
-msgid "Mit Sensoren kannst du auch verhindern, dass sich Objekte durch Wände bewegen. Hier ein Beispiel:"
-msgstr "With sensors, you can also prevent objects from moving through walls. Here's an example:"
+msgid "Example: Prevent Actors from Passing Through Walls"
+msgstr ""
 
-#: ../../source/tutorial/06_00_sensors.md:169
+#: ../../source/tutorial/06_00_sensors.md:136
+msgid ""
+"Sensors can also be used to prevent actors from walking through walls. "
+"Here’s an example:"
+msgstr ""
+
+#: ../../source/tutorial/06_00_sensors.md:174
 msgid "FAQ"
 msgstr "FAQ"
 
-#: ../../source/tutorial/06_00_sensors.md:171
-msgid "**Meine Kollisionen werden nicht erkannt, was kann ich tun?**"
-msgstr "**My collisions are not being detected, what can I do?**"
+#: ../../source/tutorial/06_00_sensors.md:176
+msgid "**My collision detection doesn’t work — what can I do?**"
+msgstr ""
 
-#: ../../source/tutorial/06_00_sensors.md:173
-msgid "Teste zuerst, ob die Methode überhaupt aufgerufen wird. Füge dazu eine `print`-Anweisung ein:"
-msgstr "First, test whether the method is called at all. To do this, insert a `print` statement:"
+#: ../../source/tutorial/06_00_sensors.md:178
+msgid ""
+"First, test whether your method is even being called. Add a `print` "
+"statement like this:"
+msgstr ""
 
-#: ../../source/tutorial/06_00_sensors.md:181
-msgid "Falls die `print`-Anweisung nicht aufgerufen wird, funktioniert der Sensor nicht."
-msgstr "If the `print` statement is not called, the sensor does not work."
+#: ../../source/tutorial/06_00_sensors.md:186
+msgid "If nothing prints, the sensor is not working as expected."
+msgstr ""
+
+#~ msgid ""
+#~ "Actors verfügen über **Sensoren**, mit "
+#~ "denen sie ihre Umwelt abtasten  können"
+#~ " und z.B andere Actors an ihrer "
+#~ "Position aufspüren können."
+#~ msgstr ""
+#~ "Actors have **sensors** that allow them"
+#~ " to scan their environment and, for"
+#~ " example, detect other actors at "
+#~ "their position."
+
+#~ msgid "Es gibt zwei Möglichkeiten, Sensoren zu verwenden:"
+#~ msgstr "There are two ways to use sensors:"
+
+#~ msgid "Du kannst Objekte \"aktiv\" aufspüren."
+#~ msgstr "You can track objects \"actively\"."
+
+#~ msgid "Du kannst Events registrieren, die durch Sensoren getriggert werden."
+#~ msgstr "You can register events triggered by sensors."
+
+#~ msgid "Objekte aufspüren"
+#~ msgstr "Locate objects"
+
+#~ msgid ""
+#~ "Du kannst Objekte aufspüren, indem du"
+#~ " die Sensoren eines Akteurs direkt "
+#~ "nutzt. Hier ein Beispiel, wie das "
+#~ "funktioniert:"
+#~ msgstr ""
+#~ "You can track objects by directly "
+#~ "using an actor's sensors. Here's an "
+#~ "example of how it works:"
+
+#~ msgid "Ausgabe"
+#~ msgstr "Output"
+
+#~ msgid "Erklärung"
+#~ msgstr "Explanation"
+
+#~ msgid ""
+#~ "In der `act()`-Methode des Rechtecks "
+#~ "wird der Sensor **`self.detect()`** verwendet,"
+#~ "  um zu prüfen, ob sich an der"
+#~ " aktuellen Position ein anderer Akteur "
+#~ "befindet. Wenn das Rechteck ein Objekt"
+#~ " erkennt, ändert es seine Farbe. Die"
+#~ " Variable actor enthält den gefundenen "
+#~ "Actor. Wenn kein Akteur gefunden wird,"
+#~ " gibt die Methode `None` zurück."
+#~ msgstr ""
+#~ "In the `act()` method of the "
+#~ "rectangle, the sensor **`self.detect()`** is"
+#~ " used to check if there is "
+#~ "another actor at the current position."
+#~ " If the rectangle detects an object,"
+#~ " it changes its color. The variable"
+#~ " actor contains the found Actor. If"
+#~ " no actor is found, the method "
+#~ "returns `None`."
+
+#~ msgid ""
+#~ "Die Anweisung `if actor` ist eine "
+#~ "Abkürzung für `if actor != None`. "
+#~ "Man kann so überprüfen, ob eine "
+#~ "Variable einen Wert enthält."
+#~ msgstr ""
+#~ "The statement `if actor` is a "
+#~ "shorthand for `if actor != None`. "
+#~ "This way, you can check if a "
+#~ "variable contains a value."
+
+#~ msgid "Ereignisse registrieren"
+#~ msgstr "Register events"
+
+#~ msgid ""
+#~ "Im obigen Beispiel wurde **aktiv** nach"
+#~ " Akteuren gesucht.  Alternativ kannst du"
+#~ " ein Ereignis registrieren, das automatisch"
+#~ " aufgerufen wird, wenn der Sensor "
+#~ "etwas entdeckt:"
+#~ msgstr ""
+#~ "In the above example, **actors** were"
+#~ " actively searched for. Alternatively, you"
+#~ " can register an event that is "
+#~ "automatically triggered when the sensor "
+#~ "detects something:"
+
+#~ msgid "Erklärung:"
+#~ msgstr "Explanation:"
+
+#~ msgid ""
+#~ "Die registrierte Methode **`on_detecting(self, "
+#~ "other)`** wird aufgerufen, sobald der "
+#~ "Akteur ein anderes Objekt an seiner "
+#~ "Position entdeckt."
+#~ msgstr ""
+#~ "The registered method **`on_detecting(self, "
+#~ "other)`** is called as soon as the"
+#~ " actor detects another object at its"
+#~ " position."
+
+#~ msgid ""
+#~ "Der Parameter **`other`** repräsentiert das"
+#~ " gefundene Objekt, sodass du herausfinden"
+#~ " kannst, welcher Akteur entdeckt wurde."
+#~ msgstr ""
+#~ "The parameter **`other`** represents the "
+#~ "found object, allowing you to determine"
+#~ " which actor was discovered."
+
+#~ msgid "Unterschiedliche Objekte erkennen"
+#~ msgstr "Recognize different objects"
+
+#~ msgid ""
+#~ "Mit Sensoren und **if-else-"
+#~ "Verzweigungen** kannst du bestimmen, welches"
+#~ " spezifische Objekt gefunden wurde:"
+#~ msgstr ""
+#~ "With sensors and **if-else branches**,"
+#~ " you can determine which specific "
+#~ "object was found:"
+
+#~ msgid ""
+#~ "In der Methode **`on_detecting`** wird "
+#~ "überprüft, ob das erkannte Objekt "
+#~ "**`c1`** oder **`c2`** ist, und die "
+#~ "Farbe des Rechtecks wird entsprechend "
+#~ "angepasst."
+#~ msgstr ""
+#~ "In the method **`on_detecting`**, it is"
+#~ " checked whether the detected object "
+#~ "is **`c1`** or **`c2`**, and the "
+#~ "color of the rectangle is adjusted "
+#~ "accordingly."
+
+#~ msgid ""
+#~ "**Hinweis: Globale Variablen**: Normalerweise "
+#~ "sind Variablen nur innerhalb einer "
+#~ "Methode bekannt. Der Zugriff auf globale"
+#~ " Variablen, wie in diesem Beispiel, "
+#~ "ist zwar einfach, kann jedoch "
+#~ "unerwünschte Seiteneffekte verursachen. Im "
+#~ "Tutorial *classes_first* lernst du, wie "
+#~ "du solche Zugriffe vermeiden kannst."
+#~ msgstr ""
+#~ "**Note: Global Variables**: Normally, "
+#~ "variables are only known within a "
+#~ "method. Accessing global variables, as "
+#~ "in this example, is straightforward but"
+#~ " can cause unwanted side effects. In"
+#~ " the *classes_first* tutorial, you will "
+#~ "learn how to avoid such accesses."
+
+#~ msgid "Beispiel: Kollision mit Wänden verhindern"
+#~ msgstr "Example: Prevent collision with walls"
+
+#~ msgid ""
+#~ "Mit Sensoren kannst du auch verhindern,"
+#~ " dass sich Objekte durch Wände "
+#~ "bewegen. Hier ein Beispiel:"
+#~ msgstr ""
+#~ "With sensors, you can also prevent "
+#~ "objects from moving through walls. "
+#~ "Here's an example:"
+
+#~ msgid "**Meine Kollisionen werden nicht erkannt, was kann ich tun?**"
+#~ msgstr "**My collisions are not being detected, what can I do?**"
+
+#~ msgid ""
+#~ "Teste zuerst, ob die Methode überhaupt"
+#~ " aufgerufen wird. Füge dazu eine "
+#~ "`print`-Anweisung ein:"
+#~ msgstr ""
+#~ "First, test whether the method is "
+#~ "called at all. To do this, insert"
+#~ " a `print` statement:"
+
+#~ msgid ""
+#~ "Falls die `print`-Anweisung nicht aufgerufen"
+#~ " wird, funktioniert der Sensor nicht."
+#~ msgstr "If the `print` statement is not called, the sensor does not work."
+
