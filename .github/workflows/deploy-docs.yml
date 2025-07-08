@@ -41,11 +41,9 @@ jobs:
         # Schritt 3: Kompiliere MO-Dateien
         sphinx-intl build
 
-        # Schritt 4: Baue HTML-Dokumentation für Englisch
-        sphinx-build -b html -nWT -D language=en source build/html/en
-
-        # Schritt 5: Baue HTML-Dokumentation für Deutsch
-        sphinx-build -b html -nWT -D language=de source build/html/de
+        # Schritt 4: Baue HTML-Dokumentation für Englisch und Deutsch
+        sphinx-build -b html -nWT -D language=en source build/html/en 2>&1 | tee sphinx-en.log
+        sphinx-build -b html -nWT -D language=de source build/html/de 2>&1 | tee sphinx-de.log
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
