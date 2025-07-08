@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-08 13:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/04_00_act.md:1
 msgid "Act"
@@ -25,21 +25,21 @@ msgstr "Act"
 
 #: ../../source/tutorial/04_00_act.md:3
 msgid ""
-"Bisher hast du gelernt, wie man Welten erstellt und Akteure auf ihnen platziert.  Nun werden wir Dinge in Bewegung "
-"setzen:"
-msgstr "So far, you have learned how to create worlds and place actors on them. Now we will set things in motion:"
+"So far, you’ve learned how to create worlds and place actors in them. Now"
+" it’s time to bring things to life:"
+msgstr ""
 
 #: ../../source/tutorial/04_00_act.md:6
-msgid "Die `act()`-Methode"
+#, fuzzy
+msgid "The `act()` Method"
 msgstr "The `act()` method"
 
 #: ../../source/tutorial/04_00_act.md:8
 msgid ""
-"Die `act()`-Methode steuert das Verhalten deiner Welt und aller Akteure.  Sie wird in jedem Frame (alle "
-"`world.step`-Zeiteinheiten) aufgerufen, bis das Programm beendet wird."
+"The `act()` method controls the behavior of your world and all its "
+"actors. It is called once every frame (i.e., every `world.step` time "
+"unit), continuing until the program ends."
 msgstr ""
-"The `act()` method controls the behavior of your world and all actors. It is called in every frame (every `world.step` "
-"time unit) until the program ends."
 
 #: ../../source/tutorial/04_00_act.md:11
 msgid "![First Actor](../_images/act.png)"
@@ -50,29 +50,109 @@ msgid "First Actor"
 msgstr "First Actor"
 
 #: ../../source/tutorial/04_00_act.md:13
-msgid "Beispiel: Bewegender Actor"
-msgstr "Example: Moving Actor"
+msgid "Example: Moving Actor"
+msgstr ""
 
 #: ../../source/tutorial/04_00_act.md:15
-msgid "Wenn du einen `Actor` erstellst, kannst du die Methode `act()` mit dem Decorator `@register` registrieren:"
-msgstr "When you create an `Actor`, you can register the `act()` method with the `@register` decorator:"
+msgid ""
+"When you create an `Actor`, you can define its `act()` method and "
+"register it using the `@register` decorator:"
+msgstr ""
 
-#: ../../source/tutorial/04_00_act.md:32
-msgid "Erklärung"
-msgstr "Explanation"
-
-#: ../../source/tutorial/04_00_act.md:34
-msgid "Die `act()`-Methode bewegt den `player` in jedem Frame um einen Schritt nach oben."
-msgstr "The `act()` method moves the `player` one step up in each frame."
+#: ../../source/tutorial/04_00_act.md:33
+msgid "Explanation"
+msgstr ""
 
 #: ../../source/tutorial/04_00_act.md:35
-msgid ""
-"Neu ist hier der Befehl `self`: Damit kann ein Objekt auf sich zugreifen. Der Befehl `self.y = self.y - 1` bedeutet "
-"also, dass das Objekt player seine  \"eigene\" y-Koordinate um 1 verringert."
+msgid "The `act()` method moves the `player` up by one unit on every frame."
 msgstr ""
-"New here is the command `self`: This allows an object to access itself. The command `self.y = self.y - 1` means that "
-"the object player decreases its \"own\" y-coordinate by 1."
 
-#: ../../source/tutorial/04_00_act.md:40
-msgid "Weitere Details zu Methoden und der Nutzung von `self` findest du [hier](concept_self.md)."
-msgstr "Further details on methods and the use of `self` can be found [here](concept_self.md)."
+#: ../../source/tutorial/04_00_act.md:36
+msgid ""
+"New here is the use of `self`, which lets the object refer to itself. So "
+"the line `self.y = self.y - 1` means the `player` object is reducing its "
+"own y-coordinate by 1."
+msgstr ""
+
+#: ../../source/tutorial/04_00_act.md:39
+#, python-brace-format
+msgid ""
+"\\:::{seealso} For more on methods and how to use `self`, see "
+"[here](api/concept_self.md). \\:::"
+msgstr ""
+
+#~ msgid ""
+#~ "Bisher hast du gelernt, wie man "
+#~ "Welten erstellt und Akteure auf ihnen"
+#~ " platziert.  Nun werden wir Dinge in"
+#~ " Bewegung setzen:"
+#~ msgstr ""
+#~ "So far, you have learned how to"
+#~ " create worlds and place actors on"
+#~ " them. Now we will set things "
+#~ "in motion:"
+
+#~ msgid ""
+#~ "Die `act()`-Methode steuert das Verhalten "
+#~ "deiner Welt und aller Akteure.  Sie "
+#~ "wird in jedem Frame (alle "
+#~ "`world.step`-Zeiteinheiten) aufgerufen, bis das "
+#~ "Programm beendet wird."
+#~ msgstr ""
+#~ "The `act()` method controls the behavior"
+#~ " of your world and all actors. "
+#~ "It is called in every frame (every"
+#~ " `world.step` time unit) until the "
+#~ "program ends."
+
+#~ msgid "Beispiel: Bewegender Actor"
+#~ msgstr "Example: Moving Actor"
+
+#~ msgid ""
+#~ "Wenn du einen `Actor` erstellst, kannst"
+#~ " du die Methode `act()` mit dem "
+#~ "Decorator `@register` registrieren:"
+#~ msgstr ""
+#~ "When you create an `Actor`, you "
+#~ "can register the `act()` method with "
+#~ "the `@register` decorator:"
+
+#~ msgid "Erklärung"
+#~ msgstr "Explanation"
+
+#~ msgid ""
+#~ "Die `act()`-Methode bewegt den `player` "
+#~ "in jedem Frame um einen Schritt "
+#~ "nach oben."
+#~ msgstr "The `act()` method moves the `player` one step up in each frame."
+
+#~ msgid ""
+#~ "Neu ist hier der Befehl `self`: "
+#~ "Damit kann ein Objekt auf sich "
+#~ "zugreifen. Der Befehl `self.y = self.y"
+#~ " - 1` bedeutet also, dass das "
+#~ "Objekt player seine  \"eigene\" y-Koordinate"
+#~ " um 1 verringert."
+#~ msgstr ""
+#~ "New here is the command `self`: "
+#~ "This allows an object to access "
+#~ "itself. The command `self.y = self.y "
+#~ "- 1` means that the object player"
+#~ " decreases its \"own\" y-coordinate by "
+#~ "1."
+
+#~ msgid ""
+#~ "Weitere Details zu Methoden und der "
+#~ "Nutzung von `self` findest du "
+#~ "[hier](concept_self.md)."
+#~ msgstr ""
+#~ "Further details on methods and the "
+#~ "use of `self` can be found "
+#~ "[here](concept_self.md)."
+
+#~ msgid ""
+#~ "\\:::{seealso} For more on methods and"
+#~ " how to use `self`, see "
+#~ "[here](concept_self.md). \\:::"
+#~ msgstr ""
+

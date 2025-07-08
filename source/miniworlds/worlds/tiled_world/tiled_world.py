@@ -82,10 +82,10 @@ class TiledWorld(world.World):
         super().__init__(x=x, y=y)
         self._tile_size = 40
         self.step = 20
-        self.dynamic_actors_dict: defaultdict = defaultdict(
+        self._dynamic_actors_dict: defaultdict = defaultdict(
             list
         )  # the dict is regularly updated
-        self.dynamic_actors: "pygame.sprite.Group" = (
+        self._dynamic_actors: "pygame.sprite.Group" = (
             pygame.sprite.Group()
         )  # Set with all dynamic actors
         self.static_actors_dict: defaultdict = defaultdict(list)
@@ -385,17 +385,17 @@ class TiledWorld(world.World):
         This method is called very often in self.sensing_actors - The dynamic_actors list should therefore be as small as possible.
         Other actors should be defined as static.
         """
-        self.dynamic_actors_dict.clear()
-        for actor in self.dynamic_actors:
+        self._dynamic_actors_dict.clear()
+        for actor in self._dynamic_actors:
             x, y = actor.position[0], actor.position[1]
-            self.dynamic_actors_dict[(x, y)].append(actor)
+            self._dynamic_actors_dict[(x, y)].append(actor)
 
     def detect_actors_at_position(self, position):
         """Sensing actors at same position"""
         self._update_actor_positions()  # This method can be a bottleneck!
         actor_list = []
-        if self.dynamic_actors_dict[position[0], position[1]]:
-            actor_list.extend(self.dynamic_actors_dict[(position[0], position[1])])
+        if self._dynamic_actors_dict[position[0], position[1]]:
+            actor_list.extend(self._dynamic_actors_dict[(position[0], position[1])])
         if self.static_actors_dict[position[1], position[1]]:
             actor_list.extend(self.static_actors_dict[(position[0], position[1])])
         actor_list = [actor for actor in actor_list]
@@ -519,5 +519,5 @@ class TiledWorld(world.World):
 
     def set_tile_size(self, value):
         self._tile_size = value
-        self.camera.reload_camera()
+        self.camera._reload_camera()
         self.background.set_dirty("all", background_mod.Background.RELOAD_ACTUAL_IMAGE)

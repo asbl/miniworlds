@@ -1,47 +1,49 @@
-# Text und Zahlen
+# Text and Numbers
 
-## Punktestand/Spielstatus
+## Score / Game Status
 
-In vielen Spielen möchtest du den aktuellen Punktestand oder andere Statusanzeigen einblenden. 
+In many games, you’ll want to display the current score or other status indicators.
 
-**Miniworlds** bietet dafür spezielle Actors wie **Text**- oder **Number**-Actors, die dir helfen, Informationen anzuzeigen.
+**Miniworlds** provides special actor types like **Text** and **Number** actors that help you display this information easily.
 
-### Text erstellen
+---
 
-Um einen Text anzuzeigen, kannst du folgendermaßen vorgehen:
+### Creating Text
+
+To display text, you can use the following:
 
 ```python
 text = miniworlds.Text(position, string)
 ```
 
-- `position`: Ein Tupel, das die obere linke Ecke des Textes definiert.
-- `string`: Der anzuzeigende Text.
+* `position`: A tuple that defines the top-left corner of the text.
+* `string`: The text to display.
 
-:::{note}
-In einer normalen **World** wird der Text automatisch skaliert. 
-In einer **Tiledworld** wird der Text in einer Kachel angezeigt, was bei längeren Texten zu Platzproblemen führen kann.
-:::
+\:::{note}
+In a regular **World**, the text is automatically scaled.
+In a **TiledWorld**, the text is shown inside a tile, which can cause space issues for longer text.
+\:::
 
-#### Beispiel:
+#### Example:
 
 ```python
 import miniworlds 
 
 world = miniworlds.World(400, 400)
-hallo_welt = Text((100, 100), "Hallo Welt!")
+hallo_welt = Text((100, 100), "Hello World!")
 
 world.run()
 ```
 
-<img src="../_images/text1.png" width=260px alt="Textbeispiel"/>
+<img src="../_images/text1.png" width=260px alt="Text example"/>
 
 ---
 
-### Text ändern
+### Changing Text
 
-Du kannst den angezeigten Text jederzeit mit dem Attribut `text` anpassen.
+You can update the displayed text at any time using the `text` attribute.
 
-Das folgende Beispiel zeigt den zuletzt gedrückten Tastendruck an:
+The following example shows the most recently pressed key:
 
 ```python
 from miniworlds import World, Text
@@ -52,18 +54,20 @@ key_display = Text((100, 100), "")
 @key_display.register
 def on_key_down(self, key):
     print(key)
-    self.text = key[0]  # Zeigt den ersten Buchstaben des gedrückten Keys an
+    self.text = key[0]  # Displays the first letter of the key pressed
 
 world.run()
 ```
 
-<img src="../_images/text2.png" width=260px alt="Text mit Tasteneingabe"/>
+<img src="../_images/text2.png" width=260px alt="Text with key input"/>
 
 ---
 
-## Zahlen anzeigen
+## Displaying Numbers
 
-Um Zahlen auf dem Bildschirm anzuzeigen, kannst du **Number-Actors** verwenden. Die Funktionsweise ähnelt der von Text-Actors. Im folgenden Beispiel wird die angezeigte Zahl bei jedem Tastendruck um 1 erhöht:
+To show numbers on screen, you can use **Number actors**.
+They work similarly to text actors.
+In the following example, the number increases by 1 every time a key is pressed:
 
 ```python
 from miniworlds import World, Number
@@ -78,6 +82,3 @@ def on_key_down(self, key):
 
 world.run()
 ```
-
----
-

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 16:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,98 +17,180 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/actor_number.md:1
 msgid "Actor > Number"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number:1 of
-msgid "A number actor shows a Number."
+msgid "A number actor that displays a numeric value (integer or float)."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number:3 of
 msgid ""
-"You have to set the size of the actor with self.size() manually so that "
-"the complete text can be seen."
+"You must manually set the size of the actor with `self.size()` to ensure "
+"the text fits the screen."
 msgstr ""
 
-#: ../../source/api/actor_number.md
-#: miniworlds.actors.texts.number.Number.set_value of
-msgid "Parameter"
+#: ../../source/api/actor_number.md miniworlds.actors.texts.number.Number.add
+#: miniworlds.actors.texts.number.Number.set_value
+#: miniworlds.actors.texts.number.Number.sub of
+msgid "Parameters"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number:6 of
-msgid "Top-Left position of Number."
-msgstr ""
-
-#: miniworlds.actors.texts.number.Number:7 of
-msgid "The initial number"
+msgid "Top-left position of the number actor."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number:8 of
-msgid "The size of the font (default: 80)"
+msgid "The initial number to display."
 msgstr ""
 
-#: miniworlds.actors.texts.number.Number:11
-#: miniworlds.actors.texts.number.Number.get_value:6
-#: miniworlds.actors.texts.number.Number.set_value:6 of
-msgid "Examples"
+#: miniworlds.actors.texts.number.Number:10 of
+msgid "Additional arguments passed to the base class."
 msgstr ""
 
-#: miniworlds.actors.texts.number.Number:12 of
-msgid "Sets a new NumberActor to display the score.::"
+#: miniworlds.actors.texts.number.Number:13 of
+msgid "Example"
 msgstr ""
 
-#: miniworlds.actors.texts.number.Number:16
-#: miniworlds.actors.texts.number.Number.get_value:7 of
-msgid "Gets the number stored in the NumberActor::"
-msgstr ""
-
-#: miniworlds.actors.texts.number.Number:20
-#: miniworlds.actors.texts.number.Number.set_value:7 of
-msgid "Sets the number stored in the NumberActor::"
+#: miniworlds.actors.texts.number.Number:14 of
+msgid "Create and update a Number actor::"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.add:1 of
-msgid "add the sprite to groups"
+msgid "Add a value to the current number."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.add:3 of
-msgid "Sprite.add(*groups): return None"
+msgid "The value to add."
 msgstr ""
 
-#: miniworlds.actors.texts.number.Number.add:5 of
-msgid ""
-"Any number of Group instances can be passed as arguments. The Sprite will"
-" be added to the Groups it is not already a member of."
-msgstr ""
-
-#: miniworlds.actors.texts.number.Number.get_value of
-msgid "Rückgabetyp"
+#: miniworlds.actors.texts.number.Number.add:6
+#: miniworlds.actors.texts.number.Number.get_value:8
+#: miniworlds.actors.texts.number.Number.inc:3
+#: miniworlds.actors.texts.number.Number.set_value:6
+#: miniworlds.actors.texts.number.Number.sub:6 of
+msgid "Example::"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.get_value:1 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgid "Get the current number."
 msgstr ""
 
+#: ../../source/api/actor_number.md
 #: miniworlds.actors.texts.number.Number.get_value of
-msgid "Rückgabe"
+msgid "Return type"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.get_value:3 of
-msgid "The current number"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: ../../source/api/actor_number.md
+#: miniworlds.actors.texts.number.Number.get_value of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.actors.texts.number.Number.get_value:5 of
+msgid "The currently displayed number."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.inc:1 of
-msgid "Increases the number by one"
+msgid "Increase the number by 1."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.set_value:1 of
-msgid "Sets the number"
+msgid "Set the number to display."
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.set_value:3 of
-msgid "The number which should be displayed"
+msgid "The number to set."
 msgstr ""
+
+#: miniworlds.actors.texts.number.Number.sub:1 of
+msgid "Subtract a value from the current number."
+msgstr ""
+
+#: miniworlds.actors.texts.number.Number.sub:3 of
+msgid "The value to subtract."
+msgstr ""
+
+#: miniworlds.actors.texts.number.Number.update_text:1 of
+msgid "Update the visual text display to match the current number."
+msgstr ""
+
+#: miniworlds.actors.texts.number.Number.value:1 of
+msgid "Get or set the value of the number."
+msgstr ""
+
+#: miniworlds.actors.texts.number.Number.value:3 of
+msgid "The current number."
+msgstr ""
+
+#~ msgid "A number actor shows a Number."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You have to set the size of "
+#~ "the actor with self.size() manually so"
+#~ " that the complete text can be "
+#~ "seen."
+#~ msgstr ""
+
+#~ msgid "Top-Left position of Number."
+#~ msgstr ""
+
+#~ msgid "The initial number"
+#~ msgstr ""
+
+#~ msgid "The size of the font (default: 80)"
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
+
+#~ msgid "Sets a new NumberActor to display the score.::"
+#~ msgstr ""
+
+#~ msgid "Gets the number stored in the NumberActor::"
+#~ msgstr ""
+
+#~ msgid "Sets the number stored in the NumberActor::"
+#~ msgstr ""
+
+#~ msgid "add the sprite to groups"
+#~ msgstr ""
+
+#~ msgid "Sprite.add(*groups): return None"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Any number of Group instances can "
+#~ "be passed as arguments. The Sprite "
+#~ "will be added to the Groups it "
+#~ "is not already a member of."
+#~ msgstr ""
+
+#~ msgid "The current number"
+#~ msgstr ""
+
+#~ msgid "Increases the number by one"
+#~ msgstr ""
+
+#~ msgid "Sets the number"
+#~ msgstr ""
+
+#~ msgid "The number which should be displayed"
+#~ msgstr ""
+
+#~ msgid "Parameter"
+#~ msgstr ""
+
+#~ msgid "Rückgabetyp"
+#~ msgstr ""
+
+#~ msgid "Rückgabe"
+#~ msgstr ""
 

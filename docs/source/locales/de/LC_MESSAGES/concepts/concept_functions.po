@@ -1,119 +1,135 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2023, Andreas Siebel
-# This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: miniworlds 2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
-
 #: ../../source/concepts/concept_functions.md:1
-msgid "Konzept: Funktionen und Code-Blöcke"
-msgstr "Concept: Funktionen und Code-Blöcke"
+msgid "Concept: Functions and Code Blocks"
+msgstr "Konzept: Funktionen und Code-Blöcke"
 
 #: ../../source/concepts/concept_functions.md:3
-msgid "Funktionen und Decorators"
-msgstr "Functions and decorators"
+msgid "Functions and Decorators"
+msgstr "Funktionen und Dekoratoren"
 
 #: ../../source/concepts/concept_functions.md:5
-msgid "Im letzten Kapitel wurde folgender Code verwendet:"
-msgstr "Im letzten Kapitel wurde folgender Code verwendet:"
+msgid "In the last chapter, we saw code like this:"
+msgstr "Im letzten Kapitel haben wir folgenden Code gesehen:"
 
 #: ../../source/concepts/concept_functions.md:14
-msgid "In der zweiten Zeile wird eine Funktion definiert, die bestimmte Anweisungen durchführt (dazu später mehr)."
-msgstr "In the second line, a function is defined that executes certain instructions (more on that later)."
+msgid ""
+"In the second line, a **function** is defined that performs specific "
+"instructions (we’ll discuss that more below)."
+msgstr ""
+"In der zweiten Zeile wird eine **Funktion** definiert, die bestimmte Anweisungen ausführt "
+"(mehr dazu weiter unten)."
 
 #: ../../source/concepts/concept_functions.md:16
 msgid ""
-"In der ersten Zeile wird diese Funktion mit einem Decorator versehen. Dieser Decorator \"heftet\" die Funktion an das "
-"World an. Immer wenn das System die Funktion `world.on_setup` aufrufen will, wird die von dir definierte Funktion "
-"aufgerufen. Auf diese Weise kannst du später Funktionen definieren, die auf beliebige Ereignisse reagieren, z.B. "
-"Tastendrücke, ..."
+"In the first line, a **decorator** is used. This decorator **attaches** "
+"the function to the `world` object. Whenever the system wants to call "
+"`world.on_setup`, the function you defined is executed instead. This way,"
+" you can define functions that respond to various **events**, like key "
+"presses, actor collisions, etc."
 msgstr ""
-"In the first line, this function is provided with a decorator. This decorator \"attaches\" the function to the World. "
-"Whenever the system wants to call the `world.on_setup` function, the function you defined is called. In this way, you "
-"can later define functions that respond to any events, such as keystrokes, ..."
+"In der ersten Zeile wird ein **Dekorator** verwendet. Dieser **verknüpft** die Funktion mit dem "
+"`world`-Objekt. Immer wenn das System `world.on_setup` aufrufen möchte, wird stattdessen "
+"die von dir definierte Funktion ausgeführt. Auf diese Weise kannst du Funktionen definieren, "
+"die auf verschiedene **Ereignisse** reagieren – etwa Tastendrücke, Kollisionen von Akteuren usw."
 
-#: ../../source/concepts/concept_functions.md:19
-msgid "Einrückung und Code-Blöcke"
-msgstr "Indentation und Code-Blöcke"
+#: ../../source/concepts/concept_functions.md:22
+msgid "Indentation and Code Blocks"
+msgstr "Einrückung und Code-Blöcke"
 
-#: ../../source/concepts/concept_functions.md:21
+#: ../../source/concepts/concept_functions.md:24
 msgid ""
-"Die dritte und vierte Zeile des Programmcodes oben sind eingerückt. Dies bedeutet, dass bei Aufruf die beiden "
-"eingerückten Zeilen aufgerufen werden."
+"Lines 3 and 4 in the example above are **indented**. This means they "
+"**belong to the function** and are executed when it is called."
 msgstr ""
-"The third and fourth lines of the program code above are indented. This means that when called, the two indented lines "
-"will be executed."
+"Die Zeilen 3 und 4 im obigen Beispiel sind **eingerückt**. Das bedeutet, sie "
+"**gehören zur Funktion** und werden beim Aufruf der Funktion ausgeführt."
 
-#: ../../source/concepts/concept_functions.md:23
+#: ../../source/concepts/concept_functions.md:26
 msgid ""
-"Code-Blöcke dienen in Python immer dazu, zu definieren wann eine bestimmte Verzweigung in deinem Programm beginnt und "
-"wann sie endet. Alles was gleich weit eingerückt wird gehört zu einem gemeinsamen Code-Block."
+"In Python, **indentation** is used to define **code blocks** — that is, "
+"when a conditional or function begins and ends. All lines with the **same"
+" level of indentation** are considered part of the same block."
 msgstr ""
-"Code blocks in Python always serve to define when a specific branch in your program begins and when it ends. Everything "
-"that is indented to the same level belongs to a common code block."
-
-#: ../../source/concepts/concept_functions.md:25
-msgid "Coding-Standards Wie weit sollte eingerückt werden?"
-msgstr "Coding-Standards Wie weit sollte eingerückt werden?"
-
-#: ../../source/concepts/concept_functions.md:27
-msgid ""
-"Die Programmiersprache Python selbst definiert nicht, wie weit ein Code-Block eingerückt werden soll, ob du drei, vier "
-"oder fünf Zeichen verwendest ist egal - Entscheidend ist, dass alle Zeilen *gleich weit* eingerückt sind."
-msgstr ""
-"The Python programming language itself does not define how far a code block should be indented, whether you use three, "
-"four, or five characters doesn't matter - what matters is that all lines are indented *equally*."
-
-#: ../../source/concepts/concept_functions.md:29
-msgid ""
-"Es gibt in Python aber bestimmte Coding-Standards, auf die sich Programmierer geeinigt haben, damit Code immer ähnlich "
-"aussieht."
-msgstr ""
-"In Python gibt es jedoch bestimmte Coding-Standards, auf die sich Programmierer geeinigt haben, damit der Code immer "
-"ähnlich aussieht."
+"In Python wird **Einrückung** verwendet, um **Code-Blöcke** zu definieren – "
+"also wann eine Bedingung oder Funktion beginnt und endet. "
+"Alle Zeilen mit **gleicher Einrückungsebene** gehören zum selben Block."
 
 #: ../../source/concepts/concept_functions.md:31
-msgid ""
-"So hat man sich darauf geeinigt, dass man Code immer 4 Zeichen einrückt. Du kannst dies für dich natürlich anders "
-"handhaben - Spätestens wenn ihr im Team arbeitet, ist es aber hilfreich sich an solche Konventionen zu halten."
-msgstr ""
-"It was agreed that code should always be indented by 4 characters. Of course, you can handle this differently for "
-"yourself - but at the latest when you work in a team, it is helpful to adhere to such conventions."
+msgid "Coding Standards — How Much Should You Indent?"
+msgstr "Coding-Standards – Wie weit sollte man einrücken?"
 
 #: ../../source/concepts/concept_functions.md:33
 msgid ""
-"In Python sind Funktionen und Konventionen in sogenannten PEPs (\"Python Enhancement Proposal) definiert. Style Guides "
-"findest du z.B. in [PEP 8](https://www.python.org/dev/peps/pep-0008/)."
+"The Python language doesn’t enforce **how many spaces** to use for "
+"indentation — whether 3, 4, or 5 spaces — but all lines in a block must "
+"be **indented equally**."
 msgstr ""
-"In Python, functions and conventions are defined in so-called PEPs (\"Python Enhancement Proposal\"). You can find "
-"style guides, for example, in [PEP 8](https://www.python.org/dev/peps/pep-0008/)."
+"Die Sprache Python schreibt nicht vor, **wie viele Leerzeichen** man für die Einrückung "
+"verwenden soll — ob 3, 4 oder 5 — aber alle Zeilen eines Blocks müssen "
+"**gleich weit eingerückt** sein."
 
 #: ../../source/concepts/concept_functions.md:35
 msgid ""
-"Neben der Einrückung findest du dort noch viel mehr, z.B. schreibt man `a = a + 3` anstatt `a=a+3`, weil ersteres "
-"leichter zu lesen ist. die Programmiersprache zwingt dich nicht dazu, aber so ist der Code für andere Programmierer "
-"besser zu lesen."
+"However, Python developers have agreed on certain **coding standards** so"
+" that code looks consistent across projects."
 msgstr ""
-"Besides indentation, you'll find much more there, e.g., you write `a = a + 3` instead of `a=a+3`, because the former is "
-"easier to read. The programming language doesn't force you to do so, but this way the code is easier for other "
-"programmers to read."
+"Allerdings haben sich Python-Entwickler auf bestimmte **Coding-Standards** geeinigt, "
+"damit Code in verschiedenen Projekten einheitlich aussieht."
 
 #: ../../source/concepts/concept_functions.md:37
+msgid "The commonly accepted rule is to indent code using **4 spaces**."
+msgstr ""
+"Die allgemein anerkannte Regel ist, Code mit **4 Leerzeichen** einzurücken."
+
+#: ../../source/concepts/concept_functions.md:38
 msgid ""
-"Viele moderne Editoren können dich durch Autoformatierung und Linting darin unterstützen, **sauberen** Code zu "
-"schreiben."
-msgstr "Many modern editors can assist you in writing **clean** code through auto-formatting and linting."
+"While you can use your own style, it is **strongly recommended** to "
+"follow this standard, especially when working in teams."
+msgstr ""
+"Auch wenn du deinen eigenen Stil verwenden kannst, wird es **dringend empfohlen**, "
+"diesen Standard zu befolgen – besonders bei Teamarbeit."
+
+#: ../../source/concepts/concept_functions.md:40
+msgid ""
+"Python’s functions and conventions are documented in official proposals "
+"called **PEPs** (Python Enhancement Proposals). Style recommendations can"
+" be found in [PEP 8](https://www.python.org/dev/peps/pep-0008/)."
+msgstr ""
+"Funktionen und Konventionen in Python sind in offiziellen Vorschlägen dokumentiert, "
+"den sogenannten **PEPs** (Python Enhancement Proposals). Stil-Empfehlungen findest du in "
+"[PEP 8](https://www.python.org/dev/peps/pep-0008/)."
+
+#: ../../source/concepts/concept_functions.md:43
+msgid "Besides indentation, it covers many other topics — for example:"
+msgstr "Neben Einrückung behandelt es viele weitere Themen — zum Beispiel:"
+
+#: ../../source/concepts/concept_functions.md:49
+msgid "instead of:"
+msgstr "anstatt:"
+
+#: ../../source/concepts/concept_functions.md:55
+msgid ""
+"Although Python doesn’t **enforce** these rules, following them helps "
+"make your code easier for others to read."
+msgstr ""
+"Auch wenn Python diese Regeln nicht **erzwingt**, hilft ihre Einhaltung, "
+"deinen Code für andere besser lesbar zu machen."
+
+#: ../../source/concepts/concept_functions.md:59
+msgid "Helpful Tools"
+msgstr "Hilfreiche Werkzeuge"
+
+#: ../../source/concepts/concept_functions.md:61
+msgid "Most modern code editors support:"
+msgstr "Die meisten modernen Code-Editoren unterstützen:"
+
+#: ../../source/concepts/concept_functions.md:63
+msgid "**Auto-formatting** (e.g., automatic indentation)"
+msgstr "**Automatische Formatierung** (z. B. automatische Einrückung)"
+
+#: ../../source/concepts/concept_functions.md:64
+msgid "**Linting** (checking your code for style issues)"
+msgstr "**Linting** (Überprüfung des Codes auf Stilprobleme)"
+
+#: ../../source/concepts/concept_functions.md:66
+msgid "These tools help you write **clean and readable code** more easily."
+msgstr "Diese Werkzeuge helfen dir, **sauberen und lesbaren Code** leichter zu schreiben."

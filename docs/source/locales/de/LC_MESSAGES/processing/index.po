@@ -21,4 +21,4 @@ msgstr ""
 
 #: ../../source/processing/index.rst:2
 msgid "Processing"
-msgstr "Verarbeitung"
+msgstr "Processing"

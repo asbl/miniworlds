@@ -80,8 +80,8 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
 
     def remove_from_world(self) -> None:
         """Removes a actor from world"""
-        if self.actor in self.world.dynamic_actors:
-            self.world.dynamic_actors.remove(self.actor)
+        if self.actor in self.world._dynamic_actors:
+            self.world._dynamic_actors.remove(self.actor)
         if self.actor in self.world.static_actors_dict[self.actor.position]:
             self.world.static_actors_dict[self.actor.position.to_tuple()].remove(
                 self.actor

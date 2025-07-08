@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,442 +17,614 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/processing/10_image_processing.md:1
-#: ../../source/processing/10_image_processing.md:254
-msgid "Bildbearbeitung"
-msgstr "Image editing"
+#: ../../source/processing/10_image_processing.md:113
+msgid "Image Processing"
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:3
-msgid "Was sind Bilder"
-msgstr "What are pictures"
+msgid "What Are Images"
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:5
-msgid "Bilder bestehen aus winzig kleinen Pixeln, die alle eine bestimmte Farbe haben:"
-msgstr "Images consist of tiny pixels, each having a specific color:"
+msgid "Images consist of tiny pixels, each with a specific color."
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:7
-msgid "![sunflower](../_images/sunflower.png)"
-msgstr "![sunflower](../_images/sunflower.png)"
-
-#: ../../source/processing/10_image_processing.md:7
-msgid "sunflower"
-msgstr "sunflower"
+msgid ""
+"Image processing means changing and manipulating these pixels based on "
+"certain criteria."
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:9
-msgid "Bildbearbeitung besteht darin, diese Pixel nach bestimmten Kriterien zu verändern und zu manipulieren."
-msgstr "Image editing involves altering and manipulating these pixels according to specific criteria."
+msgid ""
+"To do this, we use `arrays`, which are a special form of lists (arrays "
+"have fixed sizes)."
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:11
-msgid "Dazu benötigen wir `Arrays` die eine spezielle Form von Listen sind (Arrays haben begrenze Größen)."
-msgstr "For this, we need `arrays`, which are a special form of lists (arrays have limited sizes)."
+msgid "Loading the Background"
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:13
-msgid "Laden des Hintergrunds"
-msgstr "Loading background"
+msgid "In miniworlds, we can load the background using:"
+msgstr ""
 
-#: ../../source/processing/10_image_processing.md:15
-msgid "Im miniworlds können wir den `Hintergrund`  mit der Funktion  `arr = background.to_colors_array()` laden."
-msgstr "In miniworlds, we can load the `background` with the function `arr = background.to_colors_array()`."
-
-#: ../../source/processing/10_image_processing.md:19
-msgid "Wenn wir z.B. dieses minimale Programm schreiben:"
-msgstr "For example, if we write this minimal program:"
+#: ../../source/processing/10_image_processing.md:28
+msgid "The result is a nested, two-dimensional array:"
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:30
-msgid ", dann bearbeiten wir im folgenden den Standard-Hintergrund:"
-msgstr ", then we will edit the default background as follows:"
+msgid ""
+"Each innermost list represents a 3-tuple of color values, e.g., \\[150, "
+"150, 150], describing the red, green, and blue components. Each component"
+" ranges from 0 to 255."
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:32
-msgid "![grey](../_images/grey_bg.png)"
-msgstr "![grey](../_images/grey_bg.png)"
-
-#: ../../source/processing/10_image_processing.md:32
-msgid "grey"
-msgstr "grey"
+msgid "The image array consists of:"
+msgstr ""
 
 #: ../../source/processing/10_image_processing.md:34
-msgid "Du erhälst ein verschachteltes, zweidimensionales Array, das folgendermaßen aussieht:"
-msgstr "You receive a nested, two-dimensional array that looks like this:"
-
-#: ../../source/processing/10_image_processing.md:88
-msgid "Die innerste Liste steht jeweils für ein 3-Tupel an Farben. [150, 150, 150]."
-msgstr "The innermost list represents a 3-tuple of colors. [150, 150, 150]."
-
-#: ../../source/processing/10_image_processing.md:90
-msgid ""
-"Diese beschreiben jeweils den rot, grün und blau-Anteil des jeweiligen Pixels. Jede Farbe wird durch \"Mischen\" dieser "
-"3 Grundfarben erzeugt:"
+msgid "A list of columns"
 msgstr ""
-"These each describe the red, green, and blue components of the respective pixel. Each color is created by \"mixing\" "
-"these 3 primary colors:"
 
-#: ../../source/processing/10_image_processing.md:92
-msgid "![rgb](../_images/processing/rgb.png)"
-msgstr "![rgb](../_images/processing/rgb.png)"
-
-#: ../../source/processing/10_image_processing.md:92
-msgid "rgb"
-msgstr "rgb"
-
-#: ../../source/processing/10_image_processing.md:94
-msgid "Der Minimalwert für jede Farbe ist 0, der Maximalwert ist 255."
-msgstr "The minimum value for each color is 0, the maximum value is 255."
-
-#: ../../source/processing/10_image_processing.md:96
-msgid "Das Bild-Array besteht:"
-msgstr "The image array consists:"
-
-#: ../../source/processing/10_image_processing.md:98
-msgid "Aus einer Liste von Spalten"
-msgstr "From a list of columns"
-
-#: ../../source/processing/10_image_processing.md:99
-msgid "und jede dieser Spalten enthält für jede Zeile einen Farbwert (der selbst wiederrum eine Liste mit 3 Werten ist)"
-msgstr "and each of these columns contains a color value for each row (which in turn is a list with 3 values)"
-
-#: ../../source/processing/10_image_processing.md:101
-msgid "![array](../_images/array1.png)"
-msgstr "![array](../_images/array1.png)"
-
-#: ../../source/processing/10_image_processing.md:101
-#: ../../source/processing/10_image_processing.md:122
-#: ../../source/processing/10_image_processing.md:190
-#: ../../source/processing/10_image_processing.md:215
-#: ../../source/processing/10_image_processing.md:233
-#: ../../source/processing/10_image_processing.md:252
-#: ../../source/processing/10_image_processing.md:262
-#: ../../source/processing/10_image_processing.md:280
-#: ../../source/processing/10_image_processing.md:302
-#: ../../source/processing/10_image_processing.md:327
-msgid "array"
-msgstr "array"
-
-#: ../../source/processing/10_image_processing.md:103
-msgid "Verändern des Hintergrunds"
-msgstr "Changing the background"
-
-#: ../../source/processing/10_image_processing.md:105
-msgid "Man kann über dieses Array folgendermaßen iterieren:"
-msgstr "You can iterate over this array as follows:"
-
-#: ../../source/processing/10_image_processing.md:119
-msgid ""
-"Die Zählervariable x iteriert über die Spalten und wählt jeweils eine Spalte aus.  Über jede ausgewählte Spalte wird "
-"nun mit der Zählervariablen y iteriert:"
+#: ../../source/processing/10_image_processing.md:35
+msgid "Each column contains a row for each pixel with a color value"
 msgstr ""
-"The counter variable x iterates over the columns and selects one column at a time. The counter variable y then iterates "
-"over each selected column: "
 
-#: ../../source/processing/10_image_processing.md:122
-msgid "![array](../_images/array2.png)"
-msgstr "![array](../_images/array2.png)"
-
-#: ../../source/processing/10_image_processing.md:124
-msgid ""
-"Mit der Anweisung `arr[i][j][0] = 0` wird jeweils die erste Farbe, also der rot-Anteil auf 0 gesetzt. Das Array sieht "
-"folgendermaßen aus:"
+#: ../../source/processing/10_image_processing.md:37
+msgid "Modifying the Background"
 msgstr ""
-"With the instruction `arr[i][j][0] = 0`, the first color, i.e., the red component, is set to 0. The array looks as "
-"follows:"
 
-#: ../../source/processing/10_image_processing.md:155
-msgid ""
-"Dieses Array können wir nun wieder mit dem Befehl `background.from_array(arr)` als Hintergrund laden, so sieht das "
-"vollständige Programm aus:"
-msgstr ""
-"We can now load this array again as a background with the command `background.from_array(arr)`, this is what the "
-"complete program looks like:"
-
-#: ../../source/processing/10_image_processing.md:169
-msgid "...und so sieht das Ergebnis aus. Die Farbe Grau verliert ihre rot-Anteile und wird dadurch grün-bläulich:"
-msgstr "...and this is what the result looks like. The color gray loses its red components and thus becomes greenish-blue: "
-
-#: ../../source/processing/10_image_processing.md:171
-msgid "![green-blue](../_images/bg_greenblue.png)"
-msgstr "![green-blue](../_images/bg_greenblue.png)"
-
-#: ../../source/processing/10_image_processing.md:171
-msgid "green-blue"
-msgstr "green-blue"
-
-#: ../../source/processing/10_image_processing.md:173
-msgid ""
-"Hier haben wir einfach jedem Bildpunkt den rot-Wert 0 zugewiesen. Wir können aber auch jedem Bildpunkt einen Wert "
-"zwischen 0 und 255 zuweisen."
-msgstr ""
-"Here we have simply assigned the red value 0 to each pixel. However, we can also assign each pixel a value between 0 "
-"and 255."
-
-#: ../../source/processing/10_image_processing.md:175
-msgid "Man kann auch anders über diese Liste iterieren und z.B. nur jede zweite Zeile färben:"
-msgstr "You can also iterate over this list differently and, for example, color only every second line:"
-
-#: ../../source/processing/10_image_processing.md:190
-msgid "![array](../_images/stripes1.png)"
-msgstr "![array](../_images/stripes1.png)"
-
-#: ../../source/processing/10_image_processing.md:192
-msgid ""
-"Genauso ist es möglich, den Wert Abhängig von der Zählervariablen i zu verwenden - Auf diese Weise kann man "
-"Farbübergänge erzeugen, z.B. so :"
-msgstr ""
-"It is also possible to use the value depending on the counter variable i - In this way, color transitions can be "
-"created, for example, like this :"
-
-#: ../../source/processing/10_image_processing.md:209
-msgid ""
-"Mit zunehmenden x-Wert steigt der x-Wert an. (x+1) / world.width ergibt einen Wert zwischen 0 und 1.  Multipliziert man "
-"diesen mit 255 erhält man einen Wert zwischen 0 und 255. Ist ein Wert ganz links, ist sein rot-Wert minimal. Ist es "
-"ganz rechts,  ist der rot-Wert maximal."
-msgstr ""
-"As the x-value increases, the x-value rises. (x+1) / world.width results in a value between 0 and 1. Multiplying this "
-"by 255 gives a value between 0 and 255. If a value is all the way to the left, its red value is minimal. If it is all "
-"the way to the right, the red value is maximal."
-
-#: ../../source/processing/10_image_processing.md:213
-msgid "Man erhält folgenden Farbübergang."
-msgstr "You get the following color gradient."
-
-#: ../../source/processing/10_image_processing.md:215
-msgid "![array](../_images/gradient1.png)"
-msgstr "![array](../_images/gradient1.png)"
-
-#: ../../source/processing/10_image_processing.md:217
-msgid "Dies kann man auch mit der y-Variable machen, und das Programm wie folgt erweitern:"
-msgstr "This can also be done with the y-variable, and the program can be extended as follows:"
-
-#: ../../source/processing/10_image_processing.md:231
-msgid "Oben ist der grün-Wert minimal, unten ist er maximal:"
-msgstr "At the top, the green value is minimal; at the bottom, it is maximal:"
-
-#: ../../source/processing/10_image_processing.md:233
-msgid "![array](../_images/gradient2.png)"
-msgstr "![array](../_images/gradient2.png)"
-
-#: ../../source/processing/10_image_processing.md:235
-msgid "Man kann dies nun zusammensetzen:"
-msgstr "One can now put this together:"
-
-#: ../../source/processing/10_image_processing.md:250
-msgid "Man erhält diesen Farbübergang:"
-msgstr "You get this color gradient:"
-
-#: ../../source/processing/10_image_processing.md:252
-msgid "![array](../_images/gradient3.png)"
-msgstr "![array](../_images/gradient3.png)"
-
-#: ../../source/processing/10_image_processing.md:256
-msgid ""
-"Bisher haben wir nun einen einfarbigen Hintergrund bearbeitet, aber genau dies geht natürlich auch mit einem Bild als "
-"Hintergrund."
-msgstr "So far, we have edited a solid color background, but of course, this can also be done with an image as the background."
-
-#: ../../source/processing/10_image_processing.md:258
-msgid "Auf diese Weise können wir verschiedene Filter über das Bild legen."
-msgstr "This way we can apply different filters over the image."
-
-#: ../../source/processing/10_image_processing.md:260
-msgid "Wir laden z.B. die Sonnenblume von oben als Hintergrundbild:"
-msgstr "We load, for example, the sunflower from above as a background image:"
-
-#: ../../source/processing/10_image_processing.md:262
-msgid "![array](../_images/sunflower1.png)"
-msgstr "![array](../_images/sunflower1.png)"
-
-#: ../../source/processing/10_image_processing.md:277
-msgid ""
-"Da die rot-Werte aus dem Bild entfernt werden, erhält das Bild einen gründlichen Farbton. Wir haben hier also einen "
-"ersten Farbfilter geschrieben. So sieht das Ergebnis aus:"
-msgstr ""
-"As the red values are removed from the image, the image receives a thorough hue. So we have written a first color "
-"filter here. This is what the result looks like:"
-
-#: ../../source/processing/10_image_processing.md:280
-msgid "![array](../_images/sunflower2.png)"
-msgstr "![array](../_images/sunflower2.png)"
-
-#: ../../source/processing/10_image_processing.md:282
-msgid ""
-"Als nächstes manipulieren wir die Helligkeit. Dazu können wir sowohl den rot, grün als blau-Wert mit einer Konstante "
-"multiplizieren."
-msgstr "Next, we manipulate the brightness. To do this, we can multiply the red, green, and blue values by a constant. "
-
-#: ../../source/processing/10_image_processing.md:300
-msgid "Der erste Versuch sieht allerdings so aus!"
-msgstr "The first attempt looks like this, though!"
-
-#: ../../source/processing/10_image_processing.md:302
-msgid "![array](../_images/sunflower3.png)"
-msgstr "![array](../_images/sunflower3.png)"
-
-#: ../../source/processing/10_image_processing.md:304
-msgid "Wie ist dies passiert?"
-msgstr "How did this happen?"
-
-#: ../../source/processing/10_image_processing.md:306
-msgid ""
-"Jeder Farbton hat einen Wert zwischen 0 und 255, beim Multiplizieren wurden allerdings einige unserer Werte größer als "
-"255 und sind daher \"übergelaufen\". Du erkennst dies an besonders dunklen Bereichen, die eigentlich hell sein sollten."
-msgstr ""
-"Each color shade has a value between 0 and 255, but when multiplying, some of our values became greater than 255 and "
-"thus \"overflowed\". You can recognize this by particularly dark areas that should actually be bright."
-
-#: ../../source/processing/10_image_processing.md:309
-msgid "Wir müssen also sicherstellen, dass das Ergebnis kleiner als 255 ist, z.B. so:"
-msgstr "We must therefore ensure that the result is less than 255, for example like this:"
-
-#: ../../source/processing/10_image_processing.md:327
-msgid "![array](../_images/sunflower4.png)"
-msgstr "![array](../_images/sunflower4.png)"
-
-#: ../../source/processing/10_image_processing.md:329
-msgid "Bildbearbeitung II (mit Funktionen)"
+#: ../../source/processing/10_image_processing.md:160
+#, fuzzy
+msgid "Image Processing II (with Functions)"
 msgstr "Image Editing II (with Functions)"
 
-#: ../../source/processing/10_image_processing.md:331
-msgid "Helligkeit"
-msgstr "Brightness"
-
-#: ../../source/processing/10_image_processing.md:333
-msgid ""
-"Oft benötigen wir die Helligkeit eines Pixels. Die \"einfachste Methode dies zu berechnen ist den Durchschnitt der r,g "
-"und b-Werte zu berechnen:"
+#: ../../source/processing/10_image_processing.md:162
+msgid "Brightness"
 msgstr ""
-"Often we need the brightness of a pixel. The simplest method to calculate this is to compute the average of the r, g, "
-"and b values:"
 
-#: ../../source/processing/10_image_processing.md:351
-msgid ""
-"In der Funktion brightness müssen die Werte r, g und b zunächst umgewandelt werden: Es handelt sich um `uint8`-Werte, "
-"so dass das Ergebnis niemals größer als 255 werden darf (Ansonsten ensteht ein \"Overflow\"). Deshalb müssen die "
-"Variablen in den Datentyp `int` umgewandelt werden, damit das Ergebnis der Addition auch ein `int`-Wert und damit "
-"beliebig groß ist."
+#: ../../source/processing/10_image_processing.md:198
+msgid "Edge Detection"
 msgstr ""
-"In the brightness function, the values r, g, and b must first be converted: They are `uint8` values, so the result must "
-"never exceed 255 (otherwise an \"overflow\" occurs). Therefore, the variables must be converted to the `int` data type "
-"so that the result of the addition is also an `int` value and can be arbitrarily large."
 
-#: ../../source/processing/10_image_processing.md:354
-msgid "Dies können wir nutzen, um jeden Pixel grau zu färben, abhängig von seiner Helligkeit:"
-msgstr "This can be used to color each pixel gray, depending on its brightness:"
+#~ msgid "Bildbearbeitung"
+#~ msgstr "Image editing"
 
-#: ../../source/processing/10_image_processing.md:375
-msgid "![sunflower grey](../_images/sunflower5grey.png)"
-msgstr "![sunflower grey](../_images/sunflower5grey.png)"
+#~ msgid "Was sind Bilder"
+#~ msgstr "What are pictures"
 
-#: ../../source/processing/10_image_processing.md:375
-#: ../../source/processing/10_image_processing.md:505
-#: ../../source/processing/10_image_processing.md:519
-msgid "sunflower grey"
-msgstr "sunflower grey"
+#~ msgid ""
+#~ "Bilder bestehen aus winzig kleinen "
+#~ "Pixeln, die alle eine bestimmte Farbe"
+#~ " haben:"
+#~ msgstr "Images consist of tiny pixels, each having a specific color:"
 
-#: ../../source/processing/10_image_processing.md:377
-msgid "Farbunterschied und wahrgenommener Farbunterschied"
-msgstr "Color difference and perceived color difference"
+#~ msgid "![sunflower](../_images/sunflower.png)"
+#~ msgstr "![sunflower](../_images/sunflower.png)"
 
-#: ../../source/processing/10_image_processing.md:379
-msgid "Beim Arbeiten mit Bildern und Tönen ist es wichtig zu wissen, wie wir Menschen diese wahrnehmen."
-msgstr "When working with images and sounds, it is important to know how we humans perceive them."
+#~ msgid "sunflower"
+#~ msgstr "sunflower"
 
-#: ../../source/processing/10_image_processing.md:381
-msgid ""
-"Die *wahrgenommene* Helligkeit entspricht nicht der hier berechneten Helligkeit. Für die folgenden Zwecke ist die hier "
-"verwendete Form zur Berechnung der Helligkeit aber ausreichend."
-msgstr ""
-"The *perceived* brightness does not match the brightness calculated here. However, for the following purposes, the form "
-"used here to calculate brightness is sufficient."
+#~ msgid ""
+#~ "Bildbearbeitung besteht darin, diese Pixel "
+#~ "nach bestimmten Kriterien zu verändern "
+#~ "und zu manipulieren."
+#~ msgstr ""
+#~ "Image editing involves altering and "
+#~ "manipulating these pixels according to "
+#~ "specific criteria."
 
-#: ../../source/processing/10_image_processing.md:383
-msgid "Kantenerkennung"
-msgstr "Edge detection"
+#~ msgid ""
+#~ "Dazu benötigen wir `Arrays` die eine "
+#~ "spezielle Form von Listen sind (Arrays"
+#~ " haben begrenze Größen)."
+#~ msgstr ""
+#~ "For this, we need `arrays`, which "
+#~ "are a special form of lists "
+#~ "(arrays have limited sizes)."
 
-#: ../../source/processing/10_image_processing.md:385
-msgid ""
-"Eine wichtige Funktion in der Bildbearbeitung ist das Erkennen von Kanten. Auch in der künstlichen Intelligenz ist dies "
-"wichtig, weil Kantenerkennung ein erster Schritt ist, um Objekte in einem Bild zu erkennen."
-msgstr ""
-"An important function in image editing is edge detection. This is also important in artificial intelligence because "
-"edge detection is a first step in recognizing objects in an image."
+#~ msgid "Laden des Hintergrunds"
+#~ msgstr "Loading background"
 
-#: ../../source/processing/10_image_processing.md:388
-msgid "Wie funktioniert Kantenerkennung?"
-msgstr "How does edge detection work?"
+#~ msgid ""
+#~ "Im miniworlds können wir den "
+#~ "`Hintergrund`  mit der Funktion  `arr ="
+#~ " background.to_colors_array()` laden."
+#~ msgstr ""
+#~ "In miniworlds, we can load the "
+#~ "`background` with the function `arr ="
+#~ " background.to_colors_array()`."
 
-#: ../../source/processing/10_image_processing.md:390
-msgid "Helferfunktionen"
-msgstr "Helper functions"
+#~ msgid "Wenn wir z.B. dieses minimale Programm schreiben:"
+#~ msgstr "For example, if we write this minimal program:"
 
-#: ../../source/processing/10_image_processing.md:392
-msgid "Um uns auf den eigentlichen Algorithmus zu konzentrieren, verwenden wir einige Helfer-Funktionen:"
-msgstr "To focus on the actual algorithm, we use some helper functions:"
+#~ msgid ", dann bearbeiten wir im folgenden den Standard-Hintergrund:"
+#~ msgstr ", then we will edit the default background as follows:"
 
-#: ../../source/processing/10_image_processing.md:394
-msgid "Ist ein Bildpunkt im Bild?:"
-msgstr "Is there a pixel in the image?:"
+#~ msgid "![grey](../_images/grey_bg.png)"
+#~ msgstr "![grey](../_images/grey_bg.png)"
 
-#: ../../source/processing/10_image_processing.md:404
-msgid "Gebe alle Nachbarzellen eines Bildpunktes zurück:"
-msgstr "Return all neighboring cells of a pixel:"
+#~ msgid "grey"
+#~ msgstr "grey"
 
-#: ../../source/processing/10_image_processing.md:416
-msgid ""
-"Wir bereiten das Bild vor. Mit  `arr.copy()`` können wir eine Kopie des Bildes erstellen, in der wir nur die "
-"Helligkeitswerte speichern."
-msgstr ""
-"We are preparing the image. With `arr.copy()`, we can create a copy of the image in which we only store the brightness "
-"values."
+#~ msgid ""
+#~ "Du erhälst ein verschachteltes, "
+#~ "zweidimensionales Array, das folgendermaßen "
+#~ "aussieht:"
+#~ msgstr "You receive a nested, two-dimensional array that looks like this:"
 
-#: ../../source/processing/10_image_processing.md:418
-msgid "Auf diese Weise müssen wir später nicht mit allen drei Farbwerten rechnen."
-msgstr "This way, we don't have to deal with all three color values later."
+#~ msgid ""
+#~ "Die innerste Liste steht jeweils für "
+#~ "ein 3-Tupel an Farben. [150, 150, "
+#~ "150]."
+#~ msgstr "The innermost list represents a 3-tuple of colors. [150, 150, 150]."
 
-#: ../../source/processing/10_image_processing.md:421
-msgid "So sieht das Grundgerüst aus:"
-msgstr "This is what the basic framework looks like:"
+#~ msgid ""
+#~ "Diese beschreiben jeweils den rot, grün"
+#~ " und blau-Anteil des jeweiligen "
+#~ "Pixels. Jede Farbe wird durch "
+#~ "\"Mischen\" dieser 3 Grundfarben erzeugt:"
+#~ msgstr ""
+#~ "These each describe the red, green, "
+#~ "and blue components of the respective"
+#~ " pixel. Each color is created by "
+#~ "\"mixing\" these 3 primary colors:"
 
-#: ../../source/processing/10_image_processing.md:457
-msgid "und jetzt ergänzen wir noch den Algorithmus zur Kantenerkennung:"
-msgstr "and now we add the edge detection algorithm:"
+#~ msgid "![rgb](../_images/processing/rgb.png)"
+#~ msgstr "![rgb](../_images/processing/rgb.png)"
 
-#: ../../source/processing/10_image_processing.md:459
-msgid ""
-"Der Algorithmus funktioniert so: Wir berechnen mit Hilfe der neighbour_cells-Funktion den durchschnittlichen "
-"Helligkeitswert aller Nachbarzellen und färben das Bild entsprechend ein."
-msgstr ""
-"The algorithm works as follows: We calculate the average brightness value of all neighboring cells using the "
-"neighbour_cells function and color the image accordingly."
+#~ msgid "rgb"
+#~ msgstr "rgb"
 
-#: ../../source/processing/10_image_processing.md:505
-msgid "![sunflower grey](../_images/sunflower6black.png)"
-msgstr "![sunflower grey](../_images/sunflower6black.png)"
+#~ msgid "Der Minimalwert für jede Farbe ist 0, der Maximalwert ist 255."
+#~ msgstr "The minimum value for each color is 0, the maximum value is 255."
 
-#: ../../source/processing/10_image_processing.md:507
-msgid ""
-"Die Farben sind noch invertiert, d.h. wir brauchen eine Funktion, die die Farben erneut invertiert, so dass der "
-"schwarze Hintergrund weiß wird und die Kanten statt weiß schwarz werden."
-msgstr ""
-"The colors are still inverted, i.e., we need a function that inverts the colors again so that the black background "
-"becomes white and the edges become black instead of white."
+#~ msgid "Das Bild-Array besteht:"
+#~ msgstr "The image array consists:"
 
-#: ../../source/processing/10_image_processing.md:509
-msgid "Dies geht so:"
-msgstr "This goes like this:"
+#~ msgid "Aus einer Liste von Spalten"
+#~ msgstr "From a list of columns"
 
-#: ../../source/processing/10_image_processing.md:519
-msgid "![sunflower grey](../_images/sunflower8_edge.png)"
-msgstr "![sunflower grey](../_images/sunflower8_edge.png)"
+#~ msgid ""
+#~ "und jede dieser Spalten enthält für "
+#~ "jede Zeile einen Farbwert (der selbst"
+#~ " wiederrum eine Liste mit 3 Werten"
+#~ " ist)"
+#~ msgstr ""
+#~ "and each of these columns contains "
+#~ "a color value for each row (which"
+#~ " in turn is a list with 3 "
+#~ "values)"
 
-#: ../../source/processing/10_image_processing.md:521
-msgid ""
-"Diesen Algorithmus können wir noch auf verschiedene Art verändern verbessern. Eine Möglichkeit ist es, nur Zellen weiß "
-"zu färben, die einen gewissen Schwellenwert überschreiten und alle anderen Zellen schwarz, man könnte auch das Feld der "
-"Nachbarzellen größer gestalten, ..."
-msgstr ""
-"We can still modify and improve this algorithm in various ways. One possibility is to color only the cells white that "
-"exceed a certain threshold and all other cells black; one could also enlarge the field of neighboring cells, ..."
+#~ msgid "![array](../_images/array1.png)"
+#~ msgstr "![array](../_images/array1.png)"
 
-#: ../../source/processing/10_image_processing.md:523
-msgid "Probiere es aus!"
-msgstr "Try it out!"
+#~ msgid "array"
+#~ msgstr "array"
+
+#~ msgid "Verändern des Hintergrunds"
+#~ msgstr "Changing the background"
+
+#~ msgid "Man kann über dieses Array folgendermaßen iterieren:"
+#~ msgstr "You can iterate over this array as follows:"
+
+#~ msgid ""
+#~ "Die Zählervariable x iteriert über die"
+#~ " Spalten und wählt jeweils eine "
+#~ "Spalte aus.  Über jede ausgewählte "
+#~ "Spalte wird nun mit der Zählervariablen"
+#~ " y iteriert:"
+#~ msgstr ""
+#~ "The counter variable x iterates over "
+#~ "the columns and selects one column "
+#~ "at a time. The counter variable y"
+#~ " then iterates over each selected "
+#~ "column: "
+
+#~ msgid "![array](../_images/array2.png)"
+#~ msgstr "![array](../_images/array2.png)"
+
+#~ msgid ""
+#~ "Mit der Anweisung `arr[i][j][0] = 0` "
+#~ "wird jeweils die erste Farbe, also "
+#~ "der rot-Anteil auf 0 gesetzt. Das"
+#~ " Array sieht folgendermaßen aus:"
+#~ msgstr ""
+#~ "With the instruction `arr[i][j][0] = 0`,"
+#~ " the first color, i.e., the red "
+#~ "component, is set to 0. The array"
+#~ " looks as follows:"
+
+#~ msgid ""
+#~ "Dieses Array können wir nun wieder "
+#~ "mit dem Befehl `background.from_array(arr)` "
+#~ "als Hintergrund laden, so sieht das "
+#~ "vollständige Programm aus:"
+#~ msgstr ""
+#~ "We can now load this array again"
+#~ " as a background with the command "
+#~ "`background.from_array(arr)`, this is what the"
+#~ " complete program looks like:"
+
+#~ msgid ""
+#~ "...und so sieht das Ergebnis aus. "
+#~ "Die Farbe Grau verliert ihre rot-"
+#~ "Anteile und wird dadurch grün-bläulich:"
+#~ msgstr ""
+#~ "...and this is what the result "
+#~ "looks like. The color gray loses "
+#~ "its red components and thus becomes "
+#~ "greenish-blue: "
+
+#~ msgid "![green-blue](../_images/bg_greenblue.png)"
+#~ msgstr "![green-blue](../_images/bg_greenblue.png)"
+
+#~ msgid "green-blue"
+#~ msgstr "green-blue"
+
+#~ msgid ""
+#~ "Hier haben wir einfach jedem Bildpunkt"
+#~ " den rot-Wert 0 zugewiesen. Wir "
+#~ "können aber auch jedem Bildpunkt einen"
+#~ " Wert zwischen 0 und 255 zuweisen."
+#~ msgstr ""
+#~ "Here we have simply assigned the "
+#~ "red value 0 to each pixel. "
+#~ "However, we can also assign each "
+#~ "pixel a value between 0 and 255."
+
+#~ msgid ""
+#~ "Man kann auch anders über diese "
+#~ "Liste iterieren und z.B. nur jede "
+#~ "zweite Zeile färben:"
+#~ msgstr ""
+#~ "You can also iterate over this "
+#~ "list differently and, for example, color"
+#~ " only every second line:"
+
+#~ msgid "![array](../_images/stripes1.png)"
+#~ msgstr "![array](../_images/stripes1.png)"
+
+#~ msgid ""
+#~ "Genauso ist es möglich, den Wert "
+#~ "Abhängig von der Zählervariablen i zu"
+#~ " verwenden - Auf diese Weise kann "
+#~ "man Farbübergänge erzeugen, z.B. so :"
+#~ msgstr ""
+#~ "It is also possible to use the "
+#~ "value depending on the counter variable"
+#~ " i - In this way, color "
+#~ "transitions can be created, for example,"
+#~ " like this :"
+
+#~ msgid ""
+#~ "Mit zunehmenden x-Wert steigt der x-Wert"
+#~ " an. (x+1) / world.width ergibt einen"
+#~ " Wert zwischen 0 und 1.  "
+#~ "Multipliziert man diesen mit 255 erhält"
+#~ " man einen Wert zwischen 0 und "
+#~ "255. Ist ein Wert ganz links, ist"
+#~ " sein rot-Wert minimal. Ist es "
+#~ "ganz rechts,  ist der rot-Wert "
+#~ "maximal."
+#~ msgstr ""
+#~ "As the x-value increases, the x-value"
+#~ " rises. (x+1) / world.width results "
+#~ "in a value between 0 and 1. "
+#~ "Multiplying this by 255 gives a "
+#~ "value between 0 and 255. If a "
+#~ "value is all the way to the "
+#~ "left, its red value is minimal. If"
+#~ " it is all the way to the "
+#~ "right, the red value is maximal."
+
+#~ msgid "Man erhält folgenden Farbübergang."
+#~ msgstr "You get the following color gradient."
+
+#~ msgid "![array](../_images/gradient1.png)"
+#~ msgstr "![array](../_images/gradient1.png)"
+
+#~ msgid ""
+#~ "Dies kann man auch mit der "
+#~ "y-Variable machen, und das Programm wie"
+#~ " folgt erweitern:"
+#~ msgstr ""
+#~ "This can also be done with the "
+#~ "y-variable, and the program can be "
+#~ "extended as follows:"
+
+#~ msgid "Oben ist der grün-Wert minimal, unten ist er maximal:"
+#~ msgstr "At the top, the green value is minimal; at the bottom, it is maximal:"
+
+#~ msgid "![array](../_images/gradient2.png)"
+#~ msgstr "![array](../_images/gradient2.png)"
+
+#~ msgid "Man kann dies nun zusammensetzen:"
+#~ msgstr "One can now put this together:"
+
+#~ msgid "Man erhält diesen Farbübergang:"
+#~ msgstr "You get this color gradient:"
+
+#~ msgid "![array](../_images/gradient3.png)"
+#~ msgstr "![array](../_images/gradient3.png)"
+
+#~ msgid ""
+#~ "Bisher haben wir nun einen einfarbigen"
+#~ " Hintergrund bearbeitet, aber genau dies"
+#~ " geht natürlich auch mit einem Bild"
+#~ " als Hintergrund."
+#~ msgstr ""
+#~ "So far, we have edited a solid "
+#~ "color background, but of course, this"
+#~ " can also be done with an image"
+#~ " as the background."
+
+#~ msgid "Auf diese Weise können wir verschiedene Filter über das Bild legen."
+#~ msgstr "This way we can apply different filters over the image."
+
+#~ msgid "Wir laden z.B. die Sonnenblume von oben als Hintergrundbild:"
+#~ msgstr "We load, for example, the sunflower from above as a background image:"
+
+#~ msgid "![array](../_images/sunflower1.png)"
+#~ msgstr "![array](../_images/sunflower1.png)"
+
+#~ msgid ""
+#~ "Da die rot-Werte aus dem Bild "
+#~ "entfernt werden, erhält das Bild einen"
+#~ " gründlichen Farbton. Wir haben hier "
+#~ "also einen ersten Farbfilter geschrieben. "
+#~ "So sieht das Ergebnis aus:"
+#~ msgstr ""
+#~ "As the red values are removed from"
+#~ " the image, the image receives a "
+#~ "thorough hue. So we have written a"
+#~ " first color filter here. This is "
+#~ "what the result looks like:"
+
+#~ msgid "![array](../_images/sunflower2.png)"
+#~ msgstr "![array](../_images/sunflower2.png)"
+
+#~ msgid ""
+#~ "Als nächstes manipulieren wir die "
+#~ "Helligkeit. Dazu können wir sowohl den"
+#~ " rot, grün als blau-Wert mit "
+#~ "einer Konstante multiplizieren."
+#~ msgstr ""
+#~ "Next, we manipulate the brightness. To"
+#~ " do this, we can multiply the "
+#~ "red, green, and blue values by a"
+#~ " constant. "
+
+#~ msgid "Der erste Versuch sieht allerdings so aus!"
+#~ msgstr "The first attempt looks like this, though!"
+
+#~ msgid "![array](../_images/sunflower3.png)"
+#~ msgstr "![array](../_images/sunflower3.png)"
+
+#~ msgid "Wie ist dies passiert?"
+#~ msgstr "How did this happen?"
+
+#~ msgid ""
+#~ "Jeder Farbton hat einen Wert zwischen"
+#~ " 0 und 255, beim Multiplizieren "
+#~ "wurden allerdings einige unserer Werte "
+#~ "größer als 255 und sind daher "
+#~ "\"übergelaufen\". Du erkennst dies an "
+#~ "besonders dunklen Bereichen, die eigentlich"
+#~ " hell sein sollten."
+#~ msgstr ""
+#~ "Each color shade has a value "
+#~ "between 0 and 255, but when "
+#~ "multiplying, some of our values became"
+#~ " greater than 255 and thus "
+#~ "\"overflowed\". You can recognize this "
+#~ "by particularly dark areas that should"
+#~ " actually be bright."
+
+#~ msgid ""
+#~ "Wir müssen also sicherstellen, dass das"
+#~ " Ergebnis kleiner als 255 ist, z.B."
+#~ " so:"
+#~ msgstr ""
+#~ "We must therefore ensure that the "
+#~ "result is less than 255, for "
+#~ "example like this:"
+
+#~ msgid "![array](../_images/sunflower4.png)"
+#~ msgstr "![array](../_images/sunflower4.png)"
+
+#~ msgid "Helligkeit"
+#~ msgstr "Brightness"
+
+#~ msgid ""
+#~ "Oft benötigen wir die Helligkeit eines"
+#~ " Pixels. Die \"einfachste Methode dies "
+#~ "zu berechnen ist den Durchschnitt der"
+#~ " r,g und b-Werte zu berechnen:"
+#~ msgstr ""
+#~ "Often we need the brightness of a"
+#~ " pixel. The simplest method to "
+#~ "calculate this is to compute the "
+#~ "average of the r, g, and b "
+#~ "values:"
+
+#~ msgid ""
+#~ "In der Funktion brightness müssen die"
+#~ " Werte r, g und b zunächst "
+#~ "umgewandelt werden: Es handelt sich um"
+#~ " `uint8`-Werte, so dass das Ergebnis "
+#~ "niemals größer als 255 werden darf "
+#~ "(Ansonsten ensteht ein \"Overflow\"). Deshalb"
+#~ " müssen die Variablen in den Datentyp"
+#~ " `int` umgewandelt werden, damit das "
+#~ "Ergebnis der Addition auch ein "
+#~ "`int`-Wert und damit beliebig groß ist."
+#~ msgstr ""
+#~ "In the brightness function, the values"
+#~ " r, g, and b must first be "
+#~ "converted: They are `uint8` values, so"
+#~ " the result must never exceed 255 "
+#~ "(otherwise an \"overflow\" occurs). Therefore,"
+#~ " the variables must be converted to"
+#~ " the `int` data type so that "
+#~ "the result of the addition is also"
+#~ " an `int` value and can be "
+#~ "arbitrarily large."
+
+#~ msgid ""
+#~ "Dies können wir nutzen, um jeden "
+#~ "Pixel grau zu färben, abhängig von "
+#~ "seiner Helligkeit:"
+#~ msgstr "This can be used to color each pixel gray, depending on its brightness:"
+
+#~ msgid "![sunflower grey](../_images/sunflower5grey.png)"
+#~ msgstr "![sunflower grey](../_images/sunflower5grey.png)"
+
+#~ msgid "sunflower grey"
+#~ msgstr "sunflower grey"
+
+#~ msgid "Farbunterschied und wahrgenommener Farbunterschied"
+#~ msgstr "Color difference and perceived color difference"
+
+#~ msgid ""
+#~ "Beim Arbeiten mit Bildern und Tönen "
+#~ "ist es wichtig zu wissen, wie wir"
+#~ " Menschen diese wahrnehmen."
+#~ msgstr ""
+#~ "When working with images and sounds, "
+#~ "it is important to know how we "
+#~ "humans perceive them."
+
+#~ msgid ""
+#~ "Die *wahrgenommene* Helligkeit entspricht "
+#~ "nicht der hier berechneten Helligkeit. "
+#~ "Für die folgenden Zwecke ist die "
+#~ "hier verwendete Form zur Berechnung der"
+#~ " Helligkeit aber ausreichend."
+#~ msgstr ""
+#~ "The *perceived* brightness does not "
+#~ "match the brightness calculated here. "
+#~ "However, for the following purposes, the"
+#~ " form used here to calculate "
+#~ "brightness is sufficient."
+
+#~ msgid "Kantenerkennung"
+#~ msgstr "Edge detection"
+
+#~ msgid ""
+#~ "Eine wichtige Funktion in der "
+#~ "Bildbearbeitung ist das Erkennen von "
+#~ "Kanten. Auch in der künstlichen "
+#~ "Intelligenz ist dies wichtig, weil "
+#~ "Kantenerkennung ein erster Schritt ist, "
+#~ "um Objekte in einem Bild zu "
+#~ "erkennen."
+#~ msgstr ""
+#~ "An important function in image editing"
+#~ " is edge detection. This is also "
+#~ "important in artificial intelligence because"
+#~ " edge detection is a first step "
+#~ "in recognizing objects in an image."
+
+#~ msgid "Wie funktioniert Kantenerkennung?"
+#~ msgstr "How does edge detection work?"
+
+#~ msgid "Helferfunktionen"
+#~ msgstr "Helper functions"
+
+#~ msgid ""
+#~ "Um uns auf den eigentlichen Algorithmus"
+#~ " zu konzentrieren, verwenden wir einige "
+#~ "Helfer-Funktionen:"
+#~ msgstr "To focus on the actual algorithm, we use some helper functions:"
+
+#~ msgid "Ist ein Bildpunkt im Bild?:"
+#~ msgstr "Is there a pixel in the image?:"
+
+#~ msgid "Gebe alle Nachbarzellen eines Bildpunktes zurück:"
+#~ msgstr "Return all neighboring cells of a pixel:"
+
+#~ msgid ""
+#~ "Wir bereiten das Bild vor. Mit  "
+#~ "`arr.copy()`` können wir eine Kopie des"
+#~ " Bildes erstellen, in der wir nur "
+#~ "die Helligkeitswerte speichern."
+#~ msgstr ""
+#~ "We are preparing the image. With "
+#~ "`arr.copy()`, we can create a copy "
+#~ "of the image in which we only "
+#~ "store the brightness values."
+
+#~ msgid ""
+#~ "Auf diese Weise müssen wir später "
+#~ "nicht mit allen drei Farbwerten rechnen."
+#~ msgstr "This way, we don't have to deal with all three color values later."
+
+#~ msgid "So sieht das Grundgerüst aus:"
+#~ msgstr "This is what the basic framework looks like:"
+
+#~ msgid "und jetzt ergänzen wir noch den Algorithmus zur Kantenerkennung:"
+#~ msgstr "and now we add the edge detection algorithm:"
+
+#~ msgid ""
+#~ "Der Algorithmus funktioniert so: Wir "
+#~ "berechnen mit Hilfe der neighbour_cells-"
+#~ "Funktion den durchschnittlichen Helligkeitswert "
+#~ "aller Nachbarzellen und färben das Bild"
+#~ " entsprechend ein."
+#~ msgstr ""
+#~ "The algorithm works as follows: We "
+#~ "calculate the average brightness value "
+#~ "of all neighboring cells using the "
+#~ "neighbour_cells function and color the "
+#~ "image accordingly."
+
+#~ msgid "![sunflower grey](../_images/sunflower6black.png)"
+#~ msgstr "![sunflower grey](../_images/sunflower6black.png)"
+
+#~ msgid ""
+#~ "Die Farben sind noch invertiert, d.h."
+#~ " wir brauchen eine Funktion, die die"
+#~ " Farben erneut invertiert, so dass "
+#~ "der schwarze Hintergrund weiß wird und"
+#~ " die Kanten statt weiß schwarz "
+#~ "werden."
+#~ msgstr ""
+#~ "The colors are still inverted, i.e., "
+#~ "we need a function that inverts "
+#~ "the colors again so that the black"
+#~ " background becomes white and the "
+#~ "edges become black instead of white."
+
+#~ msgid "Dies geht so:"
+#~ msgstr "This goes like this:"
+
+#~ msgid "![sunflower grey](../_images/sunflower8_edge.png)"
+#~ msgstr "![sunflower grey](../_images/sunflower8_edge.png)"
+
+#~ msgid ""
+#~ "Diesen Algorithmus können wir noch auf"
+#~ " verschiedene Art verändern verbessern. "
+#~ "Eine Möglichkeit ist es, nur Zellen "
+#~ "weiß zu färben, die einen gewissen "
+#~ "Schwellenwert überschreiten und alle anderen"
+#~ " Zellen schwarz, man könnte auch das"
+#~ " Feld der Nachbarzellen größer gestalten,"
+#~ " ..."
+#~ msgstr ""
+#~ "We can still modify and improve "
+#~ "this algorithm in various ways. One "
+#~ "possibility is to color only the "
+#~ "cells white that exceed a certain "
+#~ "threshold and all other cells black; "
+#~ "one could also enlarge the field "
+#~ "of neighboring cells, ..."
+
+#~ msgid "Probiere es aus!"
+#~ msgstr "Try it out!"
+

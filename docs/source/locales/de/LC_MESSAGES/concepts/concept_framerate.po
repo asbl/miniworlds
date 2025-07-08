@@ -1,64 +1,67 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2023, Andreas Siebel
-# This file is distributed under the same license as the miniworlds package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: miniworlds 2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
-
 #: ../../source/concepts/concept_framerate.md:1
-msgid "Konzept: Framerate"
+msgid "Concept: Framerate"
 msgstr "Konzept: Bildfrequenz"
 
-#: ../../source/concepts/concept_framerate.md:4
+#: ../../source/concepts/concept_framerate.md:3
 msgid ""
-"Man kann einstellen, wie oft `act()` aufgerufen wird, indem man die Attribute `world.fps` und `world.speed` "
-"konfiguriert."
-msgstr "You can set how often `act()` is called by configuring the attributes `world.fps` and `world.speed`."
-
-#: ../../source/concepts/concept_framerate.md:6
-msgid ""
-"`world.fps` definiert die `frame rate`. Analog zu einem Daumenkino, bei dem du mit festgelegter Geschwindigkeit die "
-"Seiten umblätterst,  definiert die Framerate wie oft pro Sekunde das Bild neu gezeichnet wird. `world.fps` hat den "
-"Standardwert 60, d.h. es werden 60 Bilder pro Sekunde angezeigt."
+"You can configure how often the `act()` method is called by adjusting the"
+" attributes `world.fps` and `world.speed`."
 msgstr ""
-"`world.fps` defines the `frame rate`. Similar to a flipbook, where you turn the pages at a set speed, the frame rate "
-"defines how often the image is redrawn per second. `world.fps` has a default value of 60, meaning 60 frames are "
-"displayed per second."
+"Du kannst einstellen, wie oft die Methode `act()` aufgerufen wird, indem du die "
+"Attribute `world.fps` und `world.speed` anpasst."
 
-#: ../../source/concepts/concept_framerate.md:10
-msgid "Im Attribut `world.frame` wird der aktuelle frame gespeichert. Die Frames seit Programmstart werden hochgezählt."
-msgstr "Im Attribut `world.frame` wird der aktuelle Frame gespeichert. Die Frames seit Programmstart werden hochgezählt."
+#: ../../source/concepts/concept_framerate.md:5
+msgid ""
+"`world.fps` defines the **frame rate**. Like a flipbook where pages are "
+"turned at a fixed speed, the frame rate defines **how many times per "
+"second the screen is redrawn**. The default value is `60`, which means "
+"**60 frames per second**."
+msgstr ""
+"`world.fps` definiert die **Bildfrequenz**. Wie bei einem Daumenkino, bei dem die Seiten "
+"in fester Geschwindigkeit umgeblättert werden, legt die Framerate fest, "
+"**wie oft pro Sekunde der Bildschirm neu gezeichnet wird**. Der Standardwert ist `60`, "
+"was **60 Bilder pro Sekunde** bedeutet."
+
+#: ../../source/concepts/concept_framerate.md:9
+msgid ""
+"`world.frame` stores the **current frame count**. It increases "
+"continuously from the start of the program."
+msgstr ""
+"`world.frame` speichert die **aktuelle Frame-Zahl**. Sie wird vom Start des Programms an "
+"kontinuierlich hochgezählt."
 
 #: ../../source/concepts/concept_framerate.md:12
 msgid ""
-"`world.speed` definiert wie oft die Programmlogik (z.B. act) pro Sekunde aufgerufen wird.  Ein Wert von 60 bedeutet, "
-"dass die act()-Methode jeden 60. Frame aufgerufen wird."
+"`world.speed` defines how often the **game logic** (e.g., `act`) is "
+"called per second. A value of `3` means the `act()` function is called "
+"**every third frame**."
 msgstr ""
-"`world.speed` defines how often the program logic (e.g., act) is called per second. A value of 60 means that the act() "
-"method is called every 60th frame."
+"`world.speed` legt fest, wie oft die **Spiellogik** (z. B. `act`) pro Sekunde aufgerufen wird. "
+"Ein Wert von `3` bedeutet, dass die Funktion `act()` **alle drei Frames** aufgerufen wird."
 
-#: ../../source/concepts/concept_framerate.md:34
-msgid "Das Programm oben hat die Ausgabe:"
-msgstr "The program above has the output:"
+#: ../../source/concepts/concept_framerate.md:17
+msgid "Example"
+msgstr "Beispiel"
 
-#: ../../source/concepts/concept_framerate.md:44
+#: ../../source/concepts/concept_framerate.md:39
+msgid "Output:"
+msgstr "Ausgabe:"
+
+#: ../../source/concepts/concept_framerate.md:49
+msgid "Explanation:"
+msgstr "Erklärung:"
+
+#: ../../source/concepts/concept_framerate.md:51
+msgid "The program runs **1 frame per second**."
+msgstr "Das Programm läuft mit **1 Bild pro Sekunde**."
+
+#: ../../source/concepts/concept_framerate.md:52
 msgid ""
-"Es wird sehr langsam hochgezählt, weil genau ein Frame pro Sekunde abgespielt wird und jeden 3. Frame (also alle 3 "
-"Sekunden) die Funktion `act()` aufgerufen wird."
+"The `act()` method is called **every 3rd frame**, so it is called **every"
+" 3 seconds**."
 msgstr ""
-"It is counting up very slowly because exactly one frame per second is played, and every 3rd frame (i.e., every 3 "
-"seconds) the function `act()` is called."
+"Die Methode `act()` wird **alle 3 Frames** aufgerufen, also **alle 3 Sekunden**."
+
+#: ../../source/concepts/concept_framerate.md:53
+msgid "This results in a slow and steady frame count being printed."
+msgstr "Dadurch wird die Frame-Zahl langsam und gleichmäßig ausgegeben."

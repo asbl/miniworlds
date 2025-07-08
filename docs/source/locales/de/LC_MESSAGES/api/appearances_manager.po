@@ -1,0 +1,491 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-08 13:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/appearances_manager.md:1
+msgid "Appearance"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md:3
+msgid ""
+"**AppearanceManager** is the parent-class of **BackgroundManager** and "
+"**CostumeManager**"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md:5
+msgid "These classes manage all appearances of an actor or world."
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Public Data Attributes:"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+msgid ""
+":py:obj:`image "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.image>`\\"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+msgid ""
+":py:obj:`orientation "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.orientation>`\\"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+msgid ""
+":py:obj:`animation_speed "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.animation_speed>`\\"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+msgid ""
+":py:obj:`border "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.border>`\\"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Public Methods:"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__init__>`\\"
+" \\(parent\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`add_new_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance>`\\"
+" \\(source\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance:1
+#: of
+msgid "Adds a new Appearance (costume or background) to manager."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_new_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance>`\\"
+" \\(source\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`add_new_appearances "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearances>`\\"
+" \\(sources\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`add_new_appearance_from_list "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance_from_list>`\\"
+" \\(sources\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`create_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance:1
+#: of
+msgid "Returns a new appearance (Background instance or Costume instance)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`next_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance:1
+#: of
+msgid "Switches to next appearance"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`length "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.length>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.length:1 of
+msgid "Number of appearance in appearance manager"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`__len__ "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__len__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`get_appearance_at_index "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index>`\\"
+" \\(index\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`find_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance>`\\"
+" \\(appearance\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance:1
+#: of
+msgid "Searches for appearance; returns index of appearance"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_border "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_border>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_animated "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animated>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_animation_speed "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animation_speed>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_upscaled "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_scaled_to_width "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_width>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_scaled_to_height "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`set_scaled "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled>`\\"
+" \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`list "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.list>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.list:1 of
+msgid "Returns all appearances in manager as list."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`__str__ "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__str__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid "Return str(self)."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`remove_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance>`\\"
+" \\(\\[source\\]\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:1
+#: of
+msgid "Removes an appearance (costume or background) from manager"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`reset "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.reset>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`switch_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance>`\\"
+" \\(source\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`animate "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.animate>`\\"
+" \\(speed\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`animate_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance>`\\"
+" \\(appearance\\, speed\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`self_remove "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.self_remove>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.self_remove:1
+#: of
+msgid "Implemented in subclasses"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`__iter__ "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__iter__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`__next__ "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__next__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid ""
+":py:obj:`get_actual_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Private Data Attributes:"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`_abc_impl "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._abc_impl>`\\"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ":py:obj:`_abc_impl <abc.ABC._abc_impl>`\\"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Private Methods:"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_init_display "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._init_display>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_create_appearance_from_source "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._create_appearance_from_source>`\\"
+" \\(source\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_add_default_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_default_appearance>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_add_first_appearance "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_first_appearance>`\\"
+" \\(appearance\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_add_appearance_to_manager "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_appearance_to_manager>`\\"
+" \\(appearance\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_set_appearance_defaults "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._set_appearance_defaults>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_set_all "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._set_all>`\\"
+" \\(attribute\\, value\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid "Sets attribute for all appearance in manager."
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+":py:obj:`_remove_appearance_from_manager "
+"<miniworlds.appearances.appearances_manager.AppearancesManager._remove_appearance_from_manager>`\\"
+" \\(appearance\\)"
+msgstr ""
+
+#: ../../None:10:<autosummary>:1
+msgid ""
+"Removes appearance from manager If self.length == 1, the last costume is "
+"removed and a default appearance will be added."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance:3
+#: of
+msgid "called by ``add_costume`` and ``add_background`` in subclasses."
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance:6
+#: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance_from_list:2
+#: miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance:4
+#: miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance:2
+#: miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance:3
+#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:2
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\``"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearances:2
+#: miniworlds.appearances.appearances_manager.AppearancesManager.self_remove:4
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance:3
+#: miniworlds.appearances.appearances_manager.AppearancesManager.length:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance:5
+#: of
+msgid "Index of found appearance; -1 if appearance was not found."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index:2
+#: of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.length:5 of
+msgid "_description_"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.list:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.list:5 of
+msgid "All appearances in manager as list"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance:5
+#: of
+msgid "the switched appearance"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:3
+#: of
+msgid "Defaults:"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:4
+#: of
+msgid "Removes last costume."
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:6
+#: of
+msgid ""
+"The index of the new appearance or the Appearance which should be removed"
+" Defaults to -1"
+msgstr ""
+

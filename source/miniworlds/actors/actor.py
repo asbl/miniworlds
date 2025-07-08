@@ -735,7 +735,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
             self.position_manager
             and self.world
             and self.world.camera
-            and self.world.camera.is_actor_repainted(self)
+            and self._is_actor_repainted()
             and value == 1
         ):
             self._dirty = 1
@@ -743,6 +743,9 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
             self._dirty = 0
         else:
             pass
+
+    def _is_actor_repainted(self) -> bool:
+        return self.world.frame == 0 or self.world.camera.is_actor_in_view(self)
 
     def turn_left(self, degrees: int = 90) -> int:
         """Turns actor by *degrees* degrees left

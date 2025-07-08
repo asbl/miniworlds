@@ -1,38 +1,66 @@
-# Konzept: Funktionen und Code-Blöcke
+# Concept: Functions and Code Blocks
 
-## Funktionen und Decorators
+## Functions and Decorators
 
-Im letzten Kapitel wurde folgender Code verwendet:
+In the last chapter, we saw code like this:
 
-``` python
+```python
 @world.register
 def on_setup(self):
     world.fps = 1
     world.speed = 3
 ```
 
-* In der zweiten Zeile wird eine Funktion definiert, die bestimmte Anweisungen durchführt (dazu später mehr).
+* In the second line, a **function** is defined that performs specific instructions (we’ll discuss that more below).
 
-* In der ersten Zeile wird diese Funktion mit einem Decorator versehen. Dieser Decorator "heftet" die Funktion an das World an. Immer wenn das System die Funktion `world.on_setup` aufrufen will, wird die von dir definierte Funktion aufgerufen.
-  Auf diese Weise kannst du später Funktionen definieren, die auf beliebige Ereignisse reagieren, z.B. Tastendrücke, ...
+* In the first line, a **decorator** is used. This decorator **attaches** the function to the `world` object.
+  Whenever the system wants to call `world.on_setup`, the function you defined is executed instead.
+  This way, you can define functions that respond to various **events**, like key presses, actor collisions, etc.
 
-## Einrückung und Code-Blöcke
+---
 
-Die dritte und vierte Zeile des Programmcodes oben sind eingerückt. Dies bedeutet, dass bei Aufruf die beiden eingerückten Zeilen aufgerufen werden.
+## Indentation and Code Blocks
 
-Code-Blöcke dienen in Python immer dazu, zu definieren wann eine bestimmte Verzweigung in deinem Programm beginnt und wann sie endet. Alles was gleich weit eingerückt wird gehört zu einem gemeinsamen Code-Block.
+Lines 3 and 4 in the example above are **indented**. This means they **belong to the function** and are executed when it is called.
 
-## Coding-Standards Wie weit sollte eingerückt werden?
+In Python, **indentation** is used to define **code blocks** — that is, when a conditional or function begins and ends.
+All lines with the **same level of indentation** are considered part of the same block.
 
-Die Programmiersprache Python selbst definiert nicht, wie weit ein Code-Block eingerückt werden soll, ob du drei, vier oder fünf Zeichen verwendest ist egal - Entscheidend ist, dass alle Zeilen *gleich weit* eingerückt sind.
+---
 
-Es gibt in Python aber bestimmte Coding-Standards, auf die sich Programmierer geeinigt haben, damit Code immer ähnlich aussieht.
+## Coding Standards — How Much Should You Indent?
 
-So hat man sich darauf geeinigt, dass man Code immer 4 Zeichen einrückt. Du kannst dies für dich natürlich anders handhaben - Spätestens wenn ihr im Team arbeitet, ist es aber hilfreich sich an solche Konventionen zu halten.
+The Python language doesn’t enforce **how many spaces** to use for indentation — whether 3, 4, or 5 spaces — but all lines in a block must be **indented equally**.
 
-In Python sind Funktionen und Konventionen in sogenannten PEPs ("Python Enhancement Proposal) definiert. Style Guides findest du z.B. in [PEP 8](https://www.python.org/dev/peps/pep-0008/).
+However, Python developers have agreed on certain **coding standards** so that code looks consistent across projects.
 
-Neben der Einrückung findest du dort noch viel mehr, z.B. schreibt man `a = a + 3` anstatt `a=a+3`, weil ersteres leichter zu lesen ist. die Programmiersprache zwingt dich nicht dazu, aber so ist der Code für andere Programmierer besser zu lesen.
+* The commonly accepted rule is to indent code using **4 spaces**.
+* While you can use your own style, it is **strongly recommended** to follow this standard, especially when working in teams.
 
-Viele moderne Editoren können dich durch Autoformatierung und Linting darin unterstützen, **sauberen** Code zu schreiben.
+Python’s functions and conventions are documented in official proposals called **PEPs** (Python Enhancement Proposals).
+Style recommendations can be found in [PEP 8](https://www.python.org/dev/peps/pep-0008/).
 
+Besides indentation, it covers many other topics — for example:
+
+```python
+a = a + 3  # Recommended
+```
+
+instead of:
+
+```python
+a=a+3  # Less readable
+```
+
+Although Python doesn’t **enforce** these rules, following them helps make your code easier for others to read.
+
+---
+
+## Helpful Tools
+
+Most modern code editors support:
+
+* **Auto-formatting** (e.g., automatic indentation)
+* **Linting** (checking your code for style issues)
+
+These tools help you write **clean and readable code** more easily.

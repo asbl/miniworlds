@@ -2,73 +2,78 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/03_game_over.md:1
 msgid "Game Over"
 msgstr "Spiel vorbei"
 
 #: ../../source/patterns/03_game_over.md:3
-msgid "Typischerweise passiert bei einem Game-Over-Event folgendes:"
-msgstr "Typically, the following happens during a game-over event:"
+msgid "Typically, the following happens during a game over event:"
+msgstr "Typischerweise passiert bei einem Game-Over-Ereignis Folgendes:"
 
 #: ../../source/patterns/03_game_over.md:5
-msgid "Das Spiel wird angehalten"
-msgstr "The game is paused"
+msgid "The game is paused"
+msgstr "Das Spiel wird angehalten"
 
 #: ../../source/patterns/03_game_over.md:6
-msgid "Ein Text erscheint (ggf. mit einer High-Score)"
-msgstr "A text appears (possibly with a high score)"
+msgid "A text appears (optionally with a high score)"
+msgstr "Ein Text erscheint (ggf. mit einem Highscore)"
 
 #: ../../source/patterns/03_game_over.md:7
-msgid "Es gibt eine Möglichkeit das Spiel neu zu starten."
-msgstr "There is a way to restart the game."
+msgid "There is an option to restart the game"
+msgstr "Es gibt eine Möglichkeit, das Spiel neu zu starten"
 
 #: ../../source/patterns/03_game_over.md:9
 msgid ""
-"Zunächst macht es dazu Sinn eine Methode zu erstellen, die alle Actors erstellt, die beim Start eines Spiels erstellt "
-"werden sollen:"
-msgstr "First, it makes sense to create a method that creates all the actors that should be created at the start of a game:"
+"First, it makes sense to define a method that creates all actors needed "
+"at the start of a game:"
+msgstr ""
+"Zunächst ist es sinnvoll, eine Methode zu definieren, die alle Akteure erstellt, "
+"die beim Start eines Spiels benötigt werden:"
 
 #: ../../source/patterns/03_game_over.md:30
 msgid ""
-"In dieser Methode wird z.B. ein Spieler-Objekt erstellt und auch bereits Events an dieses Spieler-Objekt registriert. "
-"Wenn z.B. ein anderes Actor aufgespürt wird, dann wird die `game_over`-Methode getriggert."
+"This method creates a player object and already registers events to that "
+"player. For example, if another actor is detected, the `game_over` method"
+" is triggered."
 msgstr ""
-"In this method, for example, a player object is created and events are already registered to this player object. If, "
-"for example, another actor is detected, then the `game_over` method is triggered."
+"Diese Methode erstellt ein Spielerobjekt und registriert bereits Ereignisse dafür. "
+"Wenn zum Beispiel ein anderer Akteur erkannt wird, wird die Methode `game_over` ausgelöst."
 
 #: ../../source/patterns/03_game_over.md:33
-msgid "In der `game_over`-Methode wird das World angehalten:"
-msgstr "In der `game_over`-Methode wird die Welt angehalten:"
+msgid "In the `game_over` method, the world is paused:"
+msgstr "In der Methode `game_over` wird die Welt angehalten:"
 
 #: ../../source/patterns/03_game_over.md:43
 msgid ""
-"Global wird überprüft, ob die SPACE-Taste gedrückt wird - Wenn das World angehalten wird, wird die `restart`-Methode "
-"getriggert:"
+"Globally, we check whether the SPACE key is pressed – if the world is "
+"stopped, the `restart` method is triggered:"
 msgstr ""
-"Es wird global überprüft, ob die SPACE-Taste gedrückt wird - Wenn die Welt angehalten wird, wird die `restart`-Methode "
-"ausgelöst:"
+"Global wird überprüft, ob die LEERTASTE gedrückt wird – wenn die Welt angehalten ist, "
+"wird die Methode `restart` ausgelöst:"
 
 #: ../../source/patterns/03_game_over.md:53
-msgid "Die restart-Methode löscht alle Actors, startet das World erneut und ruft `setup` auf"
-msgstr "The restart method deletes all actors, restarts the world, and calls `setup`"
+msgid ""
+"The `restart` method removes all actors, restarts the world, and calls "
+"`setup`:"
+msgstr ""
+"Die Methode `restart` entfernt alle Akteure, startet die Welt neu und ruft `setup` auf:"
 
 #: ../../source/patterns/03_game_over.md:66
-msgid "Insgesamt sieht dies dann so aus:"
-msgstr "Overall sieht dies dann so aus:"
+msgid "Complete example:"
+msgstr "Vollständiges Beispiel:"

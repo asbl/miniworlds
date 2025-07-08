@@ -1,146 +1,142 @@
 # Actors
 
-## Actors: Grundbausteine deiner Welt
+## Actors: Building Blocks of Your World
 
-Ein Actor ist alles, was sich in deiner Welt bewegen oder verändert werden kann. 
-Es könnte ein Charakter sein, den der Spieler steuert, oder ein Objekt wie eine Wand oder ein Hindernis. 
-In Miniworlds ist jeder Actor ein eigenständiges Objekt, das auf der Welt angezeigt wird und mit anderen Objekten 
-interagieren kann.
+An **actor** is anything in your world that can move or be changed.
+It could be a character controlled by the player or an object like a wall or obstacle.
+In Miniworlds, every actor is an independent object that appears in the world and can interact with other objects.
 
-## Einen Actor erstellen
+## Creating an Actor
 
-angen wir damit an, einen Actor in deiner Welt zu platzieren. 
-Zuerst erstellen wir eine einfache Welt mit einem Hintergrund und platzieren einen Actor.
-
-Dies geht so:
+Let’s start by placing an actor in your world.
+We’ll first create a simple world with a background and place an actor in it:
 
 ```python
 import miniworlds
 
-# Erstelle eine Welt mit den Maßen 600x300 Pixel
+# Create a world with dimensions 600x300 pixels
 world = miniworlds.World(600, 300)
 
-# Füge einen Hintergrund hinzu (zum Beispiel ein Grasbild)
+# Add a background (for example, a grass image)
 world.add_background("images/grass.png")
 
-# Erstelle einen Actor
-actor = miniworlds.Actor((100, 40))     # Actor an der Position (0, 0)
+# Create an actor
+actor = miniworlds.Actor((100, 40))  # Actor at position (100, 40)
 
-# Starte die Welt, damit sie angezeigt wird
+# Start the world to display it
 world.run()
 ```
 
 ```{figure} ../_images/tutorial_addactor.png
   :scale: 50 %
-  :alt: Ausgabe
-  
-  Ausgabe
+  :alt: Output
+
+  Output
 ```
 
-### Erklärung:
+### Explanation:
 
-* Wir erstellen einen Actor an der Position x=100, y = 40.
-  Er wird als Lila-Rechteck angezeigt, da er noch über kein Kostüm verfügt.
-* Beachte, dass der *Ursprung* des Koordinatensystems *oben links* liegt.
+* We create an actor at position x=100, y=40.
+  It is shown as a purple rectangle because it doesn’t have a costume yet.
+* Note that the **origin** of the coordinate system is at the **top left**.
+
   ```{figure} ../_images/tutorial_addactor_coord.png
   :scale: 30 %
-  :alt: Das Koordinatensystem
-  
-  Beispiel: Das Koordinatensystem
+  :alt: Coordinate system
+
+  Example: Coordinate system
   ```
-* Die Position (100, 20) bezieht sich auf den **Mittelpunkt** des Actors.
+* The position (100, 20) refers to the **center point** of the actor.
 
-## Kostüme
+## Costumes
 
-Jeder Actor in Miniworlds kann ein Kostüm tragen, das sein äußeres Erscheinungsbild bestimmt. 
+Every actor in Miniworlds can wear a **costume**, which defines its visual appearance.
+A costume is simply an image assigned to the actor to give it a visual identity.
 
-Ein Kostüm ist einfach ein Bild, das du deinem Actor zuweist, um ihm eine visuelle Identität zu geben.
+### Step 1: Prepare Images
 
-### Schritt 1: Bilder vorbereiten
-
-Bevor du einem Actor ein Kostüm hinzufügen kannst, musst du die entsprechenden Bilder in den images-Ordner 
-deines Projekts kopieren. Ein typischer Projektaufbau könnte so aussehen:
+Before you can add a costume to an actor, copy the image files into your project’s `images` folder.
+A typical project structure might look like this:
 
 ```
 project
-│   my_world.py # file with your python code
+│   my_world.py  # file with your Python code
 └───images
-│   │   grass.png
-│   │   knight.png
-│   │   player.png
+    │   grass.png
+    │   knight.png
+    │   player.png
 ```
 
-### Schritt 2: Kostüm hinzufügen
+### Step 2: Add a Costume
 
-Sobald du deine Bilder vorbereitet hast, kannst du mit der Methode `add_costume()` deinem Actor ein Bild als Kostüm zuweisen.
-
-
+Once your images are ready, you can assign a costume to your actor using the `add_costume()` method:
 
 ```python
 from miniworlds import World, Actor
-# Erstelle eine Welt mit den Maßen 600x300
+
+# Create a world with dimensions 600x300
 world = World(600, 300)
 
-# Füge einen Hintergrund hinzu
+# Add a background
 world.add_background("images/grass.png")
 
-# Erstelle den ersten Actor an der Position (100, 20) und füge ein Kostüm hinzu
+# Create an actor at position (100, 20) and add a costume
 actor2 = Actor((100, 20))
-actor2.add_costume("images/knight.png")  # "knight.png" als Kostüm
+actor2.add_costume("images/knight.png")  # "knight.png" as costume
 
-# Starte die Welt, damit die Actors sichtbar sind
+# Start the world so the actors are visible
 world.run()
 ```
 
-#### Ausgabe:
+#### Output:
 
 ```{figure} ../_images/tutorial_firstcostume.png
   :scale: 50 %
-  :alt: Ausgabe
-  
-  Ausgabe
+  :alt: Output
+
+  Output
 ```
 
-#### Erklärung
-Nach dem Ausführen siehst du einen Actor mit dem Kostüm `knight.png`.
+#### Explanation:
 
+After running the program, you’ll see an actor with the costume `knight.png`.
 
-## Bonus: Experimentiere mit eigenen Kostümen!
+## Bonus: Experiment with Your Own Costumes!
 
-Jetzt, da du weißt, wie du Kostüme zuweist, kannst du kreativ werden:
+Now that you know how to assign costumes, you can get creative:
 
-* Erstelle eigene Bilder und speichere sie im images-Ordner.
-* Ändere die Position und das Aussehen deiner Actors.
+* Create your own images and save them in the `images` folder.
+* Change the position and appearance of your actors.
 
-Versuche beispielsweise, einen Actor an einer neuen Position zu erstellen und ihm ein anderes Bild zuzuweisen:
+For example, try creating an actor in a new position and give it a different image:
 
 ```python
-# Füge einen dritten Actor hinzu und gib ihm ein eigenes Kostüm
+# Add a third actor and give it its own costume
 actor3 = Actor((200, 150))
-actor3.add_costume("images/cow.png")  # Kostüm: "cow.png"
+actor3.add_costume("images/cow.png")  # Costume: "cow.png"
 
-# Starte die Welt erneut
+# Start the world again
 world.run()
-``` 
+```
 
-## Zusammenfassung:
+## Summary:
 
-* Actors erhalten ein Kostüm durch die Methode add_costume().
-* Die Bilder müssen im richtigen Ordner gespeichert sein, damit sie gefunden werden.
-* Du kannst beliebig viele Actors mit unterschiedlichen Kostümen in der Welt platzieren und gestalten.
+* Actors get a costume using the `add_costume()` method.
+* The images must be saved in the correct folder to be found.
+* You can place and customize as many actors as you like with different costumes.
 
+\:::{admonition} FAQ
 
-:::{admonition} FAQ
+## FAQ: Common Issues and Solutions
 
-## FAQ: Häufige Probleme und Lösungen
+### My actor is facing the wrong direction. What can I do?
 
-### Mein Actor ist falsch ausgerichtet, was kann ich tun?
+If your actor is pointing in the wrong direction, here are two simple fixes:
 
-Wenn dein Actor in die falsche Richtung zeigt, gibt es zwei einfache Lösungen:
-
-#### Problembeschreibung
+#### Problem Description
 
 #### Problem
+
 ```python
 from miniworlds import World, Actor
 
@@ -155,35 +151,34 @@ world.run()
 
 ```{figure} ../_images/tutorial_wrong_orientation1.png
   :scale: 50 %
-  :alt: Ausrichtung des Actors
-  
-  Die Ausrichtung des Bildes ist nach oben gerichtet. 
-  Miniworlds erwartet aber Bilder, die nach rechts ausgerichtet sind.
+  :alt: Actor orientation
+
+  The image is oriented upwards. 
+  However, Miniworlds expects images to face to the right.
 ```
 
 ```{figure} ../_images/tutorial_wrong_orientation2.png
   :scale: 50 %
-  :alt: Ausrichtung des Actors
-  
-  Daher schaut der Actor im Beispiel in die falsche Richtung
+  :alt: Actor orientation
+
+  So in this example, the actor appears to be facing the wrong direction.
 ```
 
-#### Lösung
+#### Solution
 
-1. **Bild drehen**: Du kannst das Bild in einem Bildbearbeitungsprogramm drehen, 
-  sodass es in die gewünschte Richtung zeigt (normalerweise nach oben).
+1. **Rotate the image**: You can rotate the image using an image editor
+   so that it faces the desired direction (usually rightwards).
 
-2. **Orientierung im Code anpassen**: Alternativ kannst du die Ausrichtung des Kostüms direkt 
-  in Miniworlds ändern. Verwende dazu das Attribut `orientation`, um das Kostüm zu drehen:
+2. **Adjust orientation in code**: Alternatively, you can rotate the costume directly in Miniworlds
+   using the `orientation` attribute:
 
    ```python
-   my_actor.costume.orientation = 90  # Dreht das Kostüm um 90 Grad
+   my_actor.costume.orientation = 90  # Rotates the costume by 90 degrees
    ```
-   
-Du kannst auch andere Werte wie -90 oder 180 verwenden, um die Ausrichtung anzupassen, je nachdem
-wie dein Ursprungsbild ausgerichtet ist.
 
-Das Beispiel oben könnte man wie folgt korrigieren:
+You can also use other values like `-90` or `180` to get the correct orientation, depending on how your image is designed.
+
+The example above can be corrected like this:
 
 ```python
 from miniworlds import World, Actor
@@ -198,19 +193,18 @@ player.costume.orientation = -90
 world.run()
 ```
 
-Erklärung:
+**Explanation**:
 
-* Das Bild ist von der erwarteten Position um -90° nach links gedreht. 
-  Mit dieser Zusatzinformation wird das Bild nun korrekt ausgerichtet.
+* The image was rotated -90° to the left relative to the expected position.
+  This correction makes the actor face the right direction in-game.
 
-### Wie verhindere ich, dass sich das Kostüm mit dem Actor dreht?
+### How do I prevent the costume from rotating with the actor?
 
-Wie verhindere ich, dass sich das Kostüm mit dem Actor dreht?
-
-Falls du möchtest, dass sich das Kostüm nicht dreht, selbst wenn sich der Actor bewegt oder rotiert, kannst du die Rotation des Kostüms deaktivieren. Setze dazu das Attribut is_rotatable auf False:
+If you want the costume to stay fixed and not rotate with the actor’s movement or orientation,
+you can disable costume rotation by setting `is_rotatable` to `False`:
 
 ```python
-my_actor.costume.is_rotatable = False  # Kostüm bleibt fest ausgerichtet
+my_actor.costume.is_rotatable = False  # Keeps costume fixed in one direction
 ```
 
-:::
+\:::

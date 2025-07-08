@@ -1,52 +1,65 @@
-# Bewegung
+# Movement
 
-In diesem Kapitel setzen wir Elemente in Bewegung. Dabei helfen uns auch Variablen.
+In this chapter, we’ll set elements in motion — with the help of variables.
 
-## Einfache Bewegungen
+---
 
-Eine einfache Bewegung kannst du realisieren, indem du bei einem Objekt die Attribute x und y veränderst.
+## Simple Movement
 
-``` python
+You can create a simple movement by changing the `x` and `y` attributes of an object:
+
+```python
 from miniworlds import *
 import random
-world = World(100,100))
-c = Circle((0,50), 20)
+world = World(100, 100)
+
+c = Circle((0, 50), 20)
+
 @world.register
 def act(self):
     c.x = c.x + 1
-    
+
 world.run()
 ```
-Ausgabe:
+
+**Output:**
 
 <img src="../_images/processing/moving.gif" alt="moving" width="260px">
 
-## Der Modulo-Operator
+---
 
-Für sich wiederholende Bewegungen ist der Modulo-Operator besonders hilfreich. 
+## The Modulo Operator
 
-Python kennt 3 Arten von Divisionen:
+The **modulo operator** is especially helpful for creating repeating movements.
 
-13 / 3 liefert das Ergebnis 4.3333333333
-13 // 3 liefert das **ganzzzahlige** Ergebnis 4
-13 % 3 liefert den Rest der Division 13 / 3, also 1 zurück.
+Python supports three types of division:
 
-Das der Rest niemals größer als der Dividend sein kann, kann uns bei Animationen helfen:
+* `13 / 3` gives the result `4.3333…`
+* `13 // 3` gives the **integer** result `4`
+* `13 % 3` returns the **remainder** of the division, in this case `1`
 
-``` python
+Since the remainder is never greater than the divisor, we can use it for looping animations:
+
+```python
 from miniworlds import *
 import random
-world = World(100,100))
-c = Circle((0,50), 20)
+world = World(100, 100)
+
+c = Circle((0, 50), 20)
 x = 0
+
 @world.register
 def act(self):
     global x
     c.x = x % 100
     x = x + 1
+
 world.run()
 ```
 
-Die Variable x zählt immer weiter nach oben, da der Rest der Division von x und 100 niemals größer als 100 werden kann, wandert der Punkt wieder zurück.
+The variable `x` keeps increasing, but `x % 100` always returns a number between 0 and 99.
+This makes the circle loop back after reaching the edge.
+
+**Output:**
 
 <img src="../_images/processing/modulo.gif" alt="moving" width="260px">

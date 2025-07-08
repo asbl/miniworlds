@@ -1,79 +1,79 @@
-# Positionierung und Ausrichtung von Actors
+# Positioning and Orientation of Actors
 
-In diesem Abschnitt lernst du, wie du Actors im Koordinatensystem positionieren und ausrichten kannst.
+In this section, you’ll learn how to position and orient actors within the coordinate system.
 
-### Grundlagen
+### Basics
 
-Zunächst eine kurze Wiederholung der wesentlichen Konzepte:
+First, a quick recap of the core concepts:
 
-* Du kannst einen Actor an einer beliebigen Position erstellen:
+* You can create an actor at any position:
+
   ```python
-  actor = Actor((50, 120))  # erstellt einen Actor an der Position (50, 120)
+  actor = Actor((50, 120))  # creates an actor at position (50, 120)
   ```
-* Das Koordinatensystem hat seinen Ursprung oben links:
+* The coordinate system has its origin at the **top-left corner**:
+
   ```{figure} ../_images/tutorial_addactor_coord.png
   :scale: 30 %
-  :alt: Das Koordinatensystem
+  :alt: The coordinate system
   ```
-* Die Position eines Actors bezieht sich immer auf dessen **Mittelpunkt** (auch Ursprung genannt).
+* The position of an actor always refers to its **center** (also called its origin point).
 
 ---
 
-## Position eines Actors nachträglich ändern
+## Changing an Actor’s Position Later
 
-Du kannst die Position eines Actors auch nach dessen Erstellung anpassen, indem du die Attribute `x`, `y` oder `position?  änderst:
+You can also adjust an actor’s position after it has been created by using the `x`, `y`, or `position` attributes:
 
 ```python
-my_actor.x = 120  # setzt die x-Koordinate auf 120
-my_actor.y = 90   # setzt die y-Koordinate auf 90
-my_actor.position = (120, 90) # setzt die Position auf x=120, y=90
+my_actor.x = 120          # sets the x-coordinate to 120  
+my_actor.y = 90           # sets the y-coordinate to 90  
+my_actor.position = (120, 90)  # sets position to x=120, y=90
 ```
 
 ---
 
-## Ausrichtung des Actors ändern
+## Changing an Actor’s Direction
 
-Die Ausrichtung eines Actors lässt sich über das Attribut `direction` festlegen. D
-ies ermöglicht es, den Actor in eine bestimmte Richtung zu drehen:
+An actor’s orientation can be controlled via the `direction` attribute.
+This allows you to rotate the actor to face a specific direction:
 
-
-In der folgenden Darstellung siehst du, wie der Wert für `Direction` zu interpretieren ist.
+The image below shows how the `direction` values are interpreted:
 
 ```{figure} ../_images/movement.jpg
   :scale: 30 %
-  :alt: Ausrichtung des Actors
+  :alt: Actor orientation
 
-  In der Darstellung siehst du die Bedeutung von `Direction`:
-  * 0 up
-  * 90 right | -90 left
-  * 180 oder - 180 down
+  The meaning of `direction`:
+  * 0 → up  
+  * 90 → right | -90 → left  
+  * 180 or -180 → down
 ```
 
 ---
 
-## Ursprung des Actors ändern
+## Changing the Actor’s Origin
 
-Du kannst den Ursprung (den Punkt, auf den sich die Position des Actors bezieht) ändern. Dies wird durch das Attribut `origin` festgelegt:
+You can change the **origin** (i.e., the point that defines the actor’s position) using the `origin` attribute:
 
 ```python
 a1 = Actor((0, 20))
-a1.origin = "topleft"  # setzt den Ursprung auf die linke obere Ecke
+a1.origin = "topleft"  # sets the origin to the top-left corner
 ```
 
 ```{figure} ../_images/pixel_coordinates.png
   :scale: 30 %
-  :alt: Ausrichtung des Actors
-  
-  (0|20) bezeichnet jetzt die obere linke Koordinate des Actors.
+  :alt: Actor origin
+
+  (0|20) now refers to the top-left corner of the actor.
 ```
 
 ---
 
-Du kannst auch spezifisch das Zentrum oder die linke obere Ecke des Actors festlegen:
+You can also set the center or top-left corner of an actor explicitly:
 
 ```python
 a1 = miniworlds.Actor((0, 20))
-a1.topleft = (20, 30)  # setzt die linke obere Ecke des Actors auf (20, 30)
-a1.center = (20, 30)  # setzt das Zentrum des Actors auf (20, 30)
+a1.topleft = (20, 30)   # sets the actor’s top-left corner to (20, 30)
+a1.center = (20, 30)    # sets the actor’s center to (20, 30)
 ```
-

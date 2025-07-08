@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 16:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/positions_vector.md:1
 msgid "Positions -> Vector"
@@ -33,7 +33,11 @@ msgstr ""
 
 #: miniworlds.positions.vector.Vector:7
 #: miniworlds.positions.vector.Vector.add:11
-#: miniworlds.positions.vector.Vector.multiply:9
+#: miniworlds.positions.vector.Vector.from_actor_direction:4
+#: miniworlds.positions.vector.Vector.length:4
+#: miniworlds.positions.vector.Vector.multiply:7
+#: miniworlds.positions.vector.Vector.neg:4
+#: miniworlds.positions.vector.Vector.normalize:4
 #: miniworlds.positions.vector.Vector.sub:11 of
 msgid "Examples"
 msgstr ""
@@ -224,10 +228,8 @@ msgstr ""
 #: of
 msgid ""
 "product self * other: * returns product, if ``other`` is scalar (return-"
-"type: Vector) :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, "
-"\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\]`"
+"type: Vector) * returns dot-product, if ``other`` is vector (return-type:"
+" float) :param other: a scalar or vector"
 msgstr ""
 
 #: ../../None:29:<autosummary>:1
@@ -295,25 +297,28 @@ msgid "limits length of vector to value"
 msgstr ""
 
 #: ../../source/api/positions_vector.md
-msgid "Rückgabetyp"
+msgid "Return type"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.add:3
 #: miniworlds.positions.vector.Vector.dot:2
 #: miniworlds.positions.vector.Vector.from_actor_and_position:7
+#: miniworlds.positions.vector.Vector.from_actor_direction:34
 #: miniworlds.positions.vector.Vector.from_actor_position:4
 #: miniworlds.positions.vector.Vector.from_actors:7
 #: miniworlds.positions.vector.Vector.from_direction:4
 #: miniworlds.positions.vector.Vector.from_position:7
 #: miniworlds.positions.vector.Vector.from_positions:7
 #: miniworlds.positions.vector.Vector.limit:4
+#: miniworlds.positions.vector.Vector.neg:18
+#: miniworlds.positions.vector.Vector.normalize:13
 #: miniworlds.positions.vector.Vector.rotate:4
 #: miniworlds.positions.vector.Vector.sub:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
 msgstr ""
 
 #: ../../source/api/positions_vector.md
-msgid "Parameter"
+msgid "Parameters"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.add:5
@@ -322,7 +327,7 @@ msgid "other Vector"
 msgstr ""
 
 #: ../../source/api/positions_vector.md
-msgid "Rückgabe"
+msgid "Returns"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.add:8
@@ -335,8 +340,8 @@ msgid "Add two vectors:"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.add:21
-#: miniworlds.positions.vector.Vector.multiply:21
-#: miniworlds.positions.vector.Vector.neg:14
+#: miniworlds.positions.vector.Vector.multiply:19
+#: miniworlds.positions.vector.Vector.neg:12
 #: miniworlds.positions.vector.Vector.sub:21 of
 msgid "Alternative:"
 msgstr ""
@@ -353,15 +358,7 @@ msgstr ""
 msgid "The vector describes is generated from: actor2.center - position"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.from_actor_direction:3
-#: miniworlds.positions.vector.Vector.neg:3
-#: miniworlds.positions.vector.Vector.normalize:3 of
-msgid ""
-"Examples: :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
-msgstr ""
-
-#: miniworlds.positions.vector.Vector.from_actor_direction:7 of
+#: miniworlds.positions.vector.Vector.from_actor_direction:5 of
 msgid "Creates rotating rectangle"
 msgstr ""
 
@@ -369,33 +366,31 @@ msgstr ""
 msgid "The vector describes is generated from: actor2.center - actor1.center"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.length:3 of
-msgid ""
-"Examples: :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
-msgstr ""
-
-#: miniworlds.positions.vector.Vector.length:7 of
+#: miniworlds.positions.vector.Vector.length:5 of
 msgid "Length of vector"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.multiply:5 of
-msgid "returns dot-product, if ``other`` is vector (return-type: float)"
+#: miniworlds.positions.vector.Vector.length:12
+#: miniworlds.positions.vector.Vector.to_direction:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.multiply:6 of
-msgid "a scalar or vector"
-msgstr ""
-
-#: miniworlds.positions.vector.Vector.multiply:10 of
+#: miniworlds.positions.vector.Vector.multiply:8 of
 msgid "Product and dot-product:"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.neg:7 of
+#: miniworlds.positions.vector.Vector.multiply:26 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+"\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\]`"
+msgstr ""
+
+#: miniworlds.positions.vector.Vector.neg:5 of
 msgid "Inverse of vector:"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.normalize:7 of
+#: miniworlds.positions.vector.Vector.normalize:5 of
 msgid "Normalized vector with length 1:"
 msgstr ""
 
@@ -403,7 +398,37 @@ msgstr ""
 msgid "Subtracts two vectors:"
 msgstr ""
 
-#: miniworlds.positions.vector.Vector.to_direction:4 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
-msgstr ""
+#~ msgid ""
+#~ "product self * other: * returns "
+#~ "product, if ``other`` is scalar "
+#~ "(return-type: Vector) :rtype: "
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\"
+#~ " \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+#~ "\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\]`"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Examples: :rtype: "
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Examples: :rtype: "
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+#~ msgstr ""
+
+#~ msgid "returns dot-product, if ``other`` is vector (return-type: float)"
+#~ msgstr ""
+
+#~ msgid "a scalar or vector"
+#~ msgstr ""
+
+#~ msgid "Rückgabetyp"
+#~ msgstr ""
+
+#~ msgid "Parameter"
+#~ msgstr ""
+
+#~ msgid "Rückgabe"
+#~ msgstr ""
 

@@ -8,7 +8,6 @@ class Test103(unittest.TestCase):
         def test_code():
             print("run test...")
             world = TiledWorld()
-            print("---------------> world dimensions", world, world.height, world.width, world.backgrounds_manager.image)
             # Black world
             @world.register
             def setup_environment(self, test):

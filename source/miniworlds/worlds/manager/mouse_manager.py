@@ -1,105 +1,160 @@
 import pygame
-from typing import Optional
+from typing import Optional, Tuple
 
 
 class MouseManager:
-    def __init__(self, world):
-        self.world = world
-        self._mouse_position = None
-        self._prev_mouse_position = None
+    """
+    Manages mouse input for a given world. Provides access to current mouse position,
+    click states, and previous mouse state.
 
-    def _update_positions(self):
+    Usage:
+        >>> world.mouse.get_mouse_position()
+        >>> world.mouse.is_mouse_left_pressed()
+    """
+
+    def __init__(self, world) -> None:
+        """
+        Initialize the MouseManager.
+
+        Args:
+            world: The world instance this mouse belongs to.
+        """
+        self.world = world
+        self._mouse_position: Optional[Tuple[int, int]] = None
+        self._prev_mouse_position: Optional[Tuple[int, int]] = None
+
+    def _update_positions(self) -> None:
+        """
+        Updates the current and previous mouse positions.
+        Should be called once per frame.
+
+        Examples:
+            >>> world.mouse.update()
+        """
         self._prev_mouse_position = self._mouse_position
         self._mouse_position = self.get_mouse_position()
 
-    def get_mouse_position(self):
+    def get_mouse_position(self) -> Optional[Tuple[int, int]]:
+        """
+        Gets the current mouse position if the mouse is over this world.
+
+        Returns:
+            Tuple of (x, y) coordinates or None if mouse is not on this world.
+
+        Examples:
+            >>> pos = world.mouse.get_mouse_position()
+            >>> if pos:
+            ...     print("Mouse over world at", pos)
+        """
         pos = pygame.mouse.get_pos()
         clicked_container = self.world.app.worlds_manager.get_world_by_pixel(pos[0], pos[1])
         if clicked_container == self.world:
             return pos
-        else:
-            return None
+        return None
 
     @property
-    def mouse_position(self):
+    def mouse_position(self) -> Optional[Tuple[int, int]]:
+        """
+        Property version of get_mouse_position()
+
+        Examples:
+            >>> if world.mouse.mouse_position:
+            ...     print("Mouse is on world!")
+        """
         return self.get_mouse_position()
 
     @property
-    def prev_mouse_position(self):
-        return self._prev_mouse_position
-
-    def mouse_left_is_clicked(self):
-        return pygame.mouse.get_pressed()[0]
-
-    def mouse_right_is_clicked(self):
-        return pygame.mouse.get_pressed()[0]
-
-
-    def get_mouse_position(self) -> Optional[tuple]:
+    def prev_mouse_position(self) -> Optional[Tuple[int, int]]:
         """
-        Gets the current mouse_position
-
-        Returns:
-            Returns the mouse position if mouse is on the world. Returns None otherwise
+        Returns the mouse position from the previous frame.
 
         Examples:
-
-            Create circles at current mouse position:
-
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = PixelWorld()
-
-                @world.register
-                def act(self):
-                    c = Circle(world.get_mouse_position(), 40)
-                    c.color = (255,255,255, 100)
-                    c.border = None
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/mousepos.png
-                :width: 200px
-                :alt: Circles at mouse-position
-
-
+            >>> prev = world.mouse.prev_mouse_position
+            >>> if prev:
+            ...     print("Mouse was at:", prev)
         """
-        return self._mouse_position
+        return self._prev_mouse_position
+
+    def mouse_left_is_clicked(self) -> bool:
+        """
+        Returns True if the left mouse button is currently pressed.
+
+        Examples:
+            >>> if world.mouse.mouse_left_is_clicked():
+            ...     print("Left button is down")
+        """
+        return pygame.mouse.get_pressed()[0]
+
+    def mouse_right_is_clicked(self) -> bool:
+        """
+        Returns True if the right mouse button is currently pressed.
+
+        Examples:
+            >>> if world.mouse.mouse_right_is_clicked():
+            ...     print("Right button is down")
+        """
+        return pygame.mouse.get_pressed()[2]
 
     def get_mouse_x(self) -> int:
-        """Gets x-coordinate of mouse-position"""
+        """
+        Returns the x-coordinate of the mouse if over the world, otherwise 0.
+
+        Examples:
+            >>> x = world.mouse.get_mouse_x()
+        """
         if self.mouse_position:
             return self.mouse_position[0]
-        else:
-            return 0
+        return 0
 
     def get_mouse_y(self) -> int:
-        """Gets y-coordinate of mouse-position"""
+        """
+        Returns the y-coordinate of the mouse if over the world, otherwise 0.
+
+        Examples:
+            >>> y = world.mouse.get_mouse_y()
+        """
         if self.mouse_position:
             return self.mouse_position[1]
-        else:
-            return 0
+        return 0
 
-    def get_prev_mouse_position(self):
-        """gets mouse-position of last frame"""
-        return self.mouse_manager.prev_mouse_position
+    def get_prev_mouse_position(self) -> Optional[Tuple[int, int]]:
+        """
+        Returns the mouse position from the last frame (if available).
+
+        Examples:
+            >>> last = world.mouse.get_prev_mouse_position()
+        """
+        return self._prev_mouse_position
 
     def is_mouse_pressed(self) -> bool:
-        """Returns True, if mouse is pressed"""
+        """
+        Returns True if any mouse button (left or right) is currently pressed.
+
+        Examples:
+            >>> if world.mouse.is_mouse_pressed():
+            ...     print("Mouse is down")
+        """
         return (
             self.mouse_left_is_clicked()
-            or self.mouse_left_is_clicked()
+            or self.mouse_right_is_clicked()
         )
 
     def is_mouse_left_pressed(self) -> bool:
-        """Returns True, if mouse left button is pressed"""
+        """
+        Returns True if the left mouse button is pressed.
+
+        Examples:
+            >>> if world.mouse.is_mouse_left_pressed():
+            ...     print("Left click detected")
+        """
         return self.mouse_left_is_clicked()
 
     def is_mouse_right_pressed(self) -> bool:
-        """Returns True, if mouse right button is pressed"""
+        """
+        Returns True if the right mouse button is pressed.
+
+        Examples:
+            >>> if world.mouse.is_mouse_right_pressed():
+            ...     print("Right click detected")
+        """
         return self.mouse_right_is_clicked()

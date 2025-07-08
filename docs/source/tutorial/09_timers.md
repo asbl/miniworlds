@@ -1,21 +1,20 @@
-# Timer
+# Timers
 
-Mit **Timern** kannst du Ereignisse **zeitgesteuert** ausführen. 
+With **timers**, you can execute events **with a delay**.
+This means an action doesn’t happen immediately, but after a specified delay in milliseconds or frames.
 
-Das bedeutet, dass eine Aktion nicht sofort, sondern mit einer Verzögerung von Millisekunden oder Sekunden 
-gestartet wird. 
+Timers are useful, for example, if you want something to happen after a certain amount of time.
 
-Timer sind nützlich, wenn du beispielsweise möchtest, dass eine Aktion erst nach einer bestimmten Zeit stattfindet.
+\:::{note}
+Python’s `time` library offers the function `time.sleep(...)` to create delays.
+However, you should **not** use it here, as it causes global pauses and may lead to unwanted side effects.
+\:::
 
-:::{note}
-Python bietet in der `time`-Bibliothek die Funktion `time.sleep(...)` an, um Verzögerungen zu erzeugen. 
-Diese Methode solltest du jedoch **nicht** verwenden, da sie zu globalen Verzögerungen 
-führt und unerwünschte Seiteneffekte verursachen kann.
-:::
+---
 
-## Einen Timer starten
+## Starting a Timer
 
-Um einen Timer zu starten, kannst du folgendes Beispiel verwenden:
+To start a timer, you can use the following example:
 
 ```python
 from miniworlds import ActionTimer
@@ -23,55 +22,57 @@ from miniworlds import ActionTimer
 ActionTimer(24, player.move)
 ```
 
-### Erklärung
+### Explanation
 
-1. Nach 24 Frames wird der Timer ausgelöst.
-2. Die Methode `player.move` wird dann ausgeführt.
+1. After 24 frames, the timer is triggered.
+2. The method `player.move` is then executed.
 
 ---
 
-## Verschiedene Timer-Typen
+## Different Timer Types
 
-Es gibt verschiedene Timer-Typen, die je nach Anwendungsfall genutzt werden können:
+There are different types of timers, depending on your use case:
 
 ### ActionTimer
 
-Der **ActionTimer** führt nach einer vorgegebenen Zeit eine Methode aus und entfernt sich danach automatisch. 
-Er eignet sich für Aktionen, die einmalig nach einer Verzögerung ausgeführt werden sollen.
+The **ActionTimer** executes a method once after a set amount of time, then removes itself automatically.
+It’s ideal for one-time delayed actions.
 
 ```python
 ActionTimer(24, player.move, None)
 ```
 
-In diesem Beispiel wird die Funktion `move` des Objekts `player` nach 24 Frames einmalig ausgeführt.
+In this example, the `move` function of the `player` object is executed once after 24 frames.
+
+---
 
 ### LoopActionTimer
 
-Der **LoopActionTimer** funktioniert ähnlich wie der ActionTimer, 
-wiederholt jedoch die Aktion in regelmäßigen Abständen. Dieser Timer ist ideal für wiederkehrende Aktionen.
+The **LoopActionTimer** works similarly to the ActionTimer but repeats the action at regular intervals.
+It’s ideal for actions that should occur continuously.
 
 ```python
 LoopActionTimer(24, player.move)
 ```
 
-In diesem Fall wird die Methode `move` des Objekts `player` alle 24 Frames ausgeführt.
+Here, the `move` method of the `player` will be executed every 24 frames.
 
-Um einen LoopActionTimer zu stoppen, kannst du ihn wie folgt entfernen:
+To stop a `LoopActionTimer`, you can unregister it:
 
 ```python
 loopactiontimer = LoopActionTimer(24, player.move)
 ...
-loopactiontimer.unregister()  # Entfernt den LoopActionTimer
+loopactiontimer.unregister()  # Stops the LoopActionTimer
 ```
 
 ---
 
-## Timer mit Events verknüpfen
+## Linking Timers to Events
 
-Ähnlich wie bei Sensoren kannst du Timer so konfigurieren, dass Methoden auf bestimmte Timer-Ereignisse reagieren. 
-Dazu registrierst du Methoden, die bei einem Timer-Ereignis ausgeführt werden sollen.
+Just like with sensors, you can configure timers to trigger methods at specific times.
+To do this, register methods that should be executed on a timer event.
 
-Ein Beispiel für eine solche Methode sieht wie folgt aus:
+Example of a one-time timer event:
 
 ```python
 @timer(frames=24)
@@ -79,9 +80,9 @@ def moving():
     player.move()
 ```
 
-In diesem Fall wird die Methode `moving` nach 24 Frames aufgerufen und führt die Aktion `player.move()` aus.
+In this case, the `moving` function is executed once after 24 frames, triggering `player.move()`.
 
-Um einen **LoopTimer** zu registrieren, der regelmäßig ausgeführt wird, kannst du folgendes Beispiel verwenden:
+To register a **looping timer** that repeats regularly, use:
 
 ```python
 @loop(frames=48)
@@ -90,4 +91,4 @@ def moving():
     player.move(2)
 ```
 
-Hier wird die Methode `moving` alle 48 Frames wiederholt ausgeführt und lässt den Actor sich nach links drehen und bewegen.
+Here, the `moving` method is called every 48 frames, turning the actor left and moving it forward.

@@ -2,134 +2,161 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 08:34+0100\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/02_00_world.md:1
-msgid "Die erste Welt"
+msgid "The First World"
 msgstr "Die erste Welt"
 
 #: ../../source/tutorial/02_00_world.md:3
 msgid ""
-"In diesem Abschnitt werden wir unsere erste \"Welt\" in Miniworlds erstellen. Eine Welt ist der Grundbaustein für "
-"alles,  was du in deiner Anwendung sehen oder steuern möchtest – von einem simplen Spielfeld bis hin zu komplexeren "
-"Welten  wie in Videospielen. Lass uns direkt loslegen:"
+"In this section, we’ll create our first “world” in Miniworlds. A world is"
+" the basic building block for everything you want to see or control in "
+"your application — from a simple game field to more complex worlds like "
+"those in video games. Let’s dive right in:"
 msgstr ""
-"In diesem Abschnitt werden wir unsere erste \"Welt\" in Miniworlds erstellen. Eine Welt ist der Grundbaustein für "
-"alles, was du in deiner Anwendung sehen oder steuern möchtest – von einem simplen Spielfeld bis hin zu komplexeren "
-"Welten wie in Videospielen. Lass uns direkt loslegen:"
+"In diesem Abschnitt erstellen wir unsere erste „Welt“ in Miniworlds. Eine"
+" Welt ist der grundlegende Baustein für alles, was du in deiner Anwendung"
+" sehen oder steuern möchtest – vom einfachen Spielfeld bis hin zu "
+"komplexen Welten wie in Videospielen. Los geht’s:"
 
-#: ../../source/tutorial/02_00_world.md:7
-msgid "Erste Schritte"
+#: ../../source/tutorial/02_00_world.md:5
+msgid "Getting Started"
 msgstr "Erste Schritte"
 
-#: ../../source/tutorial/02_00_world.md:9
-msgid "Um eine Welt zu erstellen, brauchst du nur ein paar Zeilen Code:"
-msgstr "To create a world, you only need a few lines of code:"
+#: ../../source/tutorial/02_00_world.md:7
+msgid "To create a world, you only need a few lines of code:"
+msgstr "Um eine Welt zu erstellen, brauchst du nur ein paar Zeilen Code:"
+
+#: ../../source/tutorial/02_00_world.md:19
+msgid "What happens in this code?"
+msgstr "Was passiert in diesem Code?"
 
 #: ../../source/tutorial/02_00_world.md:21
-msgid "Was passiert in diesem Code?"
-msgstr "What is happening in this code?"
+msgid ""
+"**Import the library**: The first line imports the Miniworlds library, "
+"which provides all the necessary functions."
+msgstr ""
+"**Bibliothek importieren**: Die erste Zeile importiert die Miniworlds-"
+"Bibliothek, die alle notwendigen Funktionen bereitstellt."
+
+#: ../../source/tutorial/02_00_world.md:22
+msgid ""
+"**Create a world**: The method `miniworlds.World(600, 300)` creates a new"
+" world. This defines the world’s size: 600 pixels wide and 300 pixels "
+"tall."
+msgstr ""
+"**Welt erstellen**: Die Methode `miniworlds.World(600, 300)` erstellt "
+"eine neue Welt. Diese legt die Größe der Welt fest: 600 Pixel breit und "
+"300 Pixel hoch."
 
 #: ../../source/tutorial/02_00_world.md:23
 msgid ""
-"Bibliothek importieren: In der ersten Zeile importierst du die miniworlds-Bibliothek, die alle benötigten Funktionen "
-"bereitstellt."
+"**Start the world**: `world.run()` starts the world and displays it on "
+"screen. You can think of this line like pressing “Play” — the world "
+"becomes visible only after this."
 msgstr ""
-"Bibliothek importieren: In der ersten Zeile importierst du die miniworlds-Bibliothek, die alle benötigten Funktionen "
-"bereitstellt."
+"**Welt starten**: `world.run()` startet die Welt und zeigt sie auf dem "
+"Bildschirm an. Du kannst dir diese Zeile wie einen „Play“-Button "
+"vorstellen – erst danach wird die Welt sichtbar."
 
-#: ../../source/tutorial/02_00_world.md:24
-msgid ""
-"Welt erstellen: Die Methode miniworlds.World(600, 300) erstellt eine neue Welt.  Hiermit legst du die Größe der Welt "
-"fest: Sie ist 600 Pixel breit und 300 Pixel hoch."
-msgstr ""
-"Welt erstellen: Die Methode miniworlds.World(600, 300) erstellt eine neue Welt.  Hiermit legst du die Größe der Welt "
-"fest: Sie ist 600 Pixel breit und 300 Pixel hoch."
+#: ../../source/tutorial/02_00_world.md:25
+msgid "Take a look at the following image showing the first step:"
+msgstr "Sieh dir das folgende Bild an, das den ersten Schritt zeigt:"
 
-#: ../../source/tutorial/02_00_world.md:26
-msgid ""
-"Welt starten: world.run() startet die Welt und zeigt sie auf dem Bildschirm an.  Stell dir diese Zeile wie den "
-"\"Play\"-Button vor – erst danach wird deine Welt sichtbar."
+#: ../../source/tutorial/02_00_world.md:27
+msgid "![First miniworlds Example](../_images/01firstworld.png)"
 msgstr ""
-"Starten der Welt: world.run() startet die Welt und zeigt sie auf dem Bildschirm an. Stell dir diese Zeile wie den "
-"\"Play\"-Button vor – erst danach wird deine Welt sichtbar."
+
+#: ../../source/tutorial/02_00_world.md:27
+#: ../../source/tutorial/02_00_world.md:58
+msgid "First miniworlds Example"
+msgstr ""
 
 #: ../../source/tutorial/02_00_world.md:29
-msgid "Schau dir das folgende Bild an, das den ersten Schritt zeigt:"
-msgstr "Look at the following image that shows the first step:"
+msgid "Adding a Background"
+msgstr "Hintergrund hinzufügen"
 
 #: ../../source/tutorial/02_00_world.md:31
-msgid "![First miniworlds Example](../_images/01firstworld.png)"
-msgstr "![Erstes Miniwelten-Beispiel](../_images/01firstworld.png)"
-
-#: ../../source/tutorial/02_00_world.md:31
-#: ../../source/tutorial/02_00_world.md:61
-msgid "First miniworlds Example"
-msgstr "Erstes Miniwelten-Beispiel"
-
-#: ../../source/tutorial/02_00_world.md:33
-msgid "Hintergrund hinzufügen"
-msgstr "Add background"
-
-#: ../../source/tutorial/02_00_world.md:35
 msgid ""
-"Damit die Welt nicht leer aussieht, kannst du ihr ein Bild als Hintergrund hinzufügen.  Dazu brauchst du ein Bild, das "
-"du im images-Ordner deines Projekts speicherst.  Die Ordnerstruktur deines Projekts könnte folgendermaßen aussehen:"
+"To avoid having an empty world, you can add an image as a background. "
+"You’ll need an image saved in the `images` folder of your project. Your "
+"project structure might look like this:"
 msgstr ""
-"To prevent the world from looking empty, you can add an image as a background.  For this, you need an image that you "
-"save in the images folder of your project.  The folder structure of your project might look like this:"
+"Damit die Welt nicht leer wirkt, kannst du ein Bild als Hintergrund "
+"hinzufügen. Dazu benötigst du ein Bild, das im Ordner `images` deines "
+"Projekts gespeichert ist. Die Struktur deines Projekts könnte so "
+"aussehen:"
 
-#: ../../source/tutorial/02_00_world.md:46
+#: ../../source/tutorial/02_00_world.md:42
 msgid ""
-"Nachdem du dein Bild (z.B. grass.png) in den Ordner images gelegt hast,  kannst du es mit der Methode add_background "
-"der Welt hinzufügen:"
+"Once you’ve placed your image (e.g., `grass.png`) in the `images` folder,"
+" you can add it to your world using the `add_background` method:"
 msgstr ""
-"After you have placed your image (e.g. grass.png) in the images folder, you can add it to the world using the "
-"add_background method:"
+"Sobald du dein Bild (z. B. `grass.png`) im Ordner `images` abgelegt hast,"
+" kannst du es mit der Methode `add_background` deiner Welt hinzufügen:"
 
-#: ../../source/tutorial/02_00_world.md:61
+#: ../../source/tutorial/02_00_world.md:58
 msgid "![First miniworlds Example](../_images/pixel_addbackground.png)"
-msgstr "![Erstes Miniworlds-Beispiel](../_images/pixel_addbackground.png)"
+msgstr ""
 
-#: ../../source/tutorial/02_00_world.md:63
-msgid "Was passiert hier?"
+#: ../../source/tutorial/02_00_world.md:60
+msgid "What’s happening here?"
 msgstr "Was passiert hier?"
 
-#: ../../source/tutorial/02_00_world.md:65
+#: ../../source/tutorial/02_00_world.md:62
 msgid ""
-"Die Methode add_background(\"images/grass.png\") lädt das Bild grass.png aus dem angegebenen Pfad und  setzt es als "
-"Hintergrund für deine Welt."
+"The method `add_background(\"images/grass.png\")` loads the image "
+"`grass.png` from the specified path and sets it as the background for "
+"your world."
 msgstr ""
-"The method add_background(\"images/grass.png\") loads the image grass.png from the specified path and sets it as the "
-"background for your world."
+"Die Methode `add_background(\"images/grass.png\")` lädt das Bild "
+"`grass.png` aus dem angegebenen Pfad und setzt es als Hintergrund deiner "
+"Welt."
+
+#: ../../source/tutorial/02_00_world.md:65
+#, python-brace-format
+msgid "\\:::{note}"
+msgstr "\\:::{notiz}"
+
+#: ../../source/tutorial/02_00_world.md:67
+msgid ""
+"There are different types of `Worlds` in Miniworlds. The `TiledWorld` is "
+"specifically designed for games using tiled layouts, such as top-down "
+"RPGs."
+msgstr ""
+"Es gibt verschiedene Typen von `Welten` in Miniworlds. Die `TiledWorld` "
+"ist speziell für Spiele mit gekacheltem Layout gedacht, wie z. B. Top-"
+"Down-RPGs."
+
+#: ../../source/tutorial/02_00_world.md:70
+msgid "\\:::"
+msgstr "\\:::"
 
 #: ../../source/tutorial/02_00_world.md:72
+#, python-brace-format
 msgid ""
-"Es gibt verschiedene Arten von `Worlds` in miniworlds.  Die `TiledWorld` ist speziell für Spiele auf gekachelten "
-"Flächen gedacht, z.B. Top-Down RPGs."
+"\\:::{seealso} [Concept: Naming and "
+"Variables](../concepts/concept_naming) \\:::"
 msgstr ""
-"There are different types of `Worlds` in miniworlds. The `TiledWorld` is specifically designed for games on tiled "
-"surfaces, such as top-down RPGs."
 
-#: ../../source/tutorial/02_00_world.md:77
-msgid "[Konzept: Naming und Variablen](../concepts/concept_naming)"
-msgstr "[Konzept: Naming und Variablen](../concepts/concept_naming)"
+#: ../../source/tutorial/02_00_world.md:76
+#, python-brace-format
+msgid "\\:::{seealso} [Concept: Imports](../concepts/concept_imports) \\:::"
+msgstr ""
 
-#: ../../source/tutorial/02_00_world.md:81
-msgid "[Konzept: Importe](../concepts/concept_imports)"
-msgstr "[Konzept: Importe](../concepts/concept_imports)"

@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,101 +17,211 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/03_01_actors_position.md:1
-msgid "Positionierung und Ausrichtung von Actors"
+#, fuzzy
+msgid "Positioning and Orientation of Actors"
 msgstr "Positioning and alignment of actors"
 
 #: ../../source/tutorial/03_01_actors_position.md:3
-msgid "In diesem Abschnitt lernst du, wie du Actors im Koordinatensystem positionieren und ausrichten kannst."
-msgstr "In this section, you will learn how to position and align actors in the coordinate system."
+msgid ""
+"In this section, you’ll learn how to position and orient actors within "
+"the coordinate system."
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:5
-msgid "Grundlagen"
-msgstr "Basics"
+msgid "Basics"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:7
-msgid "Zunächst eine kurze Wiederholung der wesentlichen Konzepte:"
-msgstr "First, a brief review of the essential concepts:"
+msgid "First, a quick recap of the core concepts:"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:9
-msgid "Du kannst einen Actor an einer beliebigen Position erstellen:"
-msgstr "You can create an actor at any position:"
-
-#: ../../source/tutorial/03_01_actors_position.md:13
-msgid "Das Koordinatensystem hat seinen Ursprung oben links:"
-msgstr "The coordinate system has its origin at the top left:"
+msgid "You can create an actor at any position:"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:14
-msgid "Das Koordinatensystem"
+msgid "The coordinate system has its origin at the **top-left corner**:"
+msgstr ""
+
+#: ../../source/tutorial/03_01_actors_position.md:16
+#, fuzzy
+msgid "The coordinate system"
 msgstr "The coordinate system"
 
-#: ../../source/tutorial/03_01_actors_position.md:18
-msgid "Die Position eines Actors bezieht sich immer auf dessen **Mittelpunkt** (auch Ursprung genannt)."
-msgstr "The position of an actor always refers to its **center** (also called origin)."
-
-#: ../../source/tutorial/03_01_actors_position.md:22
-msgid "Position eines Actors nachträglich ändern"
-msgstr "Change the position of an actor retroactively"
+#: ../../source/tutorial/03_01_actors_position.md:20
+msgid ""
+"The position of an actor always refers to its **center** (also called its"
+" origin point)."
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:24
-msgid ""
-"Du kannst die Position eines Actors auch nach dessen Erstellung anpassen, indem du die Attribute `x`, `y` oder "
-"`position?  änderst:"
-msgstr "You can also adjust the position of an actor after its creation by changing the attributes `x`, `y`, or `position`:"
+msgid "Changing an Actor’s Position Later"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:34
-msgid "Ausrichtung des Actors ändern"
-msgstr "Change the orientation of the actor"
+#: ../../source/tutorial/03_01_actors_position.md:26
+msgid ""
+"You can also adjust an actor’s position after it has been created by "
+"using the `x`, `y`, or `position` attributes:"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:36
-msgid ""
-"Die Ausrichtung eines Actors lässt sich über das Attribut `direction` festlegen. D ies ermöglicht es, den Actor in eine "
-"bestimmte Richtung zu drehen:"
+msgid "Changing an Actor’s Direction"
 msgstr ""
-"The orientation of an actor can be set using the `direction` attribute. This allows the actor to be rotated in a "
-"specific direction:"
 
-#: ../../source/tutorial/03_01_actors_position.md:40
-msgid "In der folgenden Darstellung siehst du, wie der Wert für `Direction` zu interpretieren ist."
-msgstr "In the following representation, you can see how the value for `Direction` is to be interpreted."
+#: ../../source/tutorial/03_01_actors_position.md:38
+msgid ""
+"An actor’s orientation can be controlled via the `direction` attribute. "
+"This allows you to rotate the actor to face a specific direction:"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:42
-#: ../../source/tutorial/03_01_actors_position.md:63
-msgid "Ausrichtung des Actors"
-msgstr "Orientation of the actor"
+#: ../../source/tutorial/03_01_actors_position.md:41
+msgid "The image below shows how the `direction` values are interpreted:"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:46
-msgid "In der Darstellung siehst du die Bedeutung von `Direction`:"
-msgstr "In the display, you see the meaning of `Direction`:"
+#: ../../source/tutorial/03_01_actors_position.md:43
+msgid "Actor orientation"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:47
-msgid "0 up"
-msgstr "0 up"
+msgid "The meaning of `direction`:"
+msgstr ""
 
 #: ../../source/tutorial/03_01_actors_position.md:48
-msgid "90 right | -90 left"
-msgstr "90 right | -90 left"
+#, fuzzy
+msgid "0 → up"
+msgstr "0 up"
 
 #: ../../source/tutorial/03_01_actors_position.md:49
-msgid "180 oder - 180 down"
+#, fuzzy
+msgid "90 → right | -90 → left"
+msgstr "90 right | -90 left"
+
+#: ../../source/tutorial/03_01_actors_position.md:50
+#, fuzzy
+msgid "180 or -180 → down"
 msgstr "180 oder - 180 down"
 
-#: ../../source/tutorial/03_01_actors_position.md:54
-msgid "Ursprung des Actors ändern"
-msgstr "Change origin of the actor"
+#: ../../source/tutorial/03_01_actors_position.md:55
+msgid "Changing the Actor’s Origin"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:56
+#: ../../source/tutorial/03_01_actors_position.md:57
 msgid ""
-"Du kannst den Ursprung (den Punkt, auf den sich die Position des Actors bezieht) ändern. Dies wird durch das Attribut "
-"`origin` festgelegt:"
-msgstr "You can change the origin (the point to which the actor's position refers). This is set by the `origin` attribute:"
+"You can change the **origin** (i.e., the point that defines the actor’s "
+"position) using the `origin` attribute:"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:67
-msgid "(0|20) bezeichnet jetzt die obere linke Koordinate des Actors."
-msgstr "(0|20) now refers to the top-left coordinate of the actor."
+#: ../../source/tutorial/03_01_actors_position.md:64
+msgid "Actor origin"
+msgstr ""
 
-#: ../../source/tutorial/03_01_actors_position.md:72
-msgid "Du kannst auch spezifisch das Zentrum oder die linke obere Ecke des Actors festlegen:"
-msgstr "You can also specifically set the center or the top left corner of the actor:"
+#: ../../source/tutorial/03_01_actors_position.md:68
+msgid "(0|20) now refers to the top-left corner of the actor."
+msgstr ""
+
+#: ../../source/tutorial/03_01_actors_position.md:73
+msgid "You can also set the center or top-left corner of an actor explicitly:"
+msgstr ""
+
+#~ msgid ""
+#~ "In diesem Abschnitt lernst du, wie "
+#~ "du Actors im Koordinatensystem positionieren"
+#~ " und ausrichten kannst."
+#~ msgstr ""
+#~ "In this section, you will learn "
+#~ "how to position and align actors "
+#~ "in the coordinate system."
+
+#~ msgid "Grundlagen"
+#~ msgstr "Basics"
+
+#~ msgid "Zunächst eine kurze Wiederholung der wesentlichen Konzepte:"
+#~ msgstr "First, a brief review of the essential concepts:"
+
+#~ msgid "Du kannst einen Actor an einer beliebigen Position erstellen:"
+#~ msgstr "You can create an actor at any position:"
+
+#~ msgid "Das Koordinatensystem hat seinen Ursprung oben links:"
+#~ msgstr "The coordinate system has its origin at the top left:"
+
+#~ msgid ""
+#~ "Die Position eines Actors bezieht sich"
+#~ " immer auf dessen **Mittelpunkt** (auch "
+#~ "Ursprung genannt)."
+#~ msgstr ""
+#~ "The position of an actor always "
+#~ "refers to its **center** (also called"
+#~ " origin)."
+
+#~ msgid "Position eines Actors nachträglich ändern"
+#~ msgstr "Change the position of an actor retroactively"
+
+#~ msgid ""
+#~ "Du kannst die Position eines Actors "
+#~ "auch nach dessen Erstellung anpassen, "
+#~ "indem du die Attribute `x`, `y` "
+#~ "oder `position?  änderst:"
+#~ msgstr ""
+#~ "You can also adjust the position "
+#~ "of an actor after its creation by"
+#~ " changing the attributes `x`, `y`, or"
+#~ " `position`:"
+
+#~ msgid "Ausrichtung des Actors ändern"
+#~ msgstr "Change the orientation of the actor"
+
+#~ msgid ""
+#~ "Die Ausrichtung eines Actors lässt sich"
+#~ " über das Attribut `direction` festlegen."
+#~ " D ies ermöglicht es, den Actor "
+#~ "in eine bestimmte Richtung zu drehen:"
+#~ msgstr ""
+#~ "The orientation of an actor can be"
+#~ " set using the `direction` attribute. "
+#~ "This allows the actor to be "
+#~ "rotated in a specific direction:"
+
+#~ msgid ""
+#~ "In der folgenden Darstellung siehst du,"
+#~ " wie der Wert für `Direction` zu "
+#~ "interpretieren ist."
+#~ msgstr ""
+#~ "In the following representation, you can"
+#~ " see how the value for `Direction`"
+#~ " is to be interpreted."
+
+#~ msgid "Ausrichtung des Actors"
+#~ msgstr "Orientation of the actor"
+
+#~ msgid "In der Darstellung siehst du die Bedeutung von `Direction`:"
+#~ msgstr "In the display, you see the meaning of `Direction`:"
+
+#~ msgid "Ursprung des Actors ändern"
+#~ msgstr "Change origin of the actor"
+
+#~ msgid ""
+#~ "Du kannst den Ursprung (den Punkt, "
+#~ "auf den sich die Position des "
+#~ "Actors bezieht) ändern. Dies wird durch"
+#~ " das Attribut `origin` festgelegt:"
+#~ msgstr ""
+#~ "You can change the origin (the "
+#~ "point to which the actor's position "
+#~ "refers). This is set by the "
+#~ "`origin` attribute:"
+
+#~ msgid "(0|20) bezeichnet jetzt die obere linke Koordinate des Actors."
+#~ msgstr "(0|20) now refers to the top-left coordinate of the actor."
+
+#~ msgid ""
+#~ "Du kannst auch spezifisch das Zentrum"
+#~ " oder die linke obere Ecke des "
+#~ "Actors festlegen:"
+#~ msgstr ""
+#~ "You can also specifically set the "
+#~ "center or the top left corner of"
+#~ " the actor:"
+

@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,301 +17,539 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/patterns/05_database.md:1
-msgid "Daten aus der Datenbank laden"
-msgstr "Load data from the database"
-
-#: ../../source/patterns/05_database.md:4
-msgid ""
-"In diesem Artikel wirst du lernen, wie man ein Datenmodell erstellt und dieses mit einer Datenbank synchronisiert. Du "
-"kannst dies für vielfältige Zwecke einsetzen, z.B. Fragen und Antworten in einem Quiz-Spiel, eine High-Score, Laden von "
-"Spieldaten, ..."
+msgid "Loading Data from the Database"
 msgstr ""
-"In this article, you will learn how to create a data model and synchronize it with a database. You can use this for "
-"various purposes, such as questions and answers in a quiz game, a high score, loading game data, ..."
 
-#: ../../source/patterns/05_database.md:6
-msgid "Erster Schritt: Erstellen des Modells:"
-msgstr "First step: Creating the model:"
+#: ../../source/patterns/05_database.md:3
+msgid ""
+"In this tutorial, you will learn how to create a data model and "
+"synchronize it with a database. You can use this for many purposes — for "
+"example, storing quiz questions and answers, high scores, game state "
+"loading, and more."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:8
-msgid "Erstelle in einer neuen Datei ein Modell für deine Daten, *so wie du sie in Python* speichern würdest."
-msgstr "Create a model for your data in a new file, *just as you would store it in Python*."
+#: ../../source/patterns/05_database.md:5
+msgid "Step 1: Creating the Model"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:10
-msgid "Eine Highscore z.B. könntest du als einfache Liste speichern, in der du Namen und Punktezahl speicherst, z.B. so:"
-msgstr "A high score, for example, you could save as a simple list where you store names and scores, like this:"
+#: ../../source/patterns/05_database.md:7
+msgid ""
+"Start by creating a model for your data in a new file — just as you would"
+" store it in Python."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:16
-msgid "Die Reihenfolge der Daten spielt noch keine Rolle, denn du kannst diese ja jederzeit sortieren"
-msgstr "The order of the data does not matter yet, because you can sort it at any time"
+#: ../../source/patterns/05_database.md:9
+msgid ""
+"For example, a high score could be represented as a simple list storing "
+"names and scores:"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:18
-msgid "Deine Klasse könnte also erstmal so aussehen:"
-msgstr "So your class might initially look like this:"
+#: ../../source/patterns/05_database.md:15
+msgid "Order doesn’t matter yet, because you can always sort the list later."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:20
-msgid "Datei: highscore_model.py:"
+#: ../../source/patterns/05_database.md:17
+msgid "Your class might initially look like this:"
+msgstr ""
+
+#: ../../source/patterns/05_database.md:19
+#, fuzzy
+msgid "**File: `highscore_model.py`**"
 msgstr "File: highscore_model.py:"
 
-#: ../../source/patterns/05_database.md:30
+#: ../../source/patterns/05_database.md:29
 msgid ""
-"Die Klasse enthält ein Attribut `scores`, welches entweder aus dem Parameter der __init__-Methode gelesen wird oder "
-"eine leere Liste enthält."
+"The class has an attribute `scores`, which is either passed as a "
+"parameter or defaults to an empty list."
 msgstr ""
-"The class contains an attribute `scores`, which is either read from the parameter of the __init__ method or contains an "
-"empty list."
 
-#: ../../source/patterns/05_database.md:32
-msgid "Einrichten der Datenbank"
-msgstr "Setting up the database"
+#: ../../source/patterns/05_database.md:31
+msgid "Setting Up the Database"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:34
-msgid "Mit dem Programm DBBrowser for sqlite kannst du die Datenbank einrichten."
-msgstr "With the program DBBrowser for sqlite, you can set up the database."
+#: ../../source/patterns/05_database.md:33
+msgid "Use the tool **DB Browser for SQLite** to set up your database."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:36
-msgid "Richte einer Tabelle und 3 Feldern ein: Name, Score und ID."
+#: ../../source/patterns/05_database.md:35
+#, fuzzy
+msgid "Create a table with three fields: Name, Score, and ID."
 msgstr "Set up a table with 3 fields: Name, Score, and ID."
 
-#: ../../source/patterns/05_database.md:38
-msgid "![Database](../_images/database1.png)"
-msgstr "![Database](../_images/database1.png)"
+#: ../../source/patterns/05_database.md:37
+msgid "Add sample data to the database so you can test reading from it later."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:38
-#: ../../source/patterns/05_database.md:49
-msgid "Database"
-msgstr "Database"
+#: ../../source/patterns/05_database.md:39
+msgid "Reading from the Database"
+msgstr ""
 
 #: ../../source/patterns/05_database.md:41
-msgid "Warum benötige ich eine ID?"
-msgstr "Why do I need an ID?"
+msgid "Next, implement a method to load the data."
+msgstr ""
 
 #: ../../source/patterns/05_database.md:43
-msgid ""
-"Wenn du dein Programm später erweitern willst, dann können die einzelnen Datensätze in der Tabelle nur identifiziert "
-"werden, wenn du ein eindeutiges Attribut ergänzt. Daher ist es sinnvoll eine *ID* zu ergänzen."
+msgid "Add this method to your class:"
 msgstr ""
-"If you want to expand your program later, the individual records in the table can only be identified if you add a "
-"unique attribute. Therefore, it makes sense to add an *ID*."
 
-#: ../../source/patterns/05_database.md:47
-msgid "Speichere Beispieldaten in die Datenbank, damit du damit später das Einlesen testen kannst:"
-msgstr "Store sample data in the database so you can test reading it later:"
+#: ../../source/patterns/05_database.md:57
+msgid ""
+"This is a `classmethod`, used like a factory to create a `Highscore` "
+"object from the database."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:49
-msgid "![Database](../_images/database2.png)"
-msgstr "![Database](../_images/database2.png)"
+#: ../../source/patterns/05_database.md:59
+msgid ""
+"A connection to the database is opened, a SQL query is run via a cursor, "
+"and the results are fetched and returned."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:52
-msgid "Aus der Datenbank lesen"
-msgstr "Read from the database"
+#: ../../source/patterns/05_database.md:61
+msgid "To test it:"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:54
-msgid "Als nächstes kannst du eine Methode zum Lesen der Daten implementieren."
-msgstr "Next, you can implement a method to read the data."
-
-#: ../../source/patterns/05_database.md:56
-msgid "Füge dazu folgende Klasse deiner Datenbank hinzu:"
-msgstr "Add the following class to your database:"
+#: ../../source/patterns/05_database.md:68
+msgid "Writing to the Database"
+msgstr ""
 
 #: ../../source/patterns/05_database.md:70
-msgid ""
-"Die Methode ist eine `classmethod` - Diese Methoden dienen dazu, Objekte einer Klasse (wie eine Art *Factory*) zu "
-"erzeugen, in diesem Fall wird ein neues Highscore-Objekt mit Daten aus der Datenbank erzeugt."
+msgid "Add the following method to write to the database:"
 msgstr ""
-"The method is a `classmethod` - These methods are used to create objects of a class (like a kind of *Factory*), in this "
-"case, a new Highscore object is created with data from the database."
 
-#: ../../source/patterns/05_database.md:72
-msgid "Zunächst wird dazu eine Verbindung aufgebaut. Hier muss der Dateiname zu deiner sqlite3-Datenbank angegegeben werden."
-msgstr "First, a connection is established. Here, the filename of your sqlite3 database must be specified."
-
-#: ../../source/patterns/05_database.md:74
-msgid "Anschließend wird ein Cursor erstellt, der SQL-Abfragen aus der Datenbank auslesen und diese ausführen kann."
-msgstr "Then a cursor is created that can read SQL queries from the database and execute them."
-
-#: ../../source/patterns/05_database.md:76
-msgid "Mit `cursor.fetchone` bzw. `cursor.fetchall()` können diese Daten dann zurückgegeben werden."
-msgstr "With `cursor.fetchone` or `cursor.fetchall()`, this data can then be returned."
-
-#: ../../source/patterns/05_database.md:79
-msgid "Aufgabe: Sortiere die Ergebnisse der Highscore absteigend."
-msgstr "Task: Sort the high score results in descending order."
-
-#: ../../source/patterns/05_database.md:82
+#: ../../source/patterns/05_database.md:83
 msgid ""
-"Du kannst dein Programm testen, indem du am Ende der Datei ein Highscore-Objekt erzeugst. Vergiss aber nicht dies zu "
-"löschen, wenn du die Datei später importierst!"
+"This creates a new record both in the database and in the local data "
+"structure."
 msgstr ""
-"You can test your program by creating a Highscore object at the end of the file. But don't forget to delete it when you "
-"import the file later!"
+
+#: ../../source/patterns/05_database.md:85
+msgid "CRUD Operations"
+msgstr ""
+
+#: ../../source/patterns/05_database.md:87
+msgid "CRUD stands for:"
+msgstr ""
 
 #: ../../source/patterns/05_database.md:89
-msgid "In die Datenbank schreiben"
-msgstr "Write to the database"
+msgid "**C**reate – Add a record"
+msgstr ""
+
+#: ../../source/patterns/05_database.md:90
+msgid "**R**ead – Read records"
+msgstr ""
 
 #: ../../source/patterns/05_database.md:91
-msgid "Ergänze folgende Funktion, um in die Datenbank zu schreiben:"
-msgstr "Complete the following function to write to the database:"
-
-#: ../../source/patterns/05_database.md:104
-msgid ""
-"Hier wird wieder zunächst eine Verbindung aufgebaut und ein Cursor erstellt, der diesesmal eine INSERT-Anfrage an die "
-"Datenbank stellt, um einen neuen Datensatz hinzuzufügen."
+msgid "**U**pdate – Update existing records"
 msgstr ""
-"Here, a connection is first established again and a cursor is created, which this time makes an INSERT request to the "
-"database to add a new record."
 
-#: ../../source/patterns/05_database.md:106
-msgid ""
-"Damit die lokalen Daten und die Daten in der Datenbank synchron bleiben, wird der Datensatz auch in der Tabelle "
-"gelöscht."
-msgstr "To keep the local data and the data in the database synchronized, the record is also deleted in the table."
+#: ../../source/patterns/05_database.md:92
+msgid "**D**elete – Remove records"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:108
-msgid "CRUD"
-msgstr "CRUD"
+#: ../../source/patterns/05_database.md:94
+msgid "You need to think about these when interacting with databases."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:110
-msgid "Als CRUD bezeichnet man:"
-msgstr "CRUD refers to:"
-
-#: ../../source/patterns/05_database.md:112
-msgid "**C**reate, einen Datensatz anlegen,"
-msgstr "**C**reate, create a record,"
-
-#: ../../source/patterns/05_database.md:113
-msgid "**R**ead, Datensatz lesen,"
-msgstr "**R**ead, Datensatz lesen,"
-
-#: ../../source/patterns/05_database.md:114
-msgid "**U**pdate, Datensatz aktualisieren"
-msgstr "**U**pdate, Datensatz aktualisieren"
-
-#: ../../source/patterns/05_database.md:115
-msgid "**D**elete oder Destroy, Datensatz löschen."
-msgstr "**D**elete or Destroy, delete record."
-
-#: ../../source/patterns/05_database.md:117
-msgid ""
-"Dies sind die Operationen über die du dir Gedanken machen musst, wenn du eine Verbindung zur Datenbank herstellen "
-"möchtest."
-msgstr "These are the operations you need to consider when you want to connect to the database."
-
-#: ../../source/patterns/05_database.md:119
+#: ../../source/patterns/05_database.md:96
 msgid "Create"
 msgstr "Create"
 
-#: ../../source/patterns/05_database.md:121
-msgid "Die Create-Funktion wurde mit der Funktion `create` implementiert."
-msgstr "The create function was implemented with the `create` function."
+#: ../../source/patterns/05_database.md:98
+msgid "Implemented in the `create` method."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:123
+#: ../../source/patterns/05_database.md:100
 msgid "Read"
 msgstr "Read"
 
-#: ../../source/patterns/05_database.md:125
-msgid ""
-"Mit der Funktion `from_db` wurde die komplette Tabelle `Highscore` in unserer Datenbank in die Liste `self.scores` "
-"geladen."
-msgstr "With the `from_db` function, the entire `Highscore` table in our database was loaded into the `self.scores` list."
+#: ../../source/patterns/05_database.md:102
+msgid "Handled by `from_db`."
+msgstr ""
 
-#: ../../source/patterns/05_database.md:127
+#: ../../source/patterns/05_database.md:104
 msgid "Update"
 msgstr "Update"
 
-#: ../../source/patterns/05_database.md:129
-msgid "Einen Datensatz kannst du aktualisieren (Wenn ein Spieler das Spiel z.B. wiederholt.)"
-msgstr "You can update a record (e.g., if a player repeats the game.)"
+#: ../../source/patterns/05_database.md:106
+msgid "To update an existing entry:"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:131
-msgid "Ergänze dazu folgende Methode:"
-msgstr "Add the following method to it:"
-
-#: ../../source/patterns/05_database.md:147
+#: ../../source/patterns/05_database.md:122
 msgid "Delete"
 msgstr "Delete"
 
-#: ../../source/patterns/05_database.md:149
-msgid "Ergänze folgende Methode:"
-msgstr "Add the following method:"
+#: ../../source/patterns/05_database.md:124
+msgid "To delete an entry:"
+msgstr ""
 
-#: ../../source/patterns/05_database.md:164
-msgid "Kompletter Code:"
+#: ../../source/patterns/05_database.md:139
+#, fuzzy
+msgid "Complete Code"
 msgstr "Complete code:"
 
-#: ../../source/patterns/05_database.md:222
-msgid "Dein Modell in deine Anwendung einbinden."
-msgstr "Integrate your model into your application."
-
-#: ../../source/patterns/05_database.md:224
-msgid "Wenn du dein Modell geschrieben hast, kannst du dies in deinem Basisprogramm einbinden."
-msgstr "When you have written your model, you can integrate it into your base program."
-
-#: ../../source/patterns/05_database.md:226
-msgid ""
-"Hier wurde z.B. ein Programm geschrieben, bei welchem man Kugeln ausweichen muss. Sobald du getroffen wirst. Das Spiel "
-"sieht zunächst so aus:"
+#: ../../source/patterns/05_database.md:197
+msgid "Integrating the Model into Your Game"
 msgstr ""
-"Here, for example, a program was written in which you have to dodge balls. As soon as you get hit. The game initially "
-"looks like this:"
 
-#: ../../source/patterns/05_database.md:278
-msgid "![Highscore](../_images/db1.png)"
-msgstr "![Highscore](../_images/db1.png)"
-
-#: ../../source/patterns/05_database.md:278
-#: ../../source/patterns/05_database.md:324
-msgid "Highscore"
-msgstr "Highscore"
-
-#: ../../source/patterns/05_database.md:280
-msgid "Dieses Spiel braucht nun zwei Funktionalitäten:"
-msgstr "This game now needs two functionalities:"
-
-#: ../../source/patterns/05_database.md:282
-msgid "Nach Spielende wird das Spiel gelöscht."
-msgstr "After the game ends, the game will be deleted."
-
-#: ../../source/patterns/05_database.md:283
-msgid "Es wird die Highscore angezeigt."
-msgstr "The high score is displayed."
-
-#: ../../source/patterns/05_database.md:285
-msgid "Ändere dafür zunächst die act-Methode:"
-msgstr "First, change the act method:"
-
-#: ../../source/patterns/05_database.md:306
-msgid ""
-"Die letzte if-Anweisung beinhaltet die Funktionalität. Das World wird gelöscht, es wird nach einer neuen Highscore "
-"gefragt die dann mit der Funktion `new_highscore` angezeigt wird."
+#: ../../source/patterns/05_database.md:199
+msgid "Once you’ve written your model, you can use it in your main program."
 msgstr ""
-"The last if statement includes the functionality. The world is deleted, a new high score is requested, which is then "
-"displayed with the `new_highscore` function."
 
-#: ../../source/patterns/05_database.md:308
-msgid "Diese sieht so aus:"
-msgstr "This looks like this:"
-
-#: ../../source/patterns/05_database.md:322
+#: ../../source/patterns/05_database.md:201
 msgid ""
-"Zuerst wird die aktuelle Highscore geladen, dann wird ein neuer Eintrag erstellt und dann die ersten 10 Elemente der "
-"Highscore mit Hilfe neuer Actors auf dem Bildschirm ausgegeben."
+"Here's a sample game where the player avoids falling balls. Once hit, the"
+" game ends. Initially, it looks like this:"
 msgstr ""
-"First, the current high score is loaded, then a new entry is created, and then the first 10 elements of the high score "
-"are displayed on the screen using new actors."
 
-#: ../../source/patterns/05_database.md:324
-msgid "![Highscore](../_images/db2.png)"
-msgstr "![Highscore](../_images/db2.png)"
-
-#: ../../source/patterns/05_database.md:327
-msgid ""
-"Den kompletten Code findest du "
-"[hier](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+#: ../../source/patterns/05_database.md:251
+msgid "To add a game over and display the high score:"
 msgstr ""
-"You can find the complete code "
-"[here](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+
+#: ../../source/patterns/05_database.md:272
+msgid "`new_highscore` is defined as:"
+msgstr ""
+
+#: ../../source/patterns/05_database.md:286
+msgid "This fetches, updates, and displays the top 10 scores."
+msgstr ""
+
+#~ msgid "Daten aus der Datenbank laden"
+#~ msgstr "Load data from the database"
+
+#~ msgid ""
+#~ "In diesem Artikel wirst du lernen, "
+#~ "wie man ein Datenmodell erstellt und "
+#~ "dieses mit einer Datenbank synchronisiert. "
+#~ "Du kannst dies für vielfältige Zwecke"
+#~ " einsetzen, z.B. Fragen und Antworten "
+#~ "in einem Quiz-Spiel, eine High-"
+#~ "Score, Laden von Spieldaten, ..."
+#~ msgstr ""
+#~ "In this article, you will learn "
+#~ "how to create a data model and "
+#~ "synchronize it with a database. You "
+#~ "can use this for various purposes, "
+#~ "such as questions and answers in a"
+#~ " quiz game, a high score, loading "
+#~ "game data, ..."
+
+#~ msgid "Erster Schritt: Erstellen des Modells:"
+#~ msgstr "First step: Creating the model:"
+
+#~ msgid ""
+#~ "Erstelle in einer neuen Datei ein "
+#~ "Modell für deine Daten, *so wie du"
+#~ " sie in Python* speichern würdest."
+#~ msgstr ""
+#~ "Create a model for your data in"
+#~ " a new file, *just as you would"
+#~ " store it in Python*."
+
+#~ msgid ""
+#~ "Eine Highscore z.B. könntest du als "
+#~ "einfache Liste speichern, in der du "
+#~ "Namen und Punktezahl speicherst, z.B. "
+#~ "so:"
+#~ msgstr ""
+#~ "A high score, for example, you "
+#~ "could save as a simple list where"
+#~ " you store names and scores, like "
+#~ "this:"
+
+#~ msgid ""
+#~ "Die Reihenfolge der Daten spielt noch"
+#~ " keine Rolle, denn du kannst diese"
+#~ " ja jederzeit sortieren"
+#~ msgstr ""
+#~ "The order of the data does not "
+#~ "matter yet, because you can sort "
+#~ "it at any time"
+
+#~ msgid "Deine Klasse könnte also erstmal so aussehen:"
+#~ msgstr "So your class might initially look like this:"
+
+#~ msgid ""
+#~ "Die Klasse enthält ein Attribut "
+#~ "`scores`, welches entweder aus dem "
+#~ "Parameter der __init__-Methode gelesen wird"
+#~ " oder eine leere Liste enthält."
+#~ msgstr ""
+#~ "The class contains an attribute "
+#~ "`scores`, which is either read from "
+#~ "the parameter of the __init__ method "
+#~ "or contains an empty list."
+
+#~ msgid "Einrichten der Datenbank"
+#~ msgstr "Setting up the database"
+
+#~ msgid ""
+#~ "Mit dem Programm DBBrowser for sqlite"
+#~ " kannst du die Datenbank einrichten."
+#~ msgstr "With the program DBBrowser for sqlite, you can set up the database."
+
+#~ msgid "![Database](../_images/database1.png)"
+#~ msgstr "![Database](../_images/database1.png)"
+
+#~ msgid "Database"
+#~ msgstr "Database"
+
+#~ msgid "Warum benötige ich eine ID?"
+#~ msgstr "Why do I need an ID?"
+
+#~ msgid ""
+#~ "Wenn du dein Programm später erweitern"
+#~ " willst, dann können die einzelnen "
+#~ "Datensätze in der Tabelle nur "
+#~ "identifiziert werden, wenn du ein "
+#~ "eindeutiges Attribut ergänzt. Daher ist "
+#~ "es sinnvoll eine *ID* zu ergänzen."
+#~ msgstr ""
+#~ "If you want to expand your program"
+#~ " later, the individual records in the"
+#~ " table can only be identified if "
+#~ "you add a unique attribute. Therefore,"
+#~ " it makes sense to add an *ID*."
+
+#~ msgid ""
+#~ "Speichere Beispieldaten in die Datenbank, "
+#~ "damit du damit später das Einlesen "
+#~ "testen kannst:"
+#~ msgstr "Store sample data in the database so you can test reading it later:"
+
+#~ msgid "![Database](../_images/database2.png)"
+#~ msgstr "![Database](../_images/database2.png)"
+
+#~ msgid "Aus der Datenbank lesen"
+#~ msgstr "Read from the database"
+
+#~ msgid "Als nächstes kannst du eine Methode zum Lesen der Daten implementieren."
+#~ msgstr "Next, you can implement a method to read the data."
+
+#~ msgid "Füge dazu folgende Klasse deiner Datenbank hinzu:"
+#~ msgstr "Add the following class to your database:"
+
+#~ msgid ""
+#~ "Die Methode ist eine `classmethod` - "
+#~ "Diese Methoden dienen dazu, Objekte "
+#~ "einer Klasse (wie eine Art *Factory*)"
+#~ " zu erzeugen, in diesem Fall wird "
+#~ "ein neues Highscore-Objekt mit Daten "
+#~ "aus der Datenbank erzeugt."
+#~ msgstr ""
+#~ "The method is a `classmethod` - "
+#~ "These methods are used to create "
+#~ "objects of a class (like a kind"
+#~ " of *Factory*), in this case, a "
+#~ "new Highscore object is created with "
+#~ "data from the database."
+
+#~ msgid ""
+#~ "Zunächst wird dazu eine Verbindung "
+#~ "aufgebaut. Hier muss der Dateiname zu"
+#~ " deiner sqlite3-Datenbank angegegeben werden."
+#~ msgstr ""
+#~ "First, a connection is established. "
+#~ "Here, the filename of your sqlite3 "
+#~ "database must be specified."
+
+#~ msgid ""
+#~ "Anschließend wird ein Cursor erstellt, "
+#~ "der SQL-Abfragen aus der Datenbank "
+#~ "auslesen und diese ausführen kann."
+#~ msgstr ""
+#~ "Then a cursor is created that can"
+#~ " read SQL queries from the database"
+#~ " and execute them."
+
+#~ msgid ""
+#~ "Mit `cursor.fetchone` bzw. `cursor.fetchall()` "
+#~ "können diese Daten dann zurückgegeben "
+#~ "werden."
+#~ msgstr ""
+#~ "With `cursor.fetchone` or `cursor.fetchall()`, "
+#~ "this data can then be returned."
+
+#~ msgid "Aufgabe: Sortiere die Ergebnisse der Highscore absteigend."
+#~ msgstr "Task: Sort the high score results in descending order."
+
+#~ msgid ""
+#~ "Du kannst dein Programm testen, indem"
+#~ " du am Ende der Datei ein "
+#~ "Highscore-Objekt erzeugst. Vergiss aber "
+#~ "nicht dies zu löschen, wenn du die"
+#~ " Datei später importierst!"
+#~ msgstr ""
+#~ "You can test your program by "
+#~ "creating a Highscore object at the "
+#~ "end of the file. But don't forget"
+#~ " to delete it when you import "
+#~ "the file later!"
+
+#~ msgid "In die Datenbank schreiben"
+#~ msgstr "Write to the database"
+
+#~ msgid "Ergänze folgende Funktion, um in die Datenbank zu schreiben:"
+#~ msgstr "Complete the following function to write to the database:"
+
+#~ msgid ""
+#~ "Hier wird wieder zunächst eine "
+#~ "Verbindung aufgebaut und ein Cursor "
+#~ "erstellt, der diesesmal eine INSERT-"
+#~ "Anfrage an die Datenbank stellt, um "
+#~ "einen neuen Datensatz hinzuzufügen."
+#~ msgstr ""
+#~ "Here, a connection is first established"
+#~ " again and a cursor is created, "
+#~ "which this time makes an INSERT "
+#~ "request to the database to add a"
+#~ " new record."
+
+#~ msgid ""
+#~ "Damit die lokalen Daten und die "
+#~ "Daten in der Datenbank synchron bleiben,"
+#~ " wird der Datensatz auch in der "
+#~ "Tabelle gelöscht."
+#~ msgstr ""
+#~ "To keep the local data and the "
+#~ "data in the database synchronized, the"
+#~ " record is also deleted in the "
+#~ "table."
+
+#~ msgid "CRUD"
+#~ msgstr "CRUD"
+
+#~ msgid "Als CRUD bezeichnet man:"
+#~ msgstr "CRUD refers to:"
+
+#~ msgid "**C**reate, einen Datensatz anlegen,"
+#~ msgstr "**C**reate, create a record,"
+
+#~ msgid "**R**ead, Datensatz lesen,"
+#~ msgstr "**R**ead, Datensatz lesen,"
+
+#~ msgid "**U**pdate, Datensatz aktualisieren"
+#~ msgstr "**U**pdate, Datensatz aktualisieren"
+
+#~ msgid "**D**elete oder Destroy, Datensatz löschen."
+#~ msgstr "**D**elete or Destroy, delete record."
+
+#~ msgid ""
+#~ "Dies sind die Operationen über die "
+#~ "du dir Gedanken machen musst, wenn "
+#~ "du eine Verbindung zur Datenbank "
+#~ "herstellen möchtest."
+#~ msgstr ""
+#~ "These are the operations you need "
+#~ "to consider when you want to "
+#~ "connect to the database."
+
+#~ msgid "Die Create-Funktion wurde mit der Funktion `create` implementiert."
+#~ msgstr "The create function was implemented with the `create` function."
+
+#~ msgid ""
+#~ "Mit der Funktion `from_db` wurde die "
+#~ "komplette Tabelle `Highscore` in unserer "
+#~ "Datenbank in die Liste `self.scores` "
+#~ "geladen."
+#~ msgstr ""
+#~ "With the `from_db` function, the entire"
+#~ " `Highscore` table in our database "
+#~ "was loaded into the `self.scores` list."
+
+#~ msgid ""
+#~ "Einen Datensatz kannst du aktualisieren "
+#~ "(Wenn ein Spieler das Spiel z.B. "
+#~ "wiederholt.)"
+#~ msgstr "You can update a record (e.g., if a player repeats the game.)"
+
+#~ msgid "Ergänze dazu folgende Methode:"
+#~ msgstr "Add the following method to it:"
+
+#~ msgid "Ergänze folgende Methode:"
+#~ msgstr "Add the following method:"
+
+#~ msgid "Dein Modell in deine Anwendung einbinden."
+#~ msgstr "Integrate your model into your application."
+
+#~ msgid ""
+#~ "Wenn du dein Modell geschrieben hast,"
+#~ " kannst du dies in deinem "
+#~ "Basisprogramm einbinden."
+#~ msgstr ""
+#~ "When you have written your model, "
+#~ "you can integrate it into your "
+#~ "base program."
+
+#~ msgid ""
+#~ "Hier wurde z.B. ein Programm "
+#~ "geschrieben, bei welchem man Kugeln "
+#~ "ausweichen muss. Sobald du getroffen "
+#~ "wirst. Das Spiel sieht zunächst so "
+#~ "aus:"
+#~ msgstr ""
+#~ "Here, for example, a program was "
+#~ "written in which you have to dodge"
+#~ " balls. As soon as you get hit."
+#~ " The game initially looks like this:"
+
+#~ msgid "![Highscore](../_images/db1.png)"
+#~ msgstr "![Highscore](../_images/db1.png)"
+
+#~ msgid "Highscore"
+#~ msgstr "Highscore"
+
+#~ msgid "Dieses Spiel braucht nun zwei Funktionalitäten:"
+#~ msgstr "This game now needs two functionalities:"
+
+#~ msgid "Nach Spielende wird das Spiel gelöscht."
+#~ msgstr "After the game ends, the game will be deleted."
+
+#~ msgid "Es wird die Highscore angezeigt."
+#~ msgstr "The high score is displayed."
+
+#~ msgid "Ändere dafür zunächst die act-Methode:"
+#~ msgstr "First, change the act method:"
+
+#~ msgid ""
+#~ "Die letzte if-Anweisung beinhaltet die"
+#~ " Funktionalität. Das World wird gelöscht,"
+#~ " es wird nach einer neuen Highscore"
+#~ " gefragt die dann mit der Funktion"
+#~ " `new_highscore` angezeigt wird."
+#~ msgstr ""
+#~ "The last if statement includes the "
+#~ "functionality. The world is deleted, a"
+#~ " new high score is requested, which"
+#~ " is then displayed with the "
+#~ "`new_highscore` function."
+
+#~ msgid "Diese sieht so aus:"
+#~ msgstr "This looks like this:"
+
+#~ msgid ""
+#~ "Zuerst wird die aktuelle Highscore "
+#~ "geladen, dann wird ein neuer Eintrag "
+#~ "erstellt und dann die ersten 10 "
+#~ "Elemente der Highscore mit Hilfe neuer"
+#~ " Actors auf dem Bildschirm ausgegeben."
+#~ msgstr ""
+#~ "First, the current high score is "
+#~ "loaded, then a new entry is "
+#~ "created, and then the first 10 "
+#~ "elements of the high score are "
+#~ "displayed on the screen using new "
+#~ "actors."
+
+#~ msgid "![Highscore](../_images/db2.png)"
+#~ msgstr "![Highscore](../_images/db2.png)"
+
+#~ msgid ""
+#~ "Den kompletten Code findest du "
+#~ "[hier](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+#~ msgstr ""
+#~ "You can find the complete code "
+#~ "[here](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/objects_first/highscore)"
+

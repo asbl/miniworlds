@@ -1,44 +1,45 @@
-# Nachrichten 
+# Messages
 
-## Nachrichten senden 
+## Sending Messages
 
-Mit **`send_message(self, message)`** kannst du eine Nachricht an alle Objekte in deiner Welt senden. 
-Diese Nachrichten können von anderen Objekten empfangen und verarbeitet werden, wenn sie auf das entsprechende Ereignis hören.
+With **`send_message(self, message)`**, you can send a message to all objects in your world.
+These messages can be received and handled by other objects that are listening for that specific event.
 
-### Beispiel:
+### Example:
 
-In diesem Beispiel sendet player 1 eine Nachricht, dass er sich bewegt hat.
-```python
-@player1.register
-def on_key_down(self, keys):
-    if 'a' in keys:
-        self.move()  # Bewegt player1
-        self.send_message("p1moved")  # Sendet Nachricht "p1moved" an alle
-```
-
-## Nachrichten empfangen 
-
-Mit dem decorator `register_message("message")` kannst du eine Nachricht registrieren:
-
-### Beispiel:
-
-Im folgenden Beispiel wird die Nachricht, die player1 versendet, von player2 empfangen.
-Er bewegt sich immer dann in die Richtung von player1, wenn dieser sich bewegt
+In this example, player 1 sends a message when they move:
 
 ```python
 @player1.register
 def on_key_down(self, keys):
     if 'a' in keys:
-        self.move()  # Bewegt player1
-        self.send_message("p1moved")  # Sendet Nachricht "p1moved" an alle
-
-@player2.register_message("p1moved") # Hier wird registriert, dass die folgende Funktion auf die Message "p1moved" reagieren soll.
-def follow(self, data): # Der Funktionsname ist hier egal
-    self.move_towards(player1)  # player2 bewegt sich in Richtung player1
+        self.move()  # Moves player1
+        self.send_message("p1moved")  # Sends message "p1moved" to all
 ```
 
-### Erklärung:
+## Receiving Messages
 
-- In diesem Beispiel sendet **player1** die Nachricht `"p1moved"`, wenn die Taste <kbd>A</kbd> gedrückt wird.
-- **player2** hat eine Methode registriert, die auf diese Nachricht hört. 
-  Sobald **player1** sich bewegt, empfängt **player2** die Nachricht und bewegt sich in Richtung von **player1**.
+You can register a handler for a message using the `@register_message("message")` decorator:
+
+### Example:
+
+In the following example, the message sent by player1 is received by player2.
+Player2 then moves toward player1 whenever player1 moves.
+
+```python
+@player1.register
+def on_key_down(self, keys):
+    if 'a' in keys:
+        self.move()  # Moves player1
+        self.send_message("p1moved")  # Sends message "p1moved" to all
+
+@player2.register_message("p1moved")  # Registers a handler for the "p1moved" message
+def follow(self, data):  # The function name doesn't matter
+    self.move_towards(player1)  # player2 moves toward player1
+```
+
+### Explanation:
+
+* In this example, **player1** sends the message `"p1moved"` when the <kbd>A</kbd> key is pressed.
+* **player2** has a method registered to listen for that message.
+  As soon as **player1** moves, **player2** receives the message and moves toward **player1**.

@@ -1,133 +1,132 @@
-# Verzweigungen
+# Conditionals (If Statements)
 
-Verzweigungen brauchst du immer dann, wenn du Bedingungen überprüfen willst und davon der Programmfluss abhängen soll.
+You need conditionals whenever your program should behave differently based on a certain condition.
 
-### Erstes Beispiel
+---
 
-Willst du z.B. in deinem Spiel überpfüen, ob ein bestimmter Punktestand erreicht wurde, so geht dies mit einer Anweisung
+### First Example
 
-``` python
+For example, if you want to check whether a player has reached a certain score in your game, you can write:
+
+```python
 if points > 100:
     print("You have won!")
 ```
 
-### Allgemeine Syntax
+---
 
-Allgemein ist dies die Syntax für Verzweigungen:
+### General Syntax
 
-``` python
-if <Bedingung>:
-    <Code Block>
+```python
+if <condition>:
+    <code block>
 ```
-### Boolsche Ausdrücke
 
-Eine Bedingung ist ein Ausdruck, der den Wert `True` oder `False` besitzen 
-kann - Man nennt solche Ausdrücke *boolsche Ausdrücke*.
+---
 
-Die einfachsten boolschen Ausdrücke sind `True` und `False`. Weitere Ausdrücke erhälst du i.d.R. mit **Vergleichen**, z.B.:
+### Boolean Expressions
 
-``` python
-10 < 100 # True
-110 < 100 # False
-x < 10 # True, if x < 10
-"a" == "b" # False
-3 == 4 # False
+A **condition** is an expression that evaluates to `True` or `False`. Such expressions are called **boolean expressions**.
+
+The simplest boolean expressions are just `True` and `False`. But you usually create them using **comparisons**, for example:
+
+```python
+10 < 100     # True
+110 < 100    # False
+x < 10       # True, if x is less than 10
+"a" == "b"   # False
+3 == 4       # False
 "ab" == "ab" # True
 ```
 
-Die Ausdrücke können beliebig kompliziert sein und Variablen enthalten.
+These expressions can include variables and be more complex.
 
-```{warning}
-Achtung: Bei Vergleichen verwendet man immer ein doppeltes Gleichheitszeichen anstelle eines einfachen Gleichheitszeichen
-```
+> ⚠️ **Note:** Use `==` for comparisons. A single `=` is used for assignments!
 
-### Vergleiche
+---
 
-Folgende Vergleiche kannst du verwenden:
+### Comparison Operators
 
-* `<`: Kleiner als
-* `<=` : Kleiner als oder gleich 
-* `==`: Gleich
-* `>=`: Größer als oder gleich
-* `>` Größer als
+Here are the most common comparison operators:
 
-### Code Blöcke
+* `<` : less than
+* `<=`: less than or equal
+* `==`: equal
+* `>=`: greater than or equal
+* `>` : greater than
 
-Willst du mehrere Anweisungen abhängig von der Bedingung durchführen, so geht dies mit Hilfe von Code-Blöcken. Code-Blöcke sind stets gleichweit eingerückt und alle Anweisungen die entsprechend eingerückt sind, werden 
+---
 
-Beispiel:
+### Code Blocks
 
-``` python
+If you want to run multiple statements when a condition is true, group them in a code block using indentation:
+
+```python
 if points > 100:
     print("You have won!")
     print("Congratulations")
 print("The game is over")
 ```
 
-Unabhängig von der Punktzahl wird die letzte Code-Zeile auf jeden Fall ausgeführt. Die beiden eingerückten Zeilen werden allerdings nur ausgeführt, wenn der Punktestand größer als 100 ist.
+The first two lines will only run if `points > 100`. The last line runs regardless.
 
-## Elif und Else
+---
 
-Mit elif und else kannst du Alternativen einbauen. Dies geht z.B. so:
+## Elif and Else
 
-``` python
+Use `elif` (else-if) and `else` for alternative branches:
+
+```python
 if points > 100:
     print("You have won!")
     print("Congratulations")
 elif points > 50:
-    print("you lost by a narrow margin")
+    print("You lost by a narrow margin")
 else: 
-    print("you have clearly lost)
+    print("You have clearly lost")
 ```
 
-Die allgemeine Syntax ist:
+General syntax:
 
-``` python
-if <Bedingung>:
-    <Code Block>
-elif <Bedingung>:
-    <Code Block>
-else <Bedingung>:
-    <Code Block>
+```python
+if <condition>:
+    <code>
+elif <condition>:
+    <code>
+else:
+    <code>
 ```
 
-Sowohl elif als auch else können dabei weggelassen werden. Es sind auch mehrere elif-Blöcke möglich.
+You can use as many `elif` branches as needed. `else` and `elif` are optional.
 
-## Ausführliches Beispiel
+---
 
-Ein Rechteck soll sich von rechts nach links bewegen. Wenn es die linke Seite erreicht, soll es wieder ganz rechts auftauchen.
+## Complete Example
 
-Die erste Variante sieht so aus:
+A rectangle moves from right to left. When it reaches the left edge, it should reappear on the right.
 
-``` python
+Initial version:
+
+```python
 from miniworlds import *
 
 world = World(300, 200)
-
-rect = Rectangle((280,120), 20, 80)
+rect = Rectangle((280, 120), 20, 80)
 
 @rect.register
 def act(self):
     rect.x -= 1
 
-
 world.run()
 ```
 
-Es fehlt noch der entscheidende Teil.
+Now add the logic to reset its position:
 
-Diesen kann man so formulieren:
-
-`Falls die x-Koordinate den Wert 0 erreicht, setze das Rechteck wieder nach rechts`
-
-Dies kann man direkt in Python übersetzen:
-
-``` python
+```python
 from miniworlds import *
 
 world = World(300, 200)
-
-rect = Rectangle((280,120), 20, 80)
+rect = Rectangle((280, 120), 20, 80)
 
 @rect.register
 def act(self):
@@ -138,57 +137,23 @@ def act(self):
 world.run()
 ```
 
-## Ein weiteres Beispiel - Ein simples Flappy-Bird
+---
 
-Wir wollen eine Art (einfaches) Flappy-Bird programmieren.
+## Another Example – Simple Flappy Bird
 
-Unser Hauptcharakter soll ein Ball sein, der bei Tastendruck sich nach oben bewegt.
-Dies können wir wie folgt realisieren:
+Let’s program a basic version of Flappy Bird.
 
-``` python
+We’ll use a ball that falls down and jumps up on key press:
+
+```python
 from miniworlds import *
 
 world = World(300, 200)
 
-rect = Rectangle((280,120), 20, 80)
-ball = Circle((20,50),20)
+rect = Rectangle((280, 120), 20, 80)
+ball = Circle((20, 50), 20)
 velocity = 1
-@rect.register
-def act(self):
-    rect.x -= 1
-    if rect.x == 0:
-        rect.x = 280
 
-@ball.register
-def act(self):
-    global velocity
-    self.y += velocity
-    if world.frame % 10 == 0:
-        velocity += 1
-    
-world.run()
-```
-
-Der Ball fällt und fällt immer schneller.
-
-In der Zeile:
-
-``` python
-    if world.frame % 10 == 0:
-        velocity += 1
-```
-
-wird die Geschwindigkeit erhöht, mit der der Ball fällt. 
-Im ersten Schritt soll sich der Ball nach oben bewegen können, wenn eine Taste gedrückt wird.
-
-``` python
-from miniworlds import *
-
-world = World(300, 200)
-
-rect = Rectangle((280,120), 20, 80)
-ball = Circle((20,50),20)
-velocity = 1
 @rect.register
 def act(self):
     rect.x -= 1
@@ -202,35 +167,25 @@ def act(self):
     if world.frame % 10 == 0:
         velocity += 1
 
+world.run()
+```
+
+Add a key press to make the ball jump:
+
+```python
 @ball.register
 def on_key_down(self, key):
     global velocity
     velocity = -2
-world.run()
 ```
 
-### Kolissionen
+---
 
-Nun wollen wir nicht nur einfach Positionen vergleichen, sondern auch die Lage von Objekten zueinander.
+### Collision Detection
 
-Dafür können wir verschiedene `sensor`-Methoden verwenden.
+Now let’s detect if the ball hits the rectangle using a **sensor**:
 
-Dies geht z.B. so:
-
-``` python
-from miniworlds import *
-
-world = World(300, 200)
-
-rect = Rectangle((280,120), 20, 80)
-ball = Circle((20,50),20)
-velocity = 1
-@rect.register
-def act(self):
-    rect.x -= 1
-    if rect.x == 0:
-        rect.x = 280
-
+```python
 @ball.register
 def act(self):
     global velocity
@@ -239,29 +194,20 @@ def act(self):
         velocity += 1
     actor = self.detect_actor()
     if actor == rect:
-       self.world.stop()
-
-@ball.register
-def on_key_down(self, key):
-    global velocity
-    velocity = -2
-world.run()
+        self.world.stop()
 ```
 
-Die Logik befindet sich in folgenden Zeilen:
+These lines detect a collision and stop the world:
 
-``` python
-    actor = self.detect_actor()
-    if actor == rect:
-       self.world.stop()
+```python
+actor = self.detect_actor()
+if actor == rect:
+    self.world.stop()
 ```
 
-Die erste Zeile überprüft mit einem Sensor, welches Actor an der eigenen Position gefunden wurde (und gibt das erste gefundene Actor zurück).
-Anschließend wird das so gefundene Actor mit dem Rechteck verglichen. Wenn dies die gleichen Objekte sind, dann wird das Spiel abgebrochen.
+The final result is a simple Flappy Bird-like game.
 
-So sieht das Flappy-Bird-Spiel nun aus:
-
- <video controls loop width=300px>
+<video controls loop width=300px>
   <source src="../_static/flappy.webm" type="video/webm">
   Your browser does not support the video tag.
-</video> 
+</video>

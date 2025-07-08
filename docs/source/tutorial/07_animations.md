@@ -1,35 +1,37 @@
-# Kostüme und Animationen
+# Costumes and Animations
 
-Jeder Actor verfügt über ein oder mehrere Kostüme. 
-Diese Kostüme bestehen aus mehreren Bildern, die für Animationen verwendet werden können.
+Every actor can have one or more **costumes**.
+These costumes consist of one or more images that can be used for animations.
 
-:::{note}
-Wenn du in der *API* nach den Attributen und Methoden der Klasse `Costume` suchst, 
-findest du sie unter der Klasse `Appearance`. `Appearance` ist die Oberklasse von 
-`Costume` und `Background`, da sich Hintergründe und Kostüme in vielen Eigenschaften ähneln.
-:::
+\:::{note}
+If you’re looking for the attributes and methods of the `Costume` class in the *API*,
+you’ll find them under the `Appearance` class.
+`Appearance` is the superclass of both `Costume` and `Background`, as backgrounds and costumes share many properties.
+\:::
 
-## Ein Kostüm hinzufügen
+---
 
-Mit der folgenden Funktion kannst du ein neues Kostüm zu einem Actor hinzufügen:
+## Adding a Costume
+
+You can add a new costume to an actor using the following function:
 
 ```python
 self.add_costume("images/image.jpg")
 ```
 
-Falls noch kein Kostüm vorhanden ist, wird dieses automatisch das erste Kostüm des Actors.
+If the actor doesn’t already have a costume, this will automatically become the first one.
 
 ---
 
-## Weitere Bilder zu einem Kostüm hinzufügen
+## Adding More Images to a Costume
 
-Um ein Kostüm zu erweitern, kannst du mit der Methode `add_image` zusätzliche Bilder hinzufügen:
+To expand a costume with additional images, you can use the `add_image` method:
 
 ```python
 self.costume.add_image("images/image_2.jpg")
 ```
 
-Alternativ kannst du auch eine Liste von Bildern gleichzeitig hinzufügen:
+Alternatively, you can add a list of images at once:
 
 ```python
 self.costume.add_images(["images/image_1.jpg", "images/image_2.jpg"])
@@ -37,26 +39,23 @@ self.costume.add_images(["images/image_1.jpg", "images/image_2.jpg"])
 
 ---
 
-## Animationen
+## Animations
 
-2D-Animationen funktionieren ähnlich wie ein Daumenkino: 
+2D animations work like a flipbook:
+By quickly switching between images, the actor appears to move.
 
-Indem die Bilder eines Actors schnell hintereinander gewechselt werden, entsteht der Eindruck einer Bewegung.
+![Costumes for the actor](../_images/costumes.png)
 
-![Kostüme für den Actor](../_images/costumes.png)
+To create an animation, first add multiple images to a costume (see above).
+Then, you can start the animation using the `animate()` method.
+The `loop` parameter determines whether the animation should repeat:
 
-Um eine Animation zu erstellen, musst du zunächst mehrere Bilder zu einem Kostüm hinzufügen (siehe oben).
-
-Dann kannst du die animation mit dem Befehl `costume.animate()` starten. Mit dem Parameter `loop` 
-kannst du festlegen, ob die Animation
-wiederholt werden soll:
-
-``` python
+```python
 my_actor.costume.animate()
-robo.costume.animate(loop = True) # Endlossanimation
+robo.costume.animate(loop=True)  # Infinite animation
 ```
 
-### Beispiel:
+### Example:
 
 ```python
 import miniworlds 
@@ -67,29 +66,29 @@ robot = miniworlds.Actor()
 robot.size = (80, 80)
 robot.add_costume("images/drive1.png")
 robot.costume.add_image("images/drive2.png")
-robot.costume.animate()  # Animation aktivieren
-robot.costume.loop = True         # Endlos-Schleife der Animation
+robot.costume.animate()           # Start animation
+robot.costume.loop = True         # Loop animation forever
 world.run()
 ```
 
- <video controls loop width=300px>
+<video controls loop width=300px>
   <source src="../_static/animation1.webm" type="video/webm">
   Your browser does not support the video tag.
-</video> 
+</video>
 
 ---
 
-## Zwischen Kostümen wechseln
+## Switching Between Costumes
 
-Um zwischen verschiedenen Kostümen zu wechseln, kannst du die Methode `switch_costume` verwenden:
+To switch between different costumes, use the `switch_costume` method:
 
 ```python
 self.switch_costume()
 ```
 
-Diese Methode wechselt zum nächsten Kostüm in der Liste. 
-Du kannst optional auch eine Zahl als Parameter angeben, um direkt zu einem bestimmten Kostüm zu springen:
+This will switch to the next costume in the list.
+Optionally, you can pass a number to switch to a specific costume directly:
 
 ```python
-self.switch_costume(1)  # Wechselt zum ersten Kostüm
+self.switch_costume(1)  # Switches to the first costume
 ```

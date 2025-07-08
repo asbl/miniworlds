@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,133 +17,251 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/processing/02_color_and_contour.md:1
-msgid "Farben und Konturen"
-msgstr "Colors and contours"
+msgid "Colors and Outlines"
+msgstr ""
 
-#: ../../source/processing/02_color_and_contour.md:4
-msgid "Einfärben"
-msgstr "Coloring"
+#: ../../source/processing/02_color_and_contour.md:3
+msgid "Filling Shapes with Color"
+msgstr ""
 
-#: ../../source/processing/02_color_and_contour.md:7
-msgid "Eine geometrische Form kann mit dem Attribut ``fill_color`` eingefärbt werden:"
-msgstr "A geometric shape can be colored with the attribute ``fill_color``:"
+#: ../../source/processing/02_color_and_contour.md:5
+msgid ""
+"You can fill a geometric shape with color using the `fill_color` "
+"attribute:"
+msgstr ""
+
+#: ../../source/processing/02_color_and_contour.md:23
+msgid "A **color** is specified as a 3-tuple:"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:25
-msgid "Eine **Farbe** wird als 3-Tupel angegeben:"
-msgstr "A **color** is specified as a 3-tuple:"
+msgid "The first value is the *red* component"
+msgstr ""
+
+#: ../../source/processing/02_color_and_contour.md:26
+msgid "The second value is the *green* component"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:27
-msgid "Der erste Wert ist der *rot*-Anteil"
-msgstr "The first value is the *red* component"
+msgid "The third value is the *blue* component"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:29
-msgid "Der zweite Wert ist der *grün*-Anteil"
-msgstr "The second value is the *green* component"
+msgid "By mixing these values, you get a specific color:"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:31
-msgid "Der dritte Wert ist der *blau*-Anteil"
-msgstr "The third value is the *blue* component"
-
-#: ../../source/processing/02_color_and_contour.md:33
-msgid "Durch \"mischen\" dieser Farben erhält man eine konkrete Farbe:"
-msgstr "By \"mixing\" these colors, you get a specific color:"
-
-#: ../../source/processing/02_color_and_contour.md:35
 msgid "rgb colors"
 msgstr "rgb colors"
 
-#: ../../source/processing/02_color_and_contour.md:37
-msgid "Variablen"
+#: ../../source/processing/02_color_and_contour.md:33
+#, fuzzy
+msgid "Variables"
 msgstr "Variables"
 
-#: ../../source/processing/02_color_and_contour.md:39
+#: ../../source/processing/02_color_and_contour.md:35
 msgid ""
-"Wir haben hier *Variablen* verwendet. Bisher wenn wir ein Objekt angelegt haben, konnten wir darauf nicht mehr "
-"zugreifen. Hier haben wir den Rechtecken Namen gegeben (z.B. r) über die man später wieder auf die Objekte zugreifen "
-"kann."
+"Here we used *variables*. In previous examples, we created objects "
+"without assigning them names, so we couldn’t refer to them later. In this"
+" case, we gave names to the rectangles (e.g., `r`), so we can access and "
+"modify them later."
 msgstr ""
-"We have used *variables* here. So far, when we created an object, we could no longer access it. Here we have given the "
-"rectangles names (e.g., r) through which you can access the objects again later."
 
-#: ../../source/processing/02_color_and_contour.md:41
-msgid "So bedeutet ``r.fill_color = (255, 0, 0)`` dass wir die Füllfarbe des zuvor mit r benannten Rechtecks ändern."
-msgstr "This means ``r.fill_color = (255, 0, 0)`` that we change the fill color of the rectangle previously named r."
-
-#: ../../source/processing/02_color_and_contour.md:43
-msgid "Umrandung"
-msgstr "Border"
-
-#: ../../source/processing/02_color_and_contour.md:45
+#: ../../source/processing/02_color_and_contour.md:38
 msgid ""
-"Jede geometrische Form kann einen **Rand** haben.  Den Rand kannst du als Integer-Wert mit dem Attribut ``border`` "
-"festlegen und die Farbe mit dem Attribut ``border-radius``:"
+"For example, `r.fill_color = (255, 0, 0)` means we are changing the fill "
+"color of the rectangle named `r`."
 msgstr ""
-"Every geometric shape can have a **border**. You can set the border as an integer value with the attribute ``border`` "
-"and the color with the attribute ``border-radius``:"
 
-#: ../../source/processing/02_color_and_contour.md:48
-msgid "Das folgende Bild erzeugt ein rotes Rechteck mit gelben Rand:"
-msgstr "The following image creates a red rectangle with a yellow border:"
+#: ../../source/processing/02_color_and_contour.md:42
+#, fuzzy
+msgid "Border"
+msgstr "borders"
 
-#: ../../source/processing/02_color_and_contour.md:62
-msgid "Ausgabe:"
-msgstr "Output:"
+#: ../../source/processing/02_color_and_contour.md:44
+msgid ""
+"Any geometric shape can have a **border**. You can set the border’s "
+"thickness using the `border` attribute (an integer), and its color with "
+"`border_color`."
+msgstr ""
 
-#: ../../source/processing/02_color_and_contour.md:64
+#: ../../source/processing/02_color_and_contour.md:47
+msgid "The following example creates a red rectangle with a yellow border:"
+msgstr ""
+
+#: ../../source/processing/02_color_and_contour.md:61
+msgid "Output:"
+msgstr ""
+
+#: ../../source/processing/02_color_and_contour.md:63
 msgid "borders"
 msgstr "borders"
 
 #: ../../source/processing/02_color_and_contour.md:67
-msgid "Füllung"
-msgstr "Füllung"
+msgid "Fill Toggle"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:69
 msgid ""
-"Du kannst auch Figuren zeigen, die nur einen Rand aber über keine Füllung besitzen. Das Attribut ``fill`` legt fest, ob "
-"ein Objekt eine Füllung hat."
+"You can also create shapes with only a border and no fill. Use the `fill`"
+" attribute to control whether the shape has a fill."
 msgstr ""
-"You can also display figures that only have an outline but no fill. The attribute ``fill`` determines whether an object "
-"has a fill."
 
-#: ../../source/processing/02_color_and_contour.md:71
-msgid "Das folgende Rechteck hat z.B. keine Füllung:"
-msgstr "The following rectangle, for example, has no fill:"
-
-#: ../../source/processing/02_color_and_contour.md:85
-msgid "Das World"
-msgstr "The world"
+#: ../../source/processing/02_color_and_contour.md:72
+msgid "This rectangle has no fill:"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:88
-msgid ""
-"Alle Figuren werden auf einem ``World`` gezeichnet. Auch das World hat verschiedene Eigenschaften, die verändert werden "
-"können, z.B. Größe und Hintergrundfarbe."
-msgstr ""
-"All figures are drawn on a ``World``. The World also has various properties that can be changed, such as size and "
-"background color."
+#, fuzzy
+msgid "The World"
+msgstr "The world"
 
 #: ../../source/processing/02_color_and_contour.md:90
-msgid "Bachte folgenden Code, welcher Größe und Hintergrund des Worlds festlegt."
-msgstr "Observe the following code, which sets the size and background of the world."
+msgid ""
+"All shapes are drawn on a `World`. The `World` itself has properties like"
+" size and background color that can be customized."
+msgstr ""
 
-#: ../../source/processing/02_color_and_contour.md:106
-msgid "Training"
-msgstr "Training"
-
-#: ../../source/processing/02_color_and_contour.md:108
-msgid "Übung 2.1: Black Face"
-msgstr "Exercise 2.1: Black Face"
-
-#: ../../source/processing/02_color_and_contour.md:110
-msgid "Zeichne folgende Form:"
-msgstr "Draw the following shape:"
+#: ../../source/processing/02_color_and_contour.md:93
+msgid "See the following example, which sets the size and background color:"
+msgstr ""
 
 #: ../../source/processing/02_color_and_contour.md:112
+#, fuzzy
+msgid "🧠 Training"
+msgstr "Training"
+
+#: ../../source/processing/02_color_and_contour.md:114
+#, fuzzy
+msgid "Exercise 2.1: Black Face"
+msgstr "Exercise 2.1: Black Face"
+
+#: ../../source/processing/02_color_and_contour.md:116
+msgid "Draw the following shape:"
+msgstr ""
+
+#: ../../source/processing/02_color_and_contour.md:118
 msgid "![Face](../_images/processing/face2.png)"
 msgstr "![Face](../_images/processing/face2.png)"
 
-#: ../../source/processing/02_color_and_contour.md:112
+#: ../../source/processing/02_color_and_contour.md:118
 msgid "Face"
 msgstr "Face"
+
+#~ msgid "Farben und Konturen"
+#~ msgstr "Colors and contours"
+
+#~ msgid "Einfärben"
+#~ msgstr "Coloring"
+
+#~ msgid ""
+#~ "Eine geometrische Form kann mit dem "
+#~ "Attribut ``fill_color`` eingefärbt werden:"
+#~ msgstr "A geometric shape can be colored with the attribute ``fill_color``:"
+
+#~ msgid "Eine **Farbe** wird als 3-Tupel angegeben:"
+#~ msgstr "A **color** is specified as a 3-tuple:"
+
+#~ msgid "Der erste Wert ist der *rot*-Anteil"
+#~ msgstr "The first value is the *red* component"
+
+#~ msgid "Der zweite Wert ist der *grün*-Anteil"
+#~ msgstr "The second value is the *green* component"
+
+#~ msgid "Der dritte Wert ist der *blau*-Anteil"
+#~ msgstr "The third value is the *blue* component"
+
+#~ msgid "Durch \"mischen\" dieser Farben erhält man eine konkrete Farbe:"
+#~ msgstr "By \"mixing\" these colors, you get a specific color:"
+
+#~ msgid ""
+#~ "Wir haben hier *Variablen* verwendet. "
+#~ "Bisher wenn wir ein Objekt angelegt "
+#~ "haben, konnten wir darauf nicht mehr "
+#~ "zugreifen. Hier haben wir den Rechtecken"
+#~ " Namen gegeben (z.B. r) über die "
+#~ "man später wieder auf die Objekte "
+#~ "zugreifen kann."
+#~ msgstr ""
+#~ "We have used *variables* here. So "
+#~ "far, when we created an object, we"
+#~ " could no longer access it. Here "
+#~ "we have given the rectangles names "
+#~ "(e.g., r) through which you can "
+#~ "access the objects again later."
+
+#~ msgid ""
+#~ "So bedeutet ``r.fill_color = (255, 0,"
+#~ " 0)`` dass wir die Füllfarbe des "
+#~ "zuvor mit r benannten Rechtecks ändern."
+#~ msgstr ""
+#~ "This means ``r.fill_color = (255, 0, "
+#~ "0)`` that we change the fill color"
+#~ " of the rectangle previously named r."
+
+#~ msgid "Umrandung"
+#~ msgstr "Border"
+
+#~ msgid ""
+#~ "Jede geometrische Form kann einen "
+#~ "**Rand** haben.  Den Rand kannst du "
+#~ "als Integer-Wert mit dem Attribut "
+#~ "``border`` festlegen und die Farbe mit"
+#~ " dem Attribut ``border-radius``:"
+#~ msgstr ""
+#~ "Every geometric shape can have a "
+#~ "**border**. You can set the border "
+#~ "as an integer value with the "
+#~ "attribute ``border`` and the color with"
+#~ " the attribute ``border-radius``:"
+
+#~ msgid "Das folgende Bild erzeugt ein rotes Rechteck mit gelben Rand:"
+#~ msgstr "The following image creates a red rectangle with a yellow border:"
+
+#~ msgid "Ausgabe:"
+#~ msgstr "Output:"
+
+#~ msgid "Füllung"
+#~ msgstr "Füllung"
+
+#~ msgid ""
+#~ "Du kannst auch Figuren zeigen, die "
+#~ "nur einen Rand aber über keine "
+#~ "Füllung besitzen. Das Attribut ``fill`` "
+#~ "legt fest, ob ein Objekt eine "
+#~ "Füllung hat."
+#~ msgstr ""
+#~ "You can also display figures that "
+#~ "only have an outline but no fill."
+#~ " The attribute ``fill`` determines whether"
+#~ " an object has a fill."
+
+#~ msgid "Das folgende Rechteck hat z.B. keine Füllung:"
+#~ msgstr "The following rectangle, for example, has no fill:"
+
+#~ msgid ""
+#~ "Alle Figuren werden auf einem ``World``"
+#~ " gezeichnet. Auch das World hat "
+#~ "verschiedene Eigenschaften, die verändert "
+#~ "werden können, z.B. Größe und "
+#~ "Hintergrundfarbe."
+#~ msgstr ""
+#~ "All figures are drawn on a "
+#~ "``World``. The World also has various"
+#~ " properties that can be changed, such"
+#~ " as size and background color."
+
+#~ msgid ""
+#~ "Bachte folgenden Code, welcher Größe und"
+#~ " Hintergrund des Worlds festlegt."
+#~ msgstr ""
+#~ "Observe the following code, which sets"
+#~ " the size and background of the "
+#~ "world."
+
+#~ msgid "Zeichne folgende Form:"
+#~ msgstr "Draw the following shape:"
+

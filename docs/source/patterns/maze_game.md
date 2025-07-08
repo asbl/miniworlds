@@ -1,19 +1,21 @@
-# Tutorial: Labyrinth-Spiel
+# Tutorial: Maze Game
 
-In diesem Kapitel erstellen wir Schritt für Schritt gemeinsam ein Labyrinth-Spiel.
+In this chapter, we’ll build a maze game step by step.
 
-![Labyrinth-Spiel - Erster Schritt](../_images/maze_tiles.png)
+![Maze Game – Step One](../_images/maze_tiles.png)
 
-Die Technik, eine Kachelkarte (Tilemap) zu erstellen, ist in vielen Spielen gängig. Nachdem du es hier gelernt hast, wirst du in der Lage sein, diese Technik in deine eigenen Projekte zu integrieren.
+The technique of creating a tilemap is common in many games. Once you've learned it here, you can apply it in your own projects.
 
-* **Basierend auf**: `https://github.com/electronstudio/pygame-zero-book`
-* **Lizenz:** Attribution-NonCommercial-ShareAlike 4.0 International
+* **Based on**: `https://github.com/electronstudio/pygame-zero-book`
+* **License**: Attribution-NonCommercial-ShareAlike 4.0 International
 
-## Schritt 1: Actor aus einer Kachelkarte laden
+---
 
-Eine Kachelkarte verwendet eine kleine Anzahl von Bildern (Kacheln), die mehrmals gezeichnet werden, um ein großes Spiellevel (die Karte) zu erstellen. Dies spart Arbeit beim Erstellen vieler Grafiken und erleichtert Änderungen am Level-Design. In diesem Beispiel erstellen wir ein Labyrinth-Level.
+## Step 1: Load Actors from a Tilemap
 
-Wir benötigen drei Bilddateien: `player.png`, `wall.png`. Diese müssen im Ordner `mu_code/images` gespeichert werden.
+A tilemap uses a small number of images (tiles) that are drawn multiple times to create a large game level (the map). This saves effort in creating graphics and makes level design easier to manage. In this example, we’ll create a maze level.
+
+You need three image files: `player.png` and `wall.png`. Save them in the `mu_code/images` folder:
 
 ```
 my_code
@@ -23,28 +25,28 @@ my_code
 |----wall.png
 ```
 
-Jetzt können wir den Rahmen für unser Spiel programmieren:
+Now let’s set up the framework for the game.
 
-### Eine Welt erstellen
+### Create a World
 
-Verwende dieses Grundgerüst für dein Spiel:
+Use this basic structure for your game:
 
-In Zeile 2 wird eine `TiledWorld` erstellt, die die Logik für gekachelte Welten bereitstellt. In der letzten Zeile musst du unbedingt `world.run()` aufrufen, um das Spiel zu starten.
+In line 2, a `TiledWorld` is created, which provides logic for tile-based worlds. You must call `world.run()` at the end to start the game.
 
-``` python
+```python
 from miniworlds import * 
 world = TiledWorld(8, 8)
 world.tile_size = 64
 world.add_background((0, 0, 0, 255))
 
-# Dein Code hier
+# Your code here
 
 world.run()
 ```
 
-### Actor-Unterklassen erstellen
+### Create Actor Subclasses
 
-Erstelle Actor-Unterklassen für jeden **Typ** von Actor:
+Create a subclass for each **type** of actor:
 
 ```python
 class Player(Actor):
@@ -57,17 +59,17 @@ class Wall(Actor):
         self.add_costume("wall")
 ```
 
-`self.add_costume` fügt dem Actor ein Kostüm hinzu, das auf einem Bild basiert (z. B. "player", "wall" – Dateiendungen wie `.png` oder `.jpeg` können weggelassen werden) oder auf einer Farbe, die als (r, g, b, a)-Tupel angegeben wird.
+`self.add_costume` adds a costume to the actor, based on an image (e.g. `"player"`, `"wall"` – file extensions like `.png` or `.jpeg` can be omitted), or a color defined as an (r, g, b, a) tuple.
 
-### Eine Kachelkarte erstellen
+### Create a Tilemap
 
-Eine Kachelkarte ist eine 2D-Liste, die die Positionen der Actor bestimmt.
+A tilemap is a 2D list that defines where each actor should be placed.
 
-- 0: Leer
-- 1: Wand
-- 2: Spieler
+* 0: Empty
+* 1: Wall
+* 2: Player
 
-``` python
+```python
 tiles = [None, Wall, Player]
 
 maze = [
@@ -82,9 +84,9 @@ maze = [
 ]
 ```
 
-### Objekte für jede Zelle der Kachelkarte erstellen
+### Create Objects for Each Tile
 
-Für jede Zelle der Kachelkarte kann ein Actor erzeugt werden. Die Klasse für jeden Actor wird aus der Kachelkarte abgerufen.
+Create actors for each tile. The class to be instantiated is looked up from the `tiles` list:
 
 ```python
 @world.register
@@ -96,11 +98,13 @@ def on_setup(self):
                 actor_cls(column, row)
 ```
 
-## Schritt 2: Bewegung
+---
 
-### Spieler bewegen
+## Step 2: Movement
 
-Füge folgenden Code zur `Player`-Klasse hinzu, um den Spieler zu bewegen:
+### Move the Player
+
+Add this to the `Player` class to move the player:
 
 ```python
 class Player(Actor):
@@ -119,9 +123,9 @@ class Player(Actor):
             self.x += 1
 ```
 
-### Bewegung blockieren
+### Block Movement
 
-Verwende die Methode `move_back()`, um die Bewegung des Spielers zu blockieren, wenn er auf eine Wand trifft:
+Use the `move_back()` method to prevent movement into walls:
 
 ```python
 def on_key_down(self, keys):
@@ -137,9 +141,11 @@ def on_key_down(self, keys):
         self.move_back()
 ```
 
-## Einen Gegner erstellen
+---
 
-Erstelle eine Gegner-Klasse, die den Spieler jagt:
+## Create an Enemy
+
+Create an `Enemy` class that follows the player:
 
 ```python
 class Enemy(Actor):
@@ -154,10 +160,12 @@ class Enemy(Actor):
             self.move_back()
             self.velocity = -self.velocity
         if self.detect_actor(Player):
-            print("Du wurdest gefangen!")
+            print("You were caught!")
             exit()
 ```
 
-### Zusammenfassung
+---
 
-In diesem Tutorial hast du ein einfaches Labyrinth-Spiel mit beweglichen Actorn und Kachelkarten erstellt. Mit dieser Grundlage kannst du weitere Funktionen wie Punkte, Levelaufstiege oder komplexere Gegner hinzufügen!
+## Summary
+
+In this tutorial, you built a basic maze game with movable actors and a tilemap. With this foundation, you can add more features like scoring, levels, or smarter enemies!

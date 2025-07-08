@@ -1,0 +1,709 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-08 06:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/api/world_manager_camera.md:1
+msgid "World > Camera"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager:1 of
+msgid ""
+"CameraManager defines a movable viewport into a 2D world and tracks "
+"visible actors. It is accessed via `world.camera` and is responsible for "
+"view positioning, actor visibility, and coordinate transformations."
+msgstr ""
+
+#: ../../source/api/world_manager_camera.md
+msgid "Public Data Attributes:"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`width "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.width>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.width:1 of
+msgid "Width of the camera viewport in pixels."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`height "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.height>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.height:1 of
+msgid "Height of the camera viewport in pixels."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`world_size_x "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.world_size_x>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.world_size_x:1 of
+msgid "Width of the world in pixels."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`world_size_y "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.world_size_y>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.world_size_y:1 of
+msgid "Height of the world in pixels."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`world_size "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.world_size>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.world_size:1 of
+msgid "Returns world size as (width, height)."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ":py:obj:`x <miniworlds.worlds.manager.camera_manager.CameraManager.x>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.x:1 of
+msgid "Camera x-position (top-left corner in world coordinates)."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ":py:obj:`y <miniworlds.worlds.manager.camera_manager.CameraManager.y>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.y:1 of
+msgid "Camera y-position (top-left corner in world coordinates)."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`topleft "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.topleft>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.topleft:1 of
+msgid "Top-left corner of the camera in world coordinates."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.rect>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.rect:1 of
+msgid "Returns camera rect in world coordinates."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`screen_rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.screen_rect>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.screen_rect:1 of
+msgid "Returns camera rect in screen coordinates."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`world_rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.world_rect>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.world_rect:1 of
+msgid "Returns the full world rect."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`center "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.center>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.center:1 of
+msgid "Returns center of camera in world coordinates."
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
+msgid ""
+":py:obj:`image "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.image>`\\"
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
+msgid ""
+":py:obj:`rect "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.rect>`\\"
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
+msgid ""
+":py:obj:`layer "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.layer>`\\"
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
+msgid "Dynamic, read only property for protected _layer attribute."
+msgstr ""
+
+#: ../../source/api/world_manager_camera.md
+msgid "Public Methods:"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.__init__>`\\ "
+"\\(view\\_x\\, view\\_y\\, world\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_rect>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:1 of
+msgid "Returns the camera rectangle in world coordinates."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_screen_rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect:1 of
+msgid "Returns the camera rectangle in screen coordinates."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_world_rect "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect:1 of
+msgid "Returns the full world rectangle from the camera's current origin."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_screen_position "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position>`\\"
+" \\(pos\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:1
+#: of
+msgid "Convert world coordinates to screen coordinates."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_local_position "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position>`\\"
+" \\(pos\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:1
+#: of
+msgid "Convert world coordinates to camera-local coordinates."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_global_coordinates_for_world "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world>`\\"
+" \\(pos\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:1
+#: of
+msgid "Convert local camera position to global world position."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`get_actors_in_view "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.get_actors_in_view>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`is_actor_in_view "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.is_actor_in_view>`\\"
+" \\(actor\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`from_actor "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.from_actor>`\\ "
+"\\(actor\\)"
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+#: miniworlds.worlds.manager.camera_manager.CameraManager.from_actor:1 of
+msgid "Move camera to center on a given actor."
+msgstr ""
+
+#: ../../None:13:<autosummary>:1
+msgid ""
+":py:obj:`is_in_screen "
+"<miniworlds.worlds.manager.camera_manager.CameraManager.is_in_screen>`\\ "
+"\\(pixel\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__init__ "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.__init__>`\\"
+" \\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.add>`\\ "
+"\\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "add the sprite to groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.remove>`\\"
+" \\(\\*groups\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the sprite from groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`add_internal "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.add_internal>`\\"
+" \\(group\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "For adding this sprite to a group internally."
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`remove_internal "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.remove_internal>`\\"
+" \\(group\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "For removing this sprite from a group internally."
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`update "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.update>`\\"
+" \\(\\*args\\, \\*\\*kwargs\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "method to control sprite behavior"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`kill "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.kill>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "remove the Sprite from all Groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`groups "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.groups>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "list of Groups that contain this Sprite"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`alive "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.alive>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "does the sprite belong to any groups"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid ""
+":py:obj:`__repr__ "
+"<miniworlds.worlds.manager.camera_manager.pygame.sprite.Sprite.__repr__>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:12:<autosummary>:1
+msgid "Return repr(self)."
+msgstr ""
+
+#: ../../source/api/world_manager_camera.md
+msgid "Private Methods:"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_disable_resize "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._disable_resize>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Disable automatic resize handling."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_enable_resize "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._enable_resize>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Re-enable automatic resize handling."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_set_width "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._set_width>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_set_height "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._set_height>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_set_topleft "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._set_topleft>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_limit_x "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._limit_x>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_limit_y "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._limit_y>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_reload_actors_in_view "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._reload_actors_in_view>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Marks actors in view as dirty for redraw."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_reload_camera "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._reload_camera>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Internal: reloads geometry and triggers world resize."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_clear_camera_cache "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._clear_camera_cache>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Clears view tracking for actor visibility."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_update "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._update>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Called each frame to refresh geometry if needed."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`_cache_rects "
+"<miniworlds.worlds.manager.camera_manager.CameraManager._cache_rects>`\\ "
+"\\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Caches world and screen rects."
+msgstr ""
+
+#: ../../source/api/world_manager_camera.md
+#: miniworlds.worlds.manager.camera_manager.CameraManager.from_actor
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect of
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.from_actor:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.from_actor:6
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:10
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:10
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:8
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:10
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect:8
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect:8 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_actors_in_view:2
+#: of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Set\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:3
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:3
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:3
+#: of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position
+#: of
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:5
+#: of
+msgid "Position relative to the camera."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:7
+#: of
+msgid "Global world position."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:5
+#: of
+msgid "Global position in the world."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:7
+#: of
+msgid "Local position relative to the camera."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:3
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect:3
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:5 of
+msgid "A pygame.Rect representing the current viewport's world area."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:5
+#: of
+msgid "Position in world coordinates."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:7
+#: of
+msgid "Position in screen coordinates."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect:5 of
+msgid "A pygame.Rect representing where the camera appears on screen."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect:5 of
+msgid "A pygame.Rect representing the visible and scrolled world area."
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.is_actor_in_view:2
+#: miniworlds.worlds.manager.camera_manager.CameraManager.is_in_screen:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#~ msgid "World > Camaera"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "CameraManager defines a movable viewport "
+#~ "into a 2D world and tracks visible"
+#~ " actors."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This rect has topleft position at "
+#~ "(0,0), regardless of world position in"
+#~ " layout"
+#~ msgstr ""
+
+#~ msgid "This rect depends on the position of the world in the layout"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This rect has topleft at (0,0) and"
+#~ " widht and height of the complete "
+#~ "world"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`disable_resize "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.disable_resize>`\\"
+#~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`enable_resize "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.enable_resize>`\\"
+#~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`cache_rects "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.cache_rects>`\\"
+#~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid "Converts global world position to screen position."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`reload_actors_in_view "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.reload_actors_in_view>`\\"
+#~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`is_actor_repainted "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.is_actor_repainted>`\\"
+#~ " \\(actor\\)"
+#~ msgstr ""
+
+#~ msgid "Move camera to center on an actor."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`clear_camera_cache "
+#~ "<miniworlds.worlds.manager.camera_manager.CameraManager.clear_camera_cache>`\\"
+#~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid "Reset the internal actor-view cache."
+#~ msgstr ""
+
+#~ msgid "Reloads and possibly resizes the app view."
+#~ msgstr ""
+

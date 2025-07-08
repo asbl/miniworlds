@@ -1,22 +1,21 @@
 # miniworlds
 
-**miniworlds** ist eine in Python und Pygame geschriebene Spiel-Engine, die für SchülerInnen entwickelt wurde, um 2D-Miniwelten und Spiele zu erstellen.
+**miniworlds** is a game engine written in Python and Pygame, designed for students to create 2D mini-worlds and games.
 
-Die Erstellung der ersten Spiele mit **minigames** ist einfach und macht Spaß.
+Creating your first games with **minigames** is simple and fun.
 
-:::{admonition} miniworlds und miniworlds
+:::{admonition} miniworlds and miniworldss
 
-**miniworlds** ist das Nachfolgeprojekt des **miniworldss**. Sehr vieles ist ähnlich, manche Bezeichnungen
-und Funktionen unterscheiden sich vom miniworlds.
-(z.B. aus Tokens wurden Actors, aus Boards wurden Worlds)
+**miniworlds** is the successor project to **miniworldss**. Many things are similar, but some names and functions differ from miniworldss.
+(e.g., *Tokens* became *Actors*, *Boards* became *Worlds*)
 
 :::
 
-## Beispiele
+## Examples
 
-### Zwei Actors, die per Tastatur gesteuert werden
+### Two actors controlled by keyboard
 
-Zwei Actors, die per Tastatur gesteuert werden
+Two actors that are controlled using the keyboard.
 
 ```python
 from miniworlds import World, Actor
@@ -49,9 +48,9 @@ Example: Two actors
 
 ### Skeetshooting
 
-Ein zufällig platziertes Ziel kann mit der Maus "abgeschossen" werden.
+A randomly placed target can be "shot" with the mouse.
 
-``` python
+```python
 from miniworlds import World, Actor, Number
 import random
 
@@ -68,7 +67,7 @@ hits = Number((20,20), 0)
 @target.register
 def act(self):
     global cooldown
-    if self.world.frame % 50 == 0: # every 50th frame:
+    if self.world.frame % 50 == 0:
         target.position = (random.randint(0, 400), random.randint(0, 400))
     cooldown -= 1
 
@@ -80,7 +79,6 @@ def on_clicked_left(self, position):
         cooldown = 10
         
 world.run()
-
 ```
 
 ```{figure} _images/examples_skeetshooting.png
@@ -92,20 +90,24 @@ Example: Skeetshooting
 
 ### Aircrafts
 
-Klassisches Spiel, bei dem man ein Flugzeug steuert und Gegner abwehrt und ausweicht.
+Classic game where you control an aircraft, avoid and shoot enemies.
 
 ```python
 from miniworlds import World, Actor, Circle, Text
 import random
 
 world = World(300, 600)
-world.add_background("images/clouds")
+world.add_background("images/clouds.png")
 world.background.is_scaled = False
 aircraft = Actor((150, 500))
 aircraft.add_costume("images/ship.png")
 
 @aircraft.register
 def on_setup(self):
+    """The downtime specifies the number of frames until the next shot can be fired.
+    
+    If downtime > 100 a shot can be fired (@see on_key down of aircraft)
+    """
     self.downtime = 0
 
 
@@ -178,6 +180,7 @@ def act(self):
                 
 
 world.run()
+
 ```
 
 ```{figure} _images/examples_aircrafts.png
@@ -187,7 +190,7 @@ world.run()
 Example: Skeetshooting
 ```
 
-### RPG with console and sidebar
+### RPG Template with console and sidebar
 
 ```python
 from miniworlds import TiledWorld, Toolbar, Console, Actor, Button, Label, PagerHorizontal
@@ -209,11 +212,11 @@ def on_setup(self):
 world.toolbar = world.layout.add_right(toolbar, size=180)
 
 console = Console()
-world.console = world.layout.add_bottom(console, size=100)
+world.console = world.add_bottom(console, size=100)
 world.console.newline("You enter a new world")
 
 pager = PagerHorizontal(console)
-world.layout.add_bottom(pager, size=60)
+world.add_bottom(pager, size=60)
 
 def create_grass(pos):
     g = Actor(pos)
@@ -377,6 +380,7 @@ def pick_up_torch(self, torch):
 
 
 world.run()
+
 ```
 
 ```{figure} _images/examples_rpg.png
@@ -386,22 +390,18 @@ world.run()
 Example: RPG
 ```
 
-
-
 ## Credits
 
+* `Greenfoot <https://www.greenfoot.org/>`\_
+  Miniworlds is strongly inspired by Greenfoot.
 
-* `Greenfoot <https://www.greenfoot.org/>`_ 
-  Miniworlds ist stark von Greenfoot inspiriert.
-  
-* `Kenney Assets <https://www.kenney.nl/assets>`_ 
-  Die meisten Bilder der Beispiele basieren auf Kenney Assets  
+* `Kenney Assets <https://www.kenney.nl/assets>`\_
+  Most images in the examples are based on Kenney Assets
 
-Links
-=====
+# Links
 
 * [Github Repository](https://github.com/asbl/miniworlds)
-* [Beispiele](https://github.com/asbl/miniworlds_examples) 
+* [Examples](https://github.com/asbl/miniworlds_examples)
 
 ```{toctree}
 ---
@@ -427,7 +427,7 @@ tutorial/10_01_status2
 
 ```{toctree}
 ---
-caption: Weitere Tutorials
+caption: More Tutorials
 maxdepth: 1
 hidden: true
 ---
@@ -436,7 +436,7 @@ processing/index
 
 ```{toctree}
 ---
-caption: Konzepte
+caption: Concepts
 maxdepth: 1
 hidden: true
 ---
@@ -452,8 +452,8 @@ concepts/concept_self
 
 ```{toctree}
 ---
-caption: Anleitungen
-maxdepth: 1
+caption: Guides
+maxdepth: 2
 hidden: true
 ---
 patterns/01_drag_and_drop
@@ -485,6 +485,7 @@ caption: API > Actor Classes
 maxdepth: 2
 hidden: true
 ---
+api/actor
 api/actor_number
 api/actor_text
 api/actor_textbox
@@ -500,21 +501,26 @@ maxdepth: 2
 hidden: true
 ---
 api/world
+api/world_manager_camera
+api/world_manager_music
+api/world_manager_sound
+api/world_manager_mouse
+api/world_manager_layout
+api/backgrounds_manager
+```
+
+
+```{toctree}
+---
+caption: API > Special World classes
+maxdepth: 2
+hidden: true
+---
 api/world_tiled
 api/world_physics
 api/world_toolbar
 api/world_console
 ```
-
-```{toctree}
----
-caption: API > Sound & Music
-maxdepth: 2
-hidden: true
----
-api/music
-```
-
 
 ```{toctree}
 ---
@@ -528,7 +534,7 @@ api/positions_vector
 
 ```{toctree}
 ---
-caption: Impressum
+caption: Legal Notice
 maxdepth: 2
 hidden: true
 ---

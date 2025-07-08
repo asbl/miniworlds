@@ -1,55 +1,51 @@
 # Level Loading
 
-Ein typischer Anwendungsfall: Du möchtest ein neues Level starten, wenn die Bildschirmfigur den Rand erreicht oder durch eine Tür geht, usw.
+A common use case: You want to load a new level when a character reaches the edge of the screen or enters a door, etc.
 
-Dies geht folgendermaßen:
+You can do this as follows:
 
-* Speichere dein Level in einer Datenbank, einer Textdatei oder einer einfachen Liste.
-* Du brauchst eine **Funktion**, die dein Level lädt, sobald etwas passiert (du erreichst den Rand, berührst ein Actor, ...)
+* Store your level in a database, a text file, or a simple list.
+* You need a **function** that loads the level when something happens (you reach the edge, touch an actor, ...)
 
-## Speichern deines Levels als Liste
+## Storing your level as a list
 
-Du kannst dein Level in einer mehrdimensionalen Liste speichern. In einem ganz einfachen Fall könnte dies z.B. so aussehen:
+You can store your level in a two-dimensional list. A very simple case might look like this:
 
-``` python
+```python
 r00 = [    "  d",
            "  w",
            "www"]
 ```
 
-Du brauchst dann eine Übersetzung in Actors, `w` steht hier für eine `Wall`, `d` für eine `Door`.
+You then need a translation to actors — `w` stands for `Wall`, `d` for `Door`.
 
-Die Räume kannst du dann in einer Liste oder als Dictionary speichern, z.B. so als Liste:
+You can store your rooms in a list or a dictionary, for example:
 
-``` python
+```python
 rooms = [r00, r01]
 ```
 
-...oder so als Dictionary:
+...or like this:
 
-``` python
+```python
 rooms = {0: r00, 1: r01}
 ```
 
-### Anlegen von Klassen für die einzelnen Objekte
+### Creating classes for individual objects
 
-Damit ein Objekt einer *bestimmten Art* erzeugt werden kann, ist es sinnvoll, eine Klasse für dieses Objekt zu speichern.
+To create objects of a specific kind, it's useful to define a class:
 
-Dies könnte z.B. so aussehen:
-
-``` python
+```python
 class Wall(Actor):
     def on_setup(self):
         self.add_costume("wall")
-``` 
+```
 
-Die Klasse `Wall` definiert Objekte, sich wie Actors verhalten, aber von dem Standard-Actor insofern unterscheidet, dass diese immer als Kostüm ein Bild mit einer Wand besitzen.
+## Translating the list
 
-## Übersetzen der Liste
+You can now translate the list into actors:
 
-Die Liste kannst du nun in Actors übersetzen:
-
-``` python
+```python
 def setup_room(room):
     for actor in world.actors:
         if actor != player:
@@ -64,25 +60,21 @@ def setup_room(room):
                 d = Door(x, y) 
 ```
 
-Zunächst werden in der ersten For-Schleife alle Actors bis auf das Player-Objekt gelöscht
+## Switching rooms
 
-In der zweiten Schleife wird nun über die Listen iteriert. Dabei wird jedesmal, wenn ein entsprechender Actor in der String-Liste gefunden wird, ein entsprechendes Actor angelegt.
+With the groundwork done, switching rooms is easy — just call `setup_room` at the right moment:
 
-## Wechseln des Raums
-
-Mit der Vorarbeit ist es einfach den Raum zu wechseln: Du musst einfach nur die Methode setup_room an geeigneter Stelle aufrufen um den Raum zu wechseln, z.B. so:
-
-``` python
-    def on_key_down(self, keys):
-        global r01
-        if "SPACE" in keys:
-            if self.detect_actor(Wall):
-                setup_room(rooms[1]) 
+```python
+def on_key_down(self, keys):
+    global r01
+    if "SPACE" in keys:
+        if self.detect_actor(Wall):
+            setup_room(rooms[1]) 
 ```
 
-So könnte das ganze Programm aussehen:
+Complete example:
 
-``` python
+```python
 from miniworlds import *
 
 world = TiledWorld()
@@ -161,6 +153,4 @@ player = Player(0, 0)
 world.run()
 ```
 
-Sobald ein Spieler auf der Tür steht und die Leertaste drückt, wird der Raum gewechselt.
-
-![Room switching](../_images/room_switching.png)
+When the player is on the door and presses the spacebar, the room changes.

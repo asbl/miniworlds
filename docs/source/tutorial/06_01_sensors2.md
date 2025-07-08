@@ -1,13 +1,12 @@
+# Additional Sensors
 
-# Weitere Sensoren
+## Checking World Boundaries
 
-## Überprüfung der Spielfeldgrenzen
+You can also use sensors to check whether an actor is at the edges or outside the boundaries of the world.
 
-Du kannst auch Sensoren verwenden, um zu überprüfen, ob sich ein Akteur an den Rändern oder außerhalb des Spielfelds befindet:
+### Is the Actor Outside the World?
 
-### Ist die Figur nicht mehr auf dem Spielfeld?###
-
-Diese Funktion überprüft, ob eine Figur noch in der aktuellen Welt ist.
+This function checks whether an actor is no longer within the current world:
 
 ```python
 @player3.register
@@ -15,9 +14,9 @@ def on_not_detecting_world(self):
     print("Warning: I'm not on the world!!!")
 ```
 
-### Beispiel: Ein Fisch, der an den Spielfeldrändern zurückschwimmt
+### Example: A Fish That Turns Around at the World Borders
 
-Das folgende Programm simuliert einen Fisch, der an den Spielfeldrändern automatisch umkehrt:
+The following program simulates a fish that automatically turns around when it reaches the edges of the world:
 
 ```python
 from miniworlds import TiledWorld, Actor 
@@ -27,7 +26,7 @@ world.columns = 4
 world.rows = 1
 world.add_background("images/water.png")
 
-fish = Actor((0,0))
+fish = Actor((0, 0))
 fish.add_costume("images/fish.png")
 fish.costume.orientation = -90
 fish.direction = "right"
@@ -39,29 +38,30 @@ def act(self):
 @fish.register
 def on_not_detecting_world(self):
     self.move_back()
-    self.flip_x()  # Der Fisch dreht um, wenn er den Spielfeldrand erreicht
+    self.flip_x()  # The fish turns around when it reaches the edge
 
 world.run()
 ```
 
-### Ausgabe
+### Output
 
 <video controls loop width=300px>
   <source src="../_static/flipthefish.webm" type="video/webm">
-  Dein Browser unterstützt das Video-Tag nicht.
+  Your browser does not support the video tag.
 </video>
 
-### Erklärung
+### Explanation
 
-  * Die Methode `on_not_detecting_world` wird nur aufgerufen, wenn erkannt wird, dass sich der Fisch nicht mehr in 
-  der Welt befindet. er wird mit move_back wieder zurückbewegt und anschließend gedreht.
+* The method `on_not_detecting_world` is called only when the fish is detected as being outside the world.
+* It moves the fish back using `move_back()` and then flips its direction with `flip_x()`.
 
+---
 
-## Überprüfung auf Spielfeldgrenzen
+## Detecting World Borders
 
-Man kann auch überprüfen, ob die Grenzen des Spielfeldes erreicht oder berührt werden:
+You can also check whether an actor has **reached or touched** the boundaries of the world:
 
-#### Ist die Figur an den Grenzen des Spielfelds?**
+### Is the Actor Touching the Borders?
 
 ```python
 @player4.register
@@ -69,6 +69,7 @@ def on_detecting_borders(self, borders):
     print("Borders are here!", str(borders))
 ```
 
-Erklärung:
-* Wenn sich eine Figur an den Rändern des Spielfelds befindet (z.B. an der Position `(0,0)`), wird ausgegeben: 
- `Borders are here! ['right', 'top']`.
+**Explanation:**
+
+* When the actor touches one or more edges of the world (e.g., at position `(0, 0)`), the output might be:
+  `Borders are here! ['right', 'top']`.

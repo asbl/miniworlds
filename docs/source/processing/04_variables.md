@@ -1,28 +1,29 @@
-# Werte und Variablen
+# Values and Variables
 
-Ein `Wert` ist etwas, dass im Computer gespeichert wird und von einem Computer-Programm manipuliert werden kann. Im Folgenden werden Werte als ``Objekte`` bezeichnet und die Wörter werden synonym verwendet.
+A **value** is something that can be stored in a computer and manipulated by a computer program.
+In this tutorial, values are referred to as **objects**, and the terms are used interchangeably.
 
-```{note}
-In anderen Programmiersprachen unterscheidet man primitive Datentypen, die nur verändert werden können und **Objekte**, welche oft auch Attribute und Methoden mitbringen, wie z.B. die Klasse ``world``, welche das Attribut ``size`` besitzt und deren Hintergrund mit der Methode `add_background` verwendet werden kann.
+> **Note**:
+> In other programming languages, a distinction is made between *primitive data types* (which can only store values) and *objects* (which also have attributes and methods).
+> For example, the `world` class has an attribute `size` and a method `add_background`.
+>
+> Python follows a simple philosophy: **everything is an object** — which is why we generally use the term *value*.
 
-Python hat die einfache Philosphie: Alles ist ein Objekt - Daher wird hier generell der Begriff *Wert* verwendet.
-```
+Each value has a **data type**, which you can check using the `type()` function. The following program:
 
-Jeder Wert hat einen Datentyp, welchen du abfragen kannst, z.B. liefert folgendes Programm:
-
-``` python
+```python
 from miniworlds import *
 import random
-world = World(100,100))
+world = World(100, 100)
 
 print(type("Hello World"))
-print(type(Line((10,10), (100,100))))
+print(type(Line((10, 10), (100, 100))))
 print(type(17))
 
 world.run()
 ```
 
-Die folgende Ausgabe auf der Kommandozeile:
+...produces this output on the console:
 
 ```
 <class 'str'>
@@ -30,61 +31,66 @@ Die folgende Ausgabe auf der Kommandozeile:
 <class 'int'>
 ```
 
-## Variablen
+---
 
-Damit im Computer erstellte Objekte wiedergefunden werden können, muss man speichern, wo diese zu finden ist. Auf technischer Ebene speichert man dazu den *Speicherplatz* eines Objekts im Rechner. In einer Programmiersprache wie Python verwenden wir einen Namen um Objekte wiederzufinden.
+## Variables
 
-``` python
-line = Line((10,10), (100,100))
+To access stored objects later, you need to save where they are. Technically, the *memory address* of an object is stored,
+but in Python, we use **names** to refer to objects.
+
+```python
+line = Line((10, 10), (100, 100))
 ```
 
-speichert die Linie unter dem Namen line. Wenn du jetzt den Namen line verwendest, kannst du auf die Variable zugreifen und das Objekt verändern.
+This stores the line in the variable named `line`.
+You can now use `line` to access and modify the object, for example:
 
-Du hast z.B. in den vorherigen Kapiteln schon die Farbe einer Linie verändert:
-
-``` python
-line.fill_color = (255,0,0)
+```python
+line.fill_color = (255, 0, 0)
 ```
 
-Genauso kannst du z.B. auch mit Zahlen rechnen
+You can also do calculations with variables, such as:
 
-``` python
+```python
 a = 3
 b = 4
 print(a + b)
 ```
 
-## Zuweisungen
+---
 
-Zuweisungen schreibt man als:
+## Assignments
 
-``` python
+Assignments use the `=` symbol:
+
+```python
 c = a + b
 ```
-Die bedeutet:
 
-  - Zuerst wird das Ergebnis auf der rechten Seite ausgewertet.
+This means:
 
-  - Dann wird das Ergebnis in die Variable auf der linken Seite gespeichert.
+* First, the **expression on the right** is evaluated.
+* Then, the **result** is stored in the variable on the left.
 
-Nach folgendem Programm:
+After this code:
 
-``` python
+```python
 a = 3
 b = 4
 c = a + b
 ```
 
-hat a den Wert 3, b den Wert 4 und c den Wert 7.
+* `a` has the value `3`
+* `b` has the value `4`
+* `c` has the value `7`
 
-Genauso kannst du aber auch Werte von Objekten, z.B. die Position eines Kreises verändern. Das folgende Programm lässt dich einen Kreis mit den Tasten a und d nach links oder rechts bewegen. Die x-Position ist über den Namen ``circle.x`` zugreifbar und kann auch so verändert werden.
+You can also update object attributes, like moving a circle left or right using the keyboard:
 
-``` python
+```python
 from miniworlds import *
-import random
-world = World(100,100))
+world = World(100, 100)
 
-circle = Circle((50,50), 20)
+circle = Circle((50, 50), 20)
 
 @world.register
 def on_key_pressed_a(self):
@@ -93,104 +99,117 @@ def on_key_pressed_a(self):
 @world.register
 def on_key_pressed_d(self):
     circle.x = circle.x + 1
-    
+
 world.run()
 ```
 
-Die Zeile ``circle.x = circle.x + 1`` sagt folgendes: Berechne zuerst den Wert ``circle.x + 1`` (d.h. erhöhe die x-Koordinate des Kreises um 1.) und speichere das Ergebnis dieser Berechnung wieder in ``circle.x``.
+The line `circle.x = circle.x + 1` means:
 
-```{note}
-Das = bedeutet nicht das der Ausdruck links und rechts mathematisch gleich ist. 
-Stattdessen wird das Ergebnis der rechten Seite zuerst ausgewertet und das Ergebnis dieser Berechnung in die Variable auf der linken Seite gespeichert.
+* Compute `circle.x + 1`
+* Store the result back into `circle.x`
 
-Man liest den Ausdruck ``a = b`` als b wird a **zugewiesen**.
+> **Note**:
+> `=` does not mean mathematical equality.
+> Instead, the right-hand expression is evaluated and the result is **assigned** to the left-hand side.
+>
+> Some programming languages use a different symbol to avoid confusion for beginners.
 
-Manche Programmiersprachen verwenden statt dem = Zeichen ein anderes Zeichen um Verwirrung bei Programmieranfängern zu vermeiden.
-```
+---
 
-## Verwendung
+## Usage
 
-Überall wo du bisher eine Zahl oder einen Text verwendet hast, kannst du auch direkt Variablen einsetzen, z.B.
+You can use variables wherever you would use a number or string — as long as the **data type** is correct:
 
-``` python
+```python
 a = 3
 b = 4
 line = Line((a, b), (5, 6))
-``` 
+```
 
-Dies funktioniert immer dann, wenn der **Datentyp** der Variablen mit dem erwarteten **Datentyp** übereinstimmt. 
+This works because `(a, b)` is a tuple — exactly what `Line` expects.
 
+But this will raise an error:
 
-Folgender Code z.B. führt z.B. zu einem Fehler:
-
-``` python
+```python
 a = 3
 b = 4
 line = Line(a, (5, 6))
-``` 
-
-Line erwartet ein Tupel und erhält aber nur eine Integer-Variable. Daher wird folgender Fehler ausgegeben
-
-```
-miniworlds.exceptions.miniworlds_exception.ActorArgumentShouldBeTuple: First argument to create a Actor [position] should be a Tuple. 
 ```
 
-Der Fehler versucht dir einen Hinweis zu geben, was du falsch gemacht hast, oft hilft es also die Fehlermeldungen zu lesen.
+`Line` expects a tuple as the first argument, but `a` is an integer.
+The error will be:
 
+```
+miniworlds.exceptions.miniworlds_exception.ActorArgumentShouldBeTuple: First argument to create a Actor [position] should be a Tuple.
+```
 
-## Gültigkeitsbereich - Scope
+Reading error messages often helps identify mistakes.
 
-Wenn Programmierer größere Programme schreiben -und das auch oft im Team-, dann kommt dem Namen von Variablen eine besondere Bedeutung zu: Wie verhindert man, dass andere Programmierer die eigenen Variablennamen verwenden und dadurch sogar unvorhergesehene Nebenwirkungen verursachen können?
+---
 
-Die Antwort darauf sind "Gültigkeitsbereiche: Eine Variable hat unterschiedliche Gültigkeitsbereiche, je nachdem wo sie definiert wurde:
+## Scope
 
-  * Eine Variable die innerhalb einer Funktion eingeführt wird hat einen lokalen Gültigkeitsbereich. Sie ist innerhalb dieser Funktion **lokal** sichtbar, aber nicht innerhalb von anderen Funktionen.
+In larger programs — especially when working in teams — variable names and their **scope** are important to prevent conflicts.
 
-  * Eine Variable die außerhalb einer Funktion definiert wurde, ist **global** sichtbar und kann in allen Funktionen deines Programms verwendet werden. **Achtung**: Wenn man auf globale Variablen zugreifen und diese verändern will, muss man das Schlüsselwort global verwenden.
+A variable has different **scopes** depending on where it's defined:
 
-  Folgendes funktioniert:
+* A variable **inside** a function has **local scope** — it's only visible within that function.
+* A variable **outside** any function is **global** — visible throughout the program.
 
-  ``` python
-  from miniworlds import *
-  world = World(100,100))
-  a = 3
-  @world.register
-  def on_key_pressed_a(self):
-      print(a)
-  world.run()
-  ```
-  
-  Es wird der Wert 3 ausgegeben.
+> ⚠️ **Important**: If you want to *modify* a global variable inside a function, you must use the `global` keyword.
 
-  ````{warning}
-  Dies funktioniert aber nicht, da bei der Zuweisung a als lokale Variable interpretiert wird (die nicht definiert wurde)
+### This works:
 
-  ``` python
+```python
+from miniworlds import *
+world = World(100, 100)
 
-  from miniworlds import *
-  world = World(100,100))
-  a = 3
-  @world.register
-  def on_key_pressed_a(self):
-      a = a + 1
-      print(a)
-  world.run()
-  ```
-  ````
-  
-  Dies funktioniert wieder, da a als globale Variable definiert wird und daher auch auf die globale Variable zugegriffen wird.
+a = 3
 
-  ``` python
+@world.register
+def on_key_pressed_a(self):
+    print(a)
 
-  from miniworlds import *
-  world = World(100,100))
-  a = 3
-  @world.register
-  def on_key_pressed_a(self):
-      global a
-      a = a + 1
-      print(a)
-  world.run()
-  ```
+world.run()
+```
 
+Output: `3`
 
+---
+
+### But this does NOT work:
+
+```python
+from miniworlds import *
+world = World(100, 100)
+
+a = 3
+
+@world.register
+def on_key_pressed_a(self):
+    a = a + 1
+    print(a)
+
+world.run()
+```
+
+This causes an error because `a` is treated as a local variable, but hasn’t been initialized yet.
+
+---
+
+### This works again using `global`:
+
+```python
+from miniworlds import *
+world = World(100, 100)
+
+a = 3
+
+@world.register
+def on_key_pressed_a(self):
+    global a
+    a = a + 1
+    print(a)
+
+world.run()
+```

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 16:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
@@ -34,7 +34,7 @@ msgid ""
 msgstr ""
 
 #: ../../source/api/actor_text.md
-msgid "Parameter"
+msgid "Parameters"
 msgstr ""
 
 #: miniworlds.actors.texts.text.Text:6 of
@@ -77,12 +77,26 @@ msgstr ""
 msgid "Sets size of actor to 10::"
 msgstr ""
 
+#: miniworlds.actors.texts.text.Text.from_topleft:1 of
+msgid "Creates a circle with topleft at position"
+msgstr ""
+
+#: ../../source/api/actor_text.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.actors.texts.text.Text.get_costume_class:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text\\_costume.TextCostume\\`\\]`"
+msgstr ""
+
 #: miniworlds.actors.texts.text.Text.get_text:1 of
 msgid "Gets the currently displayed text"
 msgstr ""
 
 #: ../../source/api/actor_text.md
-msgid "Rückgabe"
+msgid "Returns"
 msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_text:3 of
@@ -100,4 +114,18 @@ msgstr ""
 #: miniworlds.actors.texts.text.Text.text:1 of
 msgid "changes the text."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+#~ "\\\\\\[costume\\_mod.Costume\\]`"
+#~ msgstr ""
+
+#~ msgid "Parameter"
+#~ msgstr ""
+
+#~ msgid "Rückgabetyp"
+#~ msgstr ""
+
+#~ msgid "Rückgabe"
+#~ msgstr ""
 

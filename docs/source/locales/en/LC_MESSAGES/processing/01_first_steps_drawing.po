@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 21:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,351 +17,621 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/processing/01_first_steps_drawing.md:1
-msgid "Zeichnen mit dem miniworlds - Grundlagen"
-msgstr "Drawing with the miniworlds - Basics"
+msgid "Drawing with Miniworlds – Basics"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:4
-msgid "Vorwort"
+#: ../../source/processing/01_first_steps_drawing.md:3
+#, fuzzy
+msgid "Foreword"
 msgstr "Foreword"
+
+#: ../../source/processing/01_first_steps_drawing.md:5
+#, fuzzy
+msgid ""
+"This tutorial is heavily inspired by the fantastic lecture notes by Prof."
+" Dr. Michael Kipp: "
+"[https://michaelkipp.de/processing/](https://michaelkipp.de/processing/),"
+" which are based on Processing."
+msgstr ""
+"This tutorial is heavily inspired by the great lecture script by Prof. "
+"Dr. Michael Kipp https://michaelkipp.de/processing/, which relates to "
+"Processing."
 
 #: ../../source/processing/01_first_steps_drawing.md:7
 msgid ""
-"Dieses Tutorial ist stark inspiriert vom großartigen Vorlesungsskript von Prof. Dr. Michael Kipp "
-"https://michaelkipp.de/processing/, welches sich auf Processing bezieht."
+"The Miniworlds version of Processing borrows several ideas and concepts "
+"but implements them in slightly different ways. In this tutorial, you’ll "
+"learn programming with Miniworlds using its *Processing mode*, which is "
+"modeled after the popular visual programming environment."
 msgstr ""
-"This tutorial is heavily inspired by the great lecture script by Prof. Dr. Michael Kipp "
-"https://michaelkipp.de/processing/, which relates to Processing."
 
-#: ../../source/processing/01_first_steps_drawing.md:9
+#: ../../source/processing/01_first_steps_drawing.md:12
+msgid "How Does Drawing Work on a Computer?"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:14
 msgid ""
-"Der miniworlds-Port von processing übernimmt einige Ideen und Konzepte von Processing, setzt dies aber oft auf leicht "
-"abweichende Art um. In diesem Tutorial lernst du das Programmieren mit dem miniworlds kennen. Der miniworlds hat einen "
-"*Processing*-Modus, der sich an der populären Grafikprogrammierumgebung orientiert."
+"Monitors consist of a grid of tiny squares. These are so small they "
+"appear as points to us. These tiny squares are called *pixels*."
 msgstr ""
-"The miniworlds port of processing adopts some ideas and concepts from Processing, but often implements them in a "
-"slightly different way. In this tutorial, you will learn programming with miniworlds. The miniworlds has a *Processing* "
-"mode that is oriented towards the popular graphics programming environment."
 
-#: ../../source/processing/01_first_steps_drawing.md:11
-msgid "Wie zeichnet man auf einem PC?"
-msgstr "How do you draw on a PC?"
-
-#: ../../source/processing/01_first_steps_drawing.md:13
+#: ../../source/processing/01_first_steps_drawing.md:16
 msgid ""
-"Monitore bestehen aus einem Gitter kleinester Quadrate. Diese Quadrate sind so klein, dass sie für uns wie Punkte "
-"aussehen. Man nennt diese kleinsten Quadrate *Pixel*."
+"Pixels are arranged in a *coordinate system*, which usually starts in the"
+" **top-left corner**:"
 msgstr ""
-"Monitors consist of a grid of tiny squares. These squares are so small that they appear to us as dots. These smallest "
-"squares are called *pixels*."
 
-#: ../../source/processing/01_first_steps_drawing.md:15
-msgid ""
-"Die Pixel sind in einem *Koordinatensystem* angeordnet. Dieses ist allerdings leicht anders aufgebaut, denn in der "
-"Regel ist der Ursprung in der oberen linken Ecke:"
-msgstr ""
-"The pixels are arranged in a *coordinate system*. However, this is slightly different because usually the origin is in "
-"the upper left corner:"
-
-#: ../../source/processing/01_first_steps_drawing.md:17
+#: ../../source/processing/01_first_steps_drawing.md:18
 msgid "coordinates"
 msgstr "coordinates"
 
-#: ../../source/processing/01_first_steps_drawing.md:20
+#: ../../source/processing/01_first_steps_drawing.md:21
 msgid ""
-"Informatiker zählen in der Regel beginnend mit 0, d.h. die obere linke Ecke hat die Koordinaten (0,0). Ist das "
-"Bildschirmfenster 800x600 groß,  so hat die untere rechte Ecke die Koordinaten (799, 599)"
+"Computer scientists usually start counting at 0.   That means the top-"
+"left corner is (0, 0), and if the screen is 800×600 pixels, the bottom-"
+"right corner is (799, 599)."
 msgstr ""
-"Computer scientists typically start counting from 0, meaning the top left corner has the coordinates (0,0). If the "
-"screen window is 800x600 in size, the bottom right corner has the coordinates (799, 599)"
-
-#: ../../source/processing/01_first_steps_drawing.md:24
-msgid "Das erste Programm"
-msgstr "The first program"
 
 #: ../../source/processing/01_first_steps_drawing.md:27
-msgid "Ein miniworlds-Programm besteht aus mehreren Teilen:"
-msgstr "A miniworlds program consists of several parts:"
+#, fuzzy
+msgid "The First Program"
+msgstr "The first program"
 
-#: ../../source/processing/01_first_steps_drawing.md:43
-msgid "1: Die miniworlds Bibliothek wird importiert"
-msgstr "1: The miniworlds library is being imported"
+#: ../../source/processing/01_first_steps_drawing.md:29
+msgid "A Miniworlds program typically consists of the following parts:"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:40
+msgid "**Line 1**: Imports the Miniworlds library"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:41
+msgid "**Line 2**: Creates the game world"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:42
+msgid ""
+"**Last line**: Starts the main loop with `world.run()` – this must always"
+" be the final line of your program"
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:44
-msgid "2: Ein Spielfeld wird erstellt."
-msgstr "2: A playing field is created."
-
-#: ../../source/processing/01_first_steps_drawing.md:45
-msgid "6: Am Ende wird die mainloop gestartet, dies muss immer die letzte Zeile deines Programms sein."
-msgstr "6: At the end, the mainloop is started, this must always be the last line of your program."
+msgid ""
+"Everything in between can be your own code or comments. Comments start "
+"with `#` and are ignored by the computer. They are written for **humans**"
+" to help understand the code."
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:47
-msgid ""
-"Dazwischen findet sich ein *Kommentar* - Kommentare beginnen immer mit einer # und werden vom Computer ignoriert und "
-"sind für **Menschen** gemacht. Sie dienen dazu, Programmierern Hinweise zu geben, hier z.B. das an diese Stelle dein "
-"eigener Code kommt."
+#: ../../source/processing/01_first_steps_drawing.md:108
+#: ../../source/processing/01_first_steps_drawing.md:130
+#: ../../source/processing/01_first_steps_drawing.md:158
+#: ../../source/processing/01_first_steps_drawing.md:217
+#: ../../source/processing/01_first_steps_drawing.md:237
+msgid "Example:"
 msgstr ""
-"In between, there is a *comment* - comments always start with a # and are ignored by the computer and are made for "
-"**humans**. They serve to give programmers hints, for example, that your own code comes at this point."
 
-#: ../../source/processing/01_first_steps_drawing.md:49
-msgid "Dieser könnte z.B. so aussehen:"
-msgstr "This could look like this, for example:"
-
-#: ../../source/processing/01_first_steps_drawing.md:61
+#: ../../source/processing/01_first_steps_drawing.md:59
 msgid "A pixel"
 msgstr "A pixel"
 
-#: ../../source/processing/01_first_steps_drawing.md:63
-msgid "Du kannst auch die Größe des Worlds anpassen, indem du dem World beim erstellen zwei Argumente übergibst:"
-msgstr "You can also adjust the size of the world by passing two arguments to the world when creating it:"
+#: ../../source/processing/01_first_steps_drawing.md:61
+msgid "You can also set the window size by passing width and height to `World`:"
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:72
-msgid "Zeichnen geometrischer Grundformen."
-msgstr "Drawing basic geometric shapes."
+msgid "Drawing Basic Shapes"
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:74
-msgid "Als nächstes lernst du, geometrische Grundformen zu zeichnen."
-msgstr "Next, you will learn to draw basic geometric shapes."
-
-#: ../../source/processing/01_first_steps_drawing.md:76
-msgid "Linien"
+#, fuzzy
+msgid "Lines"
 msgstr "Linien"
 
-#: ../../source/processing/01_first_steps_drawing.md:78
-msgid "Die Syntax zum Zeichnen einer Linie sieht folgendermaßen aus:"
-msgstr "The syntax for drawing a line looks as follows:"
+#: ../../source/processing/01_first_steps_drawing.md:76
+msgid "Syntax:"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:82
+#, fuzzy
+msgid "Both `startpoint` and `endpoint` are tuples, e.g., `(1, 2)`."
+msgstr ""
+"The parameters `startpoint` and `endpoint` are each tuples, e.g., (1, 2) "
+"for x=1 and y=2."
 
 #: ../../source/processing/01_first_steps_drawing.md:84
-msgid "Die Parameter `startpoint` und `endpoint` sind jeweils Tupel, z.B. (1, 2) für x=1 und y=2."
-msgstr "The parameters `startpoint` and `endpoint` are each tuples, e.g., (1, 2) for x=1 and y=2."
+msgid "Draw a line from (10, 10) to (100, 200):"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:86
-msgid "Wenn du eine Linie von (10,10) zu (100, 200) zeichnen willst so musst du z.B. folgendes schreiben:"
-msgstr "If you want to draw a line from (10,10) to (100, 200), you must write the following, for example:"
-
-#: ../../source/processing/01_first_steps_drawing.md:96
+#: ../../source/processing/01_first_steps_drawing.md:94
 msgid "![A line](../_images/processing/line2.png)"
 msgstr "![A line](../_images/processing/line2.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:96
+#: ../../source/processing/01_first_steps_drawing.md:94
 msgid "A line"
 msgstr "A line"
 
 #: ../../source/processing/01_first_steps_drawing.md:98
-msgid "Kreise"
-msgstr "Kreise"
+#, fuzzy
+msgid "Circles"
+msgstr "A circle"
 
-#: ../../source/processing/01_first_steps_drawing.md:100
-msgid "Kreise kannst du allgemein folgendermaßen erstellen:"
-msgstr "You can generally create circles as follows:"
+#: ../../source/processing/01_first_steps_drawing.md:105
+msgid "The position refers to the **center** of the circle."
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:107
-msgid "Die übergebene Position bei Kreisen ist der *Mittelpunkt* des Kreises"
-msgstr "The passed position in circles is the *center* of the circle"
-
-#: ../../source/processing/01_first_steps_drawing.md:110
-msgid "Wenn du einen Kreis an der Stelle (100,200) mit Radius 20 erstellen willst, musst du folgendes schreiben:"
-msgstr "If you want to create a circle at the position (100,200) with a radius of 20, you must write the following:"
-
-#: ../../source/processing/01_first_steps_drawing.md:122
+#: ../../source/processing/01_first_steps_drawing.md:118
 msgid "![A circle](../_images/processing/circle.png)"
 msgstr "![A circle](../_images/processing/circle.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:122
+#: ../../source/processing/01_first_steps_drawing.md:118
 msgid "A circle"
 msgstr "A circle"
 
-#: ../../source/processing/01_first_steps_drawing.md:124
-msgid "Rechteck"
-msgstr "Rectangle"
+#: ../../source/processing/01_first_steps_drawing.md:122
+#, fuzzy
+msgid "Rectangles"
+msgstr "A rectangle"
 
-#: ../../source/processing/01_first_steps_drawing.md:126
-msgid "Ein Rechteck wird beschrieben durch Position, Breite und Höhe:"
-msgstr "A rectangle is described by position, width, and height:"
-
-#: ../../source/processing/01_first_steps_drawing.md:132
-msgid "Der Parameter `position` beschreibt die obere linke Ecke des Rechtecks."
-msgstr "The parameter `position` describes the top left corner of the rectangle."
-
-#: ../../source/processing/01_first_steps_drawing.md:134
-msgid "Willst du ein Rechteck an der Position (100, 100) mit Breite 20 und Höhe 100 zeichnen, so musst du folgendes schreiben:"
+#: ../../source/processing/01_first_steps_drawing.md:128
+msgid "`position` is the **center** corner of the rectangle"
 msgstr ""
-"If you want to draw a rectangle at position (100, 100) with a width of 20 and a height of 100, you must write the "
-"following:"
 
-#: ../../source/processing/01_first_steps_drawing.md:144
+#: ../../source/processing/01_first_steps_drawing.md:140
 msgid "![A rectangle](../_images/processing/rectangle.png)"
 msgstr "![A rectangle](../_images/processing/rectangle.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:144
+#: ../../source/processing/01_first_steps_drawing.md:140
 msgid "A rectangle"
 msgstr "A rectangle"
 
-#: ../../source/processing/01_first_steps_drawing.md:146
-msgid "Ellipse"
+#: ../../source/processing/01_first_steps_drawing.md:142
+msgid ""
+"It is often easier to draw a rectangle starting from the top-left "
+"position. You can do this with the method `from_center`:"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:150
+#, fuzzy
+msgid "Ellipses"
 msgstr "Ellipse"
 
-#: ../../source/processing/01_first_steps_drawing.md:148
+#: ../../source/processing/01_first_steps_drawing.md:156
 msgid ""
-"Ellipsen werden im Prinzip wie Rechtecke beschrieben, d.h. die Ellipse wird dann so gezeichnet, dass sie genau in das "
-"Rechteck hineinpasst. `width` und `height` beziehen sich hier jeweils auf den Durchmesser der Ellipse"
+"Like rectangles, but the shape is oval and fits inside the given "
+"rectangle."
 msgstr ""
-"Ellipses are basically described like rectangles, i.e., the ellipse is then drawn so that it fits exactly into the "
-"rectangle. `width` and `height` refer to the diameter of the ellipse in each case"
 
-#: ../../source/processing/01_first_steps_drawing.md:154
-msgid "Willst du eine Ellipse an der Position (100, 100) mit Breite 20 und Höhe 100 zeichnen, so musst du folgendes schreiben:"
-msgstr ""
-"If you want to draw an ellipse at position (100, 100) with a width of 20 and a height of 100, you must write the "
-"following:"
-
-#: ../../source/processing/01_first_steps_drawing.md:165
+#: ../../source/processing/01_first_steps_drawing.md:168
 msgid "![An ellipse](../_images/processing/ellipse.png)"
 msgstr "![An ellipse](../_images/processing/ellipse.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:165
+#: ../../source/processing/01_first_steps_drawing.md:168
 msgid "An ellipse"
 msgstr "An ellipse"
 
-#: ../../source/processing/01_first_steps_drawing.md:167
-msgid "Rechteck und Ellipse in die Mitte verschieben."
-msgstr "Move rectangle and ellipse to the center."
-
-#: ../../source/processing/01_first_steps_drawing.md:170
-msgid ""
-"Oft will man ein Rechteck oder eine Ellipse nicht an der oberen linken Position erstellen, sondern am Mittelpunkt. Es "
-"gibt mehrere Möglichkeiten, wie man dies erreichen kann, ohne die Position manuell auszurechnen."
-msgstr ""
-"Often, one does not want to create a rectangle or an ellipse at the top-left position, but at the center. There are "
-"several ways to achieve this without manually calculating the position."
-
 #: ../../source/processing/01_first_steps_drawing.md:172
-msgid "1. from_center"
+msgid "Centered Rectangles and Ellipses"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:174
+#, fuzzy
+msgid "1. `from_center`"
 msgstr "1. from_center"
 
-#: ../../source/processing/01_first_steps_drawing.md:175
-msgid "Mit der Klassenmethode from_center kannst du eine Ellipse am Zentrum erstellen."
-msgstr "With the class method from_center, you can create an ellipse at the center."
+#: ../../source/processing/01_first_steps_drawing.md:176
+msgid "Use `.from_center()` to draw an ellipse centered on a point:"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:185
+#: ../../source/processing/01_first_steps_drawing.md:186
 msgid "from_center Method"
 msgstr "from_center Method"
 
-#: ../../source/processing/01_first_steps_drawing.md:187
-msgid "2. Verschieben mit ellipse.center"
-msgstr "2. Move with ellipse.center"
+#: ../../source/processing/01_first_steps_drawing.md:188
+msgid "2. Using `.center`"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:189
-msgid "Du kannst die Ellipse nach dem Verschieben an den Mittelpunkt verschieben;"
-msgstr "You can move the ellipse to the center after shifting;"
+#: ../../source/processing/01_first_steps_drawing.md:190
+msgid "You can manually center an ellipse like this:"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:201
-msgid "Komplexere geometrische Grundformen"
-msgstr "Complex geometric basic shapes"
+#: ../../source/processing/01_first_steps_drawing.md:203
+msgid "More Complex Shapes"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:204
-msgid "Arc"
+#: ../../source/processing/01_first_steps_drawing.md:205
+#, fuzzy
+msgid "Arcs"
 msgstr "Arc"
 
-#: ../../source/processing/01_first_steps_drawing.md:206
-msgid "Kreisbögen und Kreisausschnitte zeichnest du mit folgendem Befehl:"
-msgstr "You draw circular arcs and circular segments with the following command:"
+#: ../../source/processing/01_first_steps_drawing.md:211
+msgid "`position`: center of bounding box"
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:212
-msgid "Bedeutung der Parameter:"
-msgstr "Meaning of the parameters:"
-
-#: ../../source/processing/01_first_steps_drawing.md:214
-msgid "``position``: Die Position als 2-Tupel"
-msgstr "``position``: The position as a 2-tuple"
-
-#: ../../source/processing/01_first_steps_drawing.md:216
-msgid ""
-"``width``, ``height``: Breite und Höhe bei Erstellung einer Ellipse. Wähle beide gleich, damit sich der Radius für "
-"einen Kreisbogen ergibt oder wähle unterschiedle Werte, damit sich der Bogen und Ausschnitt einer Ellipse ergibt."
+msgid "`width` and `height`: ellipse size"
 msgstr ""
-"``width``, ``height``: Width and height when creating an ellipse. Choose both equal to get the radius for a circular "
-"arc or choose different values to get the arc and segment of an ellipse."
 
-#: ../../source/processing/01_first_steps_drawing.md:218
+#: ../../source/processing/01_first_steps_drawing.md:213
 msgid ""
-"``start_angle``, ``end_angle``: Die Winkel des Ausschnitts. Die Winkel werden von einer gedachten Linie *gegen den "
-"Uhrzeigersinn* gemessen."
+"`start_angle`, `end_angle`: angles in degrees, counterclockwise from the "
+"right"
 msgstr ""
-"``start_angle``, ``end_angle``: The angles of the segment. The angles are measured from an imaginary line "
-"*counterclockwise*."
 
-#: ../../source/processing/01_first_steps_drawing.md:220
+#: ../../source/processing/01_first_steps_drawing.md:215
 msgid "Arc - Start and Endangle"
 msgstr "Arc - Start and Endangle"
 
-#: ../../source/processing/01_first_steps_drawing.md:222
-#: ../../source/processing/01_first_steps_drawing.md:243
-#: ../../source/processing/01_first_steps_drawing.md:264
-msgid "Beispiel:"
-msgstr "Example:"
-
-#: ../../source/processing/01_first_steps_drawing.md:232
+#: ../../source/processing/01_first_steps_drawing.md:229
 msgid "Triangle"
 msgstr "Triangle"
 
 #: ../../source/processing/01_first_steps_drawing.md:235
-msgid "Ein Dreieck erstellst du mit folgendem Befehl:"
-msgstr "You create a triangle with the following command:"
+msgid "Each point is a tuple like `(x, y)`."
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:241
-msgid "p1, p2 und p3 sind Punkte, die du jeweils als Tupel schreiben kannst."
-msgstr "p1, p2 and p3 are points that you can write as tuples."
-
-#: ../../source/processing/01_first_steps_drawing.md:253
+#: ../../source/processing/01_first_steps_drawing.md:249
 msgid "Polygon"
 msgstr "Polygon"
 
-#: ../../source/processing/01_first_steps_drawing.md:256
-msgid "Ein Polygon (d.h. ein n-Eck) erstellst du mit folgendem Befehl:"
-msgstr "You create a polygon (i.e., an n-gon) with the following command:"
+#: ../../source/processing/01_first_steps_drawing.md:255
+msgid "`pointlist` is a list of tuples. For example, a triangle as a polygon:"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:262
-msgid ""
-"``pointlist`` ist eine Liste von Punkten. Das Dreieck aus dem vorherigen Beispiel kannst du z.B. folgendermaßen als "
-"Polygon erstellen:"
-msgstr "\"pointlist\" is a list of points. You can create the triangle from the previous example as a polygon as follows:"
+#: ../../source/processing/01_first_steps_drawing.md:268
+msgid "🧠 Training Exercises"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:270
+msgid "Exercise 1.1 – House with Shapes"
+msgstr ""
+
+#: ../../source/processing/01_first_steps_drawing.md:272
+msgid "Draw a house using basic shapes:"
+msgstr ""
 
 #: ../../source/processing/01_first_steps_drawing.md:274
-msgid "Training"
-msgstr "Training"
-
-#: ../../source/processing/01_first_steps_drawing.md:276
-msgid "Übung 1.1: Haus mit Grundformen"
-msgstr "Exercise 1.1: House with Basic Shapes"
-
-#: ../../source/processing/01_first_steps_drawing.md:279
-msgid "Zeichne ein Haus mit Grundformen:"
-msgstr "Draw a house with basic shapes:"
-
-#: ../../source/processing/01_first_steps_drawing.md:281
 msgid "![House](../_images/processing/house2.png)"
 msgstr "![House](../_images/processing/house2.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:281
+#: ../../source/processing/01_first_steps_drawing.md:274
 msgid "House"
 msgstr "House"
 
-#: ../../source/processing/01_first_steps_drawing.md:301
-msgid "Übung 1.2: Gesicht"
-msgstr "Exercise 1.2: Face"
+#: ../../source/processing/01_first_steps_drawing.md:294
+msgid "Exercise 1.2 – Face"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:303
-msgid "Zeichne ein Gesicht mit Grundformen"
-msgstr "Draw a face with basic shapes"
+#: ../../source/processing/01_first_steps_drawing.md:296
+msgid "Draw a face using basic shapes:"
+msgstr ""
 
-#: ../../source/processing/01_first_steps_drawing.md:305
+#: ../../source/processing/01_first_steps_drawing.md:298
 msgid "![Face](../_images/processing/face1.png)"
 msgstr "![Face](../_images/processing/face1.png)"
 
-#: ../../source/processing/01_first_steps_drawing.md:305
+#: ../../source/processing/01_first_steps_drawing.md:298
 msgid "Face"
 msgstr "Face"
+
+#~ msgid "Zeichnen mit dem miniworlds - Grundlagen"
+#~ msgstr "Drawing with the miniworlds - Basics"
+
+#~ msgid ""
+#~ "Der miniworlds-Port von processing "
+#~ "übernimmt einige Ideen und Konzepte von"
+#~ " Processing, setzt dies aber oft auf"
+#~ " leicht abweichende Art um. In diesem"
+#~ " Tutorial lernst du das Programmieren "
+#~ "mit dem miniworlds kennen. Der "
+#~ "miniworlds hat einen *Processing*-Modus, der"
+#~ " sich an der populären "
+#~ "Grafikprogrammierumgebung orientiert."
+#~ msgstr ""
+#~ "The miniworlds port of processing adopts"
+#~ " some ideas and concepts from "
+#~ "Processing, but often implements them in"
+#~ " a slightly different way. In this"
+#~ " tutorial, you will learn programming "
+#~ "with miniworlds. The miniworlds has a"
+#~ " *Processing* mode that is oriented "
+#~ "towards the popular graphics programming "
+#~ "environment."
+
+#~ msgid "Wie zeichnet man auf einem PC?"
+#~ msgstr "How do you draw on a PC?"
+
+#~ msgid ""
+#~ "Monitore bestehen aus einem Gitter "
+#~ "kleinester Quadrate. Diese Quadrate sind "
+#~ "so klein, dass sie für uns wie "
+#~ "Punkte aussehen. Man nennt diese "
+#~ "kleinsten Quadrate *Pixel*."
+#~ msgstr ""
+#~ "Monitors consist of a grid of tiny"
+#~ " squares. These squares are so small"
+#~ " that they appear to us as "
+#~ "dots. These smallest squares are called"
+#~ " *pixels*."
+
+#~ msgid ""
+#~ "Die Pixel sind in einem "
+#~ "*Koordinatensystem* angeordnet. Dieses ist "
+#~ "allerdings leicht anders aufgebaut, denn "
+#~ "in der Regel ist der Ursprung in"
+#~ " der oberen linken Ecke:"
+#~ msgstr ""
+#~ "The pixels are arranged in a "
+#~ "*coordinate system*. However, this is "
+#~ "slightly different because usually the "
+#~ "origin is in the upper left "
+#~ "corner:"
+
+#~ msgid ""
+#~ "Informatiker zählen in der Regel "
+#~ "beginnend mit 0, d.h. die obere "
+#~ "linke Ecke hat die Koordinaten (0,0)."
+#~ " Ist das Bildschirmfenster 800x600 groß,"
+#~ "  so hat die untere rechte Ecke "
+#~ "die Koordinaten (799, 599)"
+#~ msgstr ""
+#~ "Computer scientists typically start counting"
+#~ " from 0, meaning the top left "
+#~ "corner has the coordinates (0,0). If "
+#~ "the screen window is 800x600 in "
+#~ "size, the bottom right corner has "
+#~ "the coordinates (799, 599)"
+
+#~ msgid "Ein miniworlds-Programm besteht aus mehreren Teilen:"
+#~ msgstr "A miniworlds program consists of several parts:"
+
+#~ msgid "1: Die miniworlds Bibliothek wird importiert"
+#~ msgstr "1: The miniworlds library is being imported"
+
+#~ msgid "2: Ein Spielfeld wird erstellt."
+#~ msgstr "2: A playing field is created."
+
+#~ msgid ""
+#~ "6: Am Ende wird die mainloop "
+#~ "gestartet, dies muss immer die letzte"
+#~ " Zeile deines Programms sein."
+#~ msgstr ""
+#~ "6: At the end, the mainloop is "
+#~ "started, this must always be the "
+#~ "last line of your program."
+
+#~ msgid ""
+#~ "Dazwischen findet sich ein *Kommentar* -"
+#~ " Kommentare beginnen immer mit einer "
+#~ "# und werden vom Computer ignoriert "
+#~ "und sind für **Menschen** gemacht. Sie"
+#~ " dienen dazu, Programmierern Hinweise zu"
+#~ " geben, hier z.B. das an diese "
+#~ "Stelle dein eigener Code kommt."
+#~ msgstr ""
+#~ "In between, there is a *comment* -"
+#~ " comments always start with a # "
+#~ "and are ignored by the computer "
+#~ "and are made for **humans**. They "
+#~ "serve to give programmers hints, for "
+#~ "example, that your own code comes "
+#~ "at this point."
+
+#~ msgid "Dieser könnte z.B. so aussehen:"
+#~ msgstr "This could look like this, for example:"
+
+#~ msgid ""
+#~ "Du kannst auch die Größe des "
+#~ "Worlds anpassen, indem du dem World "
+#~ "beim erstellen zwei Argumente übergibst:"
+#~ msgstr ""
+#~ "You can also adjust the size of"
+#~ " the world by passing two arguments"
+#~ " to the world when creating it:"
+
+#~ msgid "Zeichnen geometrischer Grundformen."
+#~ msgstr "Drawing basic geometric shapes."
+
+#~ msgid "Als nächstes lernst du, geometrische Grundformen zu zeichnen."
+#~ msgstr "Next, you will learn to draw basic geometric shapes."
+
+#~ msgid "Die Syntax zum Zeichnen einer Linie sieht folgendermaßen aus:"
+#~ msgstr "The syntax for drawing a line looks as follows:"
+
+#~ msgid ""
+#~ "Wenn du eine Linie von (10,10) zu"
+#~ " (100, 200) zeichnen willst so musst"
+#~ " du z.B. folgendes schreiben:"
+#~ msgstr ""
+#~ "If you want to draw a line "
+#~ "from (10,10) to (100, 200), you "
+#~ "must write the following, for example:"
+
+#~ msgid "Kreise"
+#~ msgstr "Kreise"
+
+#~ msgid "Kreise kannst du allgemein folgendermaßen erstellen:"
+#~ msgstr "You can generally create circles as follows:"
+
+#~ msgid "Die übergebene Position bei Kreisen ist der *Mittelpunkt* des Kreises"
+#~ msgstr "The passed position in circles is the *center* of the circle"
+
+#~ msgid ""
+#~ "Wenn du einen Kreis an der Stelle"
+#~ " (100,200) mit Radius 20 erstellen "
+#~ "willst, musst du folgendes schreiben:"
+#~ msgstr ""
+#~ "If you want to create a circle "
+#~ "at the position (100,200) with a "
+#~ "radius of 20, you must write the"
+#~ " following:"
+
+#~ msgid "Rechteck"
+#~ msgstr "Rectangle"
+
+#~ msgid "Ein Rechteck wird beschrieben durch Position, Breite und Höhe:"
+#~ msgstr "A rectangle is described by position, width, and height:"
+
+#~ msgid "Der Parameter `position` beschreibt die obere linke Ecke des Rechtecks."
+#~ msgstr ""
+#~ "The parameter `position` describes the "
+#~ "top left corner of the rectangle."
+
+#~ msgid ""
+#~ "Willst du ein Rechteck an der "
+#~ "Position (100, 100) mit Breite 20 "
+#~ "und Höhe 100 zeichnen, so musst du"
+#~ " folgendes schreiben:"
+#~ msgstr ""
+#~ "If you want to draw a rectangle"
+#~ " at position (100, 100) with a "
+#~ "width of 20 and a height of "
+#~ "100, you must write the following:"
+
+#~ msgid ""
+#~ "Ellipsen werden im Prinzip wie Rechtecke"
+#~ " beschrieben, d.h. die Ellipse wird "
+#~ "dann so gezeichnet, dass sie genau "
+#~ "in das Rechteck hineinpasst. `width` und"
+#~ " `height` beziehen sich hier jeweils "
+#~ "auf den Durchmesser der Ellipse"
+#~ msgstr ""
+#~ "Ellipses are basically described like "
+#~ "rectangles, i.e., the ellipse is then"
+#~ " drawn so that it fits exactly "
+#~ "into the rectangle. `width` and `height`"
+#~ " refer to the diameter of the "
+#~ "ellipse in each case"
+
+#~ msgid ""
+#~ "Willst du eine Ellipse an der "
+#~ "Position (100, 100) mit Breite 20 "
+#~ "und Höhe 100 zeichnen, so musst du"
+#~ " folgendes schreiben:"
+#~ msgstr ""
+#~ "If you want to draw an ellipse "
+#~ "at position (100, 100) with a "
+#~ "width of 20 and a height of "
+#~ "100, you must write the following:"
+
+#~ msgid "Rechteck und Ellipse in die Mitte verschieben."
+#~ msgstr "Move rectangle and ellipse to the center."
+
+#~ msgid ""
+#~ "Oft will man ein Rechteck oder "
+#~ "eine Ellipse nicht an der oberen "
+#~ "linken Position erstellen, sondern am "
+#~ "Mittelpunkt. Es gibt mehrere Möglichkeiten,"
+#~ " wie man dies erreichen kann, ohne"
+#~ " die Position manuell auszurechnen."
+#~ msgstr ""
+#~ "Often, one does not want to create"
+#~ " a rectangle or an ellipse at "
+#~ "the top-left position, but at the"
+#~ " center. There are several ways to"
+#~ " achieve this without manually calculating"
+#~ " the position."
+
+#~ msgid ""
+#~ "Mit der Klassenmethode from_center kannst "
+#~ "du eine Ellipse am Zentrum erstellen."
+#~ msgstr ""
+#~ "With the class method from_center, you"
+#~ " can create an ellipse at the "
+#~ "center."
+
+#~ msgid "2. Verschieben mit ellipse.center"
+#~ msgstr "2. Move with ellipse.center"
+
+#~ msgid ""
+#~ "Du kannst die Ellipse nach dem "
+#~ "Verschieben an den Mittelpunkt verschieben;"
+#~ msgstr "You can move the ellipse to the center after shifting;"
+
+#~ msgid "Komplexere geometrische Grundformen"
+#~ msgstr "Complex geometric basic shapes"
+
+#~ msgid "Kreisbögen und Kreisausschnitte zeichnest du mit folgendem Befehl:"
+#~ msgstr ""
+#~ "You draw circular arcs and circular "
+#~ "segments with the following command:"
+
+#~ msgid "Bedeutung der Parameter:"
+#~ msgstr "Meaning of the parameters:"
+
+#~ msgid "``position``: Die Position als 2-Tupel"
+#~ msgstr "``position``: The position as a 2-tuple"
+
+#~ msgid ""
+#~ "``width``, ``height``: Breite und Höhe "
+#~ "bei Erstellung einer Ellipse. Wähle "
+#~ "beide gleich, damit sich der Radius "
+#~ "für einen Kreisbogen ergibt oder wähle"
+#~ " unterschiedle Werte, damit sich der "
+#~ "Bogen und Ausschnitt einer Ellipse "
+#~ "ergibt."
+#~ msgstr ""
+#~ "``width``, ``height``: Width and height "
+#~ "when creating an ellipse. Choose both"
+#~ " equal to get the radius for a"
+#~ " circular arc or choose different "
+#~ "values to get the arc and segment"
+#~ " of an ellipse."
+
+#~ msgid ""
+#~ "``start_angle``, ``end_angle``: Die Winkel des"
+#~ " Ausschnitts. Die Winkel werden von "
+#~ "einer gedachten Linie *gegen den "
+#~ "Uhrzeigersinn* gemessen."
+#~ msgstr ""
+#~ "``start_angle``, ``end_angle``: The angles of"
+#~ " the segment. The angles are measured"
+#~ " from an imaginary line *counterclockwise*."
+
+#~ msgid "Beispiel:"
+#~ msgstr "Example:"
+
+#~ msgid "Ein Dreieck erstellst du mit folgendem Befehl:"
+#~ msgstr "You create a triangle with the following command:"
+
+#~ msgid "p1, p2 und p3 sind Punkte, die du jeweils als Tupel schreiben kannst."
+#~ msgstr "p1, p2 and p3 are points that you can write as tuples."
+
+#~ msgid "Ein Polygon (d.h. ein n-Eck) erstellst du mit folgendem Befehl:"
+#~ msgstr "You create a polygon (i.e., an n-gon) with the following command:"
+
+#~ msgid ""
+#~ "``pointlist`` ist eine Liste von "
+#~ "Punkten. Das Dreieck aus dem vorherigen"
+#~ " Beispiel kannst du z.B. folgendermaßen "
+#~ "als Polygon erstellen:"
+#~ msgstr ""
+#~ "\"pointlist\" is a list of points. "
+#~ "You can create the triangle from "
+#~ "the previous example as a polygon "
+#~ "as follows:"
+
+#~ msgid "Training"
+#~ msgstr "Training"
+
+#~ msgid "Übung 1.1: Haus mit Grundformen"
+#~ msgstr "Exercise 1.1: House with Basic Shapes"
+
+#~ msgid "Zeichne ein Haus mit Grundformen:"
+#~ msgstr "Draw a house with basic shapes:"
+
+#~ msgid "Übung 1.2: Gesicht"
+#~ msgstr "Exercise 1.2: Face"
+
+#~ msgid "Zeichne ein Gesicht mit Grundformen"
+#~ msgstr "Draw a face with basic shapes"
+
+#~ msgid ""
+#~ "Hier ist die englische Übersetzung des"
+#~ " Abschnitts **„Zeichnen mit dem miniworlds"
+#~ " – Grundlagen“**:"
+#~ msgstr ""
+

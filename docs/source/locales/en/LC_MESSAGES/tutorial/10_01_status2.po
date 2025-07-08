@@ -2,13 +2,13 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2025-07-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,40 +17,101 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: ../../source/tutorial/10_01_status2.md:1
-msgid "Das Programm stoppen"
-msgstr "Stop the program"
+msgid "Stopping the Program"
+msgstr ""
 
 #: ../../source/tutorial/10_01_status2.md:3
 msgid ""
-"Bei einem Spielende oder einem Levelwechsel gibt es oft bestimmte Aktionen, die durchgeführt werden müssen,  wie z.B. "
-"das Spielfeld zurückzusetzen oder das Spiel zu pausieren. Dafür stehen folgende Befehle zur Verfügung:"
+"At the end of a game or during a level transition, certain actions often "
+"need to be performed — like resetting the game field or pausing the game."
+" The following commands are available for that purpose:"
 msgstr ""
-"At the end of a game or a level change, there are often certain actions that need to be performed, such as resetting "
-"the playing field or pausing the game. The following commands are available for this:"
 
 #: ../../source/tutorial/10_01_status2.md:6
-msgid "**`world.stop()`**: Stoppt das Spielfeld. Es werden keine weiteren Aktionen ausgeführt und keine Events mehr abgefragt."
-msgstr "**`world.stop()`**: Stops the playing field. No further actions are executed and no events are queried anymore."
+msgid ""
+"**`world.stop()`**: Stops the world. No more actions will be executed and"
+" no events will be processed."
+msgstr ""
 
 #: ../../source/tutorial/10_01_status2.md:7
-msgid "**`world.start()`**: Setzt einen vorherigen `stop`-Befehl zurück und lässt das Spiel weiterlaufen."
-msgstr "**`world.start()`**: Resets a previous `stop` command and allows the game to continue. "
+msgid "**`world.start()`**: Resumes the game after a previous `stop()` command."
+msgstr ""
 
 #: ../../source/tutorial/10_01_status2.md:8
-msgid "**`world.is_running`**: Mit dieser Variable kannst du überprüfen, ob das Spielfeld gerade aktiv ist."
-msgstr "**`world.is_running`**: With this variable, you can check if the playing field is currently active."
+msgid ""
+"**`world.is_running`**: A boolean variable you can use to check if the "
+"world is currently active."
+msgstr ""
 
 #: ../../source/tutorial/10_01_status2.md:9
-msgid "**`world.clear()`**: Entfernt alle Figuren vom Spielfeld."
+#, fuzzy
+msgid "**`world.clear()`**: Removes all actors from the world."
 msgstr "**`world.clear()`**: Removes all figures from the playing field."
 
 #: ../../source/tutorial/10_01_status2.md:10
 msgid ""
-"**`world.reset()`**: Löscht das aktuelle Spielfeld und erstellt ein neues, indem alle Figuren wie in der Methode "
-"`world.on_setup()` definiert, neu erzeugt werden."
+"**`world.reset()`**: Clears the current world and re-creates it by "
+"calling everything defined in the `world.on_setup()` method."
 msgstr ""
-"**`world.reset()`**: Clears the current playing field and creates a new one by regenerating all pieces as defined in "
-"the `world.on_setup()` method. "
+
+#~ msgid "Das Programm stoppen"
+#~ msgstr "Stop the program"
+
+#~ msgid ""
+#~ "Bei einem Spielende oder einem "
+#~ "Levelwechsel gibt es oft bestimmte "
+#~ "Aktionen, die durchgeführt werden müssen,  "
+#~ "wie z.B. das Spielfeld zurückzusetzen "
+#~ "oder das Spiel zu pausieren. Dafür "
+#~ "stehen folgende Befehle zur Verfügung:"
+#~ msgstr ""
+#~ "At the end of a game or a"
+#~ " level change, there are often "
+#~ "certain actions that need to be "
+#~ "performed, such as resetting the playing"
+#~ " field or pausing the game. The "
+#~ "following commands are available for "
+#~ "this:"
+
+#~ msgid ""
+#~ "**`world.stop()`**: Stoppt das Spielfeld. Es"
+#~ " werden keine weiteren Aktionen ausgeführt"
+#~ " und keine Events mehr abgefragt."
+#~ msgstr ""
+#~ "**`world.stop()`**: Stops the playing field."
+#~ " No further actions are executed and"
+#~ " no events are queried anymore."
+
+#~ msgid ""
+#~ "**`world.start()`**: Setzt einen vorherigen "
+#~ "`stop`-Befehl zurück und lässt das Spiel"
+#~ " weiterlaufen."
+#~ msgstr ""
+#~ "**`world.start()`**: Resets a previous `stop`"
+#~ " command and allows the game to "
+#~ "continue. "
+
+#~ msgid ""
+#~ "**`world.is_running`**: Mit dieser Variable "
+#~ "kannst du überprüfen, ob das Spielfeld"
+#~ " gerade aktiv ist."
+#~ msgstr ""
+#~ "**`world.is_running`**: With this variable, "
+#~ "you can check if the playing field"
+#~ " is currently active."
+
+#~ msgid ""
+#~ "**`world.reset()`**: Löscht das aktuelle "
+#~ "Spielfeld und erstellt ein neues, indem"
+#~ " alle Figuren wie in der Methode "
+#~ "`world.on_setup()` definiert, neu erzeugt "
+#~ "werden."
+#~ msgstr ""
+#~ "**`world.reset()`**: Clears the current "
+#~ "playing field and creates a new "
+#~ "one by regenerating all pieces as "
+#~ "defined in the `world.on_setup()` method. \n"
+
