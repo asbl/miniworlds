@@ -43,7 +43,7 @@ jobs:
         echo "PYTHONPATH=$PYTHONPATH"
 
         # Schritt 1: Extrahiere Texte
-        python -m sphinx.cmd.build -b gettext source build/gettext
+        make gettext
 
         # Schritt 2: Aktualisiere PO-Dateien
         sphinx-intl update -p build/gettext -l en -l de
