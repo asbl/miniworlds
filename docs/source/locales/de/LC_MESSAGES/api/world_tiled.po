@@ -152,11 +152,11 @@ msgstr ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
-msgstr ":py:obj:`Zeilen <miniworlds.worlds.world.World.rows>`\\"
+msgstr ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
-msgstr ":py:obj:`Größe <miniworlds.worlds.world.World.size>`\\"
+msgstr ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid "Set the size of world"
@@ -164,7 +164,7 @@ msgstr "Stelle die Größe der Welt ein"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
-msgstr ":py:obj:`Hintergrund <miniworlds.worlds.world.World.background>`\\"
+msgstr ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
 
 #: ../../None:29:<autosummary>:1 ../../None:35:<autosummary>:1
 msgid "Returns the current background"
@@ -263,11 +263,11 @@ msgstr ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
-msgstr ":py:obj:`Fenster <miniworlds.worlds.world_base.WorldBase.window>`\\"
+msgstr ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
-msgstr ":py:obj:`Größe <miniworlds.worlds.world_base.WorldBase.size>`\\"
+msgstr ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`topleft <miniworlds.worlds.world_base.WorldBase.topleft>`\\"
@@ -293,7 +293,7 @@ msgid ""
 msgstr ""
 ":py:obj:`__init__ "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__>`\\ "
-"\\(\\[x\\, y\\, tile\\_size\\, leer\\]\\)"
+"\\(\\[x\\, y\\, tile\\_size\\, empty\\]\\)"
 
 #: ../../None:28:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__:1 of
@@ -348,7 +348,7 @@ msgid ""
 msgstr ""
 ":py:obj:`add_corner_to_world "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world>`\\"
-" \\(position\\, Richtung\\)"
+" \\(position\\, direction\\)"
 
 #: ../../None:28:<autosummary>:1
 msgid ""
@@ -593,7 +593,7 @@ msgid ""
 msgstr ""
 ":py:obj:`to_pixel "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel>`\\ "
-"\\(position\\[\\, größe\\, ursprung\\]\\)"
+"\\(position\\[\\, size\\, origin\\]\\)"
 
 #: ../../None:28:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:1 of
@@ -688,13 +688,11 @@ msgstr ""
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
-msgstr ""
-":py:obj:`setze_zeilen <miniworlds.worlds.world.World.set_rows>`\\ "
-"\\(value\\)"
+msgstr ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
-msgstr ":py:obj:`Grenzen <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
+msgstr ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
@@ -1248,7 +1246,7 @@ msgstr "Die Anzahl der Zeilen"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__:5 of
 msgid "The world has no tiles, edges, and corners. They must be created manually"
 msgstr ""
-"Die Welt hat keine Fliesen, Kanten und Ecken. Sie müssen manuell erstellt"
+"Die Welt hat keine tiles, edges und corners. Sie müssen manuell erstellt"
 " werden"
 
 #: ../../source/api/world_tiled.md
