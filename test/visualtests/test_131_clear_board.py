@@ -18,7 +18,7 @@ class Test131(unittest.TestCase):
 
                 @timer(frames = 10)
                 def clean():
-                    world.clear()
+                    world._clear()
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

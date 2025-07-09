@@ -131,12 +131,11 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
 
         self._validate_arguments(position, *args, **kwargs)
         self._collision_type: str = "mask"
-        self.is_display_initialized: bool = False
         self._layer: int = 0
         self._inner = 0
         self._size = (0, 0)
         self._static = False
-        self.children =  pygame.sprite.LayeredDirty()
+        #self.children =  pygame.sprite.LayeredDirty()
         self.actor_id: int = Actor.actor_count + 1
         self._has_position_manager = False
         self._has_sensor_manager = False
@@ -146,7 +145,7 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         self.is_focusable = False
         self.has_focus = False
         self._parent = None  # For actors in container
-        self.children: List["Actor"] = []
+        #self.children: List["Actor"] = []
         try:
             self.world.get_world_connector(self).init_managers(position)
         except AttributeError as e:

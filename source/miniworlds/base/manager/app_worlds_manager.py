@@ -111,7 +111,7 @@ class WorldsManager:
 
     def _deactivate_world(self, world: "world_mod.World"):
         world.stop()
-        world.stop_listening()
+        world._stop_listening()
         world.app.event_manager.event_queue.clear()
         if world in app.App.running_worlds:
             app.App.running_worlds.remove(world)
@@ -128,7 +128,7 @@ class WorldsManager:
         if setup:
             world.event_manager.setup_world()
         world.background.set_dirty("all", 2)
-        world.start_listening()
+        world._start_listening()
 
     def _finalize_world_switch(self, old_world, new_world):
         self.app.image = new_world.backgrounds.image

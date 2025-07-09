@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 13:25+0200\n"
+"POT-Creation-Date: 2025-07-08 17:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -27,6 +27,34 @@ msgstr ""
 msgid "Child class of [Appearances Manager](/api/appearances_manager)"
 msgstr ""
 
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager:1 of
+msgid "Manages background appearances in a world."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager:3 of
+msgid ""
+"This manager is typically accessed via the `backgrounds` attribute of a "
+"`World` instance."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager:6
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:10
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.background:4
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.backgrounds:4
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:8
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:10
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:10
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:12
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.world:4 of
+msgid "Example"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager:7 of
+msgid ""
+"world.backgrounds.set_background(\"assets/backgrounds/forest.png\") bg = "
+"world.backgrounds.background world.backgrounds.switch_background(2)"
+msgstr ""
+
 #: ../../source/api/backgrounds_manager.md
 msgid "Public Data Attributes:"
 msgstr ""
@@ -38,15 +66,32 @@ msgid ""
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.background:1
+#: of
+msgid "Returns the currently active background."
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`world "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.world>`\\"
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.world:1 of
+msgid "Shortcut for accessing the owning world."
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`backgrounds "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.backgrounds>`\\"
+msgstr ""
+
+#: ../../None:5:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.backgrounds:1
+#: of
+msgid "Returns the list of all loaded backgrounds."
 msgstr ""
 
 #: ../../None:6:<autosummary>:1
@@ -77,66 +122,88 @@ msgstr ""
 msgid "Public Methods:"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.__init__>`\\"
 " \\(parent\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.__init__:1 of
+msgid "Initializes the BackgroundsManager."
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`get_background_at_index "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index>`\\"
 " \\(index\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:1
+#: of
+msgid "Returns the background at a specific index."
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`add_background "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background>`\\"
 " \\(source\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:1
+#: of
+msgid "Adds a new background from a given source path."
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`set_background "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background>`\\"
 " \\(source\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:1
+#: of
+msgid "Sets the background to the one specified by the source."
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`create_appearance "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1 ../../None:31:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 #: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:1
 #: of
-msgid "Returns a new appearance (Background instance or Costume instance)"
+msgid "Creates a new background appearance instance."
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`switch_appearance "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance>`\\"
 " \\(source\\)"
 msgstr ""
 
-#: ../../None:10:<autosummary>:1
+#: ../../None:9:<autosummary>:1
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:1
+#: of
+msgid "Switches to a different background by index or reference."
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`switch_background "
 "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_background>`\\"
 " \\(source\\)"
-msgstr ""
-
-#: ../../None:10:<autosummary>:1
-msgid ""
-":py:obj:`get_world "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_world>`\\"
-" \\(\\)"
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -183,6 +250,10 @@ msgid ""
 ":py:obj:`create_appearance "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance>`\\"
 " \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+msgid "Returns a new appearance (Background instance or Costume instance)"
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -465,19 +536,151 @@ msgid ""
 msgstr ""
 
 #: ../../source/api/backgrounds_manager.md
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance
+#: of
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.__init__:3 of
+msgid "The world instance that owns this manager."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance
+#: of
 msgid "Return type"
 msgstr ""
 
-#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:4
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:3
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:3
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:3
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:3
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
 msgstr ""
 
-#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:2
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:5
+#: of
+msgid "Path to the background resource."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance
+#: of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:7
+#: of
+msgid "The newly added background instance."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background:11
+#: of
+msgid "world.backgrounds.add_background(\"assets/bg/mountain.png\")"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.background:5
+#: of
+msgid "current = world.backgrounds.background"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.backgrounds:5
+#: of
+msgid "for bg in world.backgrounds.backgrounds:"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.backgrounds:6
+#: of
+msgid "print(bg.name)"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:5
+#: of
+msgid "A new Background object linked to the world."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:9
+#: of
+msgid "bg = world.backgrounds.create_appearance()"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:5
+#: of
+msgid "Index of the background in the manager."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:7
+#: of
+msgid "The background at the given index."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index:11
+#: of
+msgid "bg = world.backgrounds.get_background_at_index(0)"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:5
+#: of
+msgid "Path to the new background."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:7
+#: of
+msgid "The background that has been set."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background:11
+#: of
+msgid "world.backgrounds.set_background(\"assets/bg/sea.png\")"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:3
+#: of
+msgid "Marks all actors in the world as dirty for redrawing."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:5
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\``"
 msgstr ""
 
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:7
+#: of
+msgid "Index of background or background instance."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:9
+#: of
+msgid "The newly activated background."
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:13
+#: of
+msgid ""
+"world.backgrounds.switch_appearance(1) "
+"world.backgrounds.switch_appearance(other_bg)"
+msgstr ""
+
+#: miniworlds.appearances.backgrounds_manager.BackgroundsManager.world:5 of
+msgid "world = world.backgrounds.world"
+msgstr ""
+
 #~ msgid "Child class of **Appearances Manager**"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`get_world "
+#~ "<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_world>`\\"
+#~ " \\(\\)"
 #~ msgstr ""
 
