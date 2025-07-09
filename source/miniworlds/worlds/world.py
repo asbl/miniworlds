@@ -415,7 +415,6 @@ class World(world_base.WorldBase):
         self.camera.height = value
         self.world_size_y = value
 
-
     @property
     def size(self) -> Tuple[int, int]:
         """
@@ -674,32 +673,6 @@ class World(world_base.WorldBase):
             self.is_running = False
         else:
             timer.ActionTimer(frames, self.stop, 0)
-
-
-    def _start_listening(self) -> None:
-        """
-        Enables input listening for the world.
-
-        After calling this method, the world will start responding
-        to input-related events such as mouse or keyboard interactions.
-
-        Example:
-            >>> world.start_listening()
-        """
-        self.is_listening = True
-
-
-    def _stop_listening(self) -> None:
-        """
-        Disables input listening for the world.
-
-        After calling this method, the world will stop reacting to user input events.
-
-        Example:
-            >>> world.stop_listening()
-        """
-        self.is_listening = False
-
 
     def run(
         self,
@@ -961,38 +934,6 @@ class World(world_base.WorldBase):
             List[actor_mod.Actor],
             [actor for actor in self.actors if actor.sensor_manager.detect_pixel(pixel)],
         )
-
-    def register(self, method: Callable) -> Callable:
-        """
-        Registers a method as a world event handler.
-
-        Typically used as a decorator to bind a function to the event loop.
-
-        Args:
-            method: The function or method to register.
-
-        Returns:
-            The bound method that will be invoked by the world event system.
-
-        Example:
-            >>> @world.register
-            ... def act():
-            ...     print(\"Acting...\")
-        """
-        self._registered_methods.append(method)
-        bound_method = world_inspection.WorldInspection(self).bind_method(method)
-        self.event_manager.register_event(method.__name__, self)
-        return bound_method
-        
-    def _unregister(self, method: Callable) -> None:
-        """
-        Unregisters a previously registered world method.
-
-        Args:
-            method: The method that should no longer receive world events.
-        """
-        self._registered_methods.remove(method)
-        world_inspection.WorldInspection(self).unbind_method(method)
 
     @staticmethod
     def distance_to(pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:

@@ -410,7 +410,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`set_animated "
-"<miniworlds.appearances.appearance.Appearance.set_animated>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance.set_animated>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -418,7 +418,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`flip <miniworlds.appearances.appearance.Appearance.flip>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -516,7 +516,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`fill <miniworlds.appearances.appearance.Appearance.fill>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.fill:1 of
@@ -529,7 +529,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`set_filled "
-"<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -730,7 +730,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_animation_speed "
 "<miniworlds.appearances.appearance.Appearance._set_animation_speed>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -754,7 +754,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_rotatable "
 "<miniworlds.appearances.appearance.Appearance._set_rotatable>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
@@ -768,7 +768,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_centered "
 "<miniworlds.appearances.appearance.Appearance._set_centered>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -777,7 +777,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`_set_flipped "
-"<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -793,7 +793,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`_set_scaled "
-"<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
@@ -825,7 +825,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_scaled_to_width "
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_width>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -835,7 +835,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_scaled_to_height "
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_height>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""

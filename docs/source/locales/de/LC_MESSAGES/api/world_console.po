@@ -380,7 +380,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`scroll_up <miniworlds.worlds.gui.toolbar.Toolbar.scroll_up>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -388,7 +388,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.scroll_down>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`scroll_down "
-"<miniworlds.worlds.gui.toolbar.Toolbar.scroll_down>`\\ \\(Wert\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.scroll_down>`\\ \\(value\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -396,7 +396,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`can_scroll_down "
-"<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down>`\\ \\(Wert\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down>`\\ \\(value\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -404,7 +404,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`can_scroll_up "
-"<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up>`\\ \\(Wert\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up>`\\ \\(value\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -478,17 +478,17 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`setze_zeilen <miniworlds.worlds.world.World.set_rows>`\\ "
-"\\(wert\\)"
+"\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
-msgstr ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(Wert\\)"
+msgstr ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
@@ -1303,7 +1303,7 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.
 #~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(value\\)"
 #~ msgstr ""
 #~ ":py:obj:`default_fill "
-#~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(Wert\\)"
+#~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(value\\)"
 
 #~ msgid ""
 #~ ":py:obj:`play_sound "

@@ -438,7 +438,7 @@ msgid ""
 msgstr ""
 ":py:obj:`borders "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:28:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:1 of
@@ -608,7 +608,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_columns "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_columns>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:28:<autosummary>:1
 msgid ""
@@ -618,7 +618,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_rows "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_rows>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:28:<autosummary>:1
 msgid ""
@@ -628,7 +628,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_tile_size "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -684,17 +684,17 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`setze_zeilen <miniworlds.worlds.world.World.set_rows>`\\ "
-"\\(wert\\)"
+"\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
-msgstr ":py:obj:`Grenzen <miniworlds.worlds.world.World.borders>`\\ \\(Wert\\)"
+msgstr ":py:obj:`Grenzen <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
@@ -1707,7 +1707,7 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(value\\)"
 #~ msgstr ""
 #~ ":py:obj:`default_fill "
-#~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(Wert\\)"
+#~ "<miniworlds.worlds.world.World.default_fill>`\\ \\(value\\)"
 
 #~ msgid ""
 #~ ":py:obj:`play_sound "
