@@ -196,7 +196,9 @@ msgstr ":py:obj:`is_running <miniworlds.worlds.gui.gui.GUI.is_running>`\\"
 msgid ""
 ":py:obj:`actors_fixed_size "
 "<miniworlds.worlds.gui.gui.GUI.actors_fixed_size>`\\"
-msgstr ":py:obj:`actors <miniworlds.worlds.gui.gui.GUI.actors>`\\"
+msgstr ""
+":py:obj:`actors_fixed_size "
+"<miniworlds.worlds.gui.gui.GUI.actors_fixed_size>`\\"
 
 #: ../../None:16:<autosummary>:1
 msgid ":py:obj:`app <miniworlds.worlds.gui.gui.GUI.app>`\\"
@@ -205,33 +207,31 @@ msgstr ":py:obj:`app <miniworlds.worlds.gui.gui.GUI.app>`\\"
 #: ../../None:16:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`backgrounds <miniworlds.worlds.gui.gui.GUI.backgrounds>`\\"
-msgstr ""
-":py:obj:`backgrounds_manager "
-"<miniworlds.worlds.gui.gui.GUI.backgrounds_manager>`\\"
+msgstr ":py:obj:`backgrounds <miniworlds.worlds.gui.gui.GUI.backgrounds>`\\"
 
 #: ../../None:16:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`layout <miniworlds.worlds.gui.gui.GUI.layout>`\\"
-msgstr ":py:obj:`sound <miniworlds.worlds.gui.gui.GUI.sound>`\\"
+msgstr ":py:obj:`layout <miniworlds.worlds.gui.gui.GUI.layout>`\\"
 
 #: ../../None:16:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`data <miniworlds.worlds.gui.gui.GUI.data>`\\"
-msgstr ":py:obj:`ask <miniworlds.worlds.gui.gui.GUI.ask>`\\"
+msgstr ":py:obj:`data <miniworlds.worlds.gui.gui.GUI.data>`\\"
 
 #: ../../None:16:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`mouse <miniworlds.worlds.gui.gui.GUI.mouse>`\\"
-msgstr ":py:obj:`Musik <miniworlds.worlds.gui.gui.GUI.music>`\\"
+msgstr ":py:obj:`mouse <miniworlds.worlds.gui.gui.GUI.mouse>`\\"
 
 #: ../../None:16:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`draw <miniworlds.worlds.gui.gui.GUI.draw>`\\"
-msgstr ":py:obj:`ask <miniworlds.worlds.gui.gui.GUI.ask>`\\"
+msgstr ":py:obj:`draw <miniworlds.worlds.gui.gui.GUI.draw>`\\"
 
 #: ../../None:16:<autosummary>:1
 msgid ":py:obj:`music <miniworlds.worlds.gui.gui.GUI.music>`\\"
-msgstr ":py:obj:`Musik <miniworlds.worlds.gui.gui.GUI.music>`\\"
+msgstr ":py:obj:`music <miniworlds.worlds.gui.gui.GUI.music>`\\"
 
 #: ../../None:16:<autosummary>:1
 msgid ":py:obj:`sound <miniworlds.worlds.gui.gui.GUI.sound>`\\"
@@ -239,7 +239,7 @@ msgstr ":py:obj:`sound <miniworlds.worlds.gui.gui.GUI.sound>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
-msgstr ":py:obj:`Unterklassen <miniworlds.worlds.world.World.subclasses>`\\"
+msgstr ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`class_name <miniworlds.worlds.world.World.class_name>`\\"
@@ -398,7 +398,7 @@ msgstr ":py:obj:`topleft <miniworlds.worlds.world_base.WorldBase.topleft>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
-msgstr ":py:obj:`Breite <miniworlds.worlds.world_base.WorldBase.width>`\\"
+msgstr ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.worlds.world_base.WorldBase.height>`\\"
@@ -543,7 +543,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_new_actor "
-"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(Akteur\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(actor\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -551,11 +551,11 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_remove_actor "
-"<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(Akteur\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(actor\\)"
 
 #: ../../None:3:<autosummary>:1
 msgid ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(actor\\)"
-msgstr ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(Akteur\\)"
+msgstr ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(actor\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -623,7 +623,7 @@ msgstr ":py:obj:`Grenzen <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
-msgstr "Ruft alle Ränder aus einer Quelle (`Position` oder `Rect`) ab."
+msgstr "Ruft alle Ränder aus einer source (`Position` oder `Rect`) ab."
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -639,7 +639,7 @@ msgid ""
 "<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
 msgstr ""
 ":py:obj:`switch_background "
-"<miniworlds.worlds.world.World.switch_background>`\\ \\(Hintergrund\\)"
+"<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Switches the background"
@@ -653,7 +653,7 @@ msgid ""
 msgstr ""
 ":py:obj:`remove_background "
 "<miniworlds.worlds.world.World.remove_background>`\\ "
-"\\(\\[hintergrund\\]\\)"
+"\\(\\[background\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Removes a background from world"
@@ -665,7 +665,7 @@ msgid ""
 " \\(source\\)"
 msgstr ""
 ":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\"
-" \\(Quelle\\)"
+" \\(source\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Adds a new background to the world"
@@ -737,7 +737,7 @@ msgid ""
 "\\(message\\[\\, data\\]\\)"
 msgstr ""
 ":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
-"\\(Nachricht\\[\\, Daten\\]\\)"
+"\\(message\\[\\, data\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -803,7 +803,7 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all actors which are found at a specific position."
@@ -915,7 +915,7 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_remove_actor "
-"<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(Akteur\\)"
+"<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
 
 #: ../../None:8:<autosummary>:1
 #, fuzzy

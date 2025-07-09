@@ -451,7 +451,7 @@ msgid ""
 "<miniworlds.appearances.background.Background.add_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`add_image "
-"<miniworlds.appearances.background.Background.add_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.background.Background.add_image>`\\ \\(source\\)"
 
 #: ../../None:33:<autosummary>:1 ../../None:9:<autosummary>:1
 #: miniworlds.appearances.background.Background.add_image:1 of
@@ -548,7 +548,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`add_image "
-"<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -658,7 +658,7 @@ msgid ""
 "\\(source\\, position\\, width\\, height\\)"
 msgstr ""
 ":py:obj:`draw <miniworlds.appearances.appearance.Appearance.draw>`\\ "
-"\\(Quelle\\, Position\\, Breite\\, Höhe\\)"
+"\\(source\\, Position\\, Breite\\, Höhe\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -1007,7 +1007,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`_set_image "
-"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""

@@ -92,5 +92,5 @@ msgid ""
 "[here](concepts/concept_self.md). \\:::"
 msgstr ""
 "\\:::{seealso} Mehr über Methoden und die Verwendung von `self` findest "
-"du [hier](concept_self.md). \\:::"
+"du [hier](concepts/concept_self.md). \\:::"
 

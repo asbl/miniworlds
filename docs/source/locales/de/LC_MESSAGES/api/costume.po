@@ -405,7 +405,7 @@ msgid ""
 "\\(source\\)"
 msgstr ""
 ":py:obj:`set_image <miniworlds.appearances.costume.Costume.set_image>`\\ "
-"\\(Quelle\\)"
+"\\(source\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
@@ -470,7 +470,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`set_image "
-"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:33:<autosummary>:1
 msgid "Sets the displayed image of costume/background to selected index"
@@ -537,7 +537,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`add_image "
-"<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Adds an image to the appearance"
@@ -551,7 +551,7 @@ msgid ""
 msgstr ""
 ":py:obj:`add_images "
 "<miniworlds.appearances.appearance.Appearance.add_images>`\\ "
-"\\(Quellen\\)"
+"\\(sources\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Adds multiple images to background/costume."
@@ -651,7 +651,7 @@ msgid ""
 "\\(source\\, position\\, width\\, height\\)"
 msgstr ""
 ":py:obj:`draw <miniworlds.appearances.appearance.Appearance.draw>`\\ "
-"\\(Quelle\\, Position\\, Breite\\, Höhe\\)"
+"\\(source\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -661,7 +661,7 @@ msgid ""
 msgstr ""
 ":py:obj:`draw_on_image "
 "<miniworlds.appearances.appearance.Appearance.draw_on_image>`\\ "
-"\\(Pfad\\, Position\\, Breite\\, Höhe\\)"
+"\\(path\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -671,7 +671,7 @@ msgid ""
 msgstr ""
 ":py:obj:`draw_color_on_image "
 "<miniworlds.appearances.appearance.Appearance.draw_color_on_image>`\\ "
-"\\(Farbe\\, Position\\, Breite\\, ...\\)"
+"\\(color\\, position\\, width\\, ...\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -996,7 +996,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`_set_image "
-"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""

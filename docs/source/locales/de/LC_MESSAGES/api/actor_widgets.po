@@ -190,7 +190,7 @@ msgstr ""
 
 #: ../../None:4:<autosummary>:1
 msgid ":py:obj:`visible <miniworlds.actors.parent_actor.ParentActor.visible>`\\"
-msgstr ":py:obj:`sichtbar <miniworlds.actors.parent_actor.ParentActor.visible>`\\"
+msgstr ":py:obj:`visible <miniworlds.actors.parent_actor.ParentActor.visible>`\\"
 
 #: ../../None:4:<autosummary>:1 ../../None:52:<autosummary>:1
 msgid ""
@@ -282,7 +282,7 @@ msgstr "Wenn ein Actor gespiegelt wird, wird er entlang der y-Achse gespiegelt."
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`costume <miniworlds.actors.actor.Actor.costume>`\\"
-msgstr ":py:obj:`Kostüm <miniworlds.actors.actor.Actor.costume>`\\"
+msgstr ":py:obj:`costume <miniworlds.actors.actor.Actor.costume>`\\"
 
 #: ../../None:52:<autosummary>:1
 #, fuzzy
@@ -291,7 +291,7 @@ msgstr "Erhält das Kostüm des Actors"
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`costumes <miniworlds.actors.actor.Actor.costumes>`\\"
-msgstr ":py:obj:`Kostüme <miniworlds.actors.actor.Actor.costumes>`\\"
+msgstr ":py:obj:`costumes <miniworlds.actors.actor.Actor.costumes>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid "Gets the costume manager"
@@ -303,7 +303,7 @@ msgstr ":py:obj:`orientation <miniworlds.actors.actor.Actor.orientation>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`direction <miniworlds.actors.actor.Actor.direction>`\\"
-msgstr ":py:obj:`Richtung <miniworlds.actors.actor.Actor.direction>`\\"
+msgstr ":py:obj:`direction <miniworlds.actors.actor.Actor.direction>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ""
@@ -357,7 +357,7 @@ msgstr "Die Breite des Akteurs in Pixeln."
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
-msgstr ":py:obj:`Höhe <miniworlds.actors.actor.Actor.height>`\\"
+msgstr ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid "The height of the actor in pixels."
@@ -437,7 +437,7 @@ msgstr "Legt fest, ob das Kostüm eines Actors drehbar sein soll."
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`static <miniworlds.actors.actor.Actor.static>`\\"
-msgstr ":py:obj:`statisch <miniworlds.actors.actor.Actor.static>`\\"
+msgstr ":py:obj:`static <miniworlds.actors.actor.Actor.static>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ""
@@ -457,7 +457,7 @@ msgstr "Die Füllfarbe des Akteurs als RGBA-Wert, z.B. (255, 0, 0) für Rot."
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
-msgstr ":py:obj:`Farbe <miniworlds.actors.actor.Actor.color>`\\"
+msgstr ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`is_filled <miniworlds.actors.actor.Actor.is_filled>`\\"
@@ -489,7 +489,7 @@ msgstr "Die Randgröße des Akteurs."
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
-msgstr ":py:obj:`sichtbar <miniworlds.actors.actor.Actor.visible>`\\"
+msgstr ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`rect <miniworlds.actors.actor.Actor.rect>`\\"
@@ -533,7 +533,7 @@ msgstr ""
 
 #: ../../None:52:<autosummary>:1
 msgid ":py:obj:`position <miniworlds.actors.actor.Actor.position>`\\"
-msgstr ":py:obj:`Position <miniworlds.actors.actor.Actor.position>`\\"
+msgstr ":py:obj:`position <miniworlds.actors.actor.Actor.position>`\\"
 
 #: ../../None:52:<autosummary>:1
 msgid ""
@@ -557,7 +557,7 @@ msgstr ":py:obj:`speed <miniworlds.actors.actor.Actor.speed>`\\"
 
 #: ../../None:4:<autosummary>:1
 msgid ":py:obj:`visible <pygame.sprite.DirtySprite.visible>`\\"
-msgstr ":py:obj:`sichtbar <pygame.sprite.DirtySprite.visible>`\\"
+msgstr ":py:obj:`visible <pygame.sprite.DirtySprite.visible>`\\"
 
 #: ../../None:4:<autosummary>:1
 msgid ":py:obj:`layer <pygame.sprite.DirtySprite.layer>`\\"
@@ -604,7 +604,7 @@ msgid ""
 "\\(\\[text\\, image\\]\\)"
 msgstr ""
 ":py:obj:`__init__ <miniworlds.actors.widgets.button.Button.__init__>`\\ "
-"\\(\\[Text\\, Bild\\]\\)"
+"\\(\\[text\\, image\\]\\)"
 
 #: ../../None:5:<autosummary>:1
 msgid ""
@@ -671,7 +671,7 @@ msgid ""
 msgstr ""
 ":py:obj:`get_local_pos "
 "<miniworlds.actors.widgets.single_widget.SingleWidget.get_local_pos>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:15:<autosummary>:1
 msgid ""
@@ -681,7 +681,7 @@ msgid ""
 msgstr ""
 ":py:obj:`setze_zeilenhöhe "
 "<miniworlds.actors.widgets.single_widget.SingleWidget.set_row_height>`\\ "
-"\\(\\[wert\\]\\)"
+"\\(\\[value\\]\\)"
 
 #: ../../None:15:<autosummary>:1
 msgid ""
@@ -691,7 +691,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_border "
 "<miniworlds.actors.widgets.single_widget.SingleWidget.set_border>`\\ "
-"\\(\\[Farbe\\, Breite\\]\\)"
+"\\(\\[color\\, width\\]\\)"
 
 #: ../../None:11:<autosummary>:1 ../../None:15:<autosummary>:1
 msgid "sets border of widget"
@@ -807,7 +807,7 @@ msgid ""
 msgstr ""
 ":py:obj:`get_local_pos "
 "<miniworlds.actors.widgets.widget_base.BaseWidget.get_local_pos>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
@@ -827,7 +827,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_border "
 "<miniworlds.actors.widgets.widget_base.BaseWidget.set_border>`\\ "
-"\\(\\[Farbe\\, Breite\\]\\)"
+"\\(\\[color\\, width\\]\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
@@ -975,7 +975,7 @@ msgid ""
 "\\(sources\\)"
 msgstr ""
 ":py:obj:`add_costumes <miniworlds.actors.actor.Actor.add_costumes>`\\ "
-"\\(Quellen\\)"
+"\\(sources\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Adds multiple costumes"
@@ -999,7 +999,7 @@ msgid ""
 " \\(source\\)"
 msgstr ""
 ":py:obj:`switch_costume <miniworlds.actors.actor.Actor.switch_costume>`\\"
-" \\(Quelle\\)"
+" \\(source\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Switches the costume of actor"
@@ -1011,7 +1011,7 @@ msgid ""
 "\\(costume\\)"
 msgstr ""
 ":py:obj:`set_costume <miniworlds.actors.actor.Actor.set_costume>`\\ "
-"\\(Kostüm\\)"
+"\\(costume\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1027,7 +1027,7 @@ msgid ""
 "<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(color\\)"
 msgstr ""
 ":py:obj:`set_background_color "
-"<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(Farbe\\)"
+"<miniworlds.actors.actor.Actor.set_background_color>`\\ \\(color\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1090,7 +1090,7 @@ msgid ""
 "\\(destination\\)"
 msgstr ""
 ":py:obj:`point_towards_position "
-"<miniworlds.actors.actor.Actor.point_towards_position>`\\ \\(Ziel\\)"
+"<miniworlds.actors.actor.Actor.point_towards_position>`\\ \\(destination\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Actor points towards a given position"
@@ -1175,7 +1175,7 @@ msgid ""
 "\\(target\\)"
 msgstr ""
 ":py:obj:`move_towards <miniworlds.actors.actor.Actor.move_towards>`\\ "
-"\\(Ziel\\)"
+"\\(destination\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1523,7 +1523,7 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 ":py:obj:`on_mouse_over <miniworlds.actors.actor.Actor.on_mouse_over>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1539,7 +1539,7 @@ msgid ""
 " \\(position\\)"
 msgstr ""
 ":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\"
-" \\(Position\\)"
+" \\(position\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1547,7 +1547,7 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 ":py:obj:`on_mouse_left <miniworlds.actors.actor.Actor.on_mouse_left>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "on_mouse_left is called when left mouse button was pressed."
@@ -1571,7 +1571,7 @@ msgid ""
 "<miniworlds.actors.actor.Actor.on_mouse_motion>`\\ \\(position\\)"
 msgstr ""
 ":py:obj:`on_mouse_motion "
-"<miniworlds.actors.actor.Actor.on_mouse_motion>`\\ \\(Position\\)"
+"<miniworlds.actors.actor.Actor.on_mouse_motion>`\\ \\(position\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Method is called when mouse moves."
@@ -1595,7 +1595,7 @@ msgid ""
 "<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(position\\)"
 msgstr ""
 ":py:obj:`on_mouse_right_released "
-"<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(Position\\)"
+"<miniworlds.actors.actor.Actor.on_mouse_right_released>`\\ \\(position\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Method is called when right mouse key is released."
@@ -1664,7 +1664,7 @@ msgid ""
 "<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(borders\\)"
 msgstr ""
 ":py:obj:`on_detecting_borders "
-"<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(Grenzen\\)"
+"<miniworlds.actors.actor.Actor.on_detecting_borders>`\\ \\(borders\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "*on_detecting_border* is called, when actor is near a border"
@@ -1702,7 +1702,7 @@ msgid ""
 "\\(method\\[\\, force\\, name\\]\\)"
 msgstr ""
 ":py:obj:`register <miniworlds.actors.actor.Actor.register>`\\ "
-"\\(Methode\\[\\, force\\, name\\]\\)"
+"\\(method\\[\\, force\\, name\\]\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "This method is used for the @register decorator."
@@ -1804,7 +1804,7 @@ msgstr ""
 
 #: ../../None:4:<autosummary>:1
 msgid ":py:obj:`__init__ <pygame.sprite.DirtySprite.__init__>`\\ \\(\\*groups\\)"
-msgstr ":py:obj:`__init__ <pygame.sprite.DirtySprite.__init__>`\\ \\(\\*Gruppen\\)"
+msgstr ":py:obj:`__init__ <pygame.sprite.DirtySprite.__init__>`\\ \\(\\*groups\\)"
 
 #: ../../None:4:<autosummary>:1
 msgid ":py:obj:`__repr__ <pygame.sprite.DirtySprite.__repr__>`\\ \\(\\)"
@@ -1816,11 +1816,11 @@ msgstr "Gib repr(self) zurück."
 
 #: ../../None:12:<autosummary>:1
 msgid ":py:obj:`__init__ <pygame.sprite.Sprite.__init__>`\\ \\(\\*groups\\)"
-msgstr ":py:obj:`__init__ <pygame.sprite.Sprite.__init__>`\\ \\(\\*Gruppen\\)"
+msgstr ":py:obj:`__init__ <pygame.sprite.Sprite.__init__>`\\ \\(\\*groups\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ":py:obj:`add <pygame.sprite.Sprite.add>`\\ \\(\\*groups\\)"
-msgstr ":py:obj:`add <pygame.sprite.Sprite.add>`\\ \\(\\*Gruppen\\)"
+msgstr ":py:obj:`add <pygame.sprite.Sprite.add>`\\ \\(\\*groups\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid "add the sprite to groups"
@@ -1828,7 +1828,7 @@ msgstr "füge den Sprite zu Gruppen hinzu"
 
 #: ../../None:12:<autosummary>:1
 msgid ":py:obj:`remove <pygame.sprite.Sprite.remove>`\\ \\(\\*groups\\)"
-msgstr ":py:obj:`remove <pygame.sprite.Sprite.remove>`\\ \\(\\*Gruppen\\)"
+msgstr ":py:obj:`remove <pygame.sprite.Sprite.remove>`\\ \\(\\*groups\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid "remove the sprite from groups"
@@ -1848,7 +1848,7 @@ msgid ""
 "\\(group\\)"
 msgstr ""
 ":py:obj:`remove_internal <pygame.sprite.Sprite.remove_internal>`\\ "
-"\\(Gruppe\\)"
+"\\(group\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid "For removing this sprite from a group internally."
