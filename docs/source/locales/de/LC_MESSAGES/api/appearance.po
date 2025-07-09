@@ -368,7 +368,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`set_image "
-"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.set_image:1 of
@@ -539,7 +539,7 @@ msgid ""
 msgstr ""
 ":py:obj:`get_color "
 "<miniworlds.appearances.appearance.Appearance.get_color>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -555,7 +555,7 @@ msgid ""
 "\\(source\\, position\\, width\\, height\\)"
 msgstr ""
 ":py:obj:`draw <miniworlds.appearances.appearance.Appearance.draw>`\\ "
-"\\(Quelle\\, Position\\, Breite\\, Höhe\\)"
+"\\(source\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -565,7 +565,7 @@ msgid ""
 msgstr ""
 ":py:obj:`draw_on_image "
 "<miniworlds.appearances.appearance.Appearance.draw_on_image>`\\ "
-"\\(Pfad\\, Position\\, Breite\\, Höhe\\)"
+"\\(path\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -575,7 +575,7 @@ msgid ""
 msgstr ""
 ":py:obj:`draw_color_on_image "
 "<miniworlds.appearances.appearance.Appearance.draw_color_on_image>`\\ "
-"\\(Farbe\\, Position\\, Breite\\, ...\\)"
+"\\(color\\, position\\, width\\, ...\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -843,7 +843,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`_set_image "
-"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -967,7 +967,7 @@ msgid ""
 "Each source in sources parameter must be a valid parameter for "
 ":py:attr:`Appearance.cimage`"
 msgstr ""
-"Jede Quelle im Quellenparameter muss ein gültiger Parameter für "
+"Jede Source im Source-Parameter muss ein gültiger Parameter für "
 ":py:attr:`Appearance.cimage` sein"
 
 #: miniworlds.appearances.appearance.Appearance.after_animation:4

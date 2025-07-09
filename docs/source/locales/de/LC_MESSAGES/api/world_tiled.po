@@ -108,7 +108,7 @@ msgstr "Kachelgröße jeder Kachel, falls die Welt Kacheln hat"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
-msgstr ":py:obj:`Unterklassen <miniworlds.worlds.world.World.subclasses>`\\"
+msgstr ":py:obj:`subclasses <miniworlds.worlds.world.World.subclasses>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`class_name <miniworlds.worlds.world.World.class_name>`\\"
@@ -358,7 +358,7 @@ msgid ""
 msgstr ""
 ":py:obj:`add_edge_to_world "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world>`\\"
-" \\(Position\\, Richtung\\)"
+" \\(position\\, direction\\)"
 
 #: ../../None:28:<autosummary>:1
 msgid ""
@@ -698,7 +698,7 @@ msgstr ":py:obj:`Grenzen <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
-msgstr "Ruft alle Ränder aus einer Quelle (`Position` oder `Rect`) ab."
+msgstr "Ruft alle Ränder aus einer source (`Position` oder `Rect`) ab."
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -728,7 +728,7 @@ msgid ""
 msgstr ""
 ":py:obj:`remove_background "
 "<miniworlds.worlds.world.World.remove_background>`\\ "
-"\\(\\[Hintergrund\\]\\)"
+"\\(\\[background\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Removes a background from world"
@@ -791,7 +791,7 @@ msgid ""
 ":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 msgstr ""
-":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[Vollbild\\, "
+":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 
 #: ../../None:35:<autosummary>:1
@@ -812,7 +812,7 @@ msgid ""
 "\\(message\\[\\, data\\]\\)"
 msgstr ""
 ":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
-"\\(nachricht\\[\\, daten\\]\\)"
+"\\(message\\[\\, data\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Sends broadcast message"
@@ -882,7 +882,7 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
-"\\(Position\\)"
+"\\(position\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ""

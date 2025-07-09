@@ -412,7 +412,7 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_new_actor "
-"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(Akteur\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor>`\\ \\(actor\\)"
 
 #: ../../None:17:<autosummary>:1
 msgid ""
@@ -420,11 +420,11 @@ msgid ""
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(actor\\)"
 msgstr ""
 ":py:obj:`on_remove_actor "
-"<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(Akteur\\)"
+"<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(actor\\)"
 
 #: ../../None:3:<autosummary>:1
 msgid ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(actor\\)"
-msgstr ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(Akteur\\)"
+msgstr ":py:obj:`add <miniworlds.worlds.gui.gui.GUI.add>`\\ \\(actor\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -492,7 +492,7 @@ msgstr ":py:obj:`borders <miniworlds.worlds.world.World.borders>`\\ \\(value\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Gets all borders from a source (`Position` or `Rect`)."
-msgstr "Ruft alle Ränder aus einer Quelle ab (`Position` oder `Rechteck`)."
+msgstr "Ruft alle Ränder aus einer source ab (`Position` oder `Rechteck`)."
 
 #: ../../None:35:<autosummary>:1
 msgid ""
@@ -522,7 +522,7 @@ msgid ""
 msgstr ""
 ":py:obj:`remove_background "
 "<miniworlds.worlds.world.World.remove_background>`\\ "
-"\\(\\[Hintergrund\\]\\)"
+"\\(\\[background\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Removes a background from world"
@@ -546,7 +546,7 @@ msgid ""
 " \\(source\\)"
 msgstr ""
 ":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\"
-" \\(Quelle\\)"
+" \\(source\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`start <miniworlds.worlds.world.World.start>`\\ \\(\\)"
@@ -558,7 +558,7 @@ msgstr "Startet die Welt, wenn die Welt nicht läuft."
 
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[frames\\]\\)"
-msgstr ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[Frames\\]\\)"
+msgstr ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[frames\\]\\)"
 
 #: ../../None:35:<autosummary>:1
 msgid "Stops the world."
@@ -585,7 +585,7 @@ msgid ""
 ":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 msgstr ""
-":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[Vollbild\\, "
+":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 
 #: ../../None:35:<autosummary>:1
