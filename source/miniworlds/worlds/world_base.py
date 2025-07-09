@@ -1,4 +1,6 @@
 from abc import ABC
+from typing import Set, Callable
+import pygame
 import miniworlds.worlds.manager.world_connector as world_connector
 import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
@@ -76,3 +78,108 @@ class WorldBase(ABC):
 
     def _create_event_manager(self):
         return event_manager.EventManager(self)
+
+    @property
+    def class_name(self) -> str:
+        return self.__class__.__name__
+
+    def screenshot(self, filename: str = "screenshot.jpg") -> None:
+        """
+        Saves a screenshot of the current window surface to a file.
+
+        Args:
+            filename: Path to the output image file. Directory must exist.
+
+        Example:
+            >>> world.screenshot(\"images/capture.jpg\")
+        """
+        pygame.image.save(self.app.window.surface, filename)
+
+
+    def get_events(self) -> None:
+        """
+        Prints a list of all events that can be registered in this world.
+
+        Useful for debugging or discovering built-in hooks.
+
+        Example:
+            >>> world.get_events()
+            {'act', 'on_setup', 'on_key_down', ...}
+        """
+        print(self.event_manager.class_events_set)
+
+    @property
+    def registered_events(self) -> Set[str]:
+        """
+        Returns the set of all event names that are currently registered.
+
+        Example:
+            >>> print(world.registered_events)
+            {'on_setup', 'act', 'on_key_down'}
+        """
+        return self.event_manager.registered_events
+
+    @registered_events.setter
+    def registered_events(self, value) -> None:
+        """
+        Prevents accidental overwriting of the event set.
+
+        This is a dummy setter to avoid inheritance conflicts.
+        """
+        return
+
+    def register(self, method: Callable) -> Callable:
+        """
+        Registers a method as a world event handler.
+
+        Typically used as a decorator to bind a function to the event loop.
+
+        Args:
+            method: The function or method to register.
+
+        Returns:
+            The bound method that will be invoked by the world event system.
+
+        Example:
+            >>> @world.register
+            ... def act():
+            ...     print(\"Acting...\")
+        """
+        self._registered_methods.append(method)
+        bound_method = world_inspection.WorldInspection(self).bind_method(method)
+        self.event_manager.register_event(method.__name__, self)
+        return bound_method
+        
+    def _unregister(self, method: Callable) -> None:
+        """
+        Unregisters a previously registered world method.
+
+        Args:
+            method: The method that should no longer receive world events.
+        """
+        self._registered_methods.remove(method)
+        world_inspection.WorldInspection(self).unbind_method(method)
+
+    def _start_listening(self) -> None:
+        """
+        Enables input listening for the world.
+
+        After calling this method, the world will start responding
+        to input-related events such as mouse or keyboard interactions.
+
+        Example:
+            >>> world.start_listening()
+        """
+        self.is_listening = True
+
+
+    def _stop_listening(self) -> None:
+        """
+        Disables input listening for the world.
+
+        After calling this method, the world will stop reacting to user input events.
+
+        Example:
+            >>> world.stop_listening()
+        """
+        self.is_listening = False

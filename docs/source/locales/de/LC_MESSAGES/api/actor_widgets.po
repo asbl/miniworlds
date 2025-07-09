@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 08:19+0200\n"
+"POT-Creation-Date: 2025-07-08 17:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -1956,7 +1956,7 @@ msgstr ":py:obj:`rect <miniworlds.actors.actor.Actor.rect>`\\"
 msgid "Private Methods:"
 msgstr "Private Methoden:"
 
-#: ../../None:3:<autosummary>:1
+#: ../../None:4:<autosummary>:1
 msgid ""
 ":py:obj:`_validate_arguments "
 "<miniworlds.actors.actor.Actor._validate_arguments>`\\ \\(position\\, "
@@ -1965,6 +1965,13 @@ msgstr ""
 ":py:obj:`_validate_arguments "
 "<miniworlds.actors.actor.Actor._validate_arguments>`\\ \\(position\\, "
 "\\*args\\, \\*\\*kwargs\\)"
+
+#: ../../None:4:<autosummary>:1
+#, fuzzy
+msgid ""
+":py:obj:`_is_actor_repainted "
+"<miniworlds.actors.actor.Actor._is_actor_repainted>`\\ \\(\\)"
+msgstr ":py:obj:`_is_acting <miniworlds.actors.actor.Actor._is_acting>`\\"
 
 #: ../../None:4:<autosummary>:1
 msgid ""
