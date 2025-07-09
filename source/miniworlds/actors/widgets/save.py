@@ -17,7 +17,7 @@ class SaveButton(widget.ButtonWidget):
         self.file = filename
         self.actors = None
 
-    def on_mouse_left(self, mouse_pos):
+    def on_mouse_left_down(self, mouse_pos):
         if self.file is None:
             tk.Tk().withdraw()
             self.file = filedialog.asksaveasfilename(

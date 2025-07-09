@@ -5,6 +5,7 @@ import miniworlds.worlds.manager.world_connector as world_connector
 import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
+import miniworlds.tools.world_inspection as world_inspection
 
 class WorldBase(ABC):
     """

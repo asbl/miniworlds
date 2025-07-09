@@ -116,12 +116,15 @@ class AppEventManager:
         pos = pygame.mouse.get_pos()
         if event.button == 1:
             self.to_event_queue("mouse_left", pos)
+            self.to_event_queue("mouse_left_down", pos)
             self.is_mouse_pressed.add("mouse_left")
         if event.button == 2:
             self.to_event_queue("mouse_middle", pos)
+            self.to_event_queue("mouse_middle_down", pos)
             self.is_mouse_pressed.add("mouse_middle")
         if event.button == 3:
             self.to_event_queue("mouse_right", pos)
+            self.to_event_queue("mouse_right_down", pos)
             self.is_mouse_pressed.add("mouse_right")
         if event.button == 4:
             self.to_event_queue("wheel_up", pos)
@@ -132,11 +135,11 @@ class AppEventManager:
         """function is called in 'pygame_events_to_event_queue"""
         pos = pygame.mouse.get_pos()
         if event.button == 1:
-            self.to_event_queue("mouse_left_released", pos)
+            self.to_event_queue("mouse_left_up", pos)
             self.is_mouse_pressed.discard("mouse_left")
         if event.button == 2:
-            self.to_event_queue("mouse_middle_released", pos)
+            self.to_event_queue("mouse_left_up", pos)
             self.is_mouse_pressed.discard("mouse_middle")
         if event.button == 3:
-            self.to_event_queue("mouse_right_released", pos)
+            self.to_event_queue("mouse_left_up", pos)
             self.is_mouse_pressed.discard("mouse_right")
