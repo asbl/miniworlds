@@ -140,32 +140,32 @@ msgid ""
 ":py:obj:`backgrounds "
 "<miniworlds.worlds.gui.toolbar.Toolbar.backgrounds>`\\"
 msgstr ""
-":py:obj:`background_color "
-"<miniworlds.worlds.gui.toolbar.Toolbar.background_color>`\\"
+":py:obj:`backgrounds "
+"<miniworlds.worlds.gui.toolbar.Toolbar.backgrounds>`\\"
 
 #: ../../None:22:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`layout <miniworlds.worlds.gui.toolbar.Toolbar.layout>`\\"
-msgstr ":py:obj:`sound <miniworlds.worlds.gui.toolbar.Toolbar.sound>`\\"
+msgstr ":py:obj:`layout <miniworlds.worlds.gui.toolbar.Toolbar.layout>`\\"
 
 #: ../../None:22:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`data <miniworlds.worlds.gui.toolbar.Toolbar.data>`\\"
-msgstr ":py:obj:`ask <miniworlds.worlds.gui.toolbar.Toolbar.ask>`\\"
+msgstr ":py:obj:`data <miniworlds.worlds.gui.toolbar.Toolbar.data>`\\"
 
 #: ../../None:22:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`mouse <miniworlds.worlds.gui.toolbar.Toolbar.mouse>`\\"
-msgstr ":py:obj:`Musik <miniworlds.worlds.gui.toolbar.Toolbar.music>`\\"
+msgstr ":py:obj:`mouse <miniworlds.worlds.gui.toolbar.Toolbar.mouse>`\\"
 
 #: ../../None:22:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`draw <miniworlds.worlds.gui.toolbar.Toolbar.draw>`\\"
-msgstr ":py:obj:`ask <miniworlds.worlds.gui.toolbar.Toolbar.ask>`\\"
+msgstr ":py:obj:`draw <miniworlds.worlds.gui.toolbar.Toolbar.draw>`\\"
 
 #: ../../None:22:<autosummary>:1
 msgid ":py:obj:`music <miniworlds.worlds.gui.toolbar.Toolbar.music>`\\"
-msgstr ":py:obj:`Musik <miniworlds.worlds.gui.toolbar.Toolbar.music>`\\"
+msgstr ":py:obj:`music <miniworlds.worlds.gui.toolbar.Toolbar.music>`\\"
 
 #: ../../None:22:<autosummary>:1
 msgid ":py:obj:`sound <miniworlds.worlds.gui.toolbar.Toolbar.sound>`\\"
@@ -295,11 +295,11 @@ msgstr "Stellen Sie die Größe der Welt ein"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
-msgstr ":py:obj:`Hintergrund <miniworlds.worlds.world.World.background>`\\"
+msgstr ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
 
 #: ../../None:29:<autosummary>:1 ../../None:35:<autosummary>:1
 msgid "Returns the current background"
-msgstr "Gibt den aktuellen Hintergrund zurück"
+msgstr "Gibt den aktuellen background zurück"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`has_background <miniworlds.worlds.world.World.has_background>`\\"
@@ -364,17 +364,17 @@ msgstr ":py:obj:`sound <miniworlds.worlds.world.World.sound>`\\"
 #: ../../None:29:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`data <miniworlds.worlds.world.World.data>`\\"
-msgstr ":py:obj:`ask <miniworlds.worlds.world.World.ask>`\\"
+msgstr ":py:obj:`data <miniworlds.worlds.world.World.data>`\\"
 
 #: ../../None:29:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`mouse <miniworlds.worlds.world.World.mouse>`\\"
-msgstr ":py:obj:`Musik <miniworlds.worlds.world.World.music>`\\"
+msgstr ":py:obj:`mouse <miniworlds.worlds.world.World.mouse>`\\"
 
 #: ../../None:29:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`draw <miniworlds.worlds.world.World.draw>`\\"
-msgstr ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
+msgstr ":py:obj:`draw <miniworlds.worlds.world.World.draw>`\\"
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`music <miniworlds.worlds.world.World.music>`\\"
@@ -386,7 +386,7 @@ msgstr ":py:obj:`sound <miniworlds.worlds.world.World.sound>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
-msgstr ":py:obj:`Fenster <miniworlds.worlds.world_base.WorldBase.window>`\\"
+msgstr ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
@@ -402,7 +402,7 @@ msgstr ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
 
 #: ../../None:7:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.worlds.world_base.WorldBase.height>`\\"
-msgstr ":py:obj:`Höhe <miniworlds.worlds.world_base.WorldBase.height>`\\"
+msgstr ":py:obj:`height <miniworlds.worlds.world_base.WorldBase.height>`\\"
 
 #: ../../source/api/world_toolbar.md
 msgid "Public Methods:"
@@ -614,7 +614,7 @@ msgstr ""
 #: ../../None:35:<autosummary>:1
 msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
 msgstr ""
-":py:obj:`setze_zeilen <miniworlds.worlds.world.World.set_rows>`\\ "
+":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ "
 "\\(value\\)"
 
 #: ../../None:35:<autosummary>:1
