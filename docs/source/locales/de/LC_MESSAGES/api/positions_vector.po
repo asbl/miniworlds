@@ -329,7 +329,7 @@ msgstr "fügt Vektor `other` zu sich selbst hinzu."
 
 #: ../../None:29:<autosummary>:1
 msgid ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ \\(value\\)"
-msgstr ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ \\(Wert\\)"
+msgstr ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ \\(value\\)"
 
 #: ../../None:29:<autosummary>:1 miniworlds.positions.vector.Vector.limit:1 of
 msgid "limits length of vector to value"

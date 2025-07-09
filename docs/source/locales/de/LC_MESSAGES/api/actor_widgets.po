@@ -705,7 +705,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_position "
 "<miniworlds.actors.widgets.single_widget.SingleWidget.set_position>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:15:<autosummary>:1
 msgid ""
@@ -817,7 +817,7 @@ msgid ""
 msgstr ""
 ":py:obj:`setze_zeilenhöhe "
 "<miniworlds.actors.widgets.widget_base.BaseWidget.set_row_height>`\\ "
-"\\(wert\\)"
+"\\(value\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
@@ -847,7 +847,7 @@ msgid ""
 msgstr ""
 ":py:obj:`set_position "
 "<miniworlds.actors.widgets.widget_base.BaseWidget.set_position>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:8:<autosummary>:1
 msgid ""
@@ -873,7 +873,7 @@ msgid ""
 "<miniworlds.actors.parent_actor.ParentActor.set_layer>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`set_layer "
-"<miniworlds.actors.parent_actor.ParentActor.set_layer>`\\ \\(Wert\\)"
+"<miniworlds.actors.parent_actor.ParentActor.set_layer>`\\ \\(value\\)"
 
 #: ../../None:8:<autosummary>:1
 msgid ""
@@ -915,7 +915,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`switch_origin <miniworlds.actors.actor.Actor.switch_origin>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1110,7 +1110,7 @@ msgstr "Der Actor zeigt auf einen anderen Actor."
 
 #: ../../None:88:<autosummary>:1
 msgid ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(value\\)"
-msgstr ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(Wert\\)"
+msgstr ":py:obj:`set_size <miniworlds.actors.actor.Actor.set_size>`\\ \\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1118,7 +1118,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`scale_width <miniworlds.actors.actor.Actor.scale_width>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""
@@ -1126,7 +1126,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`scale_height <miniworlds.actors.actor.Actor.scale_height>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 #, fuzzy
@@ -1674,7 +1674,7 @@ msgstr ""
 
 #: ../../None:88:<autosummary>:1
 msgid ":py:obj:`fill <miniworlds.actors.actor.Actor.fill>`\\ \\(value\\)"
-msgstr ":py:obj:`fill <miniworlds.actors.actor.Actor.fill>`\\ \\(Wert\\)"
+msgstr ":py:obj:`fill <miniworlds.actors.actor.Actor.fill>`\\ \\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid "Set fill color for borders and lines"
@@ -1780,7 +1780,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`set_position <miniworlds.actors.actor.Actor.set_position>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:88:<autosummary>:1
 msgid ""

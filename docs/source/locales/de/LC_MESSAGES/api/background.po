@@ -77,7 +77,7 @@ msgstr "Öffentliche Datenattribute:"
 
 #: ../../None:6:<autosummary>:1
 msgid ":py:obj:`world <miniworlds.appearances.background.Background.world>`\\"
-msgstr ":py:obj:`Welt <miniworlds.appearances.background.Background.world>`\\"
+msgstr ":py:obj:`world <miniworlds.appearances.background.Background.world>`\\"
 
 #: ../../None:32:<autosummary>:1 ../../None:33:<autosummary>:1
 #: ../../None:6:<autosummary>:1 ../../None:9:<autosummary>:1
@@ -97,7 +97,7 @@ msgstr "Zeigt ein Raster-Overlay"
 
 #: ../../None:6:<autosummary>:1
 msgid ":py:obj:`parent <miniworlds.appearances.background.Background.parent>`\\"
-msgstr ":py:obj:`Eltern <miniworlds.appearances.background.Background.parent>`\\"
+msgstr ":py:obj:`parent <miniworlds.appearances.background.Background.parent>`\\"
 
 #: ../../None:6:<autosummary>:1 ../../docstring
 #: miniworlds.appearances.background.Background.parent:1 of
@@ -412,8 +412,8 @@ msgid ""
 "\\(\\[value\\, status\\]\\)"
 msgstr ""
 ":py:obj:`set_dirty "
-"<miniworlds.appearances.background.Background.set_dirty>`\\ \\(\\[Wert\\,"
-" Status\\]\\)"
+"<miniworlds.appearances.background.Background.set_dirty>`\\ \\(\\[value\\,"
+" status\\]\\)"
 
 #: ../../None:9:<autosummary>:1
 #, fuzzy
@@ -421,8 +421,8 @@ msgid ""
 ":py:obj:`get_manager "
 "<miniworlds.appearances.background.Background.get_manager>`\\ \\(\\)"
 msgstr ""
-":py:obj:`image_manager "
-"<miniworlds.appearances.background.Background.image_manager>`\\"
+":py:obj:`get_manager "
+"<miniworlds.appearances.background.Background.get_manager>`\\"
 
 #: ../../None:9:<autosummary>:1
 msgid ""
@@ -464,8 +464,8 @@ msgid ""
 ":py:obj:`get_rect "
 "<miniworlds.appearances.background.Background.get_rect>`\\ \\(\\)"
 msgstr ""
-":py:obj:`repaint "
-"<miniworlds.appearances.background.Background.repaint>`\\ \\(\\)"
+":py:obj:`get_rect "
+"<miniworlds.appearances.background.Background.get_rect>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -481,7 +481,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 msgstr ""
 ":py:obj:`set_image "
-"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(Quelle\\)"
+"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:33:<autosummary>:1
 msgid "Sets the displayed image of costume/background to selected index"
@@ -522,7 +522,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`set_animated "
-"<miniworlds.appearances.appearance.Appearance.set_animated>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance.set_animated>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -530,7 +530,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`flip <miniworlds.appearances.appearance.Appearance.flip>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -620,7 +620,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`fill <miniworlds.appearances.appearance.Appearance.fill>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Set default fill color for borders and lines"
@@ -632,7 +632,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`set_filled "
-"<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -894,7 +894,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_animation_speed "
 "<miniworlds.appearances.appearance.Appearance._set_animation_speed>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -918,7 +918,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_rotatable "
 "<miniworlds.appearances.appearance.Appearance._set_rotatable>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
@@ -932,7 +932,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_centered "
 "<miniworlds.appearances.appearance.Appearance._set_centered>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -941,7 +941,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 ":py:obj:`_set_flipped "
-"<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -957,7 +957,7 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 msgstr ""
 ":py:obj:`_set_scaled "
-"<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(Wert\\)"
+"<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
@@ -973,7 +973,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_upscaled "
 "<miniworlds.appearances.appearance.Appearance._set_upscaled>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, the image will be upscaled remaining aspect-ratio."
@@ -989,7 +989,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_scaled_to_width "
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_width>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -999,7 +999,7 @@ msgid ""
 msgstr ""
 ":py:obj:`_set_scaled_to_height "
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_height>`\\ "
-"\\(Wert\\)"
+"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
