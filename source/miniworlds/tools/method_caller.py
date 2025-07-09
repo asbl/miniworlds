@@ -7,6 +7,9 @@ from miniworlds.base.exceptions import (
     NotNullError,
 )
 from typing import Optional
+import traceback
+import sys
+import os
 
 
 def get_signature(method: callable, arguments: tuple, allow_none=True):
@@ -44,4 +47,27 @@ def call_method(method: callable, arguments: Optional[tuple], allow_none=True):
                 method(arguments)
     except (ReferenceError, AttributeError) as e:
         # do nothing, if object does not exist.
-        raise Exception("Method caller threw an error", method, arguments, allow_none) from e
+        #print_filtered_traceback(e)
+        raise 
+
+
+def print_filtered_traceback(exc: Exception, match: str = None):
+    if match is None:
+        match = os.getcwd()
+
+    tb = exc.__traceback__
+    filtered_trace = []
+
+    while tb:
+        frame = tb.tb_frame
+        filename = frame.f_code.co_filename
+        if match in filename:
+            lineno = tb.tb_lineno
+            name = frame.f_code.co_name
+            filtered_trace.append(f'  File "{filename}", line {lineno}, in {name}')
+        tb = tb.tb_next
+
+    print("Traceback (most recent call last):", file=sys.stderr)
+    for line in filtered_trace:
+        print(line, file=sys.stderr)
+    print(f"{type(exc).__name__}: {exc}", file=sys.stderr)

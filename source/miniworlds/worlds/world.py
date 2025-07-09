@@ -25,7 +25,6 @@ import miniworlds.worlds.data.export_factory as export_factory
 import miniworlds.worlds.data.import_factory as import_factory
 import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
-import miniworlds.tools.world_inspection as world_inspection
 import miniworlds.tools.timer as timer
 import miniworlds.base.app as app_mod
 
@@ -225,10 +224,10 @@ class World(world_base.WorldBase):
         return self.sensor_manager.contains_rect_any_(rect)
 
     @property
-    def step(self) -> int:
-        """Step defines how often the method ``act()`` will be called.
+    def tick_rate(self) -> int:
+        """Tick rate defines how often the method ``act()`` will be called.
 
-        If e.g. ``step = 30``, the game logic will be called every 30th-frame.
+        If e.g. ``tick_rate = 30``, the game logic will be called every 30th-frame.
 
         .. note::
 
@@ -261,15 +260,15 @@ class World(world_base.WorldBase):
             3
             6
             9
-            12
+            12Step
             15
             ```
         """
         return self._step
 
-    @step.setter
-    def step(self, value: int):
-        self._step = value
+    @tick_rate.setter
+    def tick_rate(self, value: int):
+        self._tick_rate = value
 
     @property
     def fps(self) -> int:

@@ -23,7 +23,7 @@ class MainloopManager:
         if self.world.is_running or self.world.frame == 0:
             start = time.perf_counter()
             # Acting for all actors@static
-            if self.world.frame > 0 and self.world.frame % self.world.step == 0:
+            if self.world.frame > 0 and self.world.frame % self.world.tick_rate == 0:
                 self.world.event_manager.act_all()
             self.world._collision_manager._handle_all_collisions()
             self.world.mouse._update_positions()

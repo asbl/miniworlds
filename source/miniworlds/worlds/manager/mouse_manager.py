@@ -75,7 +75,7 @@ class MouseManager:
         """
         return self._prev_mouse_position
 
-    def mouse_left_is_clicked(self) -> bool:
+    def left(self) -> bool:
         """
         Returns True if the left mouse button is currently pressed.
 
@@ -85,7 +85,7 @@ class MouseManager:
         """
         return pygame.mouse.get_pressed()[0]
 
-    def mouse_right_is_clicked(self) -> bool:
+    def right(self) -> bool:
         """
         Returns True if the right mouse button is currently pressed.
 
@@ -95,18 +95,18 @@ class MouseManager:
         """
         return pygame.mouse.get_pressed()[2]
 
-    def get_mouse_x(self) -> int:
+    def x(self) -> int:
         """
         Returns the x-coordinate of the mouse if over the world, otherwise 0.
 
         Examples:
-            >>> x = world.mouse.get_mouse_x()
+            >>> x = world.mouse.x()
         """
         if self.mouse_position:
             return self.mouse_position[0]
         return 0
 
-    def get_mouse_y(self) -> int:
+    def y(self) -> int:
         """
         Returns the y-coordinate of the mouse if over the world, otherwise 0.
 

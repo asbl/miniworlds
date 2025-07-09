@@ -1779,6 +1779,12 @@ class Actor(pygame.sprite.DirtySprite, metaclass=Meta):
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_over)
 
+    def on_mouse_left_down(self, position: tuple):
+        raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
+
+    def on_mouse_right_down(self, position: tuple):
+        raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
+
     def on_mouse_left(self, position: tuple):
         """on_mouse_left is called when left mouse button was pressed.
         You must *register* or *implement* this method as an event.

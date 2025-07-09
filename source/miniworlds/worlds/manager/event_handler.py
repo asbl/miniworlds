@@ -34,8 +34,10 @@ class EventHandler:
         mouse_events = {
             "on_mouse_left",
             "on_mouse_right",
-            "on_mouse_left_released",
-            "on_mouse_right_released",
+            "on_mouse_left_down",
+            "on_mouse_right_down",
+            "on_mouse_left_up",
+            "on_mouse_right_up",
             "on_mouse_motion",
             "on_clicked_left",
             "on_clicked_right",
@@ -159,20 +161,20 @@ class EventHandler:
             if method.__name__ == event:
                 method_caller.call_method(method, None)
 
-    def handle_mouse_event(self, event, data):
+    def handle_mouse_event(self, event, mouse_pos):
         """Handles mouse-related events (clicks, motion, etc.)."""
-        if not self.world.camera.is_in_screen(data):
+        if not self.world.camera.is_in_screen(mouse_pos):
             return False
         mouse_methods = set()
         for e, values in self.event_registry.registered_events.items():
             if e == event:
                 mouse_methods = mouse_methods.union(values)
         for method in mouse_methods:
-            method_caller.call_method(method, (data,))
+            method_caller.call_method(method, (mouse_pos,))
         if event in ["on_mouse_motion"]:
-            return self.handle_mouse_over_event(event, data)
+            return self.handle_mouse_over_event(event, mouse_pos)
         if event in ["on_mouse_left", "on_mouse_right"]:
-            self.handle_click_on_actor_event(event, data)
+            self.handle_click_on_actor_event(event, mouse_pos)
 
     def handle_mouse_over_event(self, event, data):
         """Handles mouse-over and hover-related events for actors."""

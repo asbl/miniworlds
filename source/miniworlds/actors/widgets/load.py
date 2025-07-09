@@ -16,7 +16,7 @@ class LoadButton(widget.ButtonWidget):
         self.file = filename
         self.app = world.app
 
-    def on_mouse_left(self, mouse_pos):
+    def on_mouse_left_down(self, mouse_pos):
         tk.Tk().withdraw()
         if self.file is None:
             self.file = filedialog.askopenfilename(
