@@ -17,6 +17,7 @@ class Test610(unittest.TestCase):
                 toolbar.margin_left =  20
                 toolbar.margin_right = 10
                 toolbar.background_color = (255,0,255)
+                assert(toolbar.width == 400)
 
                 button1 = Button("Toolbar Button")
                 button1.text = "Changed Text"
@@ -60,16 +61,21 @@ class Test610(unittest.TestCase):
                 toolbar.add(label)
                 toolbar.remove(label)
 
-                label = Label("0")
-                toolbar.add(label)
-                label.set_image((255,0,0))
-                label.padding_left = 0
-                label.padding_right = 0
-                label.padding_top = 0
-                label.padding_bottom = 0
-                label.margin_right = 10
-                label.margin_left = 0
-                label.img_width = 40
+                label0 = Label("0")
+                toolbar.add(label0)
+                label0.set_image((255,0,0))
+                label0.padding_left = 0
+                label0.padding_right = 0
+                label0.padding_top = 0
+                label0.padding_bottom = 0
+                label0.margin_right = 10
+                label0.margin_left = 0
+                label0.img_width = 40
+                print("label 0")
+                print(label0.position)
+                print(label0.width, label0.height)
+                print("toolbar:", toolbar.width)
+                assert(label0.width == 370)  # 400 - toolbar-margin(20+10)-margin(10) = 370
 
                 label = Label("status")
                 toolbar.add(label)
@@ -91,8 +97,9 @@ class Test610(unittest.TestCase):
                     if percent < 100:
                         percent += 10
                 world.layout.add_right(toolbar, size = 200)
-                print("Changed Text", button1.position)
-                print("Changed Text 2", button2.position)
+                assert(toolbar.width == 200)
+                print(label0.width)
+                assert(label0.width == 170) # 200 - toolbar-margin(20+10)-margin(10) = 370
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

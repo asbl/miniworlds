@@ -34,7 +34,7 @@ class Test103(unittest.TestCase):
                 actor3.add_costume("images/player.png")
                 
                 Actor(position=(4, 1))
-                
+
             return world
         App.reset(unittest=True, file=__file__)
         world = test_code()

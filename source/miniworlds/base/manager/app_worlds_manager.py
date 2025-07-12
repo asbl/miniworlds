@@ -36,13 +36,14 @@ class WorldsManager:
                 world._mainloop.repaint()
                 world._mainloop.blit_surface_to_window_surface()
                 
-    def add_topleft(
+    def add_topleft_if_empty(
         self, new_world: "world_mod.World"
     ) -> "world_mod.World":
         """Adds the topleft corner if it does not exist."""
         for world in self.worlds:
             if world.layout.docking_position == "top_left":
                 return self.get_topleft()
+                # Don't add, if a topleft world already exists
         self.topleft = new_world
         self.add_world(new_world, "top_left")
         return new_world
@@ -53,61 +54,41 @@ class WorldsManager:
             dock: str,
             size: int | None = None
     ) -> "world_mod.World":
-        """Adds a new world to the layout and initializes it at the given docking position.
-
-        Args:
-            world: The world instance to add.
-            dock: Docking position – one of "top_left", "right", or "bottom".
-            size: Optional pixel size for docking (used for height or width depending on position).
-
-        Returns:
-            The world that was added.
-
-        Raises:
-            MiniworldsError: If the world is already in the layout.
-        """
+        """Adds and activates a new world at the given docking position."""
+        
         if world in self.worlds:
             raise MiniworldsError("World already exists in worlds list.")
 
-        # Set docking position and prepare camera
+        # Set docking and add to window
         world.layout.docking_position = dock
         world.layout._add_to_window(self.app, dock, size)
 
-        # Set camera screen position based on docking
+        # Set camera position and size
+        cam = world.camera
+        win = self.app.window
         if dock == "right":
-            world.camera.screen_topleft = (self.app.window.width, 0)
-            world.camera.height = self.app.window.height
-            world.camera.width = size
+            cam.screen_topleft = (win.width, 0)
+            cam.width = size
+            cam.height = win.height
         elif dock == "bottom":
-            world.camera.screen_topleft = (0, self.app.window.height)
-            world.camera.height = size or world.camera.height
-            world.camera.width = self.app.window.width
+            cam.screen_topleft = (0, win.height)
+            cam.width = win.width
+            cam.height = size or cam.height
         elif dock == "top_left":
-            world.camera.screen_topleft = (0, 0)
+            cam.screen_topleft = (0, 0)
 
-        world.camera._disable_resize()
-        frame = self.app.running_world.frame
+        cam._disable_resize()
 
         # Register world
-        if world not in self.worlds:
-            self.worlds.append(world)
-        app.App.running_worlds.append(world)
-        
-        # Trigger world setup and state updates
-        world.on_change()
-        self.app.resize() # must be called before setup
-        world.event_manager.setup_world()
+        self.worlds.append(world)
 
-        # Mark all worlds and their actors as dirty (to trigger redraw)
-        world.camera._enable_resize()
-        
-        for w in self.app.running_worlds:
-            for actor in w.actors:
-                actor.dirty = 1
-        if frame != 0:
-            for w in self.worlds:
-                w.dirty = 1
-        return world      
+        # Activate and finalize
+        self.app.resize()  # Layout must be resized before setup
+        self._activate_world(world, reset=False, setup=True)
+
+        cam._enable_resize()
+
+        return world
 
     def _deactivate_world(self, world: "world_mod.World"):
         world.stop()
@@ -116,19 +97,36 @@ class WorldsManager:
         if world in app.App.running_worlds:
             app.App.running_worlds.remove(world)
 
-    def _activate_world(self, world: "world_mod.World", reset: bool, setup: bool):
-        app.App.running_world = world
+    def _activate_world(self, world: "world_mod.World", reset: bool = False, setup: bool = False, run: bool = False):
+        if run:
+            app.App.running_world = world
         app.App.running_worlds.append(world)
+
         world._app = self.app
         world._window = self.app.window
         world.backgrounds._init_display()
-        world.is_running = True
+
+        if not (world.frame == 0 and world._default_start_running):
+            world.is_running = True
+
         if reset:
             world.reset()
-        if setup:
-            world.event_manager.setup_world()
+
+        if setup and not world._is_setup_completed:
+            world.on_setup()
+            world._is_setup_completed = True
+
         world.background.set_dirty("all", 2)
         world._start_listening()
+        world.on_change()
+        
+        # Mark actors/worlds as dirty for redraw
+        for w in self.app.running_worlds:
+            w._mainloop.dirty_all()
+            
+        if self.app.running_world.frame != 0:
+            for w in self.worlds:
+                w.dirty = 1
 
     def _finalize_world_switch(self, old_world, new_world):
         self.app.image = new_world.backgrounds.image
@@ -153,9 +151,10 @@ class WorldsManager:
                 break
         return new_world
 
-    def switch_world(self, new_world, reset = True, setup = True):
+    def switch_world(self, old_world, new_world, reset = True, setup = True):
         #remove old world and stop events
-        old_world = self.app.running_world
+        if old_world == app.App.running_world:
+            app.App.running_world = new_world
         self._deactivate_world(old_world)
         self._activate_world(new_world, reset, setup)
         self._finalize_world_switch(old_world, new_world)
@@ -191,7 +190,7 @@ class WorldsManager:
         
     def reset(self):
         for world in self.worlds:
-            world.clear()
+            world._clear()
             if world.layout.docking_position != "top_left":
                 self.remove_world(world)
 

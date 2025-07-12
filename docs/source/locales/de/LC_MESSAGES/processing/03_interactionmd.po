@@ -189,7 +189,7 @@ msgid ""
 msgstr ""
 
 #: ../../source/processing/03_interactionmd.md:166
-msgid "You can use `get_mouse_position()` to retrieve the current mouse position:"
+msgid "You can use `mouse.position()` to retrieve the current mouse position:"
 msgstr ""
 
 #: ../../source/processing/03_interactionmd.md:184

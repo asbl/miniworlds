@@ -140,11 +140,6 @@ class World(world_base.WorldBase):
         # --- Parameter validation ---
         self._validate_parameters(x, y)
 
-        # --- Core state ---
-        self._was_setup = False
-        self.is_tiled = False
-        self._is_acting = True  # Whether the act() method is active
-
         # --- Camera setup ---
         self.camera = self._get_camera_manager_class()(x, y, self)
 
@@ -153,20 +148,17 @@ class World(world_base.WorldBase):
 
         # --- Event system ---
         self.event_manager: event_manager.EventManager = self._create_event_manager()
-
         # --- Superclass initialization ---
         super().__init__()
 
         # --- Timing and frame control ---
         self.clock: pygame.time.Clock = pygame.time.Clock()
         self._fps: int = 60
-        self._step: int = 1
+        self._tick_rate: int = 1
         self.frame: int = 0
 
         # --- State flags ---
-        self._key_pressed: bool = False
-        self._animated: bool = False
-        self.is_running: bool = True
+        #self._key_pressed: bool = False  
         self.actors_fixed_size: bool = False
 
         # --- Actor & animation systems ---
@@ -196,8 +188,6 @@ class World(world_base.WorldBase):
         self._mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
         self._collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
         # --- Register world in application ---
-        self.app.event_manager.to_event_queue("setup", None)
-        self.app.worlds_manager.add_topleft(self)
 
     def contains_position(self, pos):
         """Checks if position is in the world.
@@ -264,7 +254,7 @@ class World(world_base.WorldBase):
             15
             ```
         """
-        return self._step
+        return self._tick_rate
 
     @tick_rate.setter
     def tick_rate(self, value: int):
@@ -706,9 +696,12 @@ class World(world_base.WorldBase):
             Automatically detects and handles running event loops (e.g. in Jupyter).
         """
         self.app.prepare_mainloop()
-        self.event_manager.setup_world()
         self.backgrounds._init_display()
-        self.is_running = True
+        self._mainloop.dirty_all()
+        if not self._is_setup_completed:
+            self.on_setup()
+        if not (self.frame == 0  and self._default_start_running):
+            self.is_running = True
 
         if event:
             self.app.event_manager.to_event_queue(event, data)
@@ -797,9 +790,9 @@ class World(world_base.WorldBase):
         self._clear()
         # Re-Setup the world
         if hasattr(self, "on_setup"):
-            self._was_setup = False
+            self._is_setup_completed = False
             self.on_setup()
-            self._was_setup = True
+            self._is_setup_completed = True
             
     def _clear(self) -> None:
         """
@@ -898,8 +891,8 @@ class World(world_base.WorldBase):
 
           .. code-block:: python
 
-              position = world.get_mouse_position()
-              actors = world.get_actors_by_pixel(position)
+              position = world.mouse.get_position()
+              actors = world.get_actors_from_pixel(position)
 
         """
         # overwritten in tiled_sensor_manager

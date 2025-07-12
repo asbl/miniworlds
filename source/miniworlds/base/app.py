@@ -119,8 +119,6 @@ class App:
         if App.path:
             self.path = App.path
 
-        print("init end")
-
     async def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
         """
         Starts the app and enters the mainloop.
@@ -131,7 +129,6 @@ class App:
             fit_desktop: Whether to adapt the window to desktop size.
             replit: Whether running in replit environment.
         """
-        print("run start")
         self.image = image
         self.window = cast(Window, self.window)
         self.window.fullscreen = fullscreen
@@ -169,7 +166,6 @@ class App:
         Starts the main event loop.
         """
         self._mainloop_started = True
-        print("start mainloop")
         while not self._quit:
             await self._update()
 

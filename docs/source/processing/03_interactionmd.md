@@ -163,7 +163,7 @@ Make sure your statements are inside the correct code blocks.
 
 In **miniworlds**, interactions occur via **events**, such as keyboard and mouse input.
 
-You can use `get_mouse_position()` to retrieve the current mouse position:
+You can use `world.mouse.get_position()` to retrieve the current mouse position:
 
 ```python
 from miniworlds import *
@@ -176,7 +176,7 @@ def on_setup(self):
 
 @world.register
 def act(self):
-    Ellipse(world.get_mouse_position(), 10, 10)
+    Ellipse(world.mouse.get_position(), 10, 10)
 
 world.run()
 ```
@@ -198,7 +198,7 @@ def on_setup(self):
 
 @world.register
 def act(self):
-    Line(world.get_prev_mouse_position(), world.get_mouse_position())
+    Line(world.get_last_position(), world.mouse.get_position())
 
 world.run()
 ```
@@ -222,7 +222,7 @@ def on_setup(self):
 
 @world.register
 def act(self):
-    Ellipse(world.get_mouse_position(), 10, 10)
+    Ellipse(world.mouse.get_position(), 10, 10)
 
 @world.register
 def on_mouse_left(self, position):

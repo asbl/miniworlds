@@ -124,9 +124,9 @@ class WorldConnector():
         if self.actor.costume:
             self.actor.costume.set_dirty("all", costume.Costume.LOAD_NEW_IMAGE)
 
-        if hasattr(self.actor, "on_setup") and not self.actor._was_setup:
+        if hasattr(self.actor, "on_setup") and not self.actor._is_setup_completed:
             self.actor.on_setup()
-            self.actor._was_setup = True
+            self.actor._is_setup_completed = True
             self.world._mainloop.reload_costumes_queue.append(self.actor)
 
         self.world.event_manager.register_events_for_actor(self.actor)

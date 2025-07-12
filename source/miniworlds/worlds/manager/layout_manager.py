@@ -84,7 +84,7 @@ class LayoutManager:
         Example:
             >>> world.layout.switch_world(main_scene, reset=True)
         """
-        self.app.worlds_manager.switch_world(new_world, reset)
+        self.app.worlds_manager.switch_world(self.world, new_world, reset)
 
     @property
     def window_docking_position(self) -> Optional[str]:

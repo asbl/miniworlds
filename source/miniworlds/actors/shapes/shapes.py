@@ -1,4 +1,4 @@
-from typing import Tuple, Union, TYPE_CHECKING
+from typing import Tuple, Union, TYPE_CHECKING, Any
 
 import pygame
 import pygame.gfxdraw
@@ -69,11 +69,37 @@ class Circle(Shape):
             miniworlds.Circle.from_topleft((100,100),50)
     """
 
-    def __init__(self, position=(0, 0), radius: float = 10, *args, **kwargs):
-        self._radius = radius
-        super().__init__(position, *args, **kwargs)
-        self.costume = shape_costume.CircleCostume(self)
-        self.position_manager.set_size((self._radius * 2, self._radius * 2), scale = False)
+    def __init__(
+            self,
+            position: Tuple[float, float] = (0.0, 0.0),
+            radius: float = 10.0,
+            *args: Any,
+            **kwargs: Any
+        ) -> None:
+            """
+            Initialize the circle with a position and radius.
+
+            Args:
+                position: A tuple of two float values representing the position (x, y).
+                radius: A float representing the radius.
+
+            Raises:
+                TypeError: If position is not a tuple of two floats or radius is not a float.
+            """
+            if (
+                not isinstance(position, tuple) or
+                len(position) != 2 or
+                not all(isinstance(coord, (int, float)) for coord in position)
+            ):
+                raise TypeError("`position` must be a tuple of two float or int values.")
+
+            if not isinstance(radius, (int, float)):
+                raise TypeError("`radius` must be a float or int.")
+
+            self._radius = float(radius)
+            super().__init__(position, *args, **kwargs)
+            self.costume = shape_costume.CircleCostume(self)
+            self.position_manager.set_size((self._radius * 2, self._radius * 2), scale=False)
         
     @property
     def radius(self):
