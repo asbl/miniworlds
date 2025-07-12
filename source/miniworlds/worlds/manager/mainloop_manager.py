@@ -15,7 +15,6 @@ class MainloopManager:
 
         Called in app.update() when reload_all_worlds is called.
         """
-
         if not self.world.is_running and self.world.frame != 0:
             self.world.event_manager.update()
             return
@@ -71,3 +70,7 @@ class MainloopManager:
 
     def blit_surface_to_window_surface(self):
         self.app.window.surface.blit(self.world.background.surface, self.world.camera.screen_rect)
+
+    def dirty_all(self):
+        for actor in self.world.actors:
+            actor.dirty = 1

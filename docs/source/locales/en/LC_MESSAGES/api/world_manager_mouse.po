@@ -39,12 +39,12 @@ msgstr ""
 
 #: ../../None:4:<autosummary>:1
 msgid ""
-":py:obj:`mouse_position "
-"<miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_position>`\\"
+":py:obj:`position "
+"<miniworlds.worlds.manager.mouse_manager.MouseManager.position>`\\"
 msgstr ""
 
 #: ../../None:4:<autosummary>:1
-#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_position:1 of
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.position:1 of
 msgid "Property version of get_mouse_position()"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgstr ""
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_pressed:6
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_right_pressed:6
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_left_is_clicked:6
-#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_position:4
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.position:4
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_right_is_clicked:6
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.prev_mouse_position:4
 #: of

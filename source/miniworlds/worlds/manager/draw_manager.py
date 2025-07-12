@@ -16,24 +16,29 @@ class DrawManager:
         self._default_border = None
         self._is_filled: bool = False
  
+    
     @property
     def default_fill_color(self):
         """Set default fill color for borders and lines"""
         return self._default_fill_color
 
     @default_fill_color.setter
-    def default_fill_color(self, value):
-        self._default_fill_color = color.Color(value).get()
+    def default_fill_color(self, value: int|Tuple):
+        self._default_fill_color = color.Color.create(value).get()
+        print(value, self._default_fill_color)
 
     def default_fill(self, value):
         """Set default fill color for borders and lines"""
         self._is_filled = value
         if self.default_is_filled is not None and self.default_is_filled:
-            self._default_fill_color = color.Color(value).get()
+            self._default_fill_color = color.Color.create(value).get()
 
     @property
     def default_is_filled(self):
         return self._default_is_filled
+
+    def fill(self, value):
+        self.default_fill_color = value
 
     @default_is_filled.setter
     def default_is_filled(self, value):
@@ -49,6 +54,8 @@ class DrawManager:
         """Set default stroke color for borders and lines. (equivalent to border-color)"""
         self.default_border_color = value
 
+    def stroke(self, value):
+        self.default_stroke_color = value
 
     @property
     def default_border_color(self):

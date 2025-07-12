@@ -44,6 +44,7 @@ class Test612(unittest.TestCase):
 
     def test_main(self):
         with self.assertRaises(SystemExit):
+            print("world ->run")
             self.world.run()
 
 

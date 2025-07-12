@@ -91,7 +91,6 @@ class TiledWorld(world.World):
         self.static_actors_dict: defaultdict = defaultdict(list)
         self.actors_fixed_size = True
         self.rotatable_actors = True
-        self.setup_world()
         self.is_tiled = True
 
     def _get_tile_factory(self):
@@ -157,7 +156,7 @@ class TiledWorld(world.World):
     def _get_camera_manager_class():
         return tiled_camera_manager.TiledCameraManager
 
-    def setup_world(self):
+    def _after_init_setup(self):
         """In this method, corners and edges are created."""
         if not self.empty:
             self._setup_tiles()
@@ -480,13 +479,11 @@ class TiledWorld(world.World):
         self._columns = value
         self.camera.width = value #* self.tile_size
         self.world_size_x = value
-        self.setup_world()
 
     def set_rows(self, value: int):
         self._rows = value
         self.camera.height = value #* self.tile_size
         self.world_size_y = value
-        self.setup_world()
 
     @property
     def columns(self) -> int:

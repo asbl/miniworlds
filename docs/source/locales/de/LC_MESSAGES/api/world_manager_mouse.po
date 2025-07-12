@@ -45,7 +45,7 @@ msgstr ""
 
 #: ../../None:4:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_position:1 of
-msgid "Property version of get_mouse_position()"
+msgid "Property version of get_position()"
 msgstr ""
 
 #: ../../None:4:<autosummary>:1

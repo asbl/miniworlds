@@ -1,127 +1,82 @@
 import math
-from typing import Union, Tuple
+from typing import Union, Tuple, Any
 
 import numpy as np
 
-import miniworlds.actors.actor as actor_mod
-
 
 class Vector:
-    """Describes a two-dimensional vector.
+    """
+    Represents a 2D vector for use in movement, geometry, and physics.
 
-    It is used to describe a position, acceleration
-    or velocity.
+    Supports arithmetic with both other Vectors and 2D tuples.
 
     Examples:
-
-        Create a circle which follows the mouse.
-
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(800, 800)
-
-            mover = Circle()
-            mover.velocity = Vector(0, 0)
-            mover.topspeed = 10
-
-
-            @world.register
-            def act(self):
-                mouse_vec = Vector(world.mouse.x(), world.mouse.y())
-                location = Vector.from_actor_position(mover)
-                acceleration = mouse_vec - location
-                acceleration.normalize() * 2
-
-            mover.velocity.add(acceleration)
-            mover.velocity.limit(mover.topspeed)
-            mover.move_vector(mover.velocity)
-
-            world.run()
-
-        .. raw:: html
-
-             <video loop autoplay muted width=240>
-            <source src="../_static/mp4/vector_1.mp4" type="video/mp4">
-            <source src="../_static/vector_1.webm" type="video/webm">
-            Your browser does not support the video tag.
-            </video>
-
+        >>> v = Vector(1, 2)
+        >>> v2 = Vector(3, 4)
+        >>> v + v2
+        Vector(4.0, 6.0)
+        >>> v + (1, 1)
+        Vector(2.0, 3.0)
+        >>> (1, 1) + v
+        Vector(2.0, 3.0)
     """
 
-    def __init__(self, x: float, y: float):
-        self.vec = np.array([x, y])
+    def __init__(self, x: float, y: float) -> None:
+        self.vec = np.array([x, y], dtype=float)
 
-    def __getitem__(self, item):
-        if item == 0:
-            return self.vec[0]
-        else:
-            return self.vec[1]
+    @staticmethod
+    def _to_vector(value: Union["Vector", Tuple[float, float]]) -> "Vector":
+        if isinstance(value, Vector):
+            return value
+        if isinstance(value, tuple) and len(value) == 2:
+            return Vector(*value)
+        raise TypeError(f"Expected Vector or 2-tuple, got {type(value)}.")
 
-    @property
-    def angle(self):
-        """describes the angle as miniworlds direction"""
-        return self.to_direction()
+    def __getitem__(self, index: int) -> float:
+        return self.vec[index]
 
     @property
     def x(self) -> float:
-        """the x component of the vector"""
         return self.vec[0]
 
     @x.setter
-    def x(self, value: float):
-        self.vec = np.array([value, self.vec[1]])
+    def x(self, value: float) -> None:
+        self.vec[0] = value
 
     @property
     def y(self) -> float:
-        """the y component of the vector"""
         return self.vec[1]
 
     @y.setter
-    def y(self, value: float):
-        self.vec = np.array([self.vec[0], value])
+    def y(self, value: float) -> None:
+        self.vec[1] = value
 
-    def to_position(self):
-        return (self.vec[0], self.vec[1])
+    @property
+    def angle(self) -> float:
+        return self.to_direction()
 
-    @classmethod
-    def from_positions(
-        cls,
-        p1: Tuple[float, float],
-        p2: Tuple[float, float],
-    ) -> "Vector":
-        """Create a vector from actor and position
-
-        The vector describes is generated from:
-        actor2.center - position
-        """
-        x = p2[0] - p1[0]
-        y = p2[1] - p1[1]
-        return cls(x, y)
+    def to_position(self) -> Tuple[float, float]:
+        return (self.x, self.y)
 
     @classmethod
-    def from_position(
-        cls,
-        position: Tuple[float, float],
-    ) -> "Vector":
-        """Create a vector from actor and position
+    def from_position(cls, position: Tuple[float, float]) -> "Vector":
+        if not (isinstance(position, tuple) and len(position) == 2):
+            raise TypeError("Position must be a tuple of two float values.")
+        return cls(*position)
 
-        The vector describes is generated from:
-        actor2.center - position
-        """
-        x = position[0]
-        y = position[1]
-        return cls(x, y)
-    
     @classmethod
-    def from_actor_and_position(cls, t1: "actor_mod.Actor", pos) -> "Vector":
-        """Create a vector from actor and position
+    def from_positions(cls, p1: Tuple[float, float], p2: Tuple[float, float]) -> "Vector":
+        return cls(p2[0] - p1[0], p2[1] - p1[1])
 
-        The vector describes is generated from:
-        actor2.center - position
-        """
-        x = pos[0] - t1.center[0]
-        y = pos[1] - t1.center[1]
+    @classmethod
+    def from_direction(cls, direction: Union[str, int, float, str]) -> "Vector":
+        """Creates a vector from miniworlds direction."""
+        if direction >= 90:
+            x = 0 + math.sin(math.radians(direction)) * 1
+            y = 0 - math.cos(math.radians(direction)) * 1
+        else:
+            x = 0 + math.sin(math.radians(direction)) * 1
+            y = 0 - math.cos(math.radians(direction)) * 1
         return cls(x, y)
 
     @classmethod
@@ -136,14 +91,14 @@ class Vector:
         return cls(x, y)
 
     @classmethod
-    def from_direction(cls, direction: Union[str, int, float, str]) -> "Vector":
-        """Creates a vector from miniworlds direction."""
-        if direction >= 90:
-            x = 0 + math.sin(math.radians(direction)) * 1
-            y = 0 - math.cos(math.radians(direction)) * 1
-        else:
-            x = 0 + math.sin(math.radians(direction)) * 1
-            y = 0 - math.cos(math.radians(direction)) * 1
+    def from_actor_and_position(cls, t1: "actor_mod.Actor", pos) -> "Vector":
+        """Create a vector from actor and position
+
+        The vector describes is generated from:
+        actor2.center - position
+        """
+        x = pos[0] - t1.center[0]
+        y = pos[1] - t1.center[1]
         return cls(x, y)
 
     @classmethod
@@ -182,241 +137,129 @@ class Vector:
         """
         return Vector.from_direction(actor.direction)
 
-    @classmethod
-    def from_actor_position(cls, actor: "actor_mod.Actor") -> "Vector":
-        """Creates a vector from actor position"""
-        x = actor.center.x
-        y = actor.center.y
-        return cls(x, y)
 
     def rotate(self, theta: float) -> "Vector":
-        """rotates Vector by theta degrees"""
-        theta_deg = theta % 360
-        theta = np.deg2rad(theta_deg)
-        rot = np.array(
-            [[math.cos(theta), -math.sin(theta)], [math.sin(theta), math.cos(theta)]]
-        )
+        radians = np.deg2rad(theta % 360)
+        rot = np.array([[math.cos(radians), -math.sin(radians)],
+                        [math.sin(radians), math.cos(radians)]])
         self.vec = np.dot(rot, self.vec)
         return self
 
     def to_direction(self) -> float:
-        """Returns miniworlds direction from vector."""
-        if self.x > 0:
-            axis = np.array([0, -1])
-        else:
-            axis = np.array([0, 1])
-        unit_vector_1 = self.vec / np.linalg.norm(self.vec)
-        unit_vector_2 = axis / np.linalg.norm(axis)
-        dot_product = np.dot(unit_vector_1, unit_vector_2)
-        angle = np.arccos(dot_product)
-        angle = np.rad2deg(angle)
-        if self.x > 0:
-            return float(angle)
-        else:
-            return float(angle + 180)
-
-    def get_normal(self):
-        self.vec = np.array([-self.vec[1], self.vec[0]])
-        return self
+        if self.length() == 0:
+            return 0.0
+        axis = np.array([0, -1])
+        unit_vector = self.vec / np.linalg.norm(self.vec)
+        dot = np.dot(unit_vector, axis)
+        angle = math.degrees(math.acos(dot))
+        if self.x < 0:
+            angle = 360 - angle
+        return angle
 
     def normalize(self) -> "Vector":
-        """sets length of vector to 1
-
-        Examples:
-
-            Normalized vector with length 1:
-
-            .. code-block:: python
-
-                w = Vector(4, 3)
-                print(w.length())     # 5
-                print(w.normalize()) #  (0.8, 0.6)
-        """
         norm = np.linalg.norm(self.vec)
         if norm == 0:
-            self.vec = (0, 0)
             return self
         self.vec = self.vec / norm
         return self
 
     def length(self) -> float:
-        """returns length of vector
+        return float(np.linalg.norm(self.vec))
 
-        Examples:
-
-            Length of vector
-
-            .. code-block:: python
-
-                w = Vector(4, 3)
-                print(w.length())     # 5
-
-        """
-        return np.linalg.norm(self.vec)
-
-    def neg(self) -> "Vector":
-        """returns -v for Vector v
-
-        Examples:
-
-            Inverse of vector:
-
-            .. code-block:: python
-
-                u = Vector(2, 4)
-                print(u.neg()) # (-2, 5)
-
-            Alternative:
-
-            .. code-block:: python
-
-                print(- u)  # (-2, 5)
-
-        """
-        x = -self.x
-        y = -self.y
-        self.x, self.y = x, y
+    def limit(self, max_length: float) -> "Vector":
+        if self.length() > max_length:
+            self.vec = self.normalize().vec * max_length
         return self
 
-    def multiply(self, other: Union[float, "Vector"]) -> Union[float, "Vector"]:
-        """product self * other:
-        * returns product, if ``other`` is scalar (return-type: Vector)
-        * returns dot-product, if ``other`` is vector (return-type: float)
-        Args:
-            other : a scalar or vector
-
-
-        Examples:
-
-            Product and dot-product:
-
-            .. code-block:: python
-
-                a = 5
-                u1 = Vector(2, 4)
-                u2 = Vector(2, 4)
-                v = Vector(3, 1)
-                print(u1.multiply(a)) # (10, 25)
-                print(u2.multiply(v)) # 11
-
-            Alternative:
-
-            .. code-block:: python
-
-                print(u1 * a)  # 25
-                print(u1 * v) # 25
-        """
-        if type(other) in [int, float]:
-            x = self.x * other
-            y = self.y * other
-            self.x, self.y = x, y
-            return Vector(x, y)
-        if type(other) == Vector:
-            dot_product = self.dot(other)
-            return dot_product
-
-    def dot(self, other: "Vector") -> "Vector":
-        self.vec = np.dot(self.vec, other.vec)
-        return self
+    def multiply(self, other: Union[float, int, "Vector"]) -> Union["Vector", float]:
+        if isinstance(other, (int, float)):
+            return Vector(self.x * other, self.y * other)
+        if isinstance(other, Vector):
+            return self.dot(other)
+        raise TypeError("Unsupported operand type for multiply.")
 
     def add_to_position(self, position: Tuple[float, float]) -> Tuple[float, float]:
-        position = position
         return (self.x + position[0], self.y + position[1])
 
-    def __str__(self):
-        return f"({round(self.x, 3)},{round(self.y, 3)})"
+    def get_normal(self) -> "Vector":
+        return Vector(-self.y, self.x)
 
-    def __neg__(self):
-        return self.neg()
+    def dot(self, other: "Vector") -> float:
+        return float(np.dot(self.vec, other.vec))
 
-    def __mul__(self, other: Union[int, float, "Vector"]) -> "Vector":
-        if type(other) in [int, float]:
-            x = self.x * other
-            y = self.y * other
-            return Vector(x, y)
-        if type(other) == Vector:
-            dot_product = self.dot(other)
-            self.vec = dot_product
-            return self
-
-    def __add__(self, other: "Vector") -> "Vector":
-        if type(other) == Vector:
-            x = self.x + other.x
-            y = self.y + other.y
-            return Vector(x, y)
-
-    def __sub__(self, other: "Vector") -> "Vector":
-        if type(other) == Vector:
-            x = self.x - other.x
-            y = self.y - other.y
-            return Vector(x, y)
-
-    def sub(self, other: "Vector") -> "Vector":
-        """adds vector `other` from self.
+    def distance_to(self, other: Union["Vector", Tuple[float, float]]) -> float:
+        """
+        Calculates Euclidean distance to another vector or position.
 
         Args:
-            other (Vector): other Vector
+            other: A Vector or tuple.
 
         Returns:
-            `self` + `other`
+            The distance as float.
 
         Examples:
-
-            Subtracts two vectors:
-
-            .. code-block:: python
-
-                v = Vector(3, 1)
-                u = Vector(2, 5)
-                print(u.sub(v)) # (1, -4)
-
-
-            Alternative:
-
-            .. code-block:: python
-
-                print(u - v)
+            >>> Vector(0, 0).distance_to((3, 4))
+            5.0
         """
-        if type(other) == Vector:
-            x = self.x - other.x
-            y = self.y - other.y
-            self.x, self.y = x, y
-            return self
+        other = self._to_vector(other)
+        return float(np.linalg.norm(self.vec - other.vec))
 
-    def add(self, other: "Vector") -> "Vector":
-        """adds vector `other` to self.
+    def angle_to(self, other: Union["Vector", Tuple[float, float]]) -> float:
+        """
+        Computes the angle between this vector and another in degrees.
 
         Args:
-            other (Vector): other Vector
+            other: A Vector or tuple.
 
         Returns:
-            `self` + `other`
+            Angle in degrees between 0 and 180.
 
         Examples:
-
-            Add two vectors:
-
-            .. code-block:: python
-
-                v = Vector(3, 1)
-                u = Vector(2, 5)
-                print(u.add(v)) # (5, 6)
-
-
-            Alternative:
-
-            .. code-block:: python
-
-                print(u + v)
+            >>> Vector(1, 0).angle_to((0, 1))
+            90.0
         """
-        if type(other) == Vector:
-            x = self.x + other.x
-            y = self.y + other.y
-            self.x, self.y = x, y
-            return self
+        other = self._to_vector(other)
+        norm_self = self.vec / np.linalg.norm(self.vec)
+        norm_other = other.vec / np.linalg.norm(other.vec)
+        dot = np.clip(np.dot(norm_self, norm_other), -1.0, 1.0)
+        return math.degrees(math.acos(dot))
 
-    def limit(self, value: float) -> "Vector":
-        """limits length of vector to value"""
-        if self.length() > value:
-            self.normalize().multiply(value)
-        return self
+    def __add__(self, other: Union["Vector", Tuple[float, float]]) -> "Vector":
+        other = self._to_vector(other)
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __radd__(self, other: Union["Vector", Tuple[float, float]]) -> "Vector":
+        return self.__add__(other)
+
+    def __sub__(self, other: Union["Vector", Tuple[float, float]]) -> "Vector":
+        other = self._to_vector(other)
+        return Vector(self.x - other.x, self.y - other.y)
+
+    def __rsub__(self, other: Union["Vector", Tuple[float, float]]) -> "Vector":
+        other = self._to_vector(other)
+        return Vector(other.x - self.x, other.y - self.y)
+
+    def __mul__(self, other: Union[float, int, "Vector", Tuple[float, float]]) -> Union["Vector", float]:
+        if isinstance(other, (int, float)):
+            return Vector(self.x * other, self.y * other)
+        other = self._to_vector(other)
+        return self.dot(other)
+
+    def __rmul__(self, other: Union[float, int, "Vector", Tuple[float, float]]) -> Union["Vector", float]:
+        return self.__mul__(other)
+
+    def __neg__(self) -> "Vector":
+        return Vector(-self.x, -self.y)
+
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, Vector):
+            return np.allclose(self.vec, other.vec)
+        if isinstance(other, tuple) and len(other) == 2:
+            return np.allclose(self.vec, np.array(other, dtype=float))
+        return False
+
+    def __str__(self) -> str:
+        return f"({round(self.x, 3)}, {round(self.y, 3)})"
+
+    def __repr__(self) -> str:
+        return f"Vector({self.x}, {self.y})"

@@ -98,7 +98,7 @@ player.orientation = -90
 
 @player.register
 def act(self):
-    self.move_in_direction(self.world.get_mouse_position())
+    self.move_in_direction(self.world.mouse.get_position())
 
 world.run()
 ```

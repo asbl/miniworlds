@@ -34,6 +34,8 @@ class Test614(unittest.TestCase):
                 def on_setup(self):
                     self.add_background((255,255,255,255))
                     self.actor = Actor((80,80), origin = "topleft")
+                    print("self", self)
+                    print("created actor", self.actor, "on world ", self.actor.world)
                     self.actor.color = (0,255,0)
                     self.actor.costume.set_dirty("all", 2)
                     self.actor.dirty = 1

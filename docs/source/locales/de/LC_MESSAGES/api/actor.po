@@ -1126,7 +1126,7 @@ msgid ""
 "\\(message\\)"
 msgstr ""
 ":py:obj:`send_message <miniworlds.actors.actor.Actor.send_message>`\\ "
-"\\(Nachricht\\)"
+"\\(message\\)"
 
 #: ../../None:88:<autosummary>:1 miniworlds.actors.actor.Actor.send_message:1
 #: of
