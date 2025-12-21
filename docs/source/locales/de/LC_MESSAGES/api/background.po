@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/background.md:1
 msgid "World > Background"
-msgstr "Welt > Hintergrund"
+msgstr "World > Hintergrund"
 
 #: ../../source/api/background.md:4
 msgid ""

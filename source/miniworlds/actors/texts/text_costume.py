@@ -31,7 +31,7 @@ class TextCostume(costume.Costume):
     def _update_draw_shape(self):
         super()._update_draw_shape()
         """Sets self.size by costume.font_size"""
-        if not self.actor.world.actors_fixed_size or (
+        if not self.actor.world.get_world_connector(self.actor).ACTORS_HAVE_FIXED_SIZE or (
             hasattr(self.actor, "fixed_size") and self.actor.fixed_size
         ):  # fixed size e.g. on Tiledworlds
             if self.actor.max_width != 0:
@@ -40,7 +40,7 @@ class TextCostume(costume.Costume):
                 width = self.get_text_width()
             height = self.get_text_height()
             self.actor.set_size((width, height))
-        if self.actor.world.actors_fixed_size:
+        if self.actor.world.get_world_connector(self.actor).ACTORS_HAVE_FIXED_SIZE:
             self.scale_to_size()
 
     def scale_to_size(self, width=None, height=None):

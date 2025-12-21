@@ -21,4 +21,4 @@ msgstr ""
 
 #: ../../source/api/world_physics.md:1
 msgid "World > Physicsworld"
-msgstr "Welt > Physikwelt"
+msgstr "World > Physikwelt"

@@ -1,6 +1,12 @@
 import miniworlds.worlds.tiled_world.tiled_world_position_manager as tiledpositionmanager
 import miniworlds.worlds.tiled_world.tiled_world_sensor_manager as tiledworldsensor
 import miniworlds.worlds.manager.world_connector as world_connector
+import miniworlds.worlds.world as world_mod
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.tiled_world.tiled_world as world_mod
+    import miniworlds.worlds.actor as actor_mod
 
 
 class TiledWorldConnector(world_connector.WorldConnector):
@@ -9,6 +15,11 @@ class TiledWorldConnector(world_connector.WorldConnector):
     Handles actor integration into static actor structures and provides
     the appropriate sensor and position manager classes.
     """
+
+    ACTORS_HAVE_FIXED_SIZE = True
+
+    def __init__(self, world: "world_mod.TiledWorld", actor: "actor_mod.Actor"):
+        super().__init__(world, actor)
 
     @staticmethod
     def get_sensor_manager_class():
