@@ -10,7 +10,11 @@ import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 from miniworlds.base.exceptions import MissingActorPartsError
 
+
 class WorldConnector():
+
+    ACTORS_HAVE_FIXED_SIZE = False
+
     def __init__(self, world: "world_mod.World", actor: "actor_mod.Actor"):
         self.world: "world_mod.World" = world
         self.actor: "actor_mod.Actor" = actor
@@ -74,7 +78,6 @@ class WorldConnector():
         """
         return sensor_manager.SensorManager
 
-
     def init_managers(self, position: Tuple[float, float] = (0, 0)) -> None:
         """
         Initializes the required manager components (sensor, position, costume) for the actor
@@ -96,7 +99,6 @@ class WorldConnector():
             self.init_costume_manager()
             self.actor._has_costume_manager = True
 
-
     def add_to_world(self, position: Tuple[float, float] = (0, 0)) -> "actor_mod.Actor":
         """
         Adds the actor to the world at the given position. Initializes required managers and
@@ -115,7 +117,7 @@ class WorldConnector():
         self.init_managers(position)
         self.world.camera._clear_camera_cache()
 
-        if self.actor not in self.world.actors: 
+        if self.actor not in self.world.actors:
             self.world.actors.add(self.actor)
 
         self.set_static(self.actor.static)
@@ -133,7 +135,6 @@ class WorldConnector():
         self.world.on_new_actor(self.actor)
 
         return self.actor
-
 
     def remove_actor_from_world(self, kill: bool = False) -> collections.defaultdict:
         """
@@ -158,7 +159,8 @@ class WorldConnector():
             pass  # Sensor manager might not be initialized
 
         # Unregister event methods
-        unregistered_methods = self.world.event_manager.unregister_instance(self.actor)
+        unregistered_methods = self.world.event_manager.unregister_instance(
+            self.actor)
 
         # Remove from reload queue if present
         if self in self.world._mainloop.reload_costumes_queue:
@@ -182,7 +184,6 @@ class WorldConnector():
 
         return unregistered_methods
 
-
     def set_world(self, old_world: "world_mod.World", new_world: "world_mod.World", position: Tuple[float, float] = (0, 0)):
         """
         Transfers the actor from the old world to a new world instance,
@@ -194,7 +195,8 @@ class WorldConnector():
             position (Tuple[float, float], optional): The new position in the target world. Defaults to (0, 0).
         """
         old_connector = old_world.get_world_connector(self.actor)
-        unregistered_methods = old_connector.remove_actor_from_world(kill=False)
+        unregistered_methods = old_connector.remove_actor_from_world(
+            kill=False)
 
         # Reassign world reference
         self.world = new_world
@@ -217,7 +219,8 @@ class WorldConnector():
         return self.actor._sensor_manager
 
     def init_position_manager(self, position=(0, 0)):
-        self.actor._position_manager = self.get_position_manager_class()(self.actor, self.world, position)
+        self.actor._position_manager = self.get_position_manager_class()(
+            self.actor, self.world, position)
         self.actor._position_manager.position = position
         return self.actor._position_manager
 

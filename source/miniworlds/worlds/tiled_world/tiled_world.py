@@ -89,7 +89,6 @@ class TiledWorld(world.World):
             pygame.sprite.Group()
         )  # Set with all dynamic actors
         self.static_actors_dict: defaultdict = defaultdict(list)
-        self.actors_fixed_size = True
         self.rotatable_actors = True
         self.is_tiled = True
 

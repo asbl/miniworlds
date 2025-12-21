@@ -124,8 +124,6 @@ class World(world_base.WorldBase):
         tile_size: Size of tiles (1 for normal worlds, can differ for Tiledworlds)
     """
 
-    subclasses = None
-
     def _validate_parameters(self, x, y):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
             raise TypeError(
@@ -137,6 +135,17 @@ class World(world_base.WorldBase):
         x: Union[int, Tuple[int, int]] = 400,
         y: int = 400,
         ):
+        """Initializes the class and manages actor sprites.
+
+        Args:
+            x (int or Tuple[int, int], optional): X position or (x, y) coordinates. Default is 400.
+            y (int, optional): Y position if `x` is only an int. Default is 400.
+
+        Attributes:
+            actors (pygame.sprite.LayeredDirty): Manages all actor sprites in the application.
+                Uses pygame LayeredDirty to handle layers and dirty updates.
+            music (world_music_manager.MusicManager): Music Manager handles music operations.
+        """
         # --- Parameter validation ---
         self._validate_parameters(x, y)
 
@@ -156,10 +165,6 @@ class World(world_base.WorldBase):
         self._fps: int = 60
         self._tick_rate: int = 1
         self.frame: int = 0
-
-        # --- State flags ---
-        #self._key_pressed: bool = False  
-        self.actors_fixed_size: bool = False
 
         # --- Actor & animation systems ---
         self._timed_objects: list = []

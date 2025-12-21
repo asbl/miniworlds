@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2025-12-21 22:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -189,7 +189,9 @@ msgid ""
 msgstr ""
 
 #: ../../source/processing/03_interactionmd.md:166
-msgid "You can use `get_mouse_position()` to retrieve the current mouse position:"
+msgid ""
+"You can use `world.mouse.get_position()` to retrieve the current mouse "
+"position:"
 msgstr ""
 
 #: ../../source/processing/03_interactionmd.md:184
@@ -545,4 +547,9 @@ msgstr "changing colors"
 
 #~ msgid "Ausgabe:"
 #~ msgstr "Output:"
+
+#~ msgid ""
+#~ "You can use `get_mouse_position()` to "
+#~ "retrieve the current mouse position:"
+#~ msgstr ""
 

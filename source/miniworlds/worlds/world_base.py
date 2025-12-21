@@ -36,6 +36,9 @@ class WorldBase(metaclass=AutoSetupMeta):
         self.screen_top_left_y = 0  # Set in add_to_window
         self._image = None
 
+        # --- Event system ---
+        self.event_manager: event_manager.EventManager = self._create_event_manager()
+
     def _after_init_setup(self):
         pass
         
