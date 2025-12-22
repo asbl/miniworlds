@@ -44,16 +44,13 @@ msgstr "Öffentliche Datenattribute:"
 
 #: ../../None:5:<autosummary>:1
 msgid ":py:obj:`x <miniworlds.positions.vector.Vector.x>`\\"
-msgstr ":py:obj:`x <miniworlds.positions.vector.Vector.x>`\\"
-
+msgstr ""
 #: ../../None:5:<autosummary>:1
 msgid ":py:obj:`y <miniworlds.positions.vector.Vector.y>`\\"
-msgstr ":py:obj:`y <miniworlds.positions.vector.Vector.y>`\\"
-
+msgstr ""
 #: ../../None:5:<autosummary>:1
 msgid ":py:obj:`angle <miniworlds.positions.vector.Vector.angle>`\\"
-msgstr ":py:obj:`Winkel <miniworlds.positions.vector.Vector.angle>`\\"
-
+msgstr ""
 #: ../../source/api/positions_vector.md
 msgid "Public Methods:"
 msgstr "Öffentliche Methoden:"
@@ -110,8 +107,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_direction:1 of
 msgid "Creates a vector from miniworlds direction."
-msgstr "Erstellt einen Vektor aus der Richtung der Miniwelten."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ "
@@ -123,8 +119,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actors:1 of
 msgid "Create a vector from two actors."
-msgstr "Erstellen Sie einen Vektor aus zwei Akteuren."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_actor_and_position "
@@ -138,8 +133,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_and_position:1 of
 msgid "Create a vector from actor and position"
-msgstr "Erstellen Sie einen Vektor aus Akteur und Position"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_actor_direction "
@@ -151,12 +145,10 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_direction:1 of
 msgid "Creates a vector from actor direction"
-msgstr "Erstellt einen Vektor aus der Richtung des Akteurs"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`rotate <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"
-msgstr ":py:obj:`rotate <miniworlds.positions.vector.Vector.rotate>`\\ \\(theta\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`to_direction "
@@ -175,15 +167,13 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`length <miniworlds.positions.vector.Vector.length>`\\ \\(\\)"
-msgstr ":py:obj:`Länge <miniworlds.positions.vector.Vector.length>`\\ \\(\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ "
 "\\(max\\_length\\)"
-msgstr ":py:obj:`limit <miniworlds.positions.vector.Vector.limit>`\\ \\(value\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ "
@@ -210,15 +200,13 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
-msgstr ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`distance_to <miniworlds.positions.vector.Vector.distance_to>`\\ "
 "\\(other\\)"
-msgstr ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.distance_to:1 of
 msgid "Calculates Euclidean distance to another vector or position."
@@ -229,8 +217,7 @@ msgstr ""
 msgid ""
 ":py:obj:`angle_to <miniworlds.positions.vector.Vector.angle_to>`\\ "
 "\\(other\\)"
-msgstr ":py:obj:`Winkel <miniworlds.positions.vector.Vector.angle>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1 miniworlds.positions.vector.Vector.angle_to:1
 #: of
 msgid "Computes the angle between this vector and another in degrees."
@@ -289,8 +276,7 @@ msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`__neg__ <miniworlds.positions.vector.Vector.__neg__>`\\ \\(\\)"
-msgstr ":py:obj:`__neg__ <miniworlds.positions.vector.Vector.__neg__>`\\ \\(\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`__eq__ <miniworlds.positions.vector.Vector.__eq__>`\\ \\(other\\)"
@@ -301,12 +287,10 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid "Return self==value."
-msgstr "Gib str(self) zurück."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`__str__ <miniworlds.positions.vector.Vector.__str__>`\\ \\(\\)"
-msgstr ":py:obj:`__str__ <miniworlds.positions.vector.Vector.__str__>`\\ \\(\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid "Return str(self)."
 msgstr "Gib str(self) zurück."
@@ -314,8 +298,7 @@ msgstr "Gib str(self) zurück."
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`__repr__ <miniworlds.positions.vector.Vector.__repr__>`\\ \\(\\)"
-msgstr ":py:obj:`__str__ <miniworlds.positions.vector.Vector.__str__>`\\ \\(\\)"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #, fuzzy
 msgid "Return repr(self)."
@@ -340,8 +323,7 @@ msgstr ""
 #: miniworlds.positions.vector.Vector.distance_to of
 #, fuzzy
 msgid "Return type"
-msgstr "Gib str(self) zurück."
-
+msgstr ""
 #: miniworlds.positions.vector.Vector.add_to_position:2
 #: miniworlds.positions.vector.Vector.to_position:2 of
 msgid ""

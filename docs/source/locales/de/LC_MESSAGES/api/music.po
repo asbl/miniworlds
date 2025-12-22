@@ -54,8 +54,7 @@ msgstr ""
 #: miniworlds.worlds.manager.music_manager.MusicManager.pause:1 of
 #, fuzzy
 msgid "Pauses the currently playing music."
-msgstr "erhält den Pfad zur aktuellen Musik"
-
+msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`is_playing "
@@ -83,8 +82,7 @@ msgstr ""
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_path:1 of
 #, fuzzy
 msgid "Returns the path of the currently loaded music file."
-msgstr "Der Pfad zur aktuellen Musikdatei"
-
+msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`play "
@@ -99,8 +97,7 @@ msgstr ""
 #: miniworlds.worlds.manager.music_manager.MusicManager.play:1 of
 #, fuzzy
 msgid "Plays a music file from the given path."
-msgstr "spielt Musik von einem Pfad"
-
+msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`stop "
@@ -113,8 +110,7 @@ msgstr ""
 #: miniworlds.worlds.manager.music_manager.MusicManager.stop:1 of
 #, fuzzy
 msgid "Stops the currently playing music."
-msgstr "erhält den Pfad zur aktuellen Musik"
-
+msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`set_volume "
@@ -158,8 +154,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 #, fuzzy
 msgid "Toggles the pause state of the music."
-msgstr "Der Weg zur Musik"
-
+msgstr ""
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_path
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_volume
 #: miniworlds.worlds.manager.music_manager.MusicManager.is_playing
@@ -290,8 +285,7 @@ msgstr ""
 #: ../../None:5:<autosummary>:1
 #: miniworlds.worlds.manager.sound_manager.SoundManager.play:1 of
 msgid "plays a sound from path"
-msgstr "spielt einen Ton vom Pfad ab"
-
+msgstr ""
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`register "
@@ -304,8 +298,7 @@ msgstr ""
 
 #: ../../None:5:<autosummary>:1
 msgid "Registers a sound."
-msgstr "Registriert einen Ton."
-
+msgstr ""
 #: miniworlds.worlds.manager.sound_manager.SoundManager.play:3
 #: miniworlds.worlds.manager.sound_manager.SoundManager.register:4 of
 msgid "The path to the sound"

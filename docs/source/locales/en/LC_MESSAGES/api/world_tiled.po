@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-21 22:42+0100\n"
+"POT-Creation-Date: 2025-12-22 06:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -24,26 +24,24 @@ msgid "World > TiledWorld"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:1 of
-msgid ""
-"from typing A TiledWorld is a World where each Actor is placed in one "
-"Tile."
+msgid "A TiledWorld is a World where each Actor is placed in one Tile."
 msgstr ""
 
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:4 of
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:3 of
 msgid "With Tiled World, you can realize RPGs and Boardgames."
 msgstr ""
 
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:6 of
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:5 of
 msgid "TiledWorld"
 msgstr ""
 
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:9 of
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:8 of
 msgid ""
 "Each Actor on a TiledWorld can be placed on a Tile, on a Corner between "
 "Tiles or on an Edge between Tiles."
 msgstr ""
 
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:12
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:11
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.clear_tiles:6
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:10
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:6
@@ -52,7 +50,7 @@ msgstr ""
 msgid "Examples"
 msgstr ""
 
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:13 of
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:12 of
 msgid "Create Actor on Tile, Corner and Edge:"
 msgstr ""
 
@@ -77,7 +75,7 @@ msgid ""
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1 ../../None:6:<autosummary>:1
+#: ../../None:11:<autosummary>:1 ../../None:6:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns:1 of
 msgid "Gets the number of horizontal pixels (columns) visible in the world."
 msgstr ""
@@ -88,7 +86,7 @@ msgid ""
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1 ../../None:6:<autosummary>:1
+#: ../../None:11:<autosummary>:1 ../../None:6:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows:1 of
 msgid "Gets the number of vertical pixels (rows) visible in the world."
 msgstr ""
@@ -104,164 +102,102 @@ msgstr ""
 msgid "Tile size of each tile, if world has tiles"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`tick_rate <miniworlds.worlds.world.World.tick_rate>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Tick rate defines how often the method ``act()`` will be called."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`fps <miniworlds.worlds.world.World.fps>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Frames per second shown on the screen."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`world_size_x <miniworlds.worlds.world.World.world_size_x>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Gets the horizontal size of the world in pixels."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`world_size_y <miniworlds.worlds.world.World.world_size_y>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Gets the vertical size of the world in pixels."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Gets the world size as a tuple (width, height), in pixels."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Returns the currently active background."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid ":py:obj:`has_background <miniworlds.worlds.world.World.has_background>`\\"
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
+#: ../../None:11:<autosummary>:1
 msgid "Returns True if the world has at least one background appearance."
 msgstr ""
 
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`actors <miniworlds.worlds.world.World.actors>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`event_manager <miniworlds.worlds.world.World.event_manager>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`clock <miniworlds.worlds.world.World.clock>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`frame <miniworlds.worlds.world.World.frame>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`app <miniworlds.worlds.world.World.app>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`backgrounds <miniworlds.worlds.world.World.backgrounds>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`layout <miniworlds.worlds.world.World.layout>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`data <miniworlds.worlds.world.World.data>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`mouse <miniworlds.worlds.world.World.mouse>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`draw <miniworlds.worlds.world.World.draw>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`music <miniworlds.worlds.world.World.music>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`sound <miniworlds.worlds.world.World.sound>`\\"
-msgstr ""
-
-#: ../../None:24:<autosummary>:1
-msgid ":py:obj:`is_running <miniworlds.worlds.world.World.is_running>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`window <miniworlds.worlds.world_base.WorldBase.window>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world_base.WorldBase.size>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`topleft <miniworlds.worlds.world_base.WorldBase.topleft>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`width <miniworlds.worlds.world_base.WorldBase.width>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.worlds.world_base.WorldBase.height>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ":py:obj:`class_name <miniworlds.worlds.world_base.WorldBase.class_name>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`registered_events "
 "<miniworlds.worlds.world_base.WorldBase.registered_events>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:9:<autosummary>:1
 msgid "Returns the set of all event names that are currently registered."
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ":py:obj:`is_running <miniworlds.worlds.world_base.WorldBase.is_running>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ""
-":py:obj:`event_manager "
-"<miniworlds.worlds.world_base.WorldBase.event_manager>`\\"
 msgstr ""
 
 #: ../../source/api/world_tiled.md
@@ -854,58 +790,12 @@ msgid ""
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld._abc_impl>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
+#: ../../None:3:<autosummary>:1
 msgid ":py:obj:`_abc_impl <miniworlds.worlds.world.World._abc_impl>`\\"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1
-msgid ":py:obj:`_fps <miniworlds.worlds.world.World._fps>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ":py:obj:`_tick_rate <miniworlds.worlds.world.World._tick_rate>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ":py:obj:`_timed_objects <miniworlds.worlds.world.World._timed_objects>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ""
-":py:obj:`_dynamic_actors "
-"<miniworlds.worlds.world.World._dynamic_actors>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ""
-":py:obj:`_registered_methods "
-"<miniworlds.worlds.world.World._registered_methods>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ":py:obj:`_mainloop <miniworlds.worlds.world.World._mainloop>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ""
-":py:obj:`_collision_manager "
-"<miniworlds.worlds.world.World._collision_manager>`\\"
-msgstr ""
-
-#: ../../None:11:<autosummary>:1
-msgid ""
-":py:obj:`_default_start_running "
-"<miniworlds.worlds.world.World._default_start_running>`\\"
-msgstr ""
-
-#: ../../None:4:<autosummary>:1
+#: ../../None:3:<autosummary>:1
 msgid ":py:obj:`_abc_impl <miniworlds.worlds.world_base.WorldBase._abc_impl>`\\"
-msgstr ""
-
-#: ../../None:4:<autosummary>:1
-msgid ""
-":py:obj:`_default_start_running "
-"<miniworlds.worlds.world_base.WorldBase._default_start_running>`\\"
 msgstr ""
 
 #: ../../source/api/world_tiled.md
@@ -2051,5 +1941,45 @@ msgstr ""
 #~ msgid ""
 #~ ":py:obj:`_ACTORS_HAVE_FIXED_SIZE "
 #~ "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld._ACTORS_HAVE_FIXED_SIZE>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "from typing A TiledWorld is a "
+#~ "World where each Actor is placed "
+#~ "in one Tile."
+#~ msgstr ""
+
+#~ msgid ":py:obj:`_fps <miniworlds.worlds.world.World._fps>`\\"
+#~ msgstr ""
+
+#~ msgid ":py:obj:`_tick_rate <miniworlds.worlds.world.World._tick_rate>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`_timed_objects "
+#~ "<miniworlds.worlds.world.World._timed_objects>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`_dynamic_actors "
+#~ "<miniworlds.worlds.world.World._dynamic_actors>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`_registered_methods "
+#~ "<miniworlds.worlds.world.World._registered_methods>`\\"
+#~ msgstr ""
+
+#~ msgid ":py:obj:`_mainloop <miniworlds.worlds.world.World._mainloop>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`_collision_manager "
+#~ "<miniworlds.worlds.world.World._collision_manager>`\\"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`_default_start_running "
+#~ "<miniworlds.worlds.world.World._default_start_running>`\\"
 #~ msgstr ""
 
