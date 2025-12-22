@@ -56,7 +56,7 @@ msgstr "Beispiele"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:12 of
 msgid "Create Actor on Tile, Corner and Edge:"
-msgstr "Erstelle Akteur auf Kachel, Ecke und Kante:"
+msgstr "Erstelle Actor auf Kachel, Ecke und Kante:"
 
 #: ../../source/api/world_tiled.md
 msgid "Public Data Attributes:"
@@ -311,7 +311,7 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:1 of
 msgid "Returns the World's borders, if actor is near a Border."
 msgstr ""
-"Gibt die Grenzen der Welt zurück, wenn der Akteur in der Nähe einer "
+"Gibt die Grenzen der Welt zurück, wenn der Actor in der Nähe einer "
 "Grenze ist."
 
 #: ../../None:27:<autosummary>:1
@@ -1018,7 +1018,7 @@ msgstr ""
 #: of
 msgid "Faster than sensing_actors, but only the first found actor is recognized."
 msgstr ""
-"Schneller als sensing_actors, aber nur der zuerst gefundene Akteur wird "
+"Schneller als sensing_actors, aber nur der zuerst gefundene Actor wird "
 "erkannt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:3
@@ -1041,7 +1041,7 @@ msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:11 of
 msgid "Get all actors at mouse position:"
-msgstr "Alle Akteure an der Mausposition abrufen:"
+msgstr "Alle Actors an der Mausposition abrufen:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:3
 #: of
@@ -1072,7 +1072,7 @@ msgstr "Löst CornerNotFoundError aus, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:7 of
 msgid "Get corner from actor:"
-msgstr "Winkel vom Akteur erhalten:"
+msgstr "Winkel vom Actor erhalten:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:13 of
 msgid "Get corner from world-position and direction"
@@ -1109,7 +1109,7 @@ msgstr "Löst EdgeNotFoundError aus, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:7 of
 msgid "Get edge from actor:"
-msgstr "Kante vom Akteur erhalten:"
+msgstr "Kante vom Actor erhalten:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:13 of
 msgid "Get edge from world-position and direction"
@@ -1125,7 +1125,7 @@ msgstr "Löst TileNotFoundError aus, wenn Tile nicht existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:7 of
 msgid "Get tile from actor:"
-msgstr "Kachel vom Akteur holen:"
+msgstr "Kachel vom Actor holen:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:13 of
 msgid "Full example:"
@@ -1278,7 +1278,7 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ "\\(file\\, actor\\_klassen\\)"
 
 #~ msgid "Loads all actors from db."
-#~ msgstr "Lädt alle Akteure aus der Datenbank."
+#~ msgstr "Lädt alle Actors aus der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`save_to_db "
@@ -1288,7 +1288,7 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ "<miniworlds.worlds.world.World.save_to_db>`\\ \\(Datei\\)"
 
 #~ msgid "Saves the current world an all actors to database."
-#~ msgstr "Speichert die aktuelle Welt und alle Akteure in der Datenbank."
+#~ msgstr "Speichert die aktuelle Welt und alle Actors in der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`get_columns_by_width "
@@ -1447,7 +1447,7 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ "<miniworlds.worlds.world.World.default_border>`\\"
 
 #~ msgid "Sets default border color for actors"
-#~ msgstr "Legt die Standardrahmenfarbe für Akteure fest"
+#~ msgstr "Legt die Standardrahmenfarbe für Actors fest"
 
 #~ msgid ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
 #~ msgstr ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
@@ -1684,15 +1684,6 @@ msgstr "Die Kachelgröße in Pixeln."
 
 #~ msgid "Returns all backgrounds of the world as list."
 #~ msgstr "Gibt alle Hintergründe der Welt als Liste zurück."
-
-#~ msgid ""
-#~ ":py:obj:`add_to_world "
-#~ "<miniworlds.worlds.world.World.add_to_world>`\\ \\(actor\\, "
-#~ "position\\)"
-#~ msgstr ""
-#~ ":py:obj:`add_to_world "
-#~ "<miniworlds.worlds.world.World.add_to_world>`\\ \\(Akteur\\, "
-#~ "Position\\)"
 
 #~ msgid "Adds a Actor to the world."
 #~ msgstr "Fügt einen Actor zur Welt hinzu."

@@ -257,7 +257,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.border:1 of
 msgid "The border-size of actor."
-msgstr "Die Randgröße des Akteurs."
+msgstr "Die Randgröße des Actors."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
@@ -620,7 +620,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Setzt den Akteur auf die Eltern-Größe **ohne** das Seitenverhältnis "
+"Setzt den Actor auf die Eltern-Größe **ohne** das Seitenverhältnis "
 "beizubehalten."
 
 #: ../../None:23:<autosummary>:1
@@ -771,7 +771,7 @@ msgid ""
 "The actor will be removed after the animation - This can be used for "
 "explosions."
 msgstr ""
-"Der Akteur wird nach der Animation entfernt - Dies kann für Explosionen "
+"Der Actor wird nach der Animation entfernt - Dies kann für Explosionen "
 "verwendet werden."
 
 #: miniworlds.appearances.appearance.Appearance.alpha:20
@@ -790,7 +790,7 @@ msgstr "Typ"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:23 of
 msgid "defines transparency of Actor"
-msgstr "definiert die Transparenz des Akteurs"
+msgstr "definiert die Transparenz des Actors"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:25 of
 msgid "0"
@@ -811,7 +811,7 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.border:3 of
 msgid "The value is 0, if actor has no border"
-msgstr "Der Wert ist 0, wenn der Akteur keinen Rand hat"
+msgstr "Der Wert ist 0, wenn der Actor keinen Rand hat"
 
 #: miniworlds.appearances.appearance.Appearance.border:5 of
 msgid "int"
@@ -896,7 +896,7 @@ msgstr ""
 #: miniworlds.appearances.appearance.Appearance.register:1 of
 msgid "Register method for decorator. Registers method to actor or background."
 msgstr ""
-"Registriere Methode für Dekorator. Registriert Methode für Akteur oder "
+"Registriere Methode für Dekorator. Registriert Methode für Actor oder "
 "Hintergrund."
 
 #: miniworlds.appearances.appearance.Appearance.set_image:3 of

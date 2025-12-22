@@ -106,16 +106,6 @@ msgstr ""
 #~ msgid "Überprüfung der Spielfeldgrenzen"
 #~ msgstr "Checking the field boundaries"
 
-#~ msgid ""
-#~ "Du kannst auch Sensoren verwenden, um"
-#~ " zu überprüfen, ob sich ein Akteur"
-#~ " an den Rändern oder außerhalb des"
-#~ " Spielfelds befindet:"
-#~ msgstr ""
-#~ "You can also use sensors to check"
-#~ " if an actor is at the edges"
-#~ " or outside the playing field:"
-
 #~ msgid "Ist die Figur nicht mehr auf dem Spielfeld?###"
 #~ msgstr "Is the piece no longer on the field?###"
 

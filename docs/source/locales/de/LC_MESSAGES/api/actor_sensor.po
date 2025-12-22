@@ -30,12 +30,12 @@ msgstr "Sensor"
 #: miniworlds.actors.sensors.circle_sensor.CircleSensor:1
 #: miniworlds.actors.sensors.sensor_actor.Sensor:1 of
 msgid "A sensors attached to a actor."
-msgstr "Ein Sensor ist an einem Akteur angebracht."
+msgstr "Ein Sensor ist an einem Actor angebracht."
 
 #: miniworlds.actors.sensors.circle_sensor.CircleSensor:3
 #: miniworlds.actors.sensors.sensor_actor.Sensor:3 of
 msgid "The sensors is not visible and will not detect the actor itself."
-msgstr "Die Sensoren sind nicht sichtbar und werden den Akteur selbst nicht erkennen."
+msgstr "Die Sensoren sind nicht sichtbar und werden den Actor selbst nicht erkennen."
 
 #: ../../source/api/actor_sensor.md:10
 msgid "Circle Sensor"

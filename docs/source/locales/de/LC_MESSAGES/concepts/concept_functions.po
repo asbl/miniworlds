@@ -29,7 +29,7 @@ msgstr ""
 "In der ersten Zeile wird ein **Dekorator** verwendet. Dieser **verknüpft** die Funktion mit dem "
 "`world`-Objekt. Immer wenn das System `world.on_setup` aufrufen möchte, wird stattdessen "
 "die von dir definierte Funktion ausgeführt. Auf diese Weise kannst du Funktionen definieren, "
-"die auf verschiedene **Ereignisse** reagieren – etwa Tastendrücke, Kollisionen von Akteuren usw."
+"die auf verschiedene **Ereignisse** reagieren – etwa Tastendrücke, Kollisionen von Actorsn usw."
 
 #: ../../source/concepts/concept_functions.md:22
 msgid "Indentation and Code Blocks"

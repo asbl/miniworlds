@@ -316,15 +316,6 @@ msgstr ""
 #~ msgid "Einen Actor erstellen"
 #~ msgstr "Create an actor"
 
-#~ msgid ""
-#~ "angen wir damit an, einen Actor in deiner Welt zu platzieren.  Zuerst "
-#~ "erstellen wir eine einfache Welt mit einem Hintergrund und platzieren einen "
-#~ "Actor."
-#~ msgstr ""
-#~ "Fangen wir damit an, einen Akteur in deiner Welt zu platzieren.  Zuerst "
-#~ "erstellen wir eine einfache Welt mit einem Hintergrund und platzieren einen "
-#~ "Akteur."
-
 #~ msgid "Dies geht so:"
 #~ msgstr "This goes like this:"
 
@@ -439,7 +430,7 @@ msgstr ""
 #~ "If your actor is facing the wrong direction, there are two simple solutions:"
 
 #~ msgid "Ausrichtung des Actors"
-#~ msgstr "Orientation des Akteurs"
+#~ msgstr "Orientation des Actors"
 
 #~ msgid ""
 #~ "Die Ausrichtung des Bildes ist nach oben gerichtet.    Miniworlds erwartet "

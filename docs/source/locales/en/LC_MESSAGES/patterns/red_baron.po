@@ -198,7 +198,7 @@ msgstr ""
 
 #~ msgid ""
 #~ "Erstelle ein Grundgerüst: Du benötigst "
-#~ "eine Welt, in der Akteure platziert "
+#~ "eine Welt, in der Actors platziert "
 #~ "werden können."
 #~ msgstr "Create a basic framework: You need a world where actors can be placed. "
 

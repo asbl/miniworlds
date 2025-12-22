@@ -299,7 +299,7 @@ msgid ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
 msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid "The border-size of actor."
-msgstr "Die Randgröße des Akteurs."
+msgstr "Die Randgröße des Actors."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
@@ -747,7 +747,7 @@ msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
 msgstr ""
-"Setzt den Akteur auf die Eltern-Größe **ohne** das Seitenverhältnis "
+"Setzt den Actor auf die Eltern-Größe **ohne** das Seitenverhältnis "
 "beizubehalten."
 
 #: ../../None:23:<autosummary>:1

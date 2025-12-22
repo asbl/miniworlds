@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../../source/patterns/03_game_over.md:1
 msgid "Game Over"
-msgstr "Spiel vorbei"
+msgstr "Game over"
 
 #: ../../source/patterns/03_game_over.md:3
 msgid "Typically, the following happens during a game over event:"
@@ -43,7 +43,7 @@ msgid ""
 "First, it makes sense to define a method that creates all actors needed "
 "at the start of a game:"
 msgstr ""
-"Zunächst ist es sinnvoll, eine Methode zu definieren, die alle Akteure erstellt, "
+"Zunächst ist es sinnvoll, eine Methode zu definieren, die alle Actors erstellt, "
 "die beim Start eines Spiels benötigt werden:"
 
 #: ../../source/patterns/03_game_over.md:30
@@ -53,7 +53,7 @@ msgid ""
 " is triggered."
 msgstr ""
 "Diese Methode erstellt ein Spielerobjekt und registriert bereits Ereignisse dafür. "
-"Wenn zum Beispiel ein anderer Akteur erkannt wird, wird die Methode `game_over` ausgelöst."
+"Wenn zum Beispiel ein anderer Actor erkannt wird, wird die Methode `game_over` ausgelöst."
 
 #: ../../source/patterns/03_game_over.md:33
 msgid "In the `game_over` method, the world is paused:"
@@ -72,7 +72,7 @@ msgid ""
 "The `restart` method removes all actors, restarts the world, and calls "
 "`setup`:"
 msgstr ""
-"Die Methode `restart` entfernt alle Akteure, startet die Welt neu und ruft `setup` auf:"
+"Die Methode `restart` entfernt alle Actors, startet die Welt neu und ruft `setup` auf:"
 
 #: ../../source/patterns/03_game_over.md:66
 msgid "Complete example:"

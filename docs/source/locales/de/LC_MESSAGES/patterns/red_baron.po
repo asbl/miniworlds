@@ -61,7 +61,7 @@ msgid ""
 "You need a world where actors can be placed. The final line must be "
 "`world.run()`:"
 msgstr ""
-"Du brauchst eine Welt, in der Akteure platziert werden können. Die letzte Zeile muss "
+"Du brauchst eine Welt, in der Actors platziert werden können. Die letzte Zeile muss "
 "`world.run()` sein:"
 
 #: ../../source/patterns/red_baron.md:33
