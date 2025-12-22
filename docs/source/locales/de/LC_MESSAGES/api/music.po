@@ -38,17 +38,12 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ "
 "\\(app\\)"
 msgstr ""
-":py:obj:`__init__ "
-"<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ "
-"\\(app\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`pause "
 "<miniworlds.worlds.manager.music_manager.MusicManager.pause>`\\ \\(\\)"
 msgstr ""
-":py:obj:`pause "
-"<miniworlds.worlds.manager.music_manager.MusicManager.pause>`\\ \\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.pause:1 of
@@ -61,9 +56,6 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`is_playing "
-"<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ "
-"\\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.is_playing:1 of
@@ -75,8 +67,6 @@ msgid ""
 ":py:obj:`get_path "
 "<miniworlds.worlds.manager.music_manager.MusicManager.get_path>`\\ \\(\\)"
 msgstr ""
-":py:obj:`get_path "
-"<miniworlds.worlds.manager.music_manager.MusicManager.get_path>`\\ \\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_path:1 of
@@ -89,9 +79,6 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
 "\\(\\[path\\, loop\\]\\)"
 msgstr ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
-"\\(\\[Pfad\\, Schleife\\]\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.play:1 of
@@ -103,8 +90,6 @@ msgid ""
 ":py:obj:`stop "
 "<miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ \\(\\)"
 msgstr ""
-":py:obj:`stop "
-"<miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ \\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.stop:1 of
@@ -117,9 +102,6 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ "
 "\\(volume\\)"
 msgstr ""
-":py:obj:`set_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ "
-"\\(Lautstärke\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.set_volume:1 of
@@ -132,9 +114,6 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`get_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ "
-"\\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_volume:1 of
@@ -148,8 +127,6 @@ msgid ""
 "<miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`pause "
-"<miniworlds.worlds.manager.music_manager.MusicManager.pause>`\\ \\(\\)"
 
 #: ../../None:11:<autosummary>:1
 #, fuzzy
@@ -268,9 +245,6 @@ msgid ""
 "<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
 "\\(app\\)"
 msgstr ""
-":py:obj:`__init__ "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
-"\\(app\\)"
 
 #: ../../None:5:<autosummary>:1
 msgid ""
@@ -278,9 +252,6 @@ msgid ""
 "<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
 "\\(\\[path\\, volume\\]\\)"
 msgstr ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
-"\\(\\[Pfad\\, Lautstärke\\]\\)"
 
 #: ../../None:5:<autosummary>:1
 #: miniworlds.worlds.manager.sound_manager.SoundManager.play:1 of
@@ -292,9 +263,6 @@ msgid ""
 "<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
 "\\(\\[path\\]\\)"
 msgstr ""
-":py:obj:`register "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
-"\\(\\[Pfad\\]\\)"
 
 #: ../../None:5:<autosummary>:1
 msgid "Registers a sound."
