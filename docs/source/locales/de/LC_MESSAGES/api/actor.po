@@ -88,11 +88,11 @@ msgstr "Erstellen Sie einen Actor mit einem Bild:"
 
 #: miniworlds.actors.actor.Actor:31 of
 msgid "Create actor as instance from an custom class"
-msgstr "Erstelle einen Akteur als Instanz aus einer benutzerdefinierten Klasse"
+msgstr "Erstelle einen Actor als Instanz aus einer benutzerdefinierten Klasse"
 
 #: miniworlds.actors.actor.Actor:46 of
 msgid "Create a Actor at current mouse position:"
-msgstr "Erstellen Sie einen Akteur an der aktuellen Mausposition:"
+msgstr "Erstellen Sie einen Actor an der aktuellen Mausposition:"
 
 #: miniworlds.actors.actor.Actor:62 of
 msgid "See: :doc:`Actor <../api/actor>`"
@@ -153,7 +153,7 @@ msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.last_position:1
 #: of
 msgid "Actor position in last frame"
-msgstr "Akteurposition im letzten Frame"
+msgstr "Actor-Position im letzten Frame"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`last_direction <miniworlds.actors.actor.Actor.last_direction>`\\"
@@ -228,7 +228,7 @@ msgid ":py:obj:`width <miniworlds.actors.actor.Actor.width>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.width:1 of
 msgid "The width of the actor in pixels."
-msgstr "Die Breite des Akteurs in Pixeln."
+msgstr "Die Breite des Actors in Pixeln."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
@@ -242,14 +242,14 @@ msgid ":py:obj:`x <miniworlds.actors.actor.Actor.x>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.x:1 of
 msgid "The x-value of a actor"
-msgstr "Der x-Wert eines Akteurs"
+msgstr "Der x-Wert eines Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`y <miniworlds.actors.actor.Actor.y>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.y:1 of
 msgid "The y-value of a actor"
-msgstr "Der y-Wert eines Akteurs"
+msgstr "Der y-Wert eines Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`class_name <miniworlds.actors.actor.Actor.class_name>`\\"
@@ -260,7 +260,7 @@ msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_x:1
 #: miniworlds.actors.actor.Actor.topleft_y:1 of
 msgid "x-value of actor topleft-position"
-msgstr "x-Wert der oberen linken Position des Akteurs"
+msgstr "x-Wert der oberen linken Position des Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
@@ -315,7 +315,7 @@ msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.color:1
 #: miniworlds.actors.actor.Actor.fill_color:1 of
 msgid "The fill color of actor as rgba value, e.g. (255, 0, 0) for red."
-msgstr "Die Füllfarbe des Akteurs als RGBA-Wert, z.B. (255, 0, 0) für Rot."
+msgstr "Die Füllfarbe des Actors als RGBA-Wert, z.B. (255, 0, 0) für Rot."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
@@ -333,7 +333,7 @@ msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.border_color:1
 #: miniworlds.actors.actor.Actor.stroke_color:1 of
 msgid "border color of actor."
-msgstr "Randfarbe des Akteurs."
+msgstr "Randfarbe des Actors."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`stroke_color <miniworlds.actors.actor.Actor.stroke_color>`\\"
@@ -343,7 +343,7 @@ msgid ":py:obj:`border <miniworlds.actors.actor.Actor.border>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1 miniworlds.actors.actor.Actor.border:1 of
 msgid "The border-size of actor."
-msgstr "Die Randgröße des Akteurs."
+msgstr "Die Randgröße des Actors."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
@@ -384,7 +384,7 @@ msgid ":py:obj:`dirty <miniworlds.actors.actor_base.ActorBase.dirty>`\\"
 msgstr ""
 #: ../../None:7:<autosummary>:1
 msgid "If actor is dirty, it will be repainted."
-msgstr "Wenn der Akteur dirty ist, wird er neu gezeichnet."
+msgstr "Wenn der Actor dirty ist, wird er neu gezeichnet."
 
 #: ../../None:7:<autosummary>:1
 #, fuzzy
@@ -497,7 +497,7 @@ msgid ":py:obj:`flip_x <miniworlds.actors.actor.Actor.flip_x>`\\ \\(\\)"
 msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "Flips the actor by 180° degrees."
-msgstr "Dreht den Akteur um 180° Grad."
+msgstr "Dreht den Actor um 180° Grad."
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -684,7 +684,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.move_in_direction:1 of
 msgid "Moves actor *distance* steps into a *direction* or towards a position"
 msgstr ""
-"Bewegt den Akteur *distance* Schritte in eine *direction* oder zu einer "
+"Bewegt den Actor *distance* Schritte in eine *direction* oder zu einer "
 "Position"
 
 #: ../../None:86:<autosummary>:1
@@ -692,14 +692,14 @@ msgid ":py:obj:`move_to <miniworlds.actors.actor.Actor.move_to>`\\ \\(position\\
 msgstr ""
 #: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.move_to:1 of
 msgid "Moves actor *distance* to a specific world_posiition"
-msgstr "Bewegt den Akteur *distance* zu einer bestimmten Weltposition"
+msgstr "Bewegt den Actor *distance* zu einer bestimmten world_posiition"
 
 #: ../../None:86:<autosummary>:1
 msgid ":py:obj:`remove <miniworlds.actors.actor.Actor.remove>`\\ \\(\\[kill\\]\\)"
 msgstr ""
 #: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.remove:1 of
 msgid "Removes this actor from world"
-msgstr "Entfernt diesen Akteur aus der Welt"
+msgstr "Entfernt diesen Actor aus der Welt"
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -955,7 +955,7 @@ msgid ""
 "on_mouse_over is called, when mouse is moved over actor :type position: "
 ":param position: The mouse position"
 msgstr ""
-"on_mouse_over wird aufgerufen, wenn die Maus über den Akteur bewegt wird "
+"on_mouse_over wird aufgerufen, wenn die Maus über den Actor bewegt wird "
 ":type position: :param position: Die Mausposition"
 
 #: ../../None:86:<autosummary>:1
@@ -1071,7 +1071,7 @@ msgid ""
 "*on_detecting_actor* is called, when actor is detects a actor on same "
 "position"
 msgstr ""
-"*on_detect_actor* wird aufgerufen, wenn ein Akteur einen Akteur an "
+"*on_detect_actor* wird aufgerufen, wenn ein Actor einen anderen Actor an "
 "derselben Position erkennt"
 
 #: ../../None:86:<autosummary>:1
@@ -1084,7 +1084,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_detecting_borders:1 of
 msgid "*on_detecting_border* is called, when actor is near a border"
 msgstr ""
-"*on_detecting_border* wird aufgerufen, wenn sich der Akteur in der Nähe "
+"*on_detecting_border* wird aufgerufen, wenn sich der Actor in der Nähe "
 "einer Grenze befindet"
 
 #: ../../None:86:<autosummary>:1
@@ -1474,7 +1474,7 @@ msgstr "Jedes ``speed``-Frame wird das Bild gewechselt. Standardmäßig auf 10."
 
 #: miniworlds.actors.actor.Actor.border:3 of
 msgid "The value is 0, if actor has no border."
-msgstr "Der Wert ist 0, wenn der Akteur keinen Rand hat."
+msgstr "Der Wert ist 0, wenn der Actor keinen Rand hat."
 
 #: miniworlds.actors.actor.Actor.border:7 of
 msgid ""
@@ -1486,7 +1486,7 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.border:11 of
 msgid "Set border of actor:"
-msgstr "Rand des Akteurs festlegen:"
+msgstr "Rand des Actors festlegen:"
 
 #: miniworlds.actors.actor.Actor.border:37
 #: miniworlds.actors.actor.Actor.color:53
@@ -1568,14 +1568,14 @@ msgstr "`default`: Kachel für TiledWorlds, 'Maske' für Pixelwelten"
 
 #: miniworlds.actors.actor.Actor.collision_type:5 of
 msgid "`tile`: Are actors on the same tile? (only TiledWorld)"
-msgstr "`tile`: Befinden sich die Akteure auf derselben Kachel? (nur TiledWorld)"
+msgstr "`tile`: Befinden sich die Actors auf derselben Kachel? (nur TiledWorld)"
 
 #: miniworlds.actors.actor.Actor.collision_type:7 of
 msgid ""
 "`rect`: Are actors colliding when checking their bounding - boxes? (Only "
 "PixelWorld)"
 msgstr ""
-"`rect`: Kollidieren die Akteure beim Überprüfen ihrer Begrenzungsrahmen? "
+"`rect`: Kollidieren die Actors beim Überprüfen ihrer Begrenzungsrahmen? "
 "(Nur PixelWorld)"
 
 #: miniworlds.actors.actor.Actor.collision_type:9 of
@@ -1583,7 +1583,7 @@ msgid ""
 "`static-rect`: Are actors colliding when checking circle with radius = "
 "bounding-box-radius.(Only PixelWorld)"
 msgstr ""
-"`static-rect`: Kollidieren Akteure beim Überprüfen eines Kreises mit "
+"`static-rect`: Kollidieren Actors beim Überprüfen eines Kreises mit "
 "Radius = Begrenzungsrahmenradius. (Nur PixelWorld)"
 
 #: miniworlds.actors.actor.Actor.collision_type:11 of
@@ -1591,7 +1591,7 @@ msgid ""
 "`circle`: Are actors colliding when checking circle with radius = "
 "bounding-box-radius.(Only PixelWorld)"
 msgstr ""
-"`circle`: Kollidieren Akteure beim Überprüfen des Kreises mit Radius = "
+"`circle`: Kollidieren Actors beim Überprüfen des Kreises mit Radius = "
 "Begrenzungsrahmenradius. (Nur PixelWorld)"
 
 #: miniworlds.actors.actor.Actor.collision_type:13 of
@@ -1599,7 +1599,7 @@ msgid ""
 "`mask`: Are actors colliding when checking if their image masks are "
 "overlapping."
 msgstr ""
-"`mask`: Überprüfen die Akteure, ob ihre Bildmasken sich überschneiden, "
+"`mask`: Überprüfen die Actors, ob ihre Bildmasken sich überschneiden, "
 "wenn sie kollidieren."
 
 #: miniworlds.actors.actor.Actor.color:3
@@ -1657,8 +1657,8 @@ msgstr "in Unterklassen überschrieben"
 #: miniworlds.actors.actor.Actor.detect:1 of
 msgid "Detects if actors are on actor position. Returns the first found actor."
 msgstr ""
-"Erkennt, ob sich Akteure an der Position eines Akteurs befinden. Gibt den"
-" zuerst gefundenen Akteur zurück."
+"Erkennt, ob sich Actors an der Position eines Actors befinden. Gibt den"
+" zuerst gefundenen Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect:4 of
 msgid ""
@@ -1689,7 +1689,7 @@ msgid ""
 "The distance in which actors should be detected (Start-Point is "
 "actor.center)"
 msgstr ""
-"Die Entfernung, in der Akteure erkannt werden sollten (Startpunkt ist "
+"Die Entfernung, in der Actors erkannt werden sollten (Startpunkt ist "
 "actor.center)"
 
 #: miniworlds.actors.actor.Actor.detect:10 of
@@ -1712,8 +1712,8 @@ msgstr "Eine Liste von Actorn"
 #: miniworlds.actors.actor.Actor.detect_all:1 of
 msgid "Detects if actors are on actor position. Returns a list of actors."
 msgstr ""
-"Erkennt, ob sich Akteure an der Position eines Akteurs befinden. Gibt "
-"eine Liste von Akteuren zurück."
+"Erkennt, ob sich Actors an der Position eines Actors befinden. Gibt "
+"eine Liste von Actorsn zurück."
 
 #: miniworlds.actors.actor.Actor.detect_all:4 of
 msgid ""
@@ -1731,7 +1731,7 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.detect_all:10 of
 msgid "All actors found by Sensor"
-msgstr "Alle von Sensor gefundenen Akteure"
+msgstr "Alle von Sensor gefundenen Actors"
 
 #: miniworlds.actors.actor.Actor.detect_borders:3
 #: miniworlds.actors.actor.Actor.detect_color_at:6 of
@@ -1792,23 +1792,23 @@ msgstr "Alle vom Sensor gefundenen Farben"
 
 #: miniworlds.actors.actor.Actor.detect_pixel:5 of
 msgid "True if pixel is below actor"
-msgstr "Wahr, wenn der Pixel unter dem Akteur ist"
+msgstr "Wahr, wenn der Pixel unter dem Actor ist"
 
 #: miniworlds.actors.actor.Actor.detect_point:5 of
 msgid ""
 "If your want to check if an actor detects a specific pixel, use "
 "detect_pixel"
 msgstr ""
-"Wenn Sie überprüfen möchten, ob ein Akteur einen bestimmten Pixel "
+"Wenn Sie überprüfen möchten, ob ein Actor einen bestimmten Pixel "
 "erkennt, verwenden Sie detect_pixel"
 
 #: miniworlds.actors.actor.Actor.detect_point:7 of
 msgid "True if point is below actor"
-msgstr "Wahr, wenn der Punkt unter dem Akteur liegt"
+msgstr "Wahr, wenn der Punkt unter dem Actor liegt"
 
 #: miniworlds.actors.actor.Actor.direction:4 of
 msgid "The default direction is ``0°``. All actors are looking ``\"up\"``"
-msgstr "Die Standardrichtung ist ``0°``. Alle Akteure schauen ``\"nach oben\"``"
+msgstr "Die Standardrichtung ist ``0°``. Alle Actors schauen ``\"nach oben\"``"
 
 #: miniworlds.actors.actor.Actor.direction:6 of
 msgid "Move on world"
@@ -1840,7 +1840,7 @@ msgstr "``\"forward\"``: Aktuelle Richtung"
 
 #: miniworlds.actors.actor.Actor.direction:18 of
 msgid "Sets direction of the actor."
-msgstr "Legt die Richtung des Akteurs fest."
+msgstr "Legt die Richtung des Actors fest."
 
 #: miniworlds.actors.actor.Actor.direction:20 of
 msgid "You can use an integer or a string to describe the direction"
@@ -1893,8 +1893,8 @@ msgid ""
 "Flips the actor by 180° degrees. The costume is flipped and the actor's "
 "direction changed by 180 degrees."
 msgstr ""
-"Dreht den Akteur um 180° Grad. Das Kostüm wird umgedreht und die Richtung"
-" des Akteurs um 180 Grad geändert. :rtype: "
+"Dreht den Actor um 180° Grad. Das Kostüm wird umgedreht und die Richtung"
+" des Actors um 180 Grad geändert. :rtype: "
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
 #: miniworlds.actors.actor.Actor.flip_x:7 of
@@ -1915,7 +1915,7 @@ msgstr "Arg`s:"
 #: miniworlds.actors.actor.Actor.from_center:4
 #: miniworlds.actors.actor.Actor.from_topleft:4 of
 msgid "center_position: Center of actor"
-msgstr "center_position: Mittelpunkt des Akteurs"
+msgstr "center_position: Mittelpunkt des Actors"
 
 #: miniworlds.actors.actor.Actor.get_distance_to:3
 #: miniworlds.actors.actor.Actor.set_direction:5 of
@@ -1931,7 +1931,7 @@ msgid ""
 "The distance between actor (measured from actor.center) to actor or "
 "position."
 msgstr ""
-"Der Abstand zwischen dem Akteur (gemessen von actor.center) zum Akteur "
+"Der Abstand zwischen dem Actor (gemessen von actor.center) zum Actor "
 "oder zur Position."
 
 #: miniworlds.actors.actor.Actor.get_local_rect:2 of
@@ -1947,7 +1947,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.height:7 miniworlds.actors.actor.Actor.width:7
 #: of
 msgid "Create a actor and scale width/height proportionally:"
-msgstr "Erstellen Sie einen Akteur und skalieren Sie die Breite/Höhe proportional:"
+msgstr "Erstellen Sie einen Actor und skalieren Sie die Breite/Höhe proportional:"
 
 #: miniworlds.actors.actor.Actor.height:30
 #: miniworlds.actors.actor.Actor.width:30 of
@@ -1981,7 +1981,7 @@ msgstr "Drehe ein Kostüm nach 100 Bildern um."
 
 #: miniworlds.actors.actor.Actor.is_flipped:44 of
 msgid "True, if actor is flipped"
-msgstr "Wahr, wenn der Akteur umgedreht ist"
+msgstr "Wahr, wenn der Actor umgedreht ist"
 
 #: miniworlds.actors.actor.Actor.is_rotatable:1 of
 msgid ""
@@ -1999,7 +1999,7 @@ msgstr "Sie können auch ``actor.costume.is_rotatable`` verwenden"
 
 #: miniworlds.actors.actor.Actor.is_rotatable:10 of
 msgid "Create a rotatable and a not rotatable actor"
-msgstr "Erstellen Sie einen drehbaren und einen nicht drehbaren Akteur"
+msgstr "Erstellen Sie einen drehbaren und einen nicht drehbaren Actor"
 
 #: miniworlds.actors.actor.Actor.last_position:3 of
 msgid "Can be used to track changes."
@@ -2009,7 +2009,7 @@ msgstr "Kann verwendet werden, um Änderungen zu verfolgen."
 msgid "Number of steps to move. If distance = 0, the actor speed will be used."
 msgstr ""
 "Anzahl der Schritte, die bewegt werden sollen. Wenn die Entfernung = 0 "
-"ist, wird die Geschwindigkeit des Akteurs verwendet."
+"ist, wird die Geschwindigkeit des Actors verwendet."
 
 #: miniworlds.actors.actor.Actor.move:8
 #: miniworlds.actors.actor.Actor.move_vector:3
@@ -2019,7 +2019,7 @@ msgstr "Der bewegte Actor"
 
 #: miniworlds.actors.actor.Actor.move:12 of
 msgid "if actor is on the world, move forward:"
-msgstr "wenn der Akteur in der Welt ist, vorwärts bewegen:"
+msgstr "wenn der Actor in der Welt ist, vorwärts bewegen:"
 
 #: miniworlds.actors.actor.Actor.move_in_direction:6 of
 msgid "0, \"up\" - Look up"
@@ -2043,7 +2043,7 @@ msgstr "Richtung als Winkel"
 
 #: miniworlds.actors.actor.Actor.move_in_direction:14 of
 msgid "Detects obj \"distance\" steps in front of current actor."
-msgstr "Erkennt Objekte \"Entfernung\" Schritte vor dem aktuellen Akteur."
+msgstr "Erkennt Objekte \"Entfernung\" Schritte vor dem aktuellen Actor."
 
 #: miniworlds.actors.actor.Actor.move_in_direction:16
 #: miniworlds.actors.actor.Actor.move_to:8 of
@@ -2055,7 +2055,7 @@ msgid ""
 "The position to which the actor should move. The position can be a "
 "2-tuple (x, y)"
 msgstr ""
-"Die Position, zu der sich der Akteur bewegen soll. Die Position kann ein "
+"Die Position, zu der sich der Actor bewegen soll. Die Position kann ein "
 "2-Tupel (x, y) sein"
 
 #: miniworlds.actors.actor.Actor.move_to:12 of
@@ -2197,7 +2197,7 @@ msgid ""
 "current mouse position is not related to actor position."
 msgstr ""
 "Das Ereignis wird ausgelöst, wenn die linke Maustaste geklickt wurde, "
-"selbst wenn die aktuelle Mausposition nicht mit der Position des Akteurs "
+"selbst wenn die aktuelle Mausposition nicht mit der Position des Actors "
 "in Zusammenhang steht."
 
 #: miniworlds.actors.actor.Actor.on_mouse_left:9
@@ -2208,7 +2208,7 @@ msgid ""
 " is *inside* the actor."
 msgstr ""
 "Sie können :py:meth:`Actor.detect_pixel` verwenden, um zu überprüfen, ob "
-"sich die mouse_position *innerhalb* des Akteurs befindet."
+"sich die mouse_position *innerhalb* des Actors befindet."
 
 #: miniworlds.actors.actor.Actor.on_mouse_left:13
 #: miniworlds.actors.actor.Actor.on_mouse_motion:12 of
@@ -2235,7 +2235,7 @@ msgid ""
 "position is not related to actor position."
 msgstr ""
 "Das Ereignis wird ausgelöst, wenn die Maus bewegt wird, selbst wenn die "
-"aktuelle Mausposition nicht mit der Position des Akteurs in Zusammenhang "
+"aktuelle Mausposition nicht mit der Position des Actors in Zusammenhang "
 "steht."
 
 #: miniworlds.actors.actor.Actor.on_mouse_right:1 of
@@ -2252,7 +2252,7 @@ msgid ""
 "mouse position is not related to actor position."
 msgstr ""
 "Das Ereignis wird ausgelöst, wenn die Maus geklickt wurde, selbst wenn "
-"die aktuelle Mausposition nicht mit der Position des Akteurs in "
+"die aktuelle Mausposition nicht mit der Position des Actors in "
 "Zusammenhang steht."
 
 #: miniworlds.actors.actor.Actor.on_mouse_right:13 of
@@ -2353,7 +2353,7 @@ msgid ""
 "actor to be rotated."
 msgstr ""
 "Sie können den Wert actor.is_rotatable = False setzen, wenn Sie nicht "
-"möchten, dass der Akteur gedreht wird."
+"möchten, dass der Actor gedreht wird."
 
 #: miniworlds.actors.actor.Actor.turn_left:34
 #: miniworlds.actors.actor.Actor.turn_right:34 of
@@ -2370,7 +2370,7 @@ msgid ""
 "Undo the last move. Moves the actor to the last position and resets "
 "direction."
 msgstr ""
-"Mache den letzten Zug rückgängig. Bewegt den Akteur zur letzten Position "
+"Mache den letzten Zug rückgängig. Bewegt den Actor zur letzten Position "
 "und setzt die Richtung zurück."
 
 #: miniworlds.actors.actor.Actor.undo_move:9 of
@@ -2380,7 +2380,7 @@ msgstr "zurückbewegen, wenn das Feld blockiert ist:"
 #: miniworlds.actors.actor.Actor.width:3 of
 msgid "When the width of a actor is changed, the height is scaled proportionally."
 msgstr ""
-"Wenn die Breite eines Akteurs geändert wird, wird die Höhe proportional "
+"Wenn die Breite eines Actors geändert wird, wird die Höhe proportional "
 "skaliert."
 
 #~ msgid ""
@@ -2388,7 +2388,7 @@ msgstr ""
 #~ " :rtype: "
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 #~ msgstr ""
-#~ "Dreht den Akteur um *degrees* Grad "
+#~ "Dreht den Actor um *degrees* Grad "
 #~ "nach links :rtype: "
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
@@ -2428,7 +2428,7 @@ msgstr ""
 #~ msgstr ":py:obj:`children <miniworlds.actors.actor.Actor.children>`\\"
 
 #~ msgid "1 if actor is dirty/0 otherwise"
-#~ msgstr "1, wenn der Akteur schmutzig ist/0 andernfalls"
+#~ msgstr "1, wenn der Actor schmutzig ist/0 andernfalls"
 
 #~ msgid ""
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
@@ -2465,7 +2465,7 @@ msgstr ""
 #~ "Objekt eine Methode hinzu"
 
 #~ msgid "The method which should be added to the actor"
-#~ msgstr "Die Methode, die dem Akteur hinzugefügt werden sollte"
+#~ msgstr "Die Methode, die dem Actor hinzugefügt werden sollte"
 
 #~ msgid "Should register forced, even if method is not handling a valid event?"
 #~ msgstr ""

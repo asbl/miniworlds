@@ -204,7 +204,7 @@ msgid ":py:obj:`last_position <miniworlds.actors.actor.Actor.last_position>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "Actor position in last frame"
-msgstr "Akteurposition im letzten Frame"
+msgstr "Actor-Position im letzten Frame"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`last_direction <miniworlds.actors.actor.Actor.last_direction>`\\"
@@ -277,7 +277,7 @@ msgid ":py:obj:`width <miniworlds.actors.actor.Actor.width>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "The width of the actor in pixels."
-msgstr "Die Breite des Akteurs in Pixeln."
+msgstr "Die Breite des Actors in Pixeln."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`height <miniworlds.actors.actor.Actor.height>`\\"
@@ -291,14 +291,14 @@ msgid ":py:obj:`x <miniworlds.actors.actor.Actor.x>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "The x-value of a actor"
-msgstr "Der x-Wert eines Akteurs"
+msgstr "Der x-Wert eines Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`y <miniworlds.actors.actor.Actor.y>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "The y-value of a actor"
-msgstr "Der y-Wert eines Akteurs"
+msgstr "Der y-Wert eines Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`class_name <miniworlds.actors.actor.Actor.class_name>`\\"
@@ -308,7 +308,7 @@ msgid ":py:obj:`topleft_x <miniworlds.actors.actor.Actor.topleft_x>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "x-value of actor topleft-position"
-msgstr "x-Wert der oberen linken Position des Akteurs"
+msgstr "x-Wert der oberen linken Position des Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
@@ -328,14 +328,14 @@ msgid ":py:obj:`center_x <miniworlds.actors.actor.Actor.center_x>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "x-value of actor center-position"
-msgstr "x-Wert der Mittelpunktposition des Akteurs"
+msgstr "x-Wert der Mittelpunktposition des Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`center_y <miniworlds.actors.actor.Actor.center_y>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "y-value of actor center-position"
-msgstr "y-Wert der Mittelpunktposition des Akteurs"
+msgstr "y-Wert der Mittelpunktposition des Actors"
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`center <miniworlds.actors.actor.Actor.center>`\\"
@@ -361,7 +361,7 @@ msgid ":py:obj:`fill_color <miniworlds.actors.actor.Actor.fill_color>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "The fill color of actor as rgba value, e.g. (255, 0, 0) for red."
-msgstr "Die Füllfarbe des Akteurs als RGBA-Wert, z.B. (255, 0, 0) für Rot."
+msgstr "Die Füllfarbe des Actors als RGBA-Wert, z.B. (255, 0, 0) für Rot."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`color <miniworlds.actors.actor.Actor.color>`\\"
@@ -378,7 +378,7 @@ msgid ":py:obj:`border_color <miniworlds.actors.actor.Actor.border_color>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "border color of actor."
-msgstr "Randfarbe des Akteurs."
+msgstr "Randfarbe des Actors."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`stroke_color <miniworlds.actors.actor.Actor.stroke_color>`\\"
@@ -388,7 +388,7 @@ msgid ":py:obj:`border <miniworlds.actors.actor.Actor.border>`\\"
 msgstr ""
 #: ../../None:45:<autosummary>:1
 msgid "The border-size of actor."
-msgstr "Die Randgröße des Akteurs."
+msgstr "Die Randgröße des Actors."
 
 #: ../../None:45:<autosummary>:1
 msgid ":py:obj:`visible <miniworlds.actors.actor.Actor.visible>`\\"
@@ -418,7 +418,7 @@ msgid ":py:obj:`dirty <miniworlds.actors.actor_base.ActorBase.dirty>`\\"
 msgstr ""
 #: ../../None:7:<autosummary>:1
 msgid "If actor is dirty, it will be repainted."
-msgstr "Wenn der Akteur schmutzig ist, wird er neu gestrichen."
+msgstr "Wenn der Actor schmutzig ist, wird er neu gezeichnet."
 
 #: ../../None:7:<autosummary>:1
 #, fuzzy
@@ -738,7 +738,7 @@ msgid ":py:obj:`flip_x <miniworlds.actors.actor.Actor.flip_x>`\\ \\(\\)"
 msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "Flips the actor by 180° degrees."
-msgstr "Dreht den Akteur um 180° Grad."
+msgstr "Dreht den Actor um 180° Grad."
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -917,7 +917,7 @@ msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "Moves actor *distance* steps into a *direction* or towards a position"
 msgstr ""
-"Bewegt den Akteur *distance* Schritte in eine *direction* oder zu einer "
+"Bewegt den Actor *distance* Schritte in eine *direction* oder zu einer "
 "Position"
 
 #: ../../None:86:<autosummary>:1
@@ -925,14 +925,14 @@ msgid ":py:obj:`move_to <miniworlds.actors.actor.Actor.move_to>`\\ \\(position\\
 msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "Moves actor *distance* to a specific world_posiition"
-msgstr "Bewegt den Akteur *distance* zu einer bestimmten Weltposition"
+msgstr "Bewegt den Actor *distance* zu einer bestimmten world_posiition"
 
 #: ../../None:86:<autosummary>:1
 msgid ":py:obj:`remove <miniworlds.actors.actor.Actor.remove>`\\ \\(\\[kill\\]\\)"
 msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "Removes this actor from world"
-msgstr "Entfernt diesen Akteur aus der Welt"
+msgstr "Entfernt diesen Actor aus der Welt"
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -1173,7 +1173,7 @@ msgid ""
 "on_mouse_over is called, when mouse is moved over actor :type position: "
 ":param position: The mouse position"
 msgstr ""
-"on_mouse_over wird aufgerufen, wenn die Maus über den Akteur bewegt wird "
+"on_mouse_over wird aufgerufen, wenn die Maus über den Actor bewegt wird "
 ":type position: :param position: Die Mausposition"
 
 #: ../../None:86:<autosummary>:1
@@ -1283,7 +1283,7 @@ msgid ""
 "*on_detecting_actor* is called, when actor is detects a actor on same "
 "position"
 msgstr ""
-"*on_detect_actor* wird aufgerufen, wenn ein Akteur einen Akteur an "
+"*on_detect_actor* wird aufgerufen, wenn ein Actor einen anderen Actor an "
 "derselben Position erkennt"
 
 #: ../../None:86:<autosummary>:1
@@ -1295,7 +1295,7 @@ msgstr ""
 #: ../../None:86:<autosummary>:1
 msgid "*on_detecting_border* is called, when actor is near a border"
 msgstr ""
-"*on_detecting_border* wird aufgerufen, wenn sich der Akteur in der Nähe "
+"*on_detecting_border* wird aufgerufen, wenn sich der Actor in der Nähe "
 "einer Grenze befindet"
 
 #: ../../None:86:<autosummary>:1
@@ -2022,7 +2022,7 @@ msgstr ""
 #~ " :rtype: "
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 #~ msgstr ""
-#~ "Dreht den Akteur um *degrees* Grad "
+#~ "Dreht den Actor um *degrees* Grad "
 #~ "nach links :rtype: "
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 

@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/actor_shapes.md:1
 msgid "Actor > Shapes"
-msgstr "Akteur > Formen"
+msgstr "Actor > Shapes(Formen)"
 
 #: ../../source/api/actor_shapes.md:3
 msgid "Shape"
@@ -267,7 +267,7 @@ msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Line.direction:4 of
 msgid "The default direction is ``0°``. All actors are looking ``\"up\"``"
-msgstr "Die Standardrichtung ist ``0°``. Alle Akteure schauen ``\"nach oben\"``"
+msgstr "Die Standardrichtung ist ``0°``. Alle Actors schauen ``\"nach oben\"``"
 
 #: miniworlds.actors.shapes.shapes.Line.direction:6 of
 msgid "Move on world"
@@ -299,7 +299,7 @@ msgstr "``\"vorwärts\"``: Aktuelle Richtung"
 
 #: miniworlds.actors.shapes.shapes.Line.direction:18 of
 msgid "Sets direction of the actor."
-msgstr "Legt die Richtung des Akteurs fest."
+msgstr "Legt die Richtung des Actors fest."
 
 #: miniworlds.actors.shapes.shapes.Line.direction:20 of
 msgid "You can use an integer or a string to describe the direction"

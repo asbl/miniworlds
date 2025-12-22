@@ -29,7 +29,7 @@ msgstr "Die Basisklasse für all deine Welten"
 
 #: miniworlds.worlds.world.World:1 of
 msgid "A world is a playing field on which actors can move."
-msgstr "Eine Welt ist ein Spielfeld, auf dem sich Akteure bewegen können."
+msgstr "Eine Welt ist ein Spielfeld, auf dem sich Actors bewegen können."
 
 #: miniworlds.worlds.world.World:3 of
 msgid ""
@@ -38,8 +38,8 @@ msgid ""
 "can be queried via the sensors of the actors."
 msgstr ""
 "Eine Welt hat einen `Hintergrund` und bietet grundlegende Funktionen für "
-"die Positionierung von Akteuren und für die Kollisionsdetektion von "
-"Akteuren, die über die Sensoren der Akteure abgefragt werden können."
+"die Positionierung von Actorsn und für die Kollisionsdetektion von "
+"Actorsn, die über die Sensoren der Actors abgefragt werden können."
 
 #: miniworlds.worlds.world.World:6 of
 msgid ""
@@ -69,8 +69,8 @@ msgstr ""
 #: miniworlds.worlds.world.World:15 of
 msgid "New actors are created with top-left corner of actor rect at position."
 msgstr ""
-"Neue Akteure werden erstellt, wobei die obere linke Ecke des "
-"Akteursrechtecks an der Position liegt."
+"Neue Actors werden erstellt, wobei die obere linke Ecke des "
+"Actorsrechtecks an der Position liegt."
 
 #: miniworlds.worlds.world.World:17 of
 msgid "Two actors collide when their sprites overlap."
@@ -863,7 +863,7 @@ msgstr "Eine Liste von Actorn"
 
 #: miniworlds.worlds.world.World.detect_actors:11 of
 msgid "Get all actors at mouse position:"
-msgstr "Alle Akteure an der Mausposition abrufen:"
+msgstr "Alle Actors an der Mausposition abrufen:"
 
 #: miniworlds.worlds.world.World.direction_to:3
 #: miniworlds.worlds.world.World.distance_to:3 of
@@ -1242,7 +1242,7 @@ msgstr ""
 #~ "<miniworlds.worlds.world.World.default_border>`\\"
 
 #~ msgid "Sets default border color for actors"
-#~ msgstr "Legt die Standardrahmenfarbe für Akteure fest"
+#~ msgstr "Legt die Standardrahmenfarbe für Actors fest"
 
 #~ msgid ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
 #~ msgstr ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
@@ -1509,7 +1509,7 @@ msgstr ""
 #~ "\\(file\\, actor\\_klassen\\)"
 
 #~ msgid "Loads all actors from db."
-#~ msgstr "Lädt alle Akteure aus der Datenbank."
+#~ msgstr "Lädt alle Actors aus der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`save_to_db "
@@ -1519,7 +1519,7 @@ msgstr ""
 #~ "<miniworlds.worlds.world.World.save_to_db>`\\ \\(Datei\\)"
 
 #~ msgid "Saves the current world an all actors to database."
-#~ msgstr "Speichert die aktuelle Welt und alle Akteure in der Datenbank."
+#~ msgstr "Speichert die aktuelle Welt und alle Actors in der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`get_columns_by_width "
@@ -1642,10 +1642,10 @@ msgstr ""
 #~ msgstr "Ein Rechteck als Tupel (oben, links, Breite, Höhe)"
 
 #~ msgid "You must also set a border for actor."
-#~ msgstr "Sie müssen auch einen Rahmen für den Akteur festlegen."
+#~ msgstr "Sie müssen auch einen Rahmen für den Actor festlegen."
 
 #~ msgid "Set default border for actors:"
-#~ msgstr "Standardgrenze für Akteure festlegen:"
+#~ msgstr "Standardgrenze für Actors festlegen:"
 
 #~ msgid ""
 #~ "``world.default_border_color`` does not have "
@@ -1658,7 +1658,7 @@ msgstr ""
 #~ msgstr "Sie müssen auch ``world.border`` > 0 setzen."
 
 #~ msgid "Create actors with and without with border"
-#~ msgstr "Erstelle Akteure mit und ohne Rand"
+#~ msgstr "Erstelle Actors mit und ohne Rand"
 
 #~ msgid "borders"
 #~ msgstr "Grenzen"
@@ -1715,8 +1715,8 @@ msgstr ""
 #~ "you load the actors in __init__() "
 #~ "or in on_setup()"
 #~ msgstr ""
-#~ "Lädt alle Akteure aus der Datenbank. "
-#~ "Normalerweise laden Sie die Akteure in"
+#~ "Lädt alle Actors aus der Datenbank. "
+#~ "Normalerweise laden Sie die Actors in"
 #~ " __init__() oder in on_setup()"
 
 #~ msgid "reference to db file"
@@ -1756,7 +1756,7 @@ msgstr ""
 #~ "opened with sqlite."
 #~ msgstr ""
 #~ "Speichert die aktuelle Welt und alle "
-#~ "Akteure in der Datenbank. Die Datei "
+#~ "Actors in der Datenbank. Die Datei "
 #~ "wird als db-Datei gespeichert und "
 #~ "kann mit SQLite geöffnet werden."
 
@@ -1960,7 +1960,7 @@ msgstr ""
 #~ msgid "A message can be received by the world or any actor on world"
 #~ msgstr ""
 #~ "Eine Nachricht kann von der Welt "
-#~ "oder jedem Akteur in der Welt "
+#~ "oder jedem Actor in der Welt "
 #~ "empfangen werden"
 
 #~ msgid "Create a world with 800 columns and 600 rows:"

@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/actor_number.md:1
 msgid "Actor > Number"
-msgstr "Darsteller > Nummer"
+msgstr "Actor > Nummer"
 
 #: miniworlds.actors.texts.number.Number:1 of
 msgid "A number actor that displays a numeric value (integer or float)."
@@ -33,7 +33,7 @@ msgid ""
 "You must manually set the size of the actor with `self.size()` to ensure "
 "the text fits the screen."
 msgstr ""
-"Sie müssen die Größe des Akteurs mit self.size() manuell einstellen, "
+"Du musst die Größe des Actors mit self.size() manuell einstellen, "
 "damit der vollständige Text sichtbar ist."
 
 #: ../../source/api/actor_number.md miniworlds.actors.texts.number.Number.add
@@ -146,7 +146,7 @@ msgid "The current number."
 msgstr "Die aktuelle Nummer"
 
 #~ msgid "A number actor shows a Number."
-#~ msgstr "Ein Zahlenakteur zeigt eine Zahl."
+#~ msgstr "Ein Number Actor zeigt eine Zahl an."
 
 #~ msgid "The size of the font (default: 80)"
 #~ msgstr "Die Schriftgröße (Standard: 80)"

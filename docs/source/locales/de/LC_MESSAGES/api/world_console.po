@@ -1007,7 +1007,7 @@ msgstr ""
 #~ "\\(file\\, actor\\_classes\\)"
 
 #~ msgid "Loads all actors from db."
-#~ msgstr "Lädt alle Akteure aus der Datenbank."
+#~ msgstr "Lädt alle Actors aus der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`save_to_db "
@@ -1017,7 +1017,7 @@ msgstr ""
 #~ "<miniworlds.worlds.world.World.save_to_db>`\\ \\(Datei\\)"
 
 #~ msgid "Saves the current world an all actors to database."
-#~ msgstr "Speichert die aktuelle Welt und alle Akteure in der Datenbank."
+#~ msgstr "Speichert die aktuelle Welt und alle Actors in der Datenbank."
 
 #~ msgid ""
 #~ ":py:obj:`get_columns_by_width "
@@ -1173,7 +1173,7 @@ msgstr ""
 #~ "<miniworlds.worlds.world.World.default_border>`\\"
 
 #~ msgid "Sets default border color for actors"
-#~ msgstr "Legt die Standardrahmenfarbe für Akteure fest"
+#~ msgstr "Legt die Standardrahmenfarbe für Actors fest"
 
 #~ msgid ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
 #~ msgstr ":py:obj:`fill_color <miniworlds.worlds.world.World.fill_color>`\\"
@@ -1347,17 +1347,8 @@ msgstr ""
 #~ ":py:obj:`backgrounds_manager "
 #~ "<miniworlds.worlds.world.World.backgrounds_manager>`\\"
 
-#~ msgid ""
-#~ ":py:obj:`add_to_world "
-#~ "<miniworlds.worlds.world.World.add_to_world>`\\ \\(actor\\, "
-#~ "position\\)"
-#~ msgstr ""
-#~ ":py:obj:`add_to_world "
-#~ "<miniworlds.worlds.world.World.add_to_world>`\\ \\(Akteur\\, "
-#~ "Position\\)"
-
 #~ msgid "Adds a Actor to the world."
-#~ msgstr "Fügt einen Akteur zur Welt hinzu."
+#~ msgstr "Fügt einen Actor zur Welt hinzu."
 
 #~ msgid ":py:obj:`step <miniworlds.worlds.world.World.step>`\\"
 #~ msgstr ":py:obj:`step <miniworlds.worlds.world.World.step>`\\"

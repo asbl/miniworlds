@@ -436,7 +436,7 @@ msgstr ""
 #~ "\\(actor\\)"
 
 #~ msgid "Creates a vector from actor position"
-#~ msgstr "Erstellt einen Vektor aus der Position des Akteurs"
+#~ msgstr "Erstellt einen Vektor aus der Position des Actors"
 
 #~ msgid "rotates Vector by theta degrees"
 #~ msgstr "dreht Vektor um theta Grad"
