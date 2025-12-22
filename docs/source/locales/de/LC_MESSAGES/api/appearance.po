@@ -54,8 +54,7 @@ msgstr "Öffentliche Datenattribute:"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`counter <miniworlds.appearances.appearance.Appearance.counter>`\\"
-msgstr ":py:obj:`counter <miniworlds.appearances.appearance.Appearance.counter>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`RELOAD_ACTUAL_IMAGE "
@@ -107,8 +106,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.is_textured:1 of
 msgid "If True, the image is tiled over the background."
-msgstr "Wenn wahr, wird das Bild über den Hintergrund gekachelt."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_rotatable "
@@ -120,8 +118,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.is_rotatable:1 of
 msgid "If True, costume will be rotated with token direction"
-msgstr "Wenn wahr, wird das Kostüm in Richtung des Tokens gedreht"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_centered "
@@ -148,8 +145,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1 ../../None:32:<autosummary>:1
 msgid "Flips the costume or background."
-msgstr "Dreht das Kostüm oder den Hintergrund um."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_upscaled "
@@ -232,8 +228,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.coloring:1 of
 msgid "Defines a colored layer."
-msgstr "Definiert eine farbige Schicht."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`transparency "
@@ -245,12 +240,10 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.transparency:1 of
 msgid "Defines a transparency."
-msgstr "Definiert eine Transparenz."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`alpha <miniworlds.appearances.appearance.Appearance.alpha>`\\"
-msgstr ":py:obj:`alpha <miniworlds.appearances.appearance.Appearance.alpha>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.alpha:1 of
 msgid "transparent, 255: visible If value < 1, it will be multiplied with 255."
@@ -269,12 +262,10 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.is_animated:1 of
 msgid "If True, the costume will be animated."
-msgstr "Wenn wahr, wird das Kostüm animiert."
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`color <miniworlds.appearances.appearance.Appearance.color>`\\"
-msgstr ":py:obj:`color <miniworlds.appearances.appearance.Appearance.color>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.color:1 of
 msgid "->See fill color"
@@ -291,8 +282,7 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.stroke_color:1 of
 msgid "see border color"
-msgstr "Randfarbe sehen"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`border_color "
@@ -304,12 +294,10 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.border_color:1 of
 msgid "border color of actor"
-msgstr "Randfarbe des Akteurs"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
-msgstr ":py:obj:`border <miniworlds.appearances.appearance.Appearance.border>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.border:1 of
 msgid "The border-size of actor."
@@ -317,12 +305,10 @@ msgstr "Die Randgröße des Akteurs."
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
-msgstr ":py:obj:`images <miniworlds.appearances.appearance.Appearance.images>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`image <miniworlds.appearances.appearance.Appearance.image>`\\"
-msgstr ":py:obj:`image <miniworlds.appearances.appearance.Appearance.image>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.image:1 of
 msgid "Performs all actions in image pipeline"
@@ -330,12 +316,10 @@ msgstr "Führt alle Aktionen in der Bildpipeline aus"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`dirty <miniworlds.appearances.appearance.Appearance.dirty>`\\"
-msgstr ":py:obj:`dirty <miniworlds.appearances.appearance.Appearance.dirty>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`world <miniworlds.appearances.appearance.Appearance.world>`\\"
-msgstr ":py:obj:`world <miniworlds.appearances.appearance.Appearance.world>`\\"
-
+msgstr ""
 #: ../../None:32:<autosummary>:1 ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.get_manager:1
 #: miniworlds.appearances.appearance.Appearance.world:1 of
@@ -352,8 +336,7 @@ msgstr ""
 
 #: ../../source/api/appearance.md
 msgid "Public Methods:"
-msgstr "Öffentliche Methoden:"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
@@ -441,8 +424,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.add_image:1 of
 msgid "Adds an image to the appearance"
-msgstr "Fügt dem Erscheinungsbild ein Bild hinzu"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`add_images "
@@ -456,8 +438,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.add_images:1 of
 msgid "Adds multiple images to background/costume."
-msgstr "Fügt mehrere Bilder zum Hintergrund/Kostüm hinzu."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`animate "
@@ -471,8 +452,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.animate:1 of
 msgid "Animates the costume"
-msgstr "Animiert das Kostüm"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`after_animation "
@@ -484,8 +464,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.after_animation:1 of
 msgid "the method is overwritten in subclasses costume and appearance"
-msgstr "die Methode wird in den Unterklassen Kostüm und Aussehen überschrieben"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`to_colors_array "
@@ -496,8 +475,7 @@ msgstr ""
 
 #: ../../None:33:<autosummary>:1
 msgid "Create an array from costume or background."
-msgstr "Erstelle ein Array aus Kostüm oder Hintergrund."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`from_array "
@@ -508,8 +486,7 @@ msgstr ""
 
 #: ../../None:33:<autosummary>:1
 msgid "Create a background or costume from array."
-msgstr "Erstellen Sie einen Hintergrund oder ein Kostüm aus einem Array."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`fill <miniworlds.appearances.appearance.Appearance.fill>`\\ "
@@ -521,8 +498,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.fill:1 of
 msgid "Set default fill color for borders and lines"
-msgstr "Standardfüllfarbe für Ränder und Linien festlegen"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`set_filled "
@@ -587,8 +563,7 @@ msgstr ""
 
 #: ../../None:33:<autosummary>:1
 msgid "Return str(self)."
-msgstr "Gib str(self) zurück."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`get_image "
@@ -599,8 +574,7 @@ msgstr ""
 
 #: ../../None:33:<autosummary>:1
 msgid "If dirty, the image will be reloaded."
-msgstr "Wenn sie verschmutzt ist, wird das Bild neu geladen."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`update <miniworlds.appearances.appearance.Appearance.update>`\\ "
@@ -612,8 +586,7 @@ msgstr ""
 #: ../../None:33:<autosummary>:1
 #: miniworlds.appearances.appearance.Appearance.update:1 of
 msgid "Loads the next image, called 1/frame"
-msgstr "Lädt das nächste Bild, genannt 1/frame"
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`register "
@@ -624,8 +597,7 @@ msgstr ""
 
 #: ../../None:33:<autosummary>:1
 msgid "Register method for decorator."
-msgstr "Methode für Dekorator registrieren."
-
+msgstr ""
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`draw_shape_append "
@@ -687,8 +659,7 @@ msgstr ""
 
 #: ../../source/api/appearance.md
 msgid "Private Data Attributes:"
-msgstr "Private Datenattribute:"
-
+msgstr ""
 #: ../../None:3:<autosummary>:1
 msgid ""
 ":py:obj:`_abc_impl "
@@ -699,8 +670,7 @@ msgstr ""
 
 #: ../../source/api/appearance.md
 msgid "Private Methods:"
-msgstr "Private Methoden:"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 #, fuzzy
 msgid ""
@@ -744,8 +714,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "bool: If True, the image is tiled over the background."
-msgstr "bool: Wenn True, wird das Bild über den Hintergrund gekachelt."
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_set_rotatable "
@@ -758,8 +727,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
-msgstr "Wenn auf Wahr gesetzt, wird das Kostüm mit der Actorrichtung gedreht"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_set_centered "
@@ -881,8 +849,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "Loads the image,"
-msgstr "Lädt das Bild,"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_update_draw_shape "
@@ -903,8 +870,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "Returns inner shape of costume"
-msgstr "Gibt die innere Form des Kostüms zurück"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_outer_shape "
@@ -915,8 +881,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "Returns outer shape of costume"
-msgstr "Gibt die äußere Form des Kostüms zurück"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_inner_shape_arguments "
@@ -929,8 +894,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "def setGets arguments for inner shape"
-msgstr "definiert setGets Argumente für innere Form"
-
+msgstr ""
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_outer_shape_arguments "
@@ -943,8 +907,7 @@ msgstr ""
 
 #: ../../None:23:<autosummary>:1
 msgid "Gets arguments for outer shape"
-msgstr "Ruft Argumente für die äußere Form ab"
-
+msgstr ""
 #: ../../source/api/appearance.md
 #, fuzzy
 msgid "Return type"

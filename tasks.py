@@ -1,5 +1,6 @@
 from invoke import task
 import os
+import shutil
 
 IMAGE = "pygame-tests"
 CONTAINER = "pygame-test-container"
@@ -54,10 +55,18 @@ def build_physics(c):
     """Lokalen Build der source/ ausführen"""
     c.run("cd physics/source && pip install -e .")
 
+
 @task
 def make_docs(c):
     """Mehrsprachige Sphinx-Dokumentation erstellen (EN + DE)"""
     with c.cd("docs"):
+        build_dir = "build"
+
+        # Build-Verzeichnis leeren
+        if os.path.exists(build_dir):
+            shutil.rmtree(build_dir)
+        os.makedirs(build_dir, exist_ok=True)
+
         # Schritt 1: gettext extrahieren
         c.run("make gettext", pty=True)
 
@@ -72,6 +81,7 @@ def make_docs(c):
 
         # Schritt 5: HTML für Deutsch bauen
         c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
+
 
 def upload_docs(c):
     pass

@@ -19,7 +19,7 @@ from miniworlds.base.exceptions import TiledWorldTooBigError
 
 
 class TiledWorld(world.World):
-    """from typing
+    """
     A TiledWorld is a World where each Actor is placed in one Tile.
 
     With Tiled World, you can realize RPGs and Boardgames.
