@@ -74,8 +74,6 @@ msgid ""
 ":py:obj:`info_overlay "
 "<miniworlds.appearances.costume.Costume.info_overlay>`\\"
 msgstr ""
-":py:obj:`info_overlay "
-"<miniworlds.appearances.costume.Costume.info_overlay>`\\"
 
 #: ../../None:5:<autosummary>:1
 #: miniworlds.appearances.costume.Costume.info_overlay:1 of
@@ -86,8 +84,6 @@ msgid ""
 ":py:obj:`image_manager "
 "<miniworlds.appearances.costume.Costume.image_manager>`\\"
 msgstr ""
-":py:obj:`image_manager "
-"<miniworlds.appearances.costume.Costume.image_manager>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`counter <miniworlds.appearances.appearance.Appearance.counter>`\\"
@@ -97,48 +93,36 @@ msgid ""
 ":py:obj:`RELOAD_ACTUAL_IMAGE "
 "<miniworlds.appearances.appearance.Appearance.RELOAD_ACTUAL_IMAGE>`\\"
 msgstr ""
-":py:obj:`RELOAD_ACTUAL_IMAGE "
-"<miniworlds.appearances.appearance.Appearance.RELOAD_ACTUAL_IMAGE>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`LOAD_NEW_IMAGE "
 "<miniworlds.appearances.appearance.Appearance.LOAD_NEW_IMAGE>`\\"
 msgstr ""
-":py:obj:`LOAD_NEW_IMAGE "
-"<miniworlds.appearances.appearance.Appearance.LOAD_NEW_IMAGE>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`font_size "
 "<miniworlds.appearances.appearance.Appearance.font_size>`\\"
 msgstr ""
-":py:obj:`Schriftgröße "
-"<miniworlds.appearances.appearance.Appearance.font_size>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`texture_size "
 "<miniworlds.appearances.appearance.Appearance.texture_size>`\\"
 msgstr ""
-":py:obj:`texture_size "
-"<miniworlds.appearances.appearance.Appearance.texture_size>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`animation_speed "
 "<miniworlds.appearances.appearance.Appearance.animation_speed>`\\"
 msgstr ""
-":py:obj:`animation_speed "
-"<miniworlds.appearances.appearance.Appearance.animation_speed>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_textured "
 "<miniworlds.appearances.appearance.Appearance.is_textured>`\\"
 msgstr ""
-":py:obj:`is_textured "
-"<miniworlds.appearances.appearance.Appearance.is_textured>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "If True, the image is tiled over the background."
@@ -148,8 +132,6 @@ msgid ""
 ":py:obj:`is_rotatable "
 "<miniworlds.appearances.appearance.Appearance.is_rotatable>`\\"
 msgstr ""
-":py:obj:`is_rotatable "
-"<miniworlds.appearances.appearance.Appearance.is_rotatable>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "If True, costume will be rotated with token direction"
@@ -159,24 +141,18 @@ msgid ""
 ":py:obj:`is_centered "
 "<miniworlds.appearances.appearance.Appearance.is_centered>`\\"
 msgstr ""
-":py:obj:`is_centered "
-"<miniworlds.appearances.appearance.Appearance.is_centered>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_filled "
 "<miniworlds.appearances.appearance.Appearance.is_filled>`\\"
 msgstr ""
-":py:obj:`is_filled "
-"<miniworlds.appearances.appearance.Appearance.is_filled>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_flipped "
 "<miniworlds.appearances.appearance.Appearance.is_flipped>`\\"
 msgstr ""
-":py:obj:`is_flipped "
-"<miniworlds.appearances.appearance.Appearance.is_flipped>`\\"
 
 #: ../../None:23:<autosummary>:1 ../../None:32:<autosummary>:1
 msgid "Flips the costume or background."
@@ -186,8 +162,6 @@ msgid ""
 ":py:obj:`is_upscaled "
 "<miniworlds.appearances.appearance.Appearance.is_upscaled>`\\"
 msgstr ""
-":py:obj:`is_upscaled "
-"<miniworlds.appearances.appearance.Appearance.is_upscaled>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "If True, the image will be upscaled remaining aspect-ratio."
@@ -200,32 +174,24 @@ msgid ""
 ":py:obj:`is_scaled_to_width "
 "<miniworlds.appearances.appearance.Appearance.is_scaled_to_width>`\\"
 msgstr ""
-":py:obj:`is_scaled_to_width "
-"<miniworlds.appearances.appearance.Appearance.is_scaled_to_width>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_scaled_to_height "
 "<miniworlds.appearances.appearance.Appearance.is_scaled_to_height>`\\"
 msgstr ""
-":py:obj:`is_scaled_to_height "
-"<miniworlds.appearances.appearance.Appearance.is_scaled_to_height>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`fill_color "
 "<miniworlds.appearances.appearance.Appearance.fill_color>`\\"
 msgstr ""
-":py:obj:`fill_color "
-"<miniworlds.appearances.appearance.Appearance.fill_color>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_scaled "
 "<miniworlds.appearances.appearance.Appearance.is_scaled>`\\"
 msgstr ""
-":py:obj:`is_scaled "
-"<miniworlds.appearances.appearance.Appearance.is_scaled>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "Scales the token to parent-size without remaining aspect-ratio."
@@ -238,8 +204,6 @@ msgid ""
 ":py:obj:`orientation "
 "<miniworlds.appearances.appearance.Appearance.orientation>`\\"
 msgstr ""
-":py:obj:`orientation "
-"<miniworlds.appearances.appearance.Appearance.orientation>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
@@ -254,8 +218,6 @@ msgid ""
 ":py:obj:`coloring "
 "<miniworlds.appearances.appearance.Appearance.coloring>`\\"
 msgstr ""
-":py:obj:`coloring "
-"<miniworlds.appearances.appearance.Appearance.coloring>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "Defines a colored layer."
@@ -265,8 +227,6 @@ msgid ""
 ":py:obj:`transparency "
 "<miniworlds.appearances.appearance.Appearance.transparency>`\\"
 msgstr ""
-":py:obj:`Transparenz "
-"<miniworlds.appearances.appearance.Appearance.transparency>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "Defines a transparency."
@@ -277,16 +237,12 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid "transparent, 255: visible If value < 1, it will be multiplied with 255."
 msgstr ""
-"transparent, 255: sichtbar Wenn der Wert < 1 ist, wird er mit 255 "
-"multipliziert."
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`is_animated "
 "<miniworlds.appearances.appearance.Appearance.is_animated>`\\"
 msgstr ""
-":py:obj:`is_animated "
-"<miniworlds.appearances.appearance.Appearance.is_animated>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "If True, the costume will be animated."
@@ -303,8 +259,6 @@ msgid ""
 ":py:obj:`stroke_color "
 "<miniworlds.appearances.appearance.Appearance.stroke_color>`\\"
 msgstr ""
-":py:obj:`stroke_color "
-"<miniworlds.appearances.appearance.Appearance.stroke_color>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "see border color"
@@ -314,8 +268,6 @@ msgid ""
 ":py:obj:`border_color "
 "<miniworlds.appearances.appearance.Appearance.border_color>`\\"
 msgstr ""
-":py:obj:`border_color "
-"<miniworlds.appearances.appearance.Appearance.border_color>`\\"
 
 #: ../../None:32:<autosummary>:1
 msgid "border color of actor"
@@ -349,8 +301,6 @@ msgid ""
 ":py:obj:`image_manager "
 "<miniworlds.appearances.appearance.Appearance.image_manager>`\\"
 msgstr ""
-":py:obj:`get_image "
-"<miniworlds.appearances.appearance.Appearance.get_image>`\\ \\(\\)"
 
 #: ../../source/api/costume.md
 msgid "Public Methods:"
@@ -360,8 +310,6 @@ msgid ""
 ":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ "
 "\\(actor\\)"
 msgstr ""
-":py:obj:`__init__ <miniworlds.appearances.costume.Costume.__init__>`\\ "
-"\\(Actor\\)"
 
 #: ../../None:12:<autosummary>:1
 #, fuzzy
@@ -369,64 +317,48 @@ msgid ""
 ":py:obj:`get_manager "
 "<miniworlds.appearances.costume.Costume.get_manager>`\\ \\(\\)"
 msgstr ""
-":py:obj:`image_manager "
-"<miniworlds.appearances.costume.Costume.image_manager>`\\"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`after_init "
 "<miniworlds.appearances.costume.Costume.after_init>`\\ \\(\\)"
 msgstr ""
-":py:obj:`after_init "
-"<miniworlds.appearances.costume.Costume.after_init>`\\ \\(\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`set_image <miniworlds.appearances.costume.Costume.set_image>`\\ "
 "\\(source\\)"
 msgstr ""
-":py:obj:`set_image <miniworlds.appearances.costume.Costume.set_image>`\\ "
-"\\(source\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`rotated <miniworlds.appearances.costume.Costume.rotated>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`rotated <miniworlds.appearances.costume.Costume.rotated>`\\ "
-"\\(\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`origin_changed "
 "<miniworlds.appearances.costume.Costume.origin_changed>`\\ \\(\\)"
 msgstr ""
-":py:obj:`origin_changed "
-"<miniworlds.appearances.costume.Costume.origin_changed>`\\ \\(\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`resized <miniworlds.appearances.costume.Costume.resized>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`resized <miniworlds.appearances.costume.Costume.resized>`\\ "
-"\\(\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`visibility_changed "
 "<miniworlds.appearances.costume.Costume.visibility_changed>`\\ \\(\\)"
 msgstr ""
-":py:obj:`visibility_changed "
-"<miniworlds.appearances.costume.Costume.visibility_changed>`\\ \\(\\)"
 
 #: ../../None:12:<autosummary>:1
 msgid ""
 ":py:obj:`set_dirty <miniworlds.appearances.costume.Costume.set_dirty>`\\ "
 "\\(\\[value\\, status\\]\\)"
 msgstr ""
-":py:obj:`set_dirty <miniworlds.appearances.costume.Costume.set_dirty>`\\ "
-"\\(\\[Wert\\, Status\\]\\)"
 
 #: ../../None:12:<autosummary>:1
 #, fuzzy
@@ -434,24 +366,18 @@ msgid ""
 ":py:obj:`get_rect <miniworlds.appearances.costume.Costume.get_rect>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`rotated <miniworlds.appearances.costume.Costume.rotated>`\\ "
-"\\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
 "<miniworlds.appearances.appearance.Appearance.__init__>`\\ \\(\\)"
 msgstr ""
-":py:obj:`__init__ "
-"<miniworlds.appearances.appearance.Appearance.__init__>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`set_image "
 "<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 msgstr ""
-":py:obj:`set_image "
-"<miniworlds.appearances.appearance.Appearance.set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:33:<autosummary>:1
 msgid "Sets the displayed image of costume/background to selected index"
@@ -464,8 +390,6 @@ msgid ""
 ":py:obj:`after_init "
 "<miniworlds.appearances.appearance.Appearance.after_init>`\\ \\(\\)"
 msgstr ""
-":py:obj:`after_init "
-"<miniworlds.appearances.appearance.Appearance.after_init>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -473,17 +397,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_mode>`\\ "
 "\\(\\*\\*kwargs\\)"
 msgstr ""
-":py:obj:`set_mode "
-"<miniworlds.appearances.appearance.Appearance.set_mode>`\\ "
-"\\(\\*\\*kwargs\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`get_modes "
 "<miniworlds.appearances.appearance.Appearance.get_modes>`\\ \\(\\)"
 msgstr ""
-":py:obj:`get_modes "
-"<miniworlds.appearances.appearance.Appearance.get_modes>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -491,16 +410,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_animated>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`set_animated "
-"<miniworlds.appearances.appearance.Appearance.set_animated>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`flip <miniworlds.appearances.appearance.Appearance.flip>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`flip <miniworlds.appearances.appearance.Appearance.flip>`\\ "
-"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -508,17 +423,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.remove_last_image>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`remove_last_image "
-"<miniworlds.appearances.appearance.Appearance.remove_last_image>`\\ "
-"\\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`add_image "
 "<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 msgstr ""
-":py:obj:`add_image "
-"<miniworlds.appearances.appearance.Appearance.add_image>`\\ \\(source\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Adds an image to the appearance"
@@ -529,9 +439,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.add_images>`\\ "
 "\\(sources\\)"
 msgstr ""
-":py:obj:`add_images "
-"<miniworlds.appearances.appearance.Appearance.add_images>`\\ "
-"\\(sources\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Adds multiple images to background/costume."
@@ -542,9 +449,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.animate>`\\ "
 "\\(\\[loop\\]\\)"
 msgstr ""
-":py:obj:`animate "
-"<miniworlds.appearances.appearance.Appearance.animate>`\\ "
-"\\(\\[Schleife\\]\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Animates the costume"
@@ -554,8 +458,6 @@ msgid ""
 ":py:obj:`after_animation "
 "<miniworlds.appearances.appearance.Appearance.after_animation>`\\ \\(\\)"
 msgstr ""
-":py:obj:`after_animation "
-"<miniworlds.appearances.appearance.Appearance.after_animation>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "the method is overwritten in subclasses costume and appearance"
@@ -565,8 +467,6 @@ msgid ""
 ":py:obj:`to_colors_array "
 "<miniworlds.appearances.appearance.Appearance.to_colors_array>`\\ \\(\\)"
 msgstr ""
-":py:obj:`to_colors_array "
-"<miniworlds.appearances.appearance.Appearance.to_colors_array>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Create an array from costume or background."
@@ -576,8 +476,6 @@ msgid ""
 ":py:obj:`from_array "
 "<miniworlds.appearances.appearance.Appearance.from_array>`\\ \\(arr\\)"
 msgstr ""
-":py:obj:`from_array "
-"<miniworlds.appearances.appearance.Appearance.from_array>`\\ \\(arr\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Create a background or costume from array."
@@ -587,8 +485,6 @@ msgid ""
 ":py:obj:`fill <miniworlds.appearances.appearance.Appearance.fill>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`fill <miniworlds.appearances.appearance.Appearance.fill>`\\ "
-"\\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Set default fill color for borders and lines"
@@ -598,8 +494,6 @@ msgid ""
 ":py:obj:`set_filled "
 "<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 msgstr ""
-":py:obj:`set_filled "
-"<miniworlds.appearances.appearance.Appearance.set_filled>`\\ \\(value\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -607,25 +501,18 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.get_color>`\\ "
 "\\(position\\)"
 msgstr ""
-":py:obj:`get_color "
-"<miniworlds.appearances.appearance.Appearance.get_color>`\\ "
-"\\(position\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`get_rect "
 "<miniworlds.appearances.appearance.Appearance.get_rect>`\\ \\(\\)"
 msgstr ""
-":py:obj:`get_rect "
-"<miniworlds.appearances.appearance.Appearance.get_rect>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`draw <miniworlds.appearances.appearance.Appearance.draw>`\\ "
 "\\(source\\, position\\, width\\, height\\)"
 msgstr ""
-":py:obj:`draw <miniworlds.appearances.appearance.Appearance.draw>`\\ "
-"\\(source\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -633,9 +520,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_on_image>`\\ "
 "\\(path\\, position\\, width\\, height\\)"
 msgstr ""
-":py:obj:`draw_on_image "
-"<miniworlds.appearances.appearance.Appearance.draw_on_image>`\\ "
-"\\(path\\, position\\, width\\, height\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -643,17 +527,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_color_on_image>`\\ "
 "\\(color\\, position\\, width\\, ...\\)"
 msgstr ""
-":py:obj:`draw_color_on_image "
-"<miniworlds.appearances.appearance.Appearance.draw_color_on_image>`\\ "
-"\\(color\\, position\\, width\\, ...\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
 ":py:obj:`__str__ "
 "<miniworlds.appearances.appearance.Appearance.__str__>`\\ \\(\\)"
 msgstr ""
-":py:obj:`__str__ "
-"<miniworlds.appearances.appearance.Appearance.__str__>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Return str(self)."
@@ -663,8 +542,6 @@ msgid ""
 ":py:obj:`get_image "
 "<miniworlds.appearances.appearance.Appearance.get_image>`\\ \\(\\)"
 msgstr ""
-":py:obj:`get_image "
-"<miniworlds.appearances.appearance.Appearance.get_image>`\\ \\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "If dirty, the image will be reloaded."
@@ -674,8 +551,6 @@ msgid ""
 ":py:obj:`update <miniworlds.appearances.appearance.Appearance.update>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`update <miniworlds.appearances.appearance.Appearance.update>`\\ "
-"\\(\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Loads the next image, called 1/frame"
@@ -685,8 +560,6 @@ msgid ""
 ":py:obj:`register "
 "<miniworlds.appearances.appearance.Appearance.register>`\\ \\(method\\)"
 msgstr ""
-":py:obj:`register "
-"<miniworlds.appearances.appearance.Appearance.register>`\\ \\(Methode\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid "Register method for decorator."
@@ -697,9 +570,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_shape_append>`\\ "
 "\\(shape\\, arguments\\)"
 msgstr ""
-":py:obj:`draw_shape_append "
-"<miniworlds.appearances.appearance.Appearance.draw_shape_append>`\\ "
-"\\(shape\\, arguments\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -707,9 +577,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_shape_set>`\\ "
 "\\(shape\\, arguments\\)"
 msgstr ""
-":py:obj:`draw_shape_set "
-"<miniworlds.appearances.appearance.Appearance.draw_shape_set>`\\ "
-"\\(Form\\, Argumente\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -717,9 +584,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_image_append>`\\ "
 "\\(surface\\, rect\\)"
 msgstr ""
-":py:obj:`draw_image_append "
-"<miniworlds.appearances.appearance.Appearance.draw_image_append>`\\ "
-"\\(Oberfläche\\, Rechteck\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -727,9 +591,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.draw_image_set>`\\ "
 "\\(surface\\, rect\\)"
 msgstr ""
-":py:obj:`draw_image_set "
-"<miniworlds.appearances.appearance.Appearance.draw_image_set>`\\ "
-"\\(Oberfläche\\, Rechteck\\)"
 
 #: ../../None:33:<autosummary>:1
 msgid ""
@@ -737,9 +598,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance.set_dirty>`\\ "
 "\\(\\[value\\, status\\]\\)"
 msgstr ""
-":py:obj:`set_dirty "
-"<miniworlds.appearances.appearance.Appearance.set_dirty>`\\ "
-"\\(\\[value\\, status\\]\\)"
 
 #: ../../None:33:<autosummary>:1
 #, fuzzy
@@ -747,8 +605,6 @@ msgid ""
 ":py:obj:`get_manager "
 "<miniworlds.appearances.appearance.Appearance.get_manager>`\\ \\(\\)"
 msgstr ""
-":py:obj:`get_image "
-"<miniworlds.appearances.appearance.Appearance.get_image>`\\ \\(\\)"
 
 #: ../../source/api/costume.md
 msgid "Private Data Attributes:"
@@ -761,8 +617,6 @@ msgid ""
 ":py:obj:`_abc_impl "
 "<miniworlds.appearances.appearance.Appearance._abc_impl>`\\"
 msgstr ""
-":py:obj:`_abc_impl "
-"<miniworlds.appearances.appearance.Appearance._abc_impl>`\\"
 
 #: ../../source/api/costume.md
 msgid "Private Methods:"
@@ -773,9 +627,6 @@ msgid ""
 "<miniworlds.appearances.costume.Costume._set_default_color_values>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_set_default_color_values "
-"<miniworlds.appearances.costume.Costume._set_default_color_values>`\\ "
-"\\(\\)"
 
 #: ../../None:7:<autosummary>:1
 msgid ""
@@ -783,9 +634,6 @@ msgid ""
 "<miniworlds.appearances.costume.Costume._set_actor_default_values>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_set_actor_default_values "
-"<miniworlds.appearances.costume.Costume._set_actor_default_values>`\\ "
-"\\(\\)"
 
 #: ../../None:7:<autosummary>:1
 msgid ""
@@ -793,17 +641,12 @@ msgid ""
 "<miniworlds.appearances.costume.Costume._set_world_default_values>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_set_world_default_values "
-"<miniworlds.appearances.costume.Costume._set_world_default_values>`\\ "
-"\\(\\)"
 
 #: ../../None:7:<autosummary>:1
 msgid ""
 ":py:obj:`_inner_shape "
 "<miniworlds.appearances.costume.Costume._inner_shape>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_inner_shape "
-"<miniworlds.appearances.costume.Costume._inner_shape>`\\ \\(\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:7:<autosummary>:1
 msgid "Returns inner shape of costume"
@@ -813,8 +656,6 @@ msgid ""
 ":py:obj:`_outer_shape "
 "<miniworlds.appearances.costume.Costume._outer_shape>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_outer_shape "
-"<miniworlds.appearances.costume.Costume._outer_shape>`\\ \\(\\)"
 
 #: ../../None:23:<autosummary>:1 ../../None:7:<autosummary>:1
 msgid "Returns outer shape of costume"
@@ -826,9 +667,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_defaults>`\\ "
 "\\(\\*\\*kwargs\\)"
 msgstr ""
-":py:obj:`set_mode "
-"<miniworlds.appearances.appearance.Appearance.set_mode>`\\ "
-"\\(\\*\\*kwargs\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -836,9 +674,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_font>`\\ \\(font\\, "
 "font\\_size\\)"
 msgstr ""
-":py:obj:`_set_font "
-"<miniworlds.appearances.appearance.Appearance._set_font>`\\ "
-"\\(Schriftart\\, Schriftgröße\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -846,9 +681,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_animation_speed>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_animation_speed "
-"<miniworlds.appearances.appearance.Appearance._set_animation_speed>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -856,9 +688,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_textured>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_textured "
-"<miniworlds.appearances.appearance.Appearance._set_textured>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "bool: If True, the image is tiled over the background."
@@ -869,9 +698,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_rotatable>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_rotatable "
-"<miniworlds.appearances.appearance.Appearance._set_rotatable>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, costume will be rotated with actor direction"
@@ -882,9 +708,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_centered>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_centered "
-"<miniworlds.appearances.appearance.Appearance._set_centered>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -892,24 +715,18 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_flipped "
-"<miniworlds.appearances.appearance.Appearance._set_flipped>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_set_filled "
 "<miniworlds.appearances.appearance.Appearance._set_filled>`\\ \\(value\\)"
 msgstr ""
-":py:obj:`_set_filled "
-"<miniworlds.appearances.appearance.Appearance._set_filled>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_set_scaled "
 "<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 msgstr ""
-":py:obj:`_set_scaled "
-"<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Sets the actor to parenz-size **without** remaining aspect-ratio."
@@ -923,9 +740,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_upscaled>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_upscaled "
-"<miniworlds.appearances.appearance.Appearance._set_upscaled>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "If set to True, the image will be upscaled remaining aspect-ratio."
@@ -939,9 +753,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_width>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_scaled_to_width "
-"<miniworlds.appearances.appearance.Appearance._set_scaled_to_width>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -949,17 +760,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._set_scaled_to_height>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`_set_scaled_to_height "
-"<miniworlds.appearances.appearance.Appearance._set_scaled_to_height>`\\ "
-"\\(value\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_set_image "
 "<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 msgstr ""
-":py:obj:`_set_image "
-"<miniworlds.appearances.appearance.Appearance._set_image>`\\ \\(source\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -967,9 +773,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._before_transformation_pipeline>`\\"
 " \\(\\)"
 msgstr ""
-":py:obj:`_before_transformation_pipeline "
-"<miniworlds.appearances.appearance.Appearance._before_transformation_pipeline>`\\"
-" \\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Called in `get_image`, if image is \"dirty\" (e.g. size, rotation, ."
@@ -983,17 +786,12 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._after_transformation_pipeline>`\\"
 " \\(\\)"
 msgstr ""
-":py:obj:`_after_transformation_pipeline "
-"<miniworlds.appearances.appearance.Appearance._after_transformation_pipeline>`\\"
-" \\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_load_image "
 "<miniworlds.appearances.appearance.Appearance._load_image>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_load_image "
-"<miniworlds.appearances.appearance.Appearance._load_image>`\\ \\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Loads the image,"
@@ -1004,25 +802,18 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._update_draw_shape>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_update_draw_shape "
-"<miniworlds.appearances.appearance.Appearance._update_draw_shape>`\\ "
-"\\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_inner_shape "
 "<miniworlds.appearances.appearance.Appearance._inner_shape>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_inner_shape "
-"<miniworlds.appearances.appearance.Appearance._inner_shape>`\\ \\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
 ":py:obj:`_outer_shape "
 "<miniworlds.appearances.appearance.Appearance._outer_shape>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_outer_shape "
-"<miniworlds.appearances.appearance.Appearance._outer_shape>`\\ \\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid ""
@@ -1030,9 +821,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._inner_shape_arguments>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_inner_shape_arguments "
-"<miniworlds.appearances.appearance.Appearance._inner_shape_arguments>`\\ "
-"\\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "def setGets arguments for inner shape"
@@ -1043,9 +831,6 @@ msgid ""
 "<miniworlds.appearances.appearance.Appearance._outer_shape_arguments>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_outer_shape_arguments "
-"<miniworlds.appearances.appearance.Appearance._outer_shape_arguments>`\\ "
-"\\(\\)"
 
 #: ../../None:23:<autosummary>:1
 msgid "Gets arguments for outer shape"

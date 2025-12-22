@@ -60,8 +60,6 @@ msgid ""
 ":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ "
 "\\(x\\, y\\)"
 msgstr ""
-":py:obj:`__init__ <miniworlds.positions.vector.Vector.__init__>`\\ "
-"\\(x\\, y\\)"
 
 #: ../../None:32:<autosummary>:1
 #, fuzzy
@@ -69,40 +67,30 @@ msgid ""
 ":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ "
 "\\(index\\)"
 msgstr ""
-":py:obj:`__getitem__ <miniworlds.positions.vector.Vector.__getitem__>`\\ "
-"\\(item\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`to_position <miniworlds.positions.vector.Vector.to_position>`\\ "
-"\\(\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_position "
 "<miniworlds.positions.vector.Vector.from_position>`\\ \\(position\\)"
 msgstr ""
-":py:obj:`from_position "
-"<miniworlds.positions.vector.Vector.from_position>`\\ \\(position\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_positions "
 "<miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
 msgstr ""
-":py:obj:`from_positions "
-"<miniworlds.positions.vector.Vector.from_positions>`\\ \\(p1\\, p2\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`from_direction "
 "<miniworlds.positions.vector.Vector.from_direction>`\\ \\(direction\\)"
 msgstr ""
-":py:obj:`from_direction "
-"<miniworlds.positions.vector.Vector.from_direction>`\\ \\(Richtung\\)"
 
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_direction:1 of
@@ -113,8 +101,6 @@ msgid ""
 ":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ "
 "\\(t1\\, t2\\)"
 msgstr ""
-":py:obj:`from_actors <miniworlds.positions.vector.Vector.from_actors>`\\ "
-"\\(t1\\, t2\\)"
 
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actors:1 of
@@ -126,9 +112,6 @@ msgid ""
 "<miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, "
 "pos\\)"
 msgstr ""
-":py:obj:`from_actor_and_position "
-"<miniworlds.positions.vector.Vector.from_actor_and_position>`\\ \\(t1\\, "
-"pos\\)"
 
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_and_position:1 of
@@ -139,8 +122,6 @@ msgid ""
 ":py:obj:`from_actor_direction "
 "<miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
 msgstr ""
-":py:obj:`from_actor_direction "
-"<miniworlds.positions.vector.Vector.from_actor_direction>`\\ \\(actor\\)"
 
 #: ../../None:32:<autosummary>:1
 #: miniworlds.positions.vector.Vector.from_actor_direction:1 of
@@ -154,16 +135,12 @@ msgid ""
 ":py:obj:`to_direction "
 "<miniworlds.positions.vector.Vector.to_direction>`\\ \\(\\)"
 msgstr ""
-":py:obj:`to_direction "
-"<miniworlds.positions.vector.Vector.to_direction>`\\ \\(\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`normalize <miniworlds.positions.vector.Vector.normalize>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`normalize <miniworlds.positions.vector.Vector.normalize>`\\ "
-"\\(\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`length <miniworlds.positions.vector.Vector.length>`\\ \\(\\)"
@@ -179,24 +156,18 @@ msgid ""
 ":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`multiply <miniworlds.positions.vector.Vector.multiply>`\\ "
-"\\(other\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`add_to_position "
 "<miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
 msgstr ""
-":py:obj:`add_to_position "
-"<miniworlds.positions.vector.Vector.add_to_position>`\\ \\(position\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`get_normal <miniworlds.positions.vector.Vector.get_normal>`\\ "
-"\\(\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`dot <miniworlds.positions.vector.Vector.dot>`\\ \\(other\\)"
@@ -228,8 +199,6 @@ msgid ""
 ":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ "
-"\\(other\\)"
 
 #: ../../None:32:<autosummary>:1
 #, fuzzy
@@ -237,16 +206,12 @@ msgid ""
 ":py:obj:`__radd__ <miniworlds.positions.vector.Vector.__radd__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__add__ <miniworlds.positions.vector.Vector.__add__>`\\ "
-"\\(other\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ "
-"\\(andere\\)"
 
 #: ../../None:32:<autosummary>:1
 #, fuzzy
@@ -254,16 +219,12 @@ msgid ""
 ":py:obj:`__rsub__ <miniworlds.positions.vector.Vector.__rsub__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ "
-"\\(andere\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ "
-"\\(andere\\)"
 
 #: ../../None:32:<autosummary>:1
 #, fuzzy
@@ -271,8 +232,6 @@ msgid ""
 ":py:obj:`__rmul__ <miniworlds.positions.vector.Vector.__rmul__>`\\ "
 "\\(other\\)"
 msgstr ""
-":py:obj:`__mul__ <miniworlds.positions.vector.Vector.__mul__>`\\ "
-"\\(andere\\)"
 
 #: ../../None:32:<autosummary>:1
 msgid ":py:obj:`__neg__ <miniworlds.positions.vector.Vector.__neg__>`\\ \\(\\)"
@@ -281,8 +240,6 @@ msgstr ""
 #, fuzzy
 msgid ":py:obj:`__eq__ <miniworlds.positions.vector.Vector.__eq__>`\\ \\(other\\)"
 msgstr ""
-":py:obj:`__sub__ <miniworlds.positions.vector.Vector.__sub__>`\\ "
-"\\(andere\\)"
 
 #: ../../None:32:<autosummary>:1
 #, fuzzy
@@ -315,8 +272,6 @@ msgid ""
 ":py:obj:`_to_vector <miniworlds.positions.vector.Vector._to_vector>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`to_direction "
-"<miniworlds.positions.vector.Vector.to_direction>`\\ \\(\\)"
 
 #: ../../source/api/positions_vector.md
 #: miniworlds.positions.vector.Vector.angle_to

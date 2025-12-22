@@ -260,8 +260,6 @@ msgid ""
 ":py:obj:`registered_events "
 "<miniworlds.worlds.world_base.WorldBase.registered_events>`\\"
 msgstr ""
-":py:obj:`registered_events "
-"<miniworlds.worlds.world.World.registered_events>`\\"
 
 #: ../../None:9:<autosummary>:1
 #, fuzzy
@@ -276,8 +274,6 @@ msgid ""
 ":py:obj:`__init__ <miniworlds.worlds.world.World.__init__>`\\ \\(\\[x\\, "
 "y\\]\\)"
 msgstr ""
-":py:obj:`__init__ <miniworlds.worlds.world.World.__init__>`\\ \\(\\[x\\, "
-"y\\]\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.__init__:1 of
 msgid "Initializes the class and manages actor sprites."
@@ -289,8 +285,6 @@ msgid ""
 ":py:obj:`contains_position "
 "<miniworlds.worlds.world.World.contains_position>`\\ \\(pos\\)"
 msgstr ""
-":py:obj:`detect_position "
-"<miniworlds.worlds.world.World.detect_position>`\\ \\(pos\\)"
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.world.World.contains_position:1 of
@@ -301,8 +295,6 @@ msgid ""
 ":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
 "\\(rect\\)"
 msgstr ""
-":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
-"\\(rect\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.contains_rect:1
 #: of
@@ -315,8 +307,6 @@ msgid ""
 ":py:obj:`contains_rect_any "
 "<miniworlds.worlds.world.World.contains_rect_any>`\\ \\(rect\\)"
 msgstr ""
-":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
-"\\(rect\\)"
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.world.World.contains_rect_any:1 of
@@ -328,8 +318,6 @@ msgid ""
 ":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
 "\\(value\\)"
 msgstr ""
-":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
-"\\(value\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.set_columns:1 of
 msgid "Internal method to set columns and sync world width."
@@ -347,8 +335,6 @@ msgid ""
 ":py:obj:`get_background <miniworlds.worlds.world.World.get_background>`\\"
 " \\(\\)"
 msgstr ""
-":py:obj:`get_background <miniworlds.worlds.world.World.get_background>`\\"
-" \\(\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.get_background:1
 #: of
@@ -360,8 +346,6 @@ msgid ""
 ":py:obj:`switch_background "
 "<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
 msgstr ""
-":py:obj:`switch_background "
-"<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.world.World.switch_background:1 of
@@ -374,9 +358,6 @@ msgid ""
 "<miniworlds.worlds.world.World.remove_background>`\\ "
 "\\(\\[background\\]\\)"
 msgstr ""
-":py:obj:`remove_background "
-"<miniworlds.worlds.world.World.remove_background>`\\ "
-"\\(\\[background\\]\\)"
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.world.World.remove_background:1 of
@@ -388,8 +369,6 @@ msgid ""
 ":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\"
 " \\(source\\)"
 msgstr ""
-":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\"
-" \\(source\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.set_background:1
 #: of
@@ -401,8 +380,6 @@ msgid ""
 ":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\"
 " \\(source\\)"
 msgstr ""
-":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\"
-" \\(source\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.add_background:1
 #: of
@@ -429,8 +406,6 @@ msgid ""
 ":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 msgstr ""
-":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
-"fit\\_desktop\\, replit\\, ...\\]\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.run:1 of
 msgid "Starts the main application loop of the Miniworlds engine."
@@ -441,8 +416,6 @@ msgid ""
 ":py:obj:`is_in_world <miniworlds.worlds.world.World.is_in_world>`\\ "
 "\\(position\\)"
 msgstr ""
-":py:obj:`is_in_world <miniworlds.worlds.world.World.is_in_world>`\\ "
-"\\(position\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.is_in_world:1 of
 #, fuzzy
@@ -453,8 +426,6 @@ msgid ""
 ":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
 "\\(message\\[\\, data\\]\\)"
 msgstr ""
-":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
-"\\(message\\[\\, data\\]\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.send_message:1
 #: of
@@ -466,8 +437,6 @@ msgid ""
 ":py:obj:`quit <miniworlds.worlds.world.World.quit>`\\ "
 "\\(\\[exit\\_code\\]\\)"
 msgstr ""
-":py:obj:`quit <miniworlds.worlds.world.World.quit>`\\ "
-"\\(\\[exit\\_code\\]\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.quit:1 of
 #, fuzzy
@@ -481,16 +450,12 @@ msgid ""
 "Resets the world Creates a new world with init-function - recreates all "
 "actors and actors on the world."
 msgstr ""
-"Setzt die Welt zurück Erstellt eine neue Welt mit der Init-Funktion - "
-"erstellt alle Akteure und Akteure in der Welt neu."
 
 #: ../../None:27:<autosummary>:1
 msgid ""
 ":py:obj:`get_from_pixel <miniworlds.worlds.world.World.get_from_pixel>`\\"
 " \\(position\\)"
 msgstr ""
-":py:obj:`get_from_pixel <miniworlds.worlds.world.World.get_from_pixel>`\\"
-" \\(position\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.get_from_pixel:1
 #: of
@@ -504,8 +469,6 @@ msgid ""
 ":py:obj:`to_pixel <miniworlds.worlds.world.World.to_pixel>`\\ "
 "\\(position\\)"
 msgstr ""
-":py:obj:`to_pixel <miniworlds.worlds.world.World.to_pixel>`\\ "
-"\\(position\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.to_pixel:1 of
 msgid "Converts a world position to a screen pixel position."
@@ -523,8 +486,6 @@ msgid ""
 ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
 "\\(position\\)"
 msgstr ""
-":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
-"\\(position\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.detect_actors:1
 #: of
@@ -538,8 +499,6 @@ msgid ""
 ":py:obj:`get_actors_from_pixel "
 "<miniworlds.worlds.world.World.get_actors_from_pixel>`\\ \\(pixel\\)"
 msgstr ""
-":py:obj:`get_actors_from_pixel "
-"<miniworlds.worlds.world.World.get_actors_from_pixel>`\\ \\(pixel\\)"
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.world.World.get_actors_from_pixel:1 of
@@ -551,8 +510,6 @@ msgid ""
 ":py:obj:`distance_to <miniworlds.worlds.world.World.distance_to>`\\ "
 "\\(pos1\\, pos2\\)"
 msgstr ""
-":py:obj:`distance_to <miniworlds.worlds.world.World.distance_to>`\\ "
-"\\(pos1\\, pos2\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.distance_to:1 of
 msgid "Calculates the Euclidean distance between two positions."
@@ -563,8 +520,6 @@ msgid ""
 ":py:obj:`direction_to <miniworlds.worlds.world.World.direction_to>`\\ "
 "\\(pos1\\, pos2\\)"
 msgstr ""
-":py:obj:`direction_to <miniworlds.worlds.world.World.direction_to>`\\ "
-"\\(pos1\\, pos2\\)"
 
 #: ../../None:27:<autosummary>:1 miniworlds.worlds.world.World.direction_to:1
 #: of
@@ -576,16 +531,12 @@ msgid ""
 ":py:obj:`__init__ <miniworlds.worlds.world_base.WorldBase.__init__>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`__init__ <miniworlds.worlds.world_base.WorldBase.__init__>`\\ "
-"\\(\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`remove <miniworlds.worlds.world_base.WorldBase.remove>`\\ "
 "\\(actor\\)"
 msgstr ""
-":py:obj:`remove <miniworlds.worlds.world_base.WorldBase.remove>`\\ "
-"\\(Akteur\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid "Implemented in subclasses"
@@ -595,8 +546,6 @@ msgid ""
 ":py:obj:`on_change <miniworlds.worlds.world_base.WorldBase.on_change>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`on_change <miniworlds.worlds.world_base.WorldBase.on_change>`\\ "
-"\\(\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid "implemented in subclasses"
@@ -606,16 +555,12 @@ msgid ""
 ":py:obj:`on_new_actor "
 "<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
 msgstr ""
-":py:obj:`on_new_actor "
-"<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`on_remove_actor "
 "<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
 msgstr ""
-":py:obj:`on_remove_actor "
-"<miniworlds.worlds.world_base.WorldBase.on_remove_actor>`\\ \\(actor\\)"
 
 #: ../../None:11:<autosummary>:1
 #, fuzzy
@@ -624,8 +569,6 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase.get_world_connector>`\\ "
 "\\(actor\\)"
 msgstr ""
-":py:obj:`get_world_connector "
-"<miniworlds.worlds.world.World.get_world_connector>`\\ \\(actor\\)"
 
 #: ../../None:11:<autosummary>:1
 #, fuzzy
@@ -634,8 +577,6 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase.screenshot>`\\ "
 "\\(\\[filename\\]\\)"
 msgstr ""
-":py:obj:`screenshot <miniworlds.worlds.world.World.screenshot>`\\ "
-"\\(\\[Dateiname\\]\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid "Saves a screenshot of the current window surface to a file."
@@ -658,8 +599,6 @@ msgid ""
 ":py:obj:`register <miniworlds.worlds.world_base.WorldBase.register>`\\ "
 "\\(method\\)"
 msgstr ""
-":py:obj:`register <miniworlds.worlds.world.World.register>`\\ "
-"\\(Methode\\)"
 
 #: ../../None:11:<autosummary>:1
 msgid "Registers a method as a world event handler."
@@ -684,8 +623,6 @@ msgid ""
 ":py:obj:`_validate_parameters "
 "<miniworlds.worlds.world.World._validate_parameters>`\\ \\(x\\, y\\)"
 msgstr ""
-":py:obj:`validate_parameters "
-"<miniworlds.worlds.world.World.validate_parameters>`\\ \\(x\\, y\\)"
 
 #: ../../None:4:<autosummary>:1
 #, fuzzy
@@ -701,8 +638,6 @@ msgid ""
 ":py:obj:`_after_init_setup "
 "<miniworlds.worlds.world_base.WorldBase._after_init_setup>`\\ \\(\\)"
 msgstr ""
-":py:obj:`__init__ <miniworlds.worlds.world_base.WorldBase.__init__>`\\ "
-"\\(\\)"
 
 #: ../../None:10:<autosummary>:1
 #, fuzzy
@@ -711,8 +646,6 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase._get_mainloopmanager_class>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_get_camera_manager_class "
-"<miniworlds.worlds.world.World._get_camera_manager_class>`\\ \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 #, fuzzy
@@ -721,8 +654,6 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase._get_camera_manager_class>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_get_camera_manager_class "
-"<miniworlds.worlds.world.World._get_camera_manager_class>`\\ \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 #, fuzzy
@@ -731,8 +662,6 @@ msgid ""
 "<miniworlds.worlds.world_base.WorldBase._get_world_connector_class>`\\ "
 "\\(\\)"
 msgstr ""
-":py:obj:`_get_world_connector_class "
-"<miniworlds.worlds.world.World._get_world_connector_class>`\\ \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid "needed by get_world_connector in parent class"
@@ -743,8 +672,6 @@ msgid ""
 ":py:obj:`_create_event_manager "
 "<miniworlds.worlds.world_base.WorldBase._create_event_manager>`\\ \\(\\)"
 msgstr ""
-":py:obj:`_create_event_manager "
-"<miniworlds.worlds.world.World._create_event_manager>`\\ \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 #, fuzzy
@@ -752,8 +679,6 @@ msgid ""
 ":py:obj:`_unregister "
 "<miniworlds.worlds.world_base.WorldBase._unregister>`\\ \\(method\\)"
 msgstr ""
-":py:obj:`unregister <miniworlds.worlds.world.World.unregister>`\\ "
-"\\(Methode\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid "Unregisters a previously registered world method."
@@ -765,8 +690,6 @@ msgid ""
 ":py:obj:`_start_listening "
 "<miniworlds.worlds.world_base.WorldBase._start_listening>`\\ \\(\\)"
 msgstr ""
-":py:obj:`start_listening "
-"<miniworlds.worlds.world.World.start_listening>`\\ \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid "Enables input listening for the world."
@@ -778,8 +701,6 @@ msgid ""
 ":py:obj:`_stop_listening "
 "<miniworlds.worlds.world_base.WorldBase._stop_listening>`\\ \\(\\)"
 msgstr ""
-":py:obj:`stop_listening <miniworlds.worlds.world.World.stop_listening>`\\"
-" \\(\\)"
 
 #: ../../None:10:<autosummary>:1
 msgid "Disables input listening for the world."
