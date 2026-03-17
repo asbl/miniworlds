@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-21 22:25+0100\n"
+"POT-Creation-Date: 2026-03-17 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,18 +17,26 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/api/actor_shapes.md:1
 msgid "Actor > Shapes"
 msgstr ""
 
 #: ../../source/api/actor_shapes.md:3
-msgid "Shape"
+msgid "Shape actors are drawable actors with geometry-focused APIs."
 msgstr ""
 
 #: ../../source/api/actor_shapes.md:5
-msgid "Base class for shapes"
+msgid "API Reference"
+msgstr ""
+
+#: ../../source/api/actor_shapes.md:7
+msgid "Shape"
+msgstr ""
+
+#: ../../source/api/actor_shapes.md:9
+msgid "Base class for shape actors."
 msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape:1 of
@@ -66,11 +74,19 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.actors.shapes.shapes.Shape.get_costume_class:2
-#: miniworlds.actors.shapes.shapes.Shape.new_costume:2 of
+#: miniworlds.actors.shapes.shapes.Shape.new_costume:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.shapes.shape\\_costume.ShapeCostume\\``"
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:12
+#: miniworlds.actors.shapes.shapes.Circle.new_costume:1
+#: miniworlds.actors.shapes.shapes.Ellipse.new_costume:1
+#: miniworlds.actors.shapes.shapes.Line.new_costume:1
+#: miniworlds.actors.shapes.shapes.Rectangle.new_costume:1
+#: miniworlds.actors.shapes.shapes.Shape.new_costume:1 of
+msgid "Create and attach a new empty costume to this actor."
+msgstr ""
+
+#: ../../source/api/actor_shapes.md:16
 msgid "Point"
 msgstr ""
 
@@ -82,7 +98,7 @@ msgstr ""
 msgid "Init a Point at specified position"
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:20 miniworlds.actors.shapes.shapes.Circle:4
+#: ../../source/api/actor_shapes.md:23 miniworlds.actors.shapes.shapes.Circle:4
 #: of
 msgid "Circle"
 msgstr ""
@@ -165,7 +181,7 @@ msgid ""
 "self.size = (x, y), the radius value will be changed too."
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:26
+#: ../../source/api/actor_shapes.md:30
 #: miniworlds.actors.shapes.shapes.Ellipse:3 of
 msgid "Ellipse"
 msgstr ""
@@ -212,7 +228,7 @@ msgstr ""
 msgid "Creates an ellipse with topleft at position"
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:33 miniworlds.actors.shapes.shapes.Line:3
+#: ../../source/api/actor_shapes.md:37 miniworlds.actors.shapes.shapes.Line:3
 #: miniworlds.actors.shapes.shapes.Rectangle:3 of
 msgid "Line"
 msgstr ""
@@ -319,7 +335,7 @@ msgstr ""
 msgid "Move -45°:"
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:39
+#: ../../source/api/actor_shapes.md:44
 msgid "Rectangle"
 msgstr ""
 
@@ -353,7 +369,7 @@ msgstr ""
 msgid "Creates a rectangle with topleft at position"
 msgstr ""
 
-#: ../../source/api/actor_shapes.md:46
+#: ../../source/api/actor_shapes.md:51
 msgid "Polygon"
 msgstr ""
 
@@ -377,5 +393,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Parameter"
+#~ msgstr ""
+
+#~ msgid "Base class for shapes"
 #~ msgstr ""
 

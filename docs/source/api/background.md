@@ -1,10 +1,9 @@
 # World > Background
 
+A `Background` is a child class of `Appearance`.
+Most methods and attributes are inherited from the `Appearance` base class.
 
-A **Background** is a child class of the **Appearance**-Class.
-Most of it's methods and attributes you can therefore find in the baseclass **Appearance**
-
-## Background
+## API Reference
 
 
 ```{eval-rst}

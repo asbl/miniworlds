@@ -1,10 +1,10 @@
 # Actor > Costume
 
-A **Costume** is a child class of the **Appearance**-Class.
-Most of it's methods and attributes you can therefore find in the baseclass **Appearance**
+A `Costume` is a child class of `Appearance`.
+Most methods and attributes are inherited from the `Appearance` base class.
 
 
-## Costume
+## API Reference
 
 ```{eval-rst}
 .. autoclass:: miniworlds.appearances.costume.Costume

@@ -480,6 +480,7 @@ api/background
 api/actor
 api/costume
 api/appearance
+api/appearances_manager
 ```
 
 ```{toctree}

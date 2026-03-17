@@ -30,14 +30,16 @@ class Costume(appear.Appearance):
         )
 
     def get_manager(self):
+        """Return the owning costume manager of the actor."""
         return self.actor.costume_manager
 
     @property
     def world(self) -> "world_mod.World":
+        """Owning world of this costume."""
         return self.parent.world
 
     def after_init(self):
-        # Called in metaclass
+        """Apply actor and world defaults after construction."""
         self._set_default_color_values()
         super().after_init()
 
@@ -99,21 +101,26 @@ class Costume(appear.Appearance):
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), self.border]
 
     def rotated(self):
+        """Mark rotation-dependent rendering as dirty after actor rotation."""
         if self.actor._is_actor_repainted():
             self.set_dirty("rotate", self.RELOAD_ACTUAL_IMAGE)
 
     def origin_changed(self):
+        """Mark rendering as dirty after an origin change."""
         if self.actor._is_actor_repainted():
             self.set_dirty("origin_changed", self.RELOAD_ACTUAL_IMAGE)
 
     def resized(self):
+        """Mark scaling-dependent rendering as dirty."""
         self.set_dirty("scale", self.RELOAD_ACTUAL_IMAGE)
 
     def visibility_changed(self):
+        """Mark full rendering as dirty after visibility updates."""
         if self.actor._is_actor_repainted():
             self.set_dirty("all", self.RELOAD_ACTUAL_IMAGE)
 
     def set_dirty(self, value="all", status=1):
+        """Set dirty flags and keep actor rect/mask caches in sync."""
         super().set_dirty(value, status)
         if hasattr(self, "actor") and self.actor and hasattr(self.actor, "position_manager"):
             self.actor.position_manager._invalidate_rect_cache()
@@ -126,6 +133,7 @@ class Costume(appear.Appearance):
 
 
     def get_rect(self):
+        """Return a frame-cached local rect for the rendered costume image."""
         frame = self.actor.world.frame if self.actor else 0
         if frame == self._cached_rect[0]:
             return self._cached_rect[1]

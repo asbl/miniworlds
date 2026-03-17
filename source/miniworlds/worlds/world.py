@@ -37,94 +37,31 @@ from miniworlds.base.exceptions import (
 
 
 class World(world_base.WorldBase):
-    """A world is a playing field on which actors can move.
+    """Base world class for pixel-based scenes.
 
-    A world has a `background` and provides basic functions for the positioning of
-    actors and for the collision detection of actors, which can be queried via the sensors of the actors.
+    A world owns the shared runtime state: actors, backgrounds, input
+    handling, and event dispatch.
 
-    You can create your own world by creating a class that inherits from World or you can directly create a world
-    object of type `World` or one of its child classes (`TiledWorld`, `PhysicsWorld`, ...).
-
-    *World*
-
-    A world for pixel accurate games.
-
-    * The position of a actor on a World is the pixel at topleft of actor.
-
-    * New actors are created with top-left corner of actor rect at position.
-
-    * Two actors collide when their sprites overlap.
-
-    .. image:: ../_images/asteroids.jpg
-        :alt: Asteroids
-
-    **Other worlds:**
-
-    * TiledWorld: For worlds using Tiles, like rogue-like rpgs, see
-      :doc:`TiledWorld </api/world_tiled>`)
-    * PhysicsWorld: For worlds using the PhysicsEngine, see
-      :doc:`PhysicsWorld </api/world_physics>`)
+    Notes:
+        - Actor positions in a `World` are pixel coordinates.
+        - New actors start at their top-left position unless their origin is
+          switched to `center`.
+        - Sprite overlap is used for collision checks by default.
 
     Examples:
+        Create a world directly:
+            from miniworlds import World
 
-        Creating a TiledWorld Object:
+            world = World(300, 200)
+            world.run()
 
-        .. code-block:: python
-
-            from miniworlds import *
-
-            my_world = TiledWorld()
-            my_world.columns = 30
-            my_world.rows = 20
-            my_world.tile_size = 20
-
-
-        Creating a TiledWorld-Subclass.
-
-        .. code-block:: python
-
-            import miniworlds
-
-            class MyWorld(miniworlds.TiledWorld):
-
-                def on_setup(self):
-                    self.columns = 30
-                    self.rows = 20
-                    self.tile_size = 20
-
-        Creating a World Object:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            my_world = World()
-            my_world.columns = 300
-            my_world.rows = 200
-
-        Creating a World Subclass
-
-        .. code-block:: python
-
+        Subclass a world and configure setup values:
             import miniworlds
 
             class MyWorld(miniworlds.World):
-
                 def on_setup(self):
                     self.columns = 300
                     self.rows = 200
-
-
-    See also:
-
-        * See: :doc:`World </api/world>`
-        * See: :doc:`TiledWorld </api/world_tiled>`
-
-
-    Args:
-        view_x: columns of new world (default: 40)
-        view_y: rows of new world (default:40)
-        tile_size: Size of tiles (1 for normal worlds, can differ for Tiledworlds)
     """
 
     def _validate_parameters(self, x, y):
@@ -204,44 +141,18 @@ class World(world_base.WorldBase):
 
     @property
     def tick_rate(self) -> int:
-        """Tick rate defines how often the method ``act()`` will be called.
+        """How often world logic runs relative to the frame loop.
 
-        If e.g. ``tick_rate = 30``, the game logic will be called every 30th-frame.
+        A value of `1` runs game logic every frame. A value of `30` runs it
+        every 30th frame.
 
-        .. note::
+        Example:
+            from miniworlds import World
 
-          You can adjust the frame-rate with ``world.fps``
-
-        Examples:
-
-            Set speed and fps.
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                world.size = (120,210)
-
-                @world.register
-                def on_setup(self):
-                    world.fps = 1
-                    world.speed = 3
-
-                @world.register
-                def act(self):
-
-                world.run()
-
-        Output:
-
-            ```
-            3
-            6
-            9
-            12Step
-            15
-            ```
+            world = World(120, 210)
+            world.fps = 60
+            world.tick_rate = 3
+            world.run()
         """
         return self._tick_rate
 
@@ -251,24 +162,14 @@ class World(world_base.WorldBase):
 
     @property
     def fps(self) -> int:
-        """
-        Frames per second shown on the screen.
+        """Frames per second of the render loop.
 
-        This controls how often the screen is redrawn. However, the game logic
-        can be called more often or less often independently of this with ``world.speed.``
+        This controls redraw frequency. Logic frequency can be tuned
+        independently via `world.tick_rate`.
 
-        Examples:
-
-            .. code-block:: python
-
-                world.speed = 10
-                world.fps = 24
-                def act(self):
-                    nonlocal i
-                    i = i + 1
-                    if world.frame == 120:
-                        test_instance.assertEqual(i, 13)
-                        test_instance.assertEqual(world.frame, 120)
+        Example:
+            world.fps = 24
+            world.tick_rate = 2
         """
         return self._fps
 

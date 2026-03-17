@@ -24,6 +24,18 @@ msgid "Actor > Sensor"
 msgstr "Aktor > Sensor"
 
 #: ../../source/api/actor_sensor.md:3
+msgid ""
+"Sensors are helper actors that can be attached to another actor to detect "
+"nearby objects and interactions."
+msgstr ""
+"Sensoren sind Hilfs-Actors, die an einen anderen Actor angehaengt werden "
+"koennen, um nahe Objekte und Interaktionen zu erkennen."
+
+#: ../../source/api/actor_sensor.md:6
+msgid "API Reference"
+msgstr "API-Referenz"
+
+#: ../../source/api/actor_sensor.md:8
 msgid "Sensor"
 msgstr "Sensor"
 
@@ -37,6 +49,6 @@ msgstr "Ein Sensor ist an einem Actor angebracht."
 msgid "The sensors is not visible and will not detect the actor itself."
 msgstr "Die Sensoren sind nicht sichtbar und werden den Actor selbst nicht erkennen."
 
-#: ../../source/api/actor_sensor.md:10
+#: ../../source/api/actor_sensor.md:16
 msgid "Circle Sensor"
 msgstr "Kreissensor"

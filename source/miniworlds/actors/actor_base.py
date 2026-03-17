@@ -10,6 +10,9 @@ import miniworlds.tools.world_inspection as world_inspection
 import miniworlds.tools.actor_inspection as actor_inspection
 from miniworlds.base.exceptions import RegisterError
 
+if TYPE_CHECKING:
+    import miniworlds.appearances.costume as costume_mod
+
 class ActorWorldConnectorMeta(ABCMeta):
     """
     Why do we need a metaclass:

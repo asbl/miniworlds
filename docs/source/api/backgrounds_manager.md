@@ -1,7 +1,8 @@
 # World > Backgrounds
 
-Child class of [Appearances Manager](/api/appearances_manager)
+Child class of [Appearances Manager](appearances_manager.md).
 
+## API Reference
 
 
 ```{eval-rst}

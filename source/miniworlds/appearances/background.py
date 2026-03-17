@@ -9,40 +9,19 @@ import miniworlds.worlds.world as world_mod
 
 
 class Background(appearance_mod.Appearance):
-    """
-    The class describes the background of a world.
+    """Background appearance of a world.
 
-    A ``background`` can be an image or a color:
-
-    Each world has one or more backgrounds that can be switched between.
-    In addition, each background also has several pictures (or colors) between which you can switch.
+    A background can be color-based or image-based, and each world can hold
+    multiple background appearances that can be switched at runtime.
 
     Examples:
-
-        Add an image as background
-
-        .. code-block:: python
-
+        Add an image background:
             world = World()
-            World.add_background(images/my_image.png)
+            world.add_background("images/my_image.png")
 
-        Add a color as background:
-
-        .. code-block:: python
-
+        Add a color background:
             world = World()
-            World.add_background((255, 0,0, 0))
-
-        ..or alternative way: Create background with property:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World()
-            world.background =(255,0,0)
-            world.run()
-
+            world.add_background((255, 0, 0, 255))
     """
 
     def __init__(self, world=None):
@@ -69,6 +48,7 @@ class Background(appearance_mod.Appearance):
         self.image_manager = image_background_manager.ImageBackgroundManager(self)
 
     def set_dirty(self, value="all", status=1):
+        """Mark the background as dirty and refresh dependent actor visuals."""
         super().set_dirty(value, status)
         self._blit_to_window_surface()
         if self.world and self.get_manager()._is_display_initialized:
@@ -79,43 +59,23 @@ class Background(appearance_mod.Appearance):
 
 
     def get_manager(self):
+        """Return the owning `BackgroundsManager`."""
         return self.world.backgrounds
 
     @property
     def world(self) -> "world_mod.World":
+        """Owning world of this background."""
         return self.parent
 
     def show_grid(self):
+        """Enable grid rendering for this background."""
         self.grid = True
 
     @property
     def grid(self) -> Union[bool, tuple]:
-        """Shows a grid-overlay
+        """Whether a grid overlay is shown.
 
-        grid can be `True`, `False` or a color-tuple
-
-        Examples:
-
-            Show grid:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = TiledWorld(4,4)
-                world.tile_margin = 10
-                background = world.add_background("images/stone.png")
-                background.is_textured = True
-                actor = Actor()
-                @actor.register
-                def on_key_down(self, key):
-                    self.move_right()
-                background.grid = True
-                world.run()
-
-            .. image:: ../_images/grid.png
-                :alt: Textured image
-
+        Accepts `True`, `False`, or a color tuple to set the grid color.
         """
         return self._grid
 
@@ -159,11 +119,13 @@ class Background(appearance_mod.Appearance):
             self.repaint()
 
     def add_image(self, source: Union[str, Tuple, pygame.Surface]) -> int:
-        super().add_image(source)
+        """Add an image source and immediately refresh the window surface."""
+        index = super().add_image(source)
         self._blit_to_window_surface()
+        return index
 
     def _inner_shape(self) -> tuple:
-        """Returns inner shape of costume
+        """Return the inner background rectangle shape.
 
         Returns:
             pygame.Rect: Inner shape (Rectangle with size of actor)
@@ -172,7 +134,7 @@ class Background(appearance_mod.Appearance):
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), 0]
 
     def _outer_shape(self) -> tuple:
-        """Returns outer shape of costume
+        """Return the outer background rectangle shape.
 
         Returns:
             pygame.Rect: Outer shape (Rectangle with size of actors without filling.)
@@ -181,6 +143,7 @@ class Background(appearance_mod.Appearance):
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), self.border]
 
     def get_rect(self):
+        """Return the cached rect of the rendered background image."""
         frame = self.world.frame if self.world else 0
         if frame == self._cached_rect[0]:
             return self._cached_rect[1]

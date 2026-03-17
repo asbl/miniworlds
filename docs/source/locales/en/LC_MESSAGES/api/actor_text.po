@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 16:39+0200\n"
+"POT-Creation-Date: 2026-03-17 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,10 +17,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/api/actor_text.md:1
 msgid "Actor > Text"
+msgstr ""
+
+#: ../../source/api/actor_text.md:3
+msgid "API Reference"
 msgstr ""
 
 #: miniworlds.actors.texts.text.Text:1 of
@@ -101,6 +105,14 @@ msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_text:3 of
 msgid "The currently displayed text"
+msgstr ""
+
+#: miniworlds.actors.texts.text.Text.new_costume:1 of
+msgid "Create and attach a new empty costume to this actor."
+msgstr ""
+
+#: miniworlds.actors.texts.text.Text.on_shape_change:1 of
+msgid "Hook called when actor shape-related properties change."
 msgstr ""
 
 #: miniworlds.actors.texts.text.Text.set_text:1 of

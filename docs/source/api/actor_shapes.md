@@ -1,49 +1,54 @@
 # Actor > Shapes
 
-## Shape
+Shape actors are drawable actors with geometry-focused APIs.
 
-Base class for shapes
+## API Reference
+
+### Shape
+
+Base class for shape actors.
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Shape
    :members:
-``` 
+```
 
-## Point
-
+### Point
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Point
    :members:
 ```
 
-## Circle
+### Circle
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Circle
    :members:
 ```
-## Ellipse
+
+### Ellipse
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Ellipse
    :members:
 ```
 
-## Line
+### Line
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Line
    :members:
 ```
-## Rectangle
+
+### Rectangle
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Rectangle
    :members:
 ```
 
-## Polygon
+### Polygon
 
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.shapes.shapes.Polygon
