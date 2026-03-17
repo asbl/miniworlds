@@ -23,6 +23,9 @@ import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.data.export_factory as export_factory
 import miniworlds.worlds.data.import_factory as import_factory
+import miniworlds.worlds.world_background_facade as world_background_facade
+import miniworlds.worlds.world_initialization_facade as world_initialization_facade
+import miniworlds.worlds.world_runtime_facade as world_runtime_facade
 import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
 import miniworlds.tools.timer as timer
@@ -135,64 +138,45 @@ class World(world_base.WorldBase):
         x: Union[int, Tuple[int, int]] = 400,
         y: int = 400,
         ):
-        """Initializes the class and manages actor sprites.
-
-        Args:
-            x (int or Tuple[int, int], optional): X position or (x, y) coordinates. Default is 400.
-            y (int, optional): Y position if `x` is only an int. Default is 400.
-
-        Attributes:
-            actors (pygame.sprite.LayeredDirty): Manages all actor sprites in the application.
-                Uses pygame LayeredDirty to handle layers and dirty updates.
-            music (world_music_manager.MusicManager): Music Manager handles music operations.
-        """
-        # --- Parameter validation ---
-        self._validate_parameters(x, y)
-
-        # --- Camera setup ---
-        self.camera = self._get_camera_manager_class()(x, y, self)
-
-        # --- Actor management ---
-        self.actors: "pygame.sprite.LayeredDirty" = pygame.sprite.LayeredDirty()
-
-        # --- Event system ---
-        self.event_manager: event_manager.EventManager = self._create_event_manager()
-        # --- Superclass initialization ---
+        """Initializes the world and all internal managers needed for runtime operation."""
+        self._initialization_facade = world_initialization_facade.WorldInitializationFacade(self)
+        self._get_initialization_facade().initialize_pre_base_state(x, y)
         super().__init__()
+        self._get_initialization_facade().initialize_post_base_state()
 
-        # --- Timing and frame control ---
-        self.clock: pygame.time.Clock = pygame.time.Clock()
-        self._fps: int = 60
-        self._tick_rate: int = 1
-        self.frame: int = 0
 
-        # --- Actor & animation systems ---
-        self._timed_objects: list = []
-        self._dynamic_actors: "pygame.sprite.Group" = pygame.sprite.Group()
-        self._registered_methods: List[Callable] = []
+    def _get_initialization_facade(
+        self,
+    ) -> world_initialization_facade.WorldInitializationFacade:
+        facade = getattr(self, "_initialization_facade", None)
+        if facade is None:
+            facade = world_initialization_facade.WorldInitializationFacade(self)
+            self._initialization_facade = facade
+        return facade
 
-        # --- Application & managers ---
-        if not app.App.running_app:
-            self.app: "app.App" = app.App("miniworlds", self)
-        else:
-            self.app = app.App.running_app
-        # --- Rendering and backgrounds ---
-        self.backgrounds: "backgrounds_manager.BackgroundsManager" = backgrounds_manager.BackgroundsManager(self)
-        self.layout : "layout_manager.Layoutmanager" = layout_manager.LayoutManager(self, self.app)
-        self.data : "data_manager.DataManager" = data_manager.DataManager(self, self.app)
-        
-        self.background = background_mod.Background(self)
-        self.background.update()
-        # --- Input handling ---
-        self.mouse: "mouse_manager.MouseManager" = mouse_manager.MouseManager(self)
-        self.draw: "draw_manager.DrawManager" = draw_manager.DrawManager(self)
-        self.music: "world_music_manager.MusicManager" = world_music_manager.MusicManager(self.app)
-        self.sound: "world_sound_manager.SoundManager" = world_sound_manager.SoundManager(self.app)
-        
-         # --- Internal ---
-        self._mainloop : "mainloop_manager.MainloopManager" = self._get_mainloopmanager_class()(self, self.app)
-        self._collision_manager: "coll_manager.CollisionManager" = coll_manager.CollisionManager(self)
-        # --- Register world in application ---
+    def _get_background_facade(self) -> world_background_facade.WorldBackgroundFacade:
+        facade = getattr(self, "_background_facade", None)
+        if facade is None:
+            facade = world_background_facade.WorldBackgroundFacade(self)
+            self._background_facade = facade
+        return facade
+
+    def _get_runtime_facade(self) -> world_runtime_facade.WorldRuntimeFacade:
+        facade = getattr(self, "_runtime_facade", None)
+        if facade is None:
+            facade = world_runtime_facade.WorldRuntimeFacade(self)
+            self._runtime_facade = facade
+        return facade
+
+    @property
+    def layout(self):
+        """Backward-compatible docking API for older example code.
+
+        The actual layout manager remains internal on ``world._layout``. Public
+        docking helpers continue to live on ``world.camera`` and are exposed
+        here as a compatibility alias for existing teaching material.
+        """
+        return self.camera
 
     def contains_position(self, pos):
         """Checks if position is in the world.
@@ -458,7 +442,7 @@ class World(world_base.WorldBase):
             >>> current = world.background
             >>> print(current)
         """
-        return self.get_background()
+        return self._get_background_facade().background
 
     @background.setter
     def background(self, source: Union[str, Tuple[int, int, int], appearance.Appearance]) -> None:
@@ -480,14 +464,7 @@ class World(world_base.WorldBase):
             >>> world.background = \"images/background.png\"  # from image file
             >>> world.background = my_appearance            # custom Appearance
         """
-        try:
-            if isinstance(source, appearance.Appearance):
-                self.backgrounds.background = source
-            else:
-                self.backgrounds.add_background(source)
-        except (FileNotFoundError, FileExistsError):
-            _, exc_value, _ = sys.exc_info()
-            raise exc_value.with_traceback(None)
+        self._get_background_facade().set_background_property(source)
 
     def get_background(self) -> background_mod.Background:
         """
@@ -499,7 +476,7 @@ class World(world_base.WorldBase):
         Example:
             >>> bg = world.get_background()
         """
-        return self.backgrounds.background
+        return self._get_background_facade().background
 
 
     def switch_background(
@@ -561,14 +538,7 @@ class World(world_base.WorldBase):
                 :width: 100%
                 :alt: Switch background
         """
-        try:
-            return cast(
-                background_mod.Background,
-                self.backgrounds.switch_appearance(background),
-            )
-        except FileNotFoundError as e:
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            raise exc_value.with_traceback(None)
+        return self._get_background_facade().switch_background(background)
 
     def remove_background(self, background: Optional[Union[int, appearance.Appearance]] = None) -> None:
         """
@@ -586,7 +556,7 @@ class World(world_base.WorldBase):
             >>> world.remove_background(0)            # removes background at index 0
             >>> world.remove_background(my_background)  # removes specific Appearance object
         """
-        self.backgrounds.remove_appearance(background)
+        self._get_background_facade().remove_background(background)
 
 
     def set_background(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
@@ -609,11 +579,7 @@ class World(world_base.WorldBase):
             >>> world.set_background("images/sky.png")
             >>> world.set_background((30, 30, 30))  # dark gray
         """
-        try:
-            return self.backgrounds.set_background(source)
-        except FileNotFoundError as e:
-            _, exc_value, _ = sys.exc_info()
-            raise exc_value.with_traceback(None)
+        return self._get_background_facade().set_background(source)
 
     def add_background(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
         """
@@ -634,11 +600,7 @@ class World(world_base.WorldBase):
             >>> world.add_background((255, 0, 0))               # red background
             >>> world.add_background("images/background.png")  # image background
         """
-        try:
-            return self.backgrounds.add_background(source)
-        except FileNotFoundError as e:
-            _, exc_value, _ = sys.exc_info()
-            raise exc_value.with_traceback(None)
+        return self._get_background_facade().add_background(source)
 
     def start(self) -> None:
         """
@@ -649,7 +611,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.start()
         """
-        self.is_running = True
+        self._get_runtime_facade().start()
 
 
     def stop(self, frames: int = 0) -> None:
@@ -663,10 +625,7 @@ class World(world_base.WorldBase):
             >>> world.stop()         # stops immediately
             >>> world.stop(frames=5) # stops after 5 frames
         """
-        if frames == 0:
-            self.is_running = False
-        else:
-            timer.ActionTimer(frames, self.stop, 0)
+        self._get_runtime_facade().stop(frames)
 
     def run(
         self,
@@ -700,33 +659,13 @@ class World(world_base.WorldBase):
         Notes:
             Automatically detects and handles running event loops (e.g. in Jupyter).
         """
-        self.app.prepare_mainloop()
-        self.backgrounds._init_display()
-        self._mainloop.dirty_all()
-        if not self._is_setup_completed:
-            self.on_setup()
-        if not (self.frame == 0  and self._default_start_running):
-            self.is_running = True
-
-        if event:
-            self.app.event_manager.to_event_queue(event, data)
-
-        async def main():
-            await self.app.run(
-                self.backgrounds.image,
-                fullscreen=fullscreen,
-                fit_desktop=fit_desktop,
-                replit=replit,
-            )
-
-        try:
-            asyncio.run(main())
-        except RuntimeError as e:
-            if "event loop is running" in str(e):
-                loop = asyncio.get_event_loop()
-                loop.create_task(main())
-            else:
-                raise
+        self._get_runtime_facade().run(
+            fullscreen=fullscreen,
+            fit_desktop=fit_desktop,
+            replit=replit,
+            event=event,
+            data=data,
+        )
 
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
@@ -746,24 +685,68 @@ class World(world_base.WorldBase):
             >>> world.is_in_world((900, 100))
             False
         """
-        x, y = position
-        return 0 < x < self.camera.world_size_x and 0 < y < self.camera.world_size_y
+        return self._get_runtime_facade().is_in_world(position)
 
     def send_message(self, message: str, data: Optional[object] = None) -> None:
         """
         Sends a broadcast message to the world and all actors.
 
         The message is dispatched through the event system and can be handled
-        by any registered method in the world or its actors.
+        by any registered method in the world or its actors. When `data` is
+        provided, handlers registered with `@register_message("...")` receive
+        that payload while generic `on_message` handlers still receive the
+        message name.
 
         Args:
             message: The name of the message/event to send.
-            data: Optional additional data to pass with the message.
+            data: Optional payload for handlers registered to this message.
 
         Example:
             >>> world.send_message(\"explode\", {\"power\": 10})
         """
-        self.app.event_manager.to_event_queue("message", message)
+        self._get_runtime_facade().send_message(message, data)
+
+    def switch_world(self, new_world: "World", reset: bool = False) -> None:
+        """Switch the active scene to another world.
+
+        Args:
+            new_world: The world that should become active.
+            reset: If `True`, the new world is reset before it starts.
+        """
+        self._get_runtime_facade().switch_world(new_world, reset)
+
+    def load_world_from_db(self, file: str) -> "World":
+        """Load a saved world from a sqlite database file and activate it.
+
+        Args:
+            file: Path to the sqlite database file.
+
+        Returns:
+            The loaded world instance.
+        """
+        return self._get_runtime_facade().load_world_from_db(file)
+
+    def load_actors_from_db(
+        self, file: str, actor_classes: list[type[actor_mod.Actor]]
+    ) -> list[actor_mod.Actor]:
+        """Load actors from a sqlite database file into the current world.
+
+        Args:
+            file: Path to the sqlite database file.
+            actor_classes: Actor classes that may be recreated from the file.
+
+        Returns:
+            A list with the recreated actors.
+        """
+        return self._get_runtime_facade().load_actors_from_db(file, actor_classes)
+
+    def save_to_db(self, file: str) -> None:
+        """Save the current world and its actors to a sqlite database file.
+
+        Args:
+            file: Path to the sqlite database file that should be written.
+        """
+        return self._get_runtime_facade().save_to_db(file)
 
 
     def quit(self, exit_code: int = 0) -> None:
@@ -776,7 +759,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.quit()
         """
-        self.app.quit(exit_code)
+        self._get_runtime_facade().quit(exit_code)
 
     def reset(self):
         """Resets the world
@@ -792,12 +775,7 @@ class World(world_base.WorldBase):
                   self.world.is_running = False
                   self.world.reset()
         """
-        self._clear()
-        # Re-Setup the world
-        if hasattr(self, "on_setup"):
-            self._is_setup_completed = False
-            self.on_setup()
-            self._is_setup_completed = True
+        self._get_runtime_facade().reset()
             
     def _clear(self) -> None:
         """
@@ -808,11 +786,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.clear()
         """
-        self.app.event_manager.event_queue.clear()
-        for background in list(self.backgrounds):
-            self.backgrounds.remove_appearance(background)
-        for actor in list(self.actors):
-            actor.remove()
+        self._get_runtime_facade().clear()
 
         
     def get_from_pixel(self, position: Tuple[float, float]) -> Optional[Tuple[float, float]]:
@@ -832,10 +806,7 @@ class World(world_base.WorldBase):
             >>> world.get_from_pixel((100, 50))
             (100, 50)
         """
-        x, y = position
-        if x < self.camera.width and y < self.camera.height:
-            return x, y
-        return None
+        return self._get_runtime_facade().get_from_pixel(position)
 
 
     def to_pixel(self, position: Tuple[float, float]) -> Tuple[float, float]:
@@ -854,7 +825,7 @@ class World(world_base.WorldBase):
             >>> world.to_pixel((5, 8))
             (5, 8)
         """
-        return position
+        return self._get_runtime_facade().to_pixel(position)
 
 
     def on_setup(self) -> None:
@@ -879,7 +850,7 @@ class World(world_base.WorldBase):
             >>> if world.has_background:
             ...     print(\"Background is set\")
         """
-        return self.backgrounds.has_appearance()
+        return self._get_background_facade().has_background()
 
     def detect_actors(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
         """Gets all actors which are found at a specific position (in global world coordinates)
@@ -901,14 +872,7 @@ class World(world_base.WorldBase):
 
         """
         # overwritten in tiled_sensor_manager
-        return cast(
-            List["actor_mod.Actor"],
-            [
-                actor
-                for actor in self.actors
-                if actor.sensor_manager.detect_point(position)
-            ],
-        )
+        return self._get_runtime_facade().detect_actors(position)
 
     def get_actors_from_pixel(self, pixel: Tuple[float, float]) -> List[actor_mod.Actor]:
         """
@@ -927,10 +891,7 @@ class World(world_base.WorldBase):
             >>> for actor in actors:
             ...     print(actor.name)
         """
-        return cast(
-            List[actor_mod.Actor],
-            [actor for actor in self.actors if actor.sensor_manager.detect_pixel(pixel)],
-        )
+        return self._get_runtime_facade().get_actors_from_pixel(pixel)
 
     @staticmethod
     def distance_to(pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
@@ -948,7 +909,7 @@ class World(world_base.WorldBase):
             >>> World.distance_to((0, 0), (3, 4))
             5.0
         """
-        return math.hypot(pos1[0] - pos2[0], pos1[1] - pos2[1])
+        return world_runtime_facade.WorldRuntimeFacade.distance_to(pos1, pos2)
 
     def direction_to(self, pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
         """
@@ -965,4 +926,4 @@ class World(world_base.WorldBase):
             >>> world.direction_to((0, 0), (0, 1))
             90.0
         """
-        return position_manager.Positionmanager.direction_from_two_points(pos1, pos2)
+        return world_runtime_facade.WorldRuntimeFacade.direction_to(pos1, pos2)

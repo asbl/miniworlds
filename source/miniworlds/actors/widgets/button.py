@@ -4,7 +4,9 @@ import miniworlds.actors.widgets.single_widget as single_widget
 
 
 class Button(single_widget.SingleWidget):
-    def __init__(self, text="", image=""):
+    """Clickable widget that sends its text as a message when it is pressed."""
+
+    def __init__(self, text: str = "", image: str = "") -> None:
         # constructors
         super().__init__()
         self.overflow = False
@@ -19,7 +21,7 @@ class Button(single_widget.SingleWidget):
         # additional layout 2
         self.set_background_color((60, 60, 60))
 
-    def on_clicked_left(self, mouse_pos):
+    def on_clicked_left(self, mouse_pos: tuple[int, int]) -> None:
         """This event is called when the button is clicked -
 
         By default, a message with the button text is then sent to the world.
@@ -33,7 +35,7 @@ class Button(single_widget.SingleWidget):
                 toolbar = Toolbar()
                 button = Button("Start Rocket")
                 button.world = toolbar
-                world.add_right(toolbar)
+                world.camera.add_right(toolbar)
 
                 @world.register
                 def on_message(self, message):
@@ -44,6 +46,6 @@ class Button(single_widget.SingleWidget):
             self.send_message(self.get_text())
             self.cooldown = 5
 
-    def act(self):
+    def act(self) -> None:
         if self.cooldown > 0:
             self.cooldown -= 1

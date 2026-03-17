@@ -40,7 +40,7 @@ class MusicManager:
             >>> current_path = world.music.get_path()
             >>> print(current_path)
         """
-        return self.music_manager.path()
+        return self.music_manager.path
 
     def play(self, path: Optional[str] = None, loop: int = -1) -> None:
         """

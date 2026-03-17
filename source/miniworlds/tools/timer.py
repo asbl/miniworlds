@@ -7,7 +7,7 @@ class Timed():
     """
 
     def __init__(self):
-        self.world = app.App.running_world
+        self.world = app.App.get_running_world()
         self.world._timed_objects.append(self)
         self.running = True
 

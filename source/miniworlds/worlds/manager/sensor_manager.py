@@ -35,6 +35,14 @@ class SensorManager:
         """
         pass
 
+    @staticmethod
+    def _is_valid_point(point: Tuple[float, float]) -> bool:
+        return (
+            isinstance(point, tuple)
+            and len(point) == 2
+            and all(isinstance(value, (int, float)) for value in point)
+        )
+
     def filter_actors(
         self,
         detected_actors: List["actor_mod.Actor"],
@@ -54,9 +62,6 @@ class SensorManager:
         Returns:
             List[Actor]: A filtered list of actors matching the criteria.
         """
-        if not detected_actors or actors is None:
-            return detected_actors or []
-
         filtered = self._filter_actor_list(detected_actors, actors)
         return filtered if filtered else []
 
@@ -66,8 +71,7 @@ class SensorManager:
         detected_actors: List["actor_mod.Actor"],
         actors: Union[str, "actor_mod.Actor", Type["actor_mod.Actor"]],
     ):
-        if detected_actors:
-            detected_actors = self._filter_actor_list(detected_actors, actors)
+        detected_actors = self._filter_actor_list(detected_actors, actors)
         if detected_actors and len(detected_actors) >= 1:
             return_value = detected_actors[0]
             del detected_actors
@@ -75,10 +79,36 @@ class SensorManager:
         else:
             return []
 
+    def _resolve_detectable_actor_filter(
+        self,
+        actor_filter: Optional[ActorFilterType],
+    ) -> Tuple[Optional[ActorFilterType], bool]:
+        if actor_filter is None:
+            return None, False
+
+        if isinstance(actor_filter, str):
+            actor_type = self._resolve_actor_type_by_name(actor_filter)
+            if actor_type is None:
+                return None, False
+            return actor_type, True
+
+        if isinstance(actor_filter, actor_mod.Actor):
+            return actor_filter, True
+
+        if isinstance(actor_filter, list) and all(
+            isinstance(actor, actor_mod.Actor) for actor in actor_filter
+        ):
+            return actor_filter, True
+
+        if inspect.isclass(actor_filter) and issubclass(actor_filter, actor_mod.Actor):
+            return actor_filter, True
+
+        raise exceptions.WrongFilterType(actor_filter)
+
     def _filter_actor_list(
         self,
         actor_list: Optional[List["actor_mod.Actor"]],
-        filter: ActorFilterType
+        actor_filter: Optional[ActorFilterType]
     ) -> List["actor_mod.Actor"]:
         """
         Applies a filter to a list of actors. Supports filtering by:
@@ -94,25 +124,32 @@ class SensorManager:
         Returns:
             List[Actor]: The filtered list of actors.
         """
-        if actor_list is None:
-            return []
+        resolved_filter, filter_applied = self._resolve_detectable_actor_filter(actor_filter)
 
-        if not filter:
+        return self._filter_actor_list_by_resolved_filter(
+            actor_list,
+            resolved_filter,
+            filter_applied,
+        )
+
+    def _filter_actor_list_by_resolved_filter(
+        self,
+        actor_list: Optional[List["actor_mod.Actor"]],
+        resolved_filter: Optional[ActorFilterType],
+        filter_applied: bool,
+    ) -> List["actor_mod.Actor"]:
+        actor_list = actor_list or []
+
+        if not filter_applied:
             return actor_list
 
-        if isinstance(filter, str):
-            return self._filter_actors_by_classname(actor_list, filter)
+        if isinstance(resolved_filter, actor_mod.Actor):
+            return self._filter_actors_by_instance(actor_list, resolved_filter)
 
-        elif isinstance(filter, actor_mod.Actor):
-            return self._filter_actors_by_instance(actor_list, filter)
+        if isinstance(resolved_filter, list):
+            return self._filter_actors_by_list(actor_list, resolved_filter)
 
-        elif isinstance(filter, list) and all(isinstance(a, actor_mod.Actor) for a in filter):
-            return self._filter_actors_by_list(actor_list, filter)
-
-        elif inspect.isclass(filter) and issubclass(filter, actor_mod.Actor):
-            return self._filter_actors_by_class(actor_list, filter)
-
-        raise WrongFilterType(filter)
+        return self._filter_actors_by_class(actor_list, resolved_filter)
 
     def _filter_actors_by_class(
         self,
@@ -134,10 +171,44 @@ class SensorManager:
     def _filter_actors_by_classname(
         self, actor_list: List["actor_mod.Actor"], actors: str
     ) -> List["actor_mod.Actor"]:
+        actor_type = self._resolve_actor_type_by_name(actors)
+        return self._filter_actors_by_class(actor_list, actor_type)
+
+    def _resolve_actor_type_by_name(
+        self, actor_name: str
+    ) -> Optional[Type["actor_mod.Actor"]]:
+        normalized_name = actor_name.lower()
+        event_manager = getattr(self.world, "event_manager", None)
+        definition = getattr(event_manager, "definition", None)
+        actor_classes_by_name = getattr(definition, "actor_classes_by_name", None)
+
+        if actor_classes_by_name is not None:
+            actor_type = actor_classes_by_name.get(normalized_name)
+            if actor_type is not None:
+                return actor_type
+
         actor_type = actor_class_inspection.ActorClassInspection(
             self.actor
-        ).find_actor_class_by_classname(actors)
-        return self._filter_actors_by_class(actor_list, actor_type)
+        ).find_actor_class_by_classname(actor_name)
+
+        if actor_type is not None and actor_classes_by_name is not None:
+            actor_classes_by_name[normalized_name] = actor_type
+
+        return actor_type
+
+    def _prefilter_detectable_actors(self, visible_actors, actor_filter):
+        resolved_filter, filter_applied = self._resolve_detectable_actor_filter(actor_filter)
+        if not filter_applied:
+            return visible_actors, False
+
+        return (
+            self._filter_actor_list_by_resolved_filter(
+                visible_actors,
+                resolved_filter,
+                filter_applied,
+            ),
+            True,
+        )
 
     @staticmethod
     def _filter_actors_by_instance(actor_list: List["actor_mod.Actor"], actors):
@@ -344,23 +415,33 @@ class SensorManager:
         Returns:
             List[Actor]: A list of actors that collide with the current actor and match the filter.
         """
-        self.world.backgrounds._init_display()
+        if not self.world.backgrounds._is_display_initialized:
+            self.world.backgrounds._init_display()
 
         visible_actors = self.world.camera.get_actors_in_view()
-        collided = pygame.sprite.spritecollide(
-            self.actor,
-            pygame.sprite.Group(visible_actors),
-            False,
-            pygame.sprite.collide_rect
+        collision_candidates, filter_applied = self._prefilter_detectable_actors(
+            visible_actors, filter
         )
+        if not collision_candidates:
+            return []
 
-        detected_actors = self._remove_self_from_actor_list(collided)
+        actor_rect = self.actor.position_manager.get_global_rect()
+        detected_actors = [
+            actor
+            for actor in collision_candidates
+            if actor is not self.actor
+            and actor.position_manager.get_global_rect().colliderect(actor_rect)
+        ]
 
-        if detected_actors:
+        collision_type = self.actor.collision_type
+        if detected_actors and collision_type not in ("rect", "static-rect"):
             detected_actors = self._detect_actor_by_collision_type(
                 detected_actors,
-                self.actor.collision_type
+                collision_type,
             )
+
+        if filter_applied:
+            return detected_actors
 
         return self.filter_actors(detected_actors, filter)
 
@@ -381,6 +462,11 @@ class SensorManager:
         detected_actors = self.get_actors_at_position(destination)
         return self.filter_actors(detected_actors, filter)
 
+    def detect_blocking_actor_at_destination(
+        self, destination: Tuple[float, float]
+    ) -> Union["actor_mod.Actor", None]:
+        return self.get_blocking_actor_at_position(destination)
+
     def detect_actor(self, filter) -> Union["actor_mod.Actor", None]:
         """
         Detects the first actor in view that collides with the current actor and matches the given filter.
@@ -399,18 +485,28 @@ class SensorManager:
             return
         
         visible_actors = self.world.camera.get_actors_in_view()
+        collision_candidates, filter_applied = self._prefilter_detectable_actors(
+            visible_actors, filter
+        )
+        if not collision_candidates:
+            return []
 
-        collided_actors = [
-            actor for actor in visible_actors
-            if pygame.sprite.collide_rect(self.actor, actor)
+        actor_rect = self.actor.position_manager.get_global_rect()
+
+        detected_actors = [
+            actor for actor in collision_candidates
+            if actor is not self.actor
+            and actor.position_manager.get_global_rect().colliderect(actor_rect)
         ]
 
-        detected_actors = self._remove_self_from_actor_list(collided_actors)
-
-        if detected_actors:
+        collision_type = self.actor.collision_type
+        if detected_actors and collision_type not in ("rect", "static-rect"):
             detected_actors = self._detect_actor_by_collision_type(
-                detected_actors, self.actor.collision_type
+                detected_actors, collision_type
             )
+
+        if filter_applied:
+            return detected_actors[0] if detected_actors else []
 
         return self.filter_first_actor(detected_actors, filter)
 
@@ -423,11 +519,7 @@ class SensorManager:
                 if pygame.sprite.collide_circle(self.actor, actor)
             ]
         elif collision_type == "rect" or collision_type == "static-rect":
-            return [
-                actor
-                for actor in actors
-                if pygame.sprite.collide_rect(self.actor, actor)
-            ]
+            return actors
         elif collision_type == "mask":
             return [
                 actor
@@ -435,15 +527,86 @@ class SensorManager:
                 if pygame.sprite.collide_mask(self.actor, actor)
             ]
 
+    @staticmethod
+    def _try_get_actor_global_rect(actor: "actor_mod.Actor") -> Optional[pygame.Rect]:
+        position_manager = getattr(actor, "_position_manager", None)
+        if position_manager is None:
+            try:
+                position_manager = actor.position_manager
+            except (AttributeError, exceptions.MissingActorPartsError):
+                return None
+        try:
+            return position_manager.get_global_rect()
+        except (AttributeError, exceptions.MissingActorPartsError):
+            return None
+
+    def _get_cached_static_blocking_rects(
+        self,
+    ) -> List[Tuple["actor_mod.Actor", pygame.Rect]]:
+        frame = getattr(self.world, "frame", -1)
+        version = getattr(self.world, "_blocking_registry_version", 0)
+        cache = getattr(self.world, "_blocking_static_rect_cache", None)
+        if (
+            isinstance(cache, tuple)
+            and len(cache) == 3
+            and cache[0] == frame
+            and cache[1] == version
+        ):
+            return cache[2]
+
+        static_rects: List[Tuple["actor_mod.Actor", pygame.Rect]] = []
+        for actor in getattr(self.world, "_blocking_actors", ()):
+            if not getattr(actor, "_static", False):
+                continue
+            actor_rect = self._try_get_actor_global_rect(actor)
+            if actor_rect is None:
+                continue
+            static_rects.append((actor, actor_rect))
+
+        self.world._blocking_static_rect_cache = (frame, version, static_rects)
+        return static_rects
+
+    def get_blocking_actor_at_position(
+        self, position: Tuple[float, float]
+    ) -> Union["actor_mod.Actor", None]:
+        if not self._is_valid_point(position):
+            return None
+        x, y = position
+
+        for actor, actor_rect in self._get_cached_static_blocking_rects():
+            if actor is self.actor:
+                continue
+            if actor_rect.collidepoint(x, y):
+                return actor
+
+        for actor in getattr(self.world, "_blocking_actors", ()):
+            if actor is self.actor or getattr(actor, "_static", False):
+                continue
+            actor_rect = self._try_get_actor_global_rect(actor)
+            if actor_rect is None:
+                continue
+            if actor_rect.collidepoint(x, y):
+                return actor
+        return None
+
     def get_actors_at_position(self, position):
+        if not self._is_valid_point(position):
+            return []
+        x, y = position
         actors = []
-        for actor in self.world.actors:
-            if actor.position_manager.get_global_rect().collidepoint(
-                position[0], position[1]
-            ):
+        camera = getattr(self.world, "camera", None)
+        if camera is not None and camera.rect.collidepoint((x, y)):
+            candidates = camera.get_actors_in_view()
+        else:
+            candidates = self.world.actors
+        for actor in candidates:
+            if actor is self.actor:
+                continue
+            actor_rect = self._try_get_actor_global_rect(actor)
+            if actor_rect is None:
+                continue
+            if actor_rect.collidepoint(x, y):
                 actors.append(actor)
-        if self.actor in actors:
-            actors.remove(self.actor)
         return actors
 
     def get_distance_to(

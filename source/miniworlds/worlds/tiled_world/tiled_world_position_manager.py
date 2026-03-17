@@ -32,7 +32,7 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         """
         size = self.get_size()
         rect = (
-            self.actor.costume.get_rect()
+            self.actor.costume.get_rect().copy()
             if self.actor.has_costume()
             else pygame.Rect(0, 0, *size)
         )
@@ -51,7 +51,7 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         return rect
 
     def get_local_rect(self) -> pygame.Rect:
-        global_rect = self.get_global_rect()
+        global_rect = self.get_global_rect().copy()
         local_pos = self.actor.world.camera.get_local_position(global_rect.topleft)
 
         if self.actor.world.is_tile(self.actor.position):

@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "actor logic mask collisions", "recorded_at": "2026-03-16T22:04:32", "slug": "actor-logic-mask-collisions", "summary_type": "frame_timing", "values": {"avg_ms": 9.2013, "frames": 99, "max_ms": 12.3141, "metric_mask_actor_collisions": 4921, "metric_mask_border_hits": 15, "min_ms": 5.677, "p95_ms": 11.8849, "p99_ms": 12.0366}}

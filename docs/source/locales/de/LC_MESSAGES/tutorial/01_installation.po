@@ -25,19 +25,17 @@ msgstr "Installation"
 
 #: ../../source/tutorial/01_installation.md:3
 msgid "You can install **miniworlds** on your computer or using **Thonny**:"
-msgstr ""
+msgstr "Du kannst **miniworlds** z.B. mit der Entwicklungsumgebung **Thonny** installieren"
 
 #: ../../source/tutorial/01_installation.md:5
 msgid "On your computer"
-msgstr ""
+msgstr "Auf deinem Computer"
 
 #: ../../source/tutorial/01_installation.md:7
-#, fuzzy
 msgid "First, install Python."
 msgstr "Installiere zuerst Python."
 
 #: ../../source/tutorial/01_installation.md:9
-#, fuzzy
 msgid "You can download Python from [Python.org](https://www.python.org)."
 msgstr ""
 "Python kannst du z.B. unter [Python.org](https://www.python.org) "
@@ -47,7 +45,8 @@ msgstr ""
 msgid ""
 "Alternatively, you can install the development environment "
 "[Thonny](https://thonny.org/) – it comes with Python included."
-msgstr ""
+msgstr "Alternativ kannst du die Entwicklungsumgebung [Thonny](https://thonny.org/)"
+"installieren. Bei ihr ist Python bereits installiert.
 
 #: ../../source/tutorial/01_installation.md:14
 #, fuzzy
@@ -56,23 +55,21 @@ msgstr "Installiere das Framework mit:"
 
 #: ../../source/tutorial/01_installation.md:20
 msgid "Install a suitable development environment, for example:"
-msgstr ""
+msgstr "Installiere eine passende Entwicklungsumgebung, z.B.:"
 
 #: ../../source/tutorial/01_installation.md:22
 msgid "[Thonny](https://thonny.org/)"
 msgstr "[Thonny](https://thonny.org/)"
 
 #: ../../source/tutorial/01_installation.md:23
-#, fuzzy
 msgid "[Pycharm](https://www.jetbrains.com/pycharm/)"
 msgstr "[Pycharm](https://www.jetbrains.com/de-de/pycharm/)"
 
 #: ../../source/tutorial/01_installation.md:25
 msgid "…now you’re ready to get started!"
-msgstr ""
+msgstr "...jetzt bist du bereit zum Starten!"
 
 #: ../../source/tutorial/01_installation.md:27
-#, fuzzy
 msgid "With Thonny"
 msgstr "Mit Thonny"
 
@@ -88,7 +85,7 @@ msgstr "![miniworlds](../_images/install01.png)"
 
 #: ../../source/tutorial/01_installation.md:31
 msgid "miniworlds"
-msgstr "Miniwelten"
+msgstr "Miniworlds"
 
 #~ msgid ""
 #~ "Du kannst miniworlds auf deinem Computer"

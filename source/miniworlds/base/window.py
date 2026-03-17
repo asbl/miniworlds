@@ -1,5 +1,6 @@
 from typing import List
 import os
+from pathlib import Path
 import pygame
 import miniworlds.base.manager.app_worlds_manager as worlds_manager_mod
 import miniworlds.base.manager.app_event_manager as event_manager_mod
@@ -24,12 +25,12 @@ class Window:
         self._fit_desktop = False
         self._replit = False
         self.mode = False
-        pygame.display.set_caption(title)
-        my_path = os.path.abspath(os.path.dirname(__file__))
+        self.app.platform.set_window_caption(title)
+        my_path = Path(__file__).resolve().parent
         try:
-            path = os.path.join(my_path, "../resources/logo_small_32.png")
-            surface = pygame.image.load(path)
-            pygame.display.set_icon(surface)
+            path = my_path / "../resources/logo_small_32.png"
+            surface = self.app.platform.load_surface(path)
+            self.app.platform.set_window_icon(surface)
         except Exception as e:
             raise Exception("Error on creating window: " + str(e))
 
@@ -77,27 +78,27 @@ class Window:
         Depends on the values of self.fullscreen, self.fit_desktop and self.replit
         """
         if self.fullscreen:
-            self._surface = pygame.display.set_mode(
+            self._surface = self.app.platform.set_mode(
                 (self.width, self.height), pygame.SCALED
             )
-            pygame.display.toggle_fullscreen()
+            self.app.platform.toggle_fullscreen()
         elif self.fit_desktop:
-            self._surface = pygame.display.set_mode((0, 0))
+            self._surface = self.app.platform.set_mode((0, 0))
         elif self.replit:
-            self._surface = pygame.display.set_mode((800, 600), pygame.SCALED)
+            self._surface = self.app.platform.set_mode((800, 600), pygame.SCALED)
         else:
             
             if self.app.init:
-                info = pygame.display.Info()
+                info = self.app.platform.display_info()
                 x, y = (
                     max((info.current_w - self.width) / 2, 0),
                     max((info.current_h - self.height) / 2, 0),
                 )
                 os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (x, y)
-                self._surface = pygame.display.set_mode((self.width, self.height))
+                self._surface = self.app.platform.set_mode((self.width, self.height))
             else:
                 if not self.mode:
-                    self._surface = pygame.display.set_mode((1, 1))
+                    self._surface = self.app.platform.set_mode((1, 1))
                     self.mode = True
         self._surface.set_alpha(None)
 

@@ -2,9 +2,13 @@ from __future__ import annotations
 from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
 import pygame.rect
 import collections
-import sys
 
-import miniworlds.base.app as app
+import miniworlds.actors.actor_appearance_facade as actor_appearance_facade
+import miniworlds.actors.actor_event_facade as actor_event_facade
+import miniworlds.actors.actor_initialization_facade as actor_initialization_facade
+import miniworlds.actors.actor_movement_facade as actor_movement_facade
+import miniworlds.actors.actor_sensor_facade as actor_sensor_facade
+import miniworlds.actors.actor_size_facade as actor_size_facade
 import miniworlds.appearances.appearance as appearance
 import miniworlds.appearances.costume as costume_mod
 import miniworlds.appearances.costumes_manager as costumes_manager
@@ -14,7 +18,6 @@ import miniworlds.base.exceptions as exceptions
 import miniworlds.actors.actor_base as actor_base
 
 from miniworlds.base.exceptions import (
-    MiniworldsError,
     NotImplementedOrRegisteredError,
     NoWorldError,
     RegisterError,
@@ -100,49 +103,57 @@ class Actor(actor_base.ActorBase):
     def __init__(
         self, position: Optional[Tuple[float, float]] = (0, 0), *args, **kwargs
     ):
-        self._dirty = 0  # must be set before calling __init__ of DirtySprite.
-        if "world" not in kwargs:
-            self._world: "world_mod.World" = app.App.running_world
-        else:
-            self.world = kwargs["world"]
-        self._is_setup_completed = False
-        self._sensor_manager: "sensor_manager.SensorManager" = None
-        self._position_manager: "actor_position_manager.Positionmanager" = None
-        self._costume_manager: "costumes_manager.CostumesManager" = None
-        super().__init__()
-
+        self._initialization_facade = actor_initialization_facade.ActorInitializationFacade(self)
+        self._get_initialization_facade().prepare_core_references(kwargs.get("world"))
         self._validate_arguments(position, *args, **kwargs)
-        self._collision_type: str = "mask"
-        self._layer: int = 0
-        self._inner = 0
-        self._size = (0, 0)
-        self._static = False
-        #self.children =  pygame.sprite.LayeredDirty()
-        self.actor_id: int = Actor.actor_count + 1
-        self._has_position_manager = False
-        self._has_sensor_manager = False
-        self._has_costume_manager = False
-        self._is_acting: bool = True  # is act method called?
-        self._is_deleted = False
-        self.is_focusable = False
-        self.has_focus = False
-        self._parent = None  # For actors in container
-        #self.children: List["Actor"] = []
-        try:
-            self.world.get_world_connector(self).init_managers(position)
-        except AttributeError as e:
-            print("error", e)
-            raise AttributeError(
-                "Actor could not be created on a World - Did you created a world instance before?"
-            )
-        if not self.world:
-            raise NoWorldError()
-        pygame.sprite.DirtySprite.__init__(self)
+        self._get_initialization_facade().initialize_runtime_state(Actor.actor_count + 1)
+        self._get_initialization_facade().initialize_world_managers(position)
+        self._get_initialization_facade().finalize_sprite_state(kwargs.get("origin"))
         Actor.actor_count += 1
-        self.speed: int = 1
-        self._dirty = 1
-        self.origin = kwargs.get("origin") if kwargs.get("origin") else "center"
-        self._visible = True
+
+    def _get_initialization_facade(
+        self,
+    ) -> actor_initialization_facade.ActorInitializationFacade:
+        facade = getattr(self, "_initialization_facade", None)
+        if facade is None:
+            facade = actor_initialization_facade.ActorInitializationFacade(self)
+            self._initialization_facade = facade
+        return facade
+
+    def _get_appearance_facade(self) -> actor_appearance_facade.ActorAppearanceFacade:
+        facade = getattr(self, "_appearance_facade", None)
+        if facade is None:
+            facade = actor_appearance_facade.ActorAppearanceFacade(self)
+            self._appearance_facade = facade
+        return facade
+
+    def _get_event_facade(self) -> actor_event_facade.ActorEventFacade:
+        facade = getattr(self, "_event_facade", None)
+        if facade is None:
+            facade = actor_event_facade.ActorEventFacade(self)
+            self._event_facade = facade
+        return facade
+
+    def _get_sensor_facade(self) -> actor_sensor_facade.ActorSensorFacade:
+        facade = getattr(self, "_sensor_facade", None)
+        if facade is None:
+            facade = actor_sensor_facade.ActorSensorFacade(self)
+            self._sensor_facade = facade
+        return facade
+
+    def _get_movement_facade(self) -> actor_movement_facade.ActorMovementFacade:
+        facade = getattr(self, "_movement_facade", None)
+        if facade is None:
+            facade = actor_movement_facade.ActorMovementFacade(self)
+            self._movement_facade = facade
+        return facade
+
+    def _get_size_facade(self) -> actor_size_facade.ActorSizeFacade:
+        facade = getattr(self, "_size_facade", None)
+        if facade is None:
+            facade = actor_size_facade.ActorSizeFacade(self)
+            self._size_facade = facade
+        return facade
 
     def _validate_arguments(self, position, *args, **kwargs):
         if not isinstance(position, tuple):
@@ -150,14 +161,14 @@ class Actor(actor_base.ActorBase):
 
     @property
     def origin(self):
-        return self.position_manager.origin
+        return self._get_size_facade().get_origin()
 
     @origin.setter
     def origin(self, value: str):
-        self.position_manager.origin = value
+        self._get_size_facade().set_origin(value)
 
     def switch_origin(self, value: str):
-        self.position_manager.switch_origin(value)
+        self._get_size_facade().switch_origin(value)
 
     @classmethod
     def create_on_world(cls, world):
@@ -193,11 +204,11 @@ class Actor(actor_base.ActorBase):
         self._collision_type = value
 
     @property
-    def is_blockable(self, value):
+    def is_blockable(self):
         """
         A actor with the property ``is_blockable`` cannot move through actors with the property ``is_blocking``.
         """
-        self.position_manager.is_blockable = value
+        return self.position_manager.is_blockable
 
     @is_blockable.setter
     def is_blockable(self, value: bool):
@@ -212,7 +223,21 @@ class Actor(actor_base.ActorBase):
 
     @is_blocking.setter
     def is_blocking(self, value: bool):
+        previous_value = self.position_manager.is_blocking
         self.position_manager.is_blocking = value
+        world = self.world
+        if previous_value == value or world is None:
+            return
+        if hasattr(world, "get_world_connector"):
+            connector = world.get_world_connector(self)
+            if connector is not None and hasattr(connector, "sync_blocking_registration"):
+                connector.sync_blocking_registration(previous_value, value)
+                return
+        if hasattr(world, "_blocking_actors"):
+            if value:
+                world._blocking_actors.add(self)
+            else:
+                world._blocking_actors.discard(self)
 
     @property
     def layer(self) -> int:
@@ -233,11 +258,11 @@ class Actor(actor_base.ActorBase):
 
         Can be used to track changes.
         """
-        return self.position_manager.last_center
+        return self._get_size_facade().get_last_center()
 
     @property
     def last_direction(self) -> int:
-        return self.position_manager.last_direction
+        return self._get_size_facade().get_last_direction()
 
     @classmethod
     def from_topleft(cls, topleft_position: Tuple[float, float], *args, **kwargs):
@@ -285,7 +310,7 @@ class Actor(actor_base.ActorBase):
         Returns:
             int: _description_
         """
-        return self.costume_manager.length()
+        return self._get_appearance_facade().costume_count
 
     @property
     def is_flipped(self) -> bool:
@@ -337,11 +362,11 @@ class Actor(actor_base.ActorBase):
             True, if actor is flipped
 
         """
-        return self.costume.is_flipped
+        return self._get_appearance_facade().is_flipped
 
     @is_flipped.setter
     def is_flipped(self, value: bool):
-        self.costume.is_flipped = value
+        self._get_appearance_facade().is_flipped = value
 
     def flip_x(self) -> int:
         """Flips the actor by 180° degrees. The costume is flipped and the actor's direction changed by 180 degrees.
@@ -386,7 +411,7 @@ class Actor(actor_base.ActorBase):
                 </video>
 
         """
-        return self.position_manager.flip_x()
+        return self._get_appearance_facade().flip_x()
 
     def add_costume(
         self, source: Union[None, Tuple, str, List] = None
@@ -467,25 +492,11 @@ class Actor(actor_base.ActorBase):
             The new costume.
 
         """
-        try:
-            if not source or type(source) in [str, tuple]:
-                return self.costume_manager.add_new_appearance(source)
-            elif isinstance(source, list):
-                return cast(
-                    "costume_mod.Costume",
-                    self.costume_manager.add_new_appearance_from_list(source),
-                )
-            else:
-                raise MiniworldsError(
-                    f"Wrong type for appearance. Expected: list, tuple or str, got {type(source)}"
-                )
-        except FileNotFoundError as e:
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            raise exc_value.with_traceback(None)
+        return self._get_appearance_facade().add_costume(source)
 
     def add_costumes(self, sources: list) -> "costume_mod.Costume":
         """Adds multiple costumes"""
-        return self.costume_manager.add_new_appearances(sources)
+        return self._get_appearance_facade().add_costumes(sources)
 
     def remove_costume(self, source: Union[int, "costume_mod.Costume"] = None):
         """Removes a costume from actor
@@ -493,9 +504,7 @@ class Actor(actor_base.ActorBase):
         Args:
             source: The index of the new costume or costume-object. Defaults to actual costume
         """
-        if source is None:
-            source = self.costume
-        return self.costume_manager.remove_appearance(source)
+        return self._get_appearance_facade().remove_costume(source)
 
     def switch_costume(
         self, source: Union[int, "appearance.Appearance"]
@@ -528,20 +537,16 @@ class Actor(actor_base.ActorBase):
         Returns:
             The new costume
         """
-        return self.costume_manager.switch_costume(source)
+        return self._get_appearance_facade().switch_costume(source)
 
     def set_costume(self, costume: Union[str, tuple, int, "appearance.Appearance"]):
-        if isinstance(costume, int) or isinstance(costume, appearance.Appearance):
-            self.switch_costume(costume)
-        elif type(costume) in [str, tuple]:
-            costume = self.add_costume(costume)
-            self.switch_costume(costume)
+        self._get_appearance_facade().set_costume(costume)
 
     def reset_costumes(self):
-        self.costume_manager.reset()
+        self._get_appearance_facade().reset_costumes()
 
     def set_background_color(self, color: tuple):
-        self.set_costume(color)
+        self._get_appearance_facade().set_background_color(color)
 
     def next_costume(self):
         """Switches to the next costume of actor
@@ -549,25 +554,19 @@ class Actor(actor_base.ActorBase):
         Returns:
             The new costume
         """
-        self.costume_manager.next_costume()
+        self._get_appearance_facade().next_costume()
 
     @property
     def costume(self) -> costume_mod.Costume:
         """Gets the costume of the actor, if available."""
-        cm = getattr(self, "costume_manager", None)
-        if cm is not None: # not None instead of if cm:, because len(cm) can be zero
-            return cm.get_actual_appearance()
+        return self._get_appearance_facade().costume
 
     def has_costume(self) -> bool:
-        cm = getattr(self, "costume_manager", None)
-        if not cm or not cm.has_appearance:
-            return False
-        else:
-            return True
+        return self._get_appearance_facade().has_costume()
 
     @costume.setter
     def costume(self, value):
-        self.costume_manager.appearance = value
+        self._get_appearance_facade().costume = value
 
     @property
     def costumes(self) -> "costumes_manager.CostumesManager":
@@ -575,16 +574,15 @@ class Actor(actor_base.ActorBase):
 
         The costume manager can be iterated to get all costumes
         """
-        return self.costume_manager
+        return self._get_appearance_facade().costumes
 
     @property
     def orientation(self) -> float:
-        return self.costume.orientation
+        return self._get_appearance_facade().orientation
 
     @orientation.setter
     def orientation(self, value: float):
-        value: float = self.position_manager.validate_direction(value)
-        self.costume.orientation = value
+        self._get_appearance_facade().orientation = value
 
     @property
     def direction(self) -> int:
@@ -681,16 +679,16 @@ class Actor(actor_base.ActorBase):
                 Your browser does not support the video tag.
                 </video>
         """
-        return self.position_manager.get_direction()
+        return self._get_movement_facade().get_direction()
 
     @direction.setter
     def direction(self, value: int):
-        self.position_manager.set_direction(value)
+        self._get_movement_facade().set_direction(value)
 
     @property
     def direction_at_unit_circle(self) -> int:
         """Gets the direction as value in unit circle (0° right, 90° top, 180° left...)"""
-        return self.position_manager.dir_to_unit_circle(self.direction)
+        return self._get_movement_facade().get_direction_at_unit_circle()
 
     @direction_at_unit_circle.setter
     def direction_at_unit_circle(self, value: int):
@@ -698,7 +696,7 @@ class Actor(actor_base.ActorBase):
         Args:
             value: An angle in the unit circle, e.g. 0°: right, 90° top, ...
         """
-        self.direction = self.position_manager.unit_circle_to_dir(value)
+        self._get_movement_facade().set_direction_at_unit_circle(value)
 
     def turn_left(self, degrees: int = 90) -> int:
         """Turns actor by *degrees* degrees left
@@ -741,7 +739,7 @@ class Actor(actor_base.ActorBase):
             New direction
 
         """
-        return self.position_manager.turn_left(degrees)
+        return self._get_movement_facade().turn_left(degrees)
 
     def turn_right(self, degrees: Union[int, float] = 90):
         """Turns actor by *degrees* degrees right
@@ -784,7 +782,7 @@ class Actor(actor_base.ActorBase):
             New direction
 
         """
-        return self.position_manager.turn_right(degrees)
+        return self._get_movement_facade().turn_right(degrees)
 
     def set_direction(self, direction: Union[str, int, float]) -> float:
         """Actor points in given direction.
@@ -819,7 +817,7 @@ class Actor(actor_base.ActorBase):
                       self.direction = "right"
                   self.move()
         """
-        return self.position_manager.set_direction(direction)
+        return self._get_movement_facade().set_direction_value(direction)
 
     def point_towards_position(
         self, destination: Tuple[float, float]
@@ -845,7 +843,7 @@ class Actor(actor_base.ActorBase):
                     self.point_towards_position(mouse)
                 self.move()
         """
-        return self.position_manager.point_towards_position(destination)
+        return self._get_movement_facade().point_towards_position(destination)
 
     def point_towards_actor(self, other: "Actor") -> int:
         """Actor points towards another actor.
@@ -857,20 +855,19 @@ class Actor(actor_base.ActorBase):
             The new direction
 
         """
-        pos = other.position_manager.get_global_rect().center
-        return self.point_towards_position(pos)
+        return self._get_movement_facade().point_towards_actor(other)
 
     @property
     def size(self) -> tuple:
         """Size of the actor"""
-        return self.position_manager.get_size()
+        return self._get_size_facade().get_size()
 
     @size.setter
     def size(self, value: tuple):
         self.set_size(value)
 
     def set_size(self, value: tuple):
-        self.position_manager.set_size(value)
+        self._get_size_facade().set_size(value)
 
     @property
     def width(self):
@@ -906,18 +903,14 @@ class Actor(actor_base.ActorBase):
             .. image:: ../_images/widthheight.png
                 :alt: Textured image
         """
-        return self.position_manager.get_size()[0]
+        return self._get_size_facade().get_width()
 
     @width.setter
     def width(self, value):
-        self.position_manager.set_width(value)
-        self.on_shape_change()
+        self._get_size_facade().set_width(value)
 
     def scale_width(self, value):
-        old_width = self.size[0]
-        old_height = self.size[1]
-        scale_factor = value / old_width
-        self.size = (value, old_height * scale_factor)
+        self._get_size_facade().scale_width(value)
 
     @property
     def height(self):
@@ -953,36 +946,32 @@ class Actor(actor_base.ActorBase):
             .. image:: ../_images/widthheight.png
                 :alt: Textured image
         """
-        return self.position_manager.get_size()[1]
+        return self._get_size_facade().get_height()
 
     @height.setter
     def height(self, value):
-        self.position_manager.set_height(value)
-        self.on_shape_change()
+        self._get_size_facade().set_height(value)
 
     def scale_height(self, value):
-        old_width = self.size[0]
-        old_height = self.size[1]
-        scale_factor = value / old_height
-        self.size = (old_width * scale_factor, value)
+        self._get_size_facade().scale_height(value)
 
     @property
     def x(self) -> float:
         """The x-value of a actor"""
-        return self.position_manager.position[0]
+        return self._get_movement_facade().get_x()
 
     @x.setter
     def x(self, value: float):
-        self.position_manager.set_position((value, self.y))
+        self._get_movement_facade().set_x(value)
 
     @property
     def y(self) -> float:
         """The y-value of a actor"""
-        return self.position_manager.position[1]
+        return self._get_movement_facade().get_y()
 
     @y.setter
     def y(self, value: float):
-        self.position_manager.set_position((self.x, value))
+        self._get_movement_facade().set_y(value)
 
     @property
     def class_name(self) -> str:
@@ -991,59 +980,59 @@ class Actor(actor_base.ActorBase):
     @property
     def topleft_x(self) -> float:
         """x-value of actor topleft-position"""
-        return self.get_global_rect().get_topleft()[0]
+        return self._get_movement_facade().get_topleft_x()
 
     @property
     def topleft_y(self) -> float:
         """x-value of actor topleft-position"""
-        return self.position_manager.get_topleft()[1]
+        return self._get_movement_facade().get_topleft_y()
 
     @topleft_x.setter
     def topleft_x(self, value: float):
-        self.position_manager.set_topleft((value, self.topleft_x))
+        self._get_movement_facade().set_topleft_x(value)
 
     @topleft_y.setter
     def topleft_y(self, value: float):
-        self.position_manager.set_topleft((self.topleft_y, value))
+        self._get_movement_facade().set_topleft_y(value)
 
     @property
     def topleft(self) -> Tuple[float, float]:
-        return self.position_manager.get_topleft()
+        return self._get_movement_facade().get_topleft()
 
     @topleft.setter
     def topleft(self, value: Tuple[float, float]):
-        self.position_manager.set_topleft(value)
+        self._get_movement_facade().set_topleft(value)
 
     @property
     def local_center(self) -> Tuple[float, float]:
         """x-value of actor center-position inside the current camera-screen"""
-        return self.position_manager.local_center
+        return self._get_movement_facade().get_local_center()
 
     @property
     def center_x(self) -> float:
         """x-value of actor center-position"""
-        return self.position_manager.get_center()[0]
+        return self._get_movement_facade().get_center_x()
 
     @center_x.setter
     def center_x(self, value: float):
-        self.position_manager.set_center((value, self.center_y))
+        self._get_movement_facade().set_center_x(value)
 
     @property
     def center_y(self) -> float:
         """y-value of actor center-position"""
-        return self.position_manager.get_center()[1]
+        return self._get_movement_facade().get_center_y()
 
     @center_y.setter
     def center_y(self, value: float):
-        self.position_manager.set_center((self.center_x, value))
+        self._get_movement_facade().set_center_y(value)
 
     @property
     def center(self) -> Tuple[float, float]:
-        return self.position_manager.get_center()
+        return self._get_movement_facade().get_center()
 
     @center.setter
     def center(self, value: Tuple[float, float]):
-        self.position_manager.set_center(value)
+        self._get_movement_facade().set_center(value)
 
     def move(self, distance: int = 0, direction: int = 0):
         """Moves actor *distance* steps in current direction
@@ -1069,9 +1058,7 @@ class Actor(actor_base.ActorBase):
                         if self.detecting_world():
                             self.move()
         """
-        if direction != 0:
-            self.position_manager.set_direction(direction)
-        return self.position_manager.move(distance)
+        return self._get_movement_facade().move(distance, direction)
 
     def move_vector(self, vector):
         """Moves actor in direction defined by the vector
@@ -1080,11 +1067,11 @@ class Actor(actor_base.ActorBase):
             The moved actor
 
         """
-        return self.position_manager.move_vector(vector)
+        return self._get_movement_facade().move_vector(vector)
 
     def move_back(self, distance):
         """ """
-        return self.position_manager.move(-distance)
+        return self._get_movement_facade().move_back(distance)
 
     def undo_move(self):
         """Undo the last move. Moves the actor to the last position and resets direction.
@@ -1104,13 +1091,10 @@ class Actor(actor_base.ActorBase):
                     self.undo_move()
 
         """
-        print("undo move")
-        return self.position_manager.undo_move()
+        return self._get_movement_facade().undo_move()
 
     def move_towards(self, target: Union[Tuple[float, float], "Actor"]):
-        if isinstance(target, Actor):
-            target = target.position
-        return self.position_manager.move_towards_position(target)
+        return self._get_movement_facade().move_towards(target)
 
     def move_in_direction(
         self,
@@ -1137,14 +1121,7 @@ class Actor(actor_base.ActorBase):
             The actor itself
 
         """
-        if type(direction) in [int, str]:
-            return self.position_manager.move_in_direction(direction, distance)
-        elif type(direction) == tuple:
-            return self.position_manager.move_towards_position(direction, distance)
-        else:
-            raise MiniworldsError(
-                f"Expected direction or position, got f{type(direction)}, ({direction})"
-            )
+        return self._get_movement_facade().move_in_direction(direction, distance)
 
     def move_to(self, position: Tuple[float, float]):
         """Moves actor *distance* to a specific world_posiition
@@ -1169,7 +1146,7 @@ class Actor(actor_base.ActorBase):
 
 
         """
-        return self.position_manager.move_to(position)
+        return self._get_movement_facade().move_to(position)
 
     def remove(self, kill=True) -> collections.defaultdict:
         """
@@ -1189,7 +1166,7 @@ class Actor(actor_base.ActorBase):
                    self.remove()
                    other.remove()
         """
-        self.world.get_world_connector(self).remove_actor_from_world(kill = kill)
+        return self.world.get_world_connector(self).remove_actor_from_world(kill=kill)
         
         
     def before_remove(self):
@@ -1316,13 +1293,7 @@ class Actor(actor_base.ActorBase):
             All actors found by Sensor
 
         """
-        if distance == 0:
-            # => search for actors at current position
-            return self.sensor_manager.detect_actors(actors)
-        else:
-            # distance and direction are != 0
-            # => search for actor in distance/direction.
-            return self.sensor_manager.detect_actors_at(actors, direction, distance)
+        return self._get_sensor_facade().detect_all(actors, direction, distance)
 
     def detect(self, *args, **kwargs) -> Union["Actor", None]:
         """Detects if actors are on actor position.
@@ -1373,20 +1344,7 @@ class Actor(actor_base.ActorBase):
                 Your browser does not support the video tag.
                 </video>
         """
-        if not args:
-            actors = kwargs.pop("filter") if "filter" in kwargs else None
-            distance = kwargs.pop("distance") if "distance" in kwargs else None
-            direction = kwargs.pop("direction") if "direction" in kwargs else self.direction
-        else:
-            actors = args[0] if len(args) > 0 else None
-            distance = args[1] if len(args) >= 2 else None
-            direction = args[2] if len(args) >= 3 else self.direction
-        if not distance:
-            return self.sensor_manager.detect_actor(filter=actors)
-        else:
-            return self.sensor_manager.detect_actors_at(
-                filter=actors, direction=direction, distance=distance
-            )
+        return self._get_sensor_facade().detect(*args, **kwargs)
 
     def detect_borders(
         self,
@@ -1404,7 +1362,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
-        return self.sensor_manager.detect_borders(distance)
+        return self._get_sensor_facade().detect_borders(distance)
 
     def detect_left_border(self) -> bool:
         """Does the actor touch the left border?
@@ -1413,7 +1371,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
-        return "left" in self.sensor_manager.detect_borders(0)
+        return self._get_sensor_facade().detect_left_border()
 
     def detect_right_border(self) -> bool:
         """Does the actor touch the right border?
@@ -1422,7 +1380,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
-        return "right" in self.sensor_manager.detect_borders(0)
+        return self._get_sensor_facade().detect_right_border()
 
     def detect_top_border(self) -> bool:
         """Does the actor touch the lower border?
@@ -1431,7 +1389,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
-        return "top" in self.sensor_manager.detect_borders(0)
+        return self._get_sensor_facade().detect_top_border()
 
     def detecting_bottom_border(self) -> bool:
         """Does the actor touch the lower border?
@@ -1440,7 +1398,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
-        return "bottom" in self.sensor_manager.detect_borders(0)
+        return self._get_sensor_facade().detecting_bottom_border()
 
     def detect_color(self, color: Tuple = None) -> bool:
         """Detects colors in world-background at actor center-position
@@ -1452,10 +1410,7 @@ class Actor(actor_base.ActorBase):
             True, if color was found
 
         """
-        color = self.sensor_manager.detect_color(
-            color,
-        )
-        return color
+        return self._get_sensor_facade().detect_color(color)
 
     def detect_color_at(
         self, direction: int = None, distance: int = 0
@@ -1470,8 +1425,7 @@ class Actor(actor_base.ActorBase):
             All colors found by Sensor
 
         """
-        color = self.sensor_manager.detect_color_at(direction, distance)
-        return color
+        return self._get_sensor_facade().detect_color_at(direction, distance)
 
     def detect_actors_at(self, direction=None, distance=0, actors=None) -> list:
         """Detects a actor in given direction and distance.
@@ -1501,30 +1455,24 @@ class Actor(actor_base.ActorBase):
         :param distance:  The distance in which actors should be detected (Start-Point is actor.center)
         :return: A list of actors
         """
-        return self.sensor_manager.detect_actors_at(actors, direction, distance)
+        return self._get_sensor_facade().detect_actors_at(direction, distance, actors)
 
     def detect_actor_at(self, direction=None, distance=0, actors=None) -> "Actor":
-        found_actors = self.sensor_manager.detect_actors_at(actors, direction, distance)
-        if found_actors:
-            return found_actors[0]
+        return self._get_sensor_facade().detect_actor_at(direction, distance, actors)
 
     def detect_actors_in_front(
         self,
         actors=None,
         distance=1,
     ) -> list:
-        return self.sensor_manager.detect_actors_at(actors, self.direction, distance)
+        return self._get_sensor_facade().detect_actors_in_front(actors, distance)
 
     def detect_actor_in_front(
         self,
         actors=None,
         distance=1,
     ) -> "Actor":
-        found_actors = self.sensor_manager.detect_actors_at(
-            actors, self.direction, distance
-        )
-        if found_actors:
-            return found_actors[0]
+        return self._get_sensor_facade().detect_actor_in_front(actors, distance)
 
     def detect_point(self, position: Tuple[float, float]) -> bool:
         """Is the actor colliding with a specific (global) point?
@@ -1535,7 +1483,7 @@ class Actor(actor_base.ActorBase):
         Returns:
             True if point is below actor
         """
-        return self.sensor_manager.detect_point(position)
+        return self._get_sensor_facade().detect_point(position)
     
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
         """Is the actor colliding with a pixel?
@@ -1543,18 +1491,18 @@ class Actor(actor_base.ActorBase):
         Returns:
             True if pixel is below actor
         """
-        return self.sensor_manager.detect_pixel(position)
+        return self._get_sensor_facade().detect_pixel(position)
 
     def detect_rect(self, rect: Union[Tuple, pygame.rect.Rect]):
         """Is the actor colliding with a static rect?"""
-        return self.sensor_manager.detect_rect(rect)
+        return self._get_sensor_facade().detect_rect(rect)
 
     def is_inside_world(self):
         """Is the actor colliding with current ...."""
-        return self.sensor_manager.detect_rect(self.world.camera.get_world_rect())
+        return self._get_sensor_facade().is_inside_world()
 
     def bounce_from_actor(self, other: "Actor"):
-        self.position_manager.bounce_from_actor(other)
+        self._get_sensor_facade().bounce_from_actor(other)
 
     def animate(self, speed: int = 10):
         self.costume_manager.animate(speed)
@@ -1642,7 +1590,7 @@ class Actor(actor_base.ActorBase):
         Args:
             message (str): A string containing the message.
         """
-        self.world.app.event_manager.to_event_queue("message", message)
+        self._get_event_facade().send_message(message)
 
     def on_key_down(self, key: list):
         """**on_key_down**  is called one time when a key is pressed down.
@@ -2100,27 +2048,27 @@ class Actor(actor_base.ActorBase):
             :alt: Set borders
 
         """
-        return self.costume.fill_color
+        return self._get_appearance_facade().fill_color
 
     @fill_color.setter
     def fill_color(self, value):
-        self.costume.fill(value)
+        self._get_appearance_facade().fill_color = value
 
     # Alias
     color = fill_color
 
     def fill(self, value):
         """Set fill color for borders and lines"""
-        self.costume.fill(value)
+        self._get_appearance_facade().fill(value)
 
     @property
     def is_filled(self):
         """Is actor filled with color?"""
-        return self.costume.is_filled
+        return self._get_appearance_facade().is_filled
 
     @is_filled.setter
     def is_filled(self, value):
-        self.costume.fill(value)
+        self._get_appearance_facade().is_filled = value
 
     @property
     def border_color(self):
@@ -2145,11 +2093,11 @@ class Actor(actor_base.ActorBase):
 
 
         """
-        return self.costume.border_color
+        return self._get_appearance_facade().border_color
 
     @border_color.setter
     def border_color(self, value):
-        self.costume.border_color = value
+        self._get_appearance_facade().border_color = value
 
     # Alias
 
@@ -2197,40 +2145,32 @@ class Actor(actor_base.ActorBase):
                 :width: 200px
                 :alt: Set borders
         """
-        return self.costume.border
+        return self._get_appearance_facade().border
 
     @border.setter
     def border(self, value):
-        self.costume.border = value
+        self._get_appearance_facade().border = value
 
     @property
     def visible(self):
-        return self._visible
+        return self._get_appearance_facade().visible
 
     @visible.setter
     def visible(self, value):
-        self._visible = value
-        self.costume.visibility_changed()
+        self._get_appearance_facade().visible = value
 
     def hide(self):
         """Hides a actor (the actor will be invisible)"""
-        self.visible = False
+        self._get_appearance_facade().hide()
 
     def show(self):
         """Displays a actor ( an invisible actor will be visible)"""
-        self.visible = True
+        self._get_appearance_facade().show()
 
     def register_sensor(self, *args, **kwargs):
         """This method is used for the @register_sensor decorator.
         """
-        def decorator(method):
-            if "method" in kwargs:                
-                method = kwargs.pop("method")
-                name = kwargs.pop("name")
-            bound_method = actor_inspection.ActorInspection(self).bind_method(method, method.__name__)
-            self.world.event_manager.register_sensor_event(method.__name__, self, args[0])
-            return bound_method
-        return decorator
+        return self._get_event_facade().register_sensor(*args, **kwargs)
 
     def get_local_rect(self) -> pygame.Rect:
         local_rect = self.position_manager.get_local_rect()
@@ -2245,12 +2185,10 @@ class Actor(actor_base.ActorBase):
         self.set_world(new_world)
 
     def set_world(self, new_world : "world_mod.World") -> "Actor":
-        _world_connector = new_world.get_world_connector(self)
-        _world_connector.set_world(self.world, new_world)
-        return self
+        return self._get_event_facade().set_world(new_world)
 
     def new_costume(self):
-        return self.world.get_world_connector(self).create_costume()
+        return self._get_appearance_facade().new_costume()
 
     @property
     def image(self) -> pygame.Surface:
@@ -2263,18 +2201,18 @@ class Actor(actor_base.ActorBase):
             as the image will be reloaded during animations
 
         """
-        return self.costume_manager.image
+        return self._get_appearance_facade().image
     @property
     def position(self) -> Tuple[float, float]:
         """The position of the actor as Position(x, y)"""
-        return self.position_manager.position
+        return self._get_movement_facade().get_position()
 
     @position.setter
     def position(self, value: Tuple[float, float]):
         self.set_position(value)
 
     def set_position(self, value: Tuple[float, float]):
-        self.position_manager.set_position(value)
+        self._get_movement_facade().set_position(value)
 
     def get_distance_to(self, obj: Union["Actor", Tuple[float, float]]) -> float:
         """Gets the distance to another actor or a position
@@ -2285,7 +2223,7 @@ class Actor(actor_base.ActorBase):
         Returns:
             float: The distance between actor (measured from actor.center) to actor or position.
         """
-        return self.sensor_manager.get_distance_to(obj)
+        return self._get_sensor_facade().get_distance_to(obj)
 
     def on_shape_change(self):
         pass

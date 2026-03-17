@@ -1,11 +1,14 @@
+import logging
 from collections import defaultdict
 from typing import Any, Callable, Optional, Union, Tuple
-from collections import defaultdict
 import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.world as world_mod
 import miniworlds.tools.actor_class_inspection as actor_class_inspection
 import miniworlds.tools.inspection as inspection
 import miniworlds.tools.color as color
+
+
+logger = logging.getLogger(__name__)
 
 class DrawManager:
     def __init__(self, world):
@@ -25,7 +28,11 @@ class DrawManager:
     @default_fill_color.setter
     def default_fill_color(self, value: int|Tuple):
         self._default_fill_color = color.Color.create(value).get()
-        print(value, self._default_fill_color)
+        logger.debug(
+            "Updated default fill color from %s to normalized %s",
+            value,
+            self._default_fill_color,
+        )
 
     def default_fill(self, value):
         """Set default fill color for borders and lines"""

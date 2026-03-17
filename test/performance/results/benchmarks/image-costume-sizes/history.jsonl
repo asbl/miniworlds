@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "image costume sizes", "recorded_at": "2026-03-16T22:04:35", "slug": "image-costume-sizes", "summary_type": "frame_timing", "values": {"avg_ms": 1.981, "frames": 119, "max_ms": 5.1531, "metric_resizes": 308, "metric_rotations": 1188, "min_ms": 0.497, "p95_ms": 4.6488, "p99_ms": 4.9138}}

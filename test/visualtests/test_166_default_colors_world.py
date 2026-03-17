@@ -6,7 +6,8 @@ import os
 import random
 
 
-class Test165(unittest.TestCase):
+class TestDefaultWorldDrawColors(unittest.TestCase):
+    SCREENSHOT_TITLE = "Test166"
 
     def setUp(self):
         def test_code():
@@ -23,8 +24,8 @@ class Test165(unittest.TestCase):
         App.reset(unittest=True, file=__file__)
         world = test_code()
         """ Setup screenshot tester"""
-        TEST_FRAMES = [0]
-        QUIT_FRAME = 100
+        TEST_FRAMES = [1]
+        QUIT_FRAME = 1
         tester = ScreenshotTester(TEST_FRAMES, QUIT_FRAME, self)
         tester.setup(world)
         if hasattr(world, "setup_environment"):

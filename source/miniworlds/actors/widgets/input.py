@@ -6,6 +6,9 @@ import miniworlds.actors.widgets.button as widget
 from miniworlds.base.exceptions import NoValidWorldPositionError
 
 
+logger = logging.getLogger(__name__)
+
+
 class Input(widget.Button):
     def __init__(self, position):
         super().__init__("")
@@ -132,8 +135,8 @@ class Input(widget.Button):
                     )
                     self.cursor_position += 1
                     self.update_cursor()
-                    logging.info(
-                        "CURSOR",
+                    logger.debug(
+                        "Updated input cursor to x=%s y=%s width=%s height=%s",
                         self.cursor.x,
                         self.cursor.y,
                         self.cursor.width,
@@ -141,7 +144,7 @@ class Input(widget.Button):
                     )
 
     def on_focus(self):
-        print("focus")
+        logger.debug("Input widget gained focus")
 
     def on_focus_lost(self):
-        print("focus lost")
+        logger.debug("Input widget lost focus")

@@ -3,6 +3,7 @@ import os
 import sys
 import warnings
 import asyncio
+import logging
 
 import pygame
 
@@ -14,6 +15,9 @@ import miniworlds.base.manager.app_event_manager as event_manager
 import miniworlds.base.manager.app_worlds_manager as worlds_manager
 import miniworlds.base.manager.app_music_manager as music_manager
 import miniworlds.base.manager.app_sound_manager as sound_manager
+import miniworlds.base.app_state as app_state
+import miniworlds.base.app_state_bridge as app_state_bridge
+import miniworlds.base.platform as platform_mod
 import miniworlds.base.window as window_mod
 from miniworlds.base.window import Window
 
@@ -25,6 +29,9 @@ if TYPE_CHECKING:
     from miniworlds.worlds.world import World
 
 
+logger = logging.getLogger(__name__)
+
+
 class App:
     """
     Main application class for Miniworlds.
@@ -34,12 +41,50 @@ class App:
         NoRunError: If `run()` is not called from the main module.
     """
 
+    _state = app_state.AppState()
+    _state_bridge: "app_state_bridge.AppStateBridge | None" = None
+    _fallback_platform = platform_mod.PlatformAdapter()
     running_world: Optional["World"] = None
     running_worlds: List["World"] = []
-    path: str = ""
+    path: str | None = ""
     running_app: Optional["App"] = None
     init: bool = False
     window: Optional["Window"] = None
+
+    @classmethod
+    def _get_state_bridge(cls) -> app_state_bridge.AppStateBridge:
+        bridge = cls._state_bridge
+        if bridge is None or bridge.app_class is not cls or bridge.state is not cls._state:
+            bridge = app_state_bridge.AppStateBridge(cls, cls._state)
+            cls._state_bridge = bridge
+        return bridge
+
+    @classmethod
+    def _sync_class_state(cls) -> None:
+        cls._get_state_bridge().sync_class_state()
+
+    @classmethod
+    def get_running_world(cls) -> Optional["World"]:
+        return cls._get_state_bridge().get_running_world()
+
+    @classmethod
+    def get_running_app(cls) -> Optional["App"]:
+        return cls._get_state_bridge().get_running_app()
+
+    @classmethod
+    def get_window(cls) -> Optional["Window"]:
+        return cls._get_state_bridge().get_window()
+
+    @classmethod
+    def get_path(cls) -> str | None:
+        return cls._get_state_bridge().get_path()
+
+    @classmethod
+    def get_platform(cls) -> platform_mod.PlatformAdapter:
+        running_app = cls.get_running_app()
+        if running_app and hasattr(running_app, "platform"):
+            return running_app.platform
+        return cls._fallback_platform
 
     @staticmethod
     def reset(unittest=False, file=None):
@@ -50,13 +95,11 @@ class App:
             unittest: Whether the reset is being called in a unit test context.
             file: Optional file path to use for setting the base path.
         """
-        App.running_world = None
-        App.running_worlds = []
-        App.path = None
-        App.running_app = None
+        App._get_state_bridge().reset(unittest=unittest, file=file)
         App.init = False
-        if file and unittest:
-            App.path = os.path.dirname(file)
+        import miniworlds.base.manager.app_file_manager as app_file_manager
+
+        app_file_manager.FileManager.clear_cache()
 
     @staticmethod
     def check_for_run_method():
@@ -65,27 +108,25 @@ class App:
         Prints a warning if it's not found (except in emscripten or notebooks).
         """
         try:
-            with open(__main__.__file__) as f:
-                if ".run(" not in f.read():
+            content = App.get_platform().read_main_module()
+            if content is not None and ".run(" not in content:
                     warnings.warn(
                         """[world_name].run() was not found in your code. 
                         This must be the last line in your code 
                         \ne.g.:\nworld.run()\n if your world-object is named world.""")
         except AttributeError:
-            if sys.platform != 'emscripten':
-                print("Can't check if run() is present (This may happen in Jupyter Notebooks. Resuming...)")
+            if not App.get_platform().is_web():
+                logger.info(
+                    "Skipping run() presence check because the main module could not be read"
+                )
 
     def _output_start(self):
         """
         Outputs version info at app start (desktop only).
         """
-        if sys.platform != 'emscripten':
-            try:
-                version_str = version("miniworlds")
-            except PackageNotFoundError:
-                version_str = "unknown"
-
-            print(f"Show new miniworlds v.{version_str} Window")
+        if not self.platform.is_web():
+            version_str = self.platform.get_package_version("miniworlds")
+            logger.info("Starting miniworlds window for version %s", version_str)
 
     def __init__(self, title, world):
         """
@@ -95,6 +136,7 @@ class App:
             title: Title for the window.
             world: The initial world object to be run.
         """
+        self.platform = platform_mod.PlatformAdapter()
         self._output_start()
         self.check_for_run_method()
 
@@ -106,18 +148,16 @@ class App:
 
         self._quit = False
         self._unittest = False
+        self._skip_frame_delay = os.getenv("MINIWORLDS_TEST_FAST") == "1"
         self._mainloop_started: bool = False
         self._exit_code: int = 0
         self.image = None
         self.repaint_areas: List = []
 
-        App.running_app = self
-        App.running_world = world
-        App.running_worlds.append(world)
-        App.window = self.window
+        self._get_state_bridge().bind_app(self, world, self.window)
 
-        if App.path:
-            self.path = App.path
+        if self.get_path():
+            self.path = self.get_path()
 
     async def run(self, image, fullscreen: bool = False, fit_desktop: bool = False, replit: bool = False):
         """
@@ -170,7 +210,7 @@ class App:
             await self._update()
 
         if not self._unittest:
-            pygame.display.quit()
+            self.platform.quit_display()
             sys.exit(self._exit_code)
 
     async def _update(self):
@@ -187,7 +227,16 @@ class App:
             self.event_manager.handle_event_queue()
             await self.worlds_manager.reload_all_worlds()
             self.display_repaint()
-            await asyncio.sleep(0)  # important: allows event loop to yield
+            await self.platform.yield_mainloop()
+
+    def set_running_world(self, world: Optional["World"]) -> None:
+        self._get_state_bridge().set_running_world(world)
+
+    def add_running_world(self, world: "World") -> None:
+        self._get_state_bridge().add_running_world(world)
+
+    def remove_running_world(self, world: "World") -> None:
+        self._get_state_bridge().remove_running_world(world)
 
     def quit(self, exit_code=0):
         """
@@ -207,13 +256,16 @@ class App:
             path: Path to the project directory.
         """
         self.path = path
-        App.path = path
+        self._get_state_bridge().set_path(path)
+        import miniworlds.base.manager.app_file_manager as app_file_manager
+
+        app_file_manager.FileManager.clear_cache()
 
     def display_repaint(self):
         """
         Repaints the regions marked as dirty (called every frame).
         """
-        pygame.display.update(self.repaint_areas)
+        self.platform.update_display(self.repaint_areas)
         self.repaint_areas = []
 
     def display_update(self):
@@ -226,7 +278,7 @@ class App:
         if self.window.dirty:
             self.window.dirty = 0
             self.add_display_to_repaint_areas()
-            pygame.display.update(self.repaint_areas)
+            self.platform.update_display(self.repaint_areas)
             self.repaint_areas = []
 
     def add_display_to_repaint_areas(self):

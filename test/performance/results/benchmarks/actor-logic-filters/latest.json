@@ -1,0 +1,34 @@
+{
+  "delta_to_previous": {
+    "avg_ms": 30.7908,
+    "frames": 0.0,
+    "max_ms": 54.1452,
+    "metric_hunter_border_hits": 0.0,
+    "metric_hunter_hits": 0.0,
+    "metric_hunter_misses": 0.0,
+    "metric_runner_border_hits": 0.0,
+    "metric_runner_hits": 0.0,
+    "metric_runner_misses": 0.0,
+    "min_ms": 24.6758,
+    "p95_ms": 49.5272,
+    "p99_ms": 54.541
+  },
+  "name": "actor logic filters",
+  "recorded_at": "2026-03-16T22:15:38",
+  "slug": "actor-logic-filters",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 53.0058,
+    "frames": 119,
+    "max_ms": 84.185,
+    "metric_hunter_border_hits": 175,
+    "metric_hunter_hits": 4021,
+    "metric_hunter_misses": 6608,
+    "metric_runner_border_hits": 18,
+    "metric_runner_hits": 3903,
+    "metric_runner_misses": 6874,
+    "min_ms": 41.8338,
+    "p95_ms": 75.6765,
+    "p99_ms": 84.1114
+  }
+}

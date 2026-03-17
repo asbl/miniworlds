@@ -1,12 +1,15 @@
 # miniworlds
 
-**miniworlds** is a game engine written in Python and Pygame, designed for students to create 2D mini-worlds and games.
+**miniworlds** is a game engine written in Python and Pygame,
+designed for students to create 2D mini-worlds and games.
 
 Creating your first games with **minigames** is simple and fun.
 
 :::{admonition} miniworlds and miniworldss
 
-**miniworlds** is the successor project to **miniworldss**. Many things are similar, but some names and functions differ from miniworldss.
+**miniworlds** is the successor project to **miniworldss**. Many
+things are similar, but some names and functions differ from
+miniworldss.
 (e.g., *Tokens* became *Actors*, *Boards* became *Worlds*)
 
 :::
@@ -209,14 +212,14 @@ def on_setup(self):
     self.add_background("images/bg")
     self.background.set_mode(mode="textured", texture_size=(200, 200))
 
-world.toolbar = world.layout.add_right(toolbar, size=180)
+world.toolbar = world.camera.add_right(toolbar, size=180)
 
 console = Console()
-world.console = world.add_bottom(console, size=100)
+world.console = world.camera.add_bottom(console, size=100)
 world.console.newline("You enter a new world")
 
 pager = PagerHorizontal(console)
-world.add_bottom(pager, size=60)
+world.camera.add_bottom(pager, size=60)
 
 def create_grass(pos):
     g = Actor(pos)
@@ -398,7 +401,7 @@ Example: RPG
 * `Kenney Assets <https://www.kenney.nl/assets>`\_
   Most images in the examples are based on Kenney Assets
 
-# Links
+## Links
 
 * [Github Repository](https://github.com/asbl/miniworlds)
 * [Examples](https://github.com/asbl/miniworlds_examples)
@@ -508,7 +511,6 @@ api/world_manager_mouse
 api/world_manager_layout
 api/backgrounds_manager
 ```
-
 
 ```{toctree}
 ---

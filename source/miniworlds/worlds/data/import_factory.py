@@ -42,30 +42,33 @@ class ImportWorldFromDB(ImportFactory, ImportDBFactory, ImportWorldFactory):
         self.world.rows = int(data[2])
         self.world.tile_size = int(data[3])
         self.world._loaded_from_db = True
-        self.world.switch_world(self.world)
+        self.db.close_connection()
         return self.world
 
 
 class ImportActorsFromDB(ImportDBFactory, ImportActorsFactory, ImportFactory):
-    def __init__(self, file, actor_classes):
+    def __init__(self, file, actor_classes, world):
         ImportDBFactory.__init__(self, file)
         ImportActorsFactory.__init__(self, actor_classes)
+        self.world = world
 
     def load(self):
         data = self.db.select_all_rows("SELECT actor_id, actor_class, x, y, direction FROM actor")
+        actor_list = []
         if data:
-            actor_list = []
             for actor_data in data:
                 class_name = actor_data[1]
                 x = actor_data[2]
                 y = actor_data[3]
                 direction = actor_data[4]
                 new_actor_class_name = class_name
+                new_actor_class = None
                 for actor_class in self.actor_classes:
                     if actor_class.__name__.lower() == new_actor_class_name.lower():
                         new_actor_class = actor_class
                 if new_actor_class is not None:
-                    new_actor = new_actor_class(position=(x, y))  # Create actor
+                    new_actor = new_actor_class(position=(x, y), world=self.world)
                     new_actor.direction = direction
                     actor_list.append(new_actor)
+        self.db.close_connection()
         return actor_list

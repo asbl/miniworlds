@@ -23,6 +23,14 @@ msgstr ""
 msgid "World > Toolbar"
 msgstr "World > Toolbar"
 
+#: ../../source/api/world_toolbar.md:3
+msgid "Toolbars are regular worlds that are usually docked beside the main world with `world.camera.add_right(toolbar)` or `world.camera.add_bottom(toolbar)`."
+msgstr "Toolbars sind normale Welten, die meist mit `world.camera.add_right(toolbar)` oder `world.camera.add_bottom(toolbar)` neben die Hauptwelt angedockt werden."
+
+#: ../../source/api/world_toolbar.md:5
+msgid "They are especially useful together with buttons, because the active world can react to toolbar actions in `on_message`."
+msgstr "Sie sind besonders zusammen mit Buttons nützlich, weil die aktive Welt in `on_message` auf Toolbar-Aktionen reagieren kann."
+
 #: miniworlds.worlds.gui.toolbar.Toolbar:1 of
 msgid "A Toolbar contains widgets (Buttons, Labels, ...)"
 msgstr "Eine Symbolleiste enthält Widgets (Schaltflächen, Beschriftungen, ...)"

@@ -19,7 +19,7 @@ class Rect(pygame.Rect):
     @classmethod
     def from_position(cls, position, dimensions=None, world=None):
         if world is None:
-            world = app.App.running_world
+            world = app.App.get_running_world()
         if dimensions is None:
             new_rect = pygame.Rect(0, 0, world.tile_size, world.tile_size)
         else:
@@ -33,4 +33,4 @@ class Rect(pygame.Rect):
 
     @property
     def world(self):
-        return app.App.running_world
+        return app.App.get_running_world()

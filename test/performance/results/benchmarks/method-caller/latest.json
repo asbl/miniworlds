@@ -1,0 +1,20 @@
+{
+  "delta_to_previous": {
+    "cache_hits": 0.0,
+    "cache_misses": 0.0,
+    "first_pass_ms": -3.409,
+    "iterations": 0.0,
+    "second_pass_ms": 1.6091
+  },
+  "name": "method caller",
+  "recorded_at": "2026-03-16T19:30:51",
+  "slug": "method-caller",
+  "summary_type": "measurements",
+  "values": {
+    "cache_hits": 99999,
+    "cache_misses": 1,
+    "first_pass_ms": 88.7625,
+    "iterations": 50000,
+    "second_pass_ms": 60.1178
+  }
+}

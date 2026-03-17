@@ -16,18 +16,29 @@ class EventDefinition:
     def __init__(self):
         self.actor_class_events = dict()
         self.actor_class_events_set = set()
+        self.actor_classes_by_name: dict[str, type[actor_mod.Actor]] = {}
         self.world_class_events = dict()
         "EventManager.world_class_events Predefined set of all world events"
         self.world_class_events_set = set()
         # Combination of actor_class_events and world_class_events
         self.class_events = dict()
         self.class_events_set = set()
+        self._actor_class_signature: tuple[str, ...] = ()
         self.setup_event_list()  # setup static event set/dict
 
-    def update(self):
-        self.setup_event_list()
+    def update(self) -> bool:
+        current_signature = self._get_actor_class_signature()
+        if current_signature == self._actor_class_signature:
+            return False
+        self.setup_event_list(current_signature)
+        return True
 
-    def setup_event_list(self):
+    def _get_actor_class_signature(self) -> tuple[str, ...]:
+        actor_classes = actor_class_inspection.ActorClassInspection(actor_mod.Actor).get_subclasses_for_cls()
+        return tuple(sorted(actor_cls.__name__ for actor_cls in actor_classes))
+
+    def setup_event_list(self, actor_class_signature: Optional[tuple[str, ...]] = None):
+        self._actor_class_signature = actor_class_signature or self._get_actor_class_signature()
         specific_key_events = []
         for key, value in keys.KEYS.items():
             specific_key_events.append("on_key_down_" + value.lower())
@@ -35,13 +46,13 @@ class EventDefinition:
             specific_key_events.append("on_key_up_" + value.lower())
         detecting_actor_methods = []
         not_detecting_actor_methods = []
-        for actor_cls in actor_class_inspection.ActorClassInspection(
-                actor_mod.Actor
-        ).get_subclasses_for_cls():
+        actor_classes = actor_class_inspection.ActorClassInspection(actor_mod.Actor).get_subclasses_for_cls()
+        self.actor_classes_by_name = {
+            actor_cls.__name__.lower(): actor_cls for actor_cls in actor_classes
+        }
+        for actor_cls in actor_classes:
             detecting_actor_methods.append("on_detecting_" + actor_cls.__name__.lower())
-        for actor_cls in actor_class_inspection.ActorClassInspection(
-                actor_mod.Actor
-        ).get_subclasses_for_cls():
+        for actor_cls in actor_classes:
             not_detecting_actor_methods.append(
                 "on_not_detecting_" + actor_cls.__name__.lower()
             )
@@ -53,8 +64,10 @@ class EventDefinition:
                 "on_mouse_middle",
                 "on_mouse_motion",
                 "on_mouse_left_down",
+                "on_mouse_middle_down",
                 "on_mouse_right_down",
                 "on_mouse_left_up",
+                "on_mouse_middle_up",
                 "on_mouse_right_up",
             ],
             "clicked_on_actor": [
@@ -99,8 +112,10 @@ class EventDefinition:
                 "on_mouse_motion",
                 "on_mouse_middle",
                 "on_mouse_left_down",
+                "on_mouse_middle_down",
                 "on_mouse_right_down",
                 "on_mouse_left_up",
+                "on_mouse_middle_up",
                 "on_mouse_right_up",
             ],
             "key": [

@@ -26,7 +26,7 @@ class TileBase(abc.ABC):
     def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
         self.int_coord = self._internal_coordinates()
-        self.world = world or app.App.running_world
+        self.world = world or app.App.get_running_world()
         self.position = position
         self._world_position = position
         self.positions = [self.position]

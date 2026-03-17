@@ -20,8 +20,16 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../source/api/world_manager_layout.md:1
-msgid "World > Camera"
-msgstr ""
+msgid "World > Camera > Docking"
+msgstr "World > Camera > Docking"
+
+#: ../../source/api/world_manager_layout.md:3
+msgid "Use `world.camera.add_right(...)`, `world.camera.add_bottom(...)`, and `world.camera.switch_world(...)` as the public API for docking and switching helper worlds."
+msgstr "Verwende `world.camera.add_right(...)`, `world.camera.add_bottom(...)` und `world.camera.switch_world(...)` als öffentliche API zum Andocken und Umschalten von Hilfswelten."
+
+#: ../../source/api/world_manager_layout.md:5
+msgid "The class below is the internal helper that implements this behavior behind the public camera API."
+msgstr "Die folgende Klasse ist der interne Helfer, der dieses Verhalten hinter der öffentlichen Kamera-API implementiert."
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager:1 of
 msgid ""
@@ -31,10 +39,13 @@ msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager:3 of
 msgid ""
-"It is accessed via `world.layout` and delegates layout behavior (e.g., "
-"docking, switching, removing) to the underlying `App` and "
-"`WorldsManager`."
+"It is stored internally on `world._layout`, while the public API is exposed "
+"via `world.camera` and delegates layout behavior to the underlying `App` "
+"and `WorldsManager`."
 msgstr ""
+"Es wird intern unter `world._layout` gespeichert, waehrend die öffentliche "
+"API ueber `world.camera` bereitgestellt wird und das Layout-Verhalten an "
+"`App` und `WorldsManager` delegiert."
 
 #: ../../source/api/world_manager_layout.md
 msgid "Public Data Attributes:"

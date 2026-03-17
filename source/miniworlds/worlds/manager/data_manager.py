@@ -1,5 +1,7 @@
 from typing import Tuple, Union, Optional, List, cast, Callable
 import miniworlds.actors.actor as actor_mod
+import miniworlds.worlds.data.export_factory as export_factory
+import miniworlds.worlds.data.import_factory as import_factory
 
 class DataManager:
 
@@ -11,7 +13,9 @@ class DataManager:
         """
         Loads a sqlite db file.
         """
-        return import_factory.ImportWorldFromDB(file, self.__class__).load()
+        loaded_world = import_factory.ImportWorldFromDB(file, self.world.__class__).load()
+        self.world.switch_world(loaded_world)
+        return loaded_world
 
     def load_actors_from_db(
         self, file: str, actor_classes: list
@@ -25,7 +29,7 @@ class DataManager:
         Returns:
             [type]: All Actors
         """
-        return import_factory.ImportActorsFromDB(file, actor_classes).load()
+        return import_factory.ImportActorsFromDB(file, actor_classes, self.world).load()
 
     def save_to_db(self, file):
         """
@@ -38,7 +42,7 @@ class DataManager:
         Returns:
 
         """
-        export = export_factory.ExportWorldToDBFactory(file, self)
+        export = export_factory.ExportWorldToDBFactory(file, self.world)
         export.remove_file()
         export.save()
-        export_factory.ExportActorsToDBFactory(file, self.actors).save()
+        export_factory.ExportActorsToDBFactory(file, self.world.actors).save()

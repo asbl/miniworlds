@@ -1,4 +1,5 @@
 from abc import ABC, ABCMeta
+import logging
 from typing import Set, Callable
 import pygame
 import miniworlds.worlds.manager.world_connector as world_connector
@@ -6,6 +7,9 @@ import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.tools.world_inspection as world_inspection
+
+
+logger = logging.getLogger(__name__)
 
 class AutoSetupMeta(ABCMeta):
     def __call__(cls, *args, **kwargs):
@@ -115,7 +119,7 @@ class WorldBase(metaclass=AutoSetupMeta):
         Example:
             >>> world.screenshot(\"images/capture.jpg\")
         """
-        pygame.image.save(self.app.window.surface, filename)
+        self.app.platform.save_image(self.app.window.surface, filename)
 
 
     def get_events(self) -> None:
@@ -128,7 +132,7 @@ class WorldBase(metaclass=AutoSetupMeta):
             >>> world.get_events()
             {'act', 'on_setup', 'on_key_down', ...}
         """
-        print(self.event_manager.class_events_set)
+        logger.info("Registered world event names: %s", self.event_manager.class_events_set)
 
     @property
     def registered_events(self) -> Set[str]:

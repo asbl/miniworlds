@@ -38,7 +38,7 @@ class MainloopManager:
         self.world.event_manager.update()
         elapsed = time.perf_counter() - start
         wait = max(0, (1 / self.world.fps) - elapsed)
-        await asyncio.sleep(wait)
+        await self.app.platform.wait_for_frame(wait, getattr(self.app, "_skip_frame_delay", False))
         
     def _update_all_costumes(self):
         """Updates the costumes of all actors in the world."""
@@ -53,7 +53,8 @@ class MainloopManager:
                     actor.costume.update()
 
     def _tick_timed_objects(self):
-        [obj.tick() for obj in self.world._timed_objects]
+        for obj in self.world._timed_objects:
+            obj.tick()
 
     def handle_event(self, event, data=None):
         """

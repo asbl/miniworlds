@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "resource lookup", "recorded_at": "2026-03-16T19:29:45", "slug": "resource-lookup", "summary_type": "measurements", "values": {"iterations": 50000, "lookup_ms": 78.7708, "lookups_per_s": 634752.9473}}
