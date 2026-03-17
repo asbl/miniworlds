@@ -133,12 +133,13 @@ class Appearance(metaclass=MetaAppearance):
             )
 
     def after_init(self):
-        # Called in metaclass
+        """Finalize initialization after the metaclass constructor hook."""
         self.set_dirty("all", Appearance.LOAD_NEW_IMAGE)
         self.initialized = True
 
     @property
     def font_size(self):
+        """Current font size used for text rendering."""
         return self.font_manager.font_size
 
     @font_size.setter
@@ -151,15 +152,17 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def texture_size(self):
-        self._texture_size
+        """Texture tile size used when `is_textured` is enabled."""
+        return self._texture_size
 
     @texture_size.setter
     def texture_size(self, value):
         self._texture_size = value
         self.set_dirty("texture", Appearance.RELOAD_ACTUAL_IMAGE)
-        
+
     @property
     def animation_speed(self):
+        """Frames between animation steps."""
         return self._animation_speed
 
     @animation_speed.setter
@@ -170,6 +173,11 @@ class Appearance(metaclass=MetaAppearance):
         self.animation_speed = value
 
     def set_mode(self, **kwargs):
+        """Set multiple appearance mode flags at once.
+
+        Supported keyword arguments include `mode`, `texture_size`, and
+        `animation_speed`.
+        """
         if "texture_size" in kwargs:
             self._texture_size = kwargs["texture_size"]
         if "animation_speed" in kwargs:
@@ -199,8 +207,8 @@ class Appearance(metaclass=MetaAppearance):
             elif "centered" in mode:
                 self._set_centered(True)
 
-
     def get_modes(self):
+        """Return all mode flags as a dictionary."""
         modes = {
             "textured": self._is_textured,
             "scaled": self._is_scaled,
@@ -280,6 +288,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_centered(self):
+        """Whether drawing operations are centered on the parent position."""
         return self._is_centered
 
     @is_centered.setter
@@ -289,6 +298,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_filled(self):
+        """Whether shapes are rendered filled instead of outlined."""
         return self._is_filled
 
     @is_filled.setter
@@ -349,6 +359,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_scaled_to_width(self):
+        """Whether the image is scaled to parent width and keeps aspect ratio."""
         return self._is_scaled_to_width
 
     @is_scaled_to_width.setter
@@ -357,6 +368,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_scaled_to_height(self):
+        """Whether the image is scaled to parent height and keeps aspect ratio."""
         return self._is_scaled_to_height
 
     @is_scaled_to_height.setter
@@ -365,6 +377,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def fill_color(self):
+        """Primary fill color for shape-based rendering."""
         return self._fill_color
 
     @fill_color.setter
@@ -431,6 +444,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def fill_color(self):
+        """Primary fill color for shape-based rendering."""
         return self._fill_color
 
     @fill_color.setter
@@ -469,28 +483,14 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def alpha(self):
-        """defines transparency of Actor: 0: transparent, 255: visible
-        If value < 1, it will be multiplied with 255.
+        """Transparency value of the appearance.
 
-        Examples:
+        Use values from `0` to `255`:
+        - `0` means fully transparent
+        - `255` means fully visible
 
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(800,400)
-
-                t = Actor((600,250))
-                t.add_costume("images/alien1.png")
-                t.costume.alpha = 50
-                t.width = 40
-                t.border = 1
-
-                world.run()
-
-            .. image:: ../_images/alpha.png
-                :alt: Textured image
-
+        If the value is between `0` and `1`, it is interpreted as a normalized
+        opacity and converted to the 0..255 range.
         """
         return self._alpha
 
@@ -535,6 +535,7 @@ class Appearance(metaclass=MetaAppearance):
         self.set_animated(value)
 
     def set_animated(self, value: bool):
+        """Enable or disable frame-based animation."""
         self._is_animated = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
         
@@ -593,10 +594,12 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
        
     def flip(self, value):
+        """Convenience wrapper to set `is_flipped`."""
         self.is_flipped = value
 
     @property
     def images(self):
+        """List of image surfaces managed by this appearance."""
         return self.image_manager.images_list
 
     @property
@@ -694,14 +697,11 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("scale", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def remove_last_image(self):
+        """Remove the most recently added image."""
         self._get_rendering_facade().remove_last_image()
 
     def add_image(self, source: Union[str, Tuple, pygame.Surface]) -> int:
-        """Adds an image to the appearance
-
-        Returns:
-            Index of the created image.
-        """
+        """Add an image source and return its index."""
         return self._get_rendering_facade().add_image(source)
 
     def _set_image(self, source: Union[int, "Appearance", tuple]) -> bool:
@@ -733,7 +733,7 @@ class Appearance(metaclass=MetaAppearance):
     def add_images(self, sources: list):
         """Adds multiple images to background/costume.
 
-        Each source in sources parameter must be a valid parameter for :py:attr:`Appearance.cimage`
+        Each source in `sources` must be a valid input for `add_image`.
         """
         self._get_rendering_facade().add_images(sources)
 
@@ -858,21 +858,27 @@ class Appearance(metaclass=MetaAppearance):
         self._get_rendering_facade().fill(value)
 
     def set_filled(self, value):
+        """Set whether shapes are rendered filled."""
         self._get_rendering_facade().set_filled(value)
 
     def get_color(self, position):
+        """Return the color at a local pixel position."""
         return self._get_rendering_facade().get_color(position)
 
     def get_rect(self):
+        """Return the local rectangle of the rendered image."""
         return self._get_rendering_facade().get_rect()
 
     def draw(self, source, position, width, height):
+        """Draw an image source at a local position."""
         self._get_rendering_facade().draw(source, position, width, height)
 
     def draw_on_image(self, path, position, width, height):
+        """Queue drawing an image file onto the appearance image."""
         self._get_rendering_facade().draw_on_image(path, position, width, height)
 
     def draw_color_on_image(self, color, position, width, height):
+        """Queue drawing a colored rectangle onto the appearance image."""
         self._get_rendering_facade().draw_color_on_image(color, position, width, height)
 
     def __str__(self):
@@ -916,19 +922,24 @@ class Appearance(metaclass=MetaAppearance):
         return self._get_rendering_facade().register(method)
 
     def draw_shape_append(self, shape, arguments):
+        """Append a shape draw command to the render queue."""
         self._get_rendering_facade().draw_shape_append(shape, arguments)
 
     def draw_shape_set(self, shape, arguments):
+        """Replace shape draw commands with a single command."""
         self._get_rendering_facade().draw_shape_set(shape, arguments)
 
     def draw_image_append(self, surface, rect):
+        """Append a pre-rendered surface draw command."""
         self._get_rendering_facade().draw_image_append(surface, rect)
 
     def draw_image_set(self, surface, rect):
+        """Replace image draw commands with one surface draw command."""
         self._get_rendering_facade().draw_image_set(surface, rect)
 
     @property
     def dirty(self):
+        """Dirty flag for the current rendering pipeline state."""
         return self._get_rendering_facade().dirty
 
     @dirty.setter
@@ -936,6 +947,7 @@ class Appearance(metaclass=MetaAppearance):
         self._get_rendering_facade().dirty = value
 
     def set_dirty(self, value="all", status=1):
+        """Mark pipeline stages as dirty so the image is re-rendered."""
         self._get_rendering_facade().set_dirty(value=value, status=status)
 
     @abstractmethod

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-21 22:25+0100\n"
+"POT-Creation-Date: 2026-03-17 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,10 +17,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/api/world_manager_mouse.md:1
 msgid "World > Mouse"
+msgstr ""
+
+#: ../../source/api/world_manager_mouse.md:3
+msgid "API Reference"
 msgstr ""
 
 #: miniworlds.worlds.manager.mouse_manager.MouseManager:1 of
@@ -63,119 +67,145 @@ msgstr ""
 msgid "Public Methods:"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.__init__>`\\ "
 "\\(world\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.__init__:1 of
 msgid "Initialize the MouseManager."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`get_position "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.get_position>`\\ "
 "\\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_position:1 of
 msgid "Gets the current mouse position if the mouse is over this world."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`left "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.left>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.left:1 of
 msgid "Returns True if the left mouse button is currently pressed."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`right "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.right>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.right:1 of
 msgid "Returns True if the right mouse button is currently pressed."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`mouse_left_is_clicked "
+"<miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_left_is_clicked>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_left_is_clicked:1
+#: of
+msgid "Backward-compatible alias for checking the left mouse button."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+":py:obj:`mouse_right_is_clicked "
+"<miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_right_is_clicked>`\\"
+" \\(\\)"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_right_is_clicked:1
+#: of
+msgid "Backward-compatible alias for checking the right mouse button."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`x <miniworlds.worlds.manager.mouse_manager.MouseManager.x>`\\ "
 "\\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.x:1 of
 msgid "Returns the x-coordinate of the mouse if over the world, otherwise 0."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`y <miniworlds.worlds.manager.mouse_manager.MouseManager.y>`\\ "
 "\\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.y:1 of
 msgid "Returns the y-coordinate of the mouse if over the world, otherwise 0."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`get_last_position "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position:1 of
 msgid "Returns the mouse position from the last frame (if available)."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`is_mouse_pressed "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_pressed>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_pressed:1 of
 msgid "Returns True if any mouse button (left or right) is currently pressed."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`is_mouse_left_pressed "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_left_pressed>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_left_pressed:1
 #: of
 msgid "Returns True if the left mouse button is pressed."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ""
 ":py:obj:`is_mouse_right_pressed "
 "<miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_right_pressed>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_right_pressed:1
 #: of
 msgid "Returns True if the right mouse button is pressed."
@@ -204,6 +234,7 @@ msgstr ""
 msgid "The world instance this mouse belongs to."
 msgstr ""
 
+#: ../../source/api/world_manager_mouse.md
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_position
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_left_pressed
@@ -219,9 +250,9 @@ msgstr ""
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position:3
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_position:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
-" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\] \\| "
+"\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position:6
@@ -250,6 +281,8 @@ msgstr ""
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_pressed:3
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.is_mouse_right_pressed:3
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.left:3
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_left_is_clicked:4
+#: miniworlds.worlds.manager.mouse_manager.MouseManager.mouse_right_is_clicked:4
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.right:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
 msgstr ""
@@ -301,5 +334,12 @@ msgstr ""
 #~ ":py:obj:`get_prev_mouse_position "
 #~ "<miniworlds.worlds.manager.mouse_manager.MouseManager.get_prev_mouse_position>`\\"
 #~ " \\(\\)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+#~ " \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+#~ "\\\\\\[\\:py\\:class\\:\\`int\\`\\, "
+#~ "\\:py\\:class\\:\\`int\\`\\]\\]`"
 #~ msgstr ""
 

@@ -31,70 +31,29 @@ if TYPE_CHECKING:
 
 
 class Actor(actor_base.ActorBase):
-    """Actors are objects on your world. Actors can move around the world and have sensors to detect other actors.
+    """Interactive object placed in a world.
 
-    The appearance of a actor is determined by its costume.
+    Actors can move, detect collisions, send messages, and react to input
+    and lifecycle events.
 
     Examples:
-
-        Create a actor:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World()
-            world.size = (100,60)
-            Actor(position=(10, 10))
-
+        Create a basic actor:
+            from miniworlds import World, Actor
+            world = World(100, 60)
+            Actor((10, 10), world=world)
             world.run()
 
-        Create a actor with an image:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World(100,60)
-            actor = Actor((10, 10))
-            actor.add_costume("images/player.png")
-
+        Create an actor with a costume:
+            from miniworlds import World, Actor
+            world = World(100, 60)
+            player = Actor((10, 10), world=world)
+            player.add_costume("images/player.png")
             world.run()
 
-        Create actor as instance from an custom class
-
-        .. code-block:: python
-
-            import miniworlds
-
-            class MyActor(miniworlds.Actor):
-
-                def on_setup(self):
-                    self.add_costume("images/player.png")
-
-            world = World(100,60)
-            my_actor = MyActor(position = (40,130))
-            world.run()
-
-        Create a Actor at current mouse position:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World()
-
-            @world.register
-            def act(self):
-                Actor(self.mouse.get_position())
-
-            world.run()
-
-    See Also:
-
-        * See: :doc:`Actor <../api/actor>`
-        * See: :doc:`Shapes <../api/actor_shapes>`
-        * See: :doc:`TextActors and NumberActors <../api/actor_text>`
+    See also:
+        - Actor API page
+        - Shapes API page
+        - Text actor API page
     """
 
     actor_count: int = 0
@@ -161,6 +120,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def origin(self):
+        """Current origin mode used for size and position operations."""
         return self._get_size_facade().get_origin()
 
     @origin.setter
@@ -168,6 +128,7 @@ class Actor(actor_base.ActorBase):
         self._get_size_facade().set_origin(value)
 
     def switch_origin(self, value: str):
+        """Switch actor origin while preserving the visual on-screen position."""
         self._get_size_facade().switch_origin(value)
 
     @classmethod
@@ -262,28 +223,19 @@ class Actor(actor_base.ActorBase):
 
     @property
     def last_direction(self) -> int:
+        """Direction value from the previous frame."""
         return self._get_size_facade().get_last_direction()
 
     @classmethod
     def from_topleft(cls, topleft_position: Tuple[float, float], *args, **kwargs):
-        """
-        Creates a actor with center at center_position
-
-        Arg`s:
-            center_position: Center of actor
-        """
+        """Create an actor whose origin is interpreted as top-left."""
         obj = cls(topleft_position, **kwargs)  # temp position
         obj.origin = "topleft"
         return obj
 
     @classmethod
     def from_center(cls, center_position: Tuple[float, float], *args, **kwargs):
-        """
-        Creates a actor with center at center_position
-
-        Arg`s:
-            center_position: Center of actor
-        """
+        """Create an actor whose origin is interpreted as center."""
         obj = cls(center_position, **kwargs)  # temp position
         obj.origin = "center"
         return obj
@@ -314,54 +266,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def is_flipped(self) -> bool:
-        """
-        When a actor is mirrored, it is mirrored across the y-axis.
-        You can use this property in 2D platformer games to change the direction of actor.
-
-        .. note::
-
-            It may be necessary to set ``is_rotatable = True``
-
-        Examples:
-
-            Flip a costume after 100 frames.
-
-            .. code-block::
-
-                from miniworlds import *
-
-                world = World(100,100)
-                actor = Actor()
-                actor.add_costume("images/alien1.png")
-                actor.height= 400
-                actor.width = 100
-                actor.is_rotatable = False
-                @actor.register
-                def act(self):
-                    if self.world.frame % 100 == 0:
-                        if self.is_flipped:
-                            self.is_flipped = False
-                        else:
-                            self.is_flipped = True
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=200>
-                <source src="../_static/# It looks like the code `flip_alien` is not a valid Python
-                # code. It seems to be a placeholder or a random string. If
-                # you provide more context or details about what you are
-                # trying to achieve, I can help you with the code.
-                flip_alien.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
-        Returns:
-            True, if actor is flipped
-
-        """
+        """Whether the actor costume is mirrored on the horizontal axis."""
         return self._get_appearance_facade().is_flipped
 
     @is_flipped.setter
@@ -540,12 +445,15 @@ class Actor(actor_base.ActorBase):
         return self._get_appearance_facade().switch_costume(source)
 
     def set_costume(self, costume: Union[str, tuple, int, "appearance.Appearance"]):
+        """Set the current costume from an index, source, or appearance object."""
         self._get_appearance_facade().set_costume(costume)
 
     def reset_costumes(self):
+        """Remove all costumes and reset appearance state."""
         self._get_appearance_facade().reset_costumes()
 
     def set_background_color(self, color: tuple):
+        """Set a background color behind the actor costume image."""
         self._get_appearance_facade().set_background_color(color)
 
     def next_costume(self):
@@ -562,6 +470,7 @@ class Actor(actor_base.ActorBase):
         return self._get_appearance_facade().costume
 
     def has_costume(self) -> bool:
+        """Return `True` when the actor currently has a costume."""
         return self._get_appearance_facade().has_costume()
 
     @costume.setter
@@ -578,6 +487,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def orientation(self) -> float:
+        """Costume orientation offset in degrees."""
         return self._get_appearance_facade().orientation
 
     @orientation.setter
@@ -867,6 +777,7 @@ class Actor(actor_base.ActorBase):
         self.set_size(value)
 
     def set_size(self, value: tuple):
+        """Set actor size as `(width, height)` in pixels."""
         self._get_size_facade().set_size(value)
 
     @property
@@ -910,6 +821,7 @@ class Actor(actor_base.ActorBase):
         self._get_size_facade().set_width(value)
 
     def scale_width(self, value):
+        """Scale actor width by a factor."""
         self._get_size_facade().scale_width(value)
 
     @property
@@ -953,6 +865,7 @@ class Actor(actor_base.ActorBase):
         self._get_size_facade().set_height(value)
 
     def scale_height(self, value):
+        """Scale actor height by a factor."""
         self._get_size_facade().scale_height(value)
 
     @property
@@ -975,6 +888,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def class_name(self) -> str:
+        """Class name of this actor instance."""
         return self.__class__.__name__
 
     @property
@@ -997,6 +911,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def topleft(self) -> Tuple[float, float]:
+        """Top-left position of the actor in world coordinates."""
         return self._get_movement_facade().get_topleft()
 
     @topleft.setter
@@ -1028,6 +943,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def center(self) -> Tuple[float, float]:
+        """Center position of the actor in world coordinates."""
         return self._get_movement_facade().get_center()
 
     @center.setter
@@ -1094,6 +1010,7 @@ class Actor(actor_base.ActorBase):
         return self._get_movement_facade().undo_move()
 
     def move_towards(self, target: Union[Tuple[float, float], "Actor"]):
+        """Move one step toward a target actor or position."""
         return self._get_movement_facade().move_towards(target)
 
     def move_in_direction(
@@ -1170,6 +1087,7 @@ class Actor(actor_base.ActorBase):
         
         
     def before_remove(self):
+        """Hook called immediately before the actor is removed from the world."""
         pass
     
     @property
@@ -1458,6 +1376,7 @@ class Actor(actor_base.ActorBase):
         return self._get_sensor_facade().detect_actors_at(direction, distance, actors)
 
     def detect_actor_at(self, direction=None, distance=0, actors=None) -> "Actor":
+        """Detect and return the first actor at a given direction and distance."""
         return self._get_sensor_facade().detect_actor_at(direction, distance, actors)
 
     def detect_actors_in_front(
@@ -1465,6 +1384,7 @@ class Actor(actor_base.ActorBase):
         actors=None,
         distance=1,
     ) -> list:
+        """Detect all actors directly in front of this actor."""
         return self._get_sensor_facade().detect_actors_in_front(actors, distance)
 
     def detect_actor_in_front(
@@ -1472,6 +1392,7 @@ class Actor(actor_base.ActorBase):
         actors=None,
         distance=1,
     ) -> "Actor":
+        """Detect and return the first actor directly in front."""
         return self._get_sensor_facade().detect_actor_in_front(actors, distance)
 
     def detect_point(self, position: Tuple[float, float]) -> bool:
@@ -1502,12 +1423,15 @@ class Actor(actor_base.ActorBase):
         return self._get_sensor_facade().is_inside_world()
 
     def bounce_from_actor(self, other: "Actor"):
+        """Reflect movement direction when colliding with another actor."""
         self._get_sensor_facade().bounce_from_actor(other)
 
     def animate(self, speed: int = 10):
+        """Animate the current costume with the given speed."""
         self.costume_manager.animate(speed)
 
     def animate_costume(self, costume: "costume_mod.Costume", speed: int = 10):
+        """Animate a specific costume with the given speed."""
         self.costume_manager.animate_costume(costume, speed)
 
     def animate_loop(self, speed: int = 10):
@@ -1593,80 +1517,29 @@ class Actor(actor_base.ActorBase):
         self._get_event_facade().send_message(message)
 
     def on_key_down(self, key: list):
-        """**on_key_down**  is called one time when a key is pressed down.
+        """Called once when a key is pressed.
 
-        .. note::
-            Instead of **on_key_down** you can use **on_key_down_letter**, e.g. **on_key_down_a** or **on_key_down_w**
-            , if you want to handle an on_key_down event for a specific letter.
-
-        Examples:
-
-            Register a key_down event:
-
-            .. code-block::
-
-                actor1 = miniworlds.Actor(position = (2, 2) )
-                actor1.add_costume((100,0,100,100))
-
-                @actor1.register
-                def on_key_down(self, key):
-                    print(key)
-
-            Register on_key_down_a event
-
-            .. code-block::
-
-                actor1 = miniworlds.Actor(position = (2, 2) )
-                actor1.add_costume((100,0,100,100))
-
-                @actor1.register
-                def on_key_down_a(self):
-                    print("a")
+        Register `on_key_down_<letter>` (for example `on_key_down_a`) if you
+        want to react to a specific letter only.
 
         Args:
-            key (list): The typed key as list (e.g. ['A', 'a']) containing both uppercase and lowercase of typed letter.
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            key: Typed key variants, for example `['A', 'a']`.
         """
         raise NotImplementedOrRegisteredError(self.on_key_down)
 
     def on_key_pressed(self, key: list):
-        """**on_key_pressed** is called when while key is pressed. If you hold the key, on_key_pressed
-        is repeatedly called again and again until the key is released.
+        """Called repeatedly while a key remains pressed.
 
-        .. note::
-
-            Like `on_key_down` the method can be called in the variant `on_key_pressed_[letter]`
-            (e.g. `on_key_pressed_w(self)`).
-
-        Examples:
-
-            Register on_key_pressed event:
-
-            .. code-block::
-
-                actor1 = miniworlds.Actor(position = (2, 2) )
-                actor1.add_costume((100,0,100,100))
-
-                @actor1.register
-                def on_key_pressed(self, key):
-                    print("pressed", key)
-
-                @actor1.register
-                def on_key_pressed_s(self):
-                    print("pressed s")
+        Like `on_key_down`, this event also supports per-letter handlers such
+        as `on_key_pressed_w`.
 
         Args:
-            key (list): The typed key as list (e.g. ['C', 'c', 'D', 'd']) containing both uppercase and lowercase
-            of typed letter.
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            key: Typed key variants, for example `['C', 'c']`.
         """
         raise NotImplementedOrRegisteredError(self.on_key_pressed)
 
     def on_key_up(self, key):
+        """Called once when a pressed key is released."""
         raise NotImplementedOrRegisteredError(self.on_key_up)
 
     def on_mouse_over(self, position):
@@ -1682,107 +1555,45 @@ class Actor(actor_base.ActorBase):
         raise NotImplementedOrRegisteredError(self.on_mouse_over)
 
     def on_mouse_left_down(self, position: tuple):
+        """Called when the left mouse button is pressed down."""
         raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
 
     def on_mouse_right_down(self, position: tuple):
+        """Called when the right mouse button is pressed down."""
         raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
 
     def on_mouse_left(self, position: tuple):
-        """on_mouse_left is called when left mouse button was pressed.
-        You must *register* or *implement* this method as an event.
+        """Called when the left mouse button is clicked.
 
-        .. note::
-
-            The event is triggered, when mouse-left was clicked, even when the current mouse position
-            is not related to actor position.
-
-            You can use :py:meth:`Actor.detect_pixel` to check, if the mouse_position is *inside* the actor.
-
-        Examples:
-
-            A circle will be moved, if you click on circle.
-
-            .. code-block::
-
-                from miniworlds import *
-
-                world = World(120,40)
-                circle = Circle((20, 20))
-                circle.direction = 90
-
-                @circle.register
-                def on_mouse_left(self, mouse_pos):
-                    if self.detect_pixel(mouse_pos):
-                        self.move()
-
-                world.run()
+        The event is triggered for the click itself, independent of whether
+        the click happened on the actor. Use `detect_pixel(position)` if you
+        only want clicks on the actor body.
 
         Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            position: Current mouse position as `(x, y)`.
         """
 
         raise NotImplementedOrRegisteredError(self.on_mouse_left)
 
     def on_mouse_right(self, position: tuple):
-        """Method is called when right mouse button was pressed.
-        You must *register* or *implement* this method as an event.
+        """Called when the right mouse button is clicked.
 
-        .. note::
-
-            The event is triggered, when mouse was clicked,even when the current mouse position is not related
-            to actor position.
-
-            You can use :py:meth:`Actor.detect_pixel` to check, if the mouse_position is *inside* the actor.
-
-        Examples:
-
-            See: :py:meth:`Actor.on_mouse_left`.
+        Use `detect_pixel(position)` if you only want clicks on the actor
+        body.
 
         Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            position: Current mouse position as `(x, y)`.
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_right)
 
     def on_mouse_motion(self, position: tuple):
-        """Method is called when mouse moves. You must *register* or *implement* this method as an event.
+        """Called when the mouse moves.
 
-        .. note::
-
-            The event is triggered, when mouse is moved, even when the current mouse position
-            is not related to actor position.
-
-            You can use :py:meth:`Actor.detect_pixel` to check, if the mouse_position is *inside* the actor.
-
-        Examples:
-
-            A circle will be moved, if you click on circle.
-
-            .. code-block::
-
-                from miniworlds import *
-
-                world = World(120,40)
-                circle = Circle((20, 20))
-                circle.direction = 90
-
-                @circle.register
-                def on_mouse_motion(self, mouse_pos):
-                    if self.detect_pixel(mouse_pos):
-                        self.move()
-
-                world.run()
+        The event is triggered for movement events in general. Use
+        `detect_pixel(position)` if you only want motion over the actor body.
 
         Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            position: Current mouse position as `(x, y)`.
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_motion)
 
@@ -1834,7 +1645,9 @@ class Actor(actor_base.ActorBase):
         raise NotImplementedOrRegisteredError(self.on_mouse_left_released)
 
     def on_mouse_right_released(self, position: tuple):
-        """Method is called when right mouse key is released. See :py:meth:`Actor.on_mouse_left_released`.
+        """Method is called when right mouse key is released.
+
+        The behavior and arguments match `on_mouse_left_released`.
 
 
         Args:
@@ -1990,63 +1803,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def fill_color(self):
-        """
-        The fill color of actor as rgba value, e.g. (255, 0, 0) for red.
+        """Fill color of the actor as RGBA tuple.
 
-        When ``fill_color`` is set to a color, the attribute ``is_filled`` of costume
-        (See: :py:attr:`.appearances.appearance.Appearance.is_filled`) is set to ``True``.
+        Setting this value also enables filling on the costume.
 
-        .. note::
-
-            Aliases: :py:attr:`Actor.color`
-
-        .. warning::
-
-            If you fill a costume with an image, the image will be completely overwritten,
-            even if `fill_color` is transparent.
-
-            This behaviour may change in later releases!
-
-        Examples:
-
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World(200,80)
-            world.default_fill_color = (0,0, 255)
-
-            t = Actor()
-
-            t2 = Actor((40,0))
-            t2.is_filled = (0, 255, 0)
-
-            t3 = Actor((80, 0))
-            t3.fill_color = (255, 0, 0)
-
-            t4 = Actor((120, 0))
-            t4.add_costume((0,0,0))
-            t4.fill_color = (255, 255, 0)
-
-            t5 = Actor((160, 0))
-            t5.add_costume("images/player.png")
-            t5.fill_color = (255, 255, 0, 100) # image is overwritten
-
-            t6 = Circle((0, 40), 20)
-            t6.position = t6.center
-            t6.fill_color = (255, 255, 255)
-
-            t7 = Ellipse((40, 40), 40, 40)
-            t7.fill_color = (255, 0, 255)
-
-            world.run()
-
-        Output:
-
-        .. image:: ../_images/fill_color.png
-            :width: 200px
-            :alt: Set borders
-
+        Notes:
+            - Alias: `Actor.color`
+            - Filling an image costume replaces the visible image content.
         """
         return self._get_appearance_facade().fill_color
 
@@ -2072,26 +1835,11 @@ class Actor(actor_base.ActorBase):
 
     @property
     def border_color(self):
-        """border color of actor.
+        """Border color as RGBA tuple.
 
-        The border-color is a rgba value, for example (255, 0, 0) for red, (0, 255, 0) for green and (255, 0, 0, 100).
-
-        If the color-value has 4 values, the last value defines the transparency:
-          * 0: Full transparent,
-          * 255: No transparency
-
-
-        .. note::
-
-            You must also set :py:attr:`Actor.border` to a value > 0
-
-            Aliases:  :py:attr:`Actor.stroke_color`
-
-        Examples:
-
-            See :py:attr:`Actor.border`
-
-
+        Notes:
+            - Set `Actor.border` to a value greater than `0` for a visible border.
+            - Alias: `Actor.stroke_color`.
         """
         return self._get_appearance_facade().border_color
 
@@ -2105,45 +1853,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def border(self):
-        """The border-size of actor.
+        """Border width of the actor.
 
-        The value is 0, if actor has no border.
+        A value of `0` means no border.
 
-        .. note::
-
-            You can also set border with ``costume.border`` or you can set the border with ``world.default_border``
-
-        Examples:
-
-            Set border of actor:
-
-            .. code-block::
-
-                from miniworlds import *
-
-                world = World(210,80)
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
-
-                t = Actor((10,10)) # default-border and color from world
-                t.add_costume("images/player.png")
-
-                t2 = Actor ((60, 10)) # overwrites default border values
-                t2.add_costume("images/player.png")
-                t2.border_color = (0,255, 0)
-                t2.border = 5
-
-                t3 = Actor ((110, 10)) # removes border
-                t3.add_costume("images/player.png")
-                t3.border = None
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/borders.png
-                :width: 200px
-                :alt: Set borders
+        Notes:
+            You can also configure borders via `costume.border` or
+            `world.default_border`.
         """
         return self._get_appearance_facade().border
 
@@ -2153,6 +1869,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def visible(self):
+        """Whether the actor is currently visible."""
         return self._get_appearance_facade().visible
 
     @visible.setter
@@ -2173,11 +1890,13 @@ class Actor(actor_base.ActorBase):
         return self._get_event_facade().register_sensor(*args, **kwargs)
 
     def get_local_rect(self) -> pygame.Rect:
+        """Return actor rect in camera-local coordinates."""
         local_rect = self.position_manager.get_local_rect()
         return local_rect
 
     @property
     def world(self):
+        """World this actor belongs to."""
         return self._world
 
     @world.setter
@@ -2185,9 +1904,11 @@ class Actor(actor_base.ActorBase):
         self.set_world(new_world)
 
     def set_world(self, new_world : "world_mod.World") -> "Actor":
+        """Move the actor to another world and return the actor."""
         return self._get_event_facade().set_world(new_world)
 
     def new_costume(self):
+        """Create and attach a new empty costume to this actor."""
         return self._get_appearance_facade().new_costume()
 
     @property
@@ -2212,6 +1933,7 @@ class Actor(actor_base.ActorBase):
         self.set_position(value)
 
     def set_position(self, value: Tuple[float, float]):
+        """Set actor position in world coordinates."""
         self._get_movement_facade().set_position(value)
 
     def get_distance_to(self, obj: Union["Actor", Tuple[float, float]]) -> float:
@@ -2226,4 +1948,5 @@ class Actor(actor_base.ActorBase):
         return self._get_sensor_facade().get_distance_to(obj)
 
     def on_shape_change(self):
+        """Hook called when actor shape-related properties change."""
         pass

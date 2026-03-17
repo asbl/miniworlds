@@ -4,6 +4,8 @@ Toolbars are regular worlds that are usually docked beside the main world with `
 
 They are especially useful together with buttons, because the active world can react to toolbar actions in `on_message`.
 
+## API Reference
+
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.gui.toolbar.Toolbar
    :members:

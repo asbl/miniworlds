@@ -24,8 +24,12 @@ msgid "World > Backgrounds"
 msgstr ""
 
 #: ../../source/api/backgrounds_manager.md:3
-msgid "Child class of [Appearances Manager](/api/appearances_manager)"
-msgstr ""
+msgid "Child class of [Appearances Manager](appearances_manager.md)."
+msgstr "Unterklasse von [Appearances Manager](appearances_manager.md)."
+
+#: ../../source/api/backgrounds_manager.md:5
+msgid "API Reference"
+msgstr "API-Referenz"
 
 #: miniworlds.appearances.backgrounds_manager.BackgroundsManager:1 of
 msgid "Manages background appearances in a world."

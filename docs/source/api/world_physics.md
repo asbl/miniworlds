@@ -34,9 +34,11 @@ Physics worlds support dedicated actor callbacks such as `on_touching_circle` an
 
 See also the [Flappy Bird tutorial](../patterns/flappy_physics.md) for a larger example.
 
+## API Reference
+
 ```{eval-rst}
 .. autoclass:: miniworlds_physics.physics_world.PhysicsWorld
-	:members:
+   :members:
 
-	.. autoclasstoc::
+   .. autoclasstoc::
 ```

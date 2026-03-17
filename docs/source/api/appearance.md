@@ -1,10 +1,11 @@
 # Appearance
 
-**Appearance** is the parent-class of **Background** and **Costume**
+`Appearance` is the parent class of `Background` and `Costume`.
 
-**Backgrounds** and **Costumes** are also **Appearances** - All objects of these types inherit all attributes and methods who are defined in this class.
+Backgrounds and costumes are appearances as well, so they inherit all
+attributes and methods defined in this class.
 
-## Appearance
+## API Reference
 
 ```{eval-rst}
 .. autoclass:: miniworlds.appearances.appearance.Appearance

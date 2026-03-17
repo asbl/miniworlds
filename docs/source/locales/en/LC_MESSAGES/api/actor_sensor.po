@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2026-03-17 07:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,13 +17,23 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/api/actor_sensor.md:1
 msgid "Actor > Sensor"
 msgstr ""
 
 #: ../../source/api/actor_sensor.md:3
+msgid ""
+"Sensors are helper actors that can be attached to another actor to detect"
+" nearby objects and interactions."
+msgstr ""
+
+#: ../../source/api/actor_sensor.md:6
+msgid "API Reference"
+msgstr ""
+
+#: ../../source/api/actor_sensor.md:8
 msgid "Sensor"
 msgstr ""
 
@@ -37,7 +47,7 @@ msgstr ""
 msgid "The sensors is not visible and will not detect the actor itself."
 msgstr ""
 
-#: ../../source/api/actor_sensor.md:10
+#: ../../source/api/actor_sensor.md:16
 msgid "Circle Sensor"
 msgstr ""
 
