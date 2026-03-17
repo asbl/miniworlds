@@ -95,6 +95,14 @@ class MouseManager:
         """
         return pygame.mouse.get_pressed()[2]
 
+    def mouse_left_is_clicked(self) -> bool:
+        """Backward-compatible alias for checking the left mouse button."""
+        return self.left()
+
+    def mouse_right_is_clicked(self) -> bool:
+        """Backward-compatible alias for checking the right mouse button."""
+        return self.right()
+
     def x(self) -> int:
         """
         Returns the x-coordinate of the mouse if over the world, otherwise 0.

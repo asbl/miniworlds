@@ -1,0 +1,28 @@
+{
+  "delta_to_previous": {
+    "avg_ms": 60.7962,
+    "frames": 0.0,
+    "max_ms": 180.4486,
+    "metric_blocked_moves": 0.0,
+    "metric_border_hits": 0.0,
+    "metric_successful_moves": -17.0,
+    "min_ms": 2.6893,
+    "p95_ms": 140.4214,
+    "p99_ms": 174.3751
+  },
+  "name": "blockable movement cprofile",
+  "recorded_at": "2026-03-16T22:15:20",
+  "slug": "blockable-movement-cprofile",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 113.4414,
+    "frames": 119,
+    "max_ms": 271.5225,
+    "metric_blocked_moves": 3395,
+    "metric_border_hits": 40,
+    "metric_successful_moves": 18161,
+    "min_ms": 46.2631,
+    "p95_ms": 207.4635,
+    "p99_ms": 258.7506
+  }
+}

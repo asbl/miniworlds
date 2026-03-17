@@ -33,7 +33,8 @@ class Corner(tile_elements.TileDelimiter):
     @classmethod
     def from_pixel(cls, position, world: Optional["tiled_world_mod.TiledWorld"] = None):
         if not world:
-            world = app.App.window.worlds_manager.get_container_by_pixel(position[0], position[1])
+            window = app.App.get_window()
+            world = window.worlds_manager.get_container_by_pixel(position[0], position[1])
         min_value = math.inf
         nearest_hex = None
         corner_points = world.get_corner_points()
@@ -46,7 +47,7 @@ class Corner(tile_elements.TileDelimiter):
 
     @classmethod
     def from_tile(cls, position, direction_string):
-        world = app.App.running_world
+        world = app.App.get_running_world()
         tile = world.get_tile(position)
         return world.get_corner(tile.position + cls.get_direction_from_string(direction_string))
 

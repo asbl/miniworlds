@@ -1,5 +1,5 @@
 import pygame
-from typing import Tuple, Set, TYPE_CHECKING
+from typing import Optional, Tuple, Set, TYPE_CHECKING
 
 import miniworlds.appearances.background as background
 
@@ -13,6 +13,9 @@ class CameraManager(pygame.sprite.Sprite):
     CameraManager defines a movable viewport into a 2D world and tracks visible actors.
     It is accessed via `world.camera` and is responsible for view positioning, actor visibility,
     and coordinate transformations.
+
+    For public API compatibility, docking and world-switching helpers are also
+    exposed through `world.camera` and delegated internally to the layout manager.
     """
 
     def __init__(self, view_x: int, view_y: int, world: "World") -> None:
@@ -181,6 +184,11 @@ class CameraManager(pygame.sprite.Sprite):
         return self.get_world_rect()
 
     @property
+    def window_docking_position(self) -> Optional[str]:
+        """Returns the docking position of this world in the application window."""
+        return self.world._layout.window_docking_position
+
+    @property
     def center(self) -> Tuple[float, float]:
         """Returns center of camera in world coordinates."""
         return (self.topleft[0] + self.view[0] / 2, self.topleft[1] + self.view[1] / 2)
@@ -275,19 +283,28 @@ class CameraManager(pygame.sprite.Sprite):
             actor.dirty = 1
 
     def get_actors_in_view(self) -> Set["Actor"]:
-        actor_rect_pairs = [
-            (actor, actor.position_manager.get_global_rect())
-            for actor in self.world.actors
-        ]
+        if self._view_update_frame == self.world.frame:
+            return self._view_active_actors
+
         current_frame_actors = {
-            actor for actor, rect in actor_rect_pairs
-            if self.rect.colliderect(rect)
+            actor
+            for actor in self.world.actors
+            if self.rect.colliderect(actor.position_manager.get_global_rect())
         }
         self.view_actors_last_frame = self._view_actors_actual_frame
         self._view_actors_actual_frame = current_frame_actors
         self._view_active_actors = current_frame_actors.union(self.view_actors_last_frame)
         self._view_update_frame = self.world.frame
         return self._view_active_actors
+
+    def _should_repaint_actor(self, actor: "Actor") -> bool:
+        if self.world.frame == 0:
+            return True
+        if self._view_update_frame == self.world.frame:
+            return actor in self._view_active_actors
+        if actor in self.view_actors_last_frame:
+            return True
+        return self.is_actor_in_view(actor)
 
     def is_actor_in_view(self, actor: "Actor") -> bool:
         return actor.position_manager.get_global_rect().colliderect(self.rect)
@@ -308,6 +325,22 @@ class CameraManager(pygame.sprite.Sprite):
         else:
             self.topleft = (0, 0)
 
+    def add_right(self, world: "World", size: int = 100) -> "World":
+        """Dock a helper world to the right side of the current world."""
+        return self.world._layout.add_right(world, size)
+
+    def add_bottom(self, world: "World", size: int = 100) -> "World":
+        """Dock a helper world below the current world."""
+        return self.world._layout.add_bottom(world, size)
+
+    def remove_world(self, world: "World") -> None:
+        """Remove a previously docked world."""
+        self.world._layout.remove_world(world)
+
+    def switch_world(self, new_world: "World", reset: bool = False) -> None:
+        """Switch to another world through the public camera API."""
+        self.world._layout.switch_world(new_world, reset)
+
     def is_in_screen(self, pixel: Tuple[int, int]) -> bool:
         return bool(pixel) and self.screen_rect.collidepoint(pixel)
 
@@ -322,6 +355,7 @@ class CameraManager(pygame.sprite.Sprite):
     def _clear_camera_cache(self) -> None:
         """Clears view tracking for actor visibility."""
         self._view_actors_actual_frame.clear()
+        self._view_active_actors.clear()
         self._view_update_frame = -1
 
     def _update(self) -> None:

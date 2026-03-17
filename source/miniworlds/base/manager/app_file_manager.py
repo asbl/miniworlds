@@ -1,5 +1,6 @@
 import os
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 import miniworlds.base.app as app
@@ -8,9 +9,20 @@ import miniworlds.base.app as app
 class FileManager:
 
     @staticmethod
+    def _platform():
+        return app.App.get_platform()
+
+    @staticmethod
+    def _base_path():
+        return app.App.get_path()
+
+    @staticmethod
+    def clear_cache():
+        FileManager._get_path_with_file_ending_cached.cache_clear()
+
+    @staticmethod
     def relative_to_absolute_path(path):
-        canonical_path = str(path).replace('/', os.sep).replace('\\', os.sep)
-        return canonical_path
+        return FileManager._platform().relative_to_absolute_path(str(path))
 
     @staticmethod
     def has_ending(path):
@@ -18,49 +30,35 @@ class FileManager:
 
     @staticmethod
     def get_path_with_file_ending(path, file_endings):
-        if sys.platform == 'emscripten':
-            path = '/' + path
-        # 1. search for file
-        if app.App.path:
-            relative_path = app.App.path + "/" + path
-        else:
-            relative_path = path
-        if Path(relative_path).is_file():
-            full_path = FileManager.relative_to_absolute_path(relative_path)
-            return full_path
-        # 2. search for file with file endings
-        full_path = FileManager._get_full_path_for_endings("", path, file_endings)
-        if full_path:
-            return full_path
-        # 3. search for file with file endings in image sub folder
-        full_path = FileManager._get_full_path_for_endings("images/", path, file_endings)
-        if full_path:
-            return full_path
-        # 4 Auto correct wrong file endings
-        if "." in path:
-            path_without_ending = path.split(".")[0]
-            full_path = FileManager._get_full_path_for_endings("", path_without_ending, file_endings)
-            if full_path:
-                return full_path
-            full_path = FileManager._get_full_path_for_endings("images/", path_without_ending, file_endings)
-            if full_path:
-                return full_path
-        raise FileNotFoundError(f"Filepath {path} not found")
+        return FileManager._get_path_with_file_ending_cached(
+            path,
+            tuple(file_endings),
+            FileManager._base_path(),
+        )
+
+    @staticmethod
+    @lru_cache(maxsize=2048)
+    def _get_path_with_file_ending_cached(path, file_endings, base_path):
+        return FileManager._platform().resolve_path_with_file_endings(
+            path,
+            file_endings,
+            base_path=base_path,
+        )
 
     @staticmethod
     def _get_full_path_for_endings(prefix, path, file_endings):
         for filename_extension in file_endings:
             relative_path = prefix + path + "." + filename_extension
-            if app.App.path:
-                relative_path = app.App.path + "/" + relative_path
-            if Path(relative_path).is_file():
+            if FileManager._base_path():
+                relative_path = FileManager._platform().join_path(FileManager._base_path(), relative_path)
+            if FileManager._platform().path_is_file(relative_path):
                 full_path = FileManager.relative_to_absolute_path(relative_path)
                 return full_path
 
     @staticmethod
     def get_image_path(path):
         canonical_path = FileManager.relative_to_absolute_path(path)
-        if Path(canonical_path).is_file():
+        if FileManager._platform().path_is_file(canonical_path):
             return Path(canonical_path)
         else:
             return FileManager.get_path_with_file_ending(path, ["jpg", "jpeg", "png", "JPG", "JPEG", "PNG"])

@@ -5,6 +5,7 @@ from typing import Union, Tuple, List, TYPE_CHECKING
 import miniworlds.appearances.managers.font_manager as font_manager
 import miniworlds.appearances.managers.image_manager as image_manager
 import miniworlds.appearances.managers.transformations_manager as transformations_manager
+import miniworlds.appearances.appearance_rendering_facade as appearance_rendering_facade
 import miniworlds.tools.binding as binding
 import miniworlds.tools.color as color_mod
 import numpy
@@ -80,6 +81,14 @@ class Appearance(metaclass=MetaAppearance):
         self.animation_length = 0
         self._animation_start_frame = 0
         self._cached_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
+        self._rendering_facade = appearance_rendering_facade.AppearanceRenderingFacade(self)
+
+    def _get_rendering_facade(self) -> appearance_rendering_facade.AppearanceRenderingFacade:
+        facade = getattr(self, "_rendering_facade", None)
+        if facade is None:
+            facade = appearance_rendering_facade.AppearanceRenderingFacade(self)
+            self._rendering_facade = facade
+        return facade
 
     def _set_defaults(self, **kwargs) -> "Appearance":
         for key, value in kwargs.items():
@@ -685,7 +694,7 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("scale", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def remove_last_image(self):
-        self.image_manager.remove_last_image()
+        self._get_rendering_facade().remove_last_image()
 
     def add_image(self, source: Union[str, Tuple, pygame.Surface]) -> int:
         """Adds an image to the appearance
@@ -693,11 +702,7 @@ class Appearance(metaclass=MetaAppearance):
         Returns:
             Index of the created image.
         """
-        if type(source) not in [str, pygame.Surface, tuple]:
-            raise MiniworldsError(
-                f"Error: Image source has wrong format (expected str or pygame.Surface, got {type(source)}"
-            )
-        return self.image_manager.add_image(source)
+        return self._get_rendering_facade().add_image(source)
 
     def _set_image(self, source: Union[int, "Appearance", tuple]) -> bool:
         """Sets the displayed image of costume/background to selected index
@@ -723,22 +728,14 @@ class Appearance(metaclass=MetaAppearance):
                 world.run()
 
         """
-        if isinstance(source, int):
-            return self.image_manager._set_image_index(source)
-        elif type(source) == tuple:
-            surface = image_manager.ImageManager.get_surface_from_color(source)
-            self.image_manager.replace_image(
-                surface, image_manager.ImageManager.COLOR, source
-            )
+        return self._get_rendering_facade().set_image(source)
 
     def add_images(self, sources: list):
         """Adds multiple images to background/costume.
 
         Each source in sources parameter must be a valid parameter for :py:attr:`Appearance.cimage`
         """
-        assert isinstance(sources, list)
-        for source in sources:
-            self.add_image(source)
+        self._get_rendering_facade().add_images(sources)
 
     def animate(self, loop=False):
         """Animates the costume
@@ -764,10 +761,7 @@ class Appearance(metaclass=MetaAppearance):
             :width: 300
             :height: 100
         """
-        self._animation_start_frame = self.world.frame
-        self.is_animated = True
-        if loop:
-            self.loop = True
+        self._get_rendering_facade().animate(loop=loop)
 
     def after_animation(self):
         """
@@ -792,7 +786,7 @@ class Appearance(metaclass=MetaAppearance):
 
                 world.run()
         """
-        pass
+        self._get_rendering_facade().after_animation()
 
     def to_colors_array(self) -> numpy.ndarray:
         """Create an array from costume or background.
@@ -825,7 +819,7 @@ class Appearance(metaclass=MetaAppearance):
             .. image:: ../_images/sunflower5grey.png
                 :alt: converted image
         """
-        return pygame.surfarray.array3d(self.image)
+        return self._get_rendering_facade().to_colors_array()
 
     def from_array(self, arr: numpy.ndarray):
         """Create a background or costume from array. The array must be a ``numpy.ndarray,
@@ -857,106 +851,55 @@ class Appearance(metaclass=MetaAppearance):
             .. image:: ../_images/gradient3.png
                 :alt: converted image
         """
-        surf = pygame.surfarray.make_surface(arr)
-        self.image_manager.replace_image(surf, image_manager.ImageManager.SURFACE, None)
+        self._get_rendering_facade().from_array(arr)
 
     def fill(self, value):
         """Set default fill color for borders and lines"""
-        self._is_filled = value
-        if self.is_filled:
-            self.fill_color = color_mod.Color(value).get()
-        self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
+        self._get_rendering_facade().fill(value)
 
     def set_filled(self, value):
-        self._is_filled = value
+        self._get_rendering_facade().set_filled(value)
 
     def get_color(self, position):
-        x = int(position[0])
-        y = int(position[1])
-        if 0 <= x < self.image.get_width() and 0 <= y < self.image.get_height():
-            return self.image.get_at((x, y))
-        else:
-            return None
+        return self._get_rendering_facade().get_color(position)
 
     def get_rect(self):
-        frame = self.actor.world.frame
-        if frame < self._cached_rect[0]:
-            return self._cached_rect[1]
-        rect = self.image.get_rect()
-        self._cached_rect = (frame, rect)
-        return rect
+        return self._get_rendering_facade().get_rect()
 
     def draw(self, source, position, width, height):
-        if isinstance(source, str):
-            self.draw_on_image(source, position, width, height)
-        elif isinstance(source, tuple):
-            self.draw_color_on_image(source, position, width, height)
+        self._get_rendering_facade().draw(source, position, width, height)
 
     def draw_on_image(self, path, position, width, height):
-        file = self.image_manager.find_image_file(path)
-        surface = self.image_manager.load_image(file)
-        self.draw_image_append(
-            surface, pygame.Rect(position[0], position[1], width, height)
-        )
-        self.set_dirty("draw_images", Appearance.RELOAD_ACTUAL_IMAGE)
+        self._get_rendering_facade().draw_on_image(path, position, width, height)
 
     def draw_color_on_image(self, color, position, width, height):
-        surface = pygame.Surface((width, height))
-        surface.fill(color)
-        self.draw_image_append(
-            surface, pygame.Rect(position[0], position[1], width, height)
-        )
-        self.set_dirty("draw_images", Appearance.RELOAD_ACTUAL_IMAGE)
+        self._get_rendering_facade().draw_color_on_image(color, position, width, height)
 
     def __str__(self):
-        return (
-            self.__class__.__name__
-            + "with ID ["
-            + str(self.id)
-            + "] for parent:["
-            + str(self.parent)
-            + "], images: "
-            + str(self.image_manager.images_list)
-        )
+        return self._get_rendering_facade().to_string()
 
     def get_image(self):
         """If dirty, the image will be reloaded.
         The image pipeline will be  processed, defined by "set_dirty"
         """
-        if (
-            self.dirty >= self.RELOAD_ACTUAL_IMAGE
-            and not self._flag_transformation_pipeline
-        ):
-            self.dirty = 0
-            self._flag_transformation_pipeline = True
-            self._before_transformation_pipeline()
-            image = self.image_manager.load_image_from_image_index()
-            image = self.transformations_manager.process_transformation_pipeline(
-                image, self
-            )
-            self._after_transformation_pipeline()
-            self._flag_transformation_pipeline = False
-            self._image = image
-        return self._image
+        return self._get_rendering_facade().get_image()
 
     def _before_transformation_pipeline(self):
         """Called in `get_image`, if image is "dirty" (e.g. size, rotation, ... has changed)
         after image transformation pipeline is processed
         """
-        pass
+        self._get_rendering_facade().before_transformation_pipeline()
 
     def _after_transformation_pipeline(self) -> None:
         """Called in `get_image`, if image is "dirty" (e.g. size, rotation, ... has changed)
         before image transformation pipeline is processed
         """
-        pass
+        self._get_rendering_facade().after_transformation_pipeline()
 
     def update(self):
         """Loads the next image,
         called 1/frame"""
-        if self.parent:
-            self._load_image()
-            return 1
+        return self._get_rendering_facade().update()
 
     def _load_image(self):
         """Loads the image,
@@ -964,51 +907,36 @@ class Appearance(metaclass=MetaAppearance):
         * switches image if necessary
         * processes transformations pipeline if necessary
         """
-        if self.is_animated and self._animation_start_frame != self.world.frame:
-            if self.world.frame != 0 and self.world.frame % self.animation_speed == 0:
-                self.image_manager.next_image()
-        self.get_image()
+        self._get_rendering_facade().load_image()
 
     def register(self, method: callable):
         """
         Register method for decorator. Registers method to actor or background.
         """
-        bound_method = binding.bind_method(self, method)
-        return bound_method
+        return self._get_rendering_facade().register(method)
 
     def draw_shape_append(self, shape, arguments):
-        self.draw_shapes.append((shape, arguments))
+        self._get_rendering_facade().draw_shape_append(shape, arguments)
 
     def draw_shape_set(self, shape, arguments):
-        self.draw_shapes = [(shape, arguments)]
+        self._get_rendering_facade().draw_shape_set(shape, arguments)
 
     def draw_image_append(self, surface, rect):
-        self.draw_images.append((surface, rect))
+        self._get_rendering_facade().draw_image_append(surface, rect)
 
     def draw_image_set(self, surface, rect):
-        self.draw_images = [(surface, rect)]
+        self._get_rendering_facade().draw_image_set(surface, rect)
 
     @property
     def dirty(self):
-        return self._dirty
+        return self._get_rendering_facade().dirty
 
     @dirty.setter
     def dirty(self, value):
-        if value == 0:
-            self._dirty = 0
-        else:
-            self.set_dirty(value)
+        self._get_rendering_facade().dirty = value
 
     def set_dirty(self, value="all", status=1):
-        if self.parent and hasattr(self, "transformations_manager"):
-            if value and self.images and self.get_manager()._is_display_initialized:
-                self._update_draw_shape()
-                self.transformations_manager.flag_reload_actions_for_transformation_pipeline(
-                    value
-                )
-            if status >= self._dirty:
-                self._dirty = status
-                self.parent.dirty = 1
+        self._get_rendering_facade().set_dirty(value=value, status=status)
 
     @abstractmethod
     def get_manager(self):
@@ -1020,16 +948,7 @@ class Appearance(metaclass=MetaAppearance):
         """Implemented in subclasses Costume and Background"""
 
     def _update_draw_shape(self) -> None:
-        self.draw_shapes = []
-        if self.parent and self._inner_shape() and self.image_manager:
-            if self._is_filled and not self.image_manager.is_image():
-                self.draw_shape_append(
-                    self._inner_shape()[0], self._inner_shape_arguments()
-                )
-        if self.parent and self._outer_shape() and self.border:
-            self.draw_shape_append(
-                self._outer_shape()[0], self._outer_shape_arguments()
-            )
+        self._get_rendering_facade().update_draw_shape()
 
     def _inner_shape(self) -> tuple:
         """Returns inner shape of costume
@@ -1037,10 +956,7 @@ class Appearance(metaclass=MetaAppearance):
         Returns:
             pygame.Rect: Inner shape (Rectangle with size of actor)
         """
-        return pygame.draw.rect, [
-            pygame.Rect(0, 0, self.parent.size[0], self.parent.size[1]),
-            0,
-        ]
+        return self._get_rendering_facade().inner_shape()
 
     def _outer_shape(self) -> tuple:
         """Returns outer shape of costume
@@ -1048,10 +964,7 @@ class Appearance(metaclass=MetaAppearance):
         Returns:
             pygame.Rect: Outer shape (Rectangle with size of actors without filling.)
         """
-        return pygame.draw.rect, [
-            pygame.Rect(0, 0, self.parent.size[0], self.parent.size[1]),
-            self.border,
-        ]
+        return self._get_rendering_facade().outer_shape()
 
     def _inner_shape_arguments(self) -> List:
         """def setGets arguments for inner shape
@@ -1060,10 +973,7 @@ class Appearance(metaclass=MetaAppearance):
             List[]: List of arguments
         """
 
-        color = self.fill_color
-        return [
-            color,
-        ] + self._inner_shape()[1]
+        return self._get_rendering_facade().inner_shape_arguments()
 
     def _outer_shape_arguments(self) -> List:
         """Gets arguments for outer shape
@@ -1071,7 +981,4 @@ class Appearance(metaclass=MetaAppearance):
         Returns:
             List[]: List of arguments
         """
-        color = self.border_color
-        return [
-            color,
-        ] + self._outer_shape()[1]
+        return self._get_rendering_facade().outer_shape_arguments()

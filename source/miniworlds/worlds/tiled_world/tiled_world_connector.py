@@ -46,7 +46,7 @@ class TiledWorldConnector(world_connector.WorldConnector):
         """
         self.remove_static_actor()
         self.remove_dynamic_actor()
-        super().remove_actor_from_world()
+        return super().remove_actor_from_world(kill=kill)
 
     def add_static_actor(self):
         """

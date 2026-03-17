@@ -1,5 +1,6 @@
 from inspect import signature
 from collections.abc import Iterable
+from functools import lru_cache
 from miniworlds.base.exceptions import (
     FirstArgumentShouldBeSelfError,
     NotCallableError,
@@ -7,25 +8,34 @@ from miniworlds.base.exceptions import (
     NotNullError,
 )
 from typing import Optional
+import logging
 import traceback
 import sys
 import os
 
 
-def get_signature(method: callable, arguments: tuple, allow_none=True):
-    check_signature(method, arguments, allow_none)
+logger = logging.getLogger(__name__)
+
+
+@lru_cache(maxsize=4096)
+def _cached_signature(method: callable):
     return signature(method)
 
 
+def get_signature(method: callable, arguments: tuple, allow_none=True):
+    check_signature(method, arguments, allow_none)
+    return _cached_signature(method)
+
+
 def check_signature(method: callable, arguments: tuple, allow_none=False):
-    if not type(callable(method)):
+    if not callable(method):
         raise NotCallableError(method)
     if arguments is None and not allow_none:
         raise NotNullError(method)
     if type(arguments) is not list and type(arguments) is not tuple and type(arguments) is not dict:
         arguments = [arguments]
     try:
-        sig = signature(method)
+        sig = _cached_signature(method)
     except ValueError:
         raise FirstArgumentShouldBeSelfError(method)
     i = 0
@@ -67,7 +77,7 @@ def print_filtered_traceback(exc: Exception, match: str = None):
             filtered_trace.append(f'  File "{filename}", line {lineno}, in {name}')
         tb = tb.tb_next
 
-    print("Traceback (most recent call last):", file=sys.stderr)
+    logger.error("Traceback (most recent call last):")
     for line in filtered_trace:
-        print(line, file=sys.stderr)
-    print(f"{type(exc).__name__}: {exc}", file=sys.stderr)
+        logger.error(line)
+    logger.error("%s: %s", type(exc).__name__, exc)

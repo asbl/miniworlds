@@ -34,6 +34,18 @@ class Positionmanager:
         self._cached_global_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
         self._cached_local_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
 
+    def _invalidate_rect_cache(self) -> None:
+        self._cached_global_rect = (-1, self._cached_global_rect[1])
+        self._cached_local_rect = (-1, self._cached_local_rect[1])
+
+        # Keep world-level static blocking caches coherent when a blocking static actor changes.
+        actor_world = getattr(self.actor, "_world", None)
+        if actor_world is None:
+            return
+        if self.is_blocking and getattr(self.actor, "_static", False):
+            current = getattr(actor_world, "_blocking_registry_version", 0)
+            actor_world._blocking_registry_version = current + 1
+
     @property
     def origin(self):
         return self._origin
@@ -73,20 +85,25 @@ class Positionmanager:
             pygame.Rect: A rect with the actor's global coordinates.
         """
         frame = self.actor.world.frame
-        if frame < self._cached_global_rect[0]:
-            return self._cached_global_rect
+        if frame == self._cached_global_rect[0]:
+            return self._cached_global_rect[1]
 
-        if self.actor.costume_manager.has_costume:
-            costume = self.actor.costume
-            rect = costume.get_rect()
+        costume_manager = getattr(self.actor, "_costume_manager", None)
+        appearance = (
+            costume_manager.appearance
+            if costume_manager is not None and costume_manager.appearance is not None
+            else None
+        )
+        if appearance is not None:
+            rect = appearance.get_rect().copy()
         else:
-            width, height = self.actor.size
+            width, height = self._size
             rect = pygame.Rect(0, 0, width, height)
 
-        if self.origin == "center":
-            rect.center = self.get_center()
-        elif self.origin == "topleft":
-            rect.topleft = self.get_topleft()
+        if self._origin == "center":
+            rect.center = self.position
+        elif self._origin == "topleft":
+            rect.topleft = self.position
         self._cached_global_rect = (frame, rect)
         return rect
 
@@ -98,18 +115,18 @@ class Positionmanager:
         into the camera's coordinate system.
         """
         frame = self.actor.world.frame
-        if frame < self._cached_local_rect[0]:
-            return self._cached_local_rect
+        if frame == self._cached_local_rect[0]:
+            return self._cached_local_rect[1]
         
-        rect = self.get_global_rect()
-
         camera = self.actor.world.camera
-        if self.origin == "center":
-            rect.center = camera.get_local_position(self.get_center())
-        elif self.origin == "topleft":
-            rect.topleft = camera.get_local_position(self.get_topleft())
+        rect = self.get_global_rect().copy()
+        local_position = camera.get_local_position(self.position)
+        if self._origin == "center":
+            rect.center = local_position
+        elif self._origin == "topleft":
+            rect.topleft = local_position
         else:
-            raise ValueError(f"Unsupported origin type: {self.origin!r}")
+            raise ValueError(f"Unsupported origin type: {self._origin!r}")
         self._cached_local_rect = (frame, rect)
         return rect
 
@@ -120,15 +137,16 @@ class Positionmanager:
         The screen rect is based on global coordinates, transformed
         by the camera and the world's window position.
         """
-        rect = self.get_global_rect()
         camera = self.actor.world.camera
+        rect = self.get_global_rect().copy()
+        screen_position = camera.get_screen_position(self.position)
 
-        if self.origin == "center":
-            rect.center = camera.get_screen_position(self.get_center())
-        elif self.origin == "topleft":
-            rect.topleft = camera.get_screen_position(self.get_topleft())
+        if self._origin == "center":
+            rect.center = screen_position
+        elif self._origin == "topleft":
+            rect.topleft = screen_position
         else:
-            raise ValueError(f"Unsupported origin type: {self.origin!r}")
+            raise ValueError(f"Unsupported origin type: {self._origin!r}")
 
         return rect
 
@@ -272,9 +290,14 @@ class Positionmanager:
             "actor_mod.Actor": The current actor
         """
         old_position = self.position
+        position_changed = old_position != value
         self.last_position = old_position
         self.position = value
-        if tuple(int(x) for x in self.last_position) != tuple(int(x) for x in self.position):
+        if position_changed:
+            self._invalidate_rect_cache()
+
+        if int(old_position[0]) != int(value[0]) or int(old_position[1]) != int(value[1]):
+            self.actor.world.camera._clear_camera_cache()
             self.actor.dirty = 1
 
         return self
@@ -342,8 +365,10 @@ class Positionmanager:
         direction = direction_raw if distance >= 0 else -direction_raw
         destination = self.actor.sensor_manager.get_destination(self.position, direction, distance)
         if self.is_blockable:
-            found_actors = self.actor.sensor_manager.detect_actors_at_destination(destination)
-            if not any(actor.is_blocking for actor in found_actors):
+            blocking_actor = self.actor.sensor_manager.detect_blocking_actor_at_destination(
+                destination
+            )
+            if blocking_actor is None:
                 self.set_position(destination)
         else:
             self.set_position(destination)

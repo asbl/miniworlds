@@ -1,17 +1,97 @@
 from collections import defaultdict
-from typing import Any, Callable, Optional, Union
-from collections import defaultdict
+from collections.abc import Iterable
+from typing import Any, Callable, Optional
 import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.world as world_mod
-import miniworlds.tools.actor_class_inspection as actor_class_inspection
 import miniworlds.tools.inspection as inspection
+from miniworlds.worlds.manager.event_subscription import EventSubscription
 
 
 class EventRegistry:
+    """Stores event, message, and sensor handlers behind a single internal registry API."""
+
     def __init__(self, world : "world_mod.World", event_definition):
-        self.registered_events = defaultdict(set)
         self.event_definition = event_definition
         self.world = world
+        self.change_counter = 0
+        self._event_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
+        self._message_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
+        self._sensor_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
+
+    def _mark_changed(self) -> None:
+        self.change_counter += 1
+
+    @property
+    def registered_events(self):
+        events = defaultdict(set)
+        for event_name, methods in self._event_handlers.items():
+            events[event_name] = methods.copy()
+        if self._message_handlers:
+            events["message"] = defaultdict(
+                set,
+                {message: methods.copy() for message, methods in self._message_handlers.items()},
+            )
+        if self._sensor_handlers:
+            events["sensor"] = defaultdict(
+                set,
+                {target: methods.copy() for target, methods in self._sensor_handlers.items()},
+            )
+        return events
+
+    def registered_event_names(self) -> set[str]:
+        names = set(self._event_handlers.keys())
+        if self._message_handlers:
+            names.add("message")
+        if self._sensor_handlers:
+            names.add("sensor")
+        return names
+
+    def copy_event_methods(self, event_name: str) -> set[Callable]:
+        return self._event_handlers.get(event_name, set()).copy()
+
+    def copy_message_methods(self, message: str) -> set[Callable]:
+        return self._message_handlers.get(message, set()).copy()
+
+    def copy_generic_message_methods(self) -> set[Callable]:
+        return self.copy_event_methods("on_message")
+
+    def iter_sensor_methods(self) -> list[tuple[str, tuple[Callable, ...]]]:
+        return [
+            (target, tuple(methods.copy()))
+            for target, methods in self._sensor_handlers.items()
+        ]
+
+    def restore_subscriptions(
+        self, subscriptions: Iterable[EventSubscription]
+    ) -> None:
+        for subscription in subscriptions:
+            self._restore_subscription(subscription)
+
+    def _add_event_method(self, event_name: str, method: Callable) -> None:
+        previous_len = len(self._event_handlers[event_name])
+        self._event_handlers[event_name].add(method)
+        if len(self._event_handlers[event_name]) != previous_len:
+            self._mark_changed()
+
+    def _add_message_method(self, message: str, method: Callable) -> None:
+        previous_len = len(self._message_handlers[message])
+        self._message_handlers[message].add(method)
+        if len(self._message_handlers[message]) != previous_len:
+            self._mark_changed()
+
+    def _add_sensor_method(self, target: str, method: Callable) -> None:
+        previous_len = len(self._sensor_handlers[target])
+        self._sensor_handlers[target].add(method)
+        if len(self._sensor_handlers[target]) != previous_len:
+            self._mark_changed()
+
+    def _restore_subscription(self, subscription: EventSubscription) -> None:
+        if subscription.kind == "event":
+            self._add_event_method(subscription.event_name, subscription.method)
+        elif subscription.kind == "message" and subscription.route_key is not None:
+            self._add_message_method(subscription.route_key, subscription.method)
+        elif subscription.kind == "sensor" and subscription.route_key is not None:
+            self._add_sensor_method(subscription.route_key, subscription.method)
 
     def setup(self):
         """Registers initial world events."""
@@ -38,14 +118,9 @@ class EventRegistry:
         # Retrieve the bound method from the instance using reflection
         method = inspection.Inspection(instance).get_instance_method(member)
         self.event_definition.update()
-        if method:
-            # Loop through all known event names defined in the event definition
-            for defined_event in self.event_definition.class_events_set:
-                # Check if the method name matches a known event name exactly
-                if member == defined_event:
-                    # Register the method under the corresponding event
-                    self.registered_events[defined_event].add(method)
-                    return defined_event, method
+        if method and member in self.event_definition.class_events_set:
+            self._add_event_method(member, method)
+            return member, method
 
     def register_message_event(self, member, instance, message):
         """
@@ -62,12 +137,7 @@ class EventRegistry:
         if not method:
             return  # Skip if the method doesn't exist or isn't accessible
 
-        # Ensure the 'message' entry in the event registry is a defaultdict(set)
-        if not isinstance(self.registered_events["message"], defaultdict):
-            self.registered_events["message"] = defaultdict(set)
-
-        # Register the method under the given message key
-        self.registered_events["message"][message].add(method)
+        self._add_message_method(message, method)
 
     def register_sensor_event(self, member: str, instance: Any, target: str) -> None:
         """
@@ -83,14 +153,9 @@ class EventRegistry:
         if not method:
             return  # Exit early if the method doesn't exist or isn't bound
 
-        # Ensure the 'sensor' entry in the event registry is a defaultdict(set)
-        if not isinstance(self.registered_events["sensor"], defaultdict):
-            self.registered_events["sensor"] = defaultdict(set)
+        self._add_sensor_method(target, method)
 
-        # Register the method under the given target identifier
-        self.registered_events["sensor"][target].add(method)
-
-    def unregister_instance(self, instance: Any) -> dict[str, set[Callable]]:
+    def unregister_instance(self, instance: Any) -> list[EventSubscription]:
         """
         Unregisters all event methods associated with the given instance.
 
@@ -107,26 +172,34 @@ class EventRegistry:
             instance: The object (typically an Actor or World) whose methods should be unregistered.
 
         Returns:
-            A dictionary mapping event names to the set of methods that were removed.
+            A list of structured event subscriptions that can later be restored.
         """
-        removed_methods: dict[str, set[Callable]] = defaultdict(set)
+        removed_methods: list[EventSubscription] = []
+        registry_changed = False
 
+        for event_name, method_set in self._event_handlers.items():
+            for method in list(method_set):
+                if getattr(method, "__self__", None) == instance:
+                    method_set.remove(method)
+                    removed_methods.append(EventSubscription.event(event_name, method))
+                    registry_changed = True
 
-        for event, method_data in self.registered_events.items():
-            # Handle nested event structures like "message" or "sensor"
-            if isinstance(method_data, dict):
-                for subkey, method_set in method_data.items():
-                    for method in list(method_set):
-                        if getattr(method, "__self__", None) == instance:
-                            method_set.remove(method)
-                            removed_methods[event].add(method)
+        for message, method_set in self._message_handlers.items():
+            for method in list(method_set):
+                if getattr(method, "__self__", None) == instance:
+                    method_set.remove(method)
+                    removed_methods.append(EventSubscription.message(message, method))
+                    registry_changed = True
 
-            # Handle flat event sets
-            elif isinstance(method_data, set):
-                for method in list(method_data):  # Copy to avoid mutation during iteration
-                    if getattr(method, "__self__", None) == instance:
-                        method_data.remove(method)
-                        removed_methods[event].add(method)
+        for target, method_set in self._sensor_handlers.items():
+            for method in list(method_set):
+                if getattr(method, "__self__", None) == instance:
+                    method_set.remove(method)
+                    removed_methods.append(EventSubscription.sensor(target, method))
+                    registry_changed = True
+
+        if registry_changed:
+            self._mark_changed()
 
         return removed_methods
 
@@ -194,8 +267,8 @@ class EventRegistry:
                         if member.startswith("on_") or member.startswith("act")
                     ]
                 )
-                member_set.union(self._get_members_for_classes(cls.__bases__))
+                member_set = member_set.union(self._get_members_for_classes(cls.__bases__))
                 all_members = all_members.union(member_set)
             else:
-                all_members = set()
+                continue
         return all_members

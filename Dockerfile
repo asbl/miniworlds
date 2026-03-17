@@ -29,6 +29,7 @@ RUN pip install -e /app/source
 
 # Copy test files
 COPY test ./test
+COPY pytest.ini ./pytest.ini
 
 # Give full write permissions to /app (fixes PytestCacheWarning)
 RUN chmod -R 777 /app

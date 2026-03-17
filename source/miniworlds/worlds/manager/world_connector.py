@@ -1,5 +1,4 @@
-import collections
-from typing import Optional, Dict, Type, Tuple
+from typing import Optional, Type, Tuple, Iterable
 import pygame
 
 import miniworlds.appearances.costume as costume
@@ -9,9 +8,11 @@ import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 from miniworlds.base.exceptions import MissingActorPartsError
+from miniworlds.worlds.manager.event_subscription import EventSubscription
 
 
 class WorldConnector():
+    """Owns the actor-to-world attachment lifecycle and its manager setup."""
 
     ACTORS_HAVE_FIXED_SIZE = False
 
@@ -99,6 +100,30 @@ class WorldConnector():
             self.init_costume_manager()
             self.actor._has_costume_manager = True
 
+    def _bump_blocking_registry_version(self) -> None:
+        current = getattr(self.world, "_blocking_registry_version", 0)
+        self.world._blocking_registry_version = current + 1
+
+    def sync_blocking_registration(
+        self, previous_value: Optional[bool] = None, value: Optional[bool] = None
+    ) -> None:
+        if not hasattr(self.world, "_blocking_actors"):
+            return
+        if value is None:
+            value = bool(getattr(self.actor, "is_blocking", False))
+        if previous_value is not None and previous_value == value:
+            return
+
+        was_registered = self.actor in self.world._blocking_actors
+        if value:
+            self.world._blocking_actors.add(self.actor)
+        else:
+            self.world._blocking_actors.discard(self.actor)
+        is_registered = self.actor in self.world._blocking_actors
+
+        if was_registered != is_registered:
+            self._bump_blocking_registry_version()
+
     def add_to_world(self, position: Tuple[float, float] = (0, 0)) -> "actor_mod.Actor":
         """
         Adds the actor to the world at the given position. Initializes required managers and
@@ -131,12 +156,14 @@ class WorldConnector():
             self.actor._is_setup_completed = True
             self.world._mainloop.reload_costumes_queue.append(self.actor)
 
+        self.sync_blocking_registration(value=self.actor.is_blocking)
+
         self.world.event_manager.register_events_for_actor(self.actor)
         self.world.on_new_actor(self.actor)
 
         return self.actor
 
-    def remove_actor_from_world(self, kill: bool = False) -> collections.defaultdict:
+    def remove_actor_from_world(self, kill: bool = False) -> list[EventSubscription]:
         """
         Removes the actor from the world, unregisters it from events, updates visuals,
         and optionally deletes it from memory.
@@ -145,7 +172,7 @@ class WorldConnector():
             kill (bool): Whether the actor should be permanently deleted. Defaults to False.
 
         Returns:
-            collections.defaultdict: A dictionary of unregistered event methods for potential re-registration.
+            list[EventSubscription]: Structured event subscriptions for potential re-registration.
         """
         self.actor.before_remove()
         self.actor._is_acting = False
@@ -163,8 +190,8 @@ class WorldConnector():
             self.actor)
 
         # Remove from reload queue if present
-        if self in self.world._mainloop.reload_costumes_queue:
-            self.world.mainloop.reload_costumes_queue.remove(self)
+        if self.actor in self.world._mainloop.reload_costumes_queue:
+            self.world._mainloop.reload_costumes_queue.remove(self.actor)
 
         # Remove from dynamic actors if not static
         if not self.actor._static:
@@ -173,6 +200,8 @@ class WorldConnector():
         # Disable managers
         self.actor._has_sensor_manager = False
         self.actor._has_position_manager = False
+
+        self.sync_blocking_registration(value=False)
 
         # Remove from world
         self.world.actors.remove(self.actor)
@@ -203,16 +232,14 @@ class WorldConnector():
         self.add_to_world(position)
 
         # Re-register previously registered event methods
-        self.register_event_methods(unregistered_methods)
+        self.restore_event_subscriptions(unregistered_methods)
 
-    def register_event_methods(self, method_dict: Dict[str, callable]):
-        if method_dict:
-            for event, method_data in method_dict.items():
-                if isinstance(method_data, set):
-                    for method in method_data:
-                        self.actor.register(method)
-                else:
-                    self.actor.register(method_data)
+    def restore_event_subscriptions(self, subscriptions: Iterable[EventSubscription]):
+        if subscriptions:
+            self.world.event_manager.restore_subscriptions(list(subscriptions))
+
+    def register_event_methods(self, method_dict):
+        self.restore_event_subscriptions(method_dict)
 
     def init_sensor_manager(self):
         self.actor._sensor_manager = self.get_sensor_manager_class()(self.actor, self.world)
@@ -237,11 +264,17 @@ class WorldConnector():
             del self.actor
 
     def set_static(self, value):
+        previous_value = self.actor._static
         self.actor._static = value
         if self.actor._static:
             self.remove_dynamic_actor()
         else:
             self.add_dynamic_actor()
+
+        if previous_value != self.actor._static and bool(
+            getattr(self.actor, "is_blocking", False)
+        ):
+            self._bump_blocking_registry_version()
 
     def remove_dynamic_actor(self):
         if self.actor in self.world._dynamic_actors:

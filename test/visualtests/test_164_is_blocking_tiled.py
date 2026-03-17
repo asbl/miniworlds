@@ -6,7 +6,8 @@ import os
 import random
 
 
-class Test164(unittest.TestCase):
+class TestTiledBlockingMovement(unittest.TestCase):
+    SCREENSHOT_TITLE = "Test164"
 
     def setUp(self):
         def test_code():
@@ -46,7 +47,7 @@ class Test164(unittest.TestCase):
         App.reset(unittest=True, file=__file__)
         world = test_code()
         """ Setup screenshot tester"""
-        TEST_FRAMES = []
+        TEST_FRAMES = [1, 5]
         QUIT_FRAME = 5
         tester = ScreenshotTester(TEST_FRAMES, QUIT_FRAME, self)
         tester.setup(world)

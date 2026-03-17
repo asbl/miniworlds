@@ -21,7 +21,11 @@ msgstr ""
 
 #: ../../source/api/world_manager_camera.md:1
 msgid "World > Camera"
-msgstr ""
+msgstr "World > Camera"
+
+#: ../../source/api/world_manager_camera.md:3
+msgid "Besides scrolling and coordinate conversion, `world.camera` also offers the public helper methods `add_right(...)`, `add_bottom(...)`, `remove_world(...)`, and `switch_world(...)`."
+msgstr "Neben Scrollen und Koordinatenumrechnung bietet `world.camera` auch die öffentlichen Hilfsmethoden `add_right(...)`, `add_bottom(...)`, `remove_world(...)` und `switch_world(...)`."
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager:1 of
 msgid ""
@@ -29,6 +33,10 @@ msgid ""
 "visible actors. It is accessed via `world.camera` and is responsible for "
 "view positioning, actor visibility, and coordinate transformations."
 msgstr ""
+"Der CameraManager definiert einen beweglichen Ausschnitt einer 2D-Welt und "
+"verfolgt sichtbare Actors. Er ist ueber `world.camera` erreichbar und fuer "
+"Blickfeldposition, Sichtbarkeit von Actors und Koordinatenumrechnungen "
+"zustaendig."
 
 #: ../../source/api/world_manager_camera.md
 msgid "Public Data Attributes:"

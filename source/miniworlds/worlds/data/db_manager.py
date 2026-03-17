@@ -1,26 +1,26 @@
 import sqlite3
+from collections.abc import Mapping
+
+import miniworlds.base.app as app
 
 
 class DBManager():
 
     def __init__(self, file):
         self.file = file
-        self.connection = sqlite3.connect(self.file)
+        self.connection = app.App.get_platform().connect_sqlite(self.file)
         self.cursor = self.connection.cursor()
 
     def insert(self, table: str, row: dict) -> bool:
         try:
-            cols = ', '.join('{}'.format(col) for col in row.keys())
-            vals = ""
-            for col in row.values():
-                if isinstance(col, str):
-                    col = "'" + col + "'"
-                vals = vals + str(col) + ","
-            vals = vals[:-1]  # strip last character
-            sql = 'INSERT INTO ' + table + '( ' + str(cols) + ') VALUES (' + str(vals) + ')'
-            self.connection.execute(sql)
+            if not isinstance(row, Mapping) or not row:
+                raise ValueError("row must be a non-empty mapping")
+            cols = ", ".join(row.keys())
+            placeholders = ", ".join("?" for _ in row)
+            sql = f"INSERT INTO {table} ({cols}) VALUES ({placeholders})"
+            self.connection.execute(sql, tuple(row.values()))
             return True
-        except:
+        except Exception:
             self.close_connection()
             raise
 

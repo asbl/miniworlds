@@ -56,7 +56,7 @@ class ExportWorldToDBFactory(ExportFactory, ExportDBFactory, ExportWorldFactory)
         cur.execute(query_world)
         self.db.commit()
         world_dict = {"world_class": self.world.__class__.__name__,
-                      "tile_size": self.world.tile_size,
+                      "tile_size": getattr(self.world, "tile_size", 1),
                       "height": self.world.rows,
                       "width": self.world.columns,                      
                       }

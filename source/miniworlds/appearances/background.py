@@ -4,7 +4,6 @@ import miniworlds.worlds.world as world_mod
 import miniworlds.appearances.appearance as appearance_mod
 import miniworlds.appearances.managers.image_background_manager as image_background_manager
 import miniworlds.appearances.managers.transformations_background_manager as transformations_background_manager
-import miniworlds.base.app as app
 import pygame
 import miniworlds.worlds.world as world_mod
 
@@ -127,7 +126,7 @@ class Background(appearance_mod.Appearance):
 
     def repaint(self):
         """Called 1/frame from world"""
-        if self.world in app.App.running_worlds:
+        if self.world and self.world.app and self.world in self.world.app.running_worlds:
             self.world.actors.clear(self.surface, self.image)
             repaint_rects = self.world.actors.draw(self.surface)
             if self.world.camera.screen_topleft[0] != 0 or self.world.camera.screen_topleft[1] != 0:
@@ -152,7 +151,7 @@ class Background(appearance_mod.Appearance):
 
     def _blit_to_window_surface(self):
         """Blits background to window surface"""
-        if self.world in app.App.running_worlds:
+        if self.world and self.world.app and self.world in self.world.app.running_worlds:
             self.world.app.window.surface.blit(
                 self.image, self.world.camera.screen_topleft
             ) 
@@ -183,7 +182,7 @@ class Background(appearance_mod.Appearance):
 
     def get_rect(self):
         frame = self.world.frame if self.world else 0
-        if frame < self._cached_rect[0]:
+        if frame == self._cached_rect[0]:
             return self._cached_rect[1]
         rect = self.image.get_rect()
         self._cached_rect = (frame, rect)

@@ -115,6 +115,8 @@ class Costume(appear.Appearance):
 
     def set_dirty(self, value="all", status=1):
         super().set_dirty(value, status)
+        if hasattr(self, "actor") and self.actor and hasattr(self.actor, "position_manager"):
+            self.actor.position_manager._invalidate_rect_cache()
         if (
             hasattr(self, "actor")
             and self.actor
@@ -125,7 +127,7 @@ class Costume(appear.Appearance):
 
     def get_rect(self):
         frame = self.actor.world.frame if self.actor else 0
-        if frame < self._cached_rect[0]:
+        if frame == self._cached_rect[0]:
             return self._cached_rect[1]
         rect = self.image.get_rect()
         self._cached_rect = (frame, rect)

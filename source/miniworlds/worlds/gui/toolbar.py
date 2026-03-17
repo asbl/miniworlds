@@ -30,7 +30,7 @@ class Toolbar(gui.GUI):
                 toolbar = Toolbar()
                 button = Button("Start Rocket")
                 toolbar.add(button)
-                world.add_container.add_right(toolbar)
+                world.camera.add_right(toolbar)
 
                 @world.register
                 def on_message(self, message):
@@ -163,11 +163,12 @@ class Toolbar(gui.GUI):
             for key, value in self.widgets.items():
                 if value == item:
                     search_key = key
-            if not search_key:
+                    break
+            if search_key is None:
                 raise ValueError(f"{item} not found in Toolbar-Widgets")
             else:
-                self.widgets.pop(key)
-                value.remove()
+                removed_widget = self.widgets.pop(search_key)
+                removed_widget.remove()
         else:
             raise TypeError(f"item must be of type [int, str, Widget], found {type(item)}")
 
@@ -226,8 +227,19 @@ class Toolbar(gui.GUI):
     def update_width_and_height(self):
         super().screen_width
 
-    def send_message(self, text):
-        app_mod.App.running_app.event_manager.to_event_queue("message", text)
+    def send_message(self, text: str) -> None:
+        """Sends a broadcast message to the world and all actors.
+
+        The message is dispatched through the event system and can be handled
+        by any registered method in the world or its actors.
+
+        Args:
+            text: The name of the message/event to send.
+
+        Example:
+            >>> toolbar.send_message("open_menu")
+        """
+        self.app.event_manager.to_event_queue("message", text)
 
     def scroll_up(self, value):
         if self.can_scroll_up(value):

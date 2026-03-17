@@ -78,7 +78,7 @@ class Tile(tile_elements.TileBase):
     @classmethod
     def from_pixel(cls, pixel_position: Tuple[float, float], world: Optional[TiledWorld] = None) -> Tile:
         if world is None:
-            world = app.App.running_world
+            world = app.App.get_running_world()
         x = int(pixel_position[0] // world.tile_size)
         y = int(pixel_position[1] // world.tile_size)
         return cls((x, y), world)

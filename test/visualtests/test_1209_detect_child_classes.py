@@ -5,7 +5,7 @@ import os
 import random
 
 
-class Test1208(unittest.TestCase):
+class Test1209DetectChildClasses(unittest.TestCase):
 
     def setUp(self):
         def test_code():

@@ -1,5 +1,6 @@
 import miniworlds.tools.method_caller as method_caller
-import miniworlds.tools.actor_class_inspection as actor_class_inspection
+import miniworlds.worlds.manager.collision_event_view as collision_event_view
+from miniworlds.worlds.manager.event_sensor_dispatcher import EventSensorDispatcher
 
 
 class CollisionManager:
@@ -10,6 +11,12 @@ class CollisionManager:
 
     def __init__(self, world):
         self.world = world
+
+    def _get_event_view(self) -> collision_event_view.CollisionEventView:
+        event_manager = self.world.event_manager
+        if hasattr(event_manager, "get_collision_event_view"):
+            return event_manager.get_collision_event_view()
+        return collision_event_view.CollisionEventView(event_manager)
 
     def _handle_all_collisions(self):
         self._handle_actor_detecting_actor_methods()
@@ -27,15 +34,7 @@ class CollisionManager:
         calls the corresponding method if the actor's sensor manager detects 
         another actor matching the event's filter target.
         """
-        sensor_registry = self.world.event_manager.registry.registered_events.get("sensor")
-        if not sensor_registry:
-            return
-
-        for target, methods in sensor_registry.items():
-            for method in methods.copy():  # use .copy() to avoid modification during iteration
-                actor = method.__self__
-                if actor.sensor_manager.detect_actors(filter=target):
-                    method_caller.call_method(method, (target,))
+        EventSensorDispatcher(self._get_event_view()).dispatch()
 
     def _handle_on_detecting_all_actors(self, actor, method):
         """
@@ -78,13 +77,8 @@ class CollisionManager:
         if actor in found_actors:
             found_actors.remove(actor)
 
-        # Get all valid subclasses once (could be optimized further by caching externally)
-        valid_actor_classes = actor_class_inspection.ActorClassInspection.get_all_actor_classes()
-
-        # Call method for each matching subclass
         for target in found_actors:
-            if target.__class__ in valid_actor_classes:
-                method_caller.call_method(method, target, target.__class__)
+            method_caller.call_method(method, target, target.__class__)
 
     def _handle_actor_detecting_actor_methods(self):
         """
@@ -95,13 +89,8 @@ class CollisionManager:
         - Methods named 'on_detecting' (i.e., detect all other actors)
         - Methods named like 'on_detecting_<target>' (i.e., filtered detection)
         """
-        class_events = self.world.event_manager.definition.class_events["on_detecting"]
-        registry = self.world.event_manager.registry.registered_events
-        for event in class_events:
-            # Copy to avoid modification during iteration
-            methods = list(registry[event])  # set → list is faster than .copy()
+        for event, methods in self._get_event_view().iter_registered_methods("on_detecting"):
             for method in methods:
-                
                 actor = method.__self__
                 method_name_parts = method.__name__.split("_")
 
@@ -125,11 +114,8 @@ class CollisionManager:
         - No actors of the specified type are detected.
         - OR only irrelevant actors (e.g., self) or unrelated subclasses are found.
         """
-        class_events = self.world.event_manager.definition.class_events["on_not_detecting"]
-        registry = self.world.event_manager.registry.registered_events
-
-        for event in class_events:
-            for method in list(registry[event]):
+        for event, methods in self._get_event_view().iter_registered_methods("on_not_detecting"):
+            for method in methods:
                 actor = method.__self__
                 method_name_parts = method.__name__.split("_")
 
@@ -148,13 +134,7 @@ class CollisionManager:
                 if actor in found_actors:
                     found_actors.remove(actor)
 
-                # Get valid subclasses (only once per actor)
-                valid_classes = actor_class_inspection.ActorClassInspection(
-                    actor
-                ).get_all_actor_classes()
-
-                # Check if any remaining actors are valid subclasses
-                if any(a.__class__ in valid_classes for a in found_actors):
+                if found_actors:
                     continue  # At least one valid actor is still present, don't call method
 
                 # No relevant actor found
@@ -169,11 +149,8 @@ class CollisionManager:
         'on_detecting_borders' and borders are detected, the method is called with 
         the detected borders. Otherwise, delegates to the more specific handler.
         """
-        class_events = self.world.event_manager.definition.class_events["border"]
-        registry = self.world.event_manager.registry.registered_events
-
-        for event in class_events:
-            for method in list(registry[event]):  # List-copy for safe iteration
+        for event, methods in self._get_event_view().iter_registered_methods("border"):
+            for method in methods:
                 actor = method.__self__
                 sensed_borders = actor.detect_borders()
 
@@ -190,13 +167,7 @@ class CollisionManager:
                 method_caller.call_method(method, None)
 
     def _handle_actor_detecting_on_the_world_methods(self):
-        methods = (
-            self.world.event_manager.registry.registered_events["on_detecting_world"]
-            .copy()
-            .union(
-                self.world.event_manager.registry.registered_events["on_detecting_world"].copy()
-            )
-        )
+        methods = self._get_event_view().copy_registered_methods("on_detecting_world")
         for method in methods:
             # get detect world method from actor
             is_inside_world = method.__self__.is_inside_world()
@@ -206,15 +177,7 @@ class CollisionManager:
         del methods
 
     def _handle_actor_detecting_not_on_the_world_methods(self):
-        methods = (
-            self.world.event_manager.copy_registered_events("on_not_detecting_world")
-            #.copy()
-            #.union(
-            #    self.world.event_manager.registered_events[
-            #        "on_not_detecting_world"
-            #    ].copy()
-            #)
-        )
+        methods = self._get_event_view().copy_registered_methods("on_not_detecting_world")
         for method in methods:
             # get detect world method from actor
             is_not_inside_world = not method.__self__.is_inside_world()

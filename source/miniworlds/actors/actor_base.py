@@ -8,6 +8,7 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.tools.world_inspection as world_inspection
 import miniworlds.tools.actor_inspection as actor_inspection
+from miniworlds.base.exceptions import RegisterError
 
 class ActorWorldConnectorMeta(ABCMeta):
     """
@@ -53,7 +54,7 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
             pass
 
     def _is_actor_repainted(self) -> bool:
-        return self.world.frame == 0 or self.world.camera.is_actor_in_view(self)
+        return self.world.camera._should_repaint_actor(self)
 
     def register(self, method: callable, force=False, name=None):
         """This method is used for the @register decorator. It adds a method to an object

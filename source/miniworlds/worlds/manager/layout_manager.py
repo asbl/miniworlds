@@ -10,8 +10,9 @@ class LayoutManager:
     """
     LayoutManager handles the positioning and management of World objects within an application window.
 
-    It is accessed via `world.layout` and delegates layout behavior (e.g., docking, switching, removing)
-    to the underlying `App` and `WorldsManager`.
+    It is stored internally on `world._layout`, while the public API is exposed
+    via `world.camera` and delegates layout behavior to the underlying `App`
+    and `WorldsManager`.
     """
 
     def __init__(self, world: "World", app: "App") -> None:
@@ -23,7 +24,7 @@ class LayoutManager:
             app: The application instance managing all worlds.
 
         Example:
-            >>> world.layout = LayoutManager(world, app)
+            >>> world.camera.add_right(Toolbar(), size=150)
         """
         self.world: "World" = world
         self.app: "App" = app
@@ -41,7 +42,7 @@ class LayoutManager:
             The newly added World instance.
 
         Example:
-            >>> world.layout.add_right(Toolbar(), size=150)
+            >>> world.camera.add_right(Toolbar(), size=150)
         """
         return self.app.worlds_manager.add_world(world, dock="right", size=size)
 
@@ -57,7 +58,7 @@ class LayoutManager:
             The newly added World instance.
 
         Example:
-            >>> world.layout.add_bottom(Console(), size=200)
+            >>> world.camera.add_bottom(Console(), size=200)
         """
         return self.app.worlds_manager.add_world(world, dock="bottom", size=size)
 
@@ -69,7 +70,7 @@ class LayoutManager:
             world: The World instance to remove.
 
         Example:
-            >>> world.layout.remove_world(toolbar)
+            >>> world.camera.remove_world(toolbar)
         """
         self.app.worlds_manager.remove_world(world)
 
@@ -82,7 +83,7 @@ class LayoutManager:
             reset: Whether to reset the world state (default: False).
 
         Example:
-            >>> world.layout.switch_world(main_scene, reset=True)
+            >>> world.camera.switch_world(main_scene, reset=True)
         """
         self.app.worlds_manager.switch_world(self.world, new_world, reset)
 
@@ -95,7 +96,7 @@ class LayoutManager:
             A string such as "right" or "bottom", or None if undocked.
 
         Example:
-            >>> world.layout.window_docking_position
+            >>> world.camera.window_docking_position
             'right'
         """
         return self.docking_position
@@ -112,7 +113,7 @@ class LayoutManager:
             size: The pixel size of the world in the layout.
 
         Example (not called manually):
-            >>> world.layout._add_to_window(app, dock="bottom", size=150)
+            >>> world.camera.add_bottom(console, size=150)
         """
         self.world._app = app
         self.app = app

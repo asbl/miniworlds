@@ -20,9 +20,10 @@ class MusicManager:
             app: Reference to the main App instance.
         """
         self.app: "app_mod.App" = app
+        self.audio = self.app.platform
         self.path: str | None = None
         self._paused: bool = False  # Tracks pause state manually
-        pygame.mixer.init()
+        self.audio.ensure_audio()
 
     def change_music(self, path: str) -> None:
         """
@@ -33,7 +34,7 @@ class MusicManager:
         """
         self.stop_music()
         self.path = path
-        pygame.mixer.music.load(self.path)
+        self.audio.music.load(self.path)
 
     def load_music(self, path: str) -> None:
         """
@@ -43,7 +44,7 @@ class MusicManager:
             path: Path to the music file.
         """
         self.path = path
-        pygame.mixer.music.load(self.path)
+        self.audio.music.load(self.path)
 
     def play_music(self, path: str | None = None, loop: int = -1) -> None:
         """
@@ -56,7 +57,7 @@ class MusicManager:
         if path:
             self.load_music(path)
         if self.path:
-            pygame.mixer.music.play(loop)
+            self.audio.music.play(loop)
             self._paused = False
 
     def is_playing(self) -> bool:
@@ -66,7 +67,7 @@ class MusicManager:
         Returns:
             True if music is playing, False otherwise.
         """
-        return pygame.mixer.music.get_busy() and not self._paused
+        return self.audio.music.get_busy() and not self._paused
 
     def get_state(self) -> str:
         """
@@ -84,7 +85,7 @@ class MusicManager:
         """
         if self._paused:
             return "paused"
-        elif pygame.mixer.music.get_busy():
+        elif self.audio.music.get_busy():
             return "playing"
         else:
             return "stopped"
@@ -93,7 +94,7 @@ class MusicManager:
         """
         Stops the currently playing music immediately.
         """
-        pygame.mixer.music.stop()
+        self.audio.music.stop()
         self._paused = False
 
     def fade_out(self, time: int) -> None:
@@ -103,7 +104,7 @@ class MusicManager:
         Args:
             time: Fade-out duration in milliseconds.
         """
-        pygame.mixer.music.fadeout(time)
+        self.audio.music.fadeout(time)
         self._paused = False
 
     def fade_in(self, time: int) -> None:
@@ -113,21 +114,21 @@ class MusicManager:
         Args:
             time: Fade-in duration in milliseconds.
         """
-        pygame.mixer.music.play(-1, 0, time)
+        self.audio.music.play(-1, 0, time)
         self._paused = False
 
     def pause(self) -> None:
         """
         Pauses the music if it is currently playing.
         """
-        pygame.mixer.music.pause()
+        self.audio.music.pause()
         self._paused = True
 
     def unpause(self) -> None:
         """
         Unpauses the music if it was previously paused.
         """
-        pygame.mixer.music.unpause()
+        self.audio.music.unpause()
         self._paused = False
 
     def resume(self) -> None:
@@ -163,7 +164,7 @@ class MusicManager:
         Args:
             percent: Volume level (0.0 to 100.0).
         """
-        pygame.mixer.music.set_volume(percent / 100)
+        self.audio.music.set_volume(percent / 100)
 
     def get_volume(self) -> float:
         """
@@ -172,4 +173,4 @@ class MusicManager:
         Returns:
             Volume level (0.0 to 100.0).
         """
-        return pygame.mixer.music.get_volume() * 100
+        return self.audio.music.get_volume() * 100
