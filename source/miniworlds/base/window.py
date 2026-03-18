@@ -32,7 +32,13 @@ class Window:
             surface = self.app.platform.load_surface(path)
             self.app.platform.set_window_icon(surface)
         except Exception as e:
-            raise RuntimeError(f"Error on creating window: {e}") from e
+            raise RuntimeError(
+                f"Could not create the window. Common reasons:\n"
+                f"1. Missing asset file: {path}\n"
+                f"2. Wrong file path (use 'assets/file.png', not 'assets\\\\file.png')\n"
+                f"3. File format not supported (use PNG, JPG, or GIF)\n"
+                f"Full error: {e}"
+            ) from e
 
     @property
     def fullscreen(self):

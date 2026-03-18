@@ -89,7 +89,11 @@ class NoValidWorldPositionError(MiniworldsError):
 
 class NoValidPositionOnInitException(MiniworldsError):
     def __init__(self, actor, value):
-        self.message = f"No valid world position for {actor}, type is {type(value)}  and should be a 2-tuple or Position"
+        self.message = (
+            f"Position for {actor} must be a tuple like (100, 200), "
+            f"not {type(value).__name__}: {repr(value)}. "
+            f"Try: actor.position = (100, 200)"
+        )
         super().__init__(self.message)
 
 
@@ -232,14 +236,22 @@ class MissingPositionManager(MissingActorPartsError):
 
 
 class OriginException(MissingActorPartsError):
-    def __init__(self, actor):
-        self.message = f"origin must be 'center' or 'topleft' for actor {actor}"
+    def __init__(self, actor, value=None):
+        if value is None:
+            self.message = f"origin must be 'center' or 'topleft' for actor {actor}"
+        else:
+            self.message = f"Actor origin must be 'center' or 'topleft', not '{value}'"
         del actor
         super().__init__(self.message)
 
 
 class WrongFilterType(MissingActorPartsError):
     def __init__(self, actor):
-        self.message = f"wrong type for filter sensor results - Should be subclass of actor or instance of actor or string, but is: {type(actor)}"
+        self.message = (
+            f"Actor filter must be:\n"
+            f"  - An Actor class, like: actor_type=Enemy\n"
+            f"  - An Actor name string, like: actor_type='Enemy'\n"
+            f"  - Got {type(actor).__name__}: {repr(actor)}"
+        )
         del actor
         super().__init__(self.message)

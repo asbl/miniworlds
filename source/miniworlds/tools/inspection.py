@@ -45,4 +45,9 @@ class Inspection:
         if method:
             self.call_instance_method(method, args)
         elif errors:
-            raise AttributeError(f"Method '{name}' not found on instance {type(self.instance).__name__}")
+            raise AttributeError(
+                f"Method '{name}' not found on {type(self.instance).__name__}.\n"
+                f"Did you remember to define `def {name}(self):` in your class?\n"
+                f"Event methods must be named exactly: {name}\n"
+                f"Hint: Check the spelling!"
+            )

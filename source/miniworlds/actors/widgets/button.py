@@ -51,7 +51,9 @@ class Button(single_widget.SingleWidget):
         try:
             self.set_text(text)
         except TypeError:
-            raise TypeError("Argument 1 must be of type str, got", type(text), text)
+            raise TypeError(
+                f"Button text must be a string like 'Click me', got {type(text).__name__}: {repr(text)}"
+            )
         # additional layout 2
         self.set_background_color((60, 60, 60))
 

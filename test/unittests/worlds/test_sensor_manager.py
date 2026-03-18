@@ -369,5 +369,59 @@ class TestAudit2Fixes(unittest.TestCase):
         self.assertIn("merge", str(ctx.exception).lower())
 
 
+class TestErrorMessagesAudit(unittest.TestCase):
+    """Tests for improved error messages (Fehler-Meldungs-Audit)."""
+
+    def test_origin_error_shows_invalid_value(self):
+        """Issue 6: Origin error now shows the invalid value that was attempted."""
+        from miniworlds import Actor, World
+        
+        world = World()
+        actor = Actor()
+        
+        # Should raise with the invalid value
+        with self.assertRaises(Exception) as ctx:
+            actor.origin = "middle"  # Invalid
+        
+        error_msg = str(ctx.exception)
+        # Verify it shows what value was attempted
+        self.assertIn("middle", error_msg)
+
+    def test_vector_multiply_error_improved(self):
+        """Issue 4: Vector multiply error improved message."""
+        from miniworlds.positions import vector
+        
+        v = vector.Vector(10, 20)
+        
+        # Should raise with improved message
+        with self.assertRaises(TypeError) as ctx:
+            result = v * "hello"
+        
+        error_msg = str(ctx.exception).lower()
+        # Verify it's NOT the old minimal message
+        self.assertNotIn("unsupported operand type for multiply", error_msg)
+
+    def test_method_not_found_has_context(self):
+        """Issue 5: Method not found error explains how to define the method."""
+        from miniworlds import Actor, World
+        from miniworlds.tools import inspection
+        
+        world = World()
+        actor = Actor()
+        
+        # Create inspector and test error
+        insp = inspection.Inspection(actor)
+        
+        # Should raise with definition hint
+        with self.assertRaises(AttributeError) as ctx:
+            insp.get_and_call_method("on_nonexistent", (), errors=True)
+        
+        error_msg = str(ctx.exception)
+        # Verify it contains helpful hints
+        self.assertIn("def", error_msg)
+        self.assertIn("on_nonexistent", error_msg)
+        self.assertIn("spelling", error_msg.lower())
+
+
 if __name__ == "__main__":
     unittest.main()

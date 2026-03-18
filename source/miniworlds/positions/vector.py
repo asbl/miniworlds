@@ -283,7 +283,11 @@ class Vector:
             return Vector(self.x * other, self.y * other)
         if isinstance(other, Vector):
             return self.dot(other)
-        raise TypeError("Unsupported operand type for multiply.")
+        raise TypeError(
+            f"Can't multiply Vector by {type(other).__name__}. "
+            f"Multiply Vector by a number instead. "
+            f"Example: my_vector * 2 or my_vector * 0.5"
+        )
 
     def add_to_position(self, position: Tuple[float, float]) -> Tuple[float, float]:
         """Adds the vector to a position tuple and returns the result.
