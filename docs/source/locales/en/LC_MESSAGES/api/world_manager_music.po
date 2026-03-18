@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -25,6 +25,14 @@ msgstr ""
 
 #: ../../source/api/world_manager_music.md:3
 msgid "API Reference"
+msgstr ""
+
+#: miniworlds.worlds.manager.music_manager.MusicManager:1 of
+msgid "Controls background music playback for a world."
+msgstr ""
+
+#: miniworlds.worlds.manager.music_manager.MusicManager:3 of
+msgid "Access via ``world.music``:"
 msgstr ""
 
 #: ../../source/api/world_manager_music.md

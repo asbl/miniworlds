@@ -167,6 +167,14 @@ class TiledWorld(world.World):
         return tile_mod.Tile, edge_mod.Edge, corner_mod.Corner
 
     def add_tile_to_world(self, position):
+        """Creates and registers a tile at a world grid position.
+
+        Args:
+            position: Tile position as ``(column, row)``.
+
+        Returns:
+            The created tile instance.
+        """
         tile_cls, edge_cls, corner_cls = self._templates()
         tile_pos = position
         tile = tile_cls(tile_pos, self)
@@ -174,6 +182,17 @@ class TiledWorld(world.World):
         return tile
 
     def add_corner_to_world(self, position, direction):
+        """Creates and registers a corner for a tile position and direction.
+
+        Existing corners are merged when multiple tiles share the same corner.
+
+        Args:
+            position: Base tile position as ``(column, row)``.
+            direction: Corner direction key (for example ``"nw"``).
+
+        Returns:
+            The registered corner object.
+        """
         tile_cls, edge_cls, corner_cls = self._templates()
         corner = corner_cls(position, direction, self)
         corner_pos = corner.position
@@ -184,6 +203,17 @@ class TiledWorld(world.World):
         return self.corners[corner_pos]
 
     def add_edge_to_world(self, position, direction):
+        """Creates and registers an edge for a tile position and direction.
+
+        Existing edges are merged when neighboring tiles describe the same edge.
+
+        Args:
+            position: Base tile position as ``(column, row)``.
+            direction: Edge direction key (for example ``"n"`` or ``"w"``).
+
+        Returns:
+            The registered edge object.
+        """
         edge_cls = self.tile_factory.edge_cls
         edge = edge_cls(position, direction, self)
         edge_pos = edge.position
@@ -389,12 +419,12 @@ class TiledWorld(world.World):
             self._dynamic_actors_dict[(x, y)].append(actor)
 
     def detect_actors_at_position(self, position):
-        """Sensing actors at same position"""
+        """Returns all actors located at the given tile/world position."""
         self._update_actor_positions()  # This method can be a bottleneck!
         actor_list = []
         if self._dynamic_actors_dict[position[0], position[1]]:
             actor_list.extend(self._dynamic_actors_dict[(position[0], position[1])])
-        if self.static_actors_dict[position[1], position[1]]:
+        if self.static_actors_dict[position[0], position[1]]:
             actor_list.extend(self.static_actors_dict[(position[0], position[1])])
         actor_list = [actor for actor in actor_list]
         return actor_list
@@ -420,12 +450,29 @@ class TiledWorld(world.World):
         self.background.grid = value
 
     def draw_on_image(self, image, position):
+        """Draws an image onto the tiled world background at a tile position.
+
+        Args:
+            image: The image/surface to draw.
+            position: Tile position as ``(column, row)``.
+        """
         position = self.to_pixel(position)
         self.background.draw_on_image(image, position, self.tile_size, self.tile_size)
 
     def get_from_pixel(self, position):
-        """Gets world position from pixel coordinates"""
-        if position[0] > self.camera.height or position[1] > self.camera.height:
+        """Returns the tile/world position for a pixel coordinate.
+
+        Args:
+            position: Pixel position as ``(x, y)``.
+
+        Returns:
+            The corresponding world position, or ``None`` if the pixel lies
+            outside the camera view.
+        """
+        x, y = position
+        if x < 0 or y < 0:
+            return None
+        if x >= self.camera.width or y >= self.camera.height:
             return None
         else:
             return self.get_tile_from_pixel(position).position
@@ -514,6 +561,11 @@ class TiledWorld(world.World):
         self.set_tile_size(value)
 
     def set_tile_size(self, value):
+        """Sets the tile size in pixels and refreshes camera/background caches.
+
+        Args:
+            value: New tile size in pixels.
+        """
         self._tile_size = value
         self.camera._reload_camera()
         self.background.set_dirty("all", background_mod.Background.RELOAD_ACTUAL_IMAGE)

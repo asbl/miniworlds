@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 09:50+0100\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -74,11 +74,10 @@ msgid ""
 "own y-coordinate by 1."
 msgstr ""
 
-#: ../../source/tutorial/04_00_act.md:39
-#, python-brace-format
+#: ../../source/tutorial/04_00_act.md:40
 msgid ""
-"\\:::{seealso} For more on methods and how to use `self`, see "
-"[here](../concepts/concept_self.md). \\:::"
+"For more on methods and how to use `self`, see "
+"[here](../concepts/concept_self.md)."
 msgstr ""
 
 #~ msgid ""
@@ -166,5 +165,11 @@ msgstr ""
 #~ "\\:::{seealso} For more on methods and"
 #~ " how to use `self`, see "
 #~ "[here](concepts/concept_self.md). \\:::"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\\:::{seealso} For more on methods and"
+#~ " how to use `self`, see "
+#~ "[here](../concepts/concept_self.md). \\:::"
 #~ msgstr ""
 

@@ -24,11 +24,23 @@ class Text(actor.Actor):
     def __init__(
         self, position: Tuple[float, float] = (0, 0), text: str = "", **kwargs
     ):
-        """_summary_
+        """Creates a text actor.
 
         Args:
-            position (tuple, optional): _description_. Defaults to (0,0).
-            text (Optional[int]): The text (otherwise empty string "")
+            position: Top-left position of the text actor, e.g. ``(100, 50)``.
+            text: The initial text to display.
+
+        Examples:
+
+            Show the current score in the top-left corner:
+
+            .. code-block:: python
+
+                score_text = Text((10, 10), "Score: 0")
+
+                @world.register
+                def act(self):
+                    score_text.text = "Score: " + str(player.score)
         """
         self._max_width = 0
         super().__init__(position, **kwargs)
@@ -41,17 +53,25 @@ class Text(actor.Actor):
         self.costume.set_dirty("write_text", self.costume.RELOAD_ACTUAL_IMAGE)
 
     def new_costume(self):
+        """Creates the text-specific costume used to draw the string.
+
+        Returns:
+            A ``TextCostume`` instance for this actor.
+        """
         return text_costume.TextCostume(self)
 
     @property
     def font_size(self):
-        """Set font size to a value, e.g. 10, 12, ...
+        """Gets or sets the font size in pixels.
 
         Examples:
 
-        Sets size of actor to 10::
+            Sets the font size to ``10``::
 
-            text.font_size = 10
+                text.font_size = 10
+
+        Returns:
+            The current font size.
         """
         return self.costume.font_size
 
@@ -63,10 +83,34 @@ class Text(actor.Actor):
             self.costume.set_dirty("write_text", self.costume.RELOAD_ACTUAL_IMAGE)
 
     def font_by_size(self, width=None, height=None):
+        """Chooses a font size that fits into a target width or height.
+
+        This is useful when the text should stay inside a fixed box.
+
+        Args:
+            width: Maximum width the text should fit into.
+            height: Maximum height the text should fit into.
+
+        Examples:
+
+            Fit a headline into a 200 pixel wide box:
+
+            .. code-block:: python
+
+                headline = Text((20, 20), "Miniworlds")
+                headline.font_by_size(width=200)
+        """
         self.font_size = self.costume.scale_to_size(width, height)
 
     @property
     def max_width(self):
+        """Maximum width used for text rendering and wrapping logic.
+
+        Set this value when the text should stay within a fixed width.
+
+        Returns:
+            The current maximum width in pixels. ``0`` means no limit.
+        """
         return self._max_width
 
     @max_width.setter
@@ -77,6 +121,18 @@ class Text(actor.Actor):
         self.costume.set_dirty("write_text", self.costume.RELOAD_ACTUAL_IMAGE)
 
     def get_text_width(self):
+        """Returns the width of the currently rendered text in pixels.
+
+        Returns:
+            Width of the text in pixels.
+
+        Examples:
+
+            .. code-block:: python
+
+                if title.get_text_width() > 200:
+                    title.font_size = 18
+        """
         return self.costume.get_text_width()
 
     def get_text(self):
@@ -90,7 +146,14 @@ class Text(actor.Actor):
 
     @property
     def text(self):
-        """changes the text."""
+        """The displayed text string.
+
+        Set this property to update what is shown:
+
+        .. code-block:: python
+
+            label.text = "Game Over"
+        """
         return self.get_text()
 
     @text.setter
@@ -101,11 +164,16 @@ class Text(actor.Actor):
         self.costume.set_dirty("all", self.costume.RELOAD_ACTUAL_IMAGE)
 
     def set_text(self, text):
-        """
-        Sets the text of the actor
+        """Sets the displayed text and redraws the actor.
 
         Args:
-            text: The text
+            text: The new text to show.
+
+        Examples:
+
+            .. code-block:: python
+
+                message.set_text("Press space to start")
         """
         self.position_manager.store_origin()
         self.costume.text = text
@@ -114,10 +182,25 @@ class Text(actor.Actor):
         self.position_manager.restore_origin()
         
     def on_shape_change(self):
+        """Updates the text layout after the actor shape has changed.
+
+        This hook is called internally when size-related properties change.
+        """
         self.costume._update_draw_shape()
 
     @property
     def value(self):
+        """Alias for ``text``.
+
+        This property is useful when a text actor should behave like a simple
+        value display, for example a score or timer.
+
+        Examples:
+
+            .. code-block:: python
+
+                score.value = "Score: " + str(points)
+        """
         return self.get_text()
 
     @value.setter
@@ -125,13 +208,26 @@ class Text(actor.Actor):
         self.set_text(new_value)
 
     def get_costume_class(self) -> type["text_costume.TextCostume"]:
+        """Returns the costume class used by ``Text`` actors.
+
+        Returns:
+            The ``TextCostume`` class.
+        """
         return text_costume.TextCostume
     
     @classmethod
     def from_topleft(
         cls, position: Tuple[float, float] = (0, 0), text: str = "", **kwargs
     ):
-        """Creates a circle with topleft at position"""
+        """Creates a text actor whose origin is interpreted as the top-left corner.
+
+        Args:
+            position: Top-left position of the text actor.
+            text: Initial text to display.
+
+        Returns:
+            A new ``Text`` actor.
+        """
         text = cls(position, text, **kwargs)
         text.origin = "topleft"
         return text

@@ -2,6 +2,18 @@ from typing import Optional
 import miniworlds.base.app as app_mod
 
 class MusicManager:
+    """Controls background music playback for a world.
+
+    Access via ``world.music``:
+
+    .. code-block:: python
+
+        world.music.play("assets/theme.mp3")
+        world.music.set_volume(80)
+        world.music.pause()
+        world.music.stop()
+    """
+
     def __init__(self, app: app_mod.App):
         # Store a reference to the app and its internal music manager
         self.app: app_mod.App = app

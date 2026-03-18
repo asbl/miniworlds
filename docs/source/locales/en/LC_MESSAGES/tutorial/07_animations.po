@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/07_animations.md:1
 #, fuzzy
@@ -30,13 +30,12 @@ msgid ""
 "one or more images that can be used for animations."
 msgstr ""
 
-#: ../../source/tutorial/07_animations.md:6
-#, python-brace-format
+#: ../../source/tutorial/07_animations.md:7
 msgid ""
-"\\:::{note} If you’re looking for the attributes and methods of the "
-"`Costume` class in the *API*, you’ll find them under the `Appearance` "
-"class. `Appearance` is the superclass of both `Costume` and `Background`,"
-" as backgrounds and costumes share many properties. \\:::"
+"If you’re looking for the attributes and methods of the `Costume` class "
+"in the *API*, you’ll find them under the `Appearance` class. `Appearance`"
+" is the superclass of both `Costume` and `Background`, as backgrounds and"
+" costumes share many properties."
 msgstr ""
 
 #: ../../source/tutorial/07_animations.md:14
@@ -236,4 +235,15 @@ msgstr ""
 #~ "optionally also provide a number as "
 #~ "a parameter to jump directly to a"
 #~ " specific costume:"
+
+#~ msgid ""
+#~ "\\:::{note} If you’re looking for the"
+#~ " attributes and methods of the "
+#~ "`Costume` class in the *API*, you’ll "
+#~ "find them under the `Appearance` class."
+#~ " `Appearance` is the superclass of "
+#~ "both `Costume` and `Background`, as "
+#~ "backgrounds and costumes share many "
+#~ "properties. \\:::"
+#~ msgstr ""
 

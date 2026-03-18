@@ -15,7 +15,7 @@
 
 ## Implementation guidance
 
-- Prefer small, focused changes that improve determinism, testability, and maintainability without changing user code.
+- Prefer changes that improve determinism, testability, and maintainability without changing user code.
 - Favor internal improvements in lifecycle handling, event dispatching, state management, and platform abstraction.
 - Avoid adding new hard desktop-only assumptions in core logic.
 - Isolate file system, audio, display, and runtime-specific behavior where practical so web support remains possible.

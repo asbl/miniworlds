@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -106,7 +106,8 @@ msgid "Circle"
 msgstr "Kreis"
 
 #: miniworlds.actors.shapes.shapes.Circle:1 of
-msgid "A circular shape, definied by position and radius"
+#, fuzzy
+msgid "A circular shape, defined by position and radius"
 msgstr "Eine kreisförmige Form, definiert durch Position und Radius"
 
 #: ../../source/api/actor_shapes.md
@@ -235,6 +236,27 @@ msgstr ""
 "(Alternative) Erstellen Sie eine Ellipse an der Position (200,100) mit "
 "einer Breite von 10 und einer Höhe von 10"
 
+#: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:1 of
+msgid "Validates constructor arguments for ``Ellipse``."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:3 of
+msgid "Tuple ``(x, y)`` of the ellipse origin."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:4 of
+msgid "Ellipse width in pixels."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:5 of
+msgid "Ellipse height in pixels."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:7 of
+#, fuzzy
+msgid "If *position* is not a tuple."
+msgstr "Die end_position als 2-Tupel."
+
 #: miniworlds.actors.shapes.shapes.Ellipse.from_center:1 of
 msgid "Creates an ellipse with center at position"
 msgstr "Erstellt eine Ellipse mit dem Mittelpunkt an der Position"
@@ -244,7 +266,7 @@ msgid "Creates an ellipse with topleft at position"
 msgstr "Erstellt eine Ellipse mit der oberen linken Ecke an der Position"
 
 #: ../../source/api/actor_shapes.md:37 miniworlds.actors.shapes.shapes.Line:3
-#: miniworlds.actors.shapes.shapes.Rectangle:3 of
+#: of
 msgid "Line"
 msgstr "Linie"
 
@@ -355,7 +377,34 @@ msgstr "Bewege 45°:"
 msgid "Move -45°:"
 msgstr "Bewege -45°:"
 
+#: miniworlds.actors.shapes.shapes.Line.end:1
+#: miniworlds.actors.shapes.shapes.Line.end_position:1 of
+msgid "End point of the line as ``(x, y)`` tuple."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Line.get_bounding_box:1 of
+msgid "Returns the rectangular bounding box that fully contains the line."
+msgstr ""
+
+#: ../../source/api/actor_shapes.md
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Line.get_bounding_box:3 of
+msgid "Bounding rectangle including line thickness."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Line.length:1 of
+msgid "Current line length in pixels."
+msgstr ""
+
+#: miniworlds.actors.shapes.shapes.Line.start:1
+#: miniworlds.actors.shapes.shapes.Line.start_position:1 of
+msgid "Start point of the line as ``(x, y)`` tuple."
+msgstr ""
+
 #: ../../source/api/actor_shapes.md:44
+#: miniworlds.actors.shapes.shapes.Rectangle:3 of
 msgid "Rectangle"
 msgstr "Rechteck"
 
@@ -410,6 +459,10 @@ msgstr "Beispielerstellung eines Polygons"
 #: miniworlds.actors.shapes.shapes.Polygon:12 of
 msgid "Example Creation of a filled polygon"
 msgstr "Beispielerstellung eines gefüllten Polygons"
+
+#: miniworlds.actors.shapes.shapes.Polygon.pointlist:1 of
+msgid "List of polygon corner points as ``[(x1, y1), (x2, y2), ...]``."
+msgstr ""
 
 #~ msgid "Rückgabetyp"
 #~ msgstr ""

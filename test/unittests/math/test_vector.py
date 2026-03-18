@@ -38,7 +38,8 @@ class TestVector(unittest.TestCase):
         v = Vector(10, 0)
         v.limit(5)
         self.assertTrue(isclose(v.length(), 5))
-        self.assertTrue(v, (5,0))
+        self.assertTrue(isclose(v.x, 5.0, abs_tol=1e-6))
+        self.assertTrue(isclose(v.y, 0.0, abs_tol=1e-6))
         
 
     def test_distance_to(self):
@@ -70,6 +71,41 @@ class TestVector(unittest.TestCase):
         v = Vector(1.12345, 2.98765)
         self.assertTrue(str(v).startswith("("))
         self.assertIn("Vector", repr(v))
+
+    def test_from_direction_accepts_named_strings(self):
+        up = Vector.from_direction("up")
+        right = Vector.from_direction("right")
+        down = Vector.from_direction("down")
+        left = Vector.from_direction("left")
+
+        self.assertTrue(isclose(up.x, 0.0, abs_tol=1e-6))
+        self.assertTrue(isclose(up.y, -1.0, abs_tol=1e-6))
+        self.assertTrue(isclose(right.x, 1.0, abs_tol=1e-6))
+        self.assertTrue(isclose(right.y, 0.0, abs_tol=1e-6))
+        self.assertTrue(isclose(down.x, 0.0, abs_tol=1e-6))
+        self.assertTrue(isclose(down.y, 1.0, abs_tol=1e-6))
+        self.assertTrue(isclose(left.x, -1.0, abs_tol=1e-6))
+        self.assertTrue(isclose(left.y, 0.0, abs_tol=1e-6))
+
+    def test_from_direction_rejects_unknown_string(self):
+        with self.assertRaises(ValueError):
+            Vector.from_direction("forward")
+
+    def test_angle_to_returns_zero_for_zero_length_vectors(self):
+        """Regression: angle_to raised RuntimeWarning and returned nan for zero-vectors."""
+        zero = Vector(0, 0)
+        unit = Vector(1, 0)
+
+        self.assertEqual(zero.angle_to(unit), 0.0)
+        self.assertEqual(unit.angle_to(zero), 0.0)
+        self.assertEqual(zero.angle_to(zero), 0.0)
+
+    def test_angle_to_is_not_nan_for_zero_vector(self):
+        import math
+        zero = Vector(0, 0)
+        result = zero.angle_to(Vector(1, 0))
+        self.assertFalse(math.isnan(result))
+
 
 if __name__ == "__main__":
     unittest.main()

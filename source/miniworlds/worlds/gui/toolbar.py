@@ -9,7 +9,33 @@ import miniworlds.worlds.gui.toolbar_mainloop_manager as toolbar_mainloop_manage
 
 
 class Toolbar(gui.GUI):
-    """A Toolbar contains widgets (Buttons, Labels, ...)"""
+    """A panel that holds buttons, labels, and other widgets.
+
+    Toolbars are usually docked beside the main world using
+    ``world.camera.add_right(toolbar)`` or ``world.camera.add_bottom(toolbar)``.
+    Widgets are added with ``toolbar.add(widget)`` (or by simply creating them –
+    they register themselves automatically when their world is set to the toolbar).
+
+    When a button inside a toolbar is clicked it broadcasts its label text as
+    a message.  The main world responds via ``on_message``.
+
+    Examples:
+
+        .. code-block:: python
+
+            from miniworlds import *
+            world = World()
+            toolbar = Toolbar()
+            toolbar.add(Button("Restart"))
+            world.camera.add_right(toolbar)
+
+            @world.register
+            def on_message(self, message):
+                if message == "Restart":
+                    world.reset()
+
+            world.run()
+    """
 
     def __init__(self):
         """
@@ -73,6 +99,11 @@ class Toolbar(gui.GUI):
         return toolbar_mainloop_manager.ToolbarMainloopManager
 
     def on_change(self):
+        """Reflows all widgets after the toolbar size or layout has changed.
+
+        This keeps widgets aligned when the toolbar is resized or docked in a
+        different place.
+        """
         if hasattr(self, "widgets"):
             for widget in self.widgets.values():
                 widget.width = self.width
@@ -148,10 +179,14 @@ class Toolbar(gui.GUI):
 
     def remove(self, item: Union[int, str, "widget_base.BaseWidget"]):
         """
-        Removes a widget from the toolbar. Warning: Be careful when calling this method in a loop.
+        Removes a widget from the toolbar.
+
+        .. warning::
+            Be careful when calling this inside a loop over ``self.widgets``.
 
         Args:
-            key: The key of widget which should be removed
+            item: The widget to remove – either the widget object itself, its
+                integer index, or its string key.
         """
         if type(item) in [int, str]:
             if item in self.widgets:
@@ -174,10 +209,13 @@ class Toolbar(gui.GUI):
 
 
     def has_widget(self, key: str):
-        """Checks if self.widgets has key
+        """Checks whether the toolbar contains a widget under *key*.
 
         Args:
-            key: The key of widget
+            key: The widget key.
+
+        Returns:
+            bool: True if the widget exists, otherwise False.
         """
         if key in self.widgets:
             return True
@@ -187,8 +225,14 @@ class Toolbar(gui.GUI):
     def get_widget(self, key: str) -> "widget_base.BaseWidget":
         """Gets widget by key
 
+        Args:
+            key: The key of the widget.
+
         Returns:
-            _type_: _description_
+            The widget stored under *key*.
+
+        Raises:
+            TypeError: If no widget with the given key exists.
         """
         if key in self.widgets:
             return self.widgets[key]
@@ -196,10 +240,19 @@ class Toolbar(gui.GUI):
             raise TypeError(f"Error: Toolbar widgets does not contain key {key}")
 
     def remove_all_widgets(self):
+        """Removes all widgets from the toolbar at once.
+
+        Use this when rebuilding a menu or replacing all controls.
+        """
         self.widgets = dict()
         self.dirty = 1
 
     def reorder(self):
+        """Recomputes the positions of all toolbar widgets.
+
+        Widgets are stacked from top to bottom with the configured paddings and
+        margins.
+        """
         if hasattr(self, "widgets") and self.widgets:
             actual_height = self.padding_top
             for widget in self.widgets.values():
@@ -225,6 +278,10 @@ class Toolbar(gui.GUI):
         widget.width = new_width
 
     def update_width_and_height(self):
+        """Updates cached toolbar dimensions after a layout change.
+
+        This hook is used internally when docking or resizing the toolbar.
+        """
         super().screen_width
 
     def send_message(self, text: str) -> None:
@@ -242,6 +299,11 @@ class Toolbar(gui.GUI):
         self.app.event_manager.to_event_queue("message", text)
 
     def scroll_up(self, value):
+        """Scrolls the toolbar view upward by *value* pixels.
+
+        Args:
+            value: Number of pixels to scroll.
+        """
         if self.can_scroll_up(value):
             self.camera.y -= value
             self.camera.y = max(0, self.camera.y)
@@ -249,19 +311,24 @@ class Toolbar(gui.GUI):
                 widget.resize()
 
     def scroll_down(self, value):
+        """Scrolls the toolbar view downward by *value* pixels.
+
+        Args:
+            value: Number of pixels to scroll.
+        """
         if self.can_scroll_down(value):
             self.camera.y += value
             for key, widget in self.widgets.items():
                 widget.resize()
 
     def can_scroll_down(self, value):
-        """
+        """Returns True if the toolbar can scroll downward by *value* pixels.
 
         Args:
-            value (_type_): _description_
+            value: Number of pixels to scroll by.
 
         Returns:
-            _type_: _description_
+            bool: True if scrolling is possible, False otherwise.
         """
         if self._widgets_total_height() < self.camera.y + self.camera.height:
             return False
@@ -271,18 +338,39 @@ class Toolbar(gui.GUI):
             return True
 
     def can_scroll_up(self, value):
+        """Returns True if the toolbar can scroll upward by *value* pixels.
+
+        Args:
+            value: Number of pixels to scroll by.
+
+        Returns:
+            bool: True if upward scrolling is possible, otherwise False.
+        """
         if self.camera.y == 0:
             return False
         else:
             return True
 
     def on_new_actor(self, actor):
+        """Handles actors that are added to this toolbar world.
+
+        Widget actors are registered in the internal widget list and then
+        resized/reordered so the layout stays consistent.
+
+        Args:
+            actor: The actor that has been added.
+        """
         if isinstance(actor, widget_parts.WidgetPart):
             return
         if isinstance(actor, widget_base.BaseWidget):
             self._add_widget(actor)
             actor.resize()
             self.reorder()
-        
+
     def on_remove_actor(self, actor):
+        """Handles actors that are removed from this toolbar world.
+
+        Args:
+            actor: The actor that has been removed.
+        """
         pass

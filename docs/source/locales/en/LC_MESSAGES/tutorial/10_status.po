@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/10_status.md:1
 #, fuzzy
@@ -59,12 +59,11 @@ msgstr ""
 msgid "`string`: The text to display."
 msgstr ""
 
-#: ../../source/tutorial/10_status.md:22
-#, python-brace-format
+#: ../../source/tutorial/10_status.md:23
 msgid ""
-"\\:::{note} In a regular **World**, the text is automatically scaled. In "
-"a **TiledWorld**, the text is shown inside a tile, which can cause space "
-"issues for longer text. \\:::"
+"In a regular **World**, the text is automatically scaled. In a "
+"**TiledWorld**, the text is shown inside a tile, which can cause space "
+"issues for longer text."
 msgstr ""
 
 #: ../../source/tutorial/10_status.md:27
@@ -177,4 +176,12 @@ msgstr ""
 #~ "the following example, the displayed "
 #~ "number increases by 1 with each "
 #~ "keystroke:"
+
+#~ msgid ""
+#~ "\\:::{note} In a regular **World**, the"
+#~ " text is automatically scaled. In a"
+#~ " **TiledWorld**, the text is shown "
+#~ "inside a tile, which can cause "
+#~ "space issues for longer text. \\:::"
+#~ msgstr ""
 

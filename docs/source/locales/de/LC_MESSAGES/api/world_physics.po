@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -294,6 +294,11 @@ msgid ""
 ":py:obj:`on_new_actor "
 "<miniworlds_physics.physics_world.PhysicsWorld.on_new_actor>`\\ "
 "\\(actor\\)"
+msgstr ""
+
+#: ../../None:9:<autosummary>:1
+#: miniworlds_physics.physics_world.PhysicsWorld.on_new_actor:1 of
+msgid "Synchronizes newly added actors with the physics simulation."
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
@@ -847,7 +852,7 @@ msgid ""
 msgstr ""
 
 #: miniworlds_physics.physics_world.PhysicsWorld.gravity:3 of
-msgid "Gravity is a 2-tuple with gravy in x-direction and y-direction."
+msgid "Gravity is a 2-tuple with gravity in x-direction and y-direction."
 msgstr ""
 
 #: miniworlds_physics.physics_world.PhysicsWorld.gravity:5 of
@@ -861,4 +866,21 @@ msgstr ""
 #: miniworlds_physics.physics_world.PhysicsWorld.gravity:9 of
 msgid "Get all actors at mouse position:"
 msgstr ""
+
+#: miniworlds_physics.physics_world.PhysicsWorld.on_new_actor:3 of
+msgid ""
+"Actors that have physics disabled are removed from pymunk so they stay as"
+" non-simulated world objects."
+msgstr ""
+
+#: ../../source/api/world_physics.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds_physics.physics_world.PhysicsWorld.on_new_actor:6 of
+msgid "The newly added actor."
+msgstr ""
+
+#~ msgid "Gravity is a 2-tuple with gravy in x-direction and y-direction."
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 09:50+0100\n"
+"POT-Creation-Date: 2026-03-17 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -38,13 +38,43 @@ msgid "API Reference"
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance:1 of
-msgid "Base class of actor costumes and world backgrounds"
+msgid "Base class for actor costumes and world backgrounds."
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance:3 of
 msgid ""
-"The class contains all methods and attributes to display and animate "
-"images of the objects, render text on the images or display overlays."
+"``Appearance`` is the parent class of both ``Costume`` (used by actors) "
+"and ``Background`` (used by worlds). You normally do not create "
+"``Appearance`` instances directly – access them through ``actor.costume``"
+" or ``world.background`` instead."
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:8 of
+msgid "Typical operations students use:"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:10 of
+msgid "Loading an image: ``actor.costume.add_image(\"my_image.png\")``"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:11 of
+msgid "Setting a fill color: ``actor.costume.fill_color = (255, 0, 0)``"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:12 of
+msgid "Drawing a border: ``actor.costume.border = 2``"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:13 of
+msgid "Animating a sprite: ``actor.costume.is_animated = True``"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:14 of
+msgid "Making transparent: ``actor.costume.alpha = 128``"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance:15 of
+msgid "Flipping horizontally: ``actor.costume.is_flipped = True``"
 msgstr ""
 
 #: ../../source/api/appearance.md
@@ -769,6 +799,10 @@ msgid ""
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
+msgid "Sets whether the costume or background should be filled with a color."
+msgstr ""
+
+#: ../../None:24:<autosummary>:1
 msgid ""
 ":py:obj:`_set_scaled "
 "<miniworlds.appearances.appearance.Appearance._set_scaled>`\\ \\(value\\)"
@@ -817,7 +851,10 @@ msgid ""
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
-msgid "Called in `get_image`, if image is \"dirty\" (e.g. size, rotation, ."
+msgid ""
+"Called in `get_image` **before** the image transformation pipeline is "
+"processed (e.g. when size, rotation, or other display properties have "
+"changed)."
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
@@ -825,6 +862,13 @@ msgid ""
 ":py:obj:`_after_transformation_pipeline "
 "<miniworlds.appearances.appearance.Appearance._after_transformation_pipeline>`\\"
 " \\(\\)"
+msgstr ""
+
+#: ../../None:24:<autosummary>:1
+msgid ""
+"Called in `get_image` **after** the image transformation pipeline is "
+"processed (e.g. when size, rotation, or other display properties have "
+"changed)."
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
@@ -872,7 +916,7 @@ msgid ""
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
-msgid "def setGets arguments for inner shape"
+msgid "Gets arguments for inner shape."
 msgstr ""
 
 #: ../../None:24:<autosummary>:1
@@ -1142,5 +1186,21 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "0"
+#~ msgstr ""
+
+#~ msgid "Base class of actor costumes and world backgrounds"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The class contains all methods and "
+#~ "attributes to display and animate images"
+#~ " of the objects, render text on "
+#~ "the images or display overlays."
+#~ msgstr ""
+
+#~ msgid "Called in `get_image`, if image is \"dirty\" (e.g. size, rotation, ."
+#~ msgstr ""
+
+#~ msgid "def setGets arguments for inner shape"
 #~ msgstr ""
 

@@ -26,10 +26,21 @@ class MetaAppearance(abc.ABCMeta):
 
 
 class Appearance(metaclass=MetaAppearance):
-    """Base class of actor costumes and world backgrounds
+    """Base class for actor costumes and world backgrounds.
 
-    The class contains all methods and attributes to display and animate images of the objects, render text
-    on the images or display overlays.
+    ``Appearance`` is the parent class of both ``Costume`` (used by actors) and
+    ``Background`` (used by worlds). You normally do not create ``Appearance``
+    instances directly – access them through ``actor.costume`` or
+    ``world.background`` instead.
+
+    Typical operations students use:
+
+    * Loading an image: ``actor.costume.add_image("my_image.png")``
+    * Setting a fill color: ``actor.costume.fill_color = (255, 0, 0)``
+    * Drawing a border: ``actor.costume.border = 2``
+    * Animating a sprite: ``actor.costume.is_animated = True``
+    * Making transparent: ``actor.costume.alpha = 128``
+    * Flipping horizontally: ``actor.costume.is_flipped = True``
     """
 
     counter = 0
@@ -639,10 +650,10 @@ class Appearance(metaclass=MetaAppearance):
 
     def _set_filled(self, value: bool):
         """
-        Flips the costume or background. The image is mirrored over the y-axis of costume/background.
+        Sets whether the costume or background should be filled with a color.
 
         Args:
-            value: True, if Appearance should be displayed as flipped.
+            value: True, if Appearance should be drawn as filled.
 
         Returns:
 
@@ -891,14 +902,14 @@ class Appearance(metaclass=MetaAppearance):
         return self._get_rendering_facade().get_image()
 
     def _before_transformation_pipeline(self):
-        """Called in `get_image`, if image is "dirty" (e.g. size, rotation, ... has changed)
-        after image transformation pipeline is processed
+        """Called in `get_image` **before** the image transformation pipeline is processed
+        (e.g. when size, rotation, or other display properties have changed).
         """
         self._get_rendering_facade().before_transformation_pipeline()
 
     def _after_transformation_pipeline(self) -> None:
-        """Called in `get_image`, if image is "dirty" (e.g. size, rotation, ... has changed)
-        before image transformation pipeline is processed
+        """Called in `get_image` **after** the image transformation pipeline is processed
+        (e.g. when size, rotation, or other display properties have changed).
         """
         self._get_rendering_facade().after_transformation_pipeline()
 
@@ -979,7 +990,7 @@ class Appearance(metaclass=MetaAppearance):
         return self._get_rendering_facade().outer_shape()
 
     def _inner_shape_arguments(self) -> List:
-        """def setGets arguments for inner shape
+        """Gets arguments for inner shape.
 
         Returns:
             List[]: List of arguments

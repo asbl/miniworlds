@@ -43,7 +43,7 @@ class Shape(actor.Actor):
 
 class Circle(Shape):
     """
-    A circular shape, definied by position and radius
+    A circular shape, defined by position and radius
 
 
     .. image:: ../_images/circle.png
@@ -192,6 +192,16 @@ class Ellipse(Shape):
         self.size = (width, height)
 
     def check_arguments(self, position, width, height):
+        """Validates constructor arguments for ``Ellipse``.
+
+        Args:
+            position: Tuple ``(x, y)`` of the ellipse origin.
+            width: Ellipse width in pixels.
+            height: Ellipse height in pixels.
+
+        Raises:
+            EllipseWrongArgumentsError: If *position* is not a tuple.
+        """
         if type(position) not in [tuple, None]:
             raise EllipseWrongArgumentsError()
 
@@ -289,7 +299,7 @@ class Arc(Ellipse):
 class Line(Shape):
     """A Line-Shape defined by start_position and end_position.
 
-    .. image:: ../_images/ellipse.png
+    .. image:: ../_images/line.png
         :width: 120px
         :alt: Line
 
@@ -334,6 +344,7 @@ class Line(Shape):
 
     @property
     def start_position(self):
+        """Start point of the line as ``(x, y)`` tuple."""
         return self._start_position
 
     start = start_position
@@ -345,6 +356,7 @@ class Line(Shape):
 
     @property
     def end_position(self):
+        """End point of the line as ``(x, y)`` tuple."""
         return self._end_position
 
     end = end_position
@@ -372,6 +384,11 @@ class Line(Shape):
         self.physics.simulation = "manual"
 
     def get_bounding_box(self):
+        """Returns the rectangular bounding box that fully contains the line.
+
+        Returns:
+            pygame.Rect: Bounding rectangle including line thickness.
+        """
         width = abs(self.start_position[0] - self.end_position[0]) + self.thickness
         height = abs(self.start_position[1] - self.end_position[1]) + self.thickness
         box = pygame.Rect(
@@ -404,6 +421,7 @@ class Line(Shape):
 
     @property
     def length(self):
+        """Current line length in pixels."""
         return self._length
 
     @property
@@ -438,9 +456,9 @@ class Rectangle(Shape):
     """
     A rectangular shape defined by position, width and height
 
-    .. image:: ../_images/ellipse.png
+    .. image:: ../_images/rectangle.png
         :width: 120px
-        :alt: Line
+        :alt: Rectangle
 
     Args:
         topleft: Topleft Position of Rect
@@ -531,6 +549,7 @@ class Polygon(Shape):
 
     @property
     def pointlist(self):
+        """List of polygon corner points as ``[(x1, y1), (x2, y2), ...]``."""
         return self._pointlist
 
     @pointlist.setter
@@ -539,6 +558,26 @@ class Polygon(Shape):
 
 
 class Triangle(Polygon):
+    """A triangle shape defined by three corner points.
+
+    Args:
+        p1: First corner as ``(x, y)`` tuple.
+        p2: Second corner as ``(x, y)`` tuple.
+        p3: Third corner as ``(x, y)`` tuple.
+
+    Examples:
+
+        Draw an upward-pointing triangle:
+
+        .. code-block:: python
+
+            from miniworlds import *
+            world = World(200, 200)
+            t = Triangle((100, 50), (50, 150), (150, 150))
+            t.fill_color = (255, 165, 0)
+            world.run()
+    """
+
     def __init__(self, p1: Tuple, p2: Tuple, p3: Tuple, *args, **kwargs):
         pointlist = [p1, p2, p3]
         super().__init__(pointlist)

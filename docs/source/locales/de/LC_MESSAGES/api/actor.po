@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 09:50+0100\n"
+"POT-Creation-Date: 2026-03-17 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -60,14 +60,20 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.height:6
 #: miniworlds.actors.actor.Actor.is_rotatable:9
 #: miniworlds.actors.actor.Actor.move:11
+#: miniworlds.actors.actor.Actor.move_back:8
 #: miniworlds.actors.actor.Actor.move_to:11
 #: miniworlds.actors.actor.Actor.on_clicked_left:4
 #: miniworlds.actors.actor.Actor.on_clicked_right:4
 #: miniworlds.actors.actor.Actor.on_detecting_actor:7
 #: miniworlds.actors.actor.Actor.on_detecting_borders:7
 #: miniworlds.actors.actor.Actor.on_detecting_world:4
+#: miniworlds.actors.actor.Actor.on_key_down:13
+#: miniworlds.actors.actor.Actor.on_key_pressed:11
+#: miniworlds.actors.actor.Actor.on_key_up:6
+#: miniworlds.actors.actor.Actor.on_mouse_leave:6
 #: miniworlds.actors.actor.Actor.on_mouse_left_released:4
-#: miniworlds.actors.actor.Actor.on_not_detecting_world:4
+#: miniworlds.actors.actor.Actor.on_mouse_over:6
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:6
 #: miniworlds.actors.actor.Actor.point_towards_position:10
 #: miniworlds.actors.actor.Actor.remove:4
 #: miniworlds.actors.actor.Actor.send_message:6
@@ -307,14 +313,18 @@ msgstr "Klassenname dieser Actor-Instanz."
 msgid ":py:obj:`topleft_x <miniworlds.actors.actor.Actor.topleft_x>`\\"
 msgstr ""
 
-#: ../../None:43:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_x:1
-#: miniworlds.actors.actor.Actor.topleft_y:1 of
+#: ../../None:43:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_x:1 of
 msgid "x-value of actor topleft-position"
 msgstr "x-Wert der oberen linken Position des Actors"
 
 #: ../../None:43:<autosummary>:1
 msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
 msgstr ""
+
+#: ../../None:43:<autosummary>:1 miniworlds.actors.actor.Actor.topleft_y:1 of
+#, fuzzy
+msgid "y-value of actor topleft-position"
+msgstr "x-Wert der oberen linken Position des Actors"
 
 #: ../../None:43:<autosummary>:1
 msgid ":py:obj:`topleft <miniworlds.actors.actor.Actor.topleft>`\\"
@@ -807,6 +817,13 @@ msgid ""
 "\\(distance\\)"
 msgstr ""
 
+#: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.move_back:1 of
+#, fuzzy
+msgid ""
+"Moves the actor backward by *distance* steps (opposite of current "
+"direction)."
+msgstr "Erkennt Objekte \"Entfernung\" Schritte vor dem aktuellen Actor."
+
 #: ../../None:86:<autosummary>:1
 msgid ":py:obj:`undo_move <miniworlds.actors.actor.Actor.undo_move>`\\ \\(\\)"
 msgstr ""
@@ -938,15 +955,20 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-#: miniworlds.actors.actor.Actor.detect_top_border:1
-#: miniworlds.actors.actor.Actor.detecting_bottom_border:1 of
-msgid "Does the actor touch the lower border?"
-msgstr ""
+#: miniworlds.actors.actor.Actor.detect_top_border:1 of
+#, fuzzy
+msgid "Does the actor touch the top border?"
+msgstr "\"prallt\" von einem Rand ab."
 
 #: ../../None:86:<autosummary>:1
 msgid ""
 ":py:obj:`detecting_bottom_border "
 "<miniworlds.actors.actor.Actor.detecting_bottom_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
+#: miniworlds.actors.actor.Actor.detecting_bottom_border:1 of
+msgid "Does the actor touch the lower border?"
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1064,8 +1086,8 @@ msgstr ""
 #: ../../None:86:<autosummary>:1
 #: miniworlds.actors.actor.Actor.is_inside_world:1 of
 #, fuzzy
-msgid "Is the actor colliding with current ...."
-msgstr ""
+msgid "Checks whether the actor is completely inside the world boundaries."
+msgstr "Ob der Actor aktuell sichtbar ist."
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -1152,7 +1174,7 @@ msgstr ""
 
 #: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.on_key_pressed:1
 #: of
-msgid "Called repeatedly while a key remains pressed."
+msgid "Called repeatedly every frame while a key is held down."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1160,7 +1182,8 @@ msgid ":py:obj:`on_key_up <miniworlds.actors.actor.Actor.on_key_up>`\\ \\(key\\)
 msgstr ""
 
 #: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.on_key_up:1 of
-msgid "Called once when a pressed key is released."
+#, fuzzy
+msgid "Called once when a previously pressed key is released."
 msgstr "Wird einmal aufgerufen, wenn eine gedrückte Taste losgelassen wird."
 
 #: ../../None:86:<autosummary>:1
@@ -1169,19 +1192,20 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 
-#: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.on_mouse_leave:1
-#: miniworlds.actors.actor.Actor.on_mouse_over:1 of
-msgid ""
-"on_mouse_over is called, when mouse is moved over actor :type position: "
-":param position: The mouse position"
+#: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.on_mouse_over:1
+#: of
+msgid "Called when the mouse cursor enters or moves over the actor area."
 msgstr ""
-"on_mouse_over wird aufgerufen, wenn die Maus über den Actor bewegt wird "
-":type position: :param position: Die Mausposition"
 
 #: ../../None:86:<autosummary>:1
 msgid ""
 ":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\"
 " \\(position\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1 miniworlds.actors.actor.Actor.on_mouse_leave:1
+#: of
+msgid "Called when the mouse cursor leaves the actor area."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1288,8 +1312,7 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-#: miniworlds.actors.actor.Actor.on_detecting_world:1
-#: miniworlds.actors.actor.Actor.on_not_detecting_world:1 of
+#: miniworlds.actors.actor.Actor.on_detecting_world:1 of
 msgid "`on_detecting_world` is called, when actor is on the world"
 msgstr ""
 
@@ -1297,6 +1320,13 @@ msgstr ""
 msgid ""
 ":py:obj:`on_not_detecting_world "
 "<miniworlds.actors.actor.Actor.on_not_detecting_world>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:1 of
+msgid ""
+"Called when the actor is **not** touching the world (i.e. outside world "
+"bounds)."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1884,8 +1914,8 @@ msgid "Add costume and count costumes"
 msgstr "Kostüm hinzufügen und Kostüme zählen"
 
 #: miniworlds.actors.actor.Actor.costume_count:17 of
-msgid "_description_"
-msgstr "_beschreibung_"
+msgid "Number of costumes currently attached to the actor."
+msgstr ""
 
 #: miniworlds.actors.actor.Actor.costumes:3 of
 msgid "The costume manager can be iterated to get all costumes"
@@ -2192,6 +2222,10 @@ msgstr ""
 "Warnung: Sie sollten nicht direkt auf das Bild zeichnen (mit pygame-"
 "Funktionen), da das Bild während der Animationen neu geladen wird"
 
+#: miniworlds.actors.actor.Actor.is_inside_world:3 of
+msgid "True if the entire actor rectangle is within the world, False otherwise."
+msgstr ""
+
 #: miniworlds.actors.actor.Actor.is_rotatable:1 of
 msgid ""
 "Defines if the costume of a actor should be rotatable. The actor can "
@@ -2229,6 +2263,20 @@ msgstr "Der bewegte Actor"
 #: miniworlds.actors.actor.Actor.move:12 of
 msgid "if actor is on the world, move forward:"
 msgstr "wenn der Actor in der Welt ist, vorwärts bewegen:"
+
+#: miniworlds.actors.actor.Actor.move_back:3 of
+msgid "Number of steps to move backward."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.move_back:5 of
+#, fuzzy
+msgid "The actor itself."
+msgstr "Der Actor selbst"
+
+#: miniworlds.actors.actor.Actor.move_back:9 of
+#, fuzzy
+msgid "Move back when wall is detected:"
+msgstr "zurückbewegen, wenn das Feld blockiert ist:"
 
 #: miniworlds.actors.actor.Actor.move_in_direction:6 of
 msgid "0, \"up\" - Look up"
@@ -2299,7 +2347,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_detecting_world:13
 #: miniworlds.actors.actor.Actor.on_mouse_left_released:41
 #: miniworlds.actors.actor.Actor.on_mouse_right_released:9
-#: miniworlds.actors.actor.Actor.on_not_detecting_world:13 of
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:15 of
 msgid "The error is raised when method is not overwritten or registered."
 msgstr ""
 "Der Fehler tritt auf, wenn die Methode nicht überschrieben oder "
@@ -2321,30 +2369,62 @@ msgstr "Eine Liste von Zeichenfolgen mit gefundenen Grenzen, z.B.: ['left', 'top
 msgid "Register on_detecting_border_event:"
 msgstr "Registrieren Sie on_detecting_border_event:"
 
-#: miniworlds.actors.actor.Actor.on_detecting_world:5
-#: miniworlds.actors.actor.Actor.on_not_detecting_world:5 of
+#: miniworlds.actors.actor.Actor.on_detecting_world:5 of
 msgid "Register on_detecting_world method:"
 msgstr "Registrieren Sie die Methode on_detecting_world:"
 
 #: miniworlds.actors.actor.Actor.on_key_down:3 of
 msgid ""
-"Register `on_key_down_<letter>` (for example `on_key_down_a`) if you want"
-" to react to a specific letter only."
+"Register ``on_key_down_<letter>`` (for example ``on_key_down_a``) if you "
+"want to react to a specific letter only."
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.on_key_down:6 of
-msgid "Typed key variants, for example `['A', 'a']`."
+msgid ""
+"For **arrow keys** use ``on_key_down_left``, ``on_key_down_right``, "
+"``on_key_down_up``, ``on_key_down_down``."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:9 of
+msgid ""
+"List of key name variants, for example ``['A', 'a']`` or ``['left']`` for"
+" the left arrow key."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_down:14 of
+#, fuzzy
+msgid "Move with WASD keys:"
+msgstr "Bewege dich mit den WASD-Tasten in eine Richtung"
+
+#: miniworlds.actors.actor.Actor.on_key_down:30 of
+msgid "Or use dedicated per-key handlers for arrow keys:"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.on_key_pressed:3 of
 msgid ""
-"Like `on_key_down`, this event also supports per-letter handlers such as "
-"`on_key_pressed_w`."
+"This is the right choice for smooth, continuous movement. Like "
+"``on_key_down``, this event supports per-letter handlers such as "
+"``on_key_pressed_w`` or ``on_key_pressed_left`` for the left arrow key."
 msgstr ""
 
-#: miniworlds.actors.actor.Actor.on_key_pressed:6 of
-msgid "Typed key variants, for example `['C', 'c']`."
+#: miniworlds.actors.actor.Actor.on_key_pressed:7 of
+msgid ""
+"List of key name variants currently held, for example ``['W', 'w']`` or "
+"``['up']``."
 msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_pressed:12 of
+msgid "Smooth movement with arrow keys (fires every frame while held):"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_key_up:3 of
+msgid "List of key name variants, same format as in ``on_key_down``."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_mouse_leave:3 of
+#, fuzzy
+msgid "The mouse position when it left the actor."
+msgstr "Legt die Richtung des Actors fest."
 
 #: miniworlds.actors.actor.Actor.on_mouse_left:3 of
 msgid ""
@@ -2372,12 +2452,25 @@ msgid ""
 "`detect_pixel(position)` if you only want motion over the actor body."
 msgstr ""
 
+#: miniworlds.actors.actor.Actor.on_mouse_over:3 of
+#, fuzzy
+msgid "Current mouse position as ``(x, y)``."
+msgstr "Aktuelle Mausposition als Tupel (x,y)"
+
 #: miniworlds.actors.actor.Actor.on_mouse_right:3 of
 msgid "Use `detect_pixel(position)` if you only want clicks on the actor body."
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.on_mouse_right_released:3 of
 msgid "The behavior and arguments match `on_mouse_left_released`."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:3 of
+msgid "Useful to remove actors that fly off-screen."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_not_detecting_world:7 of
+msgid "Remove actor when it leaves the world:"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.point_towards_actor:5 of
@@ -2986,4 +3079,41 @@ msgstr ""
 #~ "Methode wird aufgerufen, wenn die rechte"
 #~ " Maustaste losgelassen wird. Siehe "
 #~ ":py:meth:`Actor.on_mouse_left_released`."
+
+#~ msgid "Is the actor colliding with current ...."
+#~ msgstr ""
+
+#~ msgid "Called repeatedly while a key remains pressed."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "on_mouse_over is called, when mouse is"
+#~ " moved over actor :type position: "
+#~ ":param position: The mouse position"
+#~ msgstr ""
+#~ "on_mouse_over wird aufgerufen, wenn die "
+#~ "Maus über den Actor bewegt wird "
+#~ ":type position: :param position: Die "
+#~ "Mausposition"
+
+#~ msgid ""
+#~ "Register `on_key_down_<letter>` (for example "
+#~ "`on_key_down_a`) if you want to react"
+#~ " to a specific letter only."
+#~ msgstr ""
+
+#~ msgid "Typed key variants, for example `['A', 'a']`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Like `on_key_down`, this event also "
+#~ "supports per-letter handlers such as "
+#~ "`on_key_pressed_w`."
+#~ msgstr ""
+
+#~ msgid "Typed key variants, for example `['C', 'c']`."
+#~ msgstr ""
+
+#~ msgid "_description_"
+#~ msgstr "_beschreibung_"
 

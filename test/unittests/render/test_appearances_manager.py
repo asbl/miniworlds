@@ -85,6 +85,46 @@ class TestAppearancesManager(unittest.TestCase):
         self.assertEqual(len(self.manager.appearances_list), 1)
         self.assertIsNot(self.manager.appearance, explicit_appearance)
 
+    def test_remove_appearance_default_removes_last_active(self):
+        first = self.manager.add_new_appearance((255, 0, 0))
+        self.manager.add_new_appearance((0, 255, 0))
+
+        removed = self.manager.remove_appearance()
+
+        self.assertTrue(removed)
+        self.assertEqual(len(self.manager.appearances_list), 1)
+        self.assertIs(self.manager.appearance, first)
+
+    def test_remove_non_active_appearance_keeps_current_active(self):
+        first = self.manager.add_new_appearance((255, 0, 0))
+        second = self.manager.add_new_appearance((0, 255, 0))
+
+        removed = self.manager.remove_appearance(first)
+
+        self.assertTrue(removed)
+        self.assertEqual(len(self.manager.appearances_list), 1)
+        self.assertIs(self.manager.appearance, second)
+
+    def test_set_new_appearance_replaces_existing_appearance(self):
+        first = self.manager.add_new_appearance((255, 0, 0))
+
+        replacement = self.manager.set_new_appearance((0, 255, 0))
+
+        self.assertTrue(self.manager.has_appearance)
+        self.assertEqual(len(self.manager.appearances_list), 1)
+        self.assertIs(self.manager.appearance, replacement)
+        self.assertIsNot(first, replacement)
+
+    def test_reset_removes_all_explicit_appearances(self):
+        self.manager.add_new_appearance((255, 0, 0))
+        self.manager.add_new_appearance((0, 255, 0))
+
+        self.manager.reset()
+
+        self.assertFalse(self.manager.has_appearance)
+        self.assertEqual(len(self.manager.appearances_list), 1)
+        self.assertIsNotNone(self.manager.appearance)
+
     def test_switch_appearance_raises_for_invalid_index(self):
         self.manager.add_new_appearance((255, 0, 0))
 

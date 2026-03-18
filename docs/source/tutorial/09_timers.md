@@ -5,10 +5,10 @@ This means an action doesn’t happen immediately, but after a specified delay i
 
 Timers are useful, for example, if you want something to happen after a certain amount of time.
 
-\:::{note}
+:::{note}
 Python’s `time` library offers the function `time.sleep(...)` to create delays.
 However, you should **not** use it here, as it causes global pauses and may lead to unwanted side effects.
-\:::
+:::
 
 ---
 

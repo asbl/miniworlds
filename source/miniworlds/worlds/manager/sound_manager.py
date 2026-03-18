@@ -6,6 +6,19 @@ logger = logging.getLogger(__name__)
 
 
 class SoundManager:
+    """Manages short sound-effect playback for a world.
+
+    Access via ``world.sound``:
+
+    .. code-block:: python
+
+        world.sound.play("assets/explosion.wav")
+        world.sound.play("assets/jump.wav", volume=80)
+
+    Unlike ``world.music``, sounds can overlap and are designed for
+    short in-game effects (explosions, jumps, pickups, ...).
+    """
+
     def __init__(self, app: "app_mod.App"):
         self.app: "app_mod.App" = app
         self.sound_manager = self.app.sound_manager

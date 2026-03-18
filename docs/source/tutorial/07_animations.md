@@ -3,11 +3,11 @@
 Every actor can have one or more **costumes**.
 These costumes consist of one or more images that can be used for animations.
 
-\:::{note}
+:::{note}
 If you’re looking for the attributes and methods of the `Costume` class in the *API*,
 you’ll find them under the `Appearance` class.
 `Appearance` is the superclass of both `Costume` and `Background`, as backgrounds and costumes share many properties.
-\:::
+:::
 
 ---
 

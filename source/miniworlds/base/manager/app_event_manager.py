@@ -22,10 +22,10 @@ class AppEventManager:
     }
 
     def __init__(self, app: "app_mod.App"):
-        """The event manager consist
+        """Initializes the central application event manager.
 
         Args:
-            app (app.App): _description_
+            app: The application instance that owns the event queue.
         """
         self.event_queue: deque = deque()
         self.is_key_pressed: dict = {}
