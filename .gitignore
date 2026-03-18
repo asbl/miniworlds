@@ -93,3 +93,4 @@ source/miniworlds/.vscode/
 source/miniworlds/.vscode/*
 source/dist
 source/dist/*
+audit/

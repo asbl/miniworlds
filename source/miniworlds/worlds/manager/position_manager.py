@@ -220,6 +220,9 @@ class Positionmanager:
                 value = (value, value)
         if type(value) != tuple:
             raise ValueError("actor size must be int, float or tuple")
+        # Validate tuple components
+        if any(v < 0 for v in value):
+            raise ValueError(f"actor size components must be >= 0, got {value}")
         # Save old position
         self.store_origin()
         # Set the size
@@ -252,6 +255,8 @@ class Positionmanager:
     def scale_height(self, value):
         old_width = self.actor.size[0]
         old_height = self.actor.size[1]
+        if old_height == 0:
+            raise ValueError("Cannot scale height when current height is 0")
         scale_factor = value / old_height
         self.set_size((old_width * scale_factor, value))
 
@@ -359,6 +364,12 @@ class Positionmanager:
 
     def move(self, distance: int = 0) -> "actor_mod.Actor":
         if distance == 0:
+            # Check if speed exists and is valid
+            if not hasattr(self.actor, 'speed') or self.actor.speed is None:
+                raise AttributeError(
+                    f"Actor speed not initialized. Set actor.speed before calling move().\n"
+                    f"Example: actor.speed = 5; actor.move()"
+                )
             distance = self.actor.speed
 
         direction_raw = self.get_direction()

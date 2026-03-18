@@ -115,6 +115,10 @@ class Actor(actor_base.ActorBase):
         return facade
 
     def _validate_arguments(self, position, *args, **kwargs):
+        if position is None:
+            raise exceptions.NoValidPositionOnInitException(
+                self, None
+            )
         if not isinstance(position, tuple):
             raise exceptions.NoValidPositionOnInitException(self, position)
 
