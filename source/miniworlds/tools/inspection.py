@@ -1,15 +1,22 @@
 import inspect
 import types
 import functools
+from typing import Any, Optional, Callable
 
 
 class Inspection:
 
-    def __init__(self, generator):
+    def __init__(self, generator: Any) -> None:
         self.instance = generator
 
-    def get_instance_method(self, name):
-        """If a (actor-)object has method this returns the method by a given name
+    def get_instance_method(self, name: str) -> Optional[Callable]:
+        """If a (actor-)object has method this returns the method by a given name.
+        
+        Args:
+            name: The name of the method to retrieve.
+        
+        Returns:
+            The bound method, or None if not found or not callable.
         """
         if hasattr(self.instance, name):
             if callable(getattr(self.instance, name)):
@@ -38,4 +45,4 @@ class Inspection:
         if method:
             self.call_instance_method(method, args)
         elif errors:
-            raise Exception("Method not found")
+            raise AttributeError(f"Method '{name}' not found on instance {type(self.instance).__name__}")

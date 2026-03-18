@@ -253,9 +253,9 @@ class Actor(actor_base.ActorBase):
                 from miniworlds import *
                 world = World()
                 actor = Actor()
-                assert actor.costume_count == 0
+                initial_count = actor.costume_count  # 0
                 actor.add_costume((255,0,0,0))
-                assert actor.costume_count == 1
+                final_count = actor.costume_count  # 1
                 world.run()
 
 
@@ -1523,7 +1523,8 @@ class Actor(actor_base.ActorBase):
 
                 @actor1.register
                 def on_message(self, message):
-                    print("Received message:" + message)
+                    # Handle the message received
+                    self.send_message(f"got: {message}")
 
                 actor2 = Actor((100,100))
                 actor2.send_message("Hello from actor2")
@@ -1791,7 +1792,7 @@ class Actor(actor_base.ActorBase):
 
                 @actor.register
                 def on_clicked_left(self, position):
-                    print("clicked" + str(position))
+                    # Handle click event
 
 
         Args:
@@ -1815,7 +1816,7 @@ class Actor(actor_base.ActorBase):
 
                 @actor.register
                 def on_clicked_right(self, position):
-                    print("clicked" + str(position))
+                    # Handle right click event
 
 
         Args:
@@ -1837,7 +1838,7 @@ class Actor(actor_base.ActorBase):
 
                 @player.register
                     def on_detecting_world(self):
-                        print("Player 3: I'm on the world:")
+                        # Actor is inside the world
 
         Raises:
             NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
@@ -1880,9 +1881,9 @@ class Actor(actor_base.ActorBase):
 
                 @player.register
                 def on_detecting_actor(self, actor):
-                    print("Player 1: detecting actor:")
+                    # Check if detected actor is the target
                     if actor == player2:
-                    print("Am i detecting player2?" + str(actor == player2))
+                        self.move()  # React to detection
 
         Raises:
             NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
@@ -1903,8 +1904,9 @@ class Actor(actor_base.ActorBase):
 
                 @player.register
                 def on_detecting_borders(self, borders):
-                    print("Player 4: detecting borders:")
-                    print("Borders are here!", str(borders))
+                    # Handle border detection
+                    if "left" in borders:
+                        self.x = 1  # Move away from left edge
 
         Raises:
             NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
