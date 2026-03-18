@@ -125,7 +125,7 @@ world.run()
 * The images must be saved in the correct folder to be found.
 * You can place and customize as many actors as you like with different costumes.
 
-\:::{admonition} FAQ
+:::{admonition} FAQ
 
 ## FAQ: Common Issues and Solutions
 
@@ -207,4 +207,4 @@ you can disable costume rotation by setting `is_rotatable` to `False`:
 my_actor.costume.is_rotatable = False  # Keeps costume fixed in one direction
 ```
 
-\:::
+:::

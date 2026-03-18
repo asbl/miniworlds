@@ -260,7 +260,7 @@ class Actor(actor_base.ActorBase):
 
 
         Returns:
-            int: _description_
+            int: Number of costumes currently attached to the actor.
         """
         return self._get_appearance_facade().costume_count
 
@@ -898,7 +898,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def topleft_y(self) -> float:
-        """x-value of actor topleft-position"""
+        """y-value of actor topleft-position"""
         return self._get_movement_facade().get_topleft_y()
 
     @topleft_x.setter
@@ -986,7 +986,25 @@ class Actor(actor_base.ActorBase):
         return self._get_movement_facade().move_vector(vector)
 
     def move_back(self, distance):
-        """ """
+        """Moves the actor backward by *distance* steps (opposite of current direction).
+
+        Args:
+            distance: Number of steps to move backward.
+
+        Returns:
+            The actor itself.
+
+        Examples:
+
+            Move back when wall is detected:
+
+            .. code-block:: python
+
+                def act(self):
+                    self.move()
+                    if self.detect(Wall):
+                        self.move_back(5)
+        """
         return self._get_movement_facade().move_back(distance)
 
     def undo_move(self):
@@ -1301,7 +1319,7 @@ class Actor(actor_base.ActorBase):
         return self._get_sensor_facade().detect_right_border()
 
     def detect_top_border(self) -> bool:
-        """Does the actor touch the lower border?
+        """Does the actor touch the top border?
 
         Returns:
             True if border was found.
@@ -1419,7 +1437,11 @@ class Actor(actor_base.ActorBase):
         return self._get_sensor_facade().detect_rect(rect)
 
     def is_inside_world(self):
-        """Is the actor colliding with current ...."""
+        """Checks whether the actor is completely inside the world boundaries.
+
+        Returns:
+            True if the entire actor rectangle is within the world, False otherwise.
+        """
         return self._get_sensor_facade().is_inside_world()
 
     def bounce_from_actor(self, other: "Actor"):
@@ -1519,40 +1541,138 @@ class Actor(actor_base.ActorBase):
     def on_key_down(self, key: list):
         """Called once when a key is pressed.
 
-        Register `on_key_down_<letter>` (for example `on_key_down_a`) if you
+        Register ``on_key_down_<letter>`` (for example ``on_key_down_a``) if you
         want to react to a specific letter only.
 
+        For **arrow keys** use ``on_key_down_left``, ``on_key_down_right``,
+        ``on_key_down_up``, ``on_key_down_down``.
+
         Args:
-            key: Typed key variants, for example `['A', 'a']`.
+            key: List of key name variants, for example ``['A', 'a']`` or
+                ``['left']`` for the left arrow key.
+
+        Examples:
+
+            Move with WASD keys:
+
+            .. code-block:: python
+
+                @player.register
+                def on_key_down(self, key):
+                    if 'W' in key or 'up' in key:
+                        self.direction = 'up'
+                    elif 'S' in key or 'down' in key:
+                        self.direction = 'down'
+                    elif 'A' in key or 'left' in key:
+                        self.direction = 'left'
+                    elif 'D' in key or 'right' in key:
+                        self.direction = 'right'
+                    self.move()
+
+            Or use dedicated per-key handlers for arrow keys:
+
+            .. code-block:: python
+
+                @player.register
+                def on_key_down_left(self):
+                    self.direction = 'left'
+                    self.move()
+
+                @player.register
+                def on_key_down_right(self):
+                    self.direction = 'right'
+                    self.move()
+
+                @player.register
+                def on_key_down_up(self):
+                    self.direction = 'up'
+                    self.move()
+
+                @player.register
+                def on_key_down_down(self):
+                    self.direction = 'down'
+                    self.move()
         """
         raise NotImplementedOrRegisteredError(self.on_key_down)
 
     def on_key_pressed(self, key: list):
-        """Called repeatedly while a key remains pressed.
+        """Called repeatedly every frame while a key is held down.
 
-        Like `on_key_down`, this event also supports per-letter handlers such
-        as `on_key_pressed_w`.
+        This is the right choice for smooth, continuous movement. Like
+        ``on_key_down``, this event supports per-letter handlers such as
+        ``on_key_pressed_w`` or ``on_key_pressed_left`` for the left arrow key.
 
         Args:
-            key: Typed key variants, for example `['C', 'c']`.
+            key: List of key name variants currently held, for example
+                ``['W', 'w']`` or ``['up']``.
+
+        Examples:
+
+            Smooth movement with arrow keys (fires every frame while held):
+
+            .. code-block:: python
+
+                @player.register
+                def on_key_pressed(self, key):
+                    if 'left' in key:
+                        self.x -= 3
+                    elif 'right' in key:
+                        self.x += 3
+                    elif 'up' in key:
+                        self.y -= 3
+                    elif 'down' in key:
+                        self.y += 3
         """
         raise NotImplementedOrRegisteredError(self.on_key_pressed)
 
     def on_key_up(self, key):
-        """Called once when a pressed key is released."""
+        """Called once when a previously pressed key is released.
+
+        Args:
+            key: List of key name variants, same format as in ``on_key_down``.
+
+        Examples:
+
+            .. code-block:: python
+
+                @player.register
+                def on_key_up(self, key):
+                    if 'space' in key:
+                        player.stop_animation()
+        """
         raise NotImplementedOrRegisteredError(self.on_key_up)
 
     def on_mouse_over(self, position):
-        """on_mouse_over is called, when mouse is moved over actor
-        :param position: The mouse position
+        """Called when the mouse cursor enters or moves over the actor area.
+
+        Args:
+            position: Current mouse position as ``(x, y)``.
+
+        Examples:
+
+            .. code-block:: python
+
+                @actor.register
+                def on_mouse_over(self, position):
+                    self.costume.transparency = 100  # semi-transparent on hover
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_over)
 
     def on_mouse_leave(self, position):
-        """on_mouse_over is called, when mouse is moved over actor
-        :param position: The mouse position
+        """Called when the mouse cursor leaves the actor area.
+
+        Args:
+            position: The mouse position when it left the actor.
+
+        Examples:
+
+            .. code-block:: python
+
+                @actor.register
+                def on_mouse_leave(self, position):
+                    self.costume.transparency = 0  # restore normal look
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_over)
+        raise NotImplementedOrRegisteredError(self.on_mouse_leave)
 
     def on_mouse_left_down(self, position: tuple):
         """Called when the left mouse button is pressed down."""
@@ -1560,7 +1680,7 @@ class Actor(actor_base.ActorBase):
 
     def on_mouse_right_down(self, position: tuple):
         """Called when the right mouse button is pressed down."""
-        raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
+        raise NotImplementedOrRegisteredError(self.on_mouse_right_down)
 
     def on_mouse_left(self, position: tuple):
         """Called when the left mouse button is clicked.
@@ -1726,23 +1846,25 @@ class Actor(actor_base.ActorBase):
         raise NotImplementedOrRegisteredError(self.on_detecting_world)
 
     def on_not_detecting_world(self):
-        """`on_detecting_world` is called, when actor is on the world
+        """Called when the actor is **not** touching the world (i.e. outside world bounds).
+
+        Useful to remove actors that fly off-screen.
 
         Examples:
 
-            Register on_detecting_world method:
+            Remove actor when it leaves the world:
 
-            .. code-block::
+            .. code-block:: python
 
-                @player.register
-                    def on_detecting_world(self):
-                        print("Player 3: I'm on the world:")
+                @rocket.register
+                def on_not_detecting_world(self):
+                    self.remove()
 
         Raises:
             NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
 
         """
-        raise NotImplementedOrRegisteredError(self.on_detecting_world)
+        raise NotImplementedOrRegisteredError(self.on_not_detecting_world)
 
     def on_detecting_actor(self, actor: "Actor"):
         """*on_detecting_actor* is called, when actor is detects a actor on same position

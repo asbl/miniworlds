@@ -2,22 +2,22 @@
 # Copyright (C) 2023, Andreas Siebel
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 09:40+0200\n"
+"POT-Creation-Date: 2026-03-17 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
-"Language-Team: de <LL@li.org>\n"
 "Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/api/actor_sensor.md:1
 msgid "Actor > Sensor"
@@ -25,8 +25,8 @@ msgstr "Aktor > Sensor"
 
 #: ../../source/api/actor_sensor.md:3
 msgid ""
-"Sensors are helper actors that can be attached to another actor to detect "
-"nearby objects and interactions."
+"Sensors are helper actors that can be attached to another actor to detect"
+" nearby objects and interactions."
 msgstr ""
 "Sensoren sind Hilfs-Actors, die an einen anderen Actor angehaengt werden "
 "koennen, um nahe Objekte und Interaktionen zu erkennen."
@@ -39,16 +39,66 @@ msgstr "API-Referenz"
 msgid "Sensor"
 msgstr "Sensor"
 
-#: miniworlds.actors.sensors.circle_sensor.CircleSensor:1
 #: miniworlds.actors.sensors.sensor_actor.Sensor:1 of
-msgid "A sensors attached to a actor."
+#, fuzzy
+msgid "An invisible sensor attached to another actor."
 msgstr "Ein Sensor ist an einem Actor angebracht."
 
-#: miniworlds.actors.sensors.circle_sensor.CircleSensor:3
 #: miniworlds.actors.sensors.sensor_actor.Sensor:3 of
-msgid "The sensors is not visible and will not detect the actor itself."
-msgstr "Die Sensoren sind nicht sichtbar und werden den Actor selbst nicht erkennen."
+msgid ""
+"A ``Sensor`` follows the actor it is attached to and detects nearby "
+"objects. The sensor itself is not visible and will never detect the actor"
+" it belongs to."
+msgstr ""
+
+#: miniworlds.actors.sensors.sensor_actor.Sensor:7 of
+msgid "Use ``actor.register_sensor(Sensor)`` to attach a sensor to an actor."
+msgstr ""
+
+#: ../../source/api/actor_sensor.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.actors.sensors.sensor_actor.Sensor:9 of
+msgid "The parent actor this sensor is attached to."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:14
+#: miniworlds.actors.sensors.sensor_actor.Sensor:12 of
+msgid "Examples"
+msgstr ""
 
 #: ../../source/api/actor_sensor.md:16
 msgid "Circle Sensor"
 msgstr "Kreissensor"
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:1 of
+#, fuzzy
+msgid "A circular invisible sensor attached to another actor."
+msgstr "Ein Sensor ist an einem Actor angebracht."
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:3 of
+msgid ""
+"``CircleSensor`` creates a circle of a given *distance* (radius) around "
+"the parent actor. Any actor that overlaps with this circle will be "
+"detected. The sensor itself is invisible and never detects the parent "
+"actor."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:8 of
+msgid "Use ``actor.register_sensor(CircleSensor, distance=<pixels>)`` to attach."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:10 of
+msgid "The parent actor this sensor belongs to."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:11 of
+msgid "Radius of the circular detection area in pixels."
+msgstr ""
+
+#~ msgid "The sensors is not visible and will not detect the actor itself."
+#~ msgstr ""
+#~ "Die Sensoren sind nicht sichtbar und "
+#~ "werden den Actor selbst nicht erkennen."
+

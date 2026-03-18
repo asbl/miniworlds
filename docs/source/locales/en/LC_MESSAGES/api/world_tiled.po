@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -248,6 +248,11 @@ msgid ""
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:1 of
+msgid "Creates and registers a tile at a world grid position."
+msgstr ""
+
+#: ../../None:27:<autosummary>:1
 msgid ""
 ":py:obj:`add_corner_to_world "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world>`\\"
@@ -255,10 +260,21 @@ msgid ""
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:1
+#: of
+msgid "Creates and registers a corner for a tile position and direction."
+msgstr ""
+
+#: ../../None:27:<autosummary>:1
 msgid ""
 ":py:obj:`add_edge_to_world "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world>`\\"
 " \\(position\\, direction\\)"
+msgstr ""
+
+#: ../../None:27:<autosummary>:1
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:1 of
+msgid "Creates and registers an edge for a tile position and direction."
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
@@ -346,7 +362,7 @@ msgstr ""
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors_at_position:1
 #: of
-msgid "Sensing actors at same position"
+msgid "Returns all actors located at the given tile/world position."
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
@@ -370,6 +386,11 @@ msgid ""
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.draw_on_image:1 of
+msgid "Draws an image onto the tiled world background at a tile position."
+msgstr ""
+
+#: ../../None:27:<autosummary>:1
 msgid ""
 ":py:obj:`get_from_pixel "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel>`\\ "
@@ -378,7 +399,7 @@ msgstr ""
 
 #: ../../None:27:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:1 of
-msgid "Gets world position from pixel coordinates"
+msgid "Returns the tile/world position for a pixel coordinate."
 msgstr ""
 
 #: ../../None:27:<autosummary>:1
@@ -485,6 +506,11 @@ msgid ""
 ":py:obj:`set_tile_size "
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size>`\\ "
 "\\(value\\)"
+msgstr ""
+
+#: ../../None:27:<autosummary>:1
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size:1 of
+msgid "Sets the tile size in pixels and refreshes camera/background caches."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -1061,6 +1087,53 @@ msgstr ""
 msgid "The world has no tiles, edges, and corners. They must be created manually"
 msgstr ""
 
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:3
+#: of
+msgid "Existing corners are merged when multiple tiles share the same corner."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:5
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:5 of
+msgid "Base tile position as ``(column, row)``."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:6
+#: of
+msgid "Corner direction key (for example ``\"nw\"``)."
+msgstr ""
+
+#: ../../source/api/world_tiled.md
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:37 of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:8
+#: of
+msgid "The registered corner object."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:3 of
+msgid "Existing edges are merged when neighboring tiles describe the same edge."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:6 of
+msgid "Edge direction key (for example ``\"n\"`` or ``\"w\"``)."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:8 of
+msgid "The registered edge object."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:3
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.draw_on_image:4 of
+msgid "Tile position as ``(column, row)``."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:5 of
+msgid "The created tile instance."
+msgstr ""
+
 #: ../../source/api/world_tiled.md
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel
 #: of
@@ -1087,12 +1160,6 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.clear_tiles:33 of
 msgid "This variant is faster, because Tiles are not created twice"
-msgstr ""
-
-#: ../../source/api/world_tiled.md
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:37 of
-msgid "Returns"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns:3 of
@@ -1122,6 +1189,10 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:11 of
 msgid "Get all actors at mouse position:"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.draw_on_image:3 of
+msgid "The image/surface to draw."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:3
@@ -1197,6 +1268,16 @@ msgstr ""
 msgid "Edge on Position, if position exists"
 msgstr ""
 
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:3 of
+msgid "Pixel position as ``(x, y)``."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:5 of
+msgid ""
+"The corresponding world position, or ``None`` if the pixel lies outside "
+"the camera view."
+msgstr ""
+
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:3 of
 msgid "Raises TileNotFoundError, if Tile does not exists."
 msgstr ""
@@ -1223,6 +1304,10 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_rows:3 of
 msgid "New row count (height in pixels)."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size:3 of
+msgid "New tile size in pixels."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.tile_size:3 of
@@ -2063,5 +2148,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Initializes the class and manages actor sprites."
+#~ msgstr ""
+
+#~ msgid "Sensing actors at same position"
+#~ msgstr ""
+
+#~ msgid "Gets world position from pixel coordinates"
 #~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -46,8 +46,27 @@ msgid "API Reference"
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar:1 of
-msgid "A Toolbar contains widgets (Buttons, Labels, ...)"
-msgstr "Eine Symbolleiste enthält Widgets (Schaltflächen, Beschriftungen, ...)"
+msgid "A panel that holds buttons, labels, and other widgets."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar:3 of
+msgid ""
+"Toolbars are usually docked beside the main world using "
+"``world.camera.add_right(toolbar)`` or "
+"``world.camera.add_bottom(toolbar)``. Widgets are added with "
+"``toolbar.add(widget)`` (or by simply creating them – they register "
+"themselves automatically when their world is set to the toolbar)."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar:8 of
+msgid ""
+"When a button inside a toolbar is clicked it broadcasts its label text as"
+" a message.  The main world responds via ``on_message``."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar:12 of
+msgid "Examples"
+msgstr ""
 
 #: ../../source/api/world_toolbar.md
 msgid "Public Data Attributes:"
@@ -251,9 +270,9 @@ msgid ""
 "\\(\\)"
 msgstr ""
 
-#: ../../None:11:<autosummary>:1 ../../None:17:<autosummary>:1
+#: ../../None:17:<autosummary>:1
 #: miniworlds.worlds.gui.toolbar.Toolbar.on_change:1 of
-msgid "implemented in subclasses"
+msgid "Reflows all widgets after the toolbar size or layout has changed."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
@@ -262,7 +281,8 @@ msgid ""
 "\\(item\\)"
 msgstr ""
 
-#: ../../None:17:<autosummary>:1
+#: ../../None:17:<autosummary>:1 miniworlds.worlds.gui.toolbar.Toolbar.remove:1
+#: of
 msgid "Removes a widget from the toolbar."
 msgstr ""
 
@@ -274,7 +294,7 @@ msgstr ""
 
 #: ../../None:17:<autosummary>:1
 #: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:1 of
-msgid "Checks if self.widgets has key"
+msgid "Checks whether the toolbar contains a widget under *key*."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
@@ -295,13 +315,28 @@ msgid ""
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove_all_widgets:1 of
+msgid "Removes all widgets from the toolbar at once."
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
 msgid ":py:obj:`reorder <miniworlds.worlds.gui.toolbar.Toolbar.reorder>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.reorder:1 of
+msgid "Recomputes the positions of all toolbar widgets."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
 msgid ""
 ":py:obj:`update_width_and_height "
 "<miniworlds.worlds.gui.toolbar.Toolbar.update_width_and_height>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.update_width_and_height:1 of
+msgid "Updates cached toolbar dimensions after a layout change."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
@@ -322,9 +357,19 @@ msgid ""
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.scroll_up:1 of
+msgid "Scrolls the toolbar view upward by *value* pixels."
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
 msgid ""
 ":py:obj:`scroll_down "
 "<miniworlds.worlds.gui.toolbar.Toolbar.scroll_down>`\\ \\(value\\)"
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.scroll_down:1 of
+msgid "Scrolls the toolbar view downward by *value* pixels."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
@@ -334,9 +379,19 @@ msgid ""
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:1 of
+msgid "Returns True if the toolbar can scroll downward by *value* pixels."
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
 msgid ""
 ":py:obj:`can_scroll_up "
 "<miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up>`\\ \\(value\\)"
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:1 of
+msgid "Returns True if the toolbar can scroll upward by *value* pixels."
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
@@ -346,9 +401,19 @@ msgid ""
 msgstr ""
 
 #: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:1 of
+msgid "Handles actors that are added to this toolbar world."
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
 msgid ""
 ":py:obj:`on_remove_actor "
 "<miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor>`\\ \\(actor\\)"
+msgstr ""
+
+#: ../../None:17:<autosummary>:1
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor:1 of
+msgid "Handles actors that are removed from this toolbar world."
 msgstr ""
 
 #: ../../None:3:<autosummary>:1
@@ -674,6 +739,10 @@ msgid ""
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
+msgid "implemented in subclasses"
+msgstr ""
+
+#: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`on_new_actor "
 "<miniworlds.worlds.world_base.WorldBase.on_new_actor>`\\ \\(actor\\)"
@@ -915,14 +984,17 @@ msgstr "Hintergrundfarbe als Tupel, z.B. (255,255,255) für Weiß"
 msgid "Parameters"
 msgstr "Parameter"
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:1
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:4
-#: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:5 of
-msgid "_description_"
-msgstr "_beschreibung_"
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:3
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:3 of
+msgid "Number of pixels to scroll by."
+msgstr ""
 
 #: ../../source/api/world_toolbar.md
 msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:5 of
+msgid "True if scrolling is possible, False otherwise."
 msgstr ""
 
 #: ../../source/api/world_toolbar.md
@@ -930,29 +1002,84 @@ msgstr ""
 msgid "Return type"
 msgstr ""
 
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:5 of
+msgid "True if upward scrolling is possible, otherwise False."
+msgstr ""
+
 #: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.widgets.widget\\_base.BaseWidget\\``"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.widgets.widget\\_base.BaseWidget\\``"
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:3 of
-msgid "The key of widget"
+#: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:5 of
+#, fuzzy
+msgid "The key of the widget."
 msgstr "Der Schlüssel des Widgets"
 
+#: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:7 of
+msgid "The widget stored under *key*."
+msgstr ""
+
+#: ../../source/api/world_toolbar.md
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:9 of
+msgid "If no widget with the given key exists."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:3 of
+#, fuzzy
+msgid "The widget key."
+msgstr "Der Schlüssel des Widgets"
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:5 of
+msgid "True if the widget exists, otherwise False."
+msgstr ""
+
 #: miniworlds.worlds.gui.toolbar.Toolbar.on_change:3 of
-msgid "on_change() is called, after world is added to window, resized, ..."
-msgstr ""
-
-#: miniworlds.worlds.gui.toolbar.Toolbar.remove:1 of
 msgid ""
-"Removes a widget from the toolbar. Warning: Be careful when calling this "
-"method in a loop."
+"This keeps widgets aligned when the toolbar is resized or docked in a "
+"different place."
 msgstr ""
-"Entfernt ein Widget aus der Toolbar. Warnung: Seien Sie vorsichtig, wenn "
-"Sie diese Methode in einer Schleife aufrufen."
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.remove:3 of
-msgid "The key of widget which should be removed"
-msgstr "Der Schlüssel des Widgets, das entfernt werden soll"
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:3 of
+msgid ""
+"Widget actors are registered in the internal widget list and then "
+"resized/reordered so the layout stays consistent."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:6 of
+msgid "The actor that has been added."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor:3 of
+msgid "The actor that has been removed."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:4 of
+msgid "Be careful when calling this inside a loop over ``self.widgets``."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:6 of
+msgid ""
+"The widget to remove – either the widget object itself, its integer "
+"index, or its string key."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove_all_widgets:3 of
+msgid "Use this when rebuilding a menu or replacing all controls."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.reorder:3 of
+msgid ""
+"Widgets are stacked from top to bottom with the configured paddings and "
+"margins."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.scroll_down:3
+#: miniworlds.worlds.gui.toolbar.Toolbar.scroll_up:3 of
+msgid "Number of pixels to scroll."
+msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.send_message:3 of
 msgid ""
@@ -967,6 +1094,10 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.send_message:8 of
 msgid "The name of the message/event to send."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.update_width_and_height:3 of
+msgid "This hook is used internally when docking or resizing the toolbar."
 msgstr ""
 
 #~ msgid ""
@@ -1854,4 +1985,29 @@ msgstr ""
 
 #~ msgid "Optional additional data to pass with the message."
 #~ msgstr ""
+
+#~ msgid "A Toolbar contains widgets (Buttons, Labels, ...)"
+#~ msgstr "Eine Symbolleiste enthält Widgets (Schaltflächen, Beschriftungen, ...)"
+
+#~ msgid "Checks if self.widgets has key"
+#~ msgstr ""
+
+#~ msgid "_description_"
+#~ msgstr "_beschreibung_"
+
+#~ msgid "on_change() is called, after world is added to window, resized, ..."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Removes a widget from the toolbar. "
+#~ "Warning: Be careful when calling this"
+#~ " method in a loop."
+#~ msgstr ""
+#~ "Entfernt ein Widget aus der Toolbar. "
+#~ "Warnung: Seien Sie vorsichtig, wenn Sie"
+#~ " diese Methode in einer Schleife "
+#~ "aufrufen."
+
+#~ msgid "The key of widget which should be removed"
+#~ msgstr "Der Schlüssel des Widgets, das entfernt werden soll"
 

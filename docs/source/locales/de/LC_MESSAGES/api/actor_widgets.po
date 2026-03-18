@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -47,8 +47,35 @@ msgid "Button"
 msgstr "Knopf"
 
 #: miniworlds.actors.widgets.button.Button:1 of
-msgid "Clickable widget that sends its text as a message when it is pressed."
+msgid "A clickable button widget for use inside a ``Toolbar``."
 msgstr ""
+
+#: miniworlds.actors.widgets.button.Button:3 of
+msgid ""
+"When clicked, the button broadcasts its label text as a message to the "
+"world. The world (or any actor) can react to this message via "
+"``on_message``."
+msgstr ""
+
+#: ../../source/api/actor_widgets.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.actors.widgets.button.Button:7 of
+msgid ""
+"The label text shown on the button.  This same text is sent as a message "
+"when the button is clicked."
+msgstr ""
+
+#: miniworlds.actors.widgets.button.Button:9 of
+msgid "Optional path to an image shown on the button."
+msgstr ""
+
+#: miniworlds.actors.widgets.button.Button:12
+#: miniworlds.actors.widgets.button.Button.on_clicked_left:6
+#: miniworlds.actors.widgets.label.Label:10 of
+msgid "Examples"
+msgstr "Beispiele"
 
 #: ../../source/api/actor_widgets.md
 msgid "Public Data Attributes:"
@@ -390,6 +417,11 @@ msgid ":py:obj:`topleft_y <miniworlds.actors.actor.Actor.topleft_y>`\\"
 msgstr ""
 
 #: ../../None:43:<autosummary>:1
+#, fuzzy
+msgid "y-value of actor topleft-position"
+msgstr "x-Wert der oberen linken Position des Actors"
+
+#: ../../None:43:<autosummary>:1
 msgid ":py:obj:`topleft <miniworlds.actors.actor.Actor.topleft>`\\"
 msgstr ""
 
@@ -594,6 +626,11 @@ msgid ""
 "\\(\\[text\\, image\\]\\)"
 msgstr ""
 
+#: ../../None:4:<autosummary>:1 ../../None:5:<autosummary>:1
+#: miniworlds.actors.widgets.button.Button.__init__:1 of
+msgid "Creates a toolbar button."
+msgstr ""
+
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`on_clicked_left "
@@ -603,11 +640,16 @@ msgstr ""
 
 #: ../../None:5:<autosummary>:1
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:1 of
-msgid "This event is called when the button is clicked -"
+msgid "Called when the button is clicked."
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
 msgid ":py:obj:`act <miniworlds.actors.widgets.button.Button.act>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:5:<autosummary>:1 miniworlds.actors.widgets.button.Button.act:1
+#: of
+msgid "Counts down the short click cooldown."
 msgstr ""
 
 #: ../../None:15:<autosummary>:1
@@ -1080,6 +1122,12 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
+msgid ""
+"Moves the actor backward by *distance* steps (opposite of current "
+"direction)."
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
 msgid ":py:obj:`undo_move <miniworlds.actors.actor.Actor.undo_move>`\\ \\(\\)"
 msgstr ""
 
@@ -1195,13 +1243,18 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-msgid "Does the actor touch the lower border?"
-msgstr ""
+#, fuzzy
+msgid "Does the actor touch the top border?"
+msgstr "Der Actor prallt von einem Rand ab."
 
 #: ../../None:86:<autosummary>:1
 msgid ""
 ":py:obj:`detecting_bottom_border "
 "<miniworlds.actors.actor.Actor.detecting_bottom_border>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
+msgid "Does the actor touch the lower border?"
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1308,8 +1361,8 @@ msgstr ""
 
 #: ../../None:86:<autosummary>:1
 #, fuzzy
-msgid "Is the actor colliding with current ...."
-msgstr ""
+msgid "Checks whether the actor is completely inside the world boundaries."
+msgstr "Verbirgt einen Actor (der Actor wird unsichtbar)"
 
 #: ../../None:86:<autosummary>:1
 msgid ""
@@ -1389,7 +1442,7 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-msgid "Called repeatedly while a key remains pressed."
+msgid "Called repeatedly every frame while a key is held down."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1397,7 +1450,7 @@ msgid ":py:obj:`on_key_up <miniworlds.actors.actor.Actor.on_key_up>`\\ \\(key\\)
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-msgid "Called once when a pressed key is released."
+msgid "Called once when a previously pressed key is released."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1407,17 +1460,17 @@ msgid ""
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
-msgid ""
-"on_mouse_over is called, when mouse is moved over actor :type position: "
-":param position: The mouse position"
+msgid "Called when the mouse cursor enters or moves over the actor area."
 msgstr ""
-"on_mouse_over wird aufgerufen, wenn die Maus über den Actor bewegt wird "
-":type position: :param position: Die Mausposition"
 
 #: ../../None:86:<autosummary>:1
 msgid ""
 ":py:obj:`on_mouse_leave <miniworlds.actors.actor.Actor.on_mouse_leave>`\\"
 " \\(position\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
+msgid "Called when the mouse cursor leaves the actor area."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1522,6 +1575,12 @@ msgstr ""
 msgid ""
 ":py:obj:`on_not_detecting_world "
 "<miniworlds.actors.actor.Actor.on_not_detecting_world>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:86:<autosummary>:1
+msgid ""
+"Called when the actor is **not** touching the world (i.e. outside world "
+"bounds)."
 msgstr ""
 
 #: ../../None:86:<autosummary>:1
@@ -1887,12 +1946,26 @@ msgstr ""
 msgid "return the visible value of that sprite"
 msgstr "den sichtbaren Wert dieses Sprites zurückgeben"
 
+#: miniworlds.actors.widgets.button.Button.__init__:3 of
+msgid "The button label and the message that will be sent on click."
+msgstr ""
+
+#: miniworlds.actors.widgets.button.Button.__init__:4 of
+msgid "Optional image path for the button."
+msgstr ""
+
+#: miniworlds.actors.widgets.button.Button.act:3 of
+msgid ""
+"The cooldown prevents the button from sending the same message several "
+"times in a few frames while the mouse button is still held down."
+msgstr ""
+
 #: ../../source/api/actor_widgets.md
 #, fuzzy
 msgid "Return type"
 msgstr "Gib str(self) zurück."
 
-#: miniworlds.actors.widgets.button.Button.act:2
+#: miniworlds.actors.widgets.button.Button.act:7
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:21
 #: miniworlds.actors.widgets.load.LoadButton.on_mouse_left_down:4
 #: miniworlds.actors.widgets.save.SaveButton.on_mouse_left_down:4 of
@@ -1902,10 +1975,6 @@ msgstr ""
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:3 of
 msgid "By default, a message with the button text is then sent to the world."
 msgstr ""
-
-#: miniworlds.actors.widgets.button.Button.on_clicked_left:6 of
-msgid "Examples"
-msgstr "Beispiele"
 
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:7 of
 msgid "Send a event on button-click:"
@@ -1983,6 +2052,28 @@ msgstr ""
 msgid "Label"
 msgstr "Etikett"
 
+#: miniworlds.actors.widgets.label.Label:1 of
+msgid "A text label for use in a ``Toolbar``."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label:3 of
+msgid ""
+"``Label`` is usually used for headings, status text, scores, or other "
+"information that should be shown inside a toolbar."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label:6 of
+msgid "The text to display in the label."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label:7 of
+msgid "Optional path to an image to show instead of (or alongside) text."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label:11 of
+msgid "Add a label to a toolbar:"
+msgstr ""
+
 #: ../../None:3:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <miniworlds.actors.widgets.label.Label.__init__>`\\ "
@@ -1990,8 +2081,21 @@ msgid ""
 msgstr ""
 
 #: ../../None:3:<autosummary>:1
+#: miniworlds.actors.widgets.label.Label.__init__:1 of
+msgid "Creates a label widget."
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`_abc_impl <miniworlds.actors.widgets.label.Label._abc_impl>`\\"
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label.__init__:3 of
+msgid "The text displayed by the label."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label.__init__:4 of
+msgid "Optional image path."
 msgstr ""
 
 #~ msgid ":py:obj:`ask <miniworlds.actors.actor.Actor.ask>`\\"
@@ -2365,4 +2469,29 @@ msgstr ""
 
 #~ msgid ":py:obj:`__rect <miniworlds.actors.parent_actor.ParentActor.__rect>`\\"
 #~ msgstr ""
+
+#~ msgid "Clickable widget that sends its text as a message when it is pressed."
+#~ msgstr ""
+
+#~ msgid "This event is called when the button is clicked -"
+#~ msgstr ""
+
+#~ msgid "Is the actor colliding with current ...."
+#~ msgstr ""
+
+#~ msgid "Called repeatedly while a key remains pressed."
+#~ msgstr ""
+
+#~ msgid "Called once when a pressed key is released."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "on_mouse_over is called, when mouse is"
+#~ " moved over actor :type position: "
+#~ ":param position: The mouse position"
+#~ msgstr ""
+#~ "on_mouse_over wird aufgerufen, wenn die "
+#~ "Maus über den Actor bewegt wird "
+#~ ":type position: :param position: Die "
+#~ "Mausposition"
 

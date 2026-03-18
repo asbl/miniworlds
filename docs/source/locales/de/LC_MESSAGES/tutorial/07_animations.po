@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/07_animations.md:1
 msgid "Costumes and Animations"
@@ -28,19 +28,22 @@ msgid ""
 "Every actor can have one or more **costumes**. These costumes consist of "
 "one or more images that can be used for animations."
 msgstr ""
-"Jeder Actor kann ein oder mehrere **Costumes** haben. Diese Costumes bestehen aus "
-"einem oder mehreren Bildern, die für Animationen verwendet werden können."
+"Jeder Actor kann ein oder mehrere **Costumes** haben. Diese Costumes "
+"bestehen aus einem oder mehreren Bildern, die für Animationen verwendet "
+"werden können."
 
-#: ../../source/tutorial/07_animations.md:6
+#: ../../source/tutorial/07_animations.md:7
+#, python-brace-format
 msgid ""
-"\\:::{note} If you’re looking for the attributes and methods of the "
-"`Costume` class in the *API*, you’ll find them under the `Appearance` "
-"class. `Appearance` is the superclass of both `Costume` and `Background`,"
-" as backgrounds and costumes share many properties. \\:::"
+"If you’re looking for the attributes and methods of the `Costume` class "
+"in the *API*, you’ll find them under the `Appearance` class. `Appearance`"
+" is the superclass of both `Costume` and `Background`, as backgrounds and"
+" costumes share many properties."
 msgstr ""
-"\\:::{note} Wenn du in der *API* nach den Attributen und Methoden der Klasse `Costume` suchst, "
-"findest du sie unter der Klasse `Appearance`. `Appearance` ist die Oberklasse von `Costume` und `Background`, "
-"da beide viele Eigenschaften gemeinsam haben. \\:::"
+"Wenn du in der *API* nach den Attributen und Methoden der Klasse "
+"`Costume` suchst, findest du sie unter der Klasse `Appearance`. "
+"`Appearance` ist die Oberklasse von `Costume` und `Background`, da beide "
+"viele Eigenschaften gemeinsam haben."
 
 #: ../../source/tutorial/07_animations.md:14
 msgid "Adding a Costume"
@@ -48,14 +51,17 @@ msgstr "Ein Costume hinzufügen"
 
 #: ../../source/tutorial/07_animations.md:16
 msgid "You can add a new costume to an actor using the following function:"
-msgstr "Du kannst einem Actor mit der folgenden Funktion ein neues Costume hinzufügen:"
+msgstr ""
+"Du kannst einem Actor mit der folgenden Funktion ein neues Costume "
+"hinzufügen:"
 
 #: ../../source/tutorial/07_animations.md:22
 msgid ""
 "If the actor doesn’t already have a costume, this will automatically "
 "become the first one."
 msgstr ""
-"Wenn der Actor noch kein Costume hat, wird dieses automatisch als erstes gesetzt."
+"Wenn der Actor noch kein Costume hat, wird dieses automatisch als erstes "
+"gesetzt."
 
 #: ../../source/tutorial/07_animations.md:26
 msgid "Adding More Images to a Costume"
@@ -66,8 +72,8 @@ msgid ""
 "To expand a costume with additional images, you can use the `add_image` "
 "method:"
 msgstr ""
-"Um ein Costume zu erweitern, kannst du die Methode `add_image` verwenden, "
-"um zusätzliche Bilder hinzuzufügen:"
+"Um ein Costume zu erweitern, kannst du die Methode `add_image` verwenden,"
+" um zusätzliche Bilder hinzuzufügen:"
 
 #: ../../source/tutorial/07_animations.md:34
 msgid "Alternatively, you can add a list of images at once:"
@@ -82,8 +88,8 @@ msgid ""
 "2D animations work like a flipbook: By quickly switching between images, "
 "the actor appears to move."
 msgstr ""
-"2D-Animationen funktionieren wie ein Daumenkino: Durch schnelles Wechseln der Bilder "
-"entsteht der Eindruck, dass sich der Actor bewegt."
+"2D-Animationen funktionieren wie ein Daumenkino: Durch schnelles Wechseln"
+" der Bilder entsteht der Eindruck, dass sich der Actor bewegt."
 
 #: ../../source/tutorial/07_animations.md:47
 msgid "![Costumes for the actor](../_images/costumes.png)"
@@ -99,9 +105,10 @@ msgid ""
 "above). Then, you can start the animation using the `animate()` method. "
 "The `loop` parameter determines whether the animation should repeat:"
 msgstr ""
-"Um eine Animation zu erstellen, füge zuerst mehrere Bilder zu einem Costume hinzu (siehe oben). "
-"Anschließend kannst du die Animation mit der Methode `animate()` starten. "
-"Mit dem Parameter `loop` bestimmst du, ob sich die Animation wiederholen soll:"
+"Um eine Animation zu erstellen, füge zuerst mehrere Bilder zu einem "
+"Costume hinzu (siehe oben). Anschließend kannst du die Animation mit der "
+"Methode `animate()` starten. Mit dem Parameter `loop` bestimmst du, ob "
+"sich die Animation wiederholen soll:"
 
 #: ../../source/tutorial/07_animations.md:58
 msgid "Example:"
@@ -113,12 +120,16 @@ msgstr "Zwischen Costumes wechseln"
 
 #: ../../source/tutorial/07_animations.md:83
 msgid "To switch between different costumes, use the `switch_costume` method:"
-msgstr "Um zwischen verschiedenen Costumes zu wechseln, verwende die Methode `switch_costume`:"
+msgstr ""
+"Um zwischen verschiedenen Costumes zu wechseln, verwende die Methode "
+"`switch_costume`:"
 
 #: ../../source/tutorial/07_animations.md:89
 msgid ""
 "This will switch to the next costume in the list. Optionally, you can "
 "pass a number to switch to a specific costume directly:"
 msgstr ""
-"Diese Methode wechselt zum nächsten Costume in der Liste. Optional kannst du eine Zahl übergeben, "
-"um direkt zu einem bestimmten Costume zu springen:"
+"Diese Methode wechselt zum nächsten Costume in der Liste. Optional kannst"
+" du eine Zahl übergeben, um direkt zu einem bestimmten Costume zu "
+"springen:"
+

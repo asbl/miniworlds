@@ -237,6 +237,60 @@ class TestSensorManager(unittest.TestCase):
 
         self.assertIsNone(detected)
 
+    def test_get_line_to_does_not_crash_when_start_y_greater_than_target_y(self):
+        """Regression Bug 1: get_line_to used wrong operator precedence in distance formula,
+        producing a negative value under math.sqrt when start[1] > target[1]."""
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        # start[1]=5, target[1]=2 previously caused math.sqrt(-14) → ValueError
+        result = hunter.sensor_manager.get_line_to((0.0, 5.0), (3.0, 2.0))
+        self.assertIsInstance(result, list)
+        self.assertGreater(len(result), 0)
+
+    def test_get_line_to_sample_count_is_euclidean_distance(self):
+        """get_line_to should sample about floor(distance) points between start and target."""
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        # 3-4-5 right triangle → distance = 5, expect ~5 intermediate points
+        result = hunter.sensor_manager.get_line_to((0.0, 0.0), (3.0, 4.0))
+        self.assertEqual(len(result), 5)
+
+    def test_detect_actors_at_uses_actor_position_not_actor_object(self):
+        """Regression Bug 2: detect_actors_at passed self.actor (an Actor) to get_destination
+        instead of self.actor.position, causing TypeError on subscript."""
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        runner = self._create_actor(Runner, position=(20, 20))
+        # Should not raise TypeError / AttributeError
+        result = hunter.sensor_manager.detect_actors_at(filter=None, direction=0, distance=0)
+        self.assertIsInstance(result, list)
+
+    def test_detect_actor_returns_none_not_empty_list_when_nothing_found(self):
+        """Regression Bug 3: detect_actor returned [] instead of None for no match."""
+        hunter = self._create_actor(Hunter, position=(0, 0))
+        # No other actor at this position
+        result = hunter.sensor_manager.detect_actor(Runner)
+        self.assertIsNone(result)
+
+    def test_filter_first_actor_returns_none_when_no_match(self):
+        """Regression Bug 3: filter_first_actor returned [] instead of None."""
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(60, 60))
+        result = hunter.sensor_manager.filter_first_actor([], Runner)
+        self.assertIsNone(result)
+
+
+class TestEventManagerClassState(unittest.TestCase):
+    """Regression Bug 4: EventManager must not carry shared mutable class-level state."""
+
+    def test_event_manager_has_no_shared_members_attribute(self):
+        from miniworlds.worlds.manager.event_manager import EventManager
+        self.assertFalse(hasattr(EventManager, "members"))
+
+    def test_event_manager_has_no_shared_registered_class_events_attribute(self):
+        from miniworlds.worlds.manager.event_manager import EventManager
+        self.assertFalse(hasattr(EventManager, "registered_class_events"))
+
+    def test_event_manager_has_no_shared_setup_attribute(self):
+        from miniworlds.worlds.manager.event_manager import EventManager
+        self.assertFalse(hasattr(EventManager, "setup"))
 
 if __name__ == "__main__":
     unittest.main()

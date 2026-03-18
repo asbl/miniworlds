@@ -19,10 +19,10 @@ text = miniworlds.Text(position, string)
 * `position`: A tuple that defines the top-left corner of the text.
 * `string`: The text to display.
 
-\:::{note}
+:::{note}
 In a regular **World**, the text is automatically scaled.
 In a **TiledWorld**, the text is shown inside a tile, which can cause space issues for longer text.
-\:::
+:::
 
 #### Example:
 

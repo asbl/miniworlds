@@ -175,11 +175,11 @@ class SingleWidget(widget_base.BaseWidget):
         self.resize()
 
     def set_border(self, color: tuple = (0, 0, 0, 255), width: int = 1):
-        """sets border of widget
+        """Sets the widget border color and width.
 
         Args:
-            color (_type_): _description_
-            width (_type_): _description_
+            color: Border color as an RGBA tuple.
+            width: Border width in pixels.
         """
         self.border_color = color
         self.border = width

@@ -3,7 +3,12 @@ import miniworlds.tools.method_caller as method_caller
 
 
 class Timed():
-    """Base class for all timers
+    """Base class for all timer objects.
+
+    Registered timers are ticked once per frame by the world's main loop.
+    You normally use ``ActionTimer`` or ``LoopActionTimer`` (or their
+    decorator shortcuts ``@timer`` / ``@loop``) instead of subclassing
+    ``Timed`` directly.
     """
 
     def __init__(self):
@@ -12,10 +17,16 @@ class Timed():
         self.running = True
 
     def tick(self):
+        """Advances the timer by one frame.
+
+        Subclasses override this method when they need special timing logic.
+        """
         self.time = self.time - 1
 
     def unregister(self):
-        """remove timer from world
+        """Removes the timer from the current world.
+
+        Use this to stop a running timer before it fires again.
         """
         if self in self.world._timed_objects:
             self.world._timed_objects.remove(self)
@@ -23,21 +34,39 @@ class Timed():
 
 
 class Timer(Timed):
-    """Base class for timers. Calls act() Method after `time` frames.
+    """Calls its ``act()`` method once after *time* frames have elapsed.
+
+    Subclass this and override ``act()`` when you need custom timer logic.
+    For most use-cases prefer ``ActionTimer`` or the ``@timer`` decorator.
     """
 
+    @staticmethod
+    def _validate_interval(time: int) -> None:
+        if not isinstance(time, int):
+            raise TypeError(f"Timer interval must be int, got {type(time)}")
+        if time <= 0:
+            raise ValueError(f"Timer interval must be > 0, got {time}")
+
     def __init__(self, time: int):
+        self._validate_interval(time)
         super().__init__()
         self.time = time
         self.actual_time = 0
 
     def tick(self):
+        """Counts frames and calls ``act()`` when the timer interval is reached.
+
+        This method is called automatically once per frame by the world.
+        """
         self.actual_time += 1
         if self.actual_time % self.time == 0:
             self.act()
 
     def act(self):
-        """Act method for timer. Called after `actual_time` frames.
+        """Hook method that is executed when the timer interval is reached.
+
+        Subclasses override this method with the action that should happen
+        after the configured number of frames.
         """
         pass
 
@@ -73,6 +102,10 @@ class ActionTimer(Timer):
             self.arguments = None
 
     def act(self):
+        """Calls the stored method once and then unregisters the timer.
+
+        This is the behavior behind ``@timer`` and one-shot delayed actions.
+        """
         self._call_method()
         self.unregister()
         

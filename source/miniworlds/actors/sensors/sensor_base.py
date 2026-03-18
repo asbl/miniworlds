@@ -6,10 +6,10 @@ import miniworlds.actors.actor as actor_mod
 
 class SensorBase(actor_mod.Actor):
     def __init__(self, *args, **kwargs):
-        """_summary_
+        """Initializes a sensor actor that follows another actor.
 
         Args:
-            actor (actor_mod.Actor): _description_
+            actor: The actor that this sensor should watch.
         """
         actor, distance, positioning, direction = self._get_from_args(args, kwargs)
         super().__init__(actor.position, *args, **kwargs)

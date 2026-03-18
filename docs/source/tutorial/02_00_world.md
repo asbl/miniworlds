@@ -62,17 +62,17 @@ world.run()
 * The method `add_background("images/grass.png")` loads the image `grass.png` from the specified path
   and sets it as the background for your world.
 
-\:::{note}
+:::{note}
 
 There are different types of `Worlds` in Miniworlds.
 The `TiledWorld` is specifically designed for games using tiled layouts, such as top-down RPGs.
 
-\:::
+:::
 
-\:::{seealso}
+:::{seealso}
 [Concept: Naming and Variables](../concepts/concept_naming)
-\:::
+:::
 
-\:::{seealso}
+:::{seealso}
 [Concept: Imports](../concepts/concept_imports)
-\:::
+:::

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -37,6 +37,23 @@ msgstr ""
 msgid "API Reference"
 msgstr ""
 
+#: miniworlds.appearances.appearances_manager.AppearancesManager:1 of
+msgid ""
+"Abstract base class for managing a collection of costume or background "
+"appearances."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager:3 of
+msgid ""
+"Subclasses ``CostumesManager`` (for actors) and ``BackgroundsManager`` "
+"(for worlds) extend this class with their own factory methods and "
+"convenience helpers."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager:6 of
+msgid "Typical use via the public API:"
+msgstr ""
+
 #: ../../source/api/appearances_manager.md
 msgid "Public Data Attributes:"
 msgstr ""
@@ -48,9 +65,20 @@ msgid ""
 msgstr ""
 
 #: ../../None:6:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.image:1 of
+msgid "Image surface of the currently active appearance."
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
 msgid ""
 ":py:obj:`orientation "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.orientation>`\\"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.orientation:1
+#: of
+msgid "Returns the orientation values of all managed appearances."
 msgstr ""
 
 #: ../../None:6:<autosummary>:1
@@ -60,9 +88,20 @@ msgid ""
 msgstr ""
 
 #: ../../None:6:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animation_speed:1
+#: of
+msgid "Returns the animation speed of the active appearance."
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
 msgid ""
 ":py:obj:`border "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.border>`\\"
+msgstr ""
+
+#: ../../None:6:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.border:1 of
+msgid "Returns the shared border width for managed appearances."
 msgstr ""
 
 #: ../../source/api/appearances_manager.md
@@ -94,6 +133,12 @@ msgid ""
 ":py:obj:`set_new_appearance "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance>`\\"
 " \\(source\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance:1
+#: of
+msgid "Replaces the current appearance with a new one."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -145,7 +190,7 @@ msgstr ""
 
 #: ../../None:31:<autosummary>:1
 #: miniworlds.appearances.appearances_manager.AppearancesManager.length:1 of
-msgid "Number of appearance in appearance manager"
+msgid "Returns the number of appearances currently managed."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -183,10 +228,22 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_border:1
+#: of
+msgid "Sets the border width for all managed appearances."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`set_animated "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.set_animated>`\\"
 " \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_animated:1
+#: of
+msgid "Enables or disables animation for all managed appearances."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -197,10 +254,22 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_animation_speed:1
+#: of
+msgid "Sets the animation speed for all managed appearances."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`set_upscaled "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled>`\\"
 " \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled:1
+#: of
+msgid "Sets whether small images may be scaled up."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -211,6 +280,12 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_width:1
+#: of
+msgid "Sets whether appearances should scale to the parent width."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`set_scaled_to_height "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height>`\\"
@@ -218,10 +293,22 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height:1
+#: of
+msgid "Sets whether appearances should scale to the parent height."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`set_scaled "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled>`\\"
 " \\(value\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled:1
+#: of
+msgid "Sets whether appearances should scale to the parent size."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -268,10 +355,21 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.reset:1 of
+msgid "Removes all managed appearances and resets the manager state."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`switch_appearance "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance>`\\"
 " \\(source\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:1
+#: of
+msgid "Switches the active costume or background."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -282,10 +380,21 @@ msgid ""
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animate:1 of
+msgid "Starts animating the currently active appearance."
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
 msgid ""
 ":py:obj:`animate_appearance "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance>`\\"
 " \\(appearance\\, speed\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance:1
+#: of
+msgid "Switches to a specific appearance and starts animating it."
 msgstr ""
 
 #: ../../None:31:<autosummary>:1
@@ -320,6 +429,12 @@ msgid ""
 ":py:obj:`get_actual_appearance "
 "<miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance>`\\"
 " \\(\\)"
+msgstr ""
+
+#: ../../None:31:<autosummary>:1
+#: miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance:1
+#: of
+msgid "Returns the currently active appearance."
 msgstr ""
 
 #: ../../source/api/appearances_manager.md
@@ -401,9 +516,7 @@ msgid ""
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
-msgid ""
-"Removes appearance from manager If self.length == 1, the last costume is "
-"removed and a default appearance will be added."
+msgid "Removes an appearance from the manager."
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance:3
@@ -418,9 +531,9 @@ msgstr ""
 #: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance:6
 #: miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance_from_list:2
 #: miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance:4
-#: miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance:2
+#: miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance:6
 #: miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance:3
-#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:2
+#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:3
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\``"
 msgstr ""
@@ -429,6 +542,22 @@ msgstr ""
 #: miniworlds.appearances.appearances_manager.AppearancesManager.self_remove:4
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: ../../source/api/appearances_manager.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animate:3
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance:4
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_animation_speed:3
+#: of
+msgid "Number of frames between image changes."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance:3
+#: of
+msgid "The appearance to animate."
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance:3
@@ -445,6 +574,11 @@ msgstr ""
 msgid "Index of found appearance; -1 if appearance was not found."
 msgstr ""
 
+#: miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance:3
+#: of
+msgid "If no appearance exists yet, a default one is created first."
+msgstr ""
+
 #: miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index:2
 #: of
 msgid ""
@@ -452,8 +586,14 @@ msgid ""
 " \\| \\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
+#: miniworlds.appearances.appearances_manager.AppearancesManager.image:3 of
+msgid ""
+"Active appearance image, or a 1x1 fallback surface if no appearance has "
+"been created yet."
+msgstr ""
+
 #: miniworlds.appearances.appearances_manager.AppearancesManager.length:5 of
-msgid "_description_"
+msgid "Number of costumes or backgrounds in the manager."
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.list:3 of
@@ -481,15 +621,70 @@ msgstr ""
 msgid "Removes last costume."
 msgstr ""
 
-#: ../../source/api/appearances_manager.md
-msgid "Parameters"
-msgstr ""
-
 #: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:6
 #: of
 msgid ""
 "The index of the new appearance or the Appearance which should be removed"
 " Defaults to -1"
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.reset:3 of
+msgid ""
+"This is useful when an actor or world should receive a completely new set"
+" of costumes or backgrounds."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_animated:3
+#: of
+msgid "``True`` to animate appearances, otherwise ``False``."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_border:3
+#: of
+msgid "Border width in pixels."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance:3
+#: of
+msgid "If no appearance exists yet, this behaves like ``add_new_appearance``."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance:5
+#: of
+msgid ""
+"Image source, color tuple, surface, costume instance, or ``None`` for a "
+"default appearance."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance:8
+#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:7
+#: of
+msgid "The newly active appearance."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled:3
+#: of
+msgid "``True`` to scale managed appearances."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height:3
+#: of
+msgid "``True`` to scale to height."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_width:3
+#: of
+msgid "``True`` to scale to width."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled:3
+#: of
+msgid "``True`` to allow upscaling."
+msgstr ""
+
+#: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:5
+#: of
+msgid "Either the appearance index or the appearance instance."
 msgstr ""
 
 #~ msgid "Appearance"
@@ -504,5 +699,18 @@ msgstr ""
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
 #~ " "
 #~ "\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
+#~ msgstr ""
+
+#~ msgid "Number of appearance in appearance manager"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Removes appearance from manager If "
+#~ "self.length == 1, the last costume "
+#~ "is removed and a default appearance "
+#~ "will be added."
+#~ msgstr ""
+
+#~ msgid "_description_"
 #~ msgstr ""
 

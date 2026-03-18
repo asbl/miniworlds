@@ -70,14 +70,11 @@ class SensorManager:
         self,
         detected_actors: List["actor_mod.Actor"],
         actors: Union[str, "actor_mod.Actor", Type["actor_mod.Actor"]],
-    ):
+    ) -> Optional["actor_mod.Actor"]:
         detected_actors = self._filter_actor_list(detected_actors, actors)
-        if detected_actors and len(detected_actors) >= 1:
-            return_value = detected_actors[0]
-            del detected_actors
-            return return_value
-        else:
-            return []
+        if detected_actors:
+            return detected_actors[0]
+        return None
 
     def _resolve_detectable_actor_filter(
         self,
@@ -373,7 +370,7 @@ class SensorManager:
         self, start: Tuple[float, float], target: Tuple[float, float]
     ) -> List[Tuple[float, float]]:
         sampling_rate = int(
-            math.sqrt((target[0] - start[0]) ** 2 + target[1] - start[1] ** 2)
+            math.sqrt((target[0] - start[0]) ** 2 + (target[1] - start[1]) ** 2)
         )
         x_spacing = (target[0] - start[0]) / (sampling_rate + 1)
         y_spacing = (target[1] - start[1]) / (sampling_rate + 1)
@@ -450,7 +447,7 @@ class SensorManager:
     ) -> list:
         if direction is None:
             direction = self.actor.direction
-        destination = self.__class__.get_destination(self.actor, direction, distance)
+        destination = self.__class__.get_destination(self.actor.position, direction, distance)
         detected_actors = self.get_actors_at_position(destination)
         return self.filter_actors(detected_actors, filter)
 
@@ -489,7 +486,7 @@ class SensorManager:
             visible_actors, filter
         )
         if not collision_candidates:
-            return []
+            return None
 
         actor_rect = self.actor.position_manager.get_global_rect()
 
@@ -506,7 +503,7 @@ class SensorManager:
             )
 
         if filter_applied:
-            return detected_actors[0] if detected_actors else []
+            return detected_actors[0] if detected_actors else None
 
         return self.filter_first_actor(detected_actors, filter)
 

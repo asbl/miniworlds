@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/02_00_world.md:1
 msgid "The First World"
@@ -111,11 +111,6 @@ msgstr ""
 "The method add_background(\"images/grass.png\") loads the image grass.png"
 " from the specified path and sets it as the background for your world."
 
-#: ../../source/tutorial/02_00_world.md:65
-#, python-brace-format
-msgid "\\:::{note}"
-msgstr ""
-
 #: ../../source/tutorial/02_00_world.md:67
 msgid ""
 "There are different types of `Worlds` in Miniworlds. The `TiledWorld` is "
@@ -123,20 +118,14 @@ msgid ""
 "RPGs."
 msgstr ""
 
-#: ../../source/tutorial/02_00_world.md:70
-msgid "\\:::"
-msgstr ""
-
-#: ../../source/tutorial/02_00_world.md:72
+#: ../../source/tutorial/02_00_world.md:73
 #, fuzzy, python-brace-format
-msgid ""
-"\\:::{seealso} [Concept: Naming and "
-"Variables](../concepts/concept_naming) \\:::"
+msgid "[Concept: Naming and Variables](../concepts/concept_naming)"
 msgstr "[Konzept: Naming und Variablen](../concepts/concept_naming)"
 
-#: ../../source/tutorial/02_00_world.md:76
+#: ../../source/tutorial/02_00_world.md:77
 #, fuzzy, python-brace-format
-msgid "\\:::{seealso} [Concept: Imports](../concepts/concept_imports) \\:::"
+msgid "[Concept: Imports](../concepts/concept_imports)"
 msgstr "[Konzept: Importe](../concepts/concept_imports)"
 
 #~ msgid "Die erste Welt"
@@ -253,4 +242,10 @@ msgstr "[Konzept: Importe](../concepts/concept_imports)"
 #~ " in miniworlds. The `TiledWorld` is "
 #~ "specifically designed for games on tiled"
 #~ " surfaces, such as top-down RPGs."
+
+#~ msgid "\\:::{note}"
+#~ msgstr ""
+
+#~ msgid "\\:::"
+#~ msgstr ""
 

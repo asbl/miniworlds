@@ -148,6 +148,7 @@ class CantSetAutoFontSize(MiniworldsError):
 class NotImplementedOrRegisteredError(MiniworldsError):
     def __init__(self, method):
         self.message = f"Method {method} is not overwritten or registered"
+        super().__init__(self.message)
 
 
 class EllipseWrongArgumentsError(MiniworldsError):

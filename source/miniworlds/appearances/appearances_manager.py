@@ -12,6 +12,23 @@ import pygame
 
 
 class AppearancesManager(ABC):
+    """Abstract base class for managing a collection of costume or background appearances.
+
+    Subclasses ``CostumesManager`` (for actors) and ``BackgroundsManager`` (for worlds)
+    extend this class with their own factory methods and convenience helpers.
+
+    Typical use via the public API:
+
+    .. code-block:: python
+
+        # Switching between costumes
+        actor.switch_costume(1)
+        actor.next_costume()
+
+        # Switching between backgrounds
+        world.switch_background(1)
+        world.next_background()
+    """
     def __init__(self, parent):
         self.appearances_list = []
         self.parent = parent
@@ -36,6 +53,12 @@ class AppearancesManager(ABC):
 
     @property
     def image(self) -> pygame.Surface:
+        """Image surface of the currently active appearance.
+
+        Returns:
+            pygame.Surface: Active appearance image, or a 1x1 fallback surface
+            if no appearance has been created yet.
+        """
         if self.appearance:
             return self.appearance.image
         else:
@@ -82,11 +105,22 @@ class AppearancesManager(ABC):
     def set_new_appearance(
         self, source: Union[str, pygame.Surface, "costume.Costume", Tuple, None]
     ):
+        """Replaces the current appearance with a new one.
+
+        If no appearance exists yet, this behaves like ``add_new_appearance``.
+
+        Args:
+            source: Image source, color tuple, surface, costume instance, or
+                ``None`` for a default appearance.
+
+        Returns:
+            The newly active appearance.
+        """
         if not self.has_appearance:
             return self.add_new_appearance(source)
         else:
-            self.remove_appearance()
-            self.add_new_appearance(source)
+            self.remove_appearance(self.appearance)
+            return self.add_new_appearance(source)
 
     def add_new_appearances(self, sources: List) -> None:
         if type(sources) in [list]:
@@ -155,10 +189,10 @@ class AppearancesManager(ABC):
         return self.switch_appearance(index)
 
     def length(self) -> int:
-        """Number of appearance in appearance manager
+        """Returns the number of appearances currently managed.
 
         Returns:
-            int: _description_
+            int: Number of costumes or backgrounds in the manager.
         """
         if self.has_appearance:
             return len(self.appearances_list)
@@ -171,7 +205,7 @@ class AppearancesManager(ABC):
     def get_appearance_at_index(
         self, index: int
     ) -> Union["appearance_mod.Appearance", None]:
-        if 0 <= index < len(self.appearances_list):
+        if -len(self.appearances_list) <= index < len(self.appearances_list):
             return self.appearances_list[index]
         else:
             return None
@@ -193,30 +227,65 @@ class AppearancesManager(ABC):
             setattr(appearance, attribute, value)
 
     def set_border(self, value):
+        """Sets the border width for all managed appearances.
+
+        Args:
+            value: Border width in pixels.
+        """
         self._border = value
         self._set_all("border", value)
 
     def set_animated(self, value):
+        """Enables or disables animation for all managed appearances.
+
+        Args:
+            value: ``True`` to animate appearances, otherwise ``False``.
+        """
         self.is_animated = value
         self._set_all("is_animated", value)
 
     def set_animation_speed(self, value):
+        """Sets the animation speed for all managed appearances.
+
+        Args:
+            value: Number of frames between image changes.
+        """
         self.animation_speed = value
         self._set_all("animation_speed", value)
 
     def set_upscaled(self, value):
+        """Sets whether small images may be scaled up.
+
+        Args:
+            value: ``True`` to allow upscaling.
+        """
         self.is_upscaled = value
         self._set_all("is_upscaled", value)
 
     def set_scaled_to_width(self, value):
+        """Sets whether appearances should scale to the parent width.
+
+        Args:
+            value: ``True`` to scale to width.
+        """
         self.is_scaled_to_width = value
         self._set_all("is_scaled_to_width", value)
 
     def set_scaled_to_height(self, value):
+        """Sets whether appearances should scale to the parent height.
+
+        Args:
+            value: ``True`` to scale to height.
+        """
         self.is_scaled_to_height = value
         self._set_all("is_scaled_to_height", value)
 
     def set_scaled(self, value):
+        """Sets whether appearances should scale to the parent size.
+
+        Args:
+            value: ``True`` to scale managed appearances.
+        """
         self.is_scaled = value
         self._set_all("is_scaled", value)
 
@@ -232,29 +301,34 @@ class AppearancesManager(ABC):
         return f"#Appearance-Manager : {str(len(self.appearances_list))} Appearances: {str(self.appearances_list)}, ID: {self.__hash__()}#"
 
     def _remove_appearance_from_manager(self, appearance: "appearance_mod.Appearance"):
-        """Removes appearance from manager
-        If self.length == 1, the last costume is removed and a default appearance will be added.
+        """Removes an appearance from the manager.
+
+        If the removed appearance is the only one, a default appearance is created
+        to keep the actor/world renderable.
 
         Args:
-            appearance (appearance_mod.Appearance): _description_
+            appearance: The appearance instance to remove.
 
         Returns:
-            bool: True, if an appearance was removed
+            bool: True, if an appearance was removed.
         """
-        if self.has_appearance and self.length() > 0:
-            if appearance == self.appearance:
-                if self.length() == 1:
-                    self.appearances_list.remove(appearance)
-                    del appearance
-                    self._add_default_appearance()
-                    self.has_appearance = False
-                    return True
-                else:
-                    first_appearance = self.get_appearance_at_index(0)
-                    self.switch_appearance(first_appearance)
-                    self.appearances_list.remove(appearance)
-                    del appearance
-                    return True
+        if not (self.has_appearance and self.length() > 0):
+            return False
+        if appearance not in self.appearances_list:
+            return False
+
+        if self.length() == 1:
+            self.appearances_list.remove(appearance)
+            self.appearance = None
+            self._add_default_appearance()
+            self.has_appearance = False
+            return True
+
+        was_active = appearance == self.appearance
+        self.appearances_list.remove(appearance)
+        if was_active:
+            self.switch_appearance(self.appearances_list[0])
+        return True
         return False
 
     def remove_appearance(self, source: Union[int, "appearance_mod.Appearance"] = -1):
@@ -277,12 +351,25 @@ class AppearancesManager(ABC):
             )
 
     def reset(self):
-        for appearance in self.appearances_list:
+        """Removes all managed appearances and resets the manager state.
+
+        This is useful when an actor or world should receive a completely new
+        set of costumes or backgrounds.
+        """
+        for appearance in list(self.appearances_list):
             self.remove_appearance(appearance)
 
     def switch_appearance(
         self, source: Union[int, "appearance_mod.Appearance"]
     ) -> "appearance_mod.Appearance":
+        """Switches the active costume or background.
+
+        Args:
+            source: Either the appearance index or the appearance instance.
+
+        Returns:
+            The newly active appearance.
+        """
         if isinstance(source, int):
             if source >= self.length():
                 raise miniworlds_exception.CostumeOutOfBoundsError(
@@ -304,10 +391,21 @@ class AppearancesManager(ABC):
         return self.appearance
 
     def animate(self, speed: int):
+        """Starts animating the currently active appearance.
+
+        Args:
+            speed: Number of frames between image changes.
+        """
         self.appearance.animation_speed = speed
         self.appearance.animate()
 
     def animate_appearance(self, appearance: "appearance_mod.Appearance", speed: int):
+        """Switches to a specific appearance and starts animating it.
+
+        Args:
+            appearance: The appearance to animate.
+            speed: Number of frames between image changes.
+        """
         if appearance is None:
             raise miniworlds_exception.CostumeIsNoneError()
         self.switch_appearance(appearance)
@@ -332,6 +430,7 @@ class AppearancesManager(ABC):
 
     @property
     def orientation(self):
+        """Returns the orientation values of all managed appearances."""
         return [appearance.orientation for appearance in self.appearances_list]
 
     @orientation.setter
@@ -341,6 +440,7 @@ class AppearancesManager(ABC):
 
     @property
     def animation_speed(self):
+        """Returns the animation speed of the active appearance."""
         return self.appearance.animation_speed
 
     @animation_speed.setter
@@ -350,6 +450,7 @@ class AppearancesManager(ABC):
 
     @property
     def border(self):
+        """Returns the shared border width for managed appearances."""
         return self._border
 
     @border.setter
@@ -359,6 +460,10 @@ class AppearancesManager(ABC):
             appearance.border = value
 
     def get_actual_appearance(self) -> "appearance_mod.Appearance":
+        """Returns the currently active appearance.
+
+        If no appearance exists yet, a default one is created first.
+        """
         if not self.appearance:
             self._add_default_appearance()
         return self.appearance

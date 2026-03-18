@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 09:50+0100\n"
+"POT-Creation-Date: 2026-03-17 18:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -85,12 +85,12 @@ msgstr ""
 "selbst zugreifen kann. Die Zeile `self.y = self.y - 1` bedeutet, dass das"
 " Objekt `player` seine eigene y-Koordinate um 1 verringert."
 
-#: ../../source/tutorial/04_00_act.md:39
-#, fuzzy, python-brace-format
+#: ../../source/tutorial/04_00_act.md:40
+#, python-brace-format
 msgid ""
-"\\:::{seealso} For more on methods and how to use `self`, see "
-"[here](../concepts/concept_self.md). \\:::"
+"For more on methods and how to use `self`, see "
+"[here](../concepts/concept_self.md)."
 msgstr ""
-"\\:::{seealso} Mehr über Methoden und die Verwendung von `self` findest "
-"du [hier](concepts/concept_self.md). \\:::"
+"Mehr über Methoden und die Verwendung von `self` findest du "
+"[hier](../concepts/concept_self.md)."
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-03-17 16:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -37,17 +37,65 @@ msgstr ""
 msgid "Sensor"
 msgstr ""
 
-#: miniworlds.actors.sensors.circle_sensor.CircleSensor:1
 #: miniworlds.actors.sensors.sensor_actor.Sensor:1 of
-msgid "A sensors attached to a actor."
+msgid "An invisible sensor attached to another actor."
 msgstr ""
 
-#: miniworlds.actors.sensors.circle_sensor.CircleSensor:3
 #: miniworlds.actors.sensors.sensor_actor.Sensor:3 of
-msgid "The sensors is not visible and will not detect the actor itself."
+msgid ""
+"A ``Sensor`` follows the actor it is attached to and detects nearby "
+"objects. The sensor itself is not visible and will never detect the actor"
+" it belongs to."
+msgstr ""
+
+#: miniworlds.actors.sensors.sensor_actor.Sensor:7 of
+msgid "Use ``actor.register_sensor(Sensor)`` to attach a sensor to an actor."
+msgstr ""
+
+#: ../../source/api/actor_sensor.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.actors.sensors.sensor_actor.Sensor:9 of
+msgid "The parent actor this sensor is attached to."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:14
+#: miniworlds.actors.sensors.sensor_actor.Sensor:12 of
+msgid "Examples"
 msgstr ""
 
 #: ../../source/api/actor_sensor.md:16
 msgid "Circle Sensor"
 msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:1 of
+msgid "A circular invisible sensor attached to another actor."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:3 of
+msgid ""
+"``CircleSensor`` creates a circle of a given *distance* (radius) around "
+"the parent actor. Any actor that overlaps with this circle will be "
+"detected. The sensor itself is invisible and never detects the parent "
+"actor."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:8 of
+msgid "Use ``actor.register_sensor(CircleSensor, distance=<pixels>)`` to attach."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:10 of
+msgid "The parent actor this sensor belongs to."
+msgstr ""
+
+#: miniworlds.actors.sensors.circle_sensor.CircleSensor:11 of
+msgid "Radius of the circular detection area in pixels."
+msgstr ""
+
+#~ msgid "A sensors attached to a actor."
+#~ msgstr ""
+
+#~ msgid "The sensors is not visible and will not detect the actor itself."
+#~ msgstr ""
 

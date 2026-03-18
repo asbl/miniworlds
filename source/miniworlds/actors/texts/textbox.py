@@ -5,17 +5,41 @@ import miniworlds.actors.shapes.shapes as shapes
 
 
 class TextBox(parent_actor.ParentActor):
+    """A multi-line text box with fixed width and height.
+
+    Long lines are automatically word-wrapped to fit within the given width.
+    Each line is rendered as a separate ``Text`` actor.
+
+    Args:
+        position: Top-left position of the text box.
+        width: Width of the text box in pixels.
+        height: Maximum height of the text box in pixels.
+        text: Initial text to display (keyword argument).
+        font_size: Font size for all lines (keyword argument, default 18).
+        border: If truthy, a rectangle outline is drawn around the box.
+
+    Examples:
+
+        .. code-block:: python
+
+            from miniworlds import *
+            world = World(400, 300)
+            box = TextBox((10, 10), 380, 200, text="Hello World! This is a long text that wraps automatically.")
+            world.run()
+    """
+
     def __init__(
         self, position: Tuple[float, float], width: float, height: float, **kwargs
     ):
-        """Generates a textbox with fixed width and height
+        """Creates a text box with fixed width and height.
 
         Args:
-            position (Tuple[float, float]): The topleft position of textbox
-            width (float): The width of the textbox
-            height (float): The height of the textbox
-            **border (bool): Does the textbox has a border?
-            **font_size (int): The font size
+            position: Top-left position of the text box.
+            width: Maximum width in pixels before text is wrapped.
+            height: Maximum height in pixels.
+            border: Optional keyword argument. If truthy, draw a rectangle
+                around the text box.
+            font_size: Optional keyword argument. Font size used for all lines.
         """
         super().__init__([])
         self._visible: bool = False
@@ -32,14 +56,14 @@ class TextBox(parent_actor.ParentActor):
             shapes.Rectangle(position, width, height)
 
     def create_line(self, position, txt="") -> text.Text:
-        """Creates a new text-line
+        """Creates a single ``Text`` actor for one rendered line.
 
         Args:
-            position (_type_): position of line
-            txt (str, optional): Text of line. Defaults to "".
+            position: Top-left position of the line.
+            txt: Text content of the line. Defaults to an empty string.
 
         Returns:
-            text.Text: A Text-Actor
+            text.Text: The created text actor.
         """
         lineText = text.Text(position, txt)
         if self.font_size != 0:
@@ -48,8 +72,15 @@ class TextBox(parent_actor.ParentActor):
         return lineText
 
     def create_line_actors(self):
-        """creates the lines actor - One actor per line.
-        Split long lines after words.
+        """Builds the visible text lines for the current text box content.
+
+        The text is split line by line and then wrapped after words so that no
+        rendered line becomes wider than ``self.line_width``. Each line is
+        stored as a child ``Text`` actor.
+
+        Examples:
+
+            After changing ``self.text``, call this method to rebuild all lines.
         """
         dummy = self.create_line((0, 0))
         font = dummy.costume.font_manager.font

@@ -1,5 +1,3 @@
-import collections
-from collections import defaultdict
 from typing import Any, Optional, Callable
 
 import miniworlds.actors.actor as actor_mod
@@ -13,10 +11,6 @@ from miniworlds.worlds.manager.event_subscription import EventSubscription
 
 class EventManager:
     """Coordinates event registration, dispatch, and collision-event views for one world."""
-
-    members = set()
-    registered_class_events = defaultdict()
-    setup = False
 
     def __init__(self, world):
         self.world = world

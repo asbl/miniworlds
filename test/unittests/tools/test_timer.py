@@ -118,3 +118,24 @@ class TestTimer(unittest.TestCase):
 
         self.assertEqual(calls, ["tick", "tick"])
         self.assertIn(decorated_timer, world._timed_objects)
+
+    def test_timer_rejects_non_positive_interval(self):
+        with self.assertRaises(ValueError):
+            Timer(0)
+        with self.assertRaises(ValueError):
+            Timer(-1)
+
+    def test_timer_rejects_non_integer_interval(self):
+        with self.assertRaises(TypeError):
+            Timer(1.5)
+
+
+class TestNotImplementedOrRegisteredError(unittest.TestCase):
+    def test_exception_message_is_propagated_to_super(self):
+        """Regression: __init__ previously set self.message but never called super(),
+        so str(exc) showed the raw method object rather than the intended message."""
+        from miniworlds.base.exceptions import NotImplementedOrRegisteredError
+
+        exc = NotImplementedOrRegisteredError("my_method")
+        self.assertIn("my_method", str(exc))
+        self.assertIn("not overwritten or registered", str(exc))

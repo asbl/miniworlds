@@ -80,7 +80,7 @@ class MouseManager:
         Returns True if the left mouse button is currently pressed.
 
         Examples:
-            >>> if world.mouse.mouse_left_is_clicked():
+            >>> if world.mouse.left():
             ...     print("Left button is down")
         """
         return pygame.mouse.get_pressed()[0]
@@ -90,7 +90,7 @@ class MouseManager:
         Returns True if the right mouse button is currently pressed.
 
         Examples:
-            >>> if world.mouse.mouse_right_is_clicked():
+            >>> if world.mouse.right():
             ...     print("Right button is down")
         """
         return pygame.mouse.get_pressed()[2]
@@ -119,7 +119,7 @@ class MouseManager:
         Returns the y-coordinate of the mouse if over the world, otherwise 0.
 
         Examples:
-            >>> y = world.mouse.get_mouse_y()
+            >>> y = world.mouse.y()
         """
         if self.position:
             return self.position[1]
@@ -130,7 +130,7 @@ class MouseManager:
         Returns the mouse position from the last frame (if available).
 
         Examples:
-            >>> last = world.mouse.get_last_mouse_position()
+            >>> last = world.mouse.get_last_position()
         """
         return self._prev_mouse_position
 
