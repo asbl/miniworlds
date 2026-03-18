@@ -178,6 +178,10 @@ class Appearance(metaclass=MetaAppearance):
 
     @animation_speed.setter
     def animation_speed(self, value):
+        if not isinstance(value, (int, float)):
+            raise TypeError(f"animation_speed must be int or float, got {type(value).__name__}")
+        if value <= 0:
+            raise ValueError(f"animation_speed must be > 0, got {value}")
         self._animation_speed = value
 
     def _set_animation_speed(self, value):
@@ -507,9 +511,15 @@ class Appearance(metaclass=MetaAppearance):
 
     @alpha.setter
     def alpha(self, value):
-        self._alpha = value
+        if not isinstance(value, (int, float)):
+            raise TypeError(f"alpha must be int or float, got {type(value).__name__}")
+        # Allow normalized 0-1 range
         if 0 < value < 1:
             value = value * 255
+        # Validate final range
+        if not (0 <= value <= 255):
+            raise ValueError(f"alpha must be 0-255, got {value}")
+        self._alpha = value
         if value == 255:
             self.transparency = False
         else:
@@ -601,6 +611,8 @@ class Appearance(metaclass=MetaAppearance):
             value = 0
         if not isinstance(value, int):
             raise TypeError("border value should be of type int")
+        if value < 0:
+            raise ValueError(f"border must be >= 0, got {value}")
         self._border = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
        

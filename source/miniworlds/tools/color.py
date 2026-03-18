@@ -47,7 +47,11 @@ class Color:
         else:
             raise TypeError("Value must be a float or a tuple of 1, 3, or 4 float values.")
 
-        return cls(tuple(float(v) for v in value))
+        # Convert to floats and validate range
+        value = tuple(float(v) for v in value)
+        if not all(0 <= v <= 255 for v in value):
+            raise ValueError(f"Color values must be 0-255, got {value}")
+        return cls(value)
 
     def get(self) -> Tuple[float, ...]:
         """

@@ -423,5 +423,111 @@ class TestErrorMessagesAudit(unittest.TestCase):
         self.assertIn("spelling", error_msg.lower())
 
 
+class TestEarlyValidationAudit(unittest.TestCase):
+    """Regression tests for early validation and fail-fast behavior."""
+
+    def test_world_dimensions_must_be_positive(self):
+        from miniworlds import World
+
+        with self.assertRaises(ValueError) as ctx:
+            World(-100, 200)
+
+        self.assertIn("positive", str(ctx.exception).lower())
+
+    def test_world_fps_must_be_positive(self):
+        from miniworlds import World
+
+        world = World()
+        with self.assertRaises(ValueError) as ctx:
+            world.fps = 0
+
+        self.assertIn("fps", str(ctx.exception).lower())
+
+    def test_world_tick_rate_must_be_positive(self):
+        from miniworlds import World
+
+        world = World()
+        with self.assertRaises(ValueError) as ctx:
+            world.tick_rate = -1
+
+        self.assertIn("tick_rate", str(ctx.exception).lower())
+
+    def test_animation_speed_must_be_positive(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+
+        with self.assertRaises(ValueError) as ctx:
+            actor.costume.animation_speed = 0
+
+        self.assertIn("animation_speed", str(ctx.exception).lower())
+
+    def test_alpha_range_validation(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+
+        with self.assertRaises(ValueError) as ctx:
+            actor.costume.alpha = 300
+
+        self.assertIn("alpha", str(ctx.exception).lower())
+
+    def test_border_must_be_non_negative(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+
+        with self.assertRaises(ValueError) as ctx:
+            actor.costume.border = -1
+
+        self.assertIn("border", str(ctx.exception).lower())
+
+    def test_size_components_must_be_non_negative(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+
+        with self.assertRaises(ValueError) as ctx:
+            actor.size = (-10, 20)
+
+        self.assertIn("size", str(ctx.exception).lower())
+
+    def test_scale_height_zero_guard(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+        actor.size = (10, 0)
+
+        with self.assertRaises(ValueError) as ctx:
+            actor.position_manager.scale_height(5)
+
+        self.assertIn("height", str(ctx.exception).lower())
+
+    def test_move_requires_initialized_speed(self):
+        from miniworlds import Actor, World
+
+        world = World()
+        actor = Actor()
+        actor.speed = None
+
+        with self.assertRaises(AttributeError) as ctx:
+            actor.move()
+
+        self.assertIn("speed", str(ctx.exception).lower())
+
+    def test_color_range_validation(self):
+        from miniworlds.tools.color import Color
+
+        with self.assertRaises(ValueError) as ctx:
+            Color.create((500, 10, 10))
+
+        self.assertIn("0-255", str(ctx.exception))
+
+
 if __name__ == "__main__":
     unittest.main()

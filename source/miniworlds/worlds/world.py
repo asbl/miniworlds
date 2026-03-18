@@ -69,6 +69,10 @@ class World(world_base.WorldBase):
             raise TypeError(
                 f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
             )
+        if x <= 0 or y <= 0:
+            raise ValueError(
+                f"World dimensions must be positive (> 0), got ({x}, {y})"
+            )
 
     def __init__(
         self,
@@ -158,6 +162,10 @@ class World(world_base.WorldBase):
 
     @tick_rate.setter
     def tick_rate(self, value: int):
+        if not isinstance(value, (int, float)):
+            raise TypeError(f"tick_rate must be int or float, got {type(value).__name__}")
+        if value <= 0:
+            raise ValueError(f"tick_rate must be > 0, got {value}")
         self._tick_rate = value
 
     @property
@@ -175,6 +183,10 @@ class World(world_base.WorldBase):
 
     @fps.setter
     def fps(self, value: int):
+        if not isinstance(value, (int, float)):
+            raise TypeError(f"fps must be int or float, got {type(value).__name__}")
+        if value <= 0:
+            raise ValueError(f"fps must be > 0, got {value}")
         self._fps = value
 
     @property
