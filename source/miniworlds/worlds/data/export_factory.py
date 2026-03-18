@@ -31,7 +31,7 @@ class ExportActorsFactory:
         self.actors = actors
         self.actors_serialized = list()
         for actor in self.actors:
-            if not (hasattr(actor, "export") and actor.export == False):
+            if not (hasattr(actor, "export") and not actor.export):
                 actor_dict = {"x": actor.position[0],
                             "y": actor.position[1],
                             "direction": actor.direction,

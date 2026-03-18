@@ -32,7 +32,7 @@ class Window:
             surface = self.app.platform.load_surface(path)
             self.app.platform.set_window_icon(surface)
         except Exception as e:
-            raise Exception("Error on creating window: " + str(e))
+            raise RuntimeError(f"Error on creating window: {e}") from e
 
     @property
     def fullscreen(self):
@@ -70,7 +70,7 @@ class Window:
     def surface(self):
         return self._surface
 
-    def _update_surface(self):
+    def _update_surface(self) -> None:
         """Updates the surface of window. Everything is drawn and scaled to the surface
 
         Defaults to containers_width/height

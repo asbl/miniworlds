@@ -96,7 +96,8 @@ class TileBase(abc.ABC):
 
     def merge(self, other: TileBase):
         """Merge tile positions from another tile at the same location."""
-        assert other.position == self.position, "Tiles must share the same position to merge."
+        if other.position != self.position:
+            raise ValueError(f"Tiles must share the same position to merge. Got {self.position} and {other.position}.")
         for pos in other.positions:
             if pos not in self.positions:
                 self.positions.append(pos)
