@@ -54,7 +54,7 @@ class Positionmanager:
     def origin(self, value: str) -> None:
         """Set the origin. Only 'center' or 'topleft' are allowed."""
         if value not in {"center", "topleft"}:
-            raise exceptions.OriginException(self.actor)
+            raise exceptions.OriginException(self.actor, value)
 
         self._origin = value
 

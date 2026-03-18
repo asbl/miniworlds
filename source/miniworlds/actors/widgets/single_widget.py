@@ -254,7 +254,9 @@ class SingleWidget(widget_base.BaseWidget):
         if isinstance(text, int) or isinstance(text, float):
             text = str(text)
         if not isinstance(text, str):
-            raise TypeError("text must be of type str, got", type(text), text)
+            raise TypeError(
+                f"Widget text must be a string like 'Hello', got {type(text).__name__}: {repr(text)}"
+            )
         self._widget_text.set_text(text)
         self.max_width = self._widget_text.width
         self.max_height = self._widget_text.height
