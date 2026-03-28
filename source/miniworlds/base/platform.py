@@ -44,12 +44,19 @@ class PlatformAdapter:
         pygame.display.set_icon(surface)
 
     def set_mode(self, size, flags: int = 0) -> pygame.Surface:
+        # Re-initialize the display subsystem if it was previously shut down
+        # (e.g. after stop → rerun in H5P).  Without this, set_mode() silently
+        # returns an unusable surface and the canvas stays black.
+        if not pygame.display.get_init():
+            pygame.display.init()
         return pygame.display.set_mode(size, flags)
 
     def toggle_fullscreen(self) -> None:
         pygame.display.toggle_fullscreen()
 
     def display_info(self) -> pygame.display.Info:
+        if not pygame.display.get_init():
+            pygame.display.init()
         return pygame.display.Info()
 
     def update_display(self, repaint_areas) -> None:
