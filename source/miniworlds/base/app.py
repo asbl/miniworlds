@@ -206,11 +206,21 @@ class App:
         Starts the main event loop.
         """
         self._mainloop_started = True
-        while not self._quit:
-            await self._update()
+        finished_normally = False
+        try:
+            while not self._quit:
+                await self._update()
+            finished_normally = True
+        finally:
+            self._finalize_mainloop(finished_normally)
 
-        if not self._unittest:
-            self.platform.quit_display()
+    def _finalize_mainloop(self, finished_normally: bool) -> None:
+        self._mainloop_started = False
+        if self._unittest:
+            return
+
+        self.platform.quit_display()
+        if finished_normally:
             sys.exit(self._exit_code)
 
     async def _update(self):

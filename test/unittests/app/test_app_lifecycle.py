@@ -1,5 +1,6 @@
 import unittest
-from unittest.mock import MagicMock, patch
+import asyncio
+from unittest.mock import AsyncMock, MagicMock, patch
 
 from miniworlds.base.app import App
 
@@ -65,6 +66,55 @@ class TestAppLifecycle(unittest.TestCase):
         self.assertIs(App._state.running_world, replacement_world)
         self.assertEqual(App.get_path(), "/tmp/override")
         self.assertEqual(App._state.path, "/tmp/override")
+
+
+class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        App.reset()
+
+    def tearDown(self):
+        App.reset()
+
+    def _create_app(self, world):
+        with patch("miniworlds.base.app.worlds_manager.WorldsManager", return_value=MagicMock()):
+            with patch("miniworlds.base.app.event_manager.AppEventManager", return_value=MagicMock()):
+                with patch("miniworlds.base.app.sound_manager.SoundManager", return_value=MagicMock()):
+                    with patch("miniworlds.base.app.music_manager.MusicManager", return_value=MagicMock()):
+                        with patch("miniworlds.base.app.window_mod.Window", return_value=MagicMock()):
+                            return App("TestApp", world)
+
+    async def test_start_mainloop_quits_display_and_exits_after_regular_quit(self):
+        world = DummyWorld()
+        app = self._create_app(world)
+        app._unittest = False
+        app.platform = MagicMock()
+
+        async def stop_loop():
+            app._quit = True
+
+        app._update = AsyncMock(side_effect=stop_loop)
+
+        with patch("miniworlds.base.app.sys.exit") as exit_mock:
+            await app.start_mainloop()
+
+        app.platform.quit_display.assert_called_once_with()
+        exit_mock.assert_called_once_with(0)
+        self.assertFalse(app._mainloop_started)
+
+    async def test_start_mainloop_quits_display_when_cancelled(self):
+        world = DummyWorld()
+        app = self._create_app(world)
+        app._unittest = False
+        app.platform = MagicMock()
+        app._update = AsyncMock(side_effect=asyncio.CancelledError())
+
+        with patch("miniworlds.base.app.sys.exit") as exit_mock:
+            with self.assertRaises(asyncio.CancelledError):
+                await app.start_mainloop()
+
+        app.platform.quit_display.assert_called_once_with()
+        exit_mock.assert_not_called()
+        self.assertFalse(app._mainloop_started)
 
 
 if __name__ == "__main__":
