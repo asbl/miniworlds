@@ -38,11 +38,13 @@ Unit tests are grouped by domain under `test/unittests/<area>/`.
 
 ## Docs
 
-Upload new version to pypi:
+Upload new version to PyPI:
 
 ```sh
-git tag v3.0.1.1  
-# Replace version number and set this number in source/setup.conf
-
-git push origin v3.0.1.1
+invoke release --version=3.5.0.1
+invoke release --version=3.5.0.1 --dry-run
 ```
+
+This task synchronizes the version in both packages, runs the Docker test suite,
+creates the commits and tags in the main repository and the physics submodule,
+and pushes branch plus tag so the GitHub PyPI workflows can publish both packages.
