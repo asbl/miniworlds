@@ -4,7 +4,6 @@ pymunk
 setuptools
 dotenv==0.9.9
 invoke
-sqlite
 python-dotenv==1.0.1
 sphinx<9
 sphinx-intl

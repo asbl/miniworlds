@@ -62,6 +62,7 @@ class Actor(actor_base.ActorBase):
     def __init__(
         self, position: Optional[Tuple[float, float]] = (0, 0), *args, **kwargs
     ):
+        position, args = self._normalize_constructor_arguments(position, args)
         self._initialization_facade = actor_initialization_facade.ActorInitializationFacade(self)
         self._get_initialization_facade().prepare_core_references(kwargs.get("world"))
         self._validate_arguments(position, *args, **kwargs)
@@ -69,6 +70,20 @@ class Actor(actor_base.ActorBase):
         self._get_initialization_facade().initialize_world_managers(position)
         self._get_initialization_facade().finalize_sprite_state(kwargs.get("origin"))
         Actor.actor_count += 1
+
+    @classmethod
+    def _normalize_constructor_arguments(
+        cls,
+        position: Optional[Tuple[float, float]] = (0, 0),
+        args: tuple = (),
+    ) -> tuple[Optional[Tuple[float, float]], tuple]:
+        if cls is not Actor:
+            return position, args
+        if isinstance(position, tuple):
+            return position, args
+        if len(args) >= 1 and isinstance(position, (int, float)) and isinstance(args[0], (int, float)):
+            return (position, args[0]), args[1:]
+        return position, args
 
     def _get_initialization_facade(
         self,
@@ -323,7 +338,7 @@ class Actor(actor_base.ActorBase):
         return self._get_appearance_facade().flip_x()
 
     def add_costume(
-        self, source: Union[None, Tuple, str, List] = None
+        self, source: Union[None, Tuple, str, List, "appearance.Appearance"] = None
     ) -> "costume_mod.Costume":
         """Adds a new costume to actor.
         The costume can be switched with self.switch_costume(index)

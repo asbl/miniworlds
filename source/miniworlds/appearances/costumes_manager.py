@@ -74,6 +74,8 @@ class CostumesManager(appearances_manager.AppearancesManager):
         return cast("costume_mod.Costume", self.next_appearance())
 
     def _add_appearance_to_manager(self, appearance):
+        if hasattr(appearance, "bind_to_actor"):
+            appearance.bind_to_actor(self.actor)
         return super()._add_appearance_to_manager(appearance)
 
     def remove_from_world(self):

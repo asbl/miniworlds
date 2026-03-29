@@ -4,6 +4,7 @@ import unittest
 
 from miniworlds import Actor, App, World
 from miniworlds.actors.parent_actor import ParentActor
+from miniworlds.base.exceptions import NoValidPositionOnInitException
 
 
 class TestParentActor(unittest.TestCase):
@@ -54,3 +55,13 @@ class TestParentActor(unittest.TestCase):
 
         self.assertNotIn(parent, self.world.actors)
         self.assertNotIn(child, self.world.actors)
+
+    def test_actor_accepts_two_coordinate_arguments(self):
+        actor = Actor(40, 50, world=self.world)
+
+        self.assertEqual(actor.position, (40, 50))
+        self.assertIn(actor, self.world.actors)
+
+    def test_parent_actor_keeps_tuple_only_position_signature(self):
+        with self.assertRaises(NoValidPositionOnInitException):
+            ParentActor(40, 50, world=self.world)

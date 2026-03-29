@@ -158,6 +158,11 @@ class AppearancesManager(ABC):
     def _add_appearance_to_manager(
         self, appearance: "appearance_mod.Appearance"
     ) -> "appearance_mod.Appearance":
+        if appearance in self.appearances_list:
+            self.appearance = appearance
+            self._set_appearance_defaults()
+            self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
+            return appearance
         self.appearance = appearance
         self.appearances_list.append(appearance)
         self._set_appearance_defaults()

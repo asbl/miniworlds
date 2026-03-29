@@ -34,10 +34,10 @@ class ActorAppearanceFacade:
         return self.actor.position_manager.flip_x()
 
     def add_costume(
-        self, source: Union[None, Tuple, str, List] = None
+        self, source: Union[None, Tuple, str, List, appearance.Appearance] = None
     ) -> costume_mod.Costume:
         try:
-            if not source or type(source) in [str, tuple]:
+            if source is None or type(source) in [str, tuple] or isinstance(source, appearance.Appearance):
                 return self.actor.costume_manager.add_new_appearance(source)
             if isinstance(source, list):
                 return cast(
@@ -45,7 +45,7 @@ class ActorAppearanceFacade:
                     self.actor.costume_manager.add_new_appearance_from_list(source),
                 )
             raise MiniworldsError(
-                f"Wrong type for appearance. Expected: list, tuple or str, got {type(source)}"
+                f"Wrong type for appearance. Expected: list, tuple, str or Appearance, got {type(source)}"
             )
         except FileNotFoundError:
             _, exc_value, _ = sys.exc_info()

@@ -33,6 +33,8 @@ class WorldConnector():
                             otherwise falling back to the default costume class.
         """
         costume_class = self.actor.get_costume_class() or self.get_actor_costume_class()
+        if hasattr(costume_class, "create_managed"):
+            return costume_class.create_managed(self.actor)
         return costume_class(self.actor)
 
     @staticmethod
