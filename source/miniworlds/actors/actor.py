@@ -344,7 +344,8 @@ class Actor(actor_base.ActorBase):
         The costume can be switched with self.switch_costume(index)
 
         Args:
-            source: Path to the first image of new costume or Tuple with color-value
+            source: Path to the first image of a new costume, a color tuple,
+                a list of image sources, or an existing ``Costume`` object.
 
         Examples:
 
@@ -411,6 +412,33 @@ class Actor(actor_base.ActorBase):
             .. image:: ../_images/add_costume3.png
                 :width: 100%
                 :alt: Create multiple costumes and switch between costumes
+
+            Attach an already created costume:
+
+            .. code-block:: python
+
+                from miniworlds import *
+
+                world = World(100, 60)
+                actor = Actor((10, 10))
+                costume = Costume()
+                costume.add_image("images/player.png")
+                actor.add_costume(costume)
+
+                world.run()
+
+            Create and attach a costume in one step:
+
+            .. code-block:: python
+
+                from miniworlds import *
+
+                world = World(100, 60)
+                actor = Actor((10, 10))
+                costume = Costume(actor)
+                costume.add_image("images/player.png")
+
+                world.run()
 
         Returns:
             The new costume.
