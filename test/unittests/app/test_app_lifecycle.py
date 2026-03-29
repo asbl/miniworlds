@@ -88,6 +88,7 @@ class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
         app = self._create_app(world)
         app._unittest = False
         app.platform = MagicMock()
+        app.platform.is_web.return_value = False
 
         async def stop_loop():
             app._quit = True
@@ -101,11 +102,31 @@ class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
         exit_mock.assert_called_once_with(0)
         self.assertFalse(app._mainloop_started)
 
+    async def test_start_mainloop_does_not_exit_in_web_runtime(self):
+        world = DummyWorld()
+        app = self._create_app(world)
+        app._unittest = False
+        app.platform = MagicMock()
+        app.platform.is_web.return_value = True
+
+        async def stop_loop():
+            app._quit = True
+
+        app._update = AsyncMock(side_effect=stop_loop)
+
+        with patch("miniworlds.base.app.sys.exit") as exit_mock:
+            await app.start_mainloop()
+
+        app.platform.quit_display.assert_called_once_with()
+        exit_mock.assert_not_called()
+        self.assertFalse(app._mainloop_started)
+
     async def test_start_mainloop_quits_display_when_cancelled(self):
         world = DummyWorld()
         app = self._create_app(world)
         app._unittest = False
         app.platform = MagicMock()
+        app.platform.is_web.return_value = False
         app._update = AsyncMock(side_effect=asyncio.CancelledError())
 
         with patch("miniworlds.base.app.sys.exit") as exit_mock:

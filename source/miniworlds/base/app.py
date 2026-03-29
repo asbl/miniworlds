@@ -220,7 +220,7 @@ class App:
             return
 
         self.platform.quit_display()
-        if finished_normally:
+        if finished_normally and not self.platform.is_web():
             sys.exit(self._exit_code)
 
     async def _update(self):
