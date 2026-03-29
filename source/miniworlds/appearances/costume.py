@@ -14,7 +14,31 @@ class Costume(appear.Appearance):
     Every actor has a costume which defines the "look" of the actor.
     You can switch the images in a costume to animate the actor.
 
-    A costume is created if you add an image to an actor with actor.add_image(path_to_image)
+    You can create costumes in three common ways:
+
+    * ``actor.add_costume("images/player.png")``
+    * ``Costume(actor)`` to create and attach a costume immediately
+    * ``Costume()`` followed by ``actor.add_costume(costume)`` to attach it later
+
+    Examples:
+
+        Create and attach a costume directly:
+
+        .. code-block:: python
+
+            actor = Actor((20, 30))
+            costume = Costume(actor)
+            costume.add_image("images/walk1.png")
+            costume.add_image("images/walk2.png")
+
+        Create a detached costume first and add it later:
+
+        .. code-block:: python
+
+            actor = Actor((20, 30))
+            costume = Costume()
+            costume.add_image("images/walk1.png")
+            actor.add_costume(costume)
     """
 
     _managed_creation_depth = 0
