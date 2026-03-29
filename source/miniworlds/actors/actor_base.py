@@ -24,6 +24,7 @@ class ActorWorldConnectorMeta(ABCMeta):
     def __call__(
         cls, position: Optional[Tuple[float, float]] = (0, 0), *args, **kwargs
     ):
+        position, args = cls._normalize_constructor_arguments(position, args)
         instance = type.__call__(cls, position, *args, **kwargs)  # create a new Token
         world_connector = instance.world.get_world_connector(instance)
         world_connector.add_to_world(position)
@@ -31,6 +32,14 @@ class ActorWorldConnectorMeta(ABCMeta):
 
 
 class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
+    @classmethod
+    def _normalize_constructor_arguments(
+        cls,
+        position: Optional[Tuple[float, float]] = (0, 0),
+        args: tuple = (),
+    ) -> tuple[Optional[Tuple[float, float]], tuple]:
+        return position, args
+
     @property
     def dirty(self) -> int:
         """If actor is dirty, it will be repainted.

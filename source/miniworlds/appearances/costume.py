@@ -1,4 +1,4 @@
-from typing import Union, TYPE_CHECKING
+from typing import Optional, Union, TYPE_CHECKING
 import pygame
 
 import miniworlds.appearances.appearance as appear
@@ -17,7 +17,9 @@ class Costume(appear.Appearance):
     A costume is created if you add an image to an actor with actor.add_image(path_to_image)
     """
 
-    def __init__(self, actor):
+    _managed_creation_depth = 0
+
+    def __init__(self, actor=None):
         super().__init__()
         self.parent = actor  #: the parent of a costume is the associated actor.
         self.actor = self.parent
@@ -28,6 +30,22 @@ class Costume(appear.Appearance):
         self.transformations_manager = (
             transformations_costume_manager.TransformationsCostumeManager(self)
         )
+
+    @classmethod
+    def create_managed(cls, actor):
+        cls._managed_creation_depth += 1
+        try:
+            return cls(actor)
+        finally:
+            cls._managed_creation_depth -= 1
+
+    @classmethod
+    def _is_managed_creation(cls) -> bool:
+        return getattr(cls, "_managed_creation_depth", 0) > 0
+
+    def bind_to_actor(self, actor) -> None:
+        self.parent = actor
+        self.actor = actor
 
     def get_manager(self):
         """Return the owning costume manager of the actor."""
@@ -40,8 +58,12 @@ class Costume(appear.Appearance):
 
     def after_init(self):
         """Apply actor and world defaults after construction."""
-        self._set_default_color_values()
+        self._set_actor_default_values()
+        if self.actor is not None:
+            self._set_world_default_values()
         super().after_init()
+        if self.actor is not None and not type(self)._is_managed_creation():
+            self.actor.add_costume(self)
 
     def _set_default_color_values(self):
         self._set_actor_default_values()
@@ -75,7 +97,7 @@ class Costume(appear.Appearance):
         self._info_overlay = value
         self.set_dirty("all", Costume.RELOAD_ACTUAL_IMAGE)
 
-    def set_image(self, source: Union[int, "appear.Appearance, tuple"]) -> bool:
+    def set_image(self, source: Union[int, "appear.Appearance", tuple]) -> bool:
         """
         :param source: index, Appearance or color.
         :return: True if image exists
