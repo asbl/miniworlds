@@ -27,15 +27,51 @@ msgstr "Actor"
 msgid ""
 "Actors can communicate through messages when this is easier to read than "
 "passing object references around."
-msgstr ""
+msgstr "Actors koennen ueber Nachrichten kommunizieren, wenn das leichter zu lesen ist als direkte Objektverweise."
 
 #: ../../source/api/actor.md:6
 msgid ""
 "Combine `send_message(...)` with `@register_message(\"...\")` for simple,"
 " beginner-friendly event flows between actor classes."
-msgstr ""
+msgstr "Kombiniere `send_message(...)` mit `@register_message(\"...\")` fuer einfache, anfaengerfreundliche Event-Ablaufe zwischen Actor-Klassen."
 
 #: ../../source/api/actor.md:9
+msgid "For beginner classes, you can enable `world.learning_mode = True`."
+msgstr "Fuer Anfaengerkurse kannst du `world.learning_mode = True` aktivieren."
+
+#: ../../source/api/actor.md:10
+msgid "In this mode, common input mistakes are handled more gently where possible"
+msgstr "In diesem Modus werden haeufige Eingabefehler, wo moeglich, sanfter behandelt"
+
+#: ../../source/api/actor.md:11
+msgid "(for example list positions are accepted in many Actor position methods)."
+msgstr "(zum Beispiel werden Listenpositionen in vielen Actor-Positionsmethoden akzeptiert)."
+
+#: ../../source/api/actor.md:13
+msgid "Useful beginner aliases on Actor include:"
+msgstr "Nutzliche Anfaenger-Aliasse auf Actor sind:"
+
+#: ../../source/api/actor.md:14
+msgid "- `go_to(...)` for `move_to(...)`"
+msgstr "- `go_to(...)` fuer `move_to(...)`"
+
+#: ../../source/api/actor.md:15
+msgid "- `move_forward(...)` for `move(...)`"
+msgstr "- `move_forward(...)` fuer `move(...)`"
+
+#: ../../source/api/actor.md:16
+msgid "- `face(...)` for `set_direction(...)`"
+msgstr "- `face(...)` fuer `set_direction(...)`"
+
+#: ../../source/api/actor.md:17
+msgid "- `turn(...)` for `turn_right(...)`"
+msgstr "- `turn(...)` fuer `turn_right(...)`"
+
+#: ../../source/api/actor.md:18
+msgid "- `touching(...)` and `touching_all(...)` for detect helpers"
+msgstr "- `touching(...)` und `touching_all(...)` fuer Detect-Helfer"
+
+#: ../../source/api/actor.md:20
 msgid "API Reference"
 msgstr ""
 

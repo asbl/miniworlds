@@ -289,6 +289,15 @@ class Actor(actor_base.ActorBase):
             return
         if isinstance(value, str):
             return
+        if (
+            hasattr(value, "x")
+            and hasattr(value, "y")
+            and isinstance(getattr(value, "x"), Real)
+            and isinstance(getattr(value, "y"), Real)
+            and not isinstance(getattr(value, "x"), bool)
+            and not isinstance(getattr(value, "y"), bool)
+        ):
+            return
         if isinstance(value, tuple):
             cls._ensure_position_tuple(value, parameter_name)
             return
@@ -2356,8 +2365,11 @@ class Actor(actor_base.ActorBase):
 
     @is_filled.setter
     def is_filled(self, value):
-        value = self._coerce_bool_learning(value, "is_filled")
-        self._ensure_bool(value, "is_filled")
+        if isinstance(value, tuple):
+            self._ensure_color_like(value, "is_filled")
+        else:
+            value = self._coerce_bool_learning(value, "is_filled")
+            self._ensure_bool(value, "is_filled")
         self._get_appearance_facade().is_filled = value
 
     @property
@@ -2393,6 +2405,9 @@ class Actor(actor_base.ActorBase):
 
     @border.setter
     def border(self, value):
+        if value is None:
+            self._get_appearance_facade().border = None
+            return
         self._ensure_real(value, "border")
         self._get_appearance_facade().border = value
 

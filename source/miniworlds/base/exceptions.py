@@ -159,8 +159,28 @@ class NotImplementedOrRegisteredError(MiniworldsError):
         method_name = getattr(method, "__name__", str(method))
         owner = getattr(method, "__self__", None)
         owner_name = owner.__class__.__name__ if owner is not None else "YourClass"
+        signature_hints = []
+        if method_name.startswith("on_key_down"):
+            signature_hints.append("def on_key_down(self, key):")
+        elif method_name.startswith("on_key_pressed"):
+            signature_hints.append("def on_key_pressed(self, key):")
+        elif method_name.startswith("on_key_up"):
+            signature_hints.append("def on_key_up(self, key):")
+
+        if method_name.startswith("on_mouse_") or method_name.startswith("on_clicked_"):
+            signature_hints.append(f"def {method_name}(self, position):")
+
+        if method_name == "on_message":
+            signature_hints.append("def on_message(self, message):")
+
+        hint_block = ""
+        if signature_hints:
+            joined_hints = "\n".join(f"   - {hint}" for hint in signature_hints)
+            hint_block = f"\nCommon signatures:\n{joined_hints}"
+
         self.message = (
-            f"Event handler '{method_name}' is not implemented or not registered.\n"
+            f"Event handler '{method_name}' is not overwritten or registered.\n"
+            f"(Meaning: not implemented or not registered.)\n"
             f"Try one of these options:\n"
             f"1) Subclass implementation:\n"
             f"   class {owner_name}(Actor):\n"
@@ -170,6 +190,7 @@ class NotImplementedOrRegisteredError(MiniworldsError):
             f"   @{owner_name.lower()}.register\n"
             f"   def {method_name}(self, ...):\n"
             f"       pass"
+            f"{hint_block}"
         )
         super().__init__(self.message)
 
