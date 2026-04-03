@@ -78,6 +78,49 @@ class TestActorLifecycle(unittest.TestCase):
         position_manager.move.assert_called_once_with(5)
         self.assertEqual(result, "moved")
 
+    def test_move_towards_accepts_optional_step_size(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.move_towards_position.return_value = actor
+        actor._position_manager = position_manager
+
+        result = Actor.move_towards(actor, (10, 20), 0.3)
+
+        position_manager.move_towards_position.assert_called_once_with((10, 20), 0.3)
+        self.assertIs(result, actor)
+
+    def test_move_towards_accepts_mouse_manager_like_target(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.move_towards_position.return_value = actor
+        actor._position_manager = position_manager
+        mouse_manager = SimpleNamespace(get_position=MagicMock(return_value=(42, 24)))
+
+        result = Actor.move_towards(actor, mouse_manager, 0.7)
+
+        mouse_manager.get_position.assert_called_once_with()
+        position_manager.move_towards_position.assert_called_once_with((42, 24), 0.7)
+        self.assertIs(result, actor)
+
+    def test_move_towards_ignores_mouse_manager_without_position(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        actor._position_manager = position_manager
+        mouse_manager = SimpleNamespace(get_position=MagicMock(return_value=None))
+
+        result = Actor.move_towards(actor, mouse_manager, 1)
+
+        mouse_manager.get_position.assert_called_once_with()
+        position_manager.move_towards_position.assert_not_called()
+        self.assertIs(result, actor)
+
+    def test_move_towards_raises_for_invalid_target_shape(self):
+        actor = Actor.__new__(Actor)
+        actor._position_manager = MagicMock()
+
+        with self.assertRaises(MiniworldsError):
+            Actor.move_towards(actor, "not-a-position", 1)
+
     def test_position_accessors_delegate_to_position_manager(self):
         actor = Actor.__new__(Actor)
         position_manager = SimpleNamespace(position=(11, 22), set_position=MagicMock())
