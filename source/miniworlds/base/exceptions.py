@@ -45,7 +45,12 @@ class FileNotFoundError(MiniworldsError):
 class WrongArgumentsError(MiniworldsError):
     def __init__(self, method, parameters):
         sig = signature(method)
-        self.message = f"Wrong number of arguments for {str(method)}, got {str(parameters)} but should be {str(sig.parameters)}"
+        method_name = getattr(method, "__name__", str(method))
+        self.message = (
+            f"Wrong number of arguments for '{method_name}'. "
+            f"Got {str(parameters)} but expected {str(sig.parameters)}.\n"
+            f"Try: def {method_name}{sig}"
+        )
         super().__init__(self.message)
 
 
@@ -151,7 +156,21 @@ class CantSetAutoFontSize(MiniworldsError):
 
 class NotImplementedOrRegisteredError(MiniworldsError):
     def __init__(self, method):
-        self.message = f"Method {method} is not overwritten or registered"
+        method_name = getattr(method, "__name__", str(method))
+        owner = getattr(method, "__self__", None)
+        owner_name = owner.__class__.__name__ if owner is not None else "YourClass"
+        self.message = (
+            f"Event handler '{method_name}' is not implemented or not registered.\n"
+            f"Try one of these options:\n"
+            f"1) Subclass implementation:\n"
+            f"   class {owner_name}(Actor):\n"
+            f"       def {method_name}(self, ...):\n"
+            f"           pass\n"
+            f"2) Register a handler:\n"
+            f"   @{owner_name.lower()}.register\n"
+            f"   def {method_name}(self, ...):\n"
+            f"       pass"
+        )
         super().__init__(self.message)
 
 

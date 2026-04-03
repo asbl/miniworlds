@@ -143,31 +143,49 @@ class Actor(actor_base.ActorBase):
         return type(value).__name__
 
     @staticmethod
+    def _with_try_hint(message: str, example: str | None = None) -> str:
+        if not example:
+            return message
+        return f"{message}\nTry: {example}"
+
+    @staticmethod
     def _ensure_bool(value, parameter_name: str):
         if not isinstance(value, bool):
             raise TypeError(
-                f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}"
+                Actor._with_try_hint(
+                    f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}",
+                    f"{parameter_name} = True",
+                )
             )
 
     @staticmethod
     def _ensure_real(value, parameter_name: str):
         if isinstance(value, bool) or not isinstance(value, Real):
             raise TypeError(
-                f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
+                Actor._with_try_hint(
+                    f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}",
+                    f"{parameter_name} = 10",
+                )
             )
 
     @staticmethod
     def _ensure_int(value, parameter_name: str):
         if isinstance(value, bool) or not isinstance(value, int):
             raise TypeError(
-                f"{parameter_name} must be int, got {type(value).__name__}: {value!r}"
+                Actor._with_try_hint(
+                    f"{parameter_name} must be int, got {type(value).__name__}: {value!r}",
+                    f"{parameter_name} = 1",
+                )
             )
 
     @classmethod
     def _ensure_position_tuple(cls, value, parameter_name: str):
         if not isinstance(value, tuple) or len(value) != 2:
             raise TypeError(
-                f"{parameter_name} must be a tuple (x, y), got {cls._type_name(value)}: {value!r}"
+                cls._with_try_hint(
+                    f"{parameter_name} must be a tuple (x, y), got {cls._type_name(value)}: {value!r}",
+                    f"{parameter_name} = (100, 200)",
+                )
             )
         cls._ensure_real(value[0], f"{parameter_name}[0]")
         cls._ensure_real(value[1], f"{parameter_name}[1]")
@@ -178,7 +196,10 @@ class Actor(actor_base.ActorBase):
             return
         if not isinstance(value, tuple) or len(value) != 4:
             raise TypeError(
-                f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}"
+                cls._with_try_hint(
+                    f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}",
+                    f"{parameter_name} = (10, 20, 30, 40)",
+                )
             )
         for index, part in enumerate(value):
             cls._ensure_real(part, f"{parameter_name}[{index}]")
@@ -187,7 +208,10 @@ class Actor(actor_base.ActorBase):
     def _ensure_color_like(cls, value, parameter_name: str):
         if not isinstance(value, tuple):
             raise TypeError(
-                f"{parameter_name} must be a tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}"
+                cls._with_try_hint(
+                    f"{parameter_name} must be a tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}",
+                    f"{parameter_name} = (255, 0, 0)",
+                )
             )
         if len(value) not in (3, 4):
             raise TypeError(
@@ -229,8 +253,36 @@ class Actor(actor_base.ActorBase):
         if isinstance(value, Real) and not isinstance(value, bool):
             return
         raise TypeError(
-            f"{parameter_name} must be int, float, str, or tuple (x, y), got {cls._type_name(value)}: {value!r}"
+            cls._with_try_hint(
+                f"{parameter_name} must be int, float, str, or tuple (x, y), got {cls._type_name(value)}: {value!r}",
+                f"{parameter_name} = 'right'",
+            )
         )
+
+    @classmethod
+    def _normalize_direction_input(cls, value, parameter_name: str = "direction"):
+        if not isinstance(value, str):
+            return value
+        normalized = value.strip().lower()
+        synonyms = {
+            "u": "up",
+            "top": "up",
+            "north": "up",
+            "oben": "up",
+            "r": "right",
+            "east": "right",
+            "rechts": "right",
+            "l": "left",
+            "west": "left",
+            "links": "left",
+            "d": "down",
+            "south": "down",
+            "unten": "down",
+            "ahead": "forward",
+            "straight": "forward",
+            "vor": "forward",
+        }
+        return synonyms.get(normalized, normalized)
 
     @property
     def origin(self):
@@ -289,6 +341,7 @@ class Actor(actor_base.ActorBase):
             raise TypeError(
                 f"collision_type must be str, got {type(value).__name__}: {value!r}"
             )
+        value = value.strip().lower().replace("_", "-")
         if value not in allowed_values:
             raise ValueError(
                 f"collision_type must be one of {sorted(allowed_values)}, got {value!r}"
@@ -764,6 +817,7 @@ class Actor(actor_base.ActorBase):
 
     @direction.setter
     def direction(self, value: int):
+        value = self._normalize_direction_input(value, "direction")
         self._ensure_direction_value(value, "direction")
         self._get_movement_facade().set_direction(value)
 
@@ -902,6 +956,7 @@ class Actor(actor_base.ActorBase):
                       self.direction = "right"
                   self.move()
         """
+        direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction")
         return self._get_movement_facade().set_direction_value(direction)
 
@@ -1165,6 +1220,7 @@ class Actor(actor_base.ActorBase):
                         if self.detecting_world():
                             self.move()
         """
+        direction = self._normalize_direction_input(direction, "direction")
         self._ensure_real(distance, "distance")
         self._ensure_direction_value(direction, "direction")
         return self._get_movement_facade().move(distance, direction)
@@ -1259,6 +1315,7 @@ class Actor(actor_base.ActorBase):
             The actor itself
 
         """
+        direction = self._normalize_direction_input(direction, "direction")
         try:
             self._ensure_direction_value(direction, "direction")
         except TypeError as exc:
@@ -1587,6 +1644,7 @@ class Actor(actor_base.ActorBase):
             All colors found by Sensor
 
         """
+        direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_color_at(direction, distance)
@@ -1619,6 +1677,7 @@ class Actor(actor_base.ActorBase):
         :param distance:  The distance in which actors should be detected (Start-Point is actor.center)
         :return: A list of actors
         """
+        direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         self._ensure_actor_filter(actors, "actors")
@@ -1626,6 +1685,7 @@ class Actor(actor_base.ActorBase):
 
     def detect_actor_at(self, direction=None, distance=0, actors=None) -> "Actor":
         """Detect and return the first actor at a given direction and distance."""
+        direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         self._ensure_actor_filter(actors, "actors")

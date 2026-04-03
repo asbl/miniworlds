@@ -158,6 +158,22 @@ class TestActorLifecycle(unittest.TestCase):
 
         self.assertIn("collision_type must be one of", str(ctx.exception))
 
+    def test_direction_accepts_common_string_synonyms(self):
+        actor = Actor.__new__(Actor)
+        actor._movement_facade = SimpleNamespace(set_direction=MagicMock())
+
+        Actor.direction.__set__(actor, "RIGHT")
+
+        actor._movement_facade.set_direction.assert_called_once_with("right")
+
+    def test_position_validation_error_contains_try_hint(self):
+        actor = Actor.__new__(Actor)
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.move_to(actor, "12,34")
+
+        self.assertIn("Try:", str(ctx.exception))
+
     def test_size_delegates_to_position_manager(self):
         actor = Actor.__new__(Actor)
         pm = MagicMock()

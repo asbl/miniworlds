@@ -2,6 +2,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
+import pygame
+
 from miniworlds.worlds.manager.mainloop_manager import MainloopManager
 
 
@@ -52,6 +54,19 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
             await manager.update()
 
         app.platform.wait_for_frame.assert_awaited_once_with(1 / world.fps, False)
+
+    def test_blit_calls_debug_overlay_when_available(self):
+        world = self._create_world()
+        world._draw_debug_overlay = MagicMock()
+        world.background.surface = pygame.Surface((20, 20))
+        world.camera.screen_rect = pygame.Rect(0, 0, 20, 20)
+        app = MagicMock()
+        app.window = SimpleNamespace(surface=pygame.Surface((20, 20)))
+        manager = MainloopManager(world, app)
+
+        manager.blit_surface_to_window_surface()
+
+        world._draw_debug_overlay.assert_called_once_with(app.window.surface)
 
 
 if __name__ == "__main__":
