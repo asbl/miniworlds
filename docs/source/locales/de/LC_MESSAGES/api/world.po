@@ -32,21 +32,57 @@ msgstr "Die Basisklasse für all deine Welten"
 msgid ""
 "Use `world.send_message(\"name\")` for simple broadcasts between the "
 "world, actors, and docked GUI worlds."
-msgstr ""
+msgstr "Verwende `world.send_message(\"name\")` fuer einfache Broadcasts zwischen Welt, Actors und angedockten GUI-Welten."
 
 #: ../../source/api/world.md:8
 msgid ""
 "For persistence, `world.save_to_db(\"game.db\")` stores the current scene"
 " and `world.load_world_from_db(\"game.db\")` restores it again."
-msgstr ""
+msgstr "Fuer Persistenz speichert `world.save_to_db(\"game.db\")` die aktuelle Szene und `world.load_world_from_db(\"game.db\")` stellt sie wieder her."
 
 #: ../../source/api/world.md:11
 msgid ""
 "If you only want to restore actors, use `world.load_actors_from_db(...)` "
 "with the actor classes that should be recreated."
-msgstr ""
+msgstr "Wenn du nur Actors wiederherstellen willst, nutze `world.load_actors_from_db(...)` mit den Actor-Klassen, die rekonstruiert werden sollen."
+
+#: ../../source/api/world.md:14
+msgid "For beginner classes, set `world.learning_mode = True`."
+msgstr "Fuer Anfaengerkurse setze `world.learning_mode = True`."
 
 #: ../../source/api/world.md:15
+msgid "This enables soft conversions for common mistakes in selected public APIs"
+msgstr "Das aktiviert sanfte Umwandlungen fuer haeufige Fehler in ausgewaehlten oeffentlichen APIs"
+
+#: ../../source/api/world.md:16
+msgid "(for example bool-like strings such as `\"yes\"`/`\"no\"` in some flags, and"
+msgstr "(zum Beispiel bool-aehnliche Strings wie `\"yes\"`/`\"no\"` bei einigen Flags und"
+
+#: ../../source/api/world.md:17
+msgid "list positions where tuple positions are expected)."
+msgstr "Listenpositionen dort, wo Tupelpositionen erwartet werden)."
+
+#: ../../source/api/world.md:19
+msgid "Useful beginner aliases on World include:"
+msgstr "Nutzliche Anfaenger-Aliasse auf World sind:"
+
+#: ../../source/api/world.md:20
+msgid "- `contains(...)` for `contains_position(...)`"
+msgstr "- `contains(...)` fuer `contains_position(...)`"
+
+#: ../../source/api/world.md:21
+msgid "- `broadcast(...)` for `send_message(...)`"
+msgstr "- `broadcast(...)` fuer `send_message(...)`"
+
+#: ../../source/api/world.md:22
+msgid "- `actors_at(...)` for `detect_actors(...)`"
+msgstr "- `actors_at(...)` fuer `detect_actors(...)`"
+
+#: ../../source/api/world.md:23
+msgid "- `set_bg(...)`, `add_bg(...)`, `next_bg()` for background helpers"
+msgstr "- `set_bg(...)`, `add_bg(...)`, `next_bg()` fuer Background-Helfer"
+
+#: ../../source/api/world.md:25
 msgid "API Reference"
 msgstr ""
 

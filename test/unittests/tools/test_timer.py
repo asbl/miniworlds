@@ -139,3 +139,19 @@ class TestNotImplementedOrRegisteredError(unittest.TestCase):
         exc = NotImplementedOrRegisteredError("my_method")
         self.assertIn("my_method", str(exc))
         self.assertIn("not overwritten or registered", str(exc))
+
+    def test_exception_message_contains_key_signature_hint(self):
+        from miniworlds.base.exceptions import NotImplementedOrRegisteredError
+
+        exc = NotImplementedOrRegisteredError("on_key_down")
+
+        self.assertIn("Common signatures", str(exc))
+        self.assertIn("def on_key_down(self, key):", str(exc))
+
+    def test_exception_message_contains_mouse_signature_hint(self):
+        from miniworlds.base.exceptions import NotImplementedOrRegisteredError
+
+        exc = NotImplementedOrRegisteredError("on_mouse_left")
+
+        self.assertIn("Common signatures", str(exc))
+        self.assertIn("def on_mouse_left(self, position):", str(exc))

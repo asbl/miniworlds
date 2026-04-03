@@ -899,10 +899,16 @@ class World(world_base.WorldBase):
             reset: If `True`, the new world is reset before it starts.
         """
         reset = self._coerce_bool_learning(reset, "reset")
-        if not isinstance(new_world, world_base.WorldBase):
+        if new_world is None:
             raise TypeError(
-                f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
+                "new_world must not be None"
             )
+        if not isinstance(new_world, world_base.WorldBase):
+            has_proxy_switch = hasattr(getattr(self, "camera", None), "switch_world")
+            if not has_proxy_switch:
+                raise TypeError(
+                    f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
+                )
         self._ensure_bool(reset, "reset")
         self._get_runtime_facade().switch_world(new_world, reset)
 
