@@ -1074,9 +1074,23 @@ class Actor(actor_base.ActorBase):
         """
         return self._get_movement_facade().undo_move()
 
-    def move_towards(self, target: Union[Tuple[float, float], "Actor"]):
-        """Move one step toward a target actor or position."""
-        return self._get_movement_facade().move_towards(target)
+    def move_towards(
+        self,
+        target: Union[Tuple[float, float], "Actor"],
+        distance: float = 1,
+    ):
+        """Move toward a target actor, position, or mouse-like manager.
+
+        Supported targets:
+            - Another Actor instance
+            - A numeric ``(x, y)`` tuple
+            - An object exposing ``get_position()`` or ``position`` that returns
+              a numeric ``(x, y)`` tuple (e.g. ``world.mouse``)
+
+        If a mouse-like target resolves to ``None`` (e.g. pointer outside the
+        world), the actor keeps its current position for that frame.
+        """
+        return self._get_movement_facade().move_towards(target, distance)
 
     def move_in_direction(
         self,
