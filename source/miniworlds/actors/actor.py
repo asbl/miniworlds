@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
+from numbers import Real
 import pygame.rect
 import collections
 
@@ -137,6 +138,100 @@ class Actor(actor_base.ActorBase):
         if not isinstance(position, tuple):
             raise exceptions.NoValidPositionOnInitException(self, position)
 
+    @staticmethod
+    def _type_name(value) -> str:
+        return type(value).__name__
+
+    @staticmethod
+    def _ensure_bool(value, parameter_name: str):
+        if not isinstance(value, bool):
+            raise TypeError(
+                f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}"
+            )
+
+    @staticmethod
+    def _ensure_real(value, parameter_name: str):
+        if isinstance(value, bool) or not isinstance(value, Real):
+            raise TypeError(
+                f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
+            )
+
+    @staticmethod
+    def _ensure_int(value, parameter_name: str):
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise TypeError(
+                f"{parameter_name} must be int, got {type(value).__name__}: {value!r}"
+            )
+
+    @classmethod
+    def _ensure_position_tuple(cls, value, parameter_name: str):
+        if not isinstance(value, tuple) or len(value) != 2:
+            raise TypeError(
+                f"{parameter_name} must be a tuple (x, y), got {cls._type_name(value)}: {value!r}"
+            )
+        cls._ensure_real(value[0], f"{parameter_name}[0]")
+        cls._ensure_real(value[1], f"{parameter_name}[1]")
+
+    @classmethod
+    def _ensure_rect_like(cls, value, parameter_name: str):
+        if isinstance(value, pygame.rect.Rect):
+            return
+        if not isinstance(value, tuple) or len(value) != 4:
+            raise TypeError(
+                f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}"
+            )
+        for index, part in enumerate(value):
+            cls._ensure_real(part, f"{parameter_name}[{index}]")
+
+    @classmethod
+    def _ensure_color_like(cls, value, parameter_name: str):
+        if not isinstance(value, tuple):
+            raise TypeError(
+                f"{parameter_name} must be a tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}"
+            )
+        if len(value) not in (3, 4):
+            raise TypeError(
+                f"{parameter_name} must contain 3 or 4 values, got {len(value)} in {value!r}"
+            )
+        for index, part in enumerate(value):
+            cls._ensure_real(part, f"{parameter_name}[{index}]")
+
+    @classmethod
+    def _ensure_actor_instance(cls, value, parameter_name: str):
+        if not isinstance(value, Actor):
+            raise TypeError(
+                f"{parameter_name} must be an Actor, got {cls._type_name(value)}: {value!r}"
+            )
+
+    @classmethod
+    def _ensure_actor_filter(cls, value, parameter_name: str = "actors"):
+        if value is None:
+            return
+        if isinstance(value, str):
+            return
+        if isinstance(value, Actor):
+            return
+        if isinstance(value, type) and issubclass(value, Actor):
+            return
+        raise TypeError(
+            f"{parameter_name} must be None, Actor instance, Actor class, or class name string, got {cls._type_name(value)}: {value!r}"
+        )
+
+    @classmethod
+    def _ensure_direction_value(cls, value, parameter_name: str = "direction", allow_none: bool = False):
+        if value is None and allow_none:
+            return
+        if isinstance(value, str):
+            return
+        if isinstance(value, tuple):
+            cls._ensure_position_tuple(value, parameter_name)
+            return
+        if isinstance(value, Real) and not isinstance(value, bool):
+            return
+        raise TypeError(
+            f"{parameter_name} must be int, float, str, or tuple (x, y), got {cls._type_name(value)}: {value!r}"
+        )
+
     @property
     def origin(self):
         """Current origin mode used for size and position operations."""
@@ -144,10 +239,18 @@ class Actor(actor_base.ActorBase):
 
     @origin.setter
     def origin(self, value: str):
+        if not isinstance(value, str):
+            raise TypeError(
+                f"origin must be str ('center' or 'topleft'), got {type(value).__name__}: {value!r}"
+            )
         self._get_size_facade().set_origin(value)
 
     def switch_origin(self, value: str):
         """Switch actor origin while preserving the visual on-screen position."""
+        if not isinstance(value, str):
+            raise TypeError(
+                f"value must be str ('center' or 'topleft'), got {type(value).__name__}: {value!r}"
+            )
         self._get_size_facade().switch_origin(value)
 
     @classmethod
@@ -181,6 +284,15 @@ class Actor(actor_base.ActorBase):
 
     @collision_type.setter
     def collision_type(self, value: str):
+        allowed_values = {"default", "tile", "rect", "static-rect", "circle", "mask"}
+        if not isinstance(value, str):
+            raise TypeError(
+                f"collision_type must be str, got {type(value).__name__}: {value!r}"
+            )
+        if value not in allowed_values:
+            raise ValueError(
+                f"collision_type must be one of {sorted(allowed_values)}, got {value!r}"
+            )
         self._collision_type = value
 
     @property
@@ -192,6 +304,7 @@ class Actor(actor_base.ActorBase):
 
     @is_blockable.setter
     def is_blockable(self, value: bool):
+        self._ensure_bool(value, "is_blockable")
         self.position_manager.is_blockable = value
 
     @property
@@ -203,6 +316,7 @@ class Actor(actor_base.ActorBase):
 
     @is_blocking.setter
     def is_blocking(self, value: bool):
+        self._ensure_bool(value, "is_blocking")
         previous_value = self.position_manager.is_blocking
         self.position_manager.is_blocking = value
         world = self.world
@@ -226,6 +340,7 @@ class Actor(actor_base.ActorBase):
 
     @layer.setter
     def layer(self, value: int):
+        self._ensure_int(value, "layer")
         self._layer = value
         if self in self.world.actors:
             self.world.actors.change_layer(
@@ -248,6 +363,7 @@ class Actor(actor_base.ActorBase):
     @classmethod
     def from_topleft(cls, topleft_position: Tuple[float, float], *args, **kwargs):
         """Create an actor whose origin is interpreted as top-left."""
+        cls._ensure_position_tuple(topleft_position, "topleft_position")
         obj = cls(topleft_position, **kwargs)  # temp position
         obj.origin = "topleft"
         return obj
@@ -255,6 +371,7 @@ class Actor(actor_base.ActorBase):
     @classmethod
     def from_center(cls, center_position: Tuple[float, float], *args, **kwargs):
         """Create an actor whose origin is interpreted as center."""
+        cls._ensure_position_tuple(center_position, "center_position")
         obj = cls(center_position, **kwargs)  # temp position
         obj.origin = "center"
         return obj
@@ -290,6 +407,7 @@ class Actor(actor_base.ActorBase):
 
     @is_flipped.setter
     def is_flipped(self, value: bool):
+        self._ensure_bool(value, "is_flipped")
         self._get_appearance_facade().is_flipped = value
 
     def flip_x(self) -> int:
@@ -448,6 +566,10 @@ class Actor(actor_base.ActorBase):
 
     def add_costumes(self, sources: list) -> "costume_mod.Costume":
         """Adds multiple costumes"""
+        if not isinstance(sources, list):
+            raise TypeError(
+                f"sources must be list, got {type(sources).__name__}: {sources!r}"
+            )
         return self._get_appearance_facade().add_costumes(sources)
 
     def remove_costume(self, source: Union[int, "costume_mod.Costume"] = None):
@@ -501,6 +623,7 @@ class Actor(actor_base.ActorBase):
 
     def set_background_color(self, color: tuple):
         """Set a background color behind the actor costume image."""
+        self._ensure_color_like(color, "color")
         self._get_appearance_facade().set_background_color(color)
 
     def next_costume(self):
@@ -539,6 +662,7 @@ class Actor(actor_base.ActorBase):
 
     @orientation.setter
     def orientation(self, value: float):
+        self._ensure_real(value, "orientation")
         self._get_appearance_facade().orientation = value
 
     @property
@@ -640,6 +764,7 @@ class Actor(actor_base.ActorBase):
 
     @direction.setter
     def direction(self, value: int):
+        self._ensure_direction_value(value, "direction")
         self._get_movement_facade().set_direction(value)
 
     @property
@@ -653,6 +778,7 @@ class Actor(actor_base.ActorBase):
         Args:
             value: An angle in the unit circle, e.g. 0°: right, 90° top, ...
         """
+        self._ensure_real(value, "direction_at_unit_circle")
         self._get_movement_facade().set_direction_at_unit_circle(value)
 
     def turn_left(self, degrees: int = 90) -> int:
@@ -696,6 +822,7 @@ class Actor(actor_base.ActorBase):
             New direction
 
         """
+        self._ensure_real(degrees, "degrees")
         return self._get_movement_facade().turn_left(degrees)
 
     def turn_right(self, degrees: Union[int, float] = 90):
@@ -739,6 +866,7 @@ class Actor(actor_base.ActorBase):
             New direction
 
         """
+        self._ensure_real(degrees, "degrees")
         return self._get_movement_facade().turn_right(degrees)
 
     def set_direction(self, direction: Union[str, int, float]) -> float:
@@ -774,6 +902,7 @@ class Actor(actor_base.ActorBase):
                       self.direction = "right"
                   self.move()
         """
+        self._ensure_direction_value(direction, "direction")
         return self._get_movement_facade().set_direction_value(direction)
 
     def point_towards_position(
@@ -800,6 +929,7 @@ class Actor(actor_base.ActorBase):
                     self.point_towards_position(mouse)
                 self.move()
         """
+        self._ensure_position_tuple(destination, "destination")
         return self._get_movement_facade().point_towards_position(destination)
 
     def point_towards_actor(self, other: "Actor") -> int:
@@ -812,6 +942,7 @@ class Actor(actor_base.ActorBase):
             The new direction
 
         """
+        self._ensure_actor_instance(other, "other")
         return self._get_movement_facade().point_towards_actor(other)
 
     @property
@@ -825,6 +956,7 @@ class Actor(actor_base.ActorBase):
 
     def set_size(self, value: tuple):
         """Set actor size as `(width, height)` in pixels."""
+        self._ensure_position_tuple(value, "value")
         self._get_size_facade().set_size(value)
 
     @property
@@ -865,10 +997,12 @@ class Actor(actor_base.ActorBase):
 
     @width.setter
     def width(self, value):
+        self._ensure_real(value, "width")
         self._get_size_facade().set_width(value)
 
     def scale_width(self, value):
         """Scale actor width by a factor."""
+        self._ensure_real(value, "value")
         self._get_size_facade().scale_width(value)
 
     @property
@@ -909,10 +1043,12 @@ class Actor(actor_base.ActorBase):
 
     @height.setter
     def height(self, value):
+        self._ensure_real(value, "height")
         self._get_size_facade().set_height(value)
 
     def scale_height(self, value):
         """Scale actor height by a factor."""
+        self._ensure_real(value, "value")
         self._get_size_facade().scale_height(value)
 
     @property
@@ -922,6 +1058,7 @@ class Actor(actor_base.ActorBase):
 
     @x.setter
     def x(self, value: float):
+        self._ensure_real(value, "x")
         self._get_movement_facade().set_x(value)
 
     @property
@@ -931,6 +1068,7 @@ class Actor(actor_base.ActorBase):
 
     @y.setter
     def y(self, value: float):
+        self._ensure_real(value, "y")
         self._get_movement_facade().set_y(value)
 
     @property
@@ -950,10 +1088,12 @@ class Actor(actor_base.ActorBase):
 
     @topleft_x.setter
     def topleft_x(self, value: float):
+        self._ensure_real(value, "topleft_x")
         self._get_movement_facade().set_topleft_x(value)
 
     @topleft_y.setter
     def topleft_y(self, value: float):
+        self._ensure_real(value, "topleft_y")
         self._get_movement_facade().set_topleft_y(value)
 
     @property
@@ -963,6 +1103,7 @@ class Actor(actor_base.ActorBase):
 
     @topleft.setter
     def topleft(self, value: Tuple[float, float]):
+        self._ensure_position_tuple(value, "topleft")
         self._get_movement_facade().set_topleft(value)
 
     @property
@@ -977,6 +1118,7 @@ class Actor(actor_base.ActorBase):
 
     @center_x.setter
     def center_x(self, value: float):
+        self._ensure_real(value, "center_x")
         self._get_movement_facade().set_center_x(value)
 
     @property
@@ -986,6 +1128,7 @@ class Actor(actor_base.ActorBase):
 
     @center_y.setter
     def center_y(self, value: float):
+        self._ensure_real(value, "center_y")
         self._get_movement_facade().set_center_y(value)
 
     @property
@@ -995,6 +1138,7 @@ class Actor(actor_base.ActorBase):
 
     @center.setter
     def center(self, value: Tuple[float, float]):
+        self._ensure_position_tuple(value, "center")
         self._get_movement_facade().set_center(value)
 
     def move(self, distance: int = 0, direction: int = 0):
@@ -1021,6 +1165,8 @@ class Actor(actor_base.ActorBase):
                         if self.detecting_world():
                             self.move()
         """
+        self._ensure_real(distance, "distance")
+        self._ensure_direction_value(direction, "direction")
         return self._get_movement_facade().move(distance, direction)
 
     def move_vector(self, vector):
@@ -1052,6 +1198,7 @@ class Actor(actor_base.ActorBase):
                     if self.detect(Wall):
                         self.move_back(5)
         """
+        self._ensure_real(distance, "distance")
         return self._get_movement_facade().move_back(distance)
 
     def undo_move(self):
@@ -1079,17 +1226,12 @@ class Actor(actor_base.ActorBase):
         target: Union[Tuple[float, float], "Actor"],
         distance: float = 1,
     ):
-        """Move toward a target actor, position, or mouse-like manager.
-
-        Supported targets:
-            - Another Actor instance
-            - A numeric ``(x, y)`` tuple
-            - An object exposing ``get_position()`` or ``position`` that returns
-              a numeric ``(x, y)`` tuple (e.g. ``world.mouse``)
-
-        If a mouse-like target resolves to ``None`` (e.g. pointer outside the
-        world), the actor keeps its current position for that frame.
-        """
+        """Move toward a target actor or position with an optional step size."""
+        if isinstance(target, tuple):
+            self._ensure_position_tuple(target, "target")
+        else:
+            self._ensure_actor_instance(target, "target")
+        self._ensure_real(distance, "distance")
         return self._get_movement_facade().move_towards(target, distance)
 
     def move_in_direction(
@@ -1111,12 +1253,17 @@ class Actor(actor_base.ActorBase):
 
         Args:
             direction: Direction as angle
-            distance: Detects obj "distance" steps in front of current actor.
+            distance: Number of steps to move in the selected direction.
 
         Returns:
             The actor itself
 
         """
+        try:
+            self._ensure_direction_value(direction, "direction")
+        except TypeError as exc:
+            raise exceptions.MoveInDirectionTypeError(direction) from exc
+        self._ensure_real(distance, "distance")
         return self._get_movement_facade().move_in_direction(direction, distance)
 
     def move_to(self, position: Tuple[float, float]):
@@ -1142,6 +1289,7 @@ class Actor(actor_base.ActorBase):
 
 
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_movement_facade().move_to(position)
 
     def remove(self, kill=True) -> collections.defaultdict:
@@ -1162,6 +1310,7 @@ class Actor(actor_base.ActorBase):
                    self.remove()
                    other.remove()
         """
+        self._ensure_bool(kill, "kill")
         return self.world.get_world_connector(self).remove_actor_from_world(kill=kill)
         
         
@@ -1221,6 +1370,7 @@ class Actor(actor_base.ActorBase):
 
     @is_rotatable.setter
     def is_rotatable(self, value: bool):
+        self._ensure_bool(value, "is_rotatable")
         self.costume.is_rotatable = value
 
     def bounce_from_border(self, borders: List[str]) -> Actor:
@@ -1270,6 +1420,15 @@ class Actor(actor_base.ActorBase):
             The actor
 
         """
+        if not isinstance(borders, list):
+            raise TypeError(
+                f"borders must be list[str], got {type(borders).__name__}: {borders!r}"
+            )
+        invalid_border = next((border for border in borders if not isinstance(border, str)), None)
+        if invalid_border is not None:
+            raise TypeError(
+                f"borders must contain only str values, got {type(invalid_border).__name__}: {invalid_border!r}"
+            )
         return self.position_manager.bounce_from_border(borders)
 
     def detect_all(
@@ -1290,6 +1449,9 @@ class Actor(actor_base.ActorBase):
             All actors found by Sensor
 
         """
+        self._ensure_actor_filter(actors, "actors")
+        self._ensure_real(direction, "direction")
+        self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_all(actors, direction, distance)
 
     def detect(self, *args, **kwargs) -> Union["Actor", None]:
@@ -1359,6 +1521,7 @@ class Actor(actor_base.ActorBase):
             True if border was found.
 
         """
+        self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_borders(distance)
 
     def detect_left_border(self) -> bool:
@@ -1407,6 +1570,8 @@ class Actor(actor_base.ActorBase):
             True, if color was found
 
         """
+        if color is not None:
+            self._ensure_color_like(color, "color")
         return self._get_sensor_facade().detect_color(color)
 
     def detect_color_at(
@@ -1422,6 +1587,8 @@ class Actor(actor_base.ActorBase):
             All colors found by Sensor
 
         """
+        self._ensure_direction_value(direction, "direction", allow_none=True)
+        self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_color_at(direction, distance)
 
     def detect_actors_at(self, direction=None, distance=0, actors=None) -> list:
@@ -1452,10 +1619,16 @@ class Actor(actor_base.ActorBase):
         :param distance:  The distance in which actors should be detected (Start-Point is actor.center)
         :return: A list of actors
         """
+        self._ensure_direction_value(direction, "direction", allow_none=True)
+        self._ensure_real(distance, "distance")
+        self._ensure_actor_filter(actors, "actors")
         return self._get_sensor_facade().detect_actors_at(direction, distance, actors)
 
     def detect_actor_at(self, direction=None, distance=0, actors=None) -> "Actor":
         """Detect and return the first actor at a given direction and distance."""
+        self._ensure_direction_value(direction, "direction", allow_none=True)
+        self._ensure_real(distance, "distance")
+        self._ensure_actor_filter(actors, "actors")
         return self._get_sensor_facade().detect_actor_at(direction, distance, actors)
 
     def detect_actors_in_front(
@@ -1464,6 +1637,8 @@ class Actor(actor_base.ActorBase):
         distance=1,
     ) -> list:
         """Detect all actors directly in front of this actor."""
+        self._ensure_actor_filter(actors, "actors")
+        self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_actors_in_front(actors, distance)
 
     def detect_actor_in_front(
@@ -1472,6 +1647,8 @@ class Actor(actor_base.ActorBase):
         distance=1,
     ) -> "Actor":
         """Detect and return the first actor directly in front."""
+        self._ensure_actor_filter(actors, "actors")
+        self._ensure_real(distance, "distance")
         return self._get_sensor_facade().detect_actor_in_front(actors, distance)
 
     def detect_point(self, position: Tuple[float, float]) -> bool:
@@ -1483,6 +1660,7 @@ class Actor(actor_base.ActorBase):
         Returns:
             True if point is below actor
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_sensor_facade().detect_point(position)
     
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
@@ -1491,10 +1669,12 @@ class Actor(actor_base.ActorBase):
         Returns:
             True if pixel is below actor
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_sensor_facade().detect_pixel(position)
 
     def detect_rect(self, rect: Union[Tuple, pygame.rect.Rect]):
         """Is the actor colliding with a static rect?"""
+        self._ensure_rect_like(rect, "rect")
         return self._get_sensor_facade().detect_rect(rect)
 
     def is_inside_world(self):
@@ -1507,14 +1687,19 @@ class Actor(actor_base.ActorBase):
 
     def bounce_from_actor(self, other: "Actor"):
         """Reflect movement direction when colliding with another actor."""
+        self._ensure_actor_instance(other, "other")
         self._get_sensor_facade().bounce_from_actor(other)
 
     def animate(self, speed: int = 10):
         """Animate the current costume with the given speed."""
+        self._ensure_int(speed, "speed")
         self.costume_manager.animate(speed)
 
     def animate_costume(self, costume: "costume_mod.Costume", speed: int = 10):
         """Animate a specific costume with the given speed."""
+        if costume is None:
+            raise TypeError("costume must not be None")
+        self._ensure_int(speed, "speed")
         self.costume_manager.animate_costume(costume, speed)
 
     def animate_loop(self, speed: int = 10):
@@ -1538,6 +1723,7 @@ class Actor(actor_base.ActorBase):
         Args:
             speed (int, optional): Every ``speed`` frame, the image is switched. Defaults to 10.
         """
+        self._ensure_int(speed, "speed")
         self.costume.loop = True
         self.costume_manager.animate(speed)
 
@@ -1598,6 +1784,10 @@ class Actor(actor_base.ActorBase):
         Args:
             message (str): A string containing the message.
         """
+        if not isinstance(message, str):
+            raise TypeError(
+                f"message must be str, got {type(message).__name__}: {message!r}"
+            )
         self._get_event_facade().send_message(message)
 
     def on_key_down(self, key: list):
@@ -2000,6 +2190,7 @@ class Actor(actor_base.ActorBase):
 
     @fill_color.setter
     def fill_color(self, value):
+        self._ensure_color_like(value, "fill_color")
         self._get_appearance_facade().fill_color = value
 
     # Alias
@@ -2007,6 +2198,7 @@ class Actor(actor_base.ActorBase):
 
     def fill(self, value):
         """Set fill color for borders and lines"""
+        self._ensure_color_like(value, "value")
         self._get_appearance_facade().fill(value)
 
     @property
@@ -2016,6 +2208,7 @@ class Actor(actor_base.ActorBase):
 
     @is_filled.setter
     def is_filled(self, value):
+        self._ensure_bool(value, "is_filled")
         self._get_appearance_facade().is_filled = value
 
     @property
@@ -2030,6 +2223,7 @@ class Actor(actor_base.ActorBase):
 
     @border_color.setter
     def border_color(self, value):
+        self._ensure_color_like(value, "border_color")
         self._get_appearance_facade().border_color = value
 
     # Alias
@@ -2050,6 +2244,7 @@ class Actor(actor_base.ActorBase):
 
     @border.setter
     def border(self, value):
+        self._ensure_real(value, "border")
         self._get_appearance_facade().border = value
 
     @property
@@ -2059,6 +2254,7 @@ class Actor(actor_base.ActorBase):
 
     @visible.setter
     def visible(self, value):
+        self._ensure_bool(value, "visible")
         self._get_appearance_facade().visible = value
 
     def hide(self):
@@ -2090,6 +2286,12 @@ class Actor(actor_base.ActorBase):
 
     def set_world(self, new_world : "world_mod.World") -> "Actor":
         """Move the actor to another world and return the actor."""
+        if new_world is None:
+            raise TypeError("new_world must not be None")
+        if not hasattr(new_world, "get_world_connector"):
+            raise TypeError(
+                f"new_world must provide get_world_connector(actor), got {type(new_world).__name__}: {new_world!r}"
+            )
         return self._get_event_facade().set_world(new_world)
 
     def new_costume(self):
@@ -2119,6 +2321,7 @@ class Actor(actor_base.ActorBase):
 
     def set_position(self, value: Tuple[float, float]):
         """Set actor position in world coordinates."""
+        self._ensure_position_tuple(value, "value")
         self._get_movement_facade().set_position(value)
 
     def get_distance_to(self, obj: Union["Actor", Tuple[float, float]]) -> float:
