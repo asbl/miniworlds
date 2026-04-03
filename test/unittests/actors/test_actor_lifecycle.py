@@ -132,6 +132,16 @@ class TestActorLifecycle(unittest.TestCase):
 
         self.assertIn("position must be a tuple", str(ctx.exception))
 
+    def test_move_to_accepts_list_in_learning_mode(self):
+        actor = Actor.__new__(Actor)
+        actor._movement_facade = SimpleNamespace(move_to=MagicMock(return_value=actor))
+        actor._world = SimpleNamespace(learning_mode=True)
+
+        result = Actor.move_to(actor, [12, 34])
+
+        actor._movement_facade.move_to.assert_called_once_with((12, 34))
+        self.assertIs(result, actor)
+
     def test_detect_rect_rejects_invalid_argument(self):
         actor = Actor.__new__(Actor)
         actor._sensor_facade = SimpleNamespace(detect_rect=MagicMock())
@@ -149,6 +159,46 @@ class TestActorLifecycle(unittest.TestCase):
             Actor.send_message(actor, 123)
 
         self.assertIn("message must be str", str(ctx.exception))
+
+    def test_remove_converts_bool_in_learning_mode(self):
+        actor = Actor.__new__(Actor)
+        connector = MagicMock()
+        connector.remove_actor_from_world.return_value = []
+        actor._world = SimpleNamespace(
+            learning_mode=True,
+            get_world_connector=MagicMock(return_value=connector),
+        )
+
+        Actor.remove(actor, kill="no")
+
+        connector.remove_actor_from_world.assert_called_once_with(kill=False)
+
+    def test_beginner_aliases_delegate_to_existing_methods(self):
+        actor = Actor.__new__(Actor)
+        actor.move_to = MagicMock(return_value="moved")
+        actor.move = MagicMock(return_value="forward")
+        actor.set_direction = MagicMock(return_value="face")
+        actor.turn_right = MagicMock(return_value="turn")
+        actor.detect = MagicMock(return_value="one")
+        actor.detect_all = MagicMock(return_value=["a", "b"])
+
+        self.assertEqual(Actor.go_to(actor, (1, 2)), "moved")
+        actor.move_to.assert_called_once_with((1, 2))
+
+        self.assertEqual(Actor.move_forward(actor, 4), "forward")
+        actor.move.assert_called_once_with(4)
+
+        self.assertEqual(Actor.face(actor, "left"), "face")
+        actor.set_direction.assert_called_once_with("left")
+
+        self.assertEqual(Actor.turn(actor, 45), "turn")
+        actor.turn_right.assert_called_once_with(45)
+
+        self.assertEqual(Actor.touching(actor, "enemy"), "one")
+        actor.detect.assert_called_once_with("enemy")
+
+        self.assertEqual(Actor.touching_all(actor, "enemy"), ["a", "b"])
+        actor.detect_all.assert_called_once_with("enemy")
 
     def test_collision_type_rejects_unknown_value(self):
         actor = Actor.__new__(Actor)

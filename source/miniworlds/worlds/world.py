@@ -1,5 +1,6 @@
 import math
 from numbers import Real
+import warnings
 import pygame
 import sys
 import asyncio
@@ -207,6 +208,7 @@ class World(world_base.WorldBase):
         super().__init__()
         self._get_initialization_facade().initialize_post_base_state()
         self._debug = False
+        self._learning_mode = False
 
 
     def _get_initialization_facade(
@@ -255,6 +257,55 @@ class World(world_base.WorldBase):
             )
         self._debug = value
 
+    @property
+    def learning_mode(self) -> bool:
+        """Enable beginner-friendly soft conversions and hints for common input mistakes."""
+        return getattr(self, "_learning_mode", False)
+
+    @learning_mode.setter
+    def learning_mode(self, value: bool) -> None:
+        if not isinstance(value, bool):
+            raise TypeError(
+                f"learning_mode must be bool, got {type(value).__name__}: {value!r}\nTry: world.learning_mode = True"
+            )
+        self._learning_mode = value
+
+    @staticmethod
+    def _student_warn(message: str) -> None:
+        warnings.warn(message, RuntimeWarning, stacklevel=3)
+
+    def _coerce_bool_learning(self, value, parameter_name: str):
+        if isinstance(value, bool) or not self.learning_mode:
+            return value
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {"true", "yes", "y", "1", "on"}:
+                self._student_warn(
+                    f"Learning mode: converted {parameter_name} from {value!r} to True"
+                )
+                return True
+            if normalized in {"false", "no", "n", "0", "off"}:
+                self._student_warn(
+                    f"Learning mode: converted {parameter_name} from {value!r} to False"
+                )
+                return False
+        if isinstance(value, int) and value in (0, 1):
+            self._student_warn(
+                f"Learning mode: converted {parameter_name} from {value!r} to {bool(value)!r}"
+            )
+            return bool(value)
+        return value
+
+    def _coerce_position_learning(self, value, parameter_name: str):
+        if not self.learning_mode:
+            return value
+        if isinstance(value, list) and len(value) == 2:
+            self._student_warn(
+                f"Learning mode: converted {parameter_name} from list to tuple"
+            )
+            return (value[0], value[1])
+        return value
+
     def _draw_debug_overlay(self, target_surface: pygame.Surface) -> None:
         if not self.debug:
             return
@@ -293,8 +344,13 @@ class World(world_base.WorldBase):
         Returns:
             True, if Position is in the world.
         """
+        pos = self._coerce_position_learning(pos, "pos")
         self._ensure_position_tuple(pos, "pos")
         return self.sensor_manager.contains_position(pos)
+
+    def contains(self, pos):
+        """Student-friendly alias for `contains_position(pos)`."""
+        return self.contains_position(pos)
 
     def contains_rect(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
         """
@@ -503,6 +559,9 @@ class World(world_base.WorldBase):
         Example:
             >>> world.size = (800, 600)
         """
+        if self.learning_mode and isinstance(value, list) and len(value) == 2:
+            self._student_warn("Learning mode: converted size from list to tuple")
+            value = (value[0], value[1])
         self._ensure_size_tuple(value, "size")
         width, height = value
         self.world_size_x = width
@@ -691,6 +750,18 @@ class World(world_base.WorldBase):
         self._ensure_background_source(source, "source")
         return self._get_background_facade().add_background(source)
 
+    def set_bg(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+        """Student-friendly alias for `set_background(source)`."""
+        return self.set_background(source)
+
+    def add_bg(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+        """Student-friendly alias for `add_background(source)`."""
+        return self.add_background(source)
+
+    def next_bg(self) -> background_mod.Background:
+        """Student-friendly alias to switch to the next background."""
+        return self.switch_background(-1)
+
     def start(self) -> None:
         """
         Starts or resumes the world.
@@ -751,6 +822,9 @@ class World(world_base.WorldBase):
         Notes:
             Automatically detects and handles running event loops (e.g. in Jupyter).
         """
+        fullscreen = self._coerce_bool_learning(fullscreen, "fullscreen")
+        fit_desktop = self._coerce_bool_learning(fit_desktop, "fit_desktop")
+        replit = self._coerce_bool_learning(replit, "replit")
         self._ensure_bool(fullscreen, "fullscreen")
         self._ensure_bool(fit_desktop, "fit_desktop")
         self._ensure_bool(replit, "replit")
@@ -784,6 +858,7 @@ class World(world_base.WorldBase):
             >>> world.is_in_world((900, 100))
             False
         """
+        position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().is_in_world(position)
 
@@ -804,8 +879,17 @@ class World(world_base.WorldBase):
         Example:
             >>> world.send_message(\"explode\", {\"power\": 10})
         """
+        if self.learning_mode and not isinstance(message, str):
+            self._student_warn(
+                f"Learning mode: converted message from {type(message).__name__} to str"
+            )
+            message = str(message)
         self._ensure_non_empty_str(message, "message")
         self._get_runtime_facade().send_message(message, data)
+
+    def broadcast(self, message: str, data: Optional[object] = None) -> None:
+        """Student-friendly alias for `send_message(message, data)`."""
+        self.send_message(message, data)
 
     def switch_world(self, new_world: "World", reset: bool = False) -> None:
         """Switch the active scene to another world.
@@ -814,6 +898,7 @@ class World(world_base.WorldBase):
             new_world: The world that should become active.
             reset: If `True`, the new world is reset before it starts.
         """
+        reset = self._coerce_bool_learning(reset, "reset")
         if not isinstance(new_world, world_base.WorldBase):
             raise TypeError(
                 f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
@@ -917,6 +1002,7 @@ class World(world_base.WorldBase):
             >>> world.get_from_pixel((100, 50))
             (100, 50)
         """
+        position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().get_from_pixel(position)
 
@@ -937,6 +1023,7 @@ class World(world_base.WorldBase):
             >>> world.to_pixel((5, 8))
             (5, 8)
         """
+        position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().to_pixel(position)
 
@@ -984,9 +1071,14 @@ class World(world_base.WorldBase):
               actors = world.get_actors_from_pixel(position)
 
         """
+        position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         # overwritten in tiled_sensor_manager
         return self._get_runtime_facade().detect_actors(position)
+
+    def actors_at(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
+        """Student-friendly alias for `detect_actors(position)`."""
+        return self.detect_actors(position)
 
     def get_actors_from_pixel(self, pixel: Tuple[float, float]) -> List[actor_mod.Actor]:
         """
@@ -1005,6 +1097,7 @@ class World(world_base.WorldBase):
             >>> for actor in actors:
             ...     print(actor.name)
         """
+        pixel = self._coerce_position_learning(pixel, "pixel")
         self._ensure_position_tuple(pixel, "pixel")
         return self._get_runtime_facade().get_actors_from_pixel(pixel)
 
