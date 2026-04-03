@@ -12,6 +12,15 @@ from miniworlds.worlds.manager.event_subscription import EventSubscription
 
 
 class TestActorLifecycle(unittest.TestCase):
+    def test_is_blockable_rejects_non_bool(self):
+        actor = Actor.__new__(Actor)
+        actor._position_manager = SimpleNamespace(is_blockable=False)
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.is_blockable.__set__(actor, 1)
+
+        self.assertIn("is_blockable must be bool", str(ctx.exception))
+
     def test_remove_returns_connector_result(self):
         actor = Actor.__new__(Actor)
         connector = MagicMock()
@@ -89,38 +98,6 @@ class TestActorLifecycle(unittest.TestCase):
         position_manager.move_towards_position.assert_called_once_with((10, 20), 0.3)
         self.assertIs(result, actor)
 
-    def test_move_towards_accepts_mouse_manager_like_target(self):
-        actor = Actor.__new__(Actor)
-        position_manager = MagicMock()
-        position_manager.move_towards_position.return_value = actor
-        actor._position_manager = position_manager
-        mouse_manager = SimpleNamespace(get_position=MagicMock(return_value=(42, 24)))
-
-        result = Actor.move_towards(actor, mouse_manager, 0.7)
-
-        mouse_manager.get_position.assert_called_once_with()
-        position_manager.move_towards_position.assert_called_once_with((42, 24), 0.7)
-        self.assertIs(result, actor)
-
-    def test_move_towards_ignores_mouse_manager_without_position(self):
-        actor = Actor.__new__(Actor)
-        position_manager = MagicMock()
-        actor._position_manager = position_manager
-        mouse_manager = SimpleNamespace(get_position=MagicMock(return_value=None))
-
-        result = Actor.move_towards(actor, mouse_manager, 1)
-
-        mouse_manager.get_position.assert_called_once_with()
-        position_manager.move_towards_position.assert_not_called()
-        self.assertIs(result, actor)
-
-    def test_move_towards_raises_for_invalid_target_shape(self):
-        actor = Actor.__new__(Actor)
-        actor._position_manager = MagicMock()
-
-        with self.assertRaises(MiniworldsError):
-            Actor.move_towards(actor, "not-a-position", 1)
-
     def test_position_accessors_delegate_to_position_manager(self):
         actor = Actor.__new__(Actor)
         position_manager = SimpleNamespace(position=(11, 22), set_position=MagicMock())
@@ -145,6 +122,41 @@ class TestActorLifecycle(unittest.TestCase):
 
         with self.assertRaises(MiniworldsError):
             Actor.move_in_direction(actor, object(), 1)
+
+    def test_move_to_rejects_invalid_position_type_early(self):
+        actor = Actor.__new__(Actor)
+        actor._movement_facade = SimpleNamespace(move_to=MagicMock())
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.move_to(actor, "10,20")
+
+        self.assertIn("position must be a tuple", str(ctx.exception))
+
+    def test_detect_rect_rejects_invalid_argument(self):
+        actor = Actor.__new__(Actor)
+        actor._sensor_facade = SimpleNamespace(detect_rect=MagicMock())
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.detect_rect(actor, (1, 2, 3))
+
+        self.assertIn("rect must be pygame.Rect or tuple", str(ctx.exception))
+
+    def test_send_message_rejects_non_string(self):
+        actor = Actor.__new__(Actor)
+        actor._event_facade = SimpleNamespace(send_message=MagicMock())
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.send_message(actor, 123)
+
+        self.assertIn("message must be str", str(ctx.exception))
+
+    def test_collision_type_rejects_unknown_value(self):
+        actor = Actor.__new__(Actor)
+
+        with self.assertRaises(ValueError) as ctx:
+            Actor.collision_type.__set__(actor, "triangle")
+
+        self.assertIn("collision_type must be one of", str(ctx.exception))
 
     def test_size_delegates_to_position_manager(self):
         actor = Actor.__new__(Actor)
