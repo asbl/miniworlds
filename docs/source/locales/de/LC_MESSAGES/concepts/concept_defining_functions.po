@@ -123,3 +123,23 @@ msgid ""
 "Another example: color a circle red if it’s on the **left half** of the "
 "screen."
 msgstr "Ein weiteres Beispiel: Färbe einen Kreis rot, wenn er auf der **linken Hälfte** des Bildschirms ist."
+
+#: ../../source/concepts/concept_defining_functions.md:189
+msgid "Common mistakes when defining event handlers inside functions:"
+msgstr "Haeufige Fehler beim Definieren von Event-Handlern in Funktionen:"
+
+#: ../../source/concepts/concept_defining_functions.md:191
+msgid "- Always keep `self` as the first parameter."
+msgstr "- Behalte `self` immer als ersten Parameter."
+
+#: ../../source/concepts/concept_defining_functions.md:192
+msgid "- Keep the expected event parameters (for example `key` or `position`)."
+msgstr "- Behalte die erwarteten Event-Parameter (zum Beispiel `key` oder `position`)."
+
+#: ../../source/concepts/concept_defining_functions.md:193
+msgid "- Make sure the decorator is directly above the handler (`@actor.register` / `@world.register`)."
+msgstr "- Achte darauf, dass der Decorator direkt ueber dem Handler steht (`@actor.register` / `@world.register`)."
+
+#: ../../source/concepts/concept_defining_functions.md:195
+msgid "If an event does not run, check the handler name and parameters first."
+msgstr "Wenn ein Event nicht laeuft, pruefe zuerst den Handlernamen und die Parameter."

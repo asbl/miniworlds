@@ -163,3 +163,31 @@ msgid ""
 msgstr ""
 "Du kannst entweder bestimmte Tasten wie `on_key_down_b(self)` definieren "
 "oder allgemeine Tasteneingaben über `on_key_down(self, key)` verarbeiten."
+
+#: ../../source/tutorial/04_01_events.md:116
+msgid "Common mistakes with event handlers:"
+msgstr "Haeufige Fehler bei Event-Handlern:"
+
+#: ../../source/tutorial/04_01_events.md:118
+msgid "- `on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:"
+msgstr "- `on_key_down` / `on_key_pressed` / `on_key_up` brauchen `key` als Parameter:"
+
+#: ../../source/tutorial/04_01_events.md:119
+msgid "  `def on_key_down(self, key):`"
+msgstr "  `def on_key_down(self, key):`"
+
+#: ../../source/tutorial/04_01_events.md:120
+msgid "- Mouse handlers usually need `position`:"
+msgstr "- Mouse-Handler brauchen normalerweise `position`:"
+
+#: ../../source/tutorial/04_01_events.md:121
+msgid "  `def on_mouse_left(self, position):`"
+msgstr "  `def on_mouse_left(self, position):`"
+
+#: ../../source/tutorial/04_01_events.md:122
+msgid "- Do not forget `@player.register` or `@world.register` above the handler."
+msgstr "- Vergiss `@player.register` oder `@world.register` ueber dem Handler nicht."
+
+#: ../../source/tutorial/04_01_events.md:124
+msgid "If a handler is not called, first check its name and signature."
+msgstr "Wenn ein Handler nicht aufgerufen wird, pruefe zuerst Namen und Signatur."
