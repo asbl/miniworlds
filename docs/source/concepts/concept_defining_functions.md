@@ -184,6 +184,16 @@ def act(self):
 world.run()
 ```
 
+```{warning}
+Common mistakes when defining event handlers inside functions:
+
+- Always keep `self` as the first parameter.
+- Keep the expected event parameters (for example `key` or `position`).
+- Make sure the decorator is directly above the handler (`@actor.register` / `@world.register`).
+
+If an event does not run, check the handler name and parameters first.
+```
+
 ---
 
 ## Return Values

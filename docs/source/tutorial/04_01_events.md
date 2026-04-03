@@ -111,3 +111,15 @@ world.run()
 You can either define specific keys like `on_key_down_b(self)`  
 or handle all key input using `on_key_down(self, key)` for general keyboard event handling.
 ```
+
+```{warning}
+Common mistakes with event handlers:
+
+- `on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:
+    `def on_key_down(self, key):`
+- Mouse handlers usually need `position`:
+    `def on_mouse_left(self, position):`
+- Do not forget `@player.register` or `@world.register` above the handler.
+
+If a handler is not called, first check its name and signature.
+```
