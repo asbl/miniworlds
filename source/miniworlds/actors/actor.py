@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
 from numbers import Real
+from difflib import get_close_matches
+import warnings
 import pygame.rect
 import collections
 
@@ -148,6 +150,46 @@ class Actor(actor_base.ActorBase):
             return message
         return f"{message}\nTry: {example}"
 
+    def _is_learning_mode(self) -> bool:
+        world = getattr(self, "_world", None)
+        return bool(getattr(world, "learning_mode", False))
+
+    @staticmethod
+    def _student_warn(message: str) -> None:
+        warnings.warn(message, RuntimeWarning, stacklevel=3)
+
+    def _coerce_bool_learning(self, value, parameter_name: str):
+        if isinstance(value, bool) or not self._is_learning_mode():
+            return value
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {"true", "yes", "y", "1", "on"}:
+                self._student_warn(
+                    f"Learning mode: converted {parameter_name} from {value!r} to True"
+                )
+                return True
+            if normalized in {"false", "no", "n", "0", "off"}:
+                self._student_warn(
+                    f"Learning mode: converted {parameter_name} from {value!r} to False"
+                )
+                return False
+        if isinstance(value, int) and value in (0, 1):
+            self._student_warn(
+                f"Learning mode: converted {parameter_name} from {value!r} to {bool(value)!r}"
+            )
+            return bool(value)
+        return value
+
+    def _coerce_position_learning(self, value, parameter_name: str):
+        if not self._is_learning_mode():
+            return value
+        if isinstance(value, list) and len(value) == 2:
+            self._student_warn(
+                f"Learning mode: converted {parameter_name} from list to tuple"
+            )
+            return (value[0], value[1])
+        return value
+
     @staticmethod
     def _ensure_bool(value, parameter_name: str):
         if not isinstance(value, bool):
@@ -282,7 +324,13 @@ class Actor(actor_base.ActorBase):
             "straight": "forward",
             "vor": "forward",
         }
-        return synonyms.get(normalized, normalized)
+        normalized = synonyms.get(normalized, normalized)
+        if normalized in {"up", "right", "left", "down", "forward"}:
+            return normalized
+        close_match = get_close_matches(normalized, ["up", "right", "left", "down", "forward"], n=1, cutoff=0.8)
+        if close_match:
+            return close_match[0]
+        return normalized
 
     @property
     def origin(self):
@@ -342,6 +390,13 @@ class Actor(actor_base.ActorBase):
                 f"collision_type must be str, got {type(value).__name__}: {value!r}"
             )
         value = value.strip().lower().replace("_", "-")
+        if value not in allowed_values and self._is_learning_mode():
+            close_match = get_close_matches(value, sorted(allowed_values), n=1, cutoff=0.75)
+            if close_match:
+                self._student_warn(
+                    f"Learning mode: converted collision_type from {value!r} to {close_match[0]!r}"
+                )
+                value = close_match[0]
         if value not in allowed_values:
             raise ValueError(
                 f"collision_type must be one of {sorted(allowed_values)}, got {value!r}"
@@ -357,6 +412,7 @@ class Actor(actor_base.ActorBase):
 
     @is_blockable.setter
     def is_blockable(self, value: bool):
+        value = self._coerce_bool_learning(value, "is_blockable")
         self._ensure_bool(value, "is_blockable")
         self.position_manager.is_blockable = value
 
@@ -369,6 +425,7 @@ class Actor(actor_base.ActorBase):
 
     @is_blocking.setter
     def is_blocking(self, value: bool):
+        value = self._coerce_bool_learning(value, "is_blocking")
         self._ensure_bool(value, "is_blocking")
         previous_value = self.position_manager.is_blocking
         self.position_manager.is_blocking = value
@@ -460,6 +517,7 @@ class Actor(actor_base.ActorBase):
 
     @is_flipped.setter
     def is_flipped(self, value: bool):
+        value = self._coerce_bool_learning(value, "is_flipped")
         self._ensure_bool(value, "is_flipped")
         self._get_appearance_facade().is_flipped = value
 
@@ -1011,6 +1069,7 @@ class Actor(actor_base.ActorBase):
 
     def set_size(self, value: tuple):
         """Set actor size as `(width, height)` in pixels."""
+        value = self._coerce_position_learning(value, "value")
         self._ensure_position_tuple(value, "value")
         self._get_size_facade().set_size(value)
 
@@ -1158,6 +1217,7 @@ class Actor(actor_base.ActorBase):
 
     @topleft.setter
     def topleft(self, value: Tuple[float, float]):
+        value = self._coerce_position_learning(value, "topleft")
         self._ensure_position_tuple(value, "topleft")
         self._get_movement_facade().set_topleft(value)
 
@@ -1193,6 +1253,7 @@ class Actor(actor_base.ActorBase):
 
     @center.setter
     def center(self, value: Tuple[float, float]):
+        value = self._coerce_position_learning(value, "center")
         self._ensure_position_tuple(value, "center")
         self._get_movement_facade().set_center(value)
 
@@ -1346,8 +1407,33 @@ class Actor(actor_base.ActorBase):
 
 
         """
+        position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._get_movement_facade().move_to(position)
+
+    def go_to(self, position: Tuple[float, float]):
+        """Student-friendly alias for `move_to(position)`."""
+        return self.move_to(position)
+
+    def move_forward(self, distance: int = 0):
+        """Student-friendly alias for `move(distance)`."""
+        return self.move(distance)
+
+    def face(self, direction: Union[str, int, float]):
+        """Student-friendly alias for `set_direction(direction)`."""
+        return self.set_direction(direction)
+
+    def turn(self, degrees: Union[int, float] = 90):
+        """Student-friendly alias for `turn_right(degrees)`."""
+        return self.turn_right(degrees)
+
+    def touching(self, *args, **kwargs):
+        """Student-friendly alias for `detect(...)`."""
+        return self.detect(*args, **kwargs)
+
+    def touching_all(self, *args, **kwargs):
+        """Student-friendly alias for `detect_all(...)`."""
+        return self.detect_all(*args, **kwargs)
 
     def remove(self, kill=True) -> collections.defaultdict:
         """
@@ -1367,6 +1453,7 @@ class Actor(actor_base.ActorBase):
                    self.remove()
                    other.remove()
         """
+        kill = self._coerce_bool_learning(kill, "kill")
         self._ensure_bool(kill, "kill")
         return self.world.get_world_connector(self).remove_actor_from_world(kill=kill)
         
@@ -1427,6 +1514,7 @@ class Actor(actor_base.ActorBase):
 
     @is_rotatable.setter
     def is_rotatable(self, value: bool):
+        value = self._coerce_bool_learning(value, "is_rotatable")
         self._ensure_bool(value, "is_rotatable")
         self.costume.is_rotatable = value
 
@@ -2268,6 +2356,7 @@ class Actor(actor_base.ActorBase):
 
     @is_filled.setter
     def is_filled(self, value):
+        value = self._coerce_bool_learning(value, "is_filled")
         self._ensure_bool(value, "is_filled")
         self._get_appearance_facade().is_filled = value
 
@@ -2314,6 +2403,7 @@ class Actor(actor_base.ActorBase):
 
     @visible.setter
     def visible(self, value):
+        value = self._coerce_bool_learning(value, "visible")
         self._ensure_bool(value, "visible")
         self._get_appearance_facade().visible = value
 
@@ -2381,6 +2471,7 @@ class Actor(actor_base.ActorBase):
 
     def set_position(self, value: Tuple[float, float]):
         """Set actor position in world coordinates."""
+        value = self._coerce_position_learning(value, "value")
         self._ensure_position_tuple(value, "value")
         self._get_movement_facade().set_position(value)
 
