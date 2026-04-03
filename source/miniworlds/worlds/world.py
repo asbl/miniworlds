@@ -1,4 +1,5 @@
 import math
+from numbers import Real
 import pygame
 import sys
 import asyncio
@@ -64,7 +65,128 @@ class World(world_base.WorldBase):
                     self.rows = 200
     """
 
+    @staticmethod
+    def _type_name(value) -> str:
+        return type(value).__name__
+
+    @staticmethod
+    def _ensure_bool(value, parameter_name: str) -> None:
+        if not isinstance(value, bool):
+            raise TypeError(
+                f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}"
+            )
+
+    @staticmethod
+    def _ensure_real(value, parameter_name: str) -> None:
+        if isinstance(value, bool) or not isinstance(value, Real):
+            raise TypeError(
+                f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
+            )
+
+    @staticmethod
+    def _ensure_int(value, parameter_name: str) -> None:
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise TypeError(
+                f"{parameter_name} must be int, got {type(value).__name__}: {value!r}"
+            )
+
+    @staticmethod
+    def _ensure_non_empty_str(value, parameter_name: str) -> None:
+        if not isinstance(value, str):
+            raise TypeError(
+                f"{parameter_name} must be str, got {type(value).__name__}: {value!r}"
+            )
+        if not value.strip():
+            raise ValueError(f"{parameter_name} must not be empty")
+
+    @classmethod
+    def _ensure_position_tuple(cls, value, parameter_name: str) -> None:
+        if not isinstance(value, tuple) or len(value) != 2:
+            raise TypeError(
+                f"{parameter_name} must be tuple (x, y), got {cls._type_name(value)}: {value!r}"
+            )
+        cls._ensure_real(value[0], f"{parameter_name}[0]")
+        cls._ensure_real(value[1], f"{parameter_name}[1]")
+
+    @classmethod
+    def _ensure_dimension(cls, value, parameter_name: str) -> None:
+        cls._ensure_real(value, parameter_name)
+        if value <= 0:
+            raise ValueError(f"{parameter_name} must be > 0, got {value}")
+
+    @classmethod
+    def _ensure_size_tuple(cls, value, parameter_name: str = "size") -> None:
+        if not isinstance(value, tuple) or len(value) != 2:
+            raise TypeError(
+                f"{parameter_name} must be tuple (width, height), got {cls._type_name(value)}: {value!r}"
+            )
+        cls._ensure_dimension(value[0], f"{parameter_name}[0]")
+        cls._ensure_dimension(value[1], f"{parameter_name}[1]")
+
+    @classmethod
+    def _ensure_rect_like(cls, value, parameter_name: str = "rect") -> None:
+        if isinstance(value, pygame.Rect):
+            return
+        if not isinstance(value, tuple) or len(value) != 4:
+            raise TypeError(
+                f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}"
+            )
+        for index, part in enumerate(value):
+            cls._ensure_real(part, f"{parameter_name}[{index}]")
+
+    @classmethod
+    def _ensure_color_like(cls, value, parameter_name: str = "color") -> None:
+        if not isinstance(value, tuple):
+            raise TypeError(
+                f"{parameter_name} must be tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}"
+            )
+        if len(value) not in (3, 4):
+            raise TypeError(
+                f"{parameter_name} must contain 3 or 4 values, got {len(value)} in {value!r}"
+            )
+        for index, part in enumerate(value):
+            cls._ensure_real(part, f"{parameter_name}[{index}]")
+
+    @classmethod
+    def _ensure_background_source(cls, value, parameter_name: str = "source") -> None:
+        if isinstance(value, appearance.Appearance):
+            return
+        if isinstance(value, str):
+            return
+        if isinstance(value, tuple):
+            cls._ensure_color_like(value, parameter_name)
+            return
+        raise TypeError(
+            f"{parameter_name} must be str path, color tuple, or Appearance, got {cls._type_name(value)}: {value!r}"
+        )
+
+    @classmethod
+    def _ensure_background_selector(cls, value, parameter_name: str = "background") -> None:
+        if isinstance(value, int):
+            return
+        if isinstance(value, appearance.Appearance):
+            return
+        raise TypeError(
+            f"{parameter_name} must be int index or Appearance, got {cls._type_name(value)}: {value!r}"
+        )
+
+    @classmethod
+    def _ensure_actor_classes(cls, actor_classes) -> None:
+        if not isinstance(actor_classes, list):
+            raise TypeError(
+                f"actor_classes must be list[type[Actor]], got {cls._type_name(actor_classes)}: {actor_classes!r}"
+            )
+        for actor_class in actor_classes:
+            if not isinstance(actor_class, type) or not issubclass(actor_class, actor_mod.Actor):
+                raise TypeError(
+                    f"actor_classes must contain Actor subclasses, got {cls._type_name(actor_class)}: {actor_class!r}"
+                )
+
     def _validate_parameters(self, x, y):
+        if isinstance(x, bool) or isinstance(y, bool):
+            raise TypeError(
+                f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
+            )
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
             raise TypeError(
                 f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
@@ -125,6 +247,7 @@ class World(world_base.WorldBase):
         Returns:
             True, if Position is in the world.
         """
+        self._ensure_position_tuple(pos, "pos")
         return self.sensor_manager.contains_position(pos)
 
     def contains_rect(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
@@ -133,6 +256,7 @@ class World(world_base.WorldBase):
 
         Useful when ensuring that an object is completely within bounds.
         """
+        self._ensure_rect_like(rect, "rect")
         return self.sensor_manager.contains_rect_all(rect)
 
     def contains_rect_any(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
@@ -141,6 +265,7 @@ class World(world_base.WorldBase):
 
         Useful when ensuring that an object is completely within bounds.
         """
+        self._ensure_rect_like(rect, "rect")
         return self.sensor_manager.contains_rect_any_(rect)
 
     @property
@@ -162,10 +287,7 @@ class World(world_base.WorldBase):
 
     @tick_rate.setter
     def tick_rate(self, value: int):
-        if not isinstance(value, (int, float)):
-            raise TypeError(f"tick_rate must be int or float, got {type(value).__name__}")
-        if value <= 0:
-            raise ValueError(f"tick_rate must be > 0, got {value}")
+        self._ensure_dimension(value, "tick_rate")
         self._tick_rate = value
 
     @property
@@ -183,10 +305,7 @@ class World(world_base.WorldBase):
 
     @fps.setter
     def fps(self, value: int):
-        if not isinstance(value, (int, float)):
-            raise TypeError(f"fps must be int or float, got {type(value).__name__}")
-        if value <= 0:
-            raise ValueError(f"fps must be > 0, got {value}")
+        self._ensure_dimension(value, "fps")
         self._fps = value
 
     @property
@@ -216,6 +335,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.world_size_x = 1024
         """
+        self._ensure_dimension(value, "world_size_x")
         self.camera.world_size_x = value
 
 
@@ -237,6 +357,7 @@ class World(world_base.WorldBase):
         Args:
             value: New height in pixels.
         """
+        self._ensure_dimension(value, "world_size_y")
         self.camera.world_size_y = value
 
     @property
@@ -269,6 +390,7 @@ class World(world_base.WorldBase):
         Args:
             value: New column count (width in pixels).
         """
+        self._ensure_dimension(value, "columns")
         self.camera.width = value
         self.world_size_x = value
 
@@ -303,6 +425,7 @@ class World(world_base.WorldBase):
         Args:
             value: New row count (height in pixels).
         """
+        self._ensure_dimension(value, "rows")
         self.camera.height = value
         self.world_size_y = value
 
@@ -334,6 +457,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.size = (800, 600)
         """
+        self._ensure_size_tuple(value, "size")
         width, height = value
         self.world_size_x = width
         self.world_size_y = height
@@ -377,6 +501,7 @@ class World(world_base.WorldBase):
             >>> world.background = \"images/background.png\"  # from image file
             >>> world.background = my_appearance            # custom Appearance
         """
+        self._ensure_background_source(source, "source")
         self._get_background_facade().set_background_property(source)
 
     def get_background(self) -> background_mod.Background:
@@ -451,6 +576,7 @@ class World(world_base.WorldBase):
                 :width: 100%
                 :alt: Switch background
         """
+        self._ensure_background_selector(background, "background")
         return self._get_background_facade().switch_background(background)
 
     def remove_background(self, background: Optional[Union[int, appearance.Appearance]] = None) -> None:
@@ -469,6 +595,8 @@ class World(world_base.WorldBase):
             >>> world.remove_background(0)            # removes background at index 0
             >>> world.remove_background(my_background)  # removes specific Appearance object
         """
+        if background is not None:
+            self._ensure_background_selector(background, "background")
         self._get_background_facade().remove_background(background)
 
 
@@ -492,6 +620,7 @@ class World(world_base.WorldBase):
             >>> world.set_background("images/sky.png")
             >>> world.set_background((30, 30, 30))  # dark gray
         """
+        self._ensure_background_source(source, "source")
         return self._get_background_facade().set_background(source)
 
     def add_background(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
@@ -513,6 +642,7 @@ class World(world_base.WorldBase):
             >>> world.add_background((255, 0, 0))               # red background
             >>> world.add_background("images/background.png")  # image background
         """
+        self._ensure_background_source(source, "source")
         return self._get_background_facade().add_background(source)
 
     def start(self) -> None:
@@ -538,6 +668,9 @@ class World(world_base.WorldBase):
             >>> world.stop()         # stops immediately
             >>> world.stop(frames=5) # stops after 5 frames
         """
+        self._ensure_int(frames, "frames")
+        if frames < 0:
+            raise ValueError(f"frames must be >= 0, got {frames}")
         self._get_runtime_facade().stop(frames)
 
     def run(
@@ -572,6 +705,13 @@ class World(world_base.WorldBase):
         Notes:
             Automatically detects and handles running event loops (e.g. in Jupyter).
         """
+        self._ensure_bool(fullscreen, "fullscreen")
+        self._ensure_bool(fit_desktop, "fit_desktop")
+        self._ensure_bool(replit, "replit")
+        if event is not None and not isinstance(event, str):
+            raise TypeError(
+                f"event must be str or None, got {type(event).__name__}: {event!r}"
+            )
         self._get_runtime_facade().run(
             fullscreen=fullscreen,
             fit_desktop=fit_desktop,
@@ -598,6 +738,7 @@ class World(world_base.WorldBase):
             >>> world.is_in_world((900, 100))
             False
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().is_in_world(position)
 
     def send_message(self, message: str, data: Optional[object] = None) -> None:
@@ -617,6 +758,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.send_message(\"explode\", {\"power\": 10})
         """
+        self._ensure_non_empty_str(message, "message")
         self._get_runtime_facade().send_message(message, data)
 
     def switch_world(self, new_world: "World", reset: bool = False) -> None:
@@ -626,6 +768,11 @@ class World(world_base.WorldBase):
             new_world: The world that should become active.
             reset: If `True`, the new world is reset before it starts.
         """
+        if not isinstance(new_world, world_base.WorldBase):
+            raise TypeError(
+                f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
+            )
+        self._ensure_bool(reset, "reset")
         self._get_runtime_facade().switch_world(new_world, reset)
 
     def load_world_from_db(self, file: str) -> "World":
@@ -637,6 +784,7 @@ class World(world_base.WorldBase):
         Returns:
             The loaded world instance.
         """
+        self._ensure_non_empty_str(file, "file")
         return self._get_runtime_facade().load_world_from_db(file)
 
     def load_actors_from_db(
@@ -651,6 +799,8 @@ class World(world_base.WorldBase):
         Returns:
             A list with the recreated actors.
         """
+        self._ensure_non_empty_str(file, "file")
+        self._ensure_actor_classes(actor_classes)
         return self._get_runtime_facade().load_actors_from_db(file, actor_classes)
 
     def save_to_db(self, file: str) -> None:
@@ -659,6 +809,7 @@ class World(world_base.WorldBase):
         Args:
             file: Path to the sqlite database file that should be written.
         """
+        self._ensure_non_empty_str(file, "file")
         return self._get_runtime_facade().save_to_db(file)
 
 
@@ -672,6 +823,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.quit()
         """
+        self._ensure_int(exit_code, "exit_code")
         self._get_runtime_facade().quit(exit_code)
 
     def reset(self):
@@ -719,6 +871,7 @@ class World(world_base.WorldBase):
             >>> world.get_from_pixel((100, 50))
             (100, 50)
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().get_from_pixel(position)
 
 
@@ -738,6 +891,7 @@ class World(world_base.WorldBase):
             >>> world.to_pixel((5, 8))
             (5, 8)
         """
+        self._ensure_position_tuple(position, "position")
         return self._get_runtime_facade().to_pixel(position)
 
 
@@ -784,6 +938,7 @@ class World(world_base.WorldBase):
               actors = world.get_actors_from_pixel(position)
 
         """
+        self._ensure_position_tuple(position, "position")
         # overwritten in tiled_sensor_manager
         return self._get_runtime_facade().detect_actors(position)
 
@@ -804,6 +959,7 @@ class World(world_base.WorldBase):
             >>> for actor in actors:
             ...     print(actor.name)
         """
+        self._ensure_position_tuple(pixel, "pixel")
         return self._get_runtime_facade().get_actors_from_pixel(pixel)
 
     @staticmethod
@@ -822,6 +978,8 @@ class World(world_base.WorldBase):
             >>> World.distance_to((0, 0), (3, 4))
             5.0
         """
+        World._ensure_position_tuple(pos1, "pos1")
+        World._ensure_position_tuple(pos2, "pos2")
         return world_runtime_facade.WorldRuntimeFacade.distance_to(pos1, pos2)
 
     def direction_to(self, pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
@@ -839,4 +997,6 @@ class World(world_base.WorldBase):
             >>> world.direction_to((0, 0), (0, 1))
             90.0
         """
+        self._ensure_position_tuple(pos1, "pos1")
+        self._ensure_position_tuple(pos2, "pos2")
         return world_runtime_facade.WorldRuntimeFacade.direction_to(pos1, pos2)
