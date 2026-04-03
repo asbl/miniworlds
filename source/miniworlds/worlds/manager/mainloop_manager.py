@@ -71,6 +71,9 @@ class MainloopManager:
 
     def blit_surface_to_window_surface(self):
         self.app.window.surface.blit(self.world.background.surface, self.world.camera.screen_rect)
+        draw_overlay = getattr(self.world, "_draw_debug_overlay", None)
+        if callable(draw_overlay):
+            draw_overlay(self.app.window.surface)
 
     def dirty_all(self):
         for actor in self.world.actors:

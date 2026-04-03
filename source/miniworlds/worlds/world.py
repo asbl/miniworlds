@@ -206,6 +206,7 @@ class World(world_base.WorldBase):
         self._get_initialization_facade().initialize_pre_base_state(x, y)
         super().__init__()
         self._get_initialization_facade().initialize_post_base_state()
+        self._debug = False
 
 
     def _get_initialization_facade(
@@ -240,6 +241,51 @@ class World(world_base.WorldBase):
         here as a compatibility alias for existing teaching material.
         """
         return self.camera
+
+    @property
+    def debug(self) -> bool:
+        """Enable a compact debug overlay with runtime values on screen."""
+        return getattr(self, "_debug", False)
+
+    @debug.setter
+    def debug(self, value: bool) -> None:
+        if not isinstance(value, bool):
+            raise TypeError(
+                f"debug must be bool, got {type(value).__name__}: {value!r}\nTry: world.debug = True"
+            )
+        self._debug = value
+
+    def _draw_debug_overlay(self, target_surface: pygame.Surface) -> None:
+        if not self.debug:
+            return
+        if not pygame.font.get_init():
+            pygame.font.init()
+        font = pygame.font.Font(None, 18)
+        lines = [
+            f"frame: {self.frame}",
+            f"fps: {self.fps}",
+            f"tick_rate: {self.tick_rate}",
+            f"actors: {len(self.actors)}",
+            f"camera: {self.camera.topleft}",
+        ]
+        line_height = 18
+        width = 0
+        rendered = []
+        for line in lines:
+            surface = font.render(line, True, (255, 255, 255))
+            rendered.append(surface)
+            width = max(width, surface.get_width())
+
+        box_width = width + 10
+        box_height = line_height * len(rendered) + 8
+        box = pygame.Surface((box_width, box_height), pygame.SRCALPHA)
+        box.fill((0, 0, 0, 150))
+        target_surface.blit(box, (6, 6))
+
+        y = 10
+        for surface in rendered:
+            target_surface.blit(surface, (11, y))
+            y += line_height
 
     def contains_position(self, pos):
         """Checks if position is in the world.

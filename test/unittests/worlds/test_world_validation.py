@@ -93,6 +93,14 @@ class TestWorldValidation(unittest.TestCase):
         with self.assertRaises(TypeError):
             World.distance_to((0,), (1, 1))
 
+    def test_debug_toggle_rejects_non_bool(self):
+        world = self._bare_world()
+
+        with self.assertRaises(TypeError) as ctx:
+            World.debug.__set__(world, "yes")
+
+        self.assertIn("debug must be bool", str(ctx.exception))
+
 
 class WorldValidationActor(Actor):
     pass
