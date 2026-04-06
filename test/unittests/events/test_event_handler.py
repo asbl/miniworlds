@@ -356,3 +356,51 @@ def test_mouse_over_cache_rebuilds_after_registry_change(
         ("mouse_enter", (7, 8)),
         ("mouse_over", (7, 8)),
     ]
+
+
+def test_tracked_position_updates_on_mouse_motion_even_without_hover_handlers(
+    event_handler_world_builder,
+    event_registry_builder,
+):
+    """Regression: world.mouse.get_position() must stay current when the actor
+    only registers on_mouse_left_down and no hover handlers.  Before the fix,
+    _tracked_position was only set inside _MouseEventDispatcher.dispatch(), which
+    was skipped when can_handle_event returned False for on_mouse_motion."""
+
+    class ClickOnly:
+        def on_mouse_left_down(self, pos):
+            pass
+
+    recorder = ClickOnly()
+    registry = event_registry_builder({"on_mouse_left_down": {recorder.on_mouse_left_down}})
+    world = event_handler_world_builder()
+    handler = EventHandler(world, registry)
+
+    handler.handle_event("mouse_motion", (50, 60))
+
+    assert world.mouse._tracked_position == (50, 60)
+
+
+def test_tracked_position_cleared_on_motion_outside_screen(
+    event_handler_world_builder,
+    event_registry_builder,
+):
+    """When a mouse_motion event arrives with coordinates outside the world's
+    camera rect, _tracked_position must be reset to None."""
+
+    class ClickOnly:
+        def on_mouse_left_down(self, pos):
+            pass
+
+    recorder = ClickOnly()
+    registry = event_registry_builder({"on_mouse_left_down": {recorder.on_mouse_left_down}})
+    world = event_handler_world_builder()
+    world.mouse._tracked_position = (50, 60)
+
+    # Simulate mouse leaving the world area.
+    world.camera.is_in_screen.return_value = False
+    handler = EventHandler(world, registry)
+
+    handler.handle_event("mouse_motion", (999, 999))
+
+    assert world.mouse._tracked_position is None
