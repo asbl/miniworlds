@@ -86,6 +86,7 @@ def make_event_handler_world(**overrides: Any) -> SimpleNamespace:
     world = SimpleNamespace(
         camera=make_camera(),
         detect_actors=Mock(return_value=[]),
+        mouse=SimpleNamespace(_tracked_position=None),
     )
     return _apply_overrides(world, **overrides)
 
