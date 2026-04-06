@@ -261,6 +261,17 @@ class EventHandler:
         """
         event = f"on_{event}"
 
+        # Always keep tracked mouse position current from motion events, even
+        # when no hover handlers (on_mouse_over / on_mouse_enter / on_mouse_leave)
+        # are registered. Without this, world.mouse.get_position() in act() would
+        # return a stale event-based position and an actor following the mouse would
+        # stop as soon as it reached the last click/motion event coordinate.
+        if event == "on_mouse_motion" and data is not None:
+            if self.world.camera.is_in_screen(data):
+                self.world.mouse._tracked_position = data
+            else:
+                self.world.mouse._tracked_position = None
+
         if not self.can_handle_event(event):
             return
 
