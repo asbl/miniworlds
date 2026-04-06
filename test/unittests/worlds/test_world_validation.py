@@ -40,7 +40,7 @@ class TestWorldValidation(unittest.TestCase):
         with self.assertRaises(TypeError) as ctx:
             World.contains_position(world, (1,))
 
-        self.assertIn("pos must be tuple (x, y)", str(ctx.exception))
+        self.assertIn("pos must be a tuple (x, y)", str(ctx.exception))
 
     def test_contains_rect_rejects_invalid_shape(self):
         world = self._bare_world()

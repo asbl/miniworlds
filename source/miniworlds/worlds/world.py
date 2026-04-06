@@ -1,5 +1,4 @@
 import math
-from numbers import Real
 import warnings
 import pygame
 import sys
@@ -32,6 +31,7 @@ import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
 import miniworlds.tools.timer as timer
 import miniworlds.base.app as app_mod
+import miniworlds.base.api_validation as api_validation
 
 from miniworlds.base.exceptions import (
     WorldArgumentsError,
@@ -68,28 +68,38 @@ class World(world_base.WorldBase):
 
     @staticmethod
     def _type_name(value) -> str:
-        return type(value).__name__
+        return api_validation.type_name(value)
+
+    @staticmethod
+    def _with_try_hint(message: str, example: str | None = None) -> str:
+        return api_validation.with_try_hint(message, example)
 
     @staticmethod
     def _ensure_bool(value, parameter_name: str) -> None:
-        if not isinstance(value, bool):
-            raise TypeError(
-                f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}"
-            )
+        api_validation.ensure_bool(
+            value,
+            parameter_name,
+            World._with_try_hint,
+            f"{parameter_name} = True",
+        )
 
     @staticmethod
     def _ensure_real(value, parameter_name: str) -> None:
-        if isinstance(value, bool) or not isinstance(value, Real):
-            raise TypeError(
-                f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
-            )
+        api_validation.ensure_real(
+            value,
+            parameter_name,
+            World._with_try_hint,
+            f"{parameter_name} = 10",
+        )
 
     @staticmethod
     def _ensure_int(value, parameter_name: str) -> None:
-        if isinstance(value, bool) or not isinstance(value, int):
-            raise TypeError(
-                f"{parameter_name} must be int, got {type(value).__name__}: {value!r}"
-            )
+        api_validation.ensure_int(
+            value,
+            parameter_name,
+            World._with_try_hint,
+            f"{parameter_name} = 1",
+        )
 
     @staticmethod
     def _ensure_non_empty_str(value, parameter_name: str) -> None:
@@ -102,12 +112,12 @@ class World(world_base.WorldBase):
 
     @classmethod
     def _ensure_position_tuple(cls, value, parameter_name: str) -> None:
-        if not isinstance(value, tuple) or len(value) != 2:
-            raise TypeError(
-                f"{parameter_name} must be tuple (x, y), got {cls._type_name(value)}: {value!r}"
-            )
-        cls._ensure_real(value[0], f"{parameter_name}[0]")
-        cls._ensure_real(value[1], f"{parameter_name}[1]")
+        api_validation.ensure_position_tuple(
+            value,
+            parameter_name,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_dimension(cls, value, parameter_name: str) -> None:
@@ -126,27 +136,22 @@ class World(world_base.WorldBase):
 
     @classmethod
     def _ensure_rect_like(cls, value, parameter_name: str = "rect") -> None:
-        if isinstance(value, pygame.Rect):
-            return
-        if not isinstance(value, tuple) or len(value) != 4:
-            raise TypeError(
-                f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}"
-            )
-        for index, part in enumerate(value):
-            cls._ensure_real(part, f"{parameter_name}[{index}]")
+        api_validation.ensure_rect_like(
+            value,
+            parameter_name,
+            pygame.Rect,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_color_like(cls, value, parameter_name: str = "color") -> None:
-        if not isinstance(value, tuple):
-            raise TypeError(
-                f"{parameter_name} must be tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}"
-            )
-        if len(value) not in (3, 4):
-            raise TypeError(
-                f"{parameter_name} must contain 3 or 4 values, got {len(value)} in {value!r}"
-            )
-        for index, part in enumerate(value):
-            cls._ensure_real(part, f"{parameter_name}[{index}]")
+        api_validation.ensure_color_like(
+            value,
+            parameter_name,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_background_source(cls, value, parameter_name: str = "source") -> None:
@@ -275,36 +280,20 @@ class World(world_base.WorldBase):
         warnings.warn(message, RuntimeWarning, stacklevel=3)
 
     def _coerce_bool_learning(self, value, parameter_name: str):
-        if isinstance(value, bool) or not self.learning_mode:
-            return value
-        if isinstance(value, str):
-            normalized = value.strip().lower()
-            if normalized in {"true", "yes", "y", "1", "on"}:
-                self._student_warn(
-                    f"Learning mode: converted {parameter_name} from {value!r} to True"
-                )
-                return True
-            if normalized in {"false", "no", "n", "0", "off"}:
-                self._student_warn(
-                    f"Learning mode: converted {parameter_name} from {value!r} to False"
-                )
-                return False
-        if isinstance(value, int) and value in (0, 1):
-            self._student_warn(
-                f"Learning mode: converted {parameter_name} from {value!r} to {bool(value)!r}"
-            )
-            return bool(value)
-        return value
+        return api_validation.coerce_bool_learning(
+            value,
+            parameter_name,
+            self.learning_mode,
+            self._student_warn,
+        )
 
     def _coerce_position_learning(self, value, parameter_name: str):
-        if not self.learning_mode:
-            return value
-        if isinstance(value, list) and len(value) == 2:
-            self._student_warn(
-                f"Learning mode: converted {parameter_name} from list to tuple"
-            )
-            return (value[0], value[1])
-        return value
+        return api_validation.coerce_position_learning(
+            value,
+            parameter_name,
+            self.learning_mode,
+            self._student_warn,
+        )
 
     def _draw_debug_overlay(self, target_surface: pygame.Surface) -> None:
         if not self.debug:
@@ -904,11 +893,9 @@ class World(world_base.WorldBase):
                 "new_world must not be None"
             )
         if not isinstance(new_world, world_base.WorldBase):
-            has_proxy_switch = hasattr(getattr(self, "camera", None), "switch_world")
-            if not has_proxy_switch:
-                raise TypeError(
-                    f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
-                )
+            raise TypeError(
+                f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
+            )
         self._ensure_bool(reset, "reset")
         self._get_runtime_facade().switch_world(new_world, reset)
 

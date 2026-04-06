@@ -25,7 +25,7 @@ class TestWorldProxies(unittest.TestCase):
         world.data = Mock()
         world.app = make_app_with_event_queue()
 
-        new_world = Mock()
+        new_world = World.__new__(World)
         World.switch_world(world, new_world, reset=True)
         World.save_to_db(world, "save.db")
         World.load_world_from_db(world, "save.db")

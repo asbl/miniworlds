@@ -155,3 +155,17 @@ class TestNotImplementedOrRegisteredError(unittest.TestCase):
 
         self.assertIn("Common signatures", str(exc))
         self.assertIn("def on_mouse_left(self, position):", str(exc))
+
+    def test_exception_message_uses_world_context_for_world_method(self):
+        from miniworlds.base.exceptions import NotImplementedOrRegisteredError
+
+        class MyWorld:
+            def on_setup(self):
+                return None
+
+        world = MyWorld()
+        exc = NotImplementedOrRegisteredError(world.on_setup)
+
+        self.assertIn("class MyWorld(World):", str(exc))
+        self.assertIn("@world.register", str(exc))
+        self.assertIn("def on_setup(self):", str(exc))

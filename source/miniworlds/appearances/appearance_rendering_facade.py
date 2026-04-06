@@ -68,8 +68,10 @@ class AppearanceRenderingFacade:
         )
 
     def fill(self, value):
-        self.owner._is_filled = value
-        if self.owner.is_filled:
+        if isinstance(value, bool):
+            self.owner._is_filled = value
+        else:
+            self.owner._is_filled = True
             self.owner.fill_color = color_mod.Color(value).get()
         self.owner.set_dirty("all", self.owner.RELOAD_ACTUAL_IMAGE)
 
