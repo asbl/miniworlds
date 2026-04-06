@@ -159,6 +159,10 @@ class NotImplementedOrRegisteredError(MiniworldsError):
         method_name = getattr(method, "__name__", str(method))
         owner = getattr(method, "__self__", None)
         owner_name = owner.__class__.__name__ if owner is not None else "YourClass"
+        owner_module = owner.__class__.__module__ if owner is not None else ""
+        is_world_owner = owner_module.startswith("miniworlds.worlds") or owner_name.endswith("World")
+        owner_base = "World" if is_world_owner else "Actor"
+        register_target = "world" if is_world_owner else owner_name.lower()
         signature_hints = []
         if method_name.startswith("on_key_down"):
             signature_hints.append("def on_key_down(self, key):")
@@ -166,6 +170,9 @@ class NotImplementedOrRegisteredError(MiniworldsError):
             signature_hints.append("def on_key_pressed(self, key):")
         elif method_name.startswith("on_key_up"):
             signature_hints.append("def on_key_up(self, key):")
+
+        if method_name == "on_setup":
+            signature_hints.append("def on_setup(self):")
 
         if method_name.startswith("on_mouse_") or method_name.startswith("on_clicked_"):
             signature_hints.append(f"def {method_name}(self, position):")
@@ -183,11 +190,11 @@ class NotImplementedOrRegisteredError(MiniworldsError):
             f"(Meaning: not implemented or not registered.)\n"
             f"Try one of these options:\n"
             f"1) Subclass implementation:\n"
-            f"   class {owner_name}(Actor):\n"
+            f"   class {owner_name}({owner_base}):\n"
             f"       def {method_name}(self, ...):\n"
             f"           pass\n"
             f"2) Register a handler:\n"
-            f"   @{owner_name.lower()}.register\n"
+            f"   @{register_target}.register\n"
             f"   def {method_name}(self, ...):\n"
             f"       pass"
             f"{hint_block}"

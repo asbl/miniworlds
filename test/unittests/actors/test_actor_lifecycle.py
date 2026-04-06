@@ -5,6 +5,7 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 from miniworlds.actors.actor import Actor
+from miniworlds.actors.actor_appearance_facade import ActorAppearanceFacade
 from miniworlds.actors.actor_movement_facade import ActorMovementFacade
 from miniworlds.actors.actor_size_facade import ActorSizeFacade
 from miniworlds.base.exceptions import MiniworldsError
@@ -320,6 +321,24 @@ class TestActorLifecycle(unittest.TestCase):
         self.assertTrue(actor._position_manager.is_blocking)
         actor.world.get_world_connector.assert_called_once_with(actor)
         connector.sync_blocking_registration.assert_called_once_with(False, True)
+
+    def test_appearance_facade_is_filled_tuple_sets_color_and_bool(self):
+        costume = SimpleNamespace(fill=MagicMock(), set_filled=MagicMock())
+        facade = ActorAppearanceFacade(SimpleNamespace(costume=costume))
+
+        facade.is_filled = (10, 20, 30)
+
+        costume.fill.assert_called_once_with((10, 20, 30))
+        costume.set_filled.assert_called_once_with(True)
+
+    def test_appearance_facade_is_filled_bool_sets_only_flag(self):
+        costume = SimpleNamespace(fill=MagicMock(), set_filled=MagicMock())
+        facade = ActorAppearanceFacade(SimpleNamespace(costume=costume))
+
+        facade.is_filled = False
+
+        costume.fill.assert_not_called()
+        costume.set_filled.assert_called_once_with(False)
 
 
 if __name__ == "__main__":

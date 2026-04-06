@@ -1,6 +1,5 @@
 from __future__ import annotations
 from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
-from numbers import Real
 from difflib import get_close_matches
 import warnings
 import pygame.rect
@@ -19,6 +18,7 @@ import miniworlds.worlds.manager.sensor_manager as sensor_manager
 import miniworlds.worlds.manager.position_manager as actor_position_manager
 import miniworlds.base.exceptions as exceptions
 import miniworlds.actors.actor_base as actor_base
+import miniworlds.base.api_validation as api_validation
 
 from miniworlds.base.exceptions import (
     NotImplementedOrRegisteredError,
@@ -142,13 +142,11 @@ class Actor(actor_base.ActorBase):
 
     @staticmethod
     def _type_name(value) -> str:
-        return type(value).__name__
+        return api_validation.type_name(value)
 
     @staticmethod
     def _with_try_hint(message: str, example: str | None = None) -> str:
-        if not example:
-            return message
-        return f"{message}\nTry: {example}"
+        return api_validation.with_try_hint(message, example)
 
     def _is_learning_mode(self) -> bool:
         world = getattr(self, "_world", None)
@@ -159,108 +157,75 @@ class Actor(actor_base.ActorBase):
         warnings.warn(message, RuntimeWarning, stacklevel=3)
 
     def _coerce_bool_learning(self, value, parameter_name: str):
-        if isinstance(value, bool) or not self._is_learning_mode():
-            return value
-        if isinstance(value, str):
-            normalized = value.strip().lower()
-            if normalized in {"true", "yes", "y", "1", "on"}:
-                self._student_warn(
-                    f"Learning mode: converted {parameter_name} from {value!r} to True"
-                )
-                return True
-            if normalized in {"false", "no", "n", "0", "off"}:
-                self._student_warn(
-                    f"Learning mode: converted {parameter_name} from {value!r} to False"
-                )
-                return False
-        if isinstance(value, int) and value in (0, 1):
-            self._student_warn(
-                f"Learning mode: converted {parameter_name} from {value!r} to {bool(value)!r}"
-            )
-            return bool(value)
-        return value
+        return api_validation.coerce_bool_learning(
+            value,
+            parameter_name,
+            self._is_learning_mode(),
+            self._student_warn,
+        )
 
     def _coerce_position_learning(self, value, parameter_name: str):
-        if not self._is_learning_mode():
-            return value
-        if isinstance(value, list) and len(value) == 2:
-            self._student_warn(
-                f"Learning mode: converted {parameter_name} from list to tuple"
-            )
-            return (value[0], value[1])
-        return value
+        return api_validation.coerce_position_learning(
+            value,
+            parameter_name,
+            self._is_learning_mode(),
+            self._student_warn,
+        )
 
     @staticmethod
     def _ensure_bool(value, parameter_name: str):
-        if not isinstance(value, bool):
-            raise TypeError(
-                Actor._with_try_hint(
-                    f"{parameter_name} must be bool, got {type(value).__name__}: {value!r}",
-                    f"{parameter_name} = True",
-                )
-            )
+        api_validation.ensure_bool(
+            value,
+            parameter_name,
+            Actor._with_try_hint,
+            f"{parameter_name} = True",
+        )
 
     @staticmethod
     def _ensure_real(value, parameter_name: str):
-        if isinstance(value, bool) or not isinstance(value, Real):
-            raise TypeError(
-                Actor._with_try_hint(
-                    f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}",
-                    f"{parameter_name} = 10",
-                )
-            )
+        api_validation.ensure_real(
+            value,
+            parameter_name,
+            Actor._with_try_hint,
+            f"{parameter_name} = 10",
+        )
 
     @staticmethod
     def _ensure_int(value, parameter_name: str):
-        if isinstance(value, bool) or not isinstance(value, int):
-            raise TypeError(
-                Actor._with_try_hint(
-                    f"{parameter_name} must be int, got {type(value).__name__}: {value!r}",
-                    f"{parameter_name} = 1",
-                )
-            )
+        api_validation.ensure_int(
+            value,
+            parameter_name,
+            Actor._with_try_hint,
+            f"{parameter_name} = 1",
+        )
 
     @classmethod
     def _ensure_position_tuple(cls, value, parameter_name: str):
-        if not isinstance(value, tuple) or len(value) != 2:
-            raise TypeError(
-                cls._with_try_hint(
-                    f"{parameter_name} must be a tuple (x, y), got {cls._type_name(value)}: {value!r}",
-                    f"{parameter_name} = (100, 200)",
-                )
-            )
-        cls._ensure_real(value[0], f"{parameter_name}[0]")
-        cls._ensure_real(value[1], f"{parameter_name}[1]")
+        api_validation.ensure_position_tuple(
+            value,
+            parameter_name,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_rect_like(cls, value, parameter_name: str):
-        if isinstance(value, pygame.rect.Rect):
-            return
-        if not isinstance(value, tuple) or len(value) != 4:
-            raise TypeError(
-                cls._with_try_hint(
-                    f"{parameter_name} must be pygame.Rect or tuple (x, y, width, height), got {cls._type_name(value)}: {value!r}",
-                    f"{parameter_name} = (10, 20, 30, 40)",
-                )
-            )
-        for index, part in enumerate(value):
-            cls._ensure_real(part, f"{parameter_name}[{index}]")
+        api_validation.ensure_rect_like(
+            value,
+            parameter_name,
+            pygame.rect.Rect,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_color_like(cls, value, parameter_name: str):
-        if not isinstance(value, tuple):
-            raise TypeError(
-                cls._with_try_hint(
-                    f"{parameter_name} must be a tuple like (r, g, b) or (r, g, b, a), got {cls._type_name(value)}: {value!r}",
-                    f"{parameter_name} = (255, 0, 0)",
-                )
-            )
-        if len(value) not in (3, 4):
-            raise TypeError(
-                f"{parameter_name} must contain 3 or 4 values, got {len(value)} in {value!r}"
-            )
-        for index, part in enumerate(value):
-            cls._ensure_real(part, f"{parameter_name}[{index}]")
+        api_validation.ensure_color_like(
+            value,
+            parameter_name,
+            cls._ensure_real,
+            cls._with_try_hint,
+        )
 
     @classmethod
     def _ensure_actor_instance(cls, value, parameter_name: str):
@@ -285,61 +250,18 @@ class Actor(actor_base.ActorBase):
 
     @classmethod
     def _ensure_direction_value(cls, value, parameter_name: str = "direction", allow_none: bool = False):
-        if value is None and allow_none:
-            return
-        if isinstance(value, str):
-            return
-        if (
-            hasattr(value, "x")
-            and hasattr(value, "y")
-            and isinstance(getattr(value, "x"), Real)
-            and isinstance(getattr(value, "y"), Real)
-            and not isinstance(getattr(value, "x"), bool)
-            and not isinstance(getattr(value, "y"), bool)
-        ):
-            return
-        if isinstance(value, tuple):
-            cls._ensure_position_tuple(value, parameter_name)
-            return
-        if isinstance(value, Real) and not isinstance(value, bool):
-            return
-        raise TypeError(
-            cls._with_try_hint(
-                f"{parameter_name} must be int, float, str, or tuple (x, y), got {cls._type_name(value)}: {value!r}",
-                f"{parameter_name} = 'right'",
-            )
+        api_validation.DirectionInput.ensure(
+            value,
+            parameter_name,
+            allow_none,
+            cls._ensure_position_tuple,
+            cls._with_try_hint,
         )
 
     @classmethod
     def _normalize_direction_input(cls, value, parameter_name: str = "direction"):
-        if not isinstance(value, str):
-            return value
-        normalized = value.strip().lower()
-        synonyms = {
-            "u": "up",
-            "top": "up",
-            "north": "up",
-            "oben": "up",
-            "r": "right",
-            "east": "right",
-            "rechts": "right",
-            "l": "left",
-            "west": "left",
-            "links": "left",
-            "d": "down",
-            "south": "down",
-            "unten": "down",
-            "ahead": "forward",
-            "straight": "forward",
-            "vor": "forward",
-        }
-        normalized = synonyms.get(normalized, normalized)
-        if normalized in {"up", "right", "left", "down", "forward"}:
-            return normalized
-        close_match = get_close_matches(normalized, ["up", "right", "left", "down", "forward"], n=1, cutoff=0.8)
-        if close_match:
-            return close_match[0]
-        return normalized
+        del parameter_name
+        return api_validation.DirectionInput.normalize(value)
 
     @property
     def origin(self):

@@ -120,6 +120,7 @@ class ActorAppearanceFacade:
     @fill_color.setter
     def fill_color(self, value) -> None:
         self.actor.costume.fill(value)
+        self.actor.costume.set_filled(True)
 
     def fill(self, value) -> None:
         self.actor.costume.fill(value)
@@ -130,7 +131,11 @@ class ActorAppearanceFacade:
 
     @is_filled.setter
     def is_filled(self, value) -> None:
-        self.actor.costume.fill(value)
+        if isinstance(value, tuple):
+            self.actor.costume.fill(value)
+            self.actor.costume.set_filled(True)
+            return
+        self.actor.costume.set_filled(value)
 
     @property
     def border_color(self):

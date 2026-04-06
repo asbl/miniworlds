@@ -30,7 +30,8 @@ class Test132(unittest.TestCase):
                 t5 = Actor((160, 0), origin = "topleft")
                 t5.add_costume("images/player.png")
                 t5.fill_color = (255, 255, 0, 100) # image is overwritten
-                assert (t5.is_filled == (255, 255, 0, 100))
+                assert (t5.is_filled is True)
+                assert (t5.fill_color == (255, 255, 0, 100))
 
                 t6 = Circle((0, 40), 20, origin = "topleft")
                 t6.fill_color = (255, 255, 255)
