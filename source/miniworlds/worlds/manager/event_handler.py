@@ -48,8 +48,13 @@ class _MouseEventDispatcher:
 
     def dispatch(self, event: str, mouse_pos: Any):
         if not self.world.camera.is_in_screen(mouse_pos):
+            if event == "on_mouse_motion":
+                # Mouse left this world's area; clear tracked position.
+                self.world.mouse._tracked_position = None
             return False
 
+        # Mouse is confirmed inside this world; keep tracked position current.
+        self.world.mouse._tracked_position = mouse_pos
         self._call_mouse_methods(self.event_registry.copy_event_methods(event), mouse_pos)
         if event == "on_mouse_motion":
             return self.handle_mouse_over_event(mouse_pos, skip_screen_check=True)

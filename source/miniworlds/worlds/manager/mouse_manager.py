@@ -22,6 +22,8 @@ class MouseManager:
         self.world = world
         self._mouse_position: Optional[Tuple[int, int]] = None
         self._prev_mouse_position: Optional[Tuple[int, int]] = None
+        # Position updated from actual mouse events; avoids stale polling via pygame.mouse.get_pos().
+        self._tracked_position: Optional[Tuple[int, int]] = None
 
     def _update_positions(self) -> None:
         """
@@ -46,7 +48,12 @@ class MouseManager:
             >>> if pos:
             ...     print("Mouse over world at", pos)
         """
-        pos = pygame.mouse.get_pos()
+        # Prefer event-tracked position (updated on MOUSEMOTION/click events) to avoid
+        # stale pygame.mouse.get_pos() which returns (0, 0) before any events are processed.
+        pos = self._tracked_position if self._tracked_position is not None else pygame.mouse.get_pos()
+        if pos == (0, 0) and self._tracked_position is None:
+            # No events received yet; (0, 0) is the uninitialised SDL default.
+            return None
         detected_world = self.world.app.worlds_manager.get_world_by_pixel(pos[0], pos[1])
         if detected_world == self.world:
             return pos
