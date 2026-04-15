@@ -76,7 +76,7 @@ msgstr ""
 "Spiele erstellen können."
 
 #: ../../source/index.md:5
-msgid "Creating your first games with **minigames** is simple and fun."
+msgid "Creating your first games with **miniworlds** is simple and fun."
 msgstr "Deine ersten Spiele mit miniworlds zu erstellen ist einfach!"
 
 #: ../../source/index.md:7

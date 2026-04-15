@@ -3,14 +3,7 @@
 **miniworlds** is a game engine written in Python and Pygame,
 designed for students to create 2D mini-worlds and games.
 
-Creating your first games with **minigames** is simple and fun.
-
-:::{admonition} miniworlds and miniworldss
-
-**miniworlds** is the successor project to **miniworldss**. Many
-things are similar, but some names and functions differ from
-miniworldss.
-(e.g., *Tokens* became *Actors*, *Boards* became *Worlds*)
+Creating your first games with **miniworlds** is simple and fun.
 
 :::
 
