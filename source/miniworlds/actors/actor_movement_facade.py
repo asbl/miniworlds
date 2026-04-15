@@ -121,27 +121,18 @@ class ActorMovementFacade:
 
         if isinstance(target, Actor):
             target = target.position
-        elif hasattr(target, "get_position") and callable(getattr(target, "get_position")):
-            target = target.get_position()
-        elif hasattr(target, "position"):
-            target = target.position
-
-        # When following mouse managers, None means "outside this world".
-        if target is None:
-            return self.actor
-
-        if (
-            not isinstance(target, tuple)
-            or len(target) != 2
-            or not all(isinstance(value, (int, float)) for value in target)
-        ):
-            raise MiniworldsError(
-                "move_towards expected an Actor, a numeric (x, y) tuple, or an object "
-                "with get_position()/position returning a numeric (x, y) tuple; "
-                f"got {type(target).__name__}: {target!r}"
-            )
-
         return self.actor.position_manager.move_towards_position(target, distance)
+
+    def move_away(
+        self,
+        target: Union[Tuple[float, float], "actor_mod.Actor"],
+        distance: float = 1,
+    ):
+        from miniworlds.actors.actor import Actor
+
+        if isinstance(target, Actor):
+            target = target.position
+        return self.actor.position_manager.move_away_from_position(target, distance)
 
     def move_in_direction(
         self,

@@ -398,6 +398,16 @@ class Positionmanager:
             self.move(distance)
             return self.actor
 
+    def move_away_from_position(
+        self, position: Tuple[float, float], distance=1
+    ) -> "actor_mod.Actor":
+        if self.__class__.is_close(self.position, position):
+            return self.actor
+        direction = self.direction_from_two_points(position, self.actor.position)
+        self.set_direction(direction)
+        self.move(distance)
+        return self.actor
+
     def move_in_direction(
         self, direction: Union[float, str, Tuple[float, float]], distance: int = 1
     ):
