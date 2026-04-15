@@ -13,8 +13,8 @@ Legacy flat `.txt` artifacts were moved to `legacy/`.
 
 Useful tasks from `tasks.py`:
 
-- `invoke list-benchmarks`: show benchmark groups and names
-- `invoke run-benchmarks`: run the default `quick` benchmark group
-- `invoke run-benchmarks --selection=world`: run a full benchmark group
-- `invoke run-benchmarks --selection=blockable_movement_cprofile`: run one benchmark
-- `invoke profile-hotspots`: run the full benchmark suite
+- `invoke benchmarks.list`: show benchmark groups and names
+- `invoke benchmarks.run`: run the default `quick` benchmark group
+- `invoke benchmarks.run --selection=world`: run a full benchmark group
+- `invoke benchmarks.run --selection=blockable_movement_cprofile`: run one benchmark
+- `invoke benchmarks.hotspots`: run the full benchmark suite

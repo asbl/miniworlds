@@ -1,11 +1,38 @@
-from invoke import task
-from invoke.exceptions import Exit
+"""Invoke tasks grouped by workflow category.
+
+Primary entry points:
+
+- ``invoke tests.run`` for the full Docker-based test suite
+- ``invoke benchmarks.run`` for benchmark groups or individual benchmarks
+- ``invoke build.docs`` for a local Sphinx build
+- ``invoke build.image`` for the Docker image used by tests and benchmarks
+- ``invoke deploy.release --revision`` for the next release workflow
+
+Release workflow summary:
+
+1. Update the version in both packages.
+2. Run the Docker test suite unless ``--skip-tests`` is used.
+3. Commit and tag the physics repository.
+4. Commit and tag the main repository.
+5. Push branches and tags unless ``--no-push`` is used.
+
+GitHub Actions handle publication after that push step:
+
+- pushing the main repository branch ``main`` triggers docs deployment
+- pushing ``v*`` tags triggers the PyPI publish workflows
+
+Legacy flat task names stay available as compatibility aliases while the
+grouped interface becomes the documented surface.
+"""
+
 import os
 import re
 import shutil
 
+from invoke import Collection, task
+from invoke.exceptions import Exit
+
 IMAGE = "pygame-tests"
-CONTAINER = "pygame-test-container"
 REPO_ROOT = os.path.abspath(os.path.dirname(__file__))
 PHYSICS_REPO = os.path.join(REPO_ROOT, "physics")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
@@ -55,13 +82,13 @@ BENCHMARK_GROUPS["all"] = [
 
 def _docker_mounts() -> str:
     return (
-        f"-v {os.getcwd()}/pytest.ini:/app/pytest.ini "
-        f"-v {os.getcwd()}/conftest.py:/app/conftest.py "
-        f"-v {os.getcwd()}/source:/app/source "
-        f"-v {os.getcwd()}/test:/app/test "
-        f"-v {os.getcwd()}/examples:/app/examples "
-        f"-v {os.getcwd()}/physics/source:/app/physics/source "
-        f"-v {os.getcwd()}/physics/test:/app/physics/test "
+        f"-v {REPO_ROOT}/pytest.ini:/app/pytest.ini "
+        f"-v {REPO_ROOT}/conftest.py:/app/conftest.py "
+        f"-v {REPO_ROOT}/source:/app/source "
+        f"-v {REPO_ROOT}/test:/app/test "
+        f"-v {REPO_ROOT}/examples:/app/examples "
+        f"-v {REPO_ROOT}/physics/source:/app/physics/source "
+        f"-v {REPO_ROOT}/physics/test:/app/physics/test "
     )
 
 
@@ -81,6 +108,68 @@ def _resolve_benchmark_scripts(selection: str) -> list[str]:
 def _validate_release_version(version: str) -> None:
     if not re.fullmatch(r"\d+(?:\.\d+)+", version):
         raise Exit(f"Invalid version '{version}'. Expected dotted numeric format like 3.5.0.1")
+
+
+def _parse_release_version(version: str) -> list[int]:
+    _validate_release_version(version)
+    parts = [int(part) for part in version.split(".")]
+    if len(parts) > 4:
+        raise Exit(
+            f"Invalid version '{version}'. Expected up to four numeric parts: major.minor.patch.revision"
+        )
+    while len(parts) < 4:
+        parts.append(0)
+    return parts
+
+
+def _bump_release_version(current_version: str, level: str) -> str:
+    indices = {
+        "major": 0,
+        "minor": 1,
+        "patch": 2,
+        "revision": 3,
+    }
+    if level not in indices:
+        raise Exit(f"Unknown release level '{level}'")
+
+    parts = _parse_release_version(current_version)
+    index = indices[level]
+    parts[index] += 1
+    for reset_index in range(index + 1, len(parts)):
+        parts[reset_index] = 0
+    return ".".join(str(part) for part in parts)
+
+
+def _resolve_release_version(
+    current_version: str,
+    version: str | None,
+    major: bool,
+    minor: bool,
+    patch: bool,
+    revision: bool,
+) -> tuple[str, str]:
+    selected_levels = [
+        level
+        for level, enabled in (
+            ("major", major),
+            ("minor", minor),
+            ("patch", patch),
+            ("revision", revision),
+        )
+        if enabled
+    ]
+
+    if version and selected_levels:
+        raise Exit("Use either --version or exactly one of --major/--minor/--patch/--revision")
+    if len(selected_levels) > 1:
+        raise Exit("Choose only one of --major, --minor, --patch, or --revision")
+    if version:
+        _validate_release_version(version)
+        return version, "explicit"
+    if len(selected_levels) == 1:
+        level = selected_levels[0]
+        return _bump_release_version(current_version, level), level
+    raise Exit("Provide --version or one of --major, --minor, --patch, or --revision")
 
 
 def _read_version(file_path: str) -> str:
@@ -133,8 +222,27 @@ def _repo_status(c, repo_path: str) -> str:
     return _git_stdout(c, repo_path, "status --short")
 
 
+def _describe_workflow_automation(main_branch: str, push: bool) -> list[str]:
+    if not push:
+        return ["No GitHub workflow runs until branches and tags are pushed manually."]
+    notes = ["Pushed v* tags trigger the PyPI publish workflows in both repositories."]
+    if main_branch == "main":
+        notes.insert(
+            0,
+            "Pushing the main repository branch 'main' triggers .github/workflows/deploy-docs.yml, so docs are rebuilt and deployed automatically.",
+        )
+    else:
+        notes.insert(
+            0,
+            "Docs deployment only runs from pushes to the main repository branch 'main'. "
+            f"The current branch is '{main_branch}', so this release push will not deploy docs automatically.",
+        )
+    return notes
+
+
 def _print_release_plan(
     version: str,
+    release_mode: str,
     tag_name: str,
     main_branch: str,
     physics_branch: str,
@@ -149,6 +257,7 @@ def _print_release_plan(
 ) -> None:
     print("Release dry-run summary")
     print(f"- Target version: {version}")
+    print(f"- Version source: {release_mode}")
     print(f"- Target tag: {tag_name}")
     print(f"- Main branch: {main_branch}")
     print(f"- Physics branch: {physics_branch}")
@@ -161,13 +270,16 @@ def _print_release_plan(
     if skip_tests:
         print("2. Skip Docker tests")
     else:
-        print("2. Run invoke run-tests")
-    print("3. Commit and tag physics repository")
-    print("4. Commit and tag main repository")
+        print("2. Run invoke tests.run")
+    print("3. Commit and tag the physics repository")
+    print("4. Commit and tag the main repository")
     if push:
         print("5. Push both branches and tags")
     else:
         print("5. Skip pushes")
+    print("Workflow automation after push:")
+    for note in _describe_workflow_automation(main_branch, push):
+        print(f"- {note}")
     print("Checks:")
     print(f"- Main repo clean: {'yes' if not main_status else 'no'}")
     if main_status:
@@ -188,7 +300,7 @@ def ensure_test_environment(c):
     c.run(f"docker image inspect {IMAGE} >/dev/null 2>&1 || docker build -t {IMAGE} .")
 
 def build_test_environment(c):
-    """Build the rest environment. Must run bevor `run_tests`"""
+    """Rebuild the Docker image used by tests and benchmarks."""
     c.run(f"docker build -t {IMAGE} .")
 
 
@@ -242,23 +354,59 @@ def run_python_scripts_in_container(c, script_paths: list[str], rebuild: bool = 
 
 
 @task(
+    name="release",
     help={
         "version": "Release version, for example 3.5.0.1",
+        "major": "Bump the major version and reset minor, patch, and revision to 0",
+        "minor": "Bump the minor version and reset patch and revision to 0",
+        "patch": "Bump the patch version and reset revision to 0",
+        "revision": "Bump the revision version",
         "skip_tests": "Skip the Docker test run before committing and tagging",
         "push": "Push both repositories and tags after creating the release",
         "dry_run": "Show the planned release steps and blockers without changing anything",
-    }
+    },
 )
-def release(c, version, skip_tests=False, push=True, dry_run=False):
-    """Create a synchronized miniworlds/miniworlds_physics release and push tags for PyPI."""
-    _validate_release_version(version)
+def deploy_release(
+    c,
+    version=None,
+    major=False,
+    minor=False,
+    patch=False,
+    revision=False,
+    skip_tests=False,
+    push=True,
+    dry_run=False,
+):
+    """Create a synchronized miniworlds/miniworlds-physics release.
 
-    tag_name = f"v{version}"
+    Choose either an explicit ``--version`` or one bump flag from ``--major``,
+    ``--minor``, ``--patch``, or ``--revision``. The task updates both package
+    versions, runs Docker tests unless skipped, commits and tags the physics
+    repository first, then the main repository. When pushes are enabled,
+    GitHub Actions take over publication: pushed ``v*`` tags publish the
+    packages and pushes to main deploy the docs.
+    """
     main_branch = _current_branch(c, REPO_ROOT, "Main")
     physics_branch = _current_branch(c, PHYSICS_REPO, "Physics")
 
     current_main_version = _read_version(MAIN_SETUP_PATH)
     current_physics_version = _read_version(PHYSICS_SETUP_PATH)
+    if current_main_version != current_physics_version:
+        raise Exit(
+            "Main and physics package versions differ before release: "
+            f"{current_main_version} != {current_physics_version}"
+        )
+
+    version, release_mode = _resolve_release_version(
+        current_main_version,
+        version,
+        major,
+        minor,
+        patch,
+        revision,
+    )
+    tag_name = f"v{version}"
+
     main_status = _repo_status(c, REPO_ROOT)
     physics_status = _repo_status(c, PHYSICS_REPO)
     main_tag_exists = bool(_git_stdout(c, REPO_ROOT, f"tag -l {tag_name}"))
@@ -267,6 +415,7 @@ def release(c, version, skip_tests=False, push=True, dry_run=False):
     if dry_run:
         _print_release_plan(
             version,
+            release_mode,
             tag_name,
             main_branch,
             physics_branch,
@@ -285,17 +434,12 @@ def release(c, version, skip_tests=False, push=True, dry_run=False):
     _ensure_clean_repo(c, PHYSICS_REPO, "Physics")
     _ensure_tag_missing(c, REPO_ROOT, tag_name, "Main")
     _ensure_tag_missing(c, PHYSICS_REPO, tag_name, "Physics")
-    if current_main_version != current_physics_version:
-        raise Exit(
-            "Main and physics package versions differ before release: "
-            f"{current_main_version} != {current_physics_version}"
-        )
 
     _write_version(MAIN_SETUP_PATH, version)
     _write_version(PHYSICS_SETUP_PATH, version)
 
     if not skip_tests:
-        run_tests(c)
+        tests_run(c)
 
     _git(c, PHYSICS_REPO, "add source/setup.py")
     _git(c, PHYSICS_REPO, f'commit -m "Bump version to {version}"')
@@ -306,54 +450,46 @@ def release(c, version, skip_tests=False, push=True, dry_run=False):
     _git(c, REPO_ROOT, f'tag -a {tag_name} -m "Release {tag_name}"')
 
     if push:
+        for note in _describe_workflow_automation(main_branch, push=True):
+            print(f"Workflow note: {note}")
         _git(c, PHYSICS_REPO, f"push origin {physics_branch}")
         _git(c, PHYSICS_REPO, f"push origin {tag_name}")
         _git(c, REPO_ROOT, f"push origin {main_branch}")
         _git(c, REPO_ROOT, f"push origin {tag_name}")
 
-@task
-def run_tests(c):
-    """Run all tests. build_test_environment must be called before `run_tests`"""
+@task(name="run")
+def tests_run(c):
+    """Run the full test suite in Docker and rebuild the image first."""
     run_pytest_in_container(c, "-v")
 
 
-@task
-def run_tests_cached(c):
-    """Run all tests with the existing image and the current working tree mounted into the container."""
+@task(name="cached")
+def tests_cached(c):
+    """Run the full test suite against the current image without rebuilding it."""
     run_pytest_in_container(c, "-v", rebuild=False)
 
 
-@task
-def run_unit_tests(c):
-    """Run only the fast unit tests inside docker."""
+@task(name="unit")
+def tests_unit(c):
+    """Run only the fast unit tests in Docker."""
     run_pytest_in_container(c, "-m unit -v", rebuild=False)
 
 
-@task
-def run_visual_tests(c):
-    """Run only the screenshot-based visual tests inside docker."""
+@task(name="visual")
+def tests_visual(c):
+    """Run only the screenshot-based visual tests in Docker."""
     run_pytest_in_container(c, "-m visual -v", rebuild=False)
 
 
-@task
-def profile_tests(c):
-    """Show the slowest tests inside docker without rebuilding the image."""
+@task(name="profile")
+def tests_profile(c):
+    """Show the slowest tests inside Docker without rebuilding the image."""
     run_pytest_in_container(c, "-q --durations=25", rebuild=False)
 
 
-@task
-def profile_hotspots(c):
-    """Run focused hotspot profiling scripts inside docker."""
-    run_python_scripts_in_container(
-        c,
-        _resolve_benchmark_scripts("all"),
-        rebuild=False,
-    )
-
-
-@task
-def list_benchmarks(c):
-    """List available benchmark groups and individual benchmark names."""
+@task(name="list")
+def benchmarks_list(c):
+    """List benchmark groups and individual benchmark names."""
     del c
     print("Benchmark groups:")
     for group_name in sorted(BENCHMARK_GROUPS.keys()):
@@ -363,38 +499,91 @@ def list_benchmarks(c):
         print(f"- {benchmark_name}: {BENCHMARK_SCRIPTS[benchmark_name]}")
 
 
-@task
-def run_benchmark(c, name, rebuild=False):
-    """Run one benchmark by name inside docker."""
-    scripts = _resolve_benchmark_scripts(name)
-    run_python_scripts_in_container(c, scripts, rebuild=rebuild)
-
-
-@task
-def run_benchmarks(c, selection="quick", rebuild=False):
-    """Run a benchmark group or a single named benchmark inside docker.
+@task(
+    name="run",
+    help={
+        "selection": "Benchmark group or individual benchmark name",
+        "rebuild": "Rebuild the Docker image before running the benchmarks",
+    },
+)
+def benchmarks_run(c, selection="quick", rebuild=False):
+    """Run a benchmark group or one named benchmark inside Docker.
 
     Examples:
-        invoke run-benchmarks
-        invoke run-benchmarks --selection=world
-        invoke run-benchmarks --selection=blockable_movement_cprofile
+        invoke benchmarks.run
+        invoke benchmarks.run --selection=world
+        invoke benchmarks.run --selection=blockable_movement_cprofile
     """
     scripts = _resolve_benchmark_scripts(selection)
     run_python_scripts_in_container(c, scripts, rebuild=rebuild)
 
-@task
-def debug(c):
-    """Interaktives Debugging des Containers"""
+
+@task(name="hotspots")
+def benchmarks_hotspots(c):
+    """Run the full hotspot profiling suite inside Docker."""
+    run_python_scripts_in_container(
+        c,
+        _resolve_benchmark_scripts("all"),
+        rebuild=False,
+    )
+
+
+@task(
+    name="single",
+    help={
+        "name": "Individual benchmark name",
+        "rebuild": "Rebuild the Docker image before running the benchmark",
+    },
+)
+def benchmarks_single(c, name, rebuild=False):
+    """Run one benchmark by name inside Docker."""
+    scripts = _resolve_benchmark_scripts(name)
+    run_python_scripts_in_container(c, scripts, rebuild=rebuild)
+
+
+@task(name="docs")
+def docs_build(c):
+    """Build the multilingual Sphinx documentation locally.
+
+    Deployment is not handled here. After ``deploy.release`` pushes the main
+    branch, ``.github/workflows/deploy-docs.yml`` rebuilds and deploys the docs
+    automatically.
+    """
+    with c.cd("docs"):
+        build_dir = "build"
+
+        if os.path.exists(build_dir):
+            shutil.rmtree(build_dir)
+        os.makedirs(build_dir, exist_ok=True)
+
+        c.run("make gettext", pty=True)
+        c.run("sphinx-intl update -p build/gettext -l en -l de", pty=True)
+        c.run("sphinx-intl build", pty=True)
+        c.run("sphinx-build -b html -D language=en source build/html/en", pty=True)
+        c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
+
+
+@task(name="image")
+def build_image(c):
+    """Rebuild the Docker image used by test and benchmark tasks."""
+    build_test_environment(c)
+
+
+@task(name="shell")
+def container_shell(c):
+    """Start an interactive shell in the test Docker image."""
     c.run(f"docker run --rm -it {IMAGE} bash")
 
-@task
-def cleanup(c):
-    """Cleanup - Nicht verwendete Images und Container entfernen"""
+
+@task(name="cleanup")
+def container_cleanup(c):
+    """Remove unused Docker images and containers."""
     c.run("docker system prune -f")
 
-@task
-def debug_x11(c):
-    """Container starten und eine grafische Debugging-Umgebung bereitstellen"""
+
+@task(name="x11")
+def container_x11(c):
+    """Start the Docker image with X11 forwarding for graphical debugging."""
     c.run("xhost +local:root")
     c.run(
         f"docker run --rm -it "
@@ -404,48 +593,80 @@ def debug_x11(c):
     )
     c.run("xhost -local:root")
 
-@task
+
+@task(name="local")
 def build_local(c):
-    """Lokalen Build der source/ ausführen"""
+    """Install the main package from source/ in editable mode."""
     c.run("cd source && pip install -e .")
 
-@task
+
+@task(name="physics")
 def build_physics(c):
-    """Lokalen Build der source/ ausführen"""
+    """Install the physics package from physics/source in editable mode."""
     c.run("cd physics/source && pip install -e .")
 
 
-@task
-def make_docs(c):
-    """Mehrsprachige Sphinx-Dokumentation erstellen (EN + DE)"""
-    with c.cd("docs"):
-        build_dir = "build"
-
-        # Build-Verzeichnis leeren
-        if os.path.exists(build_dir):
-            shutil.rmtree(build_dir)
-        os.makedirs(build_dir, exist_ok=True)
-
-        # Schritt 1: gettext extrahieren
-        c.run("make gettext", pty=True)
-
-        # Schritt 2: PO-Dateien aktualisieren
-        c.run("sphinx-intl update -p build/gettext -l en -l de", pty=True)
-
-        # Schritt 3: Kompilieren der .mo-Dateien
-        c.run("sphinx-intl build", pty=True)
-
-        # Schritt 4: HTML für Englisch bauen
-        c.run("sphinx-build -b html -D language=en source build/html/en", pty=True)
-
-        # Schritt 5: HTML für Deutsch bauen
-        c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
+@task(name="checkout")
+def examples_checkout(c):
+    """Initialize and update the examples submodule recursively."""
+    c.run("cd examples && git submodule update --init --recursive")
 
 
-def upload_docs(c):
-    pass
+deploy = Collection("deploy")
+deploy.add_task(deploy_release, default=True)
 
-@task
-def checkout_examples(c):
-    """submodule update (with --init --recursive) on examples folder"""
-    c.run ("cd examples && git submodule update --init --recursive")
+tests = Collection("tests")
+tests.add_task(tests_run, default=True)
+tests.add_task(tests_cached)
+tests.add_task(tests_unit)
+tests.add_task(tests_visual)
+tests.add_task(tests_profile)
+
+benchmarks = Collection("benchmarks")
+benchmarks.add_task(benchmarks_run, default=True)
+benchmarks.add_task(benchmarks_list)
+benchmarks.add_task(benchmarks_hotspots)
+benchmarks.add_task(benchmarks_single)
+
+build = Collection("build")
+build.add_task(build_local, default=True)
+build.add_task(build_image)
+build.add_task(docs_build)
+build.add_task(build_physics)
+
+container = Collection("container")
+container.add_task(container_shell, default=True)
+container.add_task(container_cleanup)
+container.add_task(container_x11)
+
+examples = Collection("examples")
+examples.add_task(examples_checkout, default=True)
+
+ns = Collection()
+ns.add_collection(deploy)
+ns.add_collection(tests)
+ns.add_collection(benchmarks)
+ns.add_collection(build)
+ns.add_collection(container)
+ns.add_collection(examples)
+
+# Compatibility aliases for the previous flat task surface.
+ns.add_task(deploy_release, name="release")
+ns.add_task(tests_run, name="run_tests")
+ns.add_task(tests_cached, name="run_tests_cached")
+ns.add_task(tests_unit, name="run_unit_tests")
+ns.add_task(tests_visual, name="run_visual_tests")
+ns.add_task(tests_profile, name="profile_tests")
+ns.add_task(build_image, name="image")
+ns.add_task(benchmarks_list, name="list_benchmarks")
+ns.add_task(benchmarks_single, name="run_benchmark")
+ns.add_task(benchmarks_run, name="run_benchmarks")
+ns.add_task(benchmarks_hotspots, name="profile_hotspots")
+ns.add_task(container_shell, name="debug")
+ns.add_task(container_cleanup, name="cleanup")
+ns.add_task(container_x11, name="debug_x11")
+ns.add_task(build_local, name="build_local")
+ns.add_task(build_physics, name="build_physics")
+ns.add_task(docs_build, name="make_docs")
+ns.add_task(docs_build, name="docs_build")
+ns.add_task(examples_checkout, name="checkout_examples")
