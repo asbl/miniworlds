@@ -99,6 +99,17 @@ class TestActorLifecycle(unittest.TestCase):
         position_manager.move_towards_position.assert_called_once_with((10, 20), 0.3)
         self.assertIs(result, actor)
 
+    def test_move_away_accepts_optional_step_size(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.move_away_from_position.return_value = actor
+        actor._position_manager = position_manager
+
+        result = Actor.move_away(actor, (10, 20), 0.3)
+
+        position_manager.move_away_from_position.assert_called_once_with((10, 20), 0.3)
+        self.assertIs(result, actor)
+
     def test_position_accessors_delegate_to_position_manager(self):
         actor = Actor.__new__(Actor)
         position_manager = SimpleNamespace(position=(11, 22), set_position=MagicMock())

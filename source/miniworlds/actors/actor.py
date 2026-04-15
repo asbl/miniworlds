@@ -1282,6 +1282,19 @@ class Actor(actor_base.ActorBase):
         self._ensure_real(distance, "distance")
         return self._get_movement_facade().move_towards(target, distance)
 
+    def move_away(
+        self,
+        target: Union[Tuple[float, float], "Actor"],
+        distance: float = 1,
+    ):
+        """Move away from a target actor or position with an optional step size."""
+        if isinstance(target, tuple):
+            self._ensure_position_tuple(target, "target")
+        else:
+            self._ensure_actor_instance(target, "target")
+        self._ensure_real(distance, "distance")
+        return self._get_movement_facade().move_away(target, distance)
+
     def move_in_direction(
         self,
         direction: Union[int, str, Tuple[float, float]],

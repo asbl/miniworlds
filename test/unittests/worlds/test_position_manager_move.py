@@ -74,6 +74,18 @@ class TestPositionManagerMove(unittest.TestCase):
 
         self.assertFalse(self.mover.is_blockable)
 
+    def test_move_away_from_position_sets_opposite_direction(self):
+        self.mover.position = (10, 10)
+        self.actor.position = (10, 10)
+        self.mover.set_direction = MagicMock()
+        self.mover.move = MagicMock(return_value=self.actor)
+
+        result = self.mover.move_away_from_position((20, 10), distance=3)
+
+        self.mover.set_direction.assert_called_once_with(-90)
+        self.mover.move.assert_called_once_with(3)
+        self.assertEqual(result, self.actor)
+
 class TestPositionManagerRectCache(unittest.TestCase):
 
     def setUp(self):

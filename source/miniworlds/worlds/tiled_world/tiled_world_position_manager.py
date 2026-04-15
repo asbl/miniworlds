@@ -98,6 +98,13 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
             self.move(distance)
         return self
 
+    def move_away_from_position(self, target: Tuple[int, int], distance: float = 1):
+        if self.actor.position != target:
+            direction = self.direction_from_two_points(target, self.actor.position)
+            self.set_direction(direction)
+            self.move(distance)
+        return self
+
     def store_origin(self):
         """Overwrite base class"""
         pass
