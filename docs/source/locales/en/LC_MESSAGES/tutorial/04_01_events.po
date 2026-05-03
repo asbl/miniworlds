@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/04_01_events.md:1
 msgid "Events"
@@ -155,6 +155,30 @@ msgid ""
 "event handling."
 msgstr ""
 
+#: ../../source/tutorial/04_01_events.md:116
+msgid "Common mistakes with event handlers:"
+msgstr ""
+
+#: ../../source/tutorial/04_01_events.md:118
+msgid ""
+"`on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:"
+"   `def on_key_down(self, key):`"
+msgstr ""
+
+#: ../../source/tutorial/04_01_events.md:120
+msgid ""
+"Mouse handlers usually need `position`:   `def on_mouse_left(self, "
+"position):`"
+msgstr ""
+
+#: ../../source/tutorial/04_01_events.md:122
+msgid "Do not forget `@player.register` or `@world.register` above the handler."
+msgstr ""
+
+#: ../../source/tutorial/04_01_events.md:124
+msgid "If a handler is not called, first check its name and signature."
+msgstr ""
+
 #~ msgid "Mach dein Spiel interaktiv"
 #~ msgstr "Make your game interactive"
 
@@ -226,8 +250,8 @@ msgstr ""
 #~ msgid ""
 #~ "Diese Methode wird ausgeführt, sobald "
 #~ "die Taste <kbd>w</kbd> gedrückt wird. "
-#~ "Der Actor `player` bewegt sich dabei"
-#~ " um einen Schritt nach oben."
+#~ "Der Actor `player` bewegt sich dabei "
+#~ "um einen Schritt nach oben."
 #~ msgstr ""
 #~ "This method is executed when the "
 #~ "<kbd>w</kbd> key is pressed. The "

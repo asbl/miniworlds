@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/concepts/concept_defining_functions.md:1
 #, fuzzy
@@ -58,7 +58,7 @@ msgid ""
 msgstr ""
 
 #: ../../source/concepts/concept_defining_functions.md:60
-#: ../../source/concepts/concept_defining_functions.md:194
+#: ../../source/concepts/concept_defining_functions.md:204
 msgid "Example:"
 msgstr ""
 
@@ -119,17 +119,39 @@ msgid ""
 "(registered with `@c.register`) defined **within** the function:"
 msgstr ""
 
-#: ../../source/concepts/concept_defining_functions.md:189
-msgid "Return Values"
+#: ../../source/concepts/concept_defining_functions.md:188
+msgid "Common mistakes when defining event handlers inside functions:"
+msgstr ""
+
+#: ../../source/concepts/concept_defining_functions.md:190
+msgid "Always keep `self` as the first parameter."
 msgstr ""
 
 #: ../../source/concepts/concept_defining_functions.md:191
+msgid "Keep the expected event parameters (for example `key` or `position`)."
+msgstr ""
+
+#: ../../source/concepts/concept_defining_functions.md:192
+msgid ""
+"Make sure the decorator is directly above the handler (`@actor.register` "
+"/ `@world.register`)."
+msgstr ""
+
+#: ../../source/concepts/concept_defining_functions.md:194
+msgid "If an event does not run, check the handler name and parameters first."
+msgstr ""
+
+#: ../../source/concepts/concept_defining_functions.md:199
+msgid "Return Values"
+msgstr ""
+
+#: ../../source/concepts/concept_defining_functions.md:201
 msgid ""
 "So far, functions just did something. With a **return value**, you can "
 "get information **back** from a function."
 msgstr ""
 
-#: ../../source/concepts/concept_defining_functions.md:206
+#: ../../source/concepts/concept_defining_functions.md:216
 msgid ""
 "Another example: color a circle red if it’s on the **left half** of the "
 "screen."
