@@ -1,3 +1,22 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
 #: ../../source/concepts/concept_defining_functions.md:1
 msgid "Concept: Functions, Parameters, and Return Values"
 msgstr "Konzept: Funktionen, Parameter und Rückgabewerte"
@@ -9,10 +28,10 @@ msgid ""
 "functions**. Functions are *subroutines* that allow you to **reuse code**"
 " instead of repeating it."
 msgstr ""
-"Bisher hast du Methoden wie `on_setup` oder `act` verwendet, die zu einer "
-"`World` oder einem `Actor` gehören. Jetzt lernst du, wie du **eigene Funktionen** "
-"erstellen kannst. Funktionen sind *Unterprogramme*, mit denen du **Code wiederverwenden** "
-"kannst, statt ihn zu wiederholen."
+"Bisher hast du Methoden wie `on_setup` oder `act` verwendet, die zu einer"
+" `World` oder einem `Actor` gehören. Jetzt lernst du, wie du **eigene "
+"Funktionen** erstellen kannst. Funktionen sind *Unterprogramme*, mit "
+"denen du **Code wiederverwenden** kannst, statt ihn zu wiederholen."
 
 #: ../../source/concepts/concept_defining_functions.md:8
 msgid "First Example"
@@ -27,8 +46,9 @@ msgid ""
 "This works, but if you want to make **all four green**, you’d need to "
 "change **four lines**. Instead, you can use a function:"
 msgstr ""
-"Das funktioniert – aber wenn du **alle vier grün** machen möchtest, müsstest du "
-"**vier Zeilen** ändern. Stattdessen kannst du eine Funktion verwenden:"
+"Das funktioniert – aber wenn du **alle vier grün** machen möchtest, "
+"müsstest du **vier Zeilen** ändern. Stattdessen kannst du eine Funktion "
+"verwenden:"
 
 #: ../../source/concepts/concept_defining_functions.md:51
 msgid "General: Defining Functions"
@@ -39,11 +59,11 @@ msgid ""
 "When you want to automate complex tasks—like creating multiple actors—you"
 " define a function:"
 msgstr ""
-"Wenn du komplexe Aufgaben automatisieren willst – wie das Erstellen mehrerer Actors – "
-"definierst du eine Funktion:"
+"Wenn du komplexe Aufgaben automatisieren willst – wie das Erstellen "
+"mehrerer Actors – definierst du eine Funktion:"
 
 #: ../../source/concepts/concept_defining_functions.md:60
-#: ../../source/concepts/concept_defining_functions.md:194
+#: ../../source/concepts/concept_defining_functions.md:204
 msgid "Example:"
 msgstr "Beispiel:"
 
@@ -61,7 +81,9 @@ msgstr "**Parameter**: `x`, `y` → werden beim Funktionsaufruf übergeben"
 
 #: ../../source/concepts/concept_defining_functions.md:72
 msgid "**Function body**: runs from top to bottom when the function is called"
-msgstr "**Funktionskörper**: wird von oben nach unten ausgeführt, wenn die Funktion aufgerufen wird"
+msgstr ""
+"**Funktionskörper**: wird von oben nach unten ausgeführt, wenn die "
+"Funktion aufgerufen wird"
 
 #: ../../source/concepts/concept_defining_functions.md:76
 msgid "Calling Functions"
@@ -92,7 +114,8 @@ msgid ""
 "This example shows how you can place multiple actors efficiently using "
 "functions:"
 msgstr ""
-"Dieses Beispiel zeigt, wie du mit Funktionen effizient mehrere Actors platzieren kannst:"
+"Dieses Beispiel zeigt, wie du mit Funktionen effizient mehrere Actors "
+"platzieren kannst:"
 
 #: ../../source/concepts/concept_defining_functions.md:155
 msgid "Registering Behavior in Functions"
@@ -103,43 +126,58 @@ msgid ""
 "This example creates random **raindrops**, where each has behaviors "
 "(registered with `@c.register`) defined **within** the function:"
 msgstr ""
-"Dieses Beispiel erstellt zufällige **Regentropfen**, bei denen das Verhalten "
-"(registriert mit `@c.register`) **innerhalb** der Funktion definiert wird:"
+"Dieses Beispiel erstellt zufällige **Regentropfen**, bei denen das "
+"Verhalten (registriert mit `@c.register`) **innerhalb** der Funktion "
+"definiert wird:"
 
-#: ../../source/concepts/concept_defining_functions.md:189
+#: ../../source/concepts/concept_defining_functions.md:188
+msgid "Common mistakes when defining event handlers inside functions:"
+msgstr "Haeufige Fehler beim Definieren von Event-Handlern in Funktionen:"
+
+#: ../../source/concepts/concept_defining_functions.md:190
+#, fuzzy
+msgid "Always keep `self` as the first parameter."
+msgstr "- Behalte `self` immer als ersten Parameter."
+
+#: ../../source/concepts/concept_defining_functions.md:191
+#, fuzzy
+msgid "Keep the expected event parameters (for example `key` or `position`)."
+msgstr ""
+"- Behalte die erwarteten Event-Parameter (zum Beispiel `key` oder "
+"`position`)."
+
+#: ../../source/concepts/concept_defining_functions.md:192
+#, fuzzy
+msgid ""
+"Make sure the decorator is directly above the handler (`@actor.register` "
+"/ `@world.register`)."
+msgstr ""
+"- Achte darauf, dass der Decorator direkt ueber dem Handler steht "
+"(`@actor.register` / `@world.register`)."
+
+#: ../../source/concepts/concept_defining_functions.md:194
+msgid "If an event does not run, check the handler name and parameters first."
+msgstr ""
+"Wenn ein Event nicht laeuft, pruefe zuerst den Handlernamen und die "
+"Parameter."
+
+#: ../../source/concepts/concept_defining_functions.md:199
 msgid "Return Values"
 msgstr "Rückgabewerte"
 
-#: ../../source/concepts/concept_defining_functions.md:191
+#: ../../source/concepts/concept_defining_functions.md:201
 msgid ""
 "So far, functions just did something. With a **return value**, you can "
 "get information **back** from a function."
 msgstr ""
-"Bisher haben Funktionen einfach etwas getan. Mit einem **Rückgabewert** kannst du "
-"dir Informationen **zurückgeben** lassen."
+"Bisher haben Funktionen einfach etwas getan. Mit einem **Rückgabewert** "
+"kannst du dir Informationen **zurückgeben** lassen."
 
-#: ../../source/concepts/concept_defining_functions.md:206
+#: ../../source/concepts/concept_defining_functions.md:216
 msgid ""
 "Another example: color a circle red if it’s on the **left half** of the "
 "screen."
-msgstr "Ein weiteres Beispiel: Färbe einen Kreis rot, wenn er auf der **linken Hälfte** des Bildschirms ist."
+msgstr ""
+"Ein weiteres Beispiel: Färbe einen Kreis rot, wenn er auf der **linken "
+"Hälfte** des Bildschirms ist."
 
-#: ../../source/concepts/concept_defining_functions.md:189
-msgid "Common mistakes when defining event handlers inside functions:"
-msgstr "Haeufige Fehler beim Definieren von Event-Handlern in Funktionen:"
-
-#: ../../source/concepts/concept_defining_functions.md:191
-msgid "- Always keep `self` as the first parameter."
-msgstr "- Behalte `self` immer als ersten Parameter."
-
-#: ../../source/concepts/concept_defining_functions.md:192
-msgid "- Keep the expected event parameters (for example `key` or `position`)."
-msgstr "- Behalte die erwarteten Event-Parameter (zum Beispiel `key` oder `position`)."
-
-#: ../../source/concepts/concept_defining_functions.md:193
-msgid "- Make sure the decorator is directly above the handler (`@actor.register` / `@world.register`)."
-msgstr "- Achte darauf, dass der Decorator direkt ueber dem Handler steht (`@actor.register` / `@world.register`)."
-
-#: ../../source/concepts/concept_defining_functions.md:195
-msgid "If an event does not run, check the handler name and parameters first."
-msgstr "Wenn ein Event nicht laeuft, pruefe zuerst den Handlernamen und die Parameter."

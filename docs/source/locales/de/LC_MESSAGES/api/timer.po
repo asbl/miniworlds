@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 16:34+0100\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -85,6 +85,16 @@ msgstr ""
 msgid "Removes the timer from the current world."
 msgstr ""
 
+#: ../../source/api/timer.md
+msgid "Private Methods:"
+msgstr ""
+
+#: ../../None:3:<autosummary>:1
+msgid ""
+":py:obj:`_validate_interval "
+"<miniworlds.tools.timer.Timer._validate_interval>`\\ \\(time\\)"
+msgstr ""
+
 #: miniworlds.tools.timer.Timer.act:3 of
 msgid ""
 "Subclasses override this method with the action that should happen after "
@@ -132,10 +142,6 @@ msgstr ""
 #: miniworlds.tools.timer.ActionTimer.act:1
 #: miniworlds.tools.timer.LoopActionTimer.act:1 of
 msgid "Calls the stored method once and then unregisters the timer."
-msgstr ""
-
-#: ../../source/api/timer.md
-msgid "Private Methods:"
 msgstr ""
 
 #: ../../None:3:<autosummary>:1
