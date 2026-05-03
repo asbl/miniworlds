@@ -3,7 +3,6 @@ from __future__ import annotations
 import __main__
 import asyncio
 import os
-import sqlite3
 import sys
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
@@ -125,9 +124,6 @@ class PlatformAdapter:
     def find_channel(self):
         self.ensure_audio()
         return pygame.mixer.find_channel()
-
-    def connect_sqlite(self, file: str):
-        return sqlite3.connect(file)
 
     def path_is_file(self, path: str | os.PathLike[str]) -> bool:
         return Path(path).is_file()

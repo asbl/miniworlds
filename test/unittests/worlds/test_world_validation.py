@@ -17,9 +17,6 @@ class TestWorldValidation(unittest.TestCase):
             run=MagicMock(),
             send_message=MagicMock(),
             switch_world=MagicMock(),
-            load_world_from_db=MagicMock(return_value=None),
-            load_actors_from_db=MagicMock(return_value=[]),
-            save_to_db=MagicMock(),
             quit=MagicMock(),
             is_in_world=MagicMock(return_value=True),
             detect_actors=MagicMock(return_value=[]),
@@ -131,15 +128,6 @@ class TestWorldValidation(unittest.TestCase):
         new_world = World.__new__(World)
         with self.assertRaises(TypeError):
             World.switch_world(world, new_world, reset="no")
-
-    def test_load_actors_from_db_rejects_invalid_actor_classes(self):
-        world = self._bare_world()
-
-        with self.assertRaises(TypeError):
-            World.load_actors_from_db(world, "actors.sqlite", actor_classes=WorldValidationActor)
-
-        with self.assertRaises(TypeError):
-            World.load_actors_from_db(world, "actors.sqlite", actor_classes=[object])
 
     def test_distance_to_rejects_invalid_positions(self):
         with self.assertRaises(TypeError):
