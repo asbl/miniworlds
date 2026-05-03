@@ -571,37 +571,6 @@ msgstr ""
 
 #: ../../None:31:<autosummary>:1
 msgid ""
-":py:obj:`load_world_from_db "
-"<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Load a saved world from a sqlite database file and activate it."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid ""
-":py:obj:`load_actors_from_db "
-"<miniworlds.worlds.world.World.load_actors_from_db>`\\ \\(file\\, "
-"actor\\_classes\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Load actors from a sqlite database file into the current world."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid ""
-":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ "
-"\\(file\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Save the current world and its actors to a sqlite database file."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid ""
 ":py:obj:`quit <miniworlds.worlds.world.World.quit>`\\ "
 "\\(\\[exit\\_code\\]\\)"
 msgstr ""
@@ -1176,9 +1145,6 @@ msgstr ""
 #~ msgid ""
 #~ ":py:obj:`load_world_from_db "
 #~ "<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
-#~ msgstr ""
-
-#~ msgid "Loads a sqlite db file."
 #~ msgstr ""
 
 #~ msgid ""
