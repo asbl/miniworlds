@@ -6,6 +6,7 @@ Primary entry points:
 - ``invoke benchmarks.run`` for benchmark groups or individual benchmarks
 - ``invoke build.docs`` for a local Sphinx build
 - ``invoke build.image`` for the Docker image used by tests and benchmarks
+- ``invoke deploy.push`` for the normal branch push workflow
 - ``invoke deploy.release --revision`` for the next release workflow
 
 Release workflow summary:
@@ -222,10 +223,10 @@ def _repo_status(c, repo_path: str) -> str:
     return _git_stdout(c, repo_path, "status --short")
 
 
-def _describe_workflow_automation(main_branch: str, push: bool) -> list[str]:
+def _describe_workflow_automation(main_branch: str, push: bool, tags: bool = True) -> list[str]:
     if not push:
         return ["No GitHub workflow runs until branches and tags are pushed manually."]
-    notes = ["Pushed v* tags trigger the PyPI publish workflows in both repositories."]
+    notes = []
     if main_branch == "main":
         notes.insert(
             0,
@@ -237,7 +238,19 @@ def _describe_workflow_automation(main_branch: str, push: bool) -> list[str]:
             "Docs deployment only runs from pushes to the main repository branch 'main'. "
             f"The current branch is '{main_branch}', so this release push will not deploy docs automatically.",
         )
+    if tags:
+        notes.append("Pushed v* tags trigger the PyPI publish workflows in both repositories.")
+    else:
+        notes.append("Without pushing tags, the PyPI publish workflows are not triggered.")
     return notes
+
+
+def _push_repositories(c, main_branch: str, physics_branch: str, tags: bool) -> None:
+    _git(c, PHYSICS_REPO, f"push origin {physics_branch}")
+    _git(c, REPO_ROOT, f"push origin {main_branch}")
+    if tags:
+        _git(c, PHYSICS_REPO, "push --tags")
+        _git(c, REPO_ROOT, "push --tags")
 
 
 def _print_release_plan(
@@ -278,7 +291,7 @@ def _print_release_plan(
     else:
         print("5. Skip pushes")
     print("Workflow automation after push:")
-    for note in _describe_workflow_automation(main_branch, push):
+    for note in _describe_workflow_automation(main_branch, push, tags=True):
         print(f"- {note}")
     print("Checks:")
     print(f"- Main repo clean: {'yes' if not main_status else 'no'}")
@@ -450,12 +463,42 @@ def deploy_release(
     _git(c, REPO_ROOT, f'tag -a {tag_name} -m "Release {tag_name}"')
 
     if push:
-        for note in _describe_workflow_automation(main_branch, push=True):
+        for note in _describe_workflow_automation(main_branch, push=True, tags=True):
             print(f"Workflow note: {note}")
-        _git(c, PHYSICS_REPO, f"push origin {physics_branch}")
         _git(c, PHYSICS_REPO, f"push origin {tag_name}")
-        _git(c, REPO_ROOT, f"push origin {main_branch}")
         _git(c, REPO_ROOT, f"push origin {tag_name}")
+        _push_repositories(c, main_branch, physics_branch, tags=False)
+
+
+@task(
+    name="push",
+    help={
+        "tags": "Also push all local tags in both repositories",
+        "dry_run": "Show the planned push steps and workflow effects without changing anything",
+    },
+)
+def deploy_push(c, tags=False, dry_run=False):
+    """Push the current main and physics branches, optionally including tags.
+
+    This is the normal deploy step when you only want to push existing commits.
+    If the main repository branch is ``main``, the docs workflow runs after the
+    branch push. PyPI publication only happens when tags are pushed as well.
+    """
+    main_branch = _current_branch(c, REPO_ROOT, "Main")
+    physics_branch = _current_branch(c, PHYSICS_REPO, "Physics")
+
+    print("Deploy push summary")
+    print(f"- Main branch: {main_branch}")
+    print(f"- Physics branch: {physics_branch}")
+    print(f"- Push tags: {'yes' if tags else 'no'}")
+    print("Workflow automation after push:")
+    for note in _describe_workflow_automation(main_branch, push=True, tags=tags):
+        print(f"- {note}")
+
+    if dry_run:
+        return
+
+    _push_repositories(c, main_branch, physics_branch, tags=tags)
 
 @task(name="run")
 def tests_run(c):
@@ -614,6 +657,7 @@ def examples_checkout(c):
 
 deploy = Collection("deploy")
 deploy.add_task(deploy_release, default=True)
+deploy.add_task(deploy_push)
 
 tests = Collection("tests")
 tests.add_task(tests_run, default=True)
@@ -652,6 +696,7 @@ ns.add_collection(examples)
 
 # Compatibility aliases for the previous flat task surface.
 ns.add_task(deploy_release, name="release")
+ns.add_task(deploy_push, name="push")
 ns.add_task(tests_run, name="run_tests")
 ns.add_task(tests_cached, name="run_tests_cached")
 ns.add_task(tests_unit, name="run_unit_tests")
