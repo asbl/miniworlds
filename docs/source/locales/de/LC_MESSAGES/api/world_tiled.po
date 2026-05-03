@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 20:16+0100\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -83,7 +83,7 @@ msgid ""
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1 ../../None:6:<autosummary>:1
+#: ../../None:14:<autosummary>:1 ../../None:6:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns:1 of
 msgid "Gets the number of horizontal pixels (columns) visible in the world."
 msgstr ""
@@ -94,7 +94,7 @@ msgid ""
 "<miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1 ../../None:6:<autosummary>:1
+#: ../../None:14:<autosummary>:1 ../../None:6:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows:1 of
 msgid "Gets the number of vertical pixels (rows) visible in the world."
 msgstr ""
@@ -110,79 +110,97 @@ msgstr ""
 msgid "Tile size of each tile, if world has tiles"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`layout <miniworlds.worlds.world.World.layout>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid "Backward-compatible docking API for older example code."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
+msgid ":py:obj:`debug <miniworlds.worlds.world.World.debug>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid "Enable a compact debug overlay with runtime values on screen."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ":py:obj:`learning_mode <miniworlds.worlds.world.World.learning_mode>`\\"
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
+msgid ""
+"Enable beginner-friendly soft conversions and hints for common input "
+"mistakes."
+msgstr ""
+
+#: ../../None:14:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`tick_rate <miniworlds.worlds.world.World.tick_rate>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid "How often world logic runs relative to the frame loop."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`fps <miniworlds.worlds.world.World.fps>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #, fuzzy
 msgid "Frames per second of the render loop."
 msgstr "Bilder pro Sekunde auf dem Bildschirm angezeigt."
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`world_size_x <miniworlds.worlds.world.World.world_size_x>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid "Gets the horizontal size of the world in pixels."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`world_size_y <miniworlds.worlds.world.World.world_size_y>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #, fuzzy
 msgid "Gets the vertical size of the world in pixels."
 msgstr "Die Kachelgröße in Pixeln."
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`columns <miniworlds.worlds.world.World.columns>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`rows <miniworlds.worlds.world.World.rows>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`size <miniworlds.worlds.world.World.size>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid "Gets the world size as a tuple (width, height), in pixels."
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`background <miniworlds.worlds.world.World.background>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 #, fuzzy
 msgid "Returns the currently active background."
 msgstr "Gibt den aktuellen Hintergrund zurück"
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid ":py:obj:`has_background <miniworlds.worlds.world.World.has_background>`\\"
 msgstr ""
 
-#: ../../None:12:<autosummary>:1
+#: ../../None:14:<autosummary>:1
 msgid "Returns True if the world has at least one background appearance."
 msgstr ""
 
@@ -309,7 +327,7 @@ msgid ""
 "\\(position\\)"
 msgstr ""
 
-#: ../../None:27:<autosummary>:1 ../../None:31:<autosummary>:1
+#: ../../None:27:<autosummary>:1 ../../None:34:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:1 of
 #, fuzzy
 msgid ""
@@ -324,7 +342,7 @@ msgid ""
 " \\(position\\)"
 msgstr ""
 
-#: ../../None:27:<autosummary>:1 ../../None:31:<autosummary>:1
+#: ../../None:27:<autosummary>:1 ../../None:34:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:1
 #: of
 msgid "Returns a list of all actors located at the given screen pixel position."
@@ -500,7 +518,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 
-#: ../../None:27:<autosummary>:1 ../../None:31:<autosummary>:1
+#: ../../None:27:<autosummary>:1 ../../None:34:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_columns:1 of
 msgid "Internal method to set columns and sync world width."
 msgstr ""
@@ -512,7 +530,7 @@ msgid ""
 "\\(value\\)"
 msgstr ""
 
-#: ../../None:27:<autosummary>:1 ../../None:31:<autosummary>:1
+#: ../../None:27:<autosummary>:1 ../../None:34:<autosummary>:1
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_rows:1 of
 msgid "Internal method to set rows and sync world height."
 msgstr ""
@@ -529,287 +547,308 @@ msgstr ""
 msgid "Sets the tile size in pixels and refreshes camera/background caches."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ <miniworlds.worlds.world.World.__init__>`\\ \\(\\[x\\, "
 "y\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 "Initializes the world and all internal managers needed for runtime "
 "operation."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`contains_position "
 "<miniworlds.worlds.world.World.contains_position>`\\ \\(pos\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Checks if position is in the world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
+msgid ":py:obj:`contains <miniworlds.worlds.world.World.contains>`\\ \\(pos\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias for `contains_position(pos)`."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`contains_rect <miniworlds.worlds.world.World.contains_rect>`\\ "
 "\\(rect\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Returns True if the entire rectangle is fully inside the world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`contains_rect_any "
 "<miniworlds.worlds.world.World.contains_rect_any>`\\ \\(rect\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Returns True if any part of the rectangle is inside the world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`set_columns <miniworlds.worlds.world.World.set_columns>`\\ "
 "\\(value\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ":py:obj:`set_rows <miniworlds.worlds.world.World.set_rows>`\\ \\(value\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`get_background <miniworlds.worlds.world.World.get_background>`\\"
 " \\(\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Returns the current active background from the backgrounds manager."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`switch_background "
 "<miniworlds.worlds.world.World.switch_background>`\\ \\(background\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Switches the current background to a specified one."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`remove_background "
 "<miniworlds.worlds.world.World.remove_background>`\\ "
 "\\(\\[background\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Removes a background from the world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`set_background <miniworlds.worlds.world.World.set_background>`\\"
 " \\(source\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Sets a new background and replaces the current active background."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`add_background <miniworlds.worlds.world.World.add_background>`\\"
 " \\(source\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Adds a new background to the world and sets it as the active one."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
+msgid ":py:obj:`set_bg <miniworlds.worlds.world.World.set_bg>`\\ \\(source\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias for `set_background(source)`."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid ":py:obj:`add_bg <miniworlds.worlds.world.World.add_bg>`\\ \\(source\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias for `add_background(source)`."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid ":py:obj:`next_bg <miniworlds.worlds.world.World.next_bg>`\\ \\(\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias to switch to the next background."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
 msgid ":py:obj:`start <miniworlds.worlds.world.World.start>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Starts or resumes the world."
 msgstr "Hält die Welt an."
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ":py:obj:`stop <miniworlds.worlds.world.World.stop>`\\ \\(\\[frames\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Stops the world immediately or after a delay in frames."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`run <miniworlds.worlds.world.World.run>`\\ \\(\\[fullscreen\\, "
 "fit\\_desktop\\, replit\\, ...\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Starts the main application loop of the Miniworlds engine."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`is_in_world <miniworlds.worlds.world.World.is_in_world>`\\ "
 "\\(position\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Checks whether a given world position lies within the world's boundaries."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`send_message <miniworlds.worlds.world.World.send_message>`\\ "
 "\\(message\\[\\, data\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Sends a broadcast message to the world and all actors."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
+msgid ""
+":py:obj:`broadcast <miniworlds.worlds.world.World.broadcast>`\\ "
+"\\(message\\[\\, data\\]\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias for `send_message(message, data)`."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`switch_world <miniworlds.worlds.world.World.switch_world>`\\ "
 "\\(new\\_world\\[\\, reset\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Switch the active scene to another world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
-msgid ""
-":py:obj:`load_world_from_db "
-"<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Load a saved world from a sqlite database file and activate it."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid ""
-":py:obj:`load_actors_from_db "
-"<miniworlds.worlds.world.World.load_actors_from_db>`\\ \\(file\\, "
-"actor\\_classes\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Load actors from a sqlite database file into the current world."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid ""
-":py:obj:`save_to_db <miniworlds.worlds.world.World.save_to_db>`\\ "
-"\\(file\\)"
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
-msgid "Save the current world and its actors to a sqlite database file."
-msgstr ""
-
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`quit <miniworlds.worlds.world.World.quit>`\\ "
 "\\(\\[exit\\_code\\]\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Immediately quits the application and closes the game window."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ":py:obj:`reset <miniworlds.worlds.world.World.reset>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 "Resets the world Creates a new world with init-function - recreates all "
 "actors and actors on the world."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`get_from_pixel <miniworlds.worlds.world.World.get_from_pixel>`\\"
 " \\(position\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 "Converts a screen pixel position into a valid world position if inside "
 "bounds."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`to_pixel <miniworlds.worlds.world.World.to_pixel>`\\ "
 "\\(position\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 #, fuzzy
 msgid "Converts a world position to a screen pixel position."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ":py:obj:`on_setup <miniworlds.worlds.world.World.on_setup>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Hook method to define initial setup logic when the world is created."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`detect_actors <miniworlds.worlds.world.World.detect_actors>`\\ "
 "\\(position\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
+msgid ""
+":py:obj:`actors_at <miniworlds.worlds.world.World.actors_at>`\\ "
+"\\(position\\)"
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
+msgid "Student-friendly alias for `detect_actors(position)`."
+msgstr ""
+
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`get_actors_from_pixel "
 "<miniworlds.worlds.world.World.get_actors_from_pixel>`\\ \\(pixel\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`distance_to <miniworlds.worlds.world.World.distance_to>`\\ "
 "\\(pos1\\, pos2\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Calculates the Euclidean distance between two positions."
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid ""
 ":py:obj:`direction_to <miniworlds.worlds.world.World.direction_to>`\\ "
 "\\(pos1\\, pos2\\)"
 msgstr ""
 
-#: ../../None:31:<autosummary>:1
+#: ../../None:34:<autosummary>:1
 msgid "Calculates the angle from pos1 to pos2 in degrees."
 msgstr ""
 
@@ -1008,37 +1047,157 @@ msgstr ""
 msgid "Updates the dynamic_actors_dict."
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_type_name <miniworlds.worlds.world.World._type_name>`\\ "
+"\\(value\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_with_try_hint <miniworlds.worlds.world.World._with_try_hint>`\\"
+" \\(message\\[\\, example\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_bool <miniworlds.worlds.world.World._ensure_bool>`\\ "
+"\\(value\\, parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_real <miniworlds.worlds.world.World._ensure_real>`\\ "
+"\\(value\\, parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_int <miniworlds.worlds.world.World._ensure_int>`\\ "
+"\\(value\\, parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_non_empty_str "
+"<miniworlds.worlds.world.World._ensure_non_empty_str>`\\ \\(value\\, "
+"parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_position_tuple "
+"<miniworlds.worlds.world.World._ensure_position_tuple>`\\ \\(value\\, "
+"parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_dimension "
+"<miniworlds.worlds.world.World._ensure_dimension>`\\ \\(value\\, "
+"parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_size_tuple "
+"<miniworlds.worlds.world.World._ensure_size_tuple>`\\ \\(value\\[\\, "
+"parameter\\_name\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_rect_like "
+"<miniworlds.worlds.world.World._ensure_rect_like>`\\ \\(value\\[\\, "
+"parameter\\_name\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_color_like "
+"<miniworlds.worlds.world.World._ensure_color_like>`\\ \\(value\\[\\, "
+"parameter\\_name\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_background_source "
+"<miniworlds.worlds.world.World._ensure_background_source>`\\ "
+"\\(value\\[\\, ...\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_background_selector "
+"<miniworlds.worlds.world.World._ensure_background_selector>`\\ "
+"\\(value\\[\\, ...\\]\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_ensure_actor_classes "
+"<miniworlds.worlds.world.World._ensure_actor_classes>`\\ "
+"\\(actor\\_classes\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
 #, fuzzy
 msgid ""
 ":py:obj:`_validate_parameters "
 "<miniworlds.worlds.world.World._validate_parameters>`\\ \\(x\\, y\\)"
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
 msgid ""
 ":py:obj:`_get_initialization_facade "
 "<miniworlds.worlds.world.World._get_initialization_facade>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
 msgid ""
 ":py:obj:`_get_background_facade "
 "<miniworlds.worlds.world.World._get_background_facade>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
 msgid ""
 ":py:obj:`_get_runtime_facade "
 "<miniworlds.worlds.world.World._get_runtime_facade>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_student_warn <miniworlds.worlds.world.World._student_warn>`\\ "
+"\\(message\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_coerce_bool_learning "
+"<miniworlds.worlds.world.World._coerce_bool_learning>`\\ \\(value\\, "
+"parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_coerce_position_learning "
+"<miniworlds.worlds.world.World._coerce_position_learning>`\\ \\(value\\, "
+"parameter\\_name\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
+msgid ""
+":py:obj:`_draw_debug_overlay "
+"<miniworlds.worlds.world.World._draw_debug_overlay>`\\ "
+"\\(target\\_surface\\)"
+msgstr ""
+
+#: ../../None:25:<autosummary>:1
 #, fuzzy
 msgid ":py:obj:`_clear <miniworlds.worlds.world.World._clear>`\\ \\(\\)"
 msgstr ""
 
-#: ../../None:7:<autosummary>:1
+#: ../../None:25:<autosummary>:1
 msgid "Clears the world's state: event queue, all backgrounds, and all actors."
 msgstr ""
 
@@ -1484,21 +1643,12 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ ":py:obj:`load_world_from_db "
 #~ "<miniworlds.worlds.world.World.load_world_from_db>`\\ \\(file\\)"
 #~ msgstr ""
-#~ ":py:obj:`load_world_from_db "
-#~ "<miniworlds.worlds.world.World.load_world_from_db>`\\ "
-#~ "\\(Datei\\)"
-
-#~ msgid "Loads a sqlite db file."
-#~ msgstr "Lädt eine SQLite-Datenbankdatei."
 
 #~ msgid ""
 #~ ":py:obj:`load_actors_from_db "
 #~ "<miniworlds.worlds.world.World.load_actors_from_db>`\\ "
 #~ "\\(file\\, actor\\_classes\\)"
 #~ msgstr ""
-#~ ":py:obj:`load_actors_from_db "
-#~ "<miniworlds.worlds.world.World.load_actors_from_db>`\\ "
-#~ "\\(file\\, actor\\_klassen\\)"
 
 #~ msgid "Loads all actors from db."
 #~ msgstr "Lädt alle Actors aus der Datenbank."
@@ -1507,8 +1657,6 @@ msgstr "Die Kachelgröße in Pixeln."
 #~ ":py:obj:`save_to_db "
 #~ "<miniworlds.worlds.world.World.save_to_db>`\\ \\(file\\)"
 #~ msgstr ""
-#~ ":py:obj:`save_to_db "
-#~ "<miniworlds.worlds.world.World.save_to_db>`\\ \\(Datei\\)"
 
 #~ msgid "Saves the current world an all actors to database."
 #~ msgstr "Speichert die aktuelle Welt und alle Actors in der Datenbank."

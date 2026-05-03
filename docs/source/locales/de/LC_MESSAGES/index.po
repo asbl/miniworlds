@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 21:50+0200\n"
+"POT-Creation-Date: 2026-05-03 20:03+0200\n"
 "PO-Revision-Date: 2025-07-07 17:40+0200\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -17,48 +17,48 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
-#: ../../source/index.md:406
+#: ../../source/index.md:400
 msgid "Tutorial"
 msgstr "Anleitung"
 
-#: ../../source/index.md:428
+#: ../../source/index.md:422
 #, fuzzy
 msgid "More Tutorials"
 msgstr "Weitere Tutorials"
 
-#: ../../source/index.md:437
+#: ../../source/index.md:431
 msgid "Concepts"
 msgstr "Konzepte"
 
-#: ../../source/index.md:453
+#: ../../source/index.md:447
 msgid "Guides"
 msgstr "Tutorials"
 
-#: ../../source/index.md:469
+#: ../../source/index.md:462
 msgid "API > Basics"
 msgstr "API > Grundlagen"
 
-#: ../../source/index.md:482
+#: ../../source/index.md:476
 msgid "API > Actor Classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:496
+#: ../../source/index.md:491
 #, fuzzy
 msgid "API > World Classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:508
+#: ../../source/index.md:506
 #, fuzzy
 msgid "API > Special World classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:520
+#: ../../source/index.md:518
 msgid "Helpers"
 msgstr "Helfer"
 
-#: ../../source/index.md:530
+#: ../../source/index.md:528
 msgid "Legal Notice"
 msgstr "Impressum"
 
@@ -75,75 +75,63 @@ msgstr ""
 "pygame). Sie ist dafür geeignet, dass Schüler einfache 2D Miniwelten und "
 "Spiele erstellen können."
 
-#: ../../source/index.md:5
+#: ../../source/index.md:6
 msgid "Creating your first games with **miniworlds** is simple and fun."
 msgstr "Deine ersten Spiele mit miniworlds zu erstellen ist einfach!"
 
-#: ../../source/index.md:7
-#, fuzzy
-msgid "miniworlds and miniworldss"
-msgstr "miniworlds und miniworlds"
-
-#: ../../source/index.md:9
-msgid ""
-"**miniworlds** is the successor project to **miniworldss**. Many things "
-"are similar, but some names and functions differ from miniworldss. (e.g.,"
-" *Tokens* became *Actors*, *Boards* became *Worlds*)"
-msgstr ""
-
-#: ../../source/index.md:14
+#: ../../source/index.md:8
 msgid "Examples"
 msgstr "Beispiele"
 
-#: ../../source/index.md:16
+#: ../../source/index.md:10
 msgid "Two actors controlled by keyboard"
 msgstr "Zwei tastaturgesteuerte Actors"
 
-#: ../../source/index.md:18
+#: ../../source/index.md:12
 msgid "Two actors that are controlled using the keyboard."
 msgstr "Zwei tastaturgesteuerte Actors"
 
-#: ../../source/index.md:42 ../../source/index.md:46
+#: ../../source/index.md:36 ../../source/index.md:40
 msgid "Example: Two actors"
 msgstr "Beispiel: Zwei Actors"
 
-#: ../../source/index.md:49
+#: ../../source/index.md:43
 msgid "Skeetshooting"
 msgstr "Tontaubenschießen"
 
-#: ../../source/index.md:51
+#: ../../source/index.md:45
 msgid "A randomly placed target can be \"shot\" with the mouse."
 msgstr "Ein zufälliges Ziel kann mit der Maus \"abgeschossen\" werden."
 
-#: ../../source/index.md:84 ../../source/index.md:88 ../../source/index.md:186
-#: ../../source/index.md:190
+#: ../../source/index.md:78 ../../source/index.md:82 ../../source/index.md:180
+#: ../../source/index.md:184
 msgid "Example: Skeetshooting"
 msgstr "Beispiel: Tontaubenschießen"
 
-#: ../../source/index.md:91
+#: ../../source/index.md:85
 msgid "Aircrafts"
 msgstr "Flugzeuge"
 
-#: ../../source/index.md:93
+#: ../../source/index.md:87
 msgid "Classic game where you control an aircraft, avoid and shoot enemies."
 msgstr ""
 "Ein klassisches Spiel, bei dem man ein Flugzeug steuert, dass Gegnern "
 "ausweicht und diese abschießen kann."
 
-#: ../../source/index.md:193
+#: ../../source/index.md:187
 #, fuzzy
 msgid "RPG Template with console and sidebar"
 msgstr "RPG mit Konsole und Seitenleiste"
 
-#: ../../source/index.md:386 ../../source/index.md:390
+#: ../../source/index.md:380 ../../source/index.md:384
 msgid "Example: RPG"
 msgstr "Beispiel: RPG"
 
-#: ../../source/index.md:393
+#: ../../source/index.md:387
 msgid "Credits"
 msgstr "Credits"
 
-#: ../../source/index.md:395
+#: ../../source/index.md:389
 #, fuzzy
 msgid ""
 "`Greenfoot <https://www.greenfoot.org/>`\\_ Miniworlds is strongly "
@@ -152,7 +140,7 @@ msgstr ""
 "`Greenfoot <https://www.greenfoot.org/>`_  Miniworlds ist stark von "
 "Greenfoot inspiriert."
 
-#: ../../source/index.md:398
+#: ../../source/index.md:392
 #, fuzzy
 msgid ""
 "`Kenney Assets <https://www.kenney.nl/assets>`\\_ Most images in the "
@@ -161,15 +149,15 @@ msgstr ""
 "`Kenney Assets <https://www.kenney.nl/assets>`_  Die meisten Bilder der "
 "Beispiele basieren auf Kenney Assets"
 
-#: ../../source/index.md:401
+#: ../../source/index.md:395
 msgid "Links"
 msgstr "Links"
 
-#: ../../source/index.md:403
+#: ../../source/index.md:397
 msgid "[Github Repository](https://github.com/asbl/miniworlds)"
 msgstr "[Github-Repository](https://github.com/asbl/miniworlds)"
 
-#: ../../source/index.md:404
+#: ../../source/index.md:398
 #, fuzzy
 msgid "[Examples](https://github.com/asbl/miniworlds_examples)"
 msgstr "[Beispiele](https://github.com/asbl/miniworlds_examples)"
@@ -200,20 +188,6 @@ msgstr "[Beispiele](https://github.com/asbl/miniworlds_examples)"
 #~ "**minigames** ist einfach und macht "
 #~ "Spaß."
 
-#~ msgid ""
-#~ "**miniworlds** ist das Nachfolgeprojekt des"
-#~ " **miniworldss**. Sehr vieles ist ähnlich,"
-#~ " manche Bezeichnungen und Funktionen "
-#~ "unterscheiden sich vom miniworlds. (z.B. "
-#~ "aus Tokens wurden Actors, aus Boards "
-#~ "wurden Worlds)"
-#~ msgstr ""
-#~ "**miniworlds** is the successor project "
-#~ "of **miniworldss**. Many things are "
-#~ "similar, some names and functions differ"
-#~ " from miniworlds. (e.g., Tokens became "
-#~ "Actors, Boards became Worlds)"
-
 #~ msgid "Beispiele"
 #~ msgstr "Beispiele"
 
@@ -230,20 +204,6 @@ msgstr "[Beispiele](https://github.com/asbl/miniworlds_examples)"
 #~ "Flugzeug steuert und Gegner abwehrt und"
 #~ " ausweicht."
 #~ msgstr "Classic game where you control a plane and fend off and dodge enemies."
-
-#~ msgid ""
-#~ "**miniworlds** is the successor project "
-#~ "to **miniworldss**. Many things are "
-#~ "similar, but some names and functions"
-#~ " differ from miniworldss. (e.g., *Tokens*"
-#~ " became *Actors*, *Boards* became *Worlds*)"
-#~ msgstr ""
-#~ "**miniworlds** ist das Nachfolgeprojekt von"
-#~ " **miniworldmakrer**. Viele Dinge sind "
-#~ "ähnlich, aber einige Namen und "
-#~ "Funktionen unterscheiden sich von miniworldss."
-#~ " (z. B. wurden *Tokens* zu *Actors*,"
-#~ " *Boards* zu *Worlds*)"
 
 #~ msgid "\\:::"
 #~ msgstr ""
