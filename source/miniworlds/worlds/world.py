@@ -22,8 +22,6 @@ import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
-import miniworlds.worlds.data.export_factory as export_factory
-import miniworlds.worlds.data.import_factory as import_factory
 import miniworlds.worlds.world_background_facade as world_background_facade
 import miniworlds.worlds.world_initialization_facade as world_initialization_facade
 import miniworlds.worlds.world_runtime_facade as world_runtime_facade
@@ -898,43 +896,6 @@ class World(world_base.WorldBase):
             )
         self._ensure_bool(reset, "reset")
         self._get_runtime_facade().switch_world(new_world, reset)
-
-    def load_world_from_db(self, file: str) -> "World":
-        """Load a saved world from a sqlite database file and activate it.
-
-        Args:
-            file: Path to the sqlite database file.
-
-        Returns:
-            The loaded world instance.
-        """
-        self._ensure_non_empty_str(file, "file")
-        return self._get_runtime_facade().load_world_from_db(file)
-
-    def load_actors_from_db(
-        self, file: str, actor_classes: list[type[actor_mod.Actor]]
-    ) -> list[actor_mod.Actor]:
-        """Load actors from a sqlite database file into the current world.
-
-        Args:
-            file: Path to the sqlite database file.
-            actor_classes: Actor classes that may be recreated from the file.
-
-        Returns:
-            A list with the recreated actors.
-        """
-        self._ensure_non_empty_str(file, "file")
-        self._ensure_actor_classes(actor_classes)
-        return self._get_runtime_facade().load_actors_from_db(file, actor_classes)
-
-    def save_to_db(self, file: str) -> None:
-        """Save the current world and its actors to a sqlite database file.
-
-        Args:
-            file: Path to the sqlite database file that should be written.
-        """
-        self._ensure_non_empty_str(file, "file")
-        return self._get_runtime_facade().save_to_db(file)
 
 
     def quit(self, exit_code: int = 0) -> None:

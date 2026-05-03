@@ -73,17 +73,6 @@ class WorldRuntimeFacade:
     def switch_world(self, new_world: "world_mod.World", reset: bool = False) -> None:
         self.world.camera.switch_world(new_world, reset)
 
-    def load_world_from_db(self, file: str) -> "world_mod.World":
-        return self.world.data.load_world_from_db(file)
-
-    def load_actors_from_db(
-        self, file: str, actor_classes: list[type[actor_mod.Actor]]
-    ) -> list[actor_mod.Actor]:
-        return self.world.data.load_actors_from_db(file, actor_classes)
-
-    def save_to_db(self, file: str) -> None:
-        return self.world.data.save_to_db(file)
-
     def quit(self, exit_code: int = 0) -> None:
         self.world.app.quit(exit_code)
 

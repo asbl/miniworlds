@@ -1,9 +1,7 @@
 import unittest
 from types import SimpleNamespace
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
-from miniworlds.actors.widgets.load import LoadButton
-from miniworlds.actors.widgets.save import SaveButton
 from miniworlds.appearances.background import Background
 from miniworlds.base.app import App
 from miniworlds.worlds.gui.toolbar import Toolbar
@@ -52,31 +50,6 @@ class TestRemainingGlobalState(unittest.TestCase):
 
         world.app.window.surface.blit.assert_not_called()
         background.repaint.assert_not_called()
-
-    def test_save_button_uses_running_world_from_app_accessor(self):
-        current_world = SimpleNamespace(save_to_db=Mock(), send_message=Mock())
-        app = SimpleNamespace(get_running_world=Mock(return_value=current_world))
-        button = SaveButton.__new__(SaveButton)
-        button.app = app
-        button.file = "save.db"
-
-        SaveButton.on_mouse_left_down(button, (0, 0))
-
-        current_world.save_to_db.assert_called_once_with("save.db")
-        current_world.send_message.assert_called_once_with("Saved new world", "save.db")
-
-    def test_load_button_uses_running_world_from_app_accessor(self):
-        current_world = SimpleNamespace(load_world_from_db=Mock())
-        app = SimpleNamespace(get_running_world=Mock(return_value=current_world))
-        button = LoadButton.__new__(LoadButton)
-        button.app = app
-        button.file = "save.db"
-
-        with patch("miniworlds.actors.widgets.load.tk.Tk") as tk_mock:
-            LoadButton.on_mouse_left_down(button, (0, 0))
-
-        tk_mock.assert_not_called()
-        current_world.load_world_from_db.assert_called_once_with("save.db")
 
 
 if __name__ == "__main__":

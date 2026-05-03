@@ -5,8 +5,6 @@ designed for students to create 2D mini-worlds and games.
 
 Creating your first games with **miniworlds** is simple and fun.
 
-:::
-
 ## Examples
 
 ### Two actors controlled by keyboard
@@ -456,7 +454,6 @@ patterns/01_drag_and_drop
 patterns/02_scrolling
 patterns/03_game_over
 patterns/04_level_loading
-patterns/05_database
 patterns/maze_game
 patterns/red_baron
 patterns/flappy_physics

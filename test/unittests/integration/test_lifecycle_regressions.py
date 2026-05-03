@@ -22,20 +22,13 @@ class TestWorldProxies(unittest.TestCase):
     def test_world_proxies_delegate_to_camera_data_and_event_manager(self):
         world = World.__new__(World)
         world.camera = Mock()
-        world.data = Mock()
         world.app = make_app_with_event_queue()
 
         new_world = World.__new__(World)
         World.switch_world(world, new_world, reset=True)
-        World.save_to_db(world, "save.db")
-        World.load_world_from_db(world, "save.db")
-        World.load_actors_from_db(world, "save.db", [Actor])
         World.send_message(world, "saved", {"unused": True})
 
         world.camera.switch_world.assert_called_once_with(new_world, True)
-        world.data.save_to_db.assert_called_once_with("save.db")
-        world.data.load_world_from_db.assert_called_once_with("save.db")
-        world.data.load_actors_from_db.assert_called_once_with("save.db", [Actor])
         world.app.event_manager.to_event_queue.assert_called_once_with(
             "message", ("saved", {"unused": True})
         )
