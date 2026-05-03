@@ -18,7 +18,8 @@ For repeated local development runs without rebuilding the image:
 invoke tests.cached
 ```
 
-If `invoke` is unavailable, run the equivalent Docker command from [tasks.py](tasks.py).
+If `invoke` is unavailable, run the equivalent Docker command from
+[tasks.py](tasks.py).
 
 Run a single test:
 
@@ -42,11 +43,14 @@ Task categories in [tasks.py](tasks.py):
 - `benchmarks.*`: benchmark and profiling scripts
 - `build.docs`: local Sphinx build
 - `build.image`: rebuild the shared Docker image for tests and benchmarks
-- `deploy.release`: version bump, commit, tag, and optional push workflow
+- `deploy.push`: normal branch push workflow, optional with tags
+- `deploy.release`: version bump, commit, tag, and optional
+  push workflow
 - `build.local` and `build.physics`: editable package installs
 - `container.*`, `examples.checkout`: local utility tasks
 
-Legacy flat task names still exist as compatibility aliases, but the grouped names above are now the documented interface.
+Legacy flat task names still exist as compatibility aliases, but the grouped
+names above are now the documented interface.
 
 ## Release and Docs
 
@@ -59,6 +63,8 @@ invoke build.docs
 Create a release or preview it first:
 
 ```sh
+invoke deploy.push
+invoke deploy.push --tags
 invoke deploy.release --revision
 invoke deploy.release --patch --dry-run
 invoke deploy.release --version=3.5.0.1
@@ -66,7 +72,8 @@ invoke deploy.release --version=3.5.0.1
 
 Upload new version to PyPI:
 
-`deploy.release` accepts either an explicit `--version` or exactly one bump flag:
+`deploy.release` accepts either an explicit `--version` or exactly one bump
+flag:
 
 - `--major`: next version like `4.0.0.0`
 - `--minor`: next version like `3.6.0.0`
@@ -74,12 +81,18 @@ Upload new version to PyPI:
 - `--revision`: next version like `3.5.0.6`
 
 It synchronizes the version in both packages, runs the Docker test suite,
-creates the commits and tags in the physics repository and the main repository,
-and then pushes branch plus tag unless `--no-push` is used.
+creates the commits and tags in the physics repository and the main
+repository, and then pushes branch plus tag unless `--no-push` is used.
 
-After that push step, GitHub Actions handle deployment automatically:
+For a normal deploy without a version bump, use `deploy.push`. It pushes the
+current branches in the main and physics repositories and can optionally push
+all tags with `--tags`.
+
+After the push step, GitHub Actions handle deployment automatically:
 
 - pushing the main repository branch `main` triggers [deploy-docs.yml](.github/workflows/deploy-docs.yml)
-- pushing `v*` tags triggers the PyPI publish workflows in the main and physics repositories
+- pushing `v*` tags triggers the PyPI publish workflows in the main and
+  physics repositories
 
-There is no manual docs upload task in `tasks.py`; docs deployment is owned by the GitHub workflow.
+There is no manual docs upload task in `tasks.py`; docs deployment is owned
+by the GitHub workflow.
