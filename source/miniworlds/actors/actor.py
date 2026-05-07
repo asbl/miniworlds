@@ -2421,6 +2421,8 @@ class Actor(actor_base.ActorBase):
 
     def set_position(self, value: Tuple[float, float]):
         """Set actor position in world coordinates."""
+        if value is None:
+            return
         value = self._coerce_position_learning(value, "value")
         self._ensure_position_tuple(value, "value")
         self._get_movement_facade().set_position(value)
