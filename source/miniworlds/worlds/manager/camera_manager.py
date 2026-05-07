@@ -262,19 +262,21 @@ class CameraManager(pygame.sprite.Sprite):
         """
         return pos[0] - self.topleft[0], pos[1] - self.topleft[1]
 
-    def get_global_coordinates_for_world(self, pos: Tuple[int, int]) -> Tuple[int, int]:
+    def get_global_coordinates_for_world(self, pos: Optional[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
         """
         Convert local camera position to global world position.
 
         Args:
-            pos: Position relative to the camera.
+            pos: Position relative to the camera, or None if no position is available.
 
         Returns:
-            Global world position.
+            Global world position, or None if pos is None.
 
         Examples:
             >>> world.camera.get_global_coordinates_for_world((100, 50))
         """
+        if pos is None:
+            return None
         return pos[0] + self.topleft[0], pos[1] + self.topleft[1]
 
     def _reload_actors_in_view(self) -> None:
