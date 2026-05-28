@@ -86,6 +86,42 @@ class TestPositionManagerMove(unittest.TestCase):
         self.mover.move.assert_called_once_with(3)
         self.assertEqual(result, self.actor)
 
+    def test_bounce_from_top_preserves_horizontal_component(self):
+        self.mover.get_direction = MagicMock(return_value=45)
+        self.mover.set_direction = MagicMock()
+
+        result = self.mover.bounce_from_border(["top"])
+
+        self.mover.set_direction.assert_called_once_with(135)
+        self.assertEqual(result, self.mover)
+
+    def test_bounce_from_bottom_preserves_horizontal_component(self):
+        self.mover.get_direction = MagicMock(return_value=135)
+        self.mover.set_direction = MagicMock()
+
+        result = self.mover.bounce_from_border(["bottom"])
+
+        self.mover.set_direction.assert_called_once_with(45)
+        self.assertEqual(result, self.mover)
+
+    def test_bounce_from_right_preserves_vertical_component(self):
+        self.mover.get_direction = MagicMock(return_value=45)
+        self.mover.set_direction = MagicMock()
+
+        result = self.mover.bounce_from_border(["right"])
+
+        self.mover.set_direction.assert_called_once_with(-45)
+        self.assertEqual(result, self.mover)
+
+    def test_bounce_from_left_preserves_vertical_component(self):
+        self.mover.get_direction = MagicMock(return_value=-45)
+        self.mover.set_direction = MagicMock()
+
+        result = self.mover.bounce_from_border(["left"])
+
+        self.mover.set_direction.assert_called_once_with(45)
+        self.assertEqual(result, self.mover)
+
 class TestPositionManagerRectCache(unittest.TestCase):
 
     def setUp(self):

@@ -321,8 +321,8 @@ class CameraManager(pygame.sprite.Sprite):
         if actor.center:
             center = actor.center
             self.topleft = (
-                center[0] - self.view[0] // 2 - actor.width // 2,
-                center[1] - self.view[1] // 2 - actor.height // 2
+                center[0] - self.view[0] // 2,
+                center[1] - self.view[1] // 2
             )
         else:
             self.topleft = (0, 0)

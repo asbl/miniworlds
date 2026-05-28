@@ -373,8 +373,9 @@ class Positionmanager:
             distance = self.actor.speed
 
         direction_raw = self.get_direction()
-        direction = direction_raw if distance >= 0 else -direction_raw
-        destination = self.actor.sensor_manager.get_destination(self.position, direction, distance)
+        destination = self.actor.sensor_manager.get_destination(
+            self.position, direction_raw, distance
+        )
         if self.is_blockable:
             blocking_actor = self.actor.sensor_manager.detect_blocking_actor_at_destination(
                 destination
@@ -472,24 +473,16 @@ class Positionmanager:
             or self.get_direction() <= 90
             and self.get_direction() >= 0
         ):
-            self.set_direction(0)
-            incidence = self.get_direction() - angle
-            self.turn_left(180 - incidence)
+            self.set_direction(180 - angle)
         elif "bottom" in borders and (
             (self.get_direction() < -90 and self.get_direction() >= -180)
             or (self.get_direction() > 90 and self.get_direction() <= 180)
         ):
-            self.set_direction(180)
-            incidence = self.get_direction() - angle
-            self.turn_left(180 - incidence)
+            self.set_direction(180 - angle)
         elif "left" in borders and self.get_direction() <= 0:
-            self.set_direction(-90)
-            incidence = self.get_direction() - angle
-            self.turn_left(180 - incidence)
+            self.set_direction(-angle)
         elif "right" in borders and (self.get_direction() >= 0):
-            self.set_direction(90)
-            incidence = self.get_direction() - angle
-            self.turn_left(180 - incidence)
+            self.set_direction(-angle)
         return self
 
     def bounce_from_actor(self, other):

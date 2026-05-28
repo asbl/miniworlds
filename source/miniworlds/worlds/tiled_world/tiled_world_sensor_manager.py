@@ -35,8 +35,17 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         target = self.get_destination(
             self.actor.position, self.actor.direction, distance
         )
-        rect = (target.x, target.y, self.world.tile_size, self.world.tile_size)
-        return self.actor.world.position_manager.get_borders_from_rect(rect)
+        x, y = target
+        borders = []
+        if x <= 0:
+            borders.append("left")
+        if y + 1 >= self.world.world_size_y:
+            borders.append("bottom")
+        if x + 1 >= self.world.world_size_x:
+            borders.append("right")
+        if y <= 0:
+            borders.append("top")
+        return borders
 
     def detect_actors(self, filter=None) -> list:
         """

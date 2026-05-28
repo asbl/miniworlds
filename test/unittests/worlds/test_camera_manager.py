@@ -1,4 +1,5 @@
 import unittest
+from types import SimpleNamespace
 from unittest.mock import Mock
 import pygame
 
@@ -92,6 +93,27 @@ class TestCameraManager(unittest.TestCase):
         # Expect clamped to world size
         self.assertLessEqual(self.camera.topleft[0], 100)
         self.assertLessEqual(self.camera.topleft[1], 100)
+
+    def test_following_rectangle_moving_left_stays_centered_until_world_edge(self):
+        self.camera.world_size = (1000, 200)
+        self.camera.topleft = (0, 0)
+        actor = SimpleNamespace(center=(500, 40), width=40, height=20)
+
+        for center_x in (500, 250, 80):
+            with self.subTest(center_x=center_x):
+                actor.center = (center_x, 40)
+
+                self.camera.from_actor(actor)
+
+                self.assertEqual(self.camera.topleft, (center_x - 50, 0))
+                self.assertEqual(self.camera.get_local_position(actor.center), (50, 40))
+
+        actor.center = (20, 40)
+
+        self.camera.from_actor(actor)
+
+        self.assertEqual(self.camera.topleft, (0, 0))
+        self.assertEqual(self.camera.get_local_position(actor.center), (20, 40))
 
     def test_resize_world_smaller_than_view(self):
         self.camera.width = 200
