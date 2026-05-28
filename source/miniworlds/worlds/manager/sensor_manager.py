@@ -335,13 +335,23 @@ class SensorManager:
         path that the rectangle of the object **distance** pixels travels)
         with the edges of the playing field.
         """
-        for _ in range(distance + 1):
+        step_count = int(abs(distance))
+        step_direction = 1 if distance >= 0 else -1
+        last_step = step_direction * step_count
+
+        for step in range(step_count + 1):
+            target_distance = step_direction * step
+            target_rect = self.get_destination_rect(target_distance)
+            borders = self.get_borders_from_rect(target_rect)
+            if borders:
+                return borders
+
+        if last_step != distance:
             target_rect = self.get_destination_rect(distance)
             borders = self.get_borders_from_rect(target_rect)
             if borders:
                 return borders
-            else:
-                return []
+        return []
 
     def get_destination_rect(self, distance: Union[int, float]) -> world_rect.Rect:
         """

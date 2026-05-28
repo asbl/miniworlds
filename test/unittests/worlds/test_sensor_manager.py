@@ -276,6 +276,30 @@ class TestSensorManager(unittest.TestCase):
         result = hunter.sensor_manager.filter_first_actor([], Runner)
         self.assertIsNone(result)
 
+    def test_detect_borders_detects_current_border_before_lookahead(self):
+        hunter = self._create_actor(Hunter, position=(0, 20))
+        hunter.direction = 90
+
+        result = hunter.detect_borders(distance=5)
+
+        self.assertEqual(result, ["left"])
+
+    def test_detect_borders_accepts_float_distance_and_checks_exact_destination(self):
+        hunter = self._create_actor(Hunter, position=(55.5, 20))
+        hunter.direction = 90
+
+        result = hunter.detect_borders(distance=0.5)
+
+        self.assertEqual(result, ["right"])
+
+    def test_detect_borders_accepts_negative_distance(self):
+        hunter = self._create_actor(Hunter, position=(5, 20))
+        hunter.direction = 90
+
+        result = hunter.detect_borders(distance=-5)
+
+        self.assertEqual(result, ["left"])
+
 
 class TestEventManagerClassState(unittest.TestCase):
     """Regression Bug 4: EventManager must not carry shared mutable class-level state."""
