@@ -64,6 +64,31 @@ class TestCostumeAttachment(unittest.TestCase):
         self.assertIs(costume.parent, actor)
         self.assertIn(costume, actor.costumes.appearances_list)
 
+    def test_costume_constructor_accepts_image_path(self):
+        actor = Actor((60, 20), world=self.world)
+
+        costume = Costume(str(self.image_paths["walk1"]))
+        added_costume = actor.add_costume(costume)
+
+        self.assertIs(added_costume, costume)
+        self.assertIs(actor.costume, costume)
+        self.assertEqual(actor.costume_count, 1)
+        self.assertEqual(len(costume.images), 1)
+        self.assertIs(costume.parent, actor)
+        self.assertIn(costume, actor.costumes.appearances_list)
+
+    def test_costume_constructor_accepts_actor_and_image_path(self):
+        actor = Actor((80, 20), world=self.world)
+
+        costume = Costume(actor, str(self.image_paths["walk1"]))
+
+        self.assertTrue(actor.has_costume())
+        self.assertIs(actor.costume, costume)
+        self.assertEqual(actor.costume_count, 1)
+        self.assertEqual(len(costume.images), 1)
+        self.assertIs(costume.parent, actor)
+        self.assertIn(costume, actor.costumes.appearances_list)
+
 
 if __name__ == "__main__":
     unittest.main()
