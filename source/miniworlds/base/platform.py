@@ -50,6 +50,17 @@ class PlatformAdapter:
             pygame.display.init()
         return pygame.display.set_mode(size, flags)
 
+    def set_window_position(self, position: tuple[int, int]) -> None:
+        try:
+            from pygame._sdl2 import Window as SDLWindow
+        except (ImportError, pygame.error):
+            return
+
+        try:
+            SDLWindow.from_display_module().position = position
+        except (AttributeError, pygame.error):
+            return
+
     def toggle_fullscreen(self) -> None:
         pygame.display.toggle_fullscreen()
 
