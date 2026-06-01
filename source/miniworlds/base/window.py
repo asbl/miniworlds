@@ -93,20 +93,32 @@ class Window:
         elif self.replit:
             self._surface = self.app.platform.set_mode((800, 600), pygame.SCALED)
         else:
-            
+            self._place_window_within_screen(self.width, self.height)
             if self.app.init:
-                info = self.app.platform.display_info()
-                x, y = (
-                    max((info.current_w - self.width) / 2, 0),
-                    max((info.current_h - self.height) / 2, 0),
-                )
-                os.environ["SDL_VIDEO_WINDOW_POS"] = "%d,%d" % (x, y)
                 self._surface = self.app.platform.set_mode((self.width, self.height))
+                self._place_window_within_screen(self.width, self.height)
             else:
                 if not self.mode:
                     self._surface = self.app.platform.set_mode((1, 1))
                     self.mode = True
         self._surface.set_alpha(None)
+
+    def _place_window_within_screen(self, width: int, height: int) -> None:
+        x, y = self._window_position_within_screen(width, height)
+        position = (x, y)
+        os.environ["SDL_VIDEO_WINDOW_POS"] = f"{x},{y}"
+        self.app.platform.set_window_position(position)
+
+    def _window_position_within_screen(self, width: int, height: int) -> tuple[int, int]:
+        info = self.app.platform.display_info()
+        return (
+            self._center_or_clamp(width, info.current_w),
+            self._center_or_clamp(height, info.current_h),
+        )
+
+    @staticmethod
+    def _center_or_clamp(window_size: int, screen_size: int) -> int:
+        return max((screen_size - window_size) // 2, 0)
 
     @property
     def width(self) -> int:
