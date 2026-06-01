@@ -17,7 +17,9 @@ class Costume(appear.Appearance):
     You can create costumes in three common ways:
 
     * ``actor.add_costume("images/player.png")``
+    * ``Costume("images/player.png")`` to create a detached costume with an image
     * ``Costume(actor)`` to create and attach a costume immediately
+    * ``Costume(actor, "images/player.png")`` to create, load, and attach immediately
     * ``Costume()`` followed by ``actor.add_costume(costume)`` to attach it later
 
     Examples:
@@ -43,10 +45,14 @@ class Costume(appear.Appearance):
 
     _managed_creation_depth = 0
 
-    def __init__(self, actor=None):
+    def __init__(self, actor=None, source=None):
+        if source is None and self._is_image_source(actor):
+            source = actor
+            actor = None
         super().__init__()
         self.parent = actor  #: the parent of a costume is the associated actor.
         self.actor = self.parent
+        self._initial_source = source
         self._info_overlay = False # managed by property
         self._is_rotatable = False # managed by property in appearance
         self._fill_color = None # managed by property in appearance
@@ -54,6 +60,10 @@ class Costume(appear.Appearance):
         self.transformations_manager = (
             transformations_costume_manager.TransformationsCostumeManager(self)
         )
+
+    @staticmethod
+    def _is_image_source(value) -> bool:
+        return type(value) in [str, pygame.Surface, tuple, list]
 
     @classmethod
     def create_managed(cls, actor):
@@ -86,6 +96,11 @@ class Costume(appear.Appearance):
         if self.actor is not None:
             self._set_world_default_values()
         super().after_init()
+        if self._initial_source is not None:
+            if isinstance(self._initial_source, list):
+                self.add_images(self._initial_source)
+            else:
+                self.add_image(self._initial_source)
         if self.actor is not None and not type(self)._is_managed_creation():
             self.actor.add_costume(self)
 
