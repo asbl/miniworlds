@@ -4,7 +4,6 @@ import __main__
 import asyncio
 import os
 import sys
-from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import Iterable
 
@@ -28,6 +27,11 @@ class PlatformAdapter:
             return file_handle.read()
 
     def get_package_version(self, package_name: str) -> str:
+        try:
+            from importlib.metadata import PackageNotFoundError, version
+        except ImportError:
+            return "unknown"
+
         try:
             return version(package_name)
         except PackageNotFoundError:
