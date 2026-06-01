@@ -8,7 +8,6 @@ import logging
 import pygame
 
 from typing import List, Optional, TYPE_CHECKING, cast
-from importlib.metadata import version, PackageNotFoundError
 
 import miniworlds.appearances.managers.image_manager as image_manager
 import miniworlds.base.manager.app_event_manager as event_manager

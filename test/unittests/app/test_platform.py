@@ -32,6 +32,20 @@ class TestPlatformAdapter(unittest.TestCase):
                     self.assertEqual(init_mock.call_count, 2)
                     quit_mock.assert_called_once_with()
 
+    def test_get_package_version_returns_unknown_for_missing_distribution(self):
+        adapter = PlatformAdapter()
+
+        self.assertEqual(
+            adapter.get_package_version("__missing_miniworlds_test_package__"),
+            "unknown",
+        )
+
+    def test_get_package_version_returns_unknown_without_importlib_metadata(self):
+        adapter = PlatformAdapter()
+
+        with patch.dict("sys.modules", {"importlib.metadata": None}):
+            self.assertEqual(adapter.get_package_version("miniworlds"), "unknown")
+
 
 if __name__ == "__main__":
     unittest.main()
