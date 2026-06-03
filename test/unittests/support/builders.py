@@ -6,32 +6,32 @@ from typing import Any
 from unittest.mock import Mock
 
 
-def _apply_overrides(namespace: SimpleNamespace, **overrides: Any) -> SimpleNamespace:
+def helper_apply_overrides(namespace: SimpleNamespace, **overrides: Any) -> SimpleNamespace:
     for name, value in overrides.items():
         setattr(namespace, name, value)
     return namespace
 
 
-def make_app_with_event_queue(**overrides: Any) -> SimpleNamespace:
+def helper_make_app_with_event_queue(**overrides: Any) -> SimpleNamespace:
     app = SimpleNamespace(
         event_manager=SimpleNamespace(
             event_queue=[],
             to_event_queue=Mock(),
         )
     )
-    return _apply_overrides(app, **overrides)
+    return helper_apply_overrides(app, **overrides)
 
 
-def make_camera(**overrides: Any) -> SimpleNamespace:
+def helper_make_camera(**overrides: Any) -> SimpleNamespace:
     camera = SimpleNamespace(
         is_in_screen=Mock(return_value=True),
         screen_rect=SimpleNamespace(collidepoint=Mock(return_value=True)),
         get_global_coordinates_for_world=Mock(side_effect=lambda position: position),
     )
-    return _apply_overrides(camera, **overrides)
+    return helper_apply_overrides(camera, **overrides)
 
 
-def make_registered_events(initial: dict[str, Any] | None = None):
+def helper_make_registered_events(initial: dict[str, Any] | None = None):
     registered_events = defaultdict(set)
     if initial is None:
         return registered_events
@@ -48,7 +48,7 @@ class FakeEventRegistry:
     """Test double for the internal event-registry API used by dispatcher tests."""
 
     def __init__(self, initial: dict[str, Any] | None = None):
-        self.registered_events = make_registered_events(initial)
+        self.registered_events = helper_make_registered_events(initial)
         self.change_counter = 0
 
     def copy_event_methods(self, event_name: str):
@@ -78,26 +78,26 @@ class FakeEventRegistry:
         return set(self.registered_events.keys())
 
 
-def make_event_registry(initial: dict[str, Any] | None = None) -> SimpleNamespace:
+def helper_make_event_registry(initial: dict[str, Any] | None = None) -> SimpleNamespace:
     return FakeEventRegistry(initial)
 
 
-def make_event_handler_world(**overrides: Any) -> SimpleNamespace:
+def helper_make_event_handler_world(**overrides: Any) -> SimpleNamespace:
     world = SimpleNamespace(
-        camera=make_camera(),
+        camera=helper_make_camera(),
         detect_actors=Mock(return_value=[]),
         mouse=SimpleNamespace(_tracked_position=None),
     )
-    return _apply_overrides(world, **overrides)
+    return helper_apply_overrides(world, **overrides)
 
 
-def make_collision_world(
+def helper_make_collision_world(
     registered_events: dict[str, Any] | None = None,
     class_events: dict[str, set[Any]] | None = None,
     copy_registered_events=None,
     **overrides: Any,
 ) -> SimpleNamespace:
-    registry = make_event_registry(registered_events)
+    registry = helper_make_event_registry(registered_events)
     if not isinstance(registry.registered_events.get("sensor"), dict):
         registry.registered_events["sensor"] = defaultdict(set)
 
@@ -118,17 +118,17 @@ def make_collision_world(
             copy_registered_events=copy_registered_events or Mock(return_value=set()),
         )
     )
-    return _apply_overrides(world, **overrides)
+    return helper_apply_overrides(world, **overrides)
 
 
-def make_mouse_world(active_world=None, **overrides: Any) -> SimpleNamespace:
+def helper_make_mouse_world(active_world=None, **overrides: Any) -> SimpleNamespace:
     worlds_manager = SimpleNamespace(get_world_by_pixel=Mock())
     world = SimpleNamespace(app=SimpleNamespace(worlds_manager=worlds_manager))
     worlds_manager.get_world_by_pixel.return_value = active_world if active_world is not None else world
-    return _apply_overrides(world, **overrides)
+    return helper_apply_overrides(world, **overrides)
 
 
-def make_worlds_manager_app(**overrides: Any) -> SimpleNamespace:
+def helper_make_worlds_manager_app(**overrides: Any) -> SimpleNamespace:
     app = SimpleNamespace(
         window=Mock(),
         running_worlds=[],
@@ -149,14 +149,14 @@ def make_worlds_manager_app(**overrides: Any) -> SimpleNamespace:
     )
     app.resize = Mock()
     app.prepare_mainloop = Mock()
-    return _apply_overrides(app, **overrides)
+    return helper_apply_overrides(app, **overrides)
 
 
-def make_managed_world(frame: int = 0, **overrides: Any) -> SimpleNamespace:
+def helper_make_managed_world(frame: int = 0, **overrides: Any) -> SimpleNamespace:
     world = SimpleNamespace(
         stop=Mock(),
         _stop_listening=Mock(),
-        app=make_app_with_event_queue(),
+        app=helper_make_app_with_event_queue(),
         backgrounds=SimpleNamespace(_init_display=Mock()),
         background=SimpleNamespace(set_dirty=Mock()),
         camera=SimpleNamespace(_disable_resize=Mock(), _enable_resize=Mock()),
@@ -172,4 +172,4 @@ def make_managed_world(frame: int = 0, **overrides: Any) -> SimpleNamespace:
         reset=Mock(),
         dirty=0,
     )
-    return _apply_overrides(world, **overrides)
+    return helper_apply_overrides(world, **overrides)
