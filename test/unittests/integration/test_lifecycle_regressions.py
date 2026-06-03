@@ -12,9 +12,9 @@ import miniworlds.worlds.world_base as world_base
 from miniworlds.worlds.manager.camera_manager import CameraManager
 from miniworlds.worlds.manager.layout_manager import LayoutManager
 from test.unittests.support.builders import (
-    make_app_with_event_queue,
-    make_managed_world,
-    make_worlds_manager_app,
+    helper_make_app_with_event_queue,
+    helper_make_managed_world,
+    helper_make_worlds_manager_app,
 )
 
 
@@ -22,7 +22,7 @@ class TestWorldProxies(unittest.TestCase):
     def test_world_proxies_delegate_to_camera_data_and_event_manager(self):
         world = World.__new__(World)
         world.camera = Mock()
-        world.app = make_app_with_event_queue()
+        world.app = helper_make_app_with_event_queue()
 
         new_world = World.__new__(World)
         World.switch_world(world, new_world, reset=True)
@@ -81,7 +81,7 @@ class TestActorLifecycle(unittest.TestCase):
 
     def test_actor_send_message_uses_world_app_event_queue(self):
         actor = Actor.__new__(Actor)
-        actor._world = SimpleNamespace(app=make_app_with_event_queue())
+        actor._world = SimpleNamespace(app=helper_make_app_with_event_queue())
 
         Actor.send_message(actor, "hello")
 
@@ -134,9 +134,9 @@ class TestLayoutManager(unittest.TestCase):
 
 class TestWorldsManager(unittest.TestCase):
     def test_activate_world_initializes_and_tracks_running_world(self):
-        app = make_worlds_manager_app()
+        app = helper_make_worlds_manager_app()
         manager = WorldsManager(app)
-        world = make_managed_world()
+        world = helper_make_managed_world()
 
         manager._activate_world(world, reset=True, setup=True, run=True)
 
@@ -149,10 +149,10 @@ class TestWorldsManager(unittest.TestCase):
         world.on_change.assert_called_once_with()
 
     def test_switch_world_updates_running_world_and_calls_transition_steps(self):
-        app = make_worlds_manager_app()
+        app = helper_make_worlds_manager_app()
         manager = WorldsManager(app)
-        old_world = make_managed_world(frame=1)
-        new_world = make_managed_world(frame=1)
+        old_world = helper_make_managed_world(frame=1)
+        new_world = helper_make_managed_world(frame=1)
         app.running_world = old_world
         manager._deactivate_world = Mock()
         manager._activate_world = Mock()
