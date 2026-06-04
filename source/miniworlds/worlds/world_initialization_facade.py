@@ -16,6 +16,7 @@ import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.mouse_manager as mouse_manager
 import miniworlds.worlds.manager.music_manager as world_music_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
+import miniworlds.worlds.manager.spatial_index as spatial_index
 import miniworlds.worlds.world_background_facade as world_background_facade
 import miniworlds.worlds.world_runtime_facade as world_runtime_facade
 
@@ -52,6 +53,7 @@ class WorldInitializationFacade:
     def _initialize_actor_state(self) -> None:
         self.world._timed_objects = []
         self.world._dynamic_actors = pygame.sprite.Group()
+        self.world._spatial_index = spatial_index.SpatialIndex()
         self.world._blocking_actors = cast(Set["actor_mod.Actor"], set())
         self.world._blocking_registry_version = 0
         self.world._blocking_static_rect_cache = (-1, -1, [])

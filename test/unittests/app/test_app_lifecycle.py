@@ -67,6 +67,25 @@ class TestAppLifecycle(unittest.TestCase):
         self.assertEqual(App.get_path(), "/tmp/override")
         self.assertEqual(App._state.path, "/tmp/override")
 
+    def test_display_repaint_skips_empty_repaint_list(self):
+        app = self._create_app(DummyWorld())
+        app.platform = MagicMock()
+        app.repaint_areas = []
+
+        app.display_repaint()
+
+        app.platform.update_display.assert_not_called()
+
+    def test_display_repaint_updates_and_clears_dirty_areas(self):
+        app = self._create_app(DummyWorld())
+        app.platform = MagicMock()
+        app.repaint_areas = ["dirty-area"]
+
+        app.display_repaint()
+
+        app.platform.update_display.assert_called_once_with(["dirty-area"])
+        self.assertEqual(app.repaint_areas, [])
+
 
 class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
     def setUp(self):

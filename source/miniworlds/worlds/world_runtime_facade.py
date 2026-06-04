@@ -54,13 +54,11 @@ class WorldRuntimeFacade:
             )
 
         try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
             asyncio.run(main())
-        except RuntimeError as error:
-            if "event loop is running" in str(error):
-                loop = asyncio.get_event_loop()
-                loop.create_task(main())
-            else:
-                raise
+        else:
+            loop.create_task(main())
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
         x, y = position
@@ -114,6 +112,9 @@ class WorldRuntimeFacade:
     def _iter_candidates_for_world_position(
         self, position: Tuple[float, float]
     ) -> Iterable[actor_mod.Actor]:
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        if spatial_index is not None and not getattr(self.world, "is_tiled", False):
+            return spatial_index.query_point(position)
         camera = getattr(self.world, "camera", None)
         if camera is None:
             return self.world.actors
@@ -132,6 +133,14 @@ class WorldRuntimeFacade:
             return self.world.actors
         screen_rect = getattr(camera, "screen_rect", None)
         if screen_rect is not None and screen_rect.collidepoint(pixel):
+            spatial_index = getattr(self.world, "_spatial_index", None)
+            if spatial_index is not None and not getattr(self.world, "is_tiled", False):
+                local_pixel = (
+                    pixel[0] - camera.screen_topleft[0],
+                    pixel[1] - camera.screen_topleft[1],
+                )
+                global_position = camera.get_global_coordinates_for_world(local_pixel)
+                return spatial_index.query_point(global_position)
             get_actors_in_view = getattr(camera, "get_actors_in_view", None)
             if callable(get_actors_in_view):
                 return get_actors_in_view()

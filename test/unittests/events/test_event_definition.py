@@ -6,6 +6,13 @@ from miniworlds.worlds.manager.event_definition import EventDefinition
 
 
 class TestEventDefinition(unittest.TestCase):
+    def test_mouse_wheel_events_are_available_to_worlds_and_actors(self):
+        definition = EventDefinition()
+
+        for event_name in ("on_wheel_up", "on_wheel_down"):
+            self.assertIn(event_name, definition.world_class_events_set)
+            self.assertIn(event_name, definition.actor_class_events_set)
+
     def test_update_skips_rebuild_when_actor_classes_are_unchanged(self):
         definition = EventDefinition()
 

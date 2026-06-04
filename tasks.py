@@ -26,9 +26,13 @@ Legacy flat task names stay available as compatibility aliases while the
 grouped interface becomes the documented surface.
 """
 
+import json
 import os
 import re
 import shutil
+import sys
+import tempfile
+from pathlib import Path
 
 from invoke import Collection, task
 from invoke.exceptions import Exit
@@ -39,6 +43,7 @@ PHYSICS_REPO = os.path.join(REPO_ROOT, "physics")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
 VERSION_PATTERN = re.compile(r'version="([^"]+)"')
+PERFORMANCE_RESULTS = Path(REPO_ROOT) / "test" / "performance" / "results"
 
 BENCHMARK_SCRIPTS = {
     "method_caller": "test/performance/profile_method_caller.py",
@@ -52,6 +57,10 @@ BENCHMARK_SCRIPTS = {
     "blockable_movement_cprofile": "test/performance/profile_blockable_movement_cprofile.py",
     "image_costume_sizes": "test/performance/profile_image_costume_sizes.py",
     "camera_culling": "test/performance/profile_camera_culling.py",
+    "static_scene": "test/performance/profile_static_scene.py",
+    "world_queries": "test/performance/profile_world_queries.py",
+    "actor_lifecycle": "test/performance/profile_actor_lifecycle.py",
+    "collision_communication": "test/performance/profile_collision_communication.py",
 }
 
 BENCHMARK_GROUPS = {
@@ -67,6 +76,10 @@ BENCHMARK_GROUPS = {
         "blockable_movement",
         "image_costume_sizes",
         "camera_culling",
+        "static_scene",
+        "world_queries",
+        "actor_lifecycle",
+        "collision_communication",
     ],
     "cprofile": [
         "actor_logic_filters_cprofile",
@@ -81,8 +94,8 @@ BENCHMARK_GROUPS["all"] = [
 ]
 
 
-def _docker_mounts() -> str:
-    return (
+def _docker_mounts(results_dir: Path | None = None) -> str:
+    mounts = (
         f"-v {REPO_ROOT}/pytest.ini:/app/pytest.ini "
         f"-v {REPO_ROOT}/conftest.py:/app/conftest.py "
         f"-v {REPO_ROOT}/source:/app/source "
@@ -91,6 +104,9 @@ def _docker_mounts() -> str:
         f"-v {REPO_ROOT}/physics/source:/app/physics/source "
         f"-v {REPO_ROOT}/physics/test:/app/physics/test "
     )
+    if results_dir is not None:
+        mounts += f"-v {results_dir}:/app/test/performance/results "
+    return mounts
 
 
 def _docker_pythonpath() -> str:
@@ -349,7 +365,12 @@ def run_python_in_container(c, script_path: str, rebuild: bool = False):
     )
 
 
-def run_python_scripts_in_container(c, script_paths: list[str], rebuild: bool = False):
+def run_python_scripts_in_container(
+    c,
+    script_paths: list[str],
+    rebuild: bool = False,
+    results_dir: Path | None = None,
+):
     """Run multiple Python scripts sequentially in a single docker container."""
     if rebuild:
         build_test_environment(c)
@@ -361,9 +382,72 @@ def run_python_scripts_in_container(c, script_paths: list[str], rebuild: bool = 
     c.run(
         f"docker run --rm "
         f"--user {uid}:{gid} "
-        f"{_docker_mounts()}"
+        f"{_docker_mounts(results_dir)}"
         f"{IMAGE} sh -lc \"export SDL_AUDIODRIVER=dummy MINIWORLDS_TEST_FAST=1 {_docker_pythonpath()} && {commands}\""
     )
+
+
+def _read_latest_benchmark_results(results_dir: Path) -> dict[str, dict]:
+    latest_results = {}
+    for latest_path in sorted((results_dir / "benchmarks").glob("*/latest.json")):
+        entry = json.loads(latest_path.read_text(encoding="utf-8"))
+        latest_results[entry["slug"]] = entry
+    return latest_results
+
+
+def _performance_metric_direction(key: str) -> int:
+    if key.endswith("_per_s"):
+        return 1
+    if key.endswith("_ms"):
+        return -1
+    return 0
+
+
+def _format_performance_comparison(
+    historical: dict[str, dict],
+    current: dict[str, dict],
+    benchmark_names: list[str],
+) -> str:
+    lines = [
+        "",
+        "Performance comparison against historical latest results",
+        "=" * 56,
+        f"{'Benchmark / metric':42} {'Historical':>12} {'Current':>12} {'Change':>10}",
+        "-" * 80,
+    ]
+    for benchmark_name in benchmark_names:
+        slug = re.sub(r"[^a-z0-9]+", "-", benchmark_name.lower()).strip("-")
+        old_entry = historical.get(slug)
+        new_entry = current.get(slug)
+        if old_entry is None or new_entry is None:
+            lines.append(f"{benchmark_name:42} {'missing result':>36}")
+            continue
+
+        for key, new_value in new_entry["values"].items():
+            direction = _performance_metric_direction(key)
+            old_value = old_entry["values"].get(key)
+            if (
+                direction == 0
+                or not isinstance(old_value, (int, float))
+                or not isinstance(new_value, (int, float))
+                or not old_value
+            ):
+                continue
+            percent = (float(new_value) - float(old_value)) / float(old_value) * 100
+            performance_change = percent * direction
+            marker = (
+                "faster"
+                if performance_change > 0
+                else "slower"
+                if performance_change < 0
+                else "same"
+            )
+            lines.append(
+                f"{benchmark_name + ' / ' + key:42} "
+                f"{old_value:12.2f} {new_value:12.2f} "
+                f"{abs(performance_change):8.1f}% {marker}"
+            )
+    return "\n".join(lines)
 
 
 @task(
@@ -524,6 +608,12 @@ def tests_visual(c):
     run_pytest_in_container(c, "-m visual -v", rebuild=False)
 
 
+@task(name="pyodide")
+def tests_pyodide(c):
+    """Run core browser-runtime tests in Pyodide and headless Chromium."""
+    c.run(f"{sys.executable} test/pyodidetests/run.py")
+
+
 @task(name="profile")
 def tests_profile(c):
     """Show the slowest tests inside Docker without rebuilding the image."""
@@ -569,6 +659,41 @@ def benchmarks_hotspots(c):
         _resolve_benchmark_scripts("all"),
         rebuild=False,
     )
+
+
+@task(name="pyodide")
+def benchmarks_pyodide(c):
+    """Run everyday performance benchmarks in Pyodide and headless Chromium."""
+    c.run(f"{sys.executable} test/pyodidetests/run.py --performance")
+
+
+@task(
+    name="analyze",
+    help={
+        "selection": "Benchmark group or individual benchmark name",
+        "rebuild": "Rebuild the Docker image before running the benchmarks",
+    },
+)
+def benchmarks_analyze(c, selection="all", rebuild=False):
+    """Run benchmarks in Docker and compare them with historical latest results."""
+    scripts = _resolve_benchmark_scripts(selection)
+    benchmark_names = [
+        name for name, script in BENCHMARK_SCRIPTS.items() if script in scripts
+    ]
+    historical = _read_latest_benchmark_results(PERFORMANCE_RESULTS)
+
+    with tempfile.TemporaryDirectory(prefix="miniworlds-performance-") as temp_dir:
+        analysis_results = Path(temp_dir) / "results"
+        shutil.copytree(PERFORMANCE_RESULTS, analysis_results)
+        run_python_scripts_in_container(
+            c,
+            scripts,
+            rebuild=rebuild,
+            results_dir=analysis_results,
+        )
+        current = _read_latest_benchmark_results(analysis_results)
+
+    print(_format_performance_comparison(historical, current, benchmark_names))
 
 
 @task(
@@ -664,12 +789,15 @@ tests.add_task(tests_run, default=True)
 tests.add_task(tests_cached)
 tests.add_task(tests_unit)
 tests.add_task(tests_visual)
+tests.add_task(tests_pyodide)
 tests.add_task(tests_profile)
 
 benchmarks = Collection("benchmarks")
 benchmarks.add_task(benchmarks_run, default=True)
 benchmarks.add_task(benchmarks_list)
 benchmarks.add_task(benchmarks_hotspots)
+benchmarks.add_task(benchmarks_analyze)
+benchmarks.add_task(benchmarks_pyodide)
 benchmarks.add_task(benchmarks_single)
 
 build = Collection("build")
@@ -701,12 +829,15 @@ ns.add_task(tests_run, name="run_tests")
 ns.add_task(tests_cached, name="run_tests_cached")
 ns.add_task(tests_unit, name="run_unit_tests")
 ns.add_task(tests_visual, name="run_visual_tests")
+ns.add_task(tests_pyodide, name="run_pyodide_tests")
 ns.add_task(tests_profile, name="profile_tests")
 ns.add_task(build_image, name="image")
 ns.add_task(benchmarks_list, name="list_benchmarks")
 ns.add_task(benchmarks_single, name="run_benchmark")
 ns.add_task(benchmarks_run, name="run_benchmarks")
 ns.add_task(benchmarks_hotspots, name="profile_hotspots")
+ns.add_task(benchmarks_analyze, name="analyze_performance")
+ns.add_task(benchmarks_pyodide, name="profile_pyodide")
 ns.add_task(container_shell, name="debug")
 ns.add_task(container_cleanup, name="cleanup")
 ns.add_task(container_x11, name="debug_x11")

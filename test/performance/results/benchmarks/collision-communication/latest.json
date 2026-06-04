@@ -1,0 +1,32 @@
+{
+  "delta_to_previous": {
+    "avg_ms": 0.1908,
+    "frames": 0.0,
+    "max_ms": 4.5848,
+    "metric_actors": 0.0,
+    "metric_collision_hits": -183.0,
+    "metric_collision_queries": -53.0,
+    "metric_message_handler_calls": 0.0,
+    "metric_messages_queued": -33.0,
+    "min_ms": -0.0213,
+    "p95_ms": 0.9413,
+    "p99_ms": 0.0251
+  },
+  "name": "collision communication",
+  "recorded_at": "2026-06-04T15:29:14",
+  "slug": "collision-communication",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 37.4531,
+    "frames": 119,
+    "max_ms": 49.2049,
+    "metric_actors": 96,
+    "metric_collision_hits": 8017,
+    "metric_collision_queries": 11467,
+    "metric_message_handler_calls": 2208,
+    "metric_messages_queued": 1182,
+    "min_ms": 33.3852,
+    "p95_ms": 43.6042,
+    "p99_ms": 44.5455
+  }
+}

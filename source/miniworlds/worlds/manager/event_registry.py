@@ -14,6 +14,7 @@ class EventRegistry:
         self.event_definition = event_definition
         self.world = world
         self.change_counter = 0
+        self._event_members_by_class: dict[type, frozenset[str]] = {}
         self._event_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
         self._message_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
         self._sensor_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
@@ -45,6 +46,13 @@ class EventRegistry:
         if self._sensor_handlers:
             names.add("sensor")
         return names
+
+    def has_registered_event(self, event_name: str) -> bool:
+        if event_name == "message":
+            return bool(self._message_handlers)
+        if event_name == "sensor":
+            return bool(self._sensor_handlers)
+        return event_name in self._event_handlers
 
     def copy_event_methods(self, event_name: str) -> set[Callable]:
         return self._event_handlers.get(event_name, set()).copy()
@@ -105,8 +113,16 @@ class EventRegistry:
 
     def register_events_for_actor(self, actor):
         """Registers all actor-level event methods."""
-        for member in self._get_members_for_instance(actor):
-            self.register_event(member, actor)
+        actor_class = actor.__class__
+        class_was_cached = actor_class in self._event_members_by_class
+        members = self._get_members_for_instance(actor)
+        if not class_was_cached:
+            self.event_definition.update()
+        for member in members:
+            if member in self.event_definition.class_events_set:
+                method = inspection.Inspection(actor).get_instance_method(member)
+                if method:
+                    self._add_event_method(member, method)
 
     def register_event(self, member: str, instance: Any) -> Optional[tuple[str, Callable]]:
         """
@@ -222,7 +238,12 @@ class EventRegistry:
                 {"on_mouse_left", "on_key_down"}
                 custom_method will be ignored, because it does not start with on_ or act
         """
-        if instance.__class__ not in [
+        instance_class = instance.__class__
+        cached_members = self._event_members_by_class.get(instance_class)
+        if cached_members is not None:
+            return set(cached_members)
+
+        if instance_class not in [
             actor_mod.Actor,
             world_mod.World,
         ]:
@@ -238,10 +259,13 @@ class EventRegistry:
                     if member.startswith("on_") or member.startswith("act")
                 ]
             )
-            return member_set.union(
+            members = member_set.union(
                 self._get_members_for_classes(instance.__class__.__bases__)
             )
+            self._event_members_by_class[instance_class] = frozenset(members)
+            return members
         else:
+            self._event_members_by_class[instance_class] = frozenset()
             return set()
 
     def _get_members_for_classes(self, classes) -> set:

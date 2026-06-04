@@ -819,6 +819,7 @@ class World(world_base.WorldBase):
             raise TypeError(
                 f"event must be str or None, got {type(event).__name__}: {event!r}"
             )
+        self._run_project_validation()
         self._get_runtime_facade().run(
             fullscreen=fullscreen,
             fit_desktop=fit_desktop,
@@ -827,6 +828,23 @@ class World(world_base.WorldBase):
             data=data,
         )
 
+
+    def _run_project_validation(self) -> None:
+        """Emit warnings for project issues relevant to local desktop execution."""
+        try:
+            if app_mod.App.get_platform().is_web():
+                return  # already validated before export; no filesystem in browser
+            from pathlib import Path
+            from miniworlds.base.project_validator import ProjectValidator, Severity
+            main = sys.modules.get("__main__")
+            if not (main and getattr(main, "__file__", None)):
+                return
+            entry = Path(main.__file__).resolve()
+            for issue in ProjectValidator(entry.parent, entry).validate():
+                if issue.local_severity in (Severity.WARNING, Severity.ERROR):
+                    warnings.warn(f"[miniworlds] {issue.message}", stacklevel=4)
+        except Exception:
+            pass  # validation is best-effort; never break the game
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
         """

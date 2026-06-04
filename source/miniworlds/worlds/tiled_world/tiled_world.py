@@ -415,6 +415,9 @@ class TiledWorld(world.World):
         """
         self._dynamic_actors_dict.clear()
         for actor in self._dynamic_actors:
+            # Skip actors that are explicitly marked as static to avoid unnecessary work
+            if getattr(actor, "static", False):
+                continue
             x, y = actor.position[0], actor.position[1]
             self._dynamic_actors_dict[(x, y)].append(actor)
 

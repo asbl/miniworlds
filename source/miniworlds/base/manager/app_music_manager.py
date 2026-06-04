@@ -23,7 +23,8 @@ class MusicManager:
         self.audio = self.app.platform
         self.path: str | None = None
         self._paused: bool = False  # Tracks pause state manually
-        self.audio.ensure_audio()
+        # Do not initialize audio backend at construction time. Initialize lazily
+        # when music is actually loaded or played to avoid expensive setup in web/Pyodide.
 
     def change_music(self, path: str) -> None:
         """
