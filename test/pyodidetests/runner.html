@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>miniworlds Pyodide tests</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+  <pre id="status" data-state="running">Loading Pyodide</pre>
+  <script type="module">
+    const status = document.getElementById("status");
+    const params = new URLSearchParams(window.location.search);
+    const pyodideBase = params.get("pyodide-base")
+      || "https://cdn.jsdelivr.net/pyodide/v0.27.0/full/";
+
+    function finish(state, result) {
+      status.dataset.state = state;
+      status.textContent = JSON.stringify(result, null, 2);
+      window.pyodideTestResult = result;
+    }
+
+    try {
+      const { loadPyodide } = await import(`${pyodideBase}pyodide.mjs`);
+      const pyodide = await loadPyodide({ indexURL: pyodideBase });
+      window.pyodideTestProgress = "installing packages";
+      pyodide.canvas.setCanvas2D(document.getElementById("canvas"));
+      await pyodide.loadPackage(["micropip", "numpy"]);
+      const wheelUrl = new URL("./__MINIWORLDS_WHEEL__", window.location.href).href;
+      await pyodide.runPythonAsync(`
+import micropip
+await micropip.install(["pygame-ce", ${JSON.stringify(wheelUrl)}])
+      `);
+      window.pyodideTestProgress = "loading student project";
+      const project = new Uint8Array(await (await fetch("./project.zip")).arrayBuffer());
+      pyodide.FS.writeFile("/project.zip", project);
+      await pyodide.runPythonAsync(`
+import os
+import shutil
+import sys
+
+shutil.unpack_archive("/project.zip", "/project")
+os.chdir("/project")
+sys.path.insert(0, "/project")
+      `);
+      window.pyodideTestProgress = "loading suite";
+      const suite = await (await fetch("./suite.py")).text();
+      await pyodide.runPythonAsync(suite);
+      window.pyodideTestProgress = "running suite";
+      const result = JSON.parse(await pyodide.runPythonAsync("await run_suite()"));
+      finish(result.status, result);
+    } catch (error) {
+      finish("failed", {
+        status: "failed",
+        failed: 1,
+        error: error?.stack || String(error),
+      });
+    }
+  </script>
+</body>
+</html>

@@ -76,6 +76,18 @@ class TestCameraManager(unittest.TestCase):
         result = self.camera.get_actors_in_view()
         self.assertIn(mock_actor, result)
 
+    def test_get_actors_in_view_builds_dirty_camera_rect_once(self):
+        actors = [Mock() for _ in range(10)]
+        for actor in actors:
+            actor.position_manager.get_global_rect.return_value = pygame.Rect(0, 0, 10, 10)
+        self.mock_world.actors = actors
+        self.camera.dirty = True
+        self.camera.get_rect = Mock(wraps=self.camera.get_rect)
+
+        self.camera.get_actors_in_view()
+
+        self.camera.get_rect.assert_called_once()
+
     def test_reload_camera_triggers_resize(self):
         self.camera._reload_camera()
         self.mock_world.app.resize.assert_called_once()

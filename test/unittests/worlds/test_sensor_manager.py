@@ -78,6 +78,25 @@ class TestSensorManager(unittest.TestCase):
 
         self.assertNotIn(wall, self.world._blocking_actors)
 
+    def test_spatial_index_tracks_actor_movement_and_removal(self):
+        hunter = self._create_actor(Hunter, position=(10, 10))
+        runner = self._create_actor(Runner, position=(20, 10))
+
+        self.assertIn(runner, hunter.detect_all(Runner))
+
+        runner.position = (70, 70)
+        self.assertNotIn(runner, hunter.detect_all(Runner))
+        self.assertIn(runner, self.world._spatial_index.query_point((70, 70)))
+
+        runner.remove()
+        self.assertNotIn(runner, self.world._spatial_index.query_point((70, 70)))
+
+    def test_spatial_index_keeps_collisions_across_cell_boundaries(self):
+        hunter = self._create_actor(Hunter, position=(63, 32))
+        runner = self._create_actor(Runner, position=(65, 32))
+
+        self.assertIn(runner, hunter.detect_all(Runner))
+
     def test_world_blocking_registry_version_updates_on_flag_changes(self):
         wall = self._create_actor(Wall)
         initial_version = self.world._blocking_registry_version

@@ -288,10 +288,17 @@ class CameraManager(pygame.sprite.Sprite):
         if self._view_update_frame == self.world.frame:
             return self._view_active_actors
 
+        camera_rect = self.rect
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        candidates = (
+            spatial_index.query_rect(camera_rect)
+            if spatial_index is not None and not getattr(self.world, "is_tiled", False)
+            else self.world.actors
+        )
         current_frame_actors = {
             actor
-            for actor in self.world.actors
-            if self.rect.colliderect(actor.position_manager.get_global_rect())
+            for actor in candidates
+            if camera_rect.colliderect(actor.position_manager.get_global_rect())
         }
         self.view_actors_last_frame = self._view_actors_actual_frame
         self._view_actors_actual_frame = current_frame_actors

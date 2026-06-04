@@ -189,7 +189,10 @@ class App:
         """
         Initializes global resources (e.g., image cache).
         """
-        image_manager.ImageManager.cache_images_in_image_folder()
+        # Avoid preloading all images when running on the web (Pyodide):
+        # preloading triggers many HTTP requests and slows startup.
+        if not self.platform.is_web():
+            image_manager.ImageManager.cache_images_in_image_folder()
 
     def prepare_mainloop(self):
         """
@@ -274,6 +277,8 @@ class App:
         """
         Repaints the regions marked as dirty (called every frame).
         """
+        if not self.repaint_areas:
+            return
         self.platform.update_display(self.repaint_areas)
         self.repaint_areas = []
 

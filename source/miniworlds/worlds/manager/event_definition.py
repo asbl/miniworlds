@@ -69,6 +69,8 @@ class EventDefinition:
                 "on_mouse_left_up",
                 "on_mouse_middle_up",
                 "on_mouse_right_up",
+                "on_wheel_up",
+                "on_wheel_down",
             ],
             "clicked_on_actor": [
                 "on_clicked",
@@ -117,6 +119,8 @@ class EventDefinition:
                 "on_mouse_left_up",
                 "on_mouse_middle_up",
                 "on_mouse_right_up",
+                "on_wheel_up",
+                "on_wheel_down",
             ],
             "key": [
                 "on_key_down",

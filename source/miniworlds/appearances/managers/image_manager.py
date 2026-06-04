@@ -52,10 +52,12 @@ class ImageManager:
             return ImageManager._images_dict[canonical_path]
 
         try:
-            image = pygame.image.load(canonical_path).convert_alpha()
+            image = pygame.image.load(canonical_path)
         except pygame.error:
             raise FileExistsError(f"File '{path}' does not exist or is invalid.")
 
+        if pygame.display.get_surface():
+            image = image.convert_alpha()
         ImageManager._images_dict[canonical_path] = image
         return image
 

@@ -183,6 +183,8 @@ class Costume(appear.Appearance):
     def set_dirty(self, value="all", status=1):
         """Set dirty flags and keep actor rect/mask caches in sync."""
         super().set_dirty(value, status)
+        if hasattr(self, "_cached_rect"):
+            self._cached_rect = (-1, self._cached_rect[1])
         if hasattr(self, "actor") and self.actor and hasattr(self.actor, "position_manager"):
             self.actor.position_manager._invalidate_rect_cache()
         if (

@@ -21,6 +21,10 @@ venv/bin/invoke --list
 ## Tests
 
 The canonical test tasks run inside the Docker image configured by `tasks.py`.
+Use these Docker tasks when evaluating test failures. In particular, visual
+test output depends on the operating system, fonts, and rendering libraries, so
+visual baselines must only be compared or updated from the Docker environment.
+Do not accept or regenerate visual baselines from a direct local `pytest` run.
 
 Run all unit tests:
 

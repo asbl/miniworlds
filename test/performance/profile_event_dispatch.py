@@ -59,13 +59,24 @@ def create_world():
         screen_rect=SimpleNamespace(collidepoint=lambda position: True),
         get_global_coordinates_for_world=lambda position: position,
     )
-    return SimpleNamespace(camera=camera, detect_actors=lambda position: [])
+    return SimpleNamespace(
+        camera=camera,
+        mouse=SimpleNamespace(_tracked_position=None),
+        detect_actors=lambda position: [],
+    )
 
 
 def profile_event_dispatch(iterations: int = 50000):
     recorder = Recorder()
     second_recorder = Recorder()
     registry = SimpleNamespace(registered_events=defaultdict(set))
+    registry.registered_event_names = lambda: set(registry.registered_events)
+    registry.copy_event_methods = lambda event: set(registry.registered_events.get(event, set()))
+    registry.copy_message_methods = lambda message: set(
+        registry.registered_events["message"].get(message, set())
+    )
+    registry.copy_generic_message_methods = lambda: set()
+    registry.change_counter = 0
     registry.registered_events["on_key_down"].add(recorder.on_key_down)
     registry.registered_events["on_key_down_a"].add(recorder.on_key_down_a)
     registry.registered_events["message"] = defaultdict(set, {"saved": {recorder.on_message_saved}})

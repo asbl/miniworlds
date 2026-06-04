@@ -42,6 +42,13 @@ class Positionmanager:
         actor_world = getattr(self.actor, "_world", None)
         if actor_world is None:
             return
+        spatial_index = getattr(actor_world, "_spatial_index", None)
+        if (
+            spatial_index is not None
+            and not getattr(actor_world, "is_tiled", False)
+            and self.actor in actor_world.actors
+        ):
+            spatial_index.update(self.actor, self.get_global_rect())
         if self.is_blocking and getattr(self.actor, "_static", False):
             current = getattr(actor_world, "_blocking_registry_version", 0)
             actor_world._blocking_registry_version = current + 1
@@ -433,7 +440,7 @@ class Positionmanager:
         return self.actor
 
     def move_to(self, new_position: Tuple[float, float]) -> "actor_mod.Actor":
-        self.position = new_position
+        self.set_position(new_position)
         return self.actor
 
     @staticmethod

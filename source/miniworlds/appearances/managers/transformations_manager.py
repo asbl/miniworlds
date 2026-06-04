@@ -1,5 +1,6 @@
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 import pygame
+
 from typing import TypedDict, Callable
 
 
@@ -12,13 +13,18 @@ class TransformationPipelineEntry(TypedDict):
 
 class TransformationsManager:
 
+    PIPELINE_CACHE_MAX = 64
+
     def __init__(self, appearance):
         self.surface = None
         self.appearance = appearance
         self.reload_transformations = defaultdict(bool)
 
-        self.cached_image = pygame.Surface((0, 0))
-        self.cached_images = defaultdict(pygame.Surface)
+        # Keep complete render results for repeated requests within one revision.
+        # Every dirty signal advances the revision, including custom pipeline stages.
+        self._pipeline_cache: OrderedDict = OrderedDict()
+        self._pipeline_cache_max = TransformationsManager.PIPELINE_CACHE_MAX
+        self._render_revision = 0
 
         self.transformations_pipeline: list[TransformationPipelineEntry] = [
             {"key": "orientation", "func": self.transformation_set_orientation, "attr": "orientation", "is_optional": False},
@@ -60,30 +66,32 @@ class TransformationsManager:
             self.reload_transformations[key] = False
 
     def process_transformation_pipeline(self, image: pygame.Surface, appearance) -> pygame.Surface:
-        """Processes the image through the transformation pipeline, using cache when appropriate."""
+        """Process and cache a complete transformation pipeline result."""
+        size = self.get_size()
+        cache_key = (id(image), size, self._render_revision)
+        if cache_key in self._pipeline_cache:
+            self._pipeline_cache.move_to_end(cache_key)
+            self.reset_reload_transformations()
+            return self._pipeline_cache[cache_key]
+
         for entry in self.transformations_pipeline:
             key = entry["key"]
             func = entry["func"]
             attr = entry["attr"]
 
-            should_apply = getattr(appearance, attr, False) and self.get_size() != (0, 0)
+            should_apply = getattr(appearance, attr, False) and size != (0, 0)
+            if should_apply and image.get_width() != 0 and image.get_height() != 0:
+                image = func(image, appearance)
 
-            if (
-                key in self.reload_transformations
-                and not self.reload_transformations[key]
-                and key in self.cached_images
-                and self.cached_images[key]
-            ):
-                if should_apply:
-                    image = self.cached_images[key]  # Use cached version
-            else:
-                if should_apply and image.get_width() != 0 and image.get_height() != 0:
-                    image = func(image, appearance)  # Apply transformation
-                    self.cached_images[key] = image
+        self._pipeline_cache[cache_key] = image
+        while len(self._pipeline_cache) > self._pipeline_cache_max:
+            self._pipeline_cache.popitem(last=False)
+        self.reset_reload_transformations()
         return image
 
     def flag_reload_actions_for_transformation_pipeline(self, transformation_string):
         """Flags all transformations starting from the given one to be reloaded."""
+        self._render_revision += 1
         reload = False
         for transformation in self.transformations_pipeline:
             key = transformation["key"]
@@ -178,11 +186,13 @@ class TransformationsManager:
         return self.surface
 
     def transformation_transparency(self, image: pygame.Surface, appearance) -> pygame.Surface:
+        image = image.copy()
         image.set_alpha(appearance.alpha)
         self.surface = image
         return image
 
     def transformation_draw_images(self, image: pygame.Surface, appearance) -> pygame.Surface:
+        image = image.copy()
         for draw_action in appearance.draw_images:
             surface, rect = draw_action
             surface = pygame.transform.scale(surface, (rect[2], rect[3]))
@@ -191,6 +201,7 @@ class TransformationsManager:
         return image
 
     def transformation_draw_shapes(self, image: pygame.Surface, appearance) -> pygame.Surface:
+        image = image.copy()
         for draw_action in appearance.draw_shapes:
             draw_action[0](image, *draw_action[1])
         self.surface = image

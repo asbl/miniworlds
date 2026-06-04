@@ -234,6 +234,26 @@ class SensorManager:
             actor_list.remove(self.actor)
         return actor_list
 
+    def _query_spatial_rect(self, rect: pygame.Rect):
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        if spatial_index is None or getattr(self.world, "is_tiled", False):
+            return self.world.camera.get_actors_in_view()
+        camera_rect = self.world.camera.rect
+        return {
+            actor
+            for actor in spatial_index.query_rect(rect)
+            if camera_rect.colliderect(actor.position_manager.get_global_rect())
+        }
+
+    def _query_spatial_point(self, point: Tuple[float, float]):
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        if spatial_index is None or getattr(self.world, "is_tiled", False):
+            camera = getattr(self.world, "camera", None)
+            if camera is not None and camera.rect.collidepoint(point):
+                return camera.get_actors_in_view()
+            return self.world.actors
+        return spatial_index.query_point(point)
+
     def detect_point(self, point) -> bool:
         return self.actor.position_manager.get_global_rect().collidepoint(point)
 
@@ -425,14 +445,14 @@ class SensorManager:
         if not self.world.backgrounds._is_display_initialized:
             self.world.backgrounds._init_display()
 
-        visible_actors = self.world.camera.get_actors_in_view()
+        actor_rect = self.actor.position_manager.get_global_rect()
+        visible_actors = self._query_spatial_rect(actor_rect)
         collision_candidates, filter_applied = self._prefilter_detectable_actors(
             visible_actors, filter
         )
         if not collision_candidates:
             return []
 
-        actor_rect = self.actor.position_manager.get_global_rect()
         detected_actors = [
             actor
             for actor in collision_candidates
@@ -491,14 +511,13 @@ class SensorManager:
         if not self.world.backgrounds._is_display_initialized:
             return
         
-        visible_actors = self.world.camera.get_actors_in_view()
+        actor_rect = self.actor.position_manager.get_global_rect()
+        visible_actors = self._query_spatial_rect(actor_rect)
         collision_candidates, filter_applied = self._prefilter_detectable_actors(
             visible_actors, filter
         )
         if not collision_candidates:
             return None
-
-        actor_rect = self.actor.position_manager.get_global_rect()
 
         detected_actors = [
             actor for actor in collision_candidates
@@ -601,11 +620,7 @@ class SensorManager:
             return []
         x, y = position
         actors = []
-        camera = getattr(self.world, "camera", None)
-        if camera is not None and camera.rect.collidepoint((x, y)):
-            candidates = camera.get_actors_in_view()
-        else:
-            candidates = self.world.actors
+        candidates = self._query_spatial_point((x, y))
         for actor in candidates:
             if actor is self.actor:
                 continue

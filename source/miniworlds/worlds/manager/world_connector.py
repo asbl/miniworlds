@@ -146,6 +146,9 @@ class WorldConnector():
 
         if self.actor not in self.world.actors:
             self.world.actors.add(self.actor)
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        if spatial_index is not None and not getattr(self.world, "is_tiled", False):
+            spatial_index.update(self.actor)
 
         self.set_static(self.actor.static)
         self.actor._is_acting = True
@@ -200,6 +203,9 @@ class WorldConnector():
             self.remove_dynamic_actor()
 
         # Disable managers
+        spatial_index = getattr(self.world, "_spatial_index", None)
+        if spatial_index is not None and not getattr(self.world, "is_tiled", False):
+            spatial_index.remove(self.actor)
         self.actor._has_sensor_manager = False
         self.actor._has_position_manager = False
 

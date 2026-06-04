@@ -35,6 +35,12 @@ Run a single visual test:
 pytest test/visualtests/gui/test_610_toolbar_widgets.py -v
 ```
 
+Run the browser-runtime smoke tests with Pyodide and headless Chromium:
+
+```sh
+invoke tests.pyodide
+```
+
 Unit tests are grouped by domain under `test/unittests/<area>/`.
 
 Task categories in [tasks.py](tasks.py):

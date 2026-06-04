@@ -309,6 +309,23 @@ class EventHandler:
             return False
         if event in self.executed_events:
             return False
+        has_registered_event = getattr(
+            self.event_registry,
+            "has_registered_event",
+            None,
+        )
+        if callable(has_registered_event):
+            if has_registered_event(event):
+                return True
+            generic_key_event = self._get_generic_key_event(event)
+            if generic_key_event is not None:
+                return has_registered_event(generic_key_event)
+            dependencies = self._EVENT_DEPENDENCIES.get(event)
+            return bool(
+                dependencies
+                and any(has_registered_event(name) for name in dependencies)
+            )
+
         registered_event_keys = self.event_registry.registered_event_names()
         if event in registered_event_keys:
             return True
