@@ -125,6 +125,7 @@ class App:
         """
         if not self.platform.is_web():
             version_str = self.platform.get_package_version("miniworlds")
+            print(f"miniworlds version: {version_str}")
             logger.info("Starting miniworlds window for version %s", version_str)
 
     def __init__(self, title, world):
