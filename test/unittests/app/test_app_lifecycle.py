@@ -86,6 +86,29 @@ class TestAppLifecycle(unittest.TestCase):
         app.platform.update_display.assert_called_once_with(["dirty-area"])
         self.assertEqual(app.repaint_areas, [])
 
+    def test_output_start_prints_miniworlds_version_once_on_desktop(self):
+        app = object.__new__(App)
+        app.platform = MagicMock()
+        app.platform.is_web.return_value = False
+        app.platform.get_package_version.return_value = "1.2.3"
+
+        with patch("builtins.print") as print_mock:
+            app._output_start()
+
+        print_mock.assert_called_once_with("miniworlds version: 1.2.3")
+        app.platform.get_package_version.assert_called_once_with("miniworlds")
+
+    def test_output_start_skips_version_output_on_web(self):
+        app = object.__new__(App)
+        app.platform = MagicMock()
+        app.platform.is_web.return_value = True
+
+        with patch("builtins.print") as print_mock:
+            app._output_start()
+
+        print_mock.assert_not_called()
+        app.platform.get_package_version.assert_not_called()
+
 
 class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
