@@ -4,6 +4,7 @@ import __main__
 import asyncio
 import os
 import sys
+import warnings
 from pathlib import Path
 from typing import Iterable
 
@@ -61,7 +62,16 @@ class PlatformAdapter:
             return
 
         try:
-            SDLWindow.from_display_module().position = position
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message=(
+                        "Please use Window.get_surface and Window.flip to use "
+                        "surface-rendering with Window.*"
+                    ),
+                    category=DeprecationWarning,
+                )
+                SDLWindow.from_display_module().position = position
         except (AttributeError, pygame.error):
             return
 

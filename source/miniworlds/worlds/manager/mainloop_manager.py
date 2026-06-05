@@ -53,7 +53,8 @@ class MainloopManager:
             for actor in self.world._dynamic_actors:
                 if actor.costume:
                     costume_was_dirty = bool(actor.costume.dirty)
-                    actor.costume.update()
+                    if costume_was_dirty or actor.costume.is_animated:
+                        actor.costume.update()
                     if costume_was_dirty and not getattr(self.world, "is_tiled", False):
                         self.world._spatial_index.update(actor)
 
