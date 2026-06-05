@@ -22,7 +22,8 @@ Useful tasks from `tasks.py`:
   the historical latest results without modifying the stored history
 - `invoke benchmarks.analyze --selection=world`: analyze one benchmark group
 - `invoke benchmarks.pyodide`: measure actor lifecycle, world queries, message
-  broadcasts, and rendered frame updates in Pyodide and headless Chromium
+  broadcasts, rendered frame updates, and the objects-first solar scene in
+  Pyodide and headless Chromium
 
 The `world` group includes benchmarks for collision-heavy scenes, image
 transformations, camera culling, mostly static scenes, actor lifecycle, and

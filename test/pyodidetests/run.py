@@ -73,7 +73,7 @@ class DevToolsClient:
     def __init__(self, websocket_url: str):
         host_port, path = websocket_url.removeprefix("ws://").split("/", 1)
         host, port = host_port.split(":")
-        self.socket = socket.create_connection((host, int(port)), timeout=10)
+        self.socket = socket.create_connection((host, int(port)), timeout=60)
         key = base64.b64encode(secrets.token_bytes(16)).decode()
         request = (
             f"GET /{path} HTTP/1.1\r\n"

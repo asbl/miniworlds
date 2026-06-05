@@ -40,5 +40,6 @@ invoke benchmarks.pyodide
 ```
 
 It measures actor creation/removal, repeated world queries, message broadcasts,
-and rendered canvas frame updates. Compare these values only on the same
-machine and browser version.
+rendered canvas frame updates, and the objects-first solar scene with 1000
+orbiting circles. Compare these values only on the same machine and browser
+version.
