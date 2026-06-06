@@ -9,6 +9,4 @@ They are especially useful together with buttons, because the active world can r
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.gui.toolbar.Toolbar
    :members:
-
-   .. autoclasstoc::
 ```

@@ -48,14 +48,14 @@ This program prints:
 
 Generally, you write:
 
-```python
+```text
 for i in range(max):
     <code block>
 ```
 
 or
 
-```python
+```text
 for i in range(min, max):
     <code block>
 ```
@@ -146,7 +146,7 @@ world.run()
 
 The `while` loop has the following structure:
 
-```python
+```text
 while <condition>:
     <code block>
 ```
@@ -180,7 +180,7 @@ world.run()
 
 Your entire program technically runs inside a `while` loop:
 
-```python
+```text
 while <no quit>:
   <draw images on screen>
   <handle logic and events>
@@ -200,7 +200,7 @@ The entire loop is executed within **one frame**. This means loops are not suita
 
 A traffic light system can be modeled as a **state diagram**:
 
-```mermaid
+```text
 stateDiagram
     [*] --> Green
 

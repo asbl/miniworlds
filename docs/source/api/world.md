@@ -22,6 +22,18 @@ Useful beginner aliases on World include:
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.world.World
    :members:
+```
 
-   .. autoclasstoc::
+## Exceptions
+
+These exceptions are exported by `miniworlds` for code that wants to catch
+specific Miniworlds errors. They are documented here but intentionally do not
+have their own navigation entry.
+
+```{eval-rst}
+.. autoexception:: miniworlds.base.exceptions.CostumeOutOfBoundsError
+   :members:
+
+.. autoexception:: miniworlds.base.exceptions.OriginException
+   :members:
 ```

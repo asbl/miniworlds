@@ -21,18 +21,20 @@ invoke tests.cached
 If `invoke` is unavailable, run the equivalent Docker command from
 [tasks.py](tasks.py).
 
-Run a single test:
+Run a focused test through the Docker test path as well. Do not call `pytest`
+directly from the host environment; use an Invoke task or open a Docker shell
+through Invoke when you need an interactive focused run.
 
 Example:
 
 ```sh
-pytest test/unittests/connectors/test_world_connector.py -v
+invoke tests.unit
 ```
 
-Run a single visual test:
+Run visual tests through Docker too:
 
 ```sh
-pytest test/visualtests/gui/test_610_toolbar_widgets.py -v
+invoke tests.visual
 ```
 
 Run the browser-runtime smoke tests with Pyodide and headless Chromium:

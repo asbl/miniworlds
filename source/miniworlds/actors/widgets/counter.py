@@ -2,8 +2,10 @@ import miniworlds.actors.widgets.label as mod_label
 
 
 class CounterLabel(mod_label.Label):
-    """A counter label contains a `description` and a `counter`. The counter starts with value 0 and can be modified with
-    `add` and `sub`
+    """A counter label contains a ``description`` and a ``counter``.
+
+    The counter starts with value 0 and can be modified with ``add`` and
+    ``sub``.
     """
 
     def __init__(self, description, value = 0, image=None):
@@ -15,10 +17,12 @@ class CounterLabel(mod_label.Label):
         return f"{self.description} : {str(self.value)}"
     
     def add(self, value):
+        """Increase the counter by ``value``."""
         self.value += value
         self.update_text()
 
     def sub(self, value):
+        """Decrease the counter by ``value``."""
         self.value -= value
         self.update_text()
 

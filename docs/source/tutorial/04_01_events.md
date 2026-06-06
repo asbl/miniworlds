@@ -25,7 +25,7 @@ def on_key_down_w(self):
     self.y -= 1  # Moves the player upward
 ```
 
-#### Explanation:
+## Explanation
 
 This method is executed when the <kbd>w</kbd> key is pressed. The `player` actor moves up by one step.
 
@@ -64,7 +64,7 @@ def on_key_down_s(self):
 world.run()
 ```
 
-#### Explanation:
+## Explanation
 
 In this example, the actor is controlled as follows:
 
@@ -102,24 +102,27 @@ player2.costume.orientation = -90
 
 @player2.register
 def on_key_pressed_s(self):
-    self.y -= 1  # Continuously moves player 2 downward while key is held
+    self.y += 1  # Continuously moves player 2 downward while key is held
 
 world.run()
 ```
 
 ```{note}
 You can either define specific keys like `on_key_down_b(self)`  
-or handle all key input using `on_key_down(self, key)` for general keyboard event handling.
+or handle all key input using `on_key_down(self, keys)` for general keyboard event handling.
 ```
 
 ```{warning}
 Common mistakes with event handlers:
 
-- `on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:
-    `def on_key_down(self, key):`
+- `on_key_down` / `on_key_pressed` / `on_key_up` receive the current key list:
+    `def on_key_down(self, keys):`
 - Mouse handlers usually need `position`:
     `def on_mouse_left(self, position):`
 - Do not forget `@player.register` or `@world.register` above the handler.
 
 If a handler is not called, first check its name and signature.
 ```
+
+For a complete list of event names and signatures, see the
+[Event reference](../api/events.md).

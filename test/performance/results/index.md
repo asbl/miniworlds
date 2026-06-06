@@ -11,7 +11,7 @@ Open the per-benchmark `latest.md` or `history.md` files for detailed changes.
 | blockable movement cprofile | 2026-03-16T22:15:20 | avg_ms=113.44, p95_ms=207.46, max_ms=271.52 | avg_ms=+60.80, p95_ms=+140.42, max_ms=+180.45 | benchmarks/blockable-movement-cprofile |
 | camera culling | 2026-03-16T22:15:44 | avg_ms=16.73, p95_ms=23.27, max_ms=35.78 | avg_ms=+7.68, p95_ms=+13.20, max_ms=+24.39 | benchmarks/camera-culling |
 | collision communication | 2026-06-04T15:29:14 | avg_ms=37.45, p95_ms=43.60, max_ms=49.20 | avg_ms=+0.19, p95_ms=+0.94, max_ms=+4.58 | benchmarks/collision-communication |
-| event dispatch | 2026-03-16T19:30:07 | hover_events_ms=626.22, hover_events_per_s=79844.53, iterations=50000, key_events_ms=202.00 | - | benchmarks/event-dispatch |
+| event dispatch | 2026-06-06T07:05:38 | hover_events_ms=514.42, hover_events_per_s=97197.71, iterations=50000, key_events_ms=277.94 | hover_events_ms=-111.80, hover_events_per_s=+17353.18, iterations=0.00 | benchmarks/event-dispatch |
 | image costume sizes | 2026-03-16T22:04:35 | avg_ms=1.98, p95_ms=4.65, max_ms=5.15 | - | benchmarks/image-costume-sizes |
-| method caller | 2026-03-16T19:30:51 | cache_hits=99999, cache_misses=1, first_pass_ms=88.76, iterations=50000 | cache_hits=0.00, cache_misses=0.00, first_pass_ms=-3.41 | benchmarks/method-caller |
-| resource lookup | 2026-03-16T19:29:45 | iterations=50000, lookup_ms=78.77, lookups_per_s=634752.95 | - | benchmarks/resource-lookup |
+| method caller | 2026-06-06T07:05:36 | cache_hits=99999, cache_misses=1, first_pass_ms=68.28, iterations=50000 | cache_hits=0.00, cache_misses=0.00, first_pass_ms=-20.48 | benchmarks/method-caller |
+| resource lookup | 2026-06-06T07:05:39 | iterations=50000, lookup_ms=61.79, lookups_per_s=809207.45 | iterations=0.00, lookup_ms=-16.98, lookups_per_s=+174454.50 | benchmarks/resource-lookup |

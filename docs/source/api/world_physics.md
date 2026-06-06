@@ -4,6 +4,10 @@
 
 Install `miniworlds_physics` alongside `miniworlds` and import it from the separate package:
 
+```bash
+pip install miniworlds miniworlds_physics
+```
+
 ```python
 from miniworlds import Circle, Rectangle
 from miniworlds_physics import PhysicsWorld
@@ -34,11 +38,15 @@ Physics worlds support dedicated actor callbacks such as `on_touching_circle` an
 
 See also the [Flappy Bird tutorial](../patterns/flappy_physics.md) for a larger example.
 
+## Runtime Notes
+
+Physics support is intentionally separate from the main `miniworlds` package.
+Desktop Python environments are the recommended target. Browser-based runtimes
+such as Pyodide/H5P may not provide the same physics package support.
+
 ## API Reference
 
 ```{eval-rst}
 .. autoclass:: miniworlds_physics.physics_world.PhysicsWorld
    :members:
-
-   .. autoclasstoc::
 ```

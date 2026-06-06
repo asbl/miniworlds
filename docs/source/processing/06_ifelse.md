@@ -4,7 +4,7 @@ You need conditionals whenever your program should behave differently based on a
 
 ---
 
-### First Example
+## First Example
 
 For example, if you want to check whether a player has reached a certain score in your game, you can write:
 
@@ -15,16 +15,16 @@ if points > 100:
 
 ---
 
-### General Syntax
+## General Syntax
 
-```python
+```text
 if <condition>:
     <code block>
 ```
 
 ---
 
-### Boolean Expressions
+## Boolean Expressions
 
 A **condition** is an expression that evaluates to `True` or `False`. Such expressions are called **boolean expressions**.
 
@@ -45,7 +45,7 @@ These expressions can include variables and be more complex.
 
 ---
 
-### Comparison Operators
+## Comparison Operators
 
 Here are the most common comparison operators:
 
@@ -57,7 +57,7 @@ Here are the most common comparison operators:
 
 ---
 
-### Code Blocks
+## Code Blocks
 
 If you want to run multiple statements when a condition is true, group them in a code block using indentation:
 
@@ -88,7 +88,7 @@ else:
 
 General syntax:
 
-```python
+```text
 if <condition>:
     <code>
 elif <condition>:

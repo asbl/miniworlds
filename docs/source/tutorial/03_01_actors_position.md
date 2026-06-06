@@ -2,15 +2,15 @@
 
 In this section, you’ll learn how to position and orient actors within the coordinate system.
 
-### Basics
+## Basics
 
 First, a quick recap of the core concepts:
 
 * You can create an actor at any position:
 
-  ```python
-  actor = Actor((50, 120))  # creates an actor at position (50, 120)
-  ```
+```python
+actor = Actor((50, 120))  # creates an actor at position (50, 120)
+```
 * The coordinate system has its origin at the **top-left corner**:
 
   ```{figure} ../_images/tutorial_addactor_coord.png

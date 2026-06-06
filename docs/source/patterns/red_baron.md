@@ -23,7 +23,7 @@ You need a world where actors can be placed. The final line must be `world.run()
 from miniworlds import World, Actor, timer, Text
 world = World(800, 480)
 
-// your code here
+# your code here
 
 world.run()
 ```
@@ -60,7 +60,7 @@ Create two backgrounds side by side to simulate infinite scrolling:
 back0 = Actor()
 back0.add_costume("background")
 back0.size = world.width, world.height
-back1 = Actor(world.width, 0)
+back1 = Actor((world.width, 0))
 back1.size = world.width, world.height
 back1.add_costume("background")
 backs = [back0, back1]
@@ -98,14 +98,14 @@ class Plane(Actor):
 At the end of your code:
 
 ```python
-plane = Plane(100, world.height / 2)
+plane = Plane((100, world.height / 2))
 ```
 
 ### Add Physics
 
 Extend `on_setup()`:
 
-```python
+```text
     def on_setup(self):
         self.add_costume("planered1")
         self.gravity = 0.1
@@ -114,7 +114,7 @@ Extend `on_setup()`:
 
 ### Simulate Physics
 
-```python
+```text
     def act(self):
         self.velocity_y += self.gravity
         self.velocity_y *= 0.9  # friction
@@ -123,7 +123,7 @@ Extend `on_setup()`:
 
 ### Add Upward Force on Key Press
 
-```python
+```text
     def on_key_down_w(self):
         self.velocity_y -= 5
 ```

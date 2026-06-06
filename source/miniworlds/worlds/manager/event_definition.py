@@ -97,6 +97,7 @@ class EventDefinition:
             "on_the_world": [
                 "on_detecting_world",
                 "on_not_detecting_world",
+                "on_detecting_not_on_world",
             ],
             "on_detecting": ["on_detecting", "on_detecting_"] + detecting_actor_methods,
             "on_not_detecting": [

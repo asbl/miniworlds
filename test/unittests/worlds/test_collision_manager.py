@@ -1,10 +1,10 @@
 from types import SimpleNamespace
-from unittest.mock import Mock, call, patch
+from unittest.mock import ANY, Mock, call, patch
 
 from miniworlds.worlds.manager.collision_manager import CollisionManager
 
 
-def test_handle_all_collisions_calls_all_internal_handlers(collision_world_builder):
+def test_handle_all_collisions_skips_empty_handler_groups(collision_world_builder):
     manager = CollisionManager(collision_world_builder())
 
     with patch.object(manager, "_handle_actor_detecting_actor_methods") as detecting:
@@ -15,12 +15,46 @@ def test_handle_all_collisions_calls_all_internal_handlers(collision_world_build
                         with patch.object(manager, "_handle_sensor_events") as sensor:
                             manager._handle_all_collisions()
 
-    detecting.assert_called_once_with()
-    not_detecting.assert_called_once_with()
-    borders.assert_called_once_with()
-    on_world.assert_called_once_with()
-    off_world.assert_called_once_with()
-    sensor.assert_called_once_with()
+    detecting.assert_not_called()
+    not_detecting.assert_not_called()
+    borders.assert_not_called()
+    on_world.assert_not_called()
+    off_world.assert_not_called()
+    sensor.assert_not_called()
+
+
+def test_handle_all_collisions_calls_registered_handler_groups(collision_world_builder):
+    world = collision_world_builder(
+        registered_events={
+            "on_detecting_runner": {Mock()},
+            "on_not_detecting_runner": {Mock()},
+            "on_detecting_borders": {Mock()},
+            "on_detecting_world": {Mock()},
+            "on_detecting_not_on_world": {Mock()},
+            "sensor": {"runner": {Mock()}},
+        },
+        class_events={
+            "on_detecting": {"on_detecting_runner"},
+            "on_not_detecting": {"on_not_detecting_runner"},
+            "border": {"on_detecting_borders"},
+        },
+    )
+    manager = CollisionManager(world)
+
+    with patch.object(manager, "_handle_actor_detecting_actor_methods") as detecting:
+        with patch.object(manager, "_handle_actor_not_detecting_actor_methods") as not_detecting:
+            with patch.object(manager, "_handle_actor_detecting_border_methods") as borders:
+                with patch.object(manager, "_handle_actor_detecting_on_the_world_methods") as on_world:
+                    with patch.object(manager, "_handle_actor_detecting_not_on_the_world_methods") as off_world:
+                        with patch.object(manager, "_handle_sensor_events") as sensor:
+                            manager._handle_all_collisions()
+
+    detecting.assert_called_once_with(ANY)
+    not_detecting.assert_called_once_with(ANY)
+    borders.assert_called_once_with(ANY)
+    on_world.assert_called_once_with(ANY)
+    off_world.assert_called_once_with(ANY)
+    sensor.assert_called_once_with(ANY)
 
 
 def test_handle_sensor_events_skips_when_registry_is_empty(collision_world_builder):
@@ -120,4 +154,23 @@ def test_handle_actor_not_detecting_methods_calls_when_no_matches_exist(
         manager._handle_actor_not_detecting_actor_methods()
 
     actor.sensor_manager.detect_actors.assert_called_once_with(filter="runner")
+    call_method.assert_called_once_with(method, None)
+
+
+def test_handle_not_on_world_supports_detecting_not_on_world_alias(
+    collision_world_builder,
+):
+    world = collision_world_builder()
+    actor = SimpleNamespace(is_inside_world=Mock(return_value=False))
+    method = Mock()
+    method.__self__ = actor
+    world.event_manager.registry.registered_events["on_detecting_not_on_world"] = {
+        method
+    }
+    manager = CollisionManager(world)
+
+    with patch("miniworlds.worlds.manager.collision_manager.method_caller.call_method") as call_method:
+        manager._handle_actor_detecting_not_on_the_world_methods()
+
+    actor.is_inside_world.assert_called_once_with()
     call_method.assert_called_once_with(method, None)

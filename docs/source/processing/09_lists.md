@@ -177,11 +177,11 @@ green_circles = []
 @world.register
 def act(self):
     if self.frame % 100 == 0:
-        c = Circle((400, random.randint(0, 200), 40))
+        c = Circle((400, random.randint(0, 200)), 40)
         c.color = (255, 0, 0)
         red_circles.append(c)
     elif self.frame % 50 == 0:
-        c = Circle((400, random.randint(0, 200), 40))
+        c = Circle((400, random.randint(0, 200)), 40)
         c.color = (0, 255, 0)
         green_circles.append(c)
     for circle in red_circles:

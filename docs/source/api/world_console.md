@@ -2,9 +2,16 @@
 
 ## API Reference
 
+### Console
+
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.gui.console.Console
    :members:
+```
 
-   .. autoclasstoc::
+### PagerHorizontal
+
+```{eval-rst}
+.. autoclass:: miniworlds.worlds.gui.pager.PagerHorizontal
+   :members:
 ```

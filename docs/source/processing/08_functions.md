@@ -65,7 +65,7 @@ This defines a function `create_circle`:
 
 When you want to automate something more complex (e.g. creating Actors), you can define your own function:
 
-```python
+```text
 def function_name(<parameters>):
     <code block>
 ```

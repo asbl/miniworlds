@@ -10,6 +10,4 @@ attributes and methods defined in this class.
 ```{eval-rst}
 .. autoclass:: miniworlds.appearances.appearance.Appearance
    :members:
-
-   .. autoclasstoc::
 ```

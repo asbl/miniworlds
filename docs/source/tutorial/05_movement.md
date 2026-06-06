@@ -1,6 +1,6 @@
 # Movement
 
-### Basics
+## Basics
 
 Before we dive deeper into movement functions, here’s a quick recap of the core concepts:
 
@@ -27,7 +27,7 @@ With **`turn_left()`** and **`turn_right()`**, you can rotate the actor by a spe
 * **`player.turn_left(degrees)`**: Rotates the actor **left** by `degrees`
 * **`player.turn_right(degrees)`**: Rotates the actor **right** by `degrees`
 
-### Example:
+## Example
 
 ```python
 import miniworlds 
@@ -61,7 +61,7 @@ world.run()
 
 As an alternative to regular movement, you can use **`move_in_direction()`** to move the actor in any direction by specifying an angle.
 
-### Example: Diagonal movement
+## Example: Diagonal movement
 
 ```python
 import miniworlds 

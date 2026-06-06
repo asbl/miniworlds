@@ -172,9 +172,9 @@ world.run()
 2. **Adjust orientation in code**: Alternatively, you can rotate the costume directly in Miniworlds
    using the `orientation` attribute:
 
-   ```python
-   my_actor.costume.orientation = 90  # Rotates the costume by 90 degrees
-   ```
+```python
+my_actor.costume.orientation = 90  # Rotates the costume by 90 degrees
+```
 
 You can also use other values like `-90` or `180` to get the correct orientation, depending on how your image is designed.
 

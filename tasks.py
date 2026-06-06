@@ -39,6 +39,7 @@ from invoke.exceptions import Exit
 
 IMAGE = "pygame-tests"
 REPO_ROOT = os.path.abspath(os.path.dirname(__file__))
+VENV_PYTHON = os.path.join(REPO_ROOT, "venv", "bin", "python")
 PHYSICS_REPO = os.path.join(REPO_ROOT, "physics")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
@@ -111,6 +112,14 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
 
 def _docker_pythonpath() -> str:
     return "PYTHONPATH=/app/source:/app/physics/source"
+
+
+def _local_pythonpath() -> str:
+    return f"{REPO_ROOT}/source:{REPO_ROOT}/physics/source"
+
+
+def _local_env_prefix() -> str:
+    return f"PYTHONPATH={_local_pythonpath()} SDL_AUDIODRIVER=dummy MINIWORLDS_TEST_FAST=1"
 
 
 def _resolve_benchmark_scripts(selection: str) -> list[str]:
@@ -331,6 +340,11 @@ def ensure_test_environment(c):
 def build_test_environment(c):
     """Rebuild the Docker image used by tests and benchmarks."""
     c.run(f"docker build -t {IMAGE} .")
+
+
+def ensure_local_environment(c):
+    """Create/update the local venv through prepare.sh."""
+    c.run("MINIWORLDS_PREPARE_SKIP_LIST=1 zsh -lc 'source prepare.sh'", pty=True)
 
 
 def run_pytest_in_container(c, pytest_args: str, rebuild: bool = True):
@@ -620,6 +634,17 @@ def tests_profile(c):
     run_pytest_in_container(c, "-q --durations=25", rebuild=False)
 
 
+@task(name="physics")
+def tests_physics(c):
+    """Run the focused miniworlds_physics integration tests locally."""
+    ensure_local_environment(c)
+    c.run(
+        f"{_local_env_prefix()} {VENV_PYTHON} -m pytest -q "
+        "test/unittests/physics/test_physics_integration.py",
+        pty=True,
+    )
+
+
 @task(name="list")
 def benchmarks_list(c):
     """List benchmark groups and individual benchmark names."""
@@ -737,6 +762,33 @@ def build_image(c):
     build_test_environment(c)
 
 
+@task(name="prepare")
+def env_prepare(c):
+    """Create/update the local venv via prepare.sh."""
+    ensure_local_environment(c)
+
+
+@task(name="check")
+def env_check(c):
+    """Verify the local venv and physics imports."""
+    ensure_local_environment(c)
+    c.run(
+        f"{_local_env_prefix()} {VENV_PYTHON} - <<'PY'\n"
+        "import sys\n"
+        "import pygame\n"
+        "import pymunk\n"
+        "import miniworlds\n"
+        "import miniworlds_physics\n"
+        "print(sys.executable)\n"
+        "print(f'pygame {pygame.__version__}')\n"
+        "print('pymunk ok')\n"
+        "print('miniworlds ok')\n"
+        "print(f'miniworlds_physics exports {miniworlds_physics.__all__}')\n"
+        "PY",
+        pty=True,
+    )
+
+
 @task(name="shell")
 def container_shell(c):
     """Start an interactive shell in the test Docker image."""
@@ -791,6 +843,7 @@ tests.add_task(tests_unit)
 tests.add_task(tests_visual)
 tests.add_task(tests_pyodide)
 tests.add_task(tests_profile)
+tests.add_task(tests_physics)
 
 benchmarks = Collection("benchmarks")
 benchmarks.add_task(benchmarks_run, default=True)
@@ -806,6 +859,10 @@ build.add_task(build_image)
 build.add_task(docs_build)
 build.add_task(build_physics)
 
+env = Collection("env")
+env.add_task(env_prepare, default=True)
+env.add_task(env_check)
+
 container = Collection("container")
 container.add_task(container_shell, default=True)
 container.add_task(container_cleanup)
@@ -819,6 +876,7 @@ ns.add_collection(deploy)
 ns.add_collection(tests)
 ns.add_collection(benchmarks)
 ns.add_collection(build)
+ns.add_collection(env)
 ns.add_collection(container)
 ns.add_collection(examples)
 
@@ -831,7 +889,10 @@ ns.add_task(tests_unit, name="run_unit_tests")
 ns.add_task(tests_visual, name="run_visual_tests")
 ns.add_task(tests_pyodide, name="run_pyodide_tests")
 ns.add_task(tests_profile, name="profile_tests")
+ns.add_task(tests_physics, name="run_physics_tests")
 ns.add_task(build_image, name="image")
+ns.add_task(env_prepare, name="prepare")
+ns.add_task(env_check, name="check_env")
 ns.add_task(benchmarks_list, name="list_benchmarks")
 ns.add_task(benchmarks_single, name="run_benchmark")
 ns.add_task(benchmarks_run, name="run_benchmarks")

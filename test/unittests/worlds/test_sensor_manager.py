@@ -179,6 +179,25 @@ class TestSensorManager(unittest.TestCase):
         self.assertEqual(filtered, [runner])
         resolve_actor_type.assert_called_once_with("runner")
 
+    def test_prefilter_detectable_actors_reuses_resolved_classname(self):
+        hunter = self._create_actor(Hunter)
+        runner = self._create_actor(Runner)
+
+        with patch.object(
+            hunter.sensor_manager,
+            "_resolve_actor_type_by_name",
+            wraps=hunter.sensor_manager._resolve_actor_type_by_name,
+        ) as resolve_actor_type:
+            hunter.sensor_manager._prefilter_detectable_actors([hunter, runner], "runner")
+            filtered, applied = hunter.sensor_manager._prefilter_detectable_actors(
+                [hunter, runner],
+                "runner",
+            )
+
+        self.assertTrue(applied)
+        self.assertEqual(filtered, [runner])
+        resolve_actor_type.assert_called_once_with("runner")
+
     def test_detect_actors_applies_actor_list_filter(self):
         hunter = self._create_actor(Hunter)
         runner = self._create_actor(Runner)
@@ -255,6 +274,21 @@ class TestSensorManager(unittest.TestCase):
         detected = hunter.sensor_manager.get_blocking_actor_at_position((20, 20))
 
         self.assertIsNone(detected)
+
+    def test_get_blocking_actor_at_position_queries_spatial_index(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+        wall.is_blocking = True
+
+        with patch.object(
+            self.world._spatial_index,
+            "query_point",
+            wraps=self.world._spatial_index.query_point,
+        ) as query_point:
+            detected = hunter.sensor_manager.get_blocking_actor_at_position((40, 20))
+
+        self.assertIs(detected, wall)
+        query_point.assert_called_once_with((40, 20))
 
     def test_get_line_to_does_not_crash_when_start_y_greater_than_target_y(self):
         """Regression Bug 1: get_line_to used wrong operator precedence in distance formula,

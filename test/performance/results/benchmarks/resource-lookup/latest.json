@@ -1,12 +1,16 @@
 {
-  "delta_to_previous": {},
+  "delta_to_previous": {
+    "iterations": 0.0,
+    "lookup_ms": -16.9819,
+    "lookups_per_s": 174454.4999
+  },
   "name": "resource lookup",
-  "recorded_at": "2026-03-16T19:29:45",
+  "recorded_at": "2026-06-06T07:05:39",
   "slug": "resource-lookup",
   "summary_type": "measurements",
   "values": {
     "iterations": 50000,
-    "lookup_ms": 78.7708,
-    "lookups_per_s": 634752.9473
+    "lookup_ms": 61.7889,
+    "lookups_per_s": 809207.4472
   }
 }

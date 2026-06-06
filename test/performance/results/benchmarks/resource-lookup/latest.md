@@ -1,15 +1,17 @@
 # resource lookup
 
-Last run: 2026-03-16T19:29:45
+Last run: 2026-06-06T07:05:39
 Summary type: measurements
 
 ## Current Values
 - iterations: 50000
-- lookup_ms: 78.77
-- lookups_per_s: 634752.95
+- lookup_ms: 61.79
+- lookups_per_s: 809207.45
 
 ## Delta To Previous Run
-- no previous run
+- iterations: 0.00
+- lookup_ms: -16.98
+- lookups_per_s: +174454.50
 
 ## Files
 - history.jsonl

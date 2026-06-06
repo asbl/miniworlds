@@ -102,6 +102,27 @@ class SensorManager:
 
         raise exceptions.WrongFilterType(actor_filter)
 
+    def _resolved_detectable_actor_filter_from_cache(
+        self,
+        actor_filter: Optional[ActorFilterType],
+    ) -> Tuple[Optional[ActorFilterType], bool]:
+        if actor_filter is None:
+            return None, False
+        if not isinstance(actor_filter, str):
+            return self._resolve_detectable_actor_filter(actor_filter)
+
+        event_manager = getattr(self.world, "event_manager", None)
+        definition = getattr(event_manager, "definition", None)
+        signature = getattr(definition, "_actor_class_signature", ())
+        cache_key = (actor_filter.lower(), signature)
+        cache = getattr(self, "_resolved_actor_filter_cache", None)
+        if cache is None:
+            cache = {}
+            self._resolved_actor_filter_cache = cache
+        if cache_key not in cache:
+            cache[cache_key] = self._resolve_detectable_actor_filter(actor_filter)
+        return cache[cache_key]
+
     def _filter_actor_list(
         self,
         actor_list: Optional[List["actor_mod.Actor"]],
@@ -121,7 +142,7 @@ class SensorManager:
         Returns:
             List[Actor]: The filtered list of actors.
         """
-        resolved_filter, filter_applied = self._resolve_detectable_actor_filter(actor_filter)
+        resolved_filter, filter_applied = self._resolved_detectable_actor_filter_from_cache(actor_filter)
 
         return self._filter_actor_list_by_resolved_filter(
             actor_list,
@@ -156,11 +177,7 @@ class SensorManager:
         if actors is None:
             return actor_list
         if actors:
-            actor_list = [
-                actor
-                for actor in actor_list
-                if actor.__class__ == actors or issubclass(actor.__class__, actors)
-            ]
+            actor_list = [actor for actor in actor_list if isinstance(actor, actors)]
             return actor_list
         else:
             return actor_list
@@ -194,7 +211,7 @@ class SensorManager:
         return actor_type
 
     def _prefilter_detectable_actors(self, visible_actors, actor_filter):
-        resolved_filter, filter_applied = self._resolve_detectable_actor_filter(actor_filter)
+        resolved_filter, filter_applied = self._resolved_detectable_actor_filter_from_cache(actor_filter)
         if not filter_applied:
             return visible_actors, False
 
@@ -227,7 +244,8 @@ class SensorManager:
         Returns:
             A list of actors that are present in both lists.
         """
-        return [actor for actor in actor_list if actor in actors]
+        actor_set = set(actors)
+        return [actor for actor in actor_list if actor in actor_set]
 
     def _remove_self_from_actor_list(self, actor_list: List["actor_mod.Actor"]):
         if actor_list and self.actor in actor_list:
@@ -519,13 +537,19 @@ class SensorManager:
         if not collision_candidates:
             return None
 
+        collision_type = self.actor.collision_type
+        if collision_type in ("rect", "static-rect"):
+            for actor in collision_candidates:
+                if actor is self.actor:
+                    continue
+                if actor.position_manager.get_global_rect().colliderect(actor_rect):
+                    return actor if filter_applied else self.filter_first_actor([actor], filter)
+
         detected_actors = [
             actor for actor in collision_candidates
             if actor is not self.actor
             and actor.position_manager.get_global_rect().colliderect(actor_rect)
         ]
-
-        collision_type = self.actor.collision_type
         if detected_actors and collision_type not in ("rect", "static-rect"):
             detected_actors = self._detect_actor_by_collision_type(
                 detected_actors, collision_type
@@ -598,6 +622,29 @@ class SensorManager:
         if not self._is_valid_point(position):
             return None
         x, y = position
+        blocking_actors = getattr(self.world, "_blocking_actors", ())
+        spatial_index = getattr(self.world, "_spatial_index", None)
+
+        if spatial_index is not None and not getattr(self.world, "is_tiled", False):
+            for actor in spatial_index.query_point((x, y)):
+                if actor is self.actor or actor not in blocking_actors:
+                    continue
+                actor_rect = self._try_get_actor_global_rect(actor)
+                if actor_rect is None:
+                    continue
+                if actor_rect.collidepoint(x, y):
+                    return actor
+
+            # Keep manually registered or test-double blocking objects working.
+            for actor in blocking_actors:
+                if actor is self.actor or actor in spatial_index:
+                    continue
+                actor_rect = self._try_get_actor_global_rect(actor)
+                if actor_rect is None:
+                    continue
+                if actor_rect.collidepoint(x, y):
+                    return actor
+            return None
 
         for actor, actor_rect in self._get_cached_static_blocking_rects():
             if actor is self.actor:
@@ -605,7 +652,7 @@ class SensorManager:
             if actor_rect.collidepoint(x, y):
                 return actor
 
-        for actor in getattr(self.world, "_blocking_actors", ()):
+        for actor in blocking_actors:
             if actor is self.actor or getattr(actor, "_static", False):
                 continue
             actor_rect = self._try_get_actor_global_rect(actor)

@@ -9,6 +9,4 @@ Most methods and attributes are inherited from the `Appearance` base class.
 ```{eval-rst}
 .. autoclass:: miniworlds.appearances.costume.Costume
    :members:
-
-   .. autoclasstoc::
 ```
