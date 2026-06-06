@@ -21,4 +21,6 @@ else
 fi
 
 echo "Python verwendet: $(which python)"
-invoke -l
+if [[ -z "${MINIWORLDS_PREPARE_SKIP_LIST:-}" ]]; then
+    invoke -l
+fi

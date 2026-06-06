@@ -2,6 +2,9 @@
 
 Timer classes schedule actions in future frames.
 
+The `timer` and `loop` decorators are convenience helpers for one-time and
+repeating actions.
+
 ## API Reference
 
 ### Timer
@@ -9,8 +12,6 @@ Timer classes schedule actions in future frames.
 ```{eval-rst}
 .. autoclass:: miniworlds.tools.timer.Timer
    :members:
-
-   .. autoclasstoc::
 ```
 
 ### ActionTimer
@@ -18,8 +19,6 @@ Timer classes schedule actions in future frames.
 ```{eval-rst}
 .. autoclass:: miniworlds.tools.timer.ActionTimer
    :members:
-
-   .. autoclasstoc::
 ```
 
 ### LoopActionTimer
@@ -27,6 +26,16 @@ Timer classes schedule actions in future frames.
 ```{eval-rst}
 .. autoclass:: miniworlds.tools.timer.LoopActionTimer
    :members:
+```
 
-   .. autoclasstoc::
+### timer
+
+```{eval-rst}
+.. autofunction:: miniworlds.tools.timer.timer
+```
+
+### loop
+
+```{eval-rst}
+.. autofunction:: miniworlds.tools.timer.loop
 ```

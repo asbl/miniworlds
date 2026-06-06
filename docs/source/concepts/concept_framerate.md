@@ -1,4 +1,4 @@
-## Concept: Framerate
+# Concept: Framerate
 
 You can configure how often the `act()` method is called by adjusting the attributes `world.fps` and `world.speed`.
 
@@ -14,7 +14,7 @@ You can configure how often the `act()` method is called by adjusting the attrib
 
 ---
 
-### Example
+## Example
 
 ```python
 import miniworlds 
@@ -36,7 +36,7 @@ world.run()
 
 ---
 
-### Output:
+## Output
 
 ```
 3

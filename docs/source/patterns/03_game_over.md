@@ -10,7 +10,7 @@ First, it makes sense to define a method that creates all actors needed at the s
 
 ```python
 def setup():
-    player = Circle(40,100)
+    player = Circle((40, 100), 20)
     @player.register
     def on_key_pressed(self, keys):
         global running
@@ -36,7 +36,7 @@ In the `game_over` method, the world is paused:
 def game_over():
     global running
     running = False
-    Text(100,100, "Game Over")
+    Text((100, 100), "Game Over")
     world.stop()
 ```
 
@@ -75,7 +75,7 @@ enemies = []
 world = World()
 
 def setup():
-    player = Circle(40,100)
+    player = Circle((40, 100), 20)
     @player.register
     def on_key_pressed(self, keys):
         global running
@@ -94,7 +94,7 @@ def setup():
 def game_over():
     global running
     running  = False
-    Text(100,100, "Game Over")
+    Text((100, 100), "Game Over")
     world.stop()
     
 def restart():
@@ -108,7 +108,7 @@ def restart():
     
 def create_enemy():
     global enemies
-    enemy = Circle(400, random.randint(0,400))
+    enemy = Circle((400, random.randint(0, 400)), 20)
     enemies.append(enemy)
     @enemy.register
     def act(self):

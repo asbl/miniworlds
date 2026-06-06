@@ -6,7 +6,7 @@ All methods that belong to an object **always** receive `self` as their first pa
 
 Inside the method, you can then use `self` to access the **attributes and methods** of the object itself.
 
-### Example:
+## Example
 
 This code:
 

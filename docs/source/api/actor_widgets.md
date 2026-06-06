@@ -9,8 +9,6 @@ Use `Button` when a widget should simply send a message.
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.widgets.button.Button
    :members:
-
-   .. autoclasstoc::
 ```
 
 ### Label
@@ -18,6 +16,25 @@ Use `Button` when a widget should simply send a message.
 ```{eval-rst}
 .. autoclass:: miniworlds.actors.widgets.label.Label
    :members:
+```
 
-   .. autoclasstoc::
+### Input
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.widgets.input.Input
+   :members:
+```
+
+### YesNoButton
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.widgets.yesno.YesNoButton
+   :members:
+```
+
+### CounterLabel
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.widgets.counter.CounterLabel
+   :members:
 ```

@@ -2,19 +2,19 @@
   "delta_to_previous": {
     "cache_hits": 0.0,
     "cache_misses": 0.0,
-    "first_pass_ms": -3.409,
+    "first_pass_ms": -20.4837,
     "iterations": 0.0,
-    "second_pass_ms": 1.6091
+    "second_pass_ms": 0.7018
   },
   "name": "method caller",
-  "recorded_at": "2026-03-16T19:30:51",
+  "recorded_at": "2026-06-06T07:05:36",
   "slug": "method-caller",
   "summary_type": "measurements",
   "values": {
     "cache_hits": 99999,
     "cache_misses": 1,
-    "first_pass_ms": 88.7625,
+    "first_pass_ms": 68.2788,
     "iterations": 50000,
-    "second_pass_ms": 60.1178
+    "second_pass_ms": 60.8196
   }
 }

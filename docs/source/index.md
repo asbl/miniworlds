@@ -465,12 +465,13 @@ caption: API > Basics
 maxdepth: 2
 hidden: true
 ---
+api/app
 api/world
 api/background
-api/actor
 api/costume
 api/appearance
 api/appearances_manager
+api/events
 ```
 
 ```{toctree}
@@ -494,7 +495,6 @@ caption: API > World Classes
 maxdepth: 2
 hidden: true
 ---
-api/world
 api/world_manager_camera
 api/world_manager_music
 api/world_manager_sound
@@ -510,6 +510,7 @@ maxdepth: 2
 hidden: true
 ---
 api/world_tiled
+api/world_tiled_elements
 api/world_physics
 api/world_toolbar
 api/world_console
@@ -523,6 +524,7 @@ hidden: true
 ---
 api/timer
 api/positions_vector
+api/positions_rect
 ```
 
 ```{toctree}

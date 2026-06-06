@@ -43,7 +43,7 @@ t2.dragged = False
 
 @t2.register
 def on_mouse_left(self, mouse_pos):
-    if self.detecting_point(mouse_pos):
+    if self.detect_point(mouse_pos):
         self.dragged = True
         print("start drag")
 

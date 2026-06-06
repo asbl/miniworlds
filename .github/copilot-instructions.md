@@ -27,7 +27,9 @@
 ## Validation
 
 - Always validate changes with the Docker-based test path defined in tasks.py.
-- Preferred command: `invoke run_tests`.
+- Always start Miniworlds tests through Invoke so they run inside Docker; do not run `pytest` directly for validation, including focused or single-file checks.
+- Preferred command: `invoke tests.run`.
+- For repeated runs without rebuilding the image, use `invoke tests.cached`.
 - If `invoke` is unavailable, run the equivalent Docker build and container test commands from tasks.py.
 - Focused unit tests are grouped under `test/unittests/<domain>/`; prefer keeping new unit coverage in the matching domain folder instead of the old flat layout.
 - Rendering and behavior changes are expected to keep the visual test suite green unless the change is explicitly intended to alter output.

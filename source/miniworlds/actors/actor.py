@@ -2210,6 +2210,17 @@ class Actor(actor_base.ActorBase):
         """
         raise NotImplementedOrRegisteredError(self.on_not_detecting_world)
 
+    def on_detecting_not_on_world(self):
+        """Alias for ``on_not_detecting_world``.
+
+        Both names are accepted so older teaching material and newer examples
+        can use the wording that reads best in context.
+
+        Raises:
+            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+        """
+        raise NotImplementedOrRegisteredError(self.on_detecting_not_on_world)
+
     def on_detecting_actor(self, actor: "Actor"):
         """*on_detecting_actor* is called, when actor is detects a actor on same position
 

@@ -19,7 +19,7 @@ if points > 100:
 
 This is the general syntax of a conditional statement:
 
-```python
+```text
 if <condition>:
     <code block>
 ```
@@ -94,7 +94,7 @@ else:
 
 ### Syntax:
 
-```python
+```text
 if <condition>:
     <code block>
 elif <condition>:

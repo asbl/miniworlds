@@ -24,6 +24,4 @@ Useful beginner aliases on Actor include:
 .. autoclass:: miniworlds.actors.actor.Actor
    :members:
    :no-private-members:
-
-   .. autoclasstoc::
 ```

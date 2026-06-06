@@ -54,3 +54,17 @@ Base class for shape actors.
 .. autoclass:: miniworlds.actors.shapes.shapes.Polygon
    :members:
 ```
+
+### Triangle
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.shapes.shapes.Triangle
+   :members:
+```
+
+### Arc
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.shapes.shapes.Arc
+   :members:
+```

@@ -48,14 +48,14 @@ Output:
 
 ## General Form
 
-```python
+```text
 for i in range(max):
     <code block>
 ```
 
 or
 
-```python
+```text
 for i in range(min, max):
     <code block>
 ```
@@ -142,7 +142,7 @@ world.run()
 
 General syntax:
 
-```python
+```text
 while <condition>:
     <code block>
 ```
@@ -172,7 +172,7 @@ world.run()
 
 Your program essentially runs inside a loop like this:
 
-```python
+```text
 while <no quit>:
     <draw screen>
     <handle events>
@@ -195,7 +195,7 @@ That means it’s not suitable for animation — which depends on changes from f
 
 A simple state diagram:
 
-```mermaid
+```text
 stateDiagram
     [*] --> Green
     Green --> GreenYellow

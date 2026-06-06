@@ -1,0 +1,6 @@
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/grass.jpg image_size=(1024,683) parent=<miniworlds.worlds.world.World object at 0x7f98c85362a0> parent_size=(400, 300) parent_w_h=(400,300)
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/char_blue.png image_size=(21,31) parent=**Actor of type [Actor]: ID: 2 at pos (60, 40) with size (40, 40)** parent_size=(40, 40) parent_w_h=(40,40)
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/char_blue.png image_size=(21,31) parent=**Actor of type [Actor]: ID: 3 at pos (100, 40) with size (40, 40)** parent_size=(40, 40) parent_w_h=(40,40)
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/grass.jpg image_size=(1024,683) parent=<miniworlds.worlds.world.World object at 0x7f43f52430e0> parent_size=(400, 300) parent_w_h=(400,300)
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/char_blue.png image_size=(21,31) parent=**Actor of type [Actor]: ID: 2 at pos (60, 40) with size (40, 40)** parent_size=(40, 40) parent_w_h=(40,40)
+ADD_IMAGE_FROM_PATH path=/app/test/visualtests/images/char_blue.png image_size=(21,31) parent=**Actor of type [Actor]: ID: 3 at pos (100, 40) with size (40, 40)** parent_size=(40, 40) parent_w_h=(40,40)

@@ -13,7 +13,9 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
+import re
 import sys
+from pathlib import Path
 
 
 #sys.path.insert(0, os.path.abspath('../../'))
@@ -27,10 +29,16 @@ project = 'miniworlds'
 copyright = '5, Andreas Siebel'
 author = 'Andreas Siebel'
 
-# The short X.Y version
-version = '3'
-# The full version, including alpha/beta/rc tags
-release = '2025'
+def _read_project_version() -> str:
+    setup_py = Path(__file__).resolve().parents[2] / "source" / "setup.py"
+    match = re.search(r'version="([^"]+)"', setup_py.read_text(encoding="utf-8"))
+    if not match:
+        return "unknown"
+    return match.group(1)
+
+
+release = _read_project_version()
+version = ".".join(release.split(".")[:2])
 
 # -- General configuration ---------------------------------------------------
 
@@ -77,8 +85,34 @@ myst_enable_extensions = [
     "attrs_inline",
 ]
 
-autodoc_default_options = {     "members": True,     "undoc-members": True,     "private-members": False ,  }
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": False,
+    "private-members": False,
+    "special-members": False,
+    "inherited-members": False,
+    "exclude-members": ",".join(
+        [
+            "__dict__",
+            "__module__",
+            "__weakref__",
+            "_abc_impl",
+            "dirty",
+            "image",
+            "rect",
+            "layer",
+            "visible",
+        ]
+    ),
+}
 autosummary_generate = True
+
+suppress_warnings = [
+    "ref.class",
+    "ref.exc",
+    "sphinx_autodoc_typehints.forward_reference",
+    "sphinx_autodoc_typehints.guarded_import",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -256,3 +290,27 @@ napoleon_include_init_with_doc = True
 
 set_type_checking_flag = False
 
+
+def _skip_internal_member(app, what, name, obj, skip, options):
+    del app, what, obj, options
+    if name.startswith("_"):
+        return True
+    if name in {
+        "dirty",
+        "image",
+        "rect",
+        "layer",
+        "visible",
+        "add_internal",
+        "remove_internal",
+        "groups",
+        "alive",
+        "kill",
+        "update",
+    }:
+        return True
+    return skip
+
+
+def setup(app):
+    app.connect("autodoc-skip-member", _skip_internal_member)

@@ -1,4 +1,4 @@
-## Stopping the Program
+# Stopping the Program
 
 At the end of a game or during a level transition, certain actions often need to be performed —
 like resetting the game field or pausing the game. The following commands are available for that purpose:

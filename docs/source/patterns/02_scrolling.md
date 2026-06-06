@@ -19,7 +19,7 @@ In code, this can be implemented like this:
 back0 = Actor()
 back0.add_costume(BACKGROUND)
 back0.size = WIDTH, HEIGHT
-back1 = Actor(WIDTH, 0)
+back1 = Actor((WIDTH, 0))
 back1.size = WIDTH, HEIGHT
 back1.add_costume(BACKGROUND)
 backs = [back0, back1]
@@ -50,7 +50,7 @@ BACKGROUND = "desertback"
 back0 = Actor()
 back0.add_costume(BACKGROUND)
 back0.size = WIDTH, HEIGHT
-back1 = Actor(WIDTH, 0)
+back1 = Actor((WIDTH, 0))
 back1.size = WIDTH, HEIGHT
 back1.add_costume(BACKGROUND)
 backs = [back0, back1]
@@ -75,7 +75,7 @@ def act(self):
 @world.register
 def on_key_down(self, keys):
     if "q" in keys:
-        world.quit
+        world.quit()
 
 world.run()
 ```

@@ -10,7 +10,5 @@ the public helper methods `add_right(...)`, `add_bottom(...)`,
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.manager.camera_manager.CameraManager
    :members:
-
-   .. autoclasstoc::
 ```
 

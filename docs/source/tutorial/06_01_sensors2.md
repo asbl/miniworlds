@@ -53,6 +53,7 @@ world.run()
 ### Explanation
 
 * The method `on_not_detecting_world` is called only when the fish is detected as being outside the world.
+* You can also write the alias `on_detecting_not_on_world`.
 * It moves the fish back using `move_back()` and then flips its direction with `flip_x()`.
 
 ---

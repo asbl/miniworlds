@@ -77,6 +77,12 @@ class FakeEventRegistry:
     def registered_event_names(self):
         return set(self.registered_events.keys())
 
+    def has_registered_event(self, event_name: str) -> bool:
+        if event_name == "sensor":
+            sensor_registry = self.registered_events.get("sensor")
+            return bool(sensor_registry)
+        return event_name in self.registered_events
+
 
 def helper_make_event_registry(initial: dict[str, Any] | None = None) -> SimpleNamespace:
     return FakeEventRegistry(initial)

@@ -13,7 +13,5 @@ behind the public camera API.
 ```{eval-rst}
 .. autoclass:: miniworlds.worlds.manager.layout_manager.LayoutManager
    :members:
-
-   .. autoclasstoc::
 ```
 

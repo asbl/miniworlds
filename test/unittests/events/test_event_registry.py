@@ -51,6 +51,25 @@ class TestEventRegistry(unittest.TestCase):
         self.assertEqual(registered[0], "on_mouse_middle_up")
         self.assertIn(handler.on_mouse_middle_up, registry.copy_event_methods("on_mouse_middle_up"))
 
+    def test_registers_not_on_world_alias_event(self):
+        class BoundaryHandler:
+            def on_detecting_not_on_world(self):
+                return None
+
+        definition = Mock()
+        definition.class_events_set = {"on_detecting_not_on_world"}
+        definition.update = Mock()
+        registry = EventRegistry(Mock(), definition)
+        handler = BoundaryHandler()
+
+        registered = registry.register_event("on_detecting_not_on_world", handler)
+
+        self.assertEqual(registered[0], "on_detecting_not_on_world")
+        self.assertIn(
+            handler.on_detecting_not_on_world,
+            registry.copy_event_methods("on_detecting_not_on_world"),
+        )
+
     def test_reuses_event_member_discovery_for_instances_of_same_class(self):
         registry = EventRegistry(Mock(), Mock())
         handler = ChildHandler()

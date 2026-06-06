@@ -89,3 +89,6 @@ class SpatialIndex:
 
     def __len__(self) -> int:
         return len(self._actor_cells)
+
+    def __contains__(self, actor: "Actor") -> bool:
+        return actor in self._actor_cells
