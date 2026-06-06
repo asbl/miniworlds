@@ -113,6 +113,34 @@ class TestPhysicsIntegration(unittest.TestCase):
 
         self.assertEqual(len(world.space.constraints), 0)
 
+    def test_removing_joined_actor_removes_space_constraints(self):
+        world = PhysicsWorld(200, 120)
+        world.gravity = (0, 0)
+        anchor = Circle((70, 60), 10)
+        ball = Circle((120, 60), 10)
+
+        anchor.physics.join(ball)
+
+        self.assertEqual(len(world.space.constraints), 1)
+
+        anchor.remove()
+
+        self.assertEqual(len(world.space.constraints), 0)
+        self.assertEqual(anchor.physics.joints, [])
+
+    def test_invalid_simulation_value_raises(self):
+        world = PhysicsWorld(160, 120)
+        ball = Circle((80, 60), 10)
+
+        with self.assertRaises(ValueError):
+            ball.physics.simulation = "bogus"
+
+    def test_accuracy_must_be_positive(self):
+        world = PhysicsWorld(160, 120)
+
+        with self.assertRaises(ValueError):
+            world.accuracy = 0
+
     def test_touching_callback_receives_other_actor_and_contact_points(self):
         world = PhysicsWorld(200, 120)
         world.gravity = (0, 0)
@@ -141,6 +169,55 @@ class TestPhysicsIntegration(unittest.TestCase):
         self.assertLess(info[0][0], right.x)
         self.assertGreater(info[0][1], 40)
         self.assertLess(info[0][1], 80)
+
+    def test_touching_callbacks_are_dispatched_to_involved_actor_only(self):
+        world = PhysicsWorld(260, 120)
+        world.gravity = (0, 0)
+        left = Circle((50, 60), 10)
+        middle = Circle((120, 60), 10)
+        uninvolved = Circle((220, 60), 10)
+        left_calls = []
+        uninvolved_calls = []
+
+        @left.register
+        def on_touching_circle(self, other, info):
+            left_calls.append((other, info))
+
+        @uninvolved.register
+        def on_touching_circle(self, other, info):
+            uninvolved_calls.append((other, info))
+
+        left.physics.velocity_x = 180
+
+        for _ in range(60):
+            world.simulate_all_physics_actors()
+            if left_calls:
+                break
+
+        self.assertTrue(left_calls)
+        self.assertIs(left_calls[0][0], middle)
+        self.assertEqual(uninvolved_calls, [])
+
+    def test_removed_actor_collision_callbacks_are_unregistered(self):
+        world = PhysicsWorld(200, 120)
+        world.gravity = (0, 0)
+        ball = Circle((60, 60), 10)
+
+        @ball.register
+        def on_touching_circle(self, other, info):
+            pass
+
+        @ball.register
+        def on_separation_from_circle(self, other, info):
+            pass
+
+        self.assertEqual(len(world.touching_methods), 1)
+        self.assertEqual(len(world.separate_methods), 1)
+
+        ball.remove()
+
+        self.assertEqual(len(world.touching_methods), 0)
+        self.assertEqual(len(world.separate_methods), 0)
 
     def test_separation_callback_receives_other_actor(self):
         world = PhysicsWorld(200, 120)
