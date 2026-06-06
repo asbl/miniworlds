@@ -45,6 +45,7 @@ MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
 VERSION_PATTERN = re.compile(r'version="([^"]+)"')
 PERFORMANCE_RESULTS = Path(REPO_ROOT) / "test" / "performance" / "results"
+DOC_EXAMPLE_TESTS = Path(REPO_ROOT) / "test" / "generated" / "docs_examples"
 
 BENCHMARK_SCRIPTS = {
     "method_caller": "test/performance/profile_method_caller.py",
@@ -645,6 +646,13 @@ def tests_physics(c):
     )
 
 
+@task(name="docs")
+def tests_docs(c):
+    """Generate documentation example tests and run them in Docker."""
+    docs_generate_example_tests(c)
+    run_pytest_in_container(c, "test/generated/docs_examples -q", rebuild=False)
+
+
 @task(name="list")
 def benchmarks_list(c):
     """List benchmark groups and individual benchmark names."""
@@ -756,6 +764,27 @@ def docs_build(c):
         c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
 
 
+@task(name="examples")
+def docs_generate_example_tests(c):
+    """Generate pytest cases from Python code blocks in docs/source."""
+    del c
+    from test.docs.generate_doc_example_tests import generate_doc_example_tests
+
+    examples = generate_doc_example_tests(DOC_EXAMPLE_TESTS)
+    print(f"Generated {len(examples)} documentation example tests in {DOC_EXAMPLE_TESTS}")
+
+
+@task(name="test-examples")
+def docs_test_examples(c):
+    """Generate and run pytest cases for documentation Python examples locally."""
+    docs_generate_example_tests(c)
+    ensure_local_environment(c)
+    c.run(
+        f"{_local_env_prefix()} {VENV_PYTHON} -m pytest -q {DOC_EXAMPLE_TESTS}",
+        pty=True,
+    )
+
+
 @task(name="image")
 def build_image(c):
     """Rebuild the Docker image used by test and benchmark tasks."""
@@ -844,6 +873,7 @@ tests.add_task(tests_visual)
 tests.add_task(tests_pyodide)
 tests.add_task(tests_profile)
 tests.add_task(tests_physics)
+tests.add_task(tests_docs)
 
 benchmarks = Collection("benchmarks")
 benchmarks.add_task(benchmarks_run, default=True)
@@ -871,6 +901,10 @@ container.add_task(container_x11)
 examples = Collection("examples")
 examples.add_task(examples_checkout, default=True)
 
+docs = Collection("docs")
+docs.add_task(docs_generate_example_tests, default=True)
+docs.add_task(docs_test_examples)
+
 ns = Collection()
 ns.add_collection(deploy)
 ns.add_collection(tests)
@@ -879,6 +913,7 @@ ns.add_collection(build)
 ns.add_collection(env)
 ns.add_collection(container)
 ns.add_collection(examples)
+ns.add_collection(docs)
 
 # Compatibility aliases for the previous flat task surface.
 ns.add_task(deploy_release, name="release")
@@ -890,6 +925,7 @@ ns.add_task(tests_visual, name="run_visual_tests")
 ns.add_task(tests_pyodide, name="run_pyodide_tests")
 ns.add_task(tests_profile, name="profile_tests")
 ns.add_task(tests_physics, name="run_physics_tests")
+ns.add_task(tests_docs, name="run_doc_example_tests")
 ns.add_task(build_image, name="image")
 ns.add_task(env_prepare, name="prepare")
 ns.add_task(env_check, name="check_env")
@@ -906,4 +942,6 @@ ns.add_task(build_local, name="build_local")
 ns.add_task(build_physics, name="build_physics")
 ns.add_task(docs_build, name="make_docs")
 ns.add_task(docs_build, name="docs_build")
+ns.add_task(docs_generate_example_tests, name="generate_doc_example_tests")
+ns.add_task(docs_test_examples, name="test_doc_examples")
 ns.add_task(examples_checkout, name="checkout_examples")
