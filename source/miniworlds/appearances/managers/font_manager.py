@@ -15,6 +15,10 @@ class FontManager:
         return self._get_font_object()
     
     def _get_font_object(self):
+        # The font module can be de-initialized by a host calling pygame.quit()
+        # between runs (e.g. web player stop -> restart).
+        if not pygame.font.get_init():
+            pygame.font.init()
         font_size = self.font_size
         if self.font_path is None:
             font = pygame.font.SysFont(self.font_style, int(font_size))

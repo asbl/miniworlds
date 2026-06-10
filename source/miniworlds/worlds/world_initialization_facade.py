@@ -33,6 +33,12 @@ class WorldInitializationFacade:
     def initialize_pre_base_state(
         self, x: Union[int, Tuple[int, int]] = 400, y: int = 400
     ) -> None:
+        # pygame.init() runs once at miniworlds import time. When a host
+        # (e.g. the web player) calls pygame.quit() between runs while the
+        # interpreter keeps living, all pygame modules must be re-initialized
+        # before a new world is built.
+        if not pygame.get_init():
+            pygame.init()
         self.world._validate_parameters(x, y)
         self.world.camera = self.world._get_camera_manager_class()(x, y, self.world)
         self.world.actors = pygame.sprite.LayeredDirty()
