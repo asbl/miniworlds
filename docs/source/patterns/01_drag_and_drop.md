@@ -1,6 +1,6 @@
 # Drag and Drop
 
-To move an actor, you need to register the events `on_mouse_left` and `on_mouse_left_released`.
+To move an actor, you need to register the events `on_mouse_left` and `on_mouse_left_up`.
 You also need a variable (e.g., `dragged`) to store the state of whether an object is currently being dragged.
 
 * When the mouse is clicked, the `dragged` variable is set to `True`.
@@ -24,7 +24,7 @@ def on_mouse_left(self, mouse_pos):
         self.dragged = True
 
 @circle.register
-def on_mouse_left_released(self, mouse_pos):
+def on_mouse_left_up(self, mouse_pos):
     if self.dragged:
         self.dragged = False
         self.center = mouse_pos
@@ -48,7 +48,7 @@ def on_mouse_left(self, mouse_pos):
         print("start drag")
 
 @t2.register
-def on_mouse_left_released(self, mouse_pos):
+def on_mouse_left_up(self, mouse_pos):
     tile = mouse_pos
     if self.dragged:
         self.position = tile

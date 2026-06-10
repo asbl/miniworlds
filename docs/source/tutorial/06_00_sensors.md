@@ -22,7 +22,7 @@ c = miniworlds.Circle((200, 50), 20)
 
 @c.register
 def act(self):
-    self.move_left()
+    self.x -= 1
 
 @r.register
 def act(self):
@@ -64,7 +64,7 @@ c = Circle((200, 50), 20)
 
 @c.register
 def act(self):
-    self.move_left()
+    self.x -= 1
 
 @r.register
 def on_detecting(self, other):
@@ -96,11 +96,11 @@ c2 = miniworlds.Circle((120, 50), 20)
 
 @c1.register
 def act(self):
-    self.move_left()
+    self.x -= 1
 
 @c2.register
 def act(self):
-    self.move_left()
+    self.x -= 1
 
 @r.register
 def on_detecting(self, other):
