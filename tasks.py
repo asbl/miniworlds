@@ -120,7 +120,11 @@ def _local_pythonpath() -> str:
 
 
 def _local_env_prefix() -> str:
-    return f"PYTHONPATH={_local_pythonpath()} SDL_AUDIODRIVER=dummy MINIWORLDS_TEST_FAST=1"
+    return (
+        f"PYTHONPATH={_local_pythonpath()} "
+        "SDL_AUDIODRIVER=dummy "
+        "MINIWORLDS_TEST_FAST=1"
+    )
 
 
 def _resolve_benchmark_scripts(selection: str) -> list[str]:
@@ -348,7 +352,12 @@ def ensure_local_environment(c):
     c.run("MINIWORLDS_PREPARE_SKIP_LIST=1 zsh -lc 'source prepare.sh'", pty=True)
 
 
-def run_pytest_in_container(c, pytest_args: str, rebuild: bool = True):
+def run_pytest_in_container(
+    c,
+    pytest_args: str,
+    rebuild: bool = True,
+    extra_env: dict[str, str] | None = None,
+):
     """Run pytest inside the docker image against the live source tree."""
     if rebuild:
         build_test_environment(c)
@@ -356,11 +365,19 @@ def run_pytest_in_container(c, pytest_args: str, rebuild: bool = True):
         ensure_test_environment(c)
     uid = os.getuid()
     gid = os.getgid()
+    extra_env_args = ""
+    if extra_env:
+        extra_env_args = " ".join(f"{key}={value}" for key, value in extra_env.items()) + " "
     c.run(
         f"docker run --rm "
         f"--user {uid}:{gid} "
         f"{_docker_mounts()}"
-        f"{IMAGE} env {_docker_pythonpath()} pytest {pytest_args}"
+        f"{IMAGE} env "
+        "SDL_AUDIODRIVER=dummy "
+        "MINIWORLDS_TEST_FAST=1 "
+        "MINIWORLDS_TESTS_IN_DOCKER=1 "
+        f"{extra_env_args}"
+        f"{_docker_pythonpath()} pytest {pytest_args}"
     )
 
 
@@ -376,7 +393,11 @@ def run_python_in_container(c, script_path: str, rebuild: bool = False):
         f"docker run --rm "
         f"--user {uid}:{gid} "
         f"{_docker_mounts()}"
-        f"{IMAGE} env SDL_AUDIODRIVER=dummy MINIWORLDS_TEST_FAST=1 {_docker_pythonpath()} python {script_path}"
+        f"{IMAGE} env "
+        "SDL_AUDIODRIVER=dummy "
+        "MINIWORLDS_TEST_FAST=1 "
+        "MINIWORLDS_TESTS_IN_DOCKER=1 "
+        f"{_docker_pythonpath()} python {script_path}"
     )
 
 
@@ -625,8 +646,8 @@ def tests_visual(c):
 
 @task(name="pyodide")
 def tests_pyodide(c):
-    """Run core browser-runtime tests in Pyodide and headless Chromium."""
-    c.run(f"{sys.executable} test/pyodidetests/run.py")
+    """Run core browser-runtime tests in Pyodide and headless Chromium in Docker."""
+    run_python_in_container(c, "test/pyodidetests/run.py", rebuild=False)
 
 
 @task(name="profile")
@@ -637,12 +658,11 @@ def tests_profile(c):
 
 @task(name="physics")
 def tests_physics(c):
-    """Run the focused miniworlds_physics integration tests locally."""
-    ensure_local_environment(c)
-    c.run(
-        f"{_local_env_prefix()} {VENV_PYTHON} -m pytest -q "
-        "test/unittests/physics/test_physics_integration.py",
-        pty=True,
+    """Run the focused miniworlds_physics integration tests in Docker."""
+    run_pytest_in_container(
+        c,
+        "test/unittests/physics/test_physics_integration.py -q",
+        rebuild=False,
     )
 
 
@@ -650,7 +670,12 @@ def tests_physics(c):
 def tests_docs(c):
     """Generate documentation example tests and run them in Docker."""
     docs_generate_example_tests(c)
-    run_pytest_in_container(c, "test/generated/docs_examples -q", rebuild=False)
+    run_pytest_in_container(
+        c,
+        "test/generated/docs_examples -q",
+        rebuild=False,
+        extra_env={"MINIWORLDS_INCLUDE_DOC_EXAMPLES": "1"},
+    )
 
 
 @task(name="list")
@@ -770,18 +795,22 @@ def docs_generate_example_tests(c):
     del c
     from test.docs.generate_doc_example_tests import generate_doc_example_tests
 
-    examples = generate_doc_example_tests(DOC_EXAMPLE_TESTS)
-    print(f"Generated {len(examples)} documentation example tests in {DOC_EXAMPLE_TESTS}")
+    examples, skipped = generate_doc_example_tests(DOC_EXAMPLE_TESTS)
+    print(
+        f"Generated {len(examples)} documentation example tests in {DOC_EXAMPLE_TESTS}; "
+        f"skipped {len(skipped)} non-standalone snippets"
+    )
 
 
 @task(name="test-examples")
 def docs_test_examples(c):
-    """Generate and run pytest cases for documentation Python examples locally."""
+    """Generate and run pytest cases for documentation Python examples in Docker."""
     docs_generate_example_tests(c)
-    ensure_local_environment(c)
-    c.run(
-        f"{_local_env_prefix()} {VENV_PYTHON} -m pytest -q {DOC_EXAMPLE_TESTS}",
-        pty=True,
+    run_pytest_in_container(
+        c,
+        "test/generated/docs_examples -q",
+        rebuild=False,
+        extra_env={"MINIWORLDS_INCLUDE_DOC_EXAMPLES": "1"},
     )
 
 
