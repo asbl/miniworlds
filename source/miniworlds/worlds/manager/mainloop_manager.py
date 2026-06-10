@@ -45,18 +45,12 @@ class MainloopManager:
         for actor in self.reload_costumes_queue:
             if actor.costume:
                 actor.costume.update()
-                if not getattr(self.world, "is_tiled", False):
-                    self.world._spatial_index.update(actor)
         self.reload_costumes_queue.clear()
 
         if hasattr(self.world, "_dynamic_actors"):
             for actor in self.world._dynamic_actors:
                 if actor.costume:
-                    costume_was_dirty = bool(actor.costume.dirty)
-                    if costume_was_dirty or actor.costume.is_animated:
-                        actor.costume.update()
-                    if costume_was_dirty and not getattr(self.world, "is_tiled", False):
-                        self.world._spatial_index.update(actor)
+                    actor.costume.update()
 
     def _tick_timed_objects(self):
         for obj in self.world._timed_objects:
