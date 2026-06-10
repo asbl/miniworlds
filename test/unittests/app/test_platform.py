@@ -1,6 +1,7 @@
+import asyncio
 import os
 import unittest
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 import pygame
 
@@ -45,6 +46,88 @@ class TestPlatformAdapter(unittest.TestCase):
 
         with patch.dict("sys.modules", {"importlib.metadata": None}):
             self.assertEqual(adapter.get_package_version("miniworlds"), "unknown")
+
+
+class TestPlatformFramePacing(unittest.TestCase):
+    def _make_web_adapter(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: True
+        return adapter
+
+    def test_wait_for_frame_desktop_sleeps_wait_time(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: False
+
+        with patch("miniworlds.base.platform.asyncio.sleep", new=AsyncMock()) as sleep_mock:
+            asyncio.run(adapter.wait_for_frame(0.02))
+            sleep_mock.assert_awaited_once_with(0.02)
+
+    def test_wait_for_frame_web_awaits_one_animation_frame_without_wait(self):
+        adapter = self._make_web_adapter()
+
+        with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+            asyncio.run(adapter.wait_for_frame(0))
+
+        self.assertEqual(raf_mock.await_count, 1)
+        self.assertTrue(adapter._frame_yielded)
+
+    def test_wait_for_frame_web_awaits_animation_frames_until_deadline(self):
+        adapter = self._make_web_adapter()
+
+        with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+            with patch("miniworlds.base.platform.time.perf_counter", side_effect=[0.0, 0.005, 0.011, 0.017]):
+                asyncio.run(adapter.wait_for_frame(0.016))
+
+        self.assertEqual(raf_mock.await_count, 3)
+        self.assertTrue(adapter._frame_yielded)
+
+    def test_wait_for_frame_web_falls_back_to_sleep_without_raf(self):
+        adapter = self._make_web_adapter()
+        adapter._raf_unavailable = True
+
+        with patch("miniworlds.base.platform.asyncio.sleep", new=AsyncMock()) as sleep_mock:
+            asyncio.run(adapter.wait_for_frame(0.016))
+
+        sleep_mock.assert_awaited_once_with(0.016)
+        self.assertTrue(adapter._frame_yielded)
+
+    def test_wait_for_frame_skip_delay_does_not_mark_frame_yielded(self):
+        adapter = self._make_web_adapter()
+
+        with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+            asyncio.run(adapter.wait_for_frame(0.016, skip_delay=True))
+
+        self.assertEqual(raf_mock.await_count, 0)
+        self.assertFalse(adapter._frame_yielded)
+
+    def test_yield_mainloop_skips_extra_hop_after_wait_for_frame(self):
+        adapter = self._make_web_adapter()
+
+        async def scenario():
+            with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+                await adapter.wait_for_frame(0)
+                await adapter.yield_mainloop()
+                return raf_mock.await_count
+
+        self.assertEqual(asyncio.run(scenario()), 1)
+        self.assertFalse(adapter._frame_yielded)
+
+    def test_yield_mainloop_uses_animation_frame_when_no_wait_happened(self):
+        adapter = self._make_web_adapter()
+
+        with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+            asyncio.run(adapter.yield_mainloop())
+
+        self.assertEqual(raf_mock.await_count, 1)
+
+    def test_yield_mainloop_desktop_unchanged(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: False
+
+        with patch("miniworlds.base.platform.asyncio.sleep", new=AsyncMock()) as sleep_mock:
+            asyncio.run(adapter.yield_mainloop())
+
+        sleep_mock.assert_awaited_once_with(0)
 
 
 if __name__ == "__main__":

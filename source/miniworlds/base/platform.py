@@ -4,6 +4,7 @@ import __main__
 import asyncio
 import os
 import sys
+import time
 import warnings
 from pathlib import Path
 from typing import Iterable
@@ -16,6 +17,10 @@ class PlatformAdapter:
         self._audio_initialized = False
         self._reserved_channels: int | None = None
         self._channel_count: int | None = None
+        self._frame_yielded = False
+        self._raf = None
+        self._raf_unavailable = False
+        self._create_once_callable = None
 
     def is_web(self) -> bool:
         return sys.platform == "emscripten"
@@ -96,12 +101,75 @@ class PlatformAdapter:
         return pygame.mouse.get_pos()
 
     async def yield_mainloop(self) -> None:
+        # wait_for_frame already returned control to the browser this frame,
+        # so a second timer hop (setTimeout clamping: >= 4 ms) is not needed.
+        if self._frame_yielded:
+            self._frame_yielded = False
+            return
+        if self.is_web() and await self._await_animation_frame():
+            return
         await asyncio.sleep(0)
 
     async def wait_for_frame(self, wait_time: float, skip_delay: bool = False) -> None:
-        if skip_delay or wait_time <= 0:
+        if skip_delay:
+            return
+        if self.is_web():
+            await self._wait_for_frame_web(wait_time)
+            return
+        if wait_time <= 0:
             return
         await asyncio.sleep(wait_time)
+
+    async def _wait_for_frame_web(self, wait_time: float) -> None:
+        # In Pyodide, asyncio.sleep() schedules via setTimeout, which browsers
+        # clamp to >= 4 ms and which is not aligned with display refresh.
+        # Pacing via requestAnimationFrame yields control exactly once per
+        # painted frame, so even wait_time <= 0 must await one frame.
+        deadline = time.perf_counter() + max(wait_time, 0.0)
+        while True:
+            if not await self._await_animation_frame():
+                await asyncio.sleep(max(wait_time, 0.0))
+                break
+            if time.perf_counter() >= deadline:
+                break
+        self._frame_yielded = True
+
+    async def _await_animation_frame(self) -> bool:
+        request_animation_frame = self._get_request_animation_frame()
+        if request_animation_frame is None:
+            return False
+
+        future = asyncio.get_event_loop().create_future()
+
+        def _on_frame(_timestamp=None):
+            if not future.done():
+                future.set_result(None)
+
+        request_animation_frame(self._create_once_callable(_on_frame))
+        await future
+        return True
+
+    def _get_request_animation_frame(self):
+        if self._raf_unavailable:
+            return None
+        if self._raf is not None:
+            return self._raf
+        try:
+            import js
+            from pyodide.ffi import create_once_callable
+        except ImportError:
+            self._raf_unavailable = True
+            return None
+
+        request_animation_frame = getattr(js, "requestAnimationFrame", None)
+        if request_animation_frame is None:
+            # e.g. inside a web worker without DOM access
+            self._raf_unavailable = True
+            return None
+
+        self._raf = request_animation_frame
+        self._create_once_callable = create_once_callable
+        return self._raf
 
     def _should_prefer_dummy_audio(self) -> bool:
         if os.environ.get("SDL_AUDIODRIVER"):
