@@ -222,8 +222,16 @@ class App:
         if self._unittest:
             return
 
+        if self.platform.is_web():
+            # SDL's display teardown can segfault under Emscripten/Pyodide
+            # ("memory access out of bounds"), which kills the interpreter and
+            # breaks stop -> restart in web hosts. The host owns the canvas
+            # lifecycle there, and set_mode() re-initializes the display on the
+            # next run, so quitting the display is neither safe nor needed.
+            return
+
         self.platform.quit_display()
-        if finished_normally and not self.platform.is_web():
+        if finished_normally:
             sys.exit(self._exit_code)
 
     async def _update(self):

@@ -144,7 +144,7 @@ class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
         exit_mock.assert_called_once_with(0)
         self.assertFalse(app._mainloop_started)
 
-    async def test_start_mainloop_does_not_exit_in_web_runtime(self):
+    async def test_start_mainloop_keeps_display_and_does_not_exit_in_web_runtime(self):
         world = DummyWorld()
         app = self._create_app(world)
         app._unittest = False
@@ -159,7 +159,9 @@ class TestAppLifecycleAsync(unittest.IsolatedAsyncioTestCase):
         with patch("miniworlds.base.app.sys.exit") as exit_mock:
             await app.start_mainloop()
 
-        app.platform.quit_display.assert_called_once_with()
+        # Quitting the SDL display can segfault under Emscripten and the web
+        # host owns the canvas lifecycle, so the display must stay alive.
+        app.platform.quit_display.assert_not_called()
         exit_mock.assert_not_called()
         self.assertFalse(app._mainloop_started)
 
