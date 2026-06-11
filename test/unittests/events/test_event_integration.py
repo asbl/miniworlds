@@ -53,6 +53,24 @@ class HoverActor(Actor):
         self.received_events.append("leave")
 
 
+class ClickActor(Actor):
+    def __init__(self, position=(0, 0), *args, **kwargs) -> None:
+        self.clicks: list[tuple[int, int]] = []
+        super().__init__(position, *args, **kwargs)
+
+    def detect_pixel(self, position) -> bool:
+        return True
+
+    def on_clicked_left(self, position) -> None:
+        self.clicks.append(position)
+
+
+class DialogOpeningActor(ClickActor):
+    def on_clicked_left(self, position) -> None:
+        super().on_clicked_left(position)
+        self.world.dialog.ynbox("Continue?", "Question")
+
+
 class MessageWorld(World):
     def __init__(self) -> None:
         self.messages: list[str] = []
@@ -127,6 +145,82 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
         )
 
         self.assertEqual(actor.received_events, ["enter", "leave"])
+
+    async def test_clicked_left_fires_once_per_click_even_when_button_is_held(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(80, 80)
+        actor = ClickActor((10, 10), world=world)
+        world.camera.is_in_screen = Mock(return_value=True)
+
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1})],
+            mouse_pos=(10, 10),
+        )
+        for _ in range(3):
+            await self._run_frame(world, [], mouse_pos=(10, 10))
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1})],
+            mouse_pos=(10, 10),
+        )
+
+        self.assertEqual(actor.clicks, [(10, 10)])
+
+    async def test_dialog_opened_by_click_ignores_the_same_press(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        DialogOpeningActor((200, 150), world=world)
+        world.camera.is_in_screen = Mock(return_value=True)
+
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1})],
+            mouse_pos=(200, 150),
+        )
+        dialog = world._active_dialog
+        self.assertIsNotNone(dialog)
+        dialog._ensure_layout()
+        yes_center = dialog._buttons[0].rect.center
+
+        # Releasing the press that opened the dialog over a dialog button
+        # must not select that button.
+        await self._run_frame(world, [], mouse_pos=yes_center)
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1})],
+            mouse_pos=yes_center,
+        )
+        self.assertTrue(dialog.is_open)
+        self.assertIsNone(dialog.value)
+
+        # A fresh click on the dialog button still works.
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1})],
+            mouse_pos=yes_center,
+        )
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1})],
+            mouse_pos=yes_center,
+        )
+        self.assertFalse(dialog.is_open)
+        self.assertIs(dialog.value, True)
+
+    async def test_escape_key_event_closes_dialog(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        dialog = world.dialog.enterbox("Name?", default="Ada")
+
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.KEYDOWN, {"unicode": "\x1b", "key": pygame.K_ESCAPE})],
+        )
+
+        self.assertFalse(dialog.is_open)
+        self.assertIsNone(dialog.value)
+        self.assertEqual(dialog.input_text, "Ada")
 
     async def test_button_message_reaches_world_without_visual_test(self):
         App.reset(unittest=True, file=__file__)

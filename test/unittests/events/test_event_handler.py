@@ -157,7 +157,7 @@ def test_middle_mouse_event_dispatches_to_registered_handler(
     assert recorder.calls == [("mouse_middle_up", (4, 5))]
 
 
-def test_can_handle_mouse_left_when_focus_handlers_are_registered(
+def test_can_handle_mouse_left_down_when_focus_handlers_are_registered(
     event_handler_world_builder,
     event_registry_builder,
 ):
@@ -166,7 +166,7 @@ def test_can_handle_mouse_left_when_focus_handlers_are_registered(
         event_registry_builder({"on_focus": set()}),
     )
 
-    assert handler.can_handle_event("on_mouse_left") is True
+    assert handler.can_handle_event("on_mouse_left_down") is True
 
 
 def test_can_handle_specific_key_event_when_generic_handler_is_registered(

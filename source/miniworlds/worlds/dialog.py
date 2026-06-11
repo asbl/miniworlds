@@ -105,6 +105,9 @@ class Dialog(Overlay):
         self._message_lines: list[str] = []
         self._choice_buttons_visible = 0
         self._pressed_button_index: int | None = None
+        # True while the mouse press that was already active when the dialog
+        # opened is still held; that press must not select a dialog button.
+        self._suppress_active_press = False
         self._font = pygame.font.Font(None, 22)
         self._title_font = pygame.font.Font(None, 28)
         self._button_font = pygame.font.Font(None, 22)
@@ -150,12 +153,18 @@ class Dialog(Overlay):
         return True
 
     def _handle_mouse_left_down(self, pos) -> None:
+        if self._suppress_active_press:
+            return
         button = self._button_at(pos)
         self._pressed_button_index = button.index if button else None
         if button:
             self.focus_index = button.index
 
     def _handle_mouse_left_up(self, pos) -> None:
+        if self._suppress_active_press:
+            self._suppress_active_press = False
+            self._pressed_button_index = None
+            return
         button = self._button_at(pos)
         pressed_index = self._pressed_button_index
         self._pressed_button_index = None
@@ -474,5 +483,17 @@ class DialogService:
         active = getattr(self.world, "_active_dialog", None)
         if active and active.is_open:
             active.close(None, notify=False)
+            dialog._suppress_active_press = active._suppress_active_press
         self.world._active_dialog = dialog
+        if self._is_left_mouse_pressed():
+            dialog._suppress_active_press = True
         return dialog
+
+    @staticmethod
+    def _is_left_mouse_pressed() -> bool:
+        import miniworlds.base.app as app_mod
+
+        app = app_mod.App.get_running_app()
+        event_manager = getattr(app, "event_manager", None)
+        pressed_buttons = getattr(event_manager, "is_mouse_pressed", None)
+        return bool(pressed_buttons) and "mouse_left" in pressed_buttons

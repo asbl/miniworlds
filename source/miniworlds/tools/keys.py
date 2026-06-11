@@ -84,7 +84,12 @@ def key_code_to_key(key_code) -> str|None:
         return None
 
 def get_key(unicode, keycode):
-    if unicode:
+    if unicode and unicode.isprintable():
         return unicode
-    else:
-        return key_code_to_key(keycode)
+    # Control characters (e.g. "\r", "\x1b", "\t") are useless as key names:
+    # prefer the named key ("RETURN", "ESC", "TAB", ...). Single-letter names
+    # keep the unicode so modifier combinations like Ctrl+Q ("\x11") survive.
+    named_key = key_code_to_key(keycode)
+    if named_key and len(named_key) > 1:
+        return named_key
+    return unicode if unicode else named_key

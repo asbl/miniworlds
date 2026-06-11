@@ -34,9 +34,12 @@ class _MouseEventDispatcher:
     """Handles mouse, click, hover, and focus-related dispatch for a world."""
 
     _HOVER_EVENT_NAMES = ("on_mouse_over", "on_mouse_enter", "on_mouse_leave")
+    # Clicks dispatch from the press events; "on_mouse_left"/"on_mouse_right"
+    # repeat every frame while the button is held and would fire on_clicked
+    # once per frame instead of once per click.
     _CLICK_EVENT_NAMES = {
-        "on_mouse_left": "on_clicked_left",
-        "on_mouse_right": "on_clicked_right",
+        "on_mouse_left_down": "on_clicked_left",
+        "on_mouse_right_down": "on_clicked_right",
     }
 
     def __init__(self, world, event_registry, focus_callback):
@@ -171,15 +174,17 @@ class EventHandler:
     }
 
     _MOUSE_EVENT_DEPENDENCIES = {
-        "on_mouse_left": (
-            "on_mouse_left",
+        "on_mouse_left": ("on_mouse_left",),
+        "on_mouse_right": ("on_mouse_right",),
+        "on_mouse_left_down": (
+            "on_mouse_left_down",
             "on_clicked",
             "on_clicked_left",
             "on_focus",
             "on_focus_lost",
         ),
-        "on_mouse_right": (
-            "on_mouse_right",
+        "on_mouse_right_down": (
+            "on_mouse_right_down",
             "on_clicked",
             "on_clicked_right",
             "on_focus",
