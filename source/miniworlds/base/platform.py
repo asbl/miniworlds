@@ -81,6 +81,10 @@ class PlatformAdapter:
             return
 
     def toggle_fullscreen(self) -> None:
+        # SDL under Emscripten does not support toggle_fullscreen(); fullscreen
+        # is controlled by the embedding page (e.g. the web player's button).
+        if self.is_web():
+            return
         pygame.display.toggle_fullscreen()
 
     def display_info(self) -> pygame.display.Info:
