@@ -146,8 +146,67 @@ class TestDialog(unittest.TestCase):
         second = self.world.dialog.enterbox("Second?")
 
         self.assertFalse(first.is_open)
-        self.assertEqual(first_values, [None])
+        self.assertEqual(first_values, [])
         self.assertIs(self.world._active_dialog, second)
+
+    def test_user_cancel_still_notifies_callback(self):
+        values = []
+        dialog = self.world.dialog.ynbox("Cancel?", callback=values.append)
+
+        dialog.handle_event("key_down", ["ESC"])
+
+        self.assertEqual(values, [None])
+        self.assertIsNone(self.world._active_dialog)
+
+    def test_replacing_active_dialog_does_not_fire_cancel_callback(self):
+        calls = []
+
+        def open_dialog():
+            self.world.dialog.ynbox("Start?", callback=lambda value: calls.append(value))
+
+        open_dialog()
+        open_dialog()
+
+        self.assertEqual(calls, [])
+        self.assertIsNotNone(self.world._active_dialog)
+
+    def test_dialog_callback_can_open_next_dialog_immediately(self):
+        opened = []
+
+        def open_input(value):
+            opened.append(("yn", value))
+            self.world.dialog.enterbox("Name?", default="Ada", callback=open_choice)
+
+        def open_choice(value):
+            opened.append(("input", value))
+            self.world.dialog.choicebox("Color?", choices=["Red", "Blue"], callback=open_confirm)
+
+        def open_confirm(value):
+            opened.append(("choice", value))
+            self.world.dialog.ynbox("Confirm?", callback=lambda result: opened.append(("confirm", result)))
+
+        dialog = self.world.dialog.ynbox("Start?", callback=open_input)
+        dialog.draw(self.surface)
+        self.world.event_manager.handler.handle_event("mouse_left", dialog._button_rects[0][0].center)
+
+        self.assertEqual(opened, [("yn", True)])
+        self.assertEqual(self.world._active_dialog.kind, "input")
+
+        self.world.event_manager.handler.handle_event("key_down", ["RETURN"])
+        self.assertEqual(opened, [("yn", True), ("input", "Ada")])
+        self.assertEqual(self.world._active_dialog.kind, "choice")
+
+        self.world.event_manager.handler.handle_event("key_down", ["DOWN"])
+        self.world.event_manager.handler.handle_event("key_down", ["RETURN"])
+        self.assertEqual(opened, [("yn", True), ("input", "Ada"), ("choice", "Blue")])
+        self.assertEqual(self.world._active_dialog.kind, "yn")
+
+        self.world.event_manager.handler.handle_event("key_down", ["RETURN"])
+        self.assertEqual(
+            opened,
+            [("yn", True), ("input", "Ada"), ("choice", "Blue"), ("confirm", True)],
+        )
+        self.assertIsNone(self.world._active_dialog)
 
 
 if __name__ == "__main__":

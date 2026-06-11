@@ -36,7 +36,8 @@ class Overlay:
     def viewport_rect(self) -> pygame.Rect:
         return self.world.camera.get_screen_rect()
 
-    def close(self, value=None) -> None:
+    def close(self, value=None, notify: bool = True) -> None:
+        del notify
         self.is_open = False
         if getattr(self.world, "_active_dialog", None) is self:
             self.world._active_dialog = None
@@ -111,10 +112,10 @@ class Dialog(Overlay):
     def _button_rects(self) -> list[tuple[pygame.Rect, str, Any]]:
         return [(button.rect, button.label, button.value) for button in self._buttons]
 
-    def close(self, value=None) -> None:
+    def close(self, value=None, notify: bool = True) -> None:
         self.value = value
-        super().close(value)
-        if self.callback:
+        super().close(value, notify=notify)
+        if notify and self.callback:
             self.callback(value)
 
     def draw(self, target_surface: pygame.Surface) -> None:
@@ -450,6 +451,6 @@ class DialogService:
     def _open(self, dialog: Dialog) -> Dialog:
         active = getattr(self.world, "_active_dialog", None)
         if active and active.is_open:
-            active.close(None)
+            active.close(None, notify=False)
         self.world._active_dialog = dialog
         return dialog
