@@ -95,3 +95,4 @@ source/dist
 source/dist/*
 audit/
 test/generated/docs_examples/
+.claude/
