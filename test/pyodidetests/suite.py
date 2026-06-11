@@ -246,6 +246,39 @@ async def test_browser_mouse_click_and_wheel_reach_student_handlers() -> None:
     assert ("wheel_up", (12, 15)) in world.events
 
 
+async def test_modal_dialog_blocks_browser_events_and_supports_keyboard_choice() -> None:
+    _reset()
+
+    class DialogWorld(World):
+        def __init__(self):
+            self.clicks = []
+            self.keys = []
+            super().__init__(160, 120)
+
+        def on_mouse_left(self, position):
+            self.clicks.append(position)
+
+        def on_key_down_a(self):
+            self.keys.append("a")
+
+    world = DialogWorld()
+    dialog = world.dialog.choicebox("Choose one", choices=["Alpha", "Beta", "Gamma"])
+    world.event_manager.handler.handle_event("mouse_left", (10, 10))
+    world.event_manager.handler.handle_event("key_down_a", None)
+    world.app.platform.poll_events = lambda: [
+        pygame.event.Event(pygame.KEYDOWN, {"unicode": "", "key": pygame.K_DOWN}),
+        pygame.event.Event(pygame.KEYUP, {"unicode": "", "key": pygame.K_DOWN}),
+        pygame.event.Event(pygame.KEYDOWN, {"unicode": "", "key": pygame.K_RETURN}),
+    ]
+    world.app.platform.get_mouse_pos = lambda: (10, 10)
+
+    await world.app._update()
+
+    assert dialog.value == "Beta"
+    assert world.clicks == []
+    assert world.keys == []
+
+
 async def test_screenshot_writes_to_virtual_browser_filesystem() -> None:
     _reset()
     output = Path("/project/student-screenshot.png")
@@ -335,6 +368,7 @@ TESTS = [
     test_event_dispatch,
     test_browser_keyboard_event_reaches_student_handler,
     test_browser_mouse_click_and_wheel_reach_student_handlers,
+    test_modal_dialog_blocks_browser_events_and_supports_keyboard_choice,
     test_screenshot_writes_to_virtual_browser_filesystem,
     test_missing_sound_reports_export_problem_without_crashing_app,
     test_world_run_schedules_inside_pyodide_loop,

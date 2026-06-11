@@ -259,6 +259,11 @@ class EventHandler:
         Main dispatcher for all event types using a dispatch map.
         Tries to route the event to a specific handler function, otherwise falls back to the default handler.
         """
+        active_dialog = getattr(self.world, "_active_dialog", None)
+        if active_dialog is not None and getattr(active_dialog, "is_open", False):
+            if active_dialog.handle_event(event, data):
+                return
+
         event = f"on_{event}"
 
         # Always keep tracked mouse position current from motion events, even
