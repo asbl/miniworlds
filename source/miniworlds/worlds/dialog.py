@@ -104,6 +104,7 @@ class Dialog(Overlay):
         self._choice_area_rect = pygame.Rect(0, 0, 0, 0)
         self._message_lines: list[str] = []
         self._choice_buttons_visible = 0
+        self._pressed_button_index: int | None = None
         self._font = pygame.font.Font(None, 22)
         self._title_font = pygame.font.Font(None, 28)
         self._button_font = pygame.font.Font(None, 22)
@@ -136,8 +137,10 @@ class Dialog(Overlay):
     def handle_event(self, event: str, data) -> bool:
         if not super().handle_event(event, data):
             return False
-        if event == "mouse_left":
-            self._handle_mouse_left(data)
+        if event == "mouse_left_down":
+            self._handle_mouse_left_down(data)
+        elif event == "mouse_left_up":
+            self._handle_mouse_left_up(data)
         elif event == "key_down":
             self._handle_key_down(data or [])
         elif event == "wheel_up":
@@ -146,14 +149,33 @@ class Dialog(Overlay):
             self._move_focus(1)
         return True
 
-    def _handle_mouse_left(self, pos) -> None:
-        if pos is None:
+    def _handle_mouse_left_down(self, pos) -> None:
+        button = self._button_at(pos)
+        self._pressed_button_index = button.index if button else None
+        if button:
+            self.focus_index = button.index
+
+    def _handle_mouse_left_up(self, pos) -> None:
+        button = self._button_at(pos)
+        pressed_index = self._pressed_button_index
+        self._pressed_button_index = None
+        if button is None or button.index != pressed_index:
             return
+        self.focus_index = button.index
+        self._choose_focused_button()
+
+    def _button_at(self, pos) -> DialogButton | None:
+        if pos is None:
+            return None
+        self._ensure_layout()
         for button in self._buttons:
             if button.rect.collidepoint(pos):
-                self.focus_index = button.index
-                self._choose_focused_button()
-                return
+                return button
+        return None
+
+    def _ensure_layout(self) -> None:
+        if not self._buttons:
+            self._layout(self.viewport_rect)
 
     def _handle_key_down(self, keys: Sequence[str]) -> None:
         if "ESC" in keys:

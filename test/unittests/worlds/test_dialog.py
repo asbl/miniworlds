@@ -21,11 +21,37 @@ class TestDialog(unittest.TestCase):
         self.assertEqual(dialog._panel_rect.center, self.world.camera.get_screen_rect().center)
 
         yes_button = dialog._button_rects[0][0]
-        self.world.event_manager.handler.handle_event("mouse_left", yes_button.center)
+        self.world.event_manager.handler.handle_event("mouse_left_down", yes_button.center)
+        self.world.event_manager.handler.handle_event("mouse_left_up", yes_button.center)
 
         self.assertFalse(dialog.is_open)
         self.assertIs(dialog.value, True)
         self.assertIsNone(self.world._active_dialog)
+
+    def test_dialog_button_can_be_clicked_with_mouse_down_and_up(self):
+        dialog = self.world.dialog.ynbox("Continue?", "Question")
+        dialog.draw(self.surface)
+        yes_button = dialog._button_rects[0][0]
+
+        self.world.event_manager.handler.handle_event("mouse_left_down", yes_button.center)
+        self.assertTrue(dialog.is_open)
+
+        self.world.event_manager.handler.handle_event("mouse_left_up", yes_button.center)
+
+        self.assertFalse(dialog.is_open)
+        self.assertIs(dialog.value, True)
+
+    def test_dialog_lays_out_buttons_before_first_click_if_needed(self):
+        dialog = self.world.dialog.ynbox("Continue?", "Question")
+
+        dialog._layout(self.world.camera.get_screen_rect())
+        yes_center = dialog._button_rects[0][0].center
+        dialog._buttons.clear()
+        self.world.event_manager.handler.handle_event("mouse_left_down", yes_center)
+        self.world.event_manager.handler.handle_event("mouse_left_up", yes_center)
+
+        self.assertFalse(dialog.is_open)
+        self.assertIs(dialog.value, True)
 
     def test_choicebox_stacks_choices_and_returns_selected_choice(self):
         dialog = self.world.dialog.choicebox(
@@ -39,7 +65,8 @@ class TestDialog(unittest.TestCase):
         self.assertLess(dialog._button_rects[0][0].y, dialog._button_rects[1][0].y)
 
         blue_button = dialog._button_rects[2][0]
-        self.world.event_manager.handler.handle_event("mouse_left", blue_button.center)
+        self.world.event_manager.handler.handle_event("mouse_left_down", blue_button.center)
+        self.world.event_manager.handler.handle_event("mouse_left_up", blue_button.center)
 
         self.assertEqual(dialog.value, "Blue")
 
@@ -187,7 +214,8 @@ class TestDialog(unittest.TestCase):
 
         dialog = self.world.dialog.ynbox("Start?", callback=open_input)
         dialog.draw(self.surface)
-        self.world.event_manager.handler.handle_event("mouse_left", dialog._button_rects[0][0].center)
+        self.world.event_manager.handler.handle_event("mouse_left_down", dialog._button_rects[0][0].center)
+        self.world.event_manager.handler.handle_event("mouse_left_up", dialog._button_rects[0][0].center)
 
         self.assertEqual(opened, [("yn", True)])
         self.assertEqual(self.world._active_dialog.kind, "input")
