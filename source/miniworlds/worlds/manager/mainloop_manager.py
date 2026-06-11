@@ -6,9 +6,10 @@ import asyncio
 class MainloopManager:
 
     def __init__(self, world, app):
-        self.world = world  
-        self.app = app  
+        self.world = world
+        self.app = app
         self.reload_costumes_queue: list = []
+        self._dialog_was_visible = False
     
     async def update(self):
         """The mainloop, called once per frame.
@@ -75,8 +76,15 @@ class MainloopManager:
         if callable(draw_overlay):
             draw_overlay(self.app.window.surface)
         active_dialog = getattr(self.world, "_active_dialog", None)
-        if active_dialog is not None and getattr(active_dialog, "is_open", False):
+        dialog_visible = active_dialog is not None and getattr(active_dialog, "is_open", False)
+        if dialog_visible:
             active_dialog.draw(self.app.window.surface)
+        if dialog_visible or self._dialog_was_visible:
+            # The display only flushes dirty actor rects. A modal dialog is
+            # drawn independently of actors, so repaint the whole display
+            # while it is shown and once more after it closes.
+            self.app.add_display_to_repaint_areas()
+        self._dialog_was_visible = dialog_visible
 
     def dirty_all(self):
         for actor in self.world.actors:
