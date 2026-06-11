@@ -1188,7 +1188,7 @@ class Actor(actor_base.ActorBase):
         self._ensure_position_tuple(value, "center")
         self._get_movement_facade().set_center(value)
 
-    def move(self, distance: int = 0, direction: int = 0):
+    def move(self, distance: int = 0, direction=None):
         """Moves actor *distance* steps in current direction
 
         .. image:: ../_images/move.png
@@ -1214,7 +1214,7 @@ class Actor(actor_base.ActorBase):
         """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_real(distance, "distance")
-        self._ensure_direction_value(direction, "direction")
+        self._ensure_direction_value(direction, "direction", allow_none=True)
         return self._get_movement_facade().move(distance, direction)
 
     def move_vector(self, vector):

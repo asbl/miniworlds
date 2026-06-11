@@ -32,6 +32,24 @@ class TestTiledWorldMove(unittest.TestCase):
         self.assertEqual(abs(actor.direction), 180)
         self.assertEqual(actor.position, (1, 2))
 
+    def test_move_updates_direction_when_parameter_is_up(self):
+        actor = Actor((2, 2), world=self.world)
+        actor.direction = 90
+
+        actor.move(direction="up")
+
+        self.assertEqual(actor.direction, 0)
+        self.assertEqual(actor.position, (2, 1))
+
+    def test_move_updates_direction_when_parameter_is_zero(self):
+        actor = Actor((2, 2), world=self.world)
+        actor.direction = 90
+
+        actor.move(direction=0)
+
+        self.assertEqual(actor.direction, 0)
+        self.assertEqual(actor.position, (2, 1))
+
     def test_move_with_explicit_distance_uses_grid_steps(self):
         actor = Actor((4, 4), world=self.world)
         actor.direction = 0

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Tuple, Union
+from typing import TYPE_CHECKING, Optional, Tuple, Union
 
 from miniworlds.base.exceptions import MiniworldsError
 
@@ -97,8 +97,10 @@ class ActorMovementFacade:
     def set_center(self, value: Tuple[float, float]) -> None:
         self.actor.position_manager.set_center(value)
 
-    def move(self, distance: int = 0, direction: int = 0):
-        if direction != 0:
+    def move(
+        self, distance: int = 0, direction: Optional[Union[str, int, float]] = None
+    ):
+        if direction is not None:
             self.actor.position_manager.set_direction(direction)
         return self.actor.position_manager.move(distance)
 
