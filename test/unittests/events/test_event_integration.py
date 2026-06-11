@@ -208,6 +208,36 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
         self.assertFalse(dialog.is_open)
         self.assertIs(dialog.value, True)
 
+    async def test_open_dialog_is_flushed_to_display_and_cleared_after_close(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        flushed: list[pygame.Rect] = []
+        world.app.platform.update_display = Mock(
+            side_effect=lambda areas: flushed.extend(pygame.Rect(area) for area in areas)
+        )
+
+        # Settle initial full repaints, then open the dialog.
+        await self._run_frame(world, [])
+        await self._run_frame(world, [])
+        flushed.clear()
+        dialog = world.dialog.ynbox("Visible?")
+        await self._run_frame(world, [])
+
+        # The display only shows what is flushed; without this the dialog
+        # is drawn to the window surface but never appears on screen.
+        # (Pixel-level checks are not possible here: the unittest window
+        # surface is 1x1.)
+        panel = dialog._panel_rect
+        self.assertGreater(panel.width, 0)
+        self.assertTrue(any(area.contains(panel) for area in flushed))
+
+        # Closing must flush the area again, otherwise stale dialog pixels
+        # stay visible on screen.
+        flushed.clear()
+        dialog.close(None)
+        await self._run_frame(world, [])
+        self.assertTrue(any(area.contains(panel) for area in flushed))
+
     async def test_escape_key_event_closes_dialog(self):
         App.reset(unittest=True, file=__file__)
         world = World(400, 300)
