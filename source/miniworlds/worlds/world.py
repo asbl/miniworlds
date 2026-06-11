@@ -25,6 +25,7 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.world_background_facade as world_background_facade
 import miniworlds.worlds.world_initialization_facade as world_initialization_facade
 import miniworlds.worlds.world_runtime_facade as world_runtime_facade
+import miniworlds.worlds.dialog as dialog_mod
 import miniworlds.positions.rect as world_rect
 import miniworlds.actors.actor as actor_mod
 import miniworlds.tools.timer as timer
@@ -212,6 +213,8 @@ class World(world_base.WorldBase):
         self._get_initialization_facade().initialize_post_base_state()
         self._debug = False
         self._learning_mode = False
+        self._active_dialog = None
+        self.dialog = dialog_mod.DialogService(self)
 
 
     def _get_initialization_facade(

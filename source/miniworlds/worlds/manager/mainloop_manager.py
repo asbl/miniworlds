@@ -74,6 +74,9 @@ class MainloopManager:
         draw_overlay = getattr(self.world, "_draw_debug_overlay", None)
         if callable(draw_overlay):
             draw_overlay(self.app.window.surface)
+        active_dialog = getattr(self.world, "_active_dialog", None)
+        if active_dialog is not None and getattr(active_dialog, "is_open", False):
+            active_dialog.draw(self.app.window.surface)
 
     def dirty_all(self):
         for actor in self.world.actors:

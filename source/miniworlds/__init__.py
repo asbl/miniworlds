@@ -9,6 +9,8 @@ from miniworlds.worlds.world import World
 from miniworlds.worlds.gui.toolbar import Toolbar
 from miniworlds.worlds.gui.console import Console
 from miniworlds.worlds.gui.pager import PagerHorizontal
+from miniworlds.worlds.dialog import Dialog
+from miniworlds.worlds.dialog import Overlay
 
 from miniworlds.actors.actor import Actor
 from miniworlds.actors.texts.text import Text
@@ -97,6 +99,8 @@ __all__.append(Rect.__name__)
 __all__.append(Toolbar.__name__)
 __all__.append(Console.__name__)
 __all__.append(PagerHorizontal.__name__)
+__all__.append(Dialog.__name__)
+__all__.append(Overlay.__name__)
 
 
 __all__.append(YesNoButton.__name__)
