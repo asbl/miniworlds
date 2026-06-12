@@ -15,10 +15,17 @@ class MainloopManager:
         """The mainloop, called once per frame.
 
         Called in app.update() when reload_all_worlds is called.
+
+        Returns:
+            The remaining frame budget in seconds (for the app-level frame
+            pacing), or None if the world is not running. The frame wait
+            itself happens once per app frame in App._update, not per world:
+            awaiting it here would multiply the frame delay by the number of
+            docked worlds (e.g. world + toolbar).
         """
         if not self.world.is_running and self.world.frame != 0:
             self.world.event_manager.update()
-            return
+            return None
         start = 0
         if self.world.is_running or self.world.frame == 0:
             start = time.perf_counter()
@@ -38,8 +45,7 @@ class MainloopManager:
         self.world.frame += 1
         self.world.event_manager.update()
         elapsed = time.perf_counter() - start
-        wait = max(0, (1 / self.world.fps) - elapsed)
-        await self.app.platform.wait_for_frame(wait, getattr(self.app, "_skip_frame_delay", False))
+        return max(0, (1 / self.world.fps) - elapsed)
         
     def _update_all_costumes(self):
         """Updates the costumes of all actors in the world."""
@@ -71,12 +77,27 @@ class MainloopManager:
         self.world.background.repaint()  # called 1/frame in container.repaint()
 
     def blit_surface_to_window_surface(self):
-        self.app.window.surface.blit(self.world.background.surface, self.world.camera.screen_rect)
+        background = self.world.background
         draw_overlay = getattr(self.world, "_draw_debug_overlay", None)
-        if callable(draw_overlay):
-            draw_overlay(self.app.window.surface)
         active_dialog = getattr(self.world, "_active_dialog", None)
         dialog_visible = active_dialog is not None and getattr(active_dialog, "is_open", False)
+        pending_rects = getattr(background, "_pending_window_rects", None)
+        if pending_rects is None or callable(draw_overlay) or dialog_visible or self._dialog_was_visible:
+            # Overlay/dialog frames are repainted as a whole anyway.
+            self.app.window.surface.blit(background.surface, self.world.camera.screen_rect)
+        else:
+            # Copy only the areas that were redrawn this frame. Blitting the
+            # whole camera surface every frame is a large fixed per-frame cost
+            # (significant on slow targets such as Pyodide/wasm).
+            offset_x, offset_y = self.world.camera.screen_topleft
+            for rect in pending_rects:
+                self.app.window.surface.blit(
+                    background.surface, rect, rect.move(-offset_x, -offset_y)
+                )
+        if pending_rects is not None:
+            pending_rects.clear()
+        if callable(draw_overlay):
+            draw_overlay(self.app.window.surface)
         if dialog_visible:
             active_dialog.draw(self.app.window.surface)
         if dialog_visible or self._dialog_was_visible:

@@ -42,6 +42,13 @@ class WorldInitializationFacade:
         self.world._validate_parameters(x, y)
         self.world.camera = self.world._get_camera_manager_class()(x, y, self.world)
         self.world.actors = pygame.sprite.LayeredDirty()
+        # LayeredDirty falls back to redrawing every sprite plus a full-screen
+        # update whenever one draw call exceeds its timing threshold (12.5 ms
+        # by default). On slow targets (Pyodide/wasm) the first draw always
+        # exceeds it, so the group would stay in full-redraw mode forever and
+        # each frame would cost O(all actors) blits. miniworlds tracks dirty
+        # state itself, so always keep the group in dirty-rect mode.
+        self.world.actors.set_timing_threshold(1_000_000.0)
 
     def initialize_post_base_state(self) -> None:
         self._initialize_timing_state()

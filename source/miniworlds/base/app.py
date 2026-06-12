@@ -246,8 +246,12 @@ class App:
 
         if not self._quit:
             self.event_manager.handle_event_queue()
-            await self.worlds_manager.reload_all_worlds()
+            frame_wait = await self.worlds_manager.reload_all_worlds()
             self.display_repaint()
+            if frame_wait is not None:
+                # One frame wait per app frame for all worlds together
+                # (a per-world wait would multiply the frame delay).
+                await self.platform.wait_for_frame(frame_wait, self._skip_frame_delay)
             await self.platform.yield_mainloop()
 
     def set_running_world(self, world: Optional["World"]) -> None:
