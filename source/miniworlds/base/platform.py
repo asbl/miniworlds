@@ -130,11 +130,16 @@ class PlatformAdapter:
         # Pacing via requestAnimationFrame yields control exactly once per
         # painted frame, so even wait_time <= 0 must await one frame.
         deadline = time.perf_counter() + max(wait_time, 0.0)
+        # rAF ticks at display refresh (~16.7 ms at 60 Hz). Without slack, a
+        # 60 fps frame budget regularly misses its deadline by a fraction of a
+        # millisecond and pays a whole extra tick (16 ms -> 33 ms per frame).
+        # Stop once another tick would overshoot more than it helps.
+        slack = 1 / 120
         while True:
             if not await self._await_animation_frame():
                 await asyncio.sleep(max(wait_time, 0.0))
                 break
-            if time.perf_counter() >= deadline:
+            if time.perf_counter() >= deadline - slack:
                 break
         self._frame_yielded = True
 

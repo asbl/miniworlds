@@ -29,13 +29,22 @@ class WorldsManager:
         """Called in mainloop, triggered 1/frame.
 
         If dirty, worlds are updated and repainted.
+
+        Returns:
+            The smallest remaining frame budget (seconds) of all updated
+            worlds, or None if no world requested frame pacing. The caller
+            (App._update) awaits the frame wait once per app frame.
         """
+        frame_wait = None
         for world in self.worlds:
             if world.dirty:
-                await world._mainloop.update()
+                world_wait = await world._mainloop.update()
                 world._mainloop.repaint()
                 world._mainloop.blit_surface_to_window_surface()
-                
+                if world_wait is not None:
+                    frame_wait = world_wait if frame_wait is None else min(frame_wait, world_wait)
+        return frame_wait
+
     def add_topleft_if_empty(
         self, new_world: "world_mod.World"
     ) -> "world_mod.World":

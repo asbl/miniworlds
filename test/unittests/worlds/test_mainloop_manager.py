@@ -24,10 +24,9 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
         world._timed_objects = []
         return world
 
-    async def test_update_skips_frame_delay_in_fast_mode(self):
+    async def test_update_returns_remaining_frame_budget(self):
         world = self._create_world()
         app = MagicMock()
-        app._skip_frame_delay = True
         app.platform = SimpleNamespace(wait_for_frame=AsyncMock())
         manager = MainloopManager(world, app)
 
@@ -35,25 +34,36 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
             "miniworlds.worlds.manager.mainloop_manager.time.perf_counter",
             side_effect=[0.0, 0.0],
         ):
-            await manager.update()
+            frame_wait = await manager.update()
 
-        app.platform.wait_for_frame.assert_awaited_once_with(1 / world.fps, True)
+        # The frame wait happens once per app frame in App._update; a wait
+        # per world would multiply the frame delay by the number of worlds.
+        self.assertEqual(frame_wait, 1 / world.fps)
+        app.platform.wait_for_frame.assert_not_awaited()
         self.assertEqual(world.frame, 1)
 
-    async def test_update_waits_for_remaining_frame_time_by_default(self):
+    async def test_update_subtracts_elapsed_time_from_frame_budget(self):
         world = self._create_world()
         app = MagicMock()
-        app._skip_frame_delay = False
         app.platform = SimpleNamespace(wait_for_frame=AsyncMock())
         manager = MainloopManager(world, app)
 
         with patch(
             "miniworlds.worlds.manager.mainloop_manager.time.perf_counter",
-            side_effect=[0.0, 0.0],
+            side_effect=[0.0, 0.01],
         ):
-            await manager.update()
+            frame_wait = await manager.update()
 
-        app.platform.wait_for_frame.assert_awaited_once_with(1 / world.fps, False)
+        self.assertAlmostEqual(frame_wait, 1 / world.fps - 0.01)
+
+    async def test_update_returns_none_for_paused_world(self):
+        world = self._create_world()
+        world.is_running = False
+        world.frame = 5
+        app = MagicMock()
+        manager = MainloopManager(world, app)
+
+        self.assertIsNone(await manager.update())
 
     def test_blit_calls_debug_overlay_when_available(self):
         world = self._create_world()

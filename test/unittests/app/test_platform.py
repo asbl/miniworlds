@@ -74,11 +74,24 @@ class TestPlatformFramePacing(unittest.TestCase):
     def test_wait_for_frame_web_awaits_animation_frames_until_deadline(self):
         adapter = self._make_web_adapter()
 
+        # 30 fps budget at a 60 Hz display: two rAF ticks (16.6 ms apart).
         with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
-            with patch("miniworlds.base.platform.time.perf_counter", side_effect=[0.0, 0.005, 0.011, 0.017]):
-                asyncio.run(adapter.wait_for_frame(0.016))
+            with patch("miniworlds.base.platform.time.perf_counter", side_effect=[0.0, 0.0166, 0.0333]):
+                asyncio.run(adapter.wait_for_frame(0.033))
 
-        self.assertEqual(raf_mock.await_count, 3)
+        self.assertEqual(raf_mock.await_count, 2)
+        self.assertTrue(adapter._frame_yielded)
+
+    def test_wait_for_frame_web_full_60fps_budget_takes_one_tick(self):
+        adapter = self._make_web_adapter()
+
+        # A full 60 fps budget (16.6 ms) must not pay a second rAF tick when
+        # the first one lands fractionally before the deadline.
+        with patch.object(adapter, "_await_animation_frame", new=AsyncMock(return_value=True)) as raf_mock:
+            with patch("miniworlds.base.platform.time.perf_counter", side_effect=[0.0, 0.0162]):
+                asyncio.run(adapter.wait_for_frame(1 / 60))
+
+        self.assertEqual(raf_mock.await_count, 1)
         self.assertTrue(adapter._frame_yielded)
 
     def test_wait_for_frame_web_falls_back_to_sleep_without_raf(self):

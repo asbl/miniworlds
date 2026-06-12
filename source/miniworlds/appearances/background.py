@@ -40,6 +40,7 @@ class Background(appearance_mod.Appearance):
             (self.world.camera.width, self.world.camera.height)
         )
         self._is_scaled_to_tile = False
+        self._pending_window_rects: list[pygame.Rect] = []
         self._image = pygame.Surface(
             (self.parent.width, self.parent.height)
         )  # size set in image()-method
@@ -101,6 +102,7 @@ class Background(appearance_mod.Appearance):
                     new_repaint_rects.append(rect)
                 repaint_rects = new_repaint_rects
             self.world.app.repaint_areas.extend(repaint_rects)
+            self._pending_window_rects.extend(repaint_rects)
 
     def _after_transformation_pipeline(self) -> None:
         self.surface = pygame.Surface(
