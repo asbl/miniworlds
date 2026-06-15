@@ -446,13 +446,13 @@ class TiledWorld(world.World):
             return actor_list[0]
 
     def _rebuild_static_tile_layer(self) -> None:
-        layer = pygame.Surface(
-            (self.camera.width, self.camera.height), pygame.SRCALPHA
-        )
+        layer = self.background.image.copy()
         for actor in self.actors:
             if not getattr(actor, "_static", False):
                 continue
             if self.event_manager.registry.has_instance_handlers(actor):
+                continue
+            if not getattr(actor, "visible", True):
                 continue
             costume = getattr(actor, "costume", None)
             if costume is None:
@@ -468,16 +468,30 @@ class TiledWorld(world.World):
                 continue
             local_rect = actor_rect.move(-self.camera.x, -self.camera.y)
             layer.blit(image, local_rect)
+            actor.dirty = 0
         self._static_tile_layer = layer
         self._static_tile_layer_dirty = False
 
     def _draw_static_tile_layer(self, surface: pygame.Surface) -> bool:
         if not hasattr(self, "actors"):
             return False
+        if getattr(self, "background", None) is None:
+            return False
         if self._static_tile_layer_dirty or self._static_tile_layer is None:
             self._rebuild_static_tile_layer()
         surface.blit(self._static_tile_layer, (0, 0))
         return True
+
+    def _refresh_static_tile_layer(self) -> tuple[pygame.Surface | None, bool]:
+        if not hasattr(self, "actors"):
+            return None, False
+        if getattr(self, "background", None) is None:
+            return None, False
+        rebuilt = False
+        if self._static_tile_layer_dirty or self._static_tile_layer is None:
+            self._rebuild_static_tile_layer()
+            rebuilt = True
+        return self._static_tile_layer, rebuilt
 
     @property
     def grid(self):

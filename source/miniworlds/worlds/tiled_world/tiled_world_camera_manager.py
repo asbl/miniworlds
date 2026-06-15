@@ -28,6 +28,8 @@ class TiledCameraManager(camera_manager.CameraManager):
         Args:
             value (int): New width in tiles.
         """
+        if value == self.view[0]:
+            return
         self._set_width(value)
         self.dirty = True
 
@@ -47,8 +49,40 @@ class TiledCameraManager(camera_manager.CameraManager):
         Args:
             value (int): New height in tiles.
         """
+        if value == self.view[1]:
+            return
         self._set_height(value)
         self.dirty = True
+
+    @property
+    def x(self) -> int:
+        """
+        Returns:
+            Camera x-position in tile coordinates.
+        """
+        return self._topleft[0]
+
+    @x.setter
+    def x(self, value: int) -> None:
+        """
+        Sets the camera x-position in tile coordinates.
+        """
+        self.topleft = (value, self._topleft[1])
+
+    @property
+    def y(self) -> int:
+        """
+        Returns:
+            Camera y-position in tile coordinates.
+        """
+        return self._topleft[1]
+
+    @y.setter
+    def y(self, value: int) -> None:
+        """
+        Sets the camera y-position in tile coordinates.
+        """
+        self.topleft = (self._topleft[0], value)
 
     @property
     def topleft(self) -> tuple[int, int]:
@@ -70,6 +104,16 @@ class TiledCameraManager(camera_manager.CameraManager):
             value (tuple): Tile coordinates for top-left corner.
         """
         self._set_topleft(value)
+
+    def _set_topleft(self, value: tuple[int, int]) -> None:
+        if self._strict:
+            value = (self._limit_x(value[0]), self._limit_y(value[1]))
+        if value == self._topleft:
+            return
+        self._topleft = value
+        self._reload_actors_in_view()
+        if hasattr(self.world, "_static_tile_layer_dirty"):
+            self.world._static_tile_layer_dirty = True
         self.dirty = True
 
     def get_rect(self) -> pygame.Rect:
@@ -122,5 +166,6 @@ class TiledCameraManager(camera_manager.CameraManager):
             return value
 
     def _update(self):
-        self._reload_camera()
-        self.dirty = True
+        if self.dirty:
+            self._reload_camera()
+        super()._update()

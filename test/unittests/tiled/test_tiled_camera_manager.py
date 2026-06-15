@@ -20,12 +20,6 @@ def mock_world():
 @pytest.fixture
 def camera(mock_world):
     return tiled_camera_manager.TiledCameraManager(view_x=10, view_y=8, world=mock_world)
-    cam.world = mock_world
-    cam._topleft = (2, 3)
-    cam.world_size_x = 100  # wichtig für _limit_x
-    cam.view = (20, 15)     # wichtig für _limit_x
-    cam.world_size_y = mock_world.world_size_y
-    return cam
 
 
 
@@ -47,3 +41,109 @@ def test_from_actor_without_center(camera):
     camera.from_actor(actor)
 
     assert camera._topleft == (0, 0)
+
+
+def test_update_does_not_reload_camera_when_clean(camera):
+    camera.dirty = False
+    camera._reload_camera = MagicMock()
+    camera._cache_rects = MagicMock()
+
+    camera._update()
+
+    camera._reload_camera.assert_not_called()
+    camera._cache_rects.assert_not_called()
+    assert camera.dirty is False
+
+
+def test_update_refreshes_rect_cache_once_when_dirty(camera):
+    camera.dirty = True
+    camera._reload_camera = MagicMock()
+    camera._cache_rects = MagicMock()
+
+    camera._update()
+
+    camera._reload_camera.assert_called_once_with()
+    camera._cache_rects.assert_called_once_with()
+    assert camera.dirty is False
+
+
+def test_view_size_change_still_reloads_camera(camera):
+    camera._reload_camera = MagicMock()
+
+    camera.width = 12
+
+    camera._reload_camera.assert_called_once_with()
+    assert camera.dirty is True
+
+
+def test_setting_same_topleft_does_not_mark_camera_dirty(camera):
+    camera.world_size = (100, 100)
+    camera._topleft = (2, 3)
+    camera.dirty = False
+    camera._reload_actors_in_view = MagicMock()
+
+    camera.topleft = (2, 3)
+
+    camera._reload_actors_in_view.assert_not_called()
+    assert camera.dirty is False
+
+
+def test_setting_same_axis_position_does_not_mark_camera_dirty(camera):
+    camera.world_size = (100, 100)
+    camera._topleft = (2, 3)
+    camera.dirty = False
+    camera._reload_actors_in_view = MagicMock()
+
+    camera.x = 2
+    camera.y = 3
+
+    camera._reload_actors_in_view.assert_not_called()
+    assert camera.dirty is False
+
+
+def test_setting_same_view_size_does_not_reload_camera(camera):
+    camera.dirty = False
+    camera._reload_camera = MagicMock()
+
+    camera.width = camera.view[0]
+    camera.height = camera.view[1]
+
+    camera._reload_camera.assert_not_called()
+    assert camera.dirty is False
+
+
+def test_moving_topleft_marks_camera_and_static_layer_dirty(camera):
+    camera.world_size = (100, 100)
+    camera.world._static_tile_layer_dirty = False
+    camera._reload_actors_in_view = MagicMock()
+
+    camera.topleft = (2, 3)
+
+    camera._reload_actors_in_view.assert_called_once_with()
+    assert camera.dirty is True
+    assert camera.world._static_tile_layer_dirty is True
+
+
+def test_moving_axis_position_marks_camera_dirty_once(camera):
+    camera.world_size = (100, 100)
+    camera._reload_actors_in_view = MagicMock()
+
+    camera.x = 2
+    camera.y = 3
+
+    assert camera._topleft == (2, 3)
+    assert camera._reload_actors_in_view.call_count == 2
+    assert camera.dirty is True
+
+
+def test_repeated_clean_updates_do_not_reload_after_camera_move(camera):
+    camera.world_size = (100, 100)
+    camera.topleft = (2, 3)
+    camera._reload_camera = MagicMock()
+
+    camera._update()
+    for _ in range(10):
+        camera._update()
+
+    camera._reload_camera.assert_called_once_with()
+    assert camera.dirty is False

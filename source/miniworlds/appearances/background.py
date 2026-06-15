@@ -53,6 +53,8 @@ class Background(appearance_mod.Appearance):
     def set_dirty(self, value="all", status=1):
         """Mark the background as dirty and refresh dependent actor visuals."""
         super().set_dirty(value, status)
+        if self.world and hasattr(self.world, "_static_tile_layer_dirty"):
+            self.world._static_tile_layer_dirty = True
         self._blit_to_window_surface()
         if self.world and self.get_manager()._is_display_initialized:
             for actor in self.world.actors:
@@ -90,9 +92,17 @@ class Background(appearance_mod.Appearance):
     def repaint(self):
         """Called 1/frame from world"""
         if self.world and self.world.app and self.world in self.world.app.running_worlds:
-            self.world.actors.clear(self.surface, self.image)
-            if hasattr(self.world, "_draw_static_tile_layer"):
-                self.world._draw_static_tile_layer(self.surface)
+            clear_image = self.image
+            if hasattr(self.world, "_refresh_static_tile_layer"):
+                static_layer, static_layer_rebuilt = self.world._refresh_static_tile_layer()
+                if static_layer is not None:
+                    clear_image = static_layer
+                    if static_layer_rebuilt:
+                        self.surface.blit(static_layer, (0, 0))
+                        for actor in self.world.actors:
+                            if not getattr(actor, "_static", False):
+                                actor.dirty = 1
+            self.world.actors.clear(self.surface, clear_image)
             repaint_rects = self.world.actors.draw(self.surface)
             if self.world.camera.screen_topleft[0] != 0 or self.world.camera.screen_topleft[1] != 0:
                 new_repaint_rects = []

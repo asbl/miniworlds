@@ -49,6 +49,11 @@ class Positionmanager:
             and self.actor in actor_world.actors
         ):
             spatial_index.update(self.actor, self.get_global_rect())
+        if (
+            getattr(self.actor, "_static", False)
+            and hasattr(actor_world, "_static_tile_layer_dirty")
+        ):
+            actor_world._static_tile_layer_dirty = True
         if self.is_blocking and getattr(self.actor, "_static", False):
             current = getattr(actor_world, "_blocking_registry_version", 0)
             actor_world._blocking_registry_version = current + 1
@@ -309,8 +314,11 @@ class Positionmanager:
             self._invalidate_rect_cache()
 
         if int(old_position[0]) != int(value[0]) or int(old_position[1]) != int(value[1]):
+            if getattr(self.actor.world, "is_tiled", False):
+                self.actor._dirty = 1
+            else:
+                self.actor.dirty = 1
             self.actor.world.camera._clear_camera_cache()
-            self.actor.dirty = 1
 
         return self
 
