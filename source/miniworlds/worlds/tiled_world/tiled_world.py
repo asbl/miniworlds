@@ -77,6 +77,8 @@ class TiledWorld(world.World):
         self.tiles: defaultdict = defaultdict()
         self.corners: defaultdict = defaultdict()
         self.edges: defaultdict = defaultdict()
+        self._static_tile_layer: pygame.Surface | None = None
+        self._static_tile_layer_dirty = True
         if x > 1000 or y > 1000:
             raise TiledWorldTooBigError(x, y, 40)
         super().__init__(x=x, y=y)
@@ -442,6 +444,40 @@ class TiledWorld(world.World):
             return None
         else:
             return actor_list[0]
+
+    def _rebuild_static_tile_layer(self) -> None:
+        layer = pygame.Surface(
+            (self.camera.width, self.camera.height), pygame.SRCALPHA
+        )
+        for actor in self.actors:
+            if not getattr(actor, "_static", False):
+                continue
+            if self.event_manager.registry.has_instance_handlers(actor):
+                continue
+            costume = getattr(actor, "costume", None)
+            if costume is None:
+                continue
+            actor_rect = actor.position_manager.get_global_rect()
+            if not self.camera.rect.colliderect(actor_rect):
+                continue
+            try:
+                image = actor.image
+            except AttributeError:
+                continue
+            if image is None:
+                continue
+            local_rect = actor_rect.move(-self.camera.x, -self.camera.y)
+            layer.blit(image, local_rect)
+        self._static_tile_layer = layer
+        self._static_tile_layer_dirty = False
+
+    def _draw_static_tile_layer(self, surface: pygame.Surface) -> bool:
+        if not hasattr(self, "actors"):
+            return False
+        if self._static_tile_layer_dirty or self._static_tile_layer is None:
+            self._rebuild_static_tile_layer()
+        surface.blit(self._static_tile_layer, (0, 0))
+        return True
 
     @property
     def grid(self):

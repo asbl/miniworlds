@@ -2,6 +2,7 @@ from collections import defaultdict
 from types import SimpleNamespace
 from unittest.mock import Mock
 
+from miniworlds import Actor
 from miniworlds.worlds.tiled_world.tiled_world import TiledWorld
 
 
@@ -62,3 +63,17 @@ def test_detect_actors_at_position_ignores_wrong_position():
     result = TiledWorld.detect_actors_at_position(world, (5, 1))
 
     assert actor not in result
+
+
+def test_registered_actor_event_reactivates_auto_static_actor():
+    TiledWorld(5, 5)
+    actor = Actor((1, 1))
+
+    def act(self):
+        pass
+
+    assert actor.static
+    actor.register(act)
+
+    assert not actor.static
+    assert actor in actor.world._dynamic_actors

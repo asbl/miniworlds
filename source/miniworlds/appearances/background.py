@@ -91,6 +91,8 @@ class Background(appearance_mod.Appearance):
         """Called 1/frame from world"""
         if self.world and self.world.app and self.world in self.world.app.running_worlds:
             self.world.actors.clear(self.surface, self.image)
+            if hasattr(self.world, "_draw_static_tile_layer"):
+                self.world._draw_static_tile_layer(self.surface)
             repaint_rects = self.world.actors.draw(self.surface)
             if self.world.camera.screen_topleft[0] != 0 or self.world.camera.screen_topleft[1] != 0:
                 new_repaint_rects = []

@@ -160,6 +160,8 @@ class CameraManager(pygame.sprite.Sprite):
         if value != self._topleft:
             self._topleft = value
             self._reload_actors_in_view()
+            if hasattr(self.world, "_static_tile_layer_dirty"):
+                self.world._static_tile_layer_dirty = True
         self.dirty = True
 
     def _limit_x(self, value: int) -> int:

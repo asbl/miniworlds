@@ -38,6 +38,22 @@ class ActorSensorFacade:
             distance = args[1] if len(args) >= 2 else None
             direction = args[2] if len(args) >= 3 else self.actor.direction
         if not distance:
+            if hasattr(actors, "position_manager") and hasattr(actors, "collision_type"):
+                actor_rect = self.actor.position_manager.get_global_rect()
+                other_rect = actors.position_manager.get_global_rect()
+                if not actor_rect.colliderect(other_rect):
+                    return None
+                collision_type = self.actor.collision_type
+                if collision_type in ("rect", "static-rect") or actors.collision_type in (
+                    "rect",
+                    "static-rect",
+                ):
+                    return actors
+                if collision_type == "circle":
+                    return actors if pygame.sprite.collide_circle(self.actor, actors) else None
+                if collision_type == "mask":
+                    return actors if pygame.sprite.collide_mask(self.actor, actors) else None
+                return actors
             return self.actor.sensor_manager.detect_actor(filter=actors)
         return self.actor.sensor_manager.detect_actors_at(
             filter=actors,

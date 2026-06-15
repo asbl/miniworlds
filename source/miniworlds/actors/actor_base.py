@@ -79,11 +79,18 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
         if (not self.world.event_manager.can_register_to_actor(method) and not force):
             raise RegisterError(method.__name__, self)
         bound_method = actor_inspection.ActorInspection(self).bind_method(method, name)
+        self._disable_auto_static_after_instance_registration()
         if method.__name__ == "on_setup" and not self._is_setup_completed:
             self.on_setup()
             self._is_setup_completed = True
         self.world.event_manager.register_event(method.__name__, self)
         return bound_method
+
+    def _disable_auto_static_after_instance_registration(self):
+        if not getattr(self, "_mw_auto_static", False):
+            return
+        self.world.get_world_connector(self).set_static(False)
+        self._mw_auto_static = False
             
     def register_message(self, *args, **kwargs):
         """
@@ -118,6 +125,7 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
                 method = kwargs.pop("method")
                 name = kwargs.pop("name")
             bound_method = actor_inspection.ActorInspection(self).bind_method(method, method.__name__)
+            self._disable_auto_static_after_instance_registration()
             self.world.event_manager.register_message_event(method.__name__, self, args[0])
             return bound_method
         return decorator

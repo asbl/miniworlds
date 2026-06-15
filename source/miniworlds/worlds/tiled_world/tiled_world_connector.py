@@ -48,6 +48,26 @@ class TiledWorldConnector(world_connector.WorldConnector):
         self.remove_dynamic_actor()
         return super().remove_actor_from_world(kill=kill)
 
+    def add_to_world(self, position=(0, 0)):
+        actor = super().add_to_world(position)
+        self._auto_static_if_passive_tile_actor()
+        return actor
+
+    def _auto_static_if_passive_tile_actor(self):
+        if self.actor.static:
+            return
+        if self.world.event_manager.registry.has_instance_handlers(self.actor):
+            return
+        costume = getattr(self.actor, "costume", None)
+        if costume is not None and getattr(costume, "is_animated", False):
+            return
+        self.actor._mw_auto_static = True
+        self.set_static(True)
+
+    def _mark_static_tile_layer_dirty(self):
+        if hasattr(self.world, "_static_tile_layer_dirty"):
+            self.world._static_tile_layer_dirty = True
+
     def add_static_actor(self):
         """
         Adds the actor to the static actor list at its current position,
@@ -60,6 +80,7 @@ class TiledWorldConnector(world_connector.WorldConnector):
 
         if self.actor not in self.world.static_actors_dict[pos]:
             self.world.static_actors_dict[pos].append(self.actor)
+            self._mark_static_tile_layer_dirty()
             if hasattr(self.world, "mainloop"):
                 self.world.mainloop.reload_costumes_queue.append(self.actor)
 
@@ -72,6 +93,7 @@ class TiledWorldConnector(world_connector.WorldConnector):
         if pos in self.world.static_actors_dict:
             if self.actor in self.world.static_actors_dict[pos]:
                 self.world.static_actors_dict[pos].remove(self.actor)
+                self._mark_static_tile_layer_dirty()
 
     def set_static(self, value: bool):
         """
@@ -85,3 +107,4 @@ class TiledWorldConnector(world_connector.WorldConnector):
             self.add_static_actor()
         else:
             self.remove_static_actor()
+            self._mark_static_tile_layer_dirty()

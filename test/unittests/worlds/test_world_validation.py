@@ -56,6 +56,22 @@ class TestWorldValidation(unittest.TestCase):
         with self.assertRaises(ValueError):
             World.size.__set__(world, (800, 0))
 
+    def test_fps_setter_clamps_web_runtime_to_sixty_fps(self):
+        world = self._bare_world()
+        world.app = SimpleNamespace(platform=SimpleNamespace(is_web=MagicMock(return_value=True)))
+
+        World.fps.__set__(world, 120)
+
+        self.assertEqual(world.fps, 60)
+
+    def test_fps_setter_keeps_high_native_fps(self):
+        world = self._bare_world()
+        world.app = SimpleNamespace(platform=SimpleNamespace(is_web=MagicMock(return_value=False)))
+
+        World.fps.__set__(world, 120)
+
+        self.assertEqual(world.fps, 120)
+
     def test_run_rejects_non_boolean_flags(self):
         world = self._bare_world()
 

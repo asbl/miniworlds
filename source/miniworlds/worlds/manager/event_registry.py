@@ -47,6 +47,18 @@ class EventRegistry:
             names.add("sensor")
         return names
 
+    def has_instance_handlers(self, instance: Any) -> bool:
+        for method_set in self._event_handlers.values():
+            if any(getattr(method, "__self__", None) == instance for method in method_set):
+                return True
+        for method_set in self._message_handlers.values():
+            if any(getattr(method, "__self__", None) == instance for method in method_set):
+                return True
+        for method_set in self._sensor_handlers.values():
+            if any(getattr(method, "__self__", None) == instance for method in method_set):
+                return True
+        return False
+
     def has_registered_event(self, event_name: str) -> bool:
         if event_name == "message":
             return bool(self._message_handlers)

@@ -190,6 +190,13 @@ class Costume(appear.Appearance):
         if (
             hasattr(self, "actor")
             and self.actor
+            and getattr(self.actor, "_static", False)
+            and hasattr(self.actor.world, "_static_tile_layer_dirty")
+        ):
+            self.actor.world._static_tile_layer_dirty = True
+        if (
+            hasattr(self, "actor")
+            and self.actor
             and self.actor.collision_type == "mask"
         ):
             self.actor.mask = pygame.mask.from_surface(self.actor.image, threshold=100)

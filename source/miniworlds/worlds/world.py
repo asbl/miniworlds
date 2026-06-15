@@ -398,6 +398,8 @@ class World(world_base.WorldBase):
     @fps.setter
     def fps(self, value: int):
         self._ensure_dimension(value, "fps")
+        if self.app.platform.is_web() and value > 60:
+            value = 60
         self._fps = value
 
     @property

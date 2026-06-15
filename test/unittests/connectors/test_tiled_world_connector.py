@@ -19,6 +19,7 @@ class TestTiledWorldConnector(unittest.TestCase):
         world = SimpleNamespace(
             static_actors_dict={},
             _dynamic_actors=set(),
+            _static_tile_layer_dirty=False,
             mainloop=SimpleNamespace(reload_costumes_queue=[]),
         )
         return TiledWorldConnector(world, actor), world, actor
@@ -83,3 +84,30 @@ class TestTiledWorldConnector(unittest.TestCase):
         remove_dynamic_actor.assert_called_once_with()
         super_remove.assert_called_once_with(kill=True)
         self.assertEqual(result, {"event": {"handler"}})
+
+    def test_auto_static_marks_passive_tile_actor_static(self):
+        connector, world, actor = self._create_connector()
+        actor.static = False
+        actor.costume = SimpleNamespace(is_animated=False)
+        world.event_manager = SimpleNamespace(
+            registry=SimpleNamespace(has_instance_handlers=lambda instance: False)
+        )
+
+        connector._auto_static_if_passive_tile_actor()
+
+        self.assertTrue(actor._static)
+        self.assertTrue(actor._mw_auto_static)
+        self.assertTrue(world._static_tile_layer_dirty)
+
+    def test_auto_static_keeps_actor_dynamic_when_instance_has_handlers(self):
+        connector, _, actor = self._create_connector()
+        actor.static = False
+        actor.costume = SimpleNamespace(is_animated=False)
+        connector.world.event_manager = SimpleNamespace(
+            registry=SimpleNamespace(has_instance_handlers=lambda instance: True)
+        )
+
+        connector._auto_static_if_passive_tile_actor()
+
+        self.assertFalse(actor._static)
+        self.assertFalse(hasattr(actor, "_mw_auto_static"))
