@@ -500,6 +500,7 @@ api/world_manager_music
 api/world_manager_sound
 api/world_manager_mouse
 api/world_manager_layout
+api/world_dialog
 api/backgrounds_manager
 ```
 

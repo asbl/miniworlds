@@ -38,6 +38,7 @@ class AppEventManager:
             pygame.MOUSEMOTION: self._handle_mouse_motion_event,
             pygame.KEYDOWN: self._handle_key_down_event,
             pygame.KEYUP: self._handle_key_up_event,
+            pygame.TEXTINPUT: self._handle_text_input_event,
             pygame.VIDEORESIZE: self._handle_resize_event,
             pygame.VIDEOEXPOSE: self._handle_resize_event,
         }
@@ -108,6 +109,11 @@ class AppEventManager:
 
     def _handle_mouse_motion_event(self, event) -> None:
         self.to_event_queue("mouse_motion", self._get_mouse_pos(event))
+
+    def _handle_text_input_event(self, event) -> None:
+        # Composed text (umlauts, dead keys, IME) arrives through TEXTINPUT;
+        # input dialogs read text from this event instead of key names.
+        self.to_event_queue("text_input", event.text)
 
     def _handle_key_down_event(self, event) -> None:
         key = self._resolve_key_name(event)

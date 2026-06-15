@@ -252,6 +252,19 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(dialog.value)
         self.assertEqual(dialog.input_text, "Ada")
 
+    async def test_text_input_event_reaches_input_dialog(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        dialog = world.dialog.enterbox("Name?", default="")
+
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.TEXTINPUT, {"text": "hä"})],
+        )
+
+        self.assertEqual(dialog.input_text, "hä")
+        self.assertTrue(dialog.is_open)
+
     async def test_button_message_reaches_world_without_visual_test(self):
         App.reset(unittest=True, file=__file__)
         world = MessageWorld()
