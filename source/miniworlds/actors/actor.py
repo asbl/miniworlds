@@ -1,11 +1,14 @@
 from __future__ import annotations
-from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
-from difflib import get_close_matches
-import warnings
-import pygame.rect
+
 import collections
+import warnings
+from difflib import get_close_matches
+from typing import TYPE_CHECKING, List, Optional, Tuple, Type, Union, cast
+
+import pygame.rect
 
 import miniworlds.actors.actor_appearance_facade as actor_appearance_facade
+import miniworlds.actors.actor_base as actor_base
 import miniworlds.actors.actor_event_facade as actor_event_facade
 import miniworlds.actors.actor_initialization_facade as actor_initialization_facade
 import miniworlds.actors.actor_movement_facade as actor_movement_facade
@@ -14,19 +17,17 @@ import miniworlds.actors.actor_size_facade as actor_size_facade
 import miniworlds.appearances.appearance as appearance
 import miniworlds.appearances.costume as costume_mod
 import miniworlds.appearances.costumes_manager as costumes_manager
-import miniworlds.worlds.manager.sensor_manager as sensor_manager
-import miniworlds.worlds.manager.position_manager as actor_position_manager
-import miniworlds.base.exceptions as exceptions
-import miniworlds.actors.actor_base as actor_base
 import miniworlds.base.api_validation as api_validation
-
+import miniworlds.base.exceptions as exceptions
+import miniworlds.worlds.manager.position_manager as actor_position_manager
+import miniworlds.worlds.manager.sensor_manager as sensor_manager
 from miniworlds.base.exceptions import (
+    MissingPositionManager,
+    Missingworldsensor,
     NotImplementedOrRegisteredError,
+    NoValidWorldPositionError,
     NoWorldError,
     RegisterError,
-    NoValidWorldPositionError,
-    Missingworldsensor,
-    MissingPositionManager,
 )
 
 if TYPE_CHECKING:
@@ -66,10 +67,14 @@ class Actor(actor_base.ActorBase):
         self, position: Optional[Tuple[float, float]] = (0, 0), *args, **kwargs
     ):
         position, args = self._normalize_constructor_arguments(position, args)
-        self._initialization_facade = actor_initialization_facade.ActorInitializationFacade(self)
+        self._initialization_facade = (
+            actor_initialization_facade.ActorInitializationFacade(self)
+        )
         self._get_initialization_facade().prepare_core_references(kwargs.get("world"))
         self._validate_arguments(position, *args, **kwargs)
-        self._get_initialization_facade().initialize_runtime_state(Actor.actor_count + 1)
+        self._get_initialization_facade().initialize_runtime_state(
+            Actor.actor_count + 1
+        )
         self._get_initialization_facade().initialize_world_managers(position)
         self._get_initialization_facade().finalize_sprite_state(kwargs.get("origin"))
         Actor.actor_count += 1
@@ -84,7 +89,11 @@ class Actor(actor_base.ActorBase):
             return position, args
         if isinstance(position, tuple):
             return position, args
-        if len(args) >= 1 and isinstance(position, (int, float)) and isinstance(args[0], (int, float)):
+        if (
+            len(args) >= 1
+            and isinstance(position, (int, float))
+            and isinstance(args[0], (int, float))
+        ):
             return (position, args[0]), args[1:]
         return position, args
 
@@ -134,9 +143,7 @@ class Actor(actor_base.ActorBase):
 
     def _validate_arguments(self, position, *args, **kwargs):
         if position is None:
-            raise exceptions.NoValidPositionOnInitException(
-                self, None
-            )
+            raise exceptions.NoValidPositionOnInitException(self, None)
         if not isinstance(position, tuple):
             raise exceptions.NoValidPositionOnInitException(self, position)
 
@@ -249,7 +256,9 @@ class Actor(actor_base.ActorBase):
         )
 
     @classmethod
-    def _ensure_direction_value(cls, value, parameter_name: str = "direction", allow_none: bool = False):
+    def _ensure_direction_value(
+        cls, value, parameter_name: str = "direction", allow_none: bool = False
+    ):
         api_validation.DirectionInput.ensure(
             value,
             parameter_name,
@@ -322,7 +331,9 @@ class Actor(actor_base.ActorBase):
             )
         value = value.strip().lower().replace("_", "-")
         if value not in allowed_values and self._is_learning_mode():
-            close_match = get_close_matches(value, sorted(allowed_values), n=1, cutoff=0.75)
+            close_match = get_close_matches(
+                value, sorted(allowed_values), n=1, cutoff=0.75
+            )
             if close_match:
                 self._student_warn(
                     f"Learning mode: converted collision_type from {value!r} to {close_match[0]!r}"
@@ -365,7 +376,9 @@ class Actor(actor_base.ActorBase):
             return
         if hasattr(world, "get_world_connector"):
             connector = world.get_world_connector(self)
-            if connector is not None and hasattr(connector, "sync_blocking_registration"):
+            if connector is not None and hasattr(
+                connector, "sync_blocking_registration"
+            ):
                 connector.sync_blocking_registration(previous_value, value)
                 return
         if hasattr(world, "_blocking_actors"):
@@ -1400,12 +1413,11 @@ class Actor(actor_base.ActorBase):
         kill = self._coerce_bool_learning(kill, "kill")
         self._ensure_bool(kill, "kill")
         return self.world.get_world_connector(self).remove_actor_from_world(kill=kill)
-        
-        
+
     def before_remove(self):
         """Hook called immediately before the actor is removed from the world."""
         pass
-    
+
     @property
     def is_rotatable(self) -> bool:
         """Defines if the costume of a actor should be rotatable. The actor can still be rotated with
@@ -1513,7 +1525,9 @@ class Actor(actor_base.ActorBase):
             raise TypeError(
                 f"borders must be list[str], got {type(borders).__name__}: {borders!r}"
             )
-        invalid_border = next((border for border in borders if not isinstance(border, str)), None)
+        invalid_border = next(
+            (border for border in borders if not isinstance(border, str)), None
+        )
         if invalid_border is not None:
             raise TypeError(
                 f"borders must contain only str values, got {type(invalid_border).__name__}: {invalid_border!r}"
@@ -1622,6 +1636,15 @@ class Actor(actor_base.ActorBase):
         """
         return self._get_sensor_facade().detect_left_border()
 
+    def detecting_left_border(self) -> bool:
+        """Does the actor touch the left border?
+
+        Returns:
+            True if border was found.
+
+        """
+        return self.detect_left_border()
+
     def detect_right_border(self) -> bool:
         """Does the actor touch the right border?
 
@@ -1630,6 +1653,15 @@ class Actor(actor_base.ActorBase):
 
         """
         return self._get_sensor_facade().detect_right_border()
+
+    def detecting_right_border(self) -> bool:
+        """Does the actor touch the right border?
+
+        Returns:
+            True if border was found.
+
+        """
+        return self.detect_right_border()
 
     def detect_top_border(self) -> bool:
         """Does the actor touch the top border?
@@ -1640,6 +1672,15 @@ class Actor(actor_base.ActorBase):
         """
         return self._get_sensor_facade().detect_top_border()
 
+    def detecting_top_border(self) -> bool:
+        """Does the actor touch the top border?
+
+        Returns:
+            True if border was found.
+
+        """
+        return self.detect_top_border()
+
     def detecting_bottom_border(self) -> bool:
         """Does the actor touch the lower border?
 
@@ -1648,6 +1689,15 @@ class Actor(actor_base.ActorBase):
 
         """
         return self._get_sensor_facade().detecting_bottom_border()
+
+    def detect_bottom_border(self) -> bool:
+        """Does the actor touch the lower border?
+
+        Returns:
+            True if border was found.
+
+        """
+        return self.detecting_bottom_border()
 
     def detect_color(self, color: Tuple = None) -> bool:
         """Detects colors in world-background at actor center-position
@@ -1748,13 +1798,13 @@ class Actor(actor_base.ActorBase):
 
         Warning:
             If your want to check if an actor detects a specific pixel, use detect_pixel
-            
+
         Returns:
             True if point is below actor
         """
         self._ensure_position_tuple(position, "position")
         return self._get_sensor_facade().detect_point(position)
-    
+
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
         """Is the actor colliding with a pixel?
 
@@ -2377,8 +2427,7 @@ class Actor(actor_base.ActorBase):
         self._get_appearance_facade().show()
 
     def register_sensor(self, *args, **kwargs):
-        """This method is used for the @register_sensor decorator.
-        """
+        """This method is used for the @register_sensor decorator."""
         return self._get_event_facade().register_sensor(*args, **kwargs)
 
     def get_local_rect(self) -> pygame.Rect:
@@ -2395,7 +2444,7 @@ class Actor(actor_base.ActorBase):
     def world(self, new_world):
         self.set_world(new_world)
 
-    def set_world(self, new_world : "world_mod.World") -> "Actor":
+    def set_world(self, new_world: "world_mod.World") -> "Actor":
         """Move the actor to another world and return the actor."""
         if new_world is None:
             raise TypeError("new_world must not be None")
@@ -2421,6 +2470,7 @@ class Actor(actor_base.ActorBase):
 
         """
         return self._get_appearance_facade().image
+
     @property
     def position(self) -> Tuple[float, float]:
         """The position of the actor as Position(x, y)"""

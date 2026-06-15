@@ -38,21 +38,34 @@ class ActorSensorFacade:
             distance = args[1] if len(args) >= 2 else None
             direction = args[2] if len(args) >= 3 else self.actor.direction
         if not distance:
-            if hasattr(actors, "position_manager") and hasattr(actors, "collision_type"):
+            if hasattr(actors, "position_manager") and hasattr(
+                actors, "collision_type"
+            ):
                 actor_rect = self.actor.position_manager.get_global_rect()
                 other_rect = actors.position_manager.get_global_rect()
                 if not actor_rect.colliderect(other_rect):
                     return None
                 collision_type = self.actor.collision_type
-                if collision_type in ("rect", "static-rect") or actors.collision_type in (
+                if collision_type in (
+                    "rect",
+                    "static-rect",
+                ) or actors.collision_type in (
                     "rect",
                     "static-rect",
                 ):
                     return actors
                 if collision_type == "circle":
-                    return actors if pygame.sprite.collide_circle(self.actor, actors) else None
+                    return (
+                        actors
+                        if pygame.sprite.collide_circle(self.actor, actors)
+                        else None
+                    )
                 if collision_type == "mask":
-                    return actors if pygame.sprite.collide_mask(self.actor, actors) else None
+                    return (
+                        actors
+                        if pygame.sprite.collide_mask(self.actor, actors)
+                        else None
+                    )
                 return actors
             return self.actor.sensor_manager.detect_actor(filter=actors)
         return self.actor.sensor_manager.detect_actors_at(
@@ -67,14 +80,30 @@ class ActorSensorFacade:
     def detect_left_border(self) -> bool:
         return "left" in self.actor.sensor_manager.detect_borders(0)
 
+    def detecting_left_border(self) -> bool:
+        """Alias for detect_left_border for naming consistency."""
+        return self.detect_left_border()
+
     def detect_right_border(self) -> bool:
         return "right" in self.actor.sensor_manager.detect_borders(0)
+
+    def detecting_right_border(self) -> bool:
+        """Alias for detect_right_border for naming consistency."""
+        return self.detect_right_border()
 
     def detect_top_border(self) -> bool:
         return "top" in self.actor.sensor_manager.detect_borders(0)
 
+    def detecting_top_border(self) -> bool:
+        """Alias for detect_top_border for naming consistency."""
+        return self.detect_top_border()
+
     def detecting_bottom_border(self) -> bool:
         return "bottom" in self.actor.sensor_manager.detect_borders(0)
+
+    def detect_bottom_border(self) -> bool:
+        """Alias for detecting_bottom_border for naming consistency."""
+        return self.detecting_bottom_border()
 
     def detect_color(self, color: Tuple = None) -> bool:
         return self.actor.sensor_manager.detect_color(color)
