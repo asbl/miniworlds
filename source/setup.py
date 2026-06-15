@@ -1,7 +1,7 @@
 from codecs import open
 from os import path
 
-from setuptools import setup, find_packages # type: ignore
+from setuptools import find_packages, setup  # type: ignore
 
 here = path.abspath(path.dirname(__file__))
 
@@ -11,7 +11,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="miniworlds",
-    version="4.3.1.9",
+    version="4.3.1.10",
     description="Create 2D worlds and Games",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -32,7 +32,10 @@ setup(
         exclude=["contrib", "docs", "tests", "examples"]
     ),  # Required
     package_dir={"miniworlds": "miniworlds"},
-    install_requires=["pygame-ce", "numpy", ],
+    install_requires=[
+        "pygame-ce",
+        "numpy",
+    ],
     include_package_data=True,
     package_data={"miniworlds": ["py.typed"]},
 )
