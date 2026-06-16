@@ -182,6 +182,10 @@ class World(world_base.WorldBase):
     def _ensure_background_selector(
         cls, value, parameter_name: str = "background"
     ) -> None:
+        if isinstance(value, bool):
+            raise TypeError(
+                f"{parameter_name} must be int index or Appearance, got {cls._type_name(value)}: {value!r}"
+            )
         if isinstance(value, int):
             return
         if isinstance(value, appearance.Appearance):

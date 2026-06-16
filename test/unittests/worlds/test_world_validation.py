@@ -29,6 +29,16 @@ class TestWorldValidation(unittest.TestCase):
             contains_rect_all=MagicMock(return_value=True),
             contains_rect_any_=MagicMock(return_value=True),
         )
+        world.camera = SimpleNamespace(
+            width=100,
+            height=80,
+            world_size_x=100,
+            world_size_y=80,
+        )
+        world._background_facade = SimpleNamespace(
+            switch_background=MagicMock(),
+            remove_background=MagicMock(),
+        )
         return world
 
     def test_contains_position_rejects_invalid_shape(self):
@@ -55,6 +65,51 @@ class TestWorldValidation(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             World.size.__set__(world, (800, 0))
+
+    def test_dimension_setters_update_camera_runtime_values(self):
+        world = self._bare_world()
+
+        World.world_size_x.__set__(world, 200)
+        World.world_size_y.__set__(world, 150)
+        World.columns.__set__(world, 120)
+        World.rows.__set__(world, 90)
+
+        self.assertEqual(world.camera.world_size_x, 120)
+        self.assertEqual(world.camera.world_size_y, 90)
+        self.assertEqual(world.camera.width, 120)
+        self.assertEqual(world.camera.height, 90)
+
+    def test_dimension_setters_reject_invalid_runtime_values(self):
+        world = self._bare_world()
+        world.app = SimpleNamespace(
+            platform=SimpleNamespace(is_web=MagicMock(return_value=False))
+        )
+
+        for setter in (
+            World.fps,
+            World.tick_rate,
+            World.world_size_x,
+            World.world_size_y,
+            World.columns,
+            World.rows,
+        ):
+            with self.assertRaises(TypeError):
+                setter.__set__(world, True)
+            with self.assertRaises(TypeError):
+                setter.__set__(world, "10")
+            with self.assertRaises(ValueError):
+                setter.__set__(world, 0)
+
+    def test_size_setter_accepts_learning_mode_list_and_rejects_bool_components(self):
+        world = self._bare_world()
+        world.learning_mode = True
+
+        World.size.__set__(world, [320, 200])
+
+        self.assertEqual(world.size, (320, 200))
+
+        with self.assertRaises(TypeError):
+            World.size.__set__(world, (320, True))
 
     def test_fps_setter_clamps_web_runtime_to_sixty_fps(self):
         world = self._bare_world()
@@ -93,6 +148,14 @@ class TestWorldValidation(unittest.TestCase):
             event=None,
             data=None,
         )
+
+    def test_learning_mode_rejects_non_bool(self):
+        world = self._bare_world()
+
+        with self.assertRaises(TypeError) as ctx:
+            World.learning_mode.__set__(world, "yes")
+
+        self.assertIn("learning_mode must be bool", str(ctx.exception))
 
     def test_send_message_rejects_empty_or_non_string(self):
         world = self._bare_world()
@@ -156,6 +219,18 @@ class TestWorldValidation(unittest.TestCase):
             World.debug.__set__(world, "yes")
 
         self.assertIn("debug must be bool", str(ctx.exception))
+
+    def test_background_selection_rejects_bool_index(self):
+        world = self._bare_world()
+
+        with self.assertRaises(TypeError):
+            World.switch_background(world, True)
+
+        with self.assertRaises(TypeError):
+            World.remove_background(world, False)
+
+        world._background_facade.switch_background.assert_not_called()
+        world._background_facade.remove_background.assert_not_called()
 
     def test_world_constructor_accepts_size_tuple(self):
         world = World((120, 80))
