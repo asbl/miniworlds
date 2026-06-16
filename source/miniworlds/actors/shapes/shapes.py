@@ -141,8 +141,9 @@ class Circle(Shape):
 
     @radius.setter
     def radius(self, value):
-        self._radius = value
-        self.position_manager.set_size((self._radius * 2, self._radius * 2), scale = False)
+        _ensure_non_negative_real(value, "radius")
+        self._radius = float(value)
+        self.position_manager.set_size((self._radius * 2, self._radius * 2), scale=False)
         self.costume.set_dirty("scale", self.costume.RELOAD_ACTUAL_IMAGE)
 
     def _set_physics(self):
@@ -299,6 +300,7 @@ class Arc(Ellipse):
 
     @start_angle.setter
     def start_angle(self, value):
+        _ensure_real(value, "start_angle")
         self._start_angle = value
         self.costume.set_dirty("draw_shapes", self.costume.RELOAD_ACTUAL_IMAGE)
 
@@ -308,6 +310,7 @@ class Arc(Ellipse):
 
     @end_angle.setter
     def end_angle(self, value):
+        _ensure_real(value, "end_angle")
         self._end_angle = value
         self.costume.set_dirty("draw_shapes", self.costume.RELOAD_ACTUAL_IMAGE)
 
@@ -390,6 +393,10 @@ class Line(Shape):
 
     @start_position.setter
     def start_position(self, value):
+        try:
+            _ensure_point(value, "start_position")
+        except TypeError:
+            raise LineFirstArgumentError(value)
         self._start_position = value
         self._update_size()
 
@@ -402,6 +409,10 @@ class Line(Shape):
 
     @end_position.setter
     def end_position(self, value):
+        try:
+            _ensure_point(value, "end_position")
+        except TypeError:
+            raise LineSecondArgumentError(value)
         self._end_position = value
         self._update_size()
 
@@ -470,6 +481,7 @@ class Line(Shape):
 
     @thickness.setter
     def thickness(self, value):
+        _ensure_non_negative_real(value, "thickness")
         self.costume.border = value
         self._update_size()
 
@@ -480,6 +492,7 @@ class Line(Shape):
 
     @border.setter
     def border(self, value):
+        _ensure_non_negative_real(value, "border")
         self.costume.border = value
         self._update_size()
 
@@ -587,8 +600,11 @@ class Polygon(Shape):
         return self._pointlist
 
     @pointlist.setter
-    def pointlist(self, value: int):
-        self._pointlist = value
+    def pointlist(self, value):
+        _ensure_pointlist(value)
+        self._pointlist = list(value)
+        self.costume._update_draw_shape()
+        self.costume.set_dirty("draw_shapes", self.costume.RELOAD_ACTUAL_IMAGE)
 
 
 class Triangle(Polygon):

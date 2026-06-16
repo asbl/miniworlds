@@ -1005,7 +1005,10 @@ class Actor(actor_base.ActorBase):
     def set_size(self, value: tuple):
         """Set actor size as `(width, height)` in pixels."""
         value = self._coerce_position_learning(value, "value")
-        self._ensure_position_tuple(value, "value")
+        if isinstance(value, tuple):
+            self._ensure_position_tuple(value, "value")
+        else:
+            self._ensure_real(value, "value")
         self._size_facade.set_size(value)
 
     @property

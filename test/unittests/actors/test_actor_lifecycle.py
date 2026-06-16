@@ -247,6 +247,23 @@ class TestActorLifecycle(unittest.TestCase):
         Actor.set_size(actor, (80, 120))
         pm.set_size.assert_called_once_with((80, 120))
 
+    def test_size_accepts_scalar_and_rejects_invalid_values_early(self):
+        actor = Actor.__new__(Actor)
+        pm = MagicMock()
+        actor._position_manager = pm
+
+        Actor.set_size(actor, 20)
+        pm.set_size.assert_called_once_with(20)
+
+        with self.assertRaises(TypeError):
+            Actor.set_size(actor, True)
+
+        with self.assertRaises(TypeError):
+            Actor.set_size(actor, (20, True))
+
+        with self.assertRaises(TypeError):
+            Actor.set_size(actor, "20")
+
     def test_width_and_height_delegate_to_position_manager(self):
         actor = Actor.__new__(Actor)
         pm = MagicMock()

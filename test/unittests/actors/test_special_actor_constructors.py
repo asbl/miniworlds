@@ -14,6 +14,7 @@ from miniworlds import (
     Polygon,
     Rectangle,
     Sensor,
+    Text,
     TextBox,
     Triangle,
     World,
@@ -47,6 +48,27 @@ class TestSpecialActorConstructors(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             TextBox((10, 20), 120, -1, world=self.world)
+
+    def test_text_font_setters_validate_runtime_values(self):
+        text = Text((10, 20), "hello", world=self.world)
+
+        text.font_size = 18
+        text.max_width = 120
+
+        self.assertEqual(text.font_size, 18)
+        self.assertEqual(text.max_width, 120)
+
+        with self.assertRaises(TypeError):
+            text.font_size = True
+
+        with self.assertRaises(ValueError):
+            text.font_size = -1
+
+        with self.assertRaises(TypeError):
+            text.max_width = "wide"
+
+        with self.assertRaises(ValueError):
+            text.max_width = -1
 
     def test_number_accepts_and_updates_numeric_values(self):
         number = Number((10, 20), 3, world=self.world)
@@ -132,6 +154,20 @@ class TestSpecialActorConstructors(unittest.TestCase):
         with self.assertRaises(ValueError):
             Circle((10, 20), -1, world=self.world)
 
+    def test_circle_radius_setter_validates_runtime_values(self):
+        circle = Circle((10, 20), 5, world=self.world)
+
+        circle.radius = 7.5
+
+        self.assertEqual(circle.radius, 7.5)
+        self.assertEqual(circle.size, (15, 15))
+
+        with self.assertRaises(TypeError):
+            circle.radius = True
+
+        with self.assertRaises(ValueError):
+            circle.radius = -1
+
     def test_ellipse_rejects_invalid_width_and_height(self):
         with self.assertRaises(TypeError):
             Ellipse((10, 20), True, 10, world=self.world)
@@ -153,6 +189,21 @@ class TestSpecialActorConstructors(unittest.TestCase):
         with self.assertRaises(TypeError):
             Arc((10, 20), 30, 40, 0, "180", world=self.world)
 
+    def test_arc_angle_setters_validate_runtime_values(self):
+        arc = Arc((10, 20), 30, 40, 0, 180, world=self.world)
+
+        arc.start_angle = 45
+        arc.end_angle = 270.5
+
+        self.assertEqual(arc.start_angle, 45)
+        self.assertEqual(arc.end_angle, 270.5)
+
+        with self.assertRaises(TypeError):
+            arc.start_angle = True
+
+        with self.assertRaises(TypeError):
+            arc.end_angle = "270"
+
     def test_rectangle_rejects_invalid_width_and_height(self):
         with self.assertRaises(TypeError):
             Rectangle((10, 20), True, 10, world=self.world)
@@ -166,6 +217,29 @@ class TestSpecialActorConstructors(unittest.TestCase):
 
         with self.assertRaises(LineSecondArgumentError):
             Line((10, 20), "end", world=self.world)
+
+    def test_line_setters_validate_runtime_values(self):
+        line = Line((10, 20), (30, 20), world=self.world)
+
+        line.start_position = (15, 20)
+        line.end_position = (40, 20)
+        line.thickness = 3
+
+        self.assertEqual(line.start_position, (15, 20))
+        self.assertEqual(line.end_position, (40, 20))
+        self.assertEqual(line.thickness, 3)
+
+        with self.assertRaises(LineFirstArgumentError):
+            line.start_position = "start"
+
+        with self.assertRaises(LineSecondArgumentError):
+            line.end_position = (40, "20")
+
+        with self.assertRaises(TypeError):
+            line.thickness = True
+
+        with self.assertRaises(ValueError):
+            line.border = -1
 
     def test_polygon_and_triangle_reject_invalid_points(self):
         with self.assertRaises(TypeError):
@@ -184,6 +258,21 @@ class TestSpecialActorConstructors(unittest.TestCase):
         points.append((0, 10))
 
         self.assertEqual(polygon.pointlist, [(0, 0), (10, 0), (10, 10)])
+
+    def test_polygon_pointlist_setter_validates_and_copies_runtime_values(self):
+        polygon = Polygon([(0, 0), (10, 0), (10, 10)], world=self.world)
+        points = [(1, 1), (11, 1), (11, 11)]
+
+        polygon.pointlist = points
+        points.append((1, 11))
+
+        self.assertEqual(polygon.pointlist, [(1, 1), (11, 1), (11, 11)])
+
+        with self.assertRaises(TypeError):
+            polygon.pointlist = [(0, 0), (10, 0)]
+
+        with self.assertRaises(TypeError):
+            polygon.pointlist = [(0, 0), (10, 0), (10, True)]
 
 
 if __name__ == "__main__":

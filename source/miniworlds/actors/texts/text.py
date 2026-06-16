@@ -77,6 +77,9 @@ class Text(actor.Actor):
 
     @font_size.setter
     def font_size(self, value):
+        self._ensure_real(value, "font_size")
+        if value < 0:
+            raise ValueError(f"font_size must be >= 0, got {value}")
         if self.costume:
             self.costume.font_size = value
             self.costume._update_draw_shape()
@@ -115,6 +118,9 @@ class Text(actor.Actor):
 
     @max_width.setter
     def max_width(self, value):
+        self._ensure_real(value, "max_width")
+        if value < 0:
+            raise ValueError(f"max_width must be >= 0, got {value}")
         self._max_width = value
         self.dirty = 1
         self.costume._update_draw_shape()
