@@ -623,6 +623,26 @@ class SensorManager:
             return None
         x, y = position
         blocking_actors = getattr(self.world, "_blocking_actors", ())
+        blocking_spatial_index = getattr(self.world, "_blocking_spatial_index", None)
+        if blocking_spatial_index is not None and not getattr(
+            self.world, "is_tiled", False
+        ):
+            for actor in blocking_spatial_index.query_point((x, y)):
+                if actor is self.actor:
+                    continue
+                actor_rect = self._try_get_actor_global_rect(actor)
+                if actor_rect is not None and actor_rect.collidepoint(x, y):
+                    return actor
+
+            # Keep manually registered or test-double blocking objects working.
+            for actor in blocking_actors:
+                if actor is self.actor or actor in blocking_spatial_index:
+                    continue
+                actor_rect = self._try_get_actor_global_rect(actor)
+                if actor_rect is not None and actor_rect.collidepoint(x, y):
+                    return actor
+            return None
+
         spatial_index = getattr(self.world, "_spatial_index", None)
 
         if spatial_index is not None and not getattr(self.world, "is_tiled", False):

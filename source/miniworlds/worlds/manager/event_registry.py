@@ -1,10 +1,21 @@
 from collections import defaultdict
 from collections.abc import Iterable
-from typing import Any, Callable, Optional
-import miniworlds.actors.actor as actor_mod
-import miniworlds.worlds.world as world_mod
+from typing import TYPE_CHECKING, Any, Callable, Optional
 import miniworlds.tools.inspection as inspection
 from miniworlds.worlds.manager.event_subscription import EventSubscription
+
+if TYPE_CHECKING:
+    import miniworlds.worlds.world as world_mod
+
+
+_EVENT_ROOT_CLASSES = {
+    ("miniworlds.actors.actor", "Actor"),
+    ("miniworlds.worlds.world", "World"),
+}
+
+
+def _is_event_root_class(cls: type) -> bool:
+    return (cls.__module__, cls.__name__) in _EVENT_ROOT_CLASSES
 
 
 class EventRegistry:
@@ -18,9 +29,15 @@ class EventRegistry:
         self._event_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
         self._message_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
         self._sensor_handlers: defaultdict[str, set[Callable]] = defaultdict(set)
+        self._event_iter_cache: dict[str, tuple[Callable, ...]] = {}
+        self._message_iter_cache: dict[str, tuple[Callable, ...]] = {}
+        self._sensor_iter_cache: tuple[tuple[str, tuple[Callable, ...]], ...] | None = None
 
     def _mark_changed(self) -> None:
         self.change_counter += 1
+        self._event_iter_cache.clear()
+        self._message_iter_cache.clear()
+        self._sensor_iter_cache = None
 
     @property
     def registered_events(self):
@@ -70,13 +87,21 @@ class EventRegistry:
         return self._event_handlers.get(event_name, set()).copy()
 
     def iter_event_methods(self, event_name: str) -> tuple[Callable, ...]:
-        return tuple(self._event_handlers.get(event_name, ()))
+        if event_name not in self._event_iter_cache:
+            self._event_iter_cache[event_name] = tuple(
+                self._event_handlers.get(event_name, ())
+            )
+        return self._event_iter_cache[event_name]
 
     def copy_message_methods(self, message: str) -> set[Callable]:
         return self._message_handlers.get(message, set()).copy()
 
     def iter_message_methods(self, message: str) -> tuple[Callable, ...]:
-        return tuple(self._message_handlers.get(message, ()))
+        if message not in self._message_iter_cache:
+            self._message_iter_cache[message] = tuple(
+                self._message_handlers.get(message, ())
+            )
+        return self._message_iter_cache[message]
 
     def copy_generic_message_methods(self) -> set[Callable]:
         return self.copy_event_methods("on_message")
@@ -84,11 +109,13 @@ class EventRegistry:
     def iter_generic_message_methods(self) -> tuple[Callable, ...]:
         return self.iter_event_methods("on_message")
 
-    def iter_sensor_methods(self) -> list[tuple[str, tuple[Callable, ...]]]:
-        return [
-            (target, tuple(methods))
-            for target, methods in self._sensor_handlers.items()
-        ]
+    def iter_sensor_methods(self) -> tuple[tuple[str, tuple[Callable, ...]], ...]:
+        if self._sensor_iter_cache is None:
+            self._sensor_iter_cache = tuple(
+                (target, tuple(methods))
+                for target, methods in self._sensor_handlers.items()
+            )
+        return self._sensor_iter_cache
 
     def restore_subscriptions(
         self, subscriptions: Iterable[EventSubscription]
@@ -214,26 +241,32 @@ class EventRegistry:
         removed_methods: list[EventSubscription] = []
         registry_changed = False
 
-        for event_name, method_set in self._event_handlers.items():
+        for event_name, method_set in list(self._event_handlers.items()):
             for method in list(method_set):
                 if getattr(method, "__self__", None) == instance:
                     method_set.remove(method)
                     removed_methods.append(EventSubscription.event(event_name, method))
                     registry_changed = True
+            if not method_set:
+                del self._event_handlers[event_name]
 
-        for message, method_set in self._message_handlers.items():
+        for message, method_set in list(self._message_handlers.items()):
             for method in list(method_set):
                 if getattr(method, "__self__", None) == instance:
                     method_set.remove(method)
                     removed_methods.append(EventSubscription.message(message, method))
                     registry_changed = True
+            if not method_set:
+                del self._message_handlers[message]
 
-        for target, method_set in self._sensor_handlers.items():
+        for target, method_set in list(self._sensor_handlers.items()):
             for method in list(method_set):
                 if getattr(method, "__self__", None) == instance:
                     method_set.remove(method)
                     removed_methods.append(EventSubscription.sensor(target, method))
                     registry_changed = True
+            if not method_set:
+                del self._sensor_handlers[target]
 
         if registry_changed:
             self._mark_changed()
@@ -264,10 +297,7 @@ class EventRegistry:
         if cached_members is not None:
             return set(cached_members)
 
-        if instance_class not in [
-            actor_mod.Actor,
-            world_mod.World,
-        ]:
+        if not _is_event_root_class(instance_class):
             members = {
                 name
                 for name, method in vars(instance.__class__).items()
@@ -298,10 +328,7 @@ class EventRegistry:
         """
         all_members = set()
         for cls in classes:
-            if cls not in [
-                actor_mod.Actor,
-                world_mod.World,
-            ]:
+            if not _is_event_root_class(cls):
                 members = {
                     name for name, method in vars(cls).items() if callable(method)
                 }

@@ -1,4 +1,4 @@
-from typing import List
+from typing import Iterable
 import pygame
 import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.world as world_mod
@@ -6,11 +6,20 @@ import miniworlds.worlds.world as world_mod
 class ParentActor(actor_mod.Actor):
     """A parent Actor is an actor which can contain one ore multiple children.
     """
-    def __init__(self, position, children=[], *args, **kwargs):
+
+    def __init__(
+        self,
+        position,
+        children: Iterable["actor_mod.Actor"] | None = None,
+        *args,
+        **kwargs,
+    ):
         super().__init__(position, *args, **kwargs)
         self._visible: bool = True
         self._layer: int = 0
-        self.children: "pygame.sprite.LayeredDirty()" =  pygame.sprite.LayeredDirty(children)
+        self.children: "pygame.sprite.LayeredDirty()" = pygame.sprite.LayeredDirty(
+            children or ()
+        )
 
     @property
     def visible(self):
@@ -58,4 +67,3 @@ class ParentActor(actor_mod.Actor):
     def before_remove(self):
         for child in self.children:
             child.remove(kill = False)
-        

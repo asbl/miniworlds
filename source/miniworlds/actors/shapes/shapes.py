@@ -1,3 +1,4 @@
+from numbers import Real
 from typing import Tuple, Union, TYPE_CHECKING, Any
 
 import pygame
@@ -14,6 +15,43 @@ from miniworlds.base.exceptions import (
 
 if TYPE_CHECKING:
     import miniworlds.appearances.costume as costume_mod
+
+
+def _is_real_number(value) -> bool:
+    return isinstance(value, Real) and not isinstance(value, bool)
+
+
+def _ensure_point(value, parameter_name: str) -> None:
+    if (
+        not isinstance(value, tuple)
+        or len(value) != 2
+        or not all(_is_real_number(coord) for coord in value)
+    ):
+        raise TypeError(
+            f"{parameter_name} must be a tuple (x, y) of int or float values, got {type(value).__name__}: {value!r}"
+        )
+
+
+def _ensure_real(value, parameter_name: str) -> None:
+    if not _is_real_number(value):
+        raise TypeError(
+            f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
+        )
+
+
+def _ensure_non_negative_real(value, parameter_name: str) -> None:
+    _ensure_real(value, parameter_name)
+    if value < 0:
+        raise ValueError(f"{parameter_name} must be >= 0, got {value}")
+
+
+def _ensure_pointlist(pointlist, parameter_name: str = "pointlist") -> None:
+    if not isinstance(pointlist, (list, tuple)) or len(pointlist) < 3:
+        raise TypeError(
+            f"{parameter_name} must contain at least three points, got {pointlist!r}"
+        )
+    for index, point in enumerate(pointlist):
+        _ensure_point(point, f"{parameter_name}[{index}]")
 
 
 class Shape(actor.Actor):
@@ -86,15 +124,8 @@ class Circle(Shape):
             Raises:
                 TypeError: If position is not a tuple of two floats or radius is not a float.
             """
-            if (
-                not isinstance(position, tuple) or
-                len(position) != 2 or
-                not all(isinstance(coord, (int, float)) for coord in position)
-            ):
-                raise TypeError("`position` must be a tuple of two float or int values.")
-
-            if not isinstance(radius, (int, float)):
-                raise TypeError("`radius` must be a float or int.")
+            _ensure_point(position, "position")
+            _ensure_non_negative_real(radius, "radius")
 
             self._radius = float(radius)
             super().__init__(position, *args, **kwargs)
@@ -202,8 +233,13 @@ class Ellipse(Shape):
         Raises:
             EllipseWrongArgumentsError: If *position* is not a tuple.
         """
-        if type(position) not in [tuple, None]:
+        if position is None:
+            return
+        if not isinstance(position, tuple):
             raise EllipseWrongArgumentsError()
+        _ensure_point(position, "position")
+        _ensure_non_negative_real(width, "width")
+        _ensure_non_negative_real(height, "height")
 
     @classmethod
     def from_topleft(cls, position: tuple, width: float, height: float, **kwargs):
@@ -248,11 +284,13 @@ class Arc(Ellipse):
         *args,
         **kwargs,
     ):
+        _ensure_real(start_angle, "start_angle")
+        _ensure_real(end_angle, "end_angle")
         self._start_angle = start_angle
         self._end_angle = end_angle
         if start_angle == end_angle:
             self._end_angle = start_angle + 360
-        super().__init__(position, width, height)
+        super().__init__(position, width, height, *args, **kwargs)
         self.costume = shape_costume.ArcCostume(self)
 
     @property
@@ -328,12 +366,13 @@ class Line(Shape):
     def __init__(
         self, start_position: Union[tuple], end_position: Union[tuple], *args, **kwargs
     ):
-        if not start_position or not end_position:
-            start_position = (0, 0)
-            end_position = (0, 0)
-        if type(start_position) not in [tuple, None]:
+        try:
+            _ensure_point(start_position, "start_position")
+        except TypeError:
             raise LineFirstArgumentError(start_position)
-        if type(end_position) not in [tuple, None]:
+        try:
+            _ensure_point(end_position, "end_position")
+        except TypeError:
             raise LineSecondArgumentError(end_position)
         self._length = 0
         self._start_position = start_position
@@ -487,14 +526,8 @@ class Rectangle(Shape):
         super()._validate_arguments(position, *args, **kwargs)
         width = args[0]
         height = args[1]
-        if type(width) not in [int, float]:
-            raise TypeError(
-                "width of Rectangle should be int or float " + str(type(width))
-            )
-        if type(height) not in [int, float]:
-            raise TypeError(
-                "height of Rectangle should be int or float but is " + str(type(height))
-            )
+        _ensure_non_negative_real(width, "width")
+        _ensure_non_negative_real(height, "height")
 
     def _set_physics(self):
         self.physics.shape_type = "rect"
@@ -543,9 +576,10 @@ class Polygon(Shape):
     """
 
     def __init__(self, pointlist, *args, **kwargs):
+        _ensure_pointlist(pointlist)
         super().__init__((0, 0))
-        self._pointlist = pointlist
-        self.costume = shape_costume.PolygonCostume(self, pointlist)
+        self._pointlist = list(pointlist)
+        self.costume = shape_costume.PolygonCostume(self, self._pointlist)
 
     @property
     def pointlist(self):
@@ -579,5 +613,8 @@ class Triangle(Polygon):
     """
 
     def __init__(self, p1: Tuple, p2: Tuple, p3: Tuple, *args, **kwargs):
+        _ensure_point(p1, "p1")
+        _ensure_point(p2, "p2")
+        _ensure_point(p3, "p3")
         pointlist = [p1, p2, p3]
         super().__init__(pointlist)

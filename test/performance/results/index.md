@@ -9,9 +9,10 @@ Open the per-benchmark `latest.md` or `history.md` files for detailed changes.
 | actor logic mask collisions | 2026-03-16T22:04:32 | avg_ms=9.20, p95_ms=11.88, max_ms=12.31 | - | benchmarks/actor-logic-mask-collisions |
 | blockable movement | 2026-03-16T22:15:06 | avg_ms=10.04, p95_ms=11.80, max_ms=12.73 | avg_ms=-1.91, p95_ms=-6.99, max_ms=-9.54 | benchmarks/blockable-movement |
 | blockable movement cprofile | 2026-03-16T22:15:20 | avg_ms=113.44, p95_ms=207.46, max_ms=271.52 | avg_ms=+60.80, p95_ms=+140.42, max_ms=+180.45 | benchmarks/blockable-movement-cprofile |
+| blocking index | 2026-06-16T17:14:25 | avg_ms=3.49, p95_ms=3.86, max_ms=6.02 | - | benchmarks/blocking-index |
 | camera culling | 2026-03-16T22:15:44 | avg_ms=16.73, p95_ms=23.27, max_ms=35.78 | avg_ms=+7.68, p95_ms=+13.20, max_ms=+24.39 | benchmarks/camera-culling |
 | collision communication | 2026-06-04T15:29:14 | avg_ms=37.45, p95_ms=43.60, max_ms=49.20 | avg_ms=+0.19, p95_ms=+0.94, max_ms=+4.58 | benchmarks/collision-communication |
-| event dispatch | 2026-06-06T07:05:38 | hover_events_ms=514.42, hover_events_per_s=97197.71, iterations=50000, key_events_ms=277.94 | hover_events_ms=-111.80, hover_events_per_s=+17353.18, iterations=0.00 | benchmarks/event-dispatch |
+| event dispatch | 2026-06-16T17:15:02 | hover_events_ms=352.92, hover_events_per_s=141674.07, iterations=50000, key_events_ms=164.90 | hover_events_ms=-161.49, hover_events_per_s=+44476.36, iterations=0.00 | benchmarks/event-dispatch |
 | image costume sizes | 2026-03-16T22:04:35 | avg_ms=1.98, p95_ms=4.65, max_ms=5.15 | - | benchmarks/image-costume-sizes |
 | method caller | 2026-06-06T07:05:36 | cache_hits=99999, cache_misses=1, first_pass_ms=68.28, iterations=50000 | cache_hits=0.00, cache_misses=0.00, first_pass_ms=-20.48 | benchmarks/method-caller |
 | resource lookup | 2026-06-06T07:05:39 | iterations=50000, lookup_ms=61.79, lookups_per_s=809207.45 | iterations=0.00, lookup_ms=-16.98, lookups_per_s=+174454.50 | benchmarks/resource-lookup |

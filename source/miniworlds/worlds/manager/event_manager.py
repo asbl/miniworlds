@@ -1,11 +1,15 @@
-from typing import Any, Optional, Callable
+from __future__ import annotations
 
-import miniworlds.actors.actor as actor_mod
+from typing import TYPE_CHECKING, Any, Optional, Callable
+
 import miniworlds.worlds.manager.event_definition as event_definition
 import miniworlds.worlds.manager.event_handler as event_handler
 import miniworlds.worlds.manager.event_registry as event_registry
 import miniworlds.worlds.manager.collision_event_view as collision_event_view
 from miniworlds.worlds.manager.event_subscription import EventSubscription
+
+if TYPE_CHECKING:
+    import miniworlds.actors.actor as actor_mod
 
 
 

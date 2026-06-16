@@ -70,6 +70,123 @@ class TestSensorManager(unittest.TestCase):
 
         self.assertIs(detected, wall)
 
+    def test_blocking_spatial_index_tracks_only_blocking_actors(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        runner = self._create_actor(Runner, position=(40, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+        wall.is_blocking = True
+
+        self.assertIn(wall, self.world._blocking_spatial_index.query_point((40, 20)))
+        self.assertNotIn(
+            runner,
+            self.world._blocking_spatial_index.query_point((40, 20)),
+        )
+
+        with patch.object(
+            hunter.sensor_manager,
+            "_try_get_actor_global_rect",
+            wraps=hunter.sensor_manager._try_get_actor_global_rect,
+        ) as get_rect:
+            detected = hunter.sensor_manager.get_blocking_actor_at_position((40, 20))
+
+        self.assertIs(detected, wall)
+        checked_actors = [call.args[0] for call in get_rect.call_args_list]
+        self.assertIn(wall, checked_actors)
+        self.assertNotIn(runner, checked_actors)
+
+    def test_blocking_spatial_index_tracks_blocking_actor_movement(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+        wall.is_blocking = True
+
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((40, 20)),
+            wall,
+        )
+
+        wall.position = (70, 20)
+
+        self.assertIsNone(hunter.sensor_manager.get_blocking_actor_at_position((40, 20)))
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((70, 20)),
+            wall,
+        )
+
+    def test_static_runtime_toggle_keeps_blocking_actor_detectable(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+        wall.is_blocking = True
+
+        self.assertIn(wall, self.world._dynamic_actors)
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((40, 20)),
+            wall,
+        )
+
+        wall.static = True
+
+        self.assertNotIn(wall, self.world._dynamic_actors)
+        self.assertIn(wall, self.world._blocking_actors)
+        self.assertIn(wall, self.world._blocking_spatial_index.query_point((40, 20)))
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((40, 20)),
+            wall,
+        )
+
+        wall.position = (60, 20)
+
+        self.assertIsNone(hunter.sensor_manager.get_blocking_actor_at_position((40, 20)))
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((60, 20)),
+            wall,
+        )
+
+        wall.static = False
+
+        self.assertIn(wall, self.world._dynamic_actors)
+        self.assertIn(wall, self.world._blocking_actors)
+        self.assertIn(wall, self.world._blocking_spatial_index.query_point((60, 20)))
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((60, 20)),
+            wall,
+        )
+
+    def test_blocking_runtime_toggle_updates_static_actor_detection(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+        wall.static = True
+
+        self.assertNotIn(wall, self.world._dynamic_actors)
+        self.assertNotIn(wall, self.world._blocking_actors)
+        self.assertIsNone(hunter.sensor_manager.get_blocking_actor_at_position((40, 20)))
+
+        wall.is_blocking = True
+
+        self.assertIn(wall, self.world._blocking_actors)
+        self.assertIn(wall, self.world._blocking_spatial_index.query_point((40, 20)))
+        self.assertIs(
+            hunter.sensor_manager.get_blocking_actor_at_position((40, 20)),
+            wall,
+        )
+
+        wall.is_blocking = False
+
+        self.assertNotIn(wall, self.world._blocking_actors)
+        self.assertNotIn(wall, self.world._blocking_spatial_index)
+        self.assertIsNone(hunter.sensor_manager.get_blocking_actor_at_position((40, 20)))
+
+    def test_static_runtime_toggle_for_non_blocking_actor_does_not_pollute_blocking_index(self):
+        hunter = self._create_actor(Hunter, position=(20, 20))
+        wall = self._create_actor(Wall, position=(40, 20))
+
+        wall.static = True
+        wall.position = (60, 20)
+        wall.static = False
+
+        self.assertNotIn(wall, self.world._blocking_actors)
+        self.assertNotIn(wall, self.world._blocking_spatial_index)
+        self.assertIsNone(hunter.sensor_manager.get_blocking_actor_at_position((60, 20)))
+
     def test_removed_blocking_actor_is_removed_from_world_index(self):
         wall = self._create_actor(Wall)
         wall.is_blocking = True
@@ -77,6 +194,7 @@ class TestSensorManager(unittest.TestCase):
         wall.remove()
 
         self.assertNotIn(wall, self.world._blocking_actors)
+        self.assertNotIn(wall, self.world._blocking_spatial_index)
 
     def test_spatial_index_tracks_actor_movement_and_removal(self):
         hunter = self._create_actor(Hunter, position=(10, 10))
@@ -275,15 +393,15 @@ class TestSensorManager(unittest.TestCase):
 
         self.assertIsNone(detected)
 
-    def test_get_blocking_actor_at_position_queries_spatial_index(self):
+    def test_get_blocking_actor_at_position_queries_blocking_spatial_index(self):
         hunter = self._create_actor(Hunter, position=(20, 20))
         wall = self._create_actor(Wall, position=(40, 20))
         wall.is_blocking = True
 
         with patch.object(
-            self.world._spatial_index,
+            self.world._blocking_spatial_index,
             "query_point",
-            wraps=self.world._spatial_index.query_point,
+            wraps=self.world._blocking_spatial_index.query_point,
         ) as query_point:
             detected = hunter.sensor_manager.get_blocking_actor_at_position((40, 20))
 

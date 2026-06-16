@@ -1,13 +1,15 @@
-from typing import Union, Tuple, List
+from typing import TYPE_CHECKING, Union, Tuple, List
 import pygame
 import math
 
 import miniworlds.positions.vector as world_vector
 import miniworlds.appearances.costume as costume
-import miniworlds.worlds.world as world
 import miniworlds.base.exceptions as miniworlds_exceptions
-import miniworlds.actors.actor as actor_mod
 import miniworlds.base.exceptions as exceptions
+
+if TYPE_CHECKING:
+    import miniworlds.actors.actor as actor_mod
+    import miniworlds.worlds.world as world
 
 
 class Positionmanager:
@@ -49,6 +51,13 @@ class Positionmanager:
             and self.actor in actor_world.actors
         ):
             spatial_index.update(self.actor, self.get_global_rect())
+        blocking_spatial_index = getattr(actor_world, "_blocking_spatial_index", None)
+        if (
+            blocking_spatial_index is not None
+            and self.is_blocking
+            and self.actor in actor_world.actors
+        ):
+            blocking_spatial_index.update(self.actor, self.get_global_rect())
         if (
             getattr(self.actor, "_static", False)
             and hasattr(actor_world, "_static_tile_layer_dirty")

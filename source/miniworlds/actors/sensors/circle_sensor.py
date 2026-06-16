@@ -32,5 +32,10 @@ class CircleSensor(shapes.Circle, sensor_base.SensorBase):
     """
 
     def __init__(self, actor: "actor_mod.Actor", distance, **kwargs):
-        super().__init__(actor=actor, distance=distance, **kwargs)
-
+        super().__init__(
+            getattr(actor, "position", (0, 0)),
+            distance,
+            actor=actor,
+            distance=distance,
+            **kwargs,
+        )

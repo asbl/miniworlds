@@ -55,6 +55,10 @@ class FakeEventRegistry:
         methods = self.registered_events.get(event_name, set())
         return methods.copy() if isinstance(methods, set) else set()
 
+    def iter_event_methods(self, event_name: str):
+        methods = self.registered_events.get(event_name, set())
+        return tuple(methods) if isinstance(methods, set) else ()
+
     def copy_message_methods(self, message: str):
         message_registry = self.registered_events.get("message")
         if not isinstance(message_registry, dict):
@@ -62,8 +66,18 @@ class FakeEventRegistry:
         methods = message_registry.get(message, set())
         return methods.copy() if isinstance(methods, set) else set()
 
+    def iter_message_methods(self, message: str):
+        message_registry = self.registered_events.get("message")
+        if not isinstance(message_registry, dict):
+            return ()
+        methods = message_registry.get(message, set())
+        return tuple(methods) if isinstance(methods, set) else ()
+
     def copy_generic_message_methods(self):
         return self.copy_event_methods("on_message")
+
+    def iter_generic_message_methods(self):
+        return self.iter_event_methods("on_message")
 
     def iter_sensor_methods(self):
         sensor_registry = self.registered_events.get("sensor")

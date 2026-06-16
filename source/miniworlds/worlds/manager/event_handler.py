@@ -1,14 +1,25 @@
+from __future__ import annotations
+
 import logging
 from collections import defaultdict
-from typing import Any, Optional
+from typing import TYPE_CHECKING, Any, Optional
 
 import miniworlds.tools.method_caller as method_caller
-import miniworlds.actors.actor as actor_mod
 from miniworlds.base.exceptions import MissingActorPartsError
 from miniworlds.worlds.manager.event_message_dispatcher import EventMessageDispatcher
 
+if TYPE_CHECKING:
+    import miniworlds.actors.actor as actor_mod
+
 
 logger = logging.getLogger(__name__)
+
+
+def _iter_event_methods(event_registry, event_name: str):
+    iter_event_methods = getattr(event_registry, "iter_event_methods", None)
+    if callable(iter_event_methods):
+        return iter_event_methods(event_name)
+    return tuple(event_registry.copy_event_methods(event_name))
 
 
 class _KeyEventDispatcher:
@@ -22,11 +33,11 @@ class _KeyEventDispatcher:
             return
 
         if data is not None:
-            for method in self.event_registry.copy_event_methods(generic_event):
+            for method in _iter_event_methods(self.event_registry, generic_event):
                 method_caller.call_method(method, (data,))
 
         if event != generic_event:
-            for method in self.event_registry.copy_event_methods(event):
+            for method in _iter_event_methods(self.event_registry, event):
                 method_caller.call_method(method, None)
 
 
@@ -58,7 +69,7 @@ class _MouseEventDispatcher:
 
         # Mouse is confirmed inside this world; keep tracked position current.
         self.world.mouse._tracked_position = mouse_pos
-        self._call_mouse_methods(self.event_registry.copy_event_methods(event), mouse_pos)
+        self._call_mouse_methods(_iter_event_methods(self.event_registry, event), mouse_pos)
         if event == "on_mouse_motion":
             return self.handle_mouse_over_event(mouse_pos, skip_screen_check=True)
         if event in self._CLICK_EVENT_NAMES:
@@ -108,8 +119,8 @@ class _MouseEventDispatcher:
             return
 
         on_click_methods = (
-            self.event_registry.copy_event_methods(specific_click_event)
-            .union(self.event_registry.copy_event_methods("on_clicked"))
+            _iter_event_methods(self.event_registry, specific_click_event)
+            + _iter_event_methods(self.event_registry, "on_clicked")
         )
         for method in on_click_methods:
             actor = method.__self__
@@ -125,7 +136,7 @@ class _MouseEventDispatcher:
         self.focus_callback(actors)
 
     def _call_registered_mouse_methods(self, event_name: str, data: Any) -> None:
-        self._call_mouse_methods(self.event_registry.copy_event_methods(event_name), data)
+        self._call_mouse_methods(_iter_event_methods(self.event_registry, event_name), data)
 
     def _call_mouse_methods(self, mouse_methods, data: Any) -> None:
         for method in mouse_methods:
@@ -143,7 +154,7 @@ class _MouseEventDispatcher:
             }
         )
         for event_name in self._HOVER_EVENT_NAMES:
-            for method in self.event_registry.copy_event_methods(event_name):
+            for method in _iter_event_methods(self.event_registry, event_name):
                 methods_by_actor[method.__self__][event_name].append(method)
         return {
             actor: {
@@ -252,12 +263,11 @@ class EventHandler:
 
     def act_all(self):
         """Calls all registered 'act' methods for actors currently acting."""
-        registered_act_methods = self.event_registry.copy_event_methods("act")
+        registered_act_methods = _iter_event_methods(self.event_registry, "act")
         for method in registered_act_methods:
             instance = method.__self__
             if instance._is_acting:
                 method_caller.call_method(method, None, False)
-        del registered_act_methods
 
     def handle_event(self, event: str, data: Any):
         """
@@ -302,7 +312,7 @@ class EventHandler:
 
     def default_event_handler(self, event: str, data: Any):
         """Handles any generic events that are not mouse, key or message events."""
-        registered_events = self.event_registry.copy_event_methods(event)
+        registered_events = _iter_event_methods(self.event_registry, event)
         for method in registered_events:
             method_data = data
             if type(method_data) in [list, str, tuple]:
@@ -310,8 +320,6 @@ class EventHandler:
                     return
                 method_data = [method_data]
             method_caller.call_method(method, method_data, allow_none=False)
-        registered_events.clear()
-        del registered_events
 
     def can_handle_event(self, event):
         """Checks whether the event should be handled automatically by the event system."""
@@ -413,8 +421,8 @@ class EventHandler:
 
     def call_focus_methods(self, actors: list):
         """Handles 'on_focus' and 'on_focus_lost' for actors gaining or losing focus."""
-        focus_methods = self.event_registry.copy_event_methods("on_focus")
-        unfocus_methods = self.event_registry.copy_event_methods("on_focus_lost")
+        focus_methods = _iter_event_methods(self.event_registry, "on_focus")
+        unfocus_methods = _iter_event_methods(self.event_registry, "on_focus_lost")
         self.set_new_focus(actors)
         if self.focus_actor:
             for method in focus_methods:

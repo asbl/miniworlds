@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING, Callable, Set, Tuple, Union, cast
 
 import pygame
 
-import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.background as background_mod
 import miniworlds.appearances.backgrounds_manager as backgrounds_manager
 import miniworlds.base.app as app
@@ -21,6 +20,7 @@ import miniworlds.worlds.world_background_facade as world_background_facade
 import miniworlds.worlds.world_runtime_facade as world_runtime_facade
 
 if TYPE_CHECKING:
+    import miniworlds.actors.actor as actor_mod
     import miniworlds.worlds.world as world_mod
 
 
@@ -33,6 +33,7 @@ class WorldInitializationFacade:
     def initialize_pre_base_state(
         self, x: Union[int, Tuple[int, int]] = 400, y: int = 400
     ) -> None:
+        x, y = self.world._normalize_constructor_dimensions(x, y)
         # pygame.init() runs once at miniworlds import time. When a host
         # (e.g. the web player) calls pygame.quit() between runs while the
         # interpreter keeps living, all pygame modules must be re-initialized
@@ -74,6 +75,9 @@ class WorldInitializationFacade:
         max_dim = max(world_width, world_height)
         cell_size = max(32, min(128, max_dim // 16))
         self.world._spatial_index = spatial_index.SpatialIndex(cell_size=cell_size)
+        self.world._blocking_spatial_index = spatial_index.SpatialIndex(
+            cell_size=cell_size
+        )
         self.world._blocking_actors = cast(Set["actor_mod.Actor"], set())
         self.world._blocking_registry_version = 0
         self.world._blocking_static_rect_cache = (-1, -1, [])

@@ -1,4 +1,5 @@
 from collections import defaultdict
+from unittest.mock import Mock
 
 from miniworlds.base.exceptions import MissingActorPartsError
 from miniworlds.worlds.manager.event_handler import EventHandler
@@ -255,6 +256,36 @@ def test_default_event_handler_keeps_payload_shape_for_all_listeners(
 
     assert first.calls == [("message", ["a"])]
     assert second.calls == [("message", ["a"])]
+
+
+def test_default_dispatch_uses_iter_methods_without_copying(
+    event_handler_world_builder,
+    event_registry_builder,
+):
+    recorder = Recorder()
+    registry = event_registry_builder({"on_custom": {recorder.on_message_saved}})
+    registry.copy_event_methods = Mock(side_effect=AssertionError("copy not expected"))
+    handler = EventHandler(event_handler_world_builder(), registry)
+
+    handler.handle_event("custom", "payload")
+
+    assert recorder.calls == [("message", "payload")]
+
+
+def test_message_dispatch_uses_iter_methods_without_copying(
+    event_handler_world_builder,
+    event_registry_builder,
+):
+    recorder = Recorder()
+    registry = event_registry_builder(
+        {"message": defaultdict(set, {"saved": {recorder.on_message_saved}})}
+    )
+    registry.copy_message_methods = Mock(side_effect=AssertionError("copy not expected"))
+    handler = EventHandler(event_handler_world_builder(), registry)
+
+    handler.handle_event("message", "saved")
+
+    assert recorder.calls == [("message", "saved")]
 
 
 def test_mouse_over_enter_is_only_called_on_first_hover_frame(

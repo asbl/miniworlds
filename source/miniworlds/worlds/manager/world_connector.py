@@ -1,15 +1,14 @@
-from typing import Iterable, Optional, Tuple, Type
+from typing import TYPE_CHECKING, Iterable, Optional, Tuple, Type
 
-import pygame
-
-import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.costume as costume
 import miniworlds.appearances.costumes_manager as costumes_manager
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
-import miniworlds.worlds.world as world_mod
-from miniworlds.base.exceptions import MissingActorPartsError
 from miniworlds.worlds.manager.event_subscription import EventSubscription
+
+if TYPE_CHECKING:
+    import miniworlds.actors.actor as actor_mod
+    import miniworlds.worlds.world as world_mod
 
 
 class WorldConnector:
@@ -118,10 +117,15 @@ class WorldConnector:
             return
 
         was_registered = self.actor in self.world._blocking_actors
+        blocking_spatial_index = getattr(self.world, "_blocking_spatial_index", None)
         if value:
             self.world._blocking_actors.add(self.actor)
+            if blocking_spatial_index is not None and self.actor in self.world.actors:
+                blocking_spatial_index.update(self.actor)
         else:
             self.world._blocking_actors.discard(self.actor)
+            if blocking_spatial_index is not None:
+                blocking_spatial_index.remove(self.actor)
         is_registered = self.actor in self.world._blocking_actors
 
         if was_registered != is_registered:
@@ -211,7 +215,10 @@ class WorldConnector:
         tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
         if spatial_index is not None and not getattr(self.world, "is_tiled", False):
             spatial_index.remove(self.actor)
-        elif tiled_spatial_index is not None and getattr(self.world, "is_tiled", False):
+        blocking_spatial_index = getattr(self.world, "_blocking_spatial_index", None)
+        if blocking_spatial_index is not None:
+            blocking_spatial_index.remove(self.actor)
+        if tiled_spatial_index is not None and getattr(self.world, "is_tiled", False):
             # TiledWorld uses its own spatial index - handled by TiledWorldConnector
             pass
         self.actor._has_sensor_manager = False

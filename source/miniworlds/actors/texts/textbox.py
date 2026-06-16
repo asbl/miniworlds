@@ -2,6 +2,25 @@ from typing import Tuple
 import miniworlds.actors.parent_actor as parent_actor
 import miniworlds.actors.texts.text as text
 import miniworlds.actors.shapes.shapes as shapes
+import miniworlds.base.api_validation as api_validation
+
+
+def _ensure_real(value, parameter_name: str) -> None:
+    api_validation.ensure_real(
+        value,
+        parameter_name,
+        api_validation.with_try_hint,
+        f"{parameter_name} = 100",
+    )
+
+
+def _ensure_position(value, parameter_name: str = "position") -> None:
+    api_validation.ensure_position_tuple(
+        value,
+        parameter_name,
+        _ensure_real,
+        api_validation.with_try_hint,
+    )
 
 
 class TextBox(parent_actor.ParentActor):
@@ -41,7 +60,15 @@ class TextBox(parent_actor.ParentActor):
                 around the text box.
             font_size: Optional keyword argument. Font size used for all lines.
         """
-        super().__init__([])
+        _ensure_position(position)
+        _ensure_real(width, "width")
+        _ensure_real(height, "height")
+        if width <= 0:
+            raise ValueError(f"width must be > 0, got {width}")
+        if height <= 0:
+            raise ValueError(f"height must be > 0, got {height}")
+
+        super().__init__(position)
         self._visible: bool = False
         self.line_width = width
         self.lines_height = height
@@ -85,7 +112,7 @@ class TextBox(parent_actor.ParentActor):
         dummy = self.create_line((0, 0))
         font = dummy.costume.font_manager.font
         words = [
-            world.split(" ") for word in self.text.splitlines()
+            line.split(" ") for line in self.text.splitlines()
         ]  # 2D array where each row is a list of words.
         x, y = self.position
         for line in words:
@@ -97,7 +124,7 @@ class TextBox(parent_actor.ParentActor):
                 word_width, word_height = word_size
                 if x + word_width >= self.line_width:
                     line_actor = self.create_line((x, y), old_text)
-                    self.children.append(line_actor)
+                    self.children.add(line_actor)
                     x = self.position[0]
                     y += word_height  # Start on new row.
                     line_text = word
@@ -105,7 +132,7 @@ class TextBox(parent_actor.ParentActor):
             if y > self.lines_height:
                 break
             line_actor = self.create_line((x, y), line_text)
-            self.children.append(line_actor)
+            self.children.add(line_actor)
             x = self.position[0]  # Reset the x.
             y += line_actor.height  # Start on new row
         dummy.remove()

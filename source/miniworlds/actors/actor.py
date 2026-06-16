@@ -97,7 +97,7 @@ class Actor(actor_base.ActorBase):
         position: Optional[Tuple[float, float]] = (0, 0),
         args: tuple = (),
     ) -> tuple[Optional[Tuple[float, float]], tuple]:
-        if cls is not Actor:
+        if cls is not Actor and cls.__init__ is not Actor.__init__:
             return position, args
         if isinstance(position, tuple):
             return position, args

@@ -183,15 +183,27 @@ class TestActorNormalizeConstructorArguments(unittest.TestCase):
             "Remaining args should be preserved",
         )
 
-    def test_normalize_with_non_actor_subclass(self) -> None:
-        """Test normalization behavior for Actor subclass."""
-        # When cls is not Actor (i.e., a subclass), it should just return position and args
-        position: tuple[float, float] = (SAMPLE_X, SAMPLE_Y)
-        args: tuple = ()
-
-        # Create a mock subclass
+    def test_normalize_simple_subclass_with_inherited_actor_init(self) -> None:
+        """Simple student Actor subclasses keep the beginner-friendly x, y shortcut."""
         class ActorSubclass(Actor):
             pass
+
+        normalized_position, normalized_args = (
+            ActorSubclass._normalize_constructor_arguments(SAMPLE_X, (SAMPLE_Y,))
+        )
+
+        self.assertEqual(normalized_position, SAMPLE_POSITION)
+        self.assertEqual(normalized_args, ())
+
+    def test_subclass_with_custom_init_keeps_tuple_first_signature(self) -> None:
+        """Custom Actor subclasses keep their own positional argument contract."""
+        position: tuple[float, float] = (SAMPLE_X, SAMPLE_Y)
+        args: tuple = ("custom_arg",)
+
+        class ActorSubclass(Actor):
+            def __init__(self, position, custom_arg):
+                super().__init__(position)
+                self.custom_arg = custom_arg
 
         normalized_position, normalized_args = (
             ActorSubclass._normalize_constructor_arguments(position, args)

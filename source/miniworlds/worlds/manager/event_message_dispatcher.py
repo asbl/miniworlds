@@ -5,6 +5,24 @@ from typing import Any
 import miniworlds.tools.method_caller as method_caller
 
 
+def _iter_message_methods(event_registry, message: str):
+    iter_message_methods = getattr(event_registry, "iter_message_methods", None)
+    if callable(iter_message_methods):
+        return iter_message_methods(message)
+    return tuple(event_registry.copy_message_methods(message))
+
+
+def _iter_generic_message_methods(event_registry):
+    iter_generic_message_methods = getattr(
+        event_registry,
+        "iter_generic_message_methods",
+        None,
+    )
+    if callable(iter_generic_message_methods):
+        return iter_generic_message_methods()
+    return tuple(event_registry.copy_generic_message_methods())
+
+
 class EventMessageDispatcher:
     """Dispatches message events via exact message routes before falling back to generic handlers."""
 
@@ -17,13 +35,13 @@ class EventMessageDispatcher:
         if isinstance(data, tuple) and len(data) == 2:
             message, payload = data
 
-        message_methods = self.event_registry.copy_message_methods(message)
+        message_methods = _iter_message_methods(self.event_registry, message)
         if message_methods:
             handler_data = message if payload is None else payload
             for method in message_methods:
                 method_caller.call_method(method, (handler_data,))
             return
 
-        for method in self.event_registry.copy_generic_message_methods():
+        for method in _iter_generic_message_methods(self.event_registry):
             if event == method.__name__:
                 method_caller.call_method(method, (message,))

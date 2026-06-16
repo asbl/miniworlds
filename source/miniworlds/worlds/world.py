@@ -204,6 +204,17 @@ class World(world_base.WorldBase):
                     f"actor_classes must contain Actor subclasses, got {cls._type_name(actor_class)}: {actor_class!r}"
                 )
 
+    @classmethod
+    def _normalize_constructor_dimensions(cls, x, y):
+        if isinstance(x, tuple):
+            if y != 400:
+                raise TypeError(
+                    "World((width, height)) cannot be combined with a second y value"
+                )
+            cls._ensure_size_tuple(x, "x")
+            return x
+        return x, y
+
     def _validate_parameters(self, x, y):
         if isinstance(x, bool) or isinstance(y, bool):
             raise TypeError(

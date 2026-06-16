@@ -157,6 +157,23 @@ class TestWorldValidation(unittest.TestCase):
 
         self.assertIn("debug must be bool", str(ctx.exception))
 
+    def test_world_constructor_accepts_size_tuple(self):
+        world = World((120, 80))
+
+        self.assertEqual(world.size, (120, 80))
+
+    def test_world_constructor_rejects_invalid_size_tuple(self):
+        with self.assertRaises(TypeError) as ctx:
+            World((120,))
+
+        self.assertIn("x must be tuple (width, height)", str(ctx.exception))
+
+    def test_world_constructor_rejects_tuple_with_second_dimension(self):
+        with self.assertRaises(TypeError) as ctx:
+            World((120, 80), 90)
+
+        self.assertIn("cannot be combined", str(ctx.exception))
+
 
 class WorldValidationActor(Actor):
     pass

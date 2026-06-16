@@ -56,8 +56,33 @@ class TestParentActor(unittest.TestCase):
         self.assertNotIn(parent, self.world.actors)
         self.assertNotIn(child, self.world.actors)
 
+    def test_parent_actor_instances_do_not_share_default_children(self):
+        first = ParentActor((20, 20), world=self.world)
+        second = ParentActor((30, 30), world=self.world)
+        child = Actor((40, 40), world=self.world)
+
+        first.add_child(child)
+
+        self.assertIn(child, first.children)
+        self.assertNotIn(child, second.children)
+
     def test_actor_accepts_two_coordinate_arguments(self):
         actor = Actor(40, 50, world=self.world)
+
+        self.assertEqual(actor.position, (40, 50))
+        self.assertIn(actor, self.world.actors)
+
+    def test_actor_accepts_tuple_position_argument(self):
+        actor = Actor((40, 50), world=self.world)
+
+        self.assertEqual(actor.position, (40, 50))
+        self.assertIn(actor, self.world.actors)
+
+    def test_simple_actor_subclass_accepts_two_coordinate_arguments(self):
+        class Player(Actor):
+            pass
+
+        actor = Player(40, 50, world=self.world)
 
         self.assertEqual(actor.position, (40, 50))
         self.assertIn(actor, self.world.actors)

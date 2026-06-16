@@ -1,4 +1,4 @@
-from typing import Union
+from numbers import Real
 
 import miniworlds.positions.vector as vector
 import miniworlds.actors.actor as actor_mod
@@ -37,7 +37,7 @@ class SensorBase(actor_mod.Actor):
             raise TypeError(
                 f"Error on creating Sensor: param actor must be instance of Actor, but is {type(actor)}"
             )
-        if not (isinstance(distance, Union[float, int])):
+        if isinstance(distance, bool) or not isinstance(distance, Real):
             raise TypeError(
                 f"Error on creating Sensor: param distance must be int or float but is {type(distance)} , (value [{distance}])"
             )

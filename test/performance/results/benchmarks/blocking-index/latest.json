@@ -1,0 +1,18 @@
+{
+  "delta_to_previous": {},
+  "name": "blocking index",
+  "recorded_at": "2026-06-16T17:14:25",
+  "slug": "blocking-index",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 3.4863,
+    "frames": 119,
+    "max_ms": 6.0216,
+    "metric_blocked_moves": 1018,
+    "metric_blocking_queries": 9540,
+    "metric_successful_moves": 8522,
+    "min_ms": 3.0263,
+    "p95_ms": 3.8553,
+    "p99_ms": 5.8212
+  }
+}

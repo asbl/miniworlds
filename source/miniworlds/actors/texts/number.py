@@ -1,6 +1,16 @@
 import miniworlds.actors.texts.text as text
 import miniworlds.appearances.costume as costume_mod
+import miniworlds.base.api_validation as api_validation
 from typing import Union
+
+
+def _ensure_number(value, parameter_name: str = "number") -> None:
+    api_validation.ensure_real(
+        value,
+        parameter_name,
+        api_validation.with_try_hint,
+        f"{parameter_name} = 1",
+    )
 
 
 class Number(text.Text):
@@ -28,8 +38,7 @@ class Number(text.Text):
             raise TypeError(
                 "Invalid position type. Expected a tuple, got int or float."
             )
-        if not isinstance(number, (int, float)):
-            raise TypeError("Number must be an int or float.")
+        _ensure_number(number)
         self.number = 0
         super().__init__(position, **kwargs)
         self.set_number(number)
@@ -47,23 +56,24 @@ class Number(text.Text):
 
             number_actor.set_number(3)
         """
+        _ensure_number(number)
         self.number = number
         self.update_text()
 
     set_number = set_value
 
-    def get_value(self) -> int:
+    def get_value(self) -> Union[int, float]:
         """
         Get the current number.
 
         Returns:
-            int: The currently displayed number.
+            int or float: The currently displayed number.
 
         Example::
 
             current = number_actor.get_number()
         """
-        return int(self.costume.text)
+        return self.number
 
     get_number = get_value
 
@@ -89,6 +99,7 @@ class Number(text.Text):
 
             number_actor.sub(5)
         """
+        _ensure_number(value, "value")
         self.number -= value
         self.update_text()
 
@@ -103,6 +114,7 @@ class Number(text.Text):
 
             number_actor.add(2)
         """
+        _ensure_number(value, "value")
         self.number += value
         self.update_text()
 
@@ -146,10 +158,7 @@ class Number(text.Text):
         Returns:
             Number: The updated self.
         """
-        if isinstance(other, (int, float)):
-            self.value *= other
-        elif isinstance(other, Number):
-            self.value *= other.value
+        self.value *= self._coerce_operand(other)
         return self
 
     def __add__(self, other: Union[int, float, "Number"]):
@@ -162,10 +171,7 @@ class Number(text.Text):
         Returns:
             Number: The updated self.
         """
-        if isinstance(other, (int, float)):
-            self.value += other
-        elif isinstance(other, Number):
-            self.value += other.value
+        self.value += self._coerce_operand(other)
         return self
 
     def __sub__(self, other: Union[int, float, "Number"]):
@@ -178,8 +184,12 @@ class Number(text.Text):
         Returns:
             Number: The updated self.
         """
-        if isinstance(other, (int, float)):
-            self.value -= other
-        elif isinstance(other, Number):
-            self.value -= other.value
+        self.value -= self._coerce_operand(other)
         return self
+
+    @staticmethod
+    def _coerce_operand(other: Union[int, float, "Number"]):
+        if isinstance(other, Number):
+            return other.value
+        _ensure_number(other, "other")
+        return other

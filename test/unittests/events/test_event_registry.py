@@ -25,6 +25,41 @@ class ChildHandler(ParentHandler):
         return None
 
 
+ActorRoot = type(
+    "Actor",
+    (),
+    {
+        "__module__": "miniworlds.actors.actor",
+        "on_base_actor_event": lambda self: None,
+        "act_base": lambda self: None,
+    },
+)
+
+
+class StudentActor(ActorRoot):
+    def on_student_event(self):
+        return None
+
+    def act(self):
+        return None
+
+
+WorldRoot = type(
+    "World",
+    (),
+    {
+        "__module__": "miniworlds.worlds.world",
+        "on_base_world_event": lambda self: None,
+        "act_base": lambda self: None,
+    },
+)
+
+
+class StudentWorld(WorldRoot):
+    def on_world_started(self):
+        return None
+
+
 class TestEventRegistry(unittest.TestCase):
     """Regression coverage for the internal event registry behavior."""
 
@@ -34,6 +69,20 @@ class TestEventRegistry(unittest.TestCase):
         members = registry._get_members_for_instance(ChildHandler())
 
         self.assertEqual(members, {"act", "on_child_event", "on_parent_event"})
+
+    def test_actor_root_methods_are_not_registered_as_student_events(self):
+        registry = EventRegistry(Mock(), Mock())
+
+        members = registry._get_members_for_instance(StudentActor())
+
+        self.assertEqual(members, {"act", "on_student_event"})
+
+    def test_world_root_methods_are_not_registered_as_world_events(self):
+        registry = EventRegistry(Mock(), Mock())
+
+        members = registry._get_members_for_instance(StudentWorld())
+
+        self.assertEqual(members, {"on_world_started"})
 
     def test_registers_middle_mouse_up_event(self):
         class MiddleMouseHandler:
@@ -123,7 +172,7 @@ class TestEventRegistry(unittest.TestCase):
         registry.restore_subscriptions(subscriptions)
 
         self.assertEqual(registry.copy_message_methods("boost"), {handler.on_message_boost})
-        self.assertEqual(registry.iter_sensor_methods(), [("runner", (handler.on_sensor_runner,))])
+        self.assertEqual(registry.iter_sensor_methods(), (("runner", (handler.on_sensor_runner,)),))
 
     def test_has_registered_event_checks_all_registry_types(self):
         definition = Mock()
@@ -140,6 +189,53 @@ class TestEventRegistry(unittest.TestCase):
         self.assertTrue(registry.has_registered_event("message"))
         self.assertTrue(registry.has_registered_event("sensor"))
         self.assertFalse(registry.has_registered_event("on_missing"))
+
+    def test_iter_event_methods_cache_invalidates_when_registry_changes(self):
+        definition = Mock()
+        definition.class_events_set = {"act", "on_child_event"}
+        definition.update = Mock()
+        registry = EventRegistry(Mock(), definition)
+        first = ChildHandler()
+        second = ChildHandler()
+
+        registry.register_event("act", first)
+        first_snapshot = registry.iter_event_methods("act")
+        second_snapshot = registry.iter_event_methods("act")
+
+        self.assertIs(first_snapshot, second_snapshot)
+        self.assertEqual(first_snapshot, (first.act,))
+
+        registry.register_event("act", second)
+
+        updated_snapshot = registry.iter_event_methods("act")
+        self.assertIsNot(updated_snapshot, first_snapshot)
+        self.assertCountEqual(updated_snapshot, (first.act, second.act))
+
+    def test_iter_message_and_sensor_methods_cache_invalidates(self):
+        class CompositeHandler:
+            def on_message_saved(self, payload):
+                return payload
+
+            def on_sensor_runner(self, target):
+                return target
+
+        definition = Mock()
+        definition.class_events_set = set()
+        definition.update = Mock()
+        registry = EventRegistry(Mock(), definition)
+        handler = CompositeHandler()
+
+        registry.register_message_event("on_message_saved", handler, "saved")
+        registry.register_sensor_event("on_sensor_runner", handler, "runner")
+        message_snapshot = registry.iter_message_methods("saved")
+        sensor_snapshot = registry.iter_sensor_methods()
+
+        registry.unregister_instance(handler)
+
+        self.assertIsNot(registry.iter_message_methods("saved"), message_snapshot)
+        self.assertIsNot(registry.iter_sensor_methods(), sensor_snapshot)
+        self.assertEqual(registry.iter_message_methods("saved"), ())
+        self.assertEqual(registry.iter_sensor_methods(), ())
 
 
 if __name__ == "__main__":
