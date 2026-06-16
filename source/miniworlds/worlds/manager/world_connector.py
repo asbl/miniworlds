@@ -1,17 +1,18 @@
-from typing import Optional, Type, Tuple, Iterable
+from typing import Iterable, Optional, Tuple, Type
+
 import pygame
 
+import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.costume as costume
 import miniworlds.appearances.costumes_manager as costumes_manager
-import miniworlds.worlds.world as world_mod
-import miniworlds.actors.actor as actor_mod
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
+import miniworlds.worlds.world as world_mod
 from miniworlds.base.exceptions import MissingActorPartsError
 from miniworlds.worlds.manager.event_subscription import EventSubscription
 
 
-class WorldConnector():
+class WorldConnector:
     """Owns the actor-to-world attachment lifecycle and its manager setup."""
 
     ACTORS_HAVE_FIXED_SIZE = False
@@ -147,8 +148,12 @@ class WorldConnector():
         if self.actor not in self.world.actors:
             self.world.actors.add(self.actor)
         spatial_index = getattr(self.world, "_spatial_index", None)
+        tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
         if spatial_index is not None and not getattr(self.world, "is_tiled", False):
             spatial_index.update(self.actor)
+        elif tiled_spatial_index is not None and getattr(self.world, "is_tiled", False):
+            # TiledWorld uses its own spatial index
+            pass  # Handled by TiledWorldConnector
 
         self.set_static(self.actor.static)
         self.actor._is_acting = True
@@ -191,8 +196,7 @@ class WorldConnector():
             pass  # Sensor manager might not be initialized
 
         # Unregister event methods
-        unregistered_methods = self.world.event_manager.unregister_instance(
-            self.actor)
+        unregistered_methods = self.world.event_manager.unregister_instance(self.actor)
 
         # Remove from reload queue if present
         if self.actor in self.world._mainloop.reload_costumes_queue:
@@ -204,8 +208,12 @@ class WorldConnector():
 
         # Disable managers
         spatial_index = getattr(self.world, "_spatial_index", None)
+        tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
         if spatial_index is not None and not getattr(self.world, "is_tiled", False):
             spatial_index.remove(self.actor)
+        elif tiled_spatial_index is not None and getattr(self.world, "is_tiled", False):
+            # TiledWorld uses its own spatial index - handled by TiledWorldConnector
+            pass
         self.actor._has_sensor_manager = False
         self.actor._has_position_manager = False
 
@@ -221,7 +229,12 @@ class WorldConnector():
 
         return unregistered_methods
 
-    def set_world(self, old_world: "world_mod.World", new_world: "world_mod.World", position: Tuple[float, float] = (0, 0)):
+    def set_world(
+        self,
+        old_world: "world_mod.World",
+        new_world: "world_mod.World",
+        position: Tuple[float, float] = (0, 0),
+    ):
         """
         Transfers the actor from the old world to a new world instance,
         preserving registered event methods.
@@ -232,8 +245,7 @@ class WorldConnector():
             position (Tuple[float, float], optional): The new position in the target world. Defaults to (0, 0).
         """
         old_connector = old_world.get_world_connector(self.actor)
-        unregistered_methods = old_connector.remove_actor_from_world(
-            kill=False)
+        unregistered_methods = old_connector.remove_actor_from_world(kill=False)
 
         # Reassign world reference
         self.world = new_world
@@ -250,17 +262,22 @@ class WorldConnector():
         self.restore_event_subscriptions(method_dict)
 
     def init_sensor_manager(self):
-        self.actor._sensor_manager = self.get_sensor_manager_class()(self.actor, self.world)
+        self.actor._sensor_manager = self.get_sensor_manager_class()(
+            self.actor, self.world
+        )
         return self.actor._sensor_manager
 
     def init_position_manager(self, position=(0, 0)):
         self.actor._position_manager = self.get_position_manager_class()(
-            self.actor, self.world, position)
+            self.actor, self.world, position
+        )
         self.actor._position_manager.position = position
         return self.actor._position_manager
 
     def init_costume_manager(self):
-        self.actor._costume_manager = self._get_actor_costume_manager_class()(self.actor)
+        self.actor._costume_manager = self._get_actor_costume_manager_class()(
+            self.actor
+        )
         self.actor._costume_manager._add_default_appearance()
         return self.actor._costume_manager
 

@@ -1,20 +1,19 @@
 from collections import defaultdict
-from typing import Union, Dict, Tuple, Optional, cast, List
+from typing import Dict, List, Optional, Tuple, Union, cast
+
 import pygame
 
-import miniworlds.worlds.manager.camera_manager as world_camera_manager
-
-import miniworlds.worlds.world as world
+import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.background as background_mod
-import miniworlds.worlds.tiled_world.tiled_world_camera_manager as tiled_camera_manager
+import miniworlds.base.exceptions as miniworlds_exception
+import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.tiled_world.corner as corner_mod
 import miniworlds.worlds.tiled_world.edge as edge_mod
 import miniworlds.worlds.tiled_world.tile as tile_mod
 import miniworlds.worlds.tiled_world.tile_factory as tile_factory
+import miniworlds.worlds.tiled_world.tiled_world_camera_manager as tiled_camera_manager
 import miniworlds.worlds.tiled_world.tiled_world_connector as tiled_world_connector
-import miniworlds.actors.actor as actor_mod
-
-import miniworlds.base.exceptions as miniworlds_exception
+import miniworlds.worlds.world as world
 from miniworlds.base.exceptions import TiledWorldTooBigError
 
 
@@ -79,6 +78,8 @@ class TiledWorld(world.World):
         self.edges: defaultdict = defaultdict()
         self._static_tile_layer: pygame.Surface | None = None
         self._static_tile_layer_dirty = True
+        # Initialize tiled spatial index for efficient actor queries
+        self._tiled_spatial_index = None
         if x > 1000 or y > 1000:
             raise TiledWorldTooBigError(x, y, 40)
         super().__init__(x=x, y=y)
@@ -425,6 +426,12 @@ class TiledWorld(world.World):
 
     def detect_actors_at_position(self, position):
         """Returns all actors located at the given tile/world position."""
+        # Use tiled spatial index if available for better performance
+        tiled_spatial_index = getattr(self, "_tiled_spatial_index", None)
+        if tiled_spatial_index is not None:
+            return list(tiled_spatial_index.query_exact_position(position))
+
+        # Fallback to old method for compatibility
         self._update_actor_positions()  # This method can be a bottleneck!
         actor_list = []
         if self._dynamic_actors_dict[position[0], position[1]]:
@@ -440,10 +447,9 @@ class TiledWorld(world.World):
         Faster than sensing_actors, but only the first found actor is recognized.
         """
         actor_list = self.detect_actors_at_position(position)
-        if actor_list is None or actor_list == []:
+        if not actor_list:
             return None
-        else:
-            return actor_list[0]
+        return actor_list[0]
 
     def _rebuild_static_tile_layer(self) -> None:
         layer = self.background.image.copy()
@@ -576,12 +582,12 @@ class TiledWorld(world.World):
 
     def set_columns(self, value: int):
         self._columns = value
-        self.camera.width = value #* self.tile_size
+        self.camera.width = value  # * self.tile_size
         self.world_size_x = value
 
     def set_rows(self, value: int):
         self._rows = value
-        self.camera.height = value #* self.tile_size
+        self.camera.height = value  # * self.tile_size
         self.world_size_y = value
 
     @property

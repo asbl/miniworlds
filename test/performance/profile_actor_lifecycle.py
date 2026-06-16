@@ -2,10 +2,9 @@ from __future__ import annotations
 
 import time
 
-from miniworlds import Actor, World
-
 from logic_benchmark_utils import configure_world, record_measurement_summary
 
+from miniworlds import Actor, World
 
 ACTOR_COUNT = 1000
 

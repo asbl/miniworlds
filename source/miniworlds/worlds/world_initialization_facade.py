@@ -66,7 +66,14 @@ class WorldInitializationFacade:
     def _initialize_actor_state(self) -> None:
         self.world._timed_objects = []
         self.world._dynamic_actors = pygame.sprite.Group()
-        self.world._spatial_index = spatial_index.SpatialIndex()
+        # Use dynamic cell size based on world dimensions for optimal spatial indexing
+        # Smaller worlds: smaller cells, larger worlds: larger cells
+        # Formula: cell_size ≈ max_dimension / 16 (empirically determined)
+        world_width = getattr(self.world, "columns", 400) or 400
+        world_height = getattr(self.world, "rows", 400) or 400
+        max_dim = max(world_width, world_height)
+        cell_size = max(32, min(128, max_dim // 16))
+        self.world._spatial_index = spatial_index.SpatialIndex(cell_size=cell_size)
         self.world._blocking_actors = cast(Set["actor_mod.Actor"], set())
         self.world._blocking_registry_version = 0
         self.world._blocking_static_rect_cache = (-1, -1, [])
@@ -88,7 +95,9 @@ class WorldInitializationFacade:
         self.world.draw = draw_manager.DrawManager(self.world)
         self.world.music = world_music_manager.MusicManager(self.world.app)
         self.world.sound = world_sound_manager.SoundManager(self.world.app)
-        self.world._mainloop = self.world._get_mainloopmanager_class()(self.world, self.world.app)
+        self.world._mainloop = self.world._get_mainloopmanager_class()(
+            self.world, self.world.app
+        )
         self.world._collision_manager = coll_manager.CollisionManager(self.world)
 
     def _initialize_facades(self) -> None:

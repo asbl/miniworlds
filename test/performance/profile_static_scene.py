@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from collections import Counter
 
-from miniworlds import Actor, World
-
 from logic_benchmark_utils import configure_world, print_summary, record_frame_time
 
+from miniworlds import Actor, World
 
 FRAME_LIMIT = 180
 GRID_COLUMNS = 30

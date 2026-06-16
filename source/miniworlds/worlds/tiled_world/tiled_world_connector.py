@@ -1,12 +1,14 @@
-import miniworlds.worlds.tiled_world.tiled_world_position_manager as tiledpositionmanager
-import miniworlds.worlds.tiled_world.tiled_world_sensor_manager as tiledworldsensor
-import miniworlds.worlds.manager.world_connector as world_connector
-import miniworlds.worlds.world as world_mod
 from typing import TYPE_CHECKING
 
+import miniworlds.worlds.manager.tiled_spatial_index as tiled_spatial_index
+import miniworlds.worlds.manager.world_connector as world_connector
+import miniworlds.worlds.tiled_world.tiled_world_position_manager as tiledpositionmanager
+import miniworlds.worlds.tiled_world.tiled_world_sensor_manager as tiledworldsensor
+import miniworlds.worlds.world as world_mod
+
 if TYPE_CHECKING:
-    import miniworlds.worlds.tiled_world.tiled_world as world_mod
     import miniworlds.worlds.actor as actor_mod
+    import miniworlds.worlds.tiled_world.tiled_world as world_mod
 
 
 class TiledWorldConnector(world_connector.WorldConnector):
@@ -20,6 +22,11 @@ class TiledWorldConnector(world_connector.WorldConnector):
 
     def __init__(self, world: "world_mod.TiledWorld", actor: "actor_mod.Actor"):
         super().__init__(world, actor)
+        # Initialize tiled spatial index if not exists
+        if getattr(world, "_tiled_spatial_index", None) is None:
+            world._tiled_spatial_index = tiled_spatial_index.TiledSpatialIndex(
+                chunk_size=8
+            )
 
     @staticmethod
     def get_sensor_manager_class():
@@ -46,11 +53,19 @@ class TiledWorldConnector(world_connector.WorldConnector):
         """
         self.remove_static_actor()
         self.remove_dynamic_actor()
+        # Remove actor from tiled spatial index
+        tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
+        if tiled_spatial_index is not None:
+            tiled_spatial_index.remove(self.actor)
         return super().remove_actor_from_world(kill=kill)
 
     def add_to_world(self, position=(0, 0)):
         actor = super().add_to_world(position)
         self._auto_static_if_passive_tile_actor()
+        # Add actor to tiled spatial index
+        tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
+        if tiled_spatial_index is not None:
+            tiled_spatial_index.update(actor)
         return actor
 
     def _auto_static_if_passive_tile_actor(self):

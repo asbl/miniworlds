@@ -1,14 +1,15 @@
 import math
-import pygame
 from typing import Tuple, Union
 
-import miniworlds.worlds.manager.position_manager as actor_position_manager
+import pygame
+
+import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.costume as costume
-import miniworlds.worlds.tiled_world.tiled_world as tiled_world
-import miniworlds.worlds.tiled_world.tile as tile_mod
+import miniworlds.worlds.manager.position_manager as actor_position_manager
 import miniworlds.worlds.tiled_world.corner as corner_mod
 import miniworlds.worlds.tiled_world.edge as edge_mod
-import miniworlds.actors.actor as actor_mod
+import miniworlds.worlds.tiled_world.tile as tile_mod
+import miniworlds.worlds.tiled_world.tiled_world as tiled_world
 
 
 class TiledWorldPositionManager(actor_position_manager.Positionmanager):
@@ -18,13 +19,21 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         world: "tiled_world.TiledWorld",
         position: Tuple[int, int],
     ):
+        self._position = position
         super().__init__(actor, world, position)
         self._size: Tuple[int, int] = (1, 1)
         self._scaled_size: Tuple[int, int] = (1, 1)
+        self._tiled_spatial_index_update()
+
+    def _tiled_spatial_index_update(self):
+        """Update the actor's position in the tiled spatial index."""
+        tiled_spatial_index = getattr(self.actor.world, "_tiled_spatial_index", None)
+        if tiled_spatial_index is not None and self.actor in self.actor.world.actors:
+            tiled_spatial_index.update(self.actor)
 
     def get_global_rect(self) -> pygame.Rect:
         """Returns the global rect of the actor in the world space.
-        
+
         This rect may lie outside the visible screen.
 
         Returns:
@@ -40,11 +49,17 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         position = self.actor.position
 
         if self.actor.world.is_tile(position):
-            rect.topleft = tile_mod.Tile.from_position(position, self.actor.world).to_pixel()
+            rect.topleft = tile_mod.Tile.from_position(
+                position, self.actor.world
+            ).to_pixel()
         elif self.actor.world.is_corner(position):
-            rect.center = corner_mod.Corner.from_position(position, self.actor.world).to_pixel()
+            rect.center = corner_mod.Corner.from_position(
+                position, self.actor.world
+            ).to_pixel()
         elif self.actor.world.is_edge(position):
-            rect.center = edge_mod.Edge.from_position(position, self.actor.world).to_pixel()
+            rect.center = edge_mod.Edge.from_position(
+                position, self.actor.world
+            ).to_pixel()
         else:
             rect.topleft = (-size[0], -size[1])
 
@@ -74,6 +89,19 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         if scale and value != self._scaled_size and self.actor.costume:
             self._scaled_size = value
             self.actor.costume.set_dirty("scale", costume.Costume.RELOAD_ACTUAL_IMAGE)
+
+    @property
+    def position(self) -> Tuple[float, float]:
+        """Current tile, corner, or edge position."""
+        return self._position
+
+    @position.setter
+    def position(self, value: Tuple[float, float]) -> None:
+        """Override position setter to update tiled spatial index."""
+        old_position = getattr(self, "_position", None)
+        self._position = value
+        if old_position is not None and old_position != value:
+            self._tiled_spatial_index_update()
 
     def set_center(self, value: Tuple[int, int]):
         self.position = value

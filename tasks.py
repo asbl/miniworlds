@@ -6,7 +6,7 @@ Primary entry points:
 - ``invoke benchmarks.run`` for benchmark groups or individual benchmarks
 - ``invoke build.docs`` for a local Sphinx build
 - ``invoke build.image`` for the Docker image used by tests and benchmarks
-- ``invoke deploy.push`` for the normal branch push workflow
+- ``invoke deploy.push`` for the normal branch push workflow with tests first
 - ``invoke deploy.release --revision`` for the next release workflow
 
 Release workflow summary:
@@ -21,6 +21,8 @@ GitHub Actions handle publication after that push step:
 
 - pushing the main repository branch ``main`` triggers docs deployment
 - pushing ``v*`` tags triggers the PyPI publish workflows
+
+``deploy.push`` uses the same Docker test gate before pushing branches or tags.
 
 Legacy flat task names stay available as compatibility aliases while the
 grouped interface becomes the documented surface.
@@ -63,6 +65,7 @@ BENCHMARK_SCRIPTS = {
     "world_queries": "test/performance/profile_world_queries.py",
     "actor_lifecycle": "test/performance/profile_actor_lifecycle.py",
     "collision_communication": "test/performance/profile_collision_communication.py",
+    "tiled_spatial_index": "test/performance/profile_tiled_world_spatial_index.py",
 }
 
 BENCHMARK_GROUPS = {
@@ -82,6 +85,7 @@ BENCHMARK_GROUPS = {
         "world_queries",
         "actor_lifecycle",
         "collision_communication",
+        "tiled_spatial_index",
     ],
     "cprofile": [
         "actor_logic_filters_cprofile",
@@ -100,6 +104,7 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
     mounts = (
         f"-v {REPO_ROOT}/pytest.ini:/app/pytest.ini "
         f"-v {REPO_ROOT}/conftest.py:/app/conftest.py "
+        f"-v {REPO_ROOT}/tasks.py:/app/tasks.py "
         f"-v {REPO_ROOT}/source:/app/source "
         f"-v {REPO_ROOT}/test:/app/test "
         f"-v {REPO_ROOT}/examples:/app/examples "
@@ -338,6 +343,11 @@ def _print_release_plan(
     )
 
 
+def _run_deploy_tests(c, skip_tests: bool) -> None:
+    if not skip_tests:
+        tests_run(c)
+
+
 def ensure_test_environment(c):
     """Build the docker image if it does not exist yet."""
     c.run(f"docker image inspect {IMAGE} >/dev/null 2>&1 || docker build -t {IMAGE} .")
@@ -571,8 +581,12 @@ def deploy_release(
     _write_version(MAIN_SETUP_PATH, version)
     _write_version(PHYSICS_SETUP_PATH, version)
 
-    if not skip_tests:
-        tests_run(c)
+    try:
+        _run_deploy_tests(c, skip_tests)
+    except BaseException:
+        _write_version(MAIN_SETUP_PATH, current_main_version)
+        _write_version(PHYSICS_SETUP_PATH, current_physics_version)
+        raise
 
     _git(c, PHYSICS_REPO, "add source/setup.py")
     _git(c, PHYSICS_REPO, f'commit -m "Bump version to {version}"')
@@ -594,15 +608,18 @@ def deploy_release(
     name="push",
     help={
         "tags": "Also push all local tags in both repositories",
+        "skip_tests": "Skip the Docker test run before pushing",
         "dry_run": "Show the planned push steps and workflow effects without changing anything",
     },
 )
-def deploy_push(c, tags=False, dry_run=False):
+def deploy_push(c, tags=False, skip_tests=False, dry_run=False):
     """Push the current main and physics branches, optionally including tags.
 
     This is the normal deploy step when you only want to push existing commits.
     If the main repository branch is ``main``, the docs workflow runs after the
     branch push. PyPI publication only happens when tags are pushed as well.
+    A full Docker test run is performed before pushing unless ``--skip-tests``
+    is passed.
     """
     main_branch = _current_branch(c, REPO_ROOT, "Main")
     physics_branch = _current_branch(c, PHYSICS_REPO, "Physics")
@@ -611,6 +628,7 @@ def deploy_push(c, tags=False, dry_run=False):
     print(f"- Main branch: {main_branch}")
     print(f"- Physics branch: {physics_branch}")
     print(f"- Push tags: {'yes' if tags else 'no'}")
+    print(f"- Run tests: {'no' if skip_tests else 'yes'}")
     print("Workflow automation after push:")
     for note in _describe_workflow_automation(main_branch, push=True, tags=tags):
         print(f"- {note}")
@@ -618,6 +636,7 @@ def deploy_push(c, tags=False, dry_run=False):
     if dry_run:
         return
 
+    _run_deploy_tests(c, skip_tests)
     _push_repositories(c, main_branch, physics_branch, tags=tags)
 
 @task(name="run")

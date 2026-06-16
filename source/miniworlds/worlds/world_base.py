@@ -1,15 +1,17 @@
-from abc import ABC, ABCMeta
 import logging
-from typing import Set, Callable
-import pygame
-import miniworlds.worlds.manager.world_connector as world_connector
-import miniworlds.worlds.manager.event_manager as event_manager
-import miniworlds.worlds.manager.camera_manager as world_camera_manager
-import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
-import miniworlds.tools.world_inspection as world_inspection
+from abc import ABC, ABCMeta
+from typing import Callable, Set
 
+import pygame
+
+import miniworlds.tools.world_inspection as world_inspection
+import miniworlds.worlds.manager.camera_manager as world_camera_manager
+import miniworlds.worlds.manager.event_manager as event_manager
+import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
+import miniworlds.worlds.manager.world_connector as world_connector
 
 logger = logging.getLogger(__name__)
+
 
 class AutoSetupMeta(ABCMeta):
     def __call__(cls, *args, **kwargs):
@@ -19,19 +21,45 @@ class AutoSetupMeta(ABCMeta):
             instance._after_init_setup()
         return instance
 
+
 class WorldBase(metaclass=AutoSetupMeta):
     """
     Base class for worlds
     """
+
+    __slots__ = (
+        # Core state
+        "dirty",
+        "is_listening",
+        "_is_setup_completed",
+        "_is_acting",
+        "is_running",
+        "_default_start_running",
+        "is_tiled",
+        # Note: registered_events is a property, not an instance variable
+        # Private
+        "_window",
+        "_app",
+        "screen_top_left_x",
+        "screen_top_left_y",
+        "_image",
+        # Event system
+        "event_manager",
+        # Allow dynamic attributes (for subclasses and @cached_property)
+        "__dict__",
+    )
+
     def __init__(self):
         self.dirty = 1
         # Core state
-        self.is_listening = True # is reacting to events
-        self._is_setup_completed = False # should setup be called
-        self._is_acting = True # is used to stop acting, if world will be removed
-        self.is_running: bool = True # If world is running only event manager still listens to events; No costume update, no acting, ....
-        self._default_start_running: bool = True # default running state e.g. if stop() is called before world.run()
-        self.is_tiled = False # is a tiled world?
+        self.is_listening = True  # is reacting to events
+        self._is_setup_completed = False  # should setup be called
+        self._is_acting = True  # is used to stop acting, if world will be removed
+        self.is_running: bool = True  # If world is running only event manager still listens to events; No costume update, no acting, ....
+        self._default_start_running: bool = (
+            True  # default running state e.g. if stop() is called before world.run()
+        )
+        self.is_tiled = False  # is a tiled world?
         self.registered_events = {"mouse_left", "mouse_right"}
         # private
         self._window = None  # Set in add_to_window
@@ -45,7 +73,7 @@ class WorldBase(metaclass=AutoSetupMeta):
 
     def _after_init_setup(self):
         pass
-        
+
     @property
     def window(self):
         return self._window
@@ -74,7 +102,7 @@ class WorldBase(metaclass=AutoSetupMeta):
 
     def on_change(self):
         """implemented in subclasses
-        
+
         on_change() is called, after world is added to window, resized, ...
         """
         pass
@@ -84,7 +112,6 @@ class WorldBase(metaclass=AutoSetupMeta):
 
     def on_remove_actor(self, actor):
         pass
-    
 
     @staticmethod
     def _get_mainloopmanager_class():
@@ -121,7 +148,6 @@ class WorldBase(metaclass=AutoSetupMeta):
         """
         self.app.platform.save_image(self.app.window.surface, filename)
 
-
     def get_events(self) -> None:
         """
         Prints a list of all events that can be registered in this world.
@@ -132,7 +158,9 @@ class WorldBase(metaclass=AutoSetupMeta):
             >>> world.get_events()
             {'act', 'on_setup', 'on_key_down', ...}
         """
-        logger.info("Registered world event names: %s", self.event_manager.class_events_set)
+        logger.info(
+            "Registered world event names: %s", self.event_manager.class_events_set
+        )
 
     @property
     def registered_events(self) -> Set[str]:
@@ -177,7 +205,7 @@ class WorldBase(metaclass=AutoSetupMeta):
         if method.__name__ == "on_setup":
             self._is_setup_completed = False
         return bound_method
-        
+
     def _unregister(self, method: Callable) -> None:
         """
         Unregisters a previously registered world method.
@@ -199,7 +227,6 @@ class WorldBase(metaclass=AutoSetupMeta):
             >>> world.start_listening()
         """
         self.is_listening = True
-
 
     def _stop_listening(self) -> None:
         """

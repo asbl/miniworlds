@@ -1,10 +1,10 @@
 import math
-from typing import Union, Tuple, Optional
+from typing import Optional, Tuple, Union
 
-import miniworlds.worlds.manager.sensor_manager as worldsensor
-import miniworlds.worlds.tiled_world.tiled_world as world_module
-import miniworlds.worlds.tiled_world.tile as tile_mod
 import miniworlds.actors.actor as actor_module
+import miniworlds.worlds.manager.sensor_manager as worldsensor
+import miniworlds.worlds.tiled_world.tile as tile_mod
+import miniworlds.worlds.tiled_world.tiled_world as world_module
 
 
 class TiledWorldSensorManager(worldsensor.SensorManager):
@@ -62,7 +62,14 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         target_position = self.actor.position
         actor_list: list = list()
         if self.world and self.contains_position(target_position):
-            actor_list = self.world.detect_actors(target_position)
+            # Use tiled spatial index if available
+            tiled_spatial_index = getattr(self.world, "_tiled_spatial_index", None)
+            if tiled_spatial_index is not None:
+                actor_list = list(
+                    tiled_spatial_index.query_exact_position(target_position)
+                )
+            else:
+                actor_list = self.world.detect_actors(target_position)
         if not actor_list:
             actor_list = []
         actor_list = self._remove_self_from_actor_list(actor_list)
@@ -102,12 +109,9 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
 
     def detect_point(self, position: Tuple[float, float]) -> bool:
         return self.actor.position == position
-        
-        
+
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
-        return self.actor.position == self.world.get_from_pixel(
-            position
-        )
+        return self.actor.position == self.world.get_from_pixel(position)
 
     def detect_color_at(self, direction: Optional[int] = 0, distance: int = 0) -> Tuple:
         if not direction:
@@ -125,7 +129,6 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         else:
             tile2 = self.actor.world.get_tile(obj)
         return tile1.distance_to(tile2)
-
 
     def get_actors_at_position(self, position):
         return [actor for actor in self.world.actors if actor.position == position]

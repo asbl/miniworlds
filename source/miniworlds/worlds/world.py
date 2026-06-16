@@ -1,37 +1,38 @@
-import math
-import warnings
-import pygame
-import sys
 import asyncio
+import math
+import sys
 import time
-from typing import Tuple, Union, Optional, List, cast, Callable, Set
+import warnings
+from functools import cached_property
+from typing import Callable, List, Optional, Set, Tuple, Union, cast
 
+import pygame
+
+import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.appearance as appearance
 import miniworlds.appearances.background as background_mod
 import miniworlds.appearances.backgrounds_manager as backgrounds_manager
+import miniworlds.base.api_validation as api_validation
 import miniworlds.base.app as app
-import miniworlds.worlds.world_base as world_base
+import miniworlds.base.app as app_mod
+import miniworlds.positions.rect as world_rect
+import miniworlds.tools.timer as timer
+import miniworlds.worlds.dialog as dialog_mod
+import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.collision_manager as coll_manager
+import miniworlds.worlds.manager.data_manager as data_manager
+import miniworlds.worlds.manager.draw_manager as draw_manager
 import miniworlds.worlds.manager.event_manager as event_manager
+import miniworlds.worlds.manager.layout_manager as layout_manager
+import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.mouse_manager as mouse_manager
 import miniworlds.worlds.manager.music_manager as world_music_manager
-import miniworlds.worlds.manager.layout_manager as layout_manager
-import miniworlds.worlds.manager.draw_manager as draw_manager
-import miniworlds.worlds.manager.data_manager as data_manager
-import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
-import miniworlds.worlds.manager.sound_manager as world_sound_manager
 import miniworlds.worlds.manager.position_manager as position_manager
-import miniworlds.worlds.manager.camera_manager as world_camera_manager
+import miniworlds.worlds.manager.sound_manager as world_sound_manager
 import miniworlds.worlds.world_background_facade as world_background_facade
+import miniworlds.worlds.world_base as world_base
 import miniworlds.worlds.world_initialization_facade as world_initialization_facade
 import miniworlds.worlds.world_runtime_facade as world_runtime_facade
-import miniworlds.worlds.dialog as dialog_mod
-import miniworlds.positions.rect as world_rect
-import miniworlds.actors.actor as actor_mod
-import miniworlds.tools.timer as timer
-import miniworlds.base.app as app_mod
-import miniworlds.base.api_validation as api_validation
-
 from miniworlds.base.exceptions import (
     WorldArgumentsError,
 )
@@ -64,6 +65,18 @@ class World(world_base.WorldBase):
                     self.columns = 300
                     self.rows = 200
     """
+
+    __slots__ = (
+        # Facades
+        "_initialization_facade",
+        # Other instance attributes
+        "_debug",
+        "_learning_mode",
+        "_active_dialog",
+        "dialog",
+        # Note: __dict__ is inherited from object (via WorldBase),
+        # so dynamic attributes (including @cached_property) work normally
+    )
 
     @staticmethod
     def _type_name(value) -> str:
@@ -166,7 +179,9 @@ class World(world_base.WorldBase):
         )
 
     @classmethod
-    def _ensure_background_selector(cls, value, parameter_name: str = "background") -> None:
+    def _ensure_background_selector(
+        cls, value, parameter_name: str = "background"
+    ) -> None:
         if isinstance(value, int):
             return
         if isinstance(value, appearance.Appearance):
@@ -182,7 +197,9 @@ class World(world_base.WorldBase):
                 f"actor_classes must be list[type[Actor]], got {cls._type_name(actor_classes)}: {actor_classes!r}"
             )
         for actor_class in actor_classes:
-            if not isinstance(actor_class, type) or not issubclass(actor_class, actor_mod.Actor):
+            if not isinstance(actor_class, type) or not issubclass(
+                actor_class, actor_mod.Actor
+            ):
                 raise TypeError(
                     f"actor_classes must contain Actor subclasses, got {cls._type_name(actor_class)}: {actor_class!r}"
                 )
@@ -197,48 +214,34 @@ class World(world_base.WorldBase):
                 f"World(x, y) x and y must be int or float; Got ({type(x)}, {type(y)})"
             )
         if x <= 0 or y <= 0:
-            raise ValueError(
-                f"World dimensions must be positive (> 0), got ({x}, {y})"
-            )
+            raise ValueError(f"World dimensions must be positive (> 0), got ({x}, {y})")
 
     def __init__(
         self,
         x: Union[int, Tuple[int, int]] = 400,
         y: int = 400,
-        ):
+    ):
         """Initializes the world and all internal managers needed for runtime operation."""
-        self._initialization_facade = world_initialization_facade.WorldInitializationFacade(self)
-        self._get_initialization_facade().initialize_pre_base_state(x, y)
+        # Initialization facade is created directly during __init__
+        # (not via cached_property) because it's needed immediately
+        self._initialization_facade = (
+            world_initialization_facade.WorldInitializationFacade(self)
+        )
+        self._initialization_facade.initialize_pre_base_state(x, y)
         super().__init__()
-        self._get_initialization_facade().initialize_post_base_state()
+        self._initialization_facade.initialize_post_base_state()
         self._debug = False
         self._learning_mode = False
         self._active_dialog = None
         self.dialog = dialog_mod.DialogService(self)
 
+    @cached_property
+    def _background_facade(self) -> world_background_facade.WorldBackgroundFacade:
+        return world_background_facade.WorldBackgroundFacade(self)
 
-    def _get_initialization_facade(
-        self,
-    ) -> world_initialization_facade.WorldInitializationFacade:
-        facade = getattr(self, "_initialization_facade", None)
-        if facade is None:
-            facade = world_initialization_facade.WorldInitializationFacade(self)
-            self._initialization_facade = facade
-        return facade
-
-    def _get_background_facade(self) -> world_background_facade.WorldBackgroundFacade:
-        facade = getattr(self, "_background_facade", None)
-        if facade is None:
-            facade = world_background_facade.WorldBackgroundFacade(self)
-            self._background_facade = facade
-        return facade
-
-    def _get_runtime_facade(self) -> world_runtime_facade.WorldRuntimeFacade:
-        facade = getattr(self, "_runtime_facade", None)
-        if facade is None:
-            facade = world_runtime_facade.WorldRuntimeFacade(self)
-            self._runtime_facade = facade
-        return facade
+    @cached_property
+    def _runtime_facade(self) -> world_runtime_facade.WorldRuntimeFacade:
+        return world_runtime_facade.WorldRuntimeFacade(self)
 
     @property
     def layout(self):
@@ -432,7 +435,6 @@ class World(world_base.WorldBase):
         self._ensure_dimension(value, "world_size_x")
         self.camera.world_size_x = value
 
-
     @property
     def world_size_y(self) -> int:
         """
@@ -488,7 +490,6 @@ class World(world_base.WorldBase):
         self.camera.width = value
         self.world_size_x = value
 
-
     @property
     def rows(self) -> int:
         """
@@ -537,7 +538,6 @@ class World(world_base.WorldBase):
         """
         return self.world_size_x, self.world_size_y
 
-
     @size.setter
     def size(self, value: Tuple[int, int]) -> None:
         """
@@ -561,7 +561,6 @@ class World(world_base.WorldBase):
         self.camera.width = width
         self.camera.height = height
 
-
     @property
     def background(self) -> background_mod.Background:
         """
@@ -576,10 +575,12 @@ class World(world_base.WorldBase):
             >>> current = world.background
             >>> print(current)
         """
-        return self._get_background_facade().background
+        return self._background_facade.background
 
     @background.setter
-    def background(self, source: Union[str, Tuple[int, int, int], appearance.Appearance]) -> None:
+    def background(
+        self, source: Union[str, Tuple[int, int, int], appearance.Appearance]
+    ) -> None:
         """
         Sets the world background either via an Appearance object or image/color source.
 
@@ -599,7 +600,7 @@ class World(world_base.WorldBase):
             >>> world.background = my_appearance            # custom Appearance
         """
         self._ensure_background_source(source, "source")
-        self._get_background_facade().set_background_property(source)
+        self._background_facade.set_background_property(source)
 
     def get_background(self) -> background_mod.Background:
         """
@@ -611,8 +612,7 @@ class World(world_base.WorldBase):
         Example:
             >>> bg = world.get_background()
         """
-        return self._get_background_facade().background
-
+        return self._background_facade.background
 
     def switch_background(
         self, background: Union[int, appearance.Appearance]
@@ -674,9 +674,11 @@ class World(world_base.WorldBase):
                 :alt: Switch background
         """
         self._ensure_background_selector(background, "background")
-        return self._get_background_facade().switch_background(background)
+        return self._background_facade.switch_background(background)
 
-    def remove_background(self, background: Optional[Union[int, appearance.Appearance]] = None) -> None:
+    def remove_background(
+        self, background: Optional[Union[int, appearance.Appearance]] = None
+    ) -> None:
         """
         Removes a background from the world.
 
@@ -684,7 +686,7 @@ class World(world_base.WorldBase):
         You can also remove a specific background by passing its index or Appearance object.
 
         Args:
-            background: Either an integer index (e.g. 0) or an Appearance object. 
+            background: Either an integer index (e.g. 0) or an Appearance object.
                         If None, the most recently added background is removed.
 
         Example:
@@ -694,10 +696,11 @@ class World(world_base.WorldBase):
         """
         if background is not None:
             self._ensure_background_selector(background, "background")
-        self._get_background_facade().remove_background(background)
+        self._background_facade.remove_background(background)
 
-
-    def set_background(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+    def set_background(
+        self, source: Union[str, Tuple[int, int, int]]
+    ) -> background_mod.Background:
         """
         Sets a new background and replaces the current active background.
 
@@ -718,9 +721,11 @@ class World(world_base.WorldBase):
             >>> world.set_background((30, 30, 30))  # dark gray
         """
         self._ensure_background_source(source, "source")
-        return self._get_background_facade().set_background(source)
+        return self._background_facade.set_background(source)
 
-    def add_background(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+    def add_background(
+        self, source: Union[str, Tuple[int, int, int]]
+    ) -> background_mod.Background:
         """
         Adds a new background to the world and sets it as the active one.
 
@@ -740,13 +745,17 @@ class World(world_base.WorldBase):
             >>> world.add_background("images/background.png")  # image background
         """
         self._ensure_background_source(source, "source")
-        return self._get_background_facade().add_background(source)
+        return self._background_facade.add_background(source)
 
-    def set_bg(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+    def set_bg(
+        self, source: Union[str, Tuple[int, int, int]]
+    ) -> background_mod.Background:
         """Student-friendly alias for `set_background(source)`."""
         return self.set_background(source)
 
-    def add_bg(self, source: Union[str, Tuple[int, int, int]]) -> background_mod.Background:
+    def add_bg(
+        self, source: Union[str, Tuple[int, int, int]]
+    ) -> background_mod.Background:
         """Student-friendly alias for `add_background(source)`."""
         return self.add_background(source)
 
@@ -763,8 +772,7 @@ class World(world_base.WorldBase):
         Example:
             >>> world.start()
         """
-        self._get_runtime_facade().start()
-
+        self._runtime_facade.start()
 
     def stop(self, frames: int = 0) -> None:
         """
@@ -780,7 +788,7 @@ class World(world_base.WorldBase):
         self._ensure_int(frames, "frames")
         if frames < 0:
             raise ValueError(f"frames must be >= 0, got {frames}")
-        self._get_runtime_facade().stop(frames)
+        self._runtime_facade.stop(frames)
 
     def run(
         self,
@@ -825,7 +833,7 @@ class World(world_base.WorldBase):
                 f"event must be str or None, got {type(event).__name__}: {event!r}"
             )
         self._run_project_validation()
-        self._get_runtime_facade().run(
+        self._runtime_facade.run(
             fullscreen=fullscreen,
             fit_desktop=fit_desktop,
             replit=replit,
@@ -833,14 +841,15 @@ class World(world_base.WorldBase):
             data=data,
         )
 
-
     def _run_project_validation(self) -> None:
         """Emit warnings for project issues relevant to local desktop execution."""
         try:
             if app_mod.App.get_platform().is_web():
                 return  # already validated before export; no filesystem in browser
             from pathlib import Path
+
             from miniworlds.base.project_validator import ProjectValidator, Severity
+
             main = sys.modules.get("__main__")
             if not (main and getattr(main, "__file__", None)):
                 return
@@ -870,7 +879,7 @@ class World(world_base.WorldBase):
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
-        return self._get_runtime_facade().is_in_world(position)
+        return self._runtime_facade.is_in_world(position)
 
     def send_message(self, message: str, data: Optional[object] = None) -> None:
         """
@@ -895,7 +904,7 @@ class World(world_base.WorldBase):
             )
             message = str(message)
         self._ensure_non_empty_str(message, "message")
-        self._get_runtime_facade().send_message(message, data)
+        self._runtime_facade.send_message(message, data)
 
     def broadcast(self, message: str, data: Optional[object] = None) -> None:
         """Student-friendly alias for `send_message(message, data)`."""
@@ -910,16 +919,13 @@ class World(world_base.WorldBase):
         """
         reset = self._coerce_bool_learning(reset, "reset")
         if new_world is None:
-            raise TypeError(
-                "new_world must not be None"
-            )
+            raise TypeError("new_world must not be None")
         if not isinstance(new_world, world_base.WorldBase):
             raise TypeError(
                 f"new_world must be a World, got {type(new_world).__name__}: {new_world!r}"
             )
         self._ensure_bool(reset, "reset")
-        self._get_runtime_facade().switch_world(new_world, reset)
-
+        self._runtime_facade.switch_world(new_world, reset)
 
     def quit(self, exit_code: int = 0) -> None:
         """
@@ -932,7 +938,7 @@ class World(world_base.WorldBase):
             >>> world.quit()
         """
         self._ensure_int(exit_code, "exit_code")
-        self._get_runtime_facade().quit(exit_code)
+        self._runtime_facade.quit(exit_code)
 
     def reset(self):
         """Resets the world
@@ -948,8 +954,8 @@ class World(world_base.WorldBase):
                   self.world.is_running = False
                   self.world.reset()
         """
-        self._get_runtime_facade().reset()
-            
+        self._runtime_facade.reset()
+
     def _clear(self) -> None:
         """
         Clears the world's state: event queue, all backgrounds, and all actors.
@@ -959,10 +965,11 @@ class World(world_base.WorldBase):
         Example:
             >>> world.clear()
         """
-        self._get_runtime_facade().clear()
+        self._runtime_facade.clear()
 
-        
-    def get_from_pixel(self, position: Tuple[float, float]) -> Optional[Tuple[float, float]]:
+    def get_from_pixel(
+        self, position: Tuple[float, float]
+    ) -> Optional[Tuple[float, float]]:
         """
         Converts a screen pixel position into a valid world position if inside bounds.
 
@@ -981,8 +988,7 @@ class World(world_base.WorldBase):
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
-        return self._get_runtime_facade().get_from_pixel(position)
-
+        return self._runtime_facade.get_from_pixel(position)
 
     def to_pixel(self, position: Tuple[float, float]) -> Tuple[float, float]:
         """
@@ -1002,8 +1008,7 @@ class World(world_base.WorldBase):
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
-        return self._get_runtime_facade().to_pixel(position)
-
+        return self._runtime_facade.to_pixel(position)
 
     def on_setup(self) -> None:
         """
@@ -1017,7 +1022,6 @@ class World(world_base.WorldBase):
         """
         pass
 
-
     @property
     def has_background(self) -> bool:
         """
@@ -1027,7 +1031,7 @@ class World(world_base.WorldBase):
             >>> if world.has_background:
             ...     print(\"Background is set\")
         """
-        return self._get_background_facade().has_background()
+        return self._background_facade.has_background()
 
     def detect_actors(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
         """Gets all actors which are found at a specific position (in global world coordinates)
@@ -1051,13 +1055,15 @@ class World(world_base.WorldBase):
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         # overwritten in tiled_sensor_manager
-        return self._get_runtime_facade().detect_actors(position)
+        return self._runtime_facade.detect_actors(position)
 
     def actors_at(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
         """Student-friendly alias for `detect_actors(position)`."""
         return self.detect_actors(position)
 
-    def get_actors_from_pixel(self, pixel: Tuple[float, float]) -> List[actor_mod.Actor]:
+    def get_actors_from_pixel(
+        self, pixel: Tuple[float, float]
+    ) -> List[actor_mod.Actor]:
         """
         Returns a list of all actors located at the given screen pixel position.
 
@@ -1076,7 +1082,7 @@ class World(world_base.WorldBase):
         """
         pixel = self._coerce_position_learning(pixel, "pixel")
         self._ensure_position_tuple(pixel, "pixel")
-        return self._get_runtime_facade().get_actors_from_pixel(pixel)
+        return self._runtime_facade.get_actors_from_pixel(pixel)
 
     @staticmethod
     def distance_to(pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
@@ -1098,7 +1104,9 @@ class World(world_base.WorldBase):
         World._ensure_position_tuple(pos2, "pos2")
         return world_runtime_facade.WorldRuntimeFacade.distance_to(pos1, pos2)
 
-    def direction_to(self, pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
+    def direction_to(
+        self, pos1: Tuple[float, float], pos2: Tuple[float, float]
+    ) -> float:
         """
         Calculates the angle from pos1 to pos2 in degrees.
 

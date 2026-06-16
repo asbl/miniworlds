@@ -1,17 +1,29 @@
 from abc import ABC, ABCMeta
-from typing import Set, Callable
-from typing import Union, List, Tuple, Optional, cast, Type, TYPE_CHECKING
+from typing import (
+    TYPE_CHECKING,
+    Callable,
+    List,
+    Optional,
+    Set,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
+
 import pygame
-import miniworlds.worlds.manager.world_connector as world_connector
-import miniworlds.worlds.manager.event_manager as event_manager
-import miniworlds.worlds.manager.camera_manager as world_camera_manager
-import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
-import miniworlds.tools.world_inspection as world_inspection
+
 import miniworlds.tools.actor_inspection as actor_inspection
+import miniworlds.tools.world_inspection as world_inspection
+import miniworlds.worlds.manager.camera_manager as world_camera_manager
+import miniworlds.worlds.manager.event_manager as event_manager
+import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
+import miniworlds.worlds.manager.world_connector as world_connector
 from miniworlds.base.exceptions import RegisterError
 
 if TYPE_CHECKING:
     import miniworlds.appearances.costume as costume_mod
+
 
 class ActorWorldConnectorMeta(ABCMeta):
     """
@@ -32,6 +44,12 @@ class ActorWorldConnectorMeta(ABCMeta):
 
 
 class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
+    __slots__ = (
+        "_dirty",
+        "_is_setup_completed",
+        "_mw_auto_static",
+    )
+
     @classmethod
     def _normalize_constructor_arguments(
         cls,
@@ -76,7 +94,7 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
             force: Should register forced, even if method is not handling a valid event?
             name: Registers method with specific name
         """
-        if (not self.world.event_manager.can_register_to_actor(method) and not force):
+        if not self.world.event_manager.can_register_to_actor(method) and not force:
             raise RegisterError(method.__name__, self)
         bound_method = actor_inspection.ActorInspection(self).bind_method(method, name)
         self._disable_auto_static_after_instance_registration()
@@ -91,7 +109,7 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
             return
         self.world.get_world_connector(self).set_static(False)
         self._mw_auto_static = False
-            
+
     def register_message(self, *args, **kwargs):
         """
         Registers a method to an object to handle specific `on_message` events.
@@ -120,25 +138,30 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
         Parameters:
             message (str): The specific message event this method will react to.
         """
+
         def decorator(method):
-            if "method" in kwargs:                
+            if "method" in kwargs:
                 method = kwargs.pop("method")
                 name = kwargs.pop("name")
-            bound_method = actor_inspection.ActorInspection(self).bind_method(method, method.__name__)
+            bound_method = actor_inspection.ActorInspection(self).bind_method(
+                method, method.__name__
+            )
             self._disable_auto_static_after_instance_registration()
-            self.world.event_manager.register_message_event(method.__name__, self, args[0])
+            self.world.event_manager.register_message_event(
+                method.__name__, self, args[0]
+            )
             return bound_method
+
         return decorator
 
     @property
     def rect(self) -> pygame.Rect:
         """The surrounding Rectangle as pygame.Rect. The rect coordinates describes the local coordinates and depend on the camera view.
-        
-        Warning: 
+
+        Warning:
             If the actor is rotated, the rect vertices are not the vertices of the actor image.
         """
         return self.position_manager.get_local_rect()
-
 
     def __str__(self):
         try:
@@ -147,15 +170,14 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
                 and hasattr(self, "position_manager")
                 and self.position_manager
             ):
-                return f"**Actor of type [{ self.__class__.__name__}]: ID: { self.actor_id} at pos {self.position} with size {self.size}**"
+                return f"**Actor of type [{self.__class__.__name__}]: ID: {self.actor_id} at pos {self.position} with size {self.size}**"
             else:
-                return  f"**Actor of type [{ self.__class__.__name__}]: ID: { self.actor_id}**"
+                return f"**Actor of type [{self.__class__.__name__}]: ID: {self.actor_id}**"
         except Exception:
             return f"**Actor: {self.__class__.__name__}**"
 
     def get_costume_class(self) -> type["costume_mod.Costume"]:
         return self.world.get_world_connector(self).get_actor_costume_class()
-
 
     @property
     def position_manager(self):
