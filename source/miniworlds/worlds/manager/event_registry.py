@@ -69,15 +69,24 @@ class EventRegistry:
     def copy_event_methods(self, event_name: str) -> set[Callable]:
         return self._event_handlers.get(event_name, set()).copy()
 
+    def iter_event_methods(self, event_name: str) -> tuple[Callable, ...]:
+        return tuple(self._event_handlers.get(event_name, ()))
+
     def copy_message_methods(self, message: str) -> set[Callable]:
         return self._message_handlers.get(message, set()).copy()
+
+    def iter_message_methods(self, message: str) -> tuple[Callable, ...]:
+        return tuple(self._message_handlers.get(message, ()))
 
     def copy_generic_message_methods(self) -> set[Callable]:
         return self.copy_event_methods("on_message")
 
+    def iter_generic_message_methods(self) -> tuple[Callable, ...]:
+        return self.iter_event_methods("on_message")
+
     def iter_sensor_methods(self) -> list[tuple[str, tuple[Callable, ...]]]:
         return [
-            (target, tuple(methods.copy()))
+            (target, tuple(methods))
             for target, methods in self._sensor_handlers.items()
         ]
 

@@ -163,8 +163,17 @@ class Costume(appear.Appearance):
 
     def rotated(self):
         """Mark rotation-dependent rendering as dirty after actor rotation."""
-        if self.actor._is_actor_repainted():
-            self.set_dirty("rotate", self.RELOAD_ACTUAL_IMAGE)
+        if not self.actor._is_actor_repainted() or not self.is_rotatable:
+            return
+        frame = getattr(getattr(self.actor, "world", None), "frame", None)
+        if (
+            frame is not None
+            and getattr(self, "_rotation_dirty_frame", None) == frame
+            and self.dirty >= self.RELOAD_ACTUAL_IMAGE
+        ):
+            return
+        self._rotation_dirty_frame = frame
+        self.set_dirty("rotate", self.RELOAD_ACTUAL_IMAGE)
 
     def origin_changed(self):
         """Mark rendering as dirty after an origin change."""
