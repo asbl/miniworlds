@@ -845,21 +845,18 @@ def docs_build(c):
             shutil.rmtree(build_dir)
         os.makedirs(build_dir, exist_ok=True)
 
-        c.run(f"make gettext SPHINXBUILD={sphinx_build}", env=docs_env, pty=True)
+        c.run(f"make gettext SPHINXBUILD={sphinx_build}", env=docs_env)
         c.run(
             f"{sphinx_intl} update -j 1 -p build/gettext -l en -l de",
-            pty=True,
         )
-        c.run(f"{sphinx_intl} build", pty=True)
+        c.run(f"{sphinx_intl} build")
         c.run(
             f"{sphinx_build} -b html -D language=en source build/html/en",
             env=docs_env,
-            pty=True,
         )
         c.run(
             f"{sphinx_build} -b html -D language=de source build/html/de",
             env=docs_env,
-            pty=True,
         )
 
 
