@@ -51,12 +51,26 @@ PERFORMANCE_RESULTS = Path(REPO_ROOT) / "test" / "performance" / "results"
 DOC_EXAMPLE_TESTS = Path(REPO_ROOT) / "test" / "generated" / "docs_examples"
 DOCS_PRIORITY_API_PAGES = (
     "actor",
+    "actor_shapes",
+    "actor_widgets",
+    "appearance",
     "positions_vector",
     "timer",
+    "world",
+    "world_tiled",
     "world_toolbar",
     "world_manager_sound",
 )
 DOCS_DE_API_FORBIDDEN_TEXT = (
+    "Add multiple image sources",
+    "Broadcast a message",
+    "Clickable button widget",
+    "Convert a tile position",
+    "Create a circle",
+    "Create a toolbar button",
+    "Create a world",
+    "Line thickness",
+    "Pixel-based scene",
     "Return all actors",
     "Return whether",
     "Move the actor",
@@ -861,11 +875,11 @@ def docs_check(c):
 
         c.run(f"msgfmt -c -o /tmp/miniworlds-doc-check.mo {po_path}")
         untranslated = c.run(
-            f"msgattrib --untranslated {po_path} | rg -c '^msgid '",
+            f"msgattrib --untranslated {po_path}",
             hide=True,
             warn=True,
         )
-        count = int((untranslated.stdout or "0").strip() or "0")
+        count = len(re.findall(r"^msgid ", untranslated.stdout or "", re.MULTILINE))
         if count:
             raise Exit(f"{po_path} contains {count} untranslated messages")
 

@@ -42,7 +42,7 @@ msgid ""
 " conversions for common mistakes in selected public APIs (for example "
 "bool-like strings such as `\"yes\"`/`\"no\"` in some flags, and list "
 "positions where tuple positions are expected)."
-msgstr ""
+msgstr "Für Einsteigerklassen setze `world.learning_mode = True`. Das aktiviert weiche Umwandlungen für typische Fehler in ausgewählten öffentlichen APIs, zum Beispiel bool-ähnliche Zeichenketten wie `\"yes\"`/`\"no\"` bei einigen Flags und Listenpositionen, wo Tupelpositionen erwartet werden."
 
 #: ../../source/api/world.md:13
 msgid "Useful beginner aliases on World include:"
@@ -70,25 +70,25 @@ msgstr "- `set_bg(...)`, `add_bg(...)`, `next_bg()` fuer Background-Helfer"
 
 #: ../../source/api/world.md:20
 msgid "API Reference"
-msgstr ""
+msgstr "API-Referenz"
 
 #: miniworlds.worlds.world.World:1 of
 msgid "Pixel-based scene that owns actors, backgrounds, input, and events."
-msgstr ""
+msgstr "Pixelbasierte Szene, die Actor, Hintergründe, Eingaben und Ereignisse besitzt."
 
 #: miniworlds.worlds.world.World:3 of
 msgid ""
 "Positions in a `World` are pixel coordinates. Actors are placed by their "
 "top-left position by default unless their origin is changed."
-msgstr ""
+msgstr "Positionen in einer `World` sind Pixelkoordinaten. Actor werden standardmäßig über ihre linke obere Position platziert, sofern ihr Ursprung nicht geändert wurde."
 
 #: miniworlds.worlds.world.World:7 of
 msgid "Notes"
-msgstr ""
+msgstr "Hinweise"
 
 #: miniworlds.worlds.world.World:8 of
 msgid "Collision checks use sprite masks by default."
-msgstr ""
+msgstr "Kollisionsprüfungen verwenden standardmäßig Sprite-Masken."
 
 #: miniworlds.worlds.world.World:11 miniworlds.worlds.world.World.__init__:7
 #: miniworlds.worlds.world.World.add_background:10
@@ -127,7 +127,7 @@ msgstr "Beispiele"
 
 #: miniworlds.worlds.world.World.__init__:1 of
 msgid "Create a world with the given size."
-msgstr ""
+msgstr "Erzeuge eine Welt mit der angegebenen Größe."
 
 #: ../../source/api/world.md miniworlds.worlds.world.World.__init__
 #: miniworlds.worlds.world.World.add_background
@@ -153,15 +153,15 @@ msgstr "Parameter"
 
 #: miniworlds.worlds.world.World.__init__:3 of
 msgid "Width in pixels, or a `(width, height)` tuple."
-msgstr ""
+msgstr "Breite in Pixeln oder ein `(breite, höhe)`-Tupel."
 
 #: miniworlds.worlds.world.World.__init__:4 of
 msgid "Height in pixels. Ignored when `x` is a tuple."
-msgstr ""
+msgstr "Höhe in Pixeln. Wird ignoriert, wenn `x` ein Tupel ist."
 
 #: miniworlds.worlds.world.World.actors_at:1 of
 msgid "Student-friendly alias for `detect_actors(position)`."
-msgstr ""
+msgstr "Schülerfreundlicher Alias für `detect_actors(position)`."
 
 #: ../../source/api/world.md miniworlds.worlds.world.World.add_background
 #: miniworlds.worlds.world.World.detect_actors
@@ -181,7 +181,7 @@ msgstr ""
 #: miniworlds.worlds.world.World.switch_background
 #: miniworlds.worlds.world.World.to_pixel of
 msgid "Return type"
-msgstr ""
+msgstr "Rückgabetyp"
 
 #: miniworlds.worlds.world.World.actors_at:4
 #: miniworlds.worlds.world.World.detect_actors:3
@@ -195,7 +195,7 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.add_background:1 of
 msgid "Add a background and make it active."
-msgstr ""
+msgstr "Fügt einen Hintergrund hinzu und macht ihn aktiv."
 
 #: miniworlds.worlds.world.World.add_background:3
 #: miniworlds.worlds.world.World.add_bg:4
@@ -205,12 +205,12 @@ msgstr ""
 #: miniworlds.worlds.world.World.set_bg:4
 #: miniworlds.worlds.world.World.switch_background:5 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
 
 #: miniworlds.worlds.world.World.add_background:5
 #: miniworlds.worlds.world.World.set_background:5 of
 msgid "Image path or RGB/RGBA color tuple."
-msgstr ""
+msgstr "Bildpfad oder RGB/RGBA-Farbtupel."
 
 #: miniworlds.worlds.world.World.add_background
 #: miniworlds.worlds.world.World.contains_position
@@ -227,7 +227,7 @@ msgstr ""
 #: miniworlds.worlds.world.World.switch_background
 #: miniworlds.worlds.world.World.to_pixel of
 msgid "Returns"
-msgstr ""
+msgstr "Rückgabe"
 
 #: miniworlds.worlds.world.World.add_background:7 of
 #, fuzzy
@@ -236,7 +236,7 @@ msgstr "Der neu erstellte Hintergrund."
 
 #: miniworlds.worlds.world.World.add_bg:1 of
 msgid "Student-friendly alias for `add_background(source)`."
-msgstr ""
+msgstr "Schülerfreundlicher Alias für `add_background(source)`."
 
 #: miniworlds.worlds.world.World.background:1 of
 #, fuzzy
@@ -251,7 +251,7 @@ msgstr "Der neu erstellte Hintergrund."
 #: miniworlds.worlds.world.World.world_size_x
 #: miniworlds.worlds.world.World.world_size_y of
 msgid "type"
-msgstr ""
+msgstr "Typ"
 
 #: miniworlds.worlds.world.World.background:11 of
 #, fuzzy
@@ -260,7 +260,7 @@ msgstr "Hintergrund wechseln"
 
 #: miniworlds.worlds.world.World.broadcast:1 of
 msgid "Student-friendly alias for `send_message(message, data)`."
-msgstr ""
+msgstr "Schülerfreundlicher Alias für `send_message(message, data)`."
 
 #: miniworlds.worlds.world.World.broadcast:4
 #: miniworlds.worlds.world.World.on_setup:5
@@ -278,20 +278,19 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
 
 #: miniworlds.worlds.world.World.columns:1 of
 msgid "Width of the visible world area in pixels."
-msgstr ""
+msgstr "Breite des sichtbaren Weltbereichs in Pixeln."
 
 #: miniworlds.worlds.world.World.columns:9 miniworlds.worlds.world.World.rows:9
 #: miniworlds.worlds.world.World.world_size_x:10
 #: miniworlds.worlds.world.World.world_size_y:10 of
 msgid "int"
-msgstr ""
+msgstr "int"
 
 #: miniworlds.worlds.world.World.contains:1
 #: miniworlds.worlds.world.World.contains_position:1
 #: miniworlds.worlds.world.World.is_in_world:1 of
-#, fuzzy
 msgid "Return whether a position lies inside the world."
-msgstr "Wahr, wenn die Position in der Welt ist."
+msgstr "Gibt zurück, ob eine Position innerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains:3 of
 #, fuzzy
@@ -312,12 +311,12 @@ msgstr "Wahr, wenn die Position in der Welt ist."
 
 #: miniworlds.worlds.world.World.contains_rect:1 of
 msgid "Return whether a rectangle is fully inside the world."
-msgstr ""
+msgstr "Gibt zurück, ob ein Rechteck vollständig innerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains_rect:3
 #: miniworlds.worlds.world.World.contains_rect_any:3 of
 msgid "Rectangle as `(x, y, width, height)` or `pygame.Rect`."
-msgstr ""
+msgstr "Rechteck als `(x, y, breite, höhe)` oder `pygame.Rect`."
 
 #: miniworlds.worlds.world.World.contains_rect:5 of
 #, fuzzy
@@ -326,26 +325,25 @@ msgstr "Wahr, wenn die Position in der Welt ist."
 
 #: miniworlds.worlds.world.World.contains_rect_any:1 of
 msgid "Return whether any part of a rectangle is inside the world."
-msgstr ""
+msgstr "Gibt zurück, ob irgendein Teil eines Rechtecks innerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains_rect_any:5 of
 msgid "`True` if at least one part of the rectangle is inside the world."
-msgstr ""
+msgstr "`True`, wenn mindestens ein Teil des Rechtecks innerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.debug:1 of
 msgid "Whether to draw a compact runtime debug overlay."
-msgstr ""
+msgstr "Ob ein kompaktes Debug-Overlay zur Laufzeit gezeichnet wird."
 
 #: miniworlds.worlds.world.World.debug:9
 #: miniworlds.worlds.world.World.has_background:10
 #: miniworlds.worlds.world.World.learning_mode:9 of
 msgid "bool"
-msgstr ""
+msgstr "bool"
 
 #: miniworlds.worlds.world.World.detect_actors:1 of
-#, fuzzy
 msgid "Return all actors at a world position."
-msgstr "Alle Actors an der Mausposition abrufen:"
+msgstr "Gibt alle Actor an einer Weltposition zurück."
 
 #: miniworlds.worlds.world.World.detect_actors:5
 #: miniworlds.worlds.world.World.to_pixel:5 of
@@ -360,7 +358,7 @@ msgstr "Alle Actors an der Mausposition abrufen:"
 
 #: miniworlds.worlds.world.World.direction_to:1 of
 msgid "Return the Miniworlds direction from one position to another."
-msgstr ""
+msgstr "Gibt die Miniworlds-Richtung von einer Position zu einer anderen zurück."
 
 #: miniworlds.worlds.world.World.direction_to:3
 #: miniworlds.worlds.world.World.distance_to:3 of
@@ -379,11 +377,11 @@ msgstr "Position aus Pixel erhalten"
 
 #: miniworlds.worlds.world.World.direction_to:8 of
 msgid "Direction angle in degrees."
-msgstr ""
+msgstr "Richtungswinkel in Grad."
 
 #: miniworlds.worlds.world.World.distance_to:1 of
 msgid "Return the Euclidean distance between two positions."
-msgstr ""
+msgstr "Gibt den euklidischen Abstand zwischen zwei Positionen zurück."
 
 #: miniworlds.worlds.world.World.distance_to:5 of
 #, fuzzy
@@ -397,7 +395,7 @@ msgstr "Position aus Pixel erhalten"
 
 #: miniworlds.worlds.world.World.distance_to:8 of
 msgid "Distance between both positions."
-msgstr ""
+msgstr "Abstand zwischen beiden Positionen."
 
 #: miniworlds.worlds.world.World.fps:1 of
 #, fuzzy
@@ -408,7 +406,7 @@ msgstr "Bilder pro Sekunde auf dem Bildschirm angezeigt."
 msgid ""
 "This controls redraw frequency. Logic frequency can be tuned "
 "independently via `world.tick_rate`."
-msgstr ""
+msgstr "Dies steuert die Zeichenfrequenz. Die Logikfrequenz kann unabhängig über `world.tick_rate` eingestellt werden."
 
 #: miniworlds.worlds.world.World.fps:7
 #: miniworlds.worlds.world.World.tick_rate:7 of
@@ -418,11 +416,11 @@ msgstr "Beispiele"
 
 #: miniworlds.worlds.world.World.fps:8 of
 msgid "world.fps = 24 world.tick_rate = 2"
-msgstr ""
+msgstr "world.fps = 24\nworld.tick_rate = 2"
 
 #: miniworlds.worlds.world.World.get_actors_from_pixel:1 of
 msgid "Return all actors under a screen pixel."
-msgstr ""
+msgstr "Gibt alle Actor unter einem Bildschirmpixel zurück."
 
 #: miniworlds.worlds.world.World.get_actors_from_pixel:5 of
 #, fuzzy
@@ -431,7 +429,7 @@ msgstr "Position als Pixelkoordinaten"
 
 #: miniworlds.worlds.world.World.get_actors_from_pixel:7 of
 msgid "Actors whose screen rectangle overlaps the pixel."
-msgstr ""
+msgstr "Actor, deren Bildschirmrechteck den Pixel überlappt."
 
 #: miniworlds.worlds.world.World.get_background:1 of
 #, fuzzy
@@ -445,7 +443,7 @@ msgstr "Gibt den aktuellen Hintergrund zurück"
 
 #: miniworlds.worlds.world.World.get_from_pixel:1 of
 msgid "Convert a screen pixel position to a world position."
-msgstr ""
+msgstr "Wandelt eine Bildschirmpixelposition in eine Weltposition um."
 
 #: miniworlds.worlds.world.World.get_from_pixel:3 of
 #, fuzzy
@@ -465,7 +463,7 @@ msgstr "Position aus Pixel erhalten"
 
 #: miniworlds.worlds.world.World.get_from_pixel:7 of
 msgid "World position, or `None` if the pixel is outside the world."
-msgstr ""
+msgstr "Weltposition oder `None`, wenn der Pixel außerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.has_background:1 of
 #, fuzzy
@@ -478,102 +476,102 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
 
 #: miniworlds.worlds.world.World.layout:1 of
 msgid "Backward-compatible docking API for older example code."
-msgstr ""
+msgstr "Abwärtskompatible Docking-API für älteren Beispielcode."
 
 #: miniworlds.worlds.world.World.layout:3 of
 msgid ""
 "The actual layout manager remains internal on ``world._layout``. Public "
 "docking helpers continue to live on ``world.camera`` and are exposed here"
 " as a compatibility alias for existing teaching material."
-msgstr ""
+msgstr "Der eigentliche Layout-Manager bleibt intern unter ``world._layout``. Öffentliche Docking-Hilfen liegen weiterhin unter ``world.camera`` und werden hier als Kompatibilitätsalias für bestehendes Unterrichtsmaterial verfügbar gemacht."
 
 #: miniworlds.worlds.world.World.learning_mode:1 of
 msgid "Whether beginner-friendly conversions and hints are enabled."
-msgstr ""
+msgstr "Ob einsteigerfreundliche Umwandlungen und Hinweise aktiviert sind."
 
 #: miniworlds.worlds.world.World.next_bg:1 of
 msgid "Student-friendly alias to switch to the next background."
-msgstr ""
+msgstr "Schülerfreundlicher Alias, um zum nächsten Hintergrund zu wechseln."
 
 #: miniworlds.worlds.world.World.on_setup:1 of
 msgid "Hook for initial world setup."
-msgstr ""
+msgstr "Hook für die anfängliche Einrichtung der Welt."
 
 #: miniworlds.worlds.world.World.on_setup:3 of
 msgid "Override this in subclasses or register a function with `@world.register`."
-msgstr ""
+msgstr "Überschreibe dies in Unterklassen oder registriere eine Funktion mit `@world.register`."
 
 #: miniworlds.worlds.world.World.quit:1 of
 msgid "Quit the application and close the game window."
-msgstr ""
+msgstr "Beendet die Anwendung und schließt das Spielfenster."
 
 #: miniworlds.worlds.world.World.quit:5 of
 msgid "Process exit code."
-msgstr ""
+msgstr "Prozess-Exitcode."
 
 #: miniworlds.worlds.world.World.remove_background:1 of
 msgid "Remove a background."
-msgstr ""
+msgstr "Entfernt einen Hintergrund."
 
 #: miniworlds.worlds.world.World.remove_background:5 of
 msgid ""
 "Background index or `Appearance`. If omitted, the last background is "
 "removed."
-msgstr ""
+msgstr "Hintergrundindex oder `Appearance`. Wenn nichts angegeben wird, wird der letzte Hintergrund entfernt."
 
 #: miniworlds.worlds.world.World.reset:1 of
 msgid "Reset the world to its initial state."
-msgstr ""
+msgstr "Setzt die Welt in ihren Anfangszustand zurück."
 
 #: miniworlds.worlds.world.World.rows:1 of
 msgid "Height of the visible world area in pixels."
-msgstr ""
+msgstr "Höhe des sichtbaren Weltbereichs in Pixeln."
 
 #: miniworlds.worlds.world.World.run:1 of
 msgid "Start the Miniworlds main loop."
-msgstr ""
+msgstr "Startet die Miniworlds-Hauptschleife."
 
 #: miniworlds.worlds.world.World.run:3 of
 msgid "Call this once at the end of a Miniworlds program."
-msgstr ""
+msgstr "Rufe dies einmal am Ende eines Miniworlds-Programms auf."
 
 #: miniworlds.worlds.world.World.run:7 of
 msgid "Whether to launch in fullscreen mode."
-msgstr ""
+msgstr "Ob im Vollbildmodus gestartet werden soll."
 
 #: miniworlds.worlds.world.World.run:8 of
 msgid "Whether to adapt the window to the desktop."
-msgstr ""
+msgstr "Ob das Fenster an den Desktop angepasst werden soll."
 
 #: miniworlds.worlds.world.World.run:9 of
 msgid "Whether to use Replit-specific display adjustments."
-msgstr ""
+msgstr "Ob Replit-spezifische Anzeigeanpassungen verwendet werden sollen."
 
 #: miniworlds.worlds.world.World.run:10 of
 msgid "Optional event name to queue at startup."
-msgstr ""
+msgstr "Optionaler Ereignisname, der beim Start eingereiht wird."
 
 #: miniworlds.worlds.world.World.run:11 of
 msgid "Optional data to include with the startup event."
-msgstr ""
+msgstr "Optionale Daten für das Startereignis."
 
 #: miniworlds.worlds.world.World.send_message:1 of
 msgid "Broadcast a message to the world and its actors."
-msgstr ""
+msgstr "Sendet eine Nachricht an die Welt und ihre Actor."
 
 #: miniworlds.worlds.world.World.send_message:3 of
 msgid ""
 "The message is dispatched through the event system and can be handled by "
 "registered message handlers."
-msgstr ""
+msgstr "Die Nachricht wird über das Ereignissystem verteilt und kann von registrierten Nachrichten-Handlern verarbeitet werden."
 
 #: miniworlds.worlds.world.World.send_message:8 of
 msgid "Message name."
-msgstr ""
+msgstr "Nachrichtenname."
 
 #: miniworlds.worlds.world.World.send_message:9 of
 msgid "Optional payload for message-specific handlers."
-msgstr ""
+msgstr "Optionale Nutzdaten für nachrichtenspezifische Handler."
 
 #: miniworlds.worlds.world.World.set_background:1 of
 #, fuzzy
@@ -588,31 +586,31 @@ msgstr "Der neu erstellte Hintergrund."
 
 #: miniworlds.worlds.world.World.set_bg:1 of
 msgid "Student-friendly alias for `set_background(source)`."
-msgstr ""
+msgstr "Schülerfreundlicher Alias für `set_background(source)`."
 
 #: miniworlds.worlds.world.World.set_columns:1 of
 msgid "Set the visible world width in pixels."
-msgstr ""
+msgstr "Setzt die sichtbare Weltbreite in Pixeln."
 
 #: miniworlds.worlds.world.World.set_columns:5 of
 msgid "New width in pixels."
-msgstr ""
+msgstr "Neue Breite in Pixeln."
 
 #: miniworlds.worlds.world.World.set_rows:1 of
 msgid "Set the visible world height in pixels."
-msgstr ""
+msgstr "Setzt die sichtbare Welthöhe in Pixeln."
 
 #: miniworlds.worlds.world.World.set_rows:5 of
 msgid "New height in pixels."
-msgstr ""
+msgstr "Neue Höhe in Pixeln."
 
 #: miniworlds.worlds.world.World.size:1 of
 msgid "World size as `(width, height)` in pixels."
-msgstr ""
+msgstr "Weltgröße als `(breite, höhe)` in Pixeln."
 
 #: miniworlds.worlds.world.World.size:10 of
 msgid "tuple[int, int]"
-msgstr ""
+msgstr "tuple[int, int]"
 
 #: miniworlds.worlds.world.World.start:1 of
 #, fuzzy
@@ -621,11 +619,11 @@ msgstr "Hält die Welt an."
 
 #: miniworlds.worlds.world.World.stop:1 of
 msgid "Stop world updates immediately or after a number of frames."
-msgstr ""
+msgstr "Stoppt Weltaktualisierungen sofort oder nach einer Anzahl von Frames."
 
 #: miniworlds.worlds.world.World.stop:5 of
 msgid "Frames to wait before stopping. `0` stops immediately."
-msgstr ""
+msgstr "Frames, die vor dem Stoppen gewartet werden. `0` stoppt sofort."
 
 #: miniworlds.worlds.world.World.switch_background:1 of
 #, fuzzy
@@ -634,45 +632,45 @@ msgstr "Hintergrund wechseln"
 
 #: miniworlds.worlds.world.World.switch_background:3 of
 msgid "Pass an index, an existing appearance, or `-1` for the next background."
-msgstr ""
+msgstr "Übergebe einen Index, eine vorhandene Darstellung oder `-1` für den nächsten Hintergrund."
 
 #: miniworlds.worlds.world.World.switch_background:7 of
 msgid "Background index, `Appearance`, or `-1`."
-msgstr ""
+msgstr "Hintergrundindex, `Appearance` oder `-1`."
 
 #: miniworlds.worlds.world.World.switch_world:1 of
 msgid "Switch the active scene to another world."
-msgstr ""
+msgstr "Wechselt die aktive Szene zu einer anderen Welt."
 
 #: miniworlds.worlds.world.World.switch_world:5 of
 msgid "The world that should become active."
-msgstr ""
+msgstr "Die Welt, die aktiv werden soll."
 
 #: miniworlds.worlds.world.World.switch_world:6 of
 msgid "If `True`, the new world is reset before it starts."
-msgstr ""
+msgstr "Wenn `True`, wird die neue Welt vor dem Start zurückgesetzt."
 
 #: miniworlds.worlds.world.World.tick_rate:1 of
 msgid "How often world logic runs relative to the frame loop."
-msgstr ""
+msgstr "Wie oft die Weltlogik relativ zur Frame-Schleife läuft."
 
 #: miniworlds.worlds.world.World.tick_rate:3 of
 msgid ""
 "A value of `1` runs game logic every frame. A value of `30` runs it every"
 " 30th frame."
-msgstr ""
+msgstr "Ein Wert von `1` führt die Spiellogik in jedem Frame aus. Ein Wert von `30` führt sie in jedem 30. Frame aus."
 
 #: miniworlds.worlds.world.World.tick_rate:8 of
 msgid "from miniworlds import World"
-msgstr ""
+msgstr "from miniworlds import World"
 
 #: miniworlds.worlds.world.World.tick_rate:10 of
 msgid "world = World(120, 210) world.fps = 60 world.tick_rate = 3 world.run()"
-msgstr ""
+msgstr "world = World(120, 210)\nworld.fps = 60\nworld.tick_rate = 3\nworld.run()"
 
 #: miniworlds.worlds.world.World.to_pixel:1 of
 msgid "Convert a world position to a screen pixel position."
-msgstr ""
+msgstr "Wandelt eine Weltposition in eine Bildschirmpixelposition um."
 
 #: miniworlds.worlds.world.World.to_pixel:3 of
 #, fuzzy
@@ -685,20 +683,19 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.world_size_x:1 of
 msgid "Horizontal world size in pixels."
-msgstr ""
+msgstr "Horizontale Weltgröße in Pixeln."
 
 #: miniworlds.worlds.world.World.world_size_y:1 of
 msgid "Vertical world size in pixels."
-msgstr ""
+msgstr "Vertikale Weltgröße in Pixeln."
 
 #: ../../source/api/world.md:27
 msgid "Exceptions"
-msgstr ""
+msgstr "Ausnahmen"
 
 #: ../../source/api/world.md:29
 msgid ""
 "These exceptions are exported by `miniworlds` for code that wants to "
 "catch specific Miniworlds errors. They are documented here but "
 "intentionally do not have their own navigation entry."
-msgstr ""
-
+msgstr "Diese Ausnahmen werden von `miniworlds` exportiert, damit Code gezielt Miniworlds-Fehler abfangen kann. Sie sind hier dokumentiert, haben aber bewusst keinen eigenen Navigationseintrag."

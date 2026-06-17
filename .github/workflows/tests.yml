@@ -29,6 +29,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install invoke
 
+      - name: Build test image
+        run: invoke build.image
+
       - name: Run unit tests
         run: invoke tests.unit
 
@@ -50,6 +53,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install invoke
+
+      - name: Build test image
+        run: invoke build.image
 
       - name: Run full test suite
         run: invoke tests.cached

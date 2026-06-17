@@ -39,28 +39,28 @@ msgstr "Knopf"
 
 #: miniworlds.actors.widgets.button.Button:1 of
 msgid "Clickable button widget for use inside a `Toolbar`."
-msgstr ""
+msgstr "Anklickbares Button-Widget für eine `Toolbar`."
 
 #: miniworlds.actors.widgets.button.Button:3 of
 msgid ""
 "When clicked, the button broadcasts its label text as a message to the "
 "world. The world or any actor can react with `on_message`."
-msgstr ""
+msgstr "Beim Anklicken sendet der Button seinen Beschriftungstext als Nachricht an die Welt. Die Welt oder jeder Actor kann mit `on_message` darauf reagieren."
 
 #: ../../source/api/actor_widgets.md
 #: miniworlds.actors.widgets.input.Input.on_key_down of
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 #: miniworlds.actors.widgets.button.Button:6 of
 msgid ""
 "The label text shown on the button. This same text is sent as a message when "
 "the button is clicked."
-msgstr ""
+msgstr "Der Text, der auf dem Button angezeigt wird. Derselbe Text wird beim Anklicken als Nachricht gesendet."
 
 #: miniworlds.actors.widgets.button.Button:8 of
 msgid "Optional path to an image shown on the button."
-msgstr ""
+msgstr "Optionaler Pfad zu einem Bild, das auf dem Button angezeigt wird."
 
 #: miniworlds.actors.widgets.button.Button:11
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:8
@@ -71,25 +71,25 @@ msgstr "Beispiele"
 
 #: miniworlds.actors.widgets.button.Button.__init__:1 of
 msgid "Create a toolbar button."
-msgstr ""
+msgstr "Erzeuge einen Toolbar-Button."
 
 #: miniworlds.actors.widgets.button.Button.__init__:3 of
 msgid "The button label and the message that will be sent on click."
-msgstr ""
+msgstr "Die Button-Beschriftung und zugleich die Nachricht, die beim Anklicken gesendet wird."
 
 #: miniworlds.actors.widgets.button.Button.__init__:4 of
 msgid "Optional image path for the button."
-msgstr ""
+msgstr "Optionaler Bildpfad für den Button."
 
 #: miniworlds.actors.widgets.button.Button.act:1 of
 msgid "Counts down the short click cooldown."
-msgstr ""
+msgstr "Zählt die kurze Klick-Sperre herunter."
 
 #: miniworlds.actors.widgets.button.Button.act:3 of
 msgid ""
 "The cooldown prevents the button from sending the same message several times "
 "in a few frames while the mouse button is still held down."
-msgstr ""
+msgstr "Die Sperre verhindert, dass der Button dieselbe Nachricht mehrfach in wenigen Frames sendet, während die Maustaste noch gedrückt ist."
 
 #: ../../source/api/actor_widgets.md
 #: miniworlds.actors.widgets.button.Button.on_clicked_left of
@@ -100,15 +100,15 @@ msgstr "Gib str(self) zurück."
 #: miniworlds.actors.widgets.button.Button.act:7
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:5 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:1 of
 msgid "Called when the button is clicked."
-msgstr ""
+msgstr "Wird aufgerufen, wenn der Button angeklickt wird."
 
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:3 of
 msgid "By default, a message with the button text is then sent to the world."
-msgstr ""
+msgstr "Standardmäßig wird dann eine Nachricht mit dem Button-Text an die Welt gesendet."
 
 #: ../../source/api/actor_widgets.md:14
 msgid "Label"
@@ -116,66 +116,66 @@ msgstr "Etikett"
 
 #: miniworlds.actors.widgets.label.Label:1 of
 msgid "Text label for use in a `Toolbar`."
-msgstr ""
+msgstr "Text-Label für die Verwendung in einer `Toolbar`."
 
 #: miniworlds.actors.widgets.label.Label:3 of
 msgid ""
 "`Label` is usually used for headings, status text, scores, or other "
 "information that should be shown inside a toolbar."
-msgstr ""
+msgstr "`Label` wird typischerweise für Überschriften, Statustexte, Punkte oder andere Informationen in einer Toolbar verwendet."
 
 #: miniworlds.actors.widgets.label.Label:6 of
 msgid "The text to display in the label."
-msgstr ""
+msgstr "Der Text, der im Label angezeigt wird."
 
 #: miniworlds.actors.widgets.label.Label:7 of
 msgid "Optional path to an image to show instead of (or alongside) text."
-msgstr ""
+msgstr "Optionaler Pfad zu einem Bild, das statt des Textes oder zusätzlich dazu angezeigt wird."
 
 #: miniworlds.actors.widgets.label.Label.__init__:1 of
 msgid "Create a label widget."
-msgstr ""
+msgstr "Erzeuge ein Label-Widget."
 
 #: miniworlds.actors.widgets.label.Label.__init__:3 of
 msgid "The text displayed by the label."
-msgstr ""
+msgstr "Der vom Label angezeigte Text."
 
 #: miniworlds.actors.widgets.label.Label.__init__:4 of
 msgid "Optional image path."
-msgstr ""
+msgstr "Optionaler Bildpfad."
 
 #: ../../source/api/actor_widgets.md:21
 msgid "Input"
-msgstr ""
+msgstr "Input"
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:1 of
 msgid "Called once when a key is pressed."
-msgstr ""
+msgstr "Wird einmal aufgerufen, wenn eine Taste gedrückt wird."
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:3 of
 msgid ""
 "Register `on_key_down_<letter>` (for example `on_key_down_a`) if you want to "
 "react to a specific letter only."
-msgstr ""
+msgstr "Registriere `on_key_down_<buchstabe>` (zum Beispiel `on_key_down_a`), wenn nur auf einen bestimmten Buchstaben reagiert werden soll."
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:6 of
 msgid ""
 "For arrow keys use `on_key_down_left`, `on_key_down_right`, "
 "`on_key_down_up`, or `on_key_down_down`."
-msgstr ""
+msgstr "Für Pfeiltasten verwende `on_key_down_left`, `on_key_down_right`, `on_key_down_up` oder `on_key_down_down`."
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:9 of
 msgid ""
 "List of key name variants, for example `[\"A\", \"a\"]` or `[\"left\"]`."
-msgstr ""
+msgstr "Liste von Varianten des Tastennamens, zum Beispiel `[\"A\", \"a\"]` oder `[\"left\"]`."
 
 #: miniworlds.actors.widgets.input.Input.set_text:1 of
 msgid "Sets text of widget."
-msgstr ""
+msgstr "Setzt den Text des Widgets."
 
 #: miniworlds.actors.widgets.input.Input.set_text:3 of
 msgid "int and float values are converted to string."
-msgstr ""
+msgstr "Werte vom Typ int und float werden in Zeichenketten umgewandelt."
 
 #: ../../source/api/actor_widgets.md:28
 #, fuzzy
@@ -184,21 +184,21 @@ msgstr "Knopf"
 
 #: ../../source/api/actor_widgets.md:35
 msgid "CounterLabel"
-msgstr ""
+msgstr "CounterLabel"
 
 #: miniworlds.actors.widgets.counter.CounterLabel:1 of
 msgid "A counter label contains a ``description`` and a ``counter``."
-msgstr ""
+msgstr "Ein Zähler-Label enthält eine ``description`` und einen ``counter``."
 
 #: miniworlds.actors.widgets.counter.CounterLabel:3 of
 msgid ""
 "The counter starts with value 0 and can be modified with ``add`` and ``sub``."
-msgstr ""
+msgstr "Der Zähler startet mit dem Wert 0 und kann mit ``add`` und ``sub`` verändert werden."
 
 #: miniworlds.actors.widgets.counter.CounterLabel.add:1 of
 msgid "Increase the counter by ``value``."
-msgstr ""
+msgstr "Erhöhe den Zähler um ``value``."
 
 #: miniworlds.actors.widgets.counter.CounterLabel.sub:1 of
 msgid "Decrease the counter by ``value``."
-msgstr ""
+msgstr "Verringere den Zähler um ``value``."

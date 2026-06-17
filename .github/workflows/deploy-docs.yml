@@ -21,32 +21,20 @@ jobs:
 
     - name: Install dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get install -y gettext
         python -m pip install --upgrade pip
-        pip install sphinx sphinx-intl sphinx-toolbox sphinx-book-theme sphinxcontrib-video myst-parser sphinx-autodoc-typehints sphinxcontrib-mermaid autoclasstoc
-        pip install apeye==1.1.0
         pip install -r requirements.txt
         echo >> install miniworlds
         cd source && pip install -e .
 
     - name: Build i18n documentation (EN & DE)
-      working-directory: docs
       env:
         PYTHONPATH: ${{ github.workspace }}/source
-      run: |
-        echo "PYTHONPATH=$PYTHONPATH"
+      run: invoke build.docs
 
-        # Schritt 1: Extrahiere Texte
-        python -m sphinx.cmd.build -b gettext source build/gettext
-
-        # Schritt 2: Aktualisiere PO-Dateien
-        sphinx-intl update -p build/gettext -l en -l de
-
-        # Schritt 3: Kompiliere MO-Dateien
-        sphinx-intl build
-
-        # Schritt 4: HTML-Build für EN & DE
-        python -m sphinx.cmd.build -b html -D language=en source build/html/en
-        python -m sphinx.cmd.build -b html -D language=de source build/html/de
+    - name: Check priority API translations
+      run: invoke docs.check
 
     - name: Add redirect to German docs at root
       working-directory: docs/build/html
@@ -63,6 +51,7 @@ jobs:
         </html>' > index.html
 
     - name: Deploy to Webspace
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       working-directory: docs/build/html
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}

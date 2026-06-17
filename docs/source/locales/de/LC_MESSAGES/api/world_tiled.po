@@ -25,7 +25,7 @@ msgstr "World > Tiled World"
 
 #: ../../source/api/world_tiled.md:3
 msgid "API Reference"
-msgstr ""
+msgstr "API-Referenz"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:1 of
 #, fuzzy
@@ -38,7 +38,7 @@ msgstr ""
 msgid ""
 "A `TiledWorld` uses tile coordinates instead of pixel coordinates for actor "
 "positions. Actors can also be placed on tile corners or edges."
-msgstr ""
+msgstr "Eine `TiledWorld` verwendet Kachelkoordinaten statt Pixelkoordinaten für Actor-Positionen. Actor können auch auf Kachelecken oder Kanten platziert werden."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:7
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__:10
@@ -96,7 +96,7 @@ msgstr "World > Tiled World"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel of
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__:3 of
 #, fuzzy
@@ -129,17 +129,17 @@ msgstr "Erhalte Ecke von Weltposition und Richtung"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:3
 #: of
 msgid "Existing corners are merged when multiple tiles share the same corner."
-msgstr ""
+msgstr "Vorhandene Ecken werden zusammengeführt, wenn mehrere Kacheln dieselbe Ecke teilen."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:5
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:5 of
 msgid "Base tile position as `(column, row)`."
-msgstr ""
+msgstr "Basiskachelposition als `(spalte, zeile)`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:6
 #: of
 msgid "Corner direction key, for example `\"nw\"`."
-msgstr ""
+msgstr "Richtungsschlüssel der Ecke, zum Beispiel `\"nw\"`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world
@@ -161,7 +161,7 @@ msgstr "Rückgaben"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world:8
 #: of
 msgid "The registered corner object."
-msgstr ""
+msgstr "Das registrierte Eckenobjekt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:1 of
 #, fuzzy
@@ -171,19 +171,19 @@ msgstr "Kante von Weltposition und Richtung erhalten"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:3 of
 msgid ""
 "Existing edges are merged when neighboring tiles describe the same edge."
-msgstr ""
+msgstr "Vorhandene Kanten werden zusammengeführt, wenn benachbarte Kacheln dieselbe Kante beschreiben."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:6 of
 msgid "Edge direction key, for example `\"n\"` or `\"w\"`."
-msgstr ""
+msgstr "Richtungsschlüssel der Kante, zum Beispiel `\"n\"` oder `\"w\"`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:8 of
 msgid "The registered edge object."
-msgstr ""
+msgstr "Das registrierte Kantenobjekt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:1 of
 msgid "Creates and registers a tile at a world grid position."
-msgstr ""
+msgstr "Erzeugt und registriert eine Kachel an einer Rasterposition der Welt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:3
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actor_at_position:3
@@ -192,15 +192,15 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:3
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:3 of
 msgid "Tile position as `(column, row)`."
-msgstr ""
+msgstr "Kachelposition als `(spalte, zeile)`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world:5 of
 msgid "The created tile instance."
-msgstr ""
+msgstr "Die erzeugte Kachelinstanz."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:1 of
 msgid "Return borders touched by a position or rectangle."
-msgstr ""
+msgstr "Gibt die Ränder zurück, die von einer Position oder einem Rechteck berührt werden."
 
 #: ../../source/api/world_tiled.md
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders
@@ -217,11 +217,11 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:5 of
 msgid "Position or rectangle to check."
-msgstr ""
+msgstr "Zu prüfende Position oder zu prüfendes Rechteck."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.borders:7 of
 msgid "List of border names such as `\"left\"` or `\"top\"`."
-msgstr ""
+msgstr "Liste von Randnamen wie `\"left\"` oder `\"top\"`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.clear_tiles:1 of
 #, fuzzy
@@ -232,24 +232,24 @@ msgstr "Erstelle Actor auf Kachel, Ecke und Kante:"
 msgid ""
 "Use `empty=True` in the constructor when you want to build all tiles "
 "manually from the start."
-msgstr ""
+msgstr "Verwende `empty=True` im Konstruktor, wenn alle Kacheln von Anfang an manuell aufgebaut werden sollen."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns:1 of
 msgid "Width of the visible world area in pixels."
-msgstr ""
+msgstr "Breite des sichtbaren Weltbereichs in Pixeln."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.grid
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.tile_size of
 msgid "type"
-msgstr ""
+msgstr "Typ"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.columns:9
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows:9
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.tile_size:9 of
 msgid "int"
-msgstr ""
+msgstr "int"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actor_at_position:1
 #: of
@@ -260,12 +260,11 @@ msgstr "Alle Actors an der Mausposition abrufen:"
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actor_at_position:5
 #: of
 msgid "The first actor at that position, or `None`."
-msgstr ""
+msgstr "Der erste Actor an dieser Position oder `None`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:1 of
-#, fuzzy
 msgid "Return all actors at a world position."
-msgstr "Alle Actors an der Mausposition abrufen:"
+msgstr "Gibt alle Actor an einer Weltposition zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:3
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:3
@@ -279,7 +278,7 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:5 of
 msgid "World position as `(x, y)`."
-msgstr ""
+msgstr "Weltposition als `(x, y)`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:7 of
 #, fuzzy
@@ -288,37 +287,36 @@ msgstr "Alle Actors an der Mausposition abrufen:"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors_at_position:1
 #: of
-#, fuzzy
 msgid "Return all actors at a tile position."
-msgstr "Alle Actors an der Mausposition abrufen:"
+msgstr "Gibt alle Actor an einer Kachelposition zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors_at_position:5
 #: of
 msgid "Actors located at that position."
-msgstr ""
+msgstr "Actor an dieser Position."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.draw_on_image:1 of
 msgid "Draw an image onto the tiled world background."
-msgstr ""
+msgstr "Zeichnet ein Bild auf den Hintergrund der Kachelwelt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.draw_on_image:3 of
 msgid "The image/surface to draw."
-msgstr ""
+msgstr "Das zu zeichnende Bild oder Surface."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:1
 #: of
 msgid "Return all actors under a screen pixel."
-msgstr ""
+msgstr "Gibt alle Actor unter einem Bildschirmpixel zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:5
 #: of
 msgid "Screen pixel as `(x, y)`."
-msgstr ""
+msgstr "Bildschirmpixel als `(x, y)`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:7
 #: of
 msgid "Actors whose screen rectangle overlaps the pixel."
-msgstr ""
+msgstr "Actor, deren Bildschirmrechteck den Pixel überlappt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:1 of
 #, fuzzy
@@ -332,20 +330,20 @@ msgstr "Erhalte Ecke von Weltposition und Richtung"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:4 of
 msgid "Optional corner direction, for example `\"nw\"`."
-msgstr ""
+msgstr "Optionale Eckenrichtung, zum Beispiel `\"nw\"`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:6 of
 msgid "The matching corner."
-msgstr ""
+msgstr "Die passende Ecke."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile of
 msgid "Raises"
-msgstr ""
+msgstr "Löst aus"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner:8 of
 msgid "If no corner exists at the resolved position."
-msgstr ""
+msgstr "Wenn an der aufgelösten Position keine Ecke existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner_points:2
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge_points:2 of
@@ -354,7 +352,7 @@ msgid ""
 "\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, \\:py\\:data\\:"
 "\\`\\~typing.Tuple\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
 "\\:py\\:class\\:\\`float\\`\\]\\]`"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Dict\\`\\\\ \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, \\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:1 of
 #, fuzzy
@@ -368,42 +366,42 @@ msgstr "Kante auf Position, falls Position existiert"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:4 of
 msgid "Optional edge direction, for example `\"n\"` or `\"w\"`."
-msgstr ""
+msgstr "Optionale Kantenrichtung, zum Beispiel `\"n\"` oder `\"w\"`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:6 of
 msgid "The matching edge."
-msgstr ""
+msgstr "Die passende Kante."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:1 of
 msgid "Return the tile position for a screen pixel."
-msgstr ""
+msgstr "Gibt die Kachelposition zu einem Bildschirmpixel zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:3
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile_from_pixel:3
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:7 of
 msgid "Pixel position as `(x, y)`."
-msgstr ""
+msgstr "Pixelposition als `(x, y)`."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_from_pixel:5 of
 msgid "Tile position, or `None` if the pixel is outside the camera view."
-msgstr ""
+msgstr "Kachelposition oder `None`, wenn der Pixel außerhalb der Kameraansicht liegt."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:1 of
 msgid "Return the tile at a tile position."
-msgstr ""
+msgstr "Gibt die Kachel an einer Kachelposition zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:5 of
 msgid "The tile at the position."
-msgstr ""
+msgstr "Die Kachel an der Position."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile:7 of
 msgid "If no tile exists at the position."
-msgstr ""
+msgstr "Wenn an der Position keine Kachel existiert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile_from_pixel:1
 #: of
 msgid "Return the tile under a screen pixel."
-msgstr ""
+msgstr "Gibt die Kachel unter einem Bildschirmpixel zurück."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile_from_pixel:5
 #: of
@@ -413,23 +411,23 @@ msgstr "Die Kachelgröße in Pixeln."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.grid:1 of
 msgid "Whether to display the grid overlay."
-msgstr ""
+msgstr "Ob das Raster-Overlay angezeigt wird."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.grid:9 of
 msgid "bool"
-msgstr ""
+msgstr "bool"
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.is_corner:1 of
 msgid "Return whether a position is a corner position."
-msgstr ""
+msgstr "Gibt zurück, ob eine Position eine Eckenposition ist."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.is_edge:1 of
 msgid "Return whether a position is an edge position."
-msgstr ""
+msgstr "Gibt zurück, ob eine Position eine Kantenposition ist."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.is_tile:1 of
 msgid "Return whether a position is a tile position."
-msgstr ""
+msgstr "Gibt zurück, ob eine Position eine Kachelposition ist."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.rows:1 of
 #, fuzzy
@@ -473,12 +471,12 @@ msgstr "Die Kachelgröße in Pixeln."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:1 of
 msgid "Convert a tile position to pixel coordinates."
-msgstr ""
+msgstr "Wandelt eine Kachelposition in Pixelkoordinaten um."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:4 of
 msgid "Reserved for compatibility."
-msgstr ""
+msgstr "Für Kompatibilität reserviert."
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:5 of
 msgid "Pixel offset added to the converted position."
-msgstr ""
+msgstr "Pixelversatz, der zur umgerechneten Position addiert wird."
