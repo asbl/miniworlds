@@ -835,6 +835,7 @@ def docs_build(c):
         sphinx_build = shutil.which("sphinx-build", path=VENV_BIN) or "sphinx-build"
         sphinx_intl = shutil.which("sphinx-intl", path=VENV_BIN) or "sphinx-intl"
         docs_env = {
+            **os.environ,
             "SDL_AUDIODRIVER": "dummy",
             "SDL_VIDEODRIVER": "dummy",
             "PYGAME_HIDE_SUPPORT_PROMPT": "1",

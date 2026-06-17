@@ -19,8 +19,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout physics submodule
-        run: git submodule update --init physics
+      - name: Checkout test submodules
+        run: git submodule update --init physics examples
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -47,8 +47,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout physics submodule
-        run: git submodule update --init physics
+      - name: Checkout test submodules
+        run: git submodule update --init physics examples
 
       - name: Set up Python
         uses: actions/setup-python@v4
