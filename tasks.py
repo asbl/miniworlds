@@ -865,6 +865,8 @@ def docs_build(c):
 @task(name="check")
 def docs_check(c):
     """Check built documentation and priority API translations."""
+    from babel.messages.pofile import read_po
+
     for page in DOCS_PRIORITY_API_PAGES:
         po_path = Path("docs") / "source" / "locales" / "de" / "LC_MESSAGES" / "api" / f"{page}.po"
         html_path = Path("docs") / "build" / "html" / "de" / "api" / f"{page}.html"
@@ -873,15 +875,15 @@ def docs_check(c):
         if not html_path.exists():
             raise Exit(f"Missing German API HTML page: {html_path}")
 
-        c.run(f"msgfmt -c -o /tmp/miniworlds-doc-check.mo {po_path}")
-        untranslated = c.run(
-            f"msgattrib --untranslated {po_path}",
-            hide=True,
-            warn=True,
-        )
-        count = len(re.findall(r"^msgid ", untranslated.stdout or "", re.MULTILINE))
-        if count:
-            raise Exit(f"{po_path} contains {count} untranslated messages")
+        with po_path.open(encoding="utf-8") as handle:
+            catalog = read_po(handle)
+        untranslated = [
+            message.id
+            for message in catalog
+            if message.id and not message.string
+        ]
+        if untranslated:
+            raise Exit(f"{po_path} contains {len(untranslated)} untranslated messages")
 
         html = html_path.read_text(encoding="utf-8")
         matches = [text for text in DOCS_DE_API_FORBIDDEN_TEXT if text in html]
