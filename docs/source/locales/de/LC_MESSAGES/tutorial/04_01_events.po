@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -92,7 +92,8 @@ msgstr "Beispiel: Einfache Tastatureingabe"
 
 #: ../../source/tutorial/04_01_events.md:28
 #: ../../source/tutorial/04_01_events.md:67
-msgid "Explanation:"
+#, fuzzy
+msgid "Explanation"
 msgstr "Erklärung:"
 
 #: ../../source/tutorial/04_01_events.md:30
@@ -166,10 +167,11 @@ msgid "Example: Different Keyboard Events"
 msgstr "Beispiel: Unterschiedliche Tastatur-Events"
 
 #: ../../source/tutorial/04_01_events.md:111
+#, fuzzy
 msgid ""
 "You can either define specific keys like `on_key_down_b(self)`   or "
-"handle all key input using `on_key_down(self, key)` for general keyboard "
-"event handling."
+"handle all key input using `on_key_down(self, keys)` for general keyboard"
+" event handling."
 msgstr ""
 "Du kannst entweder bestimmte Tasten wie `on_key_down_b(self)` definieren "
 "oder allgemeine Tasteneingaben über `on_key_down(self, key)` verarbeiten."
@@ -181,8 +183,8 @@ msgstr "Haeufige Fehler bei Event-Handlern:"
 #: ../../source/tutorial/04_01_events.md:118
 #, fuzzy
 msgid ""
-"`on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:"
-"   `def on_key_down(self, key):`"
+"`on_key_down` / `on_key_pressed` / `on_key_up` receive the current key "
+"list:   `def on_key_down(self, keys):`"
 msgstr ""
 "- `on_key_down` / `on_key_pressed` / `on_key_up` brauchen `key` als "
 "Parameter:"
@@ -204,6 +206,12 @@ msgstr ""
 #: ../../source/tutorial/04_01_events.md:124
 msgid "If a handler is not called, first check its name and signature."
 msgstr "Wenn ein Handler nicht aufgerufen wird, pruefe zuerst Namen und Signatur."
+
+#: ../../source/tutorial/04_01_events.md:127
+msgid ""
+"For a complete list of event names and signatures, see the [Event "
+"reference](../api/events.md)."
+msgstr ""
 
 #~ msgid "  `def on_key_down(self, key):`"
 #~ msgstr "  `def on_key_down(self, key):`"

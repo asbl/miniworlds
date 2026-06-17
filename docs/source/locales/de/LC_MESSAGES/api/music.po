@@ -35,8 +35,7 @@ msgstr "Öffentliche Methoden:"
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ "
-"\\(app\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ \\(app\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -47,14 +46,13 @@ msgstr ""
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.pause:1 of
-#, fuzzy
 msgid "Pauses the currently playing music."
 msgstr ""
+
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`is_playing "
-"<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -70,37 +68,36 @@ msgstr ""
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_path:1 of
-#, fuzzy
 msgid "Returns the path of the currently loaded music file."
 msgstr ""
+
 #: ../../None:11:<autosummary>:1
 msgid ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
+":py:obj:`play <miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
 "\\(\\[path\\, loop\\]\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.play:1 of
-#, fuzzy
 msgid "Plays a music file from the given path."
 msgstr ""
+
 #: ../../None:11:<autosummary>:1
 msgid ""
-":py:obj:`stop "
-"<miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ \\(\\)"
+":py:obj:`stop <miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
 #: miniworlds.worlds.manager.music_manager.MusicManager.stop:1 of
-#, fuzzy
 msgid "Stops the currently playing music."
 msgstr ""
+
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`set_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ "
-"\\(volume\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ \\"
+"(volume\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -111,8 +108,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`get_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -121,17 +117,15 @@ msgid "Gets the current playback volume."
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
-#, fuzzy
 msgid ""
 ":py:obj:`toggle_pause "
-"<miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
-#, fuzzy
 msgid "Toggles the pause state of the music."
 msgstr ""
+
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_path
 #: miniworlds.worlds.manager.music_manager.MusicManager.get_volume
 #: miniworlds.worlds.manager.music_manager.MusicManager.is_playing
@@ -227,8 +221,7 @@ msgstr ""
 
 #: miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause:1 of
 msgid ""
-"Toggles the pause state of the music. Pauses if playing, resumes if "
-"paused."
+"Toggles the pause state of the music. Pauses if playing, resumes if paused."
 msgstr ""
 
 #: miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause:5 of
@@ -242,14 +235,12 @@ msgstr "Klang"
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
-"\\(app\\)"
+"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ \\(app\\)"
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
 msgid ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
+":py:obj:`play <miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
 "\\(\\[path\\, volume\\]\\)"
 msgstr ""
 
@@ -257,16 +248,18 @@ msgstr ""
 #: miniworlds.worlds.manager.sound_manager.SoundManager.play:1 of
 msgid "plays a sound from path"
 msgstr ""
+
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`register "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
-"\\(\\[path\\]\\)"
+"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ \\(\\"
+"[path\\]\\)"
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
 msgid "Registers a sound."
 msgstr ""
+
 #: miniworlds.worlds.manager.sound_manager.SoundManager.play:3
 #: miniworlds.worlds.manager.sound_manager.SoundManager.register:4 of
 msgid "The path to the sound"
@@ -282,40 +275,9 @@ msgstr "Rückgaben:"
 
 #: miniworlds.worlds.manager.sound_manager.SoundManager.register:1 of
 msgid ""
-"Registers a sound. It can slow down the performance, if sounds are loaded"
-" on the fly and it can be faster to register all sounds at program start."
+"Registers a sound. It can slow down the performance, if sounds are loaded on "
+"the fly and it can be faster to register all sounds at program start."
 msgstr ""
 "Registriert einen Sound. Es kann die Leistung verlangsamen, wenn Sounds "
-"während des Betriebs geladen werden, und es kann schneller sein, alle "
-"Sounds beim Programmstart zu registrieren."
-
-#~ msgid "Rückgabetyp"
-#~ msgstr "Returntyp"
-
-#~ msgid "Rückgabe"
-#~ msgstr "Rückgabe"
-
-#~ msgid "pauses a music"
-#~ msgstr "pausiert eine Musik"
-
-#~ msgid "returns True, if world is playing a music (and music ist not paused)"
-#~ msgstr ""
-#~ "gibt True zurück, wenn die Welt "
-#~ "Musik abspielt (und die Musik nicht "
-#~ "pausiert ist)"
-
-#~ msgid "stops a music"
-#~ msgstr "stoppt eine Musik"
-
-#~ msgid "sets volume of music"
-#~ msgstr "stellt die Lautstärke der Musik ein"
-
-#~ msgid "gets volume of music"
-#~ msgstr "holt die Lautstärke der Musik"
-
-#~ msgid "current volume"
-#~ msgstr "aktuelles Volumen"
-
-#~ msgid "Specifies how often the music must be repeated (-1: infinitely often)"
-#~ msgstr "Gibt an, wie oft die Musik wiederholt werden muss (-1: unendlich oft)"
-
+"während des Betriebs geladen werden, und es kann schneller sein, alle Sounds "
+"beim Programmstart zu registrieren."

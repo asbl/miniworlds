@@ -1,0 +1,197 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api/app.md:1
+msgid "App"
+msgstr ""
+
+#: ../../source/api/app.md:3
+msgid ""
+"`App` manages the pygame window and the active worlds. Most beginner "
+"projects do not need to create an `App` directly because `world.run()` "
+"starts the default application loop."
+msgstr ""
+
+#: ../../source/api/app.md:7
+msgid ""
+"Use `App` only when you intentionally manage more than one world or need "
+"direct control over the application lifecycle."
+msgstr ""
+
+#: ../../source/api/app.md:10
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds.base.app.App:1 of
+msgid ""
+"Main application class for Miniworlds. Created automatically when "
+"`world.run()` is called for the first time."
+msgstr ""
+
+#: ../../source/api/app.md
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.base.app.App:4 of
+msgid "If `run()` is not called from the main module."
+msgstr ""
+
+#: miniworlds.base.app.App.__init__:1 of
+msgid "Initializes the App and all its managers."
+msgstr ""
+
+#: ../../source/api/app.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.base.app.App.__init__:3 of
+msgid "Title for the window."
+msgstr ""
+
+#: miniworlds.base.app.App.__init__:4 of
+msgid "The initial world object to be run."
+msgstr ""
+
+#: miniworlds.base.app.App.add_display_to_repaint_areas:1 of
+msgid "Adds the full screen area to the repaint queue."
+msgstr ""
+
+#: ../../source/api/app.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.base.app.App.add_running_world:2
+#: miniworlds.base.app.App.remove_running_world:2
+#: miniworlds.base.app.App.set_running_world:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.check_for_run_method:1 of
+msgid ""
+"Verifies that `.run()` is called in the user's main module. Prints a warning "
+"if it's not found (except in emscripten or notebooks)."
+msgstr ""
+
+#: miniworlds.base.app.App.display_repaint:1 of
+msgid "Repaints the regions marked as dirty (called every frame)."
+msgstr ""
+
+#: miniworlds.base.app.App.display_update:1 of
+msgid "Repaints the full display if it was marked dirty."
+msgstr ""
+
+#: miniworlds.base.app.App.display_update:3 of
+msgid "This could be merged with display_repaint and update_surface."
+msgstr ""
+
+#: miniworlds.base.app.App.get_path:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`str\\` \\| \\:py\\:obj\\:"
+"\\`None\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.get_platform:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.base.platform.PlatformAdapter\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.get_running_app:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.base.app.App\\` \\| \\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.get_running_world:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.worlds.world.World\\` \\| \\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.get_window:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.base.window.Window\\` \\| \\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.base.app.App.init_app:1 of
+msgid "Initializes global resources (e.g., image cache)."
+msgstr ""
+
+#: miniworlds.base.app.App.prepare_mainloop:1 of
+msgid "Prepares all world objects for drawing."
+msgstr ""
+
+#: miniworlds.base.app.App.quit:1 of
+msgid "Signals the mainloop to exit."
+msgstr ""
+
+#: miniworlds.base.app.App.quit:3 of
+msgid "Exit code to use when quitting."
+msgstr ""
+
+#: miniworlds.base.app.App.register_path:1 of
+msgid "Registers the app path for relative resource access."
+msgstr ""
+
+#: miniworlds.base.app.App.register_path:3 of
+msgid "Path to the project directory."
+msgstr ""
+
+#: miniworlds.base.app.App.reset:1 of
+msgid "Resets all app globals."
+msgstr ""
+
+#: miniworlds.base.app.App.reset:3 of
+msgid "Whether the reset is being called in a unit test context."
+msgstr ""
+
+#: miniworlds.base.app.App.reset:4 of
+msgid "Optional file path to use for setting the base path."
+msgstr ""
+
+#: miniworlds.base.app.App.resize:1 of
+msgid "Resizes the window surface and updates all layout-related components."
+msgstr ""
+
+#: miniworlds.base.app.App.run:1 of
+msgid "Starts the app and enters the mainloop."
+msgstr ""
+
+#: miniworlds.base.app.App.run:3 of
+msgid "The background image to display."
+msgstr ""
+
+#: miniworlds.base.app.App.run:4 of
+msgid "Whether to start in fullscreen mode."
+msgstr ""
+
+#: miniworlds.base.app.App.run:5 of
+msgid "Whether to adapt the window to desktop size."
+msgstr ""
+
+#: miniworlds.base.app.App.run:6 of
+msgid "Whether running in replit environment."
+msgstr ""
+
+#: miniworlds.base.app.App.start_mainloop:1 of
+msgid "Starts the main event loop."
+msgstr ""

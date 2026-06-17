@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -16,34 +16,37 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/patterns/01_drag_and_drop.md:1
 msgid "Drag and Drop"
 msgstr "Drag and Drop"
 
 #: ../../source/patterns/01_drag_and_drop.md:3
+#, fuzzy
 msgid ""
 "To move an actor, you need to register the events `on_mouse_left` and "
-"`on_mouse_left_released`. You also need a variable (e.g., `dragged`) to "
-"store the state of whether an object is currently being dragged."
+"`on_mouse_left_up`. You also need a variable (e.g., `dragged`) to store "
+"the state of whether an object is currently being dragged."
 msgstr ""
 "Um einen Actor zu verschieben, musst du die Events `on_mouse_left` und "
-"`on_mouse_left_released` registrieren. Außerdem benötigst du eine Variable "
-"(z. B. `dragged`), um zu speichern, ob ein Objekt gerade gezogen wird."
+"`on_mouse_left_released` registrieren. Außerdem benötigst du eine "
+"Variable (z. B. `dragged`), um zu speichern, ob ein Objekt gerade gezogen"
+" wird."
 
 #: ../../source/patterns/01_drag_and_drop.md:6
 msgid "When the mouse is clicked, the `dragged` variable is set to `True`."
 msgstr ""
-"Wenn die Maus geklickt wird, wird die Variable `dragged` auf `True` gesetzt."
+"Wenn die Maus geklickt wird, wird die Variable `dragged` auf `True` "
+"gesetzt."
 
 #: ../../source/patterns/01_drag_and_drop.md:7
 msgid ""
 "When the mouse is released, the actor is only moved if `dragged` is "
 "`True`. Then `dragged` is reset to `False`."
 msgstr ""
-"Wenn die Maustaste losgelassen wird, wird der Actor nur verschoben, "
-"wenn `dragged` auf `True` gesetzt ist. Danach wird `dragged` wieder auf "
+"Wenn die Maustaste losgelassen wird, wird der Actor nur verschoben, wenn "
+"`dragged` auf `True` gesetzt ist. Danach wird `dragged` wieder auf "
 "`False` gesetzt."
 
 #: ../../source/patterns/01_drag_and_drop.md:9
@@ -57,3 +60,4 @@ msgstr "Kreise verschieben:"
 #: ../../source/patterns/01_drag_and_drop.md:35
 msgid "Drag and drop on a TiledWorld:"
 msgstr "Drag and Drop in einer TiledWorld:"
+

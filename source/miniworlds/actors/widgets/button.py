@@ -4,38 +4,32 @@ import miniworlds.actors.widgets.single_widget as single_widget
 
 
 class Button(single_widget.SingleWidget):
-    """A clickable button widget for use inside a ``Toolbar``.
+    """Clickable button widget for use inside a `Toolbar`.
 
     When clicked, the button broadcasts its label text as a message to the
-    world. The world (or any actor) can react to this message via
-    ``on_message``.
+    world. The world or any actor can react with `on_message`.
 
     Args:
-        text: The label text shown on the button.  This same text is sent as
+        text: The label text shown on the button. This same text is sent as
             a message when the button is clicked.
         image: Optional path to an image shown on the button.
 
     Examples:
+        ::
 
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(200, 300)
             toolbar = Toolbar()
-            start_btn = Button("Start")
-            toolbar.add(start_btn)
+            start_button = Button("Start")
+            toolbar.add(start_button)
             world.camera.add_right(toolbar)
 
             @world.register
             def on_message(self, message):
                 if message == "Start":
-                    print("Game started!")
-
-            world.run()
+                    print("Game started")
     """
 
     def __init__(self, text: str = "", image: str = "") -> None:
-        """Creates a toolbar button.
+        """Create a toolbar button.
 
         Args:
             text: The button label and the message that will be sent on click.
@@ -63,15 +57,9 @@ class Button(single_widget.SingleWidget):
         By default, a message with the button text is then sent to the world.
 
         Examples:
+            ::
 
-            Send a event on button-click:
-
-            .. code-block:: python
-
-                toolbar = Toolbar()
                 button = Button("Start Rocket")
-                button.world = toolbar
-                world.camera.add_right(toolbar)
 
                 @world.register
                 def on_message(self, message):

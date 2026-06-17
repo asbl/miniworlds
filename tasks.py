@@ -42,12 +42,32 @@ from invoke.exceptions import Exit
 IMAGE = "pygame-tests"
 REPO_ROOT = os.path.abspath(os.path.dirname(__file__))
 VENV_PYTHON = os.path.join(REPO_ROOT, "venv", "bin", "python")
+VENV_BIN = os.path.join(REPO_ROOT, "venv", "bin")
 PHYSICS_REPO = os.path.join(REPO_ROOT, "physics")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
 VERSION_PATTERN = re.compile(r'version="([^"]+)"')
 PERFORMANCE_RESULTS = Path(REPO_ROOT) / "test" / "performance" / "results"
 DOC_EXAMPLE_TESTS = Path(REPO_ROOT) / "test" / "generated" / "docs_examples"
+DOCS_PRIORITY_API_PAGES = (
+    "actor",
+    "positions_vector",
+    "timer",
+    "world_toolbar",
+    "world_manager_sound",
+)
+DOCS_DE_API_FORBIDDEN_TEXT = (
+    "Return all actors",
+    "Return whether",
+    "Move the actor",
+    "Move in a direction",
+    "Called once",
+    "Create a unit vector",
+    "Toolbars are usually",
+    "Frames to wait",
+    "Play a sound",
+    "Path to the sound",
+)
 
 BENCHMARK_SCRIPTS = {
     "method_caller": "test/performance/profile_method_caller.py",
@@ -798,16 +818,64 @@ def docs_build(c):
     """
     with c.cd("docs"):
         build_dir = "build"
+        sphinx_build = shutil.which("sphinx-build", path=VENV_BIN) or "sphinx-build"
+        sphinx_intl = shutil.which("sphinx-intl", path=VENV_BIN) or "sphinx-intl"
+        docs_env = {
+            "SDL_AUDIODRIVER": "dummy",
+            "SDL_VIDEODRIVER": "dummy",
+            "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+        }
 
         if os.path.exists(build_dir):
             shutil.rmtree(build_dir)
         os.makedirs(build_dir, exist_ok=True)
 
-        c.run("make gettext", pty=True)
-        c.run("sphinx-intl update -p build/gettext -l en -l de", pty=True)
-        c.run("sphinx-intl build", pty=True)
-        c.run("sphinx-build -b html -D language=en source build/html/en", pty=True)
-        c.run("sphinx-build -b html -D language=de source build/html/de", pty=True)
+        c.run(f"make gettext SPHINXBUILD={sphinx_build}", env=docs_env, pty=True)
+        c.run(
+            f"{sphinx_intl} update -j 1 -p build/gettext -l en -l de",
+            pty=True,
+        )
+        c.run(f"{sphinx_intl} build", pty=True)
+        c.run(
+            f"{sphinx_build} -b html -D language=en source build/html/en",
+            env=docs_env,
+            pty=True,
+        )
+        c.run(
+            f"{sphinx_build} -b html -D language=de source build/html/de",
+            env=docs_env,
+            pty=True,
+        )
+
+
+@task(name="check")
+def docs_check(c):
+    """Check built documentation and priority API translations."""
+    for page in DOCS_PRIORITY_API_PAGES:
+        po_path = Path("docs") / "source" / "locales" / "de" / "LC_MESSAGES" / "api" / f"{page}.po"
+        html_path = Path("docs") / "build" / "html" / "de" / "api" / f"{page}.html"
+        if not po_path.exists():
+            raise Exit(f"Missing German API catalog: {po_path}")
+        if not html_path.exists():
+            raise Exit(f"Missing German API HTML page: {html_path}")
+
+        c.run(f"msgfmt -c -o /tmp/miniworlds-doc-check.mo {po_path}")
+        untranslated = c.run(
+            f"msgattrib --untranslated {po_path} | rg -c '^msgid '",
+            hide=True,
+            warn=True,
+        )
+        count = int((untranslated.stdout or "0").strip() or "0")
+        if count:
+            raise Exit(f"{po_path} contains {count} untranslated messages")
+
+        html = html_path.read_text(encoding="utf-8")
+        matches = [text for text in DOCS_DE_API_FORBIDDEN_TEXT if text in html]
+        if matches:
+            raise Exit(
+                f"{html_path} still contains untranslated API text: "
+                + ", ".join(matches)
+            )
 
 
 @task(name="examples")
@@ -953,6 +1021,7 @@ examples.add_task(examples_checkout, default=True)
 
 docs = Collection("docs")
 docs.add_task(docs_generate_example_tests, default=True)
+docs.add_task(docs_check)
 docs.add_task(docs_test_examples)
 
 ns = Collection()
@@ -992,6 +1061,7 @@ ns.add_task(build_local, name="build_local")
 ns.add_task(build_physics, name="build_physics")
 ns.add_task(docs_build, name="make_docs")
 ns.add_task(docs_build, name="docs_build")
+ns.add_task(docs_check, name="check_docs")
 ns.add_task(docs_generate_example_tests, name="generate_doc_example_tests")
 ns.add_task(docs_test_examples, name="test_doc_examples")
 ns.add_task(examples_checkout, name="checkout_examples")

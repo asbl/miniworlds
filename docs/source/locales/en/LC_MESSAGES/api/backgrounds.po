@@ -80,36 +80,36 @@ msgstr ""
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.__init__>`\\"
-" \\(parent\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.__init__>`\\ "
+"\\(parent\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`get_background_at_index "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index>`\\"
-" \\(index\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_background_at_index>`\\ "
+"\\(index\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`add_background "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.add_background>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`set_background "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.set_background>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`create_appearance "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance>`\\"
-" \\(\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1 ../../None:32:<autosummary>:1
@@ -121,36 +121,36 @@ msgstr ""
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`switch_appearance "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`switch_background "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_background>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_background>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:10:<autosummary>:1
 msgid ""
 ":py:obj:`get_world "
-"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_world>`\\"
-" \\(\\)"
+"<miniworlds.appearances.backgrounds_manager.BackgroundsManager.get_world>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.__init__>`\\"
-" \\(parent\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__init__>`\\ "
+"\\(parent\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`add_new_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -160,36 +160,36 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_new_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_new_appearance>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`add_new_appearances "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearances>`\\"
-" \\(sources\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearances>`\\ "
+"\\(sources\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`add_new_appearance_from_list "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance_from_list>`\\"
-" \\(sources\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.add_new_appearance_from_list>`\\ "
+"\\(sources\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`create_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.create_appearance>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`next_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -199,8 +199,8 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`length "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.length>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.length>`\\ \\"
+"(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -210,22 +210,22 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__len__ "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.__len__>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__len__>`\\ \\"
+"(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`get_appearance_at_index "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index>`\\"
-" \\(index\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index>`\\ "
+"\\(index\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`find_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance>`\\"
-" \\(appearance\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.find_appearance>`\\ "
+"\\(appearance\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -235,64 +235,64 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_border "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_border>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_border>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_animated "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animated>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animated>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_animation_speed "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animation_speed>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_animation_speed>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_rotatable "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_rotatable>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_rotatable>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_upscaled "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_upscaled>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_scaled_to_width "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_width>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_width>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_scaled_to_height "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled_to_height>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`set_scaled "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled>`\\"
-" \\(value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.set_scaled>`\\ "
+"\\(value\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`list "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.list>`\\ "
-"\\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.list>`\\ \\"
+"(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -302,8 +302,8 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__str__ "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.__str__>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__str__>`\\ \\"
+"(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -313,8 +313,8 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`remove_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance>`\\"
-" \\(\\[source\\]\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance>`\\ "
+"\\(\\[source\\]\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -324,36 +324,36 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`reset "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.reset>`\\ "
-"\\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.reset>`\\ \\"
+"(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`switch_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`animate "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.animate>`\\"
-" \\(speed\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.animate>`\\ \\"
+"(speed\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`animate_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance>`\\"
-" \\(appearance\\, speed\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.animate_appearance>`\\ "
+"\\(appearance\\, speed\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`self_remove "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.self_remove>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.self_remove>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
@@ -363,22 +363,22 @@ msgstr ""
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__iter__ "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.__iter__>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__iter__>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`__next__ "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.__next__>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.__next__>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:32:<autosummary>:1
 msgid ""
 ":py:obj:`get_actual_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager.get_actual_appearance>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../source/api/backgrounds.md
@@ -408,43 +408,43 @@ msgstr ""
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_init_display "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._init_display>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._init_display>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_create_appearance_from_source "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._create_appearance_from_source>`\\"
-" \\(source\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._create_appearance_from_source>`\\ "
+"\\(source\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_add_default_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._add_default_appearance>`\\"
-" \\(\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_default_appearance>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_add_first_appearance "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._add_first_appearance>`\\"
-" \\(appearance\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_first_appearance>`\\ "
+"\\(appearance\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_add_appearance_to_manager "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._add_appearance_to_manager>`\\"
-" \\(appearance\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._add_appearance_to_manager>`\\ "
+"\\(appearance\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_set_all "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._set_all>`\\"
-" \\(attribute\\, value\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._set_all>`\\ "
+"\\(attribute\\, value\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
@@ -454,8 +454,8 @@ msgstr ""
 #: ../../None:9:<autosummary>:1
 msgid ""
 ":py:obj:`_remove_appearance_from_manager "
-"<miniworlds.appearances.appearances_manager.AppearancesManager._remove_appearance_from_manager>`\\"
-" \\(appearance\\)"
+"<miniworlds.appearances.appearances_manager.AppearancesManager._remove_appearance_from_manager>`\\ "
+"\\(appearance\\)"
 msgstr ""
 
 #: ../../None:9:<autosummary>:1
@@ -470,14 +470,14 @@ msgstr ""
 
 #: miniworlds.appearances.backgrounds_manager.BackgroundsManager.create_appearance:4
 #: of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.background.Background\\``"
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.appearances.background.Background\\``"
 msgstr ""
 
 #: miniworlds.appearances.backgrounds_manager.BackgroundsManager.switch_appearance:2
 #: of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\``"
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.appearances.appearance.Appearance\\``"
 msgstr ""
-
-#~ msgid "Child class of **Appearances**"
-#~ msgstr ""
-

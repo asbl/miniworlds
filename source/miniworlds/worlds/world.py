@@ -39,31 +39,31 @@ from miniworlds.base.exceptions import (
 
 
 class World(world_base.WorldBase):
-    """Base world class for pixel-based scenes.
+    """Pixel-based scene that owns actors, backgrounds, input, and events.
 
-    A world owns the shared runtime state: actors, backgrounds, input
-    handling, and event dispatch.
+    Positions in a `World` are pixel coordinates. Actors are placed by their
+    top-left position by default unless their origin is changed.
 
     Notes:
-        - Actor positions in a `World` are pixel coordinates.
-        - New actors start at their top-left position unless their origin is
-          switched to `center`.
-        - Sprite overlap is used for collision checks by default.
+        Collision checks use sprite masks by default.
 
     Examples:
-        Create a world directly:
-            from miniworlds import World
+        ::
 
-            world = World(300, 200)
-            world.run()
+            Create and run a world:
 
-        Subclass a world and configure setup values:
-            import miniworlds
+                from miniworlds import World
+                world = World(300, 200)
+                world.run()
 
-            class MyWorld(miniworlds.World):
-                def on_setup(self):
-                    self.columns = 300
-                    self.rows = 200
+            Configure a subclass during setup:
+
+                import miniworlds
+
+                class MyWorld(miniworlds.World):
+                    def on_setup(self):
+                        self.columns = 300
+                        self.rows = 200
     """
 
     __slots__ = (
@@ -236,7 +236,18 @@ class World(world_base.WorldBase):
         x: Union[int, Tuple[int, int]] = 400,
         y: int = 400,
     ):
-        """Initializes the world and all internal managers needed for runtime operation."""
+        """Create a world with the given size.
+
+        Args:
+            x: Width in pixels, or a `(width, height)` tuple.
+            y: Height in pixels. Ignored when `x` is a tuple.
+
+        Examples:
+            ::
+
+                world = World(400, 300)
+                square_world = World((200, 200))
+        """
         # Initialization facade is created directly during __init__
         # (not via cached_property) because it's needed immediately
         self._initialization_facade = (
@@ -270,7 +281,13 @@ class World(world_base.WorldBase):
 
     @property
     def debug(self) -> bool:
-        """Enable a compact debug overlay with runtime values on screen."""
+        """bool: Whether to draw a compact runtime debug overlay.
+
+        Examples:
+            ::
+
+                world.debug = True
+        """
         return getattr(self, "_debug", False)
 
     @debug.setter
@@ -283,7 +300,13 @@ class World(world_base.WorldBase):
 
     @property
     def learning_mode(self) -> bool:
-        """Enable beginner-friendly soft conversions and hints for common input mistakes."""
+        """bool: Whether beginner-friendly conversions and hints are enabled.
+
+        Examples:
+            ::
+
+                world.learning_mode = True
+        """
         return getattr(self, "_learning_mode", False)
 
     @learning_mode.setter
@@ -347,33 +370,63 @@ class World(world_base.WorldBase):
             y += line_height
 
     def contains_position(self, pos):
-        """Checks if position is in the world.
+        """Return whether a position lies inside the world.
+
+        Args:
+            pos: Position as `(x, y)`.
 
         Returns:
-            True, if Position is in the world.
+            `True` if the position is inside the world.
+
+        Examples:
+            ::
+
+                if world.contains_position(actor.center):
+                    actor.move()
         """
         pos = self._coerce_position_learning(pos, "pos")
         self._ensure_position_tuple(pos, "pos")
         return self.sensor_manager.contains_position(pos)
 
     def contains(self, pos):
-        """Student-friendly alias for `contains_position(pos)`."""
+        """Return whether a position lies inside the world.
+
+        This is a short alias for `contains_position()`.
+        """
         return self.contains_position(pos)
 
     def contains_rect(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
-        """
-        Returns True if the entire rectangle is fully inside the world.
+        """Return whether a rectangle is fully inside the world.
 
-        Useful when ensuring that an object is completely within bounds.
+        Args:
+            rect: Rectangle as `(x, y, width, height)` or `pygame.Rect`.
+
+        Returns:
+            `True` if the whole rectangle is inside the world.
+
+        Examples:
+            ::
+
+                if world.contains_rect(actor.rect):
+                    actor.move()
         """
         self._ensure_rect_like(rect, "rect")
         return self.sensor_manager.contains_rect_all(rect)
 
     def contains_rect_any(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
-        """
-        Returns True if any part of the rectangle is inside the world.
+        """Return whether any part of a rectangle is inside the world.
 
-        Useful when ensuring that an object is completely within bounds.
+        Args:
+            rect: Rectangle as `(x, y, width, height)` or `pygame.Rect`.
+
+        Returns:
+            `True` if at least one part of the rectangle is inside the world.
+
+        Examples:
+            ::
+
+                if not world.contains_rect_any(actor.rect):
+                    actor.remove()
         """
         self._ensure_rect_like(rect, "rect")
         return self.sensor_manager.contains_rect_any_(rect)
@@ -422,84 +475,63 @@ class World(world_base.WorldBase):
 
     @property
     def world_size_x(self) -> int:
-        """
-        Gets the horizontal size of the world in pixels.
+        """int: Horizontal world size in pixels.
 
-        This usually equals the camera's world width.
+        Examples:
+            ::
 
-        Returns:
-            Width of the world in pixels.
-
-        Example:
-            >>> print(world.world_size_x)
-            800
+                world.world_size_x = 800
+                print(world.world_size_x)
         """
         return self.camera.world_size_x
 
     @world_size_x.setter
     def world_size_x(self, value: int) -> None:
-        """
-        Sets the horizontal size of the world in pixels.
-
-        Args:
-            value: New width in pixels.
-
-        Example:
-            >>> world.world_size_x = 1024
-        """
         self._ensure_dimension(value, "world_size_x")
         self.camera.world_size_x = value
 
     @property
     def world_size_y(self) -> int:
-        """
-        Gets the vertical size of the world in pixels.
+        """int: Vertical world size in pixels.
 
-        Returns:
-            Height of the world in pixels.
+        Examples:
+            ::
+
+                world.world_size_y = 600
+                print(world.world_size_y)
         """
         return self.camera.world_size_y
 
     @world_size_y.setter
     def world_size_y(self, value: int) -> None:
-        """
-        Sets the vertical size of the world in pixels.
-
-        Args:
-            value: New height in pixels.
-        """
         self._ensure_dimension(value, "world_size_y")
         self.camera.world_size_y = value
 
     @property
     def columns(self) -> int:
-        """
-        Gets the number of horizontal pixels (columns) visible in the world.
+        """int: Width of the visible world area in pixels.
 
-        Returns:
-            The width of the camera view in pixels.
+        Examples:
+            ::
+
+                world.columns = 640
         """
         return self.camera.width
 
     @columns.setter
     def columns(self, value: int) -> None:
-        """
-        Sets the number of columns and adjusts the internal world size accordingly.
+        self.set_columns(value)
+
+    def set_columns(self, value: int) -> None:
+        """Set the visible world width in pixels.
 
         Args:
             value: New width in pixels.
 
-        Example:
-            >>> world.columns = 640
-        """
-        self.set_columns(value)
+        Examples:
+            ::
 
-    def set_columns(self, value: int) -> None:
-        """
-        Internal method to set columns and sync world width.
-
-        Args:
-            value: New column count (width in pixels).
+                world.set_columns(640)
         """
         self._ensure_dimension(value, "columns")
         self.camera.width = value
@@ -507,33 +539,29 @@ class World(world_base.WorldBase):
 
     @property
     def rows(self) -> int:
-        """
-        Gets the number of vertical pixels (rows) visible in the world.
+        """int: Height of the visible world area in pixels.
 
-        Returns:
-            The height of the camera view in pixels.
+        Examples:
+            ::
+
+                world.rows = 480
         """
         return self.camera.height
 
     @rows.setter
     def rows(self, value: int) -> None:
-        """
-        Sets the number of rows and adjusts the internal world size accordingly.
+        self.set_rows(value)
+
+    def set_rows(self, value: int) -> None:
+        """Set the visible world height in pixels.
 
         Args:
             value: New height in pixels.
 
-        Example:
-            >>> world.rows = 480
-        """
-        self.set_rows(value)
+        Examples:
+            ::
 
-    def set_rows(self, value: int) -> None:
-        """
-        Internal method to set rows and sync world height.
-
-        Args:
-            value: New row count (height in pixels).
+                world.set_rows(480)
         """
         self._ensure_dimension(value, "rows")
         self.camera.height = value
@@ -541,31 +569,18 @@ class World(world_base.WorldBase):
 
     @property
     def size(self) -> Tuple[int, int]:
-        """
-        Gets the world size as a tuple (width, height), in pixels.
+        """tuple[int, int]: World size as `(width, height)` in pixels.
 
-        Returns:
-            A tuple representing the world size in pixels.
+        Examples:
+            ::
 
-        Example:
-            >>> w, h = world.size
-            >>> print(f\"World is {w}x{h} pixels large\")
+                width, height = world.size
+                world.size = (800, 600)
         """
         return self.world_size_x, self.world_size_y
 
     @size.setter
     def size(self, value: Tuple[int, int]) -> None:
-        """
-        Sets the size of the world in pixels.
-
-        This updates both the internal world size and the camera dimensions.
-
-        Args:
-            value: A tuple (width, height) representing the new world size.
-
-        Example:
-            >>> world.size = (800, 600)
-        """
         if self.learning_mode and isinstance(value, list) and len(value) == 2:
             self._student_warn("Learning mode: converted size from list to tuple")
             value = (value[0], value[1])
@@ -578,17 +593,14 @@ class World(world_base.WorldBase):
 
     @property
     def background(self) -> background_mod.Background:
-        """
-        Returns the currently active background.
+        """Background: Currently active world background.
 
-        This property delegates to `get_background()`.
+        Examples:
+            ::
 
-        Returns:
-            The currently active Background object.
-
-        Example:
-            >>> current = world.background
-            >>> print(current)
+                world.background = (30, 30, 30)
+                world.background = "images/sky.png"
+                current = world.background
         """
         return self._background_facade.background
 
@@ -596,97 +608,54 @@ class World(world_base.WorldBase):
     def background(
         self, source: Union[str, Tuple[int, int, int], appearance.Appearance]
     ) -> None:
-        """
-        Sets the world background either via an Appearance object or image/color source.
-
-        If an Appearance is provided, it is directly set.
-        If a file path or color is provided, it is added as a new background and activated.
+        """Set the active background from a color, image path, or appearance.
 
         Args:
-            source: Either an Appearance object, a color tuple (e.g. (255, 0, 0)), or a file path string.
+            source: Image path, RGB/RGBA color tuple, or `Appearance`.
 
-        Raises:
-            FileNotFoundError: If the image file does not exist.
-            FileExistsError: If the background already exists.
+        Examples:
+            ::
 
-        Example:
-            >>> world.background = (0, 0, 0)                # black
-            >>> world.background = \"images/background.png\"  # from image file
-            >>> world.background = my_appearance            # custom Appearance
+                world.background = (0, 0, 0)
+                world.background = "images/background.png"
         """
         self._ensure_background_source(source, "source")
         self._background_facade.set_background_property(source)
 
     def get_background(self) -> background_mod.Background:
-        """
-        Returns the current active background from the backgrounds manager.
+        """Return the active background.
 
         Returns:
-            The current Background object.
+            The current `Background`.
 
-        Example:
-            >>> bg = world.get_background()
+        Examples:
+            ::
+
+                bg = world.get_background()
+                bg.fill_color = (0, 0, 0)
         """
         return self._background_facade.background
 
     def switch_background(
         self, background: Union[int, appearance.Appearance]
     ) -> background_mod.Background:
-        """
-        Switches the current background to a specified one.
+        """Switch to another background.
 
-        You can switch by index or directly using an `Appearance` object.
-        If you pass -1 as index, it will switch to the next available background in the list.
+        Pass an index, an existing appearance, or `-1` for the next background.
 
         Args:
-            background: Index of the background to switch to, or an Appearance instance.
-                        Use -1 to switch to the next background in order.
+            background: Background index, `Appearance`, or `-1`.
 
         Returns:
-            The new active Background object.
-
-        Raises:
-            FileNotFoundError: If the background image file is not found.
-
-        Example:
-            >>> world.add_background(\"images/1.png\")
-            >>> world.add_background(\"images/2.png\")
-            >>> world.switch_background(1)  # switches to second background
+            The new active `Background`.
 
         Examples:
+            ::
 
-            Switch between different backgrounds:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                actor = Actor()
-
-                world.add_background("images/1.png")
-                world.add_background((255, 0, 0, 255))
-                world.add_background("images/2.png")
-
-                @timer(frames = 40)
-                def switch():
-                    world.switch_background(0)
-
-                @timer(frames = 80)
-                def switch():
-                    world.switch_background(1)
-
-                @timer(frames = 160)
-                def switch():
-                    world.switch_background(2)
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/switch_background.png
-                :width: 100%
-                :alt: Switch background
+                world.add_background("images/day.png")
+                world.add_background("images/night.png")
+                world.switch_background(1)
+                world.switch_background(-1)
         """
         self._ensure_background_selector(background, "background")
         return self._background_facade.switch_background(background)
@@ -694,20 +663,17 @@ class World(world_base.WorldBase):
     def remove_background(
         self, background: Optional[Union[int, appearance.Appearance]] = None
     ) -> None:
-        """
-        Removes a background from the world.
-
-        If no argument is provided, the last added background will be removed.
-        You can also remove a specific background by passing its index or Appearance object.
+        """Remove a background.
 
         Args:
-            background: Either an integer index (e.g. 0) or an Appearance object.
-                        If None, the most recently added background is removed.
+            background: Background index or `Appearance`. If omitted, the last
+                background is removed.
 
-        Example:
-            >>> world.remove_background()              # removes last background
-            >>> world.remove_background(0)            # removes background at index 0
-            >>> world.remove_background(my_background)  # removes specific Appearance object
+        Examples:
+            ::
+
+                world.remove_background()
+                world.remove_background(0)
         """
         if background is not None:
             self._ensure_background_selector(background, "background")
@@ -716,24 +682,19 @@ class World(world_base.WorldBase):
     def set_background(
         self, source: Union[str, Tuple[int, int, int]]
     ) -> background_mod.Background:
-        """
-        Sets a new background and replaces the current active background.
-
-        If multiple backgrounds already exist, this will override the active one with the new background.
-        The source can be either an image path or a color tuple.
+        """Replace the active background.
 
         Args:
-            source: A string path to an image (e.g. "images/bg.png") or an RGB(A) color tuple (e.g. (0, 0, 255)).
+            source: Image path or RGB/RGBA color tuple.
 
         Returns:
-            The newly created Background object that was set as active.
+            The new active `Background`.
 
-        Raises:
-            FileNotFoundError: If the image file cannot be found.
+        Examples:
+            ::
 
-        Example:
-            >>> world.set_background("images/sky.png")
-            >>> world.set_background((30, 30, 30))  # dark gray
+                world.set_background("images/sky.png")
+                world.set_background((30, 30, 30))
         """
         self._ensure_background_source(source, "source")
         return self._background_facade.set_background(source)
@@ -741,23 +702,19 @@ class World(world_base.WorldBase):
     def add_background(
         self, source: Union[str, Tuple[int, int, int]]
     ) -> background_mod.Background:
-        """
-        Adds a new background to the world and sets it as the active one.
-
-        The source can be either a file path (image) or a solid color in RGB(A) format.
+        """Add a background and make it active.
 
         Args:
-            source: Either a path to an image file (e.g. "images/bg.png") or an RGB/RGBA color tuple (e.g. (0, 0, 255)).
+            source: Image path or RGB/RGBA color tuple.
 
         Returns:
-            The newly created Background object.
+            The newly created `Background`.
 
-        Raises:
-            FileNotFoundError: If the image file does not exist.
+        Examples:
+            ::
 
-        Example:
-            >>> world.add_background((255, 0, 0))               # red background
-            >>> world.add_background("images/background.png")  # image background
+                world.add_background((255, 0, 0))
+                world.add_background("images/background.png")
         """
         self._ensure_background_source(source, "source")
         return self._background_facade.add_background(source)
@@ -779,26 +736,26 @@ class World(world_base.WorldBase):
         return self.switch_background(-1)
 
     def start(self) -> None:
-        """
-        Starts or resumes the world.
+        """Start or resume world updates.
 
-        Sets the internal running flag to True, allowing the world to continue updating and processing events.
+        Examples:
+            ::
 
-        Example:
-            >>> world.start()
+                world.start()
         """
         self._runtime_facade.start()
 
     def stop(self, frames: int = 0) -> None:
-        """
-        Stops the world immediately or after a delay in frames.
+        """Stop world updates immediately or after a number of frames.
 
         Args:
-            frames: Number of frames to wait before stopping. If 0, stops immediately.
+            frames: Frames to wait before stopping. `0` stops immediately.
 
-        Example:
-            >>> world.stop()         # stops immediately
-            >>> world.stop(frames=5) # stops after 5 frames
+        Examples:
+            ::
+
+                world.stop()
+                world.stop(frames=5)
         """
         self._ensure_int(frames, "frames")
         if frames < 0:
@@ -813,29 +770,22 @@ class World(world_base.WorldBase):
         event: Optional[str] = None,
         data: Optional[object] = None,
     ) -> None:
-        """
-        Starts the main application loop of the Miniworlds engine.
+        """Start the Miniworlds main loop.
 
-        This should be called once at the end of a Miniworlds program. It prepares and starts:
-        - The main loop
-        - Event handling
-        - Rendering
-        - Actor updates
-        - Asynchronous compatibility (e.g. for REPLs and Jupyter)
+        Call this once at the end of a Miniworlds program.
 
         Args:
-            fullscreen: If True, the game launches in fullscreen mode.
-            fit_desktop: If True, window size adapts to desktop resolution.
-            replit: Set True if running in a Replit environment (special adjustments).
-            event: Optional event name to queue at startup (e.g. \"start\", \"setup\").
+            fullscreen: Whether to launch in fullscreen mode.
+            fit_desktop: Whether to adapt the window to the desktop.
+            replit: Whether to use Replit-specific display adjustments.
+            event: Optional event name to queue at startup.
             data: Optional data to include with the startup event.
 
-        Example:
-            >>> world = World(800, 600)
-            >>> world.run(fullscreen=False, event=\"setup\")
+        Examples:
+            ::
 
-        Notes:
-            Automatically detects and handles running event loops (e.g. in Jupyter).
+                world = World(800, 600)
+                world.run()
         """
         fullscreen = self._coerce_bool_learning(fullscreen, "fullscreen")
         fit_desktop = self._coerce_bool_learning(fit_desktop, "fit_desktop")
@@ -876,42 +826,43 @@ class World(world_base.WorldBase):
             pass  # validation is best-effort; never break the game
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
-        """
-        Checks whether a given world position lies within the world's boundaries.
+        """Return whether a position lies inside the world.
 
         Args:
-            position: A tuple (x, y) representing a position in world coordinates.
+            position: Position as `(x, y)`.
 
         Returns:
-            True if the position is inside the world bounds, False otherwise.
+            `True` if the position is inside the world.
 
-        Example:
-            >>> world.size = (800, 600)
-            >>> world.is_in_world((100, 100))
-            True
-            >>> world.is_in_world((900, 100))
-            False
+        Examples:
+            ::
+
+                if world.is_in_world((100, 100)):
+                    print("inside")
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._runtime_facade.is_in_world(position)
 
     def send_message(self, message: str, data: Optional[object] = None) -> None:
-        """
-        Sends a broadcast message to the world and all actors.
+        """Broadcast a message to the world and its actors.
 
         The message is dispatched through the event system and can be handled
-        by any registered method in the world or its actors. When `data` is
-        provided, handlers registered with `@register_message("...")` receive
-        that payload while generic `on_message` handlers still receive the
-        message name.
+        by registered message handlers.
 
         Args:
-            message: The name of the message/event to send.
-            data: Optional payload for handlers registered to this message.
+            message: Message name.
+            data: Optional payload for message-specific handlers.
 
-        Example:
-            >>> world.send_message(\"explode\", {\"power\": 10})
+        Examples:
+            ::
+
+                world.send_message("game_over")
+
+                @world.register
+                def on_message(self, message):
+                    if message == "game_over":
+                        self.stop()
         """
         if self.learning_mode and not isinstance(message, str):
             self._student_warn(
@@ -943,31 +894,29 @@ class World(world_base.WorldBase):
         self._runtime_facade.switch_world(new_world, reset)
 
     def quit(self, exit_code: int = 0) -> None:
-        """
-        Immediately quits the application and closes the game window.
+        """Quit the application and close the game window.
 
         Args:
-            exit_code: Exit code returned by the application. Defaults to 0.
+            exit_code: Process exit code.
 
-        Example:
-            >>> world.quit()
+        Examples:
+            ::
+
+                world.quit()
         """
         self._ensure_int(exit_code, "exit_code")
         self._runtime_facade.quit(exit_code)
 
     def reset(self):
-        """Resets the world
-        Creates a new world with init-function - recreates all actors and actors on the world.
+        """Reset the world to its initial state.
 
         Examples:
+            ::
 
-            Restarts flappy the bird game after collision with pipe:
-
-            .. code-block:: python
-
-              def on_sensing_collision_with_pipe(self, other, info):
-                  self.world.is_running = False
-                  self.world.reset()
+                @player.register
+                def on_detecting_actor(self, other):
+                    if isinstance(other, Enemy):
+                        self.world.reset()
         """
         self._runtime_facade.reset()
 
@@ -985,87 +934,88 @@ class World(world_base.WorldBase):
     def get_from_pixel(
         self, position: Tuple[float, float]
     ) -> Optional[Tuple[float, float]]:
-        """
-        Converts a screen pixel position into a valid world position if inside bounds.
-
-        In PixelWorlds, this returns the position directly. In TiledWorlds, this might
-        return a tile coordinate instead (override if needed).
+        """Convert a screen pixel position to a world position.
 
         Args:
-            position: A screen pixel coordinate (x, y)
+            position: Pixel position as `(x, y)`.
 
         Returns:
-            The same position if it lies inside the world, else None.
+            World position, or `None` if the pixel is outside the world.
 
-        Example:
-            >>> world.get_from_pixel((100, 50))
-            (100, 50)
+        Examples:
+            ::
+
+                @world.register
+                def on_mouse_left(self, position):
+                    world_position = self.get_from_pixel(position)
+                    if world_position:
+                        Actor(world_position)
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._runtime_facade.get_from_pixel(position)
 
     def to_pixel(self, position: Tuple[float, float]) -> Tuple[float, float]:
-        """
-        Converts a world position to a screen pixel position.
-
-        In PixelWorlds, this is an identity function. In TiledWorlds, override this.
+        """Convert a world position to a screen pixel position.
 
         Args:
-            position: World coordinate (x, y)
+            position: World position as `(x, y)`.
 
         Returns:
-            Pixel coordinate (x, y)
+            Pixel position as `(x, y)`.
 
-        Example:
-            >>> world.to_pixel((5, 8))
-            (5, 8)
+        Examples:
+            ::
+
+                pixel = world.to_pixel(actor.position)
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
         return self._runtime_facade.to_pixel(position)
 
     def on_setup(self) -> None:
-        """
-        Hook method to define initial setup logic when the world is created.
+        """Hook for initial world setup.
 
-        Override this in subclasses or register via `@world.register`.
+        Override this in subclasses or register a function with `@world.register`.
 
-        Example:
-            >>> def on_setup():
-            ...     actor = Actor()
+        Examples:
+            ::
+
+                @world.register
+                def on_setup(self):
+                    self.background = (0, 0, 0)
+                    Actor((20, 20))
         """
         pass
 
     @property
     def has_background(self) -> bool:
-        """
-        Returns True if the world has at least one background appearance.
+        """bool: Whether the world has at least one background.
 
-        Example:
-            >>> if world.has_background:
-            ...     print(\"Background is set\")
+        Examples:
+            ::
+
+                if world.has_background:
+                    world.next_bg()
         """
         return self._background_facade.has_background()
 
     def detect_actors(self, position: Tuple[float, float]) -> List["actor_mod.Actor"]:
-        """Gets all actors which are found at a specific position (in global world coordinates)
+        """Return all actors at a world position.
 
         Args:
-            position: Position, where actors should be searched.
+            position: World position as `(x, y)`.
 
         Returns:
-            A list of actors
+            Actors found at the position.
 
         Examples:
+            ::
 
-          Get all actors at mouse position:
-
-          .. code-block:: python
-
-              position = world.mouse.get_position()
-              actors = world.get_actors_from_pixel(position)
-
+                actors = world.detect_actors(player.position)
+                for actor in actors:
+                    if isinstance(actor, Coin):
+                        actor.remove()
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
@@ -1079,21 +1029,21 @@ class World(world_base.WorldBase):
     def get_actors_from_pixel(
         self, pixel: Tuple[float, float]
     ) -> List[actor_mod.Actor]:
-        """
-        Returns a list of all actors located at the given screen pixel position.
-
-        This checks whether each actor's screen-rect overlaps with the given pixel.
+        """Return all actors under a screen pixel.
 
         Args:
-            pixel: A tuple (x, y) representing the screen pixel.
+            pixel: Screen pixel as `(x, y)`.
 
         Returns:
-            A list of Actor instances under the given pixel.
+            Actors whose screen rectangle overlaps the pixel.
 
-        Example:
-            >>> actors = world.get_actors_from_pixel((120, 80))
-            >>> for actor in actors:
-            ...     print(actor.name)
+        Examples:
+            ::
+
+                @world.register
+                def on_mouse_left(self, position):
+                    for actor in self.get_actors_from_pixel(position):
+                        actor.hide()
         """
         pixel = self._coerce_position_learning(pixel, "pixel")
         self._ensure_position_tuple(pixel, "pixel")
@@ -1101,19 +1051,19 @@ class World(world_base.WorldBase):
 
     @staticmethod
     def distance_to(pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
-        """
-        Calculates the Euclidean distance between two positions.
+        """Return the Euclidean distance between two positions.
 
         Args:
-            pos1: First position (x, y)
-            pos2: Second position (x, y)
+            pos1: First position as `(x, y)`.
+            pos2: Second position as `(x, y)`.
 
         Returns:
-            The distance as a float.
+            Distance between both positions.
 
-        Example:
-            >>> World.distance_to((0, 0), (3, 4))
-            5.0
+        Examples:
+            ::
+
+                distance = World.distance_to((0, 0), (3, 4))
         """
         World._ensure_position_tuple(pos1, "pos1")
         World._ensure_position_tuple(pos2, "pos2")
@@ -1122,19 +1072,20 @@ class World(world_base.WorldBase):
     def direction_to(
         self, pos1: Tuple[float, float], pos2: Tuple[float, float]
     ) -> float:
-        """
-        Calculates the angle from pos1 to pos2 in degrees.
+        """Return the Miniworlds direction from one position to another.
 
         Args:
-            pos1: Starting position (x, y)
-            pos2: Target position (x, y)
+            pos1: Start position as `(x, y)`.
+            pos2: Target position as `(x, y)`.
 
         Returns:
-            Angle in degrees between the two points.
+            Direction angle in degrees.
 
-        Example:
-            >>> world.direction_to((0, 0), (0, 1))
-            90.0
+        Examples:
+            ::
+
+                mouse_position = world.mouse.get_position()
+                actor.direction = world.direction_to(actor.center, mouse_position)
         """
         self._ensure_position_tuple(pos1, "pos1")
         self._ensure_position_tuple(pos2, "pos2")

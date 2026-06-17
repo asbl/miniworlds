@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api/world_tiled_elements.md:1
+msgid "World > Tiled Elements"
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:3
+msgid ""
+"`TiledWorld` exposes tile helper classes for grid-based projects. They are "
+"most useful when you need to inspect or customize tiles, edges, or corners "
+"directly."
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:6
+msgid "TileFactory"
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:13
+msgid "TileBase"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase:1 of
+msgid "Base class for Tiles and TileDelimiters (like Corners, Edges)."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.add_actor:1 of
+msgid "Places an actor on this tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:1
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:1
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:1 of
+msgid "Finds the nearest tile to a given pixel coordinate."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:3
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:3
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:3 of
+msgid ""
+"This method uses caching to avoid redundant recalculation of the mapping "
+"between tile grid positions and their corresponding pixel coordinates for a "
+"given world. It also uses squared distance instead of Euclidean distance for "
+"better performance."
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:8
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_position:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.worlds.tiled\\_world.tile\\_elements.TileBase\\``"
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:8
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:10
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:10 of
+msgid "The (x, y) pixel position."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:10
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:12
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:12 of
+msgid "The world instance containing the tile layout."
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:13
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:15
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:15 of
+msgid "The tile object closest to the given pixel position."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.from_position:1
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_position:1 of
+msgid "Create a tile from a world-relative position."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_actors:1 of
+msgid "Returns all actors currently on this tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_actors:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_center_coordinate:1
+#: of
+msgid "Returns the center point offset for a tile, in local pixel coordinates."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.to_center:2
+#: miniworlds.worlds.tiled_world.tile.Tile.to_pixel:2
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_center_coordinate:4
+#: of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
+"\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_corner_points:1
+#: of
+msgid "Returns corner point offsets for rendering."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_neighbour_tiles:1
+#: of
+msgid "Returns neighboring tiles around this tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_neighbour_tiles:4
+#: of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
+"\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.edge.Edge.get_position_pixel_dict:1
+#: miniworlds.worlds.tiled_world.tile.Tile.get_position_pixel_dict:1
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_position_pixel_dict:1
+#: of
+msgid "Returns a mapping of tile positions to pixel coordinates."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.get_position_pixel_dict:4
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_position_pixel_dict:4
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.merge:1 of
+msgid "Merge tile positions from another tile at the same location."
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:20
+msgid "Tile"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.distance_to:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.from_actor:2
+#: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:8
+#: miniworlds.worlds.tiled_world.tile.Tile.from_position:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\``"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile.Tile.get_neighbour_corners:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
+"\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.corner.Corner\\`\\]`"
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:27
+msgid "Edge"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.direction_vectors:1
+#: miniworlds.worlds.tiled_world.edge.Edge.direction_vectors:1 of
+msgid "Returns the available directions."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.from_position:1
+#: miniworlds.worlds.tiled_world.edge.Edge.from_position:1 of
+msgid "Create a tile delimiter (override expected)."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.corner.Corner.start_angle:1
+#: miniworlds.worlds.tiled_world.edge.Edge.start_angle:1 of
+msgid "Override: starting angle offset for layouting (e.g. hex rotation)."
+msgstr ""
+
+#: ../../source/api/world_tiled_elements.md:34
+msgid "Corner"
+msgstr ""

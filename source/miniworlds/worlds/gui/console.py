@@ -6,25 +6,19 @@ import miniworlds.actors.widgets as widgets
 class Console(toolbar.Toolbar):
     """A scrolling text console that can be docked to a world.
 
-    Use ``console.newline(text)`` to append lines of text. The console is a
-    special ``Toolbar`` that is typically docked below or beside the main world
-    using ``world.camera.add_bottom(console)`` or
-    ``world.camera.add_right(console)``.
+    Use `console.newline(text)` to append lines of text. The console is a
+    special `Toolbar` that is typically docked below or beside the main world
+    using `world.camera.add_bottom(console)` or `world.camera.add_right(console)`.
 
     Examples:
+        ::
 
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(200, 200)
             console = Console()
             world.camera.add_bottom(console)
 
             @world.register
             def act(self):
                 console.newline("Frame: " + str(world.frame))
-
-            world.run()
     """
 
     def __init__(self):
@@ -53,11 +47,10 @@ class Console(toolbar.Toolbar):
             text: The text string to display on the new line.
 
         Returns:
-            The ``Label`` actor that was created for this line.
+            The `Label` actor that was created for this line.
 
         Examples:
-
-            .. code-block:: python
+            ::
 
                 console.newline("Player position: " + str(player.position))
         """

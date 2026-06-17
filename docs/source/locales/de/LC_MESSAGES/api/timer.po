@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"POT-Creation-Date: 2026-06-17 05:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: ../../source/api/timer.md:1 ../../source/api/timer.md:7
+#: ../../source/api/timer.md:1 ../../source/api/timer.md:10
 msgid "Timer"
 msgstr "Timer"
 
@@ -28,150 +28,96 @@ msgid "Timer classes schedule actions in future frames."
 msgstr "Timer-Klassen planen Aktionen die in späteren Frames ausgelöst werden."
 
 #: ../../source/api/timer.md:5
+msgid ""
+"The `timer` and `loop` decorators are convenience helpers for one-time and "
+"repeating actions."
+msgstr "Die Decorators `timer` und `loop` sind Hilfsfunktionen für einmalige und wiederholte Aktionen."
+
+#: ../../source/api/timer.md:8
 msgid "API Reference"
 msgstr "API-Referenz"
 
 #: miniworlds.tools.timer.Timer:1 of
-msgid "Calls its ``act()`` method once after *time* frames have elapsed."
-msgstr ""
+msgid "Timer that calls `act()` repeatedly after a frame interval."
+msgstr "Timer, der `act()` nach einem Frame-Intervall wiederholt aufruft."
 
 #: miniworlds.tools.timer.Timer:3 of
 msgid ""
-"Subclass this and override ``act()`` when you need custom timer logic. "
-"For most use-cases prefer ``ActionTimer`` or the ``@timer`` decorator."
-msgstr ""
+"Subclass this and override `act()` when you need custom timer logic. For "
+"most use-cases prefer `ActionTimer` or the `@timer` decorator."
+msgstr "Leite davon ab und überschreibe `act()`, wenn du eigene Timer-Logik brauchst. Für die meisten Fälle sind `ActionTimer` oder der Decorator `@timer` besser geeignet."
 
-#: ../../source/api/timer.md
-msgid "Public Methods:"
-msgstr ""
+#: ../../source/api/timer.md miniworlds.tools.timer.loop
+#: miniworlds.tools.timer.timer of
+msgid "Parameters"
+msgstr "Parameter"
 
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`__init__ <miniworlds.tools.timer.Timer.__init__>`\\ \\(time\\)"
-msgstr ""
+#: miniworlds.tools.timer.Timer:6 of
+msgid "Frame interval."
+msgstr "Frame-Intervall."
 
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`tick <miniworlds.tools.timer.Timer.tick>`\\ \\(\\)"
-msgstr ""
+#: miniworlds.tools.timer.ActionTimer:8
+#: miniworlds.tools.timer.LoopActionTimer:4 miniworlds.tools.timer.Timer:9
+#: miniworlds.tools.timer.loop:6 miniworlds.tools.timer.timer:6 of
+msgid "Examples"
+msgstr "Beispiele"
 
-#: ../../None:5:<autosummary>:1 miniworlds.tools.timer.Timer.tick:1 of
-msgid "Counts frames and calls ``act()`` when the timer interval is reached."
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`act <miniworlds.tools.timer.Timer.act>`\\ \\(\\)"
-msgstr ""
-
-#: ../../None:5:<autosummary>:1 miniworlds.tools.timer.Timer.act:1 of
+#: miniworlds.tools.timer.Timer.act:1 of
 msgid "Hook method that is executed when the timer interval is reached."
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`__init__ <miniworlds.tools.timer.Timed.__init__>`\\ \\(\\)"
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`tick <miniworlds.tools.timer.Timed.tick>`\\ \\(\\)"
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid "Advances the timer by one frame."
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid ":py:obj:`unregister <miniworlds.tools.timer.Timed.unregister>`\\ \\(\\)"
-msgstr ""
-
-#: ../../None:5:<autosummary>:1
-msgid "Removes the timer from the current world."
-msgstr ""
-
-#: ../../source/api/timer.md
-msgid "Private Methods:"
-msgstr ""
-
-#: ../../None:3:<autosummary>:1
-msgid ""
-":py:obj:`_validate_interval "
-"<miniworlds.tools.timer.Timer._validate_interval>`\\ \\(time\\)"
-msgstr ""
+msgstr "Hook-Methode, die ausgeführt wird, wenn das Timer-Intervall erreicht ist."
 
 #: miniworlds.tools.timer.Timer.act:3 of
 msgid ""
-"Subclasses override this method with the action that should happen after "
-"the configured number of frames."
-msgstr ""
+"Subclasses override this method with the action that should happen after the "
+"configured number of frames."
+msgstr "Unterklassen überschreiben diese Methode mit der Aktion, die nach der eingestellten Anzahl von Frames passieren soll."
+
+#: miniworlds.tools.timer.Timer.tick:1 of
+msgid "Count frames and call `act()` when the interval is reached."
+msgstr "Zählt Frames und ruft `act()` auf, wenn das Intervall erreicht ist."
 
 #: miniworlds.tools.timer.Timer.tick:3 of
 msgid "This method is called automatically once per frame by the world."
-msgstr ""
+msgstr "Diese Methode wird von der Welt automatisch einmal pro Frame aufgerufen."
 
-#: ../../source/api/timer.md:16
+#: ../../source/api/timer.md:17
 msgid "ActionTimer"
 msgstr "ActionTimer"
 
 #: miniworlds.tools.timer.ActionTimer:1 of
 msgid "Calls a method after `time` frames."
-msgstr ""
+msgstr "Ruft eine Methode nach `time` Frames auf."
+
+#: miniworlds.tools.timer.ActionTimer:3
+#: miniworlds.tools.timer.ActionTimer.__init__:3 of
+msgid "Frames to wait before calling the method."
+msgstr "Frames, die vor dem Methodenaufruf gewartet werden."
 
 #: miniworlds.tools.timer.ActionTimer:4
-#: miniworlds.tools.timer.LoopActionTimer:4 of
-msgid "Example"
-msgstr ""
+#: miniworlds.tools.timer.ActionTimer.__init__:4 of
+msgid "Method to call."
+msgstr "Aufzurufende Methode."
 
 #: miniworlds.tools.timer.ActionTimer:5
-#: miniworlds.tools.timer.LoopActionTimer:5 of
-msgid "Player moves after 48 frames::"
-msgstr ""
+#: miniworlds.tools.timer.ActionTimer.__init__:5 of
+msgid "Optional single argument passed to the method."
+msgstr "Optionales einzelnes Argument, das an die Methode übergeben wird."
 
-#: miniworlds.tools.timer.ActionTimer:9
-#: miniworlds.tools.timer.LoopActionTimer:9 of
-msgid "Same as above with decorator::"
-msgstr ""
+#: miniworlds.tools.timer.ActionTimer.__init__:1 of
+msgid "Create a one-shot action timer."
+msgstr "Erzeugt einen einmaligen Aktionstimer."
 
-#: ../../None:4:<autosummary>:1
-msgid ""
-":py:obj:`__init__ <miniworlds.tools.timer.ActionTimer.__init__>`\\ "
-"\\(time\\, method\\[\\, arguments\\]\\)"
-msgstr ""
-
-#: ../../None:4:<autosummary>:1
-msgid ":py:obj:`act <miniworlds.tools.timer.ActionTimer.act>`\\ \\(\\)"
-msgstr ""
-
-#: ../../None:3:<autosummary>:1 ../../None:4:<autosummary>:1
 #: miniworlds.tools.timer.ActionTimer.act:1
 #: miniworlds.tools.timer.LoopActionTimer.act:1 of
 msgid "Calls the stored method once and then unregisters the timer."
-msgstr ""
-
-#: ../../None:3:<autosummary>:1
-msgid ""
-":py:obj:`_call_method "
-"<miniworlds.tools.timer.ActionTimer._call_method>`\\ \\(\\)"
-msgstr ""
-
-#: ../../source/api/timer.md
-msgid "Parameters"
-msgstr ""
-
-#: miniworlds.tools.timer.ActionTimer.__init__:1 of
-msgid "After `time` frames, the method is called"
-msgstr ""
-
-#: miniworlds.tools.timer.ActionTimer.__init__:3 of
-msgid "The method to call."
-msgstr ""
-
-#: miniworlds.tools.timer.ActionTimer.__init__:5 of
-msgid "Arguments for the method."
-msgstr ""
+msgstr "Ruft die gespeicherte Methode einmal auf und meldet den Timer danach ab."
 
 #: miniworlds.tools.timer.ActionTimer.act:3
 #: miniworlds.tools.timer.LoopActionTimer.act:3 of
-msgid "This is the behavior behind ``@timer`` and one-shot delayed actions."
-msgstr ""
+msgid "This is the behavior behind `@timer` and one-shot delayed actions."
+msgstr "Das ist das Verhalten hinter `@timer` und einmalig verzögerten Aktionen."
 
-#: ../../source/api/timer.md:25
+#: ../../source/api/timer.md:24
 msgid "LoopActionTimer"
 msgstr "LoopActionTimer"
 
@@ -179,21 +125,29 @@ msgstr "LoopActionTimer"
 msgid ""
 "Calls a method after `time` frames repeatedly until the timer is "
 "unregistered."
-msgstr ""
+msgstr "Ruft eine Methode nach jeweils `time` Frames wiederholt auf, bis der Timer abgemeldet wird."
 
-#: ../../None:3:<autosummary>:1
-msgid ":py:obj:`act <miniworlds.tools.timer.LoopActionTimer.act>`\\ \\(\\)"
-msgstr ""
+#: ../../source/api/timer.md:31
+#, fuzzy
+msgid "timer"
+msgstr "Timer"
 
-#~ msgid "Base class for timers. Calls act() Method after `time` frames."
-#~ msgstr ""
+#: miniworlds.tools.timer.timer:1 of
+msgid "Decorate a function to run once after a number of frames."
+msgstr "Dekoriert eine Funktion, damit sie nach einer Anzahl von Frames einmal ausgeführt wird."
 
-#~ msgid "Act method for timer."
-#~ msgstr ""
+#: miniworlds.tools.timer.timer:3 of
+msgid "Frames to wait before the function runs."
+msgstr "Frames, die vor dem Ausführen der Funktion gewartet werden."
 
-#~ msgid "remove timer from world"
-#~ msgstr ""
+#: ../../source/api/timer.md:37
+msgid "loop"
+msgstr "loop"
 
-#~ msgid "Act method for timer. Called after `actual_time` frames."
-#~ msgstr ""
+#: miniworlds.tools.timer.loop:1 of
+msgid "Decorate a function to run repeatedly after a frame interval."
+msgstr "Dekoriert eine Funktion, damit sie nach einem Frame-Intervall wiederholt ausgeführt wird."
 
+#: miniworlds.tools.timer.loop:3 of
+msgid "Frames between function calls."
+msgstr "Frames zwischen den Funktionsaufrufen."

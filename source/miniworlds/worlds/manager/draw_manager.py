@@ -66,46 +66,17 @@ class DrawManager:
 
     @property
     def default_border_color(self):
-        """Set default border color for borders and lines.
+        """tuple: Default border color for actors and lines.
 
-        .. note::
-
-          ``world.default_border_color`` does not have an effect, if no border is set.
-
-            You must also set ``world.border`` > 0.
+        Set `world.default_border` to a value greater than `0` to make the
+        border visible.
 
         Examples:
+            ::
 
-            Create actors with and without with border
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(210,80)
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
-
-                t = Actor((10,10))
-
-                t2 = Actor ((60, 10))
-                t2.border_color = (0,255, 0)
-                t2.border = 5 # overwrites default border
-
-                t3 = Actor ((110, 10))
-                t3.border = None # removes border
-
-                t4 = Actor ((160, 10))
-                t4.add_costume("images/player.png") # border for sprite
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/border_color.png
-                :width: 200px
-                :alt: borders
-
+                world.draw.default_border_color = (0, 0, 255)
+                world.draw.default_border = 1
+                actor = Actor((10, 10))
         """
         return self._default_border_color
 
@@ -115,27 +86,13 @@ class DrawManager:
 
     @property
     def default_border(self):
-        """Sets default border color for actors
-
-        .. note::
-
-          You must also set a border for actor.
+        """int: Default border width for actors.
 
         Examples:
+            ::
 
-            Set default border for actors:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(210,80)
-                world.default_border_color = (0,0, 255)
-                world.default_border = 1
-
-                t = Actor((10,10))
-
-                world.run()
+                world.draw.default_border = 1
+                world.draw.default_border_color = (0, 0, 255)
         """
         return self._default_border
 
@@ -156,35 +113,18 @@ class DrawManager:
     color = fill_color
 
     def get_color_from_pixel(self, position: Tuple[float, float]) -> tuple:
-        """
-        Returns the color at a specific position
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60))
-
-                @world.register
-                def on_setup(self):
-                    self.add_background((255,0,0))
-                    print(self.get_color_from_pixel((5,5)))
-
-                world.run()
-
-            Output: (255, 0, 0, 255)
-
-            .. image:: ../_images/get_color.png
-                :width: 100px
-                :alt: get color of red screen
+        """Return the background color at a pixel position.
 
         Args:
-            position: The position to search for
+            position: Pixel position as `(x, y)`.
 
         Returns:
-            The color
+            Color tuple at the pixel.
 
+        Examples:
+            ::
+
+                world.add_background((255, 0, 0))
+                color = world.draw.get_color_from_pixel((5, 5))
         """
         return self.world.background.image.get_at((int(position[0]), int(position[1])))

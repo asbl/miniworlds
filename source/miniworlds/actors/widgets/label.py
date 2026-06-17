@@ -2,9 +2,9 @@ import miniworlds.actors.widgets.button as widget
 
 
 class Label(widget.Button):
-    """A text label for use in a ``Toolbar``.
+    """Text label for use in a `Toolbar`.
 
-    ``Label`` is usually used for headings, status text, scores, or other
+    `Label` is usually used for headings, status text, scores, or other
     information that should be shown inside a toolbar.
 
     Args:
@@ -12,22 +12,16 @@ class Label(widget.Button):
         image: Optional path to an image to show instead of (or alongside) text.
 
     Examples:
+        ::
 
-        Add a label to a toolbar:
-
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(200, 200)
             toolbar = Toolbar()
             score_label = Label("Score: 0")
             toolbar.add(score_label)
             world.camera.add_right(toolbar)
-            world.run()
     """
 
     def __init__(self, text, image=None):
-        """Creates a label widget.
+        """Create a label widget.
 
         Args:
             text: The text displayed by the label.

@@ -30,19 +30,17 @@ class MetaAppearance(abc.ABCMeta):
 class Appearance(metaclass=MetaAppearance):
     """Base class for actor costumes and world backgrounds.
 
-    ``Appearance`` is the parent class of both ``Costume`` (used by actors) and
-    ``Background`` (used by worlds). You normally do not create ``Appearance``
-    instances directly – access them through ``actor.costume`` or
-    ``world.background`` instead.
+    `Appearance` is the parent class of both `Costume` and `Background`. You
+    normally access it through `actor.costume` or `world.background`.
 
-    Typical operations students use:
+    Examples:
+        ::
 
-    * Loading an image: ``actor.costume.add_image("my_image.png")``
-    * Setting a fill color: ``actor.costume.fill_color = (255, 0, 0)``
-    * Drawing a border: ``actor.costume.border = 2``
-    * Animating a sprite: ``actor.costume.is_animated = True``
-    * Making transparent: ``actor.costume.alpha = 128``
-    * Flipping horizontally: ``actor.costume.is_flipped = True``
+            actor.costume.add_image("images/player.png")
+            actor.costume.fill_color = (255, 0, 0)
+            actor.costume.border = 2
+            actor.costume.is_animated = True
+            actor.costume.alpha = 128
     """
 
     counter = 0
@@ -158,28 +156,20 @@ class Appearance(metaclass=MetaAppearance):
         return self
 
     def set_image(self, source: Union[int, "Appearance", tuple]) -> bool:
-        """Sets the displayed image of costume/background to selected index
+        """Set the displayed image.
 
         Args:
-            source: The image index or an image.
+            source: Image index, appearance, or color tuple.
 
         Returns:
-            True, if image index exists
+            `True` if the image index exists.
 
         Examples:
+            ::
 
-            Add two images two background and switch to image 2
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                background = world.add_background("images/1.png")
+                background.add_image("images/1.png")
                 background.add_image("images/2.png")
                 background.set_image(1)
-                world.run()
-
         """
         if isinstance(source, int):
             return self.image_manager.set_image_index(source)
@@ -288,41 +278,14 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_textured(self):
-        """
-        bool: If True, the image is tiled over the background.
+        """bool: Whether the image is tiled over the parent area.
 
         Examples:
+            ::
 
-            Texture the board with the given image:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
                 background = world.add_background("images/stone.png")
                 background.is_textured = True
-                world.run()
-
-            .. image:: ../_images/is_textured.png
-                :alt: Textured image>
-
-            Set texture size
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                background = world.add_background("images/stone.png")
-                background.is_textured = True
-                background.texture_size = (15,15)
-                world.run()
-
-            .. image:: ../_images/is_textured1.png
-                :alt: Textured image
-
-
+                background.texture_size = (15, 15)
         """
         return self._is_textured
 
@@ -341,7 +304,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_rotatable(self):
-        """If True, costume will be rotated with token direction"""
+        """bool: Whether the image rotates with the parent direction."""
         return self._is_rotatable
 
     @is_rotatable.setter
@@ -369,37 +332,12 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_flipped(self):
-        """Flips the costume or background. The image is mirrored over the y-axis of costume/background.
+        """bool: Whether the image is mirrored horizontally.
 
         Examples:
+            ::
 
-            Flips actor:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                token = Token()
-                token.add_costume("images/alien1.png")
-                token.height= 400
-                token.width = 100
-                token.is_rotatable = False
-                @token.register
-                def act(self):
-                    if self.world.frame % 100 == 0:
-                        if self.costume.is_flipped:
-                            self.costume.is_flipped = False
-                        else:
-                            self.costume.is_flipped = True
-                world.run()
-
-            .. image:: ../_images/flip1.png
-                :alt: Textured image
-
-            .. image:: ../_images/flip2.png
-                :alt: Textured image
-
+                actor.costume.is_flipped = True
         """
         return self._is_flipped
 
@@ -455,42 +393,12 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def orientation(self):
-        """bool: If True, the image will be rotated by parent orientation before it is rotated.
+        """float: Orientation offset applied before parent rotation.
 
         Examples:
+            ::
 
-            Both actors are moving up. The image of t2 is correctly aligned. t1 is looking in the wrong direction.
-
-                .. code-block:: python
-
-
-
-                    from miniworlds import *
-
-                    world = TiledWorld()
-
-                    t1 = Actor((4,4))
-                    t1.add_costume("images/player.png")
-                    t1.move()
-
-                    t2 = Actor((4,5))
-                    t2.add_costume("images/player.png")
-                    t2.orientation = - 90
-                    t2.move()
-
-                    @t1.register
-                    def act(self):
-                        self.move()
-
-                    @t2.register
-                    def act(self):
-                        self.move()
-
-                    world.run()
-
-            .. image:: ../_images/orientation.png
-                :alt: Textured image
-
+                actor.costume.orientation = -90
         """
         return self._orientation
 
@@ -511,10 +419,12 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def coloring(self):
-        """Defines a colored layer.
+        """tuple | None: Optional color layer.
 
-        `coloring` can be True or false.
-        The color is defined by the attribute `appearance.color`.
+        Examples:
+            ::
+
+                actor.costume.coloring = (255, 0, 0)
         """
         return self._coloring
 
@@ -525,11 +435,9 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def transparency(self):
-        """Defines a transparency.
+        """bool: Whether alpha transparency is enabled.
 
-        If ``transparency``is ``True``, the che transparency value
-        is defined by the attribute ``appearance.alpha``
-
+        The actual opacity is controlled by `alpha`.
         """
         return self._transparency
 
@@ -569,26 +477,14 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def is_animated(self):
-        """If True, the costume will be animated.
+        """bool: Whether the appearance animates through its images.
 
+        Examples:
+            ::
 
-        .. code-block:: python
-
-            from miniworlds import *
-
-            world = World(80,40)
-
-            robo = Actor()
-            robo.costume.add_images(["images/1.png"])
-            robo.costume.add_images(["images/2.png","images/3.png","images/4.png"])
-            robo.costume.animation_speed = 20
-            robo.costume.is_animated = True
-            world.run()
-
-        .. video:: ../_static/animate.webm
-            :autoplay:
-            :width: 300
-            :height: 100
+                actor.costume.add_images(["images/1.png", "images/2.png"])
+                actor.costume.animation_speed = 20
+                actor.costume.is_animated = True
         """
         return self._is_animated
 
@@ -603,7 +499,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def color(self):
-        """->See fill color"""
+        """tuple: Alias for `fill_color`."""
         return self._fill_color
 
     @color.setter
@@ -614,7 +510,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def stroke_color(self):
-        """see border color"""
+        """tuple: Alias for `border_color`."""
         return self._border_color
 
     @stroke_color.setter
@@ -623,7 +519,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def border_color(self):
-        """border color of actor"""
+        """tuple: Border color."""
         return self._border_color
 
     @border_color.setter
@@ -636,12 +532,9 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def border(self):
-        """The border-size of actor.
+        """int: Border width in pixels.
 
-        The value is 0, if actor has no border
-
-        Returns:
-            _type_: int
+        A value of `0` means no border.
         """
         return self._border
 
@@ -667,18 +560,14 @@ class Appearance(metaclass=MetaAppearance):
 
     @property
     def image(self) -> pygame.Surface:
-        """Performs all actions in image pipeline"""
+        """pygame.Surface: Rendered image after the transformation pipeline."""
         return self.get_image()
 
     def _set_rotatable(self, value: bool):
-        """
-        If set to True, costume will be rotated with actor direction
+        """Set whether the appearance rotates with the parent direction.
 
         Args:
-            value: True, if image should be rotated with Actor direction
-
-        Returns:
-
+            value: Whether rotation is enabled.
         """
         self._is_rotatable = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
@@ -688,37 +577,28 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def _set_flipped(self, value: bool):
-        """
-        Flips the costume or background. The image is mirrored over the y-axis of costume/background.
+        """Set whether the image is mirrored horizontally.
 
         Args:
-            value: True, if Appearance should be displayed as flipped.
-
-        Returns:
-
+            value: Whether flipping is enabled.
         """
         self._is_flipped = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def _set_filled(self, value: bool):
-        """
-        Sets whether the costume or background should be filled with a color.
+        """Set whether shapes are rendered filled.
 
         Args:
-            value: True, if Appearance should be drawn as filled.
-
-        Returns:
-
+            value: Whether filling is enabled.
         """
         self._is_filled = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def _set_scaled(self, value: bool):
-        """
-        Sets the actor to parenz-size **without** remaining aspect-ratio.
+        """Set whether the image scales to parent size without aspect ratio.
 
         Args:
-            value: True or False
+            value: Whether scaling is enabled.
         """
         if value:
             self._is_upscaled = False
@@ -728,11 +608,10 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("scale", Appearance.RELOAD_ACTUAL_IMAGE)
 
     def _set_upscaled(self, value: bool):
-        """
-        If set to True, the image will be upscaled remaining aspect-ratio.
+        """Set whether small images may be upscaled with aspect ratio kept.
 
         Args:
-            value: True or False
+            value: Whether upscaling is enabled.
         """
         if value:
             self._is_scaled = False
@@ -768,151 +647,88 @@ class Appearance(metaclass=MetaAppearance):
         return self._rendering_facade.add_image(source)
 
     def _set_image(self, source: Union[int, "Appearance", tuple]) -> bool:
-        """Sets the displayed image of costume/background to selected index
+        """Set the displayed image.
 
         Args:
-            source: The image index or an image.
+            source: Image index, appearance, or color tuple.
 
         Returns:
-            True, if image index exists
+            `True` if the image index exists.
 
         Examples:
+            ::
 
-            Add two images two background and switch to image 2
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                background = world.add_background("images/1.png")
+                background.add_image("images/1.png")
                 background.add_image("images/2.png")
                 background._set_image(1)
-                world.run()
-
         """
         return self._rendering_facade.set_image(source)
 
     def add_images(self, sources: list):
-        """Adds multiple images to background/costume.
+        """Add multiple image sources.
 
         Each source in `sources` must be a valid input for `add_image`.
+
+        Examples:
+            ::
+
+                actor.costume.add_images(["images/1.png", "images/2.png"])
         """
         self._rendering_facade.add_images(sources)
 
     def animate(self, loop=False):
-        """Animates the costume
+        """Start appearance animation.
 
         Args:
-            loop: If loop = True, the animation will be processed as loop. (you can stop this with self.loop)
+            loop: Whether the animation should repeat.
 
-        .. code-block:: python
+        Examples:
+            ::
 
-            from miniworlds import *
-
-            world = World(80,40)
-
-            robo = Actor()
-            robo.costume.add_images(["images/1.png"])
-            robo.costume.add_images(["images/2.png","images/3.png","images/4.png"])
-            robo.costume.animation_speed = 20
-            robo.costume.is_animated = True
-            world.run()
-
-        .. video:: ../_static/animate.webm
-            :autoplay:
-            :width: 300
-            :height: 100
+                actor.costume.add_images(["images/1.png", "images/2.png"])
+                actor.costume.animate(loop=True)
         """
         self._rendering_facade.animate(loop=loop)
 
     def after_animation(self):
-        """
-        the method is overwritten in subclasses costume and appearance
+        """Hook called after a non-looping animation finishes.
 
         Examples:
+            ::
 
-            The actor will be removed after the animation - This can be used for explosions.
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-                actor = Actor()
-                costume = actor.add_costume("images/1.png")
-                costume.add_image("images/2.png")
-                costume.animate()
                 @costume.register
                 def after_animation(self):
                     self.parent.remove()
-
-                world.run()
         """
         self._rendering_facade.after_animation()
 
     def to_colors_array(self) -> numpy.ndarray:
-        """Create an array from costume or background.
-        The array can be re-written to appearance with ``.from_array``
+        """Return the appearance image as a color array.
+
+        Returns:
+            A NumPy array containing color data.
 
         Examples:
+            ::
 
-            Convert a background image to grayscale
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(600,400)
-                world.add_background("images/sunflower.jpg")
                 arr = world.background.to_colors_array()
-
-                def brightness(r, g, b):
-                    return (int(r) + int(g) + int(b)) / 3
-
-                for x in range(len(arr)):
-                    for y in range(len(arr[0])):
-                        arr[x][y] = brightness(arr[x][y][0], arr[x][y][1], arr[x][y][2])
-
+                arr[0][0] = (255, 0, 0)
                 world.background.from_array(arr)
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/sunflower5grey.png
-                :alt: converted image
         """
         return self._rendering_facade.to_colors_array()
 
     def from_array(self, arr: numpy.ndarray):
-        """Create a background or costume from array. The array must be a ``numpy.ndarray,
-        which can be created with ``.to_colors_array``
+        """Replace the appearance image from a color array.
+
+        Args:
+            arr: NumPy color array, usually created with `to_colors_array()`.
 
         Examples:
+            ::
 
-            Convert grey default-background to gradient
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
                 arr = world.background.to_colors_array()
-                for x in range(len(arr)):
-                    for y in range(len(arr[0])):
-                        arr[x][y][0] = ((x +1 ) / world.width) * 255
-                        arr[x][y][1] = ((y +1 ) /world.width) * 255
+                arr[0][0] = (255, 0, 0)
                 world.background.from_array(arr)
-                world.run()
-
-
-                world.background.from_array(arr)
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/gradient3.png
-                :alt: converted image
         """
         self._rendering_facade.from_array(arr)
 

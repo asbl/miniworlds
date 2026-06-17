@@ -12,19 +12,16 @@ class Toolbar(gui.GUI):
     """A panel that holds buttons, labels, and other widgets.
 
     Toolbars are usually docked beside the main world using
-    ``world.camera.add_right(toolbar)`` or ``world.camera.add_bottom(toolbar)``.
-    Widgets are added with ``toolbar.add(widget)`` (or by simply creating them –
+    `world.camera.add_right(toolbar)` or `world.camera.add_bottom(toolbar)`.
+    Widgets are added with `toolbar.add(widget)` (or by simply creating them -
     they register themselves automatically when their world is set to the toolbar).
 
     When a button inside a toolbar is clicked it broadcasts its label text as
-    a message.  The main world responds via ``on_message``.
+    a message. The main world responds via `on_message`.
 
     Examples:
+        ::
 
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World()
             toolbar = Toolbar()
             toolbar.add(Button("Restart"))
             world.camera.add_right(toolbar)
@@ -33,52 +30,28 @@ class Toolbar(gui.GUI):
             def on_message(self, message):
                 if message == "Restart":
                     world.reset()
-
-            world.run()
     """
 
     def __init__(self):
-        """
-        Base class for toolbars.
+        """Create a toolbar.
 
-        Example:
-
-            Add a Toolbar which interacts with Actors on world via messages:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-
-                world.add_background("images/galaxy.jpg")
+        Examples:
+            ::
 
                 toolbar = Toolbar()
-                button = Button("Start Rocket")
-                toolbar.add(button)
+                toolbar.add(Button("Start Rocket"))
                 world.camera.add_right(toolbar)
+                rocket.started = False
 
                 @world.register
                 def on_message(self, message):
                     if message == "Start Rocket":
                         rocket.started = True
 
-                rocket = Actor(100, 200)
-                rocket.add_costume("images/ship.png")
-                rocket.started = False
-                rocket.turn_left(90)
-                rocket.direction = "up"
-
                 @rocket.register
                 def act(self):
                     if self.started:
-                            self.move()
-
-                @rocket.register
-                def on_sensing_not_on_the_world(self):
-                    self.remove()
-
-                world.run()
+                        self.move()
         """
         super().__init__()
         self.widgets: OrderedDict["widget_base.BaseWidget"] = OrderedDict()
@@ -111,7 +84,13 @@ class Toolbar(gui.GUI):
 
     @property
     def background_color(self):
-        """Background color as Tuple, e.g. (255,255,255) for white"""
+        """tuple: Toolbar background color.
+
+        Examples:
+            ::
+
+                toolbar.background_color = (255, 255, 255)
+        """
         return self.background
 
     @background_color.setter

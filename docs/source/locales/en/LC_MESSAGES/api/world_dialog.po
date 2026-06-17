@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api/world_dialog.md:1
+msgid "World > Dialogs"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:3
+msgid ""
+"Every world has a built-in dialog service: `world.dialog`. Dialogs are modal "
+"windows drawn over the world: while a dialog is open, the world does not "
+"receive mouse or keyboard events."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:7
+msgid "There are four dialog types:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Purpose"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Result for the callback"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`world.dialog.msgbox`"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Show a message with OK button"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`True` (or `None` on ESC)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`world.dialog.ynbox`"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Ask a yes/no question"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`True` / `False` (`None` on ESC)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`world.dialog.choicebox`"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Choose one item from a list"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "the chosen text (`None` on ESC)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "`world.dialog.enterbox`"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Enter a line of text"
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "the text (`None` on cancel)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:16
+msgid "`world.dialog.alert` is an alias for `world.dialog.msgbox`."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:18
+msgid "Dialogs do not block"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:20
+msgid ""
+"Opening a dialog returns **immediately** — the program keeps running. You "
+"receive the answer through a *callback function* that is called when the "
+"dialog is closed:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:42
+msgid ""
+"This will **not** work, because the dialog has not been answered yet when "
+"the next line runs:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:50
+msgid ""
+"Cancelling a dialog with the ESC key always delivers `None` to the callback "
+"— even for `ynbox` (so the possible results there are `True`, `False` and "
+"`None`)."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:54
+msgid "Showing a message"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:64
+msgid ""
+"The button label can be changed: `world.dialog.msgbox(\"Done\", "
+"button=\"Weiter\")`."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:66
+msgid "Choosing from a list"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:91
+msgid "Long lists scroll automatically (mouse wheel or arrow keys)."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:93
+msgid "Entering text"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:113
+msgid ""
+"The input field supports a text cursor (arrow keys, Home/End, Delete, "
+"Backspace) and international characters."
+msgstr ""
+
+#: ../../source/api/world_dialog.md:116
+msgid "Pausing the world"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:118
+msgid ""
+"By default the world keeps running behind a dialog: actors keep acting, "
+"timers keep ticking. Pass `pause=True` to stop the world's logic while the "
+"dialog is open; it resumes automatically when the dialog closes:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:143
+msgid "Chaining dialogs"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:145
+msgid ""
+"To ask several questions in a row, open the next dialog inside the callback "
+"of the previous one:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:175
+msgid "Keyboard controls"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:177
+msgid "While a dialog is open:"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:179
+msgid ""
+"`TAB` / `UP` / `DOWN` move the button focus (`LEFT` / `RIGHT` too, except in "
+"text dialogs, where they move the text cursor)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:181
+msgid "`RETURN` activates the focused button"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:182
+msgid "`ESC` cancels the dialog (result `None`)"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:183
+msgid "The mouse wheel scrolls long choice lists"
+msgstr ""
+
+#: ../../source/api/world_dialog.md:185
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService:1 of
+msgid "Factory for modal dialogs on a world."
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService:3 of
+msgid ""
+"All factory methods return immediately; the result is delivered to the "
+"``callback`` (and stored in ``dialog.value`` after the dialog closed). "
+"Cancelling a dialog (ESC) always delivers ``None``. Pass ``pause=True`` to "
+"stop the world's logic (acting, timers, collisions) while the dialog is open."
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService.alert:1 of
+msgid "Alias for :meth:`msgbox`."
+msgstr ""
+
+#: ../../source/api/world_dialog.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService.alert:4
+#: miniworlds.worlds.dialog.DialogService.choicebox:2
+#: miniworlds.worlds.dialog.DialogService.enterbox:2
+#: miniworlds.worlds.dialog.DialogService.msgbox:7
+#: miniworlds.worlds.dialog.DialogService.ynbox:2 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.worlds.dialog.Dialog\\``"
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService.msgbox:1 of
+msgid "Shows a message with a single confirmation button."
+msgstr ""
+
+#: miniworlds.worlds.dialog.DialogService.msgbox:3 of
+msgid ""
+"The callback receives ``True`` when confirmed and ``None`` when the dialog "
+"was cancelled with ESC."
+msgstr ""
+
+#: miniworlds.worlds.dialog.Dialog:1 of
+msgid "Modal dialog drawn over a world."
+msgstr ""
+
+#: miniworlds.worlds.dialog.Dialog:3 of
+msgid ""
+"Dialogs are event-loop friendly: opening a dialog returns immediately. The "
+"selected value is stored in ``value`` and can also be delivered through "
+"``callback``."
+msgstr ""
+
+#: miniworlds.worlds.dialog.Dialog.close:2
+#: miniworlds.worlds.dialog.Dialog.draw:2
+#: miniworlds.worlds.dialog.Dialog.on_opened:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.dialog.Dialog.handle_event:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds.worlds.dialog.Dialog.on_opened:1 of
+msgid "Called by DialogService once the dialog became the active dialog."
+msgstr ""

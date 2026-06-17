@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -34,11 +34,11 @@ msgstr ""
 #: miniworlds.actors.texts.number.Number:3 of
 #, fuzzy
 msgid ""
-"You must manually set the size of the actor with `self.size()` to ensure "
-"the text fits the screen."
+"You must manually set the size of the actor with `self.size()` to ensure the "
+"text fits the screen."
 msgstr ""
-"Du musst die Größe des Actors mit self.size() manuell einstellen, damit "
-"der vollständige Text sichtbar ist."
+"Du musst die Größe des Actors mit self.size() manuell einstellen, damit der "
+"vollständige Text sichtbar ist."
 
 #: ../../source/api/actor_number.md miniworlds.actors.texts.number.Number.add
 #: miniworlds.actors.texts.number.Number.set_value
@@ -99,7 +99,10 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.get_value:3 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+#, fuzzy
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
+"\\:py\\:class\\:\\`float\\``"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
 #: ../../source/api/actor_number.md
@@ -148,46 +151,3 @@ msgstr ""
 #, fuzzy
 msgid "The current number."
 msgstr "Die aktuelle Nummer"
-
-#~ msgid "A number actor shows a Number."
-#~ msgstr "Ein Number Actor zeigt eine Zahl an."
-
-#~ msgid "The size of the font (default: 80)"
-#~ msgstr "Die Schriftgröße (Standard: 80)"
-
-#~ msgid "Sets a new NumberActor to display the score.::"
-#~ msgstr "Setzt einen neuen NumberActor, um die Punktzahl anzuzeigen.::"
-
-#~ msgid "Gets the number stored in the NumberActor::"
-#~ msgstr "Ruft die in NumberActor gespeicherte Zahl ab::"
-
-#~ msgid "Sets the number stored in the NumberActor::"
-#~ msgstr "Legt die in NumberActor:: gespeicherte Zahl fest"
-
-#~ msgid "add the sprite to groups"
-#~ msgstr "füge den Sprite zu Gruppen hinzu"
-
-#~ msgid "Sprite.add(*groups): return None"
-#~ msgstr "Sprite.add(*groups): return None"
-
-#~ msgid ""
-#~ "Any number of Group instances can "
-#~ "be passed as arguments. The Sprite "
-#~ "will be added to the Groups it "
-#~ "is not already a member of."
-#~ msgstr ""
-#~ "Eine beliebige Anzahl von Gruppeninstanzen "
-#~ "kann als Argumente übergeben werden. Der"
-#~ " Sprite wird zu den Gruppen "
-#~ "hinzugefügt, denen er noch nicht "
-#~ "angehört."
-
-#~ msgid "The number which should be displayed"
-#~ msgstr "Die Nummer, die angezeigt werden soll"
-
-#~ msgid "Rückgabetyp"
-#~ msgstr "Rückgabetyp"
-
-#~ msgid "Rückgabe"
-#~ msgstr "Rückgabe"
-

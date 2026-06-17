@@ -55,18 +55,16 @@ def _ensure_pointlist(pointlist, parameter_name: str = "pointlist") -> None:
 
 
 class Shape(actor.Actor):
-    """Shape is the parent class for various geometric objects that can be created.
+    """Base class for geometric actors.
 
-    Each geometric object has the following properties:
+    Shapes share the common actor appearance properties `border`,
+    `is_filled`, `fill_color`, and `border_color`.
 
-    * border: The border thickness of the object.
-    * is_filled: True/False if the object should be filled.
-    * fill_color: The fill color of the object
-    * border_color: The border color of the object.
+    Examples:
+        ::
 
-    .. image:: ../_images/shapes.png
-        :width: 60%
-        :alt: Shapes
+            shape.fill_color = (255, 0, 0)
+            shape.border = 2
     """
 
     def __init__(self, position: Tuple[float, float] = (0, 0), *args, **kwargs):
@@ -80,31 +78,19 @@ class Shape(actor.Actor):
         return shape_costume.ShapeCostume
 
 class Circle(Shape):
-    """
-    A circular shape, defined by position and radius
-
-
-    .. image:: ../_images/circle.png
-        :width: 120px
-        :alt: Circle
+    """Circular shape.
 
     Args:
-        position: The position as 2-tuple. The circle is created with its center at the position
-        radius: The radius of the circle
-
+        position: Center position as `(x, y)`.
+        radius: Circle radius in pixels.
 
     Examples:
-        Create a circle at center position (200,100) with radius 20:
+        ::
 
-        .. code-block:: python
+            circle = Circle((200, 100), 20)
+            circle.fill_color = (255, 0, 0)
 
-            Circle((200, 100), 20)
-
-        Create a circle at topleft position
-
-        .. code-block:: python
-
-            miniworlds.Circle.from_topleft((100,100),50)
+            circle = Circle.from_topleft((100, 100), 50)
     """
 
     def __init__(
@@ -114,15 +100,11 @@ class Circle(Shape):
             *args: Any,
             **kwargs: Any
         ) -> None:
-            """
-            Initialize the circle with a position and radius.
+            """Create a circle.
 
             Args:
-                position: A tuple of two float values representing the position (x, y).
-                radius: A float representing the radius.
-
-            Raises:
-                TypeError: If position is not a tuple of two floats or radius is not a float.
+                position: Center position as `(x, y)`.
+                radius: Circle radius in pixels.
             """
             _ensure_point(position, "position")
             _ensure_non_negative_real(radius, "radius")
@@ -134,8 +116,12 @@ class Circle(Shape):
         
     @property
     def radius(self):
-        """The radius of the circle.
-        If you change the circle-size (e.g. with self.size = (x, y), the radius value will be changed too.
+        """float: Circle radius in pixels.
+
+        Examples:
+            ::
+
+                circle.radius = 30
         """
         return self._radius
 
@@ -153,14 +139,30 @@ class Circle(Shape):
 
     @classmethod
     def from_topleft(cls, position: tuple, radius: int, **kwargs):
-        """Creates a circle with topleft at position"""
+        """Create a circle positioned by its top-left corner.
+
+        Args:
+            position: Top-left position as `(x, y)`.
+            radius: Circle radius in pixels.
+
+        Returns:
+            The created circle.
+        """
         circle = cls(position, radius, **kwargs)
         circle.origin = "topleft"
         return circle
 
     @classmethod
     def from_center(cls, position: tuple, radius: float, **kwargs):
-        """Creates a circle with center at position"""
+        """Create a circle positioned by its center.
+
+        Args:
+            position: Center position as `(x, y)`.
+            radius: Circle radius in pixels.
+
+        Returns:
+            The created circle.
+        """
         circle = cls(position, radius, **kwargs)
         circle.origin = "center"
         return circle
@@ -173,45 +175,35 @@ class Circle(Shape):
 
 
 class Point(Circle):
-    """A point is a Circle with Radius 1"""
+    """Circle with radius 1.
+
+    Args:
+        position: Point position as `(x, y)`.
+
+    Examples:
+        ::
+
+            point = Point((10, 10))
+    """
 
     def __init__(self, position: tuple):
-        """Init a Point at specified position"""
+        """Create a point at a position."""
         super().__init__(position, 1)
 
 
 class Ellipse(Shape):
-    """An elliptic shape.
-
-    .. image:: ../_images/ellipse.png
-        :width: 120px
-        :alt: Ellipse
+    """Elliptic shape.
 
     Args:
-        position: The position as 2-tuple. The ellipse is created at topleft position
-        width: The width of the ellipse
-        height: The height of the ellipse
+        position: Top-left position as `(x, y)`.
+        width: Ellipse width in pixels.
+        height: Ellipse height in pixels.
 
     Examples:
+        ::
 
-        Create an ellipse at topleft position (200,100) with width 20 and height 30
-
-        .. code-block:: python
-
-            Ellipse((200, 100), 20, 30)
-
-        Create an ellipse at center-position (200,100) width width 10 and height 10
-
-        .. code-block:: python
-
-            miniworlds.Ellipse.from_center((100,100),10, 10)
-
-        (Alternative) Create an ellipse at center-position (200,100) with width 10 and height 10
-
-        .. code-block:: python
-
-            e = miniworlds.Ellipse((100,100),10, 10)
-            e.center = e.position
+            ellipse = Ellipse((200, 100), 20, 30)
+            ellipse = Ellipse.from_center((100, 100), 10, 10)
     """
 
     def __init__(
@@ -224,10 +216,10 @@ class Ellipse(Shape):
         self.size = (width, height)
 
     def check_arguments(self, position, width, height):
-        """Validates constructor arguments for ``Ellipse``.
+        """Validate constructor arguments for `Ellipse`.
 
         Args:
-            position: Tuple ``(x, y)`` of the ellipse origin.
+            position: Position as `(x, y)`.
             width: Ellipse width in pixels.
             height: Ellipse height in pixels.
 
@@ -244,14 +236,14 @@ class Ellipse(Shape):
 
     @classmethod
     def from_topleft(cls, position: tuple, width: float, height: float, **kwargs):
-        """Creates an ellipse with topleft at position"""
+        """Create an ellipse positioned by its top-left corner."""
         ellipse = cls(position, width, height, **kwargs)
         ellipse.origin = "topleft"
         return ellipse
 
     @classmethod
     def from_center(cls, position: tuple, width: float, height: float, **kwargs):
-        """Creates an ellipse with center at position"""
+        """Create an ellipse positioned by its center."""
         ellipse = cls(position, width, height, **kwargs)
         ellipse.origin = "center"
         return ellipse
@@ -263,16 +255,19 @@ class Ellipse(Shape):
         return shape_costume.EllipseCostume
 
 class Arc(Ellipse):
-    """
-    An elliptic Arc.
+    """Elliptic arc shape.
 
     Args:
-        position: The position as 2-tuple. The ellipse is created at topleft position
-        width: The width of the ellipse
-        height: The height of the ellipse
-        start_angle: The start_angle
-        end_angle: end_angle
+        position: Top-left position as `(x, y)`.
+        width: Arc width in pixels.
+        height: Arc height in pixels.
+        start_angle: Start angle in degrees.
+        end_angle: End angle in degrees.
 
+    Examples:
+        ::
+
+            arc = Arc((20, 20), 100, 60, 0, 180)
     """
 
     def __init__(
@@ -296,6 +291,7 @@ class Arc(Ellipse):
 
     @property
     def start_angle(self):
+        """float: Start angle in degrees."""
         return self._start_angle
 
     @start_angle.setter
@@ -306,6 +302,7 @@ class Arc(Ellipse):
 
     @property
     def end_angle(self):
+        """float: End angle in degrees."""
         return self._end_angle
 
     @end_angle.setter
@@ -324,7 +321,7 @@ class Arc(Ellipse):
         end_angle: float = 360,
         **kwargs
     ):
-        """Creates an arc with center at position"""
+        """Create an arc positioned by its center."""
         arc = cls(
             position,
             width,
@@ -338,32 +335,17 @@ class Arc(Ellipse):
 
 
 class Line(Shape):
-    """A Line-Shape defined by start_position and end_position.
-
-    .. image:: ../_images/line.png
-        :width: 120px
-        :alt: Line
+    """Line shape between two positions.
 
     Args:
-
-        start_position: The start_position as 2-tuple.
-        end_position: The end_position as 2-tuple.
+        start_position: Start position as `(x, y)`.
+        end_position: End position as `(x, y)`.
 
     Examples:
+        ::
 
-        Create a line from (200, 100) to (400, 100)
-
-        .. code-block:: python
-
-            Line((200, 100), (400,100))
-
-        Create a line from (200, 100) to (400, 100)
-
-        .. code-block:: python
-
-            l = Line((200, 100), (400,100))
-            l.border = 2
-
+            line = Line((200, 100), (400, 100))
+            line.border = 2
     """
 
     def __init__(
@@ -386,7 +368,7 @@ class Line(Shape):
 
     @property
     def start_position(self):
-        """Start point of the line as ``(x, y)`` tuple."""
+        """tuple[float, float]: Start point as `(x, y)`."""
         return self._start_position
 
     start = start_position
@@ -402,7 +384,7 @@ class Line(Shape):
 
     @property
     def end_position(self):
-        """End point of the line as ``(x, y)`` tuple."""
+        """tuple[float, float]: End point as `(x, y)`."""
         return self._end_position
 
     end = end_position
@@ -434,10 +416,10 @@ class Line(Shape):
         self.physics.simulation = "manual"
 
     def get_bounding_box(self):
-        """Returns the rectangular bounding box that fully contains the line.
+        """Return the rectangular bounding box that contains the line.
 
         Returns:
-            pygame.Rect: Bounding rectangle including line thickness.
+            Bounding rectangle including line thickness.
         """
         width = abs(self.start_position[0] - self.end_position[0]) + self.thickness
         height = abs(self.start_position[1] - self.end_position[1]) + self.thickness
@@ -471,12 +453,12 @@ class Line(Shape):
 
     @property
     def length(self):
-        """Current line length in pixels."""
+        """float: Current line length in pixels."""
         return self._length
 
     @property
     def thickness(self):
-        """-> see border"""
+        """float: Line thickness in pixels."""
         return self.costume.border
 
     @thickness.setter
@@ -487,7 +469,7 @@ class Line(Shape):
 
     @property
     def border(self):
-        """-> see border"""
+        """float: Line thickness in pixels."""
         return self.costume.border
 
     @border.setter
@@ -505,26 +487,17 @@ class Line(Shape):
         return shape_costume.LineCostume
 
 class Rectangle(Shape):
-    """
-    A rectangular shape defined by position, width and height
-
-    .. image:: ../_images/rectangle.png
-        :width: 120px
-        :alt: Rectangle
+    """Rectangular shape.
 
     Args:
-        topleft: Topleft Position of Rect
-        height: The height of the rect
-        width: The width of the rect
+        position: Top-left position as `(x, y)`.
+        width: Rectangle width in pixels.
+        height: Rectangle height in pixels.
 
     Examples:
+        ::
 
-        Create a rect with the topleft position (200, 100), the width 20 and the height 10
-
-        .. code-block:: python
-
-            Rectangle((200, 100), 20, 10)
-
+            rectangle = Rectangle((200, 100), 20, 10)
     """
 
     def __init__(
@@ -549,14 +522,14 @@ class Rectangle(Shape):
 
     @classmethod
     def from_topleft(cls, position: tuple, width: float, height: float):
-        """Creates a rectangle with topleft at position"""
+        """Create a rectangle positioned by its top-left corner."""
         rectangle = cls(position, width, height)
         rectangle.topleft = position
         return rectangle
 
     @classmethod
     def from_center(cls, position: tuple, width: float, height: float):
-        """Creates a rectangle with center at position"""
+        """Create a rectangle positioned by its center."""
         rectangle = cls(position, width, height)
         rectangle.center = rectangle.position
         return rectangle
@@ -570,22 +543,16 @@ class Rectangle(Shape):
 
 
 class Polygon(Shape):
-    """
-    A Polygon-Shape.
+    """Polygon shape.
 
     Args:
-        point-list: A list of points
+        pointlist: List of corner points.
 
     Examples:
-        Example Creation of a polygon
+        ::
 
-        >>> Polygon([(200, 100), (400,100), (0, 0)])
-        Creates a red polygon with the vertices (200, 100) , (400, 100) and (0, 0)
-
-        Example Creation of a filled polygon
-
-        >>> Polygon([(200, 100), (400,100), (0, 0)])
-        Creates a red polygon with the vertices (200, 100) , (400, 100) and (0, 0)
+            polygon = Polygon([(200, 100), (400, 100), (0, 0)])
+            polygon.fill_color = (255, 0, 0)
     """
 
     def __init__(self, pointlist, *args, **kwargs):
@@ -596,7 +563,7 @@ class Polygon(Shape):
 
     @property
     def pointlist(self):
-        """List of polygon corner points as ``[(x1, y1), (x2, y2), ...]``."""
+        """list[tuple[float, float]]: Polygon corner points."""
         return self._pointlist
 
     @pointlist.setter
@@ -611,21 +578,15 @@ class Triangle(Polygon):
     """A triangle shape defined by three corner points.
 
     Args:
-        p1: First corner as ``(x, y)`` tuple.
-        p2: Second corner as ``(x, y)`` tuple.
-        p3: Third corner as ``(x, y)`` tuple.
+        p1: First corner as `(x, y)`.
+        p2: Second corner as `(x, y)`.
+        p3: Third corner as `(x, y)`.
 
     Examples:
+        ::
 
-        Draw an upward-pointing triangle:
-
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(200, 200)
-            t = Triangle((100, 50), (50, 150), (150, 150))
-            t.fill_color = (255, 165, 0)
-            world.run()
+            triangle = Triangle((100, 50), (50, 150), (150, 150))
+            triangle.fill_color = (255, 165, 0)
     """
 
     def __init__(self, p1: Tuple, p2: Tuple, p3: Tuple, *args, **kwargs):

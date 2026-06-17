@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 16:34+0100\n"
+"POT-Creation-Date: 2026-06-17 05:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -35,7 +35,7 @@ msgstr "Erzeugt ein Textfeld mit fester Breite und Höhe"
 #: miniworlds.actors.texts.textbox.TextBox:3 of
 msgid ""
 "Long lines are automatically word-wrapped to fit within the given width. "
-"Each line is rendered as a separate ``Text`` actor."
+"Each line is rendered as a separate `Text` actor."
 msgstr ""
 
 #: ../../source/api/actor_textbox.md
@@ -91,8 +91,7 @@ msgstr ""
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:6 of
 msgid ""
-"Optional keyword argument. If truthy, draw a rectangle around the text "
-"box."
+"Optional keyword argument. If truthy, draw a rectangle around the text box."
 msgstr ""
 
 #: miniworlds.actors.texts.textbox.TextBox.__init__:8 of
@@ -100,7 +99,7 @@ msgid "Optional keyword argument. Font size used for all lines."
 msgstr ""
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:1 of
-msgid "Creates a single ``Text`` actor for one rendered line."
+msgid "Create a single `Text` actor for one rendered line."
 msgstr ""
 
 #: ../../source/api/actor_textbox.md
@@ -108,8 +107,12 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:3 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text.Text\\``"
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.actors.texts.text.Text\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
+"\\`\\~miniworlds.actors.texts.text.Text\\``"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:5 of
 #, fuzzy
@@ -118,8 +121,8 @@ msgstr "Die obere linke Position des Textfelds"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line:6 of
 #, fuzzy
-msgid "Text content of the line. Defaults to an empty string."
-msgstr "Text der Zeile. Standardmäßig „“."
+msgid "Text content of the line."
+msgstr "Die obere linke Position des Textfelds"
 
 #: ../../source/api/actor_textbox.md
 msgid "Returns"
@@ -131,44 +134,12 @@ msgid "The created text actor."
 msgstr "Ein Text-Actor"
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line_actors:1 of
-msgid "Builds the visible text lines for the current text box content."
+msgid "Build visible text lines for the current text box content."
 msgstr ""
 
 #: miniworlds.actors.texts.textbox.TextBox.create_line_actors:3 of
 msgid ""
 "The text is split line by line and then wrapped after words so that no "
-"rendered line becomes wider than ``self.line_width``. Each line is stored"
-" as a child ``Text`` actor."
+"rendered line becomes wider than `self.line_width`. Each line is stored as a "
+"child `Text` actor."
 msgstr ""
-
-#: miniworlds.actors.texts.textbox.TextBox.create_line_actors:9 of
-msgid "After changing ``self.text``, call this method to rebuild all lines."
-msgstr ""
-
-#~ msgid "Rückgabetyp"
-#~ msgstr "Returntyp"
-
-#~ msgid "Rückgabe"
-#~ msgstr "Rückgabe"
-
-#~ msgid "Does the textbox has a border?"
-#~ msgstr "Hat das Textfeld einen Rahmen?"
-
-#~ msgid "The font size"
-#~ msgstr "Die Schriftgröße"
-
-#~ msgid "Creates a new text-line"
-#~ msgstr "Erstellt eine neue Textzeile"
-
-#~ msgid "position of line"
-#~ msgstr "Position der Linie"
-
-#~ msgid ""
-#~ "creates the lines actor - One "
-#~ "actor per line. Split long lines "
-#~ "after words."
-#~ msgstr ""
-#~ "erstellt die Zeilen Actor - Ein "
-#~ "Actor pro Zeile. Lange Zeilen nach "
-#~ "Wörtern trennen."
-

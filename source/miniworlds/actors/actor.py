@@ -38,27 +38,28 @@ if TYPE_CHECKING:
 class Actor(actor_base.ActorBase):
     """Interactive object placed in a world.
 
-    Actors can move, detect collisions, send messages, and react to input
-    and lifecycle events.
+    Actors can move, change costumes, detect collisions, send messages, and
+    react to keyboard, mouse, and lifecycle events.
 
     Examples:
-        Create a basic actor:
-            from miniworlds import World, Actor
-            world = World(100, 60)
-            Actor((10, 10), world=world)
-            world.run()
+        ::
 
-        Create an actor with a costume:
-            from miniworlds import World, Actor
-            world = World(100, 60)
-            player = Actor((10, 10), world=world)
-            player.add_costume("images/player.png")
-            world.run()
+            Create a basic actor:
 
-    See also:
-        - Actor API page
-        - Shapes API page
-        - Text actor API page
+                from miniworlds import Actor, World
+
+                world = World(100, 60)
+                Actor((10, 10), world=world)
+                world.run()
+
+            Create an actor with a costume:
+
+                from miniworlds import Actor, World
+
+                world = World(100, 60)
+                player = Actor((10, 10), world=world)
+                player.add_costume("images/player.png")
+                world.run()
     """
 
     actor_count: int = 0
@@ -277,7 +278,16 @@ class Actor(actor_base.ActorBase):
         self._size_facade.set_origin(value)
 
     def switch_origin(self, value: str):
-        """Switch actor origin while preserving the visual on-screen position."""
+        """Switch the actor origin while preserving its screen position.
+
+        Args:
+            value: `"center"` or `"topleft"`.
+
+        Examples:
+            ::
+
+                actor.switch_origin("center")
+        """
         if not isinstance(value, str):
             raise TypeError(
                 f"value must be str ('center' or 'topleft'), got {type(value).__name__}: {value!r}"
@@ -286,27 +296,40 @@ class Actor(actor_base.ActorBase):
 
     @classmethod
     def create_on_world(cls, world):
-        """Creates a actor to a specific world
+        """Create an actor on a specific world.
 
-        overwritten in subclasses
+        Args:
+            world: World to place the actor on.
+
+        Returns:
+            The created actor.
+
+        Examples:
+            ::
+
+                actor = Actor.create_on_world(world)
         """
         return cls((0, 0), world)
 
     @property
     def collision_type(self) -> str:
-        """collision_type specifies how collisions should be checked:
+        """str: Collision strategy used by this actor.
 
-        * `default`: tile for Tiledworlds, 'mask' for Pixelworlds
+        Values:
+            `default`: Use the world default.
+            `tile`: Match actors on the same tile.
+            `rect`: Check bounding rectangles.
+            `static-rect`: Check cached bounding rectangles.
+            `circle`: Check bounding circles.
+            `mask`: Check overlapping image masks.
 
-        * `tile`: Are actors on the same tile? (only TiledWorld)
+        Examples:
+            ::
 
-        * `rect`: Are actors colliding when checking their bounding - boxes? (Only PixelWorld)
+                actor.collision_type = "rect"
 
-        * `static-rect`: Are actors colliding when checking circle with radius = bounding-box-radius.(Only PixelWorld)
-
-        * `circle`: Are actors colliding when checking circle with radius = bounding-box-radius.(Only PixelWorld)
-
-        * `mask`: Are actors colliding when checking if their image masks are overlapping.
+                if actor.detect(wall):
+                    actor.undo_move()
         """
         if self._collision_type == "default":
             return "mask"
@@ -338,8 +361,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def is_blockable(self):
-        """
-        A actor with the property ``is_blockable`` cannot move through actors with the property ``is_blocking``.
+        """bool: Whether this actor is stopped by blocking actors.
+
+        Examples:
+            ::
+
+                player.is_blockable = True
+                wall.is_blocking = True
         """
         return self.position_manager.is_blockable
 
@@ -351,8 +379,12 @@ class Actor(actor_base.ActorBase):
 
     @property
     def is_blocking(self):
-        """
-        A actor with the property ``is_blockable`` cannot move through actors with the property ``is_blocking``.
+        """bool: Whether this actor blocks blockable actors.
+
+        Examples:
+            ::
+
+                wall.is_blocking = True
         """
         return self.position_manager.is_blocking
 
@@ -380,7 +412,15 @@ class Actor(actor_base.ActorBase):
 
     @property
     def layer(self) -> int:
-        """Defines the layer on which the actor is drawn if several actors overlap."""
+        """int: Drawing layer used when actors overlap.
+
+        Higher layers are drawn above lower layers.
+
+        Examples:
+            ::
+
+                player.layer = 10
+        """
         return self._layer
 
     @layer.setter
@@ -394,9 +434,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def last_position(self) -> Tuple[float, float]:
-        """Actor position in last frame
+        """tuple[float, float]: Actor center from the previous frame.
 
-        Can be used to track changes.
+        Examples:
+            ::
+
+                if actor.center != actor.last_position:
+                    print("actor moved")
         """
         return self._size_facade.get_last_center()
 
@@ -407,7 +451,19 @@ class Actor(actor_base.ActorBase):
 
     @classmethod
     def from_topleft(cls, topleft_position: Tuple[float, float], *args, **kwargs):
-        """Create an actor whose origin is interpreted as top-left."""
+        """Create an actor positioned by its top-left corner.
+
+        Args:
+            topleft_position: Top-left position as `(x, y)`.
+
+        Returns:
+            The created actor.
+
+        Examples:
+            ::
+
+                actor = Actor.from_topleft((20, 40))
+        """
         cls._ensure_position_tuple(topleft_position, "topleft_position")
         obj = cls(topleft_position, **kwargs)  # temp position
         obj.origin = "topleft"
@@ -415,7 +471,19 @@ class Actor(actor_base.ActorBase):
 
     @classmethod
     def from_center(cls, center_position: Tuple[float, float], *args, **kwargs):
-        """Create an actor whose origin is interpreted as center."""
+        """Create an actor positioned by its center.
+
+        Args:
+            center_position: Center position as `(x, y)`.
+
+        Returns:
+            The created actor.
+
+        Examples:
+            ::
+
+                actor = Actor.from_center((100, 80))
+        """
         cls._ensure_position_tuple(center_position, "center_position")
         obj = cls(center_position, **kwargs)  # temp position
         obj.origin = "center"
@@ -423,31 +491,25 @@ class Actor(actor_base.ActorBase):
 
     @property
     def costume_count(self) -> int:
-        """Returns number of costumes of actor, 0 if actor has no costume
+        """int: Number of costumes attached to the actor.
 
         Examples:
+            ::
 
-            Add costume and count costumes
-
-            .. code-block:: python
-
-                from miniworlds import *
-                world = World()
-                actor = Actor()
-                initial_count = actor.costume_count  # 0
-                actor.add_costume((255,0,0,0))
-                final_count = actor.costume_count  # 1
-                world.run()
-
-
-        Returns:
-            int: Number of costumes currently attached to the actor.
+                actor.add_costume((255, 0, 0))
+                print(actor.costume_count)
         """
         return self._appearance_facade.costume_count
 
     @property
     def is_flipped(self) -> bool:
-        """Whether the actor costume is mirrored on the horizontal axis."""
+        """bool: Whether the current costume is mirrored horizontally.
+
+        Examples:
+            ::
+
+                actor.is_flipped = True
+        """
         return self._appearance_facade.is_flipped
 
     @is_flipped.setter
@@ -457,161 +519,58 @@ class Actor(actor_base.ActorBase):
         self._appearance_facade.is_flipped = value
 
     def flip_x(self) -> int:
-        """Flips the actor by 180° degrees. The costume is flipped and the actor's direction changed by 180 degrees.
+        """Flip the costume horizontally and turn the actor around.
 
-        .. image:: ../_images/flip_x.png
+        Returns:
+            The new actor direction.
 
         Examples:
+            ::
 
-            Flip a actor in Example flipthefish.py
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world=TiledWorld()
-                world.columns = 4
-                world.rows = 1
-                world.add_background("images/water.png")
-                fish = Actor()
-                fish.border = 1
-                fish.add_costume("images/fish.png")
-                fish.direction = "right"
-                fish.orientation = -90
-                @fish.register
-                def act(self):
-                    self.move()
-
-                @fish.register
-                def on_not_detecting_world(self):
-                    self.move_back()
-                    self.flip_x()
-
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=200>
-                <source src="../_static/flipthefish.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
+                if actor.detect_borders():
+                    actor.flip_x()
         """
         return self._appearance_facade.flip_x()
 
     def add_costume(
         self, source: Union[None, Tuple, str, List, "appearance.Appearance"] = None
     ) -> "costume_mod.Costume":
-        """Adds a new costume to actor.
-        The costume can be switched with self.switch_costume(index)
+        """Add a costume to the actor.
 
         Args:
-            source: Path to the first image of a new costume, a color tuple,
-                a list of image sources, or an existing ``Costume`` object.
-
-        Examples:
-
-            Add first costume from image:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60))
-                actor = Actor((10,10))
-                costume = actor.add_costume("images/player.png")
-
-                world.run()
-
-
-            Output:
-
-            .. image:: ../_images/add_costume1.png
-                :width: 100px
-                :alt: Create Actor with image as costume
-
-            Add first costume from color:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60))
-                actor = Actor((10,10))
-                costume = actor.add_costume((255,255,0))
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/add_costume2.png
-                :width: 100px
-                :alt: Create Actor with image as costume
-
-
-            Create two costumes and switch between costumes
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60))
-                actor = Actor((10,10))
-                world.speed = 30
-                costume1 = actor.add_costume((255,255,0))
-                costume2 = actor.add_costume((255,0,255))
-                @actor.register
-                def act(self):
-                    if self.costume == costume1:
-                        self.switch_costume(costume2)
-                    else:
-                        self.switch_costume(costume1)
-
-                world.run()
-
-            Output:
-
-            .. image:: ../_images/add_costume3.png
-                :width: 100%
-                :alt: Create multiple costumes and switch between costumes
-
-            Attach an already created costume:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 60)
-                actor = Actor((10, 10))
-                costume = Costume()
-                costume.add_image("images/player.png")
-                actor.add_costume(costume)
-
-                world.run()
-
-            Create and attach a costume in one step:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 60)
-                actor = Actor((10, 10))
-                costume = Costume(actor)
-                costume.add_image("images/player.png")
-
-                world.run()
+            source: Image path, color tuple, list of image sources, existing
+                `Costume`, or `None` for an empty costume.
 
         Returns:
             The new costume.
 
+        Examples:
+            ::
+
+                player = Actor((20, 20))
+                player.add_costume("images/player.png")
+                player.add_costume((255, 255, 0))
+
+                idle = player.add_costume("images/idle.png")
+                run = player.add_costume("images/run.png")
+                player.switch_costume(run)
         """
         return self._appearance_facade.add_costume(source)
 
     def add_costumes(self, sources: list) -> "costume_mod.Costume":
-        """Adds multiple costumes"""
+        """Add several costumes.
+
+        Args:
+            sources: List of image paths, color tuples, or costume sources.
+
+        Returns:
+            The last added costume.
+
+        Examples:
+            ::
+
+                actor.add_costumes(["images/idle.png", "images/run.png"])
+        """
         if not isinstance(sources, list):
             raise TypeError(
                 f"sources must be list, got {type(sources).__name__}: {sources!r}"
@@ -619,43 +578,37 @@ class Actor(actor_base.ActorBase):
         return self._appearance_facade.add_costumes(sources)
 
     def remove_costume(self, source: Union[int, "costume_mod.Costume"] = None):
-        """Removes a costume from actor
+        """Remove a costume.
 
         Args:
-            source: The index of the new costume or costume-object. Defaults to actual costume
+            source: Costume index or costume object. If omitted, the current
+                costume is removed.
+
+        Examples:
+            ::
+
+                actor.remove_costume()
+                actor.remove_costume(0)
         """
         return self._appearance_facade.remove_costume(source)
 
     def switch_costume(
         self, source: Union[int, "appearance.Appearance"]
     ) -> "costume_mod.Costume":
-        """Switches the costume of actor
+        """Switch to another costume.
 
         Args:
-            source: Number of costume or Costume object
-
-        Examples:
-
-            Switch a costume:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100,60)
-                t = Actor()
-                costume =t1.add_costume("images/1.png")
-                t.add_costume("images/2.png")
-                t.switch_costume(1)
-
-                @timer(frames = 40)
-                def switch():
-                    t1.switch_costume(0)
-
-                world.run()
+            source: Costume index or costume object.
 
         Returns:
-            The new costume
+            The new active costume.
+
+        Examples:
+            ::
+
+                actor.add_costume("images/idle.png")
+                actor.add_costume("images/run.png")
+                actor.switch_costume(1)
         """
         return self._appearance_facade.switch_costume(source)
 
@@ -673,16 +626,27 @@ class Actor(actor_base.ActorBase):
         self._appearance_facade.set_background_color(color)
 
     def next_costume(self):
-        """Switches to the next costume of actor
+        """Switch to the next costume.
 
         Returns:
-            The new costume
+            The new active costume.
+
+        Examples:
+            ::
+
+                actor.next_costume()
         """
         self._appearance_facade.next_costume()
 
     @property
     def costume(self) -> costume_mod.Costume:
-        """Gets the costume of the actor, if available."""
+        """Costume: Current active costume.
+
+        Examples:
+            ::
+
+                actor.costume.is_rotatable = False
+        """
         return self._appearance_facade.costume
 
     def has_costume(self) -> bool:
@@ -695,15 +659,25 @@ class Actor(actor_base.ActorBase):
 
     @property
     def costumes(self) -> "costumes_manager.CostumesManager":
-        """Gets the costume manager
+        """CostumesManager: Manager containing all actor costumes.
 
-        The costume manager can be iterated to get all costumes
+        Examples:
+            ::
+
+                for costume in actor.costumes:
+                    costume.border = 1
         """
         return self._appearance_facade.costumes
 
     @property
     def orientation(self) -> float:
-        """Costume orientation offset in degrees."""
+        """float: Costume orientation offset in degrees.
+
+        Examples:
+            ::
+
+                actor.orientation = -90
+        """
         return self._appearance_facade.orientation
 
     @orientation.setter
@@ -713,98 +687,24 @@ class Actor(actor_base.ActorBase):
 
     @property
     def direction(self) -> int:
-        """Directions are handled exactly as in the Scratch programming language,
-        see: `Scratch Wiki <https://en.scratch-wiki.info/wiki/Direction_(value)>`_
+        """int: Actor direction in Miniworlds/Scratch convention.
 
-        The default direction is ``0°``. All actors are looking ``"up"``
-
-        .. image:: /_images/movement.jpg
-            :width: 100%
-            :alt: Move on world
-
-        **Values for Direction**
-
-        * ``0°`` or ``"up"``: up
-        * ``90°`` or ``"right"``: Move right
-        * ``-90°`` or ``"left"``: Move left
-        * ``180°`` or ``"down"``: Move down
-        * ``"forward"``: Current direction
-
-        Sets direction of the actor.
-
-        You can use an integer or a string to describe the direction
-
-        Options
-            * ``0``, ``"up"`` - Look up
-            * ``90``, ``"right"``, - Look right
-            * ``-90``, ``"left"``, - Look left
-            * ``-180``, ``180``, ``"down"`` - Look down
-
-        .. image:: ../_images/direction.png
+        Common values are `0` or `"up"`, `90` or `"right"`, `-90` or
+        `"left"`, and `180` or `"down"`.
 
         Examples:
+            ::
 
-            Move in a direction with WASD-Keys
-
-            .. code-block:: python
-
-                def on_key_down(self, keys):
-                    if "W" in keys:
-                        self.direction = "up"
-                    elif "S" in keys:
-                        self.direction = "down"
-                    elif "A" in keys:
+                @player.register
+                def on_key_down(self, key):
+                    if "left" in key:
                         self.direction = "left"
-                    elif "D" in keys:
+                    elif "right" in key:
                         self.direction = "right"
                     self.move()
 
-            Move 45°:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 100)
-                c = Circle ((50,50), 10)
-
-                @c.register
-                def act(self):
-                    c.direction = 45
-                    c.move()
-
-                world.run()
-
-
-            .. raw:: html
-
-                <video loop autoplay muted width=400>
-                <source src="../_static/move45.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
-            Move -45°:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 100)
-                c = Circle ((50,50), 10)
-
-                @c.register
-                def act(self):
-                    c.direction = -45
-                    c.move()
-
-                world.run()
-
-            .. raw:: html
-
-                <video loop autoplay muted width=400>
-                <source src="../_static/moveminus45.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
+                actor.direction = 45
+                actor.move()
         """
         return self._movement_facade.get_direction()
 
@@ -816,138 +716,73 @@ class Actor(actor_base.ActorBase):
 
     @property
     def direction_at_unit_circle(self) -> int:
-        """Gets the direction as value in unit circle (0° right, 90° top, 180° left...)"""
+        """int: Direction in unit-circle convention.
+
+        In this convention, `0` points right and `90` points up.
+
+        Examples:
+            ::
+
+                actor.direction_at_unit_circle = 0
+        """
         return self._movement_facade.get_direction_at_unit_circle()
 
     @direction_at_unit_circle.setter
     def direction_at_unit_circle(self, value: int):
-        """Sets the direction from unit circle
-        Args:
-            value: An angle in the unit circle, e.g. 0°: right, 90° top, ...
-        """
         self._ensure_real(value, "direction_at_unit_circle")
         self._movement_facade.set_direction_at_unit_circle(value)
 
     def turn_left(self, degrees: int = 90) -> int:
-        """Turns actor by *degrees* degrees left
-
-        .. image:: ../_images/turn_left.png
-
-        Options:
-          * You can set the value actor.is_rotatable = False if you don't want the actor to be rotated.
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 100)
-                t = Actor()
-                t.add_costume("images/arrow.png")
-                t.size = (100,100)
-
-                @t.register
-                def act(self):
-                    t.turn_left(1)
-
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=400>
-                <source src="../_static/turnleft.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
+        """Turn the actor left.
 
         Args:
-            degrees: degrees in left direction
+            degrees: Degrees to turn.
 
         Returns:
-            New direction
+            The new direction.
 
+        Examples:
+            ::
+
+                actor.turn_left()
+                actor.turn_left(45)
         """
         self._ensure_real(degrees, "degrees")
         return self._movement_facade.turn_left(degrees)
 
     def turn_right(self, degrees: Union[int, float] = 90):
-        """Turns actor by *degrees* degrees right
-
-        .. image:: ../_images/turn_right.png
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(100, 100)
-                t = Actor()
-                t.add_costume("images/arrow.png")
-                t.size = (100,100)
-
-                @t.register
-                def act(self):
-                    t.turn_left(1)
-
-                world.run()
-
-        Output:
-
-        .. raw:: html
-
-            <video loop autoplay muted width=400>
-            <source src="../_static/turnright.webm" type="video/webm">
-            Your browser does not support the video tag.
-            </video>
-
-        Options:
-          * You can set the value actor.is_rotatable = False if you don't want the actor to be rotated.
+        """Turn the actor right.
 
         Args:
-            degrees: degrees in left direction
+            degrees: Degrees to turn.
 
         Returns:
-            New direction
+            The new direction.
 
+        Examples:
+            ::
+
+                actor.turn_right()
+                actor.turn_right(45)
         """
         self._ensure_real(degrees, "degrees")
         return self._movement_facade.turn_right(degrees)
 
     def set_direction(self, direction: Union[str, int, float]) -> float:
-        """Actor points in given direction.
-
-        You can use a integer or a string to describe the direction
+        """Point the actor in a direction.
 
         Args:
-            The direction as integer or string (see options)
+            direction: Direction as an angle or string such as `"up"`,
+                `"right"`, `"down"`, or `"left"`.
 
-        Options
-            * ``0``, ``"up"`` - Look up
-            * ``90``, ``"right"``, - Look right
-            * ``-90``, ``"left"``, - Look left
-            * ``-180``, ``180``, ``"down"`` - Look down
-
-        .. image:: ../_images/direction.png
+        Returns:
+            The new direction.
 
         Examples:
+            ::
 
-            Move in a direction with WASD-Keys
-
-            .. code-block:: python
-
-              def on_key_down(self, keys):
-                  if "W" in keys:
-                      self.direction = "up"
-                  elif "S" in keys:
-                      self.direction = "down"
-                  elif "A" in keys:
-                      self.direction = "left"
-                  elif "D" in keys:
-                      self.direction = "right"
-                  self.move()
+                actor.set_direction("left")
+                actor.set_direction(45)
         """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction")
@@ -956,46 +791,52 @@ class Actor(actor_base.ActorBase):
     def point_towards_position(
         self, destination: Tuple[float, float]
     ) -> Union[int, float]:
-        """
-        Actor points towards a given position
+        """Point the actor toward a position.
 
         Args:
-            destination: The position to which the actor should pointing
+            destination: Target position as `(x, y)`.
 
         Returns:
-            The new direction
+            The new direction.
 
         Examples:
-
-            Point towards mouse_position:
-
-            .. code-block:: python
+            ::
 
                 def act(self):
                     mouse = self.world.mouse.get_position()
-                if mouse:
-                    self.point_towards_position(mouse)
-                self.move()
+                    if mouse:
+                        self.point_towards_position(mouse)
+                    self.move()
         """
         self._ensure_position_tuple(destination, "destination")
         return self._movement_facade.point_towards_position(destination)
 
     def point_towards_actor(self, other: "Actor") -> int:
-        """Actor points towards another actor.
+        """Point the actor toward another actor.
 
         Args:
-            other: The other actor
+            other: Target actor.
 
         Returns:
-            The new direction
+            The new direction.
 
+        Examples:
+            ::
+
+                enemy.point_towards_actor(player)
         """
         self._ensure_actor_instance(other, "other")
         return self._movement_facade.point_towards_actor(other)
 
     @property
     def size(self) -> tuple:
-        """Size of the actor"""
+        """tuple[float, float]: Actor size as `(width, height)`.
+
+        Examples:
+            ::
+
+                actor.size = (40, 30)
+        """
         return self._size_facade.get_size()
 
     @size.setter
@@ -1003,7 +844,16 @@ class Actor(actor_base.ActorBase):
         self.set_size(value)
 
     def set_size(self, value: tuple):
-        """Set actor size as `(width, height)` in pixels."""
+        """Set actor size.
+
+        Args:
+            value: Size as `(width, height)` or a scalar size.
+
+        Examples:
+            ::
+
+                actor.set_size((40, 30))
+        """
         value = self._coerce_position_learning(value, "value")
         if isinstance(value, tuple):
             self._ensure_position_tuple(value, "value")
@@ -1013,37 +863,12 @@ class Actor(actor_base.ActorBase):
 
     @property
     def width(self):
-        """The width of the actor in pixels.
-
-        When the width of a actor is changed, the height is scaled proportionally.
+        """float: Actor width in pixels.
 
         Examples:
+            ::
 
-            Create a actor and scale width/height proportionally:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(800,400)
-
-                def create_actor(x, y):
-                t = Actor()
-                t.position = (x, y)
-                t.add_costume("images/alien1.png")
-                t.border = 1
-                return t
-
-                t0 = create_actor(0,0)
-                t1 = create_actor(50,0)
-                t1.height = 400
-                t2 = create_actor(300,0)
-                t2.width = 180
-
-                world.run()
-
-            .. image:: ../_images/widthheight.png
-                :alt: Textured image
+                actor.width = 80
         """
         return self._size_facade.get_width()
 
@@ -1053,43 +878,27 @@ class Actor(actor_base.ActorBase):
         self._size_facade.set_width(value)
 
     def scale_width(self, value):
-        """Scale actor width by a factor."""
+        """Scale actor width by a factor.
+
+        Args:
+            value: Scale factor.
+
+        Examples:
+            ::
+
+                actor.scale_width(1.5)
+        """
         self._ensure_real(value, "value")
         self._size_facade.scale_width(value)
 
     @property
     def height(self):
-        """The height of the actor in pixels.
-
-        When the height of a actor is changed, the width is scaled proportionally.
+        """float: Actor height in pixels.
 
         Examples:
+            ::
 
-            Create a actor and scale width/height proportionally:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(800,400)
-
-                def create_actor(x, y):
-                t = Actor()
-                t.position = (x, y)
-                t.add_costume("images/alien1.png")
-                t.border = 1
-                return t
-
-                t0 = create_actor(0,0)
-                t1 = create_actor(50,0)
-                t1.height = 400
-                t2 = create_actor(300,0)
-                t2.width = 180
-
-                world.run()
-
-            .. image:: ../_images/widthheight.png
-                :alt: Textured image
+                actor.height = 60
         """
         return self._size_facade.get_height()
 
@@ -1099,13 +908,22 @@ class Actor(actor_base.ActorBase):
         self._size_facade.set_height(value)
 
     def scale_height(self, value):
-        """Scale actor height by a factor."""
+        """Scale actor height by a factor.
+
+        Args:
+            value: Scale factor.
+
+        Examples:
+            ::
+
+                actor.scale_height(0.5)
+        """
         self._ensure_real(value, "value")
         self._size_facade.scale_height(value)
 
     @property
     def x(self) -> float:
-        """The x-value of a actor"""
+        """float: Actor x-position."""
         return self._movement_facade.get_x()
 
     @x.setter
@@ -1115,7 +933,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def y(self) -> float:
-        """The y-value of a actor"""
+        """float: Actor y-position."""
         return self._movement_facade.get_y()
 
     @y.setter
@@ -1130,12 +948,12 @@ class Actor(actor_base.ActorBase):
 
     @property
     def topleft_x(self) -> float:
-        """x-value of actor topleft-position"""
+        """float: X-coordinate of the actor's top-left corner."""
         return self._movement_facade.get_topleft_x()
 
     @property
     def topleft_y(self) -> float:
-        """y-value of actor topleft-position"""
+        """float: Y-coordinate of the actor's top-left corner."""
         return self._movement_facade.get_topleft_y()
 
     @topleft_x.setter
@@ -1150,7 +968,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def topleft(self) -> Tuple[float, float]:
-        """Top-left position of the actor in world coordinates."""
+        """tuple[float, float]: Top-left position in world coordinates.
+
+        Examples:
+            ::
+
+                actor.topleft = (10, 20)
+        """
         return self._movement_facade.get_topleft()
 
     @topleft.setter
@@ -1161,12 +985,12 @@ class Actor(actor_base.ActorBase):
 
     @property
     def local_center(self) -> Tuple[float, float]:
-        """x-value of actor center-position inside the current camera-screen"""
+        """tuple[float, float]: Actor center in camera-local coordinates."""
         return self._movement_facade.get_local_center()
 
     @property
     def center_x(self) -> float:
-        """x-value of actor center-position"""
+        """float: X-coordinate of the actor center."""
         return self._movement_facade.get_center_x()
 
     @center_x.setter
@@ -1176,7 +1000,7 @@ class Actor(actor_base.ActorBase):
 
     @property
     def center_y(self) -> float:
-        """y-value of actor center-position"""
+        """float: Y-coordinate of the actor center."""
         return self._movement_facade.get_center_y()
 
     @center_y.setter
@@ -1186,7 +1010,13 @@ class Actor(actor_base.ActorBase):
 
     @property
     def center(self) -> Tuple[float, float]:
-        """Center position of the actor in world coordinates."""
+        """tuple[float, float]: Center position in world coordinates.
+
+        Examples:
+            ::
+
+                actor.center = (100, 80)
+        """
         return self._movement_facade.get_center()
 
     @center.setter
@@ -1196,28 +1026,21 @@ class Actor(actor_base.ActorBase):
         self._movement_facade.set_center(value)
 
     def move(self, distance: int = 0, direction=None):
-        """Moves actor *distance* steps in current direction
-
-        .. image:: ../_images/move.png
+        """Move the actor.
 
         Args:
             distance: Number of steps to move.
-              If distance = 0, the actor speed will be used.
+            direction: Optional direction. If omitted, the current actor
+                direction is used.
 
         Returns:
-            The moved actor
+            The moved actor.
 
         Examples:
+            ::
 
-            if actor is on the world, move forward:
-
-            .. code-block:: python
-
-                class Robot(Actor):
-
-                    def act(self):
-                        if self.detecting_world():
-                            self.move()
+                actor.direction = "right"
+                actor.move(5)
         """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_real(distance, "distance")
@@ -1225,16 +1048,23 @@ class Actor(actor_base.ActorBase):
         return self._movement_facade.move(distance, direction)
 
     def move_vector(self, vector):
-        """Moves actor in direction defined by the vector
+        """Move the actor by a vector.
+
+        Args:
+            vector: Vector-like movement delta.
 
         Returns:
-            The moved actor
+            The moved actor.
 
+        Examples:
+            ::
+
+                actor.move_vector(Vector(2, 0))
         """
         return self._movement_facade.move_vector(vector)
 
     def move_back(self, distance):
-        """Moves the actor backward by *distance* steps (opposite of current direction).
+        """Move the actor backward.
 
         Args:
             distance: Number of steps to move backward.
@@ -1243,36 +1073,26 @@ class Actor(actor_base.ActorBase):
             The actor itself.
 
         Examples:
+            ::
 
-            Move back when wall is detected:
-
-            .. code-block:: python
-
-                def act(self):
-                    self.move()
-                    if self.detect(Wall):
-                        self.move_back(5)
+                actor.move()
+                if actor.detect(Wall):
+                    actor.move_back(5)
         """
         self._ensure_real(distance, "distance")
         return self._movement_facade.move_back(distance)
 
     def undo_move(self):
-        """Undo the last move. Moves the actor to the last position and resets direction.
-
-        .. image:: ../_images/move_back.png
+        """Undo the last move.
 
         Returns:
-            The moved actor
+            The moved actor.
 
         Examples:
-
-            move_back when field is blocked:
-
-            .. code-block:: python
+            ::
 
                 def on_detecting_wall(self, wall):
                     self.undo_move()
-
         """
         return self._movement_facade.undo_move()
 
@@ -1281,7 +1101,21 @@ class Actor(actor_base.ActorBase):
         target: Union[Tuple[float, float], "Actor"],
         distance: float = 1,
     ):
-        """Move toward a target actor or position with an optional step size."""
+        """Move toward a target actor or position.
+
+        Args:
+            target: Target actor or position.
+            distance: Step size.
+
+        Returns:
+            The moved actor.
+
+        Examples:
+            ::
+
+                enemy.move_towards(player, 2)
+                enemy.move_towards((100, 80), 2)
+        """
         if isinstance(target, tuple):
             self._ensure_position_tuple(target, "target")
         else:
@@ -1294,7 +1128,23 @@ class Actor(actor_base.ActorBase):
         target: Union[Tuple[float, float], "Actor"],
         distance: float = 1,
     ):
-        """Move away from a target actor or position with an optional step size."""
+        """Move away from a target actor or position.
+
+        Args:
+            target: Target actor or position.
+            distance: Step size.
+
+        Returns:
+            The moved actor.
+
+        Examples:
+            ::
+
+                @player.register
+                def act(self):
+                    if self.detect(enemy):
+                        self.move_away(enemy, 3)
+        """
         if isinstance(target, tuple):
             self._ensure_position_tuple(target, "target")
         else:
@@ -1307,25 +1157,28 @@ class Actor(actor_base.ActorBase):
         direction: Union[int, str, Tuple[float, float]],
         distance=1,
     ):
-        """Moves actor *distance* steps into a *direction* or towards a position
+        """Move in a direction.
 
-        .. image:: ../_images/move_in_direction.png
-
-        Options
-            * 0, "up" - Look up
-            * 90, "right", - Look right
-            * -90, "left", - Look left
-            * -180, 180, "down" - Look down
-
-        .. image:: ../_images/direction.png
+        `direction` may be a number, a direction string, or a target position.
 
         Args:
-            direction: Direction as angle
-            distance: Number of steps to move in the selected direction.
+            direction: Direction angle, direction name, or target position.
+            distance: Number of steps to move.
 
         Returns:
-            The actor itself
+            The moved actor.
 
+        Examples:
+            ::
+
+                @player.register
+                def on_key_pressed(self, key):
+                    if "right" in key:
+                        self.move_in_direction("right", 5)
+                    if "up" in key:
+                        self.move_in_direction("up", 5)
+
+                player.move_in_direction((100, 80), 2)
         """
         direction = self._normalize_direction_input(direction, "direction")
         try:
@@ -1336,27 +1189,20 @@ class Actor(actor_base.ActorBase):
         return self._movement_facade.move_in_direction(direction, distance)
 
     def move_to(self, position: Tuple[float, float]):
-        """Moves actor *distance* to a specific world_posiition
+        """Move the actor to a world position.
 
         Args:
-            position: The position to which the actor should move. The position can be a 2-tuple (x, y)
-            which will be converted to a world_position
-
-        .. image:: ../_images/move_to.png
+            position: Target position as `(x, y)`.
 
         Returns:
-            The actor itself
+            The moved actor.
 
         Examples:
+            ::
 
-            move to (3, 2) on mouse_click
-
-            .. code-block:: python
-
+                @player.register
                 def on_clicked_left(self, position):
-                    self.move_to((3,2))
-
-
+                    self.move_to(position)
         """
         position = self._coerce_position_learning(position, "position")
         self._ensure_position_tuple(position, "position")
@@ -1387,22 +1233,20 @@ class Actor(actor_base.ActorBase):
         return self.detect_all(*args, **kwargs)
 
     def remove(self, kill=True) -> collections.defaultdict:
-        """
-        Removes this actor from world
+        """Remove this actor from its world.
+
+        Args:
+            kill: Whether to remove the underlying pygame sprite too.
+
+        Returns:
+            Removed actor data from the world connector.
 
         Examples:
+            ::
 
-            Removes robots in thecrash.py :
-
-            .. code-block:: python
-
-               def act(self):
-                   self.move()
-                   other = self.detecting_actor(distance = 0, actor_type=Robot)
-               if other:
-                   explosion = Explosion(position=self.position)
-                   self.remove()
-                   other.remove()
+                coin = actor.detect(Coin)
+                if coin:
+                    coin.remove()
         """
         kill = self._coerce_bool_learning(kill, "kill")
         self._ensure_bool(kill, "kill")
@@ -1414,51 +1258,16 @@ class Actor(actor_base.ActorBase):
 
     @property
     def is_rotatable(self) -> bool:
-        """Defines if the costume of a actor should be rotatable. The actor can still be rotated with
-        the ``direction`` property, but its costume won't be changed
+        """bool: Whether the costume rotates with the actor direction.
 
-        .. note::
-
-            You can also use ``actor.costume.is_rotatable``
+        The actor direction still changes when this is `False`; only the
+        rendered costume stays unrotated.
 
         Examples:
+            ::
 
-            Create a rotatable and a not rotatable actor
-
-            .. code-block::
-
-                from miniworlds import *
-                world = World()
-
-                t1 = Actor((100,100))
-                t1.add_costume("images/alien1.png")
-
-                t2 = Actor((200,200))
-                t2.add_costume("images/alien1.png")
-                t2.is_rotatable = False
-
-                @t1.register
-                def act(self):
-                    self.move()
-                    self.direction += 1
-
-                @t2.register
-                def act(self):
-                    self.move()
-                    self.direction += 1
-
-                world.run()
-
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=400>
-                <source src="../_static/rotatable.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
+                actor.is_rotatable = False
+                actor.direction = "right"
         """
         return self.costume.is_rotatable
 
@@ -1469,50 +1278,23 @@ class Actor(actor_base.ActorBase):
         self.costume.is_rotatable = value
 
     def bounce_from_border(self, borders: List[str]) -> Actor:
-        """The actor "bounces" from a border.
-
-        The direction is set according to the principle input angle = output angle.
-
-        .. note::
-
-          You must check for borders first!
+        """Bounce the actor away from world borders.
 
         Args:
-            borders: A list of borders as strings e.g. ["left", "right"]
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-                import random
-
-                world = World(150, 150)
-                actor = Actor((50,50))
-                actor.add_costume("images/ball.png")
-                actor.direction = 10
-
-                @actor.register
-                def act(self):
-                    self.move()
-                    borders = self.detecting_borders()
-                    if borders:
-                        self.bounce_from_border(borders)
-
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=240>
-                <source src="../_static/bouncing_ball.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
+            borders: Border names such as `"left"` or `"top"`.
 
         Returns:
-            The actor
+            The actor itself.
+
+        Examples:
+            ::
+
+                @ball.register
+                def act(self):
+                    self.move()
+                    borders = self.detect_borders()
+                    if borders:
+                        self.bounce_from_border(borders)
 
         """
         if not isinstance(borders, list):
@@ -1534,17 +1316,24 @@ class Actor(actor_base.ActorBase):
         direction: int = 0,
         distance: int = 0,
     ) -> List["Actor"]:
-        """Detects if actors are on actor position.
-        Returns a list of actors.
+        """Return all actors detected at an offset from this actor.
 
         Args:
-            actors: filter by actor type. Enter a class_name of actors to look for here
-            direction: The direction in which actors should be detected.
-            distance:  The distance in which actors should be detected (Start-Point is actor.center)
+            actors: Optional actor filter; use `None` for all actors.
+            direction: Direction to check.
+            distance: Distance from the actor center.
 
         Returns:
-            All actors found by Sensor
+            All matching actors found by the sensor.
 
+        Examples:
+            ::
+
+                coins = player.detect_all(Coin)
+                for coin in coins:
+                    coin.remove()
+
+                walls_ahead = player.detect_all(Wall, direction="right", distance=10)
         """
         self._ensure_actor_filter(actors, "actors")
         self._ensure_real(direction, "direction")
@@ -1552,53 +1341,26 @@ class Actor(actor_base.ActorBase):
         return self._sensor_facade.detect_all(actors, direction, distance)
 
     def detect(self, *args, **kwargs) -> Union["Actor", None]:
-        """Detects if actors are on actor position.
-        Returns the first found actor.
+        """Return the first detected actor.
 
         Args:
-            actors: filter by actor type. Enter a class_name of actors to look for heredirection: int = 0, distance: int = 0
-            direction: The direction in which actors should be detected.
-            distance:  The distance in which actors should be detected (Start-Point is actor.center)
+            args: Positional arguments forwarded to `detect_all()`.
+            kwargs: Keyword arguments forwarded to `detect_all()`.
 
         Returns:
-
-            First actor found by Sensor
+            First matching actor, or `None`.
 
         Examples:
+            ::
 
-            The green robot pushes the yellow robot:
+                wall = player.detect(Wall)
+                if wall:
+                    player.undo_move()
 
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = TiledWorld(8,3)
-                actor = Actor((1,1))
-                actor.add_costume("images/robo_green.png")
-                actor.orientation = -90
-                actor.direction = 90
-
-                actor2 = Actor((4,1))
-                actor2.add_costume("images/robo_yellow.png")
-                actor2.orientation = -90
-                actor2.direction = -90
-
-                @actor.register
-                def act(self):
-                    self.move()
-                    actor = self.detecting_actor()
-                    if actor:
-                        actor.move_right()
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=240>
-                <source src="../_static/pushing.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
+                coin = player.detect(Coin)
+                if coin:
+                    player.score += 1
+                    coin.remove()
         """
         return self._sensor_facade.detect(*args, **kwargs)
 
@@ -1606,102 +1368,117 @@ class Actor(actor_base.ActorBase):
         self,
         distance: int = 0,
     ) -> List:
-        """
-        Detects borders
+        """Return borders detected near the actor.
 
         Args:
-
-            distance: Specifies the distance in front of the actuator to which the sensors reacts.
+            distance: Distance in front of the actor to check.
 
         Returns:
+            List of border names such as `"left"`, `"right"`, `"top"`, or
+            `"bottom"`.
 
-            True if border was found.
+        Examples:
+            ::
 
+                @ball.register
+                def act(self):
+                    self.move()
+                    borders = self.detect_borders()
+                    if borders:
+                        self.bounce_from_border(borders)
         """
         self._ensure_real(distance, "distance")
         return self._sensor_facade.detect_borders(distance)
 
     def detect_left_border(self) -> bool:
-        """Does the actor touch the left border?
+        """Return whether the actor touches the left border.
 
         Returns:
-            True if border was found.
+            `True` if the left border is detected.
 
         """
         return self._sensor_facade.detect_left_border()
 
     def detecting_left_border(self) -> bool:
-        """Does the actor touch the left border?
+        """Return whether the actor touches the left border.
 
         Returns:
-            True if border was found.
+            `True` if the left border is detected.
 
         """
         return self.detect_left_border()
 
     def detect_right_border(self) -> bool:
-        """Does the actor touch the right border?
+        """Return whether the actor touches the right border.
 
         Returns:
-            True if border was found.
+            `True` if the right border is detected.
 
         """
         return self._sensor_facade.detect_right_border()
 
     def detecting_right_border(self) -> bool:
-        """Does the actor touch the right border?
+        """Return whether the actor touches the right border.
 
         Returns:
-            True if border was found.
+            `True` if the right border is detected.
 
         """
         return self.detect_right_border()
 
     def detect_top_border(self) -> bool:
-        """Does the actor touch the top border?
+        """Return whether the actor touches the top border.
 
         Returns:
-            True if border was found.
+            `True` if the top border is detected.
 
         """
         return self._sensor_facade.detect_top_border()
 
     def detecting_top_border(self) -> bool:
-        """Does the actor touch the top border?
+        """Return whether the actor touches the top border.
 
         Returns:
-            True if border was found.
+            `True` if the top border is detected.
 
         """
         return self.detect_top_border()
 
     def detecting_bottom_border(self) -> bool:
-        """Does the actor touch the lower border?
+        """Return whether the actor touches the bottom border.
 
         Returns:
-            True if border was found.
+            `True` if the bottom border is detected.
 
         """
         return self._sensor_facade.detecting_bottom_border()
 
     def detect_bottom_border(self) -> bool:
-        """Does the actor touch the lower border?
+        """Return whether the actor touches the bottom border.
 
         Returns:
-            True if border was found.
+            `True` if the bottom border is detected.
 
         """
         return self.detecting_bottom_border()
 
     def detect_color(self, color: Tuple = None) -> bool:
-        """Detects colors in world-background at actor center-position
+        """Return whether the actor detects a background color.
 
         Args:
-            color: color as tuple
+            color: Optional RGB/RGBA color tuple. If omitted, any color is
+                detected.
 
         Returns:
-            True, if color was found
+            `True` if the color is detected at the actor center.
 
+        Examples:
+            ::
+
+                @player.register
+                def act(self):
+                    if self.detect_color((0, 0, 0)):
+                        self.remove()
         """
         if color is not None:
             self._ensure_color_like(color, "color")
@@ -1710,15 +1487,19 @@ class Actor(actor_base.ActorBase):
     def detect_color_at(
         self, direction: int = None, distance: int = 0
     ) -> Union[Tuple, List]:
-        """Detects colors in world-background at actor-position
+        """Return background colors at an offset from the actor.
 
         Args:
-            direction: Specifies the direction where the sensors is searching.
-            distance: Specifies the distance in front of the actuator to which the sensors reacts.
+            direction: Direction to check; omit it to use the actor position.
+            distance: Distance from the actor center.
 
         Returns:
-            All colors found by Sensor
+            Color or colors found by the sensor.
 
+        Examples:
+            ::
+
+                color = actor.detect_color_at("right", 5)
         """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
@@ -1726,32 +1507,23 @@ class Actor(actor_base.ActorBase):
         return self._sensor_facade.detect_color_at(direction, distance)
 
     def detect_actors_at(self, direction=None, distance=0, actors=None) -> list:
-        """Detects a actor in given direction and distance.
+        """Return all actors at an offset from this actor.
+
+        Args:
+            direction: Direction to check; omit it to use the actor position.
+            distance: Distance from the actor center.
+            actors: Optional actor filter.
+
+        Returns:
+            List of matching actors.
 
         Examples:
+            ::
 
-          .. code-block:: python
-
-            from miniworlds import *
-            world = World()
-            wall=Rectangle((200,0))
-            wall.size = (20, 400)
-
-            for i in range(7):
-                actor = Circle((10,i*60 + 20))
-                actor.range = i * 10
-                @actor.register
-                def act(self):
-                    if not self.detect_actors_at(self.direction, self.range):
-                        self.direction = "right"
-                        self.move()
-
-            world.run()
-
-
-        :param direction: The direction in which actors should be detected.
-        :param distance:  The distance in which actors should be detected (Start-Point is actor.center)
-        :return: A list of actors
+                @player.register
+                def on_key_pressed_right(self):
+                    if not self.detect_actors_at("right", 20, Wall):
+                        self.move_in_direction("right", 5)
         """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
@@ -1760,7 +1532,23 @@ class Actor(actor_base.ActorBase):
         return self._sensor_facade.detect_actors_at(direction, distance, actors)
 
     def detect_actor_at(self, direction=None, distance=0, actors=None) -> "Actor":
-        """Detect and return the first actor at a given direction and distance."""
+        """Return the first actor at an offset from this actor.
+
+        Args:
+            direction: Direction to check.
+            distance: Distance from the actor center.
+            actors: Optional actor filter.
+
+        Returns:
+            First matching actor, or `None`.
+
+        Examples:
+            ::
+
+                wall = player.detect_actor_at("right", 20, Wall)
+                if wall:
+                    player.undo_move()
+        """
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
@@ -1772,7 +1560,22 @@ class Actor(actor_base.ActorBase):
         actors=None,
         distance=1,
     ) -> list:
-        """Detect all actors directly in front of this actor."""
+        """Return all actors directly in front of this actor.
+
+        Args:
+            actors: Optional actor filter.
+            distance: Distance in front of the actor.
+
+        Returns:
+            Matching actors.
+
+        Examples:
+            ::
+
+                enemies = player.detect_actors_in_front(Enemy)
+                for enemy in enemies:
+                    player.move_away(enemy, 3)
+        """
         self._ensure_actor_filter(actors, "actors")
         self._ensure_real(distance, "distance")
         return self._sensor_facade.detect_actors_in_front(actors, distance)
@@ -1782,143 +1585,173 @@ class Actor(actor_base.ActorBase):
         actors=None,
         distance=1,
     ) -> "Actor":
-        """Detect and return the first actor directly in front."""
+        """Return the first actor directly in front.
+
+        Args:
+            actors: Optional actor filter.
+            distance: Distance in front of the actor.
+
+        Returns:
+            First matching actor, or `None`.
+
+        Examples:
+            ::
+
+                wall = player.detect_actor_in_front(Wall)
+                if wall:
+                    player.turn_left()
+        """
         self._ensure_actor_filter(actors, "actors")
         self._ensure_real(distance, "distance")
         return self._sensor_facade.detect_actor_in_front(actors, distance)
 
     def detect_point(self, position: Tuple[float, float]) -> bool:
-        """Is the actor colliding with a specific (global) point?
+        """Return whether the actor overlaps a world point.
 
-        Warning:
-            If your want to check if an actor detects a specific pixel, use detect_pixel
+        Args:
+            position: World position as `(x, y)`.
 
         Returns:
-            True if point is below actor
+            `True` if the actor overlaps the point.
+
+        Examples:
+            ::
+
+                if actor.detect_point((100, 80)):
+                    actor.hide()
         """
         self._ensure_position_tuple(position, "position")
         return self._sensor_facade.detect_point(position)
 
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
-        """Is the actor colliding with a pixel?
+        """Return whether the actor overlaps a screen pixel.
+
+        Args:
+            position: Pixel position as `(x, y)`.
 
         Returns:
-            True if pixel is below actor
+            `True` if the actor overlaps the pixel.
+
+        Examples:
+            ::
+
+                @actor.register
+                def on_mouse_left(self, position):
+                    if self.detect_pixel(position):
+                        self.hide()
         """
         self._ensure_position_tuple(position, "position")
         return self._sensor_facade.detect_pixel(position)
 
     def detect_rect(self, rect: Union[Tuple, pygame.rect.Rect]):
-        """Is the actor colliding with a static rect?"""
+        """Return whether the actor overlaps a rectangle.
+
+        Args:
+            rect: Rectangle as `(x, y, width, height)` or `pygame.Rect`.
+
+        Returns:
+            `True` if the actor overlaps the rectangle.
+        """
         self._ensure_rect_like(rect, "rect")
         return self._sensor_facade.detect_rect(rect)
 
     def is_inside_world(self):
-        """Checks whether the actor is completely inside the world boundaries.
+        """Return whether the actor is completely inside the world.
 
         Returns:
-            True if the entire actor rectangle is within the world, False otherwise.
+            `True` if the entire actor rectangle is inside the world.
         """
         return self._sensor_facade.is_inside_world()
 
     def bounce_from_actor(self, other: "Actor"):
-        """Reflect movement direction when colliding with another actor."""
+        """Reflect movement direction after colliding with another actor.
+
+        Args:
+            other: Actor to bounce from.
+
+        Examples:
+            ::
+
+                other = ball.detect()
+                if other:
+                    ball.bounce_from_actor(other)
+        """
         self._ensure_actor_instance(other, "other")
         self._sensor_facade.bounce_from_actor(other)
 
     def animate(self, speed: int = 10):
-        """Animate the current costume with the given speed."""
+        """Animate the current costume.
+
+        Args:
+            speed: Frames between animation steps.
+
+        Examples:
+            ::
+
+                actor.animate(speed=5)
+        """
         self._ensure_int(speed, "speed")
         self.costume_manager.animate(speed)
 
     def animate_costume(self, costume: "costume_mod.Costume", speed: int = 10):
-        """Animate a specific costume with the given speed."""
+        """Animate a specific costume.
+
+        Args:
+            costume: Costume to animate.
+            speed: Frames between animation steps.
+
+        Examples:
+            ::
+
+                actor.animate_costume(run_costume, speed=5)
+        """
         if costume is None:
             raise TypeError("costume must not be None")
         self._ensure_int(speed, "speed")
         self.costume_manager.animate_costume(costume, speed)
 
     def animate_loop(self, speed: int = 10):
-        """Animates a costume with a looping animation
-
-        Switches through all costume-images every ``speed``-frame.
-
-        Examples:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(columns=280, rows=100)
-                robo = Actor(position=(0, 0))
-                robo.costume.add_images(["images/1.png", "images/2.png","images/3.png","images/4.png"])
-                robo.size = (99, 99)
-                robo.animate_loop()
-                world.run()
+        """Animate the current costume in a loop.
 
         Args:
-            speed (int, optional): Every ``speed`` frame, the image is switched. Defaults to 10.
+            speed: Frames between animation steps.
+
+        Examples:
+            ::
+
+                player.costume.add_images(["images/walk1.png", "images/walk2.png"])
+                player.animate_loop(speed=8)
         """
         self._ensure_int(speed, "speed")
         self.costume.loop = True
         self.costume_manager.animate(speed)
 
     def stop_animation(self):
-        """Stops current animation.
-        Costume ``is_animated`` is set to False
-
+        """Stop the current costume animation.
 
         Examples:
+            ::
 
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World(columns=280, rows=100)
-                robo = Actor(position=(0, 0))
-                robo.costume.add_images(["images/1.png", "images/2.png","images/3.png","images/4.png"])
-                robo.size = (99, 99)
-                robo.animate_loop()
-                @timer(frames = 100)
-                def stop():
-                    robo.stop_animation()
-                world.run()
+                actor.animate_loop()
+                actor.stop_animation()
         """
         self.costume.is_animated = False
 
     def send_message(self, message: str):
-        """Sends a message to world.
-
-        The message can be received with the ``on_message``-event
-
-        Examples:
-
-            Send and receive messages:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = World()
-
-                actor1 = Actor((2, 2))
-                actor1.add_costume((100,0,100,100))
-
-                @actor1.register
-                def on_message(self, message):
-                    # Handle the message received
-                    self.send_message(f"got: {message}")
-
-                actor2 = Actor((100,100))
-                actor2.send_message("Hello from actor2")
-
-                @actor2.register
-                def on_key_down_s(self):
-                    self.send_message("Hello")
-                world.run()
+        """Send a message through the world event system.
 
         Args:
-            message (str): A string containing the message.
+            message: Message name.
+
+        Examples:
+            ::
+
+                player.send_message("hit")
+
+                @enemy.register
+                def on_message(self, message):
+                    if message == "hit":
+                        self.remove()
         """
         if not isinstance(message, str):
             raise TypeError(
@@ -1929,57 +1762,30 @@ class Actor(actor_base.ActorBase):
     def on_key_down(self, key: list):
         """Called once when a key is pressed.
 
-        Register ``on_key_down_<letter>`` (for example ``on_key_down_a``) if you
+        Register `on_key_down_<letter>` (for example `on_key_down_a`) if you
         want to react to a specific letter only.
 
-        For **arrow keys** use ``on_key_down_left``, ``on_key_down_right``,
-        ``on_key_down_up``, ``on_key_down_down``.
+        For arrow keys use `on_key_down_left`, `on_key_down_right`,
+        `on_key_down_up`, or `on_key_down_down`.
 
         Args:
-            key: List of key name variants, for example ``['A', 'a']`` or
-                ``['left']`` for the left arrow key.
+            key: List of key name variants, for example `["A", "a"]` or
+                `["left"]`.
 
         Examples:
-
-            Move with WASD keys:
-
-            .. code-block:: python
+            ::
 
                 @player.register
                 def on_key_down(self, key):
-                    if 'W' in key or 'up' in key:
-                        self.direction = 'up'
-                    elif 'S' in key or 'down' in key:
-                        self.direction = 'down'
-                    elif 'A' in key or 'left' in key:
-                        self.direction = 'left'
-                    elif 'D' in key or 'right' in key:
-                        self.direction = 'right'
-                    self.move()
-
-            Or use dedicated per-key handlers for arrow keys:
-
-            .. code-block:: python
-
-                @player.register
-                def on_key_down_left(self):
-                    self.direction = 'left'
+                    if "left" in key:
+                        self.direction = "left"
+                    elif "right" in key:
+                        self.direction = "right"
                     self.move()
 
                 @player.register
-                def on_key_down_right(self):
-                    self.direction = 'right'
-                    self.move()
-
-                @player.register
-                def on_key_down_up(self):
-                    self.direction = 'up'
-                    self.move()
-
-                @player.register
-                def on_key_down_down(self):
-                    self.direction = 'down'
-                    self.move()
+                def on_key_down_space(self):
+                    self.send_message("jump")
         """
         raise NotImplementedOrRegisteredError(self.on_key_down)
 
@@ -1987,29 +1793,22 @@ class Actor(actor_base.ActorBase):
         """Called repeatedly every frame while a key is held down.
 
         This is the right choice for smooth, continuous movement. Like
-        ``on_key_down``, this event supports per-letter handlers such as
-        ``on_key_pressed_w`` or ``on_key_pressed_left`` for the left arrow key.
+        `on_key_down`, this event supports per-letter handlers such as
+        `on_key_pressed_w` or `on_key_pressed_left`.
 
         Args:
             key: List of key name variants currently held, for example
-                ``['W', 'w']`` or ``['up']``.
+                `["W", "w"]` or `["up"]`.
 
         Examples:
-
-            Smooth movement with arrow keys (fires every frame while held):
-
-            .. code-block:: python
+            ::
 
                 @player.register
                 def on_key_pressed(self, key):
-                    if 'left' in key:
+                    if "left" in key:
                         self.x -= 3
-                    elif 'right' in key:
+                    elif "right" in key:
                         self.x += 3
-                    elif 'up' in key:
-                        self.y -= 3
-                    elif 'down' in key:
-                        self.y += 3
         """
         raise NotImplementedOrRegisteredError(self.on_key_pressed)
 
@@ -2017,16 +1816,15 @@ class Actor(actor_base.ActorBase):
         """Called once when a previously pressed key is released.
 
         Args:
-            key: List of key name variants, same format as in ``on_key_down``.
+            key: List of key name variants, same format as in `on_key_down()`.
 
         Examples:
-
-            .. code-block:: python
+            ::
 
                 @player.register
                 def on_key_up(self, key):
-                    if 'space' in key:
-                        player.stop_animation()
+                    if "space" in key:
+                        self.stop_animation()
         """
         raise NotImplementedOrRegisteredError(self.on_key_up)
 
@@ -2034,15 +1832,14 @@ class Actor(actor_base.ActorBase):
         """Called when the mouse cursor enters or moves over the actor area.
 
         Args:
-            position: Current mouse position as ``(x, y)``.
+            position: Current mouse position as `(x, y)`.
 
         Examples:
-
-            .. code-block:: python
+            ::
 
                 @actor.register
                 def on_mouse_over(self, position):
-                    self.costume.transparency = 100  # semi-transparent on hover
+                    self.costume.transparency = 100
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_over)
 
@@ -2053,21 +1850,28 @@ class Actor(actor_base.ActorBase):
             position: The mouse position when it left the actor.
 
         Examples:
-
-            .. code-block:: python
+            ::
 
                 @actor.register
                 def on_mouse_leave(self, position):
-                    self.costume.transparency = 0  # restore normal look
+                    self.costume.transparency = 0
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_leave)
 
     def on_mouse_left_down(self, position: tuple):
-        """Called when the left mouse button is pressed down."""
+        """Called when the left mouse button is pressed down.
+
+        Args:
+            position: Current mouse position as `(x, y)`.
+        """
         raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
 
     def on_mouse_right_down(self, position: tuple):
-        """Called when the right mouse button is pressed down."""
+        """Called when the right mouse button is pressed down.
+
+        Args:
+            position: Current mouse position as `(x, y)`.
+        """
         raise NotImplementedOrRegisteredError(self.on_mouse_right_down)
 
     def on_mouse_left(self, position: tuple):
@@ -2106,130 +1910,67 @@ class Actor(actor_base.ActorBase):
         raise NotImplementedOrRegisteredError(self.on_mouse_motion)
 
     def on_mouse_left_released(self, position: tuple):
-        """Method is called when left mouse key is released.
-
-        Examples:
-
-            You can use on_mouse_left_release to implement a drag_and_drop event
-
-            .. code-block::
-
-                from miniworlds import *
-
-                world = World(200, 200)
-                circle = Circle((30, 30), 60)
-                circle.direction = 90
-                circle.dragged = False
-
-                @circle.register
-                def on_mouse_left(self, mouse_pos):
-                    if self.detect_pixel(mouse_pos):
-                        self.dragged = True
-
-                @circle.register
-                def on_mouse_left_released(self, mouse_pos):
-                    if not world.is_mouse_pressed():
-                        self.dragged = False
-                        self.center = mouse_pos
-
-                world.run()
-
-            Output:
-
-            .. raw:: html
-
-                <video loop autoplay muted width=200>
-                <source src="../_static/draganddrop.webm" type="video/webm">
-                Your browser does not support the video tag.
-                </video>
-
+        """Called when the left mouse button is released.
 
         Args:
-            position (tuple): Actual mouse position as tuple (x,y)
+            position: Current mouse position as `(x, y)`.
 
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+        Examples:
+            ::
+
+                @actor.register
+                def on_mouse_left_released(self, position):
+                    self.center = position
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_left_released)
 
     def on_mouse_right_released(self, position: tuple):
-        """Method is called when right mouse key is released.
-
-        The behavior and arguments match `on_mouse_left_released`.
-
+        """Called when the right mouse button is released.
 
         Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+            position: Current mouse position as `(x, y)`.
         """
         raise NotImplementedOrRegisteredError(self.on_mouse_right_released)
 
     def on_clicked_left(self, position: tuple):
-        """The mouse is on top of a actor and mouse was clicked.
+        """Called when the actor is clicked with the left mouse button.
+
+        Args:
+            position: Current mouse position as `(x, y)`.
 
         Examples:
-
-            Registering a on_click event:
-
-            .. code-block::
-
-                actor = miniworlds.Actor((2,2))
+            ::
 
                 @actor.register
                 def on_clicked_left(self, position):
-                    # Handle click event
-
-
-        Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+                    self.hide()
         """
         raise NotImplementedOrRegisteredError(self.on_clicked_left)
 
     def on_clicked_right(self, position):
-        """The mouse is on top of a actor and mouse was clicked.
+        """Called when the actor is clicked with the right mouse button.
+
+        Args:
+            position: Current mouse position as `(x, y)`.
 
         Examples:
-
-            Registering a on_click event:
-
-            .. code-block::
-
-                actor = miniworlds.Actor((2,2))
+            ::
 
                 @actor.register
                 def on_clicked_right(self, position):
-                    # Handle right click event
-
-
-        Args:
-            position (tuple): Actual mouse position as tuple (x,y)
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+                    self.remove()
         """
         raise NotImplementedOrRegisteredError(self.on_clicked_right)
 
     def on_detecting_world(self):
-        """`on_detecting_world` is called, when actor is on the world
+        """Called when the actor is inside the world.
 
         Examples:
-
-            Register on_detecting_world method:
-
-            .. code-block::
+            ::
 
                 @player.register
-                    def on_detecting_world(self):
-                        # Actor is inside the world
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
-
+                def on_detecting_world(self):
+                    self.move()
         """
         raise NotImplementedOrRegisteredError(self.on_detecting_world)
 
@@ -2239,18 +1980,11 @@ class Actor(actor_base.ActorBase):
         Useful to remove actors that fly off-screen.
 
         Examples:
-
-            Remove actor when it leaves the world:
-
-            .. code-block:: python
+            ::
 
                 @rocket.register
                 def on_not_detecting_world(self):
                     self.remove()
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
-
         """
         raise NotImplementedOrRegisteredError(self.on_not_detecting_world)
 
@@ -2260,54 +1994,43 @@ class Actor(actor_base.ActorBase):
         Both names are accepted so older teaching material and newer examples
         can use the wording that reads best in context.
 
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+        Examples:
+            ::
+
+                @actor.register
+                def on_detecting_not_on_world(self):
+                    self.remove()
         """
         raise NotImplementedOrRegisteredError(self.on_detecting_not_on_world)
 
     def on_detecting_actor(self, actor: "Actor"):
-        """*on_detecting_actor* is called, when actor is detects a actor on same position
+        """Called when this actor detects another actor.
 
         Args:
-            actor (Actor): The found actor
+            actor: Detected actor.
 
         Examples:
-
-            Register detect_actor event
-
-            .. code-block::
+            ::
 
                 @player.register
                 def on_detecting_actor(self, actor):
-                    # Check if detected actor is the target
-                    if actor == player2:
-                        self.move()  # React to detection
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+                    if isinstance(actor, Coin):
+                        actor.remove()
         """
         raise NotImplementedOrRegisteredError(self.on_detecting_actor)
 
     def on_detecting_borders(self, borders: List[str]):
-        """*on_detecting_border* is called, when actor is near a border
+        """Called when the actor detects one or more world borders.
 
         Args:
-            borders (List): A list of strings with found borders, e.g.: ['left', 'top']
+            borders: Border names, for example `["left", "top"]`.
 
         Examples:
-
-            Register on_detecting_border_event:
-
-            .. code-block::
+            ::
 
                 @player.register
                 def on_detecting_borders(self, borders):
-                    # Handle border detection
-                    if "left" in borders:
-                        self.x = 1  # Move away from left edge
-
-        Raises:
-            NotImplementedOrRegisteredError: The error is raised when method is not overwritten or registered.
+                    self.bounce_from_border(borders)
         """
         raise NotImplementedOrRegisteredError(self.on_detecting_borders)
 

@@ -9,38 +9,26 @@ if TYPE_CHECKING:
 
 
 class Costume(appear.Appearance):
-    """A costume contains one or multiple images
+    """Appearance for an actor.
 
-    Every actor has a costume which defines the "look" of the actor.
-    You can switch the images in a costume to animate the actor.
+    A costume contains one or more images and defines how an actor looks. You
+    can switch images in a costume to animate the actor.
 
-    You can create costumes in three common ways:
-
-    * ``actor.add_costume("images/player.png")``
-    * ``Costume("images/player.png")`` to create a detached costume with an image
-    * ``Costume(actor)`` to create and attach a costume immediately
-    * ``Costume(actor, "images/player.png")`` to create, load, and attach immediately
-    * ``Costume()`` followed by ``actor.add_costume(costume)`` to attach it later
+    Args:
+        actor: Optional actor to attach the costume to.
+        source: Optional image path, surface, color tuple, or list of image
+            sources.
 
     Examples:
+        ::
 
-        Create and attach a costume directly:
+            actor.add_costume("images/player.png")
 
-        .. code-block:: python
-
-            actor = Actor((20, 30))
-            costume = Costume(actor)
-            costume.add_image("images/walk1.png")
-            costume.add_image("images/walk2.png")
-
-        Create a detached costume first and add it later:
-
-        .. code-block:: python
-
-            actor = Actor((20, 30))
             costume = Costume()
             costume.add_image("images/walk1.png")
             actor.add_costume(costume)
+
+            costume = Costume(actor, "images/player.png")
     """
 
     _managed_creation_depth = 0
@@ -128,7 +116,13 @@ class Costume(appear.Appearance):
 
     @property
     def info_overlay(self):
-        """Shows info overlay (Rectangle around the actor and Direction marker)"""
+        """bool: Whether to draw a debug overlay around the actor.
+
+        Examples:
+            ::
+
+                actor.costume.info_overlay = True
+        """
         return self._info_overlay
 
     @info_overlay.setter
@@ -137,26 +131,35 @@ class Costume(appear.Appearance):
         self.set_dirty("all", Costume.RELOAD_ACTUAL_IMAGE)
 
     def set_image(self, source: Union[int, "appear.Appearance", tuple]) -> bool:
-        """
-        :param source: index, Appearance or color.
-        :return: True if image exists
+        """Select the active costume image.
+
+        Args:
+            source: Image index, appearance, or color tuple.
+
+        Returns:
+            `True` if the image exists.
+
+        Examples:
+            ::
+
+                costume.set_image(0)
         """
         return super().set_image(source)
 
     def _inner_shape(self) -> tuple:
-        """Returns inner shape of costume
+        """Return the inner costume shape.
 
         Returns:
-            pygame.Rect: Inner shape (Rectangle with size of actor)
+            Draw function and rectangle arguments.
         """
         size = self.parent.position_manager.get_size()
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), 0]
 
     def _outer_shape(self) -> tuple:
-        """Returns outer shape of costume
+        """Return the outer costume shape.
 
         Returns:
-            pygame.Rect: Outer shape (Rectangle with size of actors without filling.)
+            Draw function and rectangle arguments.
         """
         size = self.parent.position_manager.get_size()
         return pygame.draw.rect, [pygame.Rect(0, 0, size[0], size[1]), self.border]

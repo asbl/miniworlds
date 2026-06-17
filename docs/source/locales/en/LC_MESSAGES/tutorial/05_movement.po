@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/05_movement.md:1
 msgid "Movement"
@@ -85,7 +85,7 @@ msgstr ""
 "**degrees** degrees."
 
 #: ../../source/tutorial/05_movement.md:30
-msgid "Example:"
+msgid "Example"
 msgstr ""
 
 #: ../../source/tutorial/05_movement.md:60
@@ -182,8 +182,8 @@ msgstr ""
 
 #~ msgid ""
 #~ "Alternativ zur Standardbewegung kannst du "
-#~ "den Actor mit **`move_in_direction()`** in"
-#~ " eine beliebige Richtung bewegen, indem "
+#~ "den Actor mit **`move_in_direction()`** in "
+#~ "eine beliebige Richtung bewegen, indem "
 #~ "du einen Winkel angibst."
 #~ msgstr ""
 #~ "As an alternative to the standard "
@@ -206,4 +206,7 @@ msgstr ""
 #~ "The following example shows how the "
 #~ "actor follows the mouse pointer's "
 #~ "position using **`move_in_direction()`**:"
+
+#~ msgid "Example:"
+#~ msgstr ""
 

@@ -18,55 +18,44 @@ from miniworlds.base.exceptions import TiledWorldTooBigError
 
 
 class TiledWorld(world.World):
-    """
-    A TiledWorld is a World where each Actor is placed in one Tile.
+    """Grid-based world where actors are placed on tiles.
 
-    With Tiled World, you can realize RPGs and Boardgames.
-
-    .. image:: /_images/rpg.jpg
-        :alt: TiledWorld
-
-    Each Actor on a TiledWorld can be placed on a Tile, on a Corner between Tiles or on an Edge between Tiles.
+    A `TiledWorld` uses tile coordinates instead of pixel coordinates for actor
+    positions. Actors can also be placed on tile corners or edges.
 
     Examples:
+        ::
 
-        Create Actor on Tile, Corner and Edge:
+            Create a small grid world:
 
-        .. code-block::
+                from miniworlds import TiledWorld, Actor
 
-            from miniworlds import *
-            world = TiledWorld(6, 3)
-            world.grid = True
-            last_corner = None
+                world = TiledWorld(6, 3)
+                player = Actor((1, 1))
+                player.fill_color = (255, 255, 255)
 
-            tile = Tile((1,1))
-            t1 = Actor()
-            t1.center = tile.position
-            t1.fill_color = (255,255,255)
+                @player.register
+                def on_key_down_right(self):
+                    self.move_in_direction("right")
 
-            corner = Corner((3,1), "nw")
-            t2 = Actor()
-            t2.center = corner.position
-            t2.fill_color = (255,0,0)
-
-            edge = Edge((5,1), "w")
-            t3 = Actor()
-            t3.center = edge.position
-            t3.fill_color = (0,0,255)
-            t3.size = (0.2,1)
-            t3.direction = edge.angle
-
-            world.run()
-
+                world.run()
     """
 
     def __init__(self, x: int = 20, y: int = 16, tile_size: int = 40, empty=False):
-        """Initializes the TiledWorld
+        """Create a tiled world.
 
         Args:
-            view_x: The number of columns
-            view_y: The number of rows
-            empty: The world has no tiles, edges, and corners. They must be created manually
+            x: Number of columns.
+            y: Number of rows.
+            tile_size: Tile size in pixels.
+            empty: If `True`, tiles, edges, and corners are not created
+                automatically.
+
+        Examples:
+            ::
+
+                world = TiledWorld(8, 6)
+                empty_world = TiledWorld(8, 6, empty=True)
         """
         self._tile_size: int = tile_size
         "TiledWorld.tile_size Defines the size of a single tile (All Tiles are square)"
@@ -99,56 +88,19 @@ class TiledWorld(world.World):
         return tile_factory.TileFactory()
 
     def clear_tiles(self):
-        """Removes all tiles, corners and edges from World
+        """Remove all tiles, corners, and edges.
 
-        Instead of clearing the world, you can add the parameter empty to World to create a new World from scratch.
+        Use `empty=True` in the constructor when you want to build all tiles
+        manually from the start.
 
         Examples:
+            ::
 
-            Clear and re-create world:
+                world = TiledWorld(8, 8, empty=True)
+                world.add_tile_to_world((0, 0))
 
-            .. code-block:: python
-
-                from miniworlds import *
-                world = HexWorld(8, 8)
-
-                @world.register
-                def on_setup(self):
-                    self.clear_tiles()
-                    center = HexTile((4, 4))
-                    for x in range(self.columns):
-                        for y in range(self.rows):
-                            if center.position.distance((x, y)) < 2:
-                                tile = self.add_tile_to_world((x, y))
-                                tt = Actor()
-                                t.center = tile.position
-
-
-                world.run()
-
-
-            Create a new world from scratch
-
-            .. note::
-
-                This variant is faster, because Tiles are not created twice
-
-            .. code-block:: python
-
-                from miniworlds import *
-                world = HexWorld(8, 8, empty=True)
-
-                @world.register
-                def on_setup(self):
-                    center = HexTile((4, 4))
-                    for x in range(self.columns):
-                        for y in range(self.rows):
-                            if center.position.distance((x, y)) < 2:
-                                tile = self.add_tile_to_world((x, y))
-                                tile.create_actor()
-
-
-                world.run()
+                world.clear_tiles()
+                world.add_tile_to_world((1, 1))
         """
         self.tiles.clear()
         self.corners.clear()
@@ -173,10 +125,15 @@ class TiledWorld(world.World):
         """Creates and registers a tile at a world grid position.
 
         Args:
-            position: Tile position as ``(column, row)``.
+            position: Tile position as `(column, row)`.
 
         Returns:
             The created tile instance.
+
+        Examples:
+            ::
+
+                tile = world.add_tile_to_world((2, 3))
         """
         tile_cls, edge_cls, corner_cls = self._templates()
         tile_pos = position
@@ -185,16 +142,21 @@ class TiledWorld(world.World):
         return tile
 
     def add_corner_to_world(self, position, direction):
-        """Creates and registers a corner for a tile position and direction.
+        """Create and register a corner.
 
         Existing corners are merged when multiple tiles share the same corner.
 
         Args:
-            position: Base tile position as ``(column, row)``.
-            direction: Corner direction key (for example ``"nw"``).
+            position: Base tile position as `(column, row)`.
+            direction: Corner direction key, for example `"nw"`.
 
         Returns:
             The registered corner object.
+
+        Examples:
+            ::
+
+                corner = world.add_corner_to_world((2, 3), "nw")
         """
         tile_cls, edge_cls, corner_cls = self._templates()
         corner = corner_cls(position, direction, self)
@@ -206,16 +168,21 @@ class TiledWorld(world.World):
         return self.corners[corner_pos]
 
     def add_edge_to_world(self, position, direction):
-        """Creates and registers an edge for a tile position and direction.
+        """Create and register an edge.
 
         Existing edges are merged when neighboring tiles describe the same edge.
 
         Args:
-            position: Base tile position as ``(column, row)``.
-            direction: Edge direction key (for example ``"n"`` or ``"w"``).
+            position: Base tile position as `(column, row)`.
+            direction: Edge direction key, for example `"n"` or `"w"`.
 
         Returns:
             The registered edge object.
+
+        Examples:
+            ::
+
+                edge = world.add_edge_to_world((2, 3), "w")
         """
         edge_cls = self.tile_factory.edge_cls
         edge = edge_cls(position, direction, self)
@@ -253,40 +220,25 @@ class TiledWorld(world.World):
                 self.add_edge_to_world(tile.position, direction)
 
     def get_tile(self, position: Tuple[float, float]):
-        """Gets Tile at Position.
+        """Return the tile at a tile position.
 
-        Raises TileNotFoundError, if Tile does not exists.
+        Args:
+            position: Tile position as `(column, row)`.
+
+        Returns:
+            The tile at the position.
+
+        Raises:
+            TileNotFoundError: If no tile exists at the position.
 
         Examples:
-
-            Get tile from actor:
-
-            .. code-block:: python
+            ::
 
                 tile = world.get_tile(actor.position)
+                tile = world.get_tile((1, 1))
 
-            Full example:
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                world = TiledWorld(6, 3)
-                world.grid = True
-                last_corner = None
-
-                tile = Tile((1,1))
-                t1 = Actor()
-                t1.center = tile.position
-                t1.fill_color = (255,255,255)
-
-                tile=world.get_tile((1,1))
-                assert(tile.get_actors()[0] == t1)
-
-                world.run()
-
-        :param position: Position on World
-        :return: Tile on Position, if position exists
+                if tile.get_actors():
+                    print("Tile is occupied")
         """
         if self.is_tile(position):
             position = position
@@ -311,45 +263,23 @@ class TiledWorld(world.World):
     def get_corner(
         self, position: Tuple[float, float], direction: Optional[str] = None
     ):
-        """Gets Corner at Position.
-
-        Raises CornerNotFoundError, if Tile does not exists.
-
-        Examples:
-
-            Get corner from actor:
-
-            .. code-block:: python
-
-                corner = world.get_corner(actor.position)
-
-            Get corner from world-position and direction
-
-            .. code-block:: python
-
-                from miniworlds import *
-
-                from miniworlds import *
-                world = TiledWorld(6, 3)
-                world.grid = True
-                last_corner = None
-
-                corner = Corner((3,1), "nw")
-                t2 = Actor()
-                t1.center = corner.position
-                t2.fill_color = (255,0,0)
-
-                corner=world.get_corner((3,1),"nw")
-                assert(corner.get_actors()[0] == t2)
-
-                world.run()
+        """Return a corner by corner position or tile position plus direction.
 
         Args:
-            position: Position on World
-            direction: if direction is not None, position is interpreted as tile-world-position
+            position: Corner position, or tile position when `direction` is set.
+            direction: Optional corner direction, for example `"nw"`.
 
-        Returns
-            next corner, if position exists
+        Returns:
+            The matching corner.
+
+        Raises:
+            CornerNotFoundError: If no corner exists at the resolved position.
+
+        Examples:
+            ::
+
+                corner = world.get_corner(actor.position)
+                corner = world.get_corner((3, 1), "nw")
         """
         corner_cls = self.tile_factory.corner_cls
         if direction is not None:
@@ -360,34 +290,20 @@ class TiledWorld(world.World):
             raise miniworlds_exception.CornerNotFoundError(position)
 
     def get_edge(self, position, direction: Optional[str] = None):
-        """Gets Edge at Position.
+        """Return an edge by edge position or tile position plus direction.
 
-        Raises EdgeNotFoundError, if Tile does not exists.
+        Args:
+            position: Edge position, or tile position when `direction` is set.
+            direction: Optional edge direction, for example `"n"` or `"w"`.
+
+        Returns:
+            The matching edge.
 
         Examples:
+            ::
 
-            Get edge from actor:
-
-            .. code-block:: python
-
-                tile = world.get_edge(actor.position)
-
-            Get edge from world-position and direction
-
-            .. code-block:: python
-
-                from miniworlds import *
-                world = TiledWorld(6, 3)
-                world.grid = True
-                last_corner = None
-
-                edge=world.get_edge((5,1),"w")
-                assert(edge.get_actors()[0] == t3)
-
-                world.run()
-
-        :param position: Position on World
-        :return: Edge on Position, if position exists
+                edge = world.get_edge(actor.position)
+                edge = world.get_edge((5, 1), "w")
         """
         edge_cls = self.tile_factory.edge_cls
         if direction is not None:
@@ -402,8 +318,18 @@ class TiledWorld(world.World):
         return tiled_world_connector.TiledWorldConnector
 
     def borders(self, value: Union[tuple, Tuple[float, float], pygame.Rect]) -> list:
-        """
-        Returns the World's borders, if actor is near a Border.
+        """Return borders touched by a position or rectangle.
+
+        Args:
+            value: Position or rectangle to check.
+
+        Returns:
+            List of border names such as `"left"` or `"top"`.
+
+        Examples:
+            ::
+
+                borders = world.borders(actor.position)
         """
         position = value
         return self.get_borders_from_position(position)
@@ -425,7 +351,19 @@ class TiledWorld(world.World):
             self._dynamic_actors_dict[(x, y)].append(actor)
 
     def detect_actors_at_position(self, position):
-        """Returns all actors located at the given tile/world position."""
+        """Return all actors at a tile position.
+
+        Args:
+            position: Tile position as `(column, row)`.
+
+        Returns:
+            Actors located at that position.
+
+        Examples:
+            ::
+
+                actors = world.detect_actors_at_position((2, 3))
+        """
         # Use tiled spatial index if available for better performance
         tiled_spatial_index = getattr(self, "_tiled_spatial_index", None)
         if tiled_spatial_index is not None:
@@ -442,9 +380,18 @@ class TiledWorld(world.World):
         return actor_list
 
     def detect_actor_at_position(self, position):
-        """Sensing single actor at same position
+        """Return the first actor at a tile position.
 
-        Faster than sensing_actors, but only the first found actor is recognized.
+        Args:
+            position: Tile position as `(column, row)`.
+
+        Returns:
+            The first actor at that position, or `None`.
+
+        Examples:
+            ::
+
+                actor = world.detect_actor_at_position((2, 3))
         """
         actor_list = self.detect_actors_at_position(position)
         if not actor_list:
@@ -501,7 +448,13 @@ class TiledWorld(world.World):
 
     @property
     def grid(self):
-        """Displays grid overlay on background."""
+        """bool: Whether to display the grid overlay.
+
+        Examples:
+            ::
+
+                world.grid = True
+        """
         return self.background.grid
 
     @grid.setter
@@ -509,24 +462,33 @@ class TiledWorld(world.World):
         self.background.grid = value
 
     def draw_on_image(self, image, position):
-        """Draws an image onto the tiled world background at a tile position.
+        """Draw an image onto the tiled world background.
 
         Args:
             image: The image/surface to draw.
-            position: Tile position as ``(column, row)``.
+            position: Tile position as `(column, row)`.
+
+        Examples:
+            ::
+
+                world.draw_on_image(surface, (2, 3))
         """
         position = self.to_pixel(position)
         self.background.draw_on_image(image, position, self.tile_size, self.tile_size)
 
     def get_from_pixel(self, position):
-        """Returns the tile/world position for a pixel coordinate.
+        """Return the tile position for a screen pixel.
 
         Args:
-            position: Pixel position as ``(x, y)``.
+            position: Pixel position as `(x, y)`.
 
         Returns:
-            The corresponding world position, or ``None`` if the pixel lies
-            outside the camera view.
+            Tile position, or `None` if the pixel is outside the camera view.
+
+        Examples:
+            ::
+
+                tile_position = world.get_from_pixel((80, 120))
         """
         x, y = position
         if x < 0 or y < 0:
@@ -537,7 +499,19 @@ class TiledWorld(world.World):
             return self.get_tile_from_pixel(position).position
 
     def get_tile_from_pixel(self, position):
-        """Gets nearest Tile from pixel"""
+        """Return the tile under a screen pixel.
+
+        Args:
+            position: Pixel position as `(x, y)`.
+
+        Returns:
+            Tile under the pixel.
+
+        Examples:
+            ::
+
+                tile = world.get_tile_from_pixel((80, 120))
+        """
         tile_cls = self.tile_factory.tile_cls
         return tile_cls.from_pixel(position, self)
 
@@ -554,28 +528,63 @@ class TiledWorld(world.World):
         return corner_points
 
     def is_edge(self, position):
-        """Returns True, if position is a edge."""
+        """Return whether a position is an edge position.
+
+        Examples:
+            ::
+
+                if world.is_edge(actor.position):
+                    actor.hide()
+        """
         if position in self.edges:
             return True
         else:
             return False
 
     def is_corner(self, position):
-        """Returns True, if position is a corner."""
+        """Return whether a position is a corner position.
+
+        Examples:
+            ::
+
+                if world.is_corner(actor.position):
+                    actor.hide()
+        """
         if position in self.corners:
             return True
         else:
             return False
 
     def is_tile(self, position):
-        """Returns True, if position is a tile."""
+        """Return whether a position is a tile position.
+
+        Examples:
+            ::
+
+                if world.is_tile((1, 1)):
+                    tile = world.get_tile((1, 1))
+        """
         if position in self.tiles:
             return True
         else:
             return False
 
     def to_pixel(self, position, size=(0, 0), origin=(0, 0)):
-        """Converts WorldPosition to pixel coordinates"""
+        """Convert a tile position to pixel coordinates.
+
+        Args:
+            position: Tile position as `(column, row)`.
+            size: Reserved for compatibility.
+            origin: Pixel offset added to the converted position.
+
+        Returns:
+            Pixel position as `(x, y)`.
+
+        Examples:
+            ::
+
+                pixel = world.to_pixel((2, 3))
+        """
         x = position[0] * self.tile_size + origin[0]
         y = position[1] * self.tile_size + origin[1]
         return x, y
@@ -608,10 +617,12 @@ class TiledWorld(world.World):
 
     @property
     def tile_size(self) -> int:
-        """Tile size of each tile, if world has tiles
+        """int: Size of one tile in pixels.
 
-        Returns:
-            The tile-size in pixels.
+        Examples:
+            ::
+
+                world.tile_size = 32
         """
         return self._tile_size
 
@@ -620,10 +631,15 @@ class TiledWorld(world.World):
         self.set_tile_size(value)
 
     def set_tile_size(self, value):
-        """Sets the tile size in pixels and refreshes camera/background caches.
+        """Set the tile size in pixels.
 
         Args:
             value: New tile size in pixels.
+
+        Examples:
+            ::
+
+                world.set_tile_size(32)
         """
         self._tile_size = value
         self.camera._reload_camera()

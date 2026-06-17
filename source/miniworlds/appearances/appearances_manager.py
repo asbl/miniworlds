@@ -14,20 +14,17 @@ import pygame
 class AppearancesManager(ABC):
     """Abstract base class for managing a collection of costume or background appearances.
 
-    Subclasses ``CostumesManager`` (for actors) and ``BackgroundsManager`` (for worlds)
+    Subclasses `CostumesManager` (for actors) and `BackgroundsManager` (for worlds)
     extend this class with their own factory methods and convenience helpers.
 
-    Typical use via the public API:
+    Examples:
+        ::
 
-    .. code-block:: python
+            actor.switch_costume(1)
+            actor.next_costume()
 
-        # Switching between costumes
-        actor.switch_costume(1)
-        actor.next_costume()
-
-        # Switching between backgrounds
-        world.switch_background(1)
-        world.next_background()
+            world.switch_background(1)
+            world.next_background()
     """
     def __init__(self, parent):
         self.appearances_list = []
@@ -56,8 +53,8 @@ class AppearancesManager(ABC):
         """Image surface of the currently active appearance.
 
         Returns:
-            pygame.Surface: Active appearance image, or a 1x1 fallback surface
-            if no appearance has been created yet.
+            Active appearance image, or a 1x1 fallback surface if no
+            appearance has been created yet.
         """
         if self.appearance:
             return self.appearance.image
@@ -81,9 +78,15 @@ class AppearancesManager(ABC):
     def add_new_appearance(
         self, source: Union[str, pygame.Surface, "costume.Costume", Tuple, None]
     ) -> "appearance_mod.Appearance":
-        """Adds a new Appearance (costume or background) to manager.
+        """Add a new appearance to the manager.
 
-        called by ``add_costume`` and ``add_background`` in subclasses.
+        This is called by `add_costume()` and `add_background()` in subclasses.
+
+        Args:
+            source: Image path, surface, color tuple, costume, or `None`.
+
+        Returns:
+            The newly active appearance.
         """
         appearance: "appearance_mod.Appearance" = self._create_appearance_from_source(
             source
@@ -107,11 +110,11 @@ class AppearancesManager(ABC):
     ):
         """Replaces the current appearance with a new one.
 
-        If no appearance exists yet, this behaves like ``add_new_appearance``.
+        If no appearance exists yet, this behaves like `add_new_appearance()`.
 
         Args:
             source: Image source, color tuple, surface, costume instance, or
-                ``None`` for a default appearance.
+                `None` for a default appearance.
 
         Returns:
             The newly active appearance.

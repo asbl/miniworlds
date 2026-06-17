@@ -27,7 +27,7 @@ class TextBox(parent_actor.ParentActor):
     """A multi-line text box with fixed width and height.
 
     Long lines are automatically word-wrapped to fit within the given width.
-    Each line is rendered as a separate ``Text`` actor.
+    Each line is rendered as a separate `Text` actor.
 
     Args:
         position: Top-left position of the text box.
@@ -38,13 +38,10 @@ class TextBox(parent_actor.ParentActor):
         border: If truthy, a rectangle outline is drawn around the box.
 
     Examples:
+        ::
 
-        .. code-block:: python
-
-            from miniworlds import *
-            world = World(400, 300)
-            box = TextBox((10, 10), 380, 200, text="Hello World! This is a long text that wraps automatically.")
-            world.run()
+            box = TextBox((10, 10), 380, 200, text="Hello World!")
+            box.font_size = 16
     """
 
     def __init__(
@@ -83,14 +80,14 @@ class TextBox(parent_actor.ParentActor):
             shapes.Rectangle(position, width, height)
 
     def create_line(self, position, txt="") -> text.Text:
-        """Creates a single ``Text`` actor for one rendered line.
+        """Create a single `Text` actor for one rendered line.
 
         Args:
             position: Top-left position of the line.
-            txt: Text content of the line. Defaults to an empty string.
+            txt: Text content of the line.
 
         Returns:
-            text.Text: The created text actor.
+            The created text actor.
         """
         lineText = text.Text(position, txt)
         if self.font_size != 0:
@@ -99,15 +96,17 @@ class TextBox(parent_actor.ParentActor):
         return lineText
 
     def create_line_actors(self):
-        """Builds the visible text lines for the current text box content.
+        """Build visible text lines for the current text box content.
 
         The text is split line by line and then wrapped after words so that no
-        rendered line becomes wider than ``self.line_width``. Each line is
-        stored as a child ``Text`` actor.
+        rendered line becomes wider than `self.line_width`. Each line is
+        stored as a child `Text` actor.
 
         Examples:
+            ::
 
-            After changing ``self.text``, call this method to rebuild all lines.
+                box.text = "New text"
+                box.create_line_actors()
         """
         dummy = self.create_line((0, 0))
         font = dummy.costume.font_manager.font

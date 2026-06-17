@@ -6,9 +6,8 @@ class Timed():
     """Base class for all timer objects.
 
     Registered timers are ticked once per frame by the world's main loop.
-    You normally use ``ActionTimer`` or ``LoopActionTimer`` (or their
-    decorator shortcuts ``@timer`` / ``@loop``) instead of subclassing
-    ``Timed`` directly.
+    You normally use `ActionTimer` or `LoopActionTimer` (or their decorator
+    shortcuts `@timer` and `@loop`) instead of subclassing `Timed` directly.
     """
 
     def __init__(self):
@@ -34,10 +33,20 @@ class Timed():
 
 
 class Timer(Timed):
-    """Calls its ``act()`` method once after *time* frames have elapsed.
+    """Timer that calls `act()` repeatedly after a frame interval.
 
-    Subclass this and override ``act()`` when you need custom timer logic.
-    For most use-cases prefer ``ActionTimer`` or the ``@timer`` decorator.
+    Subclass this and override `act()` when you need custom timer logic. For
+    most use-cases prefer `ActionTimer` or the `@timer` decorator.
+
+    Args:
+        time: Frame interval.
+
+    Examples:
+        ::
+
+            class BlinkTimer(Timer):
+                def act(self):
+                    actor.visible = not actor.visible
     """
 
     @staticmethod
@@ -54,7 +63,7 @@ class Timer(Timed):
         self.actual_time = 0
 
     def tick(self):
-        """Counts frames and calls ``act()`` when the timer interval is reached.
+        """Count frames and call `act()` when the interval is reached.
 
         This method is called automatically once per frame by the world.
         """
@@ -74,25 +83,28 @@ class Timer(Timed):
 class ActionTimer(Timer):
     """Calls a method after `time` frames.
 
-    Example:
-        Player moves after 48 frames::
+    Args:
+        time: Frames to wait before calling the method.
+        method: Method to call.
+        arguments: Optional single argument passed to the method.
 
-            miniworlds.ActionTimer(48, player.move, 2)
+    Examples:
+        ::
 
-        Same as above with decorator::
+            ActionTimer(48, player.move, 2)
 
-            @miniworlds.timer(frames = 24)
+            @timer(frames=24)
             def moving():
                 player.move()
     """
 
     def __init__(self, time: int, method: callable, arguments=None):
-        """
+        """Create a one-shot action timer.
 
         Args:
-            time (int): After `time` frames, the method is called
-            method (callable): The method to call.
-            arguments ([type], optional): Arguments for the method.
+            time: Frames to wait before calling the method.
+            method: Method to call.
+            arguments: Optional single argument passed to the method.
         """
         super().__init__(time)
         self.method: callable = method
@@ -104,7 +116,7 @@ class ActionTimer(Timer):
     def act(self):
         """Calls the stored method once and then unregisters the timer.
 
-        This is the behavior behind ``@timer`` and one-shot delayed actions.
+        This is the behavior behind `@timer` and one-shot delayed actions.
         """
         self._call_method()
         self.unregister()
@@ -115,15 +127,13 @@ class ActionTimer(Timer):
 
 class LoopActionTimer(ActionTimer):
     """Calls a method after `time` frames repeatedly until the timer is unregistered.
-    
-    Example:
-        Player moves after 48 frames::
 
-            miniworlds.LoopTimer(48, player.move, 2)
+    Examples:
+        ::
 
-        Same as above with decorator::
+            LoopActionTimer(48, player.move, 2)
 
-            @miniworlds.loop(frames = 24)
+            @loop(frames=24)
             def moving():
                 player.move()
     """
@@ -133,11 +143,15 @@ class LoopActionTimer(ActionTimer):
 
 
 def timer(*args, **kwargs):
-    """Used as decorator for timed actions.
+    """Decorate a function to run once after a number of frames.
 
-    Example::
+    Args:
+        frames: Frames to wait before the function runs.
 
-        @miniworlds.timer(frames = 24)
+    Examples:
+        ::
+
+            @timer(frames=24)
             def moving():
                 player.move()
     """
@@ -150,11 +164,15 @@ def timer(*args, **kwargs):
 
 
 def loop(*args, **kwargs):
-    """Used as decorator for looped actions.
+    """Decorate a function to run repeatedly after a frame interval.
 
-    Example::
+    Args:
+        frames: Frames between function calls.
 
-        @miniworlds.loop(frames = 24)
+    Examples:
+        ::
+
+            @loop(frames=24)
             def moving():
                 player.move()
     """

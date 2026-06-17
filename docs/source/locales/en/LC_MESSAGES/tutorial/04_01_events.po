@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: en\n"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:28
 #: ../../source/tutorial/04_01_events.md:67
-msgid "Explanation:"
+msgid "Explanation"
 msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:30
@@ -151,8 +151,8 @@ msgstr ""
 #: ../../source/tutorial/04_01_events.md:111
 msgid ""
 "You can either define specific keys like `on_key_down_b(self)`   or "
-"handle all key input using `on_key_down(self, key)` for general keyboard "
-"event handling."
+"handle all key input using `on_key_down(self, keys)` for general keyboard"
+" event handling."
 msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:116
@@ -161,8 +161,8 @@ msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:118
 msgid ""
-"`on_key_down` / `on_key_pressed` / `on_key_up` need `key` as parameter:"
-"   `def on_key_down(self, key):`"
+"`on_key_down` / `on_key_pressed` / `on_key_up` receive the current key "
+"list:   `def on_key_down(self, keys):`"
 msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:120
@@ -177,6 +177,12 @@ msgstr ""
 
 #: ../../source/tutorial/04_01_events.md:124
 msgid "If a handler is not called, first check its name and signature."
+msgstr ""
+
+#: ../../source/tutorial/04_01_events.md:127
+msgid ""
+"For a complete list of event names and signatures, see the [Event "
+"reference](../api/events.md)."
 msgstr ""
 
 #~ msgid "Mach dein Spiel interaktiv"
@@ -312,4 +318,20 @@ msgstr ""
 #~ "like `on_key_down_b(self)` or process general"
 #~ " keyboard events with `on_key_down(self, "
 #~ "key)` to detect all keyboard inputs."
+
+#~ msgid "Explanation:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can either define specific keys "
+#~ "like `on_key_down_b(self)`   or handle all "
+#~ "key input using `on_key_down(self, key)` "
+#~ "for general keyboard event handling."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "`on_key_down` / `on_key_pressed` / `on_key_up`"
+#~ " need `key` as parameter:   `def "
+#~ "on_key_down(self, key):`"
+#~ msgstr ""
 

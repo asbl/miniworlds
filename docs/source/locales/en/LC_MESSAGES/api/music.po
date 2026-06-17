@@ -34,8 +34,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ "
-"\\(app\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.__init__>`\\ \\(app\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -52,8 +51,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`is_playing "
-"<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.is_playing>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -74,8 +72,7 @@ msgstr ""
 
 #: ../../None:11:<autosummary>:1
 msgid ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
+":py:obj:`play <miniworlds.worlds.manager.music_manager.MusicManager.play>`\\ "
 "\\(\\[path\\, loop\\]\\)"
 msgstr ""
 
@@ -86,8 +83,8 @@ msgstr ""
 
 #: ../../None:11:<autosummary>:1
 msgid ""
-":py:obj:`stop "
-"<miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ \\(\\)"
+":py:obj:`stop <miniworlds.worlds.manager.music_manager.MusicManager.stop>`\\ "
+"\\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -98,8 +95,8 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`set_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ "
-"\\(volume\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.set_volume>`\\ \\"
+"(volume\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -110,8 +107,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`get_volume "
-"<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.get_volume>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -122,8 +118,7 @@ msgstr ""
 #: ../../None:11:<autosummary>:1
 msgid ""
 ":py:obj:`toggle_pause "
-"<miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause>`\\ "
-"\\(\\)"
+"<miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause>`\\ \\(\\)"
 msgstr ""
 
 #: ../../None:11:<autosummary>:1
@@ -219,8 +214,7 @@ msgstr ""
 
 #: miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause:1 of
 msgid ""
-"Toggles the pause state of the music. Pauses if playing, resumes if "
-"paused."
+"Toggles the pause state of the music. Pauses if playing, resumes if paused."
 msgstr ""
 
 #: miniworlds.worlds.manager.music_manager.MusicManager.toggle_pause:5 of
@@ -234,14 +228,12 @@ msgstr ""
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`__init__ "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ "
-"\\(app\\)"
+"<miniworlds.worlds.manager.sound_manager.SoundManager.__init__>`\\ \\(app\\)"
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
 msgid ""
-":py:obj:`play "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
+":py:obj:`play <miniworlds.worlds.manager.sound_manager.SoundManager.play>`\\ "
 "\\(\\[path\\, volume\\]\\)"
 msgstr ""
 
@@ -253,8 +245,8 @@ msgstr ""
 #: ../../None:5:<autosummary>:1
 msgid ""
 ":py:obj:`register "
-"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ "
-"\\(\\[path\\]\\)"
+"<miniworlds.worlds.manager.sound_manager.SoundManager.register>`\\ \\(\\"
+"[path\\]\\)"
 msgstr ""
 
 #: ../../None:5:<autosummary>:1
@@ -276,55 +268,6 @@ msgstr ""
 
 #: miniworlds.worlds.manager.sound_manager.SoundManager.register:1 of
 msgid ""
-"Registers a sound. It can slow down the performance, if sounds are loaded"
-" on the fly and it can be faster to register all sounds at program start."
+"Registers a sound. It can slow down the performance, if sounds are loaded on "
+"the fly and it can be faster to register all sounds at program start."
 msgstr ""
-
-#~ msgid "Rückgabetyp"
-#~ msgstr ""
-
-#~ msgid "Rückgabe"
-#~ msgstr ""
-
-#~ msgid "Parameter"
-#~ msgstr ""
-
-#~ msgid "pauses a music"
-#~ msgstr ""
-
-#~ msgid "returns True, if world is playing a music (and music ist not paused)"
-#~ msgstr ""
-
-#~ msgid "gets path to current music"
-#~ msgstr ""
-
-#~ msgid "plays a music from path"
-#~ msgstr ""
-
-#~ msgid "stops a music"
-#~ msgstr ""
-
-#~ msgid "sets volume of music"
-#~ msgstr ""
-
-#~ msgid "gets volume of music"
-#~ msgstr ""
-
-#~ msgid "The path to current music file"
-#~ msgstr ""
-
-#~ msgid "current volume"
-#~ msgstr ""
-
-#~ msgid "The path to the music"
-#~ msgstr ""
-
-#~ msgid "Specifies how often the music must be repeated (-1: infinitely often)"
-#~ msgstr ""
-
-#~ msgid "Volume between 0 and 100"
-#~ msgstr ""
-
-#~ msgid "Sound and Music"
-#~ msgstr ""
-

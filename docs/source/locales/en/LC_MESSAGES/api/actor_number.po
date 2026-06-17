@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-17 07:17+0100\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -33,8 +33,8 @@ msgstr ""
 
 #: miniworlds.actors.texts.number.Number:3 of
 msgid ""
-"You must manually set the size of the actor with `self.size()` to ensure "
-"the text fits the screen."
+"You must manually set the size of the actor with `self.size()` to ensure the "
+"text fits the screen."
 msgstr ""
 
 #: ../../source/api/actor_number.md miniworlds.actors.texts.number.Number.add
@@ -89,7 +89,9 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.actors.texts.number.Number.get_value:3 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
+"\\:py\\:class\\:\\`float\\``"
 msgstr ""
 
 #: ../../source/api/actor_number.md
@@ -132,69 +134,3 @@ msgstr ""
 #: miniworlds.actors.texts.number.Number.value:3 of
 msgid "The current number."
 msgstr ""
-
-#~ msgid "A number actor shows a Number."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "You have to set the size of "
-#~ "the actor with self.size() manually so"
-#~ " that the complete text can be "
-#~ "seen."
-#~ msgstr ""
-
-#~ msgid "Top-Left position of Number."
-#~ msgstr ""
-
-#~ msgid "The initial number"
-#~ msgstr ""
-
-#~ msgid "The size of the font (default: 80)"
-#~ msgstr ""
-
-#~ msgid "Examples"
-#~ msgstr ""
-
-#~ msgid "Sets a new NumberActor to display the score.::"
-#~ msgstr ""
-
-#~ msgid "Gets the number stored in the NumberActor::"
-#~ msgstr ""
-
-#~ msgid "Sets the number stored in the NumberActor::"
-#~ msgstr ""
-
-#~ msgid "add the sprite to groups"
-#~ msgstr ""
-
-#~ msgid "Sprite.add(*groups): return None"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Any number of Group instances can "
-#~ "be passed as arguments. The Sprite "
-#~ "will be added to the Groups it "
-#~ "is not already a member of."
-#~ msgstr ""
-
-#~ msgid "The current number"
-#~ msgstr ""
-
-#~ msgid "Increases the number by one"
-#~ msgstr ""
-
-#~ msgid "Sets the number"
-#~ msgstr ""
-
-#~ msgid "The number which should be displayed"
-#~ msgstr ""
-
-#~ msgid "Parameter"
-#~ msgstr ""
-
-#~ msgid "Rückgabetyp"
-#~ msgstr ""
-
-#~ msgid "Rückgabe"
-#~ msgstr ""
-

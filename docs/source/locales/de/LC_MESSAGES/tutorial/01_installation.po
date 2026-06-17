@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-07 17:34+0200\n"
+"POT-Creation-Date: 2026-06-17 05:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.17.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: ../../source/tutorial/01_installation.md:1
 msgid "Installation"
@@ -25,7 +25,9 @@ msgstr "Installation"
 
 #: ../../source/tutorial/01_installation.md:3
 msgid "You can install **miniworlds** on your computer or using **Thonny**:"
-msgstr "Du kannst **miniworlds** z.B. mit der Entwicklungsumgebung **Thonny** installieren"
+msgstr ""
+"Du kannst **miniworlds** z.B. mit der Entwicklungsumgebung **Thonny** "
+"installieren"
 
 #: ../../source/tutorial/01_installation.md:5
 msgid "On your computer"
@@ -45,8 +47,10 @@ msgstr ""
 msgid ""
 "Alternatively, you can install the development environment "
 "[Thonny](https://thonny.org/) – it comes with Python included."
-msgstr "Alternativ kannst du die Entwicklungsumgebung [Thonny](https://thonny.org/)"
-"installieren. Bei ihr ist Python bereits installiert.
+msgstr ""
+"Alternativ kannst du die Entwicklungsumgebung "
+"[Thonny](https://thonny.org/)installieren. Bei ihr ist Python bereits "
+"installiert"
 
 #: ../../source/tutorial/01_installation.md:14
 #, fuzzy
@@ -70,20 +74,72 @@ msgid "…now you’re ready to get started!"
 msgstr "...jetzt bist du bereit zum Starten!"
 
 #: ../../source/tutorial/01_installation.md:27
+msgid "Optional Physics Package"
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:29
+msgid ""
+"The regular `miniworlds` package contains the core 2D engine. Physics "
+"support is provided by a separate package so that the base installation "
+"stays small and works reliably in school environments."
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:33
+msgid ""
+"Install physics support only when you need gravity, bouncing, joints, or "
+"collision simulation:"
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:40
+msgid "Then import the physics world from the separate package:"
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:47
+msgid ""
+"See [World > PhysicsWorld](../api/world_physics.md) for the API and a "
+"first example."
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:50
+msgid "Python And Runtime Notes"
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:52
+msgid ""
+"Miniworlds runs with Python and pygame-ce. Use a current Python 3 "
+"installation when possible."
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:55
+msgid ""
+"Some learning environments run Python in the browser, for example Pyodide"
+" or H5P-based tasks. These environments are useful for tutorials and "
+"small examples, but they may not support every desktop feature. In "
+"particular, physics support depends on the separate `miniworlds_physics` "
+"package and may be limited or unavailable in browser runtimes."
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:61
 msgid "With Thonny"
 msgstr "Mit Thonny"
 
-#: ../../source/tutorial/01_installation.md:29
+#: ../../source/tutorial/01_installation.md:63
 msgid ""
 "First click on **\"Tools → Manage Packages\"**. Then enter "
 "`\"miniworlds\"` in the search field and install **miniworlds**."
 msgstr ""
 
-#: ../../source/tutorial/01_installation.md:31
+#: ../../source/tutorial/01_installation.md:65
+msgid ""
+"If you want to use physics examples in Thonny, also install "
+"`miniworlds_physics` in the same package manager."
+msgstr ""
+
+#: ../../source/tutorial/01_installation.md:68
 msgid "![miniworlds](../_images/install01.png)"
 msgstr "![miniworlds](../_images/install01.png)"
 
-#: ../../source/tutorial/01_installation.md:31
+#: ../../source/tutorial/01_installation.md:68
 msgid "miniworlds"
 msgstr "Miniworlds"
 
