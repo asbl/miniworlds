@@ -72,7 +72,6 @@ class TiledWorld(world.World):
         if x > 1000 or y > 1000:
             raise TiledWorldTooBigError(x, y, 40)
         super().__init__(x=x, y=y)
-        self._tile_size = 40
         self.tick_rate = 20
         self._dynamic_actors_dict: defaultdict = defaultdict(
             list

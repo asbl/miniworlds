@@ -403,28 +403,7 @@ caption: Tutorial
 maxdepth: 1
 hidden: true
 ---
-tutorial/01_installation
-tutorial/02_00_world
-tutorial/03_00_actors
-tutorial/03_01_actors_position
-tutorial/04_00_act
-tutorial/04_01_events
-tutorial/04_02_messages
-tutorial/05_movement
-tutorial/06_00_sensors
-tutorial/06_01_sensors2
-tutorial/07_animations
-tutorial/09_timers
-tutorial/10_status
-tutorial/10_01_status2
-```
-
-```{toctree}
----
-caption: More Tutorials
-maxdepth: 1
-hidden: true
----
+tutorial/index
 processing/index
 ```
 

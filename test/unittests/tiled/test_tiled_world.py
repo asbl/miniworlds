@@ -2,7 +2,7 @@ from collections import defaultdict
 from types import SimpleNamespace
 from unittest.mock import Mock
 
-from miniworlds import Actor
+from miniworlds import Actor, App
 from miniworlds.worlds.tiled_world.tiled_world import TiledWorld
 
 
@@ -77,3 +77,12 @@ def test_registered_actor_event_reactivates_auto_static_actor():
 
     assert not actor.static
     assert actor in actor.world._dynamic_actors
+
+
+def test_constructor_preserves_tile_size():
+    for tile_size in (1, 10):
+        App.reset(unittest=True, file=__file__)
+        world = TiledWorld(20, 20, tile_size=tile_size)
+
+        assert world.tile_size == tile_size
+        assert world.get_tile((1, 1)).to_pixel() == (tile_size, tile_size)
