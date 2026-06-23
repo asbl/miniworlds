@@ -90,7 +90,9 @@ flag:
 
 It synchronizes the version in both packages, runs the Docker test suite,
 creates the commits and tags in the physics repository and the main
-repository, and then pushes branch plus tag unless `--no-push` is used.
+repository, and then pushes branch plus tag unless `--no-push` is used. After
+the main tag is pushed, it creates the matching GitHub Release (with generated
+release notes), which appears in the repository sidebar under **Releases**.
 
 For a normal deploy without a version bump, use `deploy.push`. It pushes the
 current branches in the main and physics repositories and can optionally push

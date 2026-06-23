@@ -16,11 +16,13 @@ Release workflow summary:
 3. Commit and tag the physics repository.
 4. Commit and tag the main repository.
 5. Push branches and tags unless ``--no-push`` is used.
+6. Create the GitHub release from the pushed main-repository tag.
 
 GitHub Actions handle publication after that push step:
 
 - pushing the main repository branch ``main`` triggers docs deployment
 - pushing ``v*`` tags triggers the PyPI publish workflows
+- ``deploy.release`` creates the corresponding GitHub release entry
 
 ``deploy.push`` uses the same Docker test gate before pushing branches or tags.
 
@@ -324,6 +326,19 @@ def _push_repositories(c, main_branch: str, physics_branch: str, tags: bool) -> 
         _git(c, REPO_ROOT, "push --tags")
 
 
+def _create_github_release(c, tag_name: str) -> None:
+    """Publish the already-pushed main-repository tag as a GitHub release."""
+    if shutil.which("gh") is None:
+        raise Exit(
+            "GitHub CLI ('gh') is required to create a GitHub release. "
+            "Install it and authenticate with 'gh auth login'."
+        )
+    c.run(
+        f'cd {REPO_ROOT} && gh release create {tag_name} '
+        f'--title "Release {tag_name}" --generate-notes'
+    )
+
+
 def _print_release_plan(
     version: str,
     release_mode: str,
@@ -359,6 +374,7 @@ def _print_release_plan(
     print("4. Commit and tag the main repository")
     if push:
         print("5. Push both branches and tags")
+        print("6. Create the GitHub release from the main-repository tag")
     else:
         print("5. Skip pushes")
     print("Workflow automation after push:")
@@ -637,6 +653,7 @@ def deploy_release(
             print(f"Workflow note: {note}")
         _git(c, PHYSICS_REPO, f"push origin {tag_name}")
         _git(c, REPO_ROOT, f"push origin {tag_name}")
+        _create_github_release(c, tag_name)
         _push_repositories(c, main_branch, physics_branch, tags=False)
 
 
