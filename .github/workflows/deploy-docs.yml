@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Checkout physics submodule
-      run: git submodule update --init physics
+      run: git submodule update --init libraries/physics
 
     - name: Set up Python
       uses: actions/setup-python@v4
