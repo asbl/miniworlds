@@ -45,7 +45,7 @@ IMAGE = "pygame-tests"
 REPO_ROOT = os.path.abspath(os.path.dirname(__file__))
 VENV_PYTHON = os.path.join(REPO_ROOT, "venv", "bin", "python")
 VENV_BIN = os.path.join(REPO_ROOT, "venv", "bin")
-PHYSICS_REPO = os.path.join(REPO_ROOT, "physics")
+PHYSICS_REPO = os.path.join(REPO_ROOT, "libraries", "physics")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
 VERSION_PATTERN = re.compile(r'version="([^"]+)"')
@@ -145,9 +145,9 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
         f"-v {REPO_ROOT}/tasks.py:/app/tasks.py "
         f"-v {REPO_ROOT}/source:/app/source "
         f"-v {REPO_ROOT}/test:/app/test "
-        f"-v {REPO_ROOT}/examples:/app/examples "
-        f"-v {REPO_ROOT}/physics/source:/app/physics/source "
-        f"-v {REPO_ROOT}/physics/test:/app/physics/test "
+        f"-v {REPO_ROOT}/libraries/examples:/app/examples "
+        f"-v {REPO_ROOT}/libraries/physics/source:/app/physics/source "
+        f"-v {REPO_ROOT}/libraries/physics/test:/app/physics/test "
     )
     if results_dir is not None:
         mounts += f"-v {results_dir}:/app/test/performance/results "
@@ -159,7 +159,7 @@ def _docker_pythonpath() -> str:
 
 
 def _local_pythonpath() -> str:
-    return f"{REPO_ROOT}/source:{REPO_ROOT}/physics/source"
+    return f"{REPO_ROOT}/source:{REPO_ROOT}/libraries/physics/source"
 
 
 def _local_env_prefix() -> str:
@@ -365,7 +365,7 @@ def _print_release_plan(
     print(f"- Run tests: {'no' if skip_tests else 'yes'}")
     print(f"- Push branches and tags: {'yes' if push else 'no'}")
     print("Planned steps:")
-    print("1. Update source/setup.py and physics/source/setup.py")
+    print("1. Update source/setup.py and libraries/physics/source/setup.py")
     if skip_tests:
         print("2. Skip Docker tests")
     else:
@@ -644,7 +644,7 @@ def deploy_release(
     _git(c, PHYSICS_REPO, f'commit -m "Bump version to {version}"')
     _git(c, PHYSICS_REPO, f'tag -a {tag_name} -m "Release {tag_name}"')
 
-    _git(c, REPO_ROOT, "add source/setup.py physics")
+    _git(c, REPO_ROOT, "add source/setup.py libraries/physics")
     _git(c, REPO_ROOT, f'commit -m "Bump version to {version}"')
     _git(c, REPO_ROOT, f'tag -a {tag_name} -m "Release {tag_name}"')
 
@@ -1009,14 +1009,14 @@ def build_local(c):
 
 @task(name="physics")
 def build_physics(c):
-    """Install the physics package from physics/source in editable mode."""
-    c.run("cd physics/source && pip install -e .")
+    """Install the physics package from libraries/physics/source in editable mode."""
+    c.run("cd libraries/physics/source && pip install -e .")
 
 
 @task(name="checkout")
 def examples_checkout(c):
     """Initialize and update the examples submodule recursively."""
-    c.run("cd examples && git submodule update --init --recursive")
+    c.run("cd libraries/examples && git submodule update --init --recursive")
 
 
 deploy = Collection("deploy")

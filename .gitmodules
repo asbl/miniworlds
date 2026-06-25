@@ -1,6 +1,15 @@
 [submodule "examples"]
-	path = examples
+	path = libraries/examples
 	url = https://github.com/asbl/miniworlds_examples.git
 [submodule "physics"]
-	path = physics
+	path = libraries/physics
 	url = https://github.com/asbl/miniworlds-physics.git
+[submodule "libraries/miniworlds_robot"]
+	path = libraries/miniworlds_robot
+	url = https://github.com/asbl/miniworlds-robot.git
+[submodule "libraries/miniworlds_turtle"]
+	path = libraries/miniworlds_turtle
+	url = https://github.com/asbl/miniworlds-turtle.git
+[submodule "miniworlds_examples"]
+	path = libraries/miniworlds_examples
+	url = https://github.com/asbl/miniworlds_examples.git
