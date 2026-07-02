@@ -34,10 +34,18 @@ class ActorAppearanceFacade:
         return self.actor.position_manager.flip_x()
 
     def add_costume(
-        self, source: Union[None, Tuple, str, List, appearance.Appearance] = None
+        self,
+        source: Union[
+            None, Tuple, str, pygame.Surface, List, appearance.Appearance
+        ] = None,
     ) -> costume_mod.Costume:
         try:
-            if source is None or type(source) in [str, tuple] or isinstance(source, appearance.Appearance):
+            if (
+                source is None
+                or type(source) in [str, tuple]
+                or isinstance(source, pygame.Surface)
+                or isinstance(source, appearance.Appearance)
+            ):
                 return self.actor.costume_manager.add_new_appearance(source)
             if isinstance(source, list):
                 return cast(
