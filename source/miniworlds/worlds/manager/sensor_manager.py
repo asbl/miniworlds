@@ -544,13 +544,14 @@ class SensorManager:
                     continue
                 if actor.position_manager.get_global_rect().colliderect(actor_rect):
                     return actor if filter_applied else self.filter_first_actor([actor], filter)
+            return None
 
         detected_actors = [
             actor for actor in collision_candidates
             if actor is not self.actor
             and actor.position_manager.get_global_rect().colliderect(actor_rect)
         ]
-        if detected_actors and collision_type not in ("rect", "static-rect"):
+        if detected_actors:
             detected_actors = self._detect_actor_by_collision_type(
                 detected_actors, collision_type
             )

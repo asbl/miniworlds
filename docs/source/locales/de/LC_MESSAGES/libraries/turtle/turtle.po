@@ -1,0 +1,481 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/turtle/turtle.md:1
+msgid "Turtle"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:3
+msgid ""
+"`Turtle` (also `RawTurtle`, `Pen`, `RawPen`) is the main drawing actor. "
+"All turtle-module functions delegate to the global default `Turtle` "
+"instance."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:6
+msgid "Movement"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Method / Alias"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`forward(distance)` / `fd`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Move forward by `distance` pixels."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`back(distance)` / `backward` / `bk`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Move backward by `distance` pixels."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`right(angle)` / `rt`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Turn right by `angle` degrees."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`left(angle)` / `lt`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Turn left by `angle` degrees."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`goto(x, y)` / `setpos` / `setposition`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Move to absolute position `(x, y)`."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`setx(x)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the x coordinate; y stays unchanged."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`sety(y)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the y coordinate; x stays unchanged."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`setheading(angle)` / `seth`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the heading to `angle` degrees."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`home()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Move to origin `(0, 0)` and set heading to 0 degrees."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`circle(radius, extent, steps)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Draw a circle of given radius."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`dot(size, color)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Draw a dot at the current position."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`teleport(x, y)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Move to `(x, y)` without drawing."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:23
+msgid "Pen control"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`penup()` / `pu` / `up`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Lift the pen; movement does not draw."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`pendown()` / `pd` / `down`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Lower the pen; movement draws."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`isdown()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return `True` when the pen is down."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`pensize(width)` / `width`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set line width."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`pencolor(*args)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set pen color."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`fillcolor(*args)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set fill color."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`color(*args)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set pen and fill color at once."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`pen(**kwargs)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Get or set multiple pen attributes at once."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:36
+msgid "Fill"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`begin_fill()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Mark the start of a region to fill."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`end_fill()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Close and fill the region."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`filling()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return `True` when inside a `begin_fill` / `end_fill` block."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:44
+msgid "State queries"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`position()` / `pos`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return current `Vec2D` position."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`xcor()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return x coordinate."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`ycor()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return y coordinate."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`heading()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return current heading in degrees."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`towards(x, y)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return angle towards point `(x, y)`."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`distance(x, y)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return distance to point `(x, y)`."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`isvisible()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return `True` when the turtle is visible."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:56
+msgid "Appearance"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`shape(name)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the turtle shape."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`shapesize(stretch_wid, stretch_len, outline)` / `turtlesize`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Scale the turtle shape."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`hideturtle()` / `ht`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Hide the turtle icon."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`showturtle()` / `st`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Show the turtle icon."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`tilt(angle)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Rotate the turtle shape by `angle` without changing the heading."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`tiltangle(angle)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the tilt angle of the turtle shape."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`speed(speed)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set drawing speed (0-10, or named string)."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:68
+msgid "Stamps and undo"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`stamp()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Stamp the turtle shape on the canvas; return stamp id."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`clearstamp(stampid)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Remove a specific stamp."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`clearstamps(n)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Remove first `n` stamps (negative = last `n`)."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`undo()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Undo the last action."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`setundobuffer(size)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Set the undo buffer size."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`undobufferentries()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return the number of actions in the undo buffer."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:79
+msgid "Mouse and click events"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`onclick(fun, btn, add)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Bind a function to a mouse-click on the turtle."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`ondrag(fun, btn, add)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Bind a function to dragging the turtle."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`onrelease(fun, btn, add)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Bind a function to releasing the mouse button on the turtle."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:87
+msgid "Polygon"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`begin_poly()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Start recording polygon vertices."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`end_poly()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Stop recording."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "`get_poly()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md
+msgid "Return the recorded polygon."
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:95
+msgid "Module-level functions"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:97
+msgid ""
+"All `Turtle` methods are also available as module-level functions that "
+"delegate to the global default turtle:"
+msgstr ""
+
+#: ../../source/libraries/turtle/turtle.md:108
+msgid "API Reference"
+msgstr ""

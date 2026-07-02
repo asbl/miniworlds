@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/turtle/index.md:1
+msgid "miniworlds-turtle"
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:3
+msgid ""
+"**miniworlds-turtle** is a miniworlds-based reimplementation of Python's "
+"standard [`turtle`](https://docs.python.org/3/library/turtle.html) module"
+" with a compatible API."
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:6
+msgid ""
+"It renders turtle graphics inside a miniworlds `World` instead of "
+"Tkinter, making it easy to combine turtle-style drawing with other "
+"miniworlds features."
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:9
+msgid "Installation"
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:15
+msgid "Quick start"
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:30
+msgid "Object-oriented usage:"
+msgstr ""
+
+#: ../../source/libraries/turtle/index.md:48
+msgid "API Reference"
+msgstr ""

@@ -1,0 +1,454 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/physics/actor_physics.md:1
+msgid "ActorPhysics (actor.physics)"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:3
+msgid ""
+"Every actor in a `PhysicsWorld` gains an `actor.physics` attribute of "
+"type `ActorPhysics`. Use it to control how the physics engine treats that"
+" actor."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:6
+msgid "Access it as:"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:14
+msgid "Simulation mode"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:16
+msgid ""
+"The `simulation` property is the primary switch. It must be set "
+"**before** the world starts running, or after a geometry change."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Value"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`\"simulated\"`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Fully simulated: affected by gravity, collisions, impulses."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`\"manual\"`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Kinematic: not affected by gravity, but can be moved manually and "
+"collides with others."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`\"static\"`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Not moved by the engine; other actors can collide with it (e.g. floors, "
+"walls)."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`None`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Completely removed from the physics space; no collisions possible."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:25
+msgid "Physical properties"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Property"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Default"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`density`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`10`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Mass density. Higher value = heavier object. Re-adds actor to physics "
+"space when changed."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`friction`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`0.5`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Surface friction (0 = frictionless, 1 = very rough). Re-adds actor to "
+"physics space."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`elasticity`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Bounciness (0 = no bounce, 1 = perfect bounce). Re-adds actor to physics "
+"space."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`shape_type`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`\"rect\"`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Collision shape: `\"rect\"` or `\"circle\"`. Re-adds actor to physics "
+"space."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`size`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`(1, 1)`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Scale factor for the physics collision box relative to the actor's visual"
+" size."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`is_rotatable`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "depends on mode"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Whether the physics engine may rotate the actor."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`damping`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`1`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Per-actor damping multiplied with the world's damping."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`max_velocity_x`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`inf`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Clamp the horizontal velocity to this maximum."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:38
+msgid "Velocity control (manual / simulated)"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`velocity_x`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Horizontal velocity in pixels per second. Positive = right."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`velocity_y`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Vertical velocity in pixels per second. Positive = down."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:45
+msgid "Impulses and forces"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`impulse_in_direction(direction, power)`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Apply an instantaneous impulse in the given direction."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`force_in_direction(direction, power)`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Apply a continuous force in the given direction."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:52
+msgid "Joints"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`join(other, type=\"pin\")`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid ""
+"Create a pin joint between this actor and `other`, connecting their "
+"centers."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "`remove_join(other)`"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Remove the joint to `other`."
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:59
+msgid "Example: Platformer character"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md:92
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics:1 of
+msgid ""
+"Defines physics-properties of a actor, used as my_actor.physics.attribute"
+" or my_actor.physics.method"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics:3 of
+msgid "Can only be used for actors on a PhysicsWorld."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics:6
+#: miniworlds_physics.actor_physics.ActorPhysics.impulse_in_direction:4
+#: miniworlds_physics.actor_physics.ActorPhysics.remove_join:6
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:12
+#: miniworlds_physics.actor_physics.ActorPhysics.velocity_x:4 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.body_type:1 of
+msgid "Returns body type of actor"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.body_type:3 of
+msgid "Must not be used from outside - Use property simulation instead."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.density:1 of
+msgid "Sets density of actor"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.density:5
+#: miniworlds_physics.actor_physics.ActorPhysics.elasticity:5
+#: miniworlds_physics.actor_physics.ActorPhysics.friction:5
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:9
+#: miniworlds_physics.actor_physics.ActorPhysics.size:9 of
+msgid ""
+"Actor is re-added to physics space after this operation - Velocity and "
+"impulses are lost."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.elasticity:1 of
+msgid "Sets elasticity of actor"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.force_in_direction:1 of
+msgid "Adds a force in given direction"
+msgstr ""
+
+#: ../../source/libraries/physics/actor_physics.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.force_in_direction:3 of
+msgid "The power-value of the force."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.force_in_direction:4
+#: miniworlds_physics.actor_physics.ActorPhysics.impulse_in_direction:27 of
+msgid "pymunk direction"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.friction:1 of
+msgid "Sets friction of actor"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.impulse_in_direction:1 of
+msgid "Adds an impulse in actor-direction"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.impulse_in_direction:26 of
+msgid "The power-value of the impulse."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.is_rotatable:1 of
+msgid "defines, if actor will be rotated by physics-engine."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.join:1 of
+msgid "joins two actors at their center points"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.reload:1 of
+msgid "Removes actor from space and reloads physics_model"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.remove:1 of
+msgid "Removes an object from physics-space"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.remove_join:1 of
+msgid "Remove a joint between two actors."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.remove_join:3 of
+msgid "Removes a joint between two actors, if a joint exists."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.remove_join:7 of
+msgid "Add and remove a joint on key_down:"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:1 of
+msgid "Sets shape type of object:"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:3 of
+msgid "Shape Types:"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:4 of
+msgid "\"rect\": Rectangle"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:5 of
+msgid "\"circle\": Circle"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.shape_type:13 of
+msgid "Demonstrate different shape types:"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:1 of
+msgid "Sets simulation type for actor (`static`, `manual`, `simulated` or `None`)"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:3 of
+msgid "Sets simulation type for actor:"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:5 of
+msgid "`simulated`: Actor is fully simulated by physics engine."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:6 of
+msgid "`manual`: Actor is not affected by gravity."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:7 of
+msgid ""
+"`static`: Actor is not moved by physics engine, but actors can collide "
+"with actor."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.simulation:8 of
+msgid ""
+"`None`: Actor is not moved by physics engine and other actors can't "
+"collide with actor."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.size:1 of
+msgid "Sets size of physics_object in relation to object"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.size:3 of
+msgid "1: Physics object size equals actor size"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.size:4 of
+msgid "< 1: Physics object is smaller than actor"
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.size:5 of
+msgid "> 1: Physics object is larger than actor."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.velocity_x:1 of
+msgid "Sets velocity in x-direction. Can be positive or negative."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.velocity_x:5 of
+msgid "Move a actor left or right."
+msgstr ""
+
+#: miniworlds_physics.actor_physics.ActorPhysics.velocity_y:1 of
+msgid "Sets velocity in y-direction"
+msgstr ""

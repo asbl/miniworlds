@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
 "PO-Revision-Date: 2025-07-07 17:40+0200\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -23,42 +23,41 @@ msgstr ""
 msgid "Tutorial"
 msgstr "Anleitung"
 
-#: ../../source/index.md:422
-#, fuzzy
-msgid "More Tutorials"
-msgstr "Weitere Tutorials"
-
-#: ../../source/index.md:431
+#: ../../source/index.md:410
 msgid "Concepts"
 msgstr "Konzepte"
 
-#: ../../source/index.md:447
+#: ../../source/index.md:426
 msgid "Guides"
 msgstr "Tutorials"
 
-#: ../../source/index.md:462
+#: ../../source/index.md:441
 msgid "API > Basics"
 msgstr "API > Grundlagen"
 
-#: ../../source/index.md:476
+#: ../../source/index.md:456
 msgid "API > Actor Classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:491
+#: ../../source/index.md:471
 #, fuzzy
 msgid "API > World Classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:506
+#: ../../source/index.md:486
 #, fuzzy
 msgid "API > Special World classes"
 msgstr "API > Actor Classes"
 
-#: ../../source/index.md:518
+#: ../../source/index.md:499
 msgid "Helpers"
 msgstr "Helfer"
 
-#: ../../source/index.md:528
+#: ../../source/index.md:510
+msgid "Sub-Libraries"
+msgstr ""
+
+#: ../../source/index.md:523
 msgid "Legal Notice"
 msgstr "Impressum"
 
@@ -213,4 +212,7 @@ msgstr "[Beispiele](https://github.com/asbl/miniworlds_examples)"
 
 #~ msgid "API > World Classes"
 #~ msgstr "API > World Classes"
+
+#~ msgid "More Tutorials"
+#~ msgstr "Weitere Tutorials"
 

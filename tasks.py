@@ -46,6 +46,7 @@ REPO_ROOT = os.path.abspath(os.path.dirname(__file__))
 VENV_PYTHON = os.path.join(REPO_ROOT, "venv", "bin", "python")
 VENV_BIN = os.path.join(REPO_ROOT, "venv", "bin")
 PHYSICS_REPO = os.path.join(REPO_ROOT, "libraries", "physics")
+DATA_REPO = os.path.join(REPO_ROOT, "libraries", "miniworlds_data")
 MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
 VERSION_PATTERN = re.compile(r'version="([^"]+)"')
@@ -148,6 +149,8 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
         f"-v {REPO_ROOT}/libraries/examples:/app/examples "
         f"-v {REPO_ROOT}/libraries/physics/source:/app/physics/source "
         f"-v {REPO_ROOT}/libraries/physics/test:/app/physics/test "
+        f"-v {REPO_ROOT}/libraries/miniworlds_data/source:/app/data/source "
+        f"-v {REPO_ROOT}/libraries/miniworlds_data/test:/app/data/test "
     )
     if results_dir is not None:
         mounts += f"-v {results_dir}:/app/test/performance/results "
@@ -155,11 +158,11 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
 
 
 def _docker_pythonpath() -> str:
-    return "PYTHONPATH=/app/source:/app/physics/source"
+    return "PYTHONPATH=/app/source:/app/physics/source:/app/data/source"
 
 
 def _local_pythonpath() -> str:
-    return f"{REPO_ROOT}/source:{REPO_ROOT}/libraries/physics/source"
+    return f"{REPO_ROOT}/source:{REPO_ROOT}/libraries/physics/source:{REPO_ROOT}/libraries/miniworlds_data/source"
 
 
 def _local_env_prefix() -> str:
@@ -738,6 +741,16 @@ def tests_physics(c):
     )
 
 
+@task(name="data")
+def tests_data(c):
+    """Run the miniworlds_data data-structure visualization tests in Docker."""
+    run_pytest_in_container(
+        c,
+        "data/test -q",
+        rebuild=False,
+    )
+
+
 @task(name="docs")
 def tests_docs(c):
     """Generate documentation example tests and run them in Docker."""
@@ -1013,6 +1026,12 @@ def build_physics(c):
     c.run("cd libraries/physics/source && pip install -e .")
 
 
+@task(name="data")
+def build_data(c):
+    """Install the miniworlds_data package from libraries/miniworlds_data/source."""
+    c.run("cd libraries/miniworlds_data/source && pip install -e .")
+
+
 @task(name="checkout")
 def examples_checkout(c):
     """Initialize and update the examples submodule recursively."""
@@ -1032,6 +1051,7 @@ tests.add_task(tests_pyodide)
 tests.add_task(tests_profile)
 tests.add_task(tests_physics)
 tests.add_task(tests_docs)
+tests.add_task(tests_data)
 
 benchmarks = Collection("benchmarks")
 benchmarks.add_task(benchmarks_run, default=True)
@@ -1046,6 +1066,7 @@ build.add_task(build_local, default=True)
 build.add_task(build_image)
 build.add_task(docs_build)
 build.add_task(build_physics)
+build.add_task(build_data)
 
 env = Collection("env")
 env.add_task(env_prepare, default=True)
@@ -1084,6 +1105,7 @@ ns.add_task(tests_visual, name="run_visual_tests")
 ns.add_task(tests_pyodide, name="run_pyodide_tests")
 ns.add_task(tests_profile, name="profile_tests")
 ns.add_task(tests_physics, name="run_physics_tests")
+ns.add_task(tests_data, name="run_data_tests")
 ns.add_task(tests_docs, name="run_doc_example_tests")
 ns.add_task(build_image, name="image")
 ns.add_task(env_prepare, name="prepare")
@@ -1099,6 +1121,7 @@ ns.add_task(container_cleanup, name="cleanup")
 ns.add_task(container_x11, name="debug_x11")
 ns.add_task(build_local, name="build_local")
 ns.add_task(build_physics, name="build_physics")
+ns.add_task(build_data, name="build_data")
 ns.add_task(docs_build, name="make_docs")
 ns.add_task(docs_build, name="docs_build")
 ns.add_task(docs_check, name="check_docs")

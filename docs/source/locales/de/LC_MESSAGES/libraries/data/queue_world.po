@@ -1,0 +1,278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/queue_world.md:1
+msgid "QueueWorld"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md:3
+msgid ""
+"`QueueWorld` visualizes a FIFO queue as a row of boxes growing left-to-"
+"right. The front box (next to be dequeued) is highlighted in red; the "
+"back box (most recently enqueued) in purple."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md:7
+msgid "Operations"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`enqueue(value)`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Add a value to the back. Raises `OverflowError` when at capacity."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`dequeue()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Remove and return the front value. Raises `IndexError` on empty queue."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`front()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid ""
+"Return the front value without removing it. Raises `IndexError` on empty "
+"queue."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`back()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid ""
+"Return the back value without removing it. Raises `IndexError` on empty "
+"queue."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`values()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Return all current elements, front-to-back order."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`is_empty()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Return `True` when the queue has no elements."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`is_full()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Return `True` when the queue has reached its capacity."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`clear()`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Remove all elements."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`size`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Number of elements currently in the queue (property)."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md:21
+msgid "Constructor parameters"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Parameter"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Default"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`capacity`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`8`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Maximum number of elements."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`box_width`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`80`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Width of each element box in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`box_height`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`50`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Height of each element box in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`margin`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`10`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Margin around the queue in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "`background`"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "light grey"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Background fill color."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md:31
+#: miniworlds_data.queue_world.QueueWorld:7 of
+msgid "Example"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md:45
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld:1 of
+msgid "Pixel world that visualizes a FIFO queue growing left-to-right."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld:3 of
+msgid ""
+"Elements are enqueued at the back and dequeued at the front. The front "
+"box is highlighted in red, the back box in purple."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.back:1 of
+msgid "Return the back element without removing it."
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.back:3
+#: miniworlds_data.queue_world.QueueWorld.dequeue:3
+#: miniworlds_data.queue_world.QueueWorld.front:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`object\\``"
+msgstr ""
+
+#: ../../source/libraries/data/queue_world.md
+msgid "Raises"
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.back:5
+#: miniworlds_data.queue_world.QueueWorld.dequeue:5
+#: miniworlds_data.queue_world.QueueWorld.front:5 of
+msgid "when the queue is empty."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.clear:1 of
+msgid "Remove every element from the queue."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.clear:4
+#: miniworlds_data.queue_world.QueueWorld.enqueue:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.dequeue:1 of
+msgid "Remove and return the front element."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.enqueue:1 of
+msgid "Add ``value`` to the back of the queue."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.enqueue:5 of
+msgid "when the queue is already at capacity."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.front:1 of
+msgid "Return the front element without removing it."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.is_empty:2
+#: miniworlds_data.queue_world.QueueWorld.is_full:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.size:1 of
+msgid "Number of elements currently in the queue."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.values:1 of
+msgid "Return the current elements, front-to-back order."
+msgstr ""
+
+#: miniworlds_data.queue_world.QueueWorld.values:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`object\\`\\]`"
+msgstr ""

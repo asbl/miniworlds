@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/robot/robot_world.md:1
+msgid "RobotWorld"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md:3
+msgid ""
+"`RobotWorld` is a `TiledWorld` subclass that hosts the robot simulation. "
+"It reads its dimensions, background color, pre-placed objects, and "
+"allowed robot abilities from a `WorldConfig` dataclass."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md:7
+msgid ""
+"Use `load_world(...)` or `task(...)` to create a pre-configured instance "
+"rather than constructing `RobotWorld` directly."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md:10
+msgid "Key methods"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "`is_blocked(position)`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid ""
+"Return `True` if the tile is outside the grid or occupied by a blocking "
+"object."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "`is_solved()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "Return `True` when the world state matches the task's `TargetConfig`."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "`add_object(actor_cls, position)`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "Place a robot world object (e.g. `Tree`, `Leaf`) on the grid."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "`robot_abilities`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "`frozenset[str]`: abilities the current task permits."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md:19
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld:1 of
+msgid "A miniworlds tiled world with a configuration-driven Robot API."
+msgstr ""
+
+#: ../../source/libraries/robot/robot_world.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.add_object:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.is_blocked:2
+#: miniworlds_robot.world.RobotWorld.is_solved:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.is_solved:1 of
+msgid "Return whether the current world state matches the task target."
+msgstr ""

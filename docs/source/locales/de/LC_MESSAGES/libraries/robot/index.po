@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/robot/index.md:1
+msgid "miniworlds-robot"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:3
+msgid ""
+"**miniworlds-robot** provides a grid-based robot world for teaching "
+"algorithmic thinking. Students write code that moves a robot through a "
+"`TiledWorld`, collecting leaves and navigating obstacles, without having "
+"access to the full miniworlds API surface."
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:7
+msgid ""
+"The library enforces an intentionally limited robot *ability set* that "
+"you configure per world, so each exercise reveals exactly the language "
+"features needed for that lesson."
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:10
+msgid "Installation"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:16
+msgid "Quick start"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:29
+msgid "Or build your own world from scratch:"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:40
+msgid "Built-in tasks"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Name"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"basic\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Empty 10 x 10 grid"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"sequence_path\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Reach a target position in a straight line"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"variables_path\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Path requiring a direction change (introduces variables)"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"function_path\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Repeated movement (introduces functions)"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"loop_square\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Walk around a square (introduces loops)"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"leaf_line\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Collect leaves in a row (introduces `on_leaf` / `remove_leaf`)"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"obstacle_garden\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Navigate around trees and mushrooms"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "`\"with_position\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md
+msgid "Exposes `robot.position` for coordinate-based tasks"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:53
+msgid "API Reference"
+msgstr ""

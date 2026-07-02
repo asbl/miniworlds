@@ -95,7 +95,15 @@ class MainloopManager:
         return max(0, (1 / self.world.fps) - elapsed)
         
     def _update_all_costumes(self):
-        """Updates the costumes of all actors in the world."""
+        """Updates the costumes of all actors in the world.
+
+        Dynamic (non-static) actors are iterated every frame. For an actor that
+        is neither animated nor dirty, ``costume.update()`` is a no-op that still
+        pays the cost of the method call plus the dirty-flag recheck inside
+        ``load_image``. Skipping those actors avoids O(dynamic_actors) no-ops per
+        frame in scenes with many idle actors (e.g. a tiled world full of
+        decorations).
+        """
         for actor in self.reload_costumes_queue:
             if actor.costume:
                 actor.costume.update()
@@ -103,8 +111,12 @@ class MainloopManager:
 
         if hasattr(self.world, "_dynamic_actors"):
             for actor in self.world._dynamic_actors:
-                if actor.costume:
-                    actor.costume.update()
+                costume = actor.costume
+                if costume is None:
+                    continue
+                if not costume.is_animated and not costume.dirty:
+                    continue
+                costume.update()
 
     def _tick_timed_objects(self):
         for obj in self.world._timed_objects:

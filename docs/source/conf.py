@@ -22,6 +22,10 @@ from pathlib import Path
 #sys.path.insert(0, os.path.abspath('../../miniworlds'))
 sys.path.insert(0, os.path.abspath('../../source'))
 sys.path.insert(0, os.path.abspath('../../physics/source'))
+sys.path.insert(0, os.path.abspath('../../libraries/physics/source'))
+sys.path.insert(0, os.path.abspath('../../libraries/miniworlds_robot/source'))
+sys.path.insert(0, os.path.abspath('../../libraries/miniworlds_data/source'))
+sys.path.insert(0, os.path.abspath('../../libraries/miniworlds_turtle/source'))
 
 # -- Project information -----------------------------------------------------
 

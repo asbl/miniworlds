@@ -1,0 +1,290 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/stepper.md:1
+msgid "Stepper"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:3
+msgid "`Stepper` drives a generator-based algorithm one visible step per frame."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:5
+msgid ""
+"Classical algorithms written as loops run to completion within a single "
+"frame, so their intermediate states are never visible on screen. "
+"`Stepper` solves this by letting the algorithm be written as a "
+"*generator* that `yield`s once per step; the stepper advances it frame by"
+" frame (or on demand)."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:10
+msgid ""
+"Each yielded value is a `(name, payload)` step tuple. The stepper records"
+" every step so it can replay them forward and backward."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:13
+msgid "Forward / backward navigation"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:22
+msgid ""
+"Backward navigation re-applies all steps from 0 to the target index using"
+" the `on_reset` callback followed by sequential `on_step` calls, because "
+"algorithm steps (like \"swap\") are not idempotent."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:26
+msgid "Automatic frame-based driving"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:33
+msgid "Complete example"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:75
+msgid "Constructor parameters"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Parameter"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`algorithm`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Generator that yields `(name, payload)` step tuples."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`world`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "World to register the `act` hook on when `run()` is called."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`on_step`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Callback `(step) -> None` called when a step is applied."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`on_reset`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid ""
+"Callback `() -> None` that restores the visualization to its initial "
+"state. Required for backward navigation."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`frames_per_step`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Advance one step every N frames (default: 1)."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:85
+msgid "Properties"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Property"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`steps`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+#: miniworlds_data.stepper.Stepper.steps:1 of
+msgid "All steps recorded so far, in execution order."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`step_index`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Index of the currently applied step (`-1` before the first step)."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`finished`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`True` once the generator has been exhausted."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`auto_advance`"
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "`True` after `run()` has been called."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md:94
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper:1 of
+msgid "Drives a generator-based algorithm one visible step per frame."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper:3 of
+msgid ""
+"Classical algorithms written as loops run entirely within a single frame,"
+" so their intermediate states are never visible. ``Stepper`` solves this "
+"by letting the algorithm be written as a *generator* that yields once per"
+" step; the stepper advances it frame by frame (or on demand)."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper:8 of
+msgid ""
+"Each yielded step is a ``(name, payload)`` tuple (see :data:`Step`). The "
+"stepper records every step so it can replay them forward and backward. "
+"For backward stepping (``prev_step``, ``reset``, ``goto``) you must pass "
+"an ``on_reset`` callback that restores the visualization to its initial "
+"state, since algorithm steps like \"swap\" are not idempotent."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper:15 of
+msgid "Example"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.auto_advance:1 of
+msgid "Whether the stepper advances automatically each frame."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.finished:1 of
+msgid "``True`` once the generator has been exhausted."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.goto:1 of
+msgid "Move to an absolute step index."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.goto:3 of
+msgid ""
+"A negative index rewinds to the start; an index past the end advances as "
+"far as the generator allows. Backward jumps require ``on_reset``."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.goto:7
+#: miniworlds_data.stepper.Stepper.reset:6
+#: miniworlds_data.stepper.Stepper.run:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.next_step:1 of
+msgid "Advance the algorithm by exactly one step and apply it."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.next_step:3 of
+msgid "Returns the applied step, or ``None`` when the algorithm is finished."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.next_step:6
+#: miniworlds_data.stepper.Stepper.on_frame:7
+#: miniworlds_data.stepper.Stepper.prev_step:9 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`str\\`\\, \\:py\\:class\\:\\`object\\`\\] \\| "
+"\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.on_frame:1 of
+msgid "Advance one step every ``frames_per_step`` frames."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.on_frame:3 of
+msgid ""
+"Call this manually from your own ``act`` hook if you do not use "
+":meth:`run`."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.prev_step:1 of
+msgid "Undo the most recently applied step and move backward."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.prev_step:3 of
+msgid "Returns the step that was undone, or ``None`` at the beginning."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.prev_step:5 of
+msgid ""
+"Requires an ``on_reset`` callback, because steps like \"swap\" cannot be "
+"undone in isolation."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.reset:1 of
+msgid "Rewind to the beginning and apply no steps."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.reset:3 of
+msgid "Requires an ``on_reset`` callback."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.run:1 of
+msgid "Register an ``act`` hook on the world that advances one step per frame."
+msgstr ""
+
+#: ../../source/libraries/data/stepper.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.run:5 of
+msgid "World to register on. Defaults to the world passed at construction time."
+msgstr ""
+
+#: miniworlds_data.stepper.Stepper.step_index:1 of
+msgid "Index of the currently applied step (-1 before the first step)."
+msgstr ""
+
+#~ msgid ""
+#~ "Classical algorithms written as loops "
+#~ "run entirely within a single frame, "
+#~ "so their intermediate states are never"
+#~ " visible. ``Stepper`` solves this by "
+#~ "letting the algorithm be written as "
+#~ "a *generator* that ``yield``s once per"
+#~ " step; the stepper advances it frame"
+#~ " by frame (or on demand)."
+#~ msgstr ""

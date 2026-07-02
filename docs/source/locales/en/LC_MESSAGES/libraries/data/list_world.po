@@ -1,0 +1,255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:39+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/list_world.md:1
+msgid "ListWorld"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md:3
+msgid ""
+"`ListWorld` visualizes a list of numeric values as a row of vertical "
+"bars. Each bar's height is proportional to its value. Use it to animate "
+"sorting and search algorithms step by step."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md:7
+msgid "Operations"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`compare(i, j)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid ""
+"Highlight cells `i` and `j` with the `compare` state; return `True` if "
+"`values[i] > values[j]`."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`swap(i, j)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid ""
+"Swap the values of cells `i` and `j`; both are colored with `swap` during"
+" the operation."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`highlight(index, state)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Color one cell with a named state (default: `\"compare\"`)."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`mark_sorted(index)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid ""
+"Mark a cell as having reached its final sorted position (`\"sorted\"` "
+"state)."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`reset_color(index)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Reset one cell back to `\"default\"`."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`reset_all()`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Reset every cell to `\"default\"`."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`set_value(index, value)`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Change a cell's value and relayout all bars."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`values`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`list[int | float]`: current values left-to-right (property)."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`length`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Number of cells (property)."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "`is_sorted()`"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md
+msgid "Return `True` when the values are non-decreasing."
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md:22
+msgid "Example"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md:34
+msgid "API Reference"
+msgstr ""
+
+#: ../../source/libraries/data/list_world.md:39
+msgid ""
+"Visualizes a list of numeric values as bars. The table above lists the "
+"public operations intended for lesson and algorithm examples."
+msgstr ""
+
+#~ msgid ""
+#~ "The world exposes high-level operations"
+#~ " (:meth:`highlight`, :meth:`swap`, :meth:`compare`, "
+#~ "...) that algorithms use to make "
+#~ "single steps visible. A standardized "
+#~ "color language is used across all "
+#~ "visualizations:"
+#~ msgstr ""
+
+#~ msgid "``default``  (blue-grey):   unsorted / idle"
+#~ msgstr ""
+
+#~ msgid "``compare``  (yellow):      currently being compared"
+#~ msgstr ""
+
+#~ msgid "``swap``     (red):         about to be swapped"
+#~ msgstr ""
+
+#~ msgid "``sorted``   (green):       final position reached"
+#~ msgstr ""
+
+#~ msgid "``pivot``    (purple):      pivot / current key"
+#~ msgstr ""
+
+#~ msgid "``mark``     (dark blue):   arbitrary marker (e.g. min/max index)"
+#~ msgstr ""
+
+#~ msgid "`list[int"
+#~ msgstr ""
+
+#~ msgid "Pixel world that visualizes a list of values as an array of bars."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The world exposes high-level operations"
+#~ " such as ``highlight()``, ``compare()``, "
+#~ "and ``swap()`` that algorithms use to"
+#~ " make single steps visible. The named"
+#~ " states are ``default``, ``compare``, "
+#~ "``swap``, ``sorted``, ``pivot``, and ``mark``."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``ListWorld([5, 2, 4, 1, 3])`` creates"
+#~ " a bar visualization. Calling ``compare(0,"
+#~ " 1)``, ``swap(0, 1)``, and "
+#~ "``mark_sorted(0)`` updates the visible state"
+#~ " for a sorting algorithm."
+#~ msgstr ""
+
+#~ msgid "Highlight cells ``i`` and ``j`` and return ``values[i] > values[j]``."
+#~ msgstr ""
+
+#~ msgid "This is the canonical \"one comparison\" step for sorting/search tasks."
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+#~ msgstr ""
+
+#~ msgid "Color a cell with one of the named states."
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Cell index."
+#~ msgstr ""
+
+#~ msgid "Named state (see class docstring)."
+#~ msgstr ""
+
+#~ msgid "Return ``True`` when the values are non-decreasing."
+#~ msgstr ""
+
+#~ msgid "Mark a cell as having reached its final (sorted) position."
+#~ msgstr ""
+
+#~ msgid "Reset every cell back to the default color."
+#~ msgstr ""
+
+#~ msgid "Reset a cell back to the default (unsorted) color."
+#~ msgstr ""
+
+#~ msgid "Color a cell with a named state or an explicit color."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "One of ``default``, ``compare``, ``swap``, "
+#~ "``sorted``, ``pivot``, ``mark``."
+#~ msgstr ""
+
+#~ msgid "Optional explicit color overriding the state's default color."
+#~ msgstr ""
+
+#~ msgid "Set the value of a cell and relayout all bars."
+#~ msgstr ""
+
+#~ msgid "Swap the values (and bar heights) of cells ``i`` and ``j``."
+#~ msgstr ""
+
+#~ msgid "Both cells are colored with the ``swap`` state during the operation."
+#~ msgstr ""
+
+#~ msgid "Current values, read left-to-right."
+#~ msgstr ""

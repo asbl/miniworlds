@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/robot/world_objects.md:1
+msgid "World Objects"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md:3
+msgid ""
+"Three actor types can be placed on a `RobotWorld` grid. They are created "
+"automatically by `load_world` / `task` when the `WorldConfig` lists them "
+"in `objects`, but you can also place them manually via "
+"`world.add_object(Leaf, (col, row))`."
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Class"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Color"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Blocks robot"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Collectable"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "`Leaf`"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "green"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "No"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Yes, use `robot.remove_leaf()`"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "`Mushroom`"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "red"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Yes"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "`Tree`"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "dark green"
+msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md:14
+msgid "API Reference"
+msgstr ""

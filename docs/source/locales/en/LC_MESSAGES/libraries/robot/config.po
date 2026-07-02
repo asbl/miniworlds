@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/robot/config.md:1
+msgid "Configuration Dataclasses"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:3
+msgid ""
+"All robot worlds and robots are configured through immutable dataclasses."
+" You can either use the built-in named configs or build your own by "
+"constructing these dataclasses directly."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:7
+msgid "RobotConfig"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:9
+msgid "Controls the robot's appearance and starting direction."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Field"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Default"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`name`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "none"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Identifier string"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`costume`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`(214, 37, 37, 255)`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "RGBA color of the robot body"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`direction`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`90`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Initial heading in degrees (90 = right)"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:17
+msgid "**Built-in configs:** `\"standard\"` (red), `\"blue\"` (blue)."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:19
+msgid "WorldConfig"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:21
+msgid "Controls the world layout, objects, allowed abilities, and win condition."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`columns`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`10`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Grid width"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`rows`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Grid height"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`tile_size`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`40`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Pixel size of each tile"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`background`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "light green"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Background fill color"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`objects`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`()`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Tuple of `ObjectConfig` for pre-placed actors"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`target`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "empty"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`TargetConfig` win condition"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`robot_abilities`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+#, python-brace-format
+msgid "`{\"step\", \"turn_left\", \"turn_right\"}`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Abilities the robot exposes"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:34
+msgid "ObjectConfig"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:36
+msgid "Describes a single pre-placed object."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`kind`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`\"leaf\"`, `\"tree\"`, or `\"mushroom\"`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`position`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`(column, row)` tile coordinate"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:43
+msgid "TargetConfig"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:45
+msgid ""
+"Describes the win condition checked by `RobotWorld.is_solved()`. All "
+"fields are optional; only non-`None` fields are checked."
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`robot_position`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Required final tile position"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`robot_direction`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Required final heading"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`robot_steps`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Exact number of steps the robot must have taken"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "Required set of remaining `ObjectConfig` entries"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:55
+msgid "Custom world example"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:73
+msgid "API Reference"
+msgstr ""

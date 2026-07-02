@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:03+0200\n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -23,39 +23,39 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#: ../../source/index.md:422
-msgid "More Tutorials"
-msgstr ""
-
-#: ../../source/index.md:431
+#: ../../source/index.md:410
 msgid "Concepts"
 msgstr ""
 
-#: ../../source/index.md:447
+#: ../../source/index.md:426
 msgid "Guides"
 msgstr ""
 
-#: ../../source/index.md:462
+#: ../../source/index.md:441
 msgid "API > Basics"
 msgstr ""
 
-#: ../../source/index.md:476
+#: ../../source/index.md:456
 msgid "API > Actor Classes"
 msgstr ""
 
-#: ../../source/index.md:491
+#: ../../source/index.md:471
 msgid "API > World Classes"
 msgstr ""
 
-#: ../../source/index.md:506
+#: ../../source/index.md:486
 msgid "API > Special World classes"
 msgstr ""
 
-#: ../../source/index.md:518
+#: ../../source/index.md:499
 msgid "Helpers"
 msgstr ""
 
-#: ../../source/index.md:528
+#: ../../source/index.md:510
+msgid "Sub-Libraries"
+msgstr ""
+
+#: ../../source/index.md:523
 msgid "Legal Notice"
 msgstr ""
 
@@ -215,5 +215,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Creating your first games with **minigames** is simple and fun."
+#~ msgstr ""
+
+#~ msgid "More Tutorials"
 #~ msgstr ""
 

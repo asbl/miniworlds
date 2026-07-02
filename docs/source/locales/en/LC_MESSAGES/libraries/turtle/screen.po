@@ -1,0 +1,303 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/turtle/screen.md:1
+msgid "Screen"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:3
+msgid ""
+"`Screen` (also `TurtleScreen`) manages the window and canvas for turtle "
+"graphics. Access the global screen via `getscreen()` or use module-level "
+"screen functions."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:6
+msgid "Setup"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Method / Alias"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`setup(width, height, startx, starty)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Configure the window size and position."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`screensize(canvwidth, canvheight, bg)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set the scroll canvas size."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`setworldcoordinates(llx, lly, urx, ury)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set user-defined coordinate system."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`title(titlestring)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set the window title."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`mode(mode)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set turtle mode: `\"standard\"`, `\"logo\"`, or `\"world\"`."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:16
+msgid "Background"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`bgcolor(*args)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Get or set the background color."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`bgpic(picname)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set a background image."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`clearscreen()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Reset the screen to its initial state."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`resetscreen()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Alias for `clearscreen()`."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:25
+msgid "Color and drawing"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`colormode(cmode)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set color mode to `1.0` (float 0-1) or `255` (int 0-255)."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`tracer(n, delay)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Control animation updates. `0` = disable animation (draw instantly)."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`update()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Perform a pending screen update (use after `tracer(0)`)."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`delay(delay)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set drawing delay in milliseconds."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:34
+msgid "Event loop"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`done()` / `mainloop`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Start the event loop."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`exitonclick()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Exit when the user clicks."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`bye()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Close the window."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:42
+msgid "Input dialogs"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`numinput(title, prompt, default, minval, maxval)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Show a numeric input dialog."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`textinput(title, prompt)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Show a text input dialog."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:49
+msgid "Events"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`onscreenclick(fun, btn, add)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Bind a function to clicking on the canvas."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`onkey(fun, key)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Bind a function to a key press (key-release event)."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`onkeypress(fun, key)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Bind a function to a key-down event."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`onkeyrelease(fun, key)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Bind a function to a key-up event."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`listen()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Set focus to the canvas for key event reception."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`ontimer(fun, t)`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Call `fun` after `t` milliseconds."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:60
+msgid "Shapes and turtles"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`register_shape(name, shape)` / `addshape`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Add a custom shape to the shape registry."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`getshapes()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Return a list of all registered shape names."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`turtles()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Return a list of all turtles on the screen."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "`getcanvas()`"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md
+msgid "Return the underlying canvas object."
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:69
+msgid "Context manager: no_animation"
+msgstr ""
+
+#: ../../source/libraries/turtle/screen.md:80
+msgid "API Reference"
+msgstr ""

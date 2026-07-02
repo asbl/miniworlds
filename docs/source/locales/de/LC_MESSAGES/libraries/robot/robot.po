@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/robot/robot.md:1
+msgid "Robot"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md:3
+msgid ""
+"The `Robot` class is a restricted public facade for the internal actor. "
+"Students interact with a `Robot` object rather than a full miniworlds "
+"`Actor`, so the visible API is limited to the abilities defined in the "
+"current `WorldConfig`."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md:7
+msgid ""
+"Attempting to call an ability that is not enabled for the current task "
+"raises `AttributeError`, which gives the student clear feedback about "
+"what is allowed."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md:10
+msgid "Abilities"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md:12
+#, python-brace-format
+msgid ""
+"The default ability set is `{\"step\", \"turn_left\", \"turn_right\"}`. "
+"The `\"with_position\"` config additionally grants `\"position\"`. The "
+"`\"leaf_line\"` config additionally grants `\"on_leaf\"` and "
+"`\"remove_leaf\"`."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Method / Property"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`step()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Move one tile in the current heading. Does nothing if the tile is blocked."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`turn_left()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Rotate 90 degrees counter-clockwise."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`turn_right()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Rotate 90 degrees clockwise."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`on_leaf()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Return `True` if there is a `Leaf` on the robot's current tile."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`remove_leaf()`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Remove one `Leaf` from the current tile; return `True` if successful."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "`position`"
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md
+msgid "Current `(column, row)` tile position (read-only)."
+msgstr ""
+
+#: ../../source/libraries/robot/robot.md:25
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_robot.robot.Robot:1 of
+msgid "Restricted public facade for the internal miniworlds actor."
+msgstr ""

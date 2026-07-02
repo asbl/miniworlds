@@ -509,6 +509,15 @@ api/positions_rect
 
 ```{toctree}
 ---
+caption: Sub-Libraries
+maxdepth: 2
+hidden: true
+---
+libraries/index
+```
+
+```{toctree}
+---
 caption: Legal Notice
 maxdepth: 2
 hidden: true

@@ -1,0 +1,342 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:39+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/graph_world.md:1
+msgid "GraphWorld, GraphNode, GraphEdge"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:3
+msgid ""
+"`GraphWorld` visualizes an undirected graph. Nodes are placed at explicit"
+" pixel positions; edges are drawn as lines between them. The world is "
+"well-suited for BFS, DFS, Dijkstra and other graph traversal tasks."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:7
+msgid "Building the graph"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:24
+msgid "GraphWorld operations"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`add_node(name, value, position)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid ""
+"Add a node with a unique name and optional display value and position; "
+"return the `GraphNode`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`get_node(name)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Return the node with the given name."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`connect(source, target)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Connect two nodes with an undirected edge; return the `GraphEdge`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`neighbors(node)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Return the list of neighboring `GraphNode` objects."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`set_start(node)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Mark a node as the search origin (red)."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`set_target(node)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Mark a node as the search goal (blue)."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`highlight(node, state, color)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Highlight a node with a named state or explicit color."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`highlight_edge(source, target, state, color)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Highlight the edge between two nodes."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`reset_colors()`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Reset all nodes and edges to their default/start/target colors."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`path_edges(path)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Highlight the edges along a sequence of node names or instances as a path."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`nodes`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "List of all `GraphNode` instances (property)."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`edges`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "List of all `GraphEdge` instances (property)."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:41
+msgid ""
+"Node states: `default`, `visited`, `current`, `frontier`, `start`, "
+"`target`, `path`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:43
+msgid "Edge states: `default`, `visited`, `path`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:45
+msgid "GraphNode attributes"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Attribute"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`name`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Unique identifier string."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`value`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Displayed value."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`state`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Current highlight state string."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`set_state(state, color)`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Change the highlight state."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:54
+msgid "GraphEdge attributes"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`source`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Source `GraphNode`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`target`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Target `GraphNode`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Change the edge color."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "`refresh()`"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md
+msgid "Recompute the line endpoints from the current node positions."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:63
+msgid "API Reference"
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:68
+msgid ""
+"Visualizes an undirected graph. The table above lists the public graph "
+"operations intended for traversal and pathfinding examples."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:73
+msgid "Node actor used by :class:`GraphWorld`."
+msgstr ""
+
+#: ../../source/libraries/data/graph_world.md:77
+msgid "Edge actor used by :class:`GraphWorld`."
+msgstr ""
+
+#~ msgid "Pixel world that visualizes an undirected graph."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Nodes are added by name at "
+#~ "explicit positions and connected by "
+#~ "edges. The world is well-suited "
+#~ "for pathfinding (BFS/DFS) and traversal "
+#~ "tasks."
+#~ msgstr ""
+
+#~ msgid "Example"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``GraphWorld()`` creates a drawing area "
+#~ "for named nodes. Use ``add_node(...)`` "
+#~ "and ``connect(...)`` to build the graph,"
+#~ " then call ``set_start(...)``, "
+#~ "``set_target(...)``, or ``highlight(...)`` while "
+#~ "an algorithm runs."
+#~ msgstr ""
+
+#~ msgid "Add a node and return it."
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds\\_data.graph\\_world.GraphNode\\``"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Unique node identifier."
+#~ msgstr ""
+
+#~ msgid "Displayed value (defaults to ``name``)."
+#~ msgstr ""
+
+#~ msgid "Center position. Defaults to the world center."
+#~ msgstr ""
+
+#~ msgid "Connect two nodes with an undirected edge and return it."
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds\\_data.graph\\_world.GraphEdge\\``"
+#~ msgstr ""
+
+#~ msgid "Highlight a node with a named state or an explicit color."
+#~ msgstr ""
+
+#~ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid "Node name or instance."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "One of ``default``, ``visited``, ``current``,"
+#~ " ``frontier``, ``start``, ``target``, ``path``."
+#~ msgstr ""
+
+#~ msgid "Optional explicit color overriding the state's default color."
+#~ msgstr ""
+
+#~ msgid "Return the neighbors of a node (unordered)."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\"
+#~ " "
+#~ "\\\\\\[\\:py\\:class\\:\\`\\~miniworlds\\_data.graph\\_world.GraphNode\\`\\]`"
+#~ msgstr ""
+
+#~ msgid "Highlight the edges along a sequence of node names/instances as a path."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Reset every node to its "
+#~ "start/target/default state and edges to "
+#~ "default color."
+#~ msgstr ""
+
+#~ msgid "Mark a node as the search start (red)."
+#~ msgstr ""
+
+#~ msgid "Mark a node as the search target (blue)."
+#~ msgstr ""
+
+#~ msgid "A node actor in a :class:`GraphWorld`."
+#~ msgstr ""
+
+#~ msgid "An edge actor in a :class:`GraphWorld` connecting two nodes."
+#~ msgstr ""

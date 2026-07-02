@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/turtle/geometry.md:1
+msgid "Vec2D"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:3
+msgid ""
+"`Vec2D` is a 2-D vector helper used internally by the turtle module. It "
+"is returned by `turtle.position()` and can be used for coordinate "
+"arithmetic."
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:15
+msgid "`Vec2D` supports:"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:17
+msgid "Indexing: `v[0]`, `v[1]`"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:18
+msgid "Arithmetic: `+`, `-`, `*` (scalar), `/`  (scalar)"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:19
+msgid "`abs(v)`: Euclidean length"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:20
+msgid "`v.rotate(angle)`: return a rotated copy"
+msgstr ""
+
+#: ../../source/libraries/turtle/geometry.md:22
+msgid "API Reference"
+msgstr ""

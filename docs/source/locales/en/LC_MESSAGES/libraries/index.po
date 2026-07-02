@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/index.md:1
+msgid "Sub-Libraries"
+msgstr ""
+
+#: ../../source/libraries/index.md:3
+msgid ""
+"**miniworlds** can be extended with optional sub-libraries that each add "
+"a focused domain on top of the core engine. Install each library "
+"independently; only bring in what your project needs."
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Library"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "pip package"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "[miniworlds-robot](robot/index)"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "`miniworlds-robot`"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Grid-based robot world for teaching algorithmic thinking"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "[miniworlds-data](data/index)"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "`miniworlds-data`"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Visual data structures (list, stack, queue, tree, graph)"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "[miniworlds-physics](physics/index)"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "`miniworlds-physics`"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Physics simulation via pymunk"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "[miniworlds-turtle](turtle/index)"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "`miniworlds-turtle`"
+msgstr ""
+
+#: ../../source/libraries/index.md
+msgid "Compatible re-implementation of Python's `turtle` module"
+msgstr ""

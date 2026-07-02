@@ -1,0 +1,261 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/stack_world.md:1
+msgid "StackWorld"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md:3
+msgid ""
+"`StackWorld` visualizes a LIFO stack as a column of boxes growing upward."
+" The topmost box is highlighted in red to indicate the top-of-stack."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md:6
+msgid "Operations"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`push(value)`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Push a value onto the top. Raises `OverflowError` when at capacity."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`pop()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Remove and return the top value. Raises `IndexError` on empty stack."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`peek()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid ""
+"Return the top value without removing it. Raises `IndexError` on empty "
+"stack."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`values()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Return all current elements, bottom-to-top order."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`is_empty()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Return `True` when the stack has no elements."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`is_full()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Return `True` when the stack has reached its capacity."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`clear()`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Remove all elements."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`size`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Number of elements currently on the stack (property)."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md:19
+msgid "Constructor parameters"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Parameter"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Default"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`capacity`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`8`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Maximum number of elements."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`box_width`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`120`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Width of each element box in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`box_height`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`40`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Height of each element box in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`margin`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`10`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Margin around the stack in pixels."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "`background`"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "light grey"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Background fill color."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md:29
+#: miniworlds_data.stack_world.StackWorld:7 of
+msgid "Example"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md:43
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld:1 of
+msgid "Pixel world that visualizes a LIFO stack growing upward."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld:3 of
+msgid ""
+"Elements are pushed onto the top and popped from the top. The topmost box"
+" is highlighted in red."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.clear:1 of
+msgid "Remove every element from the stack."
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.clear:4
+#: miniworlds_data.stack_world.StackWorld.push:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.is_empty:2
+#: miniworlds_data.stack_world.StackWorld.is_full:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.peek:1 of
+msgid "Return the top element without removing it."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.peek:3
+#: miniworlds_data.stack_world.StackWorld.pop:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`object\\``"
+msgstr ""
+
+#: ../../source/libraries/data/stack_world.md
+msgid "Raises"
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.peek:5
+#: miniworlds_data.stack_world.StackWorld.pop:5 of
+msgid "when the stack is empty."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.pop:1 of
+msgid "Remove and return the top element."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.push:1 of
+msgid "Push ``value`` onto the top of the stack."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.push:5 of
+msgid "when the stack is already at capacity."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.size:1 of
+msgid "Number of elements currently on the stack."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.values:1 of
+msgid "Return the current elements, bottom-to-top order."
+msgstr ""
+
+#: miniworlds_data.stack_world.StackWorld.values:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`object\\`\\]`"
+msgstr ""

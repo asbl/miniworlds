@@ -1,0 +1,280 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/tree_world.md:1
+msgid "TreeWorld and TreeNode"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md:3
+msgid ""
+"`TreeWorld` visualizes a binary tree. Nodes are placed via a level-order "
+"layout computed automatically by the world; edges are drawn as lines "
+"between parent and child nodes."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md:7
+msgid "Building the tree"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md:21
+msgid "TreeWorld operations"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Method"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Description"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`set_root(value)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Create and return the root node. Can only be called once."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`add_left(parent, value)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Add a left child to `parent`; return the new node."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`add_right(parent, value)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Add a right child to `parent`; return the new node."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`highlight(node, state)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid ""
+"Highlight a node with a named state. States: `default`, `visited`, "
+"`current`, `root`."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`highlight_edge(parent, child, visited)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Color the edge between `parent` and `child`."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`reset_colors()`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Reset all nodes and edges to their default colors."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`inorder()`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+#: miniworlds_data.tree_world.TreeWorld.inorder:1 of
+msgid "Return nodes in in-order sequence."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`preorder()`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+#: miniworlds_data.tree_world.TreeWorld.preorder:1 of
+msgid "Return nodes in pre-order sequence."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`postorder()`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+#: miniworlds_data.tree_world.TreeWorld.postorder:1 of
+msgid "Return nodes in post-order sequence."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`root`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "The root `TreeNode` (property, `None` if not yet set)."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`nodes`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "List of all `TreeNode` instances (property)."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md:37
+msgid "TreeNode attributes"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Attribute"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`value`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "The stored value."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`left`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Left child `TreeNode` or `None`."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`right`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Right child `TreeNode` or `None`."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`state`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Current highlight state string."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "`set_state(state)`"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Change the highlight state and update the color."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md:47
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld:1 of
+msgid "Pixel world that visualizes a binary tree."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld:3 of
+msgid ""
+"Nodes are added as a root plus left/right children. The world computes a "
+"level-order layout automatically and exposes traversal-friendly highlight"
+" methods."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld:8 of
+msgid "Example"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.add_left:1 of
+msgid "Add a left child to ``parent`` and return it."
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.add_left:4
+#: miniworlds_data.tree_world.TreeWorld.add_right:4
+#: miniworlds_data.tree_world.TreeWorld.set_root:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds\\_data.tree\\_world.TreeNode\\``"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.add_right:1 of
+msgid "Add a right child to ``parent`` and return it."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.highlight:1 of
+msgid "Highlight a node with the given state."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeNode.center_on:2
+#: miniworlds_data.tree_world.TreeNode.remove_label:2
+#: miniworlds_data.tree_world.TreeNode.set_state:2
+#: miniworlds_data.tree_world.TreeWorld.highlight:3
+#: miniworlds_data.tree_world.TreeWorld.highlight_edge:4
+#: miniworlds_data.tree_world.TreeWorld.reset_colors:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: ../../source/libraries/data/tree_world.md
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.highlight:5 of
+msgid "Node to highlight."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.highlight:6 of
+msgid "One of ``default``, ``visited``, ``current``, ``root``."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.highlight_edge:1 of
+msgid "Color the edge between ``parent`` and ``child`` as visited/unvisited."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.inorder:4
+#: miniworlds_data.tree_world.TreeWorld.postorder:4
+#: miniworlds_data.tree_world.TreeWorld.preorder:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds\\_data.tree\\_world.TreeNode\\`\\]`"
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.reset_colors:1 of
+msgid "Reset every node to its default/root state and edges to default color."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeWorld.set_root:1 of
+msgid "Create the root node and return it."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeNode:1 of
+msgid "A node actor in a :class:`TreeWorld`."
+msgstr ""
+
+#: miniworlds_data.tree_world.TreeNode:3 of
+msgid ""
+"Each node stores a value, optional left/right children, and a highlight "
+"state used during traversals. Edges to its children are drawn as lines."
+msgstr ""

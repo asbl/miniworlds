@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/libraries/data/index.md:1
+msgid "miniworlds-data"
+msgstr ""
+
+#: ../../source/libraries/data/index.md:3
+msgid ""
+"**miniworlds-data** provides animated data-structure visualizations built"
+" on top of miniworlds. Each world renders one data structure and exposes "
+"high-level operations so algorithm implementations stay readable; the "
+"visualization is a side-effect of calling the operations."
+msgstr ""
+
+#: ../../source/libraries/data/index.md:7
+msgid "Installation"
+msgstr ""
+
+#: ../../source/libraries/data/index.md:13
+msgid "Color language"
+msgstr ""
+
+#: ../../source/libraries/data/index.md:15
+msgid "All data worlds share the same color vocabulary:"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "State"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "Color"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "Meaning"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`default`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "blue-grey"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "idle / unsorted"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`compare`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "yellow"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "currently being compared"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`swap`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "red"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "about to be swapped"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`sorted`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "green"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "final position reached"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`pivot`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "purple"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "pivot / current key"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`mark`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "dark blue"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "arbitrary marker, for example min/max index"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`visited`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "already visited node"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`current`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "node being processed right now"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`frontier`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "discovered but not yet processed"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`start`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "search origin"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`target`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "blue"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "search goal"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "`path`"
+msgstr ""
+
+#: ../../source/libraries/data/index.md
+msgid "path edges"
+msgstr ""
+
+#: ../../source/libraries/data/index.md:32
+msgid "Quick start: Bubble Sort"
+msgstr ""
+
+#: ../../source/libraries/data/index.md:66
+msgid "API Reference"
+msgstr ""
