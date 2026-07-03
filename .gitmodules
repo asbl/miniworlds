@@ -7,6 +7,9 @@
 [submodule "libraries/miniworlds_robot"]
 	path = libraries/miniworlds_robot
 	url = https://github.com/asbl/miniworlds-robot.git
+[submodule "libraries/miniworlds-robot-worlds"]
+	path = libraries/miniworlds-robot-worlds
+	url = https://github.com/asbl/miniworlds-robot-worlds.git
 [submodule "libraries/miniworlds_turtle"]
 	path = libraries/miniworlds_turtle
 	url = https://github.com/asbl/miniworlds-turtle.git
