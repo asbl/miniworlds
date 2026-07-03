@@ -97,6 +97,7 @@ source/dist/*
 audit/
 test/generated/docs_examples/
 .claude/
+temp/
 
 #env
 .env
