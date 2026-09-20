@@ -52,6 +52,19 @@ class EventManager:
         self.definition.update()
         return method.__name__ in self.definition.actor_class_events_set
 
+    def can_register_to_world(self, method: Callable):
+        self.definition.update()
+        return method.__name__ in self.definition.class_events_set
+
+    def is_probable_event_typo(self, method_name: str) -> bool:
+        """Returns True if `method_name` looks like a typo of an existing event."""
+        import difflib
+
+        close_match = difflib.get_close_matches(
+            method_name, sorted(self.definition.class_events_set), n=1, cutoff=0.75
+        )
+        return bool(close_match)
+
     def copy_registered_events(self, key):
         return self.registry.copy_event_methods(key)
 

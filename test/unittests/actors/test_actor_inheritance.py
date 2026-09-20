@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 
 from miniworlds import Actor, App, World
 from miniworlds.base.exceptions import (
@@ -159,7 +160,7 @@ class TestInheritanceHooks(unittest.TestCase):
         with self.assertRaises(MissingSuperInitError):
             NoSuperInitActor((10, 10))
 
-    def test_not_implemented_error_mentions_super_call(self):
+    def test_super_call_on_event_hook_is_silent(self):
         world = self._new_world()
 
         class DirectActor(Actor):
@@ -167,10 +168,29 @@ class TestInheritanceHooks(unittest.TestCase):
                 super().on_key_down(key)
 
         actor = DirectActor((1, 1), world=world)
+        self.assertIsNone(actor.on_key_down(["a"]))
+
+    def test_direct_call_on_unimplemented_hook_raises_helpful_error(self):
+        world = self._new_world()
+        actor = Actor((1, 1), world=world)
+
         with self.assertRaises(NotImplementedOrRegisteredError) as ctx:
             actor.on_key_down(["a"])
 
-        self.assertIn("no `super()` call is needed", str(ctx.exception))
+        message = str(ctx.exception)
+        self.assertIn("on_key_down", message)
+        self.assertIn("not overwritten or registered", message)
+        self.assertIn("class Actor(Actor):", message)
+
+    def test_direct_call_on_subclass_without_override_raises(self):
+        world = self._new_world()
+
+        class NoOverrideActor(Actor):
+            pass
+
+        actor = NoOverrideActor((1, 1), world=world)
+        with self.assertRaises(NotImplementedOrRegisteredError):
+            actor.on_mouse_left((10, 10))
 
     def test_register_error_suggests_close_event_name(self):
         world = self._new_world()
@@ -238,6 +258,114 @@ class TestInheritanceHooks(unittest.TestCase):
         self.assertIn(("key", ("a",)), received)
         self.assertIn(("flexible", (1, 2)), received)
         self.assertIn(("default", 1), received)
+
+
+class TestEventTypoWarnings(unittest.TestCase):
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    def _new_world(self) -> World:
+        App.reset(unittest=True, file=__file__)
+        return World(100, 100)
+
+    def test_typo_in_actor_subclass_warns_with_suggestion(self):
+        class TypoActor(Actor):
+            def on_key_dwon(self, key):
+                pass
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            world = self._new_world()
+            TypoActor((1, 1), world=world)
+
+        messages = [str(warning.message) for warning in caught]
+        typo_warnings = [m for m in messages if "on_key_dwon" in m]
+        self.assertEqual(len(typo_warnings), 1)
+        self.assertIn("Did you mean 'on_key_down'?", typo_warnings[0])
+        self.assertIn("TypoActor", typo_warnings[0])
+
+    def test_typo_warning_is_emitted_once_per_class(self):
+        class TypoActor(Actor):
+            def on_key_dwon(self, key):
+                pass
+
+        world = self._new_world()
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            TypoActor((1, 1), world=world)
+        self.assertEqual(len([w for w in caught if "on_key_dwon" in str(w.message)]), 1)
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            TypoActor((2, 2), world=world)
+        self.assertEqual(
+            len([w for w in caught if "on_key_dwon" in str(w.message)]), 0
+        )
+
+    def test_custom_on_method_without_close_match_stays_silent(self):
+        class HelperActor(Actor):
+            def on_my_helper(self):
+                pass
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            world = self._new_world()
+            HelperActor((1, 1), world=world)
+
+        typo_warnings = [
+            str(warning.message)
+            for warning in caught
+            if "looks like an event handler" in str(warning.message)
+        ]
+        self.assertEqual(typo_warnings, [])
+
+    def test_typo_in_world_subclass_warns_with_suggestion(self):
+        class TypoWorld(World):
+            def on_key_dwon(self, key):
+                pass
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            TypoWorld(100, 100)
+
+        messages = [str(warning.message) for warning in caught]
+        typo_warnings = [m for m in messages if "on_key_dwon" in m]
+        self.assertEqual(len(typo_warnings), 1)
+        self.assertIn("Did you mean 'on_key_down'?", typo_warnings[0])
+        self.assertIn("TypoWorld", typo_warnings[0])
+
+    def test_world_register_typo_raises_register_error(self):
+        world = self._new_world()
+
+        with self.assertRaises(RegisterError) as ctx:
+
+            @world.register
+            def on_key_dwon(self, key):
+                pass
+
+        message = str(ctx.exception)
+        self.assertIn("on_key_dwon", message)
+        self.assertIn("Did you mean `on_key_down`?", message)
+
+    def test_valid_event_handlers_do_not_warn(self):
+        class ValidActor(Actor):
+            def act(self):
+                pass
+
+            def on_key_down(self, key):
+                pass
+
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            world = self._new_world()
+            ValidActor((1, 1), world=world)
+
+        typo_warnings = [
+            str(warning.message)
+            for warning in caught
+            if "looks like an event handler" in str(warning.message)
+        ]
+        self.assertEqual(typo_warnings, [])
 
 
 if __name__ == "__main__":

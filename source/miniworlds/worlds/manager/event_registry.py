@@ -1,3 +1,5 @@
+import difflib
+import warnings
 from collections import defaultdict
 from collections.abc import Iterable
 from typing import TYPE_CHECKING, Any, Callable, Optional
@@ -32,6 +34,7 @@ class EventRegistry:
         self._event_iter_cache: dict[str, tuple[Callable, ...]] = {}
         self._message_iter_cache: dict[str, tuple[Callable, ...]] = {}
         self._sensor_iter_cache: tuple[tuple[str, tuple[Callable, ...]], ...] | None = None
+        self._warned_event_handler_typos: set[str] = set()
 
     def _mark_changed(self) -> None:
         self.change_counter += 1
@@ -153,11 +156,60 @@ class EventRegistry:
         """Registers initial world events."""
         self.register_events_for_world()
 
+    def _warn_about_event_handler_typos(
+        self, instance: Any, members: set, valid_events: set
+    ) -> None:
+        """Warns about methods that look like event handlers but have a typo.
+
+        A method like `on_key_dwon` in a subclass is never called - this
+        warning points students to the correct event name.
+        """
+        sorted_events = None
+        for member in members:
+            if member in valid_events or member in self._warned_event_handler_typos:
+                continue
+            if sorted_events is None:
+                sorted_events = sorted(valid_events)
+            matches = difflib.get_close_matches(member, sorted_events, n=1, cutoff=0.75)
+            if not matches:
+                continue
+            defining_class = self._find_defining_class(instance.__class__, member)
+            class_name = (
+                defining_class.__name__
+                if defining_class is not None
+                else instance.__class__.__name__
+            )
+            warnings.warn(
+                f"'{member}' in class '{class_name}' looks like an event handler, "
+                f"but there is no event named '{member}'. "
+                f"Did you mean '{matches[0]}'? "
+                f"The method is never called with this name.",
+                RuntimeWarning,
+                stacklevel=3,
+            )
+            self._warned_event_handler_typos.add(member)
+
+    @staticmethod
+    def _find_defining_class(cls: type, member: str) -> Optional[type]:
+        for klass in cls.__mro__:
+            if _is_event_root_class(klass):
+                continue
+            if member in vars(klass):
+                return klass
+        return None
+
     def register_events_for_world(self):
         """Registers all world-level event methods."""
-        for member in self._get_members_for_instance(self.world):
+        world_class = self.world.__class__
+        class_was_cached = world_class in self._event_members_by_class
+        members = self._get_members_for_instance(self.world)
+        for member in members:
             if member in self.event_definition.world_class_events_set:
                 self.register_event(member, self.world)
+        if not class_was_cached:
+            self._warn_about_event_handler_typos(
+                self.world, members, self.event_definition.world_class_events_set
+            )
 
     def register_events_for_actor(self, actor):
         """Registers all actor-level event methods."""
@@ -171,6 +223,10 @@ class EventRegistry:
                 method = inspection.Inspection(actor).get_instance_method(member)
                 if method:
                     self._add_event_method(member, method)
+        if not class_was_cached:
+            self._warn_about_event_handler_typos(
+                actor, members, self.event_definition.class_events_set
+            )
 
     def register_event(self, member: str, instance: Any) -> Optional[tuple[str, Callable]]:
         """

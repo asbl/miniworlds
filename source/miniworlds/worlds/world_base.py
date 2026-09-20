@@ -9,6 +9,7 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.world_connector as world_connector
+from miniworlds.base.exceptions import RegisterError
 
 logger = logging.getLogger(__name__)
 
@@ -182,7 +183,7 @@ class WorldBase(metaclass=AutoSetupMeta):
         """
         return
 
-    def register(self, method: Callable) -> Callable:
+    def register(self, method: Callable, force: bool = False) -> Callable:
         """
         Registers a method as a world event handler.
 
@@ -190,15 +191,29 @@ class WorldBase(metaclass=AutoSetupMeta):
 
         Args:
             method: The function or method to register.
+            force: Register even if `method` is not a valid event name.
 
         Returns:
             The bound method that will be invoked by the world event system.
+
+        Raises:
+            RegisterError: If `method` is not a valid event name and its name
+                looks like a typo of an existing event (for example
+                `on_key_dwon` instead of `on_key_down`). Such a method would
+                otherwise never be called. Methods that do not resemble an
+                event name are bound to the world without a warning.
 
         Example:
             >>> @world.register
             ... def act():
             ...     print(\"Acting...\")
         """
+        if (
+            not force
+            and not self.event_manager.can_register_to_world(method)
+            and self.event_manager.is_probable_event_typo(method.__name__)
+        ):
+            raise RegisterError(method.__name__, self)
         self._registered_methods.append(method)
         bound_method = world_inspection.WorldInspection(self).bind_method(method)
         self.event_manager.register_event(method.__name__, self)

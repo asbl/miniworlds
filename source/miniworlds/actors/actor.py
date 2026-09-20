@@ -1807,6 +1807,21 @@ class Actor(actor_base.ActorBase):
         """
         pass
 
+    def _unimplemented_event_hook(self, method_name: str):
+        """Shared body for event hooks without a base implementation.
+
+        A direct call on a class that does not overwrite the hook raises
+        `NotImplementedOrRegisteredError` with help on how to implement or
+        register the handler. If the hook is overwritten in a (sub)class,
+        the call is treated as `super().<method_name>(...)` from the
+        overwriting method and silently does nothing.
+        """
+        if getattr(type(self), method_name, None) is not getattr(
+            Actor, method_name, None
+        ):
+            return
+        raise NotImplementedOrRegisteredError(getattr(self, method_name))
+
     def on_key_down(self, key: list):
         """Called once when a key is pressed.
 
@@ -1835,7 +1850,7 @@ class Actor(actor_base.ActorBase):
                 def on_key_down_space(self):
                     self.send_message("jump")
         """
-        raise NotImplementedOrRegisteredError(self.on_key_down)
+        self._unimplemented_event_hook("on_key_down")
 
     def on_key_pressed(self, key: list):
         """Called repeatedly every frame while a key is held down.
@@ -1858,7 +1873,7 @@ class Actor(actor_base.ActorBase):
                     elif "right" in key:
                         self.x += 3
         """
-        raise NotImplementedOrRegisteredError(self.on_key_pressed)
+        self._unimplemented_event_hook("on_key_pressed")
 
     def on_key_up(self, key):
         """Called once when a previously pressed key is released.
@@ -1874,7 +1889,7 @@ class Actor(actor_base.ActorBase):
                     if "space" in key:
                         self.stop_animation()
         """
-        raise NotImplementedOrRegisteredError(self.on_key_up)
+        self._unimplemented_event_hook("on_key_up")
 
     def on_mouse_over(self, position):
         """Called when the mouse cursor enters or moves over the actor area.
@@ -1889,7 +1904,7 @@ class Actor(actor_base.ActorBase):
                 def on_mouse_over(self, position):
                     self.costume.transparency = 100
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_over)
+        self._unimplemented_event_hook("on_mouse_over")
 
     def on_mouse_leave(self, position):
         """Called when the mouse cursor leaves the actor area.
@@ -1904,7 +1919,7 @@ class Actor(actor_base.ActorBase):
                 def on_mouse_leave(self, position):
                     self.costume.transparency = 0
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_leave)
+        self._unimplemented_event_hook("on_mouse_leave")
 
     def on_mouse_left_down(self, position: tuple):
         """Called when the left mouse button is pressed down.
@@ -1912,7 +1927,7 @@ class Actor(actor_base.ActorBase):
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_left_down)
+        self._unimplemented_event_hook("on_mouse_left_down")
 
     def on_mouse_right_down(self, position: tuple):
         """Called when the right mouse button is pressed down.
@@ -1920,7 +1935,7 @@ class Actor(actor_base.ActorBase):
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_right_down)
+        self._unimplemented_event_hook("on_mouse_right_down")
 
     def on_mouse_left(self, position: tuple):
         """Called when the left mouse button is clicked.
@@ -1933,7 +1948,7 @@ class Actor(actor_base.ActorBase):
             position: Current mouse position as `(x, y)`.
         """
 
-        raise NotImplementedOrRegisteredError(self.on_mouse_left)
+        self._unimplemented_event_hook("on_mouse_left")
 
     def on_mouse_right(self, position: tuple):
         """Called when the right mouse button is clicked.
@@ -1944,7 +1959,7 @@ class Actor(actor_base.ActorBase):
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_right)
+        self._unimplemented_event_hook("on_mouse_right")
 
     def on_mouse_motion(self, position: tuple):
         """Called when the mouse moves.
@@ -1955,7 +1970,7 @@ class Actor(actor_base.ActorBase):
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_motion)
+        self._unimplemented_event_hook("on_mouse_motion")
 
     def on_mouse_left_released(self, position: tuple):
         """Called when the left mouse button is released.
@@ -1970,7 +1985,7 @@ class Actor(actor_base.ActorBase):
                 def on_mouse_left_released(self, position):
                     self.center = position
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_left_released)
+        self._unimplemented_event_hook("on_mouse_left_released")
 
     def on_mouse_right_released(self, position: tuple):
         """Called when the right mouse button is released.
@@ -1978,7 +1993,7 @@ class Actor(actor_base.ActorBase):
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        raise NotImplementedOrRegisteredError(self.on_mouse_right_released)
+        self._unimplemented_event_hook("on_mouse_right_released")
 
     def on_clicked_left(self, position: tuple):
         """Called when the actor is clicked with the left mouse button.
@@ -1993,7 +2008,7 @@ class Actor(actor_base.ActorBase):
                 def on_clicked_left(self, position):
                     self.hide()
         """
-        raise NotImplementedOrRegisteredError(self.on_clicked_left)
+        self._unimplemented_event_hook("on_clicked_left")
 
     def on_clicked_right(self, position):
         """Called when the actor is clicked with the right mouse button.
@@ -2008,7 +2023,7 @@ class Actor(actor_base.ActorBase):
                 def on_clicked_right(self, position):
                     self.remove()
         """
-        raise NotImplementedOrRegisteredError(self.on_clicked_right)
+        self._unimplemented_event_hook("on_clicked_right")
 
     def on_detecting_world(self):
         """Called when the actor is inside the world.
@@ -2020,7 +2035,7 @@ class Actor(actor_base.ActorBase):
                 def on_detecting_world(self):
                     self.move()
         """
-        raise NotImplementedOrRegisteredError(self.on_detecting_world)
+        self._unimplemented_event_hook("on_detecting_world")
 
     def on_not_detecting_world(self):
         """Called when the actor is **not** touching the world (i.e. outside world bounds).
@@ -2034,7 +2049,7 @@ class Actor(actor_base.ActorBase):
                 def on_not_detecting_world(self):
                     self.remove()
         """
-        raise NotImplementedOrRegisteredError(self.on_not_detecting_world)
+        self._unimplemented_event_hook("on_not_detecting_world")
 
     def on_detecting_not_on_world(self):
         """Alias for ``on_not_detecting_world``.
@@ -2049,7 +2064,7 @@ class Actor(actor_base.ActorBase):
                 def on_detecting_not_on_world(self):
                     self.remove()
         """
-        raise NotImplementedOrRegisteredError(self.on_detecting_not_on_world)
+        self._unimplemented_event_hook("on_detecting_not_on_world")
 
     def on_detecting_actor(self, actor: "Actor"):
         """Called when this actor detects another actor.
@@ -2065,7 +2080,7 @@ class Actor(actor_base.ActorBase):
                     if isinstance(actor, Coin):
                         actor.remove()
         """
-        raise NotImplementedOrRegisteredError(self.on_detecting_actor)
+        self._unimplemented_event_hook("on_detecting_actor")
 
     def on_detecting_borders(self, borders: List[str]):
         """Called when the actor detects one or more world borders.
@@ -2080,7 +2095,7 @@ class Actor(actor_base.ActorBase):
                 def on_detecting_borders(self, borders):
                     self.bounce_from_border(borders)
         """
-        raise NotImplementedOrRegisteredError(self.on_detecting_borders)
+        self._unimplemented_event_hook("on_detecting_borders")
 
     @property
     def static(self):

@@ -213,8 +213,6 @@ class NotImplementedOrRegisteredError(MiniworldsError):
             f"   @{register_target}.register\n"
             f"   def {method_name}(self, ...):\n"
             f"       pass\n"
-            f"Note: If you called this via `super().{method_name}(...)`: event handlers\n"
-            f"are hooks - the base class does nothing here, so no `super()` call is needed."
             f"{hint_block}"
         )
         super().__init__(self.message)
