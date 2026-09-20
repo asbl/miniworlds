@@ -151,6 +151,10 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
         f"-v {REPO_ROOT}/libraries/physics/test:/app/physics/test "
         f"-v {REPO_ROOT}/libraries/miniworlds_data/source:/app/data/source "
         f"-v {REPO_ROOT}/libraries/miniworlds_data/test:/app/data/test "
+        f"-v {REPO_ROOT}/libraries/miniworlds_robot/source:/app/robot/source "
+        f"-v {REPO_ROOT}/libraries/miniworlds_robot/test:/app/robot/test "
+        f"-v {REPO_ROOT}/libraries/miniworlds_turtle/source:/app/turtle/source "
+        f"-v {REPO_ROOT}/libraries/miniworlds_turtle/test:/app/turtle/test "
     )
     if results_dir is not None:
         mounts += f"-v {results_dir}:/app/test/performance/results "
@@ -158,11 +162,19 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
 
 
 def _docker_pythonpath() -> str:
-    return "PYTHONPATH=/app/source:/app/physics/source:/app/data/source"
+    return (
+        "PYTHONPATH=/app/source:/app/physics/source:/app/data/source"
+        ":/app/robot/source:/app/turtle/source"
+    )
 
 
 def _local_pythonpath() -> str:
-    return f"{REPO_ROOT}/source:{REPO_ROOT}/libraries/physics/source:{REPO_ROOT}/libraries/miniworlds_data/source"
+    return (
+        f"{REPO_ROOT}/source:{REPO_ROOT}/libraries/physics/source"
+        f":{REPO_ROOT}/libraries/miniworlds_data/source"
+        f":{REPO_ROOT}/libraries/miniworlds_robot/source"
+        f":{REPO_ROOT}/libraries/miniworlds_turtle/source"
+    )
 
 
 def _local_env_prefix() -> str:

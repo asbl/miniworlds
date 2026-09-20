@@ -27,7 +27,13 @@ class ActorInitializationFacade:
         self, world_override: Optional["world_mod.World"] = None
     ) -> None:
         self.actor._dirty = 0
-        self.actor._world = world_override or app.App.get_running_world()
+        # A world override must only be replaced when it is None: a world with
+        # __len__ (e.g. QueueWorld/StackWorld) is falsy while it is still empty.
+        self.actor._world = (
+            world_override
+            if world_override is not None
+            else app.App.get_running_world()
+        )
         self.actor._is_setup_completed = False
         self.actor._sensor_manager = None
         self.actor._position_manager = None
@@ -66,7 +72,9 @@ class ActorInitializationFacade:
             raise AttributeError(
                 "Actor could not be created on a World - Did you created a world instance before?"
             ) from error
-        if not self.actor.world:
+        # Worlds may define __len__ and be falsy while they are still empty,
+        # so only None means "no world".
+        if self.actor.world is None:
             raise NoWorldError()
 
     def finalize_sprite_state(self, origin: Optional[str] = None) -> None:
