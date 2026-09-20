@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,8 +26,8 @@ msgstr ""
 #: ../../source/libraries/robot/world_objects.md:3
 msgid ""
 "Three actor types can be placed on a `RobotWorld` grid. They are created "
-"automatically by `load_world` / `task` when the `WorldConfig` lists them "
-"in `objects`, but you can also place them manually via "
+"automatically by `load` / `load_world` / `task` when the `WorldConfig` "
+"lists them in `objects`, but you can also place them manually via "
 "`world.add_object(Leaf, (col, row))`."
 msgstr ""
 
@@ -86,3 +86,24 @@ msgstr ""
 #: ../../source/libraries/robot/world_objects.md:14
 msgid "API Reference"
 msgstr ""
+
+#: ../../source/libraries/robot/world_objects.md
+msgid "Return type"
+msgstr ""
+
+#: miniworlds_robot.visuals.make_leaf_surface:2
+#: miniworlds_robot.visuals.make_mushroom_surface:2
+#: miniworlds_robot.visuals.make_tree_surface:2 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.surface.Surface\\``"
+msgstr ""
+
+#~ msgid ""
+#~ "Three actor types can be placed on"
+#~ " a `RobotWorld` grid. They are "
+#~ "created automatically by `load_world` / "
+#~ "`task` when the `WorldConfig` lists them"
+#~ " in `objects`, but you can also "
+#~ "place them manually via "
+#~ "`world.add_object(Leaf, (col, row))`."
+#~ msgstr ""
+

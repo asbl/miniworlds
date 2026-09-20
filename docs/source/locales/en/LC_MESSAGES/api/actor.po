@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:55+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -80,7 +80,8 @@ msgid ""
 "react to keyboard, mouse, and lifecycle events."
 msgstr ""
 
-#: miniworlds.actors.actor.Actor:7 miniworlds.actors.actor.Actor.add_costume:11
+#: miniworlds.actors.actor.Actor:7 miniworlds.actors.actor.Actor.act:10
+#: miniworlds.actors.actor.Actor.add_costume:11
 #: miniworlds.actors.actor.Actor.add_costumes:10
 #: miniworlds.actors.actor.Actor.animate:6
 #: miniworlds.actors.actor.Actor.animate_costume:7
@@ -136,10 +137,11 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_mouse_left_released:6
 #: miniworlds.actors.actor.Actor.on_mouse_over:6
 #: miniworlds.actors.actor.Actor.on_not_detecting_world:6
+#: miniworlds.actors.actor.Actor.on_setup:10
 #: miniworlds.actors.actor.Actor.orientation:4
 #: miniworlds.actors.actor.Actor.point_towards_actor:10
 #: miniworlds.actors.actor.Actor.point_towards_position:10
-#: miniworlds.actors.actor.Actor.remove:10
+#: miniworlds.actors.actor.Actor.remove:17
 #: miniworlds.actors.actor.Actor.remove_costume:7
 #: miniworlds.actors.actor.Actor.scale_height:6
 #: miniworlds.actors.actor.Actor.scale_width:6
@@ -156,6 +158,22 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.undo_move:6
 #: miniworlds.actors.actor.Actor.width:4 of
 msgid "Examples"
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.act:1 of
+msgid "Hook: called once per frame while the world is running."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.act:3 of
+msgid ""
+"Overwrite this method in a subclass (or register a function with "
+"`@actor.register`) to run code every frame."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.act:6 of
+msgid ""
+"The base implementation does nothing, so `super().act()` is never "
+"required in an overwritten `act` method."
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.add_costume:1 of
@@ -327,6 +345,12 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.before_remove:1 of
 msgid "Hook called immediately before the actor is removed from the world."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.before_remove:3 of
+msgid ""
+"Overwrite this method for cleanup code (e.g. updating a score). The base "
+"implementation does nothing, so no `super()` call is required here."
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.border:1 of
@@ -1177,6 +1201,22 @@ msgstr ""
 msgid "Useful to remove actors that fly off-screen."
 msgstr ""
 
+#: miniworlds.actors.actor.Actor.on_setup:1 of
+msgid "Hook: called once when the actor is added to the world."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_setup:3 of
+msgid ""
+"Overwrite this method in a subclass (or register a function with "
+"`@actor.register`) to initialize costumes and attributes."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.on_setup:6 of
+msgid ""
+"The base implementation does nothing, so `super().on_setup()` is never "
+"required in an overwritten `on_setup` method."
+msgstr ""
+
 #: miniworlds.actors.actor.Actor.on_shape_change:1 of
 msgid "Hook called when actor shape-related properties change."
 msgstr ""
@@ -1237,6 +1277,13 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.remove:7 of
 msgid "Removed actor data from the world connector."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.remove:11 of
+msgid ""
+"If you overwrite `remove()` in a subclass, call `super().remove()` - "
+"otherwise the actor stays in the world. For code that should run before "
+"removal, overwrite `before_remove()` instead; it needs no `super()` call."
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.remove_costume:1 of

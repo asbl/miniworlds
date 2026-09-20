@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -30,49 +30,87 @@ msgid ""
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md:5
-msgid "`task(name, robot=\"standard\")`"
+msgid ""
+"`load(config=\"basic\", robot=\"standard\", *, position=None, "
+"**overrides)`"
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md:7
-msgid "The simplest way to start a lesson task. Returns `(world, robot)`."
-msgstr ""
-
-#: ../../source/libraries/robot/loader.md:20
-msgid "`load_world(config=\"basic\", **overrides)`"
+msgid ""
+"The simplest way to create a world and its robot in one call. Returns "
+"`(world, robot)`. The robot is placed at `position` if given, otherwise "
+"at the world's configured `start_position` (falling back to `(0, 0)`)."
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md:22
-msgid ""
-"Create a `RobotWorld` from a named built-in config or a `WorldConfig` "
-"instance. Objects listed in the config are placed automatically."
+msgid "Worlds can also be loaded from JSON URLs, including GitHub `blob` links:"
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md:32
-msgid "`load_robot(config=\"standard\", world=None, *, position=(0, 0))`"
+msgid "`task(name, robot=\"standard\", *, position=None, debug=False)`"
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md:34
+msgid ""
+"Convenience wrapper around `load` for built-in lesson tasks. Returns "
+"`(world, robot)`."
+msgstr ""
+
+#: ../../source/libraries/robot/loader.md:37
+msgid "`load_world(config=\"basic\", **overrides)`"
+msgstr ""
+
+#: ../../source/libraries/robot/loader.md:39
+msgid ""
+"Create a `RobotWorld` from a named built-in config or a `WorldConfig` "
+"instance. Objects listed in the config are placed automatically. No robot"
+" is created."
+msgstr ""
+
+#: ../../source/libraries/robot/loader.md:49
+msgid "`load_robot(config=\"standard\", world=None, *, position=(0, 0))`"
+msgstr ""
+
+#: ../../source/libraries/robot/loader.md:51
 msgid ""
 "Create a `Robot` and place it on the given world. If `world` is `None`, a"
 " basic world is created automatically."
 msgstr ""
 
-#: ../../source/libraries/robot/loader.md:44
+#: ../../source/libraries/robot/loader.md:61
 msgid "`Loader` class"
 msgstr ""
 
-#: ../../source/libraries/robot/loader.md:46
+#: ../../source/libraries/robot/loader.md:63
 msgid ""
-"`Loader` is a convenience class that bundles both factory functions as "
+"`Loader` is a convenience class that bundles the factory functions as "
 "static methods. Useful if you want to pass the factory as an object."
 msgstr ""
 
-#: ../../source/libraries/robot/loader.md:49
+#: ../../source/libraries/robot/loader.md:66
 msgid "API Reference"
+msgstr ""
+
+#: miniworlds_robot.loader.load:1 of
+msgid "Create a robot world and its robot in one call."
+msgstr ""
+
+#: miniworlds_robot.loader.load:3 of
+msgid ""
+"The robot is placed at ``position`` if given, otherwise at the world's "
+"configured ``start_position`` (falling back to ``(0, 0)``). Returns "
+"``(world, robot)``."
 msgstr ""
 
 #: ../../source/libraries/robot/loader.md
 msgid "Return type"
+msgstr ""
+
+#: miniworlds_robot.loader.load:8 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds\\_robot.world.RobotWorld\\`\\, "
+"\\:py\\:class\\:\\`\\~miniworlds\\_robot.robot.Robot\\`\\]`"
 msgstr ""
 
 #: miniworlds_robot.loader.load_world:2 of
@@ -82,3 +120,36 @@ msgstr ""
 #: miniworlds_robot.loader.load_robot:2 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds\\_robot.robot.Robot\\``"
 msgstr ""
+
+#: miniworlds_robot.loader.load_world_config_from_url:1 of
+msgid "Load a RobotWorld JSON config from an HTTP(S) URL."
+msgstr ""
+
+#: miniworlds_robot.loader.load_world_config_from_url:3 of
+msgid "GitHub ``/blob/`` URLs are accepted and converted to their raw equivalent."
+msgstr ""
+
+#: miniworlds_robot.loader.load_world_config_from_url:6 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds\\_robot.config.WorldConfig\\``"
+msgstr ""
+
+#~ msgid "`task(name, robot=\"standard\")`"
+#~ msgstr ""
+
+#~ msgid "The simplest way to start a lesson task. Returns `(world, robot)`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Create a `RobotWorld` from a named "
+#~ "built-in config or a `WorldConfig` "
+#~ "instance. Objects listed in the config"
+#~ " are placed automatically."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "`Loader` is a convenience class that "
+#~ "bundles both factory functions as static"
+#~ " methods. Useful if you want to "
+#~ "pass the factory as an object."
+#~ msgstr ""
+

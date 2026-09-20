@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -32,8 +32,8 @@ msgstr ""
 
 #: ../../source/libraries/robot/robot_world.md:7
 msgid ""
-"Use `load_world(...)` or `task(...)` to create a pre-configured instance "
-"rather than constructing `RobotWorld` directly."
+"Use `load(...)`, `load_world(...)`, or `task(...)` to create a pre-"
+"configured instance rather than constructing `RobotWorld` directly."
 msgstr ""
 
 #: ../../source/libraries/robot/robot_world.md:10
@@ -98,6 +98,22 @@ msgstr ""
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
 msgstr ""
 
+#: miniworlds_robot.world.RobotWorld.debug:1 of
+msgid "Whether to draw a compact runtime debug overlay."
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.debug:4 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.debug of
+msgid "type"
+msgstr ""
+
+#: miniworlds_robot.world.RobotWorld.debug:9 of
+msgid "bool"
+msgstr ""
+
 #: miniworlds_robot.world.RobotWorld.is_blocked:2
 #: miniworlds_robot.world.RobotWorld.is_solved:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
@@ -106,3 +122,10 @@ msgstr ""
 #: miniworlds_robot.world.RobotWorld.is_solved:1 of
 msgid "Return whether the current world state matches the task target."
 msgstr ""
+
+#~ msgid ""
+#~ "Use `load_world(...)` or `task(...)` to "
+#~ "create a pre-configured instance rather"
+#~ " than constructing `RobotWorld` directly."
+#~ msgstr ""
+

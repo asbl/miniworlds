@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -233,11 +233,11 @@ msgstr ""
 msgid "when the queue is empty."
 msgstr ""
 
-#: miniworlds_data.queue_world.QueueWorld.clear:1 of
+#: miniworlds_data.queue_world.QueueWorld.clear_elements:1 of
 msgid "Remove every element from the queue."
 msgstr ""
 
-#: miniworlds_data.queue_world.QueueWorld.clear:4
+#: miniworlds_data.queue_world.QueueWorld.clear_elements:4
 #: miniworlds_data.queue_world.QueueWorld.enqueue:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
@@ -263,10 +263,6 @@ msgstr ""
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
 msgstr ""
 
-#: miniworlds_data.queue_world.QueueWorld.size:1 of
-msgid "Number of elements currently in the queue."
-msgstr ""
-
 #: miniworlds_data.queue_world.QueueWorld.values:1 of
 msgid "Return the current elements, front-to-back order."
 msgstr ""
@@ -276,3 +272,7 @@ msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`object\\`\\]`"
 msgstr ""
+
+#~ msgid "Number of elements currently in the queue."
+#~ msgstr ""
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -198,7 +198,7 @@ msgid ""
 " is highlighted in red."
 msgstr ""
 
-#: miniworlds_data.stack_world.StackWorld.clear:1 of
+#: miniworlds_data.stack_world.StackWorld.clear_elements:1 of
 msgid "Remove every element from the stack."
 msgstr ""
 
@@ -206,7 +206,7 @@ msgstr ""
 msgid "Return type"
 msgstr ""
 
-#: miniworlds_data.stack_world.StackWorld.clear:4
+#: miniworlds_data.stack_world.StackWorld.clear_elements:4
 #: miniworlds_data.stack_world.StackWorld.push:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
@@ -246,10 +246,6 @@ msgstr ""
 msgid "when the stack is already at capacity."
 msgstr ""
 
-#: miniworlds_data.stack_world.StackWorld.size:1 of
-msgid "Number of elements currently on the stack."
-msgstr ""
-
 #: miniworlds_data.stack_world.StackWorld.values:1 of
 msgid "Return the current elements, bottom-to-top order."
 msgstr ""
@@ -259,3 +255,7 @@ msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`object\\`\\]`"
 msgstr ""
+
+#~ msgid "Number of elements currently on the stack."
+#~ msgstr ""
+

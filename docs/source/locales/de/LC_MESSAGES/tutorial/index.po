@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/tutorial/index.md:1
+msgid "Tutorials"
+msgstr ""
+
+#: ../../source/tutorial/index.md:3
+msgid ""
+"Die interaktiven miniworlds Tutorials findest du jetzt im "
+"[miniworlds_examples Kurs](https://github.com/copilotstudent/course-"
+"sync/tree/main/courses/miniworlds_examples)."
+msgstr ""
+
+#: ../../source/tutorial/index.md:5
+msgid "Kursinhalte"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Kapitel"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Thema"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "001"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Installation"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "002"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Die erste Welt"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "003"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Actors"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "004"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Bewegung"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "005"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Kollisionen"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "006"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Events"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "007"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Fortgeschrittene Themen"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "008"
+msgstr ""
+
+#: ../../source/tutorial/index.md
+msgid "Tiled Worlds"
+msgstr ""
+
+#: ../../source/tutorial/index.md:18
+msgid "Lokale Vorschau"
+msgstr ""
+
+#: ../../source/tutorial/index.md:25
+msgid "Danach ist die Vorschau unter <http://127.0.0.1:8765/> erreichbar."
+msgstr ""
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -84,6 +84,7 @@ msgid "Collision checks use sprite masks by default."
 msgstr ""
 
 #: miniworlds.worlds.world.World:11 miniworlds.worlds.world.World.__init__:7
+#: miniworlds.worlds.world.World.act:12
 #: miniworlds.worlds.world.World.add_background:10
 #: miniworlds.worlds.world.World.background:4
 #: miniworlds.worlds.world.World.columns:4
@@ -151,11 +152,24 @@ msgstr ""
 msgid "Height in pixels. Ignored when `x` is a tuple."
 msgstr ""
 
-#: miniworlds.worlds.world.World.actors_at:1 of
-msgid "Student-friendly alias for `detect_actors(position)`."
+#: miniworlds.worlds.world.World.act:1 of
+msgid "Hook: called once per frame while the world is running."
 msgstr ""
 
-#: ../../source/api/world.md miniworlds.worlds.world.World.add_background
+#: miniworlds.worlds.world.World.act:3 of
+msgid ""
+"Overwrite this method in a subclass (or register a function with "
+"`@world.register`) to run code every frame."
+msgstr ""
+
+#: miniworlds.worlds.world.World.act:6 of
+msgid ""
+"The base implementation does nothing, so `super().act()` is never "
+"required in an overwritten `act` method."
+msgstr ""
+
+#: ../../source/api/world.md miniworlds.worlds.world.World.act
+#: miniworlds.worlds.world.World.add_background
 #: miniworlds.worlds.world.World.detect_actors
 #: miniworlds.worlds.world.World.direction_to
 #: miniworlds.worlds.world.World.distance_to
@@ -173,6 +187,24 @@ msgstr ""
 #: miniworlds.worlds.world.World.switch_background
 #: miniworlds.worlds.world.World.to_pixel of
 msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.world.World.act:9
+#: miniworlds.worlds.world.World.broadcast:4
+#: miniworlds.worlds.world.World.on_setup:5
+#: miniworlds.worlds.world.World.quit:3
+#: miniworlds.worlds.world.World.remove_background:3
+#: miniworlds.worlds.world.World.run:5
+#: miniworlds.worlds.world.World.send_message:6
+#: miniworlds.worlds.world.World.set_columns:3
+#: miniworlds.worlds.world.World.set_rows:3
+#: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.stop:3
+#: miniworlds.worlds.world.World.switch_world:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.world.World.actors_at:1 of
+msgid "Student-friendly alias for `detect_actors(position)`."
 msgstr ""
 
 #: miniworlds.worlds.world.World.actors_at:4
@@ -247,19 +279,6 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.broadcast:1 of
 msgid "Student-friendly alias for `send_message(message, data)`."
-msgstr ""
-
-#: miniworlds.worlds.world.World.broadcast:4
-#: miniworlds.worlds.world.World.on_setup:5
-#: miniworlds.worlds.world.World.quit:3
-#: miniworlds.worlds.world.World.remove_background:3
-#: miniworlds.worlds.world.World.run:5
-#: miniworlds.worlds.world.World.send_message:6
-#: miniworlds.worlds.world.World.set_columns:3
-#: miniworlds.worlds.world.World.set_rows:3
-#: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.stop:3
-#: miniworlds.worlds.world.World.switch_world:3 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.worlds.world.World.columns:1 of

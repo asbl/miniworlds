@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -179,11 +179,25 @@ msgstr ""
 msgid "Abilities the robot exposes"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:34
+#: ../../source/libraries/robot/config.md
+msgid "`start_position`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid "`None`"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md
+msgid ""
+"Default robot start tile, used by `load()` when no explicit `position` is"
+" given"
+msgstr ""
+
+#: ../../source/libraries/robot/config.md:35
 msgid "ObjectConfig"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:36
+#: ../../source/libraries/robot/config.md:37
 msgid "Describes a single pre-placed object."
 msgstr ""
 
@@ -203,11 +217,11 @@ msgstr ""
 msgid "`(column, row)` tile coordinate"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:43
+#: ../../source/libraries/robot/config.md:44
 msgid "TargetConfig"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:45
+#: ../../source/libraries/robot/config.md:46
 msgid ""
 "Describes the win condition checked by `RobotWorld.is_solved()`. All "
 "fields are optional; only non-`None` fields are checked."
@@ -241,10 +255,11 @@ msgstr ""
 msgid "Required set of remaining `ObjectConfig` entries"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:55
+#: ../../source/libraries/robot/config.md:56
 msgid "Custom world example"
 msgstr ""
 
-#: ../../source/libraries/robot/config.md:73
+#: ../../source/libraries/robot/config.md:75
 msgid "API Reference"
 msgstr ""
+

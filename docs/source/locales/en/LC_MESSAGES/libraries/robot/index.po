@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-09-20 13:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -47,10 +47,14 @@ msgid "Quick start"
 msgstr ""
 
 #: ../../source/libraries/robot/index.md:29
+msgid "Or load a world together with its robot in one call:"
+msgstr ""
+
+#: ../../source/libraries/robot/index.md:39
 msgid "Or build your own world from scratch:"
 msgstr ""
 
-#: ../../source/libraries/robot/index.md:40
+#: ../../source/libraries/robot/index.md:50
 msgid "Built-in tasks"
 msgstr ""
 
@@ -126,6 +130,7 @@ msgstr ""
 msgid "Exposes `robot.position` for coordinate-based tasks"
 msgstr ""
 
-#: ../../source/libraries/robot/index.md:53
+#: ../../source/libraries/robot/index.md:63
 msgid "API Reference"
 msgstr ""
+
