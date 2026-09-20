@@ -973,6 +973,25 @@ class World(world_base.WorldBase):
         self._ensure_position_tuple(position, "position")
         return self._runtime_facade.to_pixel(position)
 
+    def act(self) -> None:
+        """Hook: called once per frame while the world is running.
+
+        Overwrite this method in a subclass (or register a function with
+        `@world.register`) to run code every frame.
+
+        The base implementation does nothing, so `super().act()` is never
+        required in an overwritten `act` method.
+
+        Examples:
+            ::
+
+                class MyWorld(World):
+                    def act(self):
+                        if self.frame % 60 == 0:
+                            self.spawn_enemy()
+        """
+        pass
+
     def on_setup(self) -> None:
         """Hook for initial world setup.
 

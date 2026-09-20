@@ -1,4 +1,4 @@
-from inspect import signature
+from inspect import Parameter, signature
 from collections.abc import Iterable
 from functools import lru_cache
 from miniworlds.base.exceptions import (
@@ -32,6 +32,9 @@ def check_signature(method: callable, arguments: tuple, allow_none=False):
         raise NotCallableError(method)
     if arguments is None and not allow_none:
         raise NotNullError(method)
+    # `None` means the method is called without arguments (see `call_method`);
+    # remember this before `arguments` is normalized below.
+    arguments_mean_no_call = arguments is None
     if type(arguments) is not list and type(arguments) is not tuple and type(arguments) is not dict:
         arguments = [arguments]
     try:
@@ -40,9 +43,40 @@ def check_signature(method: callable, arguments: tuple, allow_none=False):
         raise FirstArgumentShouldBeSelfError(method)
     i = 0
     for key, param in sig.parameters.items():
+        if param.kind in (Parameter.VAR_POSITIONAL, Parameter.VAR_KEYWORD):
+            continue
         if param.default == param.empty and i >= len(arguments):
             raise WrongArgumentsError(method, arguments)
         i = i + 1
+    if _has_unfillable_required_parameters(sig, arguments, arguments_mean_no_call):
+        raise WrongArgumentsError(method, arguments)
+
+
+def _has_unfillable_required_parameters(
+    sig, arguments, arguments_mean_no_call: bool
+) -> bool:
+    """Checks for required parameters that would never receive a value.
+
+    Event handlers are called by miniworlds with a fixed number of
+    arguments. A handler like `def act(self, speed)` has a required
+    parameter without a default value; calling it raises a cryptic
+    Python TypeError. This check reports the mismatch upfront with a
+    helpful message instead.
+    """
+    if arguments_mean_no_call:
+        argument_count = 0
+    elif isinstance(arguments, dict):
+        argument_count = len(arguments)
+    else:
+        argument_count = len(arguments)
+    required = [
+        param
+        for param in sig.parameters.values()
+        if param.default == param.empty
+        and param.kind
+        not in (Parameter.VAR_POSITIONAL, Parameter.VAR_KEYWORD)
+    ]
+    return len(required) > argument_count
 
 
 def call_method(method: callable, arguments: Optional[tuple], allow_none=True):

@@ -26,6 +26,16 @@ robot.step()
 world.run()
 ```
 
+Or load a world together with its robot in one call:
+
+```python
+from miniworlds_robot import load
+
+world, robot = load("loop_square")
+robot.step()
+world.run()
+```
+
 Or build your own world from scratch:
 
 ```python

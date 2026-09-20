@@ -4,8 +4,8 @@
 It reads its dimensions, background color, pre-placed objects, and allowed robot
 abilities from a `WorldConfig` dataclass.
 
-Use `load_world(...)` or `task(...)` to create a pre-configured instance rather
-than constructing `RobotWorld` directly.
+Use `load(...)`, `load_world(...)`, or `task(...)` to create a pre-configured
+instance rather than constructing `RobotWorld` directly.
 
 ## Key methods
 

@@ -1,8 +1,8 @@
 # World Objects
 
 Three actor types can be placed on a `RobotWorld` grid.
-They are created automatically by `load_world` / `task` when the `WorldConfig`
-lists them in `objects`, but you can also place them manually via
+They are created automatically by `load` / `load_world` / `task` when the
+`WorldConfig` lists them in `objects`, but you can also place them manually via
 `world.add_object(Leaf, (col, row))`.
 
 | Class | Color | Blocks robot | Collectable |

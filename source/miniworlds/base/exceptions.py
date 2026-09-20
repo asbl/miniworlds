@@ -51,6 +51,22 @@ class WrongArgumentsError(MiniworldsError):
             f"Got {str(parameters)} but expected {str(sig.parameters)}.\n"
             f"Try: def {method_name}{sig}"
         )
+        event_signatures = {
+            "act": "def act(self):",
+            "on_setup": "def on_setup(self):",
+            "on_key_down": "def on_key_down(self, key):",
+            "on_key_pressed": "def on_key_pressed(self, key):",
+            "on_key_up": "def on_key_up(self, key):",
+            "on_message": "def on_message(self, message):",
+            "on_detecting_actor": "def on_detecting_actor(self, other):",
+            "on_detecting_borders": "def on_detecting_borders(self, borders):",
+        }
+        if method_name in event_signatures:
+            self.message += (
+                f"\nEvent handlers are called by miniworlds - "
+                f"use the exact signature:\n"
+                f"    {event_signatures[method_name]}"
+            )
         super().__init__(self.message)
 
 
@@ -196,7 +212,9 @@ class NotImplementedOrRegisteredError(MiniworldsError):
             f"2) Register a handler:\n"
             f"   @{register_target}.register\n"
             f"   def {method_name}(self, ...):\n"
-            f"       pass"
+            f"       pass\n"
+            f"Note: If you called this via `super().{method_name}(...)`: event handlers\n"
+            f"are hooks - the base class does nothing here, so no `super()` call is needed."
             f"{hint_block}"
         )
         super().__init__(self.message)
@@ -260,12 +278,52 @@ class EdgeNotFoundError(MiniworldsError):
 
 class RegisterError(MiniworldsError):
     def __init__(self, method, instance):
-        self.message = f"You can't register {method} to the instance {instance}"
+        from difflib import get_close_matches
+
+        method_name = getattr(method, "__name__", str(method))
+        self.message = (
+            f"You can't register {method_name} to the instance {instance}.\n"
+            f"`{method_name}` is not a valid event name.\n"
+            f"Valid events are methods like `act`, `on_setup`, `on_key_down`,\n"
+            f"`on_mouse_left`, `on_clicked_left`, `on_detecting_actor`, ..."
+        )
+        close_match = get_close_matches(
+            method_name,
+            [
+                "act", "on_setup", "on_key_down", "on_key_pressed", "on_key_up",
+                "on_mouse_left", "on_mouse_right", "on_mouse_motion",
+                "on_mouse_over", "on_mouse_leave", "on_clicked_left",
+                "on_clicked_right", "on_detecting_actor", "on_detecting_borders",
+                "on_detecting_world", "on_message",
+            ],
+            n=1,
+            cutoff=0.6,
+        )
+        if close_match:
+            self.message += (
+                f"\nDid you mean `{close_match[0]}`?"
+                f"\nTry: def {close_match[0]}(self, ...):"
+            )
         super().__init__(self.message)
 
 
 class MissingActorPartsError(MiniworldsError):
     pass
+
+
+class MissingSuperInitError(MiniworldsError):
+    def __init__(self, actor):
+        class_name = type(actor).__name__
+        self.message = (
+            f"Your class '{class_name}' is not correctly initialized.\n"
+            f"Did you forget `super().__init__()` in `__init__`?\n"
+            f"Try:\n"
+            f"    class {class_name}(Actor):\n"
+            f"        def __init__(self, position):\n"
+            f"            super().__init__(position)\n"
+            f"            # ... your own code"
+        )
+        super().__init__(self.message)
 
 
 class Missingworldsensor(MissingActorPartsError):

@@ -19,7 +19,12 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.manager.event_manager as event_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
 import miniworlds.worlds.manager.world_connector as world_connector
-from miniworlds.base.exceptions import RegisterError
+from miniworlds.base.exceptions import (
+    MissingPositionManager,
+    MissingSuperInitError,
+    Missingworldsensor,
+    RegisterError,
+)
 
 if TYPE_CHECKING:
     import miniworlds.appearances.costume as costume_mod
@@ -184,6 +189,8 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
         try:
             return self._position_manager
         except AttributeError:
+            if not hasattr(self, "_world"):
+                raise MissingSuperInitError(self)
             raise MissingPositionManager(self)
 
     @property
@@ -191,6 +198,8 @@ class ActorBase(pygame.sprite.DirtySprite, metaclass=ActorWorldConnectorMeta):
         try:
             return self._sensor_manager
         except AttributeError:
+            if not hasattr(self, "_world"):
+                raise MissingSuperInitError(self)
             raise Missingworldsensor(self)
 
     @property

@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING, Iterable, Optional, Tuple, Type
 
 import miniworlds.appearances.costume as costume
 import miniworlds.appearances.costumes_manager as costumes_manager
+import miniworlds.tools.method_caller as method_caller
 import miniworlds.worlds.manager.position_manager as position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 from miniworlds.worlds.manager.event_subscription import EventSubscription
@@ -131,6 +132,26 @@ class WorldConnector:
         if was_registered != is_registered:
             self._bump_blocking_registry_version()
 
+    def _has_overwritten_on_setup(self) -> bool:
+        """Checks whether the actor provides its own `on_setup` hook.
+
+        `Actor.on_setup` is a no-op hook, so a plain `hasattr` check would be
+        always true. Only subclasses (or actors with an instance-level
+        `on_setup`, e.g. set via `setattr`) should have their hook called
+        on world entry.
+        """
+        import miniworlds.actors.actor as actor_mod
+
+        actor_on_setup = getattr(actor_mod.Actor, "on_setup", None)
+        if "on_setup" in getattr(self.actor, "__dict__", {}):
+            return True
+        on_setup_method = getattr(type(self.actor), "on_setup", None)
+        if on_setup_method is None:
+            return False
+        if on_setup_method is actor_on_setup:
+            return False
+        return True
+
     def add_to_world(self, position: Tuple[float, float] = (0, 0)) -> "actor_mod.Actor":
         """
         Adds the actor to the world at the given position. Initializes required managers and
@@ -165,7 +186,8 @@ class WorldConnector:
         if self.actor.costume:
             self.actor.costume.set_dirty("all", costume.Costume.LOAD_NEW_IMAGE)
 
-        if hasattr(self.actor, "on_setup") and not self.actor._is_setup_completed:
+        if self._has_overwritten_on_setup() and not self.actor._is_setup_completed:
+            method_caller.check_signature(self.actor.on_setup, None, allow_none=True)
             self.actor.on_setup()
             self.actor._is_setup_completed = True
             self.world._mainloop.reload_costumes_queue.append(self.actor)

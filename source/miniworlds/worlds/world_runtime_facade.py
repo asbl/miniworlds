@@ -58,7 +58,25 @@ class WorldRuntimeFacade:
         except RuntimeError:
             asyncio.run(main())
         else:
-            loop.create_task(main())
+            task = loop.create_task(main())
+            self._register_background_task(task)
+
+    @staticmethod
+    def _register_background_task(task: "asyncio.Task") -> None:
+        # When a loop is already running (e.g. Pyodide's runPythonAsync()
+        # always has one), run() schedules the mainloop via
+        # loop.create_task() directly instead of asyncio.run(). Hosts that
+        # need to observe/cancel that task from the outside (H5P's Pyodide
+        # runtime) can expose an opt-in hook on builtins; without a host
+        # supplying one, this is a no-op.
+        try:
+            import builtins
+
+            hook = getattr(builtins, "_h5p_register_background_task", None)
+            if callable(hook):
+                hook(task)
+        except Exception:
+            pass
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
         x, y = position

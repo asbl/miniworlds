@@ -24,6 +24,7 @@ import miniworlds.worlds.manager.position_manager as actor_position_manager
 import miniworlds.worlds.manager.sensor_manager as sensor_manager
 from miniworlds.base.exceptions import (
     MissingPositionManager,
+    MissingSuperInitError,
     Missingworldsensor,
     NotImplementedOrRegisteredError,
     NoValidWorldPositionError,
@@ -1241,6 +1242,12 @@ class Actor(actor_base.ActorBase):
         Returns:
             Removed actor data from the world connector.
 
+        Warning:
+            If you overwrite `remove()` in a subclass, call
+            `super().remove()` - otherwise the actor stays in the world.
+            For code that should run before removal, overwrite
+            `before_remove()` instead; it needs no `super()` call.
+
         Examples:
             ::
 
@@ -1253,7 +1260,12 @@ class Actor(actor_base.ActorBase):
         return self.world.get_world_connector(self).remove_actor_from_world(kill=kill)
 
     def before_remove(self):
-        """Hook called immediately before the actor is removed from the world."""
+        """Hook called immediately before the actor is removed from the world.
+
+        Overwrite this method for cleanup code (e.g. updating a score).
+        The base implementation does nothing, so no `super()` call is
+        required here.
+        """
         pass
 
     @property
@@ -1759,6 +1771,42 @@ class Actor(actor_base.ActorBase):
             )
         self._event_facade.send_message(message)
 
+    def act(self):
+        """Hook: called once per frame while the world is running.
+
+        Overwrite this method in a subclass (or register a function with
+        `@actor.register`) to run code every frame.
+
+        The base implementation does nothing, so `super().act()` is never
+        required in an overwritten `act` method.
+
+        Examples:
+            ::
+
+                class Robot(Actor):
+                    def act(self):
+                        self.move()
+        """
+        pass
+
+    def on_setup(self):
+        """Hook: called once when the actor is added to the world.
+
+        Overwrite this method in a subclass (or register a function with
+        `@actor.register`) to initialize costumes and attributes.
+
+        The base implementation does nothing, so `super().on_setup()` is
+        never required in an overwritten `on_setup` method.
+
+        Examples:
+            ::
+
+                class Player(Actor):
+                    def on_setup(self):
+                        self.add_costume("player")
+        """
+        pass
+
     def on_key_down(self, key: list):
         """Called once when a key is pressed.
 
@@ -2155,7 +2203,10 @@ class Actor(actor_base.ActorBase):
     @property
     def world(self):
         """World this actor belongs to."""
-        return self._world
+        try:
+            return self._world
+        except AttributeError:
+            raise MissingSuperInitError(self)
 
     @world.setter
     def world(self, new_world):

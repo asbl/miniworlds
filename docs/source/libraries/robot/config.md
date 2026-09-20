@@ -30,6 +30,7 @@ Controls the world layout, objects, allowed abilities, and win condition.
 | `objects` | `()` | Tuple of `ObjectConfig` for pre-placed actors |
 | `target` | empty | `TargetConfig` win condition |
 | `robot_abilities` | `{"step", "turn_left", "turn_right"}` | Abilities the robot exposes |
+| `start_position` | `None` | Default robot start tile, used by `load()` when no explicit `position` is given |
 
 ## ObjectConfig
 
@@ -62,6 +63,7 @@ config = WorldConfig(
     name="my_task",
     columns=5,
     rows=5,
+    start_position=(0, 2),
     objects=(ObjectConfig("leaf", (3, 2)),),
     target=TargetConfig(robot_position=(4, 2), objects=()),
     robot_abilities=frozenset({"step", "on_leaf", "remove_leaf"}),
