@@ -1,0 +1,398 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 19:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api/world_hex.md:1
+msgid "World > HexWorld"
+msgstr ""
+
+#: ../../source/api/world_hex.md:3
+msgid "API Reference"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld:1 of
+msgid "A world that consists of hexagonal tiles."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld:3 of
+msgid ""
+"Hexes are addressed with offset coordinates `(column, row)`, like tiles "
+"in a TiledWorld. Odd rows are shifted half a hex to the right (pointy-top"
+" layout). Actors can also be placed on corners (shared by up to three "
+"hexes) or edges (shared by two hexes)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:8
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:10 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:1 of
+msgid "Create a hex world."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel of
+msgid "Parameters"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:3 of
+msgid "Number of columns."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:4 of
+msgid "Number of rows."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:5 of
+msgid "The hex size in pixels (circumradius of the hex)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:6 of
+msgid "If `True`, tiles, edges, and corners are not created automatically."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_center_points:1 of
+msgid "Return a mapping of hex positions to their center pixels."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring of
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_center_points:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Dict\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]\\, "
+"\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:1 of
+msgid "Return a corner by corner position or hex position plus direction."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:3 of
+msgid "Corner position, or hex position when `direction` is set."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:4 of
+msgid "Optional corner direction, e.g. `\"no\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:6 of
+msgid "The matching corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge of
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:8 of
+msgid "If no corner exists at the resolved position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:1 of
+msgid "Return the corner nearest to a screen pixel."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
+msgid "Pixel position as `(x, y)`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:5 of
+msgid "The nearest corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:1 of
+msgid "Return an edge by edge position or hex position plus direction."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:3 of
+msgid "Edge position, or hex position when `direction` is set."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:4 of
+msgid "Optional edge direction, e.g. `\"o\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:6 of
+msgid "The matching edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:8 of
+msgid "If no edge exists at the resolved position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:1 of
+msgid "Return the edge nearest to a screen pixel."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:5 of
+msgid "The nearest edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:1 of
+msgid "Return the hex tile under a screen pixel."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:5 of
+msgid "The hex tile under the pixel."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:1 of
+msgid "Return all tiles within a hex distance of `radius`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:4
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_tile.HexTile\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:5
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:5
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:3 of
+msgid "Hex position as `(column, row)`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:6 of
+msgid "Maximum hex distance (0 includes only the tile itself)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:8 of
+msgid "List of tiles within the radius, including the tile itself."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:1 of
+msgid "Return all tiles at exactly `radius` hex distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:6 of
+msgid "Hex distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:8 of
+msgid "List of tiles at the given distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:1 of
+msgid "Convert a hex position to the pixel position of its center."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:4 of
+msgid "Reserved for compatibility."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:5 of
+msgid "Pixel offset added to the converted position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile:1 of
+msgid "A hexagonal tile in a HexWorld."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile:3 of
+msgid ""
+"Tiles are addressed with offset coordinates `(column, row)`, like tiles "
+"in a TiledWorld. Odd rows are shifted half a hex to the right."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.from_pixel:1 of
+msgid "Return the hex tile containing a pixel position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.from_pixel:3 of
+msgid ""
+"The conversion is exact: the pixel is converted to fractional cube "
+"coordinates and rounded to the nearest hex center."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.from_pixel:7
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.from_position:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_tile.HexTile\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.from_position:1 of
+msgid "Create a tile from a world-relative position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:1 of
+msgid "Return the corner of this hex in the given direction."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.from_position:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_corner.HexCorner\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:5 of
+msgid "Corner direction, e.g. `\"no\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:1 of
+msgid "Return the edge of this hex in the given direction."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.from_position:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:3 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_edge.HexEdge\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:5 of
+msgid "Edge direction, e.g. `\"o\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_local_center_coordinate:1
+#: of
+msgid "Returns the center point offset for a tile, in local pixel coordinates."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.to_pixel:4
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.to_pixel:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_local_center_coordinate:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.to_center:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.to_pixel:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_local_corner_points:1 of
+msgid "Return the six corner pixels relative to the hex bounding box topleft."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_local_corner_points:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:1 of
+msgid "Return the up to six neighboring hex tiles."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_position_pixel_dict:1 of
+msgid "Returns a mapping of tile positions to pixel coordinates."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_position_pixel_dict:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.to_center:1 of
+msgid "Return the center pixel of the hex."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.to_pixel:1 of
+msgid "Return the topleft pixel of the hex bounding box."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner:1 of
+msgid "A corner of a hex, shared by up to three hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner:3 of
+msgid ""
+"The corner position is a unique key in tripled cube coordinates: all "
+"hexes that share the corner compute the same key, so corners are merged "
+"when the world is built."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.direction_vectors:1
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.direction_vectors:1 of
+msgid "Returns the available directions."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.from_position:1
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.from_position:1 of
+msgid "Create a tile delimiter (override expected)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:1
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:1 of
+msgid "Override: starting angle offset for layouting (e.g. hex rotation)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:4
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:4 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.to_pixel:1 of
+msgid "Return the pixel position of the corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge:1 of
+msgid "An edge of a hex, shared by exactly two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge:3 of
+msgid ""
+"The edge position is a unique key in doubled cube coordinates: both hexes"
+" that share the edge compute the same key, so edges are merged when the "
+"world is built."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.to_pixel:1 of
+msgid "Return the pixel position of the edge center."
+msgstr ""
+

@@ -1,7 +1,3 @@
-import inspect
-import os
-import sys
-import pygame
 from miniworlds.base.app import App
 
 from miniworlds.worlds.world import World
@@ -54,16 +50,10 @@ from miniworlds.worlds.tiled_world.edge import Edge
 from miniworlds.worlds.tiled_world.tile import Tile
 from miniworlds.worlds.tiled_world.corner import Corner
 
+from miniworlds.worlds.hex_world.hex_world import HexWorld
+
 from miniworlds.base.exceptions import CostumeOutOfBoundsError
 from miniworlds.base.exceptions import OriginException
-
-pygame.init()
-
-current_frame = inspect.currentframe()
-if current_frame:
-    current_dir = os.path.dirname(os.path.abspath(inspect.getfile(current_frame)))
-    parent_dir = os.path.dirname(current_dir)
-    sys.path.insert(0, parent_dir)
 
 __all__ = []
 
@@ -72,6 +62,7 @@ __all__.append(App.__name__)
 __all__.append(World.__name__)
 
 __all__.append(TiledWorld.__name__)
+__all__.append(HexWorld.__name__)
 __all__.append(Actor.__name__)
 __all__.append(Text.__name__)
 __all__.append(TextBox.__name__)

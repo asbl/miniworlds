@@ -6,9 +6,6 @@ import pygame
 import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.costume as costume
 import miniworlds.worlds.manager.position_manager as actor_position_manager
-import miniworlds.worlds.tiled_world.corner as corner_mod
-import miniworlds.worlds.tiled_world.edge as edge_mod
-import miniworlds.worlds.tiled_world.tile as tile_mod
 import miniworlds.worlds.tiled_world.tiled_world as tiled_world
 
 
@@ -47,17 +44,18 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         )
 
         position = self.actor.position
+        tile_factory = self.actor.world.tile_factory
 
         if self.actor.world.is_tile(position):
-            rect.topleft = tile_mod.Tile.from_position(
+            rect.topleft = tile_factory.tile_cls.from_position(
                 position, self.actor.world
             ).to_pixel()
         elif self.actor.world.is_corner(position):
-            rect.center = corner_mod.Corner.from_position(
+            rect.center = tile_factory.corner_cls.from_position(
                 position, self.actor.world
             ).to_pixel()
         elif self.actor.world.is_edge(position):
-            rect.center = edge_mod.Edge.from_position(
+            rect.center = tile_factory.edge_cls.from_position(
                 position, self.actor.world
             ).to_pixel()
         else:

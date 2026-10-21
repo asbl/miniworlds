@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 19:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/patterns/hex_world_catan.md:1
+msgid "Hex Worlds and a Mini-Catan Board"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:3
+msgid ""
+"A `HexWorld` consists of hexagonal tiles. Hexes are addressed with "
+"`(column, row)` coordinates, like tiles in a `TiledWorld`. Odd rows are "
+"shifted half a hex to the right."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:7
+msgid "Actors can be placed on three kinds of positions:"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:9
+msgid "**Tiles** (the hexes themselves), e.g. `(2, 3)`"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:10
+msgid ""
+"**Corners** (shared by up to three hexes), e.g. the `\"no\"` corner of a "
+"hex"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:11
+msgid "**Edges** (shared by two hexes), e.g. the `\"o\"` edge of a hex"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:13
+msgid ""
+"This is exactly the structure of a Catan board: land hexes, settlements "
+"on corners, and roads on edges."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:16
+msgid "Create a hex world"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:26
+msgid "Build a Catan-like board"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:28
+msgid ""
+"The 19 land hexes of a Catan board are arranged in rows of 3, 4, 5, 4, "
+"and 3 hexes. Actors placed on hexes are drawn as hexagons."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:61
+msgid "Click hexes, corners, and edges"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:63
+msgid ""
+"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
+"`world.get_corner_from_pixel(mouse_pos)` the nearest corner, and "
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:67
+msgid ""
+"The example places a settlement (small circle) on the clicked corner and "
+"a road (small rectangle) on the clicked edge:"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:91
+msgid "Query the neighborhood"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:93
+msgid ""
+"`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
+"given hex distance. `tile.get_neighbour_tiles()` returns the up to six "
+"neighbors of a hex. This is useful for Catan rules such as \"the robber "
+"blocks all hexes around the desert\"."
+msgstr ""
+

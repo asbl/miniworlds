@@ -15,6 +15,10 @@ Die interaktiven miniworlds Tutorials findest du jetzt im [miniworlds_examples K
 | 007 | Fortgeschrittene Themen |
 | 008 | Tiled Worlds |
 
+## Hex-Welten
+
+Ein Schritt-für-Schritt-Tutorial für sechseckige Welten (für Brettspiele wie Catan) findest du hier: [Tutorial: Hex Worlds](hex_world.md).
+
 ## Lokale Vorschau
 
 ```bash

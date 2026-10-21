@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:35+0200\n"
+"POT-Creation-Date: 2026-10-21 19:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -107,10 +107,20 @@ msgid "Tiled Worlds"
 msgstr ""
 
 #: ../../source/tutorial/index.md:18
+msgid "Hex-Welten"
+msgstr ""
+
+#: ../../source/tutorial/index.md:20
+msgid ""
+"Ein Schritt-für-Schritt-Tutorial für sechseckige Welten (für Brettspiele "
+"wie Catan) findest du hier: [Tutorial: Hex Worlds](hex_world.md)."
+msgstr ""
+
+#: ../../source/tutorial/index.md:22
 msgid "Lokale Vorschau"
 msgstr ""
 
-#: ../../source/tutorial/index.md:25
+#: ../../source/tutorial/index.md:29
 msgid "Danach ist die Vorschau unter <http://127.0.0.1:8765/> erreichbar."
 msgstr ""
 

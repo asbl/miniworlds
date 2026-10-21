@@ -404,6 +404,7 @@ maxdepth: 1
 hidden: true
 ---
 tutorial/index
+tutorial/hex_world
 processing/index
 ```
 
@@ -436,6 +437,7 @@ patterns/04_level_loading
 patterns/maze_game
 patterns/red_baron
 patterns/flappy_physics
+patterns/hex_world_catan
 ```
 
 ```{toctree}
@@ -491,6 +493,7 @@ hidden: true
 ---
 api/world_tiled
 api/world_tiled_elements
+api/world_hex
 api/world_physics
 api/world_toolbar
 api/world_console

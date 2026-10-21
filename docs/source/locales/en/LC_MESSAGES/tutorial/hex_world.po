@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-21 19:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/tutorial/hex_world.md:1
+msgid "Tutorial: Hex Worlds"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:3
+msgid ""
+"In this tutorial you build a world made of hexagons, step by step. "
+"Hexagonal worlds are used for board games like *Catan*: land hexes, "
+"settlements on corners, and roads on edges."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:7
+msgid ""
+"If you have never worked with worlds before, start with the chapter [Die "
+"erste Welt](https://github.com/copilotstudent/course-"
+"sync/tree/main/courses/miniworlds_examples) in the interactive course."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:11
+msgid "Step 1: Create a hex world"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:13
+msgid "A `HexWorld` is created with `(columns, rows)` and a `tile_size`:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:24
+msgid ""
+"Hexes are addressed with `(column, row)` coordinates, like tiles in a "
+"`TiledWorld`. Odd rows are shifted half a hex to the right."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:27
+msgid "Step 2: Place actors on hexes"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:29
+msgid "An actor placed on a hex position is drawn as a hexagon:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:46
+msgid "Step 3: Query neighbors"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:48
+msgid ""
+"`world.get_tile(position)` returns a single hex. "
+"`tile.get_neighbour_tiles()` returns the up to six neighboring hexes."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:51
+msgid "The example colors the center hex and all its neighbors:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:70
+msgid ""
+"`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
+"given hex distance."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:73
+msgid "Step 4: React to clicks"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:75
+msgid ""
+"With `@world.register` you can react to mouse clicks. "
+"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:93
+msgid "Step 5: Settlements and roads"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:95
+msgid ""
+"Corners and edges are positions, too. "
+"`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner, "
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:99
+msgid ""
+"A left click places a settlement (small circle) on a corner, a right "
+"click places a road (small rectangle) on an edge:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:125
+msgid "Step 6: A mini-Catan board"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:127
+msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:159
+msgid ""
+"From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
+"Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
+" resources, and trading are not part of the framework — they belong in "
+"your game code."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:164
+msgid ""
+"The full interface is documented in the [HexWorld API "
+"reference](../api/world_hex.md)."
+msgstr ""
+
