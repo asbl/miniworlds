@@ -54,7 +54,6 @@ class Toolbar(gui.GUI):
         super().__init__()
         self.widgets: OrderedDict[Union[int, str], "widget_base.BaseWidget"] = OrderedDict()
         self.timed_widgets: dict[int, "widget_base.BaseWidget"] = dict()
-        self.position = "right"
         self._padding_top = 10
         self._padding_bottom = 0
         self._padding_left = 10

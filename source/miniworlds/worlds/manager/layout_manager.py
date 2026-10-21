@@ -1,4 +1,3 @@
-import pygame
 from typing import Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -119,4 +118,3 @@ class LayoutManager:
         self.app = app
         self.world._window = self.world._app.window
         self.docking_position = dock
-        self.world._image = pygame.Surface((self.world.width, self.world.height))

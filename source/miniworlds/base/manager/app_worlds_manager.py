@@ -77,7 +77,7 @@ class WorldsManager:
         win = self.app.window
         if dock == "right":
             cam.screen_topleft = (win.width, 0)
-            cam.width = size
+            cam.width = size or 100
             cam.height = win.height
         elif dock == "bottom":
             cam.screen_topleft = (0, win.height)
@@ -168,16 +168,26 @@ class WorldsManager:
         self._finalize_world_switch(old_world, new_world)
 
     def worlds_right(self):
-        """List of all worlds with docking_position "right", 
-        ordered by display-position"""
-        return [self.topleft] + [
+        """List of all worlds with docking_position "right",
+        ordered by display-position.
+
+        The top-left world is included first; if no top-left world is
+        registered, it is omitted instead of appearing as None.
+        """
+        topleft = [self.topleft] if self.topleft else []
+        return topleft + [
             world for world in self.worlds if world._layout.docking_position == "right"
         ]
 
     def worlds_bottom(self):
         """List of all worlds with docking_position "bottom",
-        ordered by display-position"""
-        return [self.topleft] + [
+        ordered by display-position.
+
+        The top-left world is included first; if no top-left world is
+        registered, it is omitted instead of appearing as None.
+        """
+        topleft = [self.topleft] if self.topleft else []
+        return topleft + [
             world for world in self.worlds if world._layout.docking_position == "bottom"
         ]
 
@@ -188,16 +198,24 @@ class WorldsManager:
         raise MiniworldsError("World top_left is missing!")
 
     def remove_world(self, world: "world_mod.World"):
-        """Removes a world and updates window."""
+        """Removes a world from the layout and deactivates it.
+
+        The world stops running and listening and is removed from the
+        running worlds, so it no longer receives events or keeps
+        references alive. The window layout is recalculated afterwards.
+        """
         if world in self.worlds:
             self.worlds.remove(world)
-        for world in self.worlds:
-            world.dirty = 1
+            world.stop()
+            world._stop_listening()
+            self.app.remove_running_world(world)
+        for remaining_world in self.worlds:
+            remaining_world.dirty = 1
         self._update_all_worlds()
         self.app.resize()
         
     def reset(self):
-        for world in self.worlds:
+        for world in list(self.worlds):
             world._clear()
             if world._layout.docking_position != "top_left":
                 self.remove_world(world)
