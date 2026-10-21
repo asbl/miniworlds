@@ -340,6 +340,10 @@ class CameraManager(pygame.sprite.Sprite):
         """Dock a helper world to the right side of the current world."""
         return self.world._layout.add_right(world, size)
 
+    def add_left(self, world: "World", size: int = 100) -> "World":
+        """Dock a helper world to the left side of the current world."""
+        return self.world._layout.add_left(world, size)
+
     def add_bottom(self, world: "World", size: int = 100) -> "World":
         """Dock a helper world below the current world."""
         return self.world._layout.add_bottom(world, size)

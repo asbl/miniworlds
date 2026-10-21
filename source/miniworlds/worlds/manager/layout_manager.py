@@ -45,6 +45,25 @@ class LayoutManager:
         """
         return self.app.worlds_manager.add_world(world, dock="right", size=size)
 
+    def add_left(self, world: "World", size: int = 100) -> "World":
+        """
+        Adds a new world to the left side of the current world.
+
+        The current world (and all worlds docked to its right) are
+        shifted to the right by the width of the added world.
+
+        Args:
+            world: The World instance to dock.
+            size: Width of the added world in pixels (default: 100).
+
+        Returns:
+            The newly added World instance.
+
+        Example:
+            >>> world.camera.add_left(Toolbar(), size=150)
+        """
+        return self.app.worlds_manager.add_world(world, dock="left", size=size)
+
     def add_bottom(self, world: "World", size: int = 100) -> "World":
         """
         Adds a new world below the current world.

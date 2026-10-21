@@ -1,8 +1,11 @@
 import unittest
 from types import SimpleNamespace
 
+from miniworlds.base.app import App
 from miniworlds.base.manager.app_worlds_manager import WorldsManager
 from miniworlds.worlds.gui.pager import PagerHorizontal
+from miniworlds.worlds.gui.toolbar import Toolbar
+from miniworlds import World
 
 
 class FakeWorld:
@@ -30,6 +33,7 @@ class FakeApp:
     def __init__(self):
         self.running_worlds = []
         self.resize_calls = 0
+        self.event_manager = SimpleNamespace(event_queue=[])
 
     def resize(self):
         self.resize_calls += 1
@@ -70,6 +74,16 @@ class TestWorldsManagerReset(unittest.TestCase):
 
         self.assertTrue(main.is_listening)
         self.assertFalse(toolbar.is_listening)
+
+    def test_reset_clears_event_queue(self):
+        main = FakeWorld("main", "top_left")
+        toolbar = FakeWorld("toolbar", "right")
+        manager, app = make_manager(main, toolbar)
+        app.event_manager.event_queue.append(("key_down", ("a",)))
+
+        manager.reset()
+
+        self.assertEqual(app.event_manager.event_queue, [])
 
 
 class TestWorldsManagerRemoveWorld(unittest.TestCase):
@@ -129,6 +143,73 @@ class TestWorldsManagerWorldLists(unittest.TestCase):
         self.assertEqual(manager.worlds_right(), [main, toolbar])
 
 
+class TestWorldsManagerLeftDocking(unittest.TestCase):
+    def test_worlds_left_returns_only_left_docked_worlds(self):
+        main = FakeWorld("main", "top_left")
+        sidebar = FakeWorld("sidebar", "left")
+        toolbar = FakeWorld("toolbar", "right")
+        manager, _ = make_manager(main, sidebar, toolbar)
+
+        self.assertEqual(manager.worlds_left(), [sidebar])
+
+    def test_worlds_left_is_empty_without_left_worlds(self):
+        main = FakeWorld("main", "top_left")
+        manager, _ = make_manager(main)
+
+        self.assertEqual(manager.worlds_left(), [])
+
+    def test_update_all_worlds_positions_left_before_topleft(self):
+        main = FakeWorld("main", "top_left")
+        sidebar = FakeWorld("sidebar", "left")
+        toolbar = FakeWorld("toolbar", "right")
+        manager, _ = make_manager(main, sidebar, toolbar)
+
+        manager._update_all_worlds()
+
+        self.assertEqual(sidebar.camera.screen_topleft[0], 0)
+        self.assertEqual(main.camera.screen_topleft[0], 100)
+        self.assertEqual(toolbar.camera.screen_topleft[0], 200)
+
+    def test_update_all_worlds_keeps_y_positions(self):
+        main = FakeWorld("main", "top_left")
+        main.camera.screen_topleft = (0, 42)
+        sidebar = FakeWorld("sidebar", "left")
+        sidebar.camera.screen_topleft = (0, 7)
+        manager, _ = make_manager(main, sidebar)
+
+        manager._update_all_worlds()
+
+        # Left-docked worlds keep their own y position;
+        # the top-left world anchors the bottom stack at y=0.
+        self.assertEqual(sidebar.camera.screen_topleft, (0, 7))
+        self.assertEqual(main.camera.screen_topleft, (100, 0))
+
+    def test_recalculate_total_width_includes_left_worlds(self):
+        main = FakeWorld("main", "top_left")
+        sidebar = FakeWorld("sidebar", "left")
+        toolbar = FakeWorld("toolbar", "right")
+        manager, _ = make_manager(main, sidebar, toolbar)
+
+        self.assertEqual(manager.recalculate_total_width(), 300)
+
+    def test_recalculate_total_width_is_order_independent(self):
+        sidebar = FakeWorld("sidebar", "left")
+        main = FakeWorld("main", "top_left")
+        manager, _ = make_manager(sidebar, main)
+
+        self.assertEqual(manager.recalculate_total_width(), 200)
+
+    def test_reset_removes_left_docked_worlds(self):
+        main = FakeWorld("main", "top_left")
+        sidebar = FakeWorld("sidebar", "left")
+        manager, _ = make_manager(main, sidebar)
+
+        manager.reset()
+
+        self.assertEqual(manager.worlds, [main])
+        self.assertFalse(sidebar.is_listening)
+
+
 class TestPagerVisibleGuard(unittest.TestCase):
     class CountingButton:
         def __init__(self, visible):
@@ -182,6 +263,56 @@ class TestPagerVisibleGuard(unittest.TestCase):
         self.assertTrue(pager.pager_buttons.up.visible)
         self.assertEqual(pager.pager_buttons.down.assignments, 2)
         self.assertEqual(pager.pager_buttons.up.assignments, 2)
+
+
+class TestAddLeftIntegration(unittest.TestCase):
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    def test_add_left_docks_toolbar_and_shifts_main_world(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(200, 100)
+        toolbar = Toolbar()
+        world.camera.add_left(toolbar, size=50)
+
+        self.assertEqual(toolbar.camera.screen_topleft, (0, 0))
+        self.assertEqual(world.camera.screen_topleft, (50, 0))
+        self.assertEqual(toolbar.camera.width, 50)
+        self.assertEqual(toolbar.camera.height, 100)
+        self.assertEqual(world.app.window.width, 250)
+
+    def test_add_left_with_default_size(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(200, 100)
+        toolbar = Toolbar()
+        world.camera.add_left(toolbar)
+
+        self.assertEqual(toolbar.camera.width, 100)
+        self.assertEqual(world.camera.screen_topleft, (100, 0))
+
+    def test_add_left_then_add_right(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(200, 100)
+        sidebar = Toolbar()
+        toolbar = Toolbar()
+        world.camera.add_left(sidebar, size=50)
+        world.camera.add_right(toolbar, size=60)
+
+        self.assertEqual(sidebar.camera.screen_topleft, (0, 0))
+        self.assertEqual(world.camera.screen_topleft, (50, 0))
+        self.assertEqual(toolbar.camera.screen_topleft, (250, 0))
+        self.assertEqual(world.app.window.width, 310)
+
+    def test_remove_left_world_restores_layout(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(200, 100)
+        sidebar = Toolbar()
+        world.camera.add_left(sidebar, size=50)
+
+        world.camera.remove_world(sidebar)
+
+        self.assertEqual(world.camera.screen_topleft, (0, 0))
+        self.assertEqual(world.app.window.width, 200)
 
 
 if __name__ == "__main__":

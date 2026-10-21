@@ -1,20 +1,19 @@
-from typing import List, cast, Tuple, TYPE_CHECKING
-import pygame
+from typing import List, Tuple, TYPE_CHECKING
 import miniworlds.base.app as app
 
 from miniworlds.base.exceptions import MiniworldsError
 
 if TYPE_CHECKING:
     import miniworlds.worlds.world as world_mod
-    import miniworlds.actors.actor as actor_mod
+
 
 class WorldsManager:
     def __init__(self, miniworlds_app: "app.App") -> None:
-        self.worlds: List["worlds_mod.World"] = []
+        self.worlds: List["world_mod.World"] = []
         self.total_width: int = 0
         self.total_height: int = 0
         self.app: "app.App" = miniworlds_app
-        self.topleft : "worlds_mod.World"|None  = None
+        self.topleft : "world_mod.World"|None  = None
         self.worlds_total_height: int = 0
         self.worlds_total_width: int = 0
 
@@ -77,6 +76,10 @@ class WorldsManager:
         win = self.app.window
         if dock == "right":
             cam.screen_topleft = (win.width, 0)
+            cam.width = size or 100
+            cam.height = win.height
+        elif dock == "left":
+            cam.screen_topleft = (0, 0)
             cam.width = size or 100
             cam.height = win.height
         elif dock == "bottom":
@@ -167,6 +170,17 @@ class WorldsManager:
         self._activate_world(new_world, reset, setup)
         self._finalize_world_switch(old_world, new_world)
 
+    def worlds_left(self):
+        """List of all worlds with docking_position "left",
+        ordered by display-position.
+
+        The top-left world is not included; it is displayed to the
+        right of all left-docked worlds (see _update_all_worlds).
+        """
+        return [
+            world for world in self.worlds if world._layout.docking_position == "left"
+        ]
+
     def worlds_right(self):
         """List of all worlds with docking_position "right",
         ordered by display-position.
@@ -202,7 +216,10 @@ class WorldsManager:
 
         The world stops running and listening and is removed from the
         running worlds, so it no longer receives events or keeps
-        references alive. The window layout is recalculated afterwards.
+        references alive. The app event queue is not cleared here:
+        pending events still belong to the remaining worlds, and the
+        removed world no longer receives events because it stopped
+        listening. The window layout is recalculated afterwards.
         """
         if world in self.worlds:
             self.worlds.remove(world)
@@ -219,29 +236,37 @@ class WorldsManager:
             world._clear()
             if world._layout.docking_position != "top_left":
                 self.remove_world(world)
+        self.app.event_manager.event_queue.clear()
 
     def _update_all_worlds(self):
         """updates all world widths and heights if a world was changed"""
-        top_left = 0
+        offset_x = 0
+        for world in self.worlds_left():
+            world.camera.screen_topleft = (offset_x, world.camera.screen_topleft[1])
+            offset_x += world.camera.width
         for world in self.worlds_right():
             if world:
-                world.camera.screen_topleft = (top_left, world.camera.screen_topleft[1])
-                top_left += world.camera.width
-        top_left = 0
+                world.camera.screen_topleft = (offset_x, world.camera.screen_topleft[1])
+                offset_x += world.camera.width
+        offset_y = 0
         for world in self.worlds_bottom():
             if world:
-                world.camera.screen_topleft = (world.camera.screen_topleft[0], top_left)
-                top_left += world.camera.height
+                world.camera.screen_topleft = (world.camera.screen_topleft[0], offset_y)
+                offset_y += world.camera.height
 
     def recalculate_total_width(self) -> int:
         """Recalculates total width of all docked worlds."""
-        total_width: int = 0
+        left_width: int = 0
+        top_left_width: int = 0
+        right_width: int = 0
         for world in self.worlds:
             if world._layout.docking_position == "top_left":
-                total_width = world.camera.width
+                top_left_width = world.camera.width
             elif world._layout.docking_position == "right":
-                total_width += world.camera.width
-        self.total_width = total_width
+                right_width += world.camera.width
+            elif world._layout.docking_position == "left":
+                left_width += world.camera.width
+        self.total_width = left_width + top_left_width + right_width
         return self.total_width
 
 

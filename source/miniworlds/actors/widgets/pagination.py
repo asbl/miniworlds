@@ -23,6 +23,8 @@ class PagerButtonsHorizontal(container_widget.ContainerWidget):
         def on_clicked_left(self, pos):
             self.gui.scroll_up(10)
 
+        # Both buttons must use the same event handler name; they are
+        # registered on different widgets, so the redefinition is safe.
         @self.down.register
-        def on_clicked_left(self, pos):
+        def on_clicked_left(self, pos):  # noqa: F811
             self.gui.scroll_down(10)
