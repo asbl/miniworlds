@@ -154,6 +154,30 @@ class TestToolbarWidgetKeys(unittest.TestCase):
         self.assertIs(toolbar.widgets["start"], named)
         self.assertIs(toolbar.widgets[0], auto)
 
+    def test_add_widget_replaces_existing_key_and_removes_old_widget(self):
+        toolbar = self._make_toolbar()
+        old_widget = self._make_widget()
+        old_widget.remove = Mock()
+        new_widget = self._make_widget()
+
+        toolbar._add_widget(old_widget, key="start")
+        toolbar._add_widget(new_widget, key="start")
+
+        self.assertIs(toolbar.widgets["start"], new_widget)
+        old_widget.remove.assert_called_once_with()
+
+    def test_get_widget_raises_keyerror_for_missing_key(self):
+        toolbar = self._make_toolbar()
+
+        with self.assertRaises(KeyError):
+            toolbar.get_widget("missing")
+
+    def test_remove_unknown_widget_returns_false(self):
+        toolbar = self._make_toolbar()
+        stranger = object.__new__(DummyWidget)
+
+        self.assertFalse(toolbar.remove(stranger))
+
     def test_timed_widget_is_registered_by_id(self):
         toolbar = self._make_toolbar()
         widget = self._make_widget(timed=True)

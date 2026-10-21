@@ -3,6 +3,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, PropertyMock, patch
 
+from miniworlds.base.app import App
+from miniworlds import World, Toolbar
 from miniworlds.actors.widgets import fps as fps_module
 from miniworlds.actors.widgets import time as time_module
 from miniworlds.actors.widgets.container_widget import ContainerWidget
@@ -74,7 +76,7 @@ class TestInputWidget(unittest.TestCase):
             len(current_input) if cursor_position is None else cursor_position
         )
         widget._max_chars = max_chars
-        widget.has_focus = Mock(return_value=True)
+        widget.has_focus = True
         widget.set_text = Mock()
         widget.update_cursor = Mock()
         return widget
@@ -89,7 +91,7 @@ class TestInputWidget(unittest.TestCase):
 
     def test_text_input_ignores_input_without_focus(self):
         widget = self._make_input("ab")
-        widget.has_focus = Mock(return_value=False)
+        widget.has_focus = False
 
         Input.on_text_input(widget, "X")
 
@@ -125,6 +127,63 @@ class TestInputWidget(unittest.TestCase):
         widget.set_text.assert_not_called()
         self.assertEqual(widget._cursor_position, 1)
 
+    def test_key_down_ignores_keys_without_focus(self):
+        widget = self._make_input("ab", cursor_position=1)
+        widget.has_focus = False
+
+        Input.on_key_down(widget, ["BACKSPACE"])
+
+        widget.set_text.assert_not_called()
+        self.assertEqual(widget._cursor_position, 1)
+
+
+class TestInputWidgetIntegration(unittest.TestCase):
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    def test_input_can_be_constructed_and_used(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=200)
+
+        widget = Input((0, 0))
+        toolbar.add(widget)
+
+        self.assertEqual(widget.get_text(), "")
+        widget.set_text("hello")
+        self.assertEqual(widget.get_text(), "hello")
+        widget.cursor_position = 2
+        self.assertEqual(widget.cursor_position, 2)
+
+    def test_input_receives_text_when_focused(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=200)
+        widget = Input((0, 0))
+        toolbar.add(widget)
+
+        widget.has_focus = True
+        widget.on_text_input("a")
+        widget.on_text_input("b")
+
+        self.assertEqual(widget.get_text(), "ab")
+        self.assertEqual(widget.current_input, "ab")
+
+    def test_input_ignores_text_without_focus(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=200)
+        widget = Input((0, 0))
+        toolbar.add(widget)
+
+        widget.has_focus = False
+        widget.on_text_input("a")
+
+        self.assertEqual(widget.get_text(), "")
+
 
 class TestContainerWidget(unittest.TestCase):
     def test_get_widget_uses_child_width_consistently(self):
@@ -139,6 +198,39 @@ class TestContainerWidget(unittest.TestCase):
         self.assertIs(container.get_widget((60, 5)), container.children[1])
         self.assertIs(container.get_widget((10, 5)), container.children[0])
         self.assertIsNone(container.get_widget((200, 5)))
+
+    def test_resize_distributes_integer_width(self):
+        container = ContainerWidget.__new__(ContainerWidget)
+        container._resize = True
+        container._inner_padding = 5
+        container._padding_left = 0
+        container._padding_right = 0
+        container._padding_top = 0
+        container._padding_bottom = 0
+        container.children = [
+            SimpleNamespace(width=0, height=0, x=0, y=0, update_positions=Mock())
+            for _ in range(2)
+        ]
+
+        with (
+            patch("miniworlds.actors.widgets.widget_base.BaseWidget.resize"),
+            patch.object(ContainerWidget, "x", new_callable=PropertyMock) as x_mock,
+            patch.object(ContainerWidget, "y", new_callable=PropertyMock) as y_mock,
+            patch.object(ContainerWidget, "width", new_callable=PropertyMock) as width_mock,
+            patch.object(ContainerWidget, "height", new_callable=PropertyMock) as height_mock,
+        ):
+            x_mock.return_value = 0
+            y_mock.return_value = 0
+            width_mock.return_value = 101
+            height_mock.return_value = 40
+            ContainerWidget.resize(container)
+
+        first, second = container.children
+        self.assertEqual(first.width, 48)
+        self.assertIsInstance(first.width, int)
+        self.assertEqual(second.width, 48)
+        self.assertIsInstance(second.width, int)
+        self.assertEqual(second.x, 48 + 5)
 
 
 if __name__ == "__main__":

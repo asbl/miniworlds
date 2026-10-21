@@ -1,5 +1,4 @@
 import miniworlds.actors.widgets.widget_base as widget_base
-import miniworlds.actors.actor as actor_mod
 
 class ContainerWidget(widget_base.BaseWidget):
     """Widget containing multiple widgets.
@@ -36,7 +35,7 @@ class ContainerWidget(widget_base.BaseWidget):
             # set child positions
             child.width = (
                 self.width - self.inner_padding - self.padding_right - self.padding_left
-            ) / len(self.children)
+            ) // len(self.children)
             child.height = self.height - self.padding_top - self.padding_bottom
             child.x = actual_x
             child.y = self.y + self.padding_top
@@ -44,12 +43,19 @@ class ContainerWidget(widget_base.BaseWidget):
             actual_x += child.width + self.inner_padding
 
     def get_widget(self, pos):
+        """Returns the child widget at *pos*, or None if no child matches.
+
+        Args:
+            pos: Position to test, in the same coordinate space as
+                ``get_local_pos`` expects.
+
+        Returns:
+            The child widget at *pos*, or None if the position lies
+            outside of all children.
+        """
         local_pos = self.get_local_pos(pos)
         actual_x = 0
         for child in self.children:
             if actual_x <= local_pos[0] <= actual_x + child.width:
                 return child
             actual_x += child.width + self.inner_padding
-
-    def add_child(self, actor: "actor_mod.Actor"):
-        super().add_child(actor)

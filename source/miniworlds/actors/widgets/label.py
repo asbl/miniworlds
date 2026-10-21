@@ -28,6 +28,4 @@ class Label(widget.Button):
             image: Optional image path.
         """
         super().__init__(text, image)
-        self.event = "label"
-        self.data = text
         self.background_color = (255, 255, 255, 0)

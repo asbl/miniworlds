@@ -8,7 +8,7 @@ class GUIPositionManager(actor_position_manager.Positionmanager):
         self,
         actor: "actor_mod.Actor",
         world: "gui.GUI",
-        position: [int, int],
+        position: tuple[int, int],
     ) -> None:
         super().__init__(actor, world, position)
         self._origin = "topleft"

@@ -23,7 +23,7 @@ class FPSLabel(label.Label):
             world.camera.add_right(toolbar)
     """
 
-    def __init__(self, world=None, text: str = "FPS", img_path: str = None):
+    def __init__(self, world=None, text: str = "FPS", img_path: str | None = None):
         super().__init__(text, img_path)
         self.timed = True
         self._base_text = text

@@ -2,20 +2,36 @@ import logging
 from typing import Union
 import miniworlds.actors.shapes.shapes as shapes
 import miniworlds.actors.widgets.button as widget
-from miniworlds.base.exceptions import NoValidWorldPositionError
 
 
 logger = logging.getLogger(__name__)
 
 
 class Input(widget.Button):
+    """Text input field for use inside a `Toolbar`.
+
+    Click into the field to focus it, then type to enter text. The
+    text cursor can be moved with the arrow keys; BACKSPACE deletes
+    the character left of the cursor. At most ``max_chars`` characters
+    can be entered.
+
+    While the input has focus, the text cursor blinks; without focus,
+    the cursor is hidden.
+
+    Examples:
+        ::
+
+            toolbar = Toolbar()
+            name_input = Input((0, 0))
+            name_input.max_chars = 20
+            toolbar.add(name_input)
+            world.camera.add_right(toolbar)
+    """
+
     def __init__(self, position):
         super().__init__("")
         self.background_color = (255, 255, 255, 0)
-        try:
-            self.position = position
-        except NoValidWorldPositionError:
-            raise NoValidWorldPositionError(position)
+        self.position = position
         self._max_chars = 10
         self.current_input = ""
         self._cursor_position = 0
@@ -28,7 +44,7 @@ class Input(widget.Button):
 
         @cursor.register
         def act(self):
-            if self._parent.has_focus():
+            if self._parent.has_focus:
                 if self.world.frame % 20 == 0 and not self.world.frame % 40 == 0:
                     self.hide()
                 if self.world.frame % 40 == 0:
@@ -39,12 +55,6 @@ class Input(widget.Button):
         self.update_cursor()
         self.add_child(self.cursor)
 
-    def has_focus(self):
-        if self.world.event_manager.focus_actor == self:
-            return True
-        else:
-            return False
-
     @property
     def max_chars(self):
         return self._max_chars
@@ -53,36 +63,6 @@ class Input(widget.Button):
     def max_chars(self, value):
         self._max_chars = value
         self.resize()
-
-    def resize(self):
-        if not self._resize:
-            return
-        """resizes widget based on text_width and height"""
-        super().resize()  # sets fixed width
-        if self._img:
-            self._img.height = self.row_height - self.padding_top - self.padding_bottom
-            self._img.width = self._img_width
-            self._img.position = (
-                self.position[0] + self.padding_left,
-                self.position[1] + self.padding_top,
-            )
-        if not self.fixed_width:
-            # no image: Set width/height by text and img width
-            if self._text_align == "left" and not self._img:
-                self.width = self.text.width
-            elif (
-                self._text_align == "left" and self._img or self._text_align == "image"
-            ):
-                self.width = (
-                    self.text.width
-                    + self._padding_left
-                    + self._padding_right
-                    + self._img_width
-                    + self.img_padding_right
-                )
-        self.height = self.text.height + self._padding_top + self._padding_bottom
-        self.update_positions()
-        self.cut_widget_text()
 
     def update_cursor(self):
         font_size = self.text.font_size
@@ -109,7 +89,7 @@ class Input(widget.Button):
         super().set_text(text)
 
     def on_key_down(self, keys):
-        if self.has_focus():
+        if self.has_focus:
             if "LEFT" in keys and self.cursor_position > 0:
                 self.cursor_position -= 1
             elif "RIGHT" in keys and self.cursor_position < len(self.current_input):
@@ -128,7 +108,7 @@ class Input(widget.Button):
         Printable characters arrive through the ``text_input`` event, so key
         names like "SPACE" are never inserted as literal text.
         """
-        if not self.has_focus() or not text:
+        if not self.has_focus or not text:
             return
         if len(self.current_input) >= self.max_chars:
             return

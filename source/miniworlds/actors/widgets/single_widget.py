@@ -94,98 +94,12 @@ class SingleWidget(widget_base.BaseWidget):
         y = position[1] - self.topleft[1]
         return x, y
 
-    @property
-    def padding_left(self):
-        return self._padding_left
-
-    @padding_left.setter
-    def padding_left(self, value):
-        self._padding_left = value
-        self.resize()
-
-    @property
-    def padding_right(self):
-        return self._padding_right
-
-    @padding_right.setter
-    def padding_right(self, value):
-        self._padding_right = value
-        self.resize()
-
-    @property
-    def padding_top(self):
-        return self._padding_top
-
-    @padding_top.setter
-    def padding_top(self, value):
-        self._padding_top = value
-        self.resize()
-
-    @property
-    def padding_bottom(self):
-        return self._padding_bottom
-
-    @padding_bottom.setter
-    def padding_bottom(self, value):
-        self._padding_bottom = value
-        self.resize()
-
-    @property
-    def position(self):
-        return self.position_manager.position
-
-    @position.setter
-    def position(self, value):
-        self.position_manager.set_position(value)
-        self.update_positions()
-
-    @property
-    def topleft(self):
-        return self.position_manager.position
-
-    @topleft.setter
-    def topleft(self, value):
-        self.position_manager.set_topleft(value)
-        self.update_positions()
-
-    @property
-    def center(self):
-        return self.position_manager.get_center()
-
-    @center.setter
-    def center(self, value):
-        self.position_manager.set_center(value)
-        self.update_positions()
-
-    @property
-    def row_height(self):
-        return self._row_height
-
-    @row_height.setter
-    def row_height(self, value):
-        self.set_row_height(value)
-        
     def set_row_height(self, value=20):
         super().set_row_height(value)
         self._widget_text.font_by_size(
             self.width, value - self.padding_top - self.padding_bottom
         )
         self.resize()
-
-    def set_border(self, color: tuple = (0, 0, 0, 255), width: int = 1):
-        """Sets the widget border color and width.
-
-        Args:
-            color: Border color as an RGBA tuple.
-            width: Border width in pixels.
-        """
-        self.border_color = color
-        self.border = width
-
-    def set_position(self, value: tuple):
-        super().set_position(value)
-        self.resize()
-        self.costume._update_draw_shape()
 
     @property
     def text_align(self):
@@ -203,8 +117,7 @@ class SingleWidget(widget_base.BaseWidget):
         self._widget_text_align = value
         self.dirty = 1
         self.resize()
-        
-        
+
     def set_world(self, new_world):
         self._resize = False
         super().set_world(new_world)
@@ -256,8 +169,6 @@ class SingleWidget(widget_base.BaseWidget):
                 f"Widget text must be a string like 'Hello', got {type(text).__name__}: {repr(text)}"
             )
         self._widget_text.set_text(text)
-        self.max_width = self._widget_text.width
-        self.max_height = self._widget_text.height
         self.resize()
 
     def get_text(self):

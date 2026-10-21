@@ -35,7 +35,6 @@ class Button(single_widget.SingleWidget):
         """
         # constructors
         super().__init__()
-        self.overflow = False
         self.cooldown = 0
         if image:
             self.set_image(image)

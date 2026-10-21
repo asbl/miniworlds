@@ -143,6 +143,13 @@ class Toolbar(gui.GUI):
             # Auto keys are always integers, so custom string keys
             # cannot break the max() computation.
             key = max((k for k in self.widgets if isinstance(k, int)), default=-1) + 1
+        elif key in self.widgets:
+            # Replace the widget under an existing key: remove the old
+            # widget completely so it does not stay in the world as an
+            # unreachable, still rendered actor.
+            old_widget = self.widgets.pop(key)
+            self._unregister_widget(old_widget)
+            old_widget.remove()
         self.widgets[key] = widget
         if getattr(widget, "timed", False):
             self.timed_widgets[id(widget)] = widget
@@ -164,18 +171,23 @@ class Toolbar(gui.GUI):
         The widget is also removed from the toolbar world, so it is no
         longer rendered and no longer receives events.
 
-        .. warning::
-            Be careful when calling this inside a loop over ``self.widgets``.
-
         Args:
             item: The widget to remove – either the widget object itself, its
                 integer index, or its string key.
+
+        Returns:
+            bool: True if the widget was removed, False if no matching
+            widget or key was found.
+
+        .. warning::
+            Be careful when calling this inside a loop over ``self.widgets``.
         """
         if type(item) in [int, str]:
             if item in self.widgets:
                 removed_widget = self.widgets.pop(item)
                 self._unregister_widget(removed_widget)
                 removed_widget.remove()
+                return True
             else:
                 return False
         elif isinstance(item, widget_base.BaseWidget):
@@ -185,11 +197,11 @@ class Toolbar(gui.GUI):
                     search_key = key
                     break
             if search_key is None:
-                raise ValueError(f"{item} not found in Toolbar-Widgets")
-            else:
-                removed_widget = self.widgets.pop(search_key)
-                self._unregister_widget(removed_widget)
-                removed_widget.remove()
+                return False
+            removed_widget = self.widgets.pop(search_key)
+            self._unregister_widget(removed_widget)
+            removed_widget.remove()
+            return True
         else:
             raise TypeError(f"item must be of type [int, str, Widget], found {type(item)}")
 
@@ -218,12 +230,12 @@ class Toolbar(gui.GUI):
             The widget stored under *key*.
 
         Raises:
-            TypeError: If no widget with the given key exists.
+            KeyError: If no widget with the given key exists.
         """
         if key in self.widgets:
             return self.widgets[key]
         else:
-            raise TypeError(f"Error: Toolbar widgets does not contain key {key}")
+            raise KeyError(f"Toolbar widgets does not contain key {key!r}")
 
     def remove_all_widgets(self):
         """Removes all widgets from the toolbar at once.
