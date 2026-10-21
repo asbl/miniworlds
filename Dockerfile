@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
     alsa-utils \                
     pulseaudio \                
     libasound2-dev \            
-    python3-tk \                
+    python3-tk \
+    chromium \
     && apt-get clean
 
 # Install Python tools and test dependencies

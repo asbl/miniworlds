@@ -35,6 +35,7 @@ class TestWindowPosition(unittest.TestCase):
             display_info=Mock(return_value=SimpleNamespace(current_w=1000, current_h=800)),
             set_mode=Mock(return_value=surface),
             set_window_position=Mock(),
+            is_web=Mock(return_value=False),
         )
         window = Window.__new__(Window)
         window.app = SimpleNamespace(init=False, platform=platform)

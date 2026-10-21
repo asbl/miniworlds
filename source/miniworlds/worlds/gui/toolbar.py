@@ -187,6 +187,7 @@ class Toolbar(gui.GUI):
                 removed_widget = self.widgets.pop(item)
                 self._unregister_widget(removed_widget)
                 removed_widget.remove()
+                self.reorder()
                 return True
             else:
                 return False
@@ -201,6 +202,7 @@ class Toolbar(gui.GUI):
             removed_widget = self.widgets.pop(search_key)
             self._unregister_widget(removed_widget)
             removed_widget.remove()
+            self.reorder()
             return True
         else:
             raise TypeError(f"item must be of type [int, str, Widget], found {type(item)}")

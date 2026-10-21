@@ -11,7 +11,17 @@ import traceback
 
 import pygame
 
-from miniworlds import ActionTimer, Actor, App, LoopActionTimer, Rectangle, TiledWorld, World
+from miniworlds import (
+    ActionTimer,
+    Actor,
+    App,
+    Input,
+    LoopActionTimer,
+    Rectangle,
+    TiledWorld,
+    Toolbar,
+    World,
+)
 from miniworlds.base.project_validator import IssueCode, ProjectValidator, Severity
 
 
@@ -279,6 +289,49 @@ async def test_modal_dialog_blocks_browser_events_and_supports_keyboard_choice()
     assert world.keys == []
 
 
+async def test_docked_toolbar_input_widget_gets_focus_and_text() -> None:
+    _reset()
+
+    world = World(160, 120)
+    toolbar = Toolbar()
+    world.camera.add_right(toolbar, size=100)
+    input_widget = Input((0, 0))
+    toolbar.add(input_widget)
+
+    world.app.platform.poll_events = lambda: []
+    world.app.platform.get_mouse_pos = lambda: (0, 0)
+    await world.app._update()
+
+    # Click into the input field: the click position is a window-global
+    # screen position inside the docked toolbar.
+    click_pos = input_widget.position_manager.get_screen_rect().center
+    world.app.platform.poll_events = lambda: [
+        pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1, "pos": click_pos}),
+        pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1, "pos": click_pos}),
+    ]
+    await world.app._update()
+
+    assert input_widget.has_focus
+
+    # Composed text arrives through TEXTINPUT events; several characters
+    # can arrive within the same frame.
+    world.app.platform.poll_events = lambda: [
+        pygame.event.Event(pygame.TEXTINPUT, {"text": "ä"}),
+        pygame.event.Event(pygame.TEXTINPUT, {"text": "b"}),
+    ]
+    await world.app._update()
+
+    assert input_widget.current_input == "äb"
+
+    world.app.platform.poll_events = lambda: [
+        pygame.event.Event(pygame.KEYDOWN, {"unicode": "", "key": pygame.K_BACKSPACE}),
+        pygame.event.Event(pygame.KEYUP, {"unicode": "", "key": pygame.K_BACKSPACE}),
+    ]
+    await world.app._update()
+
+    assert input_widget.current_input == "ä"
+
+
 async def test_screenshot_writes_to_virtual_browser_filesystem() -> None:
     _reset()
     output = Path("/project/student-screenshot.png")
@@ -369,6 +422,7 @@ TESTS = [
     test_browser_keyboard_event_reaches_student_handler,
     test_browser_mouse_click_and_wheel_reach_student_handlers,
     test_modal_dialog_blocks_browser_events_and_supports_keyboard_choice,
+    test_docked_toolbar_input_widget_gets_focus_and_text,
     test_screenshot_writes_to_virtual_browser_filesystem,
     test_missing_sound_reports_export_problem_without_crashing_app,
     test_world_run_schedules_inside_pyodide_loop,

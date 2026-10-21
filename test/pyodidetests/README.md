@@ -14,6 +14,8 @@ This suite runs core miniworlds behavior in a real Pyodide browser runtime:
 - nested Python packages and UTF-8 text files
 - multiple-image costumes and animation setup
 - timers, keyboard, mouse, and wheel events
+- docked toolbars: clicking an input widget gives it focus, and typed
+  text (TEXTINPUT events) reaches the focused widget
 - screenshots written to Pyodide's virtual filesystem
 - missing sound files and their error behavior
 

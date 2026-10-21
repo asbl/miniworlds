@@ -183,11 +183,20 @@ class Dialog(Overlay):
 
     def _enable_text_entry(self) -> None:
         try:
-            self._previous_key_repeat = pygame.key.get_repeat()
+            previous_key_repeat = pygame.key.get_repeat()
+        except pygame.error:
+            return
+        try:
             pygame.key.set_repeat(self._KEY_REPEAT_DELAY, self._KEY_REPEAT_INTERVAL)
+        except pygame.error:
+            return
+        # Only remember the previous state once a modification has actually
+        # been applied, so _disable_text_entry() always restores it.
+        self._previous_key_repeat = previous_key_repeat
+        try:
             pygame.key.start_text_input()
         except pygame.error:
-            self._previous_key_repeat = None
+            pass
 
     def _disable_text_entry(self) -> None:
         if self._previous_key_repeat is None:

@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 import pygame
 
-from miniworlds import Actor, Button, Toolbar, World
+from miniworlds import Actor, Button, Input, Toolbar, World
 from miniworlds.base.app import App
 
 
@@ -108,7 +108,7 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
         world = World(80, 80)
         first = FocusActor((10, 10), world=world)
         second = FocusActor((20, 20), world=world)
-        world.detect_actors = Mock(side_effect=[[first], [second]])
+        world.get_actors_from_pixel = Mock(side_effect=[[first], [second]])
 
         await self._run_frame(
             world,
@@ -264,6 +264,98 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(dialog.input_text, "hä")
         self.assertTrue(dialog.is_open)
+
+    async def test_click_gives_focus_to_input_widget_in_docked_toolbar(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(160, 120)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=100)
+        input_widget = Input((0, 0))
+        toolbar.add(input_widget)
+
+        await self._run_frame(world, [])
+
+        click_pos = input_widget.position_manager.get_screen_rect().center
+        await self._run_frame(
+            world,
+            [
+                pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1, "pos": click_pos}),
+                pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1, "pos": click_pos}),
+            ],
+        )
+
+        self.assertTrue(input_widget.has_focus)
+
+    async def test_text_input_events_reach_focused_input_widget(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(160, 120)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=100)
+        input_widget = Input((0, 0))
+        toolbar.add(input_widget)
+
+        await self._run_frame(world, [])
+        click_pos = input_widget.position_manager.get_screen_rect().center
+        await self._run_frame(
+            world,
+            [
+                pygame.event.Event(pygame.MOUSEBUTTONDOWN, {"button": 1, "pos": click_pos}),
+                pygame.event.Event(pygame.MOUSEBUTTONUP, {"button": 1, "pos": click_pos}),
+            ],
+        )
+
+        # Several TEXTINPUT events within one frame must all be delivered.
+        await self._run_frame(
+            world,
+            [
+                pygame.event.Event(pygame.TEXTINPUT, {"text": "ä"}),
+                pygame.event.Event(pygame.TEXTINPUT, {"text": "b"}),
+            ],
+        )
+        self.assertEqual(input_widget.current_input, "äb")
+
+        await self._run_frame(
+            world,
+            [
+                pygame.event.Event(pygame.KEYDOWN, {"unicode": "", "key": pygame.K_BACKSPACE}),
+                pygame.event.Event(pygame.KEYUP, {"unicode": "", "key": pygame.K_BACKSPACE}),
+            ],
+        )
+        self.assertEqual(input_widget.current_input, "ä")
+
+    async def test_hover_uses_screen_coordinates_with_scrolled_camera(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(200, 200)
+        world.camera.world_size_y = 400
+        world.camera.topleft = (0, 40)
+        actor = Actor((0, 60), world=world)
+        actor.size = (20, 20)
+        received: list[str] = []
+
+        @actor.register
+        def on_mouse_enter(self, position):
+            received.append("enter")
+
+        @actor.register
+        def on_mouse_leave(self, position):
+            received.append("leave")
+
+        await self._run_frame(world, [])
+
+        # The actor sits at screen position (0, 20); hovering there must
+        # fire on_mouse_enter even though the camera is scrolled.
+        screen_pos = actor.position_manager.get_screen_rect().center
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEMOTION, {"pos": screen_pos})],
+        )
+        self.assertIn("enter", received)
+
+        await self._run_frame(
+            world,
+            [pygame.event.Event(pygame.MOUSEMOTION, {"pos": (150, 150)})],
+        )
+        self.assertIn("leave", received)
 
     async def test_button_message_reaches_world_without_visual_test(self):
         App.reset(unittest=True, file=__file__)

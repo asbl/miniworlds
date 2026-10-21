@@ -104,6 +104,10 @@ class Window:
         self._surface.set_alpha(None)
 
     def _place_window_within_screen(self, width: int, height: int) -> None:
+        if self.app.platform.is_web():
+            # Under Pyodide the embedding page controls the canvas position;
+            # SDL/Emscripten has no movable window, so positioning is a no-op.
+            return
         x, y = self._window_position_within_screen(width, height)
         position = (x, y)
         os.environ["SDL_VIDEO_WINDOW_POS"] = f"{x},{y}"

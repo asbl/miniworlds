@@ -79,7 +79,6 @@ class _MouseEventDispatcher:
         if not skip_screen_check and not self.world.camera.is_in_screen(data):
             return False
 
-        pos = self.world.camera.get_global_coordinates_for_world(data)
         hover_methods_by_actor = self._get_hover_methods_by_actor()
         if not hover_methods_by_actor:
             return
@@ -87,7 +86,9 @@ class _MouseEventDispatcher:
         for actor, methods_by_event in hover_methods_by_actor.items():
             was_mouse_over = getattr(actor, "_mouse_over", False)
             try:
-                is_detecting_pixel = actor.detect_pixel(pos)
+                # data is a screen position; detect_pixel() expects screen
+                # coordinates (same as the click path below).
+                is_detecting_pixel = actor.detect_pixel(data)
             except MissingActorPartsError:
                 logger.info(
                     "Skipping hover dispatch for incomplete actor %s",
@@ -132,7 +133,10 @@ class _MouseEventDispatcher:
                     "Skipping click dispatch for incomplete actor %s",
                     getattr(actor, "actor_id", actor),
                 )
-        actors = self.world.detect_actors(data)
+        # data is a screen position, so hit detection must use screen
+        # rectangles (get_actors_from_pixel) instead of world rectangles
+        # (detect_actors).
+        actors = self.world.get_actors_from_pixel(data)
         self.focus_callback(actors)
 
     def _call_registered_mouse_methods(self, event_name: str, data: Any) -> None:
@@ -325,7 +329,9 @@ class EventHandler:
         """Checks whether the event should be handled automatically by the event system."""
         if event == "setup":
             return False
-        if event in self.executed_events:
+        # text_input events carry per-event data (one per typed character),
+        # so several of them must be delivered within the same frame.
+        if event in self.executed_events and event != "on_text_input":
             return False
         has_registered_event = getattr(
             self.event_registry,

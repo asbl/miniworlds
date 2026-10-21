@@ -83,6 +83,7 @@ class EventDefinition:
                 "on_key_pressed",
                 "on_key_up",
             ],
+            "text_input": ["on_text_input"],
             "specific_key": specific_key_events,
             "message": ["on_message"],
             "act": ["act"],

@@ -63,12 +63,14 @@ class TestToolbar(unittest.TestCase):
         toolbar.widgets = OrderedDict([(0, first), (1, second)])
         toolbar.timed_widgets = {}
 
-        Toolbar.remove(toolbar, first)
+        with patch.object(Toolbar, "reorder") as reorder_mock:
+            Toolbar.remove(toolbar, first)
 
         self.assertNotIn(0, toolbar.widgets)
         self.assertIn(1, toolbar.widgets)
         first.remove.assert_called_once_with()
         second.remove.assert_not_called()
+        reorder_mock.assert_called_once_with()
 
 
 class TestConsole(unittest.TestCase):
@@ -197,6 +199,21 @@ class TestToolbarWidgetKeys(unittest.TestCase):
         self.assertNotIn(0, toolbar.widgets)
         self.assertNotIn(id(widget), toolbar.timed_widgets)
         widget.remove.assert_called_once_with()
+
+    def test_remove_by_key_reorders_remaining_widgets(self):
+        toolbar = self._make_toolbar()
+        first = self._make_widget()
+        second = self._make_widget()
+        first.remove = Mock()
+        second.remove = Mock()
+        toolbar._add_widget(first)
+        toolbar._add_widget(second)
+        first_topleft = first.topleft
+
+        Toolbar.remove(toolbar, 0)
+
+        self.assertEqual(list(toolbar.widgets.keys()), [1])
+        self.assertEqual(second.topleft, first_topleft)
 
     def test_remove_by_missing_key_returns_false(self):
         toolbar = self._make_toolbar()
