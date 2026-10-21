@@ -62,7 +62,8 @@ world.run()
 
 `world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse,
 `world.get_corner_from_pixel(mouse_pos)` the nearest corner, and
-`world.get_edge_from_pixel(mouse_pos)` the nearest edge.
+`world.get_edge_from_pixel(mouse_pos)` the nearest edge. The corner and
+edge queries return `None` if the pixel is outside the world.
 
 The example places a settlement (small circle) on the clicked corner and
 a road (small rectangle) on the clicked edge:

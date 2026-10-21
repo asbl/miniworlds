@@ -97,6 +97,23 @@ class HexWorld(tiled_world.TiledWorld):
         tile_cls = self.tile_factory.tile_cls
         return tile_cls.from_pixel(position, self)
 
+    def get_actors_from_pixel(self, position):
+        """Return all actors on the hex tile under a screen pixel.
+
+        Args:
+            position: Pixel position as `(x, y)`.
+
+        Returns:
+            Actors located on the hex tile under the pixel.
+
+        Examples:
+            ::
+
+                actors = world.get_actors_from_pixel(mouse_pos)
+        """
+        tile = self.get_tile_from_pixel(position)
+        return self.detect_actors(tile.position)
+
     def get_corner_from_pixel(self, position):
         """Return the corner nearest to a screen pixel.
 
@@ -104,7 +121,8 @@ class HexWorld(tiled_world.TiledWorld):
             position: Pixel position as `(x, y)`.
 
         Returns:
-            The nearest corner.
+            The nearest corner, or `None` if the pixel is outside
+            the world.
 
         Examples:
             ::
@@ -112,6 +130,8 @@ class HexWorld(tiled_world.TiledWorld):
                 corner = world.get_corner_from_pixel(mouse_pos)
         """
         tile = self.get_tile_from_pixel(position)
+        if not self.is_tile(tile.position):
+            return None
         nearest_corner = None
         nearest_distance = None
         for direction in hex_coords.CORNER_ORDER:
@@ -133,7 +153,8 @@ class HexWorld(tiled_world.TiledWorld):
             position: Pixel position as `(x, y)`.
 
         Returns:
-            The nearest edge.
+            The nearest edge, or `None` if the pixel is outside
+            the world.
 
         Examples:
             ::
@@ -141,6 +162,8 @@ class HexWorld(tiled_world.TiledWorld):
                 edge = world.get_edge_from_pixel(mouse_pos)
         """
         tile = self.get_tile_from_pixel(position)
+        if not self.is_tile(tile.position):
+            return None
         nearest_edge = None
         nearest_distance = None
         for direction in hex_coords.CUBE_DIRECTIONS:
@@ -180,9 +203,8 @@ class HexWorld(tiled_world.TiledWorld):
 
                 corner = world.get_corner((3, 3), "no")
         """
-        corner_cls = self.tile_factory.corner_cls
         if direction is not None:
-            position = corner_cls(position, direction, self).position
+            position = hex_coords.corner_position(position, direction)
         if position in self.corners:
             return self.corners[position]
         raise miniworlds_exception.CornerNotFoundError(position)
@@ -205,9 +227,8 @@ class HexWorld(tiled_world.TiledWorld):
 
                 edge = world.get_edge((3, 3), "o")
         """
-        edge_cls = self.tile_factory.edge_cls
         if direction is not None:
-            position = edge_cls(position, direction, self).position
+            position = hex_coords.edge_position(position, direction)
         if position in self.edges:
             return self.edges[position]
         raise miniworlds_exception.EdgeNotFoundError(position)
@@ -220,18 +241,19 @@ class HexWorld(tiled_world.TiledWorld):
             radius: Maximum hex distance (0 includes only the tile itself).
 
         Returns:
-            List of tiles within the radius, including the tile itself.
+            List of tiles within the radius, including the tile itself,
+            ordered from the center outwards in ring traversal order.
 
         Examples:
             ::
 
                 neighbours = world.get_tiles_in_radius((3, 3), 1)
         """
-        cube = hex_coords.offset_to_cube(position)
+        if radius < 0:
+            return []
         tiles = []
-        for tile_position, tile in self.tiles.items():
-            if hex_coords.cube_distance(cube, hex_coords.offset_to_cube(tile_position)) <= radius:
-                tiles.append(tile)
+        for ring_radius in range(radius + 1):
+            tiles.extend(self.get_tiles_in_ring(position, ring_radius))
         return tiles
 
     def get_tiles_in_ring(self, position, radius: int) -> List[hex_tile_mod.HexTile]:
@@ -242,7 +264,8 @@ class HexWorld(tiled_world.TiledWorld):
             radius: Hex distance.
 
         Returns:
-            List of tiles at the given distance.
+            List of tiles at the given distance, in ring traversal
+            order starting at the westernmost hex of the ring.
 
         Examples:
             ::
@@ -251,7 +274,8 @@ class HexWorld(tiled_world.TiledWorld):
         """
         cube = hex_coords.offset_to_cube(position)
         tiles = []
-        for tile_position, tile in self.tiles.items():
-            if hex_coords.cube_distance(cube, hex_coords.offset_to_cube(tile_position)) == radius:
-                tiles.append(tile)
+        for ring_cube in hex_coords.cube_ring(cube, radius):
+            tile_position = hex_coords.cube_to_offset(ring_cube)
+            if self.is_tile(tile_position):
+                tiles.append(self.get_tile(tile_position))
         return tiles

@@ -68,7 +68,9 @@ world.run()
 ```
 
 `world.get_tiles_in_radius(position, radius)` returns all hexes within
-a given hex distance.
+a given hex distance, ordered from the center outwards.
+`world.get_tiles_in_ring(position, radius)` returns only the hexes at
+exactly the given distance, in ring traversal order.
 
 ## Step 4: React to clicks
 
@@ -95,6 +97,8 @@ world.run()
 Corners and edges are positions, too.
 `world.get_corner_from_pixel(mouse_pos)` returns the nearest corner,
 `world.get_edge_from_pixel(mouse_pos)` the nearest edge.
+Both return `None` if the pixel is outside the world, for example when
+a toolbar or console is attached to the world.
 
 A left click places a settlement (small circle) on a corner,
 a right click places a road (small rectangle) on an edge:

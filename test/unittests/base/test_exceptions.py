@@ -18,6 +18,7 @@ from miniworlds.base.exceptions import (
     CornerNotFoundError,
     CostumeIsNoneError,
     CostumeOutOfBoundsError,
+    DirectionNotFoundError,
     EdgeNotFoundError,
     EllipseWrongArgumentsError,
     FileNotFoundError,
@@ -669,6 +670,35 @@ class TestEdgeNotFoundError(unittest.TestCase):
         error: EdgeNotFoundError = EdgeNotFoundError((10, 20))
         message: str = str(error)
         self.assertIn("edge", message.lower())
+
+
+class TestDirectionNotFoundError(unittest.TestCase):
+    """Tests for DirectionNotFoundError exception."""
+
+    def test_instantiation_with_direction_and_valid_directions(self) -> None:
+        """Test that DirectionNotFoundError can be instantiated."""
+        error: DirectionNotFoundError = DirectionNotFoundError(
+            "nord", ["n", "no", "so", "s", "sw", "nw"]
+        )
+        self.assertIsInstance(error, MiniworldsError)
+
+    def test_message_lists_valid_directions(self) -> None:
+        """Test that message lists the valid directions."""
+        error: DirectionNotFoundError = DirectionNotFoundError(
+            "xyz", ["n", "no", "so", "s", "sw", "nw"]
+        )
+        message: str = str(error)
+        self.assertIn("not a valid direction", message)
+        self.assertIn("n, no, so, s, sw, nw", message)
+
+    def test_message_suggests_close_match(self) -> None:
+        """Test that message suggests a close match for typos."""
+        error: DirectionNotFoundError = DirectionNotFoundError(
+            "nord", ["n", "no", "so", "s", "sw", "nw"]
+        )
+        message: str = str(error)
+        self.assertIn("Did you mean", message)
+        self.assertIn("no", message)
 
 
 class TestRegisterError(unittest.TestCase):

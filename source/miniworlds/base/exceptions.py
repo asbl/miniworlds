@@ -274,6 +274,20 @@ class EdgeNotFoundError(MiniworldsError):
         super().__init__(self.message)
 
 
+class DirectionNotFoundError(MiniworldsError):
+    def __init__(self, direction, valid_directions):
+        from difflib import get_close_matches
+
+        self.message = (
+            f"`{direction}` is not a valid direction. "
+            f"Valid directions are: {', '.join(valid_directions)}"
+        )
+        close_match = get_close_matches(str(direction), valid_directions)
+        if close_match:
+            self.message += f"\nDid you mean `{close_match[0]}`?"
+        super().__init__(self.message)
+
+
 class RegisterError(MiniworldsError):
     def __init__(self, method, instance):
         from difflib import get_close_matches

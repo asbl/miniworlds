@@ -13,6 +13,8 @@ All functions are pure and free of pygame or world dependencies.
 import math
 from typing import Dict, List, Tuple
 
+import miniworlds.base.exceptions as miniworlds_exception
+
 SQRT3 = math.sqrt(3.0)
 
 Cube = Tuple[int, int, int]
@@ -86,6 +88,28 @@ def cube_to_offset(cube: Tuple[float, float, float]) -> Offset:
 def cube_distance(a: Tuple[float, float, float], b: Tuple[float, float, float]) -> int:
     """Return the hex distance (number of hexes) between two cube positions."""
     return int((abs(a[0] - b[0]) + abs(a[1] - b[1]) + abs(a[2] - b[2])) / 2)
+
+
+def cube_ring(center: Cube, radius: int) -> List[Cube]:
+    """Return all cube positions at exactly `radius` hex distance.
+
+    The positions are returned in ring traversal order, starting at the
+    westernmost hex of the ring and walking clockwise. For `radius` 0,
+    only the center is returned; for negative `radius`, nothing is
+    returned.
+    """
+    if radius < 0:
+        return []
+    if radius == 0:
+        return [center]
+    positions: List[Cube] = []
+    cube = (center[0] - radius, center[1], center[2] + radius)
+    for side in ("no", "o", "so", "sw", "w", "nw"):
+        vector = CUBE_DIRECTIONS[side]
+        for _ in range(radius):
+            positions.append(cube)
+            cube = (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
+    return positions
 
 
 def cube_round(cube: Tuple[float, float, float]) -> Cube:
@@ -170,6 +194,16 @@ def edge_pixel_offset(direction: str, tile_size: float) -> Tuple[float, float]:
     )
 
 
+def direction_vector(direction: str, vectors: Dict[str, Cube]) -> Cube:
+    """Return the vector for a direction name, with a helpful error."""
+    try:
+        return vectors[direction]
+    except KeyError:
+        raise miniworlds_exception.DirectionNotFoundError(
+            direction, list(vectors)
+        ) from None
+
+
 def corner_position(tile_position: Tuple[int, int], direction: str) -> Cube:
     """Return the unique position key of a corner.
 
@@ -177,7 +211,7 @@ def corner_position(tile_position: Tuple[int, int], direction: str) -> Cube:
     sharing the corner produce the same integer key.
     """
     cube = offset_to_cube(tile_position)
-    vector = CORNER_DIRECTIONS[direction]
+    vector = direction_vector(direction, CORNER_DIRECTIONS)
     return (3 * cube[0] + vector[0], 3 * cube[1] + vector[1], 3 * cube[2] + vector[2])
 
 
@@ -188,7 +222,7 @@ def edge_position(tile_position: Tuple[int, int], direction: str) -> Cube:
     sharing the edge produce the same integer key.
     """
     cube = offset_to_cube(tile_position)
-    vector = EDGE_DIRECTIONS[direction]
+    vector = direction_vector(direction, EDGE_DIRECTIONS)
     return (2 * cube[0] + vector[0], 2 * cube[1] + vector[1], 2 * cube[2] + vector[2])
 
 

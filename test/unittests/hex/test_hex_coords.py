@@ -40,6 +40,38 @@ class TestCubeDistance:
         assert hex_coords.cube_distance((0, 0, 0), (2, -1, -1)) == 2
 
 
+class TestCubeRing:
+    def test_ring_with_radius_zero_is_the_center(self):
+        assert hex_coords.cube_ring((2, 3, -5), 0) == [(2, 3, -5)]
+
+    def test_negative_radius_returns_empty_list(self):
+        assert hex_coords.cube_ring((2, 3, -5), -1) == []
+
+    def test_ring_with_radius_one_contains_all_neighbors(self):
+        center = (2, 3, -5)
+        ring = hex_coords.cube_ring(center, 1)
+        assert len(ring) == 6
+        assert len(set(ring)) == 6
+        for cube in ring:
+            assert hex_coords.cube_distance(center, cube) == 1
+
+    @pytest.mark.parametrize("radius", [2, 3, 4])
+    def test_ring_contains_exact_distance_positions(self, radius):
+        center = (2, 3, -5)
+        ring = hex_coords.cube_ring(center, radius)
+        assert len(ring) == 6 * radius
+        assert len(set(ring)) == 6 * radius
+        for cube in ring:
+            assert hex_coords.cube_distance(center, cube) == radius
+
+    def test_rings_do_not_overlap(self):
+        center = (10, 10, -20)
+        all_positions = []
+        for radius in range(4):
+            all_positions.extend(hex_coords.cube_ring(center, radius))
+        assert len(all_positions) == len(set(all_positions))
+
+
 class TestPixelConversion:
     @pytest.mark.parametrize("column", [0, 1, 2, 3])
     @pytest.mark.parametrize("row", [0, 1, 2, 3])

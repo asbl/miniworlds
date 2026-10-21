@@ -178,6 +178,115 @@ class TestHexWorld(unittest.TestCase):
         found = self.world.get_edge_from_pixel(edge.to_pixel())
         self.assertIs(found, edge)
 
+    def test_get_actors_from_pixel_uses_hex_picking(self):
+        actor = Actor((2, 2), world=self.world)
+        center = self.world.to_pixel((2, 2))
+        self.assertIn(actor, self.world.get_actors_from_pixel(center))
+        self.assertEqual(
+            self.world.get_actors_from_pixel(self.world.to_pixel((5, 5))), []
+        )
+
+    def test_get_distance_to_uses_hex_distance(self):
+        actor = Actor((0, 0), world=self.world)
+        self.assertEqual(actor.get_distance_to((1, 0)), 1.0)
+        # (0, 0) -> (1, 1) is two hexes apart, not sqrt(2).
+        self.assertEqual(actor.get_distance_to((1, 1)), 2.0)
+
+    def test_get_distance_to_actor_uses_hex_distance(self):
+        first = Actor((0, 0), world=self.world)
+        second = Actor((2, 0), world=self.world)
+        self.assertEqual(first.get_distance_to(second), 2.0)
+
+    def test_get_distance_to_corner_actor(self):
+        corner = self.world.get_corner((3, 3), "n")
+        actor = Actor(corner.position, world=self.world)
+        south = self.world.get_corner((3, 3), "s")
+        self.assertAlmostEqual(actor.get_distance_to(south.position), 80.0)
+        self.assertAlmostEqual(actor.get_distance_to((3, 3)), 40.0)
+
+    def test_get_distance_to_edge_actor(self):
+        edge = self.world.get_edge((3, 3), "o")
+        actor = Actor(edge.position, world=self.world)
+        self.assertAlmostEqual(actor.get_distance_to((3, 3)), 20.0 * 3 ** 0.5)
+
+    def test_picking_outside_world_returns_none(self):
+        self.assertIsNone(self.world.get_corner_from_pixel((900, 900)))
+        self.assertIsNone(self.world.get_edge_from_pixel((900, 900)))
+        self.assertIsNone(self.world.get_corner_from_pixel((-10, -10)))
+        self.assertIsNone(self.world.get_edge_from_pixel((-10, -10)))
+
+    def test_corner_neighbour_tiles(self):
+        corner = self.world.get_corner((3, 3), "n")
+        tiles = corner.get_neighbour_tiles()
+        self.assertEqual(
+            sorted(tile.position for tile in tiles), [(3, 2), (3, 3), (4, 2)]
+        )
+
+    def test_border_corner_neighbour_tiles(self):
+        corner = self.world.get_corner((0, 0), "n")
+        tiles = corner.get_neighbour_tiles()
+        self.assertEqual([tile.position for tile in tiles], [(0, 0)])
+
+    def test_edge_neighbour_tiles(self):
+        edge = self.world.get_edge((3, 3), "o")
+        tiles = edge.get_neighbour_tiles()
+        self.assertEqual(sorted(tile.position for tile in tiles), [(3, 3), (4, 3)])
+
+    def test_border_edge_neighbour_tiles(self):
+        edge = self.world.get_edge((0, 0), "w")
+        tiles = edge.get_neighbour_tiles()
+        self.assertEqual([tile.position for tile in tiles], [(0, 0)])
+
+    def test_get_corner_and_edge_raise_correct_error_types(self):
+        from miniworlds.base.exceptions import (
+            CornerNotFoundError,
+            EdgeNotFoundError,
+        )
+
+        with self.assertRaises(CornerNotFoundError):
+            self.world.get_corner((20, 20), "n")
+        with self.assertRaises(CornerNotFoundError):
+            self.world.get_corner((20, 20))
+        with self.assertRaises(EdgeNotFoundError):
+            self.world.get_edge((20, 20), "o")
+        with self.assertRaises(EdgeNotFoundError):
+            self.world.get_edge((20, 20))
+
+    def test_invalid_direction_raises_helpful_error(self):
+        from miniworlds.base.exceptions import DirectionNotFoundError
+
+        with self.assertRaises(DirectionNotFoundError) as context:
+            self.world.get_corner((3, 3), "nord")
+        self.assertIn("not a valid direction", str(context.exception))
+        self.assertIn("Did you mean", str(context.exception))
+        with self.assertRaises(DirectionNotFoundError):
+            self.world.get_edge((3, 3), "ost")
+        with self.assertRaises(DirectionNotFoundError):
+            self.world.get_tile((3, 3)).get_corner("nord")
+
+    def test_ring_tiles_have_exact_distance(self):
+        from miniworlds.worlds.hex_world import hex_coords
+
+        center = hex_coords.offset_to_cube((3, 3))
+        for tile in self.world.get_tiles_in_ring((3, 3), 2):
+            distance = hex_coords.cube_distance(
+                center, hex_coords.offset_to_cube(tile.position)
+            )
+            self.assertEqual(distance, 2)
+
+    def test_ring_at_world_border_is_clipped(self):
+        tiles = self.world.get_tiles_in_ring((0, 0), 1)
+        self.assertEqual(sorted(tile.position for tile in tiles), [(0, 1), (1, 0)])
+
+    def test_negative_radius_returns_empty_list(self):
+        self.assertEqual(self.world.get_tiles_in_radius((3, 3), -1), [])
+        self.assertEqual(self.world.get_tiles_in_ring((3, 3), -1), [])
+
+    def test_radius_is_ordered_from_center_outwards(self):
+        tiles = self.world.get_tiles_in_radius((3, 3), 1)
+        self.assertEqual(tiles[0].position, (3, 3))
+        self.assertEqual(len(tiles), 7)
+
     def test_console_and_toolbar_widgets_on_hex_world_do_not_crash(self):
         from miniworlds.actors.widgets.button import Button
         from miniworlds.worlds.gui.console import Console
