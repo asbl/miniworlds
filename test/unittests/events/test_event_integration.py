@@ -5,7 +5,7 @@ from unittest.mock import Mock
 
 import pygame
 
-from miniworlds import Actor, Button, Input, Toolbar, World
+from miniworlds import Actor, Button, Input, Label, Toolbar, World
 from miniworlds.base.app import App
 
 
@@ -356,6 +356,24 @@ class TestEventIntegration(unittest.IsolatedAsyncioTestCase):
             [pygame.event.Event(pygame.MOUSEMOTION, {"pos": (150, 150)})],
         )
         self.assertIn("leave", received)
+
+    async def test_direct_widget_remove_keeps_toolbar_consistent(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(160, 120)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=100)
+        labels = [Label(f"l{i}") for i in range(3)]
+        for label in labels:
+            toolbar.add(label)
+
+        await self._run_frame(world, [])
+        height_before = toolbar._widgets_total_height()
+
+        labels[0].remove()
+
+        self.assertEqual(list(toolbar.widgets.keys()), [1, 2])
+        self.assertNotIn(labels[0], toolbar.widgets.values())
+        self.assertLess(toolbar._widgets_total_height(), height_before)
 
     async def test_button_message_reaches_world_without_visual_test(self):
         App.reset(unittest=True, file=__file__)

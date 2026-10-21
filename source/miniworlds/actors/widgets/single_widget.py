@@ -24,9 +24,9 @@ class SingleWidget(widget_base.BaseWidget):
         self.img_padding_right = 5
 
     def resize(self):
+        """resizes widget based on text_width and height"""
         if not self._resize:
             return
-        """resizes widget based on text_width and height"""
         if not isinstance(self.world, gui_mod.GUI):
             return
         self._widget_text.font_size = self._font_size
@@ -53,7 +53,7 @@ class SingleWidget(widget_base.BaseWidget):
         return True
 
     def cut_widget_text(self):
-        if self.fixed_width and not self._overflow:
+        if self.fixed_width:
             if not self._img_widget:
                 self._widget_text.max_width = (
                     self.width - self.padding_left - self.padding_right

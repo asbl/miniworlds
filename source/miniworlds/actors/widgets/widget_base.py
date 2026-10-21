@@ -17,7 +17,6 @@ class BaseWidget(parent_actor.ParentActor):
         self._row_height = 20
         # additional layout
         self.fixed_width: bool = True
-        self._overflow = False
         # additional
         self.timed = False  # e.g. for counters
         self.origin = kwargs.get("origin") if kwargs.get("origin") else "topleft"

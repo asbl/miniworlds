@@ -57,7 +57,12 @@ class ParentActor(actor_mod.Actor):
     def set_world(self, new_world : "world_mod.World") -> "actor_mod.Actor":
         super().set_world(new_world)
         for child in self.children:
-            child.set_world(new_world)
+            # Skip children that are already in the target world: their
+            # world may have been synced before (e.g. by a resize during
+            # on_new_actor), and transferring them again would remove and
+            # re-add them in the same world.
+            if child.world is not new_world:
+                child.set_world(new_world)
 
     def reset_costumes(self):
         super().reset_costumes()

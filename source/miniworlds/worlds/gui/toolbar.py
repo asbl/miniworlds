@@ -60,7 +60,6 @@ class Toolbar(gui.GUI):
         self._padding_right = 10
         self.row_height = 26
         self._background_color = (255, 255, 255, 255)
-        self.max_widgets = 0
         self.max_row_height = 0
         self.fixed_camera = False
 
@@ -350,12 +349,19 @@ class Toolbar(gui.GUI):
         Widget actors are registered in the internal widget list and then
         resized/reordered so the layout stays consistent.
 
+        A widget that is already registered is not registered again: a
+        world transfer can remove and re-add a widget in the same toolbar,
+        and a duplicate entry would render the widget twice and inflate
+        the computed toolbar height.
+
         Args:
             actor: The actor that has been added.
         """
         if isinstance(actor, widget_parts.WidgetPart):
             return
         if isinstance(actor, widget_base.BaseWidget):
+            if any(widget is actor for widget in self.widgets.values()):
+                return
             self._add_widget(actor)
             actor.resize()
             self.reorder()
@@ -363,7 +369,24 @@ class Toolbar(gui.GUI):
     def on_remove_actor(self, actor):
         """Handles actors that are removed from this toolbar world.
 
+        Widgets can also be removed directly via ``widget.remove()`` (not
+        only through ``Toolbar.remove()``); this keeps the internal widget
+        list consistent in that case.
+
         Args:
             actor: The actor that has been removed.
         """
-        pass
+        if not isinstance(actor, widget_base.BaseWidget):
+            return
+        if not hasattr(self, "widgets"):
+            return
+        search_key = None
+        for key, value in self.widgets.items():
+            if value == actor:
+                search_key = key
+                break
+        if search_key is None:
+            return
+        self.widgets.pop(search_key)
+        self._unregister_widget(actor)
+        self.reorder()

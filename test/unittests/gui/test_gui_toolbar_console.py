@@ -220,6 +220,32 @@ class TestToolbarWidgetKeys(unittest.TestCase):
 
         self.assertFalse(Toolbar.remove(toolbar, "missing"))
 
+    def test_on_remove_actor_removes_widget_from_toolbar(self):
+        toolbar = self._make_toolbar()
+        widget = object.__new__(DummyWidget)
+        widget.timed = True
+        widget.remove = Mock()
+
+        with patch.object(Toolbar, "reorder"):
+            toolbar._add_widget(widget)
+            Toolbar.on_remove_actor(toolbar, widget)
+
+        self.assertNotIn(0, toolbar.widgets)
+        self.assertNotIn(id(widget), toolbar.timed_widgets)
+
+    def test_on_remove_actor_ignores_unknown_actor(self):
+        toolbar = self._make_toolbar()
+        widget = object.__new__(DummyWidget)
+        widget.timed = False
+        widget.remove = Mock()
+        unknown = object.__new__(DummyWidget)
+
+        with patch.object(Toolbar, "reorder"):
+            toolbar._add_widget(widget)
+            Toolbar.on_remove_actor(toolbar, unknown)
+
+        self.assertIn(0, toolbar.widgets)
+
     def test_remove_all_widgets_removes_every_actor(self):
         toolbar = self._make_toolbar()
         first = self._make_widget(timed=True)
