@@ -1,7 +1,5 @@
 from collections import OrderedDict
 from typing import Union
-import pygame
-import miniworlds.base.app as app_mod
 import miniworlds.worlds.gui.gui as gui
 import miniworlds.actors.widgets.widget_base as widget_base
 import miniworlds.actors.widgets.widget_parts as widget_parts
@@ -54,8 +52,8 @@ class Toolbar(gui.GUI):
                         self.move()
         """
         super().__init__()
-        self.widgets: OrderedDict["widget_base.BaseWidget"] = OrderedDict()
-        self.timed_widgets = dict()
+        self.widgets: OrderedDict[Union[int, str], "widget_base.BaseWidget"] = OrderedDict()
+        self.timed_widgets: dict[int, "widget_base.BaseWidget"] = dict()
         self.position = "right"
         self._padding_top = 10
         self._padding_bottom = 0
@@ -78,9 +76,7 @@ class Toolbar(gui.GUI):
         different place.
         """
         if hasattr(self, "widgets"):
-            for widget in self.widgets.values():
-                widget.width = self.width
-        self.reorder()
+            self.reorder()
 
     @property
     def background_color(self):
@@ -137,17 +133,20 @@ class Toolbar(gui.GUI):
         self._padding_bottom = value
         self.dirty = 1
 
-    def _add_widget(self, widget: "widget_base.BaseWidget", key: int = 0, ) -> "widget_base.BaseWidget":
+    def _add_widget(
+        self,
+        widget: "widget_base.BaseWidget",
+        key: Union[int, str, None] = None,
+    ) -> "widget_base.BaseWidget":
         widget._resize = False
         widget.row_height = self.row_height
-        # If param key is not set, set key to max key +1
-        if self.widgets.keys():
-            key = max(self.widgets.keys())+1
-        else:
-            key = 0
+        if key is None:
+            # Auto keys are always integers, so custom string keys
+            # cannot break the max() computation.
+            key = max((k for k in self.widgets if isinstance(k, int)), default=-1) + 1
         self.widgets[key] = widget
-        if hasattr(widget, "timed") and widget.timed:
-            self.timed_widgets[widget.name] = widget
+        if getattr(widget, "timed", False):
+            self.timed_widgets[id(widget)] = widget
         # Reorder mus be called before camera position is updated
         self.reorder() 
         if not self.fixed_camera and widget.y + widget.height > self.camera.y + self.camera.height:
@@ -156,9 +155,15 @@ class Toolbar(gui.GUI):
         widget._resize = True
         return widget
 
+    def _unregister_widget(self, widget: "widget_base.BaseWidget"):
+        self.timed_widgets.pop(id(widget), None)
+
     def remove(self, item: Union[int, str, "widget_base.BaseWidget"]):
         """
         Removes a widget from the toolbar.
+
+        The widget is also removed from the toolbar world, so it is no
+        longer rendered and no longer receives events.
 
         .. warning::
             Be careful when calling this inside a loop over ``self.widgets``.
@@ -169,7 +174,9 @@ class Toolbar(gui.GUI):
         """
         if type(item) in [int, str]:
             if item in self.widgets:
-                self.widgets.pop(item)
+                removed_widget = self.widgets.pop(item)
+                self._unregister_widget(removed_widget)
+                removed_widget.remove()
             else:
                 return False
         elif isinstance(item, widget_base.BaseWidget):
@@ -182,16 +189,17 @@ class Toolbar(gui.GUI):
                 raise ValueError(f"{item} not found in Toolbar-Widgets")
             else:
                 removed_widget = self.widgets.pop(search_key)
+                self._unregister_widget(removed_widget)
                 removed_widget.remove()
         else:
             raise TypeError(f"item must be of type [int, str, Widget], found {type(item)}")
 
 
-    def has_widget(self, key: str):
+    def has_widget(self, key: Union[int, str]):
         """Checks whether the toolbar contains a widget under *key*.
 
         Args:
-            key: The widget key.
+            key: The widget key (integer auto key or custom string key).
 
         Returns:
             bool: True if the widget exists, otherwise False.
@@ -201,11 +209,11 @@ class Toolbar(gui.GUI):
         else:
             return False
 
-    def get_widget(self, key: str) -> "widget_base.BaseWidget":
+    def get_widget(self, key: Union[int, str]) -> "widget_base.BaseWidget":
         """Gets widget by key
 
         Args:
-            key: The key of the widget.
+            key: The key of the widget (integer auto key or custom string key).
 
         Returns:
             The widget stored under *key*.
@@ -221,9 +229,13 @@ class Toolbar(gui.GUI):
     def remove_all_widgets(self):
         """Removes all widgets from the toolbar at once.
 
-        Use this when rebuilding a menu or replacing all controls.
+        The widgets are also removed from the toolbar world. Use this
+        when rebuilding a menu or replacing all controls.
         """
-        self.widgets = dict()
+        for widget in list(self.widgets.values()):
+            self._unregister_widget(widget)
+            widget.remove()
+        self.widgets = OrderedDict()
         self.dirty = 1
 
     def reorder(self):
@@ -256,13 +268,6 @@ class Toolbar(gui.GUI):
             new_width = 0
         widget.width = new_width
 
-    def update_width_and_height(self):
-        """Updates cached toolbar dimensions after a layout change.
-
-        This hook is used internally when docking or resizing the toolbar.
-        """
-        super().screen_width
-
     def send_message(self, text: str) -> None:
         """Sends a broadcast message to the world and all actors.
 
@@ -286,8 +291,6 @@ class Toolbar(gui.GUI):
         if self.can_scroll_up(value):
             self.camera.y -= value
             self.camera.y = max(0, self.camera.y)
-            for key, widget in self.widgets.items():
-                widget.resize()
 
     def scroll_down(self, value):
         """Scrolls the toolbar view downward by *value* pixels.
@@ -297,8 +300,6 @@ class Toolbar(gui.GUI):
         """
         if self.can_scroll_down(value):
             self.camera.y += value
-            for key, widget in self.widgets.items():
-                widget.resize()
 
     def can_scroll_down(self, value):
         """Returns True if the toolbar can scroll downward by *value* pixels.

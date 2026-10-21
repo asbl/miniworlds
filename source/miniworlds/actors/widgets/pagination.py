@@ -1,5 +1,3 @@
-from typing import Tuple, Optional
-
 import miniworlds.actors.widgets.button as button
 import miniworlds.actors.widgets.container_widget as container_widget
 

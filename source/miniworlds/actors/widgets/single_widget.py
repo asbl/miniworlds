@@ -4,8 +4,6 @@ import miniworlds.actors.texts.text as mod_text
 import miniworlds.actors.widgets.widget_base as widget_base
 import miniworlds.actors.widgets.widget_parts as widget_parts
 import miniworlds.worlds.gui.gui as gui_mod
-import miniworlds.actors.actor as actor_mod
-import miniworlds.worlds.world as world_mod
 
 
 

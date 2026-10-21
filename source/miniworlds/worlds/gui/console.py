@@ -1,6 +1,6 @@
-import miniworlds.worlds.gui.toolbar as toolbar
 import miniworlds.actors.widgets.label as label
-import miniworlds.actors.widgets as widgets
+import miniworlds.actors.widgets.widget_base as widget_base
+import miniworlds.worlds.gui.toolbar as toolbar
 
 
 class Console(toolbar.Toolbar):
@@ -9,6 +9,10 @@ class Console(toolbar.Toolbar):
     Use `console.newline(text)` to append lines of text. The console is a
     special `Toolbar` that is typically docked below or beside the main world
     using `world.camera.add_bottom(console)` or `world.camera.add_right(console)`.
+
+    Only the last ``max_lines`` lines are kept: when the console is full,
+    the oldest line is removed, so the console's memory use stays constant
+    even if `newline` is called every frame.
 
     Examples:
         ::
@@ -31,17 +35,12 @@ class Console(toolbar.Toolbar):
         self.max_lines = 2
         self.text_size = 13
         self.row_margin = 5
-        self.rows = (
-            (self.max_lines) * (self.row_height + self.row_margin)
-            + self.padding_top
-            + self.padding_bottom
-        )
 
     def newline(self, text) -> "label.Label":
         """Appends a new line of text to the console.
 
-        Each call adds one label row. Older lines scroll up when the console
-        is full.
+        Each call adds one label row. When more than ``max_lines`` lines
+        exist, the oldest line is removed and the remaining lines move up.
 
         Args:
             text: The text string to display on the new line.
@@ -60,10 +59,26 @@ class Console(toolbar.Toolbar):
 
     def _add_widget(
         self,
-        widget: "widgets.ButtonWidget",
-        key: str = None,
-    ) -> "widgets.ButtonWidget":
+        widget: "widget_base.BaseWidget",
+        key=None,
+    ) -> "widget_base.BaseWidget":
         widget.margin_bottom = self.row_margin
         widget.margin_top = 0
         super()._add_widget(widget, key)
+        self._trim_old_lines()
         return widget
+
+    def _trim_old_lines(self):
+        """Removes the oldest lines until at most ``max_lines`` remain."""
+        trimmed = False
+        while len(self.widgets) > self.max_lines:
+            oldest_key = next(iter(self.widgets))
+            oldest_widget = self.widgets.pop(oldest_key)
+            self._unregister_widget(oldest_widget)
+            oldest_widget.remove()
+            trimmed = True
+        if trimmed:
+            self.reorder()
+            total_height = self._widgets_total_height()
+            self.camera.world_size_y = max(self.camera.height, total_height)
+            self.camera.y = max(0, total_height - self.camera.height)

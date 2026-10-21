@@ -61,6 +61,7 @@ class TestToolbar(unittest.TestCase):
         first.remove = Mock()
         second.remove = Mock()
         toolbar.widgets = OrderedDict([(0, first), (1, second)])
+        toolbar.timed_widgets = {}
 
         Toolbar.remove(toolbar, first)
 
@@ -86,6 +87,9 @@ class TestConsole(unittest.TestCase):
     def test_add_widget_applies_console_spacing(self):
         console = Console.__new__(Console)
         console.row_margin = 7
+        console.max_lines = 2
+        console.widgets = OrderedDict()
+        console.timed_widgets = {}
         widget = Mock()
 
         with patch(
@@ -98,6 +102,160 @@ class TestConsole(unittest.TestCase):
         self.assertEqual(widget.margin_top, 0)
         self.assertEqual(widget.margin_bottom, 7)
         add_widget_mock.assert_called_once_with(widget, None)
+
+
+class TestToolbarWidgetKeys(unittest.TestCase):
+    def _make_toolbar(self):
+        toolbar = Toolbar.__new__(Toolbar)
+        toolbar.widgets = OrderedDict()
+        toolbar.timed_widgets = {}
+        toolbar.fixed_camera = True
+        toolbar._padding_top = 0
+        toolbar._padding_left = 0
+        toolbar._padding_right = 0
+        toolbar.max_row_height = 0
+        toolbar.row_height = 20
+        toolbar.camera = SimpleNamespace(width=200, y=0, height=100, world_size_y=100)
+        return toolbar
+
+    def _make_widget(self, timed=False):
+        widget = LayoutWidget(0, 0, 0, 0, 20)
+        widget.timed = timed
+        return widget
+
+    def test_add_widget_honors_custom_key(self):
+        toolbar = self._make_toolbar()
+        widget = self._make_widget()
+
+        toolbar._add_widget(widget, key="start")
+
+        self.assertIs(toolbar.widgets["start"], widget)
+        self.assertTrue(toolbar.has_widget("start"))
+        self.assertIs(toolbar.get_widget("start"), widget)
+
+    def test_add_widget_auto_key_is_int_and_increments(self):
+        toolbar = self._make_toolbar()
+        first = self._make_widget()
+        second = self._make_widget()
+
+        toolbar._add_widget(first)
+        toolbar._add_widget(second)
+
+        self.assertEqual(list(toolbar.widgets.keys()), [0, 1])
+
+    def test_add_widget_auto_key_works_with_string_keys_present(self):
+        toolbar = self._make_toolbar()
+        named = self._make_widget()
+        auto = self._make_widget()
+
+        toolbar._add_widget(named, key="start")
+        toolbar._add_widget(auto)
+
+        self.assertIs(toolbar.widgets["start"], named)
+        self.assertIs(toolbar.widgets[0], auto)
+
+    def test_timed_widget_is_registered_by_id(self):
+        toolbar = self._make_toolbar()
+        widget = self._make_widget(timed=True)
+
+        toolbar._add_widget(widget)
+
+        self.assertIs(toolbar.timed_widgets[id(widget)], widget)
+
+    def test_remove_by_key_removes_widget_from_world(self):
+        toolbar = self._make_toolbar()
+        widget = self._make_widget(timed=True)
+        widget.remove = Mock()
+        toolbar._add_widget(widget)
+
+        Toolbar.remove(toolbar, 0)
+
+        self.assertNotIn(0, toolbar.widgets)
+        self.assertNotIn(id(widget), toolbar.timed_widgets)
+        widget.remove.assert_called_once_with()
+
+    def test_remove_by_missing_key_returns_false(self):
+        toolbar = self._make_toolbar()
+
+        self.assertFalse(Toolbar.remove(toolbar, "missing"))
+
+    def test_remove_all_widgets_removes_every_actor(self):
+        toolbar = self._make_toolbar()
+        first = self._make_widget(timed=True)
+        second = self._make_widget()
+        first.remove = Mock()
+        second.remove = Mock()
+        toolbar._add_widget(first)
+        toolbar._add_widget(second)
+
+        toolbar.remove_all_widgets()
+
+        self.assertEqual(len(toolbar.widgets), 0)
+        self.assertEqual(len(toolbar.timed_widgets), 0)
+        first.remove.assert_called_once_with()
+        second.remove.assert_called_once_with()
+
+
+class TestConsoleTrimming(unittest.TestCase):
+    def _make_console(self, max_lines=2):
+        console = Console.__new__(Console)
+        console.max_lines = max_lines
+        console.row_margin = 5
+        console.widgets = OrderedDict()
+        console.timed_widgets = {}
+        console.fixed_camera = True
+        console._padding_top = 0
+        console._padding_left = 0
+        console._padding_right = 0
+        console.max_row_height = 0
+        console.row_height = 20
+        console.camera = SimpleNamespace(width=200, y=0, height=50, world_size_y=50)
+        return console
+
+    def _add_line(self, console, name):
+        widget = LayoutWidget(0, 0, 0, 5, 20)
+        widget.name = name
+        widget.remove = Mock()
+        widget.timed = False
+        console.widgets[len(console.widgets)] = widget
+        return widget
+
+    def test_old_lines_are_trimmed_to_max_lines(self):
+        console = self._make_console(max_lines=2)
+        first = self._add_line(console, "first")
+        second = self._add_line(console, "second")
+        third = self._add_line(console, "third")
+
+        console._trim_old_lines()
+
+        self.assertEqual(list(console.widgets.values()), [second, third])
+        first.remove.assert_called_once_with()
+        second.remove.assert_not_called()
+        third.remove.assert_not_called()
+
+    def test_trim_clamps_camera_to_content_height(self):
+        console = self._make_console(max_lines=2)
+        self._add_line(console, "first")
+        self._add_line(console, "second")
+        self._add_line(console, "third")
+        console.camera.y = 500
+
+        console._trim_old_lines()
+
+        # Zwei Zeilen: 2 * (20 + 5) = 50 Pixel Inhaltshoehe
+        self.assertEqual(console.camera.world_size_y, 50)
+        self.assertEqual(console.camera.y, 0)
+
+    def test_trim_without_overflow_changes_nothing(self):
+        console = self._make_console(max_lines=5)
+        first = self._add_line(console, "first")
+        console.camera.y = 7
+
+        console._trim_old_lines()
+
+        self.assertEqual(len(console.widgets), 1)
+        first.remove.assert_not_called()
+        self.assertEqual(console.camera.y, 7)
 
 
 if __name__ == "__main__":

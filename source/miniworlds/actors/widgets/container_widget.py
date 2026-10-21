@@ -1,9 +1,5 @@
-from typing import Union
-
-import miniworlds.actors.parent_actor as parent_actor
 import miniworlds.actors.widgets.widget_base as widget_base
 import miniworlds.actors.actor as actor_mod
-import miniworlds.worlds.world as world_mod
 
 class ContainerWidget(widget_base.BaseWidget):
     """Widget containing multiple widgets.
@@ -53,7 +49,7 @@ class ContainerWidget(widget_base.BaseWidget):
         for child in self.children:
             if actual_x <= local_pos[0] <= actual_x + child.width:
                 return child
-            actual_x += child._width + self.inner_padding
+            actual_x += child.width + self.inner_padding
 
     def add_child(self, actor: "actor_mod.Actor"):
         super().add_child(actor)

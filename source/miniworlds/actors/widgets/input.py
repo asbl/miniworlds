@@ -1,6 +1,5 @@
 import logging
 from typing import Union
-
 import miniworlds.actors.shapes.shapes as shapes
 import miniworlds.actors.widgets.button as widget
 from miniworlds.base.exceptions import NoValidWorldPositionError
@@ -18,7 +17,6 @@ class Input(widget.Button):
         except NoValidWorldPositionError:
             raise NoValidWorldPositionError(position)
         self._max_chars = 10
-        self.fixed_width = 20  # (self._max_chars * self.text.font_size) / 2
         self.current_input = ""
         self._cursor_position = 0
         self.cursor_x = self.x
@@ -30,7 +28,7 @@ class Input(widget.Button):
 
         @cursor.register
         def act(self):
-            if self._parent.has_focus:
+            if self._parent.has_focus():
                 if self.world.frame % 20 == 0 and not self.world.frame % 40 == 0:
                     self.hide()
                 if self.world.frame % 40 == 0:
@@ -84,7 +82,7 @@ class Input(widget.Button):
                 )
         self.height = self.text.height + self._padding_top + self._padding_bottom
         self.update_positions()
-        self.cut_text()
+        self.cut_widget_text()
 
     def update_cursor(self):
         font_size = self.text.font_size
@@ -111,10 +109,8 @@ class Input(widget.Button):
         super().set_text(text)
 
     def on_key_down(self, keys):
-        if self.has_focus:
-            if "SHIFT_L" in keys:
-                pass
-            elif "LEFT" in keys and self.cursor_position > 0:
+        if self.has_focus():
+            if "LEFT" in keys and self.cursor_position > 0:
                 self.cursor_position -= 1
             elif "RIGHT" in keys and self.cursor_position < len(self.current_input):
                 self.cursor_position += 1
@@ -125,23 +121,31 @@ class Input(widget.Button):
                         self.current_input[0 : self.cursor_position]
                         + self.current_input[self.cursor_position + 1 :]
                     )
-            else:
-                text = keys[-1]
-                if text != "":
-                    self.set_text(
-                        self.current_input[0 : self.cursor_position]
-                        + text
-                        + self.current_input[self.cursor_position :]
-                    )
-                    self.cursor_position += 1
-                    self.update_cursor()
-                    logger.debug(
-                        "Updated input cursor to x=%s y=%s width=%s height=%s",
-                        self.cursor.x,
-                        self.cursor.y,
-                        self.cursor.width,
-                        self.cursor.height,
-                    )
+
+    def on_text_input(self, text):
+        """Inserts composed text (including umlauts and spaces) at the cursor.
+
+        Printable characters arrive through the ``text_input`` event, so key
+        names like "SPACE" are never inserted as literal text.
+        """
+        if not self.has_focus() or not text:
+            return
+        if len(self.current_input) >= self.max_chars:
+            return
+        self.set_text(
+            self.current_input[0 : self.cursor_position]
+            + text
+            + self.current_input[self.cursor_position :]
+        )
+        self.cursor_position += 1
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(
+                "Updated input cursor to x=%s y=%s width=%s height=%s",
+                self.cursor.x,
+                self.cursor.y,
+                self.cursor.width,
+                self.cursor.height,
+            )
 
     def on_focus(self):
         logger.debug("Input widget gained focus")

@@ -1,7 +1,6 @@
 from typing import Tuple
 import miniworlds.actors.actor as actor_mod
 import miniworlds.actors.texts.text as text
-import miniworlds.actors.widgets.widget_costume as widget_costume
 
 class WidgetPart():
     pass

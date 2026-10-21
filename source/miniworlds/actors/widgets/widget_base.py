@@ -1,6 +1,3 @@
-from typing import Union
-import miniworlds.worlds.gui.gui as gui_mod
-import miniworlds.actors.actor as actor_mod
 import miniworlds.actors.widgets.widget_costume as widget_costume
 import miniworlds.actors.parent_actor as parent_actor
 

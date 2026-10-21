@@ -50,6 +50,8 @@ Keyboard events:
 - `on_key_up(self, keys)`: when a key is released
 - `on_key_down_<key>(self)`, `on_key_pressed_<key>(self)`,
   `on_key_up_<key>(self)`: key-specific handlers without a `keys` parameter
+- `on_text_input(self, text)`: composed text (including umlauts and spaces);
+  use this for text entry, e.g. inside an `Input` widget
 
 Common key names include `w`, `a`, `s`, `d`, `space`, `left`, `right`, `up`,
 and `down`.

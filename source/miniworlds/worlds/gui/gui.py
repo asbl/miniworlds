@@ -1,6 +1,3 @@
-from typing import Union, Tuple
-
-
 import miniworlds.worlds.world as world
 import miniworlds.worlds.gui.gui_connector as gui_connector
 

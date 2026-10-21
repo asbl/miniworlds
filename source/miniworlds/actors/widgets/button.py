@@ -1,5 +1,3 @@
-from typing import Union
-
 import miniworlds.actors.widgets.single_widget as single_widget
 
 

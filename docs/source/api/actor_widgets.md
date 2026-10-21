@@ -38,3 +38,17 @@ Use `Button` when a widget should simply send a message.
 .. autoclass:: miniworlds.actors.widgets.counter.CounterLabel
    :members:
 ```
+
+### FPSLabel
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.widgets.fps.FPSLabel
+   :members:
+```
+
+### TimeLabel
+
+```{eval-rst}
+.. autoclass:: miniworlds.actors.widgets.time.TimeLabel
+   :members:
+```
