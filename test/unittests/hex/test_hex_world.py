@@ -178,6 +178,36 @@ class TestHexWorld(unittest.TestCase):
         found = self.world.get_edge_from_pixel(edge.to_pixel())
         self.assertIs(found, edge)
 
+    def test_console_and_toolbar_widgets_on_hex_world_do_not_crash(self):
+        from miniworlds.actors.widgets.button import Button
+        from miniworlds.worlds.gui.console import Console
+        from miniworlds.worlds.gui.toolbar import Toolbar
+        from miniworlds.worlds.hex_world.hex_costume import HexCostume
+
+        console = Console()
+        self.world.camera.add_bottom(console)
+        line = console.newline("hello")
+
+        toolbar = Toolbar()
+        self.world.camera.add_right(toolbar)
+        toolbar.add(Button("Restart"))
+
+        # The widgets were created while the hex world was the running world,
+        # so they keep a HexCostume after being re-parented to the GUI worlds.
+        # Drawing must fall back to the rectangular shape instead of calling
+        # is_tile() on the console or toolbar world.
+        self.assertIsInstance(line.costume, HexCostume)
+        self.assertFalse(line.costume._is_on_tile())
+
+        self.world.app._unittest = True
+
+        @self.world.register
+        def act(world):
+            if world.frame >= 3:
+                world.quit()
+
+        self.world.run()
+
 
 if __name__ == "__main__":
     unittest.main()

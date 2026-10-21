@@ -14,7 +14,14 @@ class HexCostume(costume_mod.Costume):
 
     def _is_on_tile(self) -> bool:
         world = self.actor.world
-        return world is not None and world.is_tile(self.actor.position)
+        # Actors can move to other worlds after their costume was created
+        # (e.g. widgets created while a HexWorld is running are later added
+        # to a toolbar or console). Only draw hexagons on hex worlds.
+        return (
+            world is not None
+            and getattr(world, "is_hex", False)
+            and world.is_tile(self.actor.position)
+        )
 
     def _hex_points(self) -> list:
         width, height = self.parent.position_manager.get_size()
