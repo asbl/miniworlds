@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import warnings
 from typing import TYPE_CHECKING, Optional, Tuple
 
 import pygame
@@ -64,18 +65,49 @@ class ActorInitializationFacade:
         try:
             self.actor.world.get_world_connector(self.actor).init_managers(position)
         except AttributeError as error:
-            logger.exception(
+            logger.debug(
                 "Failed to initialize actor %s on world %r",
                 self.actor.__class__.__name__,
                 self.actor._world,
             )
             raise AttributeError(
-                "Actor could not be created on a World - Did you created a world instance before?"
+                "Actor could not be created on a World - Did you create a world instance before?"
             ) from error
         # Worlds may define __len__ and be falsy while they are still empty,
         # so only None means "no world".
         if self.actor.world is None:
             raise NoWorldError()
+        self._warn_if_outside_world(position)
+
+    def _warn_if_outside_world(
+        self, position: Optional[Tuple[float, float]]
+    ) -> None:
+        """Warns in learning mode when an actor starts outside the world.
+
+        The actor is still created (camera worlds may place actors
+        off-screen on purpose), but beginners usually mistyped the
+        position and wonder why the actor is invisible.
+        """
+        if not getattr(self.actor.world, "learning_mode", False):
+            return
+        if not position:
+            return
+        try:
+            x, y = position
+            size_x = self.actor.world.world_size_x
+            size_y = self.actor.world.world_size_y
+        except (TypeError, ValueError, AttributeError):
+            return
+        if not (0 <= x < size_x and 0 <= y < size_y):
+            warnings.warn(
+                f"Actor {self.actor.__class__.__name__} was created at "
+                f"{position!r}, outside the world "
+                f"(size: ({size_x}, {size_y})). "
+                f"It is not visible.\n"
+                f"Try: Actor((0, 0), world=world)",
+                RuntimeWarning,
+                stacklevel=4,
+            )
 
     def finalize_sprite_state(self, origin: Optional[str] = None) -> None:
         pygame.sprite.DirtySprite.__init__(self.actor)

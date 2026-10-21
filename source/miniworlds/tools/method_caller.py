@@ -50,6 +50,35 @@ def check_signature(method: callable, arguments: tuple, allow_none=False):
         i = i + 1
     if _has_unfillable_required_parameters(sig, arguments, arguments_mean_no_call):
         raise WrongArgumentsError(method, arguments)
+    if _has_more_arguments_than_parameters(sig, arguments, arguments_mean_no_call):
+        raise WrongArgumentsError(method, arguments)
+
+
+def _has_more_arguments_than_parameters(
+    sig, arguments, arguments_mean_no_call: bool
+) -> bool:
+    """Checks for calls with more arguments than the method can accept.
+
+    Event handlers are called by miniworlds with a fixed number of
+    arguments. A handler like `def on_key_down(self):` cannot receive the
+    `key` argument; calling it would raise a cryptic Python TypeError.
+    This check reports the mismatch upfront with a helpful message
+    instead.
+    """
+    if any(
+        param.kind == Parameter.VAR_POSITIONAL for param in sig.parameters.values()
+    ):
+        return False
+    if arguments_mean_no_call:
+        argument_count = 0
+    else:
+        argument_count = len(arguments)
+    positional = [
+        param
+        for param in sig.parameters.values()
+        if param.kind in (Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD)
+    ]
+    return argument_count > len(positional)
 
 
 def _has_unfillable_required_parameters(

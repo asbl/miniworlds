@@ -1,4 +1,5 @@
 import __main__
+import atexit
 import os
 import sys
 import warnings
@@ -49,6 +50,8 @@ class App:
     running_app: Optional["App"] = None
     init: bool = False
     window: Optional["Window"] = None
+    _run_started: bool = False
+    _run_check_registered: bool = False
 
     @classmethod
     def _get_state_bridge(cls) -> app_state_bridge.AppStateBridge:
@@ -119,6 +122,35 @@ class App:
                     "Skipping run() presence check because the main module could not be read"
                 )
 
+    @classmethod
+    def register_run_check(cls) -> None:
+        """
+        Registers an exit hook that warns when a world was created but
+        `run()` was never called.
+
+        The source-based check in `check_for_run_method()` cannot detect
+        `run()` calls that are commented out or never reached. This hook
+        runs after the program ends and reports if no mainloop ever
+        started, so students learn why no window appeared.
+        """
+        if cls._run_check_registered or cls.get_platform().is_web():
+            return
+        if "pytest" in sys.modules:
+            return
+        cls._run_check_registered = True
+        atexit.register(cls._warn_if_never_run)
+
+    @classmethod
+    def _warn_if_never_run(cls) -> None:
+        if cls._run_started:
+            return
+        warnings.warn(
+            "A world was created, but [world_name].run() was never called - "
+            "no window was shown.\n"
+            "Add world.run() as the last line of your program "
+            "(if your world-object is named world)."
+        )
+
     def _output_start(self):
         """
         Outputs version info at app start (desktop only).
@@ -139,6 +171,7 @@ class App:
         self.platform = platform_mod.PlatformAdapter()
         self._output_start()
         self.check_for_run_method()
+        self.register_run_check()
 
         self.worlds_manager: "WorldsManager" = worlds_manager.WorldsManager(self)
         self.event_manager: "AppEventManager" = event_manager.AppEventManager(self)
@@ -175,6 +208,7 @@ class App:
         self.window.fit_desktop = fit_desktop
         self.window.replit = replit
 
+        App._run_started = True
         self.init_app()
         App.init = True
         self.prepare_mainloop()

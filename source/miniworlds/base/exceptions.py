@@ -91,7 +91,7 @@ class NotNullError(MiniworldsError):
 class FirstArgumentShouldBeSelfError(MiniworldsError):
     def __init__(self, method):
         self.message = (
-            f"Error calling {method}. Did you used `self` as first parameter?"
+            f"Error calling {method}. Did you use `self` as first parameter?"
         )
         super().__init__(self.message)
 

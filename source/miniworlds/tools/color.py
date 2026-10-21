@@ -1,5 +1,33 @@
 from typing import Tuple, Union
 
+import pygame
+
+
+def ensure_valid_color(value, parameter_name: str) -> None:
+    """Raises a student-friendly ValueError for colors pygame cannot render.
+
+    Accepts exactly the values pygame accepts (named colors like 'red',
+    RGB/RGBA tuples and lists, grayscale ints). `None` is allowed because
+    several color attributes use it to disable rendering.
+    """
+    if value is None or isinstance(value, pygame.Color):
+        return
+    try:
+        if isinstance(value, str):
+            pygame.Color(value)
+        elif isinstance(value, (tuple, list)):
+            pygame.Color(*value)
+        elif isinstance(value, int) and not isinstance(value, bool):
+            pygame.Color(value, value, value)
+        else:
+            return
+    except (ValueError, TypeError):
+        raise ValueError(
+            f"{parameter_name} must be a color like (255, 0, 0) or 'red', "
+            f"got {value!r}\nTry: {parameter_name} = (255, 0, 0)"
+        )
+
+
 class Color:
     """Represents an RGB or RGBA color as a tuple of float values."""
 

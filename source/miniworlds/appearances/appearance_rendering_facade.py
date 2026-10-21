@@ -7,7 +7,6 @@ import pygame
 
 import miniworlds.appearances.managers.image_manager as image_manager
 import miniworlds.tools.binding as binding
-import miniworlds.tools.color as color_mod
 from miniworlds.base.exceptions import MiniworldsError
 
 if TYPE_CHECKING:
@@ -72,7 +71,9 @@ class AppearanceRenderingFacade:
             self.owner._is_filled = value
         else:
             self.owner._is_filled = True
-            self.owner.fill_color = color_mod.Color(value).get()
+            # Route through the fill_color setter so invalid colors fail
+            # here with a clear message instead of later in pygame.
+            self.owner.fill_color = value
         self.owner.set_dirty("all", self.owner.RELOAD_ACTUAL_IMAGE)
 
     def set_filled(self, value):

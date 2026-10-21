@@ -603,6 +603,12 @@ class Positionmanager:
             value = 180
         elif isinstance(value, world_vector.Vector):
             value = value.to_direction() % 360
+        elif isinstance(value, str):
+            raise TypeError(
+                f"direction must be a number (degrees) or one of "
+                f"'up', 'right', 'left', 'down', 'forward', got {value!r}.\n"
+                f"Try: actor.direction = 'right' or actor.direction = 90"
+            )
         else:
             value = value % 360
         return value

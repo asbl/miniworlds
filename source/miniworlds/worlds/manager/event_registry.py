@@ -15,9 +15,22 @@ _EVENT_ROOT_CLASSES = {
     ("miniworlds.worlds.world", "World"),
 }
 
+# Method names that students often write instead of an event hook
+# (e.g. `setup` instead of `on_setup`). They are included in the
+# member scan so the typo warning can suggest the correct event name.
+_CONFUSABLE_LIFECYCLE_NAMES = frozenset({"setup"})
+
 
 def _is_event_root_class(cls: type) -> bool:
     return (cls.__module__, cls.__name__) in _EVENT_ROOT_CLASSES
+
+
+def _looks_like_event_member(member: str) -> bool:
+    return (
+        member.startswith("on_")
+        or member.startswith("act")
+        or member in _CONFUSABLE_LIFECYCLE_NAMES
+    )
 
 
 class EventRegistry:
@@ -208,7 +221,11 @@ class EventRegistry:
                 self.register_event(member, self.world)
         if not class_was_cached:
             self._warn_about_event_handler_typos(
-                self.world, members, self.event_definition.world_class_events_set
+                self.world,
+                members,
+                # `on_setup` is dispatched directly (not via the event set),
+                # but it must still be suggested for typos like `setup`.
+                self.event_definition.world_class_events_set | {"on_setup"},
             )
 
     def register_events_for_actor(self, actor):
@@ -363,7 +380,7 @@ class EventRegistry:
                 [
                     member
                     for member in members
-                    if member.startswith("on_") or member.startswith("act")
+                    if _looks_like_event_member(member)
                 ]
             )
             members = member_set.union(
@@ -392,7 +409,7 @@ class EventRegistry:
                     [
                         member
                         for member in members
-                        if member.startswith("on_") or member.startswith("act")
+                        if _looks_like_event_member(member)
                     ]
                 )
                 member_set = member_set.union(self._get_members_for_classes(cls.__bases__))

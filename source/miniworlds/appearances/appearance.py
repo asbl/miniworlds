@@ -379,6 +379,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @fill_color.setter
     def fill_color(self, value):
+        color_mod.ensure_valid_color(value, "fill_color")
         self._fill_color = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
@@ -414,6 +415,7 @@ class Appearance(metaclass=MetaAppearance):
 
     @fill_color.setter
     def fill_color(self, value):
+        color_mod.ensure_valid_color(value, "fill_color")
         self._fill_color = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
@@ -504,8 +506,12 @@ class Appearance(metaclass=MetaAppearance):
 
     @color.setter
     def color(self, value):
-        value = color_mod.Color.create(value).get()
-        self._fill_color = value
+        if isinstance(value, str):
+            color_mod.ensure_valid_color(value, "color")
+            self._fill_color = value
+        else:
+            value = color_mod.Color.create(value).get()
+            self._fill_color = value
         self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
 
     @property
@@ -525,6 +531,7 @@ class Appearance(metaclass=MetaAppearance):
     @border_color.setter
     def border_color(self, value: int):
         if value:
+            color_mod.ensure_valid_color(value, "border_color")
             self._border_color = value
             self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
         else:
