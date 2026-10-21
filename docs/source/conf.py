@@ -34,8 +34,12 @@ copyright = '5, Andreas Siebel'
 author = 'Andreas Siebel'
 
 def _read_project_version() -> str:
-    setup_py = Path(__file__).resolve().parents[2] / "source" / "setup.py"
-    match = re.search(r'version="([^"]+)"', setup_py.read_text(encoding="utf-8"))
+    pyproject = Path(__file__).resolve().parents[2] / "source" / "pyproject.toml"
+    match = re.search(
+        r'^version = "([^"]+)"',
+        pyproject.read_text(encoding="utf-8"),
+        re.MULTILINE,
+    )
     if not match:
         return "unknown"
     return match.group(1)

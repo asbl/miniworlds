@@ -12,13 +12,14 @@ if [[ ! -d "venv" || ! -f "venv/bin/activate" ]]; then
     echo "Virtuelle Umgebung wird erstellt..."
     python3 -m venv venv
     activate_venv
-    echo "Installiere Abhängigkeiten aus requirements.txt..."
-    pip install --upgrade pip
-    pip install -r requirements.txt
 else
     echo "Aktiviere bestehende virtuelle Umgebung..."
     activate_venv
 fi
+
+echo "Installiere/aktualisiere Abhängigkeiten aus requirements.txt..."
+pip install --upgrade pip
+pip install -r requirements.txt
 
 echo "Python verwendet: $(which python)"
 if [[ -z "${MINIWORLDS_PREPARE_SKIP_LIST:-}" ]]; then

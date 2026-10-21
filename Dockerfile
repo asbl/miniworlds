@@ -20,7 +20,7 @@ RUN pip install pytest imgcompare
 WORKDIR /app
 
 # Install Python dependencies
-COPY requirements.txt .
+COPY requirements*.txt .
 RUN pip install -r requirements.txt && echo "copied requirements txt"
 
 # Copy source code and install it as editable

@@ -47,9 +47,14 @@ VENV_PYTHON = os.path.join(REPO_ROOT, "venv", "bin", "python")
 VENV_BIN = os.path.join(REPO_ROOT, "venv", "bin")
 PHYSICS_REPO = os.path.join(REPO_ROOT, "libraries", "physics")
 DATA_REPO = os.path.join(REPO_ROOT, "libraries", "miniworlds_data")
-MAIN_SETUP_PATH = os.path.join(REPO_ROOT, "source", "setup.py")
+MAIN_PROJECT_PATH = os.path.join(REPO_ROOT, "source", "pyproject.toml")
+# Compatibility alias for existing tests and external Invoke helpers.
+MAIN_SETUP_PATH = MAIN_PROJECT_PATH
 PHYSICS_SETUP_PATH = os.path.join(PHYSICS_REPO, "source", "setup.py")
-VERSION_PATTERN = re.compile(r'version="([^"]+)"')
+VERSION_PATTERN = re.compile(
+    r'(?m)^(?P<pyproject>version\s*=\s*")(?P<pyproject_version>[^"]+)(")'
+    r'|(?P<setup>version=")(?P<setup_version>[^"]+)(")'
+)
 PERFORMANCE_RESULTS = Path(REPO_ROOT) / "test" / "performance" / "results"
 DOC_EXAMPLE_TESTS = Path(REPO_ROOT) / "test" / "generated" / "docs_examples"
 DOCS_PRIORITY_API_PAGES = (
@@ -267,13 +272,19 @@ def _read_version(file_path: str) -> str:
     match = VERSION_PATTERN.search(content)
     if not match:
         raise Exit(f"Could not find a version string in {file_path}")
-    return match.group(1)
+    return match.group("pyproject_version") or match.group("setup_version")
 
 
 def _write_version(file_path: str, version: str) -> None:
     with open(file_path, encoding="utf-8") as handle:
         content = handle.read()
-    updated_content, replacements = VERSION_PATTERN.subn(f'version="{version}"', content, count=1)
+
+    def replace(match: re.Match) -> str:
+        if match.group("pyproject"):
+            return f'{match.group("pyproject")}{version}"'
+        return f'{match.group("setup")}{version}"'
+
+    updated_content, replacements = VERSION_PATTERN.subn(replace, content, count=1)
     if replacements != 1:
         raise Exit(f"Could not update version in {file_path}")
     with open(file_path, "w", encoding="utf-8") as handle:
@@ -380,7 +391,7 @@ def _print_release_plan(
     print(f"- Run tests: {'no' if skip_tests else 'yes'}")
     print(f"- Push branches and tags: {'yes' if push else 'no'}")
     print("Planned steps:")
-    print("1. Update source/setup.py and libraries/physics/source/setup.py")
+    print("1. Update source/pyproject.toml and libraries/physics/source/setup.py")
     if skip_tests:
         print("2. Skip Docker tests")
     else:
@@ -599,7 +610,7 @@ def deploy_release(
     main_branch = _current_branch(c, REPO_ROOT, "Main")
     physics_branch = _current_branch(c, PHYSICS_REPO, "Physics")
 
-    current_main_version = _read_version(MAIN_SETUP_PATH)
+    current_main_version = _read_version(MAIN_PROJECT_PATH)
     current_physics_version = _read_version(PHYSICS_SETUP_PATH)
     if current_main_version != current_physics_version:
         raise Exit(
@@ -645,13 +656,13 @@ def deploy_release(
     _ensure_tag_missing(c, REPO_ROOT, tag_name, "Main")
     _ensure_tag_missing(c, PHYSICS_REPO, tag_name, "Physics")
 
-    _write_version(MAIN_SETUP_PATH, version)
+    _write_version(MAIN_PROJECT_PATH, version)
     _write_version(PHYSICS_SETUP_PATH, version)
 
     try:
         _run_deploy_tests(c, skip_tests)
     except BaseException:
-        _write_version(MAIN_SETUP_PATH, current_main_version)
+        _write_version(MAIN_PROJECT_PATH, current_main_version)
         _write_version(PHYSICS_SETUP_PATH, current_physics_version)
         raise
 
@@ -659,7 +670,7 @@ def deploy_release(
     _git(c, PHYSICS_REPO, f'commit -m "Bump version to {version}"')
     _git(c, PHYSICS_REPO, f'tag -a {tag_name} -m "Release {tag_name}"')
 
-    _git(c, REPO_ROOT, "add source/setup.py libraries/physics")
+    _git(c, REPO_ROOT, "add source/pyproject.toml libraries/physics")
     _git(c, REPO_ROOT, f'commit -m "Bump version to {version}"')
     _git(c, REPO_ROOT, f'tag -a {tag_name} -m "Release {tag_name}"')
 

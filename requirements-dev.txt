@@ -1,0 +1,11 @@
+-r requirements-runtime.txt
+-r requirements-docs.txt
+pymunk
+setuptools
+wheel
+build
+twine
+invoke
+python-dotenv==1.0.1
+pytest
+imgcompare

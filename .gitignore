@@ -9,6 +9,8 @@ __pycache__/
 # editor
 .vscode
 */.vscode
+.idea/
+*/.idea/
 
 # Distribution / packaging
 release/

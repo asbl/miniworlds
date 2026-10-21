@@ -1,4 +1,5 @@
 import os
+import importlib.util
 from pathlib import Path
 import sys
 import warnings
@@ -35,6 +36,19 @@ def pytest_configure(config):
             returncode=2,
         )
     if allow_local_override:
+        missing = [
+            module
+            for module in ("pygame", "numpy", "pymunk")
+            if importlib.util.find_spec(module) is None
+        ]
+        if missing:
+            pytest.exit(
+                "Local pytest override is enabled, but required test/runtime "
+                f"dependencies are missing: {', '.join(missing)}. Run "
+                "`invoke env.prepare` or `invoke env.check`, or use the "
+                "Docker-backed test path (`invoke tests.cached`).",
+                returncode=2,
+            )
         warnings.warn(
             "Running tests outside the Docker-backed invoke tasks. Results can "
             "differ between operating systems; use this only for local debugging.",

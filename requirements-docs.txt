@@ -1,0 +1,9 @@
+sphinx<9
+sphinx-intl
+sphinxcontrib.video
+sphinx_autodoc_typehints
+myst_parser
+sphinxcontrib.mermaid
+autoclasstoc
+sphinx_toolbox
+sphinx_book_theme

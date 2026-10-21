@@ -1,16 +1,1 @@
-pygame-ce
-numpy
-pymunk
-setuptools
-dotenv==0.9.9
-invoke
-python-dotenv==1.0.1
-sphinx<9
-sphinx-intl
-sphinxcontrib.video
-sphinx_autodoc_typehints
-myst_parser
-sphinxcontrib.mermaid
-autoclasstoc
-sphinx_toolbox
-sphinx_book_theme
+-r requirements-dev.txt
