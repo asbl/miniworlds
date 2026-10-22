@@ -635,13 +635,17 @@ class SensorManager:
                 if actor_rect is not None and actor_rect.collidepoint(x, y):
                     return actor
 
-            # Keep manually registered or test-double blocking objects working.
-            for actor in blocking_actors:
-                if actor is self.actor or actor in blocking_spatial_index:
-                    continue
-                actor_rect = self._try_get_actor_global_rect(actor)
-                if actor_rect is not None and actor_rect.collidepoint(x, y):
-                    return actor
+            # The blocking index only holds registered blocking actors, so
+            # equal sizes mean every blocking actor is indexed and the
+            # fallback below cannot match. Only scan the full list when
+            # manually registered or test-double objects are present.
+            if len(blocking_spatial_index) != len(blocking_actors):
+                for actor in blocking_actors:
+                    if actor is self.actor or actor in blocking_spatial_index:
+                        continue
+                    actor_rect = self._try_get_actor_global_rect(actor)
+                    if actor_rect is not None and actor_rect.collidepoint(x, y):
+                        return actor
             return None
 
         spatial_index = getattr(self.world, "_spatial_index", None)

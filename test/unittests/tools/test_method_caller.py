@@ -27,11 +27,12 @@ class TestMethodCaller(unittest.TestCase):
         receiver = Receiver()
         method = receiver.receive
         method_caller._cached_signature.cache_clear()
+        method_caller._callable_shape.cache_clear()
 
         for _ in range(5):
             method_caller.call_method(method, ["value"])
 
-        cache_info = method_caller._cached_signature.cache_info()
+        cache_info = method_caller._callable_shape.cache_info()
 
         self.assertGreater(cache_info.hits, 0)
 

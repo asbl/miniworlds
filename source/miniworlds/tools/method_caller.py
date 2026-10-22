@@ -22,6 +22,36 @@ def _cached_signature(method: callable):
     return signature(method)
 
 
+@lru_cache(maxsize=4096)
+def _callable_shape(method: callable) -> tuple[bool, int, int, int]:
+    """Precompute the parameter shape used by ``check_signature``.
+
+    Returns ``(has_var_positional, positional_count, required_count,
+    required_max_index)`` so that the per-call checks only compare integers
+    instead of walking the parameter list on every dispatch.
+    """
+    sig = _cached_signature(method)
+    has_var_positional = False
+    positional_count = 0
+    required_count = 0
+    required_max_index = -1
+    index = 0
+    for param in sig.parameters.values():
+        kind = param.kind
+        if kind == Parameter.VAR_POSITIONAL:
+            has_var_positional = True
+            continue
+        if kind == Parameter.VAR_KEYWORD:
+            continue
+        if kind in (Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD):
+            positional_count += 1
+        if param.default == param.empty:
+            required_count += 1
+            required_max_index = index
+        index += 1
+    return has_var_positional, positional_count, required_count, required_max_index
+
+
 def get_signature(method: callable, arguments: tuple, allow_none=True):
     check_signature(method, arguments, allow_none)
     return _cached_signature(method)
@@ -38,74 +68,24 @@ def check_signature(method: callable, arguments: tuple, allow_none=False):
     if type(arguments) is not list and type(arguments) is not tuple and type(arguments) is not dict:
         arguments = [arguments]
     try:
-        sig = _cached_signature(method)
+        (
+            has_var_positional,
+            positional_count,
+            required_count,
+            required_max_index,
+        ) = _callable_shape(method)
     except ValueError:
         raise FirstArgumentShouldBeSelfError(method)
-    i = 0
-    for key, param in sig.parameters.items():
-        if param.kind in (Parameter.VAR_POSITIONAL, Parameter.VAR_KEYWORD):
-            continue
-        if param.default == param.empty and i >= len(arguments):
-            raise WrongArgumentsError(method, arguments)
-        i = i + 1
-    if _has_unfillable_required_parameters(sig, arguments, arguments_mean_no_call):
+    # A required parameter sits at an index that receives no argument.
+    if required_max_index >= len(arguments):
         raise WrongArgumentsError(method, arguments)
-    if _has_more_arguments_than_parameters(sig, arguments, arguments_mean_no_call):
+    argument_count = 0 if arguments_mean_no_call else len(arguments)
+    # Required parameters that would never receive a value.
+    if required_count > argument_count:
         raise WrongArgumentsError(method, arguments)
-
-
-def _has_more_arguments_than_parameters(
-    sig, arguments, arguments_mean_no_call: bool
-) -> bool:
-    """Checks for calls with more arguments than the method can accept.
-
-    Event handlers are called by miniworlds with a fixed number of
-    arguments. A handler like `def on_key_down(self):` cannot receive the
-    `key` argument; calling it would raise a cryptic Python TypeError.
-    This check reports the mismatch upfront with a helpful message
-    instead.
-    """
-    if any(
-        param.kind == Parameter.VAR_POSITIONAL for param in sig.parameters.values()
-    ):
-        return False
-    if arguments_mean_no_call:
-        argument_count = 0
-    else:
-        argument_count = len(arguments)
-    positional = [
-        param
-        for param in sig.parameters.values()
-        if param.kind in (Parameter.POSITIONAL_ONLY, Parameter.POSITIONAL_OR_KEYWORD)
-    ]
-    return argument_count > len(positional)
-
-
-def _has_unfillable_required_parameters(
-    sig, arguments, arguments_mean_no_call: bool
-) -> bool:
-    """Checks for required parameters that would never receive a value.
-
-    Event handlers are called by miniworlds with a fixed number of
-    arguments. A handler like `def act(self, speed)` has a required
-    parameter without a default value; calling it raises a cryptic
-    Python TypeError. This check reports the mismatch upfront with a
-    helpful message instead.
-    """
-    if arguments_mean_no_call:
-        argument_count = 0
-    elif isinstance(arguments, dict):
-        argument_count = len(arguments)
-    else:
-        argument_count = len(arguments)
-    required = [
-        param
-        for param in sig.parameters.values()
-        if param.default == param.empty
-        and param.kind
-        not in (Parameter.VAR_POSITIONAL, Parameter.VAR_KEYWORD)
-    ]
-    return len(required) > argument_count
+    # More arguments than the method can accept positionally.
+    if not has_var_positional and argument_count > positional_count:
+        raise WrongArgumentsError(method, arguments)
 
 
 def call_method(method: callable, arguments: Optional[tuple], allow_none=True):

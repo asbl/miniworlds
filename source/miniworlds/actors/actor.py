@@ -361,6 +361,24 @@ class Actor(actor_base.ActorBase):
         self._collision_type = value
 
     @property
+    def mask(self) -> "pygame.mask.Mask":
+        """pygame.mask.Mask: Collision mask for `collision_type = "mask"`.
+
+        The mask is rebuilt lazily from the current image the first time it
+        is accessed after a costume change, instead of on every
+        `set_dirty` call.
+        """
+        if getattr(self, "_mask_dirty", True):
+            self._mask_dirty = False
+            self._mask = pygame.mask.from_surface(self.image, threshold=100)
+        return self._mask
+
+    @mask.setter
+    def mask(self, value: "pygame.mask.Mask") -> None:
+        self._mask = value
+        self._mask_dirty = False
+
+    @property
     def is_blockable(self):
         """bool: Whether this actor is stopped by blocking actors.
 

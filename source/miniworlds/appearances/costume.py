@@ -211,7 +211,8 @@ class Costume(appear.Appearance):
             and self.actor
             and self.actor.collision_type == "mask"
         ):
-            self.actor.mask = pygame.mask.from_surface(self.actor.image, threshold=100)
+            # The mask is rebuilt lazily on the next `actor.mask` access.
+            self.actor._mask_dirty = True
 
 
     def get_rect(self):
