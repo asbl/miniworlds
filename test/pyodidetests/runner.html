@@ -24,11 +24,13 @@
       const pyodide = await loadPyodide({ indexURL: pyodideBase });
       window.pyodideTestProgress = "installing packages";
       pyodide.canvas.setCanvas2D(document.getElementById("canvas"));
-      await pyodide.loadPackage(["micropip", "numpy"]);
+      // pygame-ce comes from the Pyodide lockfile: loadPackage fetches the
+      // prebuilt wheel in parallel and skips micropip's dependency resolution.
+      await pyodide.loadPackage(["micropip", "numpy", "pygame-ce"]);
       const wheelUrl = new URL("./__MINIWORLDS_WHEEL__", window.location.href).href;
       await pyodide.runPythonAsync(`
 import micropip
-await micropip.install(["pygame-ce", ${JSON.stringify(wheelUrl)}])
+await micropip.install([${JSON.stringify(wheelUrl)}])
       `);
       window.pyodideTestProgress = "loading student project";
       const project = new Uint8Array(await (await fetch("./project.zip")).arrayBuffer());

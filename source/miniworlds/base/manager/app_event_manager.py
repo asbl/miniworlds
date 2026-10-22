@@ -148,14 +148,17 @@ class AppEventManager:
             handler = self._pygame_event_handlers.get(event.type)
             if handler is not None:
                 handler(event)
-            if "\x11" in self._get_pressed_keys():
-                self.app.quit()
+        # The quit flag is only evaluated after event processing (App._update),
+        # so checking once after the loop is equivalent to checking per event
+        # and avoids rebuilding the pressed-keys list for every single event.
+        if "\x11" in self._get_pressed_keys():
+            self.app.quit()
 
         pressed_keys = self._get_pressed_keys()
         if self.is_key_pressed:
             self.to_event_queue("key_pressed", pressed_keys)
-        pos = self.app.platform.get_mouse_pos()
         if self.is_mouse_pressed:
+            pos = self.app.platform.get_mouse_pos()
             for event in self.is_mouse_pressed:
                 self.to_event_queue(event, pos)
         for value in self.is_key_pressed.values():
