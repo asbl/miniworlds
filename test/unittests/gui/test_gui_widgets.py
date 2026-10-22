@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock, PropertyMock, patch
 
 from miniworlds.base.app import App
-from miniworlds import World, Toolbar
+from miniworlds import World, Toolbar, Button
 from miniworlds.actors.widgets import fps as fps_module
 from miniworlds.actors.widgets import time as time_module
 from miniworlds.actors.widgets.container_widget import ContainerWidget
@@ -119,6 +119,22 @@ class TestInputWidget(unittest.TestCase):
         widget.set_text.assert_called_once_with("a")
         self.assertEqual(widget._cursor_position, 1)
 
+    def test_key_down_delete_deletes_character_right_of_cursor(self):
+        widget = self._make_input("ab", cursor_position=1)
+
+        Input.on_key_down(widget, ["DELETE"])
+
+        widget.set_text.assert_called_once_with("a")
+        self.assertEqual(widget._cursor_position, 1)
+
+    def test_key_down_delete_at_end_does_nothing(self):
+        widget = self._make_input("ab", cursor_position=2)
+
+        Input.on_key_down(widget, ["DELETE"])
+
+        widget.set_text.assert_not_called()
+        self.assertEqual(widget._cursor_position, 2)
+
     def test_key_down_arrow_moves_cursor(self):
         widget = self._make_input("ab", cursor_position=0)
 
@@ -183,6 +199,48 @@ class TestInputWidgetIntegration(unittest.TestCase):
         widget.on_text_input("a")
 
         self.assertEqual(widget.get_text(), "")
+
+
+class TestTextAlign(unittest.TestCase):
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    def _make_button(self):
+        App.reset(unittest=True, file=__file__)
+        world = World(400, 300)
+        toolbar = Toolbar()
+        world.camera.add_right(toolbar, size=200)
+        button = Button("Text")
+        toolbar.add(button)
+        return button
+
+    def test_default_alignment_is_left(self):
+        button = self._make_button()
+        self.assertEqual(button.text_align, "left")
+        self.assertEqual(button.text.topleft[0], button.topleft[0] + button.padding_left)
+
+    def test_center_alignment_centers_text_in_widget(self):
+        button = self._make_button()
+        button.text_align = "center"
+        text_width = button.text.costume.font_manager.get_text_width("Text")
+        expected_x = button.topleft[0] + max(
+            button.padding_left, (button.width - text_width) // 2
+        )
+        self.assertEqual(button.text_align, "center")
+        self.assertEqual(button.text.topleft[0], expected_x)
+
+    def test_right_alignment_aligns_text_to_right_edge(self):
+        button = self._make_button()
+        button.text_align = "right"
+        text_width = button.text.costume.font_manager.get_text_width("Text")
+        expected_x = button.topleft[0] + button.width - text_width - button.padding_right
+        self.assertEqual(button.text_align, "right")
+        self.assertEqual(button.text.topleft[0], expected_x)
+
+    def test_invalid_alignment_raises_value_error(self):
+        button = self._make_button()
+        with self.assertRaises(ValueError):
+            button.text_align = "middle"
 
 
 class TestContainerWidget(unittest.TestCase):

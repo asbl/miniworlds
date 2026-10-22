@@ -152,7 +152,7 @@ class Toolbar(gui.GUI):
         self.widgets[key] = widget
         if getattr(widget, "timed", False):
             self.timed_widgets[id(widget)] = widget
-        # Reorder mus be called before camera position is updated
+        # Reorder must be called before camera position is updated
         self.reorder() 
         if not self.fixed_camera and widget.y + widget.height > self.camera.y + self.camera.height:
             self.camera.world_size_y = widget.y + widget.height
@@ -259,12 +259,12 @@ class Toolbar(gui.GUI):
         if hasattr(self, "widgets") and self.widgets:
             actual_height = self.padding_top
             for widget in self.widgets.values():
-                    actual_height += widget.margin_top
-                    self._set_widget_width(widget)
-                    widget.topleft = (self.padding_left + widget.margin_left, actual_height)
-                    if self.max_row_height != 0:
-                        widget.height = self.max_row_height
-                    actual_height += widget.height + widget.margin_bottom
+                actual_height += widget.margin_top
+                self._set_widget_width(widget)
+                widget.topleft = (self.padding_left + widget.margin_left, actual_height)
+                if self.max_row_height != 0:
+                    widget.height = self.max_row_height
+                actual_height += widget.height + widget.margin_bottom
 
 
     def _widgets_total_height(self):
@@ -272,7 +272,7 @@ class Toolbar(gui.GUI):
         for name, widget in self.widgets.items():
             height += widget.margin_top
             height += widget.height + widget.margin_bottom
-        return height
+        return height + self.padding_bottom
 
     def _set_widget_width(self, widget):
         new_width = self.camera.width - self.padding_left - self.padding_right - widget.margin_left - widget.margin_right

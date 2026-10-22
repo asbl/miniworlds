@@ -12,8 +12,8 @@ class Input(widget.Button):
 
     Click into the field to focus it, then type to enter text. The
     text cursor can be moved with the arrow keys; BACKSPACE deletes
-    the character left of the cursor. At most ``max_chars`` characters
-    can be entered.
+    the character left of the cursor and DELETE the character right of
+    the cursor. At most ``max_chars`` characters can be entered.
 
     While the input has focus, the text cursor blinks; without focus,
     the cursor is hidden.
@@ -97,6 +97,12 @@ class Input(widget.Button):
             elif "BACKSPACE" in keys:
                 if 0 < self.cursor_position <= len(self.current_input):
                     self.cursor_position -= 1
+                    self.set_text(
+                        self.current_input[0 : self.cursor_position]
+                        + self.current_input[self.cursor_position + 1 :]
+                    )
+            elif "DELETE" in keys:
+                if self.cursor_position < len(self.current_input):
                     self.set_text(
                         self.current_input[0 : self.cursor_position]
                         + self.current_input[self.cursor_position + 1 :]

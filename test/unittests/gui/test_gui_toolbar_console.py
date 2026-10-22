@@ -272,6 +272,7 @@ class TestConsoleTrimming(unittest.TestCase):
         console.timed_widgets = {}
         console.fixed_camera = True
         console._padding_top = 0
+        console._padding_bottom = 0
         console._padding_left = 0
         console._padding_right = 0
         console.max_row_height = 0

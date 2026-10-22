@@ -35,7 +35,7 @@ class SingleWidget(widget_base.BaseWidget):
             self._img_widget.size = ( self._img_width, self._font_size)
         if not self.fixed_width:
             # no image: Set width/height by text and img width
-            if self._widget_text_align == "left" and not self._img_widget:
+            if self._widget_text_align in ("left", "center", "right") and not self._img_widget:
                 self.width = self._widget_text.width
             elif (
                 self._widget_text_align == "left" and self._img_widget or self._widget_text_align == "image"
@@ -68,14 +68,11 @@ class SingleWidget(widget_base.BaseWidget):
                 )
 
     def update_positions(self):
+        """Updates the text and image positions inside the widget."""
         super().update_positions()
-        """updates text and img position"""
-        if self._widget_text_align == "left" and not self._img_widget:
-            self._widget_text.topleft = (
-                self.topleft[0] + self.padding_left,
-                self.topleft[1] + self.padding_top,
-            )
-        if self._widget_text_align == "left" and self._img_widget or self._widget_text_align == "image":
+        if self._img_widget:
+            # With an image, the image is placed left and the text right
+            # of it, independent of the text alignment.
             self._img_widget.topleft = (
                 self.topleft[0] + self.padding_left,
                 self.topleft[1] + self.padding_top,
@@ -87,6 +84,22 @@ class SingleWidget(widget_base.BaseWidget):
                 + self.padding_left,
                 self.topleft[1] + self.padding_top,
             )
+        elif self._widget_text_align == "left":
+            self._widget_text.topleft = (
+                self.topleft[0] + self.padding_left,
+                self.topleft[1] + self.padding_top,
+            )
+        elif self._widget_text_align in ("center", "right"):
+            text_width = self._widget_text.costume.font_manager.get_text_width(
+                self._widget_text.text
+            )
+            if self._widget_text_align == "center":
+                x = self.topleft[0] + max(
+                    self.padding_left, (self.width - text_width) // 2
+                )
+            else:
+                x = self.topleft[0] + self.width - text_width - self.padding_right
+            self._widget_text.topleft = (x, self.topleft[1] + self.padding_top)
         self._widget_text.costume._update_draw_shape()
 
     def get_local_pos(self, position):
@@ -103,17 +116,22 @@ class SingleWidget(widget_base.BaseWidget):
 
     @property
     def text_align(self):
-        """Defines how text is aligned.
+        """Defines how the text is aligned inside the widget.
 
-        If widget has an image, text is aligned left, else it can be set to "left", "center" or "right".
+        If the widget has an image, the text is always aligned left of
+        the image; otherwise the text can be set to "left", "center" or
+        "right".
         """
-        if not self._img_source:
+        if self._img_source:
             return "left"
-        else:
-            return self._widget_text_align
+        return self._widget_text_align
 
     @text_align.setter
     def text_align(self, value):
+        if value not in ("left", "center", "right", "image"):
+            raise ValueError(
+                f"text_align must be one of 'left', 'center', 'right', 'image', got {value!r}"
+            )
         self._widget_text_align = value
         self.dirty = 1
         self.resize()

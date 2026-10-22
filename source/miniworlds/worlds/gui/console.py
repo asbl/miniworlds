@@ -33,7 +33,6 @@ class Console(toolbar.Toolbar):
         """
         super().__init__()
         self.max_lines = 2
-        self.text_size = 13
         self.row_margin = 5
 
     def newline(self, text) -> "label.Label":
