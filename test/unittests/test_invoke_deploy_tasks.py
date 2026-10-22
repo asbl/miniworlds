@@ -23,6 +23,7 @@ def test_deploy_push_runs_tests_before_pushing(monkeypatch):
     events = []
     _patch_branches(monkeypatch)
     monkeypatch.setattr(tasks, "tests_run", lambda c: events.append("tests"))
+    monkeypatch.setattr(tasks, "docs_l10n_check", lambda c: events.append("l10n"))
     monkeypatch.setattr(
         tasks,
         "_push_repositories",
@@ -33,13 +34,14 @@ def test_deploy_push_runs_tests_before_pushing(monkeypatch):
 
     tasks.deploy_push.body(DummyContext(), tags=True)
 
-    assert events == ["tests", ("push", "main", "physics-main", True)]
+    assert events == ["tests", "l10n", ("push", "main", "physics-main", True)]
 
 
 def test_deploy_push_can_skip_tests_explicitly(monkeypatch):
     events = []
     _patch_branches(monkeypatch)
     monkeypatch.setattr(tasks, "tests_run", lambda c: events.append("tests"))
+    monkeypatch.setattr(tasks, "docs_l10n_check", lambda c: events.append("l10n"))
     monkeypatch.setattr(
         tasks,
         "_push_repositories",
@@ -48,7 +50,29 @@ def test_deploy_push_can_skip_tests_explicitly(monkeypatch):
 
     tasks.deploy_push.body(DummyContext(), skip_tests=True)
 
-    assert events == ["push"]
+    assert events == ["l10n", "push"]
+
+
+def test_deploy_push_does_not_push_when_l10n_check_fails(monkeypatch):
+    events = []
+    _patch_branches(monkeypatch)
+    monkeypatch.setattr(tasks, "tests_run", lambda c: events.append("tests"))
+
+    def fail_l10n(c):
+        events.append("l10n")
+        raise RuntimeError("l10n failed")
+
+    monkeypatch.setattr(tasks, "docs_l10n_check", fail_l10n)
+    monkeypatch.setattr(
+        tasks,
+        "_push_repositories",
+        lambda c, main_branch, physics_branch, tags: events.append("push"),
+    )
+
+    with pytest.raises(RuntimeError, match="l10n failed"):
+        tasks.deploy_push.body(DummyContext())
+
+    assert events == ["tests", "l10n"]
 
 
 def test_deploy_push_does_not_push_when_tests_fail(monkeypatch):
@@ -99,6 +123,7 @@ def test_deploy_release_runs_tests_before_git_mutations(monkeypatch):
     monkeypatch.setattr(tasks, "_repo_status", lambda c, repo_path: "")
     monkeypatch.setattr(tasks, "_git_stdout", lambda c, repo_path, command: "")
     monkeypatch.setattr(tasks, "tests_run", lambda c: events.append("tests"))
+    monkeypatch.setattr(tasks, "docs_l10n_check", lambda c: events.append("l10n"))
     monkeypatch.setattr(tasks, "_create_github_release", lambda c, tag_name: None)
     monkeypatch.setattr(
         tasks,
@@ -118,6 +143,7 @@ def test_deploy_release_runs_tests_before_git_mutations(monkeypatch):
         "tests",
     ]
     assert events.index("tests") < git_index
+    assert events.index("l10n") < git_index
 
 
 def test_deploy_release_creates_github_release_after_pushing_main_tag(monkeypatch):
@@ -128,6 +154,7 @@ def test_deploy_release_creates_github_release_after_pushing_main_tag(monkeypatc
     monkeypatch.setattr(tasks, "_repo_status", lambda c, repo_path: "")
     monkeypatch.setattr(tasks, "_git_stdout", lambda c, repo_path, command: "")
     monkeypatch.setattr(tasks, "tests_run", lambda c: None)
+    monkeypatch.setattr(tasks, "docs_l10n_check", lambda c: None)
     monkeypatch.setattr(
         tasks,
         "_git",
