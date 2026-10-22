@@ -670,6 +670,7 @@ def deploy_release(
 
     try:
         _run_deploy_tests(c, skip_tests)
+        docs_l10n_check(c)
     except BaseException:
         _write_version(MAIN_PROJECT_PATH, current_main_version)
         _write_version(PHYSICS_SETUP_PATH, current_physics_version)
@@ -707,7 +708,8 @@ def deploy_push(c, tags=False, skip_tests=False, dry_run=False):
     If the main repository branch is ``main``, the docs workflow runs after the
     branch push. PyPI publication only happens when tags are pushed as well.
     A full Docker test run is performed before pushing unless ``--skip-tests``
-    is passed.
+    is passed, and the locale catalogs are checked so the docs workflow
+    cannot fail on missing translations after the push.
     """
     main_branch = _current_branch(c, REPO_ROOT, "Main")
     physics_branch = _current_branch(c, PHYSICS_REPO, "Physics")
@@ -725,6 +727,7 @@ def deploy_push(c, tags=False, skip_tests=False, dry_run=False):
         return
 
     _run_deploy_tests(c, skip_tests)
+    docs_l10n_check(c)
     _push_repositories(c, main_branch, physics_branch, tags=tags)
 
 @task(name="run")
@@ -891,6 +894,24 @@ def benchmarks_single(c, name, rebuild=False):
     run_python_scripts_in_container(c, scripts, rebuild=rebuild)
 
 
+def _docs_tool_env() -> dict:
+    return {
+        **os.environ,
+        "PATH": os.environ.get("PATH")
+        or "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "SDL_AUDIODRIVER": "dummy",
+        "SDL_VIDEODRIVER": "dummy",
+        "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+    }
+
+
+def _docs_tool_paths() -> tuple:
+    return (
+        shutil.which("sphinx-build", path=VENV_BIN) or "sphinx-build",
+        shutil.which("sphinx-intl", path=VENV_BIN) or "sphinx-intl",
+    )
+
+
 @task(name="docs")
 def docs_build(c):
     """Build the multilingual Sphinx documentation locally.
@@ -901,16 +922,8 @@ def docs_build(c):
     """
     with c.cd("docs"):
         build_dir = "build"
-        sphinx_build = shutil.which("sphinx-build", path=VENV_BIN) or "sphinx-build"
-        sphinx_intl = shutil.which("sphinx-intl", path=VENV_BIN) or "sphinx-intl"
-        docs_env = {
-            **os.environ,
-            "PATH": os.environ.get("PATH")
-            or "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-            "SDL_AUDIODRIVER": "dummy",
-            "SDL_VIDEODRIVER": "dummy",
-            "PYGAME_HIDE_SUPPORT_PROMPT": "1",
-        }
+        sphinx_build, sphinx_intl = _docs_tool_paths()
+        docs_env = _docs_tool_env()
 
         if os.path.exists(build_dir):
             shutil.rmtree(build_dir)
@@ -968,6 +981,83 @@ def docs_check(c):
                 f"{html_path} still contains untranslated API text: "
                 + ", ".join(matches)
             )
+
+
+@task(name="l10n-check")
+def docs_l10n_check(c):
+    """Refresh locale catalogs and fail if priority API translations are missing.
+
+    Rebuilds the gettext templates and updates the ``.po`` catalogs exactly
+    like ``build.docs`` does in the docs workflow, then fails if a German
+    priority API catalog contains untranslated messages. Run this after
+    changing docstrings or ``docs/source`` pages: it catches missing
+    translations before a push turns the docs workflow red.
+
+    On failure the refreshed catalogs are left in place so the new messages
+    can be translated and committed. On success the catalogs are restored if
+    the working tree was clean before the check, so only timestamp churn from
+    the regeneration is discarded.
+    """
+    from babel.messages.pofile import read_po
+
+    sphinx_build, sphinx_intl = _docs_tool_paths()
+    for tool in (sphinx_build, sphinx_intl):
+        if shutil.which(tool) is None:
+            raise Exit(
+                f"{tool} not found. Install the docs toolchain first: "
+                "pip install -r requirements-docs.txt"
+            )
+
+    locales_path = "docs/source/locales"
+    was_clean = not _git_stdout(c, REPO_ROOT, f"status --short -- {locales_path}")
+
+    with c.cd("docs"):
+        c.run(
+            f"{sphinx_build} -b gettext source build/gettext",
+            env=_docs_tool_env(),
+            shell="/bin/bash",
+        )
+        c.run(
+            f"{sphinx_intl} update -j 1 -p build/gettext -l en -l de",
+            shell="/bin/bash",
+        )
+
+    problems = []
+    for page in DOCS_PRIORITY_API_PAGES:
+        po_path = (
+            Path("docs") / "source" / "locales" / "de" / "LC_MESSAGES" / "api" / f"{page}.po"
+        )
+        if not po_path.exists():
+            problems.append(f"Missing German API catalog: {po_path}")
+            continue
+        with po_path.open(encoding="utf-8") as handle:
+            catalog = read_po(handle)
+        untranslated = [
+            message.id
+            for message in catalog
+            if message.id and not message.string
+        ]
+        if untranslated:
+            problems.append(
+                f"{po_path}: {len(untranslated)} untranslated message(s), "
+                f"e.g. {untranslated[0]!r}"
+            )
+        fuzzy_count = sum(1 for message in catalog if message.id and message.fuzzy)
+        if fuzzy_count:
+            print(
+                f"Warning: {po_path}: {fuzzy_count} fuzzy message(s) "
+                "currently render as English in the German docs"
+            )
+
+    if problems:
+        raise Exit(
+            "Locale catalogs are out of date. The refreshed catalogs are in "
+            f"{locales_path}: translate the new German messages and commit "
+            "them, then run this check again. Problems: " + "; ".join(problems)
+        )
+
+    if was_clean:
+        _git(c, REPO_ROOT, f"checkout -- {locales_path}")
 
 
 @task(name="examples")
@@ -1122,6 +1212,7 @@ examples.add_task(examples_checkout, default=True)
 docs = Collection("docs")
 docs.add_task(docs_generate_example_tests, default=True)
 docs.add_task(docs_check)
+docs.add_task(docs_l10n_check)
 docs.add_task(docs_test_examples)
 
 ns = Collection()
@@ -1164,6 +1255,7 @@ ns.add_task(build_data, name="build_data")
 ns.add_task(docs_build, name="make_docs")
 ns.add_task(docs_build, name="docs_build")
 ns.add_task(docs_check, name="check_docs")
+ns.add_task(docs_l10n_check, name="check_docs_l10n")
 ns.add_task(docs_generate_example_tests, name="generate_doc_example_tests")
 ns.add_task(docs_test_examples, name="test_doc_examples")
 ns.add_task(examples_checkout, name="checkout_examples")

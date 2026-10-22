@@ -50,6 +50,7 @@ Task categories in [tasks.py](tasks.py):
 - `tests.*`: Docker-based validation tasks
 - `benchmarks.*`: benchmark and profiling scripts
 - `build.docs`: local Sphinx build
+- `docs.l10n-check`: locale catalog freshness and translation gate
 - `build.image`: rebuild the shared Docker image for tests and benchmarks
 - `deploy.push`: normal branch push workflow, optional with tags
 - `deploy.release`: version bump, commit, tag, and optional
@@ -67,6 +68,19 @@ Build the documentation locally:
 ```sh
 invoke build.docs
 ```
+
+Check that the German locale catalogs are complete before pushing:
+
+```sh
+invoke docs.l10n-check
+```
+
+The check regenerates the catalogs the same way the docs workflow does and
+fails if a priority API page has untranslated messages. `deploy.push` and
+`deploy.release` run it automatically before pushing. When you change
+docstrings or `docs/source` pages, new messages usually appear in
+`docs/source/locales/de/LC_MESSAGES`: translate them and commit the updated
+catalogs, otherwise the docs deploy workflow fails after the push.
 
 Create a release or preview it first:
 
