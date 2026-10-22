@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 19:35+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: 2026-10-21 20:10+0200\n"
 "Last-Translator: Andreas Siebel\n"
 "Language: de\n"
@@ -28,9 +28,9 @@ msgid ""
 "Hexagonal worlds are used for board games like *Catan*: land hexes, "
 "settlements on corners, and roads on edges."
 msgstr ""
-"In diesem Tutorial baust du Schritt für Schritt eine Welt aus "
-"Sechsecken. Sechseckige Welten werden für Brettspiele wie *Catan* "
-"verwendet: Landhexfelder, Siedlungen auf Ecken und Straßen auf Kanten."
+"In diesem Tutorial baust du Schritt für Schritt eine Welt aus Sechsecken."
+" Sechseckige Welten werden für Brettspiele wie *Catan* verwendet: "
+"Landhexfelder, Siedlungen auf Ecken und Straßen auf Kanten."
 
 #: ../../source/tutorial/hex_world.md:7
 msgid ""
@@ -38,8 +38,8 @@ msgid ""
 "erste Welt](https://github.com/copilotstudent/course-"
 "sync/tree/main/courses/miniworlds_examples) in the interactive course."
 msgstr ""
-"Wenn du noch nie mit Welten gearbeitet hast, beginne mit dem Kapitel "
-"[Die erste Welt](https://github.com/copilotstudent/course-"
+"Wenn du noch nie mit Welten gearbeitet hast, beginne mit dem Kapitel [Die"
+" erste Welt](https://github.com/copilotstudent/course-"
 "sync/tree/main/courses/miniworlds_examples) im interaktiven Kurs."
 
 #: ../../source/tutorial/hex_world.md:11
@@ -81,8 +81,8 @@ msgid ""
 "`tile.get_neighbour_tiles()` returns the up to six neighboring hexes."
 msgstr ""
 "`world.get_tile(position)` gibt ein einzelnes Hexfeld zurück. "
-"`tile.get_neighbour_tiles()` gibt die bis zu sechs benachbarten "
-"Hexfelder zurück."
+"`tile.get_neighbour_tiles()` gibt die bis zu sechs benachbarten Hexfelder"
+" zurück."
 
 #: ../../source/tutorial/hex_world.md:51
 msgid "The example colors the center hex and all its neighbors:"
@@ -91,16 +91,36 @@ msgstr "Das Beispiel färbt das zentrale Hexfeld und alle seine Nachbarn:"
 #: ../../source/tutorial/hex_world.md:70
 msgid ""
 "`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
-"given hex distance."
+"given hex distance, ordered from the center outwards. "
+"`world.get_tiles_in_ring(position, radius)` returns only the hexes at "
+"exactly the given distance, in ring traversal order."
 msgstr ""
-"`world.get_tiles_in_radius(position, radius)` gibt alle Hexfelder "
-"innerhalb einer bestimmten Hex-Distanz zurück."
-
-#: ../../source/tutorial/hex_world.md:73
-msgid "Step 4: React to clicks"
-msgstr "Schritt 4: Auf Klicks reagieren"
 
 #: ../../source/tutorial/hex_world.md:75
+#, fuzzy
+msgid "Step 4: Move actors from hex to hex"
+msgstr "Schritt 2: Actors auf Hexfeldern platzieren"
+
+#: ../../source/tutorial/hex_world.md:77
+msgid ""
+"Actors move from hex to hex with the six hex directions `\"no\"`, "
+"`\"o\"`, `\"so\"`, `\"sw\"`, `\"w\"`, and `\"nw\"`:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:97
+msgid ""
+"Every `move_in_direction` call moves the actor exactly one hex, "
+"independent of the row parity. The directions can also be given as "
+"degrees: `\"no\"` is 30, `\"o\"` is 90, `\"so\"` is 150, `\"sw\"` is 210,"
+" `\"w\"` is 270, and `\"nw\"` is 330."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:102
+#, fuzzy
+msgid "Step 5: React to clicks"
+msgstr "Schritt 4: Auf Klicks reagieren"
+
+#: ../../source/tutorial/hex_world.md:104
 msgid ""
 "With `@world.register` you can react to mouse clicks. "
 "`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:"
@@ -109,21 +129,25 @@ msgstr ""
 "`world.get_tile_from_pixel(mouse_pos)` gibt das Hexfeld unter der Maus "
 "zurück:"
 
-#: ../../source/tutorial/hex_world.md:93
-msgid "Step 5: Settlements and roads"
+#: ../../source/tutorial/hex_world.md:122
+#, fuzzy
+msgid "Step 6: Settlements and roads"
 msgstr "Schritt 5: Siedlungen und Straßen"
 
-#: ../../source/tutorial/hex_world.md:95
+#: ../../source/tutorial/hex_world.md:124
+#, fuzzy
 msgid ""
 "Corners and edges are positions, too. "
 "`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner, "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge."
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. Both return "
+"`None` if the pixel is outside the world, for example when a toolbar or "
+"console is attached to the world."
 msgstr ""
 "Auch Ecken und Kanten sind Positionen. "
 "`world.get_corner_from_pixel(mouse_pos)` gibt die nächstgelegene Ecke "
 "zurück, `world.get_edge_from_pixel(mouse_pos)` die nächstgelegene Kante."
 
-#: ../../source/tutorial/hex_world.md:99
+#: ../../source/tutorial/hex_world.md:130
 msgid ""
 "A left click places a settlement (small circle) on a corner, a right "
 "click places a road (small rectangle) on an edge:"
@@ -131,32 +155,43 @@ msgstr ""
 "Ein Linksklick platziert eine Siedlung (kleiner Kreis) auf einer Ecke, "
 "ein Rechtsklick eine Straße (kleines Rechteck) auf einer Kante:"
 
-#: ../../source/tutorial/hex_world.md:125
-msgid "Step 6: A mini-Catan board"
+#: ../../source/tutorial/hex_world.md:156
+#, fuzzy
+msgid "Step 7: A mini-Catan board"
 msgstr "Schritt 6: Ein Mini-Catan-Brett"
 
-#: ../../source/tutorial/hex_world.md:127
+#: ../../source/tutorial/hex_world.md:158
 msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
 msgstr ""
-"Ein Catan-Brett hat 19 Landhexfelder, angeordnet in Zeilen aus 3, 4, 5, "
-"4 und 3 Hexfeldern:"
+"Ein Catan-Brett hat 19 Landhexfelder, angeordnet in Zeilen aus 3, 4, 5, 4"
+" und 3 Hexfeldern:"
 
-#: ../../source/tutorial/hex_world.md:159
+#: ../../source/tutorial/hex_world.md:190
 msgid ""
 "From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
 "Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
 " resources, and trading are not part of the framework — they belong in "
 "your game code."
 msgstr ""
-"Von hier aus kannst du im Pattern [Hex-Welten und ein Mini-Catan-Brett]"
-"(../patterns/hex_world_catan.md) weitermachen und eigene Spielregeln "
-"ergänzen: Würfel, Rohstoffe und Handel sind nicht Teil des Frameworks — "
-"sie gehören in deinen Spielcode."
+"Von hier aus kannst du im Pattern [Hex-Welten und ein Mini-Catan-"
+"Brett](../patterns/hex_world_catan.md) weitermachen und eigene "
+"Spielregeln ergänzen: Würfel, Rohstoffe und Handel sind nicht Teil des "
+"Frameworks — sie gehören in deinen Spielcode."
 
-#: ../../source/tutorial/hex_world.md:164
+#: ../../source/tutorial/hex_world.md:195
 msgid ""
 "The full interface is documented in the [HexWorld API "
 "reference](../api/world_hex.md)."
 msgstr ""
-"Die vollständige Schnittstelle ist in der [HexWorld-API-Referenz]"
-"(../api/world_hex.md) dokumentiert."
+"Die vollständige Schnittstelle ist in der [HexWorld-API-"
+"Referenz](../api/world_hex.md) dokumentiert."
+
+#~ msgid ""
+#~ "`world.get_tiles_in_radius(position, radius)` returns "
+#~ "all hexes within a given hex "
+#~ "distance."
+#~ msgstr ""
+#~ "`world.get_tiles_in_radius(position, radius)` gibt "
+#~ "alle Hexfelder innerhalb einer bestimmten "
+#~ "Hex-Distanz zurück."
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 13:05+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -437,8 +437,8 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.is_rotatable
 #: miniworlds.actors.actor.Actor.last_position
 #: miniworlds.actors.actor.Actor.local_center
-#: miniworlds.actors.actor.Actor.orientation miniworlds.actors.actor.Actor.size
-#: miniworlds.actors.actor.Actor.topleft
+#: miniworlds.actors.actor.Actor.mask miniworlds.actors.actor.Actor.orientation
+#: miniworlds.actors.actor.Actor.size miniworlds.actors.actor.Actor.topleft
 #: miniworlds.actors.actor.Actor.topleft_x
 #: miniworlds.actors.actor.Actor.topleft_y miniworlds.actors.actor.Actor.width
 #: miniworlds.actors.actor.Actor.x miniworlds.actors.actor.Actor.y of
@@ -941,6 +941,20 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.local_center:1 of
 msgid "Actor center in camera-local coordinates."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.mask:1 of
+msgid "Collision mask for `collision_type = \"mask\"`."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.mask:3 of
+msgid ""
+"The mask is rebuilt lazily from the current image the first time it is "
+"accessed after a costume change, instead of on every `set_dirty` call."
+msgstr ""
+
+#: miniworlds.actors.actor.Actor.mask:7 of
+msgid "pygame.mask.Mask"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.move:1 of

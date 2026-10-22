@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -25,9 +25,9 @@ msgstr ""
 
 #: ../../source/api/world_manager_camera.md:3
 msgid ""
-"Besides scrolling and coordinate conversion, `world.camera` also offers the "
-"public helper methods `add_right(...)`, `add_bottom(...)`, "
-"`remove_world(...)`, and `switch_world(...)`."
+"Besides scrolling and coordinate conversion, `world.camera` also offers "
+"the public helper methods `add_right(...)`, `add_left(...)`, "
+"`add_bottom(...)`, `remove_world(...)`, and `switch_world(...)`."
 msgstr ""
 
 #: ../../source/api/world_manager_camera.md:7
@@ -36,16 +36,16 @@ msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager:1 of
 msgid ""
-"CameraManager defines a movable viewport into a 2D world and tracks visible "
-"actors. It is accessed via `world.camera` and is responsible for view "
-"positioning, actor visibility, and coordinate transformations."
+"CameraManager defines a movable viewport into a 2D world and tracks "
+"visible actors. It is accessed via `world.camera` and is responsible for "
+"view positioning, actor visibility, and coordinate transformations."
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager:5 of
 msgid ""
-"For public API compatibility, docking and world-switching helpers are also "
-"exposed through `world.camera` and delegated internally to the layout "
-"manager."
+"For public API compatibility, docking and world-switching helpers are "
+"also exposed through `world.camera` and delegated internally to the "
+"layout manager."
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.add_bottom:1 of
@@ -64,10 +64,13 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.add_bottom:4
+#: miniworlds.worlds.manager.camera_manager.CameraManager.add_left:4
 #: miniworlds.worlds.manager.camera_manager.CameraManager.add_right:4 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.worlds.world.World\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\``"
+msgstr ""
+
+#: miniworlds.worlds.manager.camera_manager.CameraManager.add_left:1 of
+msgid "Dock a helper world to the left side of the current world."
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.add_right:1 of
@@ -101,8 +104,8 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_actors_in_view:2
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Set\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Set\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:1
@@ -113,8 +116,8 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:3
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\] \\| "
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\] \\| "
 "\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
@@ -153,8 +156,8 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_position:3
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]`"
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_local_position:5
@@ -174,8 +177,7 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:3
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_screen_rect:3
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_world_rect:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~pygame.rect.Rect\\``"
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_rect:5 of
@@ -270,3 +272,11 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.y:1 of
 msgid "Camera y-position (top-left corner in world coordinates)."
 msgstr ""
+
+#~ msgid ""
+#~ "Besides scrolling and coordinate conversion,"
+#~ " `world.camera` also offers the public "
+#~ "helper methods `add_right(...)`, `add_bottom(...)`,"
+#~ " `remove_world(...)`, and `switch_world(...)`."
+#~ msgstr ""
+

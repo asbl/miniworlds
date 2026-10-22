@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -79,6 +79,7 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.base.app.App.add_running_world:2
+#: miniworlds.base.app.App.register_run_check:10
 #: miniworlds.base.app.App.remove_running_world:2
 #: miniworlds.base.app.App.set_running_world:2 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
@@ -86,8 +87,8 @@ msgstr ""
 
 #: miniworlds.base.app.App.check_for_run_method:1 of
 msgid ""
-"Verifies that `.run()` is called in the user's main module. Prints a warning "
-"if it's not found (except in emscripten or notebooks)."
+"Verifies that `.run()` is called in the user's main module. Prints a "
+"warning if it's not found (except in emscripten or notebooks)."
 msgstr ""
 
 #: miniworlds.base.app.App.display_repaint:1 of
@@ -104,32 +105,30 @@ msgstr ""
 
 #: miniworlds.base.app.App.get_path:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`str\\` \\| \\:py\\:obj\\:"
-"\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`str\\` \\| "
+"\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.base.app.App.get_platform:2 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.base.platform.PlatformAdapter\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.platform.PlatformAdapter\\``"
 msgstr ""
 
 #: miniworlds.base.app.App.get_running_app:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.base.app.App\\` \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.app.App\\`"
+" \\| \\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.base.app.App.get_running_world:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.worlds.world.World\\` \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\`"
+" \\| \\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.base.app.App.get_window:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.base.window.Window\\` \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.window.Window\\`"
+" \\| \\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.base.app.App.init_app:1 of
@@ -154,6 +153,20 @@ msgstr ""
 
 #: miniworlds.base.app.App.register_path:3 of
 msgid "Path to the project directory."
+msgstr ""
+
+#: miniworlds.base.app.App.register_run_check:1 of
+msgid ""
+"Registers an exit hook that warns when a world was created but `run()` "
+"was never called."
+msgstr ""
+
+#: miniworlds.base.app.App.register_run_check:4 of
+msgid ""
+"The source-based check in `check_for_run_method()` cannot detect `run()` "
+"calls that are commented out or never reached. This hook runs after the "
+"program ends and reports if no mainloop ever started, so students learn "
+"why no window appeared."
 msgstr ""
 
 #: miniworlds.base.app.App.reset:1 of
@@ -195,3 +208,4 @@ msgstr ""
 #: miniworlds.base.app.App.start_mainloop:1 of
 msgid "Starts the main event loop."
 msgstr ""
+

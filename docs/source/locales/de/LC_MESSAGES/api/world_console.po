@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 13:05+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -44,7 +44,14 @@ msgid ""
 "`world.camera.add_right(console)`."
 msgstr ""
 
-#: miniworlds.worlds.gui.console.Console:8
+#: miniworlds.worlds.gui.console.Console:7 of
+msgid ""
+"Only the last ``max_lines`` lines are kept: when the console is full, the"
+" oldest line is removed, so the console's memory use stays constant even "
+"if `newline` is called every frame."
+msgstr ""
+
+#: miniworlds.worlds.gui.console.Console:12
 #: miniworlds.worlds.gui.console.Console.newline:13
 #: miniworlds.worlds.gui.pager.PagerHorizontal.act:10
 #: miniworlds.worlds.gui.pager.PagerHorizontal.on_setup:6 of
@@ -67,8 +74,8 @@ msgstr ""
 
 #: miniworlds.worlds.gui.console.Console.newline:3 of
 msgid ""
-"Each call adds one label row. Older lines scroll up when the console is "
-"full."
+"Each call adds one label row. When more than ``max_lines`` lines exist, "
+"the oldest line is removed and the remaining lines move up."
 msgstr ""
 
 #: miniworlds.worlds.gui.console.Console.newline of
@@ -79,6 +86,7 @@ msgstr ""
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.widgets.label.Label\\``"
 msgstr ""
 
+#: ../../source/api/world_console.md
 #: miniworlds.worlds.gui.console.Console.newline of
 msgid "Parameters"
 msgstr ""
@@ -97,6 +105,20 @@ msgstr ""
 
 #: ../../source/api/world_console.md:12
 msgid "PagerHorizontal"
+msgstr ""
+
+#: miniworlds.worlds.gui.pager.PagerHorizontal:1 of
+msgid "Toolbar with scroll buttons for another toolbar or console."
+msgstr ""
+
+#: miniworlds.worlds.gui.pager.PagerHorizontal:3 of
+msgid ""
+"The pager shows an up and a down button and toggles their visibility "
+"depending on whether the observed GUI can still scroll in that direction."
+msgstr ""
+
+#: miniworlds.worlds.gui.pager.PagerHorizontal:7 of
+msgid "The toolbar or console whose scroll range is controlled."
 msgstr ""
 
 #: miniworlds.worlds.gui.pager.PagerHorizontal.act:1 of
@@ -122,4 +144,10 @@ msgstr ""
 #: miniworlds.worlds.gui.pager.PagerHorizontal.on_setup:3 of
 msgid "Override this in subclasses or register a function with `@world.register`."
 msgstr ""
+
+#~ msgid ""
+#~ "Each call adds one label row. "
+#~ "Older lines scroll up when the "
+#~ "console is full."
+#~ msgstr ""
 

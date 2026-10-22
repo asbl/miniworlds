@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 19:35+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -76,45 +76,67 @@ msgstr ""
 #: ../../source/tutorial/hex_world.md:70
 msgid ""
 "`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
-"given hex distance."
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:73
-msgid "Step 4: React to clicks"
+"given hex distance, ordered from the center outwards. "
+"`world.get_tiles_in_ring(position, radius)` returns only the hexes at "
+"exactly the given distance, in ring traversal order."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:75
+msgid "Step 4: Move actors from hex to hex"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:77
+msgid ""
+"Actors move from hex to hex with the six hex directions `\"no\"`, "
+"`\"o\"`, `\"so\"`, `\"sw\"`, `\"w\"`, and `\"nw\"`:"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:97
+msgid ""
+"Every `move_in_direction` call moves the actor exactly one hex, "
+"independent of the row parity. The directions can also be given as "
+"degrees: `\"no\"` is 30, `\"o\"` is 90, `\"so\"` is 150, `\"sw\"` is 210,"
+" `\"w\"` is 270, and `\"nw\"` is 330."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:102
+msgid "Step 5: React to clicks"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:104
 msgid ""
 "With `@world.register` you can react to mouse clicks. "
 "`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:93
-msgid "Step 5: Settlements and roads"
+#: ../../source/tutorial/hex_world.md:122
+msgid "Step 6: Settlements and roads"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:95
+#: ../../source/tutorial/hex_world.md:124
 msgid ""
 "Corners and edges are positions, too. "
 "`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner, "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge."
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. Both return "
+"`None` if the pixel is outside the world, for example when a toolbar or "
+"console is attached to the world."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:99
+#: ../../source/tutorial/hex_world.md:130
 msgid ""
 "A left click places a settlement (small circle) on a corner, a right "
 "click places a road (small rectangle) on an edge:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:125
-msgid "Step 6: A mini-Catan board"
+#: ../../source/tutorial/hex_world.md:156
+msgid "Step 7: A mini-Catan board"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:127
+#: ../../source/tutorial/hex_world.md:158
 msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:159
+#: ../../source/tutorial/hex_world.md:190
 msgid ""
 "From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
 "Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
@@ -122,9 +144,31 @@ msgid ""
 "your game code."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:164
+#: ../../source/tutorial/hex_world.md:195
 msgid ""
 "The full interface is documented in the [HexWorld API "
 "reference](../api/world_hex.md)."
 msgstr ""
+
+#~ msgid ""
+#~ "`world.get_tiles_in_radius(position, radius)` returns "
+#~ "all hexes within a given hex "
+#~ "distance."
+#~ msgstr ""
+
+#~ msgid "Step 4: React to clicks"
+#~ msgstr ""
+
+#~ msgid "Step 5: Settlements and roads"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Corners and edges are positions, too."
+#~ " `world.get_corner_from_pixel(mouse_pos)` returns the"
+#~ " nearest corner, `world.get_edge_from_pixel(mouse_pos)`"
+#~ " the nearest edge."
+#~ msgstr ""
+
+#~ msgid "Step 6: A mini-Catan board"
+#~ msgstr ""
 

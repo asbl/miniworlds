@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -25,14 +25,15 @@ msgstr ""
 
 #: ../../source/api/world_toolbar.md:3
 msgid ""
-"Toolbars are regular worlds that are usually docked beside the main world "
-"with `world.camera.add_right(toolbar)` or `world.camera.add_bottom(toolbar)`."
+"Toolbars are regular worlds that are usually docked beside the main world"
+" with `world.camera.add_right(toolbar)` or "
+"`world.camera.add_bottom(toolbar)`."
 msgstr ""
 
 #: ../../source/api/world_toolbar.md:5
 msgid ""
-"They are especially useful together with buttons, because the active world "
-"can react to toolbar actions in `on_message`."
+"They are especially useful together with buttons, because the active "
+"world can react to toolbar actions in `on_message`."
 msgstr ""
 
 #: ../../source/api/world_toolbar.md:7
@@ -47,15 +48,15 @@ msgstr ""
 msgid ""
 "Toolbars are usually docked beside the main world using "
 "`world.camera.add_right(toolbar)` or `world.camera.add_bottom(toolbar)`. "
-"Widgets are added with `toolbar.add(widget)` (or by simply creating them - "
-"they register themselves automatically when their world is set to the "
+"Widgets are added with `toolbar.add(widget)` (or by simply creating them "
+"- they register themselves automatically when their world is set to the "
 "toolbar)."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar:8 of
 msgid ""
-"When a button inside a toolbar is clicked it broadcasts its label text as a "
-"message. The main world responds via `on_message`."
+"When a button inside a toolbar is clicked it broadcasts its label text as"
+" a message. The main world responds via `on_message`."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar:12
@@ -120,13 +121,11 @@ msgid "Gets widget by key"
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.actors.widgets.widget\\_base.BaseWidget\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.widgets.widget\\_base.BaseWidget\\``"
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:5 of
-msgid "The key of the widget."
+msgid "The key of the widget (integer auto key or custom string key)."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.get_widget:7 of
@@ -146,7 +145,7 @@ msgid "Checks whether the toolbar contains a widget under *key*."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:3 of
-msgid "The widget key."
+msgid "The widget key (integer auto key or custom string key)."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.has_widget:5 of
@@ -169,11 +168,19 @@ msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:3 of
 msgid ""
-"Widget actors are registered in the internal widget list and then resized/"
-"reordered so the layout stays consistent."
+"Widget actors are registered in the internal widget list and then "
+"resized/reordered so the layout stays consistent."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:6 of
+msgid ""
+"A widget that is already registered is not registered again: a world "
+"transfer can remove and re-add a widget in the same toolbar, and a "
+"duplicate entry would render the widget twice and inflate the computed "
+"toolbar height."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_new_actor:11 of
 msgid "The actor that has been added."
 msgstr ""
 
@@ -182,6 +189,13 @@ msgid "Handles actors that are removed from this toolbar world."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor:3 of
+msgid ""
+"Widgets can also be removed directly via ``widget.remove()`` (not only "
+"through ``Toolbar.remove()``); this keeps the internal widget list "
+"consistent in that case."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.on_remove_actor:7 of
 msgid "The actor that has been removed."
 msgstr ""
 
@@ -205,14 +219,28 @@ msgstr ""
 msgid "Removes a widget from the toolbar."
 msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.remove:4 of
-msgid "Be careful when calling this inside a loop over ``self.widgets``."
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:3 of
+msgid ""
+"The widget is also removed from the toolbar world, so it is no longer "
+"rendered and no longer receives events. The camera is clamped to the "
+"remaining content, so the view does not stay scrolled past the removed "
+"widget."
 msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.remove:6 of
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:8 of
 msgid ""
-"The widget to remove – either the widget object itself, its integer index, "
-"or its string key."
+"The widget to remove – either the widget object itself, its integer "
+"index, or its string key."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:11 of
+msgid ""
+"True if the widget was removed, False if no matching widget or key was "
+"found."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.remove:16 of
+msgid "Be careful when calling this inside a loop over ``self.widgets``."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.remove_all_widgets:1 of
@@ -220,7 +248,10 @@ msgid "Removes all widgets from the toolbar at once."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.remove_all_widgets:3 of
-msgid "Use this when rebuilding a menu or replacing all controls."
+msgid ""
+"The widgets are also removed from the toolbar world. Use this when "
+"rebuilding a menu or replacing all controls. The camera is reset to the "
+"top of the (now empty) toolbar."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.reorder:1 of
@@ -252,8 +283,8 @@ msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.send_message:3 of
 msgid ""
-"The message is dispatched through the event system and can be handled by any "
-"registered method in the world or its actors."
+"The message is dispatched through the event system and can be handled by "
+"any registered method in the world or its actors."
 msgstr ""
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.send_message:6 of
@@ -268,10 +299,18 @@ msgstr ""
 msgid "Example"
 msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.update_width_and_height:1 of
-msgid "Updates cached toolbar dimensions after a layout change."
-msgstr ""
+#~ msgid "The key of the widget."
+#~ msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.update_width_and_height:3 of
-msgid "This hook is used internally when docking or resizing the toolbar."
-msgstr ""
+#~ msgid "The widget key."
+#~ msgstr ""
+
+#~ msgid "Use this when rebuilding a menu or replacing all controls."
+#~ msgstr ""
+
+#~ msgid "Updates cached toolbar dimensions after a layout change."
+#~ msgstr ""
+
+#~ msgid "This hook is used internally when docking or resizing the toolbar."
+#~ msgstr ""
+

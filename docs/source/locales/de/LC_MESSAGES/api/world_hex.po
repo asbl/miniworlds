@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 19:30+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -42,13 +42,14 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:8
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:8
 #: miniworlds.worlds.hex_world.hex_world.HexWorld:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:8
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:11
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:9
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:11
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:9
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:8
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:11
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:12
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:12
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:10 of
 msgid "Examples"
 msgstr ""
@@ -60,6 +61,7 @@ msgstr ""
 #: ../../source/api/world_hex.md
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
@@ -85,6 +87,34 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:6 of
 msgid "If `True`, tiles, edges, and corners are not created automatically."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:1 of
+msgid "Return all actors on the hex tile under a screen pixel."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
+msgid "Pixel position as `(x, y)`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:5 of
+msgid "Actors located on the hex tile under the pixel."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_center_points:1 of
@@ -120,17 +150,6 @@ msgstr ""
 msgid "Optional corner direction, e.g. `\"no\"`."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel of
-msgid "Returns"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:6 of
 msgid "The matching corner."
 msgstr ""
@@ -148,15 +167,8 @@ msgstr ""
 msgid "Return the corner nearest to a screen pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
-msgid "Pixel position as `(x, y)`."
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:5 of
-msgid "The nearest corner."
+msgid "The nearest corner, or `None` if the pixel is outside the world."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:1 of
@@ -184,7 +196,7 @@ msgid "Return the edge nearest to a screen pixel."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:5 of
-msgid "The nearest edge."
+msgid "The nearest edge, or `None` if the pixel is outside the world."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:1 of
@@ -199,6 +211,8 @@ msgstr ""
 msgid "Return all tiles within a hex distance of `radius`."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:8
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:8
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:4
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:3
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:3 of
@@ -218,7 +232,9 @@ msgid "Maximum hex distance (0 includes only the tile itself)."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:8 of
-msgid "List of tiles within the radius, including the tile itself."
+msgid ""
+"List of tiles within the radius, including the tile itself, ordered from "
+"the center outwards in ring traversal order."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:1 of
@@ -230,7 +246,9 @@ msgid "Hex distance."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:8 of
-msgid "List of tiles at the given distance."
+msgid ""
+"List of tiles at the given distance, in ring traversal order starting at "
+"the westernmost hex of the ring."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:1 of
@@ -367,6 +385,17 @@ msgstr ""
 msgid "Create a tile delimiter (override expected)."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:1 of
+msgid "Return the up to three hexes that share this corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:3 of
+msgid ""
+"The hexes are derived from the merged corner references, so no tile has "
+"to exist for every reference: references to positions outside the world "
+"are skipped."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:1
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:1 of
 msgid "Override: starting angle offset for layouting (e.g. hex rotation)."
@@ -392,7 +421,30 @@ msgid ""
 "world is built."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:1 of
+msgid "Return the up to two hexes that share this edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:3 of
+msgid ""
+"The hexes are derived from the merged edge references, so no tile has to "
+"exist for every reference: references to positions outside the world are "
+"skipped."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge.to_pixel:1 of
 msgid "Return the pixel position of the edge center."
 msgstr ""
+
+#~ msgid "The nearest corner."
+#~ msgstr ""
+
+#~ msgid "The nearest edge."
+#~ msgstr ""
+
+#~ msgid "List of tiles within the radius, including the tile itself."
+#~ msgstr ""
+
+#~ msgid "List of tiles at the given distance."
+#~ msgstr ""
 

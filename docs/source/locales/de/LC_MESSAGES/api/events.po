@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -25,8 +25,8 @@ msgstr ""
 
 #: ../../source/api/events.md:3
 msgid ""
-"Events are methods that Miniworlds calls automatically. Register them on a "
-"`World` or an `Actor` with the `@...register` decorator."
+"Events are methods that Miniworlds calls automatically. Register them on "
+"a `World` or an `Actor` with the `@...register` decorator."
 msgstr ""
 
 #: ../../source/api/events.md:6
@@ -48,8 +48,7 @@ msgid "Use a specific key handler when you only care about one key:"
 msgstr ""
 
 #: ../../source/api/events.md:35
-msgid ""
-"Use a generic handler when you need to inspect the currently pressed keys:"
+msgid "Use a generic handler when you need to inspect the currently pressed keys:"
 msgstr ""
 
 #: ../../source/api/events.md:46
@@ -74,140 +73,148 @@ msgid ""
 "`on_key_up_<key>(self)`: key-specific handlers without a `keys` parameter"
 msgstr ""
 
-#: ../../source/api/events.md:54
+#: ../../source/api/events.md:53
 msgid ""
-"Common key names include `w`, `a`, `s`, `d`, `space`, `left`, `right`, `up`, "
-"and `down`."
+"`on_text_input(self, text)`: composed text (including umlauts and "
+"spaces); use this for text entry, e.g. inside an `Input` widget"
 msgstr ""
 
-#: ../../source/api/events.md:57
+#: ../../source/api/events.md:56
+msgid ""
+"Common key names include `w`, `a`, `s`, `d`, `space`, `left`, `right`, "
+"`up`, and `down`."
+msgstr ""
+
+#: ../../source/api/events.md:59
 msgid "Mouse"
 msgstr ""
 
-#: ../../source/api/events.md:70
+#: ../../source/api/events.md:72
 msgid "Mouse events:"
 msgstr ""
 
-#: ../../source/api/events.md:72
+#: ../../source/api/events.md:74
 msgid ""
 "`on_mouse_left(self, position)`, `on_mouse_right(self, position)`, "
 "`on_mouse_middle(self, position)`: while a button is held"
 msgstr ""
 
-#: ../../source/api/events.md:74
+#: ../../source/api/events.md:76
 msgid ""
-"`on_mouse_left_down(self, position)`, `on_mouse_left_up(self, position)`: "
-"press and release events"
+"`on_mouse_left_down(self, position)`, `on_mouse_left_up(self, position)`:"
+" press and release events"
 msgstr ""
 
-#: ../../source/api/events.md:76
+#: ../../source/api/events.md:78
 msgid "`on_mouse_motion(self, position)`: mouse movement"
 msgstr ""
 
-#: ../../source/api/events.md:77
+#: ../../source/api/events.md:79
 msgid ""
 "`on_clicked(self, position)`, `on_clicked_left(self, position)`, "
 "`on_clicked_right(self, position)`: actor click events"
 msgstr ""
 
-#: ../../source/api/events.md:79
+#: ../../source/api/events.md:81
 msgid ""
 "`on_mouse_over(self, position)`, `on_mouse_enter(self, position)`, "
 "`on_mouse_leave(self, position)`: actor hover events"
 msgstr ""
 
-#: ../../source/api/events.md:81
+#: ../../source/api/events.md:83
 msgid ""
-"`on_wheel_up(self, position)`, `on_wheel_down(self, position)`: mouse wheel"
+"`on_wheel_up(self, position)`, `on_wheel_down(self, position)`: mouse "
+"wheel"
 msgstr ""
 
-#: ../../source/api/events.md:83
+#: ../../source/api/events.md:85
 msgid "Sensors And Borders"
 msgstr ""
 
-#: ../../source/api/events.md:95
+#: ../../source/api/events.md:97
 msgid "Sensor and collision events:"
 msgstr ""
 
-#: ../../source/api/events.md:97
+#: ../../source/api/events.md:99
 msgid "`on_detecting(self, other)`: any detected actor"
 msgstr ""
 
-#: ../../source/api/events.md:98
+#: ../../source/api/events.md:100
 msgid "`on_detecting_actor(self, other)`: any actor on the same position"
 msgstr ""
 
-#: ../../source/api/events.md:99
+#: ../../source/api/events.md:101
 msgid ""
 "`on_detecting_<ClassName>(self, other)`: actors of a specific class, for "
 "example `on_detecting_wall`"
 msgstr ""
 
-#: ../../source/api/events.md:101
+#: ../../source/api/events.md:103
 msgid "`on_not_detecting(self)`: no actor detected"
 msgstr ""
 
-#: ../../source/api/events.md:102
+#: ../../source/api/events.md:104
 msgid "`on_not_detecting_<ClassName>(self)`: no actor of that class detected"
 msgstr ""
 
-#: ../../source/api/events.md:103
+#: ../../source/api/events.md:105
 msgid "`on_detecting_world(self)`: actor is inside the world"
 msgstr ""
 
-#: ../../source/api/events.md:104
+#: ../../source/api/events.md:106
 msgid "`on_not_detecting_world(self)`: actor is outside the world"
 msgstr ""
 
-#: ../../source/api/events.md:105
+#: ../../source/api/events.md:107
 msgid "`on_detecting_not_on_world(self)`: alias for `on_not_detecting_world`"
 msgstr ""
 
-#: ../../source/api/events.md:106
-msgid ""
-"`on_detecting_borders(self, borders)`: receives a list like `[\"left\"]`"
+#: ../../source/api/events.md:108
+msgid "`on_detecting_borders(self, borders)`: receives a list like `[\"left\"]`"
 msgstr ""
 
-#: ../../source/api/events.md:107
+#: ../../source/api/events.md:109
 msgid ""
 "`on_detecting_left_border(self)`, `on_detecting_right_border(self)`, "
 "`on_detecting_top_border(self)`, `on_detecting_bottom_border(self)`"
 msgstr ""
 
-#: ../../source/api/events.md:110
-msgid ""
-"Both `on_not_detecting_world` and `on_detecting_not_on_world` are accepted."
-msgstr ""
-
 #: ../../source/api/events.md:112
-msgid "Messages"
+msgid ""
+"Both `on_not_detecting_world` and `on_detecting_not_on_world` are "
+"accepted."
 msgstr ""
 
 #: ../../source/api/events.md:114
-msgid ""
-"Messages are useful when actors should communicate without holding direct "
-"references to each other."
+msgid "Messages"
 msgstr ""
 
-#: ../../source/api/events.md:127
+#: ../../source/api/events.md:116
+msgid ""
+"Messages are useful when actors should communicate without holding direct"
+" references to each other."
+msgstr ""
+
+#: ../../source/api/events.md:129
 msgid ""
 "Use `send_message(message, data=None)` to broadcast a message. Use "
 "`@actor.register_message(\"message\")` or "
 "`@world.register_message(\"message\")` to react to it."
 msgstr ""
 
-#: ../../source/api/events.md:131
+#: ../../source/api/events.md:133
 msgid "Focus"
 msgstr ""
 
-#: ../../source/api/events.md:133
+#: ../../source/api/events.md:135
 msgid "Actors can react when they receive or lose focus after a click:"
 msgstr ""
 
-#: ../../source/api/events.md:135
+#: ../../source/api/events.md:137
 msgid "`on_focus(self)`"
 msgstr ""
 
-#: ../../source/api/events.md:136
+#: ../../source/api/events.md:138
 msgid "`on_focus_lost(self)`"
 msgstr ""
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -25,15 +25,15 @@ msgstr ""
 
 #: ../../source/api/world_manager_layout.md:3
 msgid ""
-"Use `world.camera.add_right(...)`, `world.camera.add_bottom(...)`, and "
-"`world.camera.switch_world(...)` as the public API for docking and switching "
-"helper worlds."
+"Use `world.camera.add_right(...)`, `world.camera.add_left(...)`, "
+"`world.camera.add_bottom(...)`, and `world.camera.switch_world(...)` as "
+"the public API for docking and switching helper worlds."
 msgstr ""
 
 #: ../../source/api/world_manager_layout.md:7
 msgid ""
-"The class below is the internal helper that implements this behavior behind "
-"the public camera API."
+"The class below is the internal helper that implements this behavior "
+"behind the public camera API."
 msgstr ""
 
 #: ../../source/api/world_manager_layout.md:10
@@ -42,15 +42,15 @@ msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager:1 of
 msgid ""
-"LayoutManager handles the positioning and management of World objects within "
-"an application window."
+"LayoutManager handles the positioning and management of World objects "
+"within an application window."
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager:3 of
 msgid ""
-"It is stored internally on `world._layout`, while the public API is exposed "
-"via `world.camera` and delegates layout behavior to the underlying `App` and "
-"`WorldsManager`."
+"It is stored internally on `world._layout`, while the public API is "
+"exposed via `world.camera` and delegates layout behavior to the "
+"underlying `App` and `WorldsManager`."
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:1 of
@@ -59,6 +59,7 @@ msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world of
@@ -75,6 +76,7 @@ msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.__init__:7
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:11
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:14
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:11
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:8
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world:9
@@ -88,6 +90,7 @@ msgid "Adds a new world below the current world."
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.switch_world of
@@ -95,13 +98,13 @@ msgid "Return type"
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:3
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:6
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.worlds.world.World\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\``"
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:5
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:8
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:5 of
 msgid "The World instance to dock."
 msgstr ""
@@ -111,6 +114,7 @@ msgid "Height of the added world in pixels (default: 100)."
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.window_docking_position
 #: of
@@ -118,16 +122,28 @@ msgid "Returns"
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_bottom:8
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:11
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:8 of
 msgid "The newly added World instance."
 msgstr ""
 
-#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:1 of
-msgid "Adds a new world to the right side of the current world."
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:1 of
+msgid "Adds a new world to the left side of the current world."
 msgstr ""
 
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:3 of
+msgid ""
+"The current world (and all worlds docked to its right) are shifted to the"
+" right by the width of the added world."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_left:9
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:6 of
 msgid "Width of the added world in pixels (default: 100)."
+msgstr ""
+
+#: miniworlds.worlds.manager.layout_manager.LayoutManager.add_right:1 of
+msgid "Adds a new world to the right side of the current world."
 msgstr ""
 
 #: miniworlds.worlds.manager.layout_manager.LayoutManager.remove_world:1 of
@@ -164,3 +180,12 @@ msgstr ""
 #: of
 msgid "A string such as \"right\" or \"bottom\", or None if undocked."
 msgstr ""
+
+#~ msgid ""
+#~ "Use `world.camera.add_right(...)`, "
+#~ "`world.camera.add_bottom(...)`, and "
+#~ "`world.camera.switch_world(...)` as the public "
+#~ "API for docking and switching helper "
+#~ "worlds."
+#~ msgstr ""
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 13:05+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -192,6 +192,7 @@ msgstr ""
 #: miniworlds.worlds.world.World.act:9
 #: miniworlds.worlds.world.World.broadcast:4
 #: miniworlds.worlds.world.World.on_setup:5
+#: miniworlds.worlds.world.World.play_sound:6
 #: miniworlds.worlds.world.World.quit:3
 #: miniworlds.worlds.world.World.remove_background:3
 #: miniworlds.worlds.world.World.run:5
@@ -484,6 +485,24 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.on_setup:3 of
 msgid "Override this in subclasses or register a function with `@world.register`."
+msgstr ""
+
+#: miniworlds.worlds.world.World.play_sound:1 of
+msgid "Student-friendly alias for `sound.play(path, volume)`."
+msgstr ""
+
+#: miniworlds.worlds.world.World.play_sound:3 of
+msgid ""
+"Students often try `world.play_sound(...)` first, so this alias exists "
+"for discoverability. Prefer `world.sound.play(...)`."
+msgstr ""
+
+#: miniworlds.worlds.world.World.play_sound:8 of
+msgid "Path to the sound."
+msgstr ""
+
+#: miniworlds.worlds.world.World.play_sound:9 of
+msgid "Volume between `0` and `100`."
 msgstr ""
 
 #: miniworlds.worlds.world.World.quit:1 of

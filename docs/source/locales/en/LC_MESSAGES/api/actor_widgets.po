@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -45,15 +45,16 @@ msgid ""
 "world. The world or any actor can react with `on_message`."
 msgstr ""
 
-#: ../../source/api/actor_widgets.md
-#: miniworlds.actors.widgets.input.Input.on_key_down of
+#: ../../source/api/actor_widgets.md miniworlds.actors.widgets.fps.FPSLabel
+#: miniworlds.actors.widgets.input.Input.on_key_down
+#: miniworlds.actors.widgets.time.TimeLabel of
 msgid "Parameters"
 msgstr ""
 
 #: miniworlds.actors.widgets.button.Button:6 of
 msgid ""
-"The label text shown on the button. This same text is sent as a message when "
-"the button is clicked."
+"The label text shown on the button. This same text is sent as a message "
+"when the button is clicked."
 msgstr ""
 
 #: miniworlds.actors.widgets.button.Button:8 of
@@ -62,8 +63,12 @@ msgstr ""
 
 #: miniworlds.actors.widgets.button.Button:11
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:8
+#: miniworlds.actors.widgets.fps.FPSLabel:12
+#: miniworlds.actors.widgets.input.Input:12
 #: miniworlds.actors.widgets.input.Input.on_key_down:13
-#: miniworlds.actors.widgets.label.Label:10 of
+#: miniworlds.actors.widgets.label.Label:10
+#: miniworlds.actors.widgets.time.TimeLabel:9
+#: miniworlds.actors.widgets.yesno.YesNoButton:10 of
 msgid "Examples"
 msgstr ""
 
@@ -85,8 +90,8 @@ msgstr ""
 
 #: miniworlds.actors.widgets.button.Button.act:3 of
 msgid ""
-"The cooldown prevents the button from sending the same message several times "
-"in a few frames while the mouse button is still held down."
+"The cooldown prevents the button from sending the same message several "
+"times in a few frames while the mouse button is still held down."
 msgstr ""
 
 #: ../../source/api/actor_widgets.md
@@ -145,14 +150,32 @@ msgstr ""
 msgid "Input"
 msgstr ""
 
+#: miniworlds.actors.widgets.input.Input:1 of
+msgid "Text input field for use inside a `Toolbar`."
+msgstr ""
+
+#: miniworlds.actors.widgets.input.Input:3 of
+msgid ""
+"Click into the field to focus it, then type to enter text. The text "
+"cursor can be moved with the arrow keys; BACKSPACE deletes the character "
+"left of the cursor and DELETE the character right of the cursor. At most "
+"``max_chars`` characters can be entered."
+msgstr ""
+
+#: miniworlds.actors.widgets.input.Input:8 of
+msgid ""
+"While the input has focus, the text cursor blinks; without focus, the "
+"cursor is hidden."
+msgstr ""
+
 #: miniworlds.actors.widgets.input.Input.on_key_down:1 of
 msgid "Called once when a key is pressed."
 msgstr ""
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:3 of
 msgid ""
-"Register `on_key_down_<letter>` (for example `on_key_down_a`) if you want to "
-"react to a specific letter only."
+"Register `on_key_down_<letter>` (for example `on_key_down_a`) if you want"
+" to react to a specific letter only."
 msgstr ""
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:6 of
@@ -162,8 +185,17 @@ msgid ""
 msgstr ""
 
 #: miniworlds.actors.widgets.input.Input.on_key_down:9 of
+msgid "List of key name variants, for example `[\"A\", \"a\"]` or `[\"left\"]`."
+msgstr ""
+
+#: miniworlds.actors.widgets.input.Input.on_text_input:1 of
+msgid "Inserts composed text (including umlauts and spaces) at the cursor."
+msgstr ""
+
+#: miniworlds.actors.widgets.input.Input.on_text_input:3 of
 msgid ""
-"List of key name variants, for example `[\"A\", \"a\"]` or `[\"left\"]`."
+"Printable characters arrive through the ``text_input`` event, so key "
+"names like \"SPACE\" are never inserted as literal text."
 msgstr ""
 
 #: miniworlds.actors.widgets.input.Input.set_text:1 of
@@ -178,6 +210,24 @@ msgstr ""
 msgid "YesNoButton"
 msgstr ""
 
+#: miniworlds.actors.widgets.yesno.YesNoButton:1 of
+msgid "A widget with a yes and a no button side by side."
+msgstr ""
+
+#: miniworlds.actors.widgets.yesno.YesNoButton:3 of
+msgid ""
+"Use ``get_yes_button()`` and ``get_no_button()`` to access the two "
+"buttons, e.g. to style them or to register custom click handlers."
+msgstr ""
+
+#: miniworlds.actors.widgets.yesno.YesNoButton:6 of
+msgid "Label of the yes button."
+msgstr ""
+
+#: miniworlds.actors.widgets.yesno.YesNoButton:7 of
+msgid "Label of the no button."
+msgstr ""
+
 #: ../../source/api/actor_widgets.md:35
 msgid "CounterLabel"
 msgstr ""
@@ -188,7 +238,8 @@ msgstr ""
 
 #: miniworlds.actors.widgets.counter.CounterLabel:3 of
 msgid ""
-"The counter starts with value 0 and can be modified with ``add`` and ``sub``."
+"The counter starts with value 0 and can be modified with ``add`` and "
+"``sub``."
 msgstr ""
 
 #: miniworlds.actors.widgets.counter.CounterLabel.add:1 of
@@ -198,3 +249,49 @@ msgstr ""
 #: miniworlds.actors.widgets.counter.CounterLabel.sub:1 of
 msgid "Decrease the counter by ``value``."
 msgstr ""
+
+#: ../../source/api/actor_widgets.md:42
+msgid "FPSLabel"
+msgstr ""
+
+#: miniworlds.actors.widgets.fps.FPSLabel:1 of
+msgid "Label that displays the measured frames per second."
+msgstr ""
+
+#: miniworlds.actors.widgets.fps.FPSLabel:3 of
+msgid ""
+"The label measures the time between two frames itself; no clock object is"
+" required. Add it to a `Toolbar` so that it is updated once per frame."
+msgstr ""
+
+#: miniworlds.actors.widgets.fps.FPSLabel:7 of
+msgid "Optional world (ignored; kept for backward compatibility)."
+msgstr ""
+
+#: miniworlds.actors.widgets.fps.FPSLabel:8 of
+msgid "Prefix displayed before the measured value."
+msgstr ""
+
+#: miniworlds.actors.widgets.fps.FPSLabel:9
+#: miniworlds.actors.widgets.time.TimeLabel:6 of
+msgid "Optional path to an image shown alongside the text."
+msgstr ""
+
+#: ../../source/api/actor_widgets.md:49
+msgid "TimeLabel"
+msgstr ""
+
+#: miniworlds.actors.widgets.time.TimeLabel:1 of
+msgid "Label that displays the current frame number of a world."
+msgstr ""
+
+#: miniworlds.actors.widgets.time.TimeLabel:3 of
+msgid ""
+"The world whose frame counter is displayed. If no world is given, the "
+"world the widget is added to is used."
+msgstr ""
+
+#: miniworlds.actors.widgets.time.TimeLabel:5 of
+msgid "Prefix displayed before the frame number."
+msgstr ""
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 07:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -25,9 +25,9 @@ msgstr ""
 
 #: ../../source/api/world_tiled_elements.md:3
 msgid ""
-"`TiledWorld` exposes tile helper classes for grid-based projects. They are "
-"most useful when you need to inspect or customize tiles, edges, or corners "
-"directly."
+"`TiledWorld` exposes tile helper classes for grid-based projects. They "
+"are most useful when you need to inspect or customize tiles, edges, or "
+"corners directly."
 msgstr ""
 
 #: ../../source/api/world_tiled_elements.md:6
@@ -57,9 +57,9 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:3 of
 msgid ""
 "This method uses caching to avoid redundant recalculation of the mapping "
-"between tile grid positions and their corresponding pixel coordinates for a "
-"given world. It also uses squared distance instead of Euclidean distance for "
-"better performance."
+"between tile grid positions and their corresponding pixel coordinates for"
+" a given world. It also uses squared distance instead of Euclidean "
+"distance for better performance."
 msgstr ""
 
 #: ../../source/api/world_tiled_elements.md
@@ -68,9 +68,7 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:8
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_position:4 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.worlds.tiled\\_world.tile\\_elements.TileBase\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile\\_elements.TileBase\\``"
 msgstr ""
 
 #: ../../source/api/world_tiled_elements.md
@@ -122,8 +120,8 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_center_coordinate:4
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_corner_points:1
@@ -139,8 +137,8 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_neighbour_tiles:4
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\`\\]`"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.edge.Edge.get_position_pixel_dict:1
@@ -154,6 +152,24 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_position_pixel_dict:4
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:1
+#: of
+msgid "Drop the cached position-pixel mapping of a world."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:3
+#: of
+msgid ""
+"The cache maps tile positions to pixel coordinates for `from_pixel` "
+"lookups. It must be dropped whenever tiles, corners, or edges are added "
+"or removed, otherwise lookups return stale positions."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:9
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.merge:1 of
@@ -171,15 +187,13 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tile.Tile.from_actor:2
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:8
 #: miniworlds.worlds.tiled_world.tile.Tile.from_position:4 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\``"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tile.Tile.get_neighbour_corners:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.corner.Corner\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.corner.Corner\\`\\]`"
 msgstr ""
 
 #: ../../source/api/world_tiled_elements.md:27
@@ -204,3 +218,4 @@ msgstr ""
 #: ../../source/api/world_tiled_elements.md:34
 msgid "Corner"
 msgstr ""
+
