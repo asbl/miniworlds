@@ -469,7 +469,12 @@ def run_pytest_in_container(
     )
 
 
-def run_python_in_container(c, script_path: str, rebuild: bool = False):
+def run_python_in_container(
+    c,
+    script_path: str,
+    rebuild: bool = False,
+    extra_env: dict[str, str] | None = None,
+):
     """Run a Python script inside the docker image against the live source tree."""
     if rebuild:
         build_test_environment(c)
@@ -477,6 +482,9 @@ def run_python_in_container(c, script_path: str, rebuild: bool = False):
         ensure_test_environment(c)
     uid = os.getuid()
     gid = os.getgid()
+    extra_env_args = ""
+    if extra_env:
+        extra_env_args = " ".join(f"{key}={value}" for key, value in extra_env.items()) + " "
     c.run(
         f"docker run --rm "
         f"--user {uid}:{gid} "
@@ -485,6 +493,7 @@ def run_python_in_container(c, script_path: str, rebuild: bool = False):
         "SDL_AUDIODRIVER=dummy "
         "MINIWORLDS_TEST_FAST=1 "
         "MINIWORLDS_TESTS_IN_DOCKER=1 "
+        f"{extra_env_args}"
         f"{_docker_pythonpath()} python {script_path}"
     )
 
@@ -745,7 +754,14 @@ def tests_visual(c):
 @task(name="pyodide")
 def tests_pyodide(c):
     """Run core browser-runtime tests in Pyodide and headless Chromium in Docker."""
-    run_python_in_container(c, "test/pyodidetests/run.py", rebuild=False)
+    # Chromium's crashpad handler aborts when HOME is not writable, which is
+    # the case for the container's non-root user (HOME=/).
+    run_python_in_container(
+        c,
+        "test/pyodidetests/run.py",
+        rebuild=False,
+        extra_env={"HOME": "/tmp"},
+    )
 
 
 @task(name="profile")
