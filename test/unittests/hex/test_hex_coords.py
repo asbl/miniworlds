@@ -72,6 +72,44 @@ class TestCubeRing:
         assert len(all_positions) == len(set(all_positions))
 
 
+class TestCubeDestination:
+    def test_one_step_matches_neighbors(self):
+        start = (3, 3)
+        cube = hex_coords.offset_to_cube(start)
+        for direction, vector in hex_coords.CUBE_DIRECTIONS.items():
+            destination = hex_coords.cube_destination(start, direction, 1)
+            expected = hex_coords.cube_to_offset(
+                (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
+            )
+            assert destination == expected, direction
+
+    def test_distance_moves_in_steps_of_one_hex(self):
+        assert hex_coords.cube_destination((3, 3), "no", 2) == (4, 1)
+        assert hex_coords.cube_destination((3, 3), "w", 3) == (0, 3)
+
+    def test_distance_zero_stays_on_position(self):
+        assert hex_coords.cube_destination((3, 3), "no", 0) == (3, 3)
+
+    def test_invalid_direction_raises_helpful_error(self):
+        from miniworlds.base.exceptions import DirectionNotFoundError
+
+        with pytest.raises(DirectionNotFoundError):
+            hex_coords.cube_destination((3, 3), "nord", 1)
+
+
+class TestDirectionDegrees:
+    def test_all_hex_directions_have_degrees(self):
+        assert set(hex_coords.DIRECTION_DEGREES) == set(hex_coords.CUBE_DIRECTIONS)
+
+    def test_degrees_are_sixty_degrees_apart(self):
+        degrees = sorted(hex_coords.DIRECTION_DEGREES.values())
+        assert degrees == [30, 90, 150, 210, 270, 330]
+
+    def test_degree_lookup_is_inverse_of_name_lookup(self):
+        for name, degrees in hex_coords.DIRECTION_DEGREES.items():
+            assert hex_coords.DEGREE_DIRECTIONS[degrees] == name
+
+
 class TestPixelConversion:
     @pytest.mark.parametrize("column", [0, 1, 2, 3])
     @pytest.mark.parametrize("row", [0, 1, 2, 3])

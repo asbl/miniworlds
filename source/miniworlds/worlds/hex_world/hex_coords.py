@@ -59,6 +59,24 @@ EDGE_DIRECTIONS: Dict[str, Cube] = {
 # Corner names in clockwise order, starting at the top tip (for rendering).
 CORNER_ORDER: List[str] = ["n", "no", "so", "s", "sw", "nw"]
 
+# Scratch-style degrees (0 = up, clockwise) of the six neighbor
+# directions in a pointy-top layout. Used to move actors along hex
+# axes: `actor.move_in_direction("no")` moves to the north-east
+# neighbor.
+DIRECTION_DEGREES: Dict[str, int] = {
+    "no": 30,
+    "o": 90,
+    "so": 150,
+    "sw": 210,
+    "w": 270,
+    "nw": 330,
+}
+
+# Reverse of DIRECTION_DEGREES: scratch-style degrees to direction name.
+DEGREE_DIRECTIONS: Dict[int, str] = {
+    degrees: name for name, degrees in DIRECTION_DEGREES.items()
+}
+
 # The two corners that enclose an edge, keyed by edge direction.
 EDGE_CORNERS: Dict[str, Tuple[str, str]] = {
     "o": ("no", "so"),
@@ -110,6 +128,28 @@ def cube_ring(center: Cube, radius: int) -> List[Cube]:
             positions.append(cube)
             cube = (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
     return positions
+
+
+def cube_destination(start: Tuple[int, int], direction: str, distance: int) -> Offset:
+    """Return the hex position reached from `start` moving along a hex axis.
+
+    Args:
+        start: Hex position as `(column, row)`.
+        direction: Neighbor direction, e.g. `"no"`.
+        distance: Number of hexes to move.
+
+    Returns:
+        The destination hex position. The destination is not checked
+        against the world bounds.
+    """
+    cube = offset_to_cube(start)
+    vector = direction_vector(direction, CUBE_DIRECTIONS)
+    destination = (
+        cube[0] + vector[0] * distance,
+        cube[1] + vector[1] * distance,
+        cube[2] + vector[2] * distance,
+    )
+    return cube_to_offset(destination)
 
 
 def cube_round(cube: Tuple[float, float, float]) -> Cube:

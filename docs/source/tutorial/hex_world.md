@@ -72,7 +72,34 @@ a given hex distance, ordered from the center outwards.
 `world.get_tiles_in_ring(position, radius)` returns only the hexes at
 exactly the given distance, in ring traversal order.
 
-## Step 4: React to clicks
+## Step 4: Move actors from hex to hex
+
+Actors move from hex to hex with the six hex directions `"no"`, `"o"`,
+`"so"`, `"sw"`, `"w"`, and `"nw"`:
+
+```python
+import miniworlds
+
+world = miniworlds.HexWorld(7, 7, tile_size=40)
+world.background.grid = True
+
+robot = miniworlds.Actor((3, 3))
+robot.fill_color = (200, 30, 30)
+
+@robot.register
+def act(self):
+    if world.frame % 20 == 0:
+        self.move_in_direction("no")
+
+world.run()
+```
+
+Every `move_in_direction` call moves the actor exactly one hex,
+independent of the row parity. The directions can also be given as
+degrees: `"no"` is 30, `"o"` is 90, `"so"` is 150, `"sw"` is 210,
+`"w"` is 270, and `"nw"` is 330.
+
+## Step 5: React to clicks
 
 With `@world.register` you can react to mouse clicks.
 `world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:
@@ -92,7 +119,7 @@ def on_mouse_left(self, mouse_pos):
 world.run()
 ```
 
-## Step 5: Settlements and roads
+## Step 6: Settlements and roads
 
 Corners and edges are positions, too.
 `world.get_corner_from_pixel(mouse_pos)` returns the nearest corner,
@@ -126,7 +153,7 @@ def on_mouse_right(self, mouse_pos):
 world.run()
 ```
 
-## Step 6: A mini-Catan board
+## Step 7: A mini-Catan board
 
 A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:
 

@@ -50,6 +50,18 @@ class TileBase(abc.ABC):
         return TileDelimiter
 
     @classmethod
+    def invalidate_position_pixel_cache(cls, world: "world_mod.World") -> None:
+        """Drop the cached position-pixel mapping of a world.
+
+        The cache maps tile positions to pixel coordinates for
+        `from_pixel` lookups. It must be dropped whenever tiles,
+        corners, or edges are added or removed, otherwise lookups
+        return stale positions.
+        """
+        cls._position_pixel_cache.pop(id(world), None)
+        cls._position_pixel_list_cache.pop(id(world), None)
+
+    @classmethod
     def from_pixel(cls, pixel_position: Tuple[float, float], world: world_mod.World) -> TileBase:
         """
         Finds the nearest tile to a given pixel coordinate.

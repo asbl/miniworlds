@@ -18,10 +18,25 @@ class HexWorldSensorManager(tiled_sensor_manager.TiledWorldSensorManager):
 
     Distances between actors on hexes are hex distances (number of
     hexes between the positions), not euclidean offset distances.
+
+    Movement along the six hex axes (the directions `"no"`, `"o"`,
+    `"so"`, `"sw"`, `"w"`, `"nw"` and their scratch-style degrees) moves
+    from hex to hex in cube coordinates, so every step is exactly one
+    hex, independent of the row parity.
     """
 
     # Maximum pixel distance for corner/edge detection, relative to tile size.
     DETECTION_RADIUS_FACTOR = 1.0 / 3.0
+
+    @staticmethod
+    def get_destination(start, direction, distance) -> Tuple[float, float]:
+        if isinstance(direction, (int, float)):
+            hex_direction = hex_coords.DEGREE_DIRECTIONS.get(direction % 360)
+            if hex_direction is not None:
+                return hex_coords.cube_destination(start, hex_direction, distance)
+        return tiled_sensor_manager.TiledWorldSensorManager.get_destination(
+            start, direction, distance
+        )
 
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
         world = self.actor.world

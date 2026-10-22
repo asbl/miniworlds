@@ -86,3 +86,21 @@ def test_constructor_preserves_tile_size():
 
         assert world.tile_size == tile_size
         assert world.get_tile((1, 1)).to_pixel() == (tile_size, tile_size)
+
+
+def test_from_pixel_cache_is_invalidated_when_tiles_change():
+    from miniworlds.worlds.tiled_world.edge import Edge
+
+    App.reset(unittest=True, file=__file__)
+    try:
+        world = TiledWorld(4, 4, tile_size=40, empty=True)
+        world.add_tile_to_world((0, 0))
+        edge = world.add_edge_to_world((0, 0), "o")
+        assert Edge.from_pixel(edge.to_pixel(), world).position == edge.position
+
+        world.clear_tiles()
+        world.add_tile_to_world((2, 2))
+        new_edge = world.add_edge_to_world((2, 2), "o")
+        assert Edge.from_pixel(new_edge.to_pixel(), world).position == new_edge.position
+    finally:
+        App.reset(unittest=True, file=__file__)

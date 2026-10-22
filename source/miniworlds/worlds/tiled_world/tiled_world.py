@@ -10,6 +10,7 @@ import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.tiled_world.corner as corner_mod
 import miniworlds.worlds.tiled_world.edge as edge_mod
 import miniworlds.worlds.tiled_world.tile as tile_mod
+import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 import miniworlds.worlds.tiled_world.tile_factory as tile_factory
 import miniworlds.worlds.tiled_world.tiled_world_camera_manager as tiled_camera_manager
 import miniworlds.worlds.tiled_world.tiled_world_connector as tiled_world_connector
@@ -104,6 +105,7 @@ class TiledWorld(world.World):
         self.tiles.clear()
         self.corners.clear()
         self.edges.clear()
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
 
     @staticmethod
     def _get_camera_manager_class():
@@ -138,6 +140,7 @@ class TiledWorld(world.World):
         tile_pos = position
         tile = tile_cls(tile_pos, self)
         self.tiles[tile.position] = tile
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return tile
 
     def add_corner_to_world(self, position, direction):
@@ -164,6 +167,7 @@ class TiledWorld(world.World):
             self.corners[corner_pos] = corner
         else:
             self.corners[corner_pos].merge(corner)
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return self.corners[corner_pos]
 
     def add_edge_to_world(self, position, direction):
@@ -190,6 +194,7 @@ class TiledWorld(world.World):
             self.edges[edge_pos] = edge
         else:
             self.edges[edge_pos].merge(edge)
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return self.edges[edge_pos]
 
     def _setup_tiles(self):

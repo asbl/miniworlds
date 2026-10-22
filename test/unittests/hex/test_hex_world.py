@@ -287,6 +287,61 @@ class TestHexWorld(unittest.TestCase):
         self.assertEqual(tiles[0].position, (3, 3))
         self.assertEqual(len(tiles), 7)
 
+    def test_move_in_direction_with_hex_direction_names(self):
+        expected = {
+            "o": (4, 3),
+            "so": (4, 4),
+            "sw": (3, 4),
+            "w": (2, 3),
+            "nw": (3, 2),
+            "no": (4, 2),
+        }
+        for direction, destination in expected.items():
+            actor = Actor((3, 3), world=self.world)
+            actor.move_in_direction(direction)
+            self.assertEqual(actor.position, destination, direction)
+
+    def test_hex_direction_name_sets_direction_degrees(self):
+        actor = Actor((3, 3), world=self.world)
+        actor.direction = "no"
+        self.assertEqual(actor.direction, 30)
+        actor.move_in_direction("nw")
+        # get_direction normalizes 330 degrees to -30
+        self.assertEqual(actor.direction, -30)
+        self.assertEqual(actor.position, (3, 2))
+
+    def test_move_along_hex_axis_degrees(self):
+        actor = Actor((3, 3), world=self.world)
+        actor.direction = 30
+        actor.move(1)
+        self.assertEqual(actor.position, (4, 2))
+
+    def test_move_in_direction_with_hex_distance(self):
+        actor = Actor((3, 3), world=self.world)
+        actor.move_in_direction("no", 2)
+        self.assertEqual(actor.position, (4, 1))
+
+    def test_square_directions_still_work(self):
+        actor = Actor((3, 3), world=self.world)
+        actor.move_in_direction("right")
+        self.assertEqual(actor.position, (4, 3))
+        actor.move_in_direction("down")
+        self.assertEqual(actor.position, (4, 4))
+
+    def test_edge_from_pixel_cache_invalidated_on_tile_changes(self):
+        from miniworlds.worlds.hex_world.hex_edge import HexEdge
+
+        world = HexWorld(4, 4, tile_size=40, empty=True)
+        world.add_tile_to_world((2, 2))
+        edge = world.add_edge_to_world((2, 2), "o")
+        self.assertEqual(HexEdge.from_pixel(edge.to_pixel(), world).position, edge.position)
+        world.clear_tiles()
+        world.add_tile_to_world((1, 1))
+        new_edge = world.add_edge_to_world((1, 1), "o")
+        self.assertEqual(
+            HexEdge.from_pixel(new_edge.to_pixel(), world).position, new_edge.position
+        )
+
     def test_console_and_toolbar_widgets_on_hex_world_do_not_crash(self):
         from miniworlds.actors.widgets.button import Button
         from miniworlds.worlds.gui.console import Console
