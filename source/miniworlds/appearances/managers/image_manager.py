@@ -184,7 +184,9 @@ class ImageManager:
         try:
             return self.images_list[index]
         except IndexError:
-            raise ImageIndexNotExistsError(index, self)
+            raise ImageIndexNotExistsError(
+                self.appearance, index, len(self.images_list)
+            )
 
     def replace_image(self, image: pygame.Surface, type: int, source: Union[str, Tuple, None]) -> None:
         """Replaces the current image entry with a new one."""
@@ -232,7 +234,9 @@ class ImageManager:
             if old_index != self.image_index:
                 self.appearance.set_dirty("all", self.appearance.LOAD_NEW_IMAGE)
             return True
-        raise ImageIndexNotExistsError(value, self)
+        raise ImageIndexNotExistsError(
+            self.appearance, value, len(self.images_list)
+        )
 
     def load_surface(self) -> pygame.Surface:
         """Returns a blank fallback surface if image loading fails."""

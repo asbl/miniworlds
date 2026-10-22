@@ -12,8 +12,13 @@ import warnings
 
 from miniworlds import Actor, Rectangle, World
 from miniworlds.base.app import App
-from miniworlds.base.exceptions import WrongArgumentsError
+from miniworlds.base.exceptions import (
+    ImageIndexNotExistsError,
+    MiniworldsError,
+    WrongArgumentsError,
+)
 from miniworlds.tools import method_caller
+from miniworlds.tools.timer import Timer
 
 
 class StudentFriendlyFixesTest(unittest.TestCase):
@@ -186,6 +191,63 @@ class StudentFriendlyFixesTest(unittest.TestCase):
             self.assertIn("Did you create a world instance", str(error))
         else:
             self.fail("Expected AttributeError")
+
+
+class Audit2FixesTest(unittest.TestCase):
+    """Tests for the audit-2 fixes (N4, N9, N1, movement error typo)."""
+
+    def setUp(self):
+        App.reset(unittest=True, file=__file__)
+
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    # N4: image index error message
+
+    def test_set_image_with_invalid_index_has_clear_message(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        with self.assertRaises(ImageIndexNotExistsError) as ctx:
+            actor.costume.set_image(5)
+        message = str(ctx.exception)
+        self.assertIn("Image index 5 does not exist", message)
+        self.assertIn("counted from 0", message)
+        self.assertNotIn("ImageManager object", message)
+
+    # N9: Timer with callback argument
+
+    def test_timer_with_callback_argument_hints_at_action_timer(self):
+        with self.assertRaises(TypeError) as ctx:
+            Timer(10, lambda: None)
+        self.assertIn("ActionTimer", str(ctx.exception))
+
+    def test_timer_with_single_argument_still_works(self):
+        world = World(100, 100)
+        timer = Timer(10)
+        self.assertEqual(timer.time, 10)
+
+    # N1: play_sound alias
+
+    def test_play_sound_alias_warns_and_forwards_to_sound_manager(self):
+        world = World(100, 100)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            with self.assertRaises(ValueError) as ctx:
+                world.play_sound("")
+        self.assertTrue(
+            any("world.sound.play" in str(w.message) for w in caught)
+        )
+        self.assertIn("Sound path must not be empty", str(ctx.exception))
+
+    # movement facade error message typo
+
+    def test_move_in_direction_with_invalid_type_has_clean_message(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        with self.assertRaises(MiniworldsError) as ctx:
+            actor.move_in_direction([1, 2])
+        self.assertIn("Found <class 'list'>", str(ctx.exception))
+        self.assertNotIn("got f", str(ctx.exception))
 
 
 if __name__ == "__main__":

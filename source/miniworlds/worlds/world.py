@@ -876,6 +876,22 @@ class World(world_base.WorldBase):
         """Student-friendly alias for `send_message(message, data)`."""
         self.send_message(message, data)
 
+    def play_sound(self, path: str, volume: int = 100) -> None:
+        """Student-friendly alias for `sound.play(path, volume)`.
+
+        Students often try `world.play_sound(...)` first, so this alias
+        exists for discoverability. Prefer `world.sound.play(...)`.
+
+        Args:
+            path: Path to the sound.
+            volume: Volume between `0` and `100`.
+        """
+        self._student_warn(
+            "Hint: use world.sound.play(...) to play sounds - "
+            "world.play_sound(...) still works."
+        )
+        self.sound.play(path, volume)
+
     def switch_world(self, new_world: "World", reset: bool = False) -> None:
         """Switch the active scene to another world.
 

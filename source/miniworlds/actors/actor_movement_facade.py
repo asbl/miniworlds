@@ -147,7 +147,7 @@ class ActorMovementFacade:
             return self.actor.position_manager.move_towards_position(direction, distance)
         else:
             raise MiniworldsError(
-                f"Expected direction or position, got f{type(direction)}, ({direction})"
+                f"Expected direction or position, got {type(direction)}, ({direction})"
             )
 
     def move_to(self, position: Tuple[float, float]):

@@ -251,8 +251,17 @@ class NoWorldError(MiniworldsError):
 
 
 class ImageIndexNotExistsError(MiniworldsError):
-    def __init__(self, appearance, index):
-        self.message = f"Error: Image index {index} does not exist for {appearance}.\n You can't set costume or background -image to a non-existing image"
+    def __init__(self, appearance, index, image_count=None):
+        self.message = f"Error: Image index {index} does not exist for {appearance}."
+        if image_count is not None:
+            self.message += (
+                f"\n{appearance} has {image_count} images."
+                "\nRemember: images are counted from 0!"
+            )
+        else:
+            self.message += (
+                "\n You can't set costume or background -image to a non-existing image"
+            )
         super().__init__(self.message)
 
 

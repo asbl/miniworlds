@@ -56,7 +56,14 @@ class Timer(Timed):
         if time <= 0:
             raise ValueError(f"Timer interval must be > 0, got {time}")
 
-    def __init__(self, time: int):
+    def __init__(self, time: int, *args):
+        if args:
+            raise TypeError(
+                f"Timer() takes only the frame interval, but got "
+                f"{1 + len(args)} arguments: Timer({time}, ...).\n"
+                "If you want to call a function after the timer, use ActionTimer:\n"
+                "  ActionTimer(48, player.move)  or  ActionTimer(48, player.move, 2)"
+            )
         self._validate_interval(time)
         super().__init__()
         self.time = time
