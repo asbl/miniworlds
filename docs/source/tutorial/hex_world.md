@@ -102,7 +102,8 @@ degrees: `"no"` is 30, `"o"` is 90, `"so"` is 150, `"sw"` is 210,
 ## Step 5: React to clicks
 
 With `@world.register` you can react to mouse clicks.
-`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:
+`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse,
+or `None` if the click is outside the world:
 
 ```python
 import miniworlds
@@ -113,6 +114,8 @@ world.background.grid = True
 @world.register
 def on_mouse_left(self, mouse_pos):
     tile = world.get_tile_from_pixel(mouse_pos)
+    if tile is None:
+        return
     actor = miniworlds.Actor(tile.position)
     actor.fill_color = (0, 120, 0)
 

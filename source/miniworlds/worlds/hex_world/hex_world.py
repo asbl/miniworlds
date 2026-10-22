@@ -21,6 +21,20 @@ class HexWorld(tiled_world.TiledWorld):
     (pointy-top layout). Actors can also be placed on corners (shared by
     up to three hexes) or edges (shared by two hexes).
 
+    The six neighbors of a hex are reached with the directions
+    `"o"`, `"so"`, `"sw"`, `"w"`, `"nw"`, `"no"`. Because odd rows are
+    shifted, the diagonal neighbors depend on the row parity:
+
+    * Odd rows: `"no"` and `"so"` point to `(column + 1, row - 1)` and
+      `(column + 1, row + 1)`, while `"nw"` and `"sw"` point to
+      `(column, row - 1)` and `(column, row + 1)`.
+    * Even rows: `"no"` and `"so"` point to `(column, row - 1)` and
+      `(column, row + 1)`, while `"nw"` and `"sw"` point to
+      `(column - 1, row - 1)` and `(column - 1, row + 1)`.
+
+    `"o"` and `"w"` always point to `(column + 1, row)` and
+    `(column - 1, row)`.
+
     Examples:
         ::
 
@@ -87,15 +101,42 @@ class HexWorld(tiled_world.TiledWorld):
             position: Pixel position as `(x, y)`.
 
         Returns:
-            The hex tile under the pixel.
+            The hex tile under the pixel, or `None` if the pixel lies
+            outside the world (no tile exists at the rounded hex
+            position).
 
         Examples:
             ::
 
                 tile = world.get_tile_from_pixel((80, 120))
+                if tile is not None:
+                    tile.fill_color = (255, 0, 0)
         """
         tile_cls = self.tile_factory.tile_cls
-        return tile_cls.from_pixel(position, self)
+        tile = tile_cls.from_pixel(position, self)
+        if not self.is_tile(tile.position):
+            return None
+        return tile
+
+    def get_from_pixel(self, position):
+        """Return the hex position for a screen pixel.
+
+        Args:
+            position: Pixel position as `(x, y)`.
+
+        Returns:
+            Hex position as `(column, row)`, or `None` if the pixel
+            lies outside the world.
+
+        Examples:
+            ::
+
+                hex_position = world.get_from_pixel((80, 120))
+        """
+        tile = self.get_tile_from_pixel(position)
+        if tile is None:
+            return None
+        return tile.position
 
     def get_actors_from_pixel(self, position):
         """Return all actors on the hex tile under a screen pixel.
@@ -104,7 +145,8 @@ class HexWorld(tiled_world.TiledWorld):
             position: Pixel position as `(x, y)`.
 
         Returns:
-            Actors located on the hex tile under the pixel.
+            Actors located on the hex tile under the pixel. An empty
+            list if the pixel lies outside the world.
 
         Examples:
             ::
@@ -112,6 +154,8 @@ class HexWorld(tiled_world.TiledWorld):
                 actors = world.get_actors_from_pixel(mouse_pos)
         """
         tile = self.get_tile_from_pixel(position)
+        if tile is None:
+            return []
         return self.detect_actors(tile.position)
 
     def get_corner_from_pixel(self, position):
@@ -130,7 +174,7 @@ class HexWorld(tiled_world.TiledWorld):
                 corner = world.get_corner_from_pixel(mouse_pos)
         """
         tile = self.get_tile_from_pixel(position)
-        if not self.is_tile(tile.position):
+        if tile is None:
             return None
         nearest_corner = None
         nearest_distance = None
@@ -162,7 +206,7 @@ class HexWorld(tiled_world.TiledWorld):
                 edge = world.get_edge_from_pixel(mouse_pos)
         """
         tile = self.get_tile_from_pixel(position)
-        if not self.is_tile(tile.position):
+        if tile is None:
             return None
         nearest_edge = None
         nearest_distance = None
@@ -236,6 +280,10 @@ class HexWorld(tiled_world.TiledWorld):
     def get_tiles_in_radius(self, position, radius: int) -> List[hex_tile_mod.HexTile]:
         """Return all tiles within a hex distance of `radius`.
 
+        Neighbors are computed in cube coordinates, so the result is
+        independent of the row parity described in the `HexWorld`
+        docstring.
+
         Args:
             position: Hex position as `(column, row)`.
             radius: Maximum hex distance (0 includes only the tile itself).
@@ -243,6 +291,7 @@ class HexWorld(tiled_world.TiledWorld):
         Returns:
             List of tiles within the radius, including the tile itself,
             ordered from the center outwards in ring traversal order.
+            Positions outside the world are skipped.
 
         Examples:
             ::
@@ -259,6 +308,10 @@ class HexWorld(tiled_world.TiledWorld):
     def get_tiles_in_ring(self, position, radius: int) -> List[hex_tile_mod.HexTile]:
         """Return all tiles at exactly `radius` hex distance.
 
+        Neighbors are computed in cube coordinates, so the result is
+        independent of the row parity described in the `HexWorld`
+        docstring.
+
         Args:
             position: Hex position as `(column, row)`.
             radius: Hex distance.
@@ -266,6 +319,7 @@ class HexWorld(tiled_world.TiledWorld):
         Returns:
             List of tiles at the given distance, in ring traversal
             order starting at the westernmost hex of the ring.
+            Positions outside the world are skipped.
 
         Examples:
             ::

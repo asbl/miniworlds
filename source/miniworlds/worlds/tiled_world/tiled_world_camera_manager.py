@@ -119,6 +119,16 @@ class TiledCameraManager(camera_manager.CameraManager):
     def get_rect(self) -> pygame.Rect:
         return pygame.Rect(*self.topleft, self.width, self.height)
 
+    def get_screen_rect(self) -> pygame.Rect:
+        """Camera rectangle in screen coordinates, measured in pixels.
+
+        The base implementation uses ``self.view``, which counts tiles for
+        tile-based worlds; mouse-event dispatch would then drop every click
+        outside a tiny tile-sized rectangle. Pixel width/height come from the
+        ``width``/``height`` properties (overridden per world type).
+        """
+        return pygame.Rect(*self.screen_topleft, self.width, self.height)
+
     def get_world_rect(self) -> pygame.Rect:
         return pygame.Rect(*self._topleft, self.world_size_x * self.world.tile_size, self.world_size_y * self.world.tile_size) 
 

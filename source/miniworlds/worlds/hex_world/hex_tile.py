@@ -16,7 +16,9 @@ class HexTile(tile_mod.Tile):
     """A hexagonal tile in a HexWorld.
 
     Tiles are addressed with offset coordinates `(column, row)`, like
-    tiles in a TiledWorld. Odd rows are shifted half a hex to the right.
+    tiles in a TiledWorld. Odd rows are shifted half a hex to the right;
+    because of this shift, the diagonal neighbors of a hex depend on the
+    row parity (see the `HexWorld` docstring for the full convention).
     """
 
     tile_vectors = dict(hex_coords.CUBE_DIRECTIONS)
@@ -34,7 +36,10 @@ class HexTile(tile_mod.Tile):
         """Return the hex tile containing a pixel position.
 
         The conversion is exact: the pixel is converted to fractional cube
-        coordinates and rounded to the nearest hex center.
+        coordinates and rounded to the nearest hex center. The position is
+        not checked against the world bounds; use
+        `world.get_tile_from_pixel` for a bounds-checked lookup that
+        returns `None` outside the world.
         """
         if world is None:
             world = app.App.get_running_world()

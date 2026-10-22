@@ -62,8 +62,8 @@ world.run()
 
 `world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse,
 `world.get_corner_from_pixel(mouse_pos)` the nearest corner, and
-`world.get_edge_from_pixel(mouse_pos)` the nearest edge. The corner and
-edge queries return `None` if the pixel is outside the world.
+`world.get_edge_from_pixel(mouse_pos)` the nearest edge. All three
+queries return `None` if the pixel is outside the world.
 
 The example places a settlement (small circle) on the clicked corner and
 a road (small rectangle) on the clicked edge:
@@ -77,6 +77,8 @@ world.background.grid = True
 @world.register
 def on_mouse_left(self, mouse_pos):
     tile = world.get_tile_from_pixel(mouse_pos)
+    if tile is None:
+        return
     print("you clicked the hex", tile.position)
 
 @world.register

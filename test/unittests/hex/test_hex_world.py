@@ -6,6 +6,7 @@ import unittest
 
 from miniworlds import Actor, App
 from miniworlds.worlds.hex_world.hex_corner import HexCorner
+from miniworlds.worlds.hex_world.hex_coords import CUBE_DIRECTIONS, cube_to_offset, offset_to_cube
 from miniworlds.worlds.hex_world.hex_edge import HexEdge
 from miniworlds.worlds.hex_world.hex_tile import HexTile
 from miniworlds.worlds.hex_world.hex_world import HexWorld
@@ -82,6 +83,38 @@ class TestHexWorld(unittest.TestCase):
         center = self.world.to_pixel((4, 4))
         self.assertEqual(self.world.get_from_pixel(center), (4, 4))
         self.assertIsNone(self.world.get_from_pixel((-5, -5)))
+
+    def test_pixel_picking_outside_world_returns_none(self):
+        # Far outside the world.
+        self.assertIsNone(self.world.get_tile_from_pixel((-100, -100)))
+        self.assertIsNone(self.world.get_tile_from_pixel((2000, 2000)))
+        # Inside the camera view, but rounding beyond the grid
+        # (bottom-right corner of a 7x7 world).
+        self.assertIsNone(self.world.get_tile_from_pixel((517, 438)))
+        self.assertIsNone(self.world.get_from_pixel((517, 438)))
+
+    def test_get_actors_from_pixel_outside_world(self):
+        self.assertEqual(self.world.get_actors_from_pixel((-100, -100)), [])
+        self.assertEqual(self.world.get_actors_from_pixel((517, 438)), [])
+
+    def _neighbour(self, position, direction):
+        cube = offset_to_cube(position)
+        vector = CUBE_DIRECTIONS[direction]
+        return cube_to_offset(
+            (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
+        )
+
+    def test_diagonal_neighbours_depend_on_row_parity(self):
+        # Odd rows are shifted half a hex to the right, so the diagonal
+        # neighbors differ between odd and even rows (see HexWorld docs).
+        self.assertEqual(self._neighbour((3, 1), "no"), (4, 0))
+        self.assertEqual(self._neighbour((3, 1), "so"), (4, 2))
+        self.assertEqual(self._neighbour((3, 1), "nw"), (3, 0))
+        self.assertEqual(self._neighbour((3, 1), "sw"), (3, 2))
+        self.assertEqual(self._neighbour((3, 2), "no"), (3, 1))
+        self.assertEqual(self._neighbour((3, 2), "so"), (3, 3))
+        self.assertEqual(self._neighbour((3, 2), "nw"), (2, 1))
+        self.assertEqual(self._neighbour((3, 2), "sw"), (2, 3))
 
     def test_tiles_in_radius(self):
         tiles = self.world.get_tiles_in_radius((3, 3), 1)
