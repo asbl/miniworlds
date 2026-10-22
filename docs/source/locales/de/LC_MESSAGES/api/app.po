@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -105,8 +105,8 @@ msgstr ""
 
 #: miniworlds.base.app.App.get_path:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`str\\` \\| "
-"\\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:class\\:\\`str\\`\\]`"
 msgstr ""
 
 #: miniworlds.base.app.App.get_platform:2 of
@@ -115,20 +115,20 @@ msgstr ""
 
 #: miniworlds.base.app.App.get_running_app:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.app.App\\`"
-" \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:class\\:\\`\\~miniworlds.base.app.App\\`\\]`"
 msgstr ""
 
 #: miniworlds.base.app.App.get_running_world:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\`"
-" \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\`\\]`"
 msgstr ""
 
 #: miniworlds.base.app.App.get_window:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.window.Window\\`"
-" \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:class\\:\\`\\~miniworlds.base.window.Window\\`\\]`"
 msgstr ""
 
 #: miniworlds.base.app.App.init_app:1 of
@@ -208,4 +208,24 @@ msgstr ""
 #: miniworlds.base.app.App.start_mainloop:1 of
 msgid "Starts the main event loop."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`str\\` \\|"
+#~ " \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.app.App\\`"
+#~ " \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.world.World\\`"
+#~ " \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.base.window.Window\\`"
+#~ " \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -316,11 +316,13 @@ msgstr "Multipliziert mit einem Skalar oder berechnet ein Skalarprodukt."
 
 #: miniworlds.positions.vector.Vector.multiply:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
-" \\| \\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\, "
+"\\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
-" \\| \\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\, "
+"\\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.positions.vector.Vector.multiply:5 of
 msgid "Scalar value or another `Vector`."
@@ -367,4 +369,11 @@ msgstr "Die x-Komponente des Vektors."
 #: miniworlds.positions.vector.Vector.y:1 of
 msgid "The y-component of the vector."
 msgstr "Die y-Komponente des Vektors."
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
+#~ " \\| \\:py\\:class\\:\\`float\\``"
+#~ msgstr ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
+#~ " \\| \\:py\\:class\\:\\`float\\``"
 

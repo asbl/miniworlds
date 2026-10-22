@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -34,11 +34,11 @@ msgstr ""
 #: miniworlds.actors.texts.number.Number:3 of
 #, fuzzy
 msgid ""
-"You must manually set the size of the actor with `self.size()` to ensure the "
-"text fits the screen."
+"You must manually set the size of the actor with `self.size()` to ensure "
+"the text fits the screen."
 msgstr ""
-"Du musst die Größe des Actors mit self.size() manuell einstellen, damit der "
-"vollständige Text sichtbar ist."
+"Du musst die Größe des Actors mit self.size() manuell einstellen, damit "
+"der vollständige Text sichtbar ist."
 
 #: ../../source/api/actor_number.md miniworlds.actors.texts.number.Number.add
 #: miniworlds.actors.texts.number.Number.set_value
@@ -101,8 +101,8 @@ msgstr ""
 #: miniworlds.actors.texts.number.Number.get_value:3 of
 #, fuzzy
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
-"\\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
 #: ../../source/api/actor_number.md
@@ -151,3 +151,4 @@ msgstr ""
 #, fuzzy
 msgid "The current number."
 msgstr "Die aktuelle Nummer"
+

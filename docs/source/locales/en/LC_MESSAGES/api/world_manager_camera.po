@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -116,9 +116,9 @@ msgstr ""
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world:3
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\] \\| "
-"\\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds.worlds.manager.camera_manager.CameraManager.get_global_coordinates_for_world
@@ -278,5 +278,11 @@ msgstr ""
 #~ " `world.camera` also offers the public "
 #~ "helper methods `add_right(...)`, `add_bottom(...)`,"
 #~ " `remove_world(...)`, and `switch_world(...)`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
+#~ " \\\\\\[\\:py\\:class\\:\\`int\\`\\, "
+#~ "\\:py\\:class\\:\\`int\\`\\] \\| \\:py\\:obj\\:\\`None\\``"
 #~ msgstr ""
 

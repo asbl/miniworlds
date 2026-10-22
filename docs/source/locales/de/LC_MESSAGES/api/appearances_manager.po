@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -78,9 +78,7 @@ msgstr ""
 #: miniworlds.appearances.appearances_manager.AppearancesManager.next_appearance:3
 #: miniworlds.appearances.appearances_manager.AppearancesManager.switch_appearance:3
 #: of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.appearances.appearance.Appearance\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\``"
 msgstr ""
 
 #: ../../source/api/appearances_manager.md
@@ -173,9 +171,9 @@ msgstr ""
 #: miniworlds.appearances.appearances_manager.AppearancesManager.get_appearance_at_index:2
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.appearances.appearance.Appearance\\` \\| \\:py\\:obj\\:"
-"\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.length:1 of
@@ -192,8 +190,8 @@ msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.list:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`\\]`"
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.list:5 of
@@ -233,8 +231,8 @@ msgstr ""
 #: miniworlds.appearances.appearances_manager.AppearancesManager.remove_appearance:6
 #: of
 msgid ""
-"The index of the new appearance or the Appearance which should be removed "
-"Defaults to -1"
+"The index of the new appearance or the Appearance which should be removed"
+" Defaults to -1"
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.reset:1 of
@@ -243,8 +241,8 @@ msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.reset:3 of
 msgid ""
-"This is useful when an actor or world should receive a completely new set of "
-"costumes or backgrounds."
+"This is useful when an actor or world should receive a completely new set"
+" of costumes or backgrounds."
 msgstr ""
 
 #: miniworlds.appearances.appearances_manager.AppearancesManager.self_remove:1
@@ -343,3 +341,9 @@ msgstr ""
 #: of
 msgid "Either the appearance index or the appearance instance."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appearances.appearance.Appearance\\`"
+#~ " \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+

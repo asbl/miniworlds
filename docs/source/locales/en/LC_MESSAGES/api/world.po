@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -438,9 +438,9 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.get_from_pixel:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\] \\| "
-"\\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds.worlds.world.World.get_from_pixel:5
@@ -696,4 +696,11 @@ msgid ""
 "catch specific Miniworlds errors. They are documented here but "
 "intentionally do not have their own navigation entry."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
+#~ " \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
+#~ "\\:py\\:class\\:\\`float\\`\\] \\| "
+#~ "\\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
 

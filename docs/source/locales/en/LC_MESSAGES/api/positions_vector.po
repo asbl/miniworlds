@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -93,8 +93,8 @@ msgstr ""
 #: miniworlds.positions.vector.Vector.add_to_position:3
 #: miniworlds.positions.vector.Vector.to_position:4 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.add_to_position:5
@@ -237,15 +237,13 @@ msgstr ""
 #: miniworlds.positions.vector.Vector.limit:3
 #: miniworlds.positions.vector.Vector.normalize:3
 #: miniworlds.positions.vector.Vector.rotate:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.from_direction:5 of
 msgid ""
-"Direction in Miniworlds convention. Common values are `0` or `\"up\"`, `90` "
-"or `\"right\"`, `-90` or `\"left\"`, and `180` or `\"down\"`."
+"Direction in Miniworlds convention. Common values are `0` or `\"up\"`, "
+"`90` or `\"right\"`, `-90` or `\"left\"`, and `180` or `\"down\"`."
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.from_direction:9 of
@@ -311,8 +309,9 @@ msgstr ""
 
 #: miniworlds.positions.vector.Vector.multiply:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\` \\| \\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`\\, "
+"\\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
 
 #: miniworlds.positions.vector.Vector.multiply:5 of
@@ -358,3 +357,9 @@ msgstr ""
 #: miniworlds.positions.vector.Vector.y:1 of
 msgid "The y-component of the vector."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
+#~ " \\| \\:py\\:class\\:\\`float\\``"
+#~ msgstr ""
+

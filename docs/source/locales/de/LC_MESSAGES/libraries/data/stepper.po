@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 10:36+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -225,9 +225,9 @@ msgstr ""
 #: miniworlds_data.stepper.Stepper.on_frame:7
 #: miniworlds_data.stepper.Stepper.prev_step:9 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`str\\`\\, \\:py\\:class\\:\\`object\\`\\] \\| "
-"\\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`str\\`\\, \\:py\\:class\\:\\`object\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds_data.stepper.Stepper.on_frame:1 of
@@ -288,3 +288,11 @@ msgstr ""
 #~ " step; the stepper advances it frame"
 #~ " by frame (or on demand)."
 #~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
+#~ " \\\\\\[\\:py\\:class\\:\\`str\\`\\, "
+#~ "\\:py\\:class\\:\\`object\\`\\] \\| "
+#~ "\\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+

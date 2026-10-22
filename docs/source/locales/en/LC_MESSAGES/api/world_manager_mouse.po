@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:51+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -69,9 +69,9 @@ msgstr ""
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position:3
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_position:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\] \\| "
-"\\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.get_last_position:6
@@ -162,3 +162,10 @@ msgstr ""
 #: miniworlds.worlds.manager.mouse_manager.MouseManager.y:1 of
 msgid "Returns the y-coordinate of the mouse if over the world, otherwise 0."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
+#~ " \\\\\\[\\:py\\:class\\:\\`int\\`\\, "
+#~ "\\:py\\:class\\:\\`int\\`\\] \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+

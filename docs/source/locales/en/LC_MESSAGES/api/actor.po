@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -562,8 +562,8 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.detect:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`"
-" \\| \\:py\\:obj\\:\\`None\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.detect:5 of
@@ -717,8 +717,9 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.detect_color_at:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\` \\| "
-"\\:py\\:class\\:\\`\\~typing.List\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
+"\\:py\\:class\\:\\`\\~typing.List\\`\\]`"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.detect_color_at:8 of
@@ -1265,8 +1266,8 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.point_towards_position:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
-"\\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
 
 #: miniworlds.actors.actor.Actor.position:1 of
@@ -1459,4 +1460,19 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.y:1 of
 msgid "Actor y-position."
 msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`"
+#~ " \\| \\:py\\:obj\\:\\`None\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`"
+#~ " \\| \\:py\\:class\\:\\`\\~typing.List\\``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\|"
+#~ " \\:py\\:class\\:\\`float\\``"
+#~ msgstr ""
 
