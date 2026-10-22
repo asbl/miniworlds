@@ -966,17 +966,25 @@ def docs_check(c):
 
         with po_path.open(encoding="utf-8") as handle:
             catalog = read_po(handle)
+        # Type annotation messages are locale-independent code strings whose
+        # rendering depends on the Python and sphinx_autodoc_typehints
+        # versions, so they are exempt from both checks: Sphinx falls back
+        # to the msgid, which is the correct output in every environment.
         untranslated = [
             message.id
             for message in catalog
-            if message.id and not message.string
+            if message.id
+            and not message.string
+            and not message.id.startswith(":sphinx_autodoc_typehints_type:")
         ]
         if untranslated:
             raise Exit(f"{po_path} contains {len(untranslated)} untranslated messages")
         fuzzy = [
             message.id
             for message in catalog
-            if message.id and message.fuzzy
+            if message.id
+            and message.fuzzy
+            and not message.id.startswith(":sphinx_autodoc_typehints_type:")
         ]
         if fuzzy:
             raise Exit(
@@ -1043,10 +1051,16 @@ def docs_l10n_check(c):
             continue
         with po_path.open(encoding="utf-8") as handle:
             catalog = read_po(handle)
+        # Type annotation messages are locale-independent code strings whose
+        # rendering depends on the Python and sphinx_autodoc_typehints
+        # versions, so they are exempt from both checks: Sphinx falls back
+        # to the msgid, which is the correct output in every environment.
         untranslated = [
             message.id
             for message in catalog
-            if message.id and not message.string
+            if message.id
+            and not message.string
+            and not message.id.startswith(":sphinx_autodoc_typehints_type:")
         ]
         if untranslated:
             problems.append(
@@ -1056,7 +1070,9 @@ def docs_l10n_check(c):
         fuzzy = [
             message.id
             for message in catalog
-            if message.id and message.fuzzy
+            if message.id
+            and message.fuzzy
+            and not message.id.startswith(":sphinx_autodoc_typehints_type:")
         ]
         if fuzzy:
             problems.append(
