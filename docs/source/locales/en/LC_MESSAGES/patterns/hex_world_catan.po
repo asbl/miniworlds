@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -76,8 +76,8 @@ msgstr ""
 msgid ""
 "`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
 "`world.get_corner_from_pixel(mouse_pos)` the nearest corner, and "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. The corner and "
-"edge queries return `None` if the pixel is outside the world."
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. All three "
+"queries return `None` if the pixel is outside the world."
 msgstr ""
 
 #: ../../source/patterns/hex_world_catan.md:68
@@ -86,11 +86,11 @@ msgid ""
 "a road (small rectangle) on the clicked edge:"
 msgstr ""
 
-#: ../../source/patterns/hex_world_catan.md:92
+#: ../../source/patterns/hex_world_catan.md:94
 msgid "Query the neighborhood"
 msgstr ""
 
-#: ../../source/patterns/hex_world_catan.md:94
+#: ../../source/patterns/hex_world_catan.md:96
 msgid ""
 "`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
 "given hex distance. `tile.get_neighbour_tiles()` returns the up to six "
@@ -104,5 +104,15 @@ msgstr ""
 #~ "`world.get_corner_from_pixel(mouse_pos)` the nearest "
 #~ "corner, and `world.get_edge_from_pixel(mouse_pos)` "
 #~ "the nearest edge."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "`world.get_tile_from_pixel(mouse_pos)` returns the "
+#~ "hex under the mouse, "
+#~ "`world.get_corner_from_pixel(mouse_pos)` the nearest "
+#~ "corner, and `world.get_edge_from_pixel(mouse_pos)` "
+#~ "the nearest edge. The corner and "
+#~ "edge queries return `None` if the "
+#~ "pixel is outside the world."
 #~ msgstr ""
 

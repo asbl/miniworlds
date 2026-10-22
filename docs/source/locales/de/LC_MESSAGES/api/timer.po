@@ -29,9 +29,11 @@ msgstr "Timer-Klassen planen Aktionen die in späteren Frames ausgelöst werden.
 
 #: ../../source/api/timer.md:5
 msgid ""
-"The `timer` and `loop` decorators are convenience helpers for one-time and "
-"repeating actions."
-msgstr "Die Decorators `timer` und `loop` sind Hilfsfunktionen für einmalige und wiederholte Aktionen."
+"The `timer` and `loop` decorators are convenience helpers for one-time "
+"and repeating actions."
+msgstr ""
+"Die Decorators `timer` und `loop` sind Hilfsfunktionen für einmalige und "
+"wiederholte Aktionen."
 
 #: ../../source/api/timer.md:8
 msgid "API Reference"
@@ -45,7 +47,10 @@ msgstr "Timer, der `act()` nach einem Frame-Intervall wiederholt aufruft."
 msgid ""
 "Subclass this and override `act()` when you need custom timer logic. For "
 "most use-cases prefer `ActionTimer` or the `@timer` decorator."
-msgstr "Leite davon ab und überschreibe `act()`, wenn du eigene Timer-Logik brauchst. Für die meisten Fälle sind `ActionTimer` oder der Decorator `@timer` besser geeignet."
+msgstr ""
+"Leite davon ab und überschreibe `act()`, wenn du eigene Timer-Logik "
+"brauchst. Für die meisten Fälle sind `ActionTimer` oder der Decorator "
+"`@timer` besser geeignet."
 
 #: ../../source/api/timer.md miniworlds.tools.timer.loop
 #: miniworlds.tools.timer.timer of
@@ -68,9 +73,11 @@ msgstr "Hook-Methode, die ausgeführt wird, wenn das Timer-Intervall erreicht is
 
 #: miniworlds.tools.timer.Timer.act:3 of
 msgid ""
-"Subclasses override this method with the action that should happen after the "
-"configured number of frames."
-msgstr "Unterklassen überschreiben diese Methode mit der Aktion, die nach der eingestellten Anzahl von Frames passieren soll."
+"Subclasses override this method with the action that should happen after "
+"the configured number of frames."
+msgstr ""
+"Unterklassen überschreiben diese Methode mit der Aktion, die nach der "
+"eingestellten Anzahl von Frames passieren soll."
 
 #: miniworlds.tools.timer.Timer.tick:1 of
 msgid "Count frames and call `act()` when the interval is reached."
@@ -125,16 +132,19 @@ msgstr "LoopActionTimer"
 msgid ""
 "Calls a method after `time` frames repeatedly until the timer is "
 "unregistered."
-msgstr "Ruft eine Methode nach jeweils `time` Frames wiederholt auf, bis der Timer abgemeldet wird."
+msgstr ""
+"Ruft eine Methode nach jeweils `time` Frames wiederholt auf, bis der "
+"Timer abgemeldet wird."
 
 #: ../../source/api/timer.md:31
-#, fuzzy
 msgid "timer"
-msgstr "Timer"
+msgstr "timer"
 
 #: miniworlds.tools.timer.timer:1 of
 msgid "Decorate a function to run once after a number of frames."
-msgstr "Dekoriert eine Funktion, damit sie nach einer Anzahl von Frames einmal ausgeführt wird."
+msgstr ""
+"Dekoriert eine Funktion, damit sie nach einer Anzahl von Frames einmal "
+"ausgeführt wird."
 
 #: miniworlds.tools.timer.timer:3 of
 msgid "Frames to wait before the function runs."
@@ -146,8 +156,11 @@ msgstr "loop"
 
 #: miniworlds.tools.timer.loop:1 of
 msgid "Decorate a function to run repeatedly after a frame interval."
-msgstr "Dekoriert eine Funktion, damit sie nach einem Frame-Intervall wiederholt ausgeführt wird."
+msgstr ""
+"Dekoriert eine Funktion, damit sie nach einem Frame-Intervall wiederholt "
+"ausgeführt wird."
 
 #: miniworlds.tools.timer.loop:3 of
 msgid "Frames between function calls."
 msgstr "Frames zwischen den Funktionsaufrufen."
+

@@ -93,11 +93,11 @@ msgstr "Rückgabetyp"
 #: miniworlds.positions.vector.Vector.add_to_position:3
 #: miniworlds.positions.vector.Vector.to_position:4 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.positions.vector.Vector.add_to_position:5
 #: miniworlds.positions.vector.Vector.from_position:5 of
@@ -151,9 +151,8 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
 
 #: miniworlds.positions.vector.Vector.angle_to:5
 #: miniworlds.positions.vector.Vector.distance_to:5 of
-#, fuzzy
 msgid "A Vector or tuple."
-msgstr "fügt Vektor `other` zu sich selbst hinzu."
+msgstr "Ein Vector oder Tupel."
 
 #: miniworlds.positions.vector.Vector.angle_to:7 of
 msgid "Angle in degrees between 0 and 180."
@@ -161,7 +160,9 @@ msgstr "Winkel in Grad zwischen 0 und 180."
 
 #: miniworlds.positions.vector.Vector.distance_to:1 of
 msgid "Calculate the Euclidean distance to another vector or position."
-msgstr "Berechnet den euklidischen Abstand zu einem anderen Vektor oder zu einer Position."
+msgstr ""
+"Berechnet den euklidischen Abstand zu einem anderen Vektor oder zu einer "
+"Position."
 
 #: miniworlds.positions.vector.Vector.distance_to:7 of
 msgid "The distance as float."
@@ -186,9 +187,8 @@ msgstr "Erzeugt einen Vektor vom Actor-Mittelpunkt zu einer Zielposition."
 #: miniworlds.positions.vector.Vector.from_actor_and_position:3
 #: miniworlds.positions.vector.Vector.from_actor_direction:3
 #: miniworlds.positions.vector.Vector.from_actors:3 of
-#, fuzzy
 msgid ":sphinx_autodoc_typehints_type:`Vector`"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ":sphinx_autodoc_typehints_type:`Vector`"
 
 #: miniworlds.positions.vector.Vector.from_actor_and_position:5 of
 msgid "The start actor."
@@ -241,18 +241,17 @@ msgstr "Erzeugt einen Einheitsvektor aus einer Miniworlds-Richtung."
 #: miniworlds.positions.vector.Vector.limit:3
 #: miniworlds.positions.vector.Vector.normalize:3
 #: miniworlds.positions.vector.Vector.rotate:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\``"
-msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\``"
 
 #: miniworlds.positions.vector.Vector.from_direction:5 of
 msgid ""
-"Direction in Miniworlds convention. Common values are `0` or `\"up\"`, `90` "
-"or `\"right\"`, `-90` or `\"left\"`, and `180` or `\"down\"`."
-msgstr "Richtung in der Miniworlds-Konvention. Häufige Werte sind `0` oder `\"up\"`, `90` oder `\"right\"`, `-90` oder `\"left\"` und `180` oder `\"down\"`."
+"Direction in Miniworlds convention. Common values are `0` or `\"up\"`, "
+"`90` or `\"right\"`, `-90` or `\"left\"`, and `180` or `\"down\"`."
+msgstr ""
+"Richtung in der Miniworlds-Konvention. Häufige Werte sind `0` oder "
+"`\"up\"`, `90` oder `\"right\"`, `-90` oder `\"left\"` und `180` oder "
+"`\"down\"`."
 
 #: miniworlds.positions.vector.Vector.from_direction:9 of
 msgid "A new unit Vector pointing in the given direction."
@@ -308,22 +307,20 @@ msgstr "Maximal erlaubte Länge."
 
 #: miniworlds.positions.vector.Vector.limit:7
 #: miniworlds.positions.vector.Vector.rotate:7 of
-#, fuzzy
 msgid "The vector itself."
-msgstr "fügt Vektor `other` zu sich selbst hinzu."
+msgstr "Der Vektor selbst."
 
 #: miniworlds.positions.vector.Vector.multiply:1 of
 msgid "Multiply by a scalar or compute a dot product."
 msgstr "Multipliziert mit einem Skalar oder berechnet ein Skalarprodukt."
 
 #: miniworlds.positions.vector.Vector.multiply:3 of
-#, fuzzy
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\` \\| \\:py\\:class\\:\\`float\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
+" \\| \\:py\\:class\\:\\`float\\``"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.positions.vector.Vector\\``"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.positions.vector.Vector\\`"
+" \\| \\:py\\:class\\:\\`float\\``"
 
 #: miniworlds.positions.vector.Vector.multiply:5 of
 msgid "Scalar value or another `Vector`."
@@ -331,7 +328,9 @@ msgstr "Skalarwert oder ein anderer `Vector`."
 
 #: miniworlds.positions.vector.Vector.multiply:7 of
 msgid "A scaled `Vector` for scalar input, or a dot product for vectors."
-msgstr "Ein skalierter `Vector` bei Skalar-Eingabe oder ein Skalarprodukt bei Vektoren."
+msgstr ""
+"Ein skalierter `Vector` bei Skalar-Eingabe oder ein Skalarprodukt bei "
+"Vektoren."
 
 #: miniworlds.positions.vector.Vector.normalize:1 of
 msgid "Normalize the vector to length 1 in-place."
@@ -342,9 +341,8 @@ msgid "The vector itself. A zero-length vector is returned unchanged."
 msgstr "Der Vektor selbst. Ein Vektor der Länge 0 wird unverändert zurückgegeben."
 
 #: miniworlds.positions.vector.Vector.rotate:1 of
-#, fuzzy
 msgid "Rotate the vector in-place."
-msgstr "fügt Vektor `other` zu sich selbst hinzu."
+msgstr "Dreht den Vektor an Ort und Stelle."
 
 #: miniworlds.positions.vector.Vector.rotate:5 of
 msgid "Rotation angle in degrees."
@@ -369,3 +367,4 @@ msgstr "Die x-Komponente des Vektors."
 #: miniworlds.positions.vector.Vector.y:1 of
 msgid "The y-component of the vector."
 msgstr "Die y-Komponente des Vektors."
+

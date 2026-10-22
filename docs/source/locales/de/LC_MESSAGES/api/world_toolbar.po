@@ -78,9 +78,8 @@ msgid "Examples"
 msgstr "Beispiele"
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.__init__:1 of
-#, fuzzy
 msgid "Create a toolbar."
-msgstr "World > Toolbar"
+msgstr "Erstellt eine Toolbar."
 
 #: miniworlds.worlds.gui.toolbar.Toolbar.background_color:1 of
 msgid "Toolbar background color."

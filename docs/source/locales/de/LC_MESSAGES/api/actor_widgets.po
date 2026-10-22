@@ -107,9 +107,8 @@ msgstr ""
 
 #: ../../source/api/actor_widgets.md
 #: miniworlds.actors.widgets.button.Button.on_clicked_left of
-#, fuzzy
 msgid "Return type"
-msgstr "Gib str(self) zurück."
+msgstr "Rückgabetyp"
 
 #: miniworlds.actors.widgets.button.Button.act:7
 #: miniworlds.actors.widgets.button.Button.on_clicked_left:5 of
@@ -169,9 +168,8 @@ msgid "Input"
 msgstr "Input"
 
 #: miniworlds.actors.widgets.input.Input:1 of
-#, fuzzy
 msgid "Text input field for use inside a `Toolbar`."
-msgstr "Text-Label für die Verwendung in einer `Toolbar`."
+msgstr "Text-Eingabefeld zur Verwendung in einer `Toolbar`."
 
 #: miniworlds.actors.widgets.input.Input:3 of
 msgid ""
@@ -243,9 +241,8 @@ msgid "int and float values are converted to string."
 msgstr "Werte vom Typ int und float werden in Zeichenketten umgewandelt."
 
 #: ../../source/api/actor_widgets.md:28
-#, fuzzy
 msgid "YesNoButton"
-msgstr "Knopf"
+msgstr "YesNoButton"
 
 #: miniworlds.actors.widgets.yesno.YesNoButton:1 of
 msgid "A widget with a yes and a no button side by side."
@@ -293,9 +290,8 @@ msgid "Decrease the counter by ``value``."
 msgstr "Verringere den Zähler um ``value``."
 
 #: ../../source/api/actor_widgets.md:42
-#, fuzzy
 msgid "FPSLabel"
-msgstr "Etikett"
+msgstr "FPSLabel"
 
 #: miniworlds.actors.widgets.fps.FPSLabel:1 of
 msgid "Label that displays the measured frames per second."
@@ -320,14 +316,12 @@ msgstr "Präfix, das vor dem gemessenen Wert angezeigt wird."
 
 #: miniworlds.actors.widgets.fps.FPSLabel:9
 #: miniworlds.actors.widgets.time.TimeLabel:6 of
-#, fuzzy
 msgid "Optional path to an image shown alongside the text."
-msgstr "Optionaler Pfad zu einem Bild, das auf dem Button angezeigt wird."
+msgstr "Optionaler Pfad zu einem Bild, das neben dem Text angezeigt wird."
 
 #: ../../source/api/actor_widgets.md:49
-#, fuzzy
 msgid "TimeLabel"
-msgstr "Etikett"
+msgstr "TimeLabel"
 
 #: miniworlds.actors.widgets.time.TimeLabel:1 of
 msgid "Label that displays the current frame number of a world."
@@ -342,7 +336,6 @@ msgstr ""
 "wird die Welt verwendet, zu der das Widget hinzugefügt wird."
 
 #: miniworlds.actors.widgets.time.TimeLabel:5 of
-#, fuzzy
 msgid "Prefix displayed before the frame number."
-msgstr "Der vom Label angezeigte Text."
+msgstr "Präfix, das vor der Frame-Nummer angezeigt wird."
 

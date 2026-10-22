@@ -76,7 +76,8 @@ invoke docs.l10n-check
 ```
 
 The check regenerates the catalogs the same way the docs workflow does and
-fails if a priority API page has untranslated messages. `deploy.push` and
+fails if a priority API page has untranslated or fuzzy messages (fuzzy
+messages render as English in the German docs). `deploy.push` and
 `deploy.release` run it automatically before pushing. When you change
 docstrings or `docs/source` pages, new messages usually appear in
 `docs/source/locales/de/LC_MESSAGES`: translate them and commit the updated

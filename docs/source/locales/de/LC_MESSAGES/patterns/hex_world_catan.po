@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:26+0200\n"
 "PO-Revision-Date: 2026-10-21 20:00+0200\n"
 "Last-Translator: Andreas Siebel\n"
 "Language: de\n"
@@ -89,8 +89,8 @@ msgstr "Auf Hexfelder, Ecken und Kanten klicken"
 msgid ""
 "`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
 "`world.get_corner_from_pixel(mouse_pos)` the nearest corner, and "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. The corner and "
-"edge queries return `None` if the pixel is outside the world."
+"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. All three "
+"queries return `None` if the pixel is outside the world."
 msgstr ""
 "`world.get_tile_from_pixel(mouse_pos)` gibt das Hexfeld unter der Maus "
 "zurück, `world.get_corner_from_pixel(mouse_pos)` die nächstgelegene Ecke "
@@ -104,11 +104,11 @@ msgstr ""
 "Das Beispiel platziert eine Siedlung (kleiner Kreis) auf der angeklickten"
 " Ecke und eine Straße (kleines Rechteck) auf der angeklickten Kante:"
 
-#: ../../source/patterns/hex_world_catan.md:92
+#: ../../source/patterns/hex_world_catan.md:94
 msgid "Query the neighborhood"
 msgstr "Die Nachbarschaft abfragen"
 
-#: ../../source/patterns/hex_world_catan.md:94
+#: ../../source/patterns/hex_world_catan.md:96
 msgid ""
 "`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
 "given hex distance. `tile.get_neighbour_tiles()` returns the up to six "

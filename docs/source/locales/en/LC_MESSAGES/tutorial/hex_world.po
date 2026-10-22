@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -106,14 +106,15 @@ msgstr ""
 #: ../../source/tutorial/hex_world.md:104
 msgid ""
 "With `@world.register` you can react to mouse clicks. "
-"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:"
+"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
+"or `None` if the click is outside the world:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:122
+#: ../../source/tutorial/hex_world.md:125
 msgid "Step 6: Settlements and roads"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:124
+#: ../../source/tutorial/hex_world.md:127
 msgid ""
 "Corners and edges are positions, too. "
 "`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner, "
@@ -122,21 +123,21 @@ msgid ""
 "console is attached to the world."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:130
+#: ../../source/tutorial/hex_world.md:133
 msgid ""
 "A left click places a settlement (small circle) on a corner, a right "
 "click places a road (small rectangle) on an edge:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:156
+#: ../../source/tutorial/hex_world.md:159
 msgid "Step 7: A mini-Catan board"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:158
+#: ../../source/tutorial/hex_world.md:161
 msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:190
+#: ../../source/tutorial/hex_world.md:193
 msgid ""
 "From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
 "Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
@@ -144,7 +145,7 @@ msgid ""
 "your game code."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:195
+#: ../../source/tutorial/hex_world.md:198
 msgid ""
 "The full interface is documented in the [HexWorld API "
 "reference](../api/world_hex.md)."
@@ -170,5 +171,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Step 6: A mini-Catan board"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "With `@world.register` you can react to"
+#~ " mouse clicks. `world.get_tile_from_pixel(mouse_pos)`"
+#~ " returns the hex under the mouse:"
 #~ msgstr ""
 

@@ -973,6 +973,16 @@ def docs_check(c):
         ]
         if untranslated:
             raise Exit(f"{po_path} contains {len(untranslated)} untranslated messages")
+        fuzzy = [
+            message.id
+            for message in catalog
+            if message.id and message.fuzzy
+        ]
+        if fuzzy:
+            raise Exit(
+                f"{po_path} contains {len(fuzzy)} fuzzy messages that render "
+                "as English in the German docs"
+            )
 
         html = html_path.read_text(encoding="utf-8")
         matches = [text for text in DOCS_DE_API_FORBIDDEN_TEXT if text in html]
@@ -989,7 +999,8 @@ def docs_l10n_check(c):
 
     Rebuilds the gettext templates and updates the ``.po`` catalogs exactly
     like ``build.docs`` does in the docs workflow, then fails if a German
-    priority API catalog contains untranslated messages. Run this after
+    priority API catalog contains untranslated or fuzzy messages (fuzzy
+    messages render as English in the German docs). Run this after
     changing docstrings or ``docs/source`` pages: it catches missing
     translations before a push turns the docs workflow red.
 
@@ -1042,11 +1053,15 @@ def docs_l10n_check(c):
                 f"{po_path}: {len(untranslated)} untranslated message(s), "
                 f"e.g. {untranslated[0]!r}"
             )
-        fuzzy_count = sum(1 for message in catalog if message.id and message.fuzzy)
-        if fuzzy_count:
-            print(
-                f"Warning: {po_path}: {fuzzy_count} fuzzy message(s) "
-                "currently render as English in the German docs"
+        fuzzy = [
+            message.id
+            for message in catalog
+            if message.id and message.fuzzy
+        ]
+        if fuzzy:
+            problems.append(
+                f"{po_path}: {len(fuzzy)} fuzzy message(s) that render as "
+                f"English in the German docs, e.g. {fuzzy[0]!r}"
             )
 
     if problems:

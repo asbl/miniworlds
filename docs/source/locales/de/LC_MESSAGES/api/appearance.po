@@ -32,24 +32,25 @@ msgid ""
 "Backgrounds and costumes are appearances as well, so they inherit all "
 "attributes and methods defined in this class."
 msgstr ""
-"Backgrounds und Costumes sind ebenfalls Appearances und erben daher alle in "
-"dieser Klasse definierten Attribute und Methoden."
+"Backgrounds und Costumes sind ebenfalls Appearances und erben daher alle "
+"in dieser Klasse definierten Attribute und Methoden."
 
 #: ../../source/api/appearance.md:8
 msgid "API Reference"
 msgstr "API-Referenz"
 
 #: miniworlds.appearances.appearance.Appearance:1 of
-#, fuzzy
 msgid "Base class for actor costumes and world backgrounds."
-msgstr "Basisklasse von Actorkostümen und Welt-Hintergründen"
+msgstr "Basisklasse von Actor-Kostümen und Welt-Hintergründen."
 
 #: miniworlds.appearances.appearance.Appearance:3 of
-#, fuzzy
 msgid ""
 "`Appearance` is the parent class of both `Costume` and `Background`. You "
 "normally access it through `actor.costume` or `world.background`."
-msgstr "`Appearance` ist die Basisklasse von `Background` und `Costume`."
+msgstr ""
+"`Appearance` ist die Basisklasse von `Costume` und `Background`. "
+"Normalerweise greifst du über `actor.costume` oder `world.background` "
+"darauf zu."
 
 #: miniworlds.appearances.appearance.Appearance:7
 #: miniworlds.appearances.appearance.Appearance.add_images:6
@@ -73,9 +74,8 @@ msgstr "Fügt eine Bildquelle hinzu und gibt ihren Index zurück."
 #: ../../source/api/appearance.md
 #: miniworlds.appearances.appearance.Appearance.set_image
 #: miniworlds.appearances.appearance.Appearance.to_colors_array of
-#, fuzzy
 msgid "Return type"
-msgstr "Gib str(self) zurück."
+msgstr "Rückgabetyp"
 
 #: miniworlds.appearances.appearance.Appearance.add_image:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
@@ -86,20 +86,18 @@ msgid "Add multiple image sources."
 msgstr "Füge mehrere Bildquellen hinzu."
 
 #: miniworlds.appearances.appearance.Appearance.add_images:3 of
-#, fuzzy
 msgid "Each source in `sources` must be a valid input for `add_image`."
-msgstr ""
-"Jede Source im Source-Parameter muss ein gültiger Parameter "
-"für :py:attr:`Appearance.cimage` sein"
+msgstr "Jede Quelle in `sources` muss eine gültige Eingabe für `add_image` sein."
 
 #: miniworlds.appearances.appearance.Appearance.after_animation:1 of
 msgid "Hook called after a non-looping animation finishes."
-msgstr "Hook, der nach dem Ende einer nicht wiederholten Animation aufgerufen wird."
+msgstr ""
+"Hook, der nach dem Ende einer nicht wiederholten Animation aufgerufen "
+"wird."
 
 #: miniworlds.appearances.appearance.Appearance.after_init:1 of
 msgid "Finalize initialization after the metaclass constructor hook."
-msgstr ""
-"Schließt die Initialisierung nach dem Konstruktor-Hook der Metaklasse ab."
+msgstr "Schließt die Initialisierung nach dem Konstruktor-Hook der Metaklasse ab."
 
 #: miniworlds.appearances.appearance.Appearance.alpha:1 of
 msgid "Transparency value of the appearance."
@@ -107,25 +105,27 @@ msgstr "Transparenzwert der Darstellung."
 
 #: miniworlds.appearances.appearance.Appearance.alpha:3 of
 msgid ""
-"Use values from `0` to `255`: - `0` means fully transparent - `255` means "
-"fully visible"
-msgstr "Verwende Werte von `0` bis `255`: - `0` bedeutet vollständig transparent - `255` bedeutet vollständig sichtbar"
+"Use values from `0` to `255`: - `0` means fully transparent - `255` means"
+" fully visible"
+msgstr ""
+"Verwende Werte von `0` bis `255`: - `0` bedeutet vollständig transparent "
+"- `255` bedeutet vollständig sichtbar"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:7 of
 msgid ""
 "If the value is between `0` and `1`, it is interpreted as a normalized "
 "opacity and converted to the 0..255 range."
-msgstr "Liegt der Wert zwischen `0` und `1`, wird er als normalisierte Deckkraft interpretiert und in den Bereich 0..255 umgerechnet."
+msgstr ""
+"Liegt der Wert zwischen `0` und `1`, wird er als normalisierte Deckkraft "
+"interpretiert und in den Bereich 0..255 umgerechnet."
 
 #: miniworlds.appearances.appearance.Appearance.animate:1 of
-#, fuzzy
 msgid "Start appearance animation."
-msgstr "Setzt mehrere Appearance-Modus-Flags auf einmal."
+msgstr "Startet die Appearance-Animation."
 
 #: miniworlds.appearances.appearance.Appearance.animate
 #: miniworlds.appearances.appearance.Appearance.from_array
 #: miniworlds.appearances.appearance.Appearance.set_image of
-#, fuzzy
 msgid "Parameters"
 msgstr "Parameter"
 
@@ -142,9 +142,8 @@ msgid "Border width in pixels."
 msgstr "Rahmenbreite in Pixeln."
 
 #: miniworlds.appearances.appearance.Appearance.border:3 of
-#, fuzzy
 msgid "A value of `0` means no border."
-msgstr "Der Wert ist 0, wenn der Actor keinen Rand hat"
+msgstr "Ein Wert von `0` bedeutet kein Rand."
 
 #: miniworlds.appearances.appearance.Appearance.border
 #: miniworlds.appearances.appearance.Appearance.border_color
@@ -171,9 +170,8 @@ msgstr "Rahmenfarbe."
 #: miniworlds.appearances.appearance.Appearance.border_color:3
 #: miniworlds.appearances.appearance.Appearance.color:3
 #: miniworlds.appearances.appearance.Appearance.stroke_color:3 of
-#, fuzzy
 msgid "tuple"
-msgstr "Typ"
+msgstr "tuple"
 
 #: miniworlds.appearances.appearance.Appearance.color:1 of
 msgid "Alias for `fill_color`."
@@ -193,8 +191,7 @@ msgstr "Zeichnet eine Bildquelle an einer lokalen Position."
 
 #: miniworlds.appearances.appearance.Appearance.draw_color_on_image:1 of
 msgid "Queue drawing a colored rectangle onto the appearance image."
-msgstr ""
-"Plant das Zeichnen eines farbigen Rechtecks auf das Appearance-Bild ein."
+msgstr "Plant das Zeichnen eines farbigen Rechtecks auf das Appearance-Bild ein."
 
 #: miniworlds.appearances.appearance.Appearance.draw_image_append:1 of
 msgid "Append a pre-rendered surface draw command."
@@ -202,8 +199,7 @@ msgstr "Hängt einen Zeichenbefehl für eine vorgerenderte Surface an."
 
 #: miniworlds.appearances.appearance.Appearance.draw_image_set:1 of
 msgid "Replace image draw commands with one surface draw command."
-msgstr ""
-"Ersetzt Bild-Zeichenbefehle durch einen einzelnen Surface-Zeichenbefehl."
+msgstr "Ersetzt Bild-Zeichenbefehle durch einen einzelnen Surface-Zeichenbefehl."
 
 #: miniworlds.appearances.appearance.Appearance.draw_on_image:1 of
 msgid "Queue drawing an image file onto the appearance image."
@@ -247,8 +243,8 @@ msgstr "Gibt die Farbe an einer lokalen Pixelposition zurück."
 
 #: miniworlds.appearances.appearance.Appearance.get_image:1 of
 msgid ""
-"If dirty, the image will be reloaded. The image pipeline will be  processed, "
-"defined by \"set_dirty\""
+"If dirty, the image will be reloaded. The image pipeline will be  "
+"processed, defined by \"set_dirty\""
 msgstr ""
 "Wenn verschmutzt, wird das Bild neu geladen. Die Bildpipeline wird "
 "verarbeitet, definiert durch \"set_dirty\""
@@ -295,11 +291,8 @@ msgid "Whether the image is mirrored horizontally."
 msgstr "Ob das Bild horizontal gespiegelt wird."
 
 #: miniworlds.appearances.appearance.Appearance.is_rotatable:1 of
-#, fuzzy
 msgid "Whether the image rotates with the parent direction."
-msgstr ""
-"Wenn True, wird das Bild unter Beibehaltung des Seitenverhältnisses "
-"hochskaliert."
+msgstr "Ob sich das Bild mit der Richtung des Parents mitdreht."
 
 #: miniworlds.appearances.appearance.Appearance.is_scaled:1 of
 msgid "Scales the token to parent-size without remaining aspect-ratio."
@@ -308,25 +301,20 @@ msgstr ""
 "Seitenverhältnis beizubehalten."
 
 #: miniworlds.appearances.appearance.Appearance.is_scaled_to_height:1 of
-#, fuzzy
 msgid "Whether the image is scaled to parent height and keeps aspect ratio."
 msgstr ""
-"Wenn True, wird das Bild unter Beibehaltung des Seitenverhältnisses "
-"hochskaliert."
+"Ob das Bild auf die Höhe des Parents skaliert wird und das "
+"Seitenverhältnis behält."
 
 #: miniworlds.appearances.appearance.Appearance.is_scaled_to_width:1 of
-#, fuzzy
 msgid "Whether the image is scaled to parent width and keeps aspect ratio."
 msgstr ""
-"Wenn True, wird das Bild unter Beibehaltung des Seitenverhältnisses "
-"hochskaliert."
+"Ob das Bild auf die Breite des Parents skaliert wird und das "
+"Seitenverhältnis behält."
 
 #: miniworlds.appearances.appearance.Appearance.is_textured:1 of
-#, fuzzy
 msgid "Whether the image is tiled over the parent area."
-msgstr ""
-"Wenn True, wird das Bild unter Beibehaltung des Seitenverhältnisses "
-"hochskaliert."
+msgstr "Ob das Bild über den Parent-Bereich gekachelt wird."
 
 #: miniworlds.appearances.appearance.Appearance.is_upscaled:1 of
 msgid "If True, the image will be upscaled remaining aspect-ratio."
@@ -336,7 +324,9 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.orientation:1 of
 msgid "Orientation offset applied before parent rotation."
-msgstr "Ausrichtungsversatz, der vor der Rotation des übergeordneten Objekts angewendet wird."
+msgstr ""
+"Ausrichtungsversatz, der vor der Rotation des übergeordneten Objekts "
+"angewendet wird."
 
 #: miniworlds.appearances.appearance.Appearance.orientation:9 of
 msgid "float"
@@ -382,9 +372,8 @@ msgid "Returns"
 msgstr "Rückgabe"
 
 #: miniworlds.appearances.appearance.Appearance.set_image:7 of
-#, fuzzy
 msgid "`True` if the image index exists."
-msgstr "Wahr, wenn der Bildindex existiert"
+msgstr "`True`, wenn der Bildindex existiert."
 
 #: miniworlds.appearances.appearance.Appearance.set_mode:1 of
 msgid "Set multiple appearance mode flags at once."
@@ -407,16 +396,12 @@ msgid "Texture tile size used when `is_textured` is enabled."
 msgstr "Kachelgröße der Textur, wenn `is_textured` aktiviert ist."
 
 #: miniworlds.appearances.appearance.Appearance.to_colors_array:1 of
-#, fuzzy
 msgid "Return the appearance image as a color array."
-msgstr "Setzt mehrere Appearance-Modus-Flags auf einmal."
+msgstr "Gibt das Appearance-Bild als Farbarray zurück."
 
 #: miniworlds.appearances.appearance.Appearance.to_colors_array:3 of
-#, fuzzy
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~numpy.ndarray\\``"
-msgstr ""
-"Beispiele: :rtype: :sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~numpy.ndarray\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~numpy.ndarray\\``"
 
 #: miniworlds.appearances.appearance.Appearance.to_colors_array:5 of
 msgid "A NumPy array containing color data."
@@ -429,3 +414,4 @@ msgstr "Ob Alpha-Transparenz aktiviert ist."
 #: miniworlds.appearances.appearance.Appearance.transparency:3 of
 msgid "The actual opacity is controlled by `alpha`."
 msgstr "Die tatsächliche Deckkraft wird über `alpha` gesteuert."
+

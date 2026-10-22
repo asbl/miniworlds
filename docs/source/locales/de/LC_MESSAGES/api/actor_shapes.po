@@ -40,15 +40,16 @@ msgid "Base class for shape actors."
 msgstr "Basisklasse fuer Shape-Actors."
 
 #: miniworlds.actors.shapes.shapes.Shape:1 of
-#, fuzzy
 msgid "Base class for geometric actors."
-msgstr "Basisklasse fuer Shape-Actors."
+msgstr "Basisklasse für geometrische Actors."
 
 #: miniworlds.actors.shapes.shapes.Shape:3 of
 msgid ""
-"Shapes share the common actor appearance properties `border`, `is_filled`, "
-"`fill_color`, and `border_color`."
-msgstr "Formen teilen die gemeinsamen Darstellungs-Eigenschaften `border`, `is_filled`, `fill_color` und `border_color` von Actor."
+"Shapes share the common actor appearance properties `border`, "
+"`is_filled`, `fill_color`, and `border_color`."
+msgstr ""
+"Formen teilen die gemeinsamen Darstellungs-Eigenschaften `border`, "
+"`is_filled`, `fill_color` und `border_color` von Actor."
 
 #: miniworlds.actors.shapes.shapes.Arc:10
 #: miniworlds.actors.shapes.shapes.Circle:7
@@ -70,9 +71,7 @@ msgstr "Rückgabetyp"
 
 #: miniworlds.actors.shapes.shapes.Shape.get_costume_class:2
 #: miniworlds.actors.shapes.shapes.Shape.new_costume:4 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:"
-"\\`\\~miniworlds.actors.shapes.shape\\_costume.ShapeCostume\\``"
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.shapes.shape\\_costume.ShapeCostume\\``"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.shapes.shape\\_costume.ShapeCostume\\``"
 
 #: miniworlds.actors.shapes.shapes.Circle.new_costume:1
@@ -88,12 +87,10 @@ msgid "Point"
 msgstr "Punkt"
 
 #: miniworlds.actors.shapes.shapes.Point:1 of
-#, fuzzy
 msgid "Circle with radius 1."
-msgstr "Ein Punkt ist ein Kreis mit Radius 1"
+msgstr "Kreis mit Radius 1."
 
 #: ../../source/api/actor_shapes.md miniworlds.actors.shapes.shapes.Triangle of
-#, fuzzy
 msgid "Parameters"
 msgstr "Parameter"
 
@@ -102,9 +99,8 @@ msgid "Point position as `(x, y)`."
 msgstr "Punktposition als `(x, y)`."
 
 #: miniworlds.actors.shapes.shapes.Point.__init__:1 of
-#, fuzzy
 msgid "Create a point at a position."
-msgstr "Erstelle einen Kreis in der oberen linken Position"
+msgstr "Erstellt einen Punkt an einer Position."
 
 #: ../../source/api/actor_shapes.md:23
 msgid "Circle"
@@ -142,9 +138,8 @@ msgstr "Rückgabe"
 
 #: miniworlds.actors.shapes.shapes.Circle.from_center:6
 #: miniworlds.actors.shapes.shapes.Circle.from_topleft:6 of
-#, fuzzy
 msgid "The created circle."
-msgstr "Der Radius des Kreises"
+msgstr "Der erstellte Kreis."
 
 #: miniworlds.actors.shapes.shapes.Circle.from_topleft:1 of
 msgid "Create a circle positioned by its top-left corner."
@@ -154,18 +149,19 @@ msgstr "Erzeuge einen Kreis, der über seine linke obere Ecke positioniert wird.
 #: miniworlds.actors.shapes.shapes.Circle.from_topleft:3
 #: miniworlds.actors.shapes.shapes.Ellipse:3
 #: miniworlds.actors.shapes.shapes.Rectangle:3 of
-#, fuzzy
 msgid "Top-left position as `(x, y)`."
-msgstr "Obere linke Position des Rechtecks"
+msgstr "Oben-links-Position als `(x, y)`."
 
 #: miniworlds.actors.shapes.shapes.Circle.get_costume_class:2
 #: miniworlds.actors.shapes.shapes.Ellipse.get_costume_class:2
 #: miniworlds.actors.shapes.shapes.Line.get_costume_class:2
 #: miniworlds.actors.shapes.shapes.Rectangle.get_costume_class:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ \\\\\\"
-"[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ \\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.appearances.costume.Costume\\`\\]`"
 
 #: miniworlds.actors.shapes.shapes.Arc.end_angle
 #: miniworlds.actors.shapes.shapes.Arc.start_angle
@@ -198,9 +194,8 @@ msgid "Ellipse"
 msgstr "Ellipse"
 
 #: miniworlds.actors.shapes.shapes.Ellipse:1 of
-#, fuzzy
 msgid "Elliptic shape."
-msgstr "Eine elliptische Form."
+msgstr "Elliptische Form."
 
 #: miniworlds.actors.shapes.shapes.Ellipse:4
 #: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:4 of
@@ -225,14 +220,12 @@ msgid "Raises"
 msgstr "Löst aus"
 
 #: miniworlds.actors.shapes.shapes.Ellipse.check_arguments:7 of
-#, fuzzy
 msgid "If *position* is not a tuple."
-msgstr "Die end_position als 2-Tupel."
+msgstr "Wenn *position* kein Tupel ist."
 
 #: miniworlds.actors.shapes.shapes.Ellipse.from_center:1 of
-#, fuzzy
 msgid "Create an ellipse positioned by its center."
-msgstr "Erstellt eine Ellipse mit dem Mittelpunkt an der Position"
+msgstr "Erstellt eine Ellipse, die über ihren Mittelpunkt positioniert wird."
 
 #: miniworlds.actors.shapes.shapes.Ellipse.from_topleft:1 of
 msgid "Create an ellipse positioned by its top-left corner."
@@ -247,14 +240,12 @@ msgid "Line shape between two positions."
 msgstr "Linienform zwischen zwei Positionen."
 
 #: miniworlds.actors.shapes.shapes.Line:3 of
-#, fuzzy
 msgid "Start position as `(x, y)`."
-msgstr "Die start_position als 2-Tupel."
+msgstr "Startposition als `(x, y)`."
 
 #: miniworlds.actors.shapes.shapes.Line:4 of
-#, fuzzy
 msgid "End position as `(x, y)`."
-msgstr "Die end_position als 2-Tupel."
+msgstr "Endposition als `(x, y)`."
 
 #: miniworlds.actors.shapes.shapes.Line.border:1
 #: miniworlds.actors.shapes.shapes.Line.line_width:1
@@ -268,14 +259,15 @@ msgstr "Actor-Richtung in der Miniworlds/Scratch-Konvention."
 
 #: miniworlds.actors.shapes.shapes.Line.direction:3 of
 msgid ""
-"Common values are `0` or `\"up\"`, `90` or `\"right\"`, `-90` or `\"left\"`, "
-"and `180` or `\"down\"`."
-msgstr "Häufige Werte sind `0` oder `\"up\"`, `90` oder `\"right\"`, `-90` oder `\"left\"` und `180` oder `\"down\"`."
+"Common values are `0` or `\"up\"`, `90` or `\"right\"`, `-90` or "
+"`\"left\"`, and `180` or `\"down\"`."
+msgstr ""
+"Häufige Werte sind `0` oder `\"up\"`, `90` oder `\"right\"`, `-90` oder "
+"`\"left\"` und `180` oder `\"down\"`."
 
 #: miniworlds.actors.shapes.shapes.Line.direction:21 of
-#, fuzzy
 msgid "int"
-msgstr "Punkt"
+msgstr "int"
 
 #: miniworlds.actors.shapes.shapes.Line.end:1
 #: miniworlds.actors.shapes.shapes.Line.end_position:1 of
@@ -311,9 +303,8 @@ msgid "Rectangle"
 msgstr "Rechteck"
 
 #: miniworlds.actors.shapes.shapes.Rectangle:1 of
-#, fuzzy
 msgid "Rectangular shape."
-msgstr "Rechteck"
+msgstr "Rechteckige Form."
 
 #: miniworlds.actors.shapes.shapes.Rectangle:4 of
 msgid "Rectangle width in pixels."
@@ -324,9 +315,8 @@ msgid "Rectangle height in pixels."
 msgstr "Höhe des Rechtecks in Pixeln."
 
 #: miniworlds.actors.shapes.shapes.Rectangle.from_center:1 of
-#, fuzzy
 msgid "Create a rectangle positioned by its center."
-msgstr "Erstellt ein Rechteck mit dem Mittelpunkt an der Position"
+msgstr "Erstellt ein Rechteck, das über seinen Mittelpunkt positioniert wird."
 
 #: miniworlds.actors.shapes.shapes.Rectangle.from_topleft:1 of
 msgid "Create a rectangle positioned by its top-left corner."
@@ -337,14 +327,12 @@ msgid "Polygon"
 msgstr "Polygon"
 
 #: miniworlds.actors.shapes.shapes.Polygon:1 of
-#, fuzzy
 msgid "Polygon shape."
-msgstr "Eine Polygon-Form."
+msgstr "Polygon-Form."
 
 #: miniworlds.actors.shapes.shapes.Polygon:3 of
-#, fuzzy
 msgid "List of corner points."
-msgstr "Eine Liste von Punkten"
+msgstr "Liste der Eckpunkte."
 
 #: miniworlds.actors.shapes.shapes.Polygon.pointlist:1 of
 msgid "Polygon corner points."
@@ -355,9 +343,8 @@ msgid "list[tuple[float, float]]"
 msgstr "list[tuple[float, float]]"
 
 #: ../../source/api/actor_shapes.md:58
-#, fuzzy
 msgid "Triangle"
-msgstr "Rechteck"
+msgstr "Triangle"
 
 #: miniworlds.actors.shapes.shapes.Triangle:1 of
 msgid "A triangle shape defined by three corner points."
@@ -380,9 +367,8 @@ msgid "Arc"
 msgstr "Arc"
 
 #: miniworlds.actors.shapes.shapes.Arc:1 of
-#, fuzzy
 msgid "Elliptic arc shape."
-msgstr "Eine elliptische Form."
+msgstr "Elliptische Bogenform."
 
 #: miniworlds.actors.shapes.shapes.Arc:4 of
 msgid "Arc width in pixels."
@@ -405,3 +391,4 @@ msgstr "Endwinkel in Grad."
 #: miniworlds.actors.shapes.shapes.Arc.from_center:1 of
 msgid "Create an arc positioned by its center."
 msgstr "Erzeuge einen Bogen, der über seinen Mittelpunkt positioniert wird."
+

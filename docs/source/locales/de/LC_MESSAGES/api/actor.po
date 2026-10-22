@@ -55,29 +55,24 @@ msgid "Useful beginner aliases on Actor include:"
 msgstr "Nutzliche Anfaenger-Aliasse auf Actor sind:"
 
 #: ../../source/api/actor.md:15
-#, fuzzy
 msgid "`go_to(...)` for `move_to(...)`"
-msgstr "- `go_to(...)` fuer `move_to(...)`"
+msgstr "`go_to(...)` für `move_to(...)`"
 
 #: ../../source/api/actor.md:16
-#, fuzzy
 msgid "`move_forward(...)` for `move(...)`"
-msgstr "- `move_forward(...)` fuer `move(...)`"
+msgstr "`move_forward(...)` für `move(...)`"
 
 #: ../../source/api/actor.md:17
-#, fuzzy
 msgid "`face(...)` for `set_direction(...)`"
-msgstr "- `face(...)` fuer `set_direction(...)`"
+msgstr "`face(...)` für `set_direction(...)`"
 
 #: ../../source/api/actor.md:18
-#, fuzzy
 msgid "`turn(...)` for `turn_right(...)`"
-msgstr "- `turn(...)` fuer `turn_right(...)`"
+msgstr "`turn(...)` für `turn_right(...)`"
 
 #: ../../source/api/actor.md:19
-#, fuzzy
 msgid "`touching(...)` and `touching_all(...)` for detect helpers"
-msgstr "- `touching(...)` und `touching_all(...)` fuer Detect-Helfer"
+msgstr "`touching(...)` und `touching_all(...)` für Detect-Helfer"
 
 #: ../../source/api/actor.md:21
 msgid "API Reference"
@@ -197,9 +192,8 @@ msgstr ""
 "überschriebenen `act`-Methode nie nötig."
 
 #: miniworlds.actors.actor.Actor.add_costume:1 of
-#, fuzzy
 msgid "Add a costume to the actor."
-msgstr "Füge das erste Kostüm aus der Farbe hinzu:"
+msgstr "Fügt dem Actor ein Kostüm hinzu."
 
 #: ../../source/api/actor.md miniworlds.actors.actor.Actor.add_costume
 #: miniworlds.actors.actor.Actor.add_costumes
@@ -285,11 +279,12 @@ msgid "Parameters"
 msgstr "Parameter"
 
 #: miniworlds.actors.actor.Actor.add_costume:5 of
-#, fuzzy
 msgid ""
 "Image path, color tuple, list of image sources, existing `Costume`, or "
 "`None` for an empty costume."
-msgstr "Pfad zum ersten Bild des neuen Kostüms oder Tupel mit Farbwert"
+msgstr ""
+"Bildpfad, Farbtupel, Liste von Bildquellen, ein vorhandenes `Costume` "
+"oder `None` für ein leeres Kostüm."
 
 #: ../../source/api/actor.md miniworlds.actors.actor.Actor.add_costume
 #: miniworlds.actors.actor.Actor.add_costumes
@@ -332,23 +327,20 @@ msgid "The new costume."
 msgstr "Das neue Kostüm."
 
 #: miniworlds.actors.actor.Actor.add_costumes:1 of
-#, fuzzy
 msgid "Add several costumes."
-msgstr "Kostüm hinzufügen und Kostüme zählen"
+msgstr "Fügt mehrere Kostüme hinzu."
 
 #: miniworlds.actors.actor.Actor.add_costumes:5 of
 msgid "List of image paths, color tuples, or costume sources."
 msgstr "Liste aus Bildpfaden, Farbtupeln oder Kostümquellen."
 
 #: miniworlds.actors.actor.Actor.add_costumes:7 of
-#, fuzzy
 msgid "The last added costume."
-msgstr "Das neue Kostüm."
+msgstr "Das zuletzt hinzugefügte Kostüm."
 
 #: miniworlds.actors.actor.Actor.animate:1 of
-#, fuzzy
 msgid "Animate the current costume."
-msgstr "Animiert das aktuelle Kostüm mit der angegebenen Geschwindigkeit."
+msgstr "Animiert das aktuelle Kostüm."
 
 #: miniworlds.actors.actor.Actor.animate:3
 #: miniworlds.actors.actor.Actor.animate_costume:4
@@ -357,18 +349,16 @@ msgid "Frames between animation steps."
 msgstr "Frames zwischen Animationsschritten."
 
 #: miniworlds.actors.actor.Actor.animate_costume:1 of
-#, fuzzy
 msgid "Animate a specific costume."
-msgstr "Animiert ein bestimmtes Kostüm mit der angegebenen Geschwindigkeit."
+msgstr "Animiert ein bestimmtes Kostüm."
 
 #: miniworlds.actors.actor.Actor.animate_costume:3 of
 msgid "Costume to animate."
 msgstr "Zu animierendes Kostüm."
 
 #: miniworlds.actors.actor.Actor.animate_loop:1 of
-#, fuzzy
 msgid "Animate the current costume in a loop."
-msgstr "Animiert das aktuelle Kostüm mit der angegebenen Geschwindigkeit."
+msgstr "Animiert das aktuelle Kostüm in einer Schleife."
 
 #: miniworlds.actors.actor.Actor.before_remove:1 of
 msgid "Hook called immediately before the actor is removed from the world."
@@ -386,14 +376,12 @@ msgstr ""
 "kein `super()`-Aufruf nötig."
 
 #: miniworlds.actors.actor.Actor.border:1 of
-#, fuzzy
 msgid "Border width of the actor."
-msgstr "Die Breite des Actors in Pixeln."
+msgstr "Randbreite des Actors."
 
 #: miniworlds.actors.actor.Actor.border:3 of
-#, fuzzy
 msgid "A value of `0` means no border."
-msgstr "Der Wert ist 0, wenn der Actor keinen Rand hat."
+msgstr "Ein Wert von `0` bedeutet kein Rand."
 
 #: miniworlds.actors.actor.Actor.border:6
 #: miniworlds.actors.actor.Actor.border_color:4
@@ -404,19 +392,17 @@ msgid "Notes"
 msgstr "Hinweise"
 
 #: miniworlds.actors.actor.Actor.border:7 of
-#, fuzzy
 msgid ""
 "You can also configure borders via `costume.border` or "
 "`world.default_border`."
 msgstr ""
-"Sie können auch den Rand mit ``costume.border`` festlegen oder Sie können"
-" den Rand mit ``world.default_border`` festlegen"
+"Ränder kannst du auch über `costume.border` oder `world.default_border` "
+"konfigurieren."
 
 #: miniworlds.actors.actor.Actor.border_color:1
 #: miniworlds.actors.actor.Actor.stroke_color:1 of
-#, fuzzy
 msgid "Border color as RGBA tuple."
-msgstr "Randfarbe des Actors."
+msgstr "Randfarbe als RGBA-Tupel."
 
 #: miniworlds.actors.actor.Actor.border_color:5
 #: miniworlds.actors.actor.Actor.stroke_color:5 of
@@ -427,26 +413,22 @@ msgstr ""
 
 #: miniworlds.actors.actor.Actor.border_color:6
 #: miniworlds.actors.actor.Actor.stroke_color:6 of
-#, fuzzy
 msgid "Alias: `Actor.stroke_color`."
-msgstr "Aliase:  :py:attr:`Actor.stroke_color`"
+msgstr "Alias: `Actor.stroke_color`."
 
 #: miniworlds.actors.actor.Actor.bounce_from_actor:1 of
-#, fuzzy
 msgid "Reflect movement direction after colliding with another actor."
 msgstr ""
-"Spiegelt die Bewegungsrichtung bei einer Kollision mit einem anderen "
+"Spiegelt die Bewegungsrichtung nach einer Kollision mit einem anderen "
 "Actor."
 
 #: miniworlds.actors.actor.Actor.bounce_from_actor:3 of
-#, fuzzy
 msgid "Actor to bounce from."
-msgstr "\"prallt\" von einem Rand ab."
+msgstr "Actor, von dem abgeprallt wird."
 
 #: miniworlds.actors.actor.Actor.bounce_from_border:1 of
-#, fuzzy
 msgid "Bounce the actor away from world borders."
-msgstr "\"prallt\" von einem Rand ab."
+msgstr "Lässt den Actor von Welträndern abprallen."
 
 #: miniworlds.actors.actor.Actor.bounce_from_border:3
 #: miniworlds.actors.actor.Actor.detect_actor_at:3
@@ -461,14 +443,12 @@ msgstr "Randnamen wie `\"left\"` oder `\"top\"`."
 
 #: miniworlds.actors.actor.Actor.bounce_from_border:7
 #: miniworlds.actors.actor.Actor.move_back:5 of
-#, fuzzy
 msgid "The actor itself."
-msgstr "Der Actor selbst"
+msgstr "Der Actor selbst."
 
 #: miniworlds.actors.actor.Actor.center:1 of
-#, fuzzy
 msgid "Center position in world coordinates."
-msgstr "Setzt die Actor-Position in Weltkoordinaten."
+msgstr "Mittelposition in Weltkoordinaten."
 
 #: miniworlds.actors.actor.Actor.center miniworlds.actors.actor.Actor.center_x
 #: miniworlds.actors.actor.Actor.center_y
@@ -502,9 +482,8 @@ msgid "tuple[float, float]"
 msgstr "tuple[float, float]"
 
 #: miniworlds.actors.actor.Actor.center_x:1 of
-#, fuzzy
 msgid "X-coordinate of the actor center."
-msgstr "x-Wert der Actor-Mittelposition"
+msgstr "x-Koordinate der Actor-Mittelposition."
 
 #: miniworlds.actors.actor.Actor.center_x:3
 #: miniworlds.actors.actor.Actor.center_y:3
@@ -518,9 +497,8 @@ msgid "float"
 msgstr "float"
 
 #: miniworlds.actors.actor.Actor.center_y:1 of
-#, fuzzy
 msgid "Y-coordinate of the actor center."
-msgstr "y-Wert der Actor-Mittelposition"
+msgstr "y-Koordinate der Actor-Mittelposition."
 
 #: miniworlds.actors.actor.Actor.class_name:1 of
 msgid "Class name of this actor instance."
@@ -552,9 +530,8 @@ msgstr "str"
 
 #: miniworlds.actors.actor.Actor.color:1
 #: miniworlds.actors.actor.Actor.fill_color:1 of
-#, fuzzy
 msgid "Fill color of the actor as RGBA tuple."
-msgstr "Die Füllfarbe des Actors als RGBA-Wert, z.B. (255, 0, 0) für Rot."
+msgstr "Füllfarbe des Actors als RGBA-Tupel."
 
 #: miniworlds.actors.actor.Actor.color:3
 #: miniworlds.actors.actor.Actor.fill_color:3 of
@@ -563,9 +540,8 @@ msgstr "Das Setzen dieses Werts aktiviert auch das Füllen des Kostüms."
 
 #: miniworlds.actors.actor.Actor.color:7
 #: miniworlds.actors.actor.Actor.fill_color:7 of
-#, fuzzy
 msgid "Alias: `Actor.color`"
-msgstr "Aliase: :py:attr:`Actor.color`"
+msgstr "Alias: `Actor.color`"
 
 #: miniworlds.actors.actor.Actor.color:8
 #: miniworlds.actors.actor.Actor.fill_color:8 of
@@ -573,14 +549,12 @@ msgid "Filling an image costume replaces the visible image content."
 msgstr "Das Füllen eines Bildkostüms ersetzt den sichtbaren Bildinhalt."
 
 #: miniworlds.actors.actor.Actor.costume:1 of
-#, fuzzy
 msgid "Current active costume."
-msgstr "Actor mit Bild als Kostüm erstellen"
+msgstr "Das aktuell aktive Kostüm."
 
 #: miniworlds.actors.actor.Actor.costume:9 of
-#, fuzzy
 msgid "Costume"
-msgstr "Das neue Kostüm"
+msgstr "Costume"
 
 #: miniworlds.actors.actor.Actor.costume_count:1 of
 msgid "Number of costumes attached to the actor."
@@ -597,37 +571,34 @@ msgid "Manager containing all actor costumes."
 msgstr "Manager, der alle Kostüme des Actors enthält."
 
 #: miniworlds.actors.actor.Actor.costumes:10 of
-#, fuzzy
 msgid "CostumesManager"
-msgstr "Ruft den Kostümmanager ab"
+msgstr "CostumesManager"
 
 #: miniworlds.actors.actor.Actor.create_on_world:1 of
-#, fuzzy
 msgid "Create an actor on a specific world."
-msgstr "Erstellen Sie einen Actor mit einem Bild:"
+msgstr "Erstellt einen Actor in einer bestimmten Welt."
 
 #: miniworlds.actors.actor.Actor.create_on_world:3 of
-#, fuzzy
 msgid "World to place the actor on."
-msgstr "Welt, zu der dieser Actor gehört."
+msgstr "Welt, in der der Actor platziert wird."
 
 #: miniworlds.actors.actor.Actor.create_on_world:5
 #: miniworlds.actors.actor.Actor.from_center:5
 #: miniworlds.actors.actor.Actor.from_topleft:5 of
-#, fuzzy
 msgid "The created actor."
-msgstr "Der andere Actor"
+msgstr "Der erstellte Actor."
 
 #: miniworlds.actors.actor.Actor.detect:1 of
 msgid "Return the first detected actor."
 msgstr "Gibt den ersten erkannten Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect:3 of
-#, fuzzy
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`"
 " \\| \\:py\\:obj\\:\\`None\\``"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`"
+" \\| \\:py\\:obj\\:\\`None\\``"
 
 #: miniworlds.actors.actor.Actor.detect:5 of
 msgid "Positional arguments forwarded to `detect_all()`."
@@ -649,9 +620,8 @@ msgstr "Gibt den ersten Actor an einem Abstand von diesem Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect_actor_at:5
 #: miniworlds.actors.actor.Actor.detect_all:6 of
-#, fuzzy
 msgid "Direction to check."
-msgstr "Legt die Richtung des Actors fest."
+msgstr "Zu prüfende Richtung."
 
 #: miniworlds.actors.actor.Actor.detect_actor_at:6
 #: miniworlds.actors.actor.Actor.detect_actors_at:6
@@ -664,20 +634,17 @@ msgstr "Abstand vom Mittelpunkt des Actors."
 #: miniworlds.actors.actor.Actor.detect_actor_in_front:5
 #: miniworlds.actors.actor.Actor.detect_actors_at:7
 #: miniworlds.actors.actor.Actor.detect_actors_in_front:5 of
-#, fuzzy
 msgid "Optional actor filter."
-msgstr "Der Actor selbst"
+msgstr "Optionaler Actor-Filter."
 
 #: miniworlds.actors.actor.Actor.detect_actor_in_front:1 of
-#, fuzzy
 msgid "Return the first actor directly in front."
-msgstr "Erkennt und liefert den ersten Actor direkt vor diesem Actor."
+msgstr "Gibt den ersten Actor direkt vor diesem Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect_actor_in_front:6
 #: miniworlds.actors.actor.Actor.detect_actors_in_front:6 of
-#, fuzzy
 msgid "Distance in front of the actor."
-msgstr "Legt die Richtung des Actors fest."
+msgstr "Abstand vor dem Actor."
 
 #: miniworlds.actors.actor.Actor.detect_actors_at:1 of
 msgid "Return all actors at an offset from this actor."
@@ -694,18 +661,16 @@ msgid "Direction to check; omit it to use the actor position."
 msgstr "Zu prüfende Richtung; weglassen, um die Actor-Position zu verwenden."
 
 #: miniworlds.actors.actor.Actor.detect_actors_at:9 of
-#, fuzzy
 msgid "List of matching actors."
-msgstr "Eine Liste von Actorn"
+msgstr "Liste der passenden Actors."
 
 #: miniworlds.actors.actor.Actor.detect_actors_in_front:1 of
 msgid "Return all actors directly in front of this actor."
 msgstr "Gibt alle Actors direkt vor diesem Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect_actors_in_front:8 of
-#, fuzzy
 msgid "Matching actors."
-msgstr "Der Actor"
+msgstr "Passende Actors."
 
 #: miniworlds.actors.actor.Actor.detect_all:1 of
 msgid "Return all actors detected at an offset from this actor."
@@ -726,24 +691,20 @@ msgid "Optional actor filter; use `None` for all actors."
 msgstr "Optionaler Actor-Filter; verwende `None` für alle Actors."
 
 #: miniworlds.actors.actor.Actor.detect_all:9 of
-#, fuzzy
 msgid "All matching actors found by the sensor."
-msgstr "Alle von Sensor gefundenen Actors"
+msgstr "Alle vom Sensor gefundenen passenden Actors."
 
 #: miniworlds.actors.actor.Actor.detect_borders:1 of
-#, fuzzy
 msgid "Return borders detected near the actor."
-msgstr "Die Breite des Actors in Pixeln."
+msgstr "Gibt Ränder zurück, die in der Nähe des Actors erkannt wurden."
 
 #: miniworlds.actors.actor.Actor.detect_borders:3 of
-#, fuzzy
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`list\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
 
 #: miniworlds.actors.actor.Actor.detect_borders:5 of
-#, fuzzy
 msgid "Distance in front of the actor to check."
-msgstr "Gibt den Abstand vor dem Aktuator an, auf den die Sensoren reagieren."
+msgstr "Abstand vor dem Actor, der geprüft wird."
 
 #: miniworlds.actors.actor.Actor.detect_borders:7 of
 msgid ""
@@ -797,19 +758,16 @@ msgid "Return background colors at an offset from the actor."
 msgstr "Gibt Hintergrundfarben an einem Abstand vom Actor zurück."
 
 #: miniworlds.actors.actor.Actor.detect_color_at:3 of
-#, fuzzy
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\` \\| "
 "\\:py\\:class\\:\\`\\~typing.List\\``"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
-"\\:py\\:class\\:\\`\\~typing.List\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\` \\| "
+"\\:py\\:class\\:\\`\\~typing.List\\``"
 
 #: miniworlds.actors.actor.Actor.detect_color_at:8 of
-#, fuzzy
 msgid "Color or colors found by the sensor."
-msgstr "Alle vom Sensor gefundenen Farben"
+msgstr "Farbe oder Farben, die vom Sensor gefunden wurden."
 
 #: miniworlds.actors.actor.Actor.detect_left_border:1
 #: miniworlds.actors.actor.Actor.detecting_left_border:1 of
@@ -818,32 +776,28 @@ msgstr "Gibt zurück, ob der Actor den linken Rand berührt."
 
 #: miniworlds.actors.actor.Actor.detect_left_border:5
 #: miniworlds.actors.actor.Actor.detecting_left_border:5 of
-#, fuzzy
 msgid "`True` if the left border is detected."
-msgstr "Wahr, wenn eine Grenze gefunden wurde."
+msgstr "`True`, wenn der linke Rand erkannt wird."
 
 #: miniworlds.actors.actor.Actor.detect_pixel:1 of
 msgid "Return whether the actor overlaps a screen pixel."
 msgstr "Gibt zurück, ob der Actor ein Bildschirmpixel überlappt."
 
 #: miniworlds.actors.actor.Actor.detect_pixel:5 of
-#, fuzzy
 msgid "Pixel position as `(x, y)`."
-msgstr "Aktuelle Mausposition als Tupel (x,y)"
+msgstr "Pixelposition als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.detect_pixel:7 of
-#, fuzzy
 msgid "`True` if the actor overlaps the pixel."
-msgstr "Die Breite des Actors in Pixeln."
+msgstr "`True`, wenn der Actor das Pixel überlappt."
 
 #: miniworlds.actors.actor.Actor.detect_point:1 of
 msgid "Return whether the actor overlaps a world point."
 msgstr "Gibt zurück, ob der Actor einen Punkt in der Welt überlappt."
 
 #: miniworlds.actors.actor.Actor.detect_point:5 of
-#, fuzzy
 msgid "World position as `(x, y)`."
-msgstr "Aktuelle Mausposition als Tupel (x,y)"
+msgstr "Weltposition als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.detect_point:7 of
 msgid "`True` if the actor overlaps the point."
@@ -854,9 +808,8 @@ msgid "Return whether the actor overlaps a rectangle."
 msgstr "Gibt zurück, ob der Actor ein Rechteck überlappt."
 
 #: miniworlds.actors.actor.Actor.detect_rect:3 of
-#, fuzzy
 msgid "Rectangle as `(x, y, width, height)` or `pygame.Rect`."
-msgstr "Setzt die Actor-Größe als `(width, height)` in Pixeln."
+msgstr "Rechteck als `(x, y, width, height)` oder `pygame.Rect`."
 
 #: miniworlds.actors.actor.Actor.detect_rect:5 of
 msgid "`True` if the actor overlaps the rectangle."
@@ -879,9 +832,8 @@ msgstr "Gibt zurück, ob der Actor den oberen Rand berührt."
 
 #: miniworlds.actors.actor.Actor.detect_top_border:5
 #: miniworlds.actors.actor.Actor.detecting_top_border:5 of
-#, fuzzy
 msgid "`True` if the top border is detected."
-msgstr "Wahr, wenn eine Grenze gefunden wurde."
+msgstr "`True`, wenn der obere Rand erkannt wird."
 
 #: miniworlds.actors.actor.Actor.direction:1 of
 msgid "Actor direction in Miniworlds/Scratch convention."
@@ -922,29 +874,24 @@ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
 
 #: miniworlds.actors.actor.Actor.flip_x:5 of
-#, fuzzy
 msgid "The new actor direction."
-msgstr "Die neue Richtung"
+msgstr "Die neue Actor-Richtung."
 
 #: miniworlds.actors.actor.Actor.from_center:1 of
-#, fuzzy
 msgid "Create an actor positioned by its center."
-msgstr "Erstellt einen Actor, dessen Ursprung als Mittelpunkt interpretiert wird."
+msgstr "Erstellt einen Actor, der über seine Mittelposition positioniert wird."
 
 #: miniworlds.actors.actor.Actor.from_center:3 of
-#, fuzzy
 msgid "Center position as `(x, y)`."
-msgstr "Aktuelle Mausposition als Tupel (x,y)"
+msgstr "Mittelposition als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.from_topleft:1 of
-#, fuzzy
 msgid "Create an actor positioned by its top-left corner."
-msgstr "Setzt die Actor-Position in Weltkoordinaten."
+msgstr "Erstellt einen Actor, der über seine Oben-links-Ecke positioniert wird."
 
 #: miniworlds.actors.actor.Actor.from_topleft:3 of
-#, fuzzy
 msgid "Top-left position as `(x, y)`."
-msgstr "Aktuelle Mausposition als Tupel (x,y)"
+msgstr "Oben-links-Position als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.get_distance_to:1 of
 msgid "Gets the distance to another actor or a position"
@@ -984,9 +931,8 @@ msgid "Return `True` when the actor currently has a costume."
 msgstr "Gibt `True` zurück, wenn der Actor aktuell ein Kostüm hat."
 
 #: miniworlds.actors.actor.Actor.height:1 of
-#, fuzzy
 msgid "Actor height in pixels."
-msgstr "Die Höhe des Actors in Pixeln."
+msgstr "Höhe des Actors in Pixeln."
 
 #: miniworlds.actors.actor.Actor.hide:1 of
 msgid "Hides a actor (the actor will be invisible)"
@@ -1004,18 +950,16 @@ msgid "bool"
 msgstr "bool"
 
 #: miniworlds.actors.actor.Actor.is_blocking:1 of
-#, fuzzy
 msgid "Whether this actor blocks blockable actors."
-msgstr "Welt, zu der dieser Actor gehört."
+msgstr "Ob dieser Actor blockierbare Actors blockiert."
 
 #: miniworlds.actors.actor.Actor.is_filled:1 of
 msgid "Is actor filled with color?"
 msgstr "Ist der Actor mit Farbe gefüllt?"
 
 #: miniworlds.actors.actor.Actor.is_flipped:1 of
-#, fuzzy
 msgid "Whether the current costume is mirrored horizontally."
-msgstr "Ob das Actor-Kostüm an der horizontalen Achse gespiegelt ist."
+msgstr "Ob das aktuelle Kostüm horizontal gespiegelt ist."
 
 #: miniworlds.actors.actor.Actor.is_inside_world:1 of
 msgid "Return whether the actor is completely inside the world."
@@ -1026,9 +970,8 @@ msgid "`True` if the entire actor rectangle is inside the world."
 msgstr "`True`, wenn das gesamte Actor-Rechteck innerhalb der Welt liegt."
 
 #: miniworlds.actors.actor.Actor.is_rotatable:1 of
-#, fuzzy
 msgid "Whether the costume rotates with the actor direction."
-msgstr "Erhält das Kostüm des Actors"
+msgstr "Ob sich das Kostüm mit der Actor-Richtung mitdreht."
 
 #: miniworlds.actors.actor.Actor.is_rotatable:3 of
 msgid ""
@@ -1043,14 +986,12 @@ msgid "Direction value from the previous frame."
 msgstr "Richtungswert aus dem vorherigen Frame."
 
 #: miniworlds.actors.actor.Actor.last_position:1 of
-#, fuzzy
 msgid "Actor center from the previous frame."
-msgstr "Richtungswert aus dem vorherigen Frame."
+msgstr "Actor-Mittelposition aus dem vorherigen Frame."
 
 #: miniworlds.actors.actor.Actor.local_center:1 of
-#, fuzzy
 msgid "Actor center in camera-local coordinates."
-msgstr "Gibt das Actor-Rechteck in kamera-lokalen Koordinaten zurück."
+msgstr "Actor-Mittelposition in kamera-lokalen Koordinaten."
 
 #: miniworlds.actors.actor.Actor.mask:1 of
 msgid "Collision mask for `collision_type = \"mask\"`."
@@ -1074,11 +1015,8 @@ msgstr "Bewegt den Actor."
 
 #: miniworlds.actors.actor.Actor.move:3
 #: miniworlds.actors.actor.Actor.move_in_direction:6 of
-#, fuzzy
 msgid "Number of steps to move."
-msgstr ""
-"Anzahl der Schritte, die bewegt werden sollen. Wenn die Entfernung = 0 "
-"ist, wird die Geschwindigkeit des Actors verwendet."
+msgstr "Anzahl der Schritte, die bewegt werden."
 
 #: miniworlds.actors.actor.Actor.move:4 of
 msgid "Optional direction. If omitted, the current actor direction is used."
@@ -1093,22 +1031,17 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.move_towards:6
 #: miniworlds.actors.actor.Actor.move_vector:5
 #: miniworlds.actors.actor.Actor.undo_move:3 of
-#, fuzzy
 msgid "The moved actor."
-msgstr "Der bewegte Actor"
+msgstr "Der bewegte Actor."
 
 #: miniworlds.actors.actor.Actor.move_away:1 of
-#, fuzzy
 msgid "Move away from a target actor or position."
-msgstr ""
-"Bewegt sich einen Schritt in Richtung eines Ziel-Actors oder einer "
-"Position."
+msgstr "Bewegt sich von einem Ziel-Actor oder einer Position weg."
 
 #: miniworlds.actors.actor.Actor.move_away:3
 #: miniworlds.actors.actor.Actor.move_towards:3 of
-#, fuzzy
 msgid "Target actor or position."
-msgstr "Actor oder Position"
+msgstr "Ziel-Actor oder Position."
 
 #: miniworlds.actors.actor.Actor.move_away:4
 #: miniworlds.actors.actor.Actor.move_towards:4 of
@@ -1151,11 +1084,8 @@ msgid "Target position as `(x, y)`."
 msgstr "Zielposition als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.move_towards:1 of
-#, fuzzy
 msgid "Move toward a target actor or position."
-msgstr ""
-"Bewegt sich einen Schritt in Richtung eines Ziel-Actors oder einer "
-"Position."
+msgstr "Bewegt sich auf einen Ziel-Actor oder eine Position zu."
 
 #: miniworlds.actors.actor.Actor.move_vector:1 of
 msgid "Move the actor by a vector."
@@ -1170,20 +1100,17 @@ msgid "Create and attach a new empty costume to this actor."
 msgstr "Erstellt ein neues leeres Kostüm und hängt es an diesen Actor an."
 
 #: miniworlds.actors.actor.Actor.next_costume:1 of
-#, fuzzy
 msgid "Switch to the next costume."
-msgstr "Das neue Kostüm."
+msgstr "Wechselt zum nächsten Kostüm."
 
 #: miniworlds.actors.actor.Actor.next_costume:3
 #: miniworlds.actors.actor.Actor.switch_costume:7 of
-#, fuzzy
 msgid "The new active costume."
-msgstr "Das neue Kostüm."
+msgstr "Das neue aktive Kostüm."
 
 #: miniworlds.actors.actor.Actor.on_clicked_left:1 of
-#, fuzzy
 msgid "Called when the actor is clicked with the left mouse button."
-msgstr "Wird aufgerufen, wenn die linke Maustaste gedrückt wird."
+msgstr "Wird aufgerufen, wenn der Actor mit der linken Maustaste angeklickt wird."
 
 #: miniworlds.actors.actor.Actor.on_clicked_left:3
 #: miniworlds.actors.actor.Actor.on_clicked_right:3
@@ -1195,37 +1122,32 @@ msgstr "Wird aufgerufen, wenn die linke Maustaste gedrückt wird."
 #: miniworlds.actors.actor.Actor.on_mouse_right:6
 #: miniworlds.actors.actor.Actor.on_mouse_right_down:3
 #: miniworlds.actors.actor.Actor.on_mouse_right_released:3 of
-#, fuzzy
 msgid "Current mouse position as `(x, y)`."
-msgstr "Aktuelle Mausposition als Tupel (x,y)"
+msgstr "Aktuelle Mausposition als `(x, y)`."
 
 #: miniworlds.actors.actor.Actor.on_clicked_right:1 of
-#, fuzzy
 msgid "Called when the actor is clicked with the right mouse button."
-msgstr "Wird aufgerufen, wenn die rechte Maustaste gedrückt wird."
+msgstr "Wird aufgerufen, wenn der Actor mit der rechten Maustaste angeklickt wird."
 
 #: miniworlds.actors.actor.Actor.on_detecting_actor:1 of
 msgid "Called when this actor detects another actor."
 msgstr "Wird aufgerufen, wenn dieser Actor einen anderen Actor erkennt."
 
 #: miniworlds.actors.actor.Actor.on_detecting_actor:3 of
-#, fuzzy
 msgid "Detected actor."
-msgstr "Der andere Actor"
+msgstr "Erkannter Actor."
 
 #: miniworlds.actors.actor.Actor.on_detecting_borders:1 of
-#, fuzzy
 msgid "Called when the actor detects one or more world borders."
-msgstr "Ob der Actor aktuell sichtbar ist."
+msgstr "Wird aufgerufen, wenn der Actor einen oder mehrere Weltränder erkennt."
 
 #: miniworlds.actors.actor.Actor.on_detecting_borders:3 of
 msgid "Border names, for example `[\"left\", \"top\"]`."
 msgstr "Randnamen, zum Beispiel `[\"left\", \"top\"]`."
 
 #: miniworlds.actors.actor.Actor.on_detecting_not_on_world:1 of
-#, fuzzy
 msgid "Alias for ``on_not_detecting_world``."
-msgstr "Registrieren Sie die Methode on_detecting_world:"
+msgstr "Alias für ``on_not_detecting_world``."
 
 #: miniworlds.actors.actor.Actor.on_detecting_not_on_world:3 of
 msgid ""
@@ -1236,9 +1158,8 @@ msgstr ""
 "neuere Beispiele die jeweils passendere Formulierung verwenden können."
 
 #: miniworlds.actors.actor.Actor.on_detecting_world:1 of
-#, fuzzy
 msgid "Called when the actor is inside the world."
-msgstr "Ob der Actor aktuell sichtbar ist."
+msgstr "Wird aufgerufen, wenn der Actor innerhalb der Welt ist."
 
 #: miniworlds.actors.actor.Actor.on_key_down:1 of
 msgid "Called once when a key is pressed."
@@ -1303,9 +1224,8 @@ msgid "Called when the mouse cursor leaves the actor area."
 msgstr "Wird aufgerufen, wenn der Mauszeiger den Bereich des Actors verlässt."
 
 #: miniworlds.actors.actor.Actor.on_mouse_leave:3 of
-#, fuzzy
 msgid "The mouse position when it left the actor."
-msgstr "Legt die Richtung des Actors fest."
+msgstr "Die Mausposition, als sie den Actor verlassen hat."
 
 #: miniworlds.actors.actor.Actor.on_mouse_left:1 of
 msgid "Called when the left mouse button is clicked."
@@ -1326,9 +1246,8 @@ msgid "Called when the left mouse button is pressed down."
 msgstr "Wird aufgerufen, wenn die linke Maustaste gedrückt wird."
 
 #: miniworlds.actors.actor.Actor.on_mouse_left_released:1 of
-#, fuzzy
 msgid "Called when the left mouse button is released."
-msgstr "Wird aufgerufen, wenn die linke Maustaste gedrückt wird."
+msgstr "Wird aufgerufen, wenn die linke Maustaste losgelassen wird."
 
 #: miniworlds.actors.actor.Actor.on_mouse_motion:1 of
 msgid "Called when the mouse moves."
@@ -1364,9 +1283,8 @@ msgid "Called when the right mouse button is pressed down."
 msgstr "Wird aufgerufen, wenn die rechte Maustaste gedrückt wird."
 
 #: miniworlds.actors.actor.Actor.on_mouse_right_released:1 of
-#, fuzzy
 msgid "Called when the right mouse button is released."
-msgstr "Wird aufgerufen, wenn die rechte Maustaste gedrückt wird."
+msgstr "Wird aufgerufen, wenn die rechte Maustaste losgelassen wird."
 
 #: miniworlds.actors.actor.Actor.on_not_detecting_world:1 of
 msgid ""
@@ -1381,9 +1299,8 @@ msgid "Useful to remove actors that fly off-screen."
 msgstr "Nützlich, um Actors zu entfernen, die aus dem sichtbaren Bereich fliegen."
 
 #: miniworlds.actors.actor.Actor.on_setup:1 of
-#, fuzzy
 msgid "Hook: called once when the actor is added to the world."
-msgstr "Ob der Actor aktuell sichtbar ist."
+msgstr "Hook: wird einmal aufgerufen, wenn der Actor zur Welt hinzugefügt wird."
 
 #: miniworlds.actors.actor.Actor.on_setup:3 of
 msgid ""
@@ -1417,9 +1334,8 @@ msgid "Current origin mode used for size and position operations."
 msgstr "Aktueller Ursprungmodus für Größen- und Positionsoperationen."
 
 #: miniworlds.actors.actor.Actor.point_towards_actor:1 of
-#, fuzzy
 msgid "Point the actor toward another actor."
-msgstr "Verschiebt den Actor in eine andere Welt und gibt den Actor zurück."
+msgstr "Richtet den Actor auf einen anderen Actor aus."
 
 #: miniworlds.actors.actor.Actor.point_towards_actor:5 of
 msgid "Target actor."
@@ -1430,21 +1346,20 @@ msgstr "Ziel-Actor."
 #: miniworlds.actors.actor.Actor.set_direction:8
 #: miniworlds.actors.actor.Actor.turn_left:7
 #: miniworlds.actors.actor.Actor.turn_right:5 of
-#, fuzzy
 msgid "The new direction."
-msgstr "Die neue Richtung"
+msgstr "Die neue Richtung."
 
 #: miniworlds.actors.actor.Actor.point_towards_position:1 of
-#, fuzzy
 msgid "Point the actor toward a position."
-msgstr "Zeige auf mouse_position:"
+msgstr "Richtet den Actor auf eine Position aus."
 
 #: miniworlds.actors.actor.Actor.point_towards_position:3 of
-#, fuzzy
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
 "\\:py\\:class\\:\\`float\\``"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\` \\| "
+"\\:py\\:class\\:\\`float\\``"
 
 #: miniworlds.actors.actor.Actor.position:1 of
 msgid "The position of the actor as Position(x, y)"
@@ -1455,25 +1370,20 @@ msgid "This method is used for the @register_sensor decorator."
 msgstr "Diese Methode wird für den Decorator `@register_sensor` verwendet."
 
 #: miniworlds.actors.actor.Actor.remove:1 of
-#, fuzzy
 msgid "Remove this actor from its world."
-msgstr "Entfernt diesen Actor aus der Welt"
+msgstr "Entfernt diesen Actor aus seiner Welt."
 
 #: miniworlds.actors.actor.Actor.remove:3 of
-#, fuzzy
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
-msgstr ""
-"Beispiele: :rtype: "
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~collections.defaultdict\\``"
 
 #: miniworlds.actors.actor.Actor.remove:5 of
 msgid "Whether to remove the underlying pygame sprite too."
 msgstr "Ob auch das zugrunde liegende pygame-Sprite entfernt werden soll."
 
 #: miniworlds.actors.actor.Actor.remove:7 of
-#, fuzzy
 msgid "Removed actor data from the world connector."
-msgstr "Verschiebt den Actor in eine andere Welt und gibt den Actor zurück."
+msgstr "Entfernt Actor-Daten aus dem World-Connector."
 
 #: miniworlds.actors.actor.Actor.remove:11 of
 msgid ""
@@ -1487,9 +1397,8 @@ msgstr ""
 "`before_remove()`; hier ist kein `super()`-Aufruf nötig."
 
 #: miniworlds.actors.actor.Actor.remove_costume:1 of
-#, fuzzy
 msgid "Remove a costume."
-msgstr "Das neue Kostüm."
+msgstr "Entfernt ein Kostüm."
 
 #: miniworlds.actors.actor.Actor.remove_costume:3 of
 msgid ""
@@ -1509,9 +1418,8 @@ msgstr "Skaliert die Actor-Höhe mit einem Faktor."
 
 #: miniworlds.actors.actor.Actor.scale_height:3
 #: miniworlds.actors.actor.Actor.scale_width:3 of
-#, fuzzy
 msgid "Scale factor."
-msgstr "Der Actor"
+msgstr "Skalierungsfaktor."
 
 #: miniworlds.actors.actor.Actor.scale_width:1 of
 msgid "Scale actor width by a factor."
@@ -1536,9 +1444,8 @@ msgstr ""
 "Appearance-Objekt."
 
 #: miniworlds.actors.actor.Actor.set_direction:1 of
-#, fuzzy
 msgid "Point the actor in a direction."
-msgstr "Die neue Richtung"
+msgstr "Richtet den Actor in eine Richtung."
 
 #: miniworlds.actors.actor.Actor.set_direction:5 of
 msgid ""
@@ -1553,14 +1460,12 @@ msgid "Set actor position in world coordinates."
 msgstr "Setzt die Actor-Position in Weltkoordinaten."
 
 #: miniworlds.actors.actor.Actor.set_size:1 of
-#, fuzzy
 msgid "Set actor size."
-msgstr "Der Actor selbst"
+msgstr "Setzt die Actor-Größe."
 
 #: miniworlds.actors.actor.Actor.set_size:3 of
-#, fuzzy
 msgid "Size as `(width, height)` or a scalar size."
-msgstr "Setzt die Actor-Größe als `(width, height)` in Pixeln."
+msgstr "Größe als `(width, height)` oder als skalare Größe."
 
 #: miniworlds.actors.actor.Actor.set_world:1 of
 msgid "Move the actor to another world and return the actor."
@@ -1571,9 +1476,8 @@ msgid "Displays a actor ( an invisible actor will be visible)"
 msgstr "Zeigt einen Actor an (ein unsichtbarer Actor wird sichtbar)"
 
 #: miniworlds.actors.actor.Actor.size:1 of
-#, fuzzy
 msgid "Actor size as `(width, height)`."
-msgstr "Setzt die Actor-Größe als `(width, height)` in Pixeln."
+msgstr "Actor-Größe als `(width, height)`."
 
 #: miniworlds.actors.actor.Actor.static:1 of
 msgid ""
@@ -1584,22 +1488,18 @@ msgstr ""
 "zusätzliche Performance deaktivieren."
 
 #: miniworlds.actors.actor.Actor.stop_animation:1 of
-#, fuzzy
 msgid "Stop the current costume animation."
-msgstr "Animiert das aktuelle Kostüm mit der angegebenen Geschwindigkeit."
+msgstr "Stoppt die aktuelle Kostüm-Animation."
 
 #: miniworlds.actors.actor.Actor.switch_costume:1 of
-#, fuzzy
 msgid "Switch to another costume."
-msgstr "Ein Kostüm wechseln:"
+msgstr "Wechselt zu einem anderen Kostüm."
 
 #: miniworlds.actors.actor.Actor.switch_costume:5 of
-#, fuzzy
 msgid "Costume index or costume object."
-msgstr "Anzahl der Kostüme oder Kostümobjekt"
+msgstr "Kostüm-Index oder Kostüm-Objekt."
 
 #: miniworlds.actors.actor.Actor.switch_origin:1 of
-#, fuzzy
 msgid "Switch the actor origin while preserving its screen position."
 msgstr ""
 "Wechselt den Ursprung des Actors und erhält dabei die sichtbare Position "
@@ -1610,9 +1510,8 @@ msgid "`\"center\"` or `\"topleft\"`."
 msgstr "`\"center\"` oder `\"topleft\"`."
 
 #: miniworlds.actors.actor.Actor.topleft:1 of
-#, fuzzy
 msgid "Top-left position in world coordinates."
-msgstr "Oben-links-Position des Actors in Weltkoordinaten."
+msgstr "Oben-links-Position in Weltkoordinaten."
 
 #: miniworlds.actors.actor.Actor.topleft_x:1 of
 msgid "X-coordinate of the actor's top-left corner."
@@ -1635,9 +1534,8 @@ msgid "Student-friendly alias for `turn_right(degrees)`."
 msgstr "Schülerfreundlicher Alias für `turn_right(degrees)`."
 
 #: miniworlds.actors.actor.Actor.turn_left:1 of
-#, fuzzy
 msgid "Turn the actor left."
-msgstr "Der Actor selbst"
+msgstr "Dreht den Actor nach links."
 
 #: miniworlds.actors.actor.Actor.turn_left:5
 #: miniworlds.actors.actor.Actor.turn_right:3 of
@@ -1645,30 +1543,26 @@ msgid "Degrees to turn."
 msgstr "Gradzahl für die Drehung."
 
 #: miniworlds.actors.actor.Actor.turn_right:1 of
-#, fuzzy
 msgid "Turn the actor right."
-msgstr "Der Actor selbst"
+msgstr "Dreht den Actor nach rechts."
 
 #: miniworlds.actors.actor.Actor.undo_move:1 of
 msgid "Undo the last move."
 msgstr "Mache den letzten Zug rückgängig."
 
 #: miniworlds.actors.actor.Actor.width:1 of
-#, fuzzy
 msgid "Actor width in pixels."
-msgstr "Die Breite des Actors in Pixeln."
+msgstr "Breite des Actors in Pixeln."
 
 #: miniworlds.actors.actor.Actor.world:1 of
 msgid "World this actor belongs to."
 msgstr "Welt, zu der dieser Actor gehört."
 
 #: miniworlds.actors.actor.Actor.x:1 of
-#, fuzzy
 msgid "Actor x-position."
-msgstr "Actor oder Position"
+msgstr "x-Position des Actors."
 
 #: miniworlds.actors.actor.Actor.y:1 of
-#, fuzzy
 msgid "Actor y-position."
-msgstr "Actor oder Position"
+msgstr "y-Position des Actors."
 

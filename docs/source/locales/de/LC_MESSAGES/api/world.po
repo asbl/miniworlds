@@ -24,9 +24,8 @@ msgid "World"
 msgstr "World"
 
 #: ../../source/api/world.md:3
-#, fuzzy
 msgid "The base class for all of your worlds."
-msgstr "Die Basisklasse für all deine Welten"
+msgstr "Die Basisklasse für all deine Welten."
 
 #: ../../source/api/world.md:5
 msgid ""
@@ -53,24 +52,20 @@ msgid "Useful beginner aliases on World include:"
 msgstr "Nutzliche Anfaenger-Aliasse auf World sind:"
 
 #: ../../source/api/world.md:15
-#, fuzzy
 msgid "`contains(...)` for `contains_position(...)`"
-msgstr "- `contains(...)` fuer `contains_position(...)`"
+msgstr "`contains(...)` für `contains_position(...)`"
 
 #: ../../source/api/world.md:16
-#, fuzzy
 msgid "`broadcast(...)` for `send_message(...)`"
-msgstr "- `broadcast(...)` fuer `send_message(...)`"
+msgstr "`broadcast(...)` für `send_message(...)`"
 
 #: ../../source/api/world.md:17
-#, fuzzy
 msgid "`actors_at(...)` for `detect_actors(...)`"
-msgstr "- `actors_at(...)` fuer `detect_actors(...)`"
+msgstr "`actors_at(...)` für `detect_actors(...)`"
 
 #: ../../source/api/world.md:18
-#, fuzzy
 msgid "`set_bg(...)`, `add_bg(...)`, `next_bg()` for background helpers"
-msgstr "- `set_bg(...)`, `add_bg(...)`, `next_bg()` fuer Background-Helfer"
+msgstr "`set_bg(...)`, `add_bg(...)`, `next_bg()` für Background-Helfer"
 
 #: ../../source/api/world.md:20
 msgid "API Reference"
@@ -157,7 +152,6 @@ msgstr "Erzeuge eine Welt mit der angegebenen Größe."
 #: miniworlds.worlds.world.World.set_rows miniworlds.worlds.world.World.stop
 #: miniworlds.worlds.world.World.switch_background
 #: miniworlds.worlds.world.World.to_pixel of
-#, fuzzy
 msgid "Parameters"
 msgstr "Parameter"
 
@@ -174,13 +168,12 @@ msgid "Hook: called once per frame while the world is running."
 msgstr "Hook: wird einmal pro Frame aufgerufen, solange die Welt läuft."
 
 #: miniworlds.worlds.world.World.act:3 of
-#, fuzzy
 msgid ""
 "Overwrite this method in a subclass (or register a function with "
 "`@world.register`) to run code every frame."
 msgstr ""
-"Überschreibe dies in Unterklassen oder registriere eine Funktion mit "
-"`@world.register`."
+"Überschreibe diese Methode in einer Unterklasse (oder registriere eine "
+"Funktion mit `@world.register`), um Code in jedem Frame auszuführen."
 
 #: miniworlds.worlds.world.World.act:6 of
 msgid ""
@@ -223,9 +216,8 @@ msgstr "Rückgabetyp"
 #: miniworlds.worlds.world.World.set_rows:3
 #: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.stop:3
 #: miniworlds.worlds.world.World.switch_world:3 of
-#, fuzzy
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
-msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 
 #: miniworlds.worlds.world.World.actors_at:1 of
 msgid "Student-friendly alias for `detect_actors(position)`."
@@ -278,18 +270,16 @@ msgid "Returns"
 msgstr "Rückgabe"
 
 #: miniworlds.worlds.world.World.add_background:7 of
-#, fuzzy
 msgid "The newly created `Background`."
-msgstr "Der neu erstellte Hintergrund."
+msgstr "Der neu erstellte `Background`."
 
 #: miniworlds.worlds.world.World.add_bg:1 of
 msgid "Student-friendly alias for `add_background(source)`."
 msgstr "Schülerfreundlicher Alias für `add_background(source)`."
 
 #: miniworlds.worlds.world.World.background:1 of
-#, fuzzy
 msgid "Currently active world background."
-msgstr "Der neu erstellte Hintergrund."
+msgstr "Der aktuell aktive Welt-Hintergrund."
 
 #: miniworlds.worlds.world.World.background
 #: miniworlds.worlds.world.World.columns miniworlds.worlds.world.World.debug
@@ -302,9 +292,8 @@ msgid "type"
 msgstr "Typ"
 
 #: miniworlds.worlds.world.World.background:11 of
-#, fuzzy
 msgid "Background"
-msgstr "Hintergrund wechseln"
+msgstr "Background"
 
 #: miniworlds.worlds.world.World.broadcast:1 of
 msgid "Student-friendly alias for `send_message(message, data)`."
@@ -327,21 +316,18 @@ msgid "Return whether a position lies inside the world."
 msgstr "Gibt zurück, ob eine Position innerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains:3 of
-#, fuzzy
 msgid "This is a short alias for `contains_position()`."
-msgstr "- `contains(...)` fuer `contains_position(...)`"
+msgstr "Dies ist ein kurzer Alias für `contains_position()`."
 
 #: miniworlds.worlds.world.World.contains_position:3
 #: miniworlds.worlds.world.World.is_in_world:5 of
-#, fuzzy
 msgid "Position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Position als `(x, y)`."
 
 #: miniworlds.worlds.world.World.contains_position:5
 #: miniworlds.worlds.world.World.is_in_world:7 of
-#, fuzzy
 msgid "`True` if the position is inside the world."
-msgstr "Wahr, wenn die Position in der Welt ist."
+msgstr "`True`, wenn die Position in der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains_rect:1 of
 msgid "Return whether a rectangle is fully inside the world."
@@ -353,9 +339,8 @@ msgid "Rectangle as `(x, y, width, height)` or `pygame.Rect`."
 msgstr "Rechteck als `(x, y, breite, höhe)` oder `pygame.Rect`."
 
 #: miniworlds.worlds.world.World.contains_rect:5 of
-#, fuzzy
 msgid "`True` if the whole rectangle is inside the world."
-msgstr "Wahr, wenn die Position in der Welt ist."
+msgstr "`True`, wenn das gesamte Rechteck in der Welt liegt."
 
 #: miniworlds.worlds.world.World.contains_rect_any:1 of
 msgid "Return whether any part of a rectangle is inside the world."
@@ -381,14 +366,12 @@ msgstr "Gibt alle Actor an einer Weltposition zurück."
 
 #: miniworlds.worlds.world.World.detect_actors:5
 #: miniworlds.worlds.world.World.to_pixel:5 of
-#, fuzzy
 msgid "World position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Weltposition als `(x, y)`."
 
 #: miniworlds.worlds.world.World.detect_actors:7 of
-#, fuzzy
 msgid "Actors found at the position."
-msgstr "Alle Actors an der Mausposition abrufen:"
+msgstr "Actors, die an der Position gefunden wurden."
 
 #: miniworlds.worlds.world.World.direction_to:1 of
 msgid "Return the Miniworlds direction from one position to another."
@@ -400,14 +383,12 @@ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
 msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
 
 #: miniworlds.worlds.world.World.direction_to:5 of
-#, fuzzy
 msgid "Start position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Startposition als `(x, y)`."
 
 #: miniworlds.worlds.world.World.direction_to:6 of
-#, fuzzy
 msgid "Target position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Zielposition als `(x, y)`."
 
 #: miniworlds.worlds.world.World.direction_to:8 of
 msgid "Direction angle in degrees."
@@ -418,23 +399,20 @@ msgid "Return the Euclidean distance between two positions."
 msgstr "Gibt den euklidischen Abstand zwischen zwei Positionen zurück."
 
 #: miniworlds.worlds.world.World.distance_to:5 of
-#, fuzzy
 msgid "First position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Erste Position als `(x, y)`."
 
 #: miniworlds.worlds.world.World.distance_to:6 of
-#, fuzzy
 msgid "Second position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Zweite Position als `(x, y)`."
 
 #: miniworlds.worlds.world.World.distance_to:8 of
 msgid "Distance between both positions."
 msgstr "Abstand zwischen beiden Positionen."
 
 #: miniworlds.worlds.world.World.fps:1 of
-#, fuzzy
 msgid "Frames per second of the render loop."
-msgstr "Bilder pro Sekunde auf dem Bildschirm angezeigt."
+msgstr "Frames pro Sekunde der Render-Schleife."
 
 #: miniworlds.worlds.world.World.fps:3 of
 msgid ""
@@ -446,9 +424,8 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.fps:7
 #: miniworlds.worlds.world.World.tick_rate:7 of
-#, fuzzy
 msgid "Example"
-msgstr "Beispiele"
+msgstr "Beispiel"
 
 #: miniworlds.worlds.world.World.fps:8 of
 msgid "world.fps = 24 world.tick_rate = 2"
@@ -461,52 +438,47 @@ msgid "Return all actors under a screen pixel."
 msgstr "Gibt alle Actor unter einem Bildschirmpixel zurück."
 
 #: miniworlds.worlds.world.World.get_actors_from_pixel:5 of
-#, fuzzy
 msgid "Screen pixel as `(x, y)`."
-msgstr "Position als Pixelkoordinaten"
+msgstr "Bildschirm-Pixel als `(x, y)`."
 
 #: miniworlds.worlds.world.World.get_actors_from_pixel:7 of
 msgid "Actors whose screen rectangle overlaps the pixel."
 msgstr "Actor, deren Bildschirmrechteck den Pixel überlappt."
 
 #: miniworlds.worlds.world.World.get_background:1 of
-#, fuzzy
 msgid "Return the active background."
-msgstr "Gibt den aktuellen Background zurück"
+msgstr "Gibt den aktiven Hintergrund zurück."
 
 #: miniworlds.worlds.world.World.get_background:5 of
-#, fuzzy
 msgid "The current `Background`."
-msgstr "Gibt den aktuellen Hintergrund zurück"
+msgstr "Der aktuelle `Background`."
 
 #: miniworlds.worlds.world.World.get_from_pixel:1 of
 msgid "Convert a screen pixel position to a world position."
 msgstr "Wandelt eine Bildschirmpixelposition in eine Weltposition um."
 
 #: miniworlds.worlds.world.World.get_from_pixel:3 of
-#, fuzzy
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\] \\| "
 "\\:py\\:obj\\:\\`None\\``"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
-" \\\\\\[\\:py\\:class\\:\\`tuple\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\] \\| "
+"\\:py\\:obj\\:\\`None\\``"
 
 #: miniworlds.worlds.world.World.get_from_pixel:5
 #: miniworlds.worlds.world.World.to_pixel:7 of
-#, fuzzy
 msgid "Pixel position as `(x, y)`."
-msgstr "Position aus Pixel erhalten"
+msgstr "Pixelposition als `(x, y)`."
 
 #: miniworlds.worlds.world.World.get_from_pixel:7 of
 msgid "World position, or `None` if the pixel is outside the world."
 msgstr "Weltposition oder `None`, wenn der Pixel außerhalb der Welt liegt."
 
 #: miniworlds.worlds.world.World.has_background:1 of
-#, fuzzy
 msgid "Whether the world has at least one background."
-msgstr "Gibt den aktuellen Background zurück"
+msgstr "Ob die Welt mindestens einen Hintergrund hat."
 
 #: miniworlds.worlds.world.World.is_in_world:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
@@ -546,9 +518,8 @@ msgstr ""
 "`@world.register`."
 
 #: miniworlds.worlds.world.World.play_sound:1 of
-#, fuzzy
 msgid "Student-friendly alias for `sound.play(path, volume)`."
-msgstr "Schülerfreundlicher Alias für `set_background(source)`."
+msgstr "Schülerfreundlicher Alias für `sound.play(path, volume)`."
 
 #: miniworlds.worlds.world.World.play_sound:3 of
 msgid ""
@@ -644,15 +615,13 @@ msgid "Optional payload for message-specific handlers."
 msgstr "Optionale Nutzdaten für nachrichtenspezifische Handler."
 
 #: miniworlds.worlds.world.World.set_background:1 of
-#, fuzzy
 msgid "Replace the active background."
-msgstr "Gibt den aktuellen Background zurück"
+msgstr "Ersetzt den aktiven Hintergrund."
 
 #: miniworlds.worlds.world.World.set_background:7
 #: miniworlds.worlds.world.World.switch_background:9 of
-#, fuzzy
 msgid "The new active `Background`."
-msgstr "Der neu erstellte Hintergrund."
+msgstr "Der neue aktive `Background`."
 
 #: miniworlds.worlds.world.World.set_bg:1 of
 msgid "Student-friendly alias for `set_background(source)`."
@@ -683,9 +652,8 @@ msgid "tuple[int, int]"
 msgstr "tuple[int, int]"
 
 #: miniworlds.worlds.world.World.start:1 of
-#, fuzzy
 msgid "Start or resume world updates."
-msgstr "Hält die Welt an."
+msgstr "Startet oder setzt die Welt-Aktualisierungen fort."
 
 #: miniworlds.worlds.world.World.stop:1 of
 msgid "Stop world updates immediately or after a number of frames."
@@ -696,9 +664,8 @@ msgid "Frames to wait before stopping. `0` stops immediately."
 msgstr "Frames, die vor dem Stoppen gewartet werden. `0` stoppt sofort."
 
 #: miniworlds.worlds.world.World.switch_background:1 of
-#, fuzzy
 msgid "Switch to another background."
-msgstr "Hintergrund wechseln"
+msgstr "Wechselt zu einem anderen Hintergrund."
 
 #: miniworlds.worlds.world.World.switch_background:3 of
 msgid "Pass an index, an existing appearance, or `-1` for the next background."
@@ -751,13 +718,12 @@ msgid "Convert a world position to a screen pixel position."
 msgstr "Wandelt eine Weltposition in eine Bildschirmpixelposition um."
 
 #: miniworlds.worlds.world.World.to_pixel:3 of
-#, fuzzy
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
-" \\\\\\[\\:py\\:class\\:\\`tuple\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.worlds.world.World.world_size_x:1 of
 msgid "Horizontal world size in pixels."

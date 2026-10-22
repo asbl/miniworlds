@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-10-22 11:26+0200\n"
 "PO-Revision-Date: 2026-10-21 20:10+0200\n"
 "Last-Translator: Andreas Siebel\n"
 "Language: de\n"
@@ -121,20 +121,22 @@ msgid "Step 5: React to clicks"
 msgstr "Schritt 4: Auf Klicks reagieren"
 
 #: ../../source/tutorial/hex_world.md:104
+#, fuzzy
 msgid ""
 "With `@world.register` you can react to mouse clicks. "
-"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse:"
+"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
+"or `None` if the click is outside the world:"
 msgstr ""
 "Mit `@world.register` kannst du auf Mausklicks reagieren. "
 "`world.get_tile_from_pixel(mouse_pos)` gibt das Hexfeld unter der Maus "
 "zurück:"
 
-#: ../../source/tutorial/hex_world.md:122
+#: ../../source/tutorial/hex_world.md:125
 #, fuzzy
 msgid "Step 6: Settlements and roads"
 msgstr "Schritt 5: Siedlungen und Straßen"
 
-#: ../../source/tutorial/hex_world.md:124
+#: ../../source/tutorial/hex_world.md:127
 #, fuzzy
 msgid ""
 "Corners and edges are positions, too. "
@@ -147,7 +149,7 @@ msgstr ""
 "`world.get_corner_from_pixel(mouse_pos)` gibt die nächstgelegene Ecke "
 "zurück, `world.get_edge_from_pixel(mouse_pos)` die nächstgelegene Kante."
 
-#: ../../source/tutorial/hex_world.md:130
+#: ../../source/tutorial/hex_world.md:133
 msgid ""
 "A left click places a settlement (small circle) on a corner, a right "
 "click places a road (small rectangle) on an edge:"
@@ -155,18 +157,18 @@ msgstr ""
 "Ein Linksklick platziert eine Siedlung (kleiner Kreis) auf einer Ecke, "
 "ein Rechtsklick eine Straße (kleines Rechteck) auf einer Kante:"
 
-#: ../../source/tutorial/hex_world.md:156
+#: ../../source/tutorial/hex_world.md:159
 #, fuzzy
 msgid "Step 7: A mini-Catan board"
 msgstr "Schritt 6: Ein Mini-Catan-Brett"
 
-#: ../../source/tutorial/hex_world.md:158
+#: ../../source/tutorial/hex_world.md:161
 msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
 msgstr ""
 "Ein Catan-Brett hat 19 Landhexfelder, angeordnet in Zeilen aus 3, 4, 5, 4"
 " und 3 Hexfeldern:"
 
-#: ../../source/tutorial/hex_world.md:190
+#: ../../source/tutorial/hex_world.md:193
 msgid ""
 "From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
 "Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
@@ -178,7 +180,7 @@ msgstr ""
 "Spielregeln ergänzen: Würfel, Rohstoffe und Handel sind nicht Teil des "
 "Frameworks — sie gehören in deinen Spielcode."
 
-#: ../../source/tutorial/hex_world.md:195
+#: ../../source/tutorial/hex_world.md:198
 msgid ""
 "The full interface is documented in the [HexWorld API "
 "reference](../api/world_hex.md)."
