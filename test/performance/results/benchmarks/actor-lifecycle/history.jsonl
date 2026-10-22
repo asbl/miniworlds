@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "actor lifecycle", "recorded_at": "2026-10-22T04:34:00", "slug": "actor-lifecycle", "summary_type": "measurements", "values": {"actors": 1000, "creation_ms": 235.5092, "creations_per_s": 4246.1194, "removal_ms": 66.6905, "removals_per_s": 14994.6459}}

@@ -1,33 +1,33 @@
 # event dispatch
 
-Last run: 2026-06-16T17:15:02
+Last run: 2026-10-22T04:50:29
 Summary type: measurements
 
 ## Current Values
-- hover_events_ms: 352.92
-- hover_events_per_s: 141674.07
+- hover_events_ms: 380.53
+- hover_events_per_s: 131395.75
 - iterations: 50000
-- key_events_ms: 164.90
-- key_events_per_s: 303207.20
-- message_events_ms: 160.77
-- message_events_per_s: 311011.44
-- queue_translations_ms: 193.68
-- queue_translations_per_s: 258164.09
-- sensor_dispatches_ms: 67.05
-- sensor_dispatches_per_s: 745747.39
+- key_events_ms: 196.73
+- key_events_per_s: 254150.08
+- message_events_ms: 187.93
+- message_events_per_s: 266052.57
+- queue_translations_ms: 218.56
+- queue_translations_per_s: 228774.04
+- sensor_dispatches_ms: 64.00
+- sensor_dispatches_per_s: 781242.54
 
 ## Delta To Previous Run
-- hover_events_ms: -161.49
-- hover_events_per_s: +44476.36
+- hover_events_ms: -500.11
+- hover_events_per_s: +74618.91
 - iterations: 0.00
-- key_events_ms: -113.03
-- key_events_per_s: +123309.77
-- message_events_ms: -73.64
-- message_events_per_s: +97706.21
-- queue_translations_ms: -73.06
-- queue_translations_per_s: +70712.44
-- sensor_dispatches_ms: -29.00
-- sensor_dispatches_per_s: +225168.03
+- key_events_ms: -191.97
+- key_events_per_s: +125518.93
+- message_events_ms: -125.70
+- message_events_per_s: +106631.86
+- queue_translations_ms: -42.13
+- queue_translations_per_s: +36974.18
+- sensor_dispatches_ms: -149.28
+- sensor_dispatches_per_s: +546811.45
 
 ## Files
 - history.jsonl

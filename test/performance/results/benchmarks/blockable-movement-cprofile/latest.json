@@ -1,28 +1,28 @@
 {
   "delta_to_previous": {
-    "avg_ms": 60.7962,
+    "avg_ms": -71.5034,
     "frames": 0.0,
-    "max_ms": 180.4486,
+    "max_ms": -213.7846,
     "metric_blocked_moves": 0.0,
     "metric_border_hits": 0.0,
-    "metric_successful_moves": -17.0,
-    "min_ms": 2.6893,
-    "p95_ms": 140.4214,
-    "p99_ms": 174.3751
+    "metric_successful_moves": -45.0,
+    "min_ms": -10.6591,
+    "p95_ms": -159.6505,
+    "p99_ms": -203.0141
   },
   "name": "blockable movement cprofile",
-  "recorded_at": "2026-03-16T22:15:20",
+  "recorded_at": "2026-10-22T04:34:20",
   "slug": "blockable-movement-cprofile",
   "summary_type": "frame_timing",
   "values": {
-    "avg_ms": 113.4414,
+    "avg_ms": 41.938,
     "frames": 119,
-    "max_ms": 271.5225,
+    "max_ms": 57.7379,
     "metric_blocked_moves": 3395,
     "metric_border_hits": 40,
-    "metric_successful_moves": 18161,
-    "min_ms": 46.2631,
-    "p95_ms": 207.4635,
-    "p99_ms": 258.7506
+    "metric_successful_moves": 18116,
+    "min_ms": 35.604,
+    "p95_ms": 47.813,
+    "p99_ms": 55.7365
   }
 }

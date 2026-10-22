@@ -1,32 +1,32 @@
 {
   "delta_to_previous": {
-    "hover_events_ms": -161.4927,
-    "hover_events_per_s": 44476.3555,
+    "hover_events_ms": -500.1109,
+    "hover_events_per_s": 74618.9052,
     "iterations": 0.0,
-    "key_events_ms": -113.0325,
-    "key_events_per_s": 123309.7728,
-    "message_events_ms": -73.6401,
-    "message_events_per_s": 97706.2105,
-    "queue_translations_ms": -73.0602,
-    "queue_translations_per_s": 70712.4445,
-    "sensor_dispatches_ms": -29.0,
-    "sensor_dispatches_per_s": 225168.0347
+    "key_events_ms": -191.9741,
+    "key_events_per_s": 125518.9283,
+    "message_events_ms": -125.7027,
+    "message_events_per_s": 106631.8554,
+    "queue_translations_ms": -42.1321,
+    "queue_translations_per_s": 36974.1805,
+    "sensor_dispatches_ms": -149.2817,
+    "sensor_dispatches_per_s": 546811.4533
   },
   "name": "event dispatch",
-  "recorded_at": "2026-06-16T17:15:02",
+  "recorded_at": "2026-10-22T04:50:29",
   "slug": "event-dispatch",
   "summary_type": "measurements",
   "values": {
-    "hover_events_ms": 352.9227,
-    "hover_events_per_s": 141674.0705,
+    "hover_events_ms": 380.5298,
+    "hover_events_per_s": 131395.7478,
     "iterations": 50000,
-    "key_events_ms": 164.9037,
-    "key_events_per_s": 303207.2015,
-    "message_events_ms": 160.7658,
-    "message_events_per_s": 311011.439,
-    "queue_translations_ms": 193.6753,
-    "queue_translations_per_s": 258164.0895,
-    "sensor_dispatches_ms": 67.0468,
-    "sensor_dispatches_per_s": 745747.3904
+    "key_events_ms": 196.7342,
+    "key_events_per_s": 254150.0776,
+    "message_events_ms": 187.9328,
+    "message_events_per_s": 266052.5705,
+    "queue_translations_ms": 218.5563,
+    "queue_translations_per_s": 228774.0435,
+    "sensor_dispatches_ms": 64.0006,
+    "sensor_dispatches_per_s": 781242.5413
   }
 }

@@ -1,0 +1,21 @@
+{
+  "delta_to_previous": {},
+  "name": "actor logic filters cprofile",
+  "recorded_at": "2026-10-22T04:34:13",
+  "slug": "actor-logic-filters-cprofile",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 68.2244,
+    "frames": 119,
+    "max_ms": 111.4086,
+    "metric_hunter_border_hits": 290,
+    "metric_hunter_hits": 4439,
+    "metric_hunter_misses": 6284,
+    "metric_runner_border_hits": 14,
+    "metric_runner_hits": 4529,
+    "metric_runner_misses": 6392,
+    "min_ms": 42.0267,
+    "p95_ms": 88.1585,
+    "p99_ms": 100.0619
+  }
+}

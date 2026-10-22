@@ -1,0 +1,17 @@
+{
+  "delta_to_previous": {},
+  "name": "static scene",
+  "recorded_at": "2026-10-22T04:33:44",
+  "slug": "static-scene",
+  "summary_type": "frame_timing",
+  "values": {
+    "avg_ms": 4.0772,
+    "frames": 179,
+    "max_ms": 9.8517,
+    "metric_player_moves": 180,
+    "metric_static_actors": 540,
+    "min_ms": 2.3771,
+    "p95_ms": 7.1562,
+    "p99_ms": 8.4783
+  }
+}

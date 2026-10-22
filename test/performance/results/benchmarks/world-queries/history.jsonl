@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "world queries", "recorded_at": "2026-10-22T04:33:57", "slug": "world-queries", "summary_type": "measurements", "values": {"actors": 384, "iterations": 20000, "pixel_hits": 20000, "pixel_queries_ms": 170.7534, "pixel_queries_per_s": 117127.9684, "world_hits": 20000, "world_queries_ms": 109.7124, "world_queries_per_s": 182294.7966}}
