@@ -1046,6 +1046,14 @@ class Actor(actor_base.ActorBase):
         direction = self._normalize_direction_input(direction, "direction")
         self._ensure_real(distance, "distance")
         self._ensure_direction_value(direction, "direction", allow_none=True)
+        if self._is_learning_mode() and not getattr(
+            self, "_has_position_manager", True
+        ):
+            self._student_warn(
+                f"This actor ({self}) was removed from the world - "
+                "move() has no visible effect. "
+                "If you want to reuse the actor, add it to the world again."
+            )
         return self._movement_facade.move(distance, direction)
 
     def move_vector(self, vector):

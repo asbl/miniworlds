@@ -80,7 +80,7 @@ class WorldRuntimeFacade:
 
     def is_in_world(self, position: Tuple[float, float]) -> bool:
         x, y = position
-        return 0 < x < self.world.camera.world_size_x and 0 < y < self.world.camera.world_size_y
+        return 0 <= x < self.world.camera.world_size_x and 0 <= y < self.world.camera.world_size_y
 
     def send_message(self, message: str, data: Optional[object] = None) -> None:
         event_data = message if data is None else (message, data)

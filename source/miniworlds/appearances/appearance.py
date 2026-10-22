@@ -409,17 +409,6 @@ class Appearance(metaclass=MetaAppearance):
         self.set_dirty("orientation", Appearance.RELOAD_ACTUAL_IMAGE)
 
     @property
-    def fill_color(self):
-        """Primary fill color for shape-based rendering."""
-        return self._fill_color
-
-    @fill_color.setter
-    def fill_color(self, value):
-        color_mod.ensure_valid_color(value, "fill_color")
-        self._fill_color = value
-        self.set_dirty("all", Appearance.RELOAD_ACTUAL_IMAGE)
-
-    @property
     def coloring(self):
         """tuple | None: Optional color layer.
 

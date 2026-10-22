@@ -115,6 +115,16 @@ class NoValidPositionOnInitException(MiniworldsError):
             f"not {type(value).__name__}: {repr(value)}. "
             f"Try: actor.position = (100, 200)"
         )
+        try:
+            from miniworlds.actors.texts.text import Text
+
+            if isinstance(actor, Text):
+                self.message += (
+                    "\nTip: Text takes the position first and the text second:"
+                    " Text((10, 10), 'hello')"
+                )
+        except ImportError:
+            pass
         super().__init__(self.message)
 
 
@@ -324,6 +334,10 @@ class RegisterError(MiniworldsError):
             self.message += (
                 f"\nDid you mean `{close_match[0]}`?"
                 f"\nTry: def {close_match[0]}(self, ...):"
+            )
+        else:
+            self.message += (
+                "\nIf you want a normal helper method, define it without @register."
             )
         super().__init__(self.message)
 

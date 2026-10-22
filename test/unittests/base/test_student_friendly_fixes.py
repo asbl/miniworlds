@@ -10,11 +10,13 @@ from __future__ import annotations
 import unittest
 import warnings
 
-from miniworlds import Actor, Rectangle, World
+from miniworlds import Actor, Rectangle, Text, World
 from miniworlds.base.app import App
 from miniworlds.base.exceptions import (
     ImageIndexNotExistsError,
     MiniworldsError,
+    NoValidPositionOnInitException,
+    RegisterError,
     WrongArgumentsError,
 )
 from miniworlds.tools import method_caller
@@ -248,6 +250,88 @@ class Audit2FixesTest(unittest.TestCase):
             actor.move_in_direction([1, 2])
         self.assertIn("Found <class 'list'>", str(ctx.exception))
         self.assertNotIn("got f", str(ctx.exception))
+
+    # N2: move() on a removed actor
+
+    def test_move_after_remove_warns_in_learning_mode(self):
+        world = World(100, 100)
+        world.learning_mode = True
+        actor = Actor((10, 10), world=world)
+        actor.remove()
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            actor.move()
+        self.assertTrue(
+            any("removed from the world" in str(w.message) for w in caught)
+        )
+
+    def test_move_after_remove_is_silent_by_default(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        actor.remove()
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            actor.move()
+        self.assertFalse(
+            any("removed from the world" in str(w.message) for w in caught)
+        )
+
+    # N14: @register with non-event methods
+
+    def test_register_error_on_actor_hints_at_plain_methods(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        with self.assertRaises(RegisterError) as ctx:
+
+            @actor.register
+            def calculate_score(self):
+                pass
+
+        self.assertIn("without @register", str(ctx.exception))
+
+    def test_world_register_non_event_warns_in_learning_mode(self):
+        world = World(100, 100)
+        world.learning_mode = True
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+
+            @world.register
+            def calculate_score(world):
+                pass
+
+        self.assertTrue(
+            any("never be called automatically" in str(w.message) for w in caught)
+        )
+
+    def test_world_register_non_event_is_silent_by_default(self):
+        world = World(100, 100)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+
+            @world.register
+            def calculate_score(world):
+                pass
+
+        self.assertFalse(
+            any("never be called automatically" in str(w.message) for w in caught)
+        )
+
+    # N12: Text with swapped arguments
+
+    def test_text_with_swapped_arguments_hints_at_signature(self):
+        world = World(100, 100)
+        with self.assertRaises(NoValidPositionOnInitException) as ctx:
+            Text("hello", (10, 10))
+        self.assertIn("Text((10, 10), 'hello')", str(ctx.exception))
+
+    # is_in_world boundary
+
+    def test_is_in_world_accepts_origin(self):
+        world = World(100, 100)
+        self.assertTrue(world.is_in_world((0, 50)))
+        self.assertTrue(world.is_in_world((50, 0)))
+        self.assertFalse(world.is_in_world((-1, 50)))
+        self.assertFalse(world.is_in_world((100, 50)))
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 import logging
+import warnings
 from abc import ABC, ABCMeta
 from typing import Callable, Set
 
@@ -214,6 +215,18 @@ class WorldBase(metaclass=AutoSetupMeta):
             and self.event_manager.is_probable_event_typo(method.__name__)
         ):
             raise RegisterError(method.__name__, self)
+        if (
+            not force
+            and not self.event_manager.can_register_to_world(method)
+            and getattr(self, "learning_mode", False)
+        ):
+            warnings.warn(
+                f"`{method.__name__}` was registered with @register, but it is "
+                "not an event handler - it will never be called automatically. "
+                "If you want a helper method, define it without @register.",
+                RuntimeWarning,
+                stacklevel=3,
+            )
         self._registered_methods.append(method)
         bound_method = world_inspection.WorldInspection(self).bind_method(method)
         self.event_manager.register_event(method.__name__, self)
