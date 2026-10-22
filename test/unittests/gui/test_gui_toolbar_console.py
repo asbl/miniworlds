@@ -13,6 +13,18 @@ class DummyWidget(widget_base.BaseWidget):
         pass
 
 
+class ClampDummyWidget(widget_base.BaseWidget):
+    """BaseWidget with position/size properties shadowed by plain attributes.
+
+    Allows toolbar layout logic to run on widgets created via ``__new__``
+    without a position manager.
+    """
+
+    height = 0
+    y = 0
+    topleft = None
+
+
 class LayoutWidget:
     def __init__(self, margin_top, margin_left, margin_right, margin_bottom, height):
         self.margin_top = margin_top
@@ -22,6 +34,7 @@ class LayoutWidget:
         self.height = height
         self.width = None
         self.topleft = None
+        self.y = 0
 
 
 class TestToolbar(unittest.TestCase):
@@ -62,6 +75,7 @@ class TestToolbar(unittest.TestCase):
         second.remove = Mock()
         toolbar.widgets = OrderedDict([(0, first), (1, second)])
         toolbar.timed_widgets = {}
+        toolbar.fixed_camera = True
 
         with patch.object(Toolbar, "reorder") as reorder_mock:
             Toolbar.remove(toolbar, first)
@@ -261,6 +275,101 @@ class TestToolbarWidgetKeys(unittest.TestCase):
         self.assertEqual(len(toolbar.timed_widgets), 0)
         first.remove.assert_called_once_with()
         second.remove.assert_called_once_with()
+
+
+class TestToolbarCameraClamping(unittest.TestCase):
+    def _make_toolbar(self, fixed_camera=False):
+        toolbar = Toolbar.__new__(Toolbar)
+        toolbar.widgets = OrderedDict()
+        toolbar.timed_widgets = {}
+        toolbar.fixed_camera = fixed_camera
+        toolbar._padding_top = 0
+        toolbar._padding_bottom = 0
+        toolbar._padding_left = 0
+        toolbar._padding_right = 0
+        toolbar.max_row_height = 0
+        toolbar.row_height = 20
+        toolbar.camera = SimpleNamespace(width=200, y=0, height=100, world_size_y=100)
+        return toolbar
+
+    def _add_widgets(self, toolbar, count):
+        widgets = []
+        for _ in range(count):
+            widget = LayoutWidget(0, 0, 0, 0, 20)
+            widget.timed = False
+            widget.remove = Mock()
+            widgets.append(widget)
+            toolbar._add_widget(widget)
+        return widgets
+
+    def _scroll_camera(self, toolbar, y, world_size_y):
+        toolbar.camera.y = y
+        toolbar.camera.world_size_y = world_size_y
+
+    def test_remove_clamps_camera_when_content_shrinks_below_viewport(self):
+        toolbar = self._make_toolbar()
+        self._add_widgets(toolbar, 10)
+        self._scroll_camera(toolbar, y=100, world_size_y=200)
+
+        for key in range(8):
+            Toolbar.remove(toolbar, key)
+
+        # Zwei Widgets bleiben: 2 * 20 = 40 Pixel Inhaltshoehe
+        self.assertEqual(toolbar.camera.world_size_y, 100)
+        self.assertEqual(toolbar.camera.y, 0)
+
+    def test_remove_clamps_camera_while_content_still_overflows(self):
+        toolbar = self._make_toolbar()
+        self._add_widgets(toolbar, 10)
+        self._scroll_camera(toolbar, y=100, world_size_y=200)
+
+        Toolbar.remove(toolbar, 9)
+
+        # Neun Widgets: 9 * 20 = 180 Pixel Inhaltshoehe
+        self.assertEqual(toolbar.camera.world_size_y, 180)
+        self.assertEqual(toolbar.camera.y, 80)
+
+    def test_remove_all_widgets_resets_camera_to_top(self):
+        toolbar = self._make_toolbar()
+        self._add_widgets(toolbar, 10)
+        self._scroll_camera(toolbar, y=100, world_size_y=200)
+
+        toolbar.remove_all_widgets()
+
+        self.assertEqual(toolbar.camera.world_size_y, 100)
+        self.assertEqual(toolbar.camera.y, 0)
+
+    def test_on_remove_actor_clamps_camera(self):
+        toolbar = self._make_toolbar(fixed_camera=True)
+        self._add_widgets(toolbar, 9)
+        widget = object.__new__(ClampDummyWidget)
+        widget.margin_top = 0
+        widget.margin_bottom = 0
+        widget.height = 20
+        widget.timed = False
+        widget.remove = Mock()
+        with patch.object(Toolbar, "reorder"):
+            toolbar._add_widget(widget)
+        toolbar.fixed_camera = False
+        self._scroll_camera(toolbar, y=100, world_size_y=200)
+
+        with patch.object(Toolbar, "reorder"):
+            Toolbar.on_remove_actor(toolbar, widget)
+
+        # Neun Widgets bleiben: 9 * 20 = 180 Pixel Inhaltshoehe
+        self.assertEqual(toolbar.camera.world_size_y, 180)
+        self.assertEqual(toolbar.camera.y, 80)
+
+    def test_fixed_camera_is_left_untouched_by_remove(self):
+        toolbar = self._make_toolbar(fixed_camera=True)
+        self._add_widgets(toolbar, 10)
+        self._scroll_camera(toolbar, y=100, world_size_y=200)
+
+        Toolbar.remove(toolbar, 0)
+        toolbar.remove_all_widgets()
+
+        self.assertEqual(toolbar.camera.y, 100)
+        self.assertEqual(toolbar.camera.world_size_y, 200)
 
 
 class TestConsoleTrimming(unittest.TestCase):

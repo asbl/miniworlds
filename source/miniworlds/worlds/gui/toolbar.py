@@ -168,7 +168,9 @@ class Toolbar(gui.GUI):
         Removes a widget from the toolbar.
 
         The widget is also removed from the toolbar world, so it is no
-        longer rendered and no longer receives events.
+        longer rendered and no longer receives events. The camera is
+        clamped to the remaining content, so the view does not stay
+        scrolled past the removed widget.
 
         Args:
             item: The widget to remove – either the widget object itself, its
@@ -187,6 +189,7 @@ class Toolbar(gui.GUI):
                 self._unregister_widget(removed_widget)
                 removed_widget.remove()
                 self.reorder()
+                self._clamp_camera_to_content()
                 return True
             else:
                 return False
@@ -202,6 +205,7 @@ class Toolbar(gui.GUI):
             self._unregister_widget(removed_widget)
             removed_widget.remove()
             self.reorder()
+            self._clamp_camera_to_content()
             return True
         else:
             raise TypeError(f"item must be of type [int, str, Widget], found {type(item)}")
@@ -242,12 +246,14 @@ class Toolbar(gui.GUI):
         """Removes all widgets from the toolbar at once.
 
         The widgets are also removed from the toolbar world. Use this
-        when rebuilding a menu or replacing all controls.
+        when rebuilding a menu or replacing all controls. The camera is
+        reset to the top of the (now empty) toolbar.
         """
         for widget in list(self.widgets.values()):
             self._unregister_widget(widget)
             widget.remove()
         self.widgets = OrderedDict()
+        self._clamp_camera_to_content()
         self.dirty = 1
 
     def reorder(self):
@@ -273,6 +279,22 @@ class Toolbar(gui.GUI):
             height += widget.margin_top
             height += widget.height + widget.margin_bottom
         return height + self.padding_bottom
+
+    def _clamp_camera_to_content(self):
+        """Clamps the camera to the remaining widget content.
+
+        After widgets are removed, the world size and the camera position
+        are reduced to the remaining content, so the view does not stay
+        scrolled past removed widgets. Toolbars with ``fixed_camera``
+        are left untouched.
+        """
+        if self.fixed_camera:
+            return
+        total_height = self._widgets_total_height()
+        self.camera.world_size_y = max(self.camera.height, total_height)
+        max_camera_y = max(0, total_height - self.camera.height)
+        if self.camera.y > max_camera_y:
+            self.camera.y = max_camera_y
 
     def _set_widget_width(self, widget):
         new_width = self.camera.width - self.padding_left - self.padding_right - widget.margin_left - widget.margin_right
@@ -390,3 +412,4 @@ class Toolbar(gui.GUI):
         self.widgets.pop(search_key)
         self._unregister_widget(actor)
         self.reorder()
+        self._clamp_camera_to_content()
