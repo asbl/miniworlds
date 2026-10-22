@@ -46,10 +46,13 @@ class WrongArgumentsError(MiniworldsError):
     def __init__(self, method, parameters):
         sig = signature(method)
         method_name = getattr(method, "__name__", str(method))
+        expected = [name for name in sig.parameters]
+        expected_str = (
+            ", ".join(expected) if expected else "no arguments (besides self)"
+        )
         self.message = (
             f"Wrong number of arguments for '{method_name}'. "
-            f"Got {str(parameters)} but expected {str(sig.parameters)}.\n"
-            f"Try: def {method_name}{sig}"
+            f"Got {str(parameters)} but expected {expected_str}.\n"
         )
         event_signatures = {
             "act": "def act(self):",
@@ -63,10 +66,12 @@ class WrongArgumentsError(MiniworldsError):
         }
         if method_name in event_signatures:
             self.message += (
-                f"\nEvent handlers are called by miniworlds - "
-                f"use the exact signature:\n"
-                f"    {event_signatures[method_name]}"
+                f"Try: {event_signatures[method_name]}\n"
+                f"Event handlers are called by miniworlds - "
+                f"use the exact signature above."
             )
+        else:
+            self.message += f"Try: def {method_name}{sig}"
         super().__init__(self.message)
 
 

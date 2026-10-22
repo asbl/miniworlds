@@ -35,7 +35,8 @@ def _ensure_point(value, parameter_name: str) -> None:
 def _ensure_real(value, parameter_name: str) -> None:
     if not _is_real_number(value):
         raise TypeError(
-            f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}"
+            f"{parameter_name} must be int or float, got {type(value).__name__}: {value!r}\n"
+            f"Try: {parameter_name} = 10"
         )
 
 

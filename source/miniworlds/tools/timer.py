@@ -52,7 +52,10 @@ class Timer(Timed):
     @staticmethod
     def _validate_interval(time: int) -> None:
         if not isinstance(time, int):
-            raise TypeError(f"Timer interval must be int, got {type(time)}")
+            raise TypeError(
+                f"Timer interval must be int, got {type(time).__name__}: {time!r}\n"
+                "Try: Timer(48)"
+            )
         if time <= 0:
             raise ValueError(f"Timer interval must be > 0, got {time}")
 

@@ -271,7 +271,9 @@ class PlatformAdapter:
             if full_path:
                 return full_path
 
-        raise FileNotFoundError(f"Filepath {path} not found")
+        raise FileNotFoundError(
+            f"Filepath {path} not found in working directory '{os.getcwd()}'"
+        )
 
     def _apply_base_path(self, path: str, base_path: str | None) -> str:
         if base_path:

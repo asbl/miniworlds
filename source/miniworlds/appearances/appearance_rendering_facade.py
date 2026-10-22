@@ -119,7 +119,7 @@ class AppearanceRenderingFacade:
     def to_string(self) -> str:
         return (
             self.owner.__class__.__name__
-            + "with ID ["
+            + " with ID ["
             + str(self.owner.id)
             + "] for parent:["
             + str(self.owner.parent)

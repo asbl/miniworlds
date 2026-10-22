@@ -334,5 +334,68 @@ class Audit2FixesTest(unittest.TestCase):
         self.assertFalse(world.is_in_world((100, 50)))
 
 
+class Audit3FixesTest(unittest.TestCase):
+    """Tests for the audit-3 message polish."""
+
+    def setUp(self):
+        App.reset(unittest=True, file=__file__)
+
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    # A2: WrongArgumentsError message
+
+    def test_wrong_arguments_error_lists_expected_parameters(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+
+        @actor.register
+        def on_message(self):
+            pass
+
+        world.send_message("hello")
+        with self.assertRaises(WrongArgumentsError) as ctx:
+            world.app.event_manager.handle_event_queue()
+        message = str(ctx.exception)
+        self.assertIn("expected no arguments (besides self)", message)
+        self.assertIn("Try: def on_message(self, message):", message)
+        self.assertNotIn("OrderedDict", message)
+
+    # A3: Timer interval message
+
+    def test_timer_with_string_interval_has_try_hint(self):
+        with self.assertRaises(TypeError) as ctx:
+            Timer("10")
+        message = str(ctx.exception)
+        self.assertIn("got str: '10'", message)
+        self.assertIn("Try: Timer(48)", message)
+
+    # A4: image path error includes working directory
+
+    def test_missing_image_error_names_working_directory(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        with self.assertRaises(FileNotFoundError) as ctx:
+            actor.costume.add_image("missing_image_file.png")
+        self.assertIn("working directory", str(ctx.exception))
+
+    # A5: appearance string has space before "with ID"
+
+    def test_appearance_str_has_space_before_id(self):
+        world = World(100, 100)
+        actor = Actor((10, 10), world=world)
+        self.assertIn(" with ID [", str(actor.costume))
+
+    # A6: shapes error messages have Try hint
+
+    def test_rectangle_with_string_width_has_try_hint(self):
+        world = World(100, 100)
+        with self.assertRaises(TypeError) as ctx:
+            Rectangle((10, 10), "40", 40)
+        message = str(ctx.exception)
+        self.assertIn("width must be int or float, got str: '40'", message)
+        self.assertIn("Try: width = 10", message)
+
+
 if __name__ == "__main__":
     unittest.main()
