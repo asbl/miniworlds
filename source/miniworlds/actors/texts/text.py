@@ -9,8 +9,11 @@ class Text(actor.Actor):
     Set `size`, `font_size`, or `max_width` when the complete text should fit
     into a fixed area.
 
+    Positions refer to the center by default, as for other actors. Use
+    `Text.from_topleft` when the position should identify the top-left corner.
+
     Args:
-        position: Top-left position of the text.
+        position: Position of the text origin (center by default).
         text: Initial text.
 
     Examples:
@@ -26,7 +29,7 @@ class Text(actor.Actor):
         """Create a text actor.
 
         Args:
-            position: Top-left position as `(x, y)`.
+            position: Position as `(x, y)`, interpreted using the actor origin.
             text: Initial text.
 
         Examples:

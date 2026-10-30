@@ -94,6 +94,11 @@ class TiledWorldSensorManager(worldsensor.SensorManager):
         if actor_list:
             return actor_list[0]
 
+    def get_blocking_actor_at_position(self, position):
+        if not self._is_valid_point(position):
+            return None
+        return super().get_blocking_actor_at_position(self.world.to_pixel(position))
+
     def remove_from_world(self) -> None:
         """Removes a actor from world"""
         if self.actor in self.world._dynamic_actors:

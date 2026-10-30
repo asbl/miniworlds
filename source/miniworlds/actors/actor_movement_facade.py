@@ -39,12 +39,32 @@ class ActorMovementFacade:
     def set_direction_value(self, direction: Union[str, int, float]) -> float:
         return self.actor.position_manager.set_direction(direction)
 
+    @staticmethod
+    def _resolve_position(
+        target: Union[Tuple[float, float], "actor_mod.Actor"]
+    ) -> Tuple[float, float]:
+        """Resolve an Actor-or-position target to a plain `(x, y)` position.
+
+        Uses the actor's `position` (not its rect center) so that
+        move_towards/move_away/point_towards all target the same point for
+        a given actor, regardless of that actor's `origin` mode.
+        """
+        from miniworlds.actors.actor import Actor
+
+        if isinstance(target, Actor):
+            return target.position
+        return target
+
+    def point_towards(
+        self, target: Union[Tuple[float, float], "actor_mod.Actor"]
+    ) -> Union[int, float]:
+        return self.point_towards_position(self._resolve_position(target))
+
     def point_towards_position(self, destination: Tuple[float, float]) -> Union[int, float]:
         return self.actor.position_manager.point_towards_position(destination)
 
     def point_towards_actor(self, other: "actor_mod.Actor") -> int:
-        pos = other.position_manager.get_global_rect().center
-        return self.point_towards_position(pos)
+        return self.point_towards_position(other.position)
 
     def get_x(self) -> float:
         return self.actor.position_manager.position[0]
@@ -119,10 +139,7 @@ class ActorMovementFacade:
         target: Union[Tuple[float, float], "actor_mod.Actor"],
         distance: float = 1,
     ):
-        from miniworlds.actors.actor import Actor
-
-        if isinstance(target, Actor):
-            target = target.position
+        target = self._resolve_position(target)
         return self.actor.position_manager.move_towards_position(target, distance)
 
     def move_away(
@@ -130,10 +147,7 @@ class ActorMovementFacade:
         target: Union[Tuple[float, float], "actor_mod.Actor"],
         distance: float = 1,
     ):
-        from miniworlds.actors.actor import Actor
-
-        if isinstance(target, Actor):
-            target = target.position
+        target = self._resolve_position(target)
         return self.actor.position_manager.move_away_from_position(target, distance)
 
     def move_in_direction(

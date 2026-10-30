@@ -99,6 +99,88 @@ class TestActorLifecycle(unittest.TestCase):
         position_manager.move_towards_position.assert_called_once_with((10, 20), 0.3)
         self.assertIs(result, actor)
 
+    def test_point_towards_position_delegates_without_moving(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.point_towards_position.return_value = 90
+        actor._position_manager = position_manager
+
+        result = Actor.point_towards(actor, (10, 20))
+
+        position_manager.point_towards_position.assert_called_once_with((10, 20))
+        position_manager.move.assert_not_called()
+        self.assertEqual(result, 90)
+
+    def test_point_towards_actor_delegates_without_moving(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.point_towards_position.return_value = 180
+        actor._position_manager = position_manager
+
+        other = Actor.__new__(Actor)
+        other_position_manager = MagicMock()
+        other_position_manager.position = (5, 6)
+        other._position_manager = other_position_manager
+
+        result = Actor.point_towards(actor, other)
+
+        position_manager.point_towards_position.assert_called_once_with((5, 6))
+        position_manager.move.assert_not_called()
+        self.assertEqual(result, 180)
+
+    def test_point_towards_and_move_towards_resolve_actor_target_identically(self):
+        # Regression test: point_towards and move_towards must target the same
+        # point for a given actor, regardless of that actor's origin mode.
+        other = Actor.__new__(Actor)
+        other_position_manager = MagicMock()
+        other_position_manager.position = (42, 7)
+        other._position_manager = other_position_manager
+
+        pointer = Actor.__new__(Actor)
+        pointer_position_manager = MagicMock()
+        pointer._position_manager = pointer_position_manager
+
+        mover = Actor.__new__(Actor)
+        mover_position_manager = MagicMock()
+        mover._position_manager = mover_position_manager
+
+        Actor.point_towards(pointer, other)
+        Actor.move_towards(mover, other, 1)
+
+        pointer_position_manager.point_towards_position.assert_called_once_with((42, 7))
+        mover_position_manager.move_towards_position.assert_called_once_with((42, 7), 1)
+
+    def test_point_towards_rejects_invalid_target_type(self):
+        actor = Actor.__new__(Actor)
+        actor._position_manager = MagicMock()
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.point_towards(actor, 123)
+
+        self.assertIn("must be an Actor or a position tuple", str(ctx.exception))
+
+    def test_point_towards_rejects_list_outside_learning_mode(self):
+        actor = Actor.__new__(Actor)
+        actor._position_manager = MagicMock()
+
+        with self.assertRaises(TypeError) as ctx:
+            Actor.point_towards(actor, [10, 20])
+
+        self.assertIn("must be an Actor or a position tuple", str(ctx.exception))
+
+    def test_point_towards_coerces_list_in_learning_mode(self):
+        actor = Actor.__new__(Actor)
+        position_manager = MagicMock()
+        position_manager.point_towards_position.return_value = 45
+        actor._position_manager = position_manager
+        actor._world = SimpleNamespace(learning_mode=True)
+
+        with self.assertWarns(RuntimeWarning):
+            result = Actor.point_towards(actor, [10, 20])
+
+        position_manager.point_towards_position.assert_called_once_with((10, 20))
+        self.assertEqual(result, 45)
+
     def test_move_away_accepts_optional_step_size(self):
         actor = Actor.__new__(Actor)
         position_manager = MagicMock()

@@ -174,6 +174,43 @@ class TestHexWorld(unittest.TestCase):
         self.assertTrue(actor.detect_pixel(center))
         self.assertFalse(actor.detect_pixel(self.world.to_pixel((5, 5))))
 
+    def test_colored_hex_costume_has_transparent_corners(self):
+        actor = Actor((2, 2), world=self.world)
+        actor.border = 1
+        actor.fill_color = (0, 120, 0)
+        image = actor.costume.get_image()
+        width, height = image.get_size()
+        self.assertEqual(image.get_at((width // 2, height // 2)), (0, 120, 0, 255))
+        for position in ((0, 0), (width - 1, 0), (0, height - 1), (width - 1, height - 1)):
+            self.assertEqual(image.get_at(position).a, 0)
+
+    def test_hex_costume_recoloring_keeps_corners_transparent(self):
+        actor = Actor((2, 2), world=self.world)
+        actor.fill_color = (0, 120, 0)
+        actor.costume.get_image()
+        actor.fill_color = (220, 180, 60)
+        image = actor.costume.get_image()
+        self.assertEqual(image.get_at((0, 0)).a, 0)
+        self.assertEqual(image.get_at(image.get_rect().center), (220, 180, 60, 255))
+
+    def test_unfilled_hex_costume_has_transparent_center(self):
+        actor = Actor((2, 2), world=self.world)
+        actor.border = 2
+        actor.fill = False
+        image = actor.costume.get_image()
+        self.assertEqual(image.get_at(image.get_rect().center).a, 0)
+        self.assertEqual(image.get_at((0, 0)).a, 0)
+
+    def test_hex_image_costume_keeps_image_corners(self):
+        import pygame
+
+        actor = Actor((2, 2), world=self.world)
+        surface = pygame.Surface((20, 20), pygame.SRCALPHA)
+        surface.fill((10, 20, 30, 255))
+        actor.add_costume(surface)
+        image = actor.costume.get_image()
+        self.assertEqual(image.get_at((0, 0)), (10, 20, 30, 255))
+
     def test_click_detection_on_corner_actor(self):
         corner = self.world.get_corner((3, 3), "n")
         actor = Actor(corner.position, world=self.world)

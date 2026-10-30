@@ -235,6 +235,21 @@ class Actor(actor_base.ActorBase):
             )
 
     @classmethod
+    def _ensure_actor_or_position(cls, value, parameter_name: str):
+        if isinstance(value, Actor):
+            return
+        if isinstance(value, tuple):
+            cls._ensure_position_tuple(value, parameter_name)
+            return
+        raise TypeError(
+            cls._with_try_hint(
+                f"{parameter_name} must be an Actor or a position tuple (x, y), "
+                f"got {cls._type_name(value)}: {value!r}",
+                f"{parameter_name} = (100, 200)",
+            )
+        )
+
+    @classmethod
     def _ensure_actor_filter(cls, value, parameter_name: str = "actors"):
         if value is None:
             return
@@ -807,6 +822,27 @@ class Actor(actor_base.ActorBase):
         self._ensure_direction_value(direction, "direction")
         return self._movement_facade.set_direction_value(direction)
 
+    def point_towards(
+        self, target: Union[Tuple[float, float], "Actor"]
+    ) -> Union[int, float]:
+        """Point the actor toward a target actor or position, without moving.
+
+        Args:
+            target: Target actor or position as `(x, y)`.
+
+        Returns:
+            The new direction.
+
+        Examples:
+            ::
+
+                enemy.point_towards(player)
+                enemy.point_towards((100, 80))
+        """
+        target = self._coerce_position_learning(target, "target")
+        self._ensure_actor_or_position(target, "target")
+        return self._movement_facade.point_towards(target)
+
     def point_towards_position(
         self, destination: Tuple[float, float]
     ) -> Union[int, float]:
@@ -1143,10 +1179,8 @@ class Actor(actor_base.ActorBase):
                 enemy.move_towards(player, 2)
                 enemy.move_towards((100, 80), 2)
         """
-        if isinstance(target, tuple):
-            self._ensure_position_tuple(target, "target")
-        else:
-            self._ensure_actor_instance(target, "target")
+        target = self._coerce_position_learning(target, "target")
+        self._ensure_actor_or_position(target, "target")
         self._ensure_real(distance, "distance")
         return self._movement_facade.move_towards(target, distance)
 
@@ -1172,10 +1206,8 @@ class Actor(actor_base.ActorBase):
                     if self.detect(enemy):
                         self.move_away(enemy, 3)
         """
-        if isinstance(target, tuple):
-            self._ensure_position_tuple(target, "target")
-        else:
-            self._ensure_actor_instance(target, "target")
+        target = self._coerce_position_learning(target, "target")
+        self._ensure_actor_or_position(target, "target")
         self._ensure_real(distance, "distance")
         return self._movement_facade.move_away(target, distance)
 

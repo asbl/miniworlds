@@ -35,9 +35,15 @@ class ActorSensorFacade:
             )
         else:
             actors = args[0] if len(args) > 0 else None
-            distance = args[1] if len(args) >= 2 else None
-            direction = args[2] if len(args) >= 3 else self.actor.direction
+            distance = args[1] if len(args) >= 2 else kwargs.pop("distance", None)
+            direction = (
+                args[2]
+                if len(args) >= 3
+                else kwargs.pop("direction", self.actor.direction)
+            )
         if not distance:
+            if actors is self.actor:
+                return None
             if hasattr(actors, "position_manager") and hasattr(
                 actors, "collision_type"
             ):
@@ -68,11 +74,12 @@ class ActorSensorFacade:
                     )
                 return actors
             return self.actor.sensor_manager.detect_actor(filter=actors)
-        return self.actor.sensor_manager.detect_actors_at(
+        detected = self.actor.sensor_manager.detect_actors_at(
             filter=actors,
             direction=direction,
             distance=distance,
         )
+        return detected[0] if detected else None
 
     def detect_borders(self, distance: int = 0) -> List[str]:
         return self.actor.sensor_manager.detect_borders(distance)

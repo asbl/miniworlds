@@ -1,0 +1,6 @@
+# Grosse Doku- und Testassets werden nicht in GitHub-Release-Zips/Tarballs
+# gepackt (GitHub nutzt `git archive`, das export-ignore respektiert).
+# Im normalen Clone/Checkout bleiben sie erhalten.
+docs/source/_static/** export-ignore
+docs/source/_images/** export-ignore
+test/visualtests/** export-ignore

@@ -114,7 +114,8 @@ class SensorManager:
         event_manager = getattr(self.world, "event_manager", None)
         definition = getattr(event_manager, "definition", None)
         signature = getattr(definition, "_actor_class_signature", ())
-        cache_key = (actor_filter.lower(), signature)
+        revision = getattr(definition, "actor_class_resolution_revision", 0)
+        cache_key = (actor_filter.lower(), signature, revision)
         cache = getattr(self, "_resolved_actor_filter_cache", None)
         if cache is None:
             cache = {}
@@ -205,8 +206,8 @@ class SensorManager:
             self.actor
         ).find_actor_class_by_classname(actor_name)
 
-        if actor_type is not None and actor_classes_by_name is not None:
-            actor_classes_by_name[normalized_name] = actor_type
+        if actor_type is not None and definition is not None:
+            definition.register_actor_class(actor_type)
 
         return actor_type
 

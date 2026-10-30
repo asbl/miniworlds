@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-10-30 17:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -34,8 +34,15 @@ msgstr "Der aktuell angezeigte Text"
 
 #: miniworlds.actors.texts.text.Text:3 of
 msgid ""
-"Set `size`, `font_size`, or `max_width` when the complete text should fit "
-"into a fixed area."
+"Set `size`, `font_size`, or `max_width` when the complete text should fit"
+" into a fixed area."
+msgstr ""
+
+#: miniworlds.actors.texts.text.Text:6 of
+msgid ""
+"Positions refer to the center by default, as for other actors. Use "
+"`Text.from_topleft` when the position should identify the top-left "
+"corner."
 msgstr ""
 
 #: ../../source/api/actor_text.md miniworlds.actors.texts.text.Text.__init__
@@ -46,18 +53,17 @@ msgstr ""
 msgid "Parameters"
 msgstr "Parameter"
 
-#: miniworlds.actors.texts.text.Text:6 of
-#, fuzzy
-msgid "Top-left position of the text."
-msgstr "Oben-links Position des Textes."
+#: miniworlds.actors.texts.text.Text:9 of
+msgid "Position of the text origin (center by default)."
+msgstr ""
 
-#: miniworlds.actors.texts.text.Text:7
+#: miniworlds.actors.texts.text.Text:10
 #: miniworlds.actors.texts.text.Text.__init__:4 of
 #, fuzzy
 msgid "Initial text."
 msgstr "Der ursprüngliche Text"
 
-#: miniworlds.actors.texts.text.Text:10
+#: miniworlds.actors.texts.text.Text:13
 #: miniworlds.actors.texts.text.Text.__init__:7
 #: miniworlds.actors.texts.text.Text.font_by_size:9
 #: miniworlds.actors.texts.text.Text.font_size:4
@@ -76,9 +82,8 @@ msgid "Create a text actor."
 msgstr "Legt den Text des Actors fest"
 
 #: miniworlds.actors.texts.text.Text.__init__:3 of
-#, fuzzy
-msgid "Top-left position as `(x, y)`."
-msgstr "Oben-links Position des Textes."
+msgid "Position as `(x, y)`, interpreted using the actor origin."
+msgstr ""
 
 #: miniworlds.actors.texts.text.Text.font_by_size:1 of
 msgid "Choose a font size that fits into a target width or height."
@@ -147,9 +152,8 @@ msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_costume_class:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ \\\\\\"
-"[\\:py\\:class\\:"
-"\\`\\~miniworlds.actors.texts.text\\_costume.TextCostume\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`type\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.texts.text\\_costume.TextCostume\\`\\]`"
 msgstr ""
 
 #: miniworlds.actors.texts.text.Text.get_costume_class:5 of
@@ -222,6 +226,13 @@ msgstr ""
 
 #: miniworlds.actors.texts.text.Text.value:3 of
 msgid ""
-"This property is useful when a text actor should behave like a simple value "
-"display, for example a score or timer."
+"This property is useful when a text actor should behave like a simple "
+"value display, for example a score or timer."
 msgstr ""
+
+#~ msgid "Top-left position of the text."
+#~ msgstr "Oben-links Position des Textes."
+
+#~ msgid "Top-left position as `(x, y)`."
+#~ msgstr "Oben-links Position des Textes."
+

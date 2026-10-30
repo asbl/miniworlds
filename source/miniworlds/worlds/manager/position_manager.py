@@ -575,7 +575,7 @@ class Positionmanager:
 
         """
         direction = self.direction_from_two_points(
-            self.actor.center, destination
+            self.actor.position, destination
         )
         self.set_direction(direction)
         return self.get_direction()

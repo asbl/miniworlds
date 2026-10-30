@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 11:48+0200\n"
+"POT-Creation-Date: 2026-10-30 17:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -150,6 +150,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_not_detecting_world:6
 #: miniworlds.actors.actor.Actor.on_setup:10
 #: miniworlds.actors.actor.Actor.orientation:4
+#: miniworlds.actors.actor.Actor.point_towards:10
 #: miniworlds.actors.actor.Actor.point_towards_actor:10
 #: miniworlds.actors.actor.Actor.point_towards_position:10
 #: miniworlds.actors.actor.Actor.remove:17
@@ -210,6 +211,7 @@ msgstr "Fügt dem Actor ein Kostüm hinzu."
 #: miniworlds.actors.actor.Actor.detect_pixel
 #: miniworlds.actors.actor.Actor.detect_point
 #: miniworlds.actors.actor.Actor.flip_x
+#: miniworlds.actors.actor.Actor.point_towards
 #: miniworlds.actors.actor.Actor.point_towards_actor
 #: miniworlds.actors.actor.Actor.point_towards_position
 #: miniworlds.actors.actor.Actor.remove
@@ -262,6 +264,7 @@ msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.appeara
 #: miniworlds.actors.actor.Actor.on_mouse_leave
 #: miniworlds.actors.actor.Actor.on_mouse_left_released
 #: miniworlds.actors.actor.Actor.on_mouse_over
+#: miniworlds.actors.actor.Actor.point_towards
 #: miniworlds.actors.actor.Actor.point_towards_actor
 #: miniworlds.actors.actor.Actor.point_towards_position
 #: miniworlds.actors.actor.Actor.remove
@@ -311,6 +314,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.move_towards
 #: miniworlds.actors.actor.Actor.move_vector
 #: miniworlds.actors.actor.Actor.next_costume
+#: miniworlds.actors.actor.Actor.point_towards
 #: miniworlds.actors.actor.Actor.point_towards_actor
 #: miniworlds.actors.actor.Actor.point_towards_position
 #: miniworlds.actors.actor.Actor.remove
@@ -1335,14 +1339,24 @@ msgstr "Ausrichtungsversatz des Kostüms in Grad."
 msgid "Current origin mode used for size and position operations."
 msgstr "Aktueller Ursprungmodus für Größen- und Positionsoperationen."
 
-#: miniworlds.actors.actor.Actor.point_towards_actor:1 of
-msgid "Point the actor toward another actor."
-msgstr "Richtet den Actor auf einen anderen Actor aus."
+#: miniworlds.actors.actor.Actor.point_towards:1 of
+msgid "Point the actor toward a target actor or position, without moving."
+msgstr "Richtet den Actor auf einen Ziel-Actor oder eine Position aus, ohne sich zu bewegen."
 
-#: miniworlds.actors.actor.Actor.point_towards_actor:5 of
-msgid "Target actor."
-msgstr "Ziel-Actor."
+#: miniworlds.actors.actor.Actor.point_towards:3
+#: miniworlds.actors.actor.Actor.point_towards_position:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
+msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 
+#: miniworlds.actors.actor.Actor.point_towards:5 of
+msgid "Target actor or position as `(x, y)`."
+msgstr "Ziel-Actor oder Zielposition als `(x, y)`."
+
+#: miniworlds.actors.actor.Actor.point_towards:7
 #: miniworlds.actors.actor.Actor.point_towards_actor:7
 #: miniworlds.actors.actor.Actor.point_towards_position:7
 #: miniworlds.actors.actor.Actor.set_direction:8
@@ -1351,17 +1365,17 @@ msgstr "Ziel-Actor."
 msgid "The new direction."
 msgstr "Die neue Richtung."
 
+#: miniworlds.actors.actor.Actor.point_towards_actor:1 of
+msgid "Point the actor toward another actor."
+msgstr "Richtet den Actor auf einen anderen Actor aus."
+
+#: miniworlds.actors.actor.Actor.point_towards_actor:5 of
+msgid "Target actor."
+msgstr "Ziel-Actor."
+
 #: miniworlds.actors.actor.Actor.point_towards_position:1 of
 msgid "Point the actor toward a position."
 msgstr "Richtet den Actor auf eine Position aus."
-
-#: miniworlds.actors.actor.Actor.point_towards_position:3 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
-msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Union\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.actors.actor.Actor.position:1 of
 msgid "The position of the actor as Position(x, y)"

@@ -41,19 +41,32 @@ class ActorClassInspection:
 
     def get_subclasses_for_cls(self):
         def all_subclasses(cls):
-            return set(cls.__subclasses__()).union(
-                [s for c in cls.__subclasses__() for s in all_subclasses(c)]
-            )
+            # __subclasses__() returns subclasses in definition order, so
+            # walking it depth-first (instead of collecting into a set)
+            # keeps that order: if two classes share a name (e.g. after a
+            # script restart redefines a class), the more recently defined
+            # one comes last and wins when callers build a name -> class
+            # dict from this result.
+            ordered = []
+            for subclass in cls.__subclasses__():
+                ordered.append(subclass)
+                ordered.extend(all_subclasses(subclass))
+            return ordered
 
-        actor_set = set()
-        actor_set.add(self.actor_class)
-        return actor_set.union(all_subclasses(self.actor_class))
+        classes = [self.actor_class] + all_subclasses(self.actor_class)
+        return list(dict.fromkeys(classes))
 
     def find_actor_class_by_classname(
         self, class_name: str
     ) -> Union[None, Type["actor_mod.Actor"]]:
         class_name = class_name.lower()
+        match = None
         for actor_cls in self.get_all_actor_classes():
             if actor_cls.__name__.lower() == class_name:
-                return actor_cls
-        return None
+                # Keep the last match: get_all_actor_classes() returns
+                # classes in definition order, so if a name was redefined
+                # (e.g. after a script restart), the most recently defined
+                # class wins here too, consistent with how
+                # EventDefinition.setup_event_list() resolves name clashes.
+                match = actor_cls
+        return match

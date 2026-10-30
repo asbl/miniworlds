@@ -235,6 +235,7 @@ class EventRegistry:
         members = self._get_members_for_instance(actor)
         if not class_was_cached:
             self.event_definition.update()
+            self.event_definition.register_actor_class(actor_class)
         for member in members:
             if member in self.event_definition.class_events_set:
                 method = inspection.Inspection(actor).get_instance_method(member)

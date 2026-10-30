@@ -49,6 +49,16 @@ class TestSensorManager(unittest.TestCase):
         self.assertNotIn(wall, detected)
         self.assertNotIn(hunter, detected)
 
+    def test_classname_filter_prefers_current_world_classes_after_restart(self):
+        old_powerup = type("RestartPowerup", (Actor,), {})
+        current_powerup = type("RestartPowerup", (Actor,), {})
+        current_heart = type("RestartHeart", (current_powerup,), {})
+        hunter = self._create_actor(Hunter)
+        self.world.event_manager.definition.actor_classes_by_name["restartpowerup"] = old_powerup
+        self.assertEqual(hunter.detect_all("restartpowerup"), [])
+        heart = self._create_actor(current_heart)
+        self.assertIn(heart, hunter.detect_all("restartpowerup"))
+
     def test_world_tracks_blocking_actors_when_flag_changes(self):
         wall = self._create_actor(Wall)
 

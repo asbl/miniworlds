@@ -65,12 +65,12 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
 
     def get_local_rect(self) -> pygame.Rect:
         global_rect = self.get_global_rect().copy()
-        local_pos = self.actor.world.camera.get_local_position(global_rect.topleft)
+        camera = self.actor.world.camera
 
         if self.actor.world.is_tile(self.actor.position):
-            global_rect.topleft = local_pos
+            global_rect.topleft = camera.get_local_position(global_rect.topleft)
         else:
-            global_rect.center = local_pos
+            global_rect.center = camera.get_local_position(global_rect.center)
 
         return global_rect
 

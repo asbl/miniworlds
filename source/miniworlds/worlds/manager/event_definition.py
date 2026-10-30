@@ -17,6 +17,8 @@ class EventDefinition:
         self.actor_class_events = dict()
         self.actor_class_events_set = set()
         self.actor_classes_by_name: dict[str, type[actor_mod.Actor]] = {}
+        self._registered_actor_classes_by_name: dict[str, type[actor_mod.Actor]] = {}
+        self.actor_class_resolution_revision = 0
         self.world_class_events = dict()
         "EventManager.world_class_events Predefined set of all world events"
         self.world_class_events_set = set()
@@ -32,6 +34,16 @@ class EventDefinition:
             return False
         self.setup_event_list(current_signature)
         return True
+
+    def register_actor_class(self, actor_class: "type[actor_mod.Actor]") -> None:
+        for parent_class in reversed(actor_class.__mro__):
+            if not issubclass(parent_class, actor_mod.Actor):
+                continue
+            name = parent_class.__name__.lower()
+            if self._registered_actor_classes_by_name.get(name) is not parent_class:
+                self._registered_actor_classes_by_name[name] = parent_class
+                self.actor_class_resolution_revision += 1
+        self.actor_classes_by_name.update(self._registered_actor_classes_by_name)
 
     def _get_actor_class_signature(self) -> tuple[str, ...]:
         actor_classes = actor_class_inspection.ActorClassInspection(actor_mod.Actor).get_subclasses_for_cls()
@@ -50,6 +62,7 @@ class EventDefinition:
         self.actor_classes_by_name = {
             actor_cls.__name__.lower(): actor_cls for actor_cls in actor_classes
         }
+        self.actor_classes_by_name.update(self._registered_actor_classes_by_name)
         for actor_cls in actor_classes:
             detecting_actor_methods.append("on_detecting_" + actor_cls.__name__.lower())
         for actor_cls in actor_classes:

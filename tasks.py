@@ -732,8 +732,9 @@ def deploy_push(c, tags=False, skip_tests=False, dry_run=False):
 
 @task(name="run")
 def tests_run(c):
-    """Run the full test suite in Docker and rebuild the image first."""
+    """Run the full test suite plus the Pyodide browser tests in Docker, rebuilding the image first."""
     run_pytest_in_container(c, "-v")
+    tests_pyodide(c)
 
 
 @task(name="cached")

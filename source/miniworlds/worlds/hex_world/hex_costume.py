@@ -34,6 +34,12 @@ class HexCostume(costume_mod.Costume):
             (0, height / 4),
         ]
 
+    def _update_draw_shape(self) -> None:
+        super()._update_draw_shape()
+        current_image = self.image_manager.images_list[self.image_manager.image_index]
+        if self._is_on_tile() and current_image["type"] == self.image_manager.COLOR:
+            self.draw_shapes.insert(0, (pygame.Surface.fill, [(0, 0, 0, 0)]))
+
     def _inner_shape(self) -> tuple:
         if self._is_on_tile():
             return pygame.draw.polygon, [self._hex_points(), 0]

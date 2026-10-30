@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import importlib
 import json
+import math
 from pathlib import Path
 import sys
 import traceback
@@ -15,6 +16,7 @@ from miniworlds import (
     ActionTimer,
     Actor,
     App,
+    HexWorld,
     Input,
     LoopActionTimer,
     Rectangle,
@@ -55,6 +57,38 @@ def test_collision_and_removal() -> None:
     assert second not in world.actors
 
 
+def test_self_detection_and_moose_group_avoidance() -> None:
+    _reset()
+    world = World(240, 240)
+    actor = Actor((20, 20), world=world)
+    other = Actor((25, 20), world=world)
+    for candidate in (actor, other):
+        candidate.size = (24, 24)
+        candidate.add_costume((255, 0, 0))
+    for collision_type in ("rect", "static-rect", "circle", "mask"):
+        actor.collision_type = collision_type
+        other.collision_type = collision_type
+        assert actor.detect(actor) is None
+        assert actor.detect(filter=actor) is None
+        assert actor.detect_all(actor) == []
+        assert actor.detect(other) is other
+    actor.remove()
+    other.remove()
+
+    enemies = [Actor(position, world=world) for position in ((40, 40), (150, 40), (40, 150))]
+    for enemy in enemies:
+        enemy.size = (24, 24)
+        enemy.collision_type = "rect"
+    initial = [enemy.position for enemy in enemies]
+    for enemy in enemies:
+        enemy.move_towards((180, 180), 11)
+        for first in enemies:
+            for second in enemies:
+                assert first.detect(second) is None
+    for position, enemy in zip(initial, enemies):
+        assert math.isclose(math.dist(position, enemy.position), 11)
+
+
 def test_tiled_world_movement_and_detection() -> None:
     _reset()
     world = TiledWorld(6, 5)
@@ -67,6 +101,45 @@ def test_tiled_world_movement_and_detection() -> None:
     assert target in world.detect_actors((3, 2))
     player.undo_move()
     assert player.position == (1, 2)
+
+
+def test_blockable_grid_movement_uses_world_coordinates() -> None:
+    for world_class in (TiledWorld, HexWorld):
+        _reset()
+        world = world_class(5, 5, tile_size=40)
+        origin_wall = Actor((0, 0), world=world)
+        origin_wall.is_blocking = True
+        wall = Actor((2, 1), world=world)
+        wall.is_blocking = True
+        player = Actor((1, 1), world=world)
+        player.is_blockable = True
+        assert wall in player.detect_actors_at(direction=90, distance=1)
+        player.move_in_direction("right")
+        assert player.position == (1, 1)
+        wall.remove()
+        player.move_in_direction("right")
+        assert player.position == (2, 1)
+
+
+def test_hex_costumes_and_neighbor_picking() -> None:
+    _reset()
+    world = HexWorld(7, 7, tile_size=40)
+    field = Actor((4, 3), world=world)
+    field.fill_color = (220, 180, 60)
+    field.border = 1
+    player = Actor((3, 3), world=world)
+    player.fill_color = (60, 130, 220)
+    for actor in (field, player):
+        image = actor.costume.get_image()
+        assert image.get_at((0, 0)).a == 0
+        assert tuple(image.get_at(image.get_rect().center))[:3] == actor.fill_color
+    neighbors = [tile.position for tile in world.get_tiles_in_ring(player.position, 1)]
+    assert len(neighbors) == 6
+    assert player.position not in neighbors
+    picked = world.get_tile_from_pixel(world.to_pixel(field.position))
+    assert picked.position in neighbors
+    player.position = picked.position
+    assert player.position == field.position
 
 
 def test_uploaded_project_supports_local_modules_and_data_files() -> None:
@@ -409,7 +482,10 @@ async def test_web_frame_updates_and_canvas_rendering() -> None:
 TESTS = [
     test_pixel_world_actor_and_costume,
     test_collision_and_removal,
+    test_self_detection_and_moose_group_avoidance,
     test_tiled_world_movement_and_detection,
+    test_blockable_grid_movement_uses_world_coordinates,
+    test_hex_costumes_and_neighbor_picking,
     test_uploaded_project_supports_local_modules_and_data_files,
     test_nested_package_and_unicode_text_survive_upload,
     test_relative_image_paths_and_extension_lookup,
