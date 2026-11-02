@@ -59,6 +59,10 @@ class Background(appearance_mod.Appearance):
         if self.world and self.get_manager()._is_display_initialized:
             for actor in self.world.actors:
                 actor.costume_manager._is_display_initialized = True
+            # Only actors in view need a full costume re-render here; this used
+            # to run the transformation pipeline for every actor in the world.
+            # Offscreen actors re-render lazily when they enter the view.
+            for actor in self.world.camera.get_actors_in_view():
                 if actor.costume:
                     actor.costume.set_dirty("all", self.LOAD_NEW_IMAGE)
 
@@ -126,11 +130,16 @@ class Background(appearance_mod.Appearance):
             actor.dirty = 1
 
     def _blit_to_window_surface(self):
-        """Blits background to window surface"""
+        """Blits background to window surface and repaints the sprite layer.
+
+        The repaint call is load-bearing: camera reloads trigger this via
+        `set_dirty` during `camera._update`, before the mainloop's own
+        repaint, and the sprite layer must be refreshed at that point.
+        """
         if self.world and self.world.app and self.world in self.world.app.running_worlds:
             self.world.app.window.surface.blit(
                 self.image, self.world.camera.screen_topleft
-            ) 
+            )
             self.world.app.add_display_to_repaint_areas()
             self.repaint()
 

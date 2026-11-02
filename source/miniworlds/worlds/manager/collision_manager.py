@@ -11,6 +11,39 @@ class CollisionManager:
 
     def __init__(self, world):
         self.world = world
+        # detect_actors(filter=None) results cached per actor for the duration
+        # of one _handle_all_collisions call (once per frame).
+        self._detect_cache = {}
+
+    def _detected_actors(self, actor):
+        """Unfiltered detect_actors result for this frame, cached per actor.
+
+        Multiple handlers (on_detecting, on_detecting_<Type>,
+        on_not_detecting_<Type>, sensor events) for the same actor derive
+        their filtered lists from this cache instead of re-running the
+        collision checks for every handler. The actor itself is held in the
+        cache entry so the id-key cannot be recycled while cached.
+        """
+        key = id(actor)
+        cached = self._detect_cache.get(key)
+        if cached is None or cached[0] is not actor:
+            result = actor.sensor_manager.detect_actors(filter=None) or []
+            self._detect_cache[key] = (actor, result)
+            return result
+        return cached[1]
+
+    def _detected_actors_filtered(self, actor, actor_filter):
+        """Filtered view of the cached detection result.
+
+        Equivalent to detect_actors(filter=actor_filter): the cached result
+        already applied rect/collision-type checks to all candidates, so
+        filtering it afterwards yields the same set.
+        """
+        sensor_manager = actor.sensor_manager
+        filter_actors = getattr(sensor_manager, "filter_actors", None)
+        if filter_actors is None:
+            return sensor_manager.detect_actors(filter=actor_filter)
+        return filter_actors(self._detected_actors(actor), actor_filter)
 
     def _get_event_view(self) -> collision_event_view.CollisionEventView:
         event_manager = self.world.event_manager
@@ -19,6 +52,7 @@ class CollisionManager:
         return collision_event_view.CollisionEventView(event_manager)
 
     def _handle_all_collisions(self):
+        self._detect_cache = {}
         event_view = self._get_event_view()
         if event_view.has_group_methods("on_detecting"):
             self._handle_actor_detecting_actor_methods(event_view)
@@ -44,7 +78,11 @@ class CollisionManager:
         calls the corresponding method if the actor's sensor manager detects 
         another actor matching the event's filter target.
         """
-        EventSensorDispatcher(event_view or self._get_event_view()).dispatch()
+        dispatcher = EventSensorDispatcher(
+            event_view or self._get_event_view(),
+            detect=self._detected_actors_filtered,
+        )
+        dispatcher.dispatch()
 
     def _handle_on_detecting_all_actors(self, actor, method):
         """
@@ -58,8 +96,8 @@ class CollisionManager:
             actor: The actor performing the detection.
             method: The method to call for each detected actor.
         """
-        # Detect all actors in range (no filter)
-        found_actors = actor.sensor_manager.detect_actors(filter=None) or []
+        # Detect all actors in range (no filter), cached per frame
+        found_actors = list(self._detected_actors(actor))
 
         # Avoid detecting self
         if actor in found_actors:
@@ -80,8 +118,8 @@ class CollisionManager:
             method: The method to be called on detection.
             actor_type_name: The name of the actor class (as string) to filter detection.
         """
-        # Detect actors of the given type
-        found_actors = actor.sensor_manager.detect_actors(filter=actor_type_name) or []
+        # Detect actors of the given type (derived from the cached unfiltered result)
+        found_actors = list(self._detected_actors_filtered(actor, actor_type_name))
 
         # Exclude self from detection results
         if actor in found_actors:
@@ -135,7 +173,7 @@ class CollisionManager:
                     continue  # Skip malformed method names
 
                 actor_type = method_name_parts[3]
-                found_actors = actor.sensor_manager.detect_actors(filter=actor_type)
+                found_actors = list(self._detected_actors_filtered(actor, actor_type))
 
                 # If nothing found or only irrelevant matches (like self or unrelated subclasses)
                 if not found_actors:

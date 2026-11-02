@@ -31,11 +31,17 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
     def get_global_rect(self) -> pygame.Rect:
         """Returns the global rect of the actor in the world space.
 
-        This rect may lie outside the visible screen.
+        This rect may lie outside the visible screen. The result is cached
+        per frame (like in the base class); position changes invalidate the
+        cache via `_invalidate_rect_cache`.
 
         Returns:
             pygame.Rect: A rect with the actor's global coordinates.
         """
+        frame = self.actor.world.frame
+        if frame == self._cached_global_rect[0]:
+            return self._cached_global_rect[1]
+
         size = self.get_size()
         rect = (
             self.actor.costume.get_rect().copy()
@@ -61,6 +67,7 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         else:
             rect.topleft = (-size[0], -size[1])
 
+        self._cached_global_rect = (frame, rect)
         return rect
 
     def get_local_rect(self) -> pygame.Rect:

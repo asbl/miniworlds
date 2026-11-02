@@ -1,3 +1,9 @@
+4.4.0.8
+  * Performance für große Welten (z. B. Survivors-like): Kamera-Sichtabfragen und Sensor-Queries in TiledWorlds laufen über den TiledSpatialIndex statt über alle Actors; der Kamera-View-Cache wird bei Actor-Bewegungen selektiv (O(1)) statt komplett invalidiert; get_global_rect ist in TiledWorlds pro Frame gecached; der statische Tile-Layer wird nur noch für sichtbare Actors neu gebaut; Background-Änderungen re-rendern nur Costumes von Actors in Sicht; Rotationen werden pro Direction gecached; Kollisions-Erkennung wird pro Actor und Frame nur einmal berechnet.
+  * Fehler behoben: Statische Actors wurden in TiledWorlds beim Kamera-Scrolling im vorgebackenen Layer um bis zu `topleft_px - topleft_tiles` Pixel versetzt gerendert (Pixel-Rect vs. Tile-Koordinaten gemischt).
+  * TiledWorld.detect_actors / world.actors_at nutzen den räumlichen Index statt eines Vollscans.
+  * HexWorld: Bewegungsrichtungen werden auf die nächste Hex-Achse gerundet (nearest_axis_degrees), Nachbar-Tiles werden über eine versionsbasierte Cache-Invalidierung verwaltet, Hex-Kamera-Setter für width/height/topleft sind ergänzt; Doku der Hex-Manager-Klassen erweitert.
+  * Neuer Benchmark "tiled camera culling" (Survivors-like-Szenario) in der world-Gruppe; Regressionstests für Kamera-Sicht, Cache-Invalidierung, Static-Layer-Positionierung und Kollisions-Caching.
 4.4.0.6
   * HexWorld: Farbige Hex-Kostüme haben transparente Ecken statt pinker Rechteckflächen.
   * Neue Methode actor.point_towards(target) dreht die Figur zu einer Position oder einem anderen Actor, ohne sich zu bewegen (Pendant zu move_towards).

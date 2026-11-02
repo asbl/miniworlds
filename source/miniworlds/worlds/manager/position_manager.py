@@ -327,7 +327,10 @@ class Positionmanager:
                 self.actor._dirty = 1
             else:
                 self.actor.dirty = 1
-            self.actor.world.camera._clear_camera_cache()
+            # Selective O(1) update of the moved actor instead of clearing the
+            # whole view cache, which would force an O(actors) recomputation
+            # on the next get_actors_in_view() within the same frame.
+            self.actor.world.camera._invalidate_actor_view_cache(self.actor)
 
         return self
 

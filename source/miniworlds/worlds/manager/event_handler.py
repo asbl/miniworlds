@@ -319,8 +319,8 @@ class EventHandler:
         registered_events = _iter_event_methods(self.event_registry, event)
         for method in registered_events:
             method_data = data
-            if type(method_data) in [list, str, tuple]:
-                if type(method_data) == tuple and not self.world.camera.screen_rect.collidepoint(method_data):
+            if isinstance(method_data, (list, str, tuple)):
+                if isinstance(method_data, tuple) and not self.world.camera.screen_rect.collidepoint(method_data):
                     return
                 method_data = [method_data]
             method_caller.call_method(method, method_data, allow_none=False)

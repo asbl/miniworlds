@@ -25,6 +25,11 @@ class TransformationsManager:
         self._pipeline_cache: OrderedDict = OrderedDict()
         self._pipeline_cache_max = TransformationsManager.PIPELINE_CACHE_MAX
         self._render_revision = 0
+        # rotozoom results keyed by (id(image), direction). The source image is
+        # held in the value so the id cannot be recycled while cached. This
+        # survives render-revision bumps (e.g. set_dirty("all")) as long as the
+        # direction did not change.
+        self._rotation_cache: OrderedDict = OrderedDict()
 
         self.transformations_pipeline: list[TransformationPipelineEntry] = [
             {"key": "orientation", "func": self.transformation_set_orientation, "attr": "orientation", "is_optional": False},
@@ -161,8 +166,18 @@ class TransformationsManager:
         return self.surface
 
     def transformation_rotate(self, image: pygame.Surface, appearance) -> pygame.Surface:
-        if appearance.parent.direction != 0:
-            rotated_image = pygame.transform.rotozoom(image, -appearance.parent.direction, 1)
+        direction = getattr(appearance.parent, "direction", 0)
+        if direction != 0:
+            cache_key = (id(image), direction)
+            cached = self._rotation_cache.get(cache_key)
+            if cached is not None and cached[0] is image:
+                self._rotation_cache.move_to_end(cache_key)
+                self.surface = cached[1]
+                return cached[1]
+            rotated_image = pygame.transform.rotozoom(image, -direction, 1)
+            self._rotation_cache[cache_key] = (image, rotated_image)
+            while len(self._rotation_cache) > self._pipeline_cache_max:
+                self._rotation_cache.popitem(last=False)
             self.surface = rotated_image
             return rotated_image
         self.surface = image

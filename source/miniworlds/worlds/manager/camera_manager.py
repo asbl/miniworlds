@@ -286,17 +286,40 @@ class CameraManager(pygame.sprite.Sprite):
         for actor in self.get_actors_in_view():
             actor.dirty = 1
 
+    def _view_candidates(self, camera_rect: pygame.Rect):
+        """Candidate actors for a view query.
+
+        Non-tiled worlds use the pixel-based SpatialIndex. Tiled worlds use
+        the TiledSpatialIndex over the camera's tile range, so the candidate
+        set scales with the visible area instead of the total actor count.
+        Callers still apply the precise pixel-level rect filter afterwards.
+        """
+        world = self.world
+        is_tiled = getattr(world, "is_tiled", False)
+        if is_tiled is True:
+            tiled_index = getattr(world, "_tiled_spatial_index", None)
+            if tiled_index is not None:
+                tile_size = max(1, getattr(world, "tile_size", 1))
+                min_tile = (camera_rect.left // tile_size, camera_rect.top // tile_size)
+                max_tile = (
+                    max(camera_rect.left, camera_rect.right - 1) // tile_size,
+                    max(camera_rect.top, camera_rect.bottom - 1) // tile_size,
+                )
+                # One chunk ring of margin: actors just outside the camera
+                # whose pixel rect still reaches into the view remain candidates.
+                return tiled_index.query_chunk_region(min_tile, max_tile, ring=1)
+            return world.actors
+        spatial_index = getattr(world, "_spatial_index", None)
+        if spatial_index is not None and not is_tiled:
+            return spatial_index.query_rect(camera_rect)
+        return world.actors
+
     def get_actors_in_view(self) -> Set["Actor"]:
         if self._view_update_frame == self.world.frame:
             return self._view_active_actors
 
         camera_rect = self.rect
-        spatial_index = getattr(self.world, "_spatial_index", None)
-        candidates = (
-            spatial_index.query_rect(camera_rect)
-            if spatial_index is not None and not getattr(self.world, "is_tiled", False)
-            else self.world.actors
-        )
+        candidates = self._view_candidates(camera_rect)
         current_frame_actors = {
             actor
             for actor in candidates
@@ -372,6 +395,28 @@ class CameraManager(pygame.sprite.Sprite):
         self._view_actors_actual_frame.clear()
         self._view_active_actors.clear()
         self._view_update_frame = -1
+
+    def _invalidate_actor_view_cache(self, actor: "Actor") -> None:
+        """Updates the view cache for a single moved actor.
+
+        Instead of clearing the whole cache (which would force a full
+        recomputation on the next query within the same frame), only the
+        moved actor's membership is re-evaluated in O(1). If the cache was
+        not computed for the current frame, nothing needs to be done: the
+        next get_actors_in_view() recomputes it on the frame change anyway.
+
+        Actors that left the view stay in the active set when they were
+        visible last frame, so their old position is repainted once.
+        """
+        if self._view_update_frame != self.world.frame:
+            return
+        if self.is_actor_in_view(actor):
+            self._view_actors_actual_frame.add(actor)
+            self._view_active_actors.add(actor)
+        else:
+            self._view_actors_actual_frame.discard(actor)
+            if actor not in self.view_actors_last_frame:
+                self._view_active_actors.discard(actor)
 
     def _update(self) -> None:
         """Called each frame to refresh geometry if needed."""

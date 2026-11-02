@@ -137,6 +137,39 @@ class TiledSpatialIndex:
         """
         return set(self._positions.get((position[0], position[1]), set()))
 
+    def query_chunk_region(
+        self,
+        min_pos: Tuple[float, float],
+        max_pos: Tuple[float, float],
+        ring: int = 0,
+    ) -> Set["Actor"]:
+        """Query all actors in chunks overlapping a rectangular tile region.
+
+        Unlike :meth:`query_rect` this does not filter by the actor's exact
+        position, so actors whose footprint spans several tiles are returned
+        from every covered chunk. Callers that need precise results should
+        apply their own filter (e.g. a pixel-level rect collision) on top.
+
+        Args:
+            min_pos: Minimum (x, y) tile position (inclusive)
+            max_pos: Maximum (x, y) tile position (inclusive)
+            ring: Extra chunk ring around the region (margin for actors just
+                  outside the region whose rect still overlaps it)
+        """
+        min_x, min_y = int(min_pos[0]), int(min_pos[1])
+        max_x, max_y = int(max_pos[0]), int(max_pos[1])
+
+        min_chunk_x = min_x // self.chunk_size - ring
+        min_chunk_y = min_y // self.chunk_size - ring
+        max_chunk_x = max_x // self.chunk_size + ring
+        max_chunk_y = max_y // self.chunk_size + ring
+
+        actors: Set["Actor"] = set()
+        for chunk_x in range(min_chunk_x, max_chunk_x + 1):
+            for chunk_y in range(min_chunk_y, max_chunk_y + 1):
+                actors.update(self._chunks.get((chunk_x, chunk_y), set()))
+        return actors
+
     def query_rect(
         self, min_pos: Tuple[float, float], max_pos: Tuple[float, float]
     ) -> Set["Actor"]:
@@ -149,19 +182,9 @@ class TiledSpatialIndex:
         min_x, min_y = int(min_pos[0]), int(min_pos[1])
         max_x, max_y = int(max_pos[0]), int(max_pos[1])
 
-        min_chunk_x = min_x // self.chunk_size
-        min_chunk_y = min_y // self.chunk_size
-        max_chunk_x = max_x // self.chunk_size
-        max_chunk_y = max_y // self.chunk_size
-
-        actors: Set["Actor"] = set()
-        for chunk_x in range(min_chunk_x, max_chunk_x + 1):
-            for chunk_y in range(min_chunk_y, max_chunk_y + 1):
-                actors.update(self._chunks.get((chunk_x, chunk_y), set()))
-
         return {
             actor
-            for actor in actors
+            for actor in self.query_chunk_region(min_pos, max_pos)
             if min_x <= int(actor.position[0]) <= max_x
             and min_y <= int(actor.position[1]) <= max_y
         }

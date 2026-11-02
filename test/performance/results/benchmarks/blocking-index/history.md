@@ -4,3 +4,4 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-06-16T17:14:25 | 3.49 | 119 | 6.02 | 1018 | 9540 | 8522 | 3.03 | 3.86 | 5.82 | - |
 | 2026-10-22T04:45:56 | 4.98 | 119 | 8.14 | 1020 | 9564 | 8544 | 4.00 | 7.61 | 7.86 | avg_ms=+1.49, frames=0.00, max_ms=+2.12, metric_blocked_moves=+2.00, metric_blocking_queries=+24.00, metric_successful_moves=+22.00, min_ms=+0.97, p95_ms=+3.75, p99_ms=+2.04 |
+| 2026-11-02T07:13:44 | 5.54 | 119 | 10.49 | 1023 | 9594 | 8571 | 4.18 | 9.41 | 9.86 | avg_ms=+0.57, frames=0.00, max_ms=+2.35, metric_blocked_moves=+3.00, metric_blocking_queries=+30.00, metric_successful_moves=+27.00, min_ms=+0.19, p95_ms=+1.80, p99_ms=+2.00 |

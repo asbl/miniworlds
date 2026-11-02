@@ -1,5 +1,5 @@
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple, Union, cast
+from typing import Dict, List, Optional, Tuple, Union
 
 import pygame
 
@@ -260,10 +260,9 @@ class TiledWorld(world.World):
     def detect_actors(
         self, position: Union[Tuple[float, float], Tuple[float, float]]
     ) -> List["actor_mod.Actor"]:
-        return cast(
-            List["actor_mod.Actor"],
-            [actor for actor in self.actors if actor.position == position],
-        )
+        # Tile-position lookup via the TiledSpatialIndex (same semantics as
+        # matching actor.position == position, but O(1) instead of O(actors)).
+        return self.detect_actors_at_position(position)
 
     def get_actors_from_pixel(
         self, position: Union[Tuple[float, float], Tuple[float, float]]
@@ -409,9 +408,31 @@ class TiledWorld(world.World):
             return None
         return actor_list[0]
 
+    def _static_layer_candidates(self):
+        """Candidate actors for the static tile layer rebuild.
+
+        Uses the TiledSpatialIndex over the camera's tile range to skip the
+        expensive per-actor work (rect filter, image blit) for actors outside
+        the view. Iteration still happens in ``world.actors`` order, because
+        the blit order of overlapping static actors matters: the result is
+        identical to scanning all actors.
+        """
+        camera_rect = self.camera.rect
+        tiled_index = getattr(self, "_tiled_spatial_index", None)
+        if tiled_index is None:
+            return self.actors
+        tile_size = max(1, self.tile_size)
+        min_tile = (camera_rect.left // tile_size, camera_rect.top // tile_size)
+        max_tile = (
+            max(camera_rect.left, camera_rect.right - 1) // tile_size,
+            max(camera_rect.top, camera_rect.bottom - 1) // tile_size,
+        )
+        in_view = tiled_index.query_chunk_region(min_tile, max_tile, ring=1)
+        return (actor for actor in self.actors if actor in in_view)
+
     def _rebuild_static_tile_layer(self) -> None:
         layer = self.background.image.copy()
-        for actor in self.actors:
+        for actor in self._static_layer_candidates():
             if not getattr(actor, "_static", False):
                 continue
             if self.event_manager.registry.has_instance_handlers(actor):
@@ -430,7 +451,11 @@ class TiledWorld(world.World):
                 continue
             if image is None:
                 continue
-            local_rect = actor_rect.move(-self.camera.x, -self.camera.y)
+            # camera.topleft is in pixels (tile * tile_size), while camera.x/y
+            # are in tile units — mixing them with the pixel rect misplaced
+            # static actors whenever the camera scrolled.
+            topleft_px = self.camera.topleft
+            local_rect = actor_rect.move(-topleft_px[0], -topleft_px[1])
             layer.blit(image, local_rect)
             actor.dirty = 0
         self._static_tile_layer = layer

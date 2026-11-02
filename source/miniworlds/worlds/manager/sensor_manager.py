@@ -254,10 +254,34 @@ class SensorManager:
         return actor_list
 
     def _query_spatial_rect(self, rect: pygame.Rect):
-        spatial_index = getattr(self.world, "_spatial_index", None)
-        if spatial_index is None or getattr(self.world, "is_tiled", False):
-            return self.world.camera.get_actors_in_view()
-        camera_rect = self.world.camera.rect
+        world = self.world
+        spatial_index = getattr(world, "_spatial_index", None)
+        is_tiled = getattr(world, "is_tiled", False)
+        if spatial_index is None or is_tiled:
+            if is_tiled is True:
+                tiled_index = getattr(world, "_tiled_spatial_index", None)
+                if tiled_index is not None:
+                    # Query only the chunks around the rect instead of the whole
+                    # view. The camera filter is kept so results match the
+                    # non-tiled path.
+                    tile_size = max(1, getattr(world, "tile_size", 1))
+                    camera_rect = world.camera.rect
+                    min_tile = (rect.left // tile_size, rect.top // tile_size)
+                    max_tile = (
+                        max(rect.left, rect.right - 1) // tile_size,
+                        max(rect.top, rect.bottom - 1) // tile_size,
+                    )
+                    return {
+                        actor
+                        for actor in tiled_index.query_chunk_region(
+                            min_tile, max_tile, ring=1
+                        )
+                        if camera_rect.colliderect(
+                            actor.position_manager.get_global_rect()
+                        )
+                    }
+            return world.camera.get_actors_in_view()
+        camera_rect = world.camera.rect
         return {
             actor
             for actor in spatial_index.query_rect(rect)
