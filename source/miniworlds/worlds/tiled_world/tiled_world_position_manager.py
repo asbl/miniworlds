@@ -71,14 +71,29 @@ class TiledWorldPositionManager(actor_position_manager.Positionmanager):
         return rect
 
     def get_local_rect(self) -> pygame.Rect:
-        global_rect = self.get_global_rect().copy()
-        camera = self.actor.world.camera
+        """Returns the actor rect in camera-local coordinates.
 
-        if self.actor.world.is_tile(self.actor.position):
+        Cached per frame and camera position: the draw path reads the local
+        rect several times per actor and frame, and the underlying global
+        rect plus the camera offset recomputation dominated large scenes
+        with a moving camera. Invalidated like the global rect via
+        `_invalidate_rect_cache`, and by camera movement through the
+        (frame, topleft) cache key.
+        """
+        world = self.actor.world
+        camera = world.camera
+        key = (world.frame, getattr(camera, "_topleft", None))
+        if key == self._cached_local_rect[0]:
+            return self._cached_local_rect[1]
+
+        global_rect = self.get_global_rect().copy()
+
+        if world.is_tile(self.actor.position):
             global_rect.topleft = camera.get_local_position(global_rect.topleft)
         else:
             global_rect.center = camera.get_local_position(global_rect.center)
 
+        self._cached_local_rect = (key, global_rect)
         return global_rect
 
     def get_size(self) -> Tuple[int, int]:

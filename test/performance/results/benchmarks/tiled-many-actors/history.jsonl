@@ -1,0 +1,1 @@
+{"delta_to_previous": {}, "name": "tiled many actors", "recorded_at": "2026-11-02T08:56:57", "slug": "tiled-many-actors", "summary_type": "frame_timing", "values": {"avg_ms": 23.5671, "frames": 119, "max_ms": 60.9395, "min_ms": 14.2838, "p95_ms": 26.848, "p99_ms": 36.3525}}

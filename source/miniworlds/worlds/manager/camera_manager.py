@@ -396,7 +396,7 @@ class CameraManager(pygame.sprite.Sprite):
         self._view_active_actors.clear()
         self._view_update_frame = -1
 
-    def _invalidate_actor_view_cache(self, actor: "Actor") -> None:
+    def _invalidate_actor_view_cache(self, actor: "Actor", in_view: bool = None) -> None:
         """Updates the view cache for a single moved actor.
 
         Instead of clearing the whole cache (which would force a full
@@ -407,10 +407,15 @@ class CameraManager(pygame.sprite.Sprite):
 
         Actors that left the view stay in the active set when they were
         visible last frame, so their old position is repainted once.
+
+        ``in_view`` can pass an already-computed visibility to avoid a
+        second rect check (the caller in set_position needs the same value).
         """
         if self._view_update_frame != self.world.frame:
             return
-        if self.is_actor_in_view(actor):
+        if in_view is None:
+            in_view = self.is_actor_in_view(actor)
+        if in_view:
             self._view_actors_actual_frame.add(actor)
             self._view_active_actors.add(actor)
         else:

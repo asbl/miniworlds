@@ -1,25 +1,25 @@
 # tiled camera culling
 
-Last run: 2026-11-02T07:57:29
+Last run: 2026-11-02T08:57:00
 Summary type: frame_timing
 
 ## Current Values
-- avg_ms: 28.55
+- avg_ms: 6.09
 - frames: 119
-- max_ms: 39.43
-- metric_visible_actor_samples: 14520
-- min_ms: 22.52
-- p95_ms: 35.74
-- p99_ms: 38.60
+- max_ms: 8.29
+- metric_visible_actor_samples: 1231
+- min_ms: 3.37
+- p95_ms: 6.78
+- p99_ms: 7.56
 
 ## Delta To Previous Run
-- avg_ms: +1.08
+- avg_ms: -22.46
 - frames: 0.00
-- max_ms: -7.78
-- metric_visible_actor_samples: 0.00
-- min_ms: +2.66
-- p95_ms: -6.97
-- p99_ms: -8.55
+- max_ms: -31.14
+- metric_visible_actor_samples: -13289.00
+- min_ms: -19.15
+- p95_ms: -28.96
+- p99_ms: -31.04
 
 ## Files
 - history.jsonl

@@ -431,7 +431,13 @@ class TiledWorld(world.World):
         return (actor for actor in self.actors if actor in in_view)
 
     def _rebuild_static_tile_layer(self) -> None:
-        layer = self.background.image.copy()
+        # The layer is camera-sized (not world-sized): this runs on every
+        # camera move, so its cost must scale with the visible area instead
+        # of the total world size.
+        camera_rect = self.camera.rect
+        layer = pygame.Surface(camera_rect.size, pygame.SRCALPHA)
+        layer.blit(self.background.image, (0, 0), camera_rect)
+        topleft_px = self.camera.topleft
         for actor in self._static_layer_candidates():
             if not getattr(actor, "_static", False):
                 continue
@@ -443,7 +449,7 @@ class TiledWorld(world.World):
             if costume is None:
                 continue
             actor_rect = actor.position_manager.get_global_rect()
-            if not self.camera.rect.colliderect(actor_rect):
+            if not camera_rect.colliderect(actor_rect):
                 continue
             try:
                 image = actor.image
@@ -454,7 +460,6 @@ class TiledWorld(world.World):
             # camera.topleft is in pixels (tile * tile_size), while camera.x/y
             # are in tile units — mixing them with the pixel rect misplaced
             # static actors whenever the camera scrolled.
-            topleft_px = self.camera.topleft
             local_rect = actor_rect.move(-topleft_px[0], -topleft_px[1])
             layer.blit(image, local_rect)
             actor.dirty = 0

@@ -19,5 +19,6 @@ Open the per-benchmark `latest.md` or `history.md` files for detailed changes.
 | method caller | 2026-10-22T04:32:50 | cache_hits=99999, cache_misses=1, first_pass_ms=152.62, iterations=50000 | cache_hits=0.00, cache_misses=0.00, first_pass_ms=+84.34 | benchmarks/method-caller |
 | resource lookup | 2026-10-22T04:32:54 | iterations=50000, lookup_ms=117.83, lookups_per_s=424351.66 | iterations=0.00, lookup_ms=+56.04, lookups_per_s=-384855.79 | benchmarks/resource-lookup |
 | static scene | 2026-11-02T07:13:41 | avg_ms=4.77, p95_ms=5.85, max_ms=8.39 | avg_ms=+0.70, p95_ms=-1.31, max_ms=-1.46 | benchmarks/static-scene |
-| tiled camera culling | 2026-11-02T07:57:29 | avg_ms=28.55, p95_ms=35.74, max_ms=39.43 | avg_ms=+1.08, p95_ms=-6.97, max_ms=-7.78 | benchmarks/tiled-camera-culling |
+| tiled camera culling | 2026-11-02T08:57:00 | avg_ms=6.09, p95_ms=6.78, max_ms=8.29 | avg_ms=-22.46, p95_ms=-28.96, max_ms=-31.14 | benchmarks/tiled-camera-culling |
+| tiled many actors | 2026-11-02T08:56:57 | avg_ms=23.57, p95_ms=26.85, max_ms=60.94 | - | benchmarks/tiled-many-actors |
 | world queries | 2026-10-22T04:33:57 | actors=384, iterations=20000, pixel_hits=20000, pixel_queries_ms=170.75 | - | benchmarks/world-queries |

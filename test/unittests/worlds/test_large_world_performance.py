@@ -207,9 +207,9 @@ class TestSelectiveCameraCacheInvalidation(unittest.TestCase):
         invalidate_calls = []
         original_invalidate = camera._invalidate_actor_view_cache
         camera._clear_camera_cache = lambda: clear_calls.append(1)
-        camera._invalidate_actor_view_cache = lambda actor: (
+        camera._invalidate_actor_view_cache = lambda actor, in_view=None: (
             invalidate_calls.append(actor),
-            original_invalidate(actor),
+            original_invalidate(actor, in_view=in_view),
         )
 
         self.b.position = (20, 20)
@@ -315,6 +315,93 @@ class TestTiledWorldDetectActors(unittest.TestCase):
         result = self.world.detect_actors((2, 3))
         self.assertIn(self.actor, result)
         self.assertNotIn(self.other, result)
+
+
+class TestManyActorsOptimizations(unittest.TestCase):
+    """Round 4: very many actors around a moving camera."""
+
+    def setUp(self):
+        App.reset(unittest=True, file=__file__)
+        self.world = TiledWorld(20, 10, tile_size=32)
+        self.world.camera.view = (6, 5)
+        self.world.camera.dirty = True
+        self.world.camera._clear_camera_cache()
+
+    def tearDown(self):
+        App.reset(unittest=True, file=__file__)
+
+    def test_local_rect_cached_per_frame_and_camera_position(self):
+        actor = Actor((3, 3), world=self.world)
+        pm = actor.position_manager
+        self.world.frame = 1
+        first = pm.get_local_rect()
+        second = pm.get_local_rect()
+        self.assertIs(first, second)
+
+        # camera movement invalidates the local rect (new key)
+        self.world.camera.topleft = (2, 1)
+        third = pm.get_local_rect()
+        self.assertIsNot(first, third)
+        self.assertEqual(third.topleft, (first.topleft[0] - 64, first.topleft[1] - 32))
+
+        # position change invalidates, too
+        self.world.frame += 1
+        actor.position = (4, 3)
+        fourth = pm.get_local_rect()
+        self.assertIsNot(third, fourth)
+
+    def test_offscreen_mover_stays_clean(self):
+        actor = Actor((1, 1), world=self.world)  # inside 6x5 view
+        off = Actor((15, 8), world=self.world)  # outside the view
+        actor._dirty = 0
+        off._dirty = 0
+        self.world.frame = 1
+        self.world.camera.get_actors_in_view()
+
+        off.position = (16, 8)
+
+        self.assertEqual(off._dirty, 0)
+
+    def test_in_view_mover_becomes_dirty(self):
+        actor = Actor((1, 1), world=self.world)
+        actor._dirty = 0
+        self.world.frame = 1
+        self.world.camera.get_actors_in_view()
+
+        actor.position = (2, 1)
+
+        self.assertEqual(actor._dirty, 1)
+
+    def test_leaving_view_actor_dirty_for_erase(self):
+        self.world.camera.topleft = (0, 0)
+        actor = Actor((4, 2), world=self.world)  # near the right view edge
+        actor._dirty = 0
+        self.world.frame = 1
+        self.world.camera.get_actors_in_view()
+
+        actor.position = (15, 2)  # moved out of view
+
+        # was visible this frame -> stays dirty so the old rect is erased
+        self.assertEqual(actor._dirty, 1)
+
+    def test_topleft_px_cache_follows_direct_topleft_writes(self):
+        camera = self.world.camera
+        self.world.frame = 1
+        camera.topleft = (2, 1)
+        self.assertEqual(camera.topleft, (2 * 32, 1 * 32))
+        # direct _topleft write (bypassing the setter) must not return
+        # a stale cached pixel topleft
+        camera._topleft = (4, 2)
+        self.assertEqual(camera.topleft, (4 * 32, 2 * 32))
+
+    def test_topleft_px_cache_invalidated_on_tile_size_change(self):
+        camera = self.world.camera
+        camera.topleft = (2, 1)
+        self.assertEqual(camera.topleft, (64, 32))
+
+        self.world.tile_size = 16
+
+        self.assertEqual(camera.topleft, (32, 16))
 
 
 if __name__ == "__main__":

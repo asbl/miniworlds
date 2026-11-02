@@ -25,6 +25,11 @@ FRAME_LIMIT = 120
 GRID_COLUMNS = 100
 GRID_ROWS = 75
 TILE_SIZE = 32
+# Camera view smaller than the world: the camera must actually scroll,
+# otherwise from_actor clamps to (0, 0) and the scenario never exercises
+# the moving-camera paths.
+VIEW_COLUMNS = 25
+VIEW_ROWS = 20
 ENEMY_COUNT = 120
 SEED = 42
 
@@ -49,6 +54,7 @@ class Player(Actor):
 
 world = TiledWorld(GRID_COLUMNS, GRID_ROWS, tile_size=TILE_SIZE)
 configure_world(world)
+world.camera.view = (VIEW_COLUMNS, VIEW_ROWS)
 world.tick_rate = 1
 
 rng = random.Random(SEED)

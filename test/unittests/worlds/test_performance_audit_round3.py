@@ -55,8 +55,9 @@ class TestStaticTileLayerViewCandidates(unittest.TestCase):
         self.world._rebuild_static_tile_layer()
         layer = self.world._static_tile_layer
 
-        expected = self.world.background.image.copy()
         camera_rect = self.world.camera.rect
+        expected = pygame.Surface(camera_rect.size, pygame.SRCALPHA)
+        expected.blit(self.world.background.image, (0, 0), camera_rect)
         for actor in self.world.actors:
             if not getattr(actor, "_static", False):
                 continue

@@ -1,24 +1,24 @@
 {
   "delta_to_previous": {
-    "avg_ms": 1.0844,
+    "avg_ms": -22.4607,
     "frames": 0.0,
-    "max_ms": -7.7757,
-    "metric_visible_actor_samples": 0.0,
-    "min_ms": 2.6634,
-    "p95_ms": -6.9745,
-    "p99_ms": -8.552
+    "max_ms": -31.1376,
+    "metric_visible_actor_samples": -13289.0,
+    "min_ms": -19.1453,
+    "p95_ms": -28.9644,
+    "p99_ms": -31.0374
   },
   "name": "tiled camera culling",
-  "recorded_at": "2026-11-02T07:57:29",
+  "recorded_at": "2026-11-02T08:57:00",
   "slug": "tiled-camera-culling",
   "summary_type": "frame_timing",
   "values": {
-    "avg_ms": 28.5518,
+    "avg_ms": 6.0911,
     "frames": 119,
-    "max_ms": 39.4318,
-    "metric_visible_actor_samples": 14520,
-    "min_ms": 22.5171,
-    "p95_ms": 35.7439,
-    "p99_ms": 38.5959
+    "max_ms": 8.2942,
+    "metric_visible_actor_samples": 1231,
+    "min_ms": 3.3718,
+    "p95_ms": 6.7795,
+    "p99_ms": 7.5585
   }
 }

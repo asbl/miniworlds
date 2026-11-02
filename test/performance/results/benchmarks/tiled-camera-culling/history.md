@@ -8,3 +8,4 @@
 | 2026-11-02T07:09:45 | 27.64 | 119 | 49.53 | 14520 | 19.59 | 43.62 | 49.01 | avg_ms=-1.28, frames=0.00, max_ms=-0.24, metric_visible_actor_samples=0.00, min_ms=-0.35, p95_ms=+0.34, p99_ms=+4.30 |
 | 2026-11-02T07:13:50 | 27.47 | 119 | 47.21 | 14520 | 19.85 | 42.72 | 47.15 | avg_ms=-0.17, frames=0.00, max_ms=-2.32, metric_visible_actor_samples=0.00, min_ms=+0.27, p95_ms=-0.90, p99_ms=-1.87 |
 | 2026-11-02T07:57:29 | 28.55 | 119 | 39.43 | 14520 | 22.52 | 35.74 | 38.60 | avg_ms=+1.08, frames=0.00, max_ms=-7.78, metric_visible_actor_samples=0.00, min_ms=+2.66, p95_ms=-6.97, p99_ms=-8.55 |
+| 2026-11-02T08:57:00 | 6.09 | 119 | 8.29 | 1231 | 3.37 | 6.78 | 7.56 | avg_ms=-22.46, frames=0.00, max_ms=-31.14, metric_visible_actor_samples=-13289.00, min_ms=-19.15, p95_ms=-28.96, p99_ms=-31.04 |

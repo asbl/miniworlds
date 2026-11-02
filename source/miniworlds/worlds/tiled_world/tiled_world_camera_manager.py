@@ -90,10 +90,13 @@ class TiledCameraManager(camera_manager.CameraManager):
         Returns:
             Top-left corner of the camera view in pixels.
         """
-        return (
-            self._topleft[0] * self.world.tile_size,
-            self._topleft[1] * self.world.tile_size,
-        )
+        cache = getattr(self, "_topleft_px_cache", None)
+        if cache is not None and cache[0] == self._topleft:
+            return cache[1]
+        tile_size = self.world.tile_size
+        px = (self._topleft[0] * tile_size, self._topleft[1] * tile_size)
+        self._topleft_px_cache = (self._topleft, px)
+        return px
 
     @topleft.setter
     def topleft(self, value: tuple[int, int]):
@@ -115,6 +118,12 @@ class TiledCameraManager(camera_manager.CameraManager):
         if hasattr(self.world, "_static_tile_layer_dirty"):
             self.world._static_tile_layer_dirty = True
         self.dirty = True
+
+    def _reload_camera(self) -> None:
+        # Invalidate the cached pixel topleft (tile_size changes keep the
+        # tile topleft but change its pixel value).
+        self._topleft_px_cache = None
+        super()._reload_camera()
 
     def get_rect(self) -> pygame.Rect:
         return pygame.Rect(*self.topleft, self.width, self.height)

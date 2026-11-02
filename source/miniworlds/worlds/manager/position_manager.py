@@ -323,14 +323,24 @@ class Positionmanager:
             self._invalidate_rect_cache()
 
         if int(old_position[0]) != int(value[0]) or int(old_position[1]) != int(value[1]):
+            camera = self.actor.world.camera
             if getattr(self.actor.world, "is_tiled", False):
-                self.actor._dirty = 1
+                # Redraw only if the actor is visible now or was visible
+                # recently (its old screen position may need erasing).
+                # Offscreen movers stay clean, which avoids clipped blits
+                # for every actor outside the camera.
+                view_active = getattr(camera, "_view_active_actors", None)
+                was_active = isinstance(view_active, set) and self.actor in view_active
+                in_view = camera.is_actor_in_view(self.actor)
+                if was_active or in_view:
+                    self.actor._dirty = 1
             else:
+                in_view = None
                 self.actor.dirty = 1
             # Selective O(1) update of the moved actor instead of clearing the
             # whole view cache, which would force an O(actors) recomputation
             # on the next get_actors_in_view() within the same frame.
-            self.actor.world.camera._invalidate_actor_view_cache(self.actor)
+            camera._invalidate_actor_view_cache(self.actor, in_view=in_view)
 
         return self
 
