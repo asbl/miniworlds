@@ -123,6 +123,31 @@ class TestStaticLayerScrollPositioning(unittest.TestCase):
         self.assertEqual(layer.get_at((85, 5)), (110, 120, 150, 255))
         self.assertEqual(layer.get_at((5, 5)), (35, 55, 75, 255))
 
+    def test_static_layer_with_view_larger_than_world(self):
+        """Regression (changeset audit, round 4): a camera view larger than
+        the world yields a negative topleft; the layer must still show the
+        world at its camera-local offset, and background and actors must be
+        aligned."""
+        world = TiledWorld(4, 3, tile_size=32)
+        world.add_background((10, 20, 30, 255))
+        world.camera.view = (6, 4)
+        world.camera.dirty = True
+        world.camera.topleft = (0, 0)  # clamps to negative topleft
+        self.assertEqual(world.camera.topleft, (-64, -32))
+        marker = Actor((1, 1), world=world)
+        marker.add_costume((200, 0, 0, 255))
+
+        world._static_tile_layer_dirty = True
+        layer, _ = world._refresh_static_tile_layer()
+
+        self.assertEqual(layer.get_size(), (192, 128))
+        # world (0,0) is at layer (64, 32)
+        self.assertEqual(layer.get_at((69, 37)), (10, 20, 30, 255))
+        # marker on tile (1, 1) is at layer (64+32, 32+32)
+        self.assertEqual(layer.get_at((112, 80)), (200, 0, 0, 255))
+        # outside the world the layer stays transparent
+        self.assertEqual(layer.get_at((5, 5)), (0, 0, 0, 0))
+
 
 class TestBackgroundSetDirty(unittest.TestCase):
     def setUp(self):

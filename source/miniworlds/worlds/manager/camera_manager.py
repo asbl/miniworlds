@@ -396,7 +396,7 @@ class CameraManager(pygame.sprite.Sprite):
         self._view_active_actors.clear()
         self._view_update_frame = -1
 
-    def _invalidate_actor_view_cache(self, actor: "Actor", in_view: bool = None) -> None:
+    def _invalidate_actor_view_cache(self, actor: "Actor", in_view: Optional[bool] = None) -> None:
         """Updates the view cache for a single moved actor.
 
         Instead of clearing the whole cache (which would force a full

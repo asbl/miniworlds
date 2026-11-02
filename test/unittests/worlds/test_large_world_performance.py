@@ -372,6 +372,18 @@ class TestManyActorsOptimizations(unittest.TestCase):
 
         self.assertEqual(actor._dirty, 1)
 
+    def test_in_view_mover_dirty_without_prior_view_computation(self):
+        """The view cache may never have been computed (e.g. first frame):
+        the fresh is_actor_in_view check must still mark in-view movers."""
+        actor = Actor((1, 1), world=self.world)
+        actor._dirty = 0
+        self.world.frame = 1
+        # no get_actors_in_view() call: _view_active_actors is empty
+
+        actor.position = (2, 1)
+
+        self.assertEqual(actor._dirty, 1)
+
     def test_leaving_view_actor_dirty_for_erase(self):
         self.world.camera.topleft = (0, 0)
         actor = Actor((4, 2), world=self.world)  # near the right view edge
