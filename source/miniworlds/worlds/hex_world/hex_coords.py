@@ -77,6 +77,18 @@ DEGREE_DIRECTIONS: Dict[int, str] = {
     degrees: name for name, degrees in DIRECTION_DEGREES.items()
 }
 
+
+def nearest_axis_degrees(direction: float) -> int:
+    """Return the hex axis degree nearest to `direction` (scratch-style degrees).
+
+    The six hex axes are 30, 90, 150, 210, 270 and 330 degrees (0 = up,
+    clockwise). Any other angle is snapped to the nearest axis, so one
+    movement step is always exactly one hex. Ties round towards the next
+    higher axis.
+    """
+    index = math.floor((float(direction) - 30) / 60 + 0.5)
+    return (30 + 60 * index) % 360
+
 # The two corners that enclose an edge, keyed by edge direction.
 EDGE_CORNERS: Dict[str, Tuple[str, str]] = {
     "o": ("no", "so"),

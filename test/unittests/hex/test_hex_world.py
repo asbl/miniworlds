@@ -412,6 +412,128 @@ class TestHexWorld(unittest.TestCase):
             HexEdge.from_pixel(new_edge.to_pixel(), world).position, new_edge.position
         )
 
+    def test_camera_view_setters_work_on_hex_world(self):
+        import math
+
+        world = HexWorld(10, 10, tile_size=40)
+        world.camera.width = 5
+        world.camera.height = 5
+        self.assertEqual(world.camera.view, (5, 5))
+        world.camera.topleft = (2, 2)
+        self.assertEqual(world.camera._topleft, (2, 2))
+        world.camera.x = 1
+        world.camera.y = 3
+        self.assertEqual(world.camera._topleft, (1, 3))
+        # the getter still reports the pixel position
+        self.assertEqual(
+            world.camera.topleft,
+            (int(1 * math.sqrt(3) * 40), int(3 * 1.5 * 40)),
+        )
+
+    def test_camera_from_actor_centers_on_actor(self):
+        world = HexWorld(10, 10, tile_size=40)
+        world.camera.width = 5
+        world.camera.height = 5
+        actor = Actor((5, 5), world=world)
+        actor.center = (5, 5)
+        world.camera.from_actor(actor)
+        self.assertEqual(world.camera._topleft, (3, 3))
+
+    def test_columns_and_rows_setters_work_on_hex_world(self):
+        world = HexWorld(10, 10, tile_size=40)
+        world.columns = 8
+        world.rows = 6
+        self.assertEqual(world.columns, 8)
+        self.assertEqual(world.rows, 6)
+        self.assertEqual(world.camera.view, (8, 6))
+
+    def test_set_tile_size_invalidates_edge_pixel_cache(self):
+        world = HexWorld(6, 6, tile_size=40)
+        edge = world.get_edge((3, 3), "o")
+        # warm the from_pixel cache with the old tile size
+        self.assertIs(HexEdge.from_pixel(edge.to_pixel(), world), edge)
+        world.set_tile_size(80)
+        self.assertIs(HexEdge.from_pixel(edge.to_pixel(), world), edge)
+
+    def test_neighbour_cache_invalidated_when_tile_added(self):
+        world = HexWorld(4, 4, tile_size=40, empty=True)
+        world.add_tile_to_world((1, 1))
+        tile = world.get_tile((1, 1))
+        self.assertEqual(tile.get_neighbour_tiles(), [])
+        world.add_tile_to_world((2, 1))
+        self.assertEqual([t.position for t in tile.get_neighbour_tiles()], [(2, 1)])
+        world.clear_tiles()
+        world.add_tile_to_world((1, 1))
+        self.assertEqual(world.get_tile((1, 1)).get_neighbour_tiles(), [])
+
+    def test_corner_neighbour_cache_invalidated_on_merge(self):
+        world = HexWorld(4, 4, tile_size=40, empty=True)
+        world.add_tile_to_world((1, 1))
+        world.add_tile_to_world((2, 0))
+        world.add_corner_to_world((1, 1), "no")
+        corner = world.get_corner((1, 1), "no")
+        self.assertEqual([t.position for t in corner.get_neighbour_tiles()], [(1, 1)])
+        # the "s" corner of (2, 0) is the same physical corner
+        world.add_corner_to_world((2, 0), "s")
+        self.assertEqual(
+            sorted(t.position for t in corner.get_neighbour_tiles()), [(1, 1), (2, 0)]
+        )
+
+    def test_get_tile_from_pixel_returns_registered_tile(self):
+        center = self.world.to_pixel((3, 3))
+        self.assertIs(self.world.get_tile_from_pixel(center), self.world.get_tile((3, 3)))
+
+    def test_get_actors_from_pixel_includes_corner_and_edge_actors(self):
+        corner = self.world.get_corner((3, 3), "n")
+        edge = self.world.get_edge((3, 3), "o")
+        tile_actor = Actor((3, 3), world=self.world)
+        corner_actor = Actor(corner.position, world=self.world)
+        edge_actor = Actor(edge.position, world=self.world)
+        self.assertIn(corner_actor, self.world.get_actors_from_pixel(corner.to_pixel()))
+        self.assertIn(edge_actor, self.world.get_actors_from_pixel(edge.to_pixel()))
+        found = self.world.get_actors_from_pixel(self.world.to_pixel((3, 3)))
+        self.assertIn(tile_actor, found)
+        # corner and edge centers are one tile_size away from the hex
+        # center, beyond the detection radius of tile_size / 3
+        self.assertNotIn(corner_actor, found)
+        self.assertNotIn(edge_actor, found)
+        self.assertEqual(self.world.get_actors_from_pixel((-100, -100)), [])
+
+    def test_get_from_pixel_respects_camera_view(self):
+        world = HexWorld(10, 10, tile_size=40)
+        world.camera.width = 5
+        world.camera.height = 5
+        self.assertIsNone(world.get_from_pixel((1000, 10)))
+        self.assertIsNone(world.get_from_pixel((-1, 5)))
+        self.assertEqual(world.get_from_pixel(world.to_pixel((0, 0))), (0, 0))
+
+    def test_move_snaps_any_degree_to_a_hex_axis(self):
+        from miniworlds.worlds.hex_world import hex_coords
+        from miniworlds.worlds.hex_world.hex_world_sensor_manager import (
+            HexWorldSensorManager,
+        )
+
+        start = (3, 2)
+        start_cube = hex_coords.offset_to_cube(start)
+        for degrees in range(360):
+            destination = HexWorldSensorManager.get_destination(start, degrees, 1)
+            distance = hex_coords.cube_distance(
+                start_cube, hex_coords.offset_to_cube(destination)
+            )
+            self.assertEqual(distance, 1, degrees)
+        actor = Actor((3, 3), world=self.world)
+        actor.move_in_direction(45)
+        self.assertEqual(actor.position, (4, 2))
+
+    def test_invalid_direction_error_mentions_hex_directions(self):
+        actor = Actor((3, 3), world=self.world)
+        with self.assertRaises(TypeError) as context:
+            actor.direction = "xyzzy"
+        self.assertIn("'no'", str(context.exception))
+        self.assertIn("HexWorld", str(context.exception))
+        with self.assertRaises(TypeError):
+            actor.move_in_direction("xyzzy")
+
     def test_console_and_toolbar_widgets_on_hex_world_do_not_crash(self):
         from miniworlds.actors.widgets.button import Button
         from miniworlds.worlds.gui.console import Console

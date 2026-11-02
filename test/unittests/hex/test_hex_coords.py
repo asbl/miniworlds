@@ -184,6 +184,42 @@ class TestCornerGeometry:
         assert (center[0] + edge_offset[0], center[1] + edge_offset[1]) == (expected_x, expected_y)
 
 
+class TestNearestAxisDegrees:
+    @pytest.mark.parametrize(
+        "direction,expected",
+        [
+            (30, 30),
+            (90, 90),
+            (150, 150),
+            (210, 210),
+            (270, 270),
+            (330, 330),
+            (-30, 330),
+            (360, 30),
+            (-360, 30),
+            (0, 30),
+            (45, 30),
+            (60, 90),
+            (89, 90),
+            (91, 90),
+            (180, 210),
+            (359, 330),
+            (-90, 270),
+            (29, 30),
+            (31, 30),
+        ],
+    )
+    def test_snaps_to_nearest_axis(self, direction, expected):
+        assert hex_coords.nearest_axis_degrees(direction) == expected
+
+    def test_result_is_always_a_hex_axis(self):
+        for direction in range(-720, 720):
+            assert (
+                hex_coords.nearest_axis_degrees(direction)
+                in hex_coords.DIRECTION_DEGREES.values()
+            )
+
+
 class TestWorldPixelSize:
     def test_world_size_grows_with_rows_and_columns(self):
         small = hex_coords.world_pixel_size(3, 3, 40)

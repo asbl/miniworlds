@@ -22,7 +22,9 @@ class HexWorldSensorManager(tiled_sensor_manager.TiledWorldSensorManager):
     Movement along the six hex axes (the directions `"no"`, `"o"`,
     `"so"`, `"sw"`, `"w"`, `"nw"` and their scratch-style degrees) moves
     from hex to hex in cube coordinates, so every step is exactly one
-    hex, independent of the row parity.
+    hex, independent of the row parity. Angles that are not hex axes are
+    snapped to the nearest axis (`hex_coords.nearest_axis_degrees`), so a
+    single step never jumps more than one hex.
     """
 
     # Maximum pixel distance for corner/edge detection, relative to tile size.
@@ -31,9 +33,9 @@ class HexWorldSensorManager(tiled_sensor_manager.TiledWorldSensorManager):
     @staticmethod
     def get_destination(start, direction, distance) -> Tuple[float, float]:
         if isinstance(direction, (int, float)):
-            hex_direction = hex_coords.DEGREE_DIRECTIONS.get(direction % 360)
-            if hex_direction is not None:
-                return hex_coords.cube_destination(start, hex_direction, distance)
+            axis_degrees = hex_coords.nearest_axis_degrees(direction)
+            hex_direction = hex_coords.DEGREE_DIRECTIONS[axis_degrees]
+            return hex_coords.cube_destination(start, hex_direction, distance)
         return tiled_sensor_manager.TiledWorldSensorManager.get_destination(
             start, direction, distance
         )

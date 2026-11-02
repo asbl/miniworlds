@@ -77,8 +77,9 @@ class HexTile(tile_mod.Tile):
 
     def get_neighbour_tiles(self) -> List[HexTile]:
         """Return the up to six neighboring hex tiles."""
-        if self._neighbour_tiles is not None:
-            return self._neighbour_tiles
+        cached = self._cached_neighbour_tiles()
+        if cached is not None:
+            return cached
 
         cube = hex_coords.offset_to_cube(self.position)
         neighbours: List[HexTile] = []
@@ -92,7 +93,7 @@ class HexTile(tile_mod.Tile):
             if self.world.is_tile(neighbour_position):
                 neighbours.append(self.world.get_tile(neighbour_position))
 
-        self._neighbour_tiles = neighbours
+        self._cache_neighbour_tiles(neighbours)
         return neighbours
 
     def get_corner(self, direction: str) -> HexCorner:

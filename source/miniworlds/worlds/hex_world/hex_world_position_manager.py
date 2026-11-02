@@ -22,6 +22,16 @@ class HexWorldPositionManager(tiled_position_manager.TiledWorldPositionManager):
         return (0, 0)
 
     def validate_direction(self, value):
-        if isinstance(value, str) and value in hex_coords.DIRECTION_DEGREES:
-            return hex_coords.DIRECTION_DEGREES[value]
+        if isinstance(value, str):
+            if value in hex_coords.DIRECTION_DEGREES:
+                return hex_coords.DIRECTION_DEGREES[value]
+            if value in ("top", "up", "left", "right", "down"):
+                return super().validate_direction(value)
+            raise TypeError(
+                f"direction must be a number (degrees) or a direction name, got {value!r}.\n"
+                f"On a HexWorld the direction names are: "
+                f"{', '.join(repr(name) for name in hex_coords.DIRECTION_DEGREES)} "
+                f"('up', 'right', 'down', 'left' also work).\n"
+                f"Try: actor.direction = 'no' or actor.direction = 30"
+            )
         return super().validate_direction(value)

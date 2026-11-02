@@ -9,6 +9,7 @@ import miniworlds.worlds.hex_world.hex_edge as hex_edge_mod
 import miniworlds.worlds.hex_world.hex_tile as hex_tile_mod
 import miniworlds.worlds.hex_world.hex_tile_factory as hex_tile_factory
 import miniworlds.worlds.hex_world.hex_world_connector as hex_world_connector
+import miniworlds.worlds.hex_world.hex_world_sensor_manager as hex_world_sensor_manager
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
 import miniworlds.worlds.tiled_world.tiled_world as tiled_world
 
@@ -101,9 +102,9 @@ class HexWorld(tiled_world.TiledWorld):
             position: Pixel position as `(x, y)`.
 
         Returns:
-            The hex tile under the pixel, or `None` if the pixel lies
-            outside the world (no tile exists at the rounded hex
-            position).
+            The registered hex tile under the pixel (the same object as
+            `world.get_tile(...)`), or `None` if the pixel lies outside
+            the world (no tile exists at the rounded hex position).
 
         Examples:
             ::
@@ -116,7 +117,7 @@ class HexWorld(tiled_world.TiledWorld):
         tile = tile_cls.from_pixel(position, self)
         if not self.is_tile(tile.position):
             return None
-        return tile
+        return self.get_tile(tile.position)
 
     def get_from_pixel(self, position):
         """Return the hex position for a screen pixel.
@@ -126,27 +127,36 @@ class HexWorld(tiled_world.TiledWorld):
 
         Returns:
             Hex position as `(column, row)`, or `None` if the pixel
-            lies outside the world.
+            lies outside the camera view or outside the world.
 
         Examples:
             ::
 
                 hex_position = world.get_from_pixel((80, 120))
         """
+        x, y = position
+        if x < 0 or y < 0:
+            return None
+        if x >= self.camera.width or y >= self.camera.height:
+            return None
         tile = self.get_tile_from_pixel(position)
         if tile is None:
             return None
         return tile.position
 
     def get_actors_from_pixel(self, position):
-        """Return all actors on the hex tile under a screen pixel.
+        """Return all actors under a screen pixel.
+
+        Actors on the hex tile under the pixel are returned, plus actors
+        on corners or edges whose center lies within the detection radius
+        (`tile_size / 3`, same as `actor.detect_pixel`) of the pixel.
 
         Args:
             position: Pixel position as `(x, y)`.
 
         Returns:
-            Actors located on the hex tile under the pixel. An empty
-            list if the pixel lies outside the world.
+            Actors located under the pixel. An empty list if the pixel
+            lies outside the world.
 
         Examples:
             ::
@@ -156,7 +166,26 @@ class HexWorld(tiled_world.TiledWorld):
         tile = self.get_tile_from_pixel(position)
         if tile is None:
             return []
-        return self.detect_actors(tile.position)
+        actors = list(self.detect_actors(tile.position))
+        radius = (
+            self.tile_size
+            * hex_world_sensor_manager.HexWorldSensorManager.DETECTION_RADIUS_FACTOR
+        )
+        squared_radius = radius * radius
+        for actor in self.actors:
+            actor_position = actor.position
+            if self.is_corner(actor_position):
+                center = self.get_corner(actor_position).to_pixel()
+            elif self.is_edge(actor_position):
+                center = self.get_edge(actor_position).to_pixel()
+            else:
+                continue
+            if (
+                (center[0] - position[0]) ** 2 + (center[1] - position[1]) ** 2
+                <= squared_radius
+            ):
+                actors.append(actor)
+        return actors
 
     def get_corner_from_pixel(self, position):
         """Return the corner nearest to a screen pixel.

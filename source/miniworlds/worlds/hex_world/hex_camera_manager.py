@@ -16,10 +16,26 @@ class HexCameraManager(tiled_camera_manager.TiledCameraManager):
         """Camera view width in pixels."""
         return int(hex_coords.hex_width(self.world.tile_size) * (self.view[0] + 0.5))
 
+    @width.setter
+    def width(self, value: int):
+        """Set the camera view width in hexes (columns)."""
+        if value == self.view[0]:
+            return
+        self._set_width(value)
+        self.dirty = True
+
     @property
     def height(self) -> int:
         """Camera view height in pixels."""
         return int(self.world.tile_size * (1.5 * self.view[1] + 0.5))
+
+    @height.setter
+    def height(self, value: int):
+        """Set the camera view height in hexes (rows)."""
+        if value == self.view[1]:
+            return
+        self._set_height(value)
+        self.dirty = True
 
     @property
     def topleft(self) -> tuple[int, int]:
@@ -28,6 +44,11 @@ class HexCameraManager(tiled_camera_manager.TiledCameraManager):
             int(self._topleft[0] * hex_coords.hex_width(self.world.tile_size)),
             int(self._topleft[1] * 1.5 * self.world.tile_size),
         )
+
+    @topleft.setter
+    def topleft(self, value: tuple[int, int]):
+        """Set the top-left corner of the camera view in hex coordinates."""
+        self._set_topleft(value)
 
     def get_world_rect(self) -> pygame.Rect:
         width, height = hex_coords.world_pixel_size(

@@ -70,6 +70,9 @@ class TiledWorld(world.World):
         self._static_tile_layer_dirty = True
         # Initialize tiled spatial index for efficient actor queries
         self._tiled_spatial_index = None
+        # Bumped whenever tiles, corners, or edges are added or removed,
+        # so cached neighbour lists of tile elements can be invalidated.
+        self._tile_structure_version = 0
         if x > 1000 or y > 1000:
             raise TiledWorldTooBigError(x, y, 40)
         super().__init__(x=x, y=y)
@@ -105,6 +108,7 @@ class TiledWorld(world.World):
         self.tiles.clear()
         self.corners.clear()
         self.edges.clear()
+        self._tile_structure_version += 1
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
 
     @staticmethod
@@ -140,6 +144,7 @@ class TiledWorld(world.World):
         tile_pos = position
         tile = tile_cls(tile_pos, self)
         self.tiles[tile.position] = tile
+        self._tile_structure_version += 1
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return tile
 
@@ -167,6 +172,7 @@ class TiledWorld(world.World):
             self.corners[corner_pos] = corner
         else:
             self.corners[corner_pos].merge(corner)
+        self._tile_structure_version += 1
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return self.corners[corner_pos]
 
@@ -194,6 +200,7 @@ class TiledWorld(world.World):
             self.edges[edge_pos] = edge
         else:
             self.edges[edge_pos].merge(edge)
+        self._tile_structure_version += 1
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
         return self.edges[edge_pos]
 
@@ -646,5 +653,6 @@ class TiledWorld(world.World):
                 world.set_tile_size(32)
         """
         self._tile_size = value
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
         self.camera._reload_camera()
         self.background.set_dirty("all", background_mod.Background.RELOAD_ACTUAL_IMAGE)

@@ -39,6 +39,7 @@ class Tile(tile_elements.TileBase):
     def __init__(self, position: Tuple[int, int], world: Optional[TiledWorld] = None):
         super().__init__(position, world)
         self._cached_corners: Optional[List[Corner]] = None  # Cache explizit und privat
+        self._corners_version = None
 
     @classmethod
     def from_position(cls, position: Tuple[int, int], world: TiledWorld) -> Tile:
@@ -49,7 +50,10 @@ class Tile(tile_elements.TileBase):
         return actor.world.get_tile(actor.position)
 
     def get_neighbour_corners(self) -> List[Corner]:
-        if self._cached_corners is not None:
+        if (
+            self._cached_corners is not None
+            and self._corners_version == self._structure_version(self.world)
+        ):
             return self._cached_corners
 
         neighbours = []
@@ -59,6 +63,7 @@ class Tile(tile_elements.TileBase):
                 neighbours.append(corner)
 
         self._cached_corners = neighbours
+        self._corners_version = self._structure_version(self.world)
         return neighbours
 
     def to_pixel(self) -> Tuple[float, float]:

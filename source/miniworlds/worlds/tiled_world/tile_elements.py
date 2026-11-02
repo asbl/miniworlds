@@ -25,6 +25,7 @@ class TileBase(abc.ABC):
 
     def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
+        self._neighbour_tiles_version = None
         self.int_coord = self._internal_coordinates()
         # A world with __len__ is falsy while it is empty, so only None
         # means "use the running world".
@@ -60,6 +61,30 @@ class TileBase(abc.ABC):
         """
         cls._position_pixel_cache.pop(id(world), None)
         cls._position_pixel_list_cache.pop(id(world), None)
+
+    @staticmethod
+    def _structure_version(world: "world_mod.World") -> int:
+        """Return the world's tile-structure version counter.
+
+        Worlds that add or remove tiles, corners, or edges bump this
+        counter; cached neighbour lists compare against it. Worlds
+        without the counter (constant 0) keep their cache forever.
+        """
+        return getattr(world, "_tile_structure_version", 0)
+
+    def _cached_neighbour_tiles(self):
+        """Return the cached neighbour list if the world structure is unchanged."""
+        if (
+            self._neighbour_tiles is not None
+            and self._neighbour_tiles_version == self._structure_version(self.world)
+        ):
+            return self._neighbour_tiles
+        return None
+
+    def _cache_neighbour_tiles(self, neighbours) -> None:
+        """Store the neighbour list together with the current structure version."""
+        self._neighbour_tiles = neighbours
+        self._neighbour_tiles_version = self._structure_version(self.world)
 
     @classmethod
     def from_pixel(cls, pixel_position: Tuple[float, float], world: world_mod.World) -> TileBase:
@@ -128,8 +153,9 @@ class TileBase(abc.ABC):
 
     def get_neighbour_tiles(self) -> List[tile_mod.Tile]:
         """Returns neighboring tiles around this tile."""
-        if self._neighbour_tiles is not None:
-            return self._neighbour_tiles
+        cached = self._cached_neighbour_tiles()
+        if cached is not None:
+            return cached
 
         neighbours = []
         for direction, vector in self.tile_vectors.items():
@@ -139,7 +165,7 @@ class TileBase(abc.ABC):
                 if tile and tile not in neighbours:
                     neighbours.append(tile)
 
-        self._neighbour_tiles = neighbours
+        self._cache_neighbour_tiles(neighbours)
         return neighbours
 
     def get_local_corner_points(self):

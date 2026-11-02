@@ -20,6 +20,9 @@ class HexEdge(edge_mod.Edge):
     when the world is built.
     """
 
+    # Interface stubs of TileDelimiter: the hex rendering path overrides
+    # to_pixel(), so these angle tables are never read for hex edges.
+    # They are kept for interface compatibility.
     angles = {
         "o": 0,
         "so": 1,
@@ -67,8 +70,9 @@ class HexEdge(edge_mod.Edge):
         tile has to exist for every reference: references to positions
         outside the world are skipped.
         """
-        if self._neighbour_tiles is not None:
-            return self._neighbour_tiles
+        cached = self._cached_neighbour_tiles()
+        if cached is not None:
+            return cached
 
         tiles: List[HexTile] = []
         for position, direction in self.positions:
@@ -82,7 +86,7 @@ class HexEdge(edge_mod.Edge):
             if self.world.is_tile(tile_position):
                 tiles.append(self.world.get_tile(tile_position))
 
-        self._neighbour_tiles = tiles
+        self._cache_neighbour_tiles(tiles)
         return tiles
 
     def to_pixel(self) -> Tuple[float, float]:

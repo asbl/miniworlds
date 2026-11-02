@@ -20,6 +20,10 @@ class HexCorner(corner_mod.Corner):
     merged when the world is built.
     """
 
+    # Interface stubs of TileDelimiter (same pattern as tiled_world.Corner):
+    # the hex rendering path overrides to_pixel(), so these angle tables
+    # are only read by TileBase.get_local_corner_points(), which HexTile
+    # also overrides. They are kept for interface compatibility.
     angles = {
         "n": 0,
         "no": 1,
@@ -67,8 +71,9 @@ class HexCorner(corner_mod.Corner):
         tile has to exist for every reference: references to positions
         outside the world are skipped.
         """
-        if self._neighbour_tiles is not None:
-            return self._neighbour_tiles
+        cached = self._cached_neighbour_tiles()
+        if cached is not None:
+            return cached
 
         tiles: List[HexTile] = []
         for position, direction in self.positions:
@@ -82,7 +87,7 @@ class HexCorner(corner_mod.Corner):
             if self.world.is_tile(tile_position):
                 tiles.append(self.world.get_tile(tile_position))
 
-        self._neighbour_tiles = tiles
+        self._cache_neighbour_tiles(tiles)
         return tiles
 
     def to_pixel(self) -> Tuple[float, float]:
