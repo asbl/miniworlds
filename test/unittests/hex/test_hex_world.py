@@ -565,5 +565,166 @@ class TestHexWorld(unittest.TestCase):
         self.world.run()
 
 
+class TestHexPixelPicking(unittest.TestCase):
+    """Pixel picking translates screen pixels into world pixels.
+
+    Mouse events deliver window coordinates: the camera view is scrolled
+    by `camera.topleft` and docked worlds are drawn at
+    `camera.screen_topleft`, while hexes, corners, and edges are laid
+    out in world pixels. All picking queries and corner/edge actor
+    detection must therefore translate the pixel first.
+    """
+
+    def setUp(self) -> None:
+        App.reset(unittest=True, file=__file__)
+
+    def tearDown(self) -> None:
+        App.reset(unittest=True, file=__file__)
+
+    def _scrolled_world(self):
+        world = HexWorld(20, 16, tile_size=40)
+        world.camera._strict = False
+        world.camera.width = 8   # view size in hexes
+        world.camera.height = 6
+        world.camera.topleft = (5, 4)  # scroll position in hexes
+        return world
+
+    def _screen_pixel(self, world, world_pixel):
+        """Window pixel at which the given world pixel is drawn."""
+        topleft = world.camera.topleft
+        return (world_pixel[0] - topleft[0], world_pixel[1] - topleft[1])
+
+    def test_tile_picking_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        tile = world.get_tile((7, 5))
+        screen_pixel = self._screen_pixel(world, world.to_pixel((7, 5)))
+        self.assertIs(world.get_tile_from_pixel(screen_pixel), tile)
+        self.assertEqual(world.get_from_pixel(screen_pixel), (7, 5))
+
+    def test_edge_picking_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        edge = world.get_edge((7, 5), "o")
+        screen_pixel = self._screen_pixel(world, edge.to_pixel())
+        found = world.get_edge_from_pixel(screen_pixel)
+        self.assertIs(found, edge)
+        found_edge_pixel = found.to_pixel()
+        self.assertAlmostEqual(found_edge_pixel[0], edge.to_pixel()[0], places=2)
+        self.assertAlmostEqual(found_edge_pixel[1], edge.to_pixel()[1], places=2)
+
+    def test_corner_picking_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        corner = world.get_corner((7, 5), "n")
+        screen_pixel = self._screen_pixel(world, corner.to_pixel())
+        self.assertIs(world.get_corner_from_pixel(screen_pixel), corner)
+
+    def test_picking_outside_camera_view_returns_none(self):
+        world = self._scrolled_world()
+        # World pixel below the visible view, but inside the world:
+        # the screen pixel would map back into the world, yet it lies
+        # outside the camera view and is not clickable.
+        outside_pixel = world.to_pixel((17, 14))
+        screen_pixel = self._screen_pixel(world, outside_pixel)
+        # The pixel is scrolled out of the view; window coordinates for
+        # it cannot exist, but a raw call must still not pick anything.
+        self.assertIsNone(world.get_corner_from_pixel(screen_pixel))
+        self.assertIsNone(world.get_edge_from_pixel(screen_pixel))
+
+    def test_edge_picking_in_docked_window(self):
+        world = HexWorld(7, 7, tile_size=40)
+        world.camera.screen_topleft = (120, 40)
+        edge = world.get_edge((3, 4), "no")
+        screen_pixel = (
+            edge.to_pixel()[0] + 120,
+            edge.to_pixel()[1] + 40,
+        )
+        self.assertIs(world.get_edge_from_pixel(screen_pixel), edge)
+
+    def test_rim_edge_click_returns_nearest_edge(self):
+        world = HexWorld(7, 7, tile_size=40)
+        edge = world.get_edge((3, 0), "no")
+        # A pixel directly above the top rim edges rounds to a position
+        # outside the world, although the edge is visibly under it.
+        screen_pixel = (edge.to_pixel()[0], 2)
+        self.assertIs(world.get_edge_from_pixel(screen_pixel), edge)
+
+    def test_rim_corner_click_returns_nearest_corner(self):
+        world = HexWorld(7, 7, tile_size=40)
+        corner = world.get_corner((2, 0), "n")
+        # The top tip corner of hex (2, 0) lies at the world border.
+        screen_pixel = (corner.to_pixel()[0], 3)
+        self.assertIs(world.get_corner_from_pixel(screen_pixel), corner)
+
+    def test_picking_far_outside_world_returns_none(self):
+        world = HexWorld(7, 7, tile_size=40)
+        self.assertIsNone(world.get_edge_from_pixel((900, 900)))
+        self.assertIsNone(world.get_corner_from_pixel((900, 900)))
+        self.assertIsNone(world.get_edge_from_pixel((-10, -10)))
+        self.assertIsNone(world.get_corner_from_pixel((-10, -10)))
+
+    def test_edge_actor_detect_pixel_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        edge = world.get_edge((7, 5), "o")
+        road = Actor(edge.position, world=world)
+        screen_pixel = self._screen_pixel(world, edge.to_pixel())
+        self.assertTrue(road.detect_pixel(screen_pixel))
+        other_pixel = self._screen_pixel(world, world.to_pixel((10, 9)))
+        self.assertFalse(road.detect_pixel(other_pixel))
+
+    def test_tile_actor_detect_pixel_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        actor = Actor((7, 5), world=world)
+        screen_pixel = self._screen_pixel(world, world.to_pixel((7, 5)))
+        self.assertTrue(actor.detect_pixel(screen_pixel))
+        other_pixel = self._screen_pixel(world, world.to_pixel((10, 9)))
+        self.assertFalse(actor.detect_pixel(other_pixel))
+
+    def test_get_actors_from_pixel_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        corner = world.get_corner((7, 5), "n")
+        settlement = Actor(corner.position, world=world)
+        screen_pixel = self._screen_pixel(world, corner.to_pixel())
+        self.assertIn(settlement, world.get_actors_from_pixel(screen_pixel))
+
+    def test_mouse_event_picks_clicked_edge_with_scrolled_camera(self):
+        world = self._scrolled_world()
+        edge = world.get_edge((7, 5), "o")
+        screen_pixel = self._screen_pixel(world, edge.to_pixel())
+        clicked = {}
+
+        @world.register
+        def on_mouse_left(self, mouse_pos):
+            clicked["edge"] = world.get_edge_from_pixel(mouse_pos)
+
+        world.event_manager.handler.handle_event("mouse_left", screen_pixel)
+        self.assertIs(clicked.get("edge"), edge)
+
+    def test_picking_returns_true_nearest_edge(self):
+        world = HexWorld(7, 7, tile_size=40)
+        edge_centers = [
+            (edge, edge.to_pixel()) for edge in world.edges.values()
+        ]
+        for screen_pixel in [
+            world.to_pixel((0, 0)),
+            world.to_pixel((6, 6)),
+            world.get_edge((0, 0), "w").to_pixel(),
+            (world.get_edge((3, 0), "no").to_pixel()[0], 2),
+        ] + [
+            (x, y)
+            for y in range(0, 460, 53)
+            for x in range(0, 520, 67)
+        ]:
+            found = world.get_edge_from_pixel(screen_pixel)
+            self.assertIsNotNone(found, screen_pixel)
+            best_distance = min(
+                (center[0] - screen_pixel[0]) ** 2 + (center[1] - screen_pixel[1]) ** 2
+                for _edge, center in edge_centers
+            )
+            found_distance = (
+                (found.to_pixel()[0] - screen_pixel[0]) ** 2
+                + (found.to_pixel()[1] - screen_pixel[1]) ** 2
+            )
+            self.assertLessEqual(found_distance, best_distance, screen_pixel)
+
+
 if __name__ == "__main__":
     unittest.main()

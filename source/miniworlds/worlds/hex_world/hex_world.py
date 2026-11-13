@@ -161,8 +161,70 @@ class HexWorld(tiled_world.TiledWorld):
         center = hex_coords.hex_center(position, self.tile_size)
         return (center[0] + origin[0], center[1] + origin[1])
 
+    def _world_pixel_from_screen(self, position) -> Tuple[float, float]:
+        """Translate a screen (mouse) pixel into world pixel coordinates.
+
+        Mouse events deliver window coordinates. The camera view is
+        drawn at `camera.screen_topleft` in the window and shows the
+        world scrolled by `camera.topleft`, while hex geometry is laid
+        out in world pixels. Pixel queries must therefore translate the
+        pixel before the hex math, so a click picks what is visible at
+        the clicked position for scrolled cameras and docked windows.
+
+        With an unscrolled camera at the window origin the translation
+        is the identity.
+        """
+        topleft = self.camera.topleft
+        window_topleft = self.camera.screen_topleft
+        return (
+            position[0] - window_topleft[0] + topleft[0],
+            position[1] - window_topleft[1] + topleft[1],
+        )
+
+    def _tile_from_world_pixel(self, world_pixel):
+        tile_position = hex_coords.cube_to_offset(
+            hex_coords.pixel_to_cube(world_pixel, self.tile_size)
+        )
+        if not self.is_tile(tile_position):
+            return None
+        return self.tiles[tile_position]
+
+    def _picking_tiles(self, world_pixel):
+        """Return the registered tiles whose edges and corners are pickable.
+
+        The pixel usually lies on a registered tile; its six edges and
+        corners then contain the nearest edge and corner to the pixel.
+        Near the border of the world, the pixel rounds to a position
+        outside the world, although registered edges and corners lie
+        visually on it (the rim of the board area belongs to the border
+        hexes). The registered neighbours are candidates instead, so
+        edges and corners on the border of the world remain clickable.
+        """
+        tile = self._tile_from_world_pixel(world_pixel)
+        if tile is not None:
+            return [tile]
+        cube = hex_coords.pixel_to_cube(world_pixel, self.tile_size)
+        neighbour_cubes = [
+            (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
+            for vector in hex_coords.CUBE_DIRECTIONS.values()
+        ]
+        tiles = []
+        seen_positions = set()
+        for candidate in [cube] + neighbour_cubes:
+            tile_position = hex_coords.cube_to_offset(candidate)
+            if tile_position in seen_positions:
+                continue
+            if self.is_tile(tile_position):
+                seen_positions.add(tile_position)
+                tiles.append(self.tiles[tile_position])
+        return tiles
+
     def get_tile_from_pixel(self, position):
         """Return the hex tile under a screen pixel.
+
+        The pixel is translated to world pixels first, so the query
+        also works while the camera is scrolled or the world is docked
+        next to other worlds.
 
         Args:
             position: Pixel position as `(x, y)`.
@@ -179,15 +241,14 @@ class HexWorld(tiled_world.TiledWorld):
                 if tile is not None:
                     tile.fill_color = (255, 0, 0)
         """
-        tile_position = hex_coords.cube_to_offset(
-            hex_coords.pixel_to_cube(position, self.tile_size)
-        )
-        if not self.is_tile(tile_position):
-            return None
-        return self.tiles[tile_position]
+        return self._tile_from_world_pixel(self._world_pixel_from_screen(position))
 
     def get_from_pixel(self, position):
         """Return the hex position for a screen pixel.
+
+        The pixel is translated to world pixels first, so the query
+        also works while the camera is scrolled or the world is docked
+        next to other worlds.
 
         Args:
             position: Pixel position as `(x, y)`.
@@ -201,12 +262,10 @@ class HexWorld(tiled_world.TiledWorld):
 
                 hex_position = world.get_from_pixel((80, 120))
         """
-        x, y = position
-        if x < 0 or y < 0:
+        world_pixel = self._world_pixel_from_screen(position)
+        if not self.camera.get_rect().collidepoint(world_pixel):
             return None
-        if x >= self.camera.width or y >= self.camera.height:
-            return None
-        tile = self.get_tile_from_pixel(position)
+        tile = self._tile_from_world_pixel(world_pixel)
         if tile is None:
             return None
         return tile.position
@@ -218,22 +277,27 @@ class HexWorld(tiled_world.TiledWorld):
         on corners or edges whose center lies within the detection radius
         (`tile_size / 3`, same as `actor.detect_pixel`) of the pixel.
 
+        The pixel is translated to world pixels first, so the query
+        also works while the camera is scrolled or the world is docked
+        next to other worlds. Corner and edge actors are detected
+        without a tile under the pixel, so roads and settlements on
+        the border of the world remain clickable.
+
         Args:
             position: Pixel position as `(x, y)`.
 
         Returns:
-            Actors located under the pixel. An empty list if the pixel
-            lies outside the world.
+            Actors located under the pixel. An empty list if no actor
+            is under the pixel.
 
         Examples:
             ::
 
                 actors = world.get_actors_from_pixel(mouse_pos)
         """
-        tile = self.get_tile_from_pixel(position)
-        if tile is None:
-            return []
-        actors = list(self.detect_actors(tile.position))
+        world_pixel = self._world_pixel_from_screen(position)
+        tile = self._tile_from_world_pixel(world_pixel)
+        actors = list(self.detect_actors(tile.position)) if tile is not None else []
         radius = (
             self.tile_size
             * hex_world_sensor_manager.HexWorldSensorManager.DETECTION_RADIUS_FACTOR
@@ -248,7 +312,8 @@ class HexWorld(tiled_world.TiledWorld):
             else:
                 continue
             if (
-                (center[0] - position[0]) ** 2 + (center[1] - position[1]) ** 2
+                (center[0] - world_pixel[0]) ** 2
+                + (center[1] - world_pixel[1]) ** 2
                 <= squared_radius
             ):
                 actors.append(actor)
@@ -257,65 +322,79 @@ class HexWorld(tiled_world.TiledWorld):
     def get_corner_from_pixel(self, position):
         """Return the corner nearest to a screen pixel.
 
+        The pixel is translated to world pixels first, so the query
+        also works while the camera is scrolled or the world is docked
+        next to other worlds. Pixels near the border of the world pick
+        from the border hexes, so corners on the border (settlement
+        positions on a Catan board) remain clickable.
+
         Args:
             position: Pixel position as `(x, y)`.
 
         Returns:
             The nearest corner, or `None` if the pixel is outside
-            the world.
+            the camera view or outside the world.
 
         Examples:
             ::
 
                 corner = world.get_corner_from_pixel(mouse_pos)
         """
-        tile = self.get_tile_from_pixel(position)
-        if tile is None:
+        world_pixel = self._world_pixel_from_screen(position)
+        if not self.camera.get_rect().collidepoint(world_pixel):
             return None
         nearest_corner = None
         nearest_distance = None
-        for direction in hex_coords.CORNER_ORDER:
-            corner = self.get_corner(tile.position, direction)
-            corner_pixel = corner.to_pixel()
-            distance = (
-                (corner_pixel[0] - position[0]) ** 2
-                + (corner_pixel[1] - position[1]) ** 2
-            )
-            if nearest_distance is None or distance < nearest_distance:
-                nearest_corner = corner
-                nearest_distance = distance
+        for tile in self._picking_tiles(world_pixel):
+            for direction in hex_coords.CORNER_ORDER:
+                corner = self.get_corner(tile.position, direction)
+                corner_pixel = corner.to_pixel()
+                distance = (
+                    (corner_pixel[0] - world_pixel[0]) ** 2
+                    + (corner_pixel[1] - world_pixel[1]) ** 2
+                )
+                if nearest_distance is None or distance < nearest_distance:
+                    nearest_corner = corner
+                    nearest_distance = distance
         return nearest_corner
 
     def get_edge_from_pixel(self, position):
         """Return the edge nearest to a screen pixel.
+
+        The pixel is translated to world pixels first, so the query
+        also works while the camera is scrolled or the world is docked
+        next to other worlds. Pixels near the border of the world pick
+        from the border hexes, so edges on the border (road positions
+        on a Catan board) remain clickable.
 
         Args:
             position: Pixel position as `(x, y)`.
 
         Returns:
             The nearest edge, or `None` if the pixel is outside
-            the world.
+            the camera view or outside the world.
 
         Examples:
             ::
 
                 edge = world.get_edge_from_pixel(mouse_pos)
         """
-        tile = self.get_tile_from_pixel(position)
-        if tile is None:
+        world_pixel = self._world_pixel_from_screen(position)
+        if not self.camera.get_rect().collidepoint(world_pixel):
             return None
         nearest_edge = None
         nearest_distance = None
-        for direction in hex_coords.CUBE_DIRECTIONS:
-            edge = self.get_edge(tile.position, direction)
-            edge_pixel = edge.to_pixel()
-            distance = (
-                (edge_pixel[0] - position[0]) ** 2
-                + (edge_pixel[1] - position[1]) ** 2
-            )
-            if nearest_distance is None or distance < nearest_distance:
-                nearest_edge = edge
-                nearest_distance = distance
+        for tile in self._picking_tiles(world_pixel):
+            for direction in hex_coords.CUBE_DIRECTIONS:
+                edge = self.get_edge(tile.position, direction)
+                edge_pixel = edge.to_pixel()
+                distance = (
+                    (edge_pixel[0] - world_pixel[0]) ** 2
+                    + (edge_pixel[1] - world_pixel[1]) ** 2
+                )
+                if nearest_distance is None or distance < nearest_distance:
+                    nearest_edge = edge
+                    nearest_distance = distance
         return nearest_edge
 
     def get_center_points(self) -> Dict[Tuple[int, int], Tuple[float, float]]:

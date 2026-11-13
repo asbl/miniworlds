@@ -42,14 +42,19 @@ class HexWorldSensorManager(tiled_sensor_manager.TiledWorldSensorManager):
 
     def detect_pixel(self, position: Tuple[float, float]) -> bool:
         world = self.actor.world
+        # Mouse events deliver window pixels; corner and edge pixels live
+        # in world coordinates. Translate before the distance check, so
+        # corner and edge actors are still detected while the camera is
+        # scrolled or the world is docked next to other worlds.
+        pixel = world._world_pixel_from_screen(position)
         if world.is_corner(self.actor.position):
             corner = world.tile_factory.corner_cls.from_position(
                 self.actor.position, world
             )
-            return self._pixel_distance(position, corner.to_pixel()) <= self._detection_radius()
+            return self._pixel_distance(pixel, corner.to_pixel()) <= self._detection_radius()
         if world.is_edge(self.actor.position):
             edge = world.tile_factory.edge_cls.from_position(self.actor.position, world)
-            return self._pixel_distance(position, edge.to_pixel()) <= self._detection_radius()
+            return self._pixel_distance(pixel, edge.to_pixel()) <= self._detection_radius()
         return super().detect_pixel(position)
 
     def _detection_radius(self) -> float:
