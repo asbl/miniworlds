@@ -11,6 +11,7 @@ import miniworlds.worlds.hex_world.hex_tile_factory as hex_tile_factory
 import miniworlds.worlds.hex_world.hex_world_connector as hex_world_connector
 import miniworlds.worlds.hex_world.hex_world_sensor_manager as hex_world_sensor_manager
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
+import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 import miniworlds.worlds.tiled_world.tiled_world as tiled_world
 
 
@@ -76,6 +77,71 @@ class HexWorld(tiled_world.TiledWorld):
     def _templates(self):
         return hex_tile_mod.HexTile, hex_edge_mod.HexEdge, hex_corner_mod.HexCorner
 
+    def _setup_tiles(self):
+        """Add a tile for each world position, without per-add cache work.
+
+        `add_tile_to_world` bumps the structure version and drops the
+        position-pixel cache on every call. Both are pure overhead while the
+        world model is built, because no lookup can run before setup
+        finishes; they run once at the end instead of once per tile.
+        """
+        tiles = self.tiles
+        tile_cls = self.tile_factory.tile_cls
+        for column in range(self.world_size_x):
+            for row in range(self.world_size_y):
+                tile = tile_cls((column, row), self)
+                tiles[tile.position] = tile
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
+        self._tile_structure_version += 1
+
+    def _setup_corners(self):
+        """Add and merge all corners, keyed without discarded objects.
+
+        `add_corner_to_world` constructs a `HexCorner` for every
+        (tile, direction) pair and merges about two thirds of them away.
+        Here the merged key is computed first (pure math) and only the
+        first instance of each corner is constructed; further references
+        are appended exactly like `TileBase.merge` does.
+        """
+        corners = self.corners
+        _tile_cls, _edge_cls, corner_cls = self._templates()
+        for tile_position in list(self.tiles):
+            for direction in hex_coords.CORNER_DIRECTIONS:
+                corner_position = hex_coords.corner_position(tile_position, direction)
+                corner = corners.get(corner_position)
+                if corner is None:
+                    corners[corner_position] = corner_cls(
+                        tile_position, direction, self
+                    )
+                else:
+                    reference = (corner_position, direction)
+                    if reference not in corner.positions:
+                        corner.positions.append(reference)
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
+        self._tile_structure_version += 1
+
+    def _setup_edges(self):
+        """Add and merge all edges, keyed without discarded objects.
+
+        Same key-first strategy as `_setup_corners`: only the first instance
+        of each edge is constructed, further references are appended like
+        `TileBase.merge` does.
+        """
+        edges = self.edges
+        _tile_cls, edge_cls, _corner_cls = self._templates()
+        for tile_position in list(self.tiles):
+            for direction in hex_coords.EDGE_DIRECTIONS:
+                edge_position = hex_coords.edge_position(tile_position, direction)
+                edge = edges.get(edge_position)
+                if edge is None:
+                    edges[edge_position] = edge_cls(tile_position, direction, self)
+                else:
+                    reference = (edge_position, direction)
+                    if reference not in edge.positions:
+                        edge.positions.append(reference)
+        tile_elements.TileBase.invalidate_position_pixel_cache(self)
+        self._tile_structure_version += 1
+
     def to_pixel(self, position, size=(0, 0), origin=(0, 0)):
         """Convert a hex position to the pixel position of its center.
 
@@ -113,11 +179,12 @@ class HexWorld(tiled_world.TiledWorld):
                 if tile is not None:
                     tile.fill_color = (255, 0, 0)
         """
-        tile_cls = self.tile_factory.tile_cls
-        tile = tile_cls.from_pixel(position, self)
-        if not self.is_tile(tile.position):
+        tile_position = hex_coords.cube_to_offset(
+            hex_coords.pixel_to_cube(position, self.tile_size)
+        )
+        if not self.is_tile(tile_position):
             return None
-        return self.get_tile(tile.position)
+        return self.tiles[tile_position]
 
     def get_from_pixel(self, position):
         """Return the hex position for a screen pixel.
@@ -257,6 +324,55 @@ class HexWorld(tiled_world.TiledWorld):
         for position, tile in self.tiles.items():
             center_points[position] = tile.to_center()
         return center_points
+
+    def view_position_ranges(self, camera_rect):
+        """Return position ranges covering `camera_rect` for index queries.
+
+        Positions on a hex world live in three different coordinate spaces:
+        tiles in offset coordinates `(column, row)`, corners in tripled cube
+        coordinates, and edges in doubled cube coordinates. The chunk key of
+        the tiled spatial index is derived from the raw position, so one
+        range per space is returned. Every actor whose pixel rect may
+        intersect the camera rect is covered by one of the ranges, while
+        each range stays bounded by the visible window.
+
+        Args:
+            camera_rect: Camera rectangle in world pixels.
+
+        Returns:
+            A list of `((min_x, min_y), (max_x, max_y))` position pair
+            ranges, covering tile, corner, and edge positions.
+
+        Examples:
+            ::
+
+                ranges = world.view_position_ranges(world.camera.rect)
+        """
+        tile_size = self.tile_size
+        width = hex_coords.hex_width(tile_size)
+        row_height = 1.5 * tile_size
+        # A hex bounding box (width x 2 * tile_size) must intersect the
+        # camera rect. The +/-1 margins also cover the hexes that share
+        # only a corner or an edge with a visible hex.
+        col0 = int((camera_rect.left - 2 * width) // width) - 1
+        col1 = int(camera_rect.right // width) + 1
+        row0 = int((camera_rect.top - 2 * tile_size) // row_height) - 1
+        row1 = int(camera_rect.bottom // row_height) + 1
+        tile_range = ((col0 - 1, row0 - 1), (col1 + 1, row1 + 1))
+        # Corners sit at 3 * cube + corner vector (components up to 2),
+        # edges at 2 * cube + direction vector (components up to 1). Both
+        # inherit the cube range of the visible offset range.
+        cubes = [
+            hex_coords.offset_to_cube(position)
+            for position in ((col0, row0), (col0, row1), (col1, row0), (col1, row1))
+        ]
+        q_min = min(cube[0] for cube in cubes)
+        q_max = max(cube[0] for cube in cubes)
+        r_min = min(cube[1] for cube in cubes)
+        r_max = max(cube[1] for cube in cubes)
+        corner_range = ((3 * q_min - 2, 3 * r_min - 2), (3 * q_max + 2, 3 * r_max + 2))
+        edge_range = ((2 * q_min - 1, 2 * r_min - 1), (2 * q_max + 1, 2 * r_max + 1))
+        return [tile_range, corner_range, edge_range]
 
     def get_corner(self, position, direction=None):
         """Return a corner by corner position or hex position plus direction.

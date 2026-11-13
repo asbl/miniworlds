@@ -290,24 +290,28 @@ class CameraManager(pygame.sprite.Sprite):
         """Candidate actors for a view query.
 
         Non-tiled worlds use the pixel-based SpatialIndex. Tiled worlds use
-        the TiledSpatialIndex over the camera's tile range, so the candidate
-        set scales with the visible area instead of the total actor count.
+        the TiledSpatialIndex over the camera's position ranges (see
+        ``TiledWorld.view_position_ranges``), so the candidate set scales
+        with the visible area instead of the total actor count.
         Callers still apply the precise pixel-level rect filter afterwards.
         """
         world = self.world
         is_tiled = getattr(world, "is_tiled", False)
         if is_tiled is True:
             tiled_index = getattr(world, "_tiled_spatial_index", None)
+            view_position_ranges = getattr(world, "view_position_ranges", None)
             if tiled_index is not None:
-                tile_size = max(1, getattr(world, "tile_size", 1))
-                min_tile = (camera_rect.left // tile_size, camera_rect.top // tile_size)
-                max_tile = (
-                    max(camera_rect.left, camera_rect.right - 1) // tile_size,
-                    max(camera_rect.top, camera_rect.bottom - 1) // tile_size,
-                )
-                # One chunk ring of margin: actors just outside the camera
-                # whose pixel rect still reaches into the view remain candidates.
-                return tiled_index.query_chunk_region(min_tile, max_tile, ring=1)
+                if view_position_ranges is None:
+                    return world.actors
+                # One chunk ring of margin per range: actors just outside
+                # the camera whose pixel rect still reaches into the view
+                # remain candidates.
+                candidates = set()
+                for min_pos, max_pos in view_position_ranges(camera_rect):
+                    candidates |= tiled_index.query_chunk_region(
+                        min_pos, max_pos, ring=1
+                    )
+                return candidates
             return world.actors
         spatial_index = getattr(world, "_spatial_index", None)
         if spatial_index is not None and not is_tiled:
@@ -392,6 +396,9 @@ class CameraManager(pygame.sprite.Sprite):
 
     def _clear_camera_cache(self) -> None:
         """Clears view tracking for actor visibility."""
+        collision_manager = getattr(self.world, "_collision_manager", None)
+        if collision_manager is not None:
+            collision_manager.invalidate()
         self._view_actors_actual_frame.clear()
         self._view_active_actors.clear()
         self._view_update_frame = -1

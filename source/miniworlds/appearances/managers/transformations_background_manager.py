@@ -33,7 +33,33 @@ class TransformationsBackgroundManager(transformations_manager.TransformationsMa
 
     def _transformation_grid_hex(self, image: pygame.Surface, appearance) -> pygame.Surface:
         parent = self.appearance.parent
-        for position in parent.tiles:
-            points = hex_coords.corner_pixel_points(position, parent.tile_size)
-            pygame.draw.polygon(image, appearance._grid_color, points, 1)
+        # Draw only the hexes visible in the camera window: the background
+        # image is a camera-sized window anchored at the camera topleft, and
+        # redraws happen on every camera move. Drawing every tile of the
+        # world scales the redraw with the world size instead of the view.
+        camera_rect = parent.camera.get_rect()
+        tile_size = parent.tile_size
+        width = hex_coords.hex_width(tile_size)
+        row_height = 1.5 * tile_size
+        left = camera_rect.left
+        top = camera_rect.top
+        col0 = int((camera_rect.left - 2 * width) // width)
+        col1 = int(camera_rect.right // width) + 1
+        row0 = int((camera_rect.top - 2 * tile_size) // row_height)
+        row1 = int(camera_rect.bottom // row_height) + 1
+        color = appearance._grid_color
+        offsets = list(hex_coords.corner_pixel_offsets(tile_size).values())
+        tiles = parent.tiles
+        for row in range(row0, row1 + 1):
+            row_shift = 0.5 * (row & 1) * width
+            y = row_height * row + tile_size - top
+            for col in range(col0, col1 + 1):
+                if (col, row) not in tiles:
+                    continue
+                x = width * col + width / 2 + row_shift - left
+                pygame.draw.polygon(
+                    image, color,
+                    [(x + offset[0], y + offset[1]) for offset in offsets],
+                    1,
+                )
         return image

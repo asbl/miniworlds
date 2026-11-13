@@ -408,27 +408,61 @@ class TiledWorld(world.World):
             return None
         return actor_list[0]
 
-    def _static_layer_candidates(self):
-        """Candidate actors for the static tile layer rebuild.
+    def view_position_ranges(self, camera_rect: pygame.Rect):
+        """Return position ranges covering `camera_rect` for index queries.
 
-        Uses the TiledSpatialIndex over the camera's tile range to skip the
-        expensive per-actor work (rect filter, image blit) for actors outside
-        the view. Iteration still happens in ``world.actors`` order, because
-        the blit order of overlapping static actors matters: the result is
-        identical to scanning all actors.
+        Used to query the tiled spatial index for actors that may be visible
+        in the camera. Each range is a conservative superset in the
+        coordinate space in which actor positions live; callers apply their
+        precise pixel/rect filter afterwards.
+
+        The default converts the pixel rect with a plain tile-size division
+        and returns a single range, which is correct for rectangular tiles.
+        Worlds whose positions map differently to pixels (e.g. hex worlds,
+        where tiles, tripled-cube corners, and doubled-cube edges live in
+        three different coordinate spaces) override this method and return
+        one range per space.
+
+        Args:
+            camera_rect: Camera rectangle in world pixels.
+
+        Returns:
+            A list of `((min_x, min_y), (max_x, max_y))` position pairs.
         """
-        camera_rect = self.camera.rect
-        tiled_index = getattr(self, "_tiled_spatial_index", None)
-        if tiled_index is None:
-            return self.actors
         tile_size = max(1, self.tile_size)
         min_tile = (camera_rect.left // tile_size, camera_rect.top // tile_size)
         max_tile = (
             max(camera_rect.left, camera_rect.right - 1) // tile_size,
             max(camera_rect.top, camera_rect.bottom - 1) // tile_size,
         )
-        in_view = tiled_index.query_chunk_region(min_tile, max_tile, ring=1)
-        return (actor for actor in self.actors if actor in in_view)
+        return [(min_tile, max_tile)]
+
+    def _view_index_candidates(self, camera_rect, tiled_index):
+        """Query the tiled spatial index over the world's position ranges.
+
+        One chunk ring of margin per range: actors just outside the camera
+        whose pixel rect still reaches into the view remain candidates.
+        """
+        candidates = set()
+        for min_pos, max_pos in self.view_position_ranges(camera_rect):
+            candidates |= tiled_index.query_chunk_region(min_pos, max_pos, ring=1)
+        return candidates
+
+    def _static_layer_candidates(self):
+        """Candidate actors for the static tile layer rebuild.
+
+        Uses the TiledSpatialIndex over the camera's position ranges to skip
+        the expensive per-actor work (rect filter, image blit) for actors
+        outside the view. Candidates are sorted by cached ``world.actors``
+        rank, preserving the draw order of overlapping actors without a full
+        scan on each camera movement.
+        """
+        camera_rect = self.camera.rect
+        tiled_index = getattr(self, "_tiled_spatial_index", None)
+        if tiled_index is None:
+            return self.actors
+        in_view = self._view_index_candidates(camera_rect, tiled_index)
+        return self.actors.ordered_candidates(in_view)
 
     def _rebuild_static_tile_layer(self) -> None:
         # The layer is camera-sized (not world-sized): this runs on every

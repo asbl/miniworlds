@@ -210,40 +210,64 @@ def pixel_to_cube(pixel: Tuple[float, float], tile_size: float) -> Cube:
     return cube_round((q, r, -q - r))
 
 
+# Corner and edge pixel offsets are pure functions of the tile size, but
+# they are read on hot paths (corner/edge picking, grid rendering). They
+# are cached per tile size (few distinct values per program).
+_CORNER_OFFSETS_CACHE: Dict[float, Dict[str, Tuple[float, float]]] = {}
+_EDGE_OFFSETS_CACHE: Dict[float, Dict[str, Tuple[float, float]]] = {}
+
+
+def corner_pixel_offsets(tile_size: float) -> Dict[str, Tuple[float, float]]:
+    """Return the pixel offsets of the six hex corners (relative to center)."""
+    offsets = _CORNER_OFFSETS_CACHE.get(tile_size)
+    if offsets is None:
+        half_width = hex_width(tile_size) / 2.0
+        half = tile_size / 2.0
+        offsets = {
+            "n": (0.0, -tile_size),
+            "no": (half_width, -half),
+            "so": (half_width, half),
+            "s": (0.0, tile_size),
+            "sw": (-half_width, half),
+            "nw": (-half_width, -half),
+        }
+        _CORNER_OFFSETS_CACHE[tile_size] = offsets
+    return offsets
+
+
 def corner_pixel_offset(direction: str, tile_size: float) -> Tuple[float, float]:
     """Return the pixel offset of a hex corner, relative to the hex center."""
-    half_width = hex_width(tile_size) / 2.0
-    half = tile_size / 2.0
-    offsets = {
-        "n": (0.0, -tile_size),
-        "no": (half_width, -half),
-        "so": (half_width, half),
-        "s": (0.0, tile_size),
-        "sw": (-half_width, half),
-        "nw": (-half_width, -half),
-    }
-    return offsets[direction]
+    return corner_pixel_offsets(tile_size)[direction]
 
 
 def corner_pixel_points(position: Tuple[int, int], tile_size: float) -> List[Tuple[float, float]]:
     """Return the six corner pixels of a hex, clockwise from the top tip."""
     center = hex_center(position, tile_size)
-    points = []
-    for direction in CORNER_ORDER:
-        offset = corner_pixel_offset(direction, tile_size)
-        points.append((center[0] + offset[0], center[1] + offset[1]))
-    return points
+    return [
+        (center[0] + offset[0], center[1] + offset[1])
+        for offset in corner_pixel_offsets(tile_size).values()
+    ]
+
+
+def edge_pixel_offsets(tile_size: float) -> Dict[str, Tuple[float, float]]:
+    """Return the pixel offsets of the six edge centers (relative to center)."""
+    offsets = _EDGE_OFFSETS_CACHE.get(tile_size)
+    if offsets is None:
+        corner_offsets = corner_pixel_offsets(tile_size)
+        offsets = {
+            direction: (
+                (corner_offsets[first][0] + corner_offsets[second][0]) / 2.0,
+                (corner_offsets[first][1] + corner_offsets[second][1]) / 2.0,
+            )
+            for direction, (first, second) in EDGE_CORNERS.items()
+        }
+        _EDGE_OFFSETS_CACHE[tile_size] = offsets
+    return offsets
 
 
 def edge_pixel_offset(direction: str, tile_size: float) -> Tuple[float, float]:
     """Return the pixel offset of an edge center, relative to the hex center."""
-    first, second = EDGE_CORNERS[direction]
-    first_offset = corner_pixel_offset(first, tile_size)
-    second_offset = corner_pixel_offset(second, tile_size)
-    return (
-        (first_offset[0] + second_offset[0]) / 2.0,
-        (first_offset[1] + second_offset[1]) / 2.0,
-    )
+    return edge_pixel_offsets(tile_size)[direction]
 
 
 def direction_vector(direction: str, vectors: Dict[str, Cube]) -> Cube:
