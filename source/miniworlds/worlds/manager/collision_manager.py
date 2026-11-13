@@ -12,11 +12,15 @@ class CollisionManager:
     def __init__(self, world):
         self.world = world
         # detect_actors(filter=None) results cached per actor for the duration
-        # of one _handle_all_collisions call (once per frame).
+        # of one _handle_all_collisions call, until the scene changes.
         self._detect_cache = {}
 
+    def invalidate(self):
+        """Discard detections when geometry, membership or collision mode changes."""
+        self._detect_cache.clear()
+
     def _detected_actors(self, actor):
-        """Unfiltered detect_actors result for this frame, cached per actor.
+        """Unfiltered result cached per actor until the scene changes.
 
         Multiple handlers (on_detecting, on_detecting_<Type>,
         on_not_detecting_<Type>, sensor events) for the same actor derive

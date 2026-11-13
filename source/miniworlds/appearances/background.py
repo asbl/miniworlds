@@ -94,7 +94,14 @@ class Background(appearance_mod.Appearance):
         self.set_dirty("all", Background.LOAD_NEW_IMAGE)
 
     def repaint(self):
-        """Called 1/frame from world"""
+        """Draw actors once, including when loading the background triggers a blit."""
+        self._repainting = True
+        try:
+            self._repaint()
+        finally:
+            self._repainting = False
+
+    def _repaint(self):
         if self.world and self.world.app and self.world in self.world.app.running_worlds:
             clear_image = self.image
             if hasattr(self.world, "_refresh_static_tile_layer"):
@@ -103,7 +110,7 @@ class Background(appearance_mod.Appearance):
                     clear_image = static_layer
                     if static_layer_rebuilt:
                         self.surface.blit(static_layer, (0, 0))
-                        for actor in self.world.actors:
+                        for actor in self.world.camera.get_actors_in_view():
                             if not getattr(actor, "_static", False):
                                 actor.dirty = 1
             self.world.actors.clear(self.surface, clear_image)
@@ -132,11 +139,18 @@ class Background(appearance_mod.Appearance):
     def _blit_to_window_surface(self):
         """Blits background to window surface and repaints the sprite layer.
 
-        The repaint call is load-bearing: camera reloads trigger this via
-        `set_dirty` during `camera._update`, before the mainloop's own
-        repaint, and the sprite layer must be refreshed at that point.
+        During a mainloop update, defer presentation to the final repaint.
+        Outside that batch, refresh immediately for setup and direct callers.
         """
         if self.world and self.world.app and self.world in self.world.app.running_worlds:
+            if getattr(self.world, "frame", 0) > 0 and (
+                getattr(self, "_repainting", False) or getattr(
+                    getattr(self.world, "_mainloop", None), "_defer_background_repaint", False
+                )
+            ):
+                self._pending_window_rects.append(self.world.camera.screen_rect.copy())
+                self.world.app.add_display_to_repaint_areas()
+                return
             self.world.app.window.surface.blit(
                 self.image, self.world.camera.screen_topleft
             )

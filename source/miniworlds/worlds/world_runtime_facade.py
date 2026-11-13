@@ -93,11 +93,19 @@ class WorldRuntimeFacade:
         self.world.app.quit(exit_code)
 
     def reset(self) -> None:
-        self.clear()
-        if hasattr(self.world, "on_setup"):
-            self.world._is_setup_completed = False
-            self.world.on_setup()
-            self.world._is_setup_completed = True
+        # Reset/setup presents intermediate backgrounds immediately, just like
+        # initial setup, even when called from a batched frame update.
+        mainloop = self.world._mainloop
+        deferred = mainloop._defer_background_repaint
+        mainloop._defer_background_repaint = False
+        try:
+            self.clear()
+            if hasattr(self.world, "on_setup"):
+                self.world._is_setup_completed = False
+                self.world.on_setup()
+                self.world._is_setup_completed = True
+        finally:
+            mainloop._defer_background_repaint = deferred
 
     def clear(self) -> None:
         self.world.app.event_manager.event_queue.clear()

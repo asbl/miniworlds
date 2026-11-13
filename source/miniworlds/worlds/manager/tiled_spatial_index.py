@@ -68,10 +68,10 @@ class TiledSpatialIndex:
         x, y = int(position[0]), int(position[1])
 
         chunks = set()
-        for dx in range(width_tiles):
-            for dy in range(height_tiles):
-                tile_pos = (x + dx, y + dy)
-                chunks.add(self._chunk_for_position(tile_pos))
+        chunk_size = self.chunk_size
+        for chunk_x in range(x // chunk_size, (x + width_tiles - 1) // chunk_size + 1):
+            for chunk_y in range(y // chunk_size, (y + height_tiles - 1) // chunk_size + 1):
+                chunks.add((chunk_x, chunk_y))
 
         return frozenset(chunks)
 

@@ -10,6 +10,7 @@ class MainloopManager:
         self.app = app
         self.reload_costumes_queue: list = []
         self._dialog_was_visible = False
+        self._defer_background_repaint = False
         self._profile_enabled = False
         self._profile_stats: dict[str, dict[str, float]] = {}
 

@@ -44,6 +44,9 @@ class Positionmanager:
         actor_world = getattr(self.actor, "_world", None)
         if actor_world is None:
             return
+        collision_manager = getattr(actor_world, "_collision_manager", None)
+        if collision_manager is not None:
+            collision_manager.invalidate()
         spatial_index = getattr(actor_world, "_spatial_index", None)
         if (
             spatial_index is not None
@@ -316,11 +319,11 @@ class Positionmanager:
             "actor_mod.Actor": The current actor
         """
         old_position = self.position
-        position_changed = old_position != value
         self.last_position = old_position
+        if old_position == value:
+            return self
         self.position = value
-        if position_changed:
-            self._invalidate_rect_cache()
+        self._invalidate_rect_cache()
 
         if int(old_position[0]) != int(value[0]) or int(old_position[1]) != int(value[1]):
             camera = self.actor.world.camera

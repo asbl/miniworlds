@@ -12,6 +12,7 @@ import miniworlds.worlds.manager.data_manager as data_manager
 import miniworlds.worlds.manager.draw_manager as draw_manager
 import miniworlds.worlds.manager.layout_manager as layout_manager
 import miniworlds.worlds.manager.mainloop_manager as mainloop_manager
+from miniworlds.worlds.manager.ordered_actor_group import OrderedActorGroup
 import miniworlds.worlds.manager.mouse_manager as mouse_manager
 import miniworlds.worlds.manager.music_manager as world_music_manager
 import miniworlds.worlds.manager.sound_manager as world_sound_manager
@@ -42,7 +43,7 @@ class WorldInitializationFacade:
             pygame.init()
         self.world._validate_parameters(x, y)
         self.world.camera = self.world._get_camera_manager_class()(x, y, self.world)
-        self.world.actors = pygame.sprite.LayeredDirty()
+        self.world.actors = OrderedActorGroup()
         # LayeredDirty falls back to redrawing every sprite plus a full-screen
         # update whenever one draw call exceeds its timing threshold (12.5 ms
         # by default). On slow targets (Pyodide/wasm) the first draw always

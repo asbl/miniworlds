@@ -374,6 +374,9 @@ class Actor(actor_base.ActorBase):
                 f"collision_type must be one of {sorted(allowed_values)}, got {value!r}"
             )
         self._collision_type = value
+        collision_manager = getattr(getattr(self, "_world", None), "_collision_manager", None)
+        if collision_manager is not None:
+            collision_manager.invalidate()
 
     @property
     def mask(self) -> "pygame.mask.Mask":

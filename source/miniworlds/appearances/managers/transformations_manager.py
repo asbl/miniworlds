@@ -27,8 +27,7 @@ class TransformationsManager:
         self._render_revision = 0
         # rotozoom results keyed by (id(image), direction). The source image is
         # held in the value so the id cannot be recycled while cached. This
-        # survives render-revision bumps (e.g. set_dirty("all")) as long as the
-        # direction did not change.
+        # is invalidated on dirty signals because surfaces can change in place.
         self._rotation_cache: OrderedDict = OrderedDict()
 
         self.transformations_pipeline: list[TransformationPipelineEntry] = [
@@ -97,6 +96,8 @@ class TransformationsManager:
     def flag_reload_actions_for_transformation_pipeline(self, transformation_string):
         """Flags all transformations starting from the given one to be reloaded."""
         self._render_revision += 1
+        # Dirty input may have been modified in place, retaining its identity.
+        self._rotation_cache.clear()
         reload = False
         for transformation in self.transformations_pipeline:
             key = transformation["key"]

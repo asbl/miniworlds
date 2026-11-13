@@ -179,6 +179,20 @@ class TestBackgroundSetDirty(unittest.TestCase):
         self.assertTrue(self.in_view.costume_manager._is_display_initialized)
         self.assertTrue(self.off_view.costume_manager._is_display_initialized)
 
+    def test_deferred_blit_records_full_window_area_without_drawing(self):
+        background = self.world.background
+        background.repaint = Mock()
+        self.world.app.window = SimpleNamespace(surface=Mock())
+        self.world.app.add_display_to_repaint_areas = Mock()
+        self.world.app.add_running_world(self.world)
+        self.world.frame = 1
+        self.world._mainloop._defer_background_repaint = True
+        background._pending_window_rects.clear()
+        background._blit_to_window_surface()
+        background.repaint.assert_not_called()
+        self.world.app.window.surface.blit.assert_not_called()
+        self.assertEqual(background._pending_window_rects, [self.world.camera.screen_rect])
+
     def test_blit_to_window_surface_blits_and_repaints(self):
         # The repaint inside _blit_to_window_surface is load-bearing (camera
         # reloads during camera._update rely on it), so it stays.
@@ -220,7 +234,7 @@ class TestRotationCache(unittest.TestCase):
             self.assertIsNot(first, third)
             self.assertEqual(rotozoom_spy.call_count, 2)
 
-    def test_rotate_cache_survives_render_revision_bump(self):
+    def test_rotate_cache_invalidated_when_source_is_dirty(self):
         manager, appearance = self._make_manager(direction=90)
         image = pygame.Surface((20, 10), pygame.SRCALPHA)
 
@@ -228,10 +242,11 @@ class TestRotationCache(unittest.TestCase):
             "pygame.transform.rotozoom", wraps=pygame.transform.rotozoom
         ) as rotozoom_spy:
             manager.process_transformation_pipeline(image, appearance)
+            image.fill("blue")
             manager.flag_reload_actions_for_transformation_pipeline("all")
-            manager.process_transformation_pipeline(image, appearance)
-            # direction unchanged -> no second rotozoom
-            self.assertEqual(rotozoom_spy.call_count, 1)
+            result = manager.process_transformation_pipeline(image, appearance)
+            self.assertEqual(result.get_at(result.get_rect().center), pygame.Color("blue"))
+            self.assertEqual(rotozoom_spy.call_count, 2)
 
 
 class R3Wall(Actor):
@@ -250,6 +265,12 @@ class R3Hunter(Actor):
         self.detected.append(("wall", other))
 
 
+class R3MovingHunter(R3Hunter):
+    def on_detecting(self, other):
+        self.detected.append(("all", other))
+        other.position = (150, 150)
+
+
 class TestCollisionDetectCache(unittest.TestCase):
     def setUp(self):
         App.reset(unittest=True, file=__file__)
@@ -261,6 +282,32 @@ class TestCollisionDetectCache(unittest.TestCase):
 
     def tearDown(self):
         App.reset(unittest=True, file=__file__)
+
+    def test_callback_movement_is_seen_by_next_filtered_handler(self):
+        self.hunter.remove()
+        hunter = R3MovingHunter((50, 50), world=self.world)
+        hunter.collision_type = "rect"
+        self.world._collision_manager._handle_all_collisions()
+        self.assertIn(("all", self.wall), hunter.detected)
+        self.assertNotIn(("wall", self.wall), hunter.detected)
+
+    def test_cache_invalidated_by_partner_movement(self):
+        manager = self.world._collision_manager
+        self.assertIn(self.wall, manager._detected_actors(self.hunter))
+        self.wall.position = (150, 150)
+        self.assertNotIn(self.wall, manager._detected_actors(self.hunter))
+
+    def test_cache_invalidated_by_partner_removal(self):
+        manager = self.world._collision_manager
+        self.assertIn(self.wall, manager._detected_actors(self.hunter))
+        self.wall.remove()
+        self.assertNotIn(self.wall, manager._detected_actors(self.hunter))
+
+    def test_cache_invalidated_by_collision_mode_change(self):
+        manager = self.world._collision_manager
+        manager._detected_actors(self.hunter)
+        self.hunter.collision_type = "circle"
+        self.assertFalse(manager._detect_cache)
 
     def test_detect_actors_called_once_per_actor_per_frame(self):
         spy = Mock(wraps=self.hunter.sensor_manager.detect_actors)

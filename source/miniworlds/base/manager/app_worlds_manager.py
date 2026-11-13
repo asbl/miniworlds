@@ -37,7 +37,12 @@ class WorldsManager:
         frame_wait = None
         for world in self.worlds:
             if world.dirty:
-                world_wait = await world._mainloop.update()
+                # Background reloads during update are presented by the final repaint.
+                world._mainloop._defer_background_repaint = world.frame > 0
+                try:
+                    world_wait = await world._mainloop.update()
+                finally:
+                    world._mainloop._defer_background_repaint = False
                 world._mainloop.repaint()
                 world._mainloop.blit_surface_to_window_surface()
                 if world_wait is not None:
