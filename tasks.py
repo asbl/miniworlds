@@ -154,6 +154,7 @@ def _docker_mounts(results_dir: Path | None = None) -> str:
         f"-v {REPO_ROOT}/conftest.py:/app/conftest.py "
         f"-v {REPO_ROOT}/tasks.py:/app/tasks.py "
         f"-v {REPO_ROOT}/source:/app/source "
+        f"-v {REPO_ROOT}/libraries/thonny-miniworlds:/app/libraries/thonny-miniworlds "
         f"-v {REPO_ROOT}/test:/app/test "
         f"-v {REPO_ROOT}/libraries/examples:/app/examples "
         f"-v {REPO_ROOT}/libraries/physics/source:/app/physics/source "
@@ -753,6 +754,34 @@ def tests_unit(c):
     run_pytest_in_container(c, "-m unit -v", rebuild=False)
 
 
+@task(name="thonny")
+def tests_thonny(c, network=False):
+    """Validate the Thonny plugin; --network also repairs a disposable venv via PyPI."""
+    run_pytest_in_container(c, "test/unittests/thonny_plugin -v", rebuild=False,
+                            extra_env={"MINIWORLDS_TEST_INSTALLER_NETWORK": "1"} if network else None)
+
+
+@task(name="thonny-backend")
+def tests_thonny_backend(c):
+    """Exercise the real Thonny 4.1 backend; downloads disposable test dependencies."""
+    import shlex
+
+    ensure_test_environment(c)
+    script = (
+        "python -m pip install --quiet --no-cache-dir --target /tmp/thonny-test-deps 'thonny==4.1.7' 'setuptools<81' "
+        "&& export SDL_AUDIODRIVER=dummy MINIWORLDS_TEST_FAST=1 MINIWORLDS_TESTS_IN_DOCKER=1 "
+        f"{_docker_pythonpath()}:/tmp/thonny-test-deps "
+        "&& pytest test/unittests/thonny_plugin/test_live_backend.py -v"
+    )
+    c.run(f"docker run --rm --user {os.getuid()}:{os.getgid()} {_docker_mounts()}{IMAGE} sh -c {shlex.quote(script)}")
+
+
+@task(name="experiment")
+def tests_experiment(c):
+    """Check engine experiment API, app lifecycle and mainloop contracts."""
+    run_pytest_in_container(c, "test/unittests/worlds/test_experiment.py test/unittests/app/test_app_lifecycle.py test/unittests/worlds/test_mainloop_manager.py -v", rebuild=False)
+
+
 @task(name="visual")
 def tests_visual(c):
     """Run only the screenshot-based visual tests in Docker."""
@@ -1211,6 +1240,9 @@ tests = Collection("tests")
 tests.add_task(tests_run, default=True)
 tests.add_task(tests_cached)
 tests.add_task(tests_unit)
+tests.add_task(tests_thonny)
+tests.add_task(tests_thonny_backend)
+tests.add_task(tests_experiment)
 tests.add_task(tests_visual)
 tests.add_task(tests_pyodide)
 tests.add_task(tests_profile)

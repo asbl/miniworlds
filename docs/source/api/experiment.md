@@ -62,7 +62,15 @@ die Welt erzeugt wurde und die SDL-Hauptschleife läuft. `invoke()` prüft diese
 Thread. Auch `pause`, `resume` und `refresh` dort ausführen.
 
 Der Desktop-Aufruf `world.run()` betreibt weiterhin seine eigene Hauptschleife.
-Die Schnittstelle ersetzt keinen Thonny-Backend-Adapter: Dieser muss Kommandos
-zwischen Frames zustellen, Ergebnisse/Fehler übertragen und Editoränderungen
-sowie Backend-Neustarts melden. Lange Schüleraufrufe blockieren weiterhin den
-Ausführungsthread. Die Methoden sind keine nebenläufige RPC-Schnittstelle.
+Der Thonny-Adapter unter `libraries/thonny-miniworlds` installiert intern einen
+Host, der Kommandos zwischen Frames verarbeitet. Ein expliziter Experimentierstart
+über das Objektlabor aktiviert ihn; Schülercode benötigt keine zusätzlichen
+Aufrufe oder Importe. Normales F5 führt das Programm wie bisher aus.
+
+Die Oberfläche und der Ausführungsprozess tauschen Aufträge über einen lokalen,
+mit einem zufälligen Token geschützten Kanal aus. Empfang und Ausführung sind
+getrennt: Nur die Hauptschleife führt Objektoperationen aus. Jede Antwort enthält
+Sitzungsgeneration und Auftragskennung. Stop/Restart beendet die Sitzung;
+Editoränderungen markieren den Laufzeitstand als veraltet. Lange Schüleraufrufe
+blockieren weiterhin den Ausführungsthread und lassen sich mit Thonnys
+Stop/Restart abbrechen.

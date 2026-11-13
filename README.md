@@ -61,3 +61,10 @@ Links
 - [Documentation](http://miniworlds.de/)
 - [PyPI](https://pypi.org/project/miniworlds/)
 - [Cookbook](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/)
+
+Thonny plugin
+-------------
+
+A German learning plugin with E2/Q1 modes, project templates, event assistance,
+media management and code checks is available in
+[libraries/thonny-miniworlds](libraries/thonny-miniworlds/README.md).

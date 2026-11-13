@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="920" viewBox="0 0 1200 920" role="img" aria-labelledby="title desc">
+<title id="title">miniworlds: Entwurf für eine schülergerechte Oberfläche</title>
+<desc id="desc">Ereignisassistent und Medienverwaltung mit klaren Schritten sowie kompakte Ansicht für eine schmale Thonny-Seitenleiste. Ein statischer Gestaltungsvorschlag.</desc>
+<style>text{font-family:DejaVu Sans,sans-serif;fill:#203447;font-size:14px}.title{font-size:22px;font-weight:700}.heading{font-size:18px;font-weight:700}.small{font-size:12px;fill:#526577}.label{font-size:13px;font-weight:700}.code{font-family:DejaVu Sans Mono,monospace;font-size:13px}.white{fill:#fff}.accent{fill:#216358}.muted{fill:#526577}</style>
+<rect width="1200" height="920" fill="#eaf0f3"/>
+
+<text x="32" y="40" class="title">miniworlds · UI-Entwurf</text>
+<text x="32" y="66" class="muted">Aufgaben führen durch die Oberfläche. Technikdetails stehen unter Einstellungen.</text>
+<text x="32" y="94" class="small">A · Ereignisse · reguläre Seitenleiste</text>
+<text x="448" y="94" class="small">B · Medien · reguläre Seitenleiste</text>
+<text x="864" y="94" class="small">C · schmale Seitenleiste</text>
+<rect x="32" y="110" width="384" height="740" rx="10" fill="#fff" stroke="none"/>
+<text x="52" y="144" class="heading">miniworlds</text>
+<rect x="305" y="124" width="91" height="28" rx="14" fill="#e4f1ec" stroke="none"/>
+<text x="315" y="143" class="small">Objekte · E2</text>
+<text x="52" y="173" class="small">spiel.py · Mein Fangspiel</text>
+<text x="52" y="198" class="small">Bereit · Bibliothek gefunden</text>
+<path d="M52 214h344" stroke="#dde5e8"/>
+<text x="52" y="245" class="label">Bereich</text>
+<rect x="52" y="255" width="344" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="64" y="281" class="">Ereignisse</text>
+<text x="372" y="281" class="muted">⌄</text>
+<text x="52" y="329" class="heading">Was soll passieren?</text>
+<text x="52" y="354" class="small">Wähle eine Figur und einen Auslöser.</text>
+<text x="52" y="391" class="label">1   Wer reagiert?</text>
+<rect x="52" y="401" width="344" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="64" y="427" class="">player · Figur (Actor)</text>
+<text x="372" y="427" class="muted">⌄</text>
+<text x="52" y="476" class="label">2   Wann?</text>
+<rect x="52" y="486" width="344" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="64" y="512" class="">Rechte Pfeiltaste halten</text>
+<text x="372" y="512" class="muted">⌄</text>
+<rect x="52" y="548" width="344" height="70" rx="10" fill="#f1f6f8" stroke="none"/>
+<text x="66" y="574" class="small">Solange du die Taste hältst, reagiert</text>
+<text x="66" y="595" class="small">player in jedem Bild.</text>
+<text x="52" y="650" class="label">Codevorschau ausblenden  ⌃</text>
+<rect x="52" y="666" width="344" height="102" rx="7" fill="#f3f6f8" stroke="none"/>
+<text x="66" y="693" class="code">@player.register</text>
+<text x="66" y="716" class="code">def on_key_pressed_right(self):</text>
+<text x="66" y="739" class="code">    pass</text>
+<rect x="52" y="788" width="344" height="40" rx="7" fill="#216358" stroke="none"/>
+<text x="66" y="813" class="white">In meinen Code einfügen …</text>
+<rect x="448" y="110" width="384" height="740" rx="10" fill="#fff" stroke="none"/>
+<text x="468" y="144" class="heading">miniworlds</text>
+<rect x="721" y="124" width="91" height="28" rx="14" fill="#e4f1ec" stroke="none"/>
+<text x="731" y="143" class="small">Objekte · E2</text>
+<text x="468" y="173" class="small">spiel.py · Mein Fangspiel</text>
+<text x="468" y="198" class="small">Bereit · Bibliothek gefunden</text>
+<path d="M468 214h344" stroke="#dde5e8"/>
+<text x="468" y="245" class="label">Bereich</text>
+<rect x="468" y="255" width="344" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="480" y="281" class="">Bilder &amp; Sounds</text>
+<text x="788" y="281" class="muted">⌄</text>
+<rect x="468" y="306" width="344" height="40" rx="7" fill="#216358" stroke="none"/>
+<text x="482" y="331" class="white">Dateien hinzufügen …</text>
+<rect x="468" y="364" width="164" height="34" rx="7" fill="#e4f1ec" stroke="none"/>
+<text x="482" y="386" class="label">Bilder</text>
+<text x="665" y="386" class="muted">Sounds</text>
+<text x="468" y="428" class="heading">Deine Bilder</text>
+<rect x="468" y="448" width="164" height="157" rx="10" fill="#f5f9f7" stroke="#216358"/>
+<rect x="480" y="460" width="140" height="91" rx="5" fill="#edf1f4" stroke="none"/>
+<circle cx="550" cy="505" r="30" fill="#58ab86"/>
+<text x="480" y="576" class="small">spieler.png</text>
+<text x="480" y="595" class="small">80 × 80 · transparent</text>
+<rect x="648" y="448" width="164" height="157" rx="10" fill="#fff" stroke="#dce5e9"/>
+<rect x="660" y="460" width="140" height="91" rx="5" fill="#edf1f4" stroke="none"/>
+<circle cx="730" cy="505" r="30" fill="#7487d4"/>
+<text x="660" y="576" class="small">hintergrund.png</text>
+<text x="660" y="595" class="small">80 × 80 · transparent</text>
+<text x="468" y="646" class="label">spieler.png ausgewählt</text>
+<text x="468" y="681" class="label">Verwenden für</text>
+<rect x="468" y="691" width="344" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="480" y="717" class="">player · Figur (Actor)</text>
+<text x="788" y="717" class="muted">⌄</text>
+<text x="468" y="767" class="small">Weitere Aktionen  ⋯</text>
+<rect x="468" y="788" width="344" height="40" rx="7" fill="#216358" stroke="none"/>
+<text x="482" y="813" class="white">Als Kostüm verwenden …</text>
+<rect x="864" y="110" width="224" height="740" rx="10" fill="#fff" stroke="none"/>
+<text x="884" y="144" class="heading">miniworlds</text>
+<rect x="1020" y="124" width="48" height="28" rx="14" fill="#e4f1ec" stroke="none"/>
+<text x="1030" y="143" class="small">E2</text>
+<text x="884" y="173" class="small">spiel.py · Mein Fangspiel</text>
+<text x="884" y="198" class="small">Bereit · Bibliothek gefunden</text>
+<path d="M884 214h184" stroke="#dde5e8"/>
+<text x="884" y="245" class="label">Bereich</text>
+<rect x="884" y="255" width="184" height="42" rx="7" fill="#f9fbfc" stroke="#cbd7de"/>
+<text x="896" y="281" class="">Ereignisse</text>
+<text x="1044" y="281" class="muted">⌄</text>
+<text x="884" y="329" class="heading">Ereignisse</text>
+<text x="884" y="360" class="label">player · Figur</text>
+<text x="884" y="385" class="small">Rechte Pfeiltaste halten</text>
+<rect x="884" y="412" width="184" height="113" rx="10" fill="#f1f6f8" stroke="none"/>
+<text x="898" y="440" class="label">Hier ist wenig Platz.</text>
+<text x="898" y="466" class="small">Bearbeite den Baustein</text>
+<text x="898" y="487" class="small">in einer größeren Ansicht.</text>
+<rect x="884" y="548" width="184" height="40" rx="7" fill="#216358" stroke="none"/>
+<text x="898" y="573" class="white">Assistent öffnen …</text>
+<text x="884" y="617" class="small">Buttons bleiben lesbar.</text>
+<text x="884" y="642" class="small">Code bleibt gut lesbar.</text>
+<text x="884" y="667" class="small">Auswahl bleibt erhalten.</text>
+<text x="32" y="888" class="small">Statischer Vorschlag · noch keine Änderung an der laufenden Oberfläche · Farben werden an das Thonny-Thema angepasst.</text>
+</svg>

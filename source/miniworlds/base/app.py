@@ -4,6 +4,7 @@ import os
 import sys
 import warnings
 import asyncio
+import miniworlds.base.runtime_host as runtime_host
 import logging
 
 import pygame
@@ -214,6 +215,11 @@ class App:
         self.prepare_mainloop()
 
         if not self._mainloop_started:
+            try:
+                runtime_host.start(self)
+            except BaseException:
+                runtime_host.stop(self)
+                raise
             await self.start_mainloop()
         else:
             for world in self.running_worlds:
@@ -253,6 +259,7 @@ class App:
 
     def _finalize_mainloop(self, finished_normally: bool) -> None:
         self._mainloop_started = False
+        runtime_host.stop(self)
         if self._unittest:
             return
 
@@ -273,6 +280,7 @@ class App:
         A single iteration of the mainloop.
         Handles events, updates worlds, redraws screen.
         """
+        runtime_host.poll(self)
         self.event_manager.pygame_events_to_event_queue()
 
         if self.window.dirty:

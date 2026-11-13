@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thonny-miniworlds"
+version = "0.4.1"
+description = "Deutschsprachige miniworlds-Lernhilfen für Thonny (E2/Q1)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["thonny>=4.1,<4.2", "Pillow>=10", "pygame-ce>=2.5", "setuptools<81", "packaging>=23"]
+license = "MIT"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["thonnycontrib.*"]
+namespaces = true

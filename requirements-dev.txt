@@ -1,7 +1,7 @@
 -r requirements-runtime.txt
 -r requirements-docs.txt
 pymunk
-setuptools
+setuptools<81
 wheel
 build
 twine
@@ -10,3 +10,6 @@ python-dotenv==1.0.1
 pytest
 imgcompare
 ruff
+
+# Real CPython backend integration tests for the supported plugin target.
+thonny==4.1.7
