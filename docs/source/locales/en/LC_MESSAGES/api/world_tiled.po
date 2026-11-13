@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-11-13 08:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -33,8 +33,8 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:3 of
 msgid ""
-"A `TiledWorld` uses tile coordinates instead of pixel coordinates for actor "
-"positions. Actors can also be placed on tile corners or edges."
+"A `TiledWorld` uses tile coordinates instead of pixel coordinates for "
+"actor positions. Actors can also be placed on tile corners or edges."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld:7
@@ -72,6 +72,7 @@ msgstr ""
 msgid "Create a tiled world."
 msgstr ""
 
+#: ../../source/api/world_tiled.md
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.__init__
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world
@@ -130,6 +131,7 @@ msgstr ""
 msgid "Corner direction key, for example `\"nw\"`."
 msgstr ""
 
+#: ../../source/api/world_tiled.md
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_corner_to_world
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_tile_to_world
@@ -157,8 +159,7 @@ msgid "Create and register an edge."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:3 of
-msgid ""
-"Existing edges are merged when neighboring tiles describe the same edge."
+msgid "Existing edges are merged when neighboring tiles describe the same edge."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.add_edge_to_world:6 of
@@ -255,8 +256,8 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_actors_from_pixel:3
 #: of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ \\\\"
-"\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.actors.actor.Actor\\`\\]`"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.detect_actors:5 of
@@ -328,10 +329,10 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner_points:2
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge_points:2 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Dict\\`\\\\ \\\\"
-"\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, \\:py\\:data\\:"
-"\\`\\~typing.Tuple\\`\\\\ \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
-"\\:py\\:class\\:\\`float\\`\\]\\]`"
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.Dict\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\, "
+"\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_edge:1 of
@@ -448,4 +449,38 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel:5 of
 msgid "Pixel offset added to the converted position."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.view_position_ranges:1
+#: of
+msgid "Return position ranges covering `camera_rect` for index queries."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.view_position_ranges:3
+#: of
+msgid ""
+"Used to query the tiled spatial index for actors that may be visible in "
+"the camera. Each range is a conservative superset in the coordinate space"
+" in which actor positions live; callers apply their precise pixel/rect "
+"filter afterwards."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.view_position_ranges:8
+#: of
+msgid ""
+"The default converts the pixel rect with a plain tile-size division and "
+"returns a single range, which is correct for rectangular tiles. Worlds "
+"whose positions map differently to pixels (e.g. hex worlds, where tiles, "
+"tripled-cube corners, and doubled-cube edges live in three different "
+"coordinate spaces) override this method and return one range per space."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.view_position_ranges:15
+#: of
+msgid "Camera rectangle in world pixels."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.view_position_ranges:17
+#: of
+msgid "A list of `((min_x, min_y), (max_x, max_y))` position pairs."
 msgstr ""

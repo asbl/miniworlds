@@ -57,7 +57,7 @@ class TestStaticTileLayerViewCandidates(unittest.TestCase):
 
         camera_rect = self.world.camera.rect
         expected = pygame.Surface(camera_rect.size, pygame.SRCALPHA)
-        expected.blit(self.world.background.image, (0, 0), camera_rect)
+        expected.blit(self.world.background.image, (0, 0))
         for actor in self.world.actors:
             if not getattr(actor, "_static", False):
                 continue
@@ -145,8 +145,8 @@ class TestStaticLayerScrollPositioning(unittest.TestCase):
         self.assertEqual(layer.get_at((69, 37)), (10, 20, 30, 255))
         # marker on tile (1, 1) is at layer (64+32, 32+32)
         self.assertEqual(layer.get_at((112, 80)), (200, 0, 0, 255))
-        # outside the world the layer stays transparent
-        self.assertEqual(layer.get_at((5, 5)), (0, 0, 0, 0))
+        # The background fills the camera, including outside the world.
+        self.assertEqual(layer.get_at((5, 5)), (10, 20, 30, 255))
 
 
 class TestBackgroundSetDirty(unittest.TestCase):

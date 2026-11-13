@@ -470,13 +470,9 @@ class TiledWorld(world.World):
         # of the total world size.
         camera_rect = self.camera.rect
         layer = pygame.Surface(camera_rect.size, pygame.SRCALPHA)
-        # Blit the world background at its camera-local offset. A blit with
-        # an area rect would be empty when the camera looks beyond the world
-        # edge (negative topleft, e.g. view larger than the world); the
-        # offset blit clips automatically and covers both cases.
-        layer.blit(
-            self.background.image, (-camera_rect.left, -camera_rect.top)
-        )
+        # Background transformations already produce a camera-local image,
+        # including the scrolled hex grid. Only actor rects need an offset.
+        layer.blit(self.background.image, (0, 0))
         topleft_px = self.camera.topleft
         for actor in self._static_layer_candidates():
             if not getattr(actor, "_static", False):

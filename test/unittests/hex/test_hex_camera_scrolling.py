@@ -357,3 +357,21 @@ class TestHexTilePickingIdentity(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestStaticLayerBackground(HexScrollTestBase):
+    def test_scrolled_layer_preserves_camera_local_background(self):
+        world = self.world
+        self.set_view(5, 4)
+        world.add_background((35, 55, 75, 255))
+        world.background.grid = True
+        for position in [(0, 0), (4, 3), (10, 8)]:
+            with self.subTest(position=position):
+                world.camera.topleft = position
+                world.background.set_dirty("all", world.background.LOAD_NEW_IMAGE)
+                expected = world.background.image.copy()
+                world._rebuild_static_tile_layer()
+                self.assertEqual(
+                    pygame.image.tostring(world._static_tile_layer, "RGBA"),
+                    pygame.image.tostring(expected, "RGBA"),
+                )
