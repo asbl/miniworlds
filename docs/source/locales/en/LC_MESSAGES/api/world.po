@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 11:48+0200\n"
+"POT-Creation-Date: 2026-11-13 14:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -62,6 +62,13 @@ msgid "`set_bg(...)`, `add_bg(...)`, `next_bg()` for background helpers"
 msgstr ""
 
 #: ../../source/api/world.md:20
+msgid ""
+"For interactive IDE calls, see [Experimentieren aus einer "
+"IDE](experiment.md) for `pause()`, `invoke()`, `refresh()`, `resume()`, "
+"and versioned object handles."
+msgstr ""
+
+#: ../../source/api/world.md:23
 msgid "API Reference"
 msgstr ""
 
@@ -192,10 +199,11 @@ msgstr ""
 #: miniworlds.worlds.world.World.act:9
 #: miniworlds.worlds.world.World.broadcast:4
 #: miniworlds.worlds.world.World.on_setup:5
+#: miniworlds.worlds.world.World.pause:4
 #: miniworlds.worlds.world.World.play_sound:6
-#: miniworlds.worlds.world.World.quit:3
+#: miniworlds.worlds.world.World.quit:3 miniworlds.worlds.world.World.refresh:4
 #: miniworlds.worlds.world.World.remove_background:3
-#: miniworlds.worlds.world.World.run:5
+#: miniworlds.worlds.world.World.resume:4 miniworlds.worlds.world.World.run:5
 #: miniworlds.worlds.world.World.send_message:6
 #: miniworlds.worlds.world.World.set_columns:3
 #: miniworlds.worlds.world.World.set_rows:3
@@ -456,8 +464,22 @@ msgstr ""
 msgid "Whether the world has at least one background."
 msgstr ""
 
+#: miniworlds.worlds.world.World.invoke:1 of
+msgid "Call synchronously in the runtime thread and refresh, staying paused."
+msgstr ""
+
+#: miniworlds.worlds.world.World.invoke:3 of
+msgid ""
+"Returns the callback result; exceptions propagate without rolling back "
+"mutations. The host must dispatch this on the SDL/mainloop thread."
+msgstr ""
+
 #: miniworlds.worlds.world.World.is_in_world:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds.worlds.world.World.is_paused:1 of
+msgid "Whether the world is frozen for interactive experimentation."
 msgstr ""
 
 #: miniworlds.worlds.world.World.layout:1 of
@@ -487,6 +509,10 @@ msgstr ""
 msgid "Override this in subclasses or register a function with `@world.register`."
 msgstr ""
 
+#: miniworlds.worlds.world.World.pause:1 of
+msgid "Freeze simulation and game events, including before the first frame."
+msgstr ""
+
 #: miniworlds.worlds.world.World.play_sound:1 of
 msgid "Student-friendly alias for `sound.play(path, volume)`."
 msgstr ""
@@ -513,6 +539,10 @@ msgstr ""
 msgid "Process exit code."
 msgstr ""
 
+#: miniworlds.worlds.world.World.refresh:1 of
+msgid "Render current state without advancing animation, timers, or physics."
+msgstr ""
+
 #: miniworlds.worlds.world.World.remove_background:1 of
 msgid "Remove a background."
 msgstr ""
@@ -525,6 +555,10 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.reset:1 of
 msgid "Reset the world to its initial state."
+msgstr ""
+
+#: miniworlds.worlds.world.World.resume:1 of
+msgid "Leave experiment mode and resume normal simulation."
 msgstr ""
 
 #: miniworlds.worlds.world.World.rows:1 of
@@ -686,11 +720,11 @@ msgstr ""
 msgid "Vertical world size in pixels."
 msgstr ""
 
-#: ../../source/api/world.md:27
+#: ../../source/api/world.md:30
 msgid "Exceptions"
 msgstr ""
 
-#: ../../source/api/world.md:29
+#: ../../source/api/world.md:32
 msgid ""
 "These exceptions are exported by `miniworlds` for code that wants to "
 "catch specific Miniworlds errors. They are documented here but "

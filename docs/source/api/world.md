@@ -17,6 +17,9 @@ Useful beginner aliases on World include:
 - `actors_at(...)` for `detect_actors(...)`
 - `set_bg(...)`, `add_bg(...)`, `next_bg()` for background helpers
 
+For interactive IDE calls, see [Experimentieren aus einer IDE](experiment.md)
+for `pause()`, `invoke()`, `refresh()`, `resume()`, and versioned object handles.
+
 ## API Reference
 
 ```{eval-rst}

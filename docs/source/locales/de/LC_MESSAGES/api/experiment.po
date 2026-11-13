@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 14:38+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/api/experiment.md:1
+msgid "Experimentieren aus einer IDE"
+msgstr ""
+
+#: ../../source/api/experiment.md:3
+msgid ""
+"`World.pause()`, `World.invoke(callback, *args, **kwargs)`, "
+"`World.refresh()` und `World.resume()` bilden die öffentliche "
+"Schnittstelle für interaktive Objektaufrufe. `world.is_paused` zeigt den "
+"Experimentierzustand an. Das bisherige `stop()` behält seine Semantik; "
+"`start()` beendet auch eine Experimentierpause."
+msgstr ""
+
+#: ../../source/api/experiment.md:21
+msgid ""
+"Pause hält auch Frame 0 an. Automatische Aktionen, Kollisionen, "
+"Animationen, Timer und Spielereignisse werden nicht ausgeführt. "
+"Betriebssystemereignisse wie Fenster schließen bleiben in der laufenden "
+"App aktiv. Ereignisse für pausierte Welten werden verworfen, nicht für "
+"später gesammelt. Andere Welten laufen weiter; für eine komplett "
+"pausierte Anwendung alle Welten pausieren."
+msgstr ""
+
+#: ../../source/api/experiment.md:27
+msgid ""
+"`refresh()` zeichnet den aktuellen Zustand, ohne einen Simulationsschritt"
+" auszuführen. `invoke()` pausiert vor dem Aufruf und bleibt auch nach "
+"Fehlern pausiert. Änderungen vor einem Fehler bleiben erhalten und werden"
+" dargestellt. Die Schnittstelle unterstützt synchrone Aufrufe; Coroutinen"
+" werden abgewiesen."
+msgstr ""
+
+#: ../../source/api/experiment.md:32
+msgid "Objektbank und Programmversion"
+msgstr ""
+
+#: ../../source/api/experiment.md:46
+msgid ""
+"Die geladene Version bleibt während der Sitzung unverändert. Der Host "
+"muss Revisionen für alle relevanten Projektdateien bestimmen und "
+"Änderungen melden. Alte Objekte bleiben mit ihrem bisherigen Code "
+"aufrufbar. Wird der Editorstand wiederhergestellt, verschwindet die "
+"Abweichung."
+msgstr ""
+
+#: ../../source/api/experiment.md:51
+msgid ""
+"Bei Backend-Ende `session.close()` aufrufen und die Objektbank im "
+"Frontend leeren. Erst nach erfolgreichem Laden des neuen Programms eine "
+"neue Sitzung mit neuer Quellversion anlegen. Jede Sitzung hat eine eigene"
+" Generation; Handles aus einer anderen oder geschlossenen Sitzung sind "
+"ungültig. Ein neues `ExperimentSession`-Objekt allein lädt keinen "
+"Programmcode neu."
+msgstr ""
+
+#: ../../source/api/experiment.md:57
+msgid "Einbindung in Thonny"
+msgstr ""
+
+#: ../../source/api/experiment.md:59
+msgid ""
+"Diese Schnittstelle gehört in den Ausführungsprozess. Die Oberfläche "
+"importiert miniworlds nicht. IDE-Kommandos müssen auf dem Thread "
+"ausgeführt werden, auf dem die Welt erzeugt wurde und die SDL-"
+"Hauptschleife läuft. `invoke()` prüft diesen Thread. Auch `pause`, "
+"`resume` und `refresh` dort ausführen."
+msgstr ""
+
+#: ../../source/api/experiment.md:64
+msgid ""
+"Der Desktop-Aufruf `world.run()` betreibt weiterhin seine eigene "
+"Hauptschleife. Die Schnittstelle ersetzt keinen Thonny-Backend-Adapter: "
+"Dieser muss Kommandos zwischen Frames zustellen, Ergebnisse/Fehler "
+"übertragen und Editoränderungen sowie Backend-Neustarts melden. Lange "
+"Schüleraufrufe blockieren weiterhin den Ausführungsthread. Die Methoden "
+"sind keine nebenläufige RPC-Schnittstelle."
+msgstr ""
+

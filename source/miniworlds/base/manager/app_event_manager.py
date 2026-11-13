@@ -51,7 +51,7 @@ class AppEventManager:
         while self.event_queue:
             element = self.event_queue.pop()
             for world in self.app.worlds_manager.worlds:
-                if world.is_listening:
+                if world.is_listening and getattr(world, "is_paused", False) is not True:
                     world._mainloop.handle_event(element[0], element[1])
         self.event_queue.clear()
 

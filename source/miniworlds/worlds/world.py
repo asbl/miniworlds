@@ -735,6 +735,31 @@ class World(world_base.WorldBase):
         """Student-friendly alias to switch to the next background."""
         return self.switch_background(-1)
 
+    @property
+    def is_paused(self) -> bool:
+        """Whether the world is frozen for interactive experimentation."""
+        return self._runtime_facade.is_paused
+
+    def pause(self) -> None:
+        """Freeze simulation and game events, including before the first frame."""
+        self._runtime_facade.pause()
+
+    def resume(self) -> None:
+        """Leave experiment mode and resume normal simulation."""
+        self._runtime_facade.resume()
+
+    def refresh(self) -> None:
+        """Render current state without advancing animation, timers, or physics."""
+        self._mainloop.refresh()
+
+    def invoke(self, callback: Callable, *args, **kwargs):
+        """Call synchronously in the runtime thread and refresh, staying paused.
+
+        Returns the callback result; exceptions propagate without rolling back
+        mutations. The host must dispatch this on the SDL/mainloop thread.
+        """
+        return self._runtime_facade.invoke(callback, *args, **kwargs)
+
     def start(self) -> None:
         """Start or resume world updates.
 

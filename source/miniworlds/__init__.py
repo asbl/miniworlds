@@ -1,4 +1,5 @@
 from miniworlds.base.app import App
+from miniworlds.tools.experiment import ExperimentSession
 
 from miniworlds.worlds.world import World
 
@@ -116,3 +117,5 @@ __all__.append(Timer.__name__)
 
 __all__.append(CostumeOutOfBoundsError.__name__)
 __all__.append(OriginException.__name__)
+
+__all__.append(ExperimentSession.__name__)

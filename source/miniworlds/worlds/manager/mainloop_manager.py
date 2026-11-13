@@ -66,6 +66,9 @@ class MainloopManager:
             awaiting it here would multiply the frame delay by the number of
             docked worlds (e.g. world + toolbar).
         """
+        if getattr(self.world, "is_paused", False) is True:
+            self.world.event_manager.update()
+            return 1 / self.world.fps
         if not self.world.is_running and self.world.frame != 0:
             self.world.event_manager.update()
             return None
@@ -95,6 +98,18 @@ class MainloopManager:
             self._profile_add("mainloop.update", elapsed)
         return max(0, (1 / self.world.fps) - elapsed)
         
+    def refresh(self):
+        """Present state without invoking simulation or animation updates."""
+        self.world.camera._update()
+        self.world.background.get_image()
+        for actor in list(self.world.actors):
+            if actor.costume:
+                actor.costume.get_image()
+        self.reload_costumes_queue.clear()
+        self.repaint()
+        self.blit_surface_to_window_surface()
+        self.app.display_repaint()
+
     def _update_all_costumes(self):
         """Updates the costumes of all actors in the world.
 

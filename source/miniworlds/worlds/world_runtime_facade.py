@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import math
+import threading
 from typing import TYPE_CHECKING, Iterable, List, Optional, Tuple, cast
 
 import miniworlds.actors.actor as actor_mod
@@ -16,9 +17,48 @@ if TYPE_CHECKING:
 class WorldRuntimeFacade:
     def __init__(self, world: "world_mod.World"):
         self.world = world
+        self.is_paused = False
+        self._runtime_thread = threading.get_ident()
+
+    def pause(self) -> None:
+        self.is_paused = True
+        self.world.is_running = False
+
+    def resume(self) -> None:
+        self.is_paused = False
+        self.world.is_running = True
+
+    def invoke(self, callback, *args, **kwargs):
+        import inspect
+
+        if threading.get_ident() != self._runtime_thread:
+            raise RuntimeError("invoke must run on the world creation/mainloop thread")
+
+        if not callable(callback) or inspect.iscoroutinefunction(callback):
+            raise TypeError("invoke expects a synchronous callable")
+        self.pause()
+        try:
+            result = callback(*args, **kwargs)
+            if inspect.isawaitable(result):
+                if inspect.iscoroutine(result):
+                    result.close()
+                raise TypeError("invoke does not support awaitable results")
+        except BaseException as call_error:
+            self.pause()
+            try:
+                self.world.refresh()
+            except Exception as refresh_error:
+                # Keep the student's error primary, with the presentation
+                # failure available to the backend through exception chaining.
+                raise call_error from refresh_error
+            raise
+        else:
+            self.pause()
+            self.world.refresh()
+            return result
 
     def start(self) -> None:
-        self.world.is_running = True
+        self.resume()
 
     def stop(self, frames: int = 0) -> None:
         if frames == 0:
