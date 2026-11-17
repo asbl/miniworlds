@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 11:26+0200\n"
+"POT-Creation-Date: 2026-11-17 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -96,6 +96,62 @@ msgid ""
 "given hex distance. `tile.get_neighbour_tiles()` returns the up to six "
 "neighbors of a hex. This is useful for Catan rules such as \"the robber "
 "blocks all hexes around the desert\"."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:115
+msgid "Build rules with corners and edges"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:117
+msgid ""
+"Corners and edges know their neighbours, so the placement rules of Catan "
+"need only a few lines:"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:120
+msgid ""
+"`corner.get_neighbour_corners()` returns the up to three corners one hex "
+"side away,"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:122
+msgid ""
+"`corner.get_neighbour_edges()` returns the up to three edges that meet at"
+" the corner,"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:124
+msgid ""
+"`edge.get_neighbour_corners()` returns the two corners at the ends of an "
+"edge,"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:126
+msgid "`edge.get_neighbour_edges()` returns the edges that touch the edge,"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:127
+msgid ""
+"`tile.get_neighbour_corners()` and `tile.get_neighbour_edges()` return "
+"the six corners and edges of a hex."
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:130
+msgid ""
+"The distance rule (\"no settlement next to another settlement\") and the "
+"connection rule (\"a road must touch one of your settlements\") look like"
+" this:"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:175
+msgid "Resources and dice with tile data"
+msgstr ""
+
+#: ../../source/patterns/hex_world_catan.md:177
+msgid ""
+"Each hex can store its terrain and dice number in `tile.data`. After a "
+"dice roll, the settlements on the corners of the matching hexes collect "
+"the resource:"
 msgstr ""
 
 #~ msgid ""

@@ -4,6 +4,7 @@ from typing import List, Optional, Tuple, TYPE_CHECKING
 
 import miniworlds.base.app as app
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
+import miniworlds.worlds.hex_world.hex_neighbour_cache as hex_neighbour_cache
 import miniworlds.worlds.tiled_world.tile as tile_mod
 
 if TYPE_CHECKING:
@@ -12,7 +13,7 @@ if TYPE_CHECKING:
     from miniworlds.worlds.hex_world.hex_world import HexWorld
 
 
-class HexTile(tile_mod.Tile):
+class HexTile(hex_neighbour_cache.HexNeighbourCacheMixin, tile_mod.Tile):
     """A hexagonal tile in a HexWorld.
 
     Tiles are addressed with offset coordinates `(column, row)`, like
@@ -76,25 +77,164 @@ class HexTile(tile_mod.Tile):
         ]
 
     def get_neighbour_tiles(self) -> List[HexTile]:
-        """Return the up to six neighboring hex tiles."""
+        """Return the up to six neighboring hex tiles.
+
+        The list is a copy; changing it does not affect the world.
+        """
+        return list(self._neighbour_tiles_shared())
+
+    def _neighbour_tiles_shared(self) -> List[HexTile]:
+        """Return the cached neighbour list itself (do not modify it).
+
+        Used by path finding, which reads the list in a hot loop and
+        would pay for a copy on every step.
+        """
         cached = self._cached_neighbour_tiles()
         if cached is not None:
             return cached
 
-        cube = hex_coords.offset_to_cube(self.position)
+        column, row = self.position
+        tiles = self.world.tiles
         neighbours: List[HexTile] = []
-        for vector in hex_coords.CUBE_DIRECTIONS.values():
-            neighbour_cube = (
-                cube[0] + vector[0],
-                cube[1] + vector[1],
-                cube[2] + vector[2],
-            )
-            neighbour_position = hex_coords.cube_to_offset(neighbour_cube)
-            if self.world.is_tile(neighbour_position):
-                neighbours.append(self.world.get_tile(neighbour_position))
+        for delta_column, delta_row in hex_coords.neighbour_offset_deltas(row):
+            tile = tiles.get((column + delta_column, row + delta_row))
+            if tile is not None:
+                neighbours.append(tile)
 
         self._cache_neighbour_tiles(neighbours)
         return neighbours
+
+    def get_neighbour(self, direction: str) -> Optional[HexTile]:
+        """Return the neighboring hex in one direction, or `None` at the border.
+
+        Args:
+            direction: One of `"o"`, `"so"`, `"sw"`, `"w"`, `"nw"`, `"no"`.
+
+        Raises:
+            DirectionNotFoundError: If `direction` is not a hex direction.
+
+        Examples:
+            ::
+
+                east = world.get_tile((3, 3)).get_neighbour("o")
+                if east is not None:
+                    east.highlight()
+        """
+        vector = hex_coords.direction_vector(direction, hex_coords.CUBE_DIRECTIONS)
+        cube = hex_coords.offset_to_cube(self.position)
+        position = hex_coords.cube_to_offset(
+            (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
+        )
+        return self.world.tiles.get(position)
+
+    def get_tiles_in_radius(self, radius: int, include_center: bool = False) -> List[HexTile]:
+        """Return the tiles within `radius` steps of this hex.
+
+        Unlike `world.get_tiles_in_radius`, the tile itself is not included
+        by default, so `get_tiles_in_radius(1)` returns the same tiles as
+        `get_neighbour_tiles()` (in ring order instead of direction order).
+
+        Args:
+            radius: Maximum hex distance.
+            include_center: If `True`, this tile is the first result.
+
+        Examples:
+            ::
+
+                for tile in world.get_tile((3, 3)).get_tiles_in_radius(2):
+                    tile.highlight()
+        """
+        return self.world.get_tiles_in_radius(
+            self.position, radius, include_center=include_center
+        )
+
+    def get_tiles_in_ring(self, radius: int) -> List[HexTile]:
+        """Return the tiles at exactly `radius` steps from this hex.
+
+        Examples:
+            ::
+
+                ring = world.get_tile((3, 3)).get_tiles_in_ring(2)
+        """
+        return self.world.get_tiles_in_ring(self.position, radius)
+
+    def get_distance_to(self, other) -> int:
+        """Return the hex distance (number of steps) to a tile, position, or actor.
+
+        Examples:
+            ::
+
+                steps = tile.get_distance_to(goal_tile)
+        """
+        return self.world.get_distance(self.position, other)
+
+    def distance_to(self, other) -> int:
+        """Return the hex distance to another tile (same as `get_distance_to`).
+
+        The rectangular `Tile.distance_to` measures the euclidean distance
+        of the offset coordinates, which is wrong on a hex grid because of
+        the shifted rows.
+        """
+        return self.get_distance_to(other)
+
+    def get_neighbour_corners(self) -> List[HexCorner]:
+        """Return the six corners of this hex, clockwise from the top tip.
+
+        Examples:
+            ::
+
+                for corner in world.get_tile((2, 2)).get_neighbour_corners():
+                    print(corner.position)
+        """
+        return self._cached_neighbours(
+            "corners",
+            lambda: [self.get_corner(direction) for direction in hex_coords.CORNER_ORDER],
+        )
+
+    def get_neighbour_edges(self) -> List[HexEdge]:
+        """Return the six edges of this hex, clockwise from the north-east edge.
+
+        Examples:
+            ::
+
+                for edge in world.get_tile((2, 2)).get_neighbour_edges():
+                    print(edge.position)
+        """
+        return self._cached_neighbours(
+            "edges",
+            lambda: [self.get_edge(direction) for direction in hex_coords.EDGE_ORDER],
+        )
+
+    def highlight(self, color: Tuple[int, ...] = (255, 255, 0, 90)) -> None:
+        """Highlight this hex with a translucent color.
+
+        The highlight is drawn on the world background below the actors
+        and stays until `clear_highlight` is called.
+
+        Args:
+            color: RGB or RGBA color; with RGB a default transparency is used.
+
+        Examples:
+            ::
+
+                @world.register
+                def on_tile_enter(self, tile):
+                    tile.highlight((255, 255, 255, 80))
+
+                @world.register
+                def on_tile_leave(self, tile):
+                    tile.clear_highlight()
+        """
+        self.world.highlight_tiles([self], color)
+
+    def clear_highlight(self) -> None:
+        """Remove the highlight of this hex."""
+        self.world.clear_highlights([self])
+
+    @property
+    def is_highlighted(self) -> bool:
+        """bool: Whether this hex is currently highlighted."""
+        return self.position in self.world._tile_highlights
 
     def get_corner(self, direction: str) -> HexCorner:
         """Return the corner of this hex in the given direction.

@@ -1,13 +1,15 @@
 from __future__ import annotations
 
-from typing import Dict, List, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
+import miniworlds.base.api_validation as api_validation
 import miniworlds.base.exceptions as miniworlds_exception
 import miniworlds.worlds.hex_world.hex_camera_manager as hex_camera_manager
 import miniworlds.worlds.hex_world.hex_corner as hex_corner_mod
 import miniworlds.worlds.hex_world.hex_edge as hex_edge_mod
 import miniworlds.worlds.hex_world.hex_tile as hex_tile_mod
 import miniworlds.worlds.hex_world.hex_tile_factory as hex_tile_factory
+import miniworlds.worlds.hex_world.hex_pathfinding as hex_pathfinding
 import miniworlds.worlds.hex_world.hex_world_connector as hex_world_connector
 import miniworlds.worlds.hex_world.hex_world_sensor_manager as hex_world_sensor_manager
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
@@ -61,6 +63,10 @@ class HexWorld(tiled_world.TiledWorld):
             empty: If `True`, tiles, edges, and corners are not created
                 automatically.
         """
+        # Highlights and hover state must exist before the base class builds
+        # the background, because the background reads them while rendering.
+        self._tile_highlights: Dict[Tuple[int, int], Tuple[int, ...]] = {}
+        self._hovered_tile = None
         super().__init__(x=x, y=y, tile_size=tile_size, empty=empty)
 
     @staticmethod
@@ -501,43 +507,53 @@ class HexWorld(tiled_world.TiledWorld):
             return self.edges[position]
         raise miniworlds_exception.EdgeNotFoundError(position)
 
-    def get_tiles_in_radius(self, position, radius: int) -> List[hex_tile_mod.HexTile]:
+    def get_tiles_in_radius(
+        self, position, radius: int, include_center: bool = True
+    ) -> List[hex_tile_mod.HexTile]:
         """Return all tiles within a hex distance of `radius`.
 
-        Neighbors are computed in cube coordinates, so the result is
-        independent of the row parity described in the `HexWorld`
-        docstring.
+        The result is independent of the row parity described in the
+        `HexWorld` docstring. Offsets of a ring are computed once per row
+        parity and radius, so repeated queries are cheap.
 
         Args:
-            position: Hex position as `(column, row)`.
+            position: Hex position `(column, row)`, a tile, or an actor.
             radius: Maximum hex distance (0 includes only the tile itself).
+            include_center: If `False`, the tile at `position` is left out.
 
         Returns:
-            List of tiles within the radius, including the tile itself,
-            ordered from the center outwards in ring traversal order.
-            Positions outside the world are skipped.
+            List of tiles within the radius, ordered from the center
+            outwards in ring traversal order. Positions outside the world
+            are skipped.
+
+        Raises:
+            TypeError: If `radius` or `position` has the wrong type.
 
         Examples:
             ::
 
                 neighbours = world.get_tiles_in_radius((3, 3), 1)
+                around = world.get_tiles_in_radius((3, 3), 2, include_center=False)
         """
-        if radius < 0:
-            return []
-        tiles = []
-        for ring_radius in range(radius + 1):
-            tiles.extend(self.get_tiles_in_ring(position, ring_radius))
+        position = hex_coords.to_offset(position)
+        radius = self._checked_radius(radius)
+        if radius > self.world_size_x + self.world_size_y:
+            radius = min(radius, self._max_distance(position))
+        tiles = self._tiles_at_offset_deltas(
+            position, hex_coords.disc_offset_deltas, radius
+        )
+        if not include_center and tiles:
+            tiles = tiles[1:] if tiles[0].position == position else tiles
         return tiles
 
     def get_tiles_in_ring(self, position, radius: int) -> List[hex_tile_mod.HexTile]:
         """Return all tiles at exactly `radius` hex distance.
 
-        Neighbors are computed in cube coordinates, so the result is
-        independent of the row parity described in the `HexWorld`
-        docstring.
+        The result is independent of the row parity described in the
+        `HexWorld` docstring.
 
         Args:
-            position: Hex position as `(column, row)`.
+            position: Hex position `(column, row)`, a tile, or an actor.
             radius: Hex distance.
 
         Returns:
@@ -545,15 +561,374 @@ class HexWorld(tiled_world.TiledWorld):
             order starting at the westernmost hex of the ring.
             Positions outside the world are skipped.
 
+        Raises:
+            TypeError: If `radius` or `position` has the wrong type.
+
         Examples:
             ::
 
                 ring = world.get_tiles_in_ring((3, 3), 2)
         """
+        position = hex_coords.to_offset(position)
+        radius = self._checked_radius(radius)
+        if radius > self.world_size_x + self.world_size_y and radius > self._max_distance(position):
+            return []
+        return self._tiles_at_offset_deltas(
+            position, hex_coords.ring_offset_deltas, radius
+        )
+
+    def get_distance(self, first, second) -> int:
+        """Return the hex distance (number of steps) between two hexes.
+
+        The distance does not depend on the row parity and ignores
+        blocked tiles; use `find_path` to count steps around obstacles.
+
+        Args:
+            first: Hex position, tile, or actor.
+            second: Hex position, tile, or actor.
+
+        Returns:
+            The number of hexes you have to step from `first` to `second`.
+
+        Examples:
+            ::
+
+                if world.get_distance(robot, goal) <= 2:
+                    print("Goal in reach")
+        """
+        return hex_coords.hex_distance(
+            hex_coords.to_offset(first), hex_coords.to_offset(second)
+        )
+
+    def get_tiles_in_line(self, start, end) -> List[hex_tile_mod.HexTile]:
+        """Return the tiles on the straight line between two hexes.
+
+        Both ends are included. Positions of the line outside the world
+        are skipped. Together with `tile.is_blocking` this answers
+        line-of-sight questions.
+
+        Args:
+            start: Hex position, tile, or actor.
+            end: Hex position, tile, or actor.
+
+        Returns:
+            The tiles from `start` to `end`.
+
+        Examples:
+            ::
+
+                visible = all(
+                    not tile.is_blocking
+                    for tile in world.get_tiles_in_line(archer, target)
+                )
+        """
+        first = hex_coords.offset_to_cube(hex_coords.to_offset(start))
+        last = hex_coords.offset_to_cube(hex_coords.to_offset(end))
+        tiles = self.tiles
+        found = []
+        for cube in hex_coords.cube_line(first, last):
+            tile = tiles.get(hex_coords.cube_to_offset(cube))
+            if tile is not None:
+                found.append(tile)
+        return found
+
+    @staticmethod
+    def _checked_radius(radius) -> int:
+        api_validation.ensure_int(
+            radius,
+            "radius",
+            api_validation.with_try_hint,
+            "world.get_tiles_in_radius((3, 3), 2)",
+        )
+        return radius
+
+    def _tiles_at_offset_deltas(self, position, deltas_for, radius: int) -> List[hex_tile_mod.HexTile]:
+        """Return the existing tiles at the offset deltas of a ring or disc.
+
+        The deltas depend only on the row parity, so each hex is found with
+        one tuple addition and one dictionary lookup.
+        """
+        if radius < 0:
+            return []
+        column, row = position
+        tiles = self.tiles
+        found = []
+        for delta_column, delta_row in deltas_for(row, radius):
+            tile = tiles.get((column + delta_column, row + delta_row))
+            if tile is not None:
+                found.append(tile)
+        return found
+
+    def _max_distance(self, position) -> int:
+        """Return an upper bound for the distance from `position` to any tile.
+
+        Rings and discs beyond this distance contain no tile, so huge radii
+        do not walk (and cache) rings far outside the world. It is only
+        needed for radii larger than the world itself. The farthest
+        tile of a rectangular world is at one of its corners; the margin of
+        two rings covers the zigzag of the odd-r offset layout.
+        """
         cube = hex_coords.offset_to_cube(position)
-        tiles = []
-        for ring_cube in hex_coords.cube_ring(cube, radius):
-            tile_position = hex_coords.cube_to_offset(ring_cube)
-            if self.is_tile(tile_position):
-                tiles.append(self.get_tile(tile_position))
-        return tiles
+        last_column, last_row = self.world_size_x - 1, self.world_size_y - 1
+        corners = ((0, 0), (last_column, 0), (0, last_row), (last_column, last_row))
+        return 2 + max(
+            hex_coords.cube_distance(cube, hex_coords.offset_to_cube(corner))
+            for corner in corners
+        )
+
+    # ------------------------------------------------------------------
+    # Path finding
+    # ------------------------------------------------------------------
+
+    def find_path(
+        self,
+        start,
+        goal,
+        blocked: Optional[Callable[[hex_tile_mod.HexTile], bool]] = None,
+        cost: Optional[Callable[[hex_tile_mod.HexTile], float]] = None,
+        max_cost: Optional[float] = None,
+        min_cost: Optional[float] = None,
+    ) -> List[hex_tile_mod.HexTile]:
+        """Return the cheapest path between two hexes.
+
+        Entering a tile costs `tile.cost` (default `1`). A tile is
+        impassable if `tile.is_blocking` is set or an actor with
+        `is_blocking = True` stands on it. The goal must be passable.
+
+        Args:
+            start: Start hex as position, tile, or actor.
+            goal: Goal hex as position, tile, or actor.
+            blocked: Optional function `blocked(tile) -> bool` that replaces
+                the default blocking rule.
+            cost: Optional function `cost(tile) -> float` that replaces
+                `tile.cost`. Costs must not be negative.
+            max_cost: Optional budget; more expensive paths are not returned.
+            min_cost: Cheapest step cost of a custom `cost` function; speeds
+                up the search. Too large values can return non-optimal paths.
+
+        Returns:
+            The tiles from start to goal, both included, or an empty list
+            if there is no path.
+
+        Raises:
+            TileNotFoundError: If start or goal is not a tile of the world.
+
+        Examples:
+            ::
+
+                world.get_tile((2, 2)).is_blocking = True   # water
+                path = world.find_path((0, 0), (5, 4))
+                for tile in path:
+                    tile.highlight()
+        """
+        return hex_pathfinding.find_path(
+            self, start, goal, blocked=blocked, cost=cost,
+            max_cost=max_cost, min_cost=min_cost,
+        )
+
+    def get_reachable_tiles(
+        self,
+        start,
+        max_cost: float,
+        blocked: Optional[Callable[[hex_tile_mod.HexTile], bool]] = None,
+        cost: Optional[Callable[[hex_tile_mod.HexTile], float]] = None,
+    ) -> List[hex_tile_mod.HexTile]:
+        """Return all hexes reachable within a movement budget.
+
+        With default costs `max_cost` is the number of steps; blocked
+        tiles are walked around, so the result can be smaller than
+        `get_tiles_in_radius`.
+
+        Args:
+            start: Start hex as position, tile, or actor.
+            max_cost: Movement budget.
+            blocked: Optional `blocked(tile) -> bool`, see `find_path`.
+            cost: Optional `cost(tile) -> float`, see `find_path`.
+
+        Returns:
+            The reachable tiles including the start tile, ordered from
+            the cheapest to the most expensive.
+
+        Examples:
+            ::
+
+                for tile in world.get_reachable_tiles(robot.position, 3):
+                    tile.highlight((0, 200, 0, 80))
+        """
+        return hex_pathfinding.get_reachable_tiles(
+            self, start, max_cost, blocked=blocked, cost=cost
+        )
+
+    def find_nearest(
+        self,
+        start,
+        is_target: Callable[[hex_tile_mod.HexTile], bool],
+        blocked: Optional[Callable[[hex_tile_mod.HexTile], bool]] = None,
+        cost: Optional[Callable[[hex_tile_mod.HexTile], float]] = None,
+        max_cost: Optional[float] = None,
+        include_start: bool = False,
+    ) -> List[hex_tile_mod.HexTile]:
+        """Return the path to the nearest hex that satisfies `is_target`.
+
+        The nearest hex is the cheapest one to reach, not the one with the
+        smallest hex distance. A target may be blocked (for example an
+        enemy that blocks its hex): the path ends on it.
+
+        Args:
+            start: Start hex as position, tile, or actor.
+            is_target: Function `is_target(tile) -> bool`.
+            blocked: Optional `blocked(tile) -> bool`, see `find_path`.
+            cost: Optional `cost(tile) -> float`, see `find_path`.
+            max_cost: Optional budget; more expensive targets are ignored.
+            include_start: If `True`, the start hex can be the target.
+
+        Returns:
+            The tiles from start to the nearest target, both included,
+            or an empty list if no target is reachable.
+
+        Examples:
+            ::
+
+                path = world.find_nearest(robot, lambda tile: tile.terrain == "forest")
+                if path:
+                    robot.position = path[1].position
+        """
+        return hex_pathfinding.find_nearest(
+            self, start, is_target, blocked=blocked, cost=cost,
+            max_cost=max_cost, include_start=include_start,
+        )
+
+    def has_line_of_sight(
+        self,
+        start,
+        goal,
+        blocked: Optional[Callable[[hex_tile_mod.HexTile], bool]] = None,
+    ) -> bool:
+        """Return whether no blocked hex lies on the line between two hexes.
+
+        The line is the one of `get_tiles_in_line`. Only the hexes strictly
+        between start and goal count; a blocked goal can still be seen.
+
+        Args:
+            start: Start hex as position, tile, or actor.
+            goal: Goal hex as position, tile, or actor.
+            blocked: Optional `blocked(tile) -> bool`, see `find_path`.
+
+        Examples:
+            ::
+
+                if world.has_line_of_sight(guard, player):
+                    print("spotted")
+        """
+        return hex_pathfinding.has_line_of_sight(self, start, goal, blocked=blocked)
+
+    def get_path_cost(
+        self,
+        path,
+        cost: Optional[Callable[[hex_tile_mod.HexTile], float]] = None,
+    ) -> float:
+        """Return the cost of a path (the first hex is not counted).
+
+        Args:
+            path: A list of tiles, for example the result of `find_path`.
+            cost: Optional `cost(tile) -> float`, see `find_path`.
+
+        Examples:
+            ::
+
+                path = world.find_path((0, 0), (5, 3))
+                print(world.get_path_cost(path))
+        """
+        return hex_pathfinding.get_path_cost(path, cost=cost)
+
+    # ------------------------------------------------------------------
+    # Highlights and hover
+    # ------------------------------------------------------------------
+
+    def highlight_tiles(self, tiles, color: Tuple[int, ...] = (255, 255, 0, 90)) -> None:
+        """Highlight hexes with a translucent color.
+
+        The highlights are drawn on the background below the actors and
+        stay until `clear_highlights` is called.
+
+        Args:
+            tiles: Tiles or hex positions.
+            color: RGB or RGBA color; with RGB a default transparency is used.
+
+        Examples:
+            ::
+
+                world.highlight_tiles(world.get_tiles_in_radius((3, 3), 1))
+        """
+        color = self._normalize_highlight_color(color)
+        changed = False
+        for tile in tiles:
+            position = hex_pathfinding._to_position(tile)
+            if self._tile_highlights.get(position) != color:
+                self._tile_highlights[position] = color
+                changed = True
+        if changed:
+            self._refresh_highlights()
+
+    def clear_highlights(self, tiles=None) -> None:
+        """Remove highlights.
+
+        Args:
+            tiles: Tiles or hex positions to clear. Without it, all
+                highlights are removed.
+
+        Examples:
+            ::
+
+                world.clear_highlights()
+        """
+        if tiles is None:
+            changed = bool(self._tile_highlights)
+            self._tile_highlights.clear()
+        else:
+            changed = False
+            for tile in tiles:
+                if self._tile_highlights.pop(hex_pathfinding._to_position(tile), None) is not None:
+                    changed = True
+        if changed:
+            self._refresh_highlights()
+
+    @staticmethod
+    def _normalize_highlight_color(color) -> Tuple[int, ...]:
+        color = tuple(int(component) for component in color)
+        if len(color) == 3:
+            return color + (90,)
+        if len(color) != 4:
+            raise ValueError(f"A highlight color needs 3 or 4 components, got {color!r}")
+        return color
+
+    def _refresh_highlights(self) -> None:
+        background = getattr(self, "background", None)
+        if background is not None:
+            background.set_dirty("all", background.LOAD_NEW_IMAGE)
+
+    @property
+    def hovered_tile(self):
+        """The hex under the mouse, or `None`.
+
+        The value is kept up to date while the world has an
+        `on_tile_enter` or `on_tile_leave` handler (or `on_mouse_motion`).
+
+        Examples:
+            ::
+
+                @world.register
+                def on_mouse_left(self, mouse_pos):
+                    if world.hovered_tile is not None:
+                        print(world.hovered_tile.position)
+        """
+        return self._hovered_tile
+
+    def _update_hovered_tile(self, mouse_pos):
+        """Track the hovered hex; return `(left_tile, entered_tile)` on change."""
+        new_tile = None if mouse_pos is None else self.get_tile_from_pixel(mouse_pos)
+        old_tile = self._hovered_tile
+        if new_tile is old_tile:
+            return None
+        self._hovered_tile = new_tile
+        return old_tile, new_tile

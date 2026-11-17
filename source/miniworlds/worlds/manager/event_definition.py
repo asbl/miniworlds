@@ -145,6 +145,8 @@ class EventDefinition:
             "specific_key": specific_key_events,
             "message": ["on_message"],
             "act": ["act"],
+            # Hex worlds: the mouse enters or leaves a hex tile.
+            "tile_hover": ["on_tile_enter", "on_tile_leave"],
         }
         # Generate
         self.fill_event_sets()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 11:26+0200\n"
+"POT-Creation-Date: 2026-11-17 13:39+0100\n"
 "PO-Revision-Date: 2026-10-21 20:00+0200\n"
 "Last-Translator: Andreas Siebel\n"
 "Language: de\n"
@@ -85,7 +85,6 @@ msgid "Click hexes, corners, and edges"
 msgstr "Auf Hexfelder, Ecken und Kanten klicken"
 
 #: ../../source/patterns/hex_world_catan.md:63
-#, fuzzy
 msgid ""
 "`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
 "`world.get_corner_from_pixel(mouse_pos)` the nearest corner, and "
@@ -94,7 +93,9 @@ msgid ""
 msgstr ""
 "`world.get_tile_from_pixel(mouse_pos)` gibt das Hexfeld unter der Maus "
 "zurück, `world.get_corner_from_pixel(mouse_pos)` die nächstgelegene Ecke "
-"und `world.get_edge_from_pixel(mouse_pos)` die nächstgelegene Kante."
+"und `world.get_edge_from_pixel(mouse_pos)` die nächstgelegene Kante. Alle"
+" drei Abfragen geben `None` zurück, wenn der Pixel außerhalb der Welt "
+"liegt."
 
 #: ../../source/patterns/hex_world_catan.md:68
 msgid ""
@@ -120,4 +121,78 @@ msgstr ""
 "`tile.get_neighbour_tiles()` gibt die bis zu sechs Nachbarn eines "
 "Hexfelds zurück. Das ist nützlich für Catan-Regeln wie „der Räuber "
 "blockiert alle Hexfelder um die Wüste“."
+
+#: ../../source/patterns/hex_world_catan.md:115
+msgid "Build rules with corners and edges"
+msgstr "Bauregeln mit Ecken und Kanten"
+
+#: ../../source/patterns/hex_world_catan.md:117
+msgid ""
+"Corners and edges know their neighbours, so the placement rules of Catan "
+"need only a few lines:"
+msgstr ""
+"Ecken und Kanten kennen ihre Nachbarn, deshalb brauchen die Bauregeln von"
+" Catan nur wenige Zeilen:"
+
+#: ../../source/patterns/hex_world_catan.md:120
+msgid ""
+"`corner.get_neighbour_corners()` returns the up to three corners one hex "
+"side away,"
+msgstr ""
+"`corner.get_neighbour_corners()` gibt die bis zu drei Ecken zurück, die "
+"eine Hexfeld-Seite entfernt sind,"
+
+#: ../../source/patterns/hex_world_catan.md:122
+msgid ""
+"`corner.get_neighbour_edges()` returns the up to three edges that meet at"
+" the corner,"
+msgstr ""
+"`corner.get_neighbour_edges()` gibt die bis zu drei Kanten zurück, die an"
+" der Ecke zusammentreffen,"
+
+#: ../../source/patterns/hex_world_catan.md:124
+msgid ""
+"`edge.get_neighbour_corners()` returns the two corners at the ends of an "
+"edge,"
+msgstr ""
+"`edge.get_neighbour_corners()` gibt die beiden Ecken an den Enden einer "
+"Kante zurück,"
+
+#: ../../source/patterns/hex_world_catan.md:126
+msgid "`edge.get_neighbour_edges()` returns the edges that touch the edge,"
+msgstr ""
+"`edge.get_neighbour_edges()` gibt die Kanten zurück, die die Kante "
+"berühren,"
+
+#: ../../source/patterns/hex_world_catan.md:127
+msgid ""
+"`tile.get_neighbour_corners()` and `tile.get_neighbour_edges()` return "
+"the six corners and edges of a hex."
+msgstr ""
+"`tile.get_neighbour_corners()` und `tile.get_neighbour_edges()` geben die"
+" sechs Ecken und Kanten eines Hexfelds zurück."
+
+#: ../../source/patterns/hex_world_catan.md:130
+msgid ""
+"The distance rule (\"no settlement next to another settlement\") and the "
+"connection rule (\"a road must touch one of your settlements\") look like"
+" this:"
+msgstr ""
+"Die Abstandsregel (\"keine Siedlung neben einer anderen Siedlung\") und "
+"die Anschlussregel (\"eine Straße muss eine deiner Siedlungen berühren\")"
+" sehen so aus:"
+
+#: ../../source/patterns/hex_world_catan.md:175
+msgid "Resources and dice with tile data"
+msgstr "Rohstoffe und Würfel mit Kachel-Daten"
+
+#: ../../source/patterns/hex_world_catan.md:177
+msgid ""
+"Each hex can store its terrain and dice number in `tile.data`. After a "
+"dice roll, the settlements on the corners of the matching hexes collect "
+"the resource:"
+msgstr ""
+"Jedes Hexfeld kann sein Gelände und seine Würfelzahl in `tile.data` "
+"speichern. Nach einem Würfelwurf sammeln die Siedlungen an den Ecken der "
+"passenden Hexfelder den Rohstoff ein:"
 

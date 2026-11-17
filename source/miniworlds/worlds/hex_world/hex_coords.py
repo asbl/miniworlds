@@ -10,6 +10,7 @@ neighbor and distance calculations, because they are uniform across rows.
 All functions are pure and free of pygame or world dependencies.
 """
 
+import functools
 import math
 from typing import Dict, List, Tuple
 
@@ -58,6 +59,9 @@ EDGE_DIRECTIONS: Dict[str, Cube] = {
 
 # Corner names in clockwise order, starting at the top tip (for rendering).
 CORNER_ORDER: List[str] = ["n", "no", "so", "s", "sw", "nw"]
+
+# Edge names in clockwise order, starting at the north-east edge.
+EDGE_ORDER: List[str] = ["no", "o", "so", "sw", "w", "nw"]
 
 # Scratch-style degrees (0 = up, clockwise) of the six neighbor
 # directions in a pointy-top layout. Used to move actors along hex
@@ -140,6 +144,119 @@ def cube_ring(center: Cube, radius: int) -> List[Cube]:
             positions.append(cube)
             cube = (cube[0] + vector[0], cube[1] + vector[1], cube[2] + vector[2])
     return positions
+
+
+# Offset deltas of rings and discs. In odd-r offset coordinates the offset
+# of a neighbour depends only on the row parity, so the deltas of a ring
+# around any hex are the same for all hexes of one parity. They are
+# computed once per `(parity, radius)` and turn every ring/radius query
+# into plain tuple additions and dictionary lookups, without converting
+# between offset and cube coordinates for each hex.
+OffsetDeltas = Tuple[Offset, ...]
+
+
+def neighbour_offset_deltas(row_parity: int) -> OffsetDeltas:
+    """Return the offset deltas of the six neighbours for a row parity.
+
+    The deltas follow the order of `CUBE_DIRECTIONS`: `"o"`, `"so"`,
+    `"sw"`, `"w"`, `"nw"`, `"no"`. Any integer row can be passed; only its
+    parity counts.
+    """
+    return _neighbour_offset_deltas(row_parity & 1)
+
+
+def ring_offset_deltas(row_parity: int, radius: int) -> OffsetDeltas:
+    """Return the offset deltas of all hexes at exactly `radius` distance.
+
+    The order is the ring traversal order of `cube_ring`. For `radius` 0
+    the only delta is `(0, 0)`; for negative `radius` it is empty. Any
+    integer row can be passed; only its parity counts.
+    """
+    return _ring_offset_deltas(row_parity & 1, max(int(radius), -1))
+
+
+def disc_offset_deltas(row_parity: int, radius: int) -> OffsetDeltas:
+    """Return the offset deltas of all hexes within `radius` distance.
+
+    The center comes first, followed by the rings from the inside out,
+    each in `cube_ring` order.
+    """
+    return _disc_offset_deltas(row_parity & 1, max(int(radius), -1))
+
+
+@functools.lru_cache(maxsize=2)
+def _neighbour_offset_deltas(row_parity: int) -> OffsetDeltas:
+    origin = (0, row_parity)
+    origin_cube = offset_to_cube(origin)
+    deltas = []
+    for vector in CUBE_DIRECTIONS.values():
+        target = cube_to_offset(
+            (origin_cube[0] + vector[0], origin_cube[1] + vector[1], origin_cube[2] + vector[2])
+        )
+        deltas.append((target[0] - origin[0], target[1] - origin[1]))
+    return tuple(deltas)
+
+
+@functools.lru_cache(maxsize=256)
+def _ring_offset_deltas(row_parity: int, radius: int) -> OffsetDeltas:
+    origin = (0, row_parity)
+    return tuple(
+        (target[0] - origin[0], target[1] - origin[1])
+        for target in map(cube_to_offset, cube_ring(offset_to_cube(origin), radius))
+    )
+
+
+@functools.lru_cache(maxsize=256)
+def _disc_offset_deltas(row_parity: int, radius: int) -> OffsetDeltas:
+    if radius < 0:
+        return ()
+    if radius == 0:
+        return _ring_offset_deltas(row_parity, 0)
+    return _disc_offset_deltas(row_parity, radius - 1) + _ring_offset_deltas(
+        row_parity, radius
+    )
+
+
+def hex_distance(first: Tuple[int, int], second: Tuple[int, int]) -> int:
+    """Return the hex distance between two offset positions `(column, row)`.
+
+    The distance is the number of hex steps between the positions; it
+    does not depend on the row parity.
+    """
+    return cube_distance(offset_to_cube(first), offset_to_cube(second))
+
+
+def cube_line(start: Cube, end: Cube) -> List[Cube]:
+    """Return the cubes of the straight line from `start` to `end`.
+
+    Both ends are included; the line has `distance + 1` hexes. A tiny
+    nudge makes the result deterministic when the line runs exactly along
+    the border of two hexes.
+    """
+    distance = cube_distance(start, end)
+    if distance == 0:
+        return [start]
+    nudge = (1e-6, 2e-6, -3e-6)
+    return [
+        cube_round(
+            tuple(
+                start[axis] + nudge[axis] + (end[axis] - start[axis]) * step / distance
+                for axis in range(3)
+            )
+        )
+        for step in range(distance + 1)
+    ]
+
+
+def to_offset(value) -> Offset:
+    """Return the offset position of a position tuple, tile, or actor."""
+    position = getattr(value, "position", value)
+    try:
+        return (int(position[0]), int(position[1]))
+    except (TypeError, ValueError, IndexError):
+        raise TypeError(
+            f"Expected a position (column, row), a tile, or an actor, got {value!r}"
+        ) from None
 
 
 def cube_destination(start: Tuple[int, int], direction: str, distance: int) -> Offset:
@@ -300,6 +417,105 @@ def edge_position(tile_position: Tuple[int, int], direction: str) -> Cube:
     cube = offset_to_cube(tile_position)
     vector = direction_vector(direction, EDGE_DIRECTIONS)
     return (2 * cube[0] + vector[0], 2 * cube[1] + vector[1], 2 * cube[2] + vector[2])
+
+
+def _divisible(cube: Cube, divisor: int) -> bool:
+    return all(component % divisor == 0 for component in cube)
+
+
+def corner_tile_references(corner_key: Cube) -> List[Tuple[Cube, str]]:
+    """Return `(tile cube, corner direction)` for every hex sharing a corner.
+
+    A corner key is `3 * cube + vector`. Subtracting each corner vector
+    and testing divisibility by three finds the (up to) three hexes that
+    reach the corner, independent of the world bounds.
+    """
+    references = []
+    for direction, vector in CORNER_DIRECTIONS.items():
+        difference = (
+            corner_key[0] - vector[0],
+            corner_key[1] - vector[1],
+            corner_key[2] - vector[2],
+        )
+        if _divisible(difference, 3):
+            references.append(
+                ((difference[0] // 3, difference[1] // 3, difference[2] // 3), direction)
+            )
+    return references
+
+
+def edge_tile_references(edge_key: Cube) -> List[Tuple[Cube, str]]:
+    """Return `(tile cube, edge direction)` for both hexes sharing an edge.
+
+    An edge key is `2 * cube + vector`; see `corner_tile_references`.
+    """
+    references = []
+    for direction, vector in EDGE_DIRECTIONS.items():
+        difference = (
+            edge_key[0] - vector[0],
+            edge_key[1] - vector[1],
+            edge_key[2] - vector[2],
+        )
+        if _divisible(difference, 2):
+            references.append(
+                ((difference[0] // 2, difference[1] // 2, difference[2] // 2), direction)
+            )
+    return references
+
+
+def _corner_key(cube: Cube, direction: str) -> Cube:
+    vector = CORNER_DIRECTIONS[direction]
+    return (3 * cube[0] + vector[0], 3 * cube[1] + vector[1], 3 * cube[2] + vector[2])
+
+
+def _edge_key(cube: Cube, direction: str) -> Cube:
+    vector = EDGE_DIRECTIONS[direction]
+    return (2 * cube[0] + vector[0], 2 * cube[1] + vector[1], 2 * cube[2] + vector[2])
+
+
+def _unique(keys: List[Cube]) -> List[Cube]:
+    return list(dict.fromkeys(keys))
+
+
+def corner_neighbour_corner_keys(corner_key: Cube) -> List[Cube]:
+    """Return the keys of the three corners one hex side away from a corner.
+
+    The keys are computed without a world, so they may lie outside the
+    board; callers filter by the corners that exist.
+    """
+    keys = []
+    for cube, direction in corner_tile_references(corner_key):
+        index = CORNER_ORDER.index(direction)
+        for step in (-1, 1):
+            keys.append(_corner_key(cube, CORNER_ORDER[(index + step) % 6]))
+    return _unique(keys)
+
+
+def corner_edge_keys(corner_key: Cube) -> List[Cube]:
+    """Return the keys of the three edges that meet at a corner."""
+    keys = []
+    for cube, direction in corner_tile_references(corner_key):
+        for edge_direction, corners in EDGE_CORNERS.items():
+            if direction in corners:
+                keys.append(_edge_key(cube, edge_direction))
+    return _unique(keys)
+
+
+def edge_corner_keys(edge_key: Cube) -> List[Cube]:
+    """Return the keys of the two corners at the ends of an edge."""
+    keys = []
+    for cube, direction in edge_tile_references(edge_key):
+        for corner_direction in EDGE_CORNERS[direction]:
+            keys.append(_corner_key(cube, corner_direction))
+    return _unique(keys)
+
+
+def edge_neighbour_edge_keys(edge_key: Cube) -> List[Cube]:
+    """Return the keys of the (up to four) edges that touch an edge at a corner."""
+    keys = []
+    for corner_key in edge_corner_keys(edge_key):
+        keys.extend(corner_edge_keys(corner_key))
+    return [key for key in _unique(keys) if key != edge_key]
 
 
 def world_pixel_size(columns: int, rows: int, tile_size: float) -> Tuple[float, float]:

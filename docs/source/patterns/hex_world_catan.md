@@ -111,3 +111,98 @@ for tile in world.get_tiles_in_radius(center.position, 1):
 
 world.run()
 ```
+
+## Build rules with corners and edges
+
+Corners and edges know their neighbours, so the placement rules of Catan
+need only a few lines:
+
+* `corner.get_neighbour_corners()` returns the up to three corners one
+  hex side away,
+* `corner.get_neighbour_edges()` returns the up to three edges that meet at
+  the corner,
+* `edge.get_neighbour_corners()` returns the two corners at the ends of an
+  edge,
+* `edge.get_neighbour_edges()` returns the edges that touch the edge,
+* `tile.get_neighbour_corners()` and `tile.get_neighbour_edges()` return the
+  six corners and edges of a hex.
+
+The distance rule ("no settlement next to another settlement") and the
+connection rule ("a road must touch one of your settlements") look like
+this:
+
+```python
+import miniworlds
+
+world = miniworlds.HexWorld(7, 7, tile_size=40)
+world.background.grid = True
+settlements = {}
+
+def can_build_settlement(corner):
+    if corner.position in settlements:
+        return False
+    for neighbour in corner.get_neighbour_corners():
+        if neighbour.position in settlements:
+            return False
+    return True
+
+def can_build_road(edge):
+    for end in edge.get_neighbour_corners():
+        if end.position in settlements:
+            return True
+    return False
+
+@world.register
+def on_mouse_left(self, mouse_pos):
+    corner = world.get_corner_from_pixel(mouse_pos)
+    if corner is not None and can_build_settlement(corner):
+        settlement = miniworlds.Actor(corner.position)
+        settlement.fill_color = (200, 30, 30)
+        settlement.size = (0.3, 0.3)
+        settlements[corner.position] = settlement
+
+@world.register
+def on_mouse_right(self, mouse_pos):
+    edge = world.get_edge_from_pixel(mouse_pos)
+    if edge is not None and can_build_road(edge):
+        road = miniworlds.Actor(edge.position)
+        road.fill_color = (90, 60, 30)
+        road.size = (0.6, 0.15)
+
+world.run()
+```
+
+## Resources and dice with tile data
+
+Each hex can store its terrain and dice number in `tile.data`. After a dice
+roll, the settlements on the corners of the matching hexes collect the
+resource:
+
+```python
+import random
+
+import miniworlds
+
+world = miniworlds.HexWorld(7, 7, tile_size=40)
+world.background.grid = True
+
+for tile in world.get_tiles_in_radius((3, 3), 1):
+    tile.terrain = "forest"
+    tile.data["dice_number"] = random.randint(2, 12)
+
+def collect(dice_roll, owners):
+    """owners maps corner positions to player names."""
+    gains = []
+    for tile in world.tiles.values():
+        if tile.data.get("dice_number") != dice_roll:
+            continue
+        for corner in tile.get_neighbour_corners():
+            if corner.position in owners:
+                gains.append((owners[corner.position], tile.terrain))
+    return gains
+
+print(collect(8, {}))
+
+world.run()
+```
+

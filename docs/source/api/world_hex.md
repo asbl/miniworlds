@@ -46,3 +46,9 @@
 .. automodule:: miniworlds.worlds.hex_world.hex_coords
    :members:
 ```
+
+```{eval-rst}
+.. automodule:: miniworlds.worlds.hex_world.hex_pathfinding
+   :members: find_path, get_reachable_tiles
+```
+

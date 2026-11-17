@@ -65,15 +65,37 @@ class _MouseEventDispatcher:
             if event == "on_mouse_motion":
                 # Mouse left this world's area; clear tracked position.
                 self.world.mouse._tracked_position = None
+                self._dispatch_tile_hover(None)
             return False
 
         # Mouse is confirmed inside this world; keep tracked position current.
         self.world.mouse._tracked_position = mouse_pos
         self._call_mouse_methods(_iter_event_methods(self.event_registry, event), mouse_pos)
         if event == "on_mouse_motion":
+            self._dispatch_tile_hover(mouse_pos)
             return self.handle_mouse_over_event(mouse_pos, skip_screen_check=True)
         if event in self._CLICK_EVENT_NAMES:
             self.handle_click_on_actor_event(event, mouse_pos)
+
+    def _dispatch_tile_hover(self, mouse_pos: Any) -> None:
+        """Call `on_tile_leave` / `on_tile_enter` when the hovered tile changes.
+
+        Only worlds with tiles that can be hovered (HexWorld) provide
+        `_update_hovered_tile`; for all other worlds this is a no-op.
+        """
+        update_hovered_tile = getattr(self.world, "_update_hovered_tile", None)
+        if update_hovered_tile is None:
+            return
+        change = update_hovered_tile(mouse_pos)
+        if change is None:
+            return
+        left_tile, entered_tile = change
+        if left_tile is not None:
+            for method in _iter_event_methods(self.event_registry, "on_tile_leave"):
+                method_caller.call_method(method, (left_tile,))
+        if entered_tile is not None:
+            for method in _iter_event_methods(self.event_registry, "on_tile_enter"):
+                method_caller.call_method(method, (entered_tile,))
 
     def handle_mouse_over_event(self, data: Any, skip_screen_check: bool = False):
         if not skip_screen_check and not self.world.camera.is_in_screen(data):
@@ -210,6 +232,8 @@ class EventHandler:
             "on_mouse_over",
             "on_mouse_enter",
             "on_mouse_leave",
+            "on_tile_enter",
+            "on_tile_leave",
         ),
     }
 

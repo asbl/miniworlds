@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 08:22+0100\n"
+"POT-Creation-Date: 2026-11-17 14:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -67,18 +67,39 @@ msgid ""
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect:8
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_corners:10
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_edges:8
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_corners:6
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_edges:9
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:8
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_distance_to:6
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:8
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour:10
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_corners:6
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_edges:6
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:13
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_ring:6
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:11
 #: miniworlds.worlds.hex_world.hex_world.HexWorld:23
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:13
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:20
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:25
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:19
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:11
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:15
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:14
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:11
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:9
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:9
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:10
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:17
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:17
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:15
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:13
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:18
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:14
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:15
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:20
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:18
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:13
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:12
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.hovered_tile:7
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:10
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges:17 of
 msgid "Examples"
@@ -91,15 +112,27 @@ msgstr ""
 #: ../../source/api/world_hex.md
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges of
 msgid "Parameters"
@@ -121,6 +154,202 @@ msgstr ""
 msgid "If `True`, tiles, edges, and corners are not created automatically."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:1 of
+msgid "Remove highlights."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_corners
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_edges
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_corners
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_edges
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_distance_to
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_corners
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_edges
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles of
+msgid "Return type"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.clear_highlight:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:6
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:6 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:5 of
+msgid "Tiles or hex positions to clear. Without it, all highlights are removed."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:1 of
+msgid "Return the path to the nearest hex that satisfies `is_target`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:3 of
+msgid ""
+"The nearest hex is the cheapest one to reach, not the one with the "
+"smallest hex distance. A target may be blocked (for example an enemy that"
+" blocks its hex): the path ends on it."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:8
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:8
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:7
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:3
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:3
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:6
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:7
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_ring:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:6 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_tile.HexTile\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:8 of
+msgid "Start hex as position, tile, or actor."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:10 of
+msgid "Function `is_target(tile) -> bool`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:12
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:11
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:10 of
+msgid "Optional `blocked(tile) -> bool`, see `find_path`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:13
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_path_cost:6
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:10
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:12
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost:6
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:12 of
+msgid "Optional `cost(tile) -> float`, see `find_path`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:13 of
+msgid "Optional budget; more expensive targets are ignored."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:14 of
+msgid "If `True`, the start hex can be the target."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:17
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:16 of
+msgid ""
+"The tiles from start to the nearest target, both included, or an empty "
+"list if no target is reachable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:1 of
+msgid "Return the cheapest path between two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:3 of
+msgid ""
+"Entering a tile costs `tile.cost` (default `1`). A tile is impassable if "
+"`tile.is_blocking` is set or an actor with `is_blocking = True` stands on"
+" it. The goal must be passable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:10
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:9 of
+msgid "Goal hex as position, tile, or actor."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:11 of
+msgid ""
+"Optional function `blocked(tile) -> bool` that replaces the default "
+"blocking rule."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:13 of
+msgid ""
+"Optional function `cost(tile) -> float` that replaces `tile.cost`. Costs "
+"must not be negative."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:15 of
+msgid "Optional budget; more expensive paths are not returned."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:16 of
+msgid ""
+"Cheapest step cost of a custom `cost` function; speeds up the search. Too"
+" large values can return non-optimal paths."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:19 of
+msgid ""
+"The tiles from start to goal, both included, or an empty list if there is"
+" no path."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring of
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:22 of
+msgid "If start or goal is not a tile of the world."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:1 of
 msgid "Return all actors under a screen pixel."
 msgstr ""
@@ -132,48 +361,31 @@ msgid ""
 "(`tile_size / 3`, same as `actor.detect_pixel`) of the pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:7
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:7 of
+msgid ""
+"The pixel is translated to world pixels first, so the query also works "
+"while the camera is scrolled or the world is docked next to other worlds."
+" Corner and edge actors are detected without a tile under the pixel, so "
+"roads and settlements on the border of the world remain clickable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:13
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:7
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
 msgid "Pixel position as `(x, y)`."
 msgstr ""
 
-#: ../../source/api/world_hex.md
-#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges of
-msgid "Returns"
-msgstr ""
-
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:9 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel:15 of
 msgid ""
-"Actors located under the pixel. An empty list if the pixel lies outside "
-"the world."
+"Actors located under the pixel. An empty list if no actor is under the "
+"pixel."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_center_points:1 of
 msgid "Return a mapping of hex positions to their center pixels."
-msgstr ""
-
-#: ../../source/api/world_hex.md
-#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
-#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner
-#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring of
-msgid "Return type"
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_center_points:4 of
@@ -201,11 +413,6 @@ msgstr ""
 msgid "The matching corner."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge of
-msgid "Raises"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner:8 of
 msgid "If no corner exists at the resolved position."
 msgstr ""
@@ -214,8 +421,51 @@ msgstr ""
 msgid "Return the corner nearest to a screen pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:5 of
-msgid "The nearest corner, or `None` if the pixel is outside the world."
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:3 of
+msgid ""
+"The pixel is translated to world pixels first, so the query also works "
+"while the camera is scrolled or the world is docked next to other worlds."
+" Pixels near the border of the world pick from the border hexes, so "
+"corners on the border (settlement positions on a Catan board) remain "
+"clickable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel:11 of
+msgid ""
+"The nearest corner, or `None` if the pixel is outside the camera view or "
+"outside the world."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:1 of
+msgid "Return the hex distance (number of steps) between two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:3 of
+msgid ""
+"The distance does not depend on the row parity and ignores blocked tiles;"
+" use `find_path` to count steps around obstacles."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.cube_distance:4
+#: miniworlds.worlds.hex_world.hex_coords.hex_distance:7
+#: miniworlds.worlds.hex_world.hex_coords.nearest_axis_degrees:9
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:4
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:4
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.distance_to:8
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_distance_to:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:6 of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:9
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:10 of
+msgid "Hex position, tile, or actor."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance:11 of
+msgid "The number of hexes you have to step from `first` to `second`."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge:1 of
@@ -242,86 +492,210 @@ msgstr ""
 msgid "Return the edge nearest to a screen pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:5 of
-msgid "The nearest edge, or `None` if the pixel is outside the world."
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:3 of
+msgid ""
+"The pixel is translated to world pixels first, so the query also works "
+"while the camera is scrolled or the world is docked next to other worlds."
+" Pixels near the border of the world pick from the border hexes, so edges"
+" on the border (road positions on a Catan board) remain clickable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:11 of
+msgid ""
+"The nearest edge, or `None` if the pixel is outside the camera view or "
+"outside the world."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:1 of
 msgid "Return the hex position for a screen pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:5 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:3 of
+msgid ""
+"The pixel is translated to world pixels first, so the query also works "
+"while the camera is scrolled or the world is docked next to other worlds."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:9 of
 msgid ""
 "Hex position as `(column, row)`, or `None` if the pixel lies outside the "
 "camera view or outside the world."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost:1 of
+msgid "Return the cost of a path (the first hex is not counted)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.hex_height:4
+#: miniworlds.worlds.hex_world.hex_coords.hex_width:4
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_path_cost:3
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost:3
+#: miniworlds.worlds.hex_world.hex_world_sensor_manager.HexWorldSensorManager.get_distance_to:9
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_path_cost:5
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_path_cost:5 of
+msgid "A list of tiles, for example the result of `find_path`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:1 of
+msgid "Return all hexes reachable within a movement budget."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:3 of
+msgid ""
+"With default costs `max_cost` is the number of steps; blocked tiles are "
+"walked around, so the result can be smaller than `get_tiles_in_radius`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:10 of
+msgid "Movement budget."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:12
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles:14 of
+msgid ""
+"The reachable tiles including the start tile, ordered from the cheapest "
+"to the most expensive."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:1 of
 msgid "Return the hex tile under a screen pixel."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:5 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:9 of
 msgid ""
 "The registered hex tile under the pixel (the same object as "
 "`world.get_tile(...)`), or `None` if the pixel lies outside the world (no"
 " tile exists at the rounded hex position)."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:1 of
+msgid "Return the tiles on the straight line between two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:3 of
+msgid ""
+"Both ends are included. Positions of the line outside the world are "
+"skipped. Together with `tile.is_blocking` this answers line-of-sight "
+"questions."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line:12 of
+msgid "The tiles from `start` to `end`."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:1 of
 msgid "Return all tiles within a hex distance of `radius`."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:3
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:3 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:3 of
 msgid ""
-"Neighbors are computed in cube coordinates, so the result is independent "
-"of the row parity described in the `HexWorld` docstring."
+"The result is independent of the row parity described in the `HexWorld` "
+"docstring. Offsets of a ring are computed once per row parity and radius,"
+" so repeated queries are cheap."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:8
-#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:8
-#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:4
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:7
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:7 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_tile.HexTile\\`\\]`"
-msgstr ""
-
-#: miniworlds.worlds.hex_world.hex_coords.cube_destination:5
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:9
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:9
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:3 of
-msgid "Hex position as `(column, row)`."
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:8 of
+msgid "Hex position `(column, row)`, a tile, or an actor."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:10 of
 msgid "Maximum hex distance (0 includes only the tile itself)."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:12 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:11 of
+msgid "If `False`, the tile at `position` is left out."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:13 of
 msgid ""
-"List of tiles within the radius, including the tile itself, ordered from "
-"the center outwards in ring traversal order. Positions outside the world "
-"are skipped."
+"List of tiles within the radius, ordered from the center outwards in ring"
+" traversal order. Positions outside the world are skipped."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius:17
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:15 of
+msgid "If `radius` or `position` has the wrong type."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:1 of
 msgid "Return all tiles at exactly `radius` hex distance."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:10 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:3 of
+msgid ""
+"The result is independent of the row parity described in the `HexWorld` "
+"docstring."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:9 of
 msgid "Hex distance."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:12 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring:11 of
 msgid ""
 "List of tiles at the given distance, in ring traversal order starting at "
 "the westernmost hex of the ring. Positions outside the world are skipped."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:1 of
+msgid "Return whether no blocked hex lies on the line between two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:3 of
+msgid ""
+"The line is the one of `get_tiles_in_line`. Only the hexes strictly "
+"between start and goal count; a blocked goal can still be seen."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.has_line_of_sight:7
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:6
+#: miniworlds.worlds.hex_world.hex_world_sensor_manager.HexWorldSensorManager.detect_pixel:2
+#: of
+msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:1 of
+msgid "Highlight hexes with a translucent color."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:3 of
+msgid ""
+"The highlights are drawn on the background below the actors and stay "
+"until `clear_highlights` is called."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:8 of
+msgid "Tiles or hex positions."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:8
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:9 of
+msgid "RGB or RGBA color; with RGB a default transparency is used."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.hovered_tile:1 of
+msgid "The hex under the mouse, or `None`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.hovered_tile:3 of
+msgid ""
+"The value is kept up to date while the world has an `on_tile_enter` or "
+"`on_tile_leave` handler (or `on_mouse_motion`)."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:1 of
 msgid "Convert a hex position to the pixel position of its center."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.cube_destination:5
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:3 of
+msgid "Hex position as `(column, row)`."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:4 of
@@ -369,6 +743,21 @@ msgid ""
 "(see the `HexWorld` docstring for the full convention)."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.clear_highlight:1 of
+msgid "Remove the highlight of this hex."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.distance_to:1 of
+msgid "Return the hex distance to another tile (same as `get_distance_to`)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.distance_to:3 of
+msgid ""
+"The rectangular `Tile.distance_to` measures the euclidean distance of the"
+" offset coordinates, which is wrong on a hex grid because of the shifted "
+"rows."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.from_pixel:1 of
 msgid "Return the hex tile containing a pixel position."
 msgstr ""
@@ -401,6 +790,10 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_corner:5 of
 msgid "Corner direction, e.g. `\"no\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_distance_to:1 of
+msgid "Return the hex distance (number of steps) to a tile, position, or actor."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_edge:1 of
@@ -449,8 +842,55 @@ msgid ""
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour:1 of
+msgid "Return the neighboring hex in one direction, or `None` at the border."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_tile.HexTile\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour:5 of
+msgid "One of `\"o\"`, `\"so\"`, `\"sw\"`, `\"w\"`, `\"nw\"`, `\"no\"`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour:7 of
+msgid "If `direction` is not a hex direction."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_corners:1 of
+msgid "Return the six corners of this hex, clockwise from the top tip."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_corners:7
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_corners:3
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_corners:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_corner.HexCorner\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_edges:1 of
+msgid "Return the six edges of this hex, clockwise from the north-east edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_edges:5
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_edges:6
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_edges:3 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.hex\\_world.hex\\_edge.HexEdge\\`\\]`"
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:1 of
 msgid "Return the up to six neighboring hex tiles."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour_tiles:3 of
+msgid "The list is a copy; changing it does not affect the world."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_position_pixel_dict:1 of
@@ -459,6 +899,51 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_position_pixel_dict:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:1 of
+msgid "Return the tiles within `radius` steps of this hex."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:3 of
+msgid ""
+"Unlike `world.get_tiles_in_radius`, the tile itself is not included by "
+"default, so `get_tiles_in_radius(1)` returns the same tiles as "
+"`get_neighbour_tiles()` (in ring order instead of direction order)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:9 of
+msgid "Maximum hex distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius:10 of
+msgid "If `True`, this tile is the first result."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_ring:1 of
+msgid "Return the tiles at exactly `radius` steps from this hex."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:1 of
+msgid "Highlight this hex with a translucent color."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:3 of
+msgid ""
+"The highlight is drawn on the world background below the actors and stays"
+" until `clear_highlight` is called."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.is_highlighted:1 of
+msgid "Whether this hex is currently highlighted."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.is_highlighted of
+msgid "type"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.is_highlighted:3 of
+msgid "bool"
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.to_center:1 of
@@ -490,6 +975,24 @@ msgstr ""
 msgid "Create a tile delimiter (override expected)."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_corners:1 of
+msgid "Return the corners one hex side away (up to three)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_corners:3 of
+msgid ""
+"This is the \"distance rule\" of Catan: a settlement may only be built if"
+" no neighbouring corner holds one. Corners outside the world are skipped."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_edges:1 of
+msgid "Return the edges that meet at this corner (up to three)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_edges:3 of
+msgid "Edges outside the world are skipped."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_corner.HexCorner.get_neighbour_tiles:1 of
 msgid "Return the up to three hexes that share this corner."
 msgstr ""
@@ -506,13 +1009,6 @@ msgstr ""
 msgid "Override: starting angle offset for layouting (e.g. hex rotation)."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_coords.cube_distance:4
-#: miniworlds.worlds.hex_world.hex_coords.nearest_axis_degrees:9
-#: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:4
-#: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:4 of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`int\\``"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_corner.HexCorner.to_pixel:1 of
 msgid "Return the pixel position of the corner."
 msgstr ""
@@ -526,6 +1022,20 @@ msgid ""
 "The edge position is a unique key in doubled cube coordinates: both hexes"
 " that share the edge compute the same key, so edges are merged when the "
 "world is built."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_corners:1 of
+msgid "Return the two corners at the ends of this edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_edges:1 of
+msgid "Return the edges that touch this edge at a corner (up to four)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_edges:3 of
+msgid ""
+"This is the connection rule of Catan roads: a road must connect to a "
+"settlement or another road."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge.get_neighbour_tiles:1 of
@@ -575,11 +1085,6 @@ msgid ""
 "single step never jumps more than one hex."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world_sensor_manager.HexWorldSensorManager.detect_pixel:2
-#: of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`bool\\``"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world_sensor_manager.HexWorldSensorManager.get_destination:1
 #: of
 msgid ""
@@ -621,13 +1126,6 @@ msgid ""
 "returned."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_coords.hex_height:4
-#: miniworlds.worlds.hex_world.hex_coords.hex_width:4
-#: miniworlds.worlds.hex_world.hex_world_sensor_manager.HexWorldSensorManager.get_distance_to:9
-#: of
-msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world_position_manager.HexWorldPositionManager:1
 #: of
 msgid "Position manager for actors on hex worlds."
@@ -644,6 +1142,7 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_destination:3
 #: miniworlds.worlds.hex_world.hex_coords.cube_to_offset:4
+#: miniworlds.worlds.hex_world.hex_coords.to_offset:4
 #: miniworlds.worlds.hex_world.hex_world_position_manager.HexWorldPositionManager.get_size:2
 #: of
 msgid ""
@@ -742,6 +1241,33 @@ msgstr ""
 msgid "All functions are pure and free of pygame or world dependencies."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.corner_edge_keys:1 of
+msgid "Return the keys of the three edges that meet at a corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.corner_edge_keys:4
+#: miniworlds.worlds.hex_world.hex_coords.corner_neighbour_corner_keys:7
+#: miniworlds.worlds.hex_world.hex_coords.cube_line:8
+#: miniworlds.worlds.hex_world.hex_coords.cube_ring:9
+#: miniworlds.worlds.hex_world.hex_coords.edge_corner_keys:4
+#: miniworlds.worlds.hex_world.hex_coords.edge_neighbour_edge_keys:4 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\, "
+"\\:py\\:class\\:\\`int\\`\\]\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.corner_neighbour_corner_keys:1 of
+msgid "Return the keys of the three corners one hex side away from a corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.corner_neighbour_corner_keys:3 of
+msgid ""
+"The keys are computed without a world, so they may lie outside the board;"
+" callers filter by the corners that exist."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.corner_pixel_offset:1 of
 msgid "Return the pixel offset of a hex corner, relative to the hex center."
 msgstr ""
@@ -785,6 +1311,27 @@ msgid ""
 "\\:py\\:class\\:\\`int\\`\\]`"
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.corner_tile_references:1 of
+msgid "Return `(tile cube, corner direction)` for every hex sharing a corner."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.corner_tile_references:3 of
+msgid ""
+"A corner key is `3 * cube + vector`. Subtracting each corner vector and "
+"testing divisibility by three finds the (up to) three hexes that reach "
+"the corner, independent of the world bounds."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.corner_tile_references:8
+#: miniworlds.worlds.hex_world.hex_coords.edge_tile_references:6 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\, "
+"\\:py\\:class\\:\\`int\\`\\]\\, \\:py\\:class\\:\\`str\\`\\]\\]`"
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.cube_destination:1 of
 msgid "Return the hex position reached from `start` moving along a hex axis."
 msgstr ""
@@ -807,6 +1354,17 @@ msgstr ""
 msgid "Return the hex distance (number of hexes) between two cube positions."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.cube_line:1 of
+msgid "Return the cubes of the straight line from `start` to `end`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.cube_line:3 of
+msgid ""
+"Both ends are included; the line has `distance + 1` hexes. A tiny nudge "
+"makes the result deterministic when the line runs exactly along the "
+"border of two hexes."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.cube_ring:1 of
 msgid "Return all cube positions at exactly `radius` hex distance."
 msgstr ""
@@ -816,14 +1374,6 @@ msgid ""
 "The positions are returned in ring traversal order, starting at the "
 "westernmost hex of the ring and walking clockwise. For `radius` 0, only "
 "the center is returned; for negative `radius`, nothing is returned."
-msgstr ""
-
-#: miniworlds.worlds.hex_world.hex_coords.cube_ring:9 of
-msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
-"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
-"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\, "
-"\\:py\\:class\\:\\`int\\`\\]\\]`"
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_round:1 of
@@ -836,6 +1386,34 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.direction_vector:1 of
 msgid "Return the vector for a direction name, with a helpful error."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.disc_offset_deltas:1 of
+msgid "Return the offset deltas of all hexes within `radius` distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.disc_offset_deltas:3 of
+msgid ""
+"The center comes first, followed by the rings from the inside out, each "
+"in `cube_ring` order."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.disc_offset_deltas:7
+#: miniworlds.worlds.hex_world.hex_coords.neighbour_offset_deltas:8
+#: miniworlds.worlds.hex_world.hex_coords.ring_offset_deltas:8 of
+msgid ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\]\\, "
+"\\:py\\:data\\:\\`...\\<Ellipsis\\>\\`\\]`"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.edge_corner_keys:1 of
+msgid "Return the keys of the two corners at the ends of an edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.edge_neighbour_edge_keys:1 of
+msgid "Return the keys of the (up to four) edges that touch an edge at a corner."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.edge_pixel_offset:1 of
@@ -856,6 +1434,14 @@ msgid ""
 "sharing the edge produce the same integer key."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.edge_tile_references:1 of
+msgid "Return `(tile cube, edge direction)` for both hexes sharing an edge."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.edge_tile_references:3 of
+msgid "An edge key is `2 * cube + vector`; see `corner_tile_references`."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.hex_center:1 of
 msgid "Return the pixel center of the hex at offset position `(column, row)`."
 msgstr ""
@@ -865,6 +1451,16 @@ msgid ""
 "The layout leaves half a hex margin at the top and left so that the top "
 "tip of the first row and the left edge of the first column are fully "
 "visible."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.hex_distance:1 of
+msgid "Return the hex distance between two offset positions `(column, row)`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.hex_distance:3 of
+msgid ""
+"The distance is the number of hex steps between the positions; it does "
+"not depend on the row parity."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.hex_height:1 of
@@ -887,6 +1483,17 @@ msgid ""
 "higher axis."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.neighbour_offset_deltas:1 of
+msgid "Return the offset deltas of the six neighbours for a row parity."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.neighbour_offset_deltas:3 of
+msgid ""
+"The deltas follow the order of `CUBE_DIRECTIONS`: `\"o\"`, `\"so\"`, "
+"`\"sw\"`, `\"w\"`, `\"nw\"`, `\"no\"`. Any integer row can be passed; "
+"only its parity counts."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.offset_to_cube:1 of
 msgid "Convert odd-r offset coordinates `(column, row)` to cube coordinates."
 msgstr ""
@@ -895,8 +1502,134 @@ msgstr ""
 msgid "Return the cube coordinates of the hex containing a pixel position."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.ring_offset_deltas:1 of
+msgid "Return the offset deltas of all hexes at exactly `radius` distance."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.ring_offset_deltas:3 of
+msgid ""
+"The order is the ring traversal order of `cube_ring`. For `radius` 0 the "
+"only delta is `(0, 0)`; for negative `radius` it is empty. Any integer "
+"row can be passed; only its parity counts."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.to_offset:1 of
+msgid "Return the offset position of a position tuple, tile, or actor."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.world_pixel_size:1 of
 msgid "Return the pixel size of a hex world with `columns` x `rows` hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding:1 of
+msgid "Path finding on hexagonal worlds."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding:3 of
+msgid ""
+"The functions work on the tiles of a `HexWorld`. Stepping onto a tile "
+"costs `tile.cost` (default `1`); tiles are impassable if their "
+"`is_blocking` flag is set or a blocking actor (`actor.is_blocking`) "
+"stands on them. Both rules can be replaced with the `blocked` and `cost` "
+"callbacks."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding:8 of
+msgid ""
+"Path finding runs in plain Python on the neighbour cache of the tiles, so"
+" it is meant for on-demand queries (a click, a turn), not for being "
+"called for hundreds of actors in every frame."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:1 of
+msgid "Return the cheapest path to the nearest hex that satisfies `is_target`."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:3 of
+msgid ""
+"A target may be blocked, for example an enemy that blocks its own hex: "
+"the path ends on the target. Only the hexes on the way must be passable."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:9
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:5
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:5 of
+msgid "The hex world."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:10
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:6
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:6 of
+msgid "Start hex (position, tile, or actor)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:14 of
+msgid "Optional budget; targets that cost more are ignored."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:15 of
+msgid "If `True`, the start hex itself can be the target."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:1 of
+msgid "Return the cheapest path between two hexes (A*)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:7 of
+msgid "Goal hex (position, tile, or actor)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:8 of
+msgid ""
+"Optional `blocked(tile) -> bool`; replaces the default rule (tile flag or"
+" blocking actor)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:10 of
+msgid ""
+"Optional `cost(tile) -> float` for entering a tile; replaces `tile.cost`."
+" Costs must not be negative."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:12 of
+msgid "Optional budget; paths that cost more are not returned."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:13 of
+msgid ""
+"Cheapest step cost, used to speed up the search. Only needed together "
+"with a custom `cost`; a too large value can return a path that is not the"
+" cheapest."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.find_path:17 of
+msgid ""
+"The tiles from start to goal, both included, or an empty list if the goal"
+" is blocked, unreachable, or too expensive."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_path_cost:1 of
+msgid ""
+"Return the cost of a path: the sum of the costs of all hexes but the "
+"first."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:1 of
+msgid "Return all hexes reachable within a movement budget (Dijkstra)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:7 of
+msgid "Movement budget; with default costs this is the number of steps."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.has_line_of_sight:1 of
+msgid "Return whether no blocked hex lies between two hexes."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.has_line_of_sight:3 of
+msgid ""
+"Only the hexes strictly between start and goal count, so a blocked goal "
+"(for example an enemy that blocks its own hex) can be seen."
 msgstr ""
 
 #~ msgid "The nearest corner."
@@ -966,3 +1699,37 @@ msgstr ""
 #~ "the world (no tile exists at the"
 #~ " rounded hex position)."
 #~ msgstr ""
+
+#~ msgid ""
+#~ "Actors located under the pixel. An "
+#~ "empty list if the pixel lies "
+#~ "outside the world."
+#~ msgstr ""
+
+#~ msgid "The nearest corner, or `None` if the pixel is outside the world."
+#~ msgstr ""
+
+#~ msgid "The nearest edge, or `None` if the pixel is outside the world."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Neighbors are computed in cube "
+#~ "coordinates, so the result is "
+#~ "independent of the row parity described"
+#~ " in the `HexWorld` docstring."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "List of tiles within the radius, "
+#~ "including the tile itself, ordered from"
+#~ " the center outwards in ring "
+#~ "traversal order. Positions outside the "
+#~ "world are skipped."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If `radius` is not an int or "
+#~ "`position` is no     position, tile, or"
+#~ " actor."
+#~ msgstr ""
+

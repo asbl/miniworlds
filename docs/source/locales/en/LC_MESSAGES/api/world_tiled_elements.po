@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-17 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -44,6 +44,46 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.add_actor:1 of
 msgid "Places an actor on this tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:1 of
+msgid "Cost of entering this tile for path finding (default `1`)."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:3 of
+msgid "Must not be negative. A cost of `0` makes the tile free to enter."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:6
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:8
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:7
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.terrain:4 of
+msgid "Examples"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking of
+msgid "type"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:12 of
+msgid "float"
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:1 of
+msgid "Free-form game data stored on this tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:3 of
+msgid ""
+"Use it for anything your game needs per tile, for example a resource, an "
+"owner, or a dice number. The dict is created on first access and stays "
+"attached to the tile."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:15 of
+msgid "dict"
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:1
@@ -172,8 +212,26 @@ msgstr ""
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:1 of
+msgid "Whether path finding treats this tile as impassable."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:3 of
+msgid ""
+"Actors with `is_blocking = True` block their tile as well; this flag "
+"blocks a tile without needing an actor, for example water."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:12 of
+msgid "bool"
+msgstr ""
+
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.merge:1 of
 msgid "Merge tile positions from another tile at the same location."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.terrain:1 of
+msgid "The terrain name of this tile, or `None` (stored as `data[\"terrain\"]`)."
 msgstr ""
 
 #: ../../source/api/world_tiled_elements.md:20

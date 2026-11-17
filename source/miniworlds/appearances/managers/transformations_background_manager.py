@@ -9,12 +9,38 @@ class TransformationsBackgroundManager(transformations_manager.TransformationsMa
     def __init__(self, appearance):
         super().__init__(appearance)
         self.transformations_pipeline.extend([
+            # Highlights come before the grid, so the grid lines stay visible on top.
+            {"key": "tile_highlights", "func": self.transformation_tile_highlights, "attr": "_has_tile_highlights", "is_optional": False},
             {"key": "grid", "func": self.transformation_grid, "attr": "grid", "is_optional": False},
         ])
 
     def get_size(self):
         size = (self.appearance.parent.camera.width, self.appearance.parent.camera.height)
         return size
+
+    def transformation_tile_highlights(self, image: pygame.Surface, appearance) -> pygame.Surface:
+        """Draw the translucent highlights of hex tiles (camera-local)."""
+        parent = self.appearance.parent
+        highlights = getattr(parent, "_tile_highlights", None)
+        if not highlights:
+            return image
+        camera_rect = parent.camera.get_rect()
+        tile_size = parent.tile_size
+        offsets = list(hex_coords.corner_pixel_offsets(tile_size).values())
+        margin = hex_coords.hex_width(tile_size)
+        overlay = pygame.Surface(image.get_size(), pygame.SRCALPHA)
+        for position, color in highlights.items():
+            x, y = hex_coords.hex_center(position, tile_size)
+            x -= camera_rect.left
+            y -= camera_rect.top
+            if (x < -margin or y < -margin
+                    or x > image.get_width() + margin or y > image.get_height() + margin):
+                continue
+            pygame.draw.polygon(
+                overlay, color, [(x + dx, y + dy) for dx, dy in offsets], 0
+            )
+        image.blit(overlay, (0, 0))
+        return image
 
     def transformation_grid(self, image: pygame.Surface, appearance) -> pygame.Surface:
         parent = self.appearance.parent

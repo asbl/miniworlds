@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-17 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -127,94 +127,100 @@ msgid ""
 "wheel"
 msgstr ""
 
-#: ../../source/api/events.md:85
+#: ../../source/api/events.md:84
+msgid ""
+"`on_tile_enter(self, tile)`, `on_tile_leave(self, tile)`: the mouse "
+"enters or leaves a hex (`HexWorld` only)"
+msgstr ""
+
+#: ../../source/api/events.md:87
 msgid "Sensors And Borders"
 msgstr ""
 
-#: ../../source/api/events.md:97
+#: ../../source/api/events.md:99
 msgid "Sensor and collision events:"
 msgstr ""
 
-#: ../../source/api/events.md:99
+#: ../../source/api/events.md:101
 msgid "`on_detecting(self, other)`: any detected actor"
 msgstr ""
 
-#: ../../source/api/events.md:100
+#: ../../source/api/events.md:102
 msgid "`on_detecting_actor(self, other)`: any actor on the same position"
 msgstr ""
 
-#: ../../source/api/events.md:101
+#: ../../source/api/events.md:103
 msgid ""
 "`on_detecting_<ClassName>(self, other)`: actors of a specific class, for "
 "example `on_detecting_wall`"
 msgstr ""
 
-#: ../../source/api/events.md:103
+#: ../../source/api/events.md:105
 msgid "`on_not_detecting(self)`: no actor detected"
 msgstr ""
 
-#: ../../source/api/events.md:104
+#: ../../source/api/events.md:106
 msgid "`on_not_detecting_<ClassName>(self)`: no actor of that class detected"
 msgstr ""
 
-#: ../../source/api/events.md:105
+#: ../../source/api/events.md:107
 msgid "`on_detecting_world(self)`: actor is inside the world"
 msgstr ""
 
-#: ../../source/api/events.md:106
+#: ../../source/api/events.md:108
 msgid "`on_not_detecting_world(self)`: actor is outside the world"
 msgstr ""
 
-#: ../../source/api/events.md:107
+#: ../../source/api/events.md:109
 msgid "`on_detecting_not_on_world(self)`: alias for `on_not_detecting_world`"
 msgstr ""
 
-#: ../../source/api/events.md:108
+#: ../../source/api/events.md:110
 msgid "`on_detecting_borders(self, borders)`: receives a list like `[\"left\"]`"
 msgstr ""
 
-#: ../../source/api/events.md:109
+#: ../../source/api/events.md:111
 msgid ""
 "`on_detecting_left_border(self)`, `on_detecting_right_border(self)`, "
 "`on_detecting_top_border(self)`, `on_detecting_bottom_border(self)`"
 msgstr ""
 
-#: ../../source/api/events.md:112
+#: ../../source/api/events.md:114
 msgid ""
 "Both `on_not_detecting_world` and `on_detecting_not_on_world` are "
 "accepted."
 msgstr ""
 
-#: ../../source/api/events.md:114
+#: ../../source/api/events.md:116
 msgid "Messages"
 msgstr ""
 
-#: ../../source/api/events.md:116
+#: ../../source/api/events.md:118
 msgid ""
 "Messages are useful when actors should communicate without holding direct"
 " references to each other."
 msgstr ""
 
-#: ../../source/api/events.md:129
+#: ../../source/api/events.md:131
 msgid ""
 "Use `send_message(message, data=None)` to broadcast a message. Use "
 "`@actor.register_message(\"message\")` or "
 "`@world.register_message(\"message\")` to react to it."
 msgstr ""
 
-#: ../../source/api/events.md:133
+#: ../../source/api/events.md:135
 msgid "Focus"
 msgstr ""
 
-#: ../../source/api/events.md:135
+#: ../../source/api/events.md:137
 msgid "Actors can react when they receive or lose focus after a click:"
 msgstr ""
 
-#: ../../source/api/events.md:137
+#: ../../source/api/events.md:139
 msgid "`on_focus(self)`"
 msgstr ""
 
-#: ../../source/api/events.md:138
+#: ../../source/api/events.md:140
 msgid "`on_focus_lost(self)`"
 msgstr ""
 

@@ -76,6 +76,11 @@ class Background(appearance_mod.Appearance):
         """Owning world of this background."""
         return self.parent
 
+    @property
+    def _has_tile_highlights(self) -> bool:
+        """Whether the world has tile highlights to draw (hex worlds)."""
+        return bool(getattr(self.world, "_tile_highlights", None))
+
     def show_grid(self):
         """Enable grid rendering for this background."""
         self.grid = True

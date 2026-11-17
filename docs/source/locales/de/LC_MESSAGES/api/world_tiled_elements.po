@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-17 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../../source/api/world_tiled_elements.md:1
 msgid "World > Tiled Elements"
-msgstr ""
+msgstr "Welt > Tiled-Elemente"
 
 #: ../../source/api/world_tiled_elements.md:3
 msgid ""
@@ -29,28 +29,76 @@ msgid ""
 "are most useful when you need to inspect or customize tiles, edges, or "
 "corners directly."
 msgstr ""
+"`TiledWorld` stellt Hilfsklassen für Kachel-Projekte bereit. Sie sind am "
+"nützlichsten, wenn du Kacheln, Kanten oder Ecken direkt untersuchen oder "
+"anpassen willst."
 
 #: ../../source/api/world_tiled_elements.md:6
 msgid "TileFactory"
-msgstr ""
+msgstr "TileFactory"
 
 #: ../../source/api/world_tiled_elements.md:13
 msgid "TileBase"
-msgstr ""
+msgstr "TileBase"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase:1 of
 msgid "Base class for Tiles and TileDelimiters (like Corners, Edges)."
-msgstr ""
+msgstr "Basisklasse für Kacheln und Kachel-Begrenzer (wie Ecken und Kanten)."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.add_actor:1 of
 msgid "Places an actor on this tile."
+msgstr "Platziert einen Actor auf dieser Kachel."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:1 of
+msgid "Cost of entering this tile for path finding (default `1`)."
+msgstr "Kosten für das Betreten dieser Kachel bei der Wegfindung (Standard: `1`)."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:3 of
+msgid "Must not be negative. A cost of `0` makes the tile free to enter."
 msgstr ""
+"Darf nicht negativ sein. Kosten von `0` machen das Betreten der Kachel "
+"kostenlos."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:6
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:8
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:7
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.terrain:4 of
+msgid "Examples"
+msgstr "Beispiele"
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking of
+msgid "type"
+msgstr "Typ"
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.cost:12 of
+msgid "float"
+msgstr "float"
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:1 of
+msgid "Free-form game data stored on this tile."
+msgstr "Freie Spieldaten, die auf dieser Kachel gespeichert sind."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:3 of
+msgid ""
+"Use it for anything your game needs per tile, for example a resource, an "
+"owner, or a dice number. The dict is created on first access and stays "
+"attached to the tile."
+msgstr ""
+"Verwende es für alles, was dein Spiel pro Kachel braucht, zum Beispiel "
+"einen Rohstoff, einen Besitzer oder eine Würfelzahl. Das Dictionary wird "
+"beim ersten Zugriff angelegt und bleibt an der Kachel."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.data:15 of
+msgid "dict"
+msgstr "dict"
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:1
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:1
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:1 of
 msgid "Finds the nearest tile to a given pixel coordinate."
-msgstr ""
+msgstr "Findet die Kachel, die einer gegebenen Pixelkoordinate am nächsten liegt."
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:3
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:3
@@ -61,59 +109,65 @@ msgid ""
 " a given world. It also uses squared distance instead of Euclidean "
 "distance for better performance."
 msgstr ""
+"Diese Methode nutzt Caching, um die Zuordnung zwischen Kachelpositionen "
+"im Raster und ihren Pixelkoordinaten für eine gegebene Welt nicht unnötig"
+" neu zu berechnen. Außerdem verwendet sie den quadrierten statt des "
+"euklidischen Abstands, um schneller zu sein."
 
 #: ../../source/api/world_tiled_elements.md
 msgid "Return type"
-msgstr ""
+msgstr "Rückgabetyp"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:8
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_position:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile\\_elements.TileBase\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile\\_elements.TileBase\\``"
 
 #: ../../source/api/world_tiled_elements.md
 msgid "Parameters"
-msgstr ""
+msgstr "Parameter"
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:8
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:10
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:10 of
 msgid "The (x, y) pixel position."
-msgstr ""
+msgstr "Die Pixelposition (x, y)."
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:10
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:12
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:12 of
 msgid "The world instance containing the tile layout."
-msgstr ""
+msgstr "Die Weltinstanz, die das Kachel-Layout enthält."
 
 #: ../../source/api/world_tiled_elements.md
 msgid "Returns"
-msgstr ""
+msgstr "Rückgabe"
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_pixel:13
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:15
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_pixel:15 of
 msgid "The tile object closest to the given pixel position."
-msgstr ""
+msgstr "Das Kachelobjekt, das der gegebenen Pixelposition am nächsten liegt."
 
 #: miniworlds.worlds.tiled_world.tile.Tile.from_position:1
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.from_position:1 of
 msgid "Create a tile from a world-relative position."
-msgstr ""
+msgstr "Erstellt eine Kachel aus einer weltrelativen Position."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_actors:1 of
 msgid "Returns all actors currently on this tile."
-msgstr ""
+msgstr "Gibt alle Actors zurück, die sich aktuell auf dieser Kachel befinden."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_actors:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\``"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_center_coordinate:1
 #: of
 msgid "Returns the center point offset for a tile, in local pixel coordinates."
 msgstr ""
+"Gibt den Mittelpunkt-Versatz einer Kachel in lokalen Pixelkoordinaten "
+"zurück."
 
 #: miniworlds.worlds.tiled_world.tile.Tile.to_center:2
 #: miniworlds.worlds.tiled_world.tile.Tile.to_pixel:2
@@ -123,16 +177,18 @@ msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]`"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_local_corner_points:1
 #: of
 msgid "Returns corner point offsets for rendering."
-msgstr ""
+msgstr "Gibt die Versätze der Eckpunkte für das Rendern zurück."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_neighbour_tiles:1
 #: of
 msgid "Returns neighboring tiles around this tile."
-msgstr ""
+msgstr "Gibt die benachbarten Kacheln dieser Kachel zurück."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_neighbour_tiles:4
 #: of
@@ -140,24 +196,28 @@ msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\`\\]`"
 msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\`\\]`"
 
 #: miniworlds.worlds.tiled_world.edge.Edge.get_position_pixel_dict:1
 #: miniworlds.worlds.tiled_world.tile.Tile.get_position_pixel_dict:1
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_position_pixel_dict:1
 #: of
 msgid "Returns a mapping of tile positions to pixel coordinates."
-msgstr ""
+msgstr "Gibt eine Zuordnung von Kachelpositionen zu Pixelkoordinaten zurück."
 
 #: miniworlds.worlds.tiled_world.tile.Tile.get_position_pixel_dict:4
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.get_position_pixel_dict:4
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`dict\\``"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:1
 #: of
 msgid "Drop the cached position-pixel mapping of a world."
 msgstr ""
+"Verwirft die zwischengespeicherte Zuordnung von Position zu Pixel einer "
+"Welt."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:3
 #: of
@@ -166,56 +226,84 @@ msgid ""
 "lookups. It must be dropped whenever tiles, corners, or edges are added "
 "or removed, otherwise lookups return stale positions."
 msgstr ""
+"Der Cache ordnet Kachelpositionen Pixelkoordinaten für "
+"`from_pixel`-Abfragen zu. Er muss verworfen werden, sobald Kacheln, Ecken"
+" oder Kanten hinzugefügt oder entfernt werden, sonst liefern Abfragen "
+"veraltete Positionen."
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.invalidate_position_pixel_cache:9
 #: of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:1 of
+msgid "Whether path finding treats this tile as impassable."
+msgstr "Ob die Wegfindung diese Kachel als nicht passierbar behandelt."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:3 of
+msgid ""
+"Actors with `is_blocking = True` block their tile as well; this flag "
+"blocks a tile without needing an actor, for example water."
 msgstr ""
+"Actors mit `is_blocking = True` blockieren ihre Kachel ebenfalls; dieses "
+"Flag blockiert eine Kachel ohne Actor, zum Beispiel Wasser."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.is_blocking:12 of
+msgid "bool"
+msgstr "bool"
 
 #: miniworlds.worlds.tiled_world.tile_elements.TileBase.merge:1 of
 msgid "Merge tile positions from another tile at the same location."
+msgstr "Führt Kachelpositionen einer anderen Kachel an derselben Stelle zusammen."
+
+#: miniworlds.worlds.tiled_world.tile_elements.TileBase.terrain:1 of
+msgid "The terrain name of this tile, or `None` (stored as `data[\"terrain\"]`)."
 msgstr ""
+"Der Geländename dieser Kachel oder `None` (gespeichert als "
+"`data[\"terrain\"]`)."
 
 #: ../../source/api/world_tiled_elements.md:20
 msgid "Tile"
-msgstr ""
+msgstr "Tile"
 
 #: miniworlds.worlds.tiled_world.tile.Tile.distance_to:2 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`float\\``"
 
 #: miniworlds.worlds.tiled_world.tile.Tile.from_actor:2
 #: miniworlds.worlds.tiled_world.tile.Tile.from_pixel:8
 #: miniworlds.worlds.tiled_world.tile.Tile.from_position:4 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\``"
-msgstr ""
+msgstr ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.tile.Tile\\``"
 
 #: miniworlds.worlds.tiled_world.tile.Tile.get_neighbour_corners:2 of
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.corner.Corner\\`\\]`"
 msgstr ""
+":sphinx_autodoc_typehints_type:`\\:py\\:class\\:\\`\\~typing.List\\`\\\\ "
+"\\\\\\[\\:py\\:class\\:\\`\\~miniworlds.worlds.tiled\\_world.corner.Corner\\`\\]`"
 
 #: ../../source/api/world_tiled_elements.md:27
 msgid "Edge"
-msgstr ""
+msgstr "Edge"
 
 #: miniworlds.worlds.tiled_world.corner.Corner.direction_vectors:1
 #: miniworlds.worlds.tiled_world.edge.Edge.direction_vectors:1 of
 msgid "Returns the available directions."
-msgstr ""
+msgstr "Gibt die verfügbaren Richtungen zurück."
 
 #: miniworlds.worlds.tiled_world.corner.Corner.from_position:1
 #: miniworlds.worlds.tiled_world.edge.Edge.from_position:1 of
 msgid "Create a tile delimiter (override expected)."
-msgstr ""
+msgstr "Erstellt einen Kachel-Begrenzer (Überschreiben erwartet)."
 
 #: miniworlds.worlds.tiled_world.corner.Corner.start_angle:1
 #: miniworlds.worlds.tiled_world.edge.Edge.start_angle:1 of
 msgid "Override: starting angle offset for layouting (e.g. hex rotation)."
-msgstr ""
+msgstr "Überschreiben: Start-Winkelversatz für das Layout (z. B. Hex-Rotation)."
 
 #: ../../source/api/world_tiled_elements.md:34
 msgid "Corner"
-msgstr ""
+msgstr "Corner"
 

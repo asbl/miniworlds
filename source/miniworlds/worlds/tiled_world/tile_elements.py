@@ -26,6 +26,11 @@ class TileBase(abc.ABC):
     def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
         self._neighbour_tiles_version = None
+        # Created lazily: worlds hold thousands of tiles and most of them
+        # never carry data.
+        self._data = None
+        self._cost = 1.0
+        self._is_blocking = False
         self.int_coord = self._internal_coordinates()
         # A world with __len__ is falsy while it is empty, so only None
         # means "use the running world".
@@ -35,6 +40,85 @@ class TileBase(abc.ABC):
         self.position = position
         self._world_position = position
         self.positions = [self.position]
+
+    @property
+    def data(self) -> dict:
+        """dict: Free-form game data stored on this tile.
+
+        Use it for anything your game needs per tile, for example a
+        resource, an owner, or a dice number. The dict is created on
+        first access and stays attached to the tile.
+
+        Examples:
+            ::
+
+                tile = world.get_tile((2, 3))
+                tile.data["dice_number"] = 8
+                print(tile.data.get("dice_number"))
+        """
+        if self._data is None:
+            self._data = {}
+        return self._data
+
+    @property
+    def terrain(self):
+        """The terrain name of this tile, or `None` (stored as `data["terrain"]`).
+
+        Examples:
+            ::
+
+                tile.terrain = "forest"
+                if tile.terrain == "forest":
+                    print("wood")
+        """
+        if self._data is None:
+            return None
+        return self._data.get("terrain")
+
+    @terrain.setter
+    def terrain(self, value) -> None:
+        self.data["terrain"] = value
+
+    @property
+    def cost(self) -> float:
+        """float: Cost of entering this tile for path finding (default `1`).
+
+        Must not be negative. A cost of `0` makes the tile free to enter.
+
+        Examples:
+            ::
+
+                swamp.cost = 3
+                road.cost = 0.5
+        """
+        return self._cost
+
+    @cost.setter
+    def cost(self, value: float) -> None:
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+            raise ValueError(
+                f"tile.cost must be a number >= 0, got {value!r}. "
+                "Use tile.is_blocking = True to make a tile impassable."
+            )
+        self._cost = value
+
+    @property
+    def is_blocking(self) -> bool:
+        """bool: Whether path finding treats this tile as impassable.
+
+        Actors with `is_blocking = True` block their tile as well; this
+        flag blocks a tile without needing an actor, for example water.
+
+        Examples:
+            ::
+
+                water_tile.is_blocking = True
+        """
+        return self._is_blocking
+
+    @is_blocking.setter
+    def is_blocking(self, value: bool) -> None:
+        self._is_blocking = bool(value)
 
     @classmethod
     @abc.abstractmethod

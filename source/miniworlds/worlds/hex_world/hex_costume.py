@@ -5,6 +5,10 @@ import pygame
 import miniworlds.appearances.costume as costume_mod
 
 
+# RGB of the placeholder color every new costume starts with.
+_PLACEHOLDER_RGB = (255, 0, 255)
+
+
 class HexCostume(costume_mod.Costume):
     """Costume for actors on hex worlds.
 
@@ -38,7 +42,22 @@ class HexCostume(costume_mod.Costume):
         super()._update_draw_shape()
         current_image = self.image_manager.images_list[self.image_manager.image_index]
         if self._is_on_tile() and current_image["type"] == self.image_manager.COLOR:
+            # Clear the rectangular color image, so that only the hexagon
+            # remains visible.
             self.draw_shapes.insert(0, (pygame.Surface.fill, [(0, 0, 0, 0)]))
+            if not self._is_filled and tuple(current_image["source"])[:3] != _PLACEHOLDER_RGB:
+                # The color was set explicitly, e.g. with
+                # `actor.add_costume((r, g, b))`, and no filled inner shape
+                # is drawn. Redraw the color as a hexagon, otherwise the
+                # actor would be invisible. The pink placeholder of an
+                # actor without any costume stays outline-only.
+                self.draw_shapes.insert(
+                    1,
+                    (
+                        pygame.draw.polygon,
+                        [current_image["source"], self._hex_points(), 0],
+                    ),
+                )
 
     def _inner_shape(self) -> tuple:
         if self._is_on_tile():

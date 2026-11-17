@@ -81,6 +81,8 @@ Mouse events:
 - `on_mouse_over(self, position)`, `on_mouse_enter(self, position)`,
   `on_mouse_leave(self, position)`: actor hover events
 - `on_wheel_up(self, position)`, `on_wheel_down(self, position)`: mouse wheel
+- `on_tile_enter(self, tile)`, `on_tile_leave(self, tile)`: the mouse enters or
+  leaves a hex (`HexWorld` only)
 
 ## Sensors And Borders
 

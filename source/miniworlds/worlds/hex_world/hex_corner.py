@@ -4,15 +4,17 @@ from typing import List, Tuple, Optional, TYPE_CHECKING
 
 import miniworlds.base.app as app
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
+import miniworlds.worlds.hex_world.hex_neighbour_cache as hex_neighbour_cache
 import miniworlds.worlds.tiled_world.corner as corner_mod
 import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 
 if TYPE_CHECKING:
+    from miniworlds.worlds.hex_world.hex_edge import HexEdge
     from miniworlds.worlds.hex_world.hex_tile import HexTile
     from miniworlds.worlds.hex_world.hex_world import HexWorld
 
 
-class HexCorner(corner_mod.Corner):
+class HexCorner(hex_neighbour_cache.HexNeighbourCacheMixin, corner_mod.Corner):
     """A corner of a hex, shared by up to three hexes.
 
     The corner position is a unique key in tripled cube coordinates: all
@@ -89,6 +91,49 @@ class HexCorner(corner_mod.Corner):
 
         self._cache_neighbour_tiles(tiles)
         return tiles
+
+    def get_neighbour_corners(self) -> List[HexCorner]:
+        """Return the corners one hex side away (up to three).
+
+        This is the "distance rule" of Catan: a settlement may only be
+        built if no neighbouring corner holds one. Corners outside the
+        world are skipped.
+
+        Examples:
+            ::
+
+                for corner in world.get_corner((3, 3), "n").get_neighbour_corners():
+                    print(corner.position)
+        """
+        corners = self.world.corners
+        return self._cached_neighbours(
+            "corners",
+            lambda: [
+                corners[key]
+                for key in hex_coords.corner_neighbour_corner_keys(self.position)
+                if key in corners
+            ],
+        )
+
+    def get_neighbour_edges(self) -> List[HexEdge]:
+        """Return the edges that meet at this corner (up to three).
+
+        Edges outside the world are skipped.
+
+        Examples:
+            ::
+
+                roads = corner.get_neighbour_edges()
+        """
+        edges = self.world.edges
+        return self._cached_neighbours(
+            "edges",
+            lambda: [
+                edges[key]
+                for key in hex_coords.corner_edge_keys(self.position)
+                if key in edges
+            ],
+        )
 
     def to_pixel(self) -> Tuple[float, float]:
         """Return the pixel position of the corner."""

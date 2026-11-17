@@ -72,6 +72,82 @@ class TestCubeRing:
         assert len(all_positions) == len(set(all_positions))
 
 
+class TestOffsetDeltas:
+    @pytest.mark.parametrize("parity", [0, 1])
+    @pytest.mark.parametrize("radius", [0, 1, 2, 5])
+    def test_ring_deltas_match_cube_ring_for_any_hex_of_the_parity(self, parity, radius):
+        for column, row in [(0, parity), (4, parity + 2), (-3, parity - 4), (9, parity + 10)]:
+            expected = [
+                hex_coords.cube_to_offset(cube)
+                for cube in hex_coords.cube_ring(
+                    hex_coords.offset_to_cube((column, row)), radius
+                )
+            ]
+            actual = [
+                (column + delta[0], row + delta[1])
+                for delta in hex_coords.ring_offset_deltas(row & 1, radius)
+            ]
+            assert actual == expected
+
+    def test_disc_deltas_are_the_rings_from_the_inside_out(self):
+        disc = hex_coords.disc_offset_deltas(1, 3)
+        expected = ()
+        for radius in range(4):
+            expected += hex_coords.ring_offset_deltas(1, radius)
+        assert disc == expected
+        assert len(disc) == 1 + 3 * 3 * 4
+
+    def test_negative_radius_has_no_deltas(self):
+        assert hex_coords.ring_offset_deltas(0, -1) == ()
+        assert hex_coords.disc_offset_deltas(0, -1) == ()
+
+    @pytest.mark.parametrize("parity", [0, 1])
+    def test_neighbour_deltas_are_the_six_adjacent_hexes(self, parity):
+        deltas = hex_coords.neighbour_offset_deltas(parity)
+        assert len(deltas) == 6
+        center = hex_coords.offset_to_cube((0, parity))
+        for delta in deltas:
+            cube = hex_coords.offset_to_cube((delta[0], parity + delta[1]))
+            assert hex_coords.cube_distance(center, cube) == 1
+
+
+class TestDistanceAndLine:
+    def test_hex_distance_is_independent_of_row_parity(self):
+        assert hex_coords.hex_distance((2, 2), (2, 2)) == 0
+        for neighbour in ((3, 2), (1, 2), (2, 1), (2, 3), (1, 1), (1, 3)):
+            assert hex_coords.hex_distance((2, 2), neighbour) == 1
+        for neighbour in ((3, 1), (1, 1), (2, 0), (3, 0), (2, 2), (3, 2)):
+            assert hex_coords.hex_distance((2, 1), neighbour) == 1
+
+    @pytest.mark.parametrize(
+        "start, end",
+        [((0, 0), (6, 0)), ((0, 0), (0, 6)), ((1, 1), (5, 4)), ((5, 4), (1, 1)), ((3, 3), (3, 3))],
+    )
+    def test_line_has_distance_plus_one_adjacent_hexes(self, start, end):
+        line = hex_coords.cube_line(hex_coords.offset_to_cube(start), hex_coords.offset_to_cube(end))
+        assert len(line) == hex_coords.hex_distance(start, end) + 1
+        assert hex_coords.cube_to_offset(line[0]) == start
+        assert hex_coords.cube_to_offset(line[-1]) == end
+        for first, second in zip(line, line[1:]):
+            assert hex_coords.cube_distance(first, second) == 1
+
+    def test_to_offset_accepts_tuples_and_objects_with_position(self):
+        class Thing:
+            position = (4, 5)
+
+        assert hex_coords.to_offset((1, 2)) == (1, 2)
+        assert hex_coords.to_offset(Thing()) == (4, 5)
+        with pytest.raises(TypeError):
+            hex_coords.to_offset("abc")
+        with pytest.raises(TypeError):
+            hex_coords.to_offset(None)
+
+    def test_deltas_accept_any_row_and_radius_below_zero(self):
+        assert hex_coords.ring_offset_deltas(5, 2) == hex_coords.ring_offset_deltas(1, 2)
+        assert hex_coords.ring_offset_deltas(-3, 2) == hex_coords.ring_offset_deltas(1, 2)
+        assert hex_coords.disc_offset_deltas(0, -7) == ()
+
+
 class TestCubeDestination:
     def test_one_step_matches_neighbors(self):
         start = (3, 3)

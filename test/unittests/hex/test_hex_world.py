@@ -201,6 +201,18 @@ class TestHexWorld(unittest.TestCase):
         self.assertEqual(image.get_at(image.get_rect().center).a, 0)
         self.assertEqual(image.get_at((0, 0)).a, 0)
 
+    def test_add_costume_with_color_draws_visible_hexagon(self):
+        # Students typically write `actor.add_costume((r, g, b))`. This used
+        # to clear the color image and draw no hexagon, so the actor was
+        # invisible.
+        actor = Actor((2, 2), world=self.world)
+        actor.add_costume((255, 0, 0))
+        image = actor.costume.get_image()
+        width, height = image.get_size()
+        self.assertEqual(image.get_at((width // 2, height // 2)), (255, 0, 0, 255))
+        for position in ((0, 0), (width - 1, 0), (0, height - 1), (width - 1, height - 1)):
+            self.assertEqual(image.get_at(position).a, 0)
+
     def test_hex_image_costume_keeps_image_corners(self):
         import pygame
 

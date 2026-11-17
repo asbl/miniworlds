@@ -4,15 +4,17 @@ from typing import List, Tuple, Optional, TYPE_CHECKING
 
 import miniworlds.base.app as app
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
+import miniworlds.worlds.hex_world.hex_neighbour_cache as hex_neighbour_cache
 import miniworlds.worlds.tiled_world.edge as edge_mod
 import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 
 if TYPE_CHECKING:
+    from miniworlds.worlds.hex_world.hex_corner import HexCorner
     from miniworlds.worlds.hex_world.hex_tile import HexTile
     from miniworlds.worlds.hex_world.hex_world import HexWorld
 
 
-class HexEdge(edge_mod.Edge):
+class HexEdge(hex_neighbour_cache.HexNeighbourCacheMixin, edge_mod.Edge):
     """An edge of a hex, shared by exactly two hexes.
 
     The edge position is a unique key in doubled cube coordinates: both
@@ -88,6 +90,45 @@ class HexEdge(edge_mod.Edge):
 
         self._cache_neighbour_tiles(tiles)
         return tiles
+
+    def get_neighbour_corners(self) -> List[HexCorner]:
+        """Return the two corners at the ends of this edge.
+
+        Examples:
+            ::
+
+                first, second = edge.get_neighbour_corners()
+        """
+        corners = self.world.corners
+        return self._cached_neighbours(
+            "corners",
+            lambda: [
+                corners[key]
+                for key in hex_coords.edge_corner_keys(self.position)
+                if key in corners
+            ],
+        )
+
+    def get_neighbour_edges(self) -> List[HexEdge]:
+        """Return the edges that touch this edge at a corner (up to four).
+
+        This is the connection rule of Catan roads: a road must connect
+        to a settlement or another road.
+
+        Examples:
+            ::
+
+                connected_roads = edge.get_neighbour_edges()
+        """
+        edges = self.world.edges
+        return self._cached_neighbours(
+            "edges",
+            lambda: [
+                edges[key]
+                for key in hex_coords.edge_neighbour_edge_keys(self.position)
+                if key in edges
+            ],
+        )
 
     def to_pixel(self) -> Tuple[float, float]:
         """Return the pixel position of the edge center."""
