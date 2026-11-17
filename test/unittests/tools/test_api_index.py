@@ -38,6 +38,28 @@ class TestApiIndex:
         assert actor["center"]["kind"] == "property"
         assert not any(name.startswith("_") for name in actor)
 
+    def test_docs_are_the_members_own_first_line_not_a_builtin_docstring(self):
+        move = self.members("Actor")["move"]["doc"]
+        assert "object" not in move and "bytes_or_buffer" not in move
+        docs = {m["doc"] for c in self.index.values() for m in c["members"] if m["doc"]}
+        assert len(docs) > 100  # distinct docs, not one shared text
+
+    def test_members_of_internal_base_classes_are_listed_with_the_public_class(self):
+        assert {"register", "remove"} <= set(self.members("Actor"))
+        assert {"width", "height", "register"} <= set(self.members("World"))
+
+    def test_nothing_public_is_unknown_to_the_index(self):
+        import miniworlds
+
+        for name in ("Actor", "Circle", "World", "TiledWorld"):
+            known, current = set(), name
+            while current:
+                entry = self.index[current]
+                known |= {m["name"] for m in entry["members"]} | set(entry["hidden"])
+                current = entry["base"]
+            public = {n for n in dir(getattr(miniworlds, name)) if not n.startswith("_")}
+            assert public <= known, (name, sorted(public - known))
+
     def test_index_is_json_serializable_and_small(self):
         text = json.dumps(build_index())
         assert len(text) < 400_000

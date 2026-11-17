@@ -99,6 +99,31 @@ w.run()
         main = "import miniworlds as mw\nimport miniworlds_physics\n\n\nclass A(mw.Actor):\n    def act(self):\n        self.mov(2)\n\nmw.World().run()\n"
         assert hints(main) == []
 
+    def test_hooks_defined_only_by_subclasses_are_known_on_the_base(self):
+        source = HEADER + (
+            "class Fabrik:\n    def bauen(self):\n        return self.erzeuge_objekt()\n\n\n"
+            "class Mauer(Fabrik):\n    def erzeuge_objekt(self):\n        return 1\n\n"
+            "    def erzeuge_objekte(self):\n        return 2\n\n"
+            "mw.World().run()\n"
+        )
+        assert hints(source) == []
+
+    def test_nested_handlers_with_their_own_self_are_not_checked_against_the_class(self):
+        source = HEADER + (
+            "class Tester:\n    def setup(self, world):\n        @world.register\n"
+            "        def on_setup(self):\n            self.init_test()\n\n    def init_tests(self):\n        pass\n\n"
+            "mw.World().run()\n"
+        )
+        assert hints(source) == []
+
+    def test_columns_are_utf16_so_umlauts_do_not_shift_the_range(self):
+        source = HEADER + 'class A(mw.Actor):\n    def act(self):\n        print("Größe äöü 😀", pritn(1))\n\nmw.World().run()\n'
+        found = hints(source)
+        line = source.split("\n")[found[0]["line"] - 1]
+        utf16 = line.encode("utf-16-le")
+        shown = utf16[found[0]["col"] * 2 : found[0]["end_col"] * 2].decode("utf-16-le")
+        assert shown == "pritn"
+
     def test_method_without_self(self):
         found = hints(HEADER + "class A(mw.Actor):\n    def act():\n        pass\n\n    @staticmethod\n    def ok():\n        pass\n\nw = mw.World()\nw.run()\n")
         assert codes(found) == ["missing-self-param"]

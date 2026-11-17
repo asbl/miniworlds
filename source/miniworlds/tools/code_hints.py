@@ -16,6 +16,7 @@ from __future__ import annotations
 import ast
 import builtins
 import difflib
+import re
 from typing import Any, Optional
 
 from miniworlds.tools import class_model
@@ -26,12 +27,23 @@ CUTOFF_MEMBER = 0.72
 OBJECT_MEMBERS = set(dir(object))
 
 
-def _hint(path, node, message, severity="warning", code="", replacement=None):
+def _column(line: str, byte_offset: int) -> int:
+    """UTF-16 column (what editors like CodeMirror use) of an ``ast`` UTF-8 byte offset."""
+    prefix = line.encode("utf-8")[:byte_offset].decode("utf-8", errors="ignore")
+    return len(prefix.encode("utf-16-le")) // 2
+
+
+def _hint(path, node, message, severity="warning", code="", replacement=None, lines=None):
+    col = node.col_offset
+    end = getattr(node, "end_col_offset", None) or node.col_offset + 1
+    if lines is not None and node.lineno <= len(lines):
+        text = lines[node.lineno - 1]
+        col, end = _column(text, col), _column(text, end)
     return {
         "file": path,
         "line": node.lineno,
-        "col": node.col_offset,
-        "end_col": getattr(node, "end_col_offset", None) or node.col_offset + 1,
+        "col": col,
+        "end_col": end,
         "severity": severity,
         "code": code,
         "message": message,
@@ -101,7 +113,7 @@ def _members_of(
         return names
     if name in api:
         entry = api[name]
-        names = {m["name"] for m in entry["members"]}
+        names = {m["name"] for m in entry["members"]} | set(entry.get("hidden", ()))
         if entry["base"]:
             inherited = _members_of(entry["base"], user, api, files_attrs, seen)
             if inherited is None:
@@ -142,7 +154,9 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
     user = {c["name"]: c for c in model["classes"]}
     hints: list[dict] = []
 
-    bound: set[str] = set(dir(builtins)) | {"__name__", "__file__", "__doc__"}
+    bound: set[str] = set(dir(builtins)) | {
+        "__name__", "__file__", "__doc__", "__class__", "__builtins__", "__spec__", "__loader__", "__package__",
+    }
     star = False
     miniworlds_star = False
     for tree in trees.values():
@@ -174,6 +188,7 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
                 class_attrs[node.name] = _self_attributes(node)
 
     for path, tree in trees.items():
+        lines = re.split(r"\r\n|\r|\n", files[path])
         # --- names defined nowhere -------------------------------------
         if not star_unknown:
             enclosing = _enclosing_classes(tree)
@@ -184,14 +199,14 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
                         members = _members_of(cls_name, user, api, class_attrs)
                         if members and node.id in members:
                             hints.append(
-                                _hint(path, node, f"„{node.id}“ gehört zum Objekt: schreibe self.{node.id}.", "error", "missing-self", f"self.{node.id}")
+                                _hint(path, node, f"„{node.id}“ gehört zum Objekt: schreibe self.{node.id}.", "error", "missing-self", f"self.{node.id}", lines=lines)
                             )
                             continue
                     close = difflib.get_close_matches(node.id, sorted(bound), n=1, cutoff=CUTOFF_NAME)
                     text = f"Der Name „{node.id}“ ist nirgends definiert."
                     if close:
                         text += f" Meintest du „{close[0]}“?"
-                    hints.append(_hint(path, node, text, "error", "undefined-name", close[0] if close else None))
+                    hints.append(_hint(path, node, text, "error", "undefined-name", close[0] if close else None, lines=lines))
 
         # --- method without self ----------------------------------------
         for node in tree.body:
@@ -206,18 +221,19 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
                 first = (item.args.posonlyargs + item.args.args)[:1]
                 if not first or first[0].arg not in ("self", "cls"):
                     hints.append(
-                        _hint(path, item, f"Die Methode „{item.name}“ braucht „self“ als ersten Parameter: def {item.name}(self, …).", "error", "missing-self-param")
+                        _hint(path, item, f"Die Methode „{item.name}“ braucht „self“ als ersten Parameter: def {item.name}(self, …).", "error", "missing-self-param", lines=lines)
                     )
 
             # --- self.<typo> ---------------------------------------------
             members = None if extended else _members_of(node.name, user, api, class_attrs)
             if members is None:
                 continue
+            members = members | _descendant_members(node.name, user, class_attrs)
             known = sorted(members | OBJECT_MEMBERS)
             for item in node.body:
                 if not isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
                     continue
-                for sub in ast.walk(item):
+                for sub in _walk_same_self(item):
                     if (
                         isinstance(sub, ast.Attribute)
                         and isinstance(sub.value, ast.Name)
@@ -229,7 +245,7 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
                         close = difflib.get_close_matches(sub.attr, known, n=1, cutoff=CUTOFF_MEMBER)
                         if close:
                             hints.append(
-                                _hint(path, sub, f"„self.{sub.attr}“ gibt es nicht. Meintest du „self.{close[0]}“?", "warning", "unknown-member", f"self.{close[0]}")
+                                _hint(path, sub, f"„self.{sub.attr}“ gibt es nicht. Meintest du „self.{close[0]}“?", "warning", "unknown-member", f"self.{close[0]}", lines=lines)
                             )
 
         # --- program never starts the world --------------------------------
@@ -241,10 +257,49 @@ def check(files: dict[str, str], index: Optional[dict] = None) -> list[dict[str,
             if not calls_run and tree.body:
                 last = tree.body[-1]
                 hints.append(
-                    _hint(path, last, "Die Welt wird nie gestartet: am Ende fehlt z. B. welt.run().", "warning", "no-run")
+                    _hint(path, last, "Die Welt wird nie gestartet: am Ende fehlt z. B. welt.run().", "warning", "no-run", lines=lines)
                 )
 
     return sorted(hints, key=lambda h: (h["file"], h["line"], h["col"]))
+
+
+def _walk_same_self(function: ast.AST):
+    """Walk a method body, skipping nested functions that bind their own ``self``.
+
+    ``@world.register`` handlers written inside a method take ``self`` too, but it
+    is the registered object, not the class being checked.
+    """
+    stack = list(ast.iter_child_nodes(function))
+    while stack:
+        node = stack.pop()
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+            args = node.args
+            if any(a.arg == "self" for a in args.posonlyargs + args.args + args.kwonlyargs):
+                continue
+        yield node
+        stack.extend(ast.iter_child_nodes(node))
+
+
+def _descendant_members(name: str, user: dict[str, dict], files_attrs: dict[str, set[str]]) -> set[str]:
+    """Members that subclasses of ``name`` add.
+
+    A base class may call hooks only its subclasses define (template method),
+    so those names are legitimate on ``self`` there.
+    """
+    def lineage(cls_name: str, seen: frozenset = frozenset()) -> set[str]:
+        if cls_name in seen or cls_name not in user:
+            return set()
+        out = {cls_name}
+        for base in user[cls_name]["bases"]:
+            out |= lineage(base, seen | {cls_name})
+        return out
+
+    names: set[str] = set()
+    for other, info in user.items():
+        if other != name and name in lineage(other):
+            names |= {m["name"] for m in info["methods"]} | {a["name"] for a in info["attributes"]}
+            names |= files_attrs.get(other, set())
+    return names
 
 
 def _enclosing_classes(tree: ast.Module) -> dict[int, str]:

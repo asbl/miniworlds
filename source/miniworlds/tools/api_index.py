@@ -7,6 +7,7 @@ that a class inherits is found by following ``base``; nothing is duplicated.
 """
 from __future__ import annotations
 
+import functools
 import inspect
 from typing import Any, Optional
 
@@ -14,7 +15,8 @@ MAX_DOC = 140
 
 
 def _first_line(doc: Optional[str]) -> str:
-    text = inspect.getdoc(doc) if isinstance(doc, str) else doc
+    # cleandoc, not getdoc: getdoc(<str>) would return the docstring of ``str``.
+    text = inspect.cleandoc(doc) if isinstance(doc, str) else ""
     if not text:
         return ""
     line = text.strip().split("\n\n")[0].replace("\n", " ").strip()
@@ -48,6 +50,26 @@ def _public_base(cls: type) -> Optional[str]:
     return None
 
 
+def _own_classes(cls: type) -> list[type]:
+    """``cls`` plus the non-exported miniworlds bases it inherits from.
+
+    Engine classes get much of their API from internal base classes
+    (``ActorBase``, ``WorldBase``, ...). Pupils see them as part of ``Actor`` and
+    ``World``, so their members are listed with the nearest public class.
+    """
+    import miniworlds
+
+    found = [cls]
+    for ancestor in cls.__mro__[1:]:
+        if ancestor is object:
+            break
+        if getattr(miniworlds, ancestor.__name__, None) is ancestor:
+            break  # next public class: it lists its own members
+        if ancestor.__module__.startswith("miniworlds"):
+            found.append(ancestor)
+    return found
+
+
 def build_index() -> dict[str, Any]:
     """Return ``{"classes": {name: {"base", "kind", "members": [...]}}}``."""
     import miniworlds
@@ -60,25 +82,43 @@ def build_index() -> dict[str, Any]:
         if not (inspect.isclass(cls) and issubclass(cls, (Actor, World))):
             continue
         members = []
-        for member_name, member in sorted(vars(cls).items()):
-            if member_name.startswith("_"):
-                continue
-            if isinstance(member, property):
-                members.append(
-                    {"name": member_name, "kind": "property", "doc": _first_line(member.fget.__doc__ if member.fget else None)}
-                )
-            elif inspect.isfunction(member):
-                members.append(
-                    {
-                        "name": member_name,
-                        "kind": "method",
-                        "signature": _signature(member),
-                        "doc": _first_line(member.__doc__),
-                    }
-                )
+        seen: set[str] = set()
+        for source in _own_classes(cls):
+            for member_name, member in sorted(vars(source).items()):
+                if member_name.startswith("_") or member_name in seen:
+                    continue
+                if isinstance(member, (property, functools.cached_property)):
+                    seen.add(member_name)
+                    getter = member.fget if isinstance(member, property) else member.func
+                    members.append(
+                        {"name": member_name, "kind": "property", "doc": _first_line(getter.__doc__ if getter else None)}
+                    )
+                elif inspect.isfunction(member):
+                    seen.add(member_name)
+                    members.append(
+                        {
+                            "name": member_name,
+                            "kind": "method",
+                            "signature": _signature(member),
+                            "doc": _first_line(member.__doc__),
+                        }
+                    )
         classes[name] = {
             "base": _public_base(cls),
             "kind": "actor" if issubclass(cls, Actor) else "world",
             "members": members,
+            "_cls": cls,
         }
+    # Names that exist on the class but are not part of the curated list
+    # (pygame sprite methods, plain class attributes, ...): never suggested,
+    # but known, so hints do not call them typos.
+    for name, entry in classes.items():
+        chain_names: set[str] = set()
+        current: Optional[str] = name
+        while current:
+            chain_names |= {m["name"] for m in classes[current]["members"]}
+            current = classes[current]["base"]
+        entry["hidden"] = sorted(
+            n for n in dir(entry.pop("_cls")) if not n.startswith("_") and n not in chain_names
+        )
     return {"classes": classes}
