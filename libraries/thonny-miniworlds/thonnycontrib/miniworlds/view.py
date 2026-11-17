@@ -11,7 +11,7 @@ import time
 import tkinter as tk
 import webbrowser
 from pathlib import Path
-from tkinter import filedialog, messagebox, simpledialog, ttk
+from tkinter import filedialog, messagebox, ttk
 
 from thonny import get_runner, get_workbench, ui_utils
 
@@ -91,7 +91,7 @@ class MiniworldsView(ttk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.columnconfigure(0, weight=1)
-        self.rowconfigure(4, weight=1)
+        self.rowconfigure(2, weight=1)
         self.current_project = None
         self.current_filename = None
         self.context_kind = None
@@ -107,33 +107,74 @@ class MiniworldsView(ttk.Frame):
         self.mode = tk.StringVar(
             value=MODES.get(get_workbench().get_option("miniworlds.mode"), MODES["E2"])
         )
-        self.project_label = ttk.Label(
-            self, text="Projekt: noch keine gespeicherte Datei", wraplength=420
+        header = ttk.Frame(self)
+        header.grid(row=0, column=0, sticky="ew", padx=5, pady=4)
+        header.columnconfigure(0, weight=1)
+        self.project_label = ttk.Label(header, text="miniworlds", wraplength=230)
+        self.project_label.grid(row=0, column=0, sticky="w")
+        self.project_label.bind(
+            "<Configure>",
+            lambda e: self.project_label.configure(wraplength=max(85, e.width - 4)),
         )
-        self.project_label.grid(row=0, column=0, sticky="ew", padx=5)
-        mode = ttk.Combobox(
-            self,
-            textvariable=self.mode,
-            values=list(MODES.values()),
-            state="readonly",
-            width=39,
+        self.mode_badge = ttk.Label(header, text=self.mode_key)
+        self.mode_badge.grid(row=0, column=1, padx=4)
+        self.more_button = ttk.Menubutton(header, text="Mehr")
+        self.more_button.grid(row=0, column=2)
+        self.more_menu = tk.Menu(self.more_button, tearoff=False)
+        self.more_menu.add_command(
+            label="Installation & Updates …", command=install_library
         )
-        mode.grid(row=1, column=0, sticky="ew", padx=5, pady=4)
-        mode.bind("<<ComboboxSelected>>", self.change_mode)
-        ttk.Button(
-            self, text="Installation & Interpreter prüfen", command=self.show_status
-        ).grid(row=2, column=0, sticky="ew", padx=5)
-        self.section = tk.StringVar(value="Hilfe")
-        self.section_box = ttk.Combobox(
-            self, textvariable=self.section, state="readonly"
+        self.more_menu.add_command(
+            label="Interpreter & Einstellungen …", command=self.show_status
         )
-        self.section_box.grid(row=3, column=0, sticky="ew", padx=5, pady=4)
-        self.section_box.bind("<<ComboboxSelected>>", lambda e: self.select_section())
-        style = ttk.Style(self)
-        style.layout("Miniworlds.TNotebook.Tab", [])
-        self.tabs = ttk.Notebook(self, style="Miniworlds.TNotebook")
-        self.tabs.bind("<<NotebookTabChanged>>", lambda e: self.update_section())
-        self.tabs.grid(row=4, column=0, sticky="nsew", padx=5, pady=5)
+        self.more_menu.add_separator()
+        for key, label in [("E2", "Objekte (E2)"), ("Q1", "Klassen (Q1)")]:
+            self.more_menu.add_radiobutton(
+                label=label,
+                variable=self.mode,
+                value=MODES[key],
+                command=self.change_mode,
+            )
+        self.more_button.configure(menu=self.more_menu)
+        self.lab_dialog = None
+        self.lab_button = ttk.Button(
+            self, text="Objektlabor starten", command=self.open_lab
+        )
+        self.lab_button.grid(row=1, column=0, sticky="ew", padx=5, pady=(0, 4))
+        self.tabs = ttk.Notebook(self)
+        self.tabs.grid(row=2, column=0, sticky="nsew", padx=5, pady=4)
+        self.start_page = ttk.Frame(self.tabs, padding=4)
+        self.code_page = ttk.Frame(self.tabs, padding=2)
+        self.media_page = ttk.Frame(self.tabs, padding=3)
+        for frame, label in [
+            (self.start_page, "Start"),
+            (self.code_page, "Code"),
+            (self.media_page, "Medien"),
+        ]:
+            self.tabs.add(frame, text=label)
+        # Start remains usable in a narrow or short dock.
+        self.start_canvas = tk.Canvas(self.start_page, highlightthickness=0, width=150)
+        start_scroll = ttk.Scrollbar(self.start_page, command=self.start_canvas.yview)
+        self.start_canvas.configure(yscrollcommand=start_scroll.set)
+        start_scroll.pack(side="right", fill="y")
+        self.start_canvas.pack(fill="both", expand=True)
+        self.start_content = ttk.Frame(self.start_canvas)
+        start_window = self.start_canvas.create_window(
+            (0, 0), window=self.start_content, anchor="nw"
+        )
+        self.start_content.bind(
+            "<Configure>",
+            lambda e: self.start_canvas.configure(
+                scrollregion=self.start_canvas.bbox("all")
+            ),
+        )
+        self.start_canvas.bind(
+            "<Configure>",
+            lambda e: self.start_canvas.itemconfigure(start_window, width=e.width),
+        )
+        self.code_tabs = ttk.Notebook(self.code_page)
+        self.code_tabs.pack(fill="both", expand=True)
+        self.pages = {}
         self.build_help()
         self.build_templates()
         self.build_events()
@@ -141,49 +182,102 @@ class MiniworldsView(ttk.Frame):
         self.build_media()
         self.build_checks()
         self.build_status()
-        self.build_lab()
-        self.section_box.configure(
-            values=[self.tabs.tab(tab, "text") for tab in self.tabs.tabs()]
-        )
+        self.tabs.bind("<<NotebookTabChanged>>", self.navigation_changed)
+        self.code_tabs.bind("<<NotebookTabChanged>>", self.navigation_changed)
         self.refresh_learning()
         self.sync_project()
         self.bind("<Destroy>", self.cleanup, add=True)
 
-    def build_lab(self):
-        frame = self.tab("Objektlabor")
-        self.note(
-            frame,
-            "Objekte wie in BlueJ ausprobieren: Klassen ansehen, Objekte erzeugen, Methoden aufrufen und Zustandsänderungen vergleichen. E2 zeigt Objekte, Q1 ergänzt Klassen und Vererbung.",
-        )
-        self.button(frame, "Objektlabor öffnen …", self.open_lab)
-        self.note(
-            frame,
-            "Benötigt miniworlds ab 4.4.0.12. Das Programm läuft im ausgewählten Thonny-Interpreter. Stop/Restart beendet die Sitzung. Bei Codeänderungen muss es neu geladen werden.",
-        )
-        self.lab_dialog = None
-
     def open_lab(self):
+        dock = get_workbench().get_view("MiniworldsLabView")
+        dock.open()
+        # Run selects Thonny's shell. Restore the lab after dispatching it.
+        get_workbench().show_view("MiniworldsLabView")
+
+    def lab_ready(self):
+        wb = get_workbench()
+        dock = wb.get_view("MiniworldsLabView")
+        if not getattr(dock, "hidden", False):
+            wb.show_view("MiniworldsLabView", set_focus=False)
+
+    def show_main(self):
+        get_workbench().hide_view("MiniworldsLabView")
+        get_workbench().show_view("MiniworldsView")
+
+    def destroy(self):
+        # Release the connected session while its child widgets still exist.
         if self.lab_dialog and self.lab_dialog.winfo_exists():
-            self.lab_dialog.lift()
-            return
-        from .live_view import ConnectedLabDialog
+            self.lab_dialog.close()
+        super().destroy()
 
-        self.lab_dialog = ConnectedLabDialog(self)
+    def show_page(self, name):
+        self.show_main()
+        page = self.pages[name]
+        if name in {"Hilfe", "Ereignisse", "Prüfung"}:
+            self.tabs.select(self.code_page)
+            self.code_tabs.select(page)
+        elif name == "Bilder & Sounds":
+            self.tabs.select(self.media_page)
+        else:
+            self.tabs.select(self.start_page)
 
-    def select_section(self):
-        for tab in self.tabs.tabs():
-            if self.tabs.tab(tab, "text") == self.section.get():
-                self.tabs.select(tab)
-                break
-
-    def update_section(self):
-        if self.tabs.select():
-            self.section.set(self.tabs.tab(self.tabs.select(), "text"))
+    def navigation_changed(self, event=None):
+        if self.tabs.select() == str(self.media_page):
+            editor = self.editor(False)
+            filename = editor.get_filename() if editor else None
+            project = (
+                project_root(filename)
+                if filename and Path(filename).is_file()
+                else None
+            )
+            if project and project != self.media_project:
+                self.refresh_media()
+            elif not project:
+                self.media_info.configure(
+                    text="Speichere zuerst deine Python-Datei. Danach kannst du hier Bilder und Sounds hinzufügen."
+                )
+        elif self.tabs.select() == str(self.code_page):
+            if self.code_tabs.select() == str(self.events_tab):
+                self.discover_targets(notify=False)
+            elif self.code_tabs.select() == str(self.check_tab) and self.editor(False):
+                self.check()
 
     def tab(self, title):
-        frame = ttk.Frame(self.tabs, padding=5)
-        self.tabs.add(frame, text=title)
+        if title in {"Hilfe", "Ereignisse", "Prüfung"}:
+            frame = ttk.Frame(self.code_tabs, padding=4)
+            self.code_tabs.add(
+                frame,
+                text={"Ereignisse": "Aktion", "Prüfung": "Prüfen"}.get(title, title),
+            )
+        elif title == "Bilder & Sounds":
+            frame = self.media_page
+        elif title == "Installation":
+            self.settings_dialog = tk.Toplevel(self)
+            self.settings_dialog.withdraw()
+            self.settings_dialog.title("miniworlds · Einstellungen")
+            self.settings_dialog.geometry("560x470")
+            self.settings_dialog.protocol(
+                "WM_DELETE_WINDOW", self.settings_dialog.withdraw
+            )
+            frame = ttk.Frame(self.settings_dialog, padding=8)
+            frame.pack(fill="both", expand=True)
+        else:
+            frame = ttk.LabelFrame(
+                self.start_content,
+                text="Eigenes Projekt"
+                if title == "Vorlagen"
+                else "Mit Beispiel starten",
+                padding=6,
+            )
+            frame.pack(fill="x", pady=5)
+        self.pages[title] = frame
         return frame
+
+    def toggle_panel(self, variable, frame):
+        if variable.get():
+            frame.pack(fill="both", expand=True, pady=3)
+        else:
+            frame.pack_forget()
 
     def button(self, parent, title, action):
         button = ttk.Button(parent, text=title, command=action)
@@ -269,6 +363,17 @@ class MiniworldsView(ttk.Frame):
             self.discover_targets(notify=False)
             self.stop_audio()
             self.clear_media()
+            self.navigation_changed()
+        editor = self.editor(False)
+        if (
+            editor
+            and self.tabs.select() == str(self.code_page)
+            and self.code_tabs.select() == str(self.events_tab)
+        ):
+            stamp = (editor.get_filename(), editor.get_content(), self.mode_key)
+            if stamp != getattr(self, "_event_stamp", None):
+                self._event_stamp = stamp
+                self.discover_targets(notify=False)
         self.sync_job = self.after(500, self.sync_project)
 
     def change_mode(self, event=None):
@@ -284,6 +389,9 @@ class MiniworldsView(ttk.Frame):
         self.discover_targets(notify=False)
 
     def refresh_learning(self):
+        self.mode_badge.configure(text=self.mode_key)
+        if self.lab_dialog and self.lab_dialog.winfo_exists():
+            self.lab_dialog.apply_mode()
         self.help_stage = 0
         self.context_kind = None
         self.example_stage = 0
@@ -298,10 +406,8 @@ class MiniworldsView(ttk.Frame):
         self.combo(
             self.help_tab, self.topic, list(TOPICS) + list(EVENTS), self.reset_help
         )
-        self.button(self.help_tab, "Hilfe am Cursor (Strg+F1)", self.context_help)
-        self.button(
-            self.help_tab, "Nächster Schritt: Hinweis / Beispiel", self.reveal_help
-        )
+        self.button(self.help_tab, "Hilfe zum Code", self.context_help)
+        self.help_hint = self.button(self.help_tab, "Hinweis zeigen", self.reveal_help)
         self.help_output = self.output(self.help_tab)
 
     def reset_help(self):
@@ -314,6 +420,10 @@ class MiniworldsView(ttk.Frame):
         self.refresh_help()
 
     def refresh_help(self):
+        self.help_hint.configure(
+            text="Hinweis zeigen" if self.help_stage == 0 else "Beispielcode zeigen",
+            state="disabled" if self.help_stage >= 2 else "normal",
+        )
         self.display(
             self.help_output,
             learning_help(
@@ -348,23 +458,30 @@ class MiniworldsView(ttk.Frame):
                 MODES[self.mode_key]
                 + "\n\nKeine eigene Hilfe an dieser Stelle. Wähle oben ein Thema. Bei unvollständiger Syntax kann der Objekttyp noch nicht erkannt werden.",
             )
-        self.tabs.select(self.help_tab)
+        self.show_page("Hilfe")
 
     def build_templates(self):
         self.project_tab = self.tab("Vorlagen")
         self.kind = tk.StringVar(value="Pixelwelt")
+        self.note(self.project_tab, "Welche Welt möchtest du erstellen?")
         self.combo(
             self.project_tab,
             self.kind,
             ["Pixelwelt", "Kachelwelt"],
             self.preview_project,
         )
-        self.note(
+        self.button(self.project_tab, "Neues Projekt …", self.new_project)
+        self.template_preview = tk.BooleanVar(value=False)
+        self.template_content = ttk.Frame(self.project_tab)
+        ttk.Checkbutton(
             self.project_tab,
-            "Vorlagen enthalten eine kleine Aufgabe und Kommentare passend zum gewählten Unterrichtsmodus.",
-        )
-        self.button(self.project_tab, "Neues Projekt anlegen …", self.new_project)
-        self.project_output = self.output(self.project_tab)
+            text="Code ansehen",
+            variable=self.template_preview,
+            command=lambda: self.toggle_panel(
+                self.template_preview, self.template_content
+            ),
+        ).pack(anchor="w")
+        self.project_output = self.output(self.template_content, height=8)
 
     def preview_project(self):
         self.display(
@@ -372,47 +489,95 @@ class MiniworldsView(ttk.Frame):
         )
 
     def new_project(self, example=False):
-        parent = filedialog.askdirectory(
-            parent=self, title="Übergeordneten Projektordner wählen"
-        )
-        if not parent:
+        selected = self.example.get() if example else "Grundgerüst"
+        if selected not in EXAMPLES:
+            self.info("Bitte ein Beispiel auswählen.")
             return
-        name = simpledialog.askstring(
-            "Projekt", "Name des neuen Projektordners:", parent=self
+        dialog = tk.Toplevel(self)
+        dialog.title("Projekt anlegen")
+        dialog.transient(self.winfo_toplevel())
+        dialog.resizable(True, False)
+        frame = ttk.Frame(dialog, padding=12)
+        frame.pack(fill="both", expand=True)
+        self.note(
+            frame,
+            MODES[self.mode_key] + " · " + (selected if example else self.kind.get()),
         )
-        if name is None:
-            return
-        try:
-            selected = self.example.get() if example else "Grundgerüst"
-            if selected not in EXAMPLES:
-                raise ValueError("Bitte zuerst ein Beispiel auswählen.")
-            code = teaching_project_code(
-                self.mode_key, "Pixelwelt" if example else self.kind.get(), selected
+        name = tk.StringVar(value="mein_spiel")
+        parent = tk.StringVar(
+            value=str(
+                getattr(
+                    self,
+                    "last_project_parent",
+                    self.current_project.parent
+                    if self.current_project
+                    else Path.home(),
+                )
             )
-            path = create_project(parent, name, code)
-            save_project_mode(path.parent, self.mode_key)
-            get_workbench().get_editor_notebook().show_file(str(path))
-        except (OSError, ValueError) as error:
-            self.info(str(error))
+        )
+        self.note(frame, "Projektname")
+        entry = ttk.Entry(frame, textvariable=name)
+        entry.pack(fill="x")
+        self.note(frame, "Speichern in")
+        path_row = ttk.Frame(frame)
+        path_row.pack(fill="x")
+        ttk.Entry(path_row, textvariable=parent, width=32).pack(
+            side="left", fill="x", expand=True
+        )
+
+        def browse():
+            folder = filedialog.askdirectory(
+                parent=dialog, initialdir=parent.get(), title="Projektordner wählen"
+            )
+            if folder:
+                parent.set(folder)
+
+        ttk.Button(path_row, text="Ordner …", command=browse).pack(
+            side="left", padx=(5, 0)
+        )
+        feedback = self.note(
+            frame, "Ein neuer Ordner mit main.py, images und sounds wird angelegt."
+        )
+        mode = self.mode_key
+        kind = "Pixelwelt" if example else self.kind.get()
+
+        def create():
+            try:
+                if not Path(parent.get()).is_dir():
+                    raise ValueError("Bitte einen vorhandenen Speicherordner wählen.")
+                code = teaching_project_code(mode, kind, selected)
+                path = create_project(parent.get(), name.get().strip(), code)
+                save_project_mode(path.parent, mode)
+                self.last_project_parent = path.parent.parent
+                get_workbench().get_editor_notebook().show_file(str(path))
+                dialog.destroy()
+            except (OSError, ValueError) as error:
+                feedback.configure(text=str(error))
+
+        self.button(frame, "Projekt anlegen", create)
+        self.button(frame, "Abbrechen", dialog.destroy)
+        dialog.bind("<Return>", lambda e: create())
+        dialog.bind("<Escape>", lambda e: dialog.destroy())
+        entry.focus_set()
+        entry.selection_range(0, "end")
 
     def build_events(self):
         self.events_tab = self.tab("Ereignisse")
         self.note(
             self.events_tab,
-            "E2: World/Actor-Objekt · Q1: World/Actor-Klasse. Vorhandene Ereignisse werden geöffnet.",
+            "Wähle ein Objekt und einen Auslöser.",
         )
         self.target = tk.StringVar(value="")
         self.target_box = self.combo(
             self.events_tab, self.target, [], self.preview_event
         )
-        self.button(self.events_tab, "Ziele aus Editor laden", self.discover_targets)
+        self.note(self.events_tab, "Wer reagiert?")
+        self.note(self.events_tab, "Wann?")
         self.event = tk.StringVar(value="act")
         self.event_box = self.combo(
             self.events_tab, self.event, EVENTS, self.preview_event
         )
-        self.button(
-            self.events_tab, "Einfügen / vorhandenes Ereignis öffnen", self.insert_event
-        )
+        self.button(self.events_tab, "In Code einfügen …", self.insert_event)
         self.event_output = self.output(self.events_tab)
 
     def discover_targets(self, notify=True):
@@ -427,7 +592,12 @@ class MiniworldsView(ttk.Frame):
         names = list(targets)
         self.target_box.configure(values=names)
         if self.target.get() not in names:
-            self.target.set(names[0] if names else "")
+            self.target.set(
+                next(
+                    (name for name in names if targets[name].kind == "Actor"),
+                    names[0] if names else "",
+                )
+            )
         self.preview_event()
 
     def preview_event(self):
@@ -547,31 +717,39 @@ class MiniworldsView(ttk.Frame):
         self.example_tab = self.tab("Beispiele")
         self.example_topic = tk.StringVar(value="Alle")
         self.example_level = tk.StringVar(value="Alle")
-        self.combo(
-            self.example_tab,
-            self.example_topic,
-            ["Alle", "Einstieg", "Bewegung", "Eingabe"],
-            self.filter_examples,
-        )
-        self.combo(
-            self.example_tab,
-            self.example_level,
-            ["Alle", "Einstieg", "Fortgeschritten"],
-            self.filter_examples,
-        )
         self.example = tk.StringVar(value="Bewegung")
         self.example_box = self.combo(
             self.example_tab, self.example, EXAMPLES, self.reset_example
         )
         self.button(
-            self.example_tab, "Nächster Schritt: Hinweis / Code", self.reveal_example
-        )
-        self.button(
             self.example_tab,
-            "Als neues Projekt öffnen …",
+            "Beispiel öffnen …",
             lambda: self.new_project(example=True),
         )
-        self.example_output = self.output(self.example_tab)
+        self.example_output = self.output(self.example_tab, height=7)
+        self.example_hint = self.button(
+            self.example_tab, "Hinweis zeigen", self.reveal_example
+        )
+        self.filter_visible = tk.BooleanVar(value=False)
+        filters = ttk.Frame(self.example_tab)
+        ttk.Checkbutton(
+            self.example_tab,
+            text="Beispiele filtern",
+            variable=self.filter_visible,
+            command=lambda: self.toggle_panel(self.filter_visible, filters),
+        ).pack(anchor="w")
+        self.combo(
+            filters,
+            self.example_topic,
+            ["Alle", "Einstieg", "Bewegung", "Eingabe"],
+            self.filter_examples,
+        )
+        self.combo(
+            filters,
+            self.example_level,
+            ["Alle", "Einstieg", "Fortgeschritten"],
+            self.filter_examples,
+        )
 
     def filter_examples(self):
         names = filter_examples(self.example_topic.get(), self.example_level.get())
@@ -589,6 +767,10 @@ class MiniworldsView(ttk.Frame):
         self.preview_example()
 
     def preview_example(self):
+        self.example_hint.configure(
+            text="Hinweis zeigen" if self.example_stage == 0 else "Code zeigen",
+            state="disabled" if self.example_stage >= 2 else "normal",
+        )
         item = EXAMPLES.get(self.example.get())
         if item is None:
             self.display(
@@ -607,48 +789,52 @@ class MiniworldsView(ttk.Frame):
 
     def build_media(self):
         self.media_tab = self.tab("Bilder & Sounds")
-        canvas = tk.Canvas(self.media_tab, height=420, highlightthickness=0)
-        scrollbar = ttk.Scrollbar(self.media_tab, command=canvas.yview)
-        canvas.configure(yscrollcommand=scrollbar.set)
-        scrollbar.pack(side="right", fill="y")
-        canvas.pack(fill="both", expand=True)
-        content = ttk.Frame(canvas)
-        window = canvas.create_window((0, 0), window=content, anchor="nw")
-        content.bind(
-            "<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        self.media_kind = tk.StringVar(value="Bilder")
+        self.media_list_mode = tk.BooleanVar(value=False)
+        self.media_rows = []
+        toolbar = ttk.Frame(self.media_tab)
+        toolbar.pack(fill="x")
+        self.button(toolbar, "Dateien hinzufügen …", self.import_files)
+        choices = ttk.Frame(self.media_tab)
+        choices.pack(fill="x", pady=3)
+        for label in ["Bilder", "Sounds"]:
+            ttk.Radiobutton(
+                choices,
+                text=label,
+                value=label,
+                variable=self.media_kind,
+                command=self.apply_media_view,
+            ).pack(side="left")
+        more = ttk.Menubutton(self.media_tab, text="Dateiaktionen")
+        menu = tk.Menu(more, tearoff=False)
+        menu.add_command(label="Dateiliste aktualisieren", command=self.refresh_media)
+        menu.add_checkbutton(
+            label="Bilder als Dateiliste",
+            variable=self.media_list_mode,
+            command=self.apply_media_view,
         )
-        canvas.bind(
-            "<Configure>", lambda e: canvas.itemconfigure(window, width=e.width)
-        )
-        self.note(
-            content,
-            "Bilder und Sounds im aktuellen Projekt. PNG/JPEG/WebP und weitere Formate werden als Miniaturen angezeigt.",
-        )
-        bar = ttk.Frame(content)
-        bar.pack(fill="x")
-        ttk.Button(bar, text="Importieren …", command=self.import_files).pack(
-            side="left", expand=True, fill="x"
-        )
-        ttk.Button(bar, text="Aktualisieren", command=self.refresh_media).pack(
-            side="left", expand=True, fill="x"
-        )
+        menu.add_separator()
+        menu.add_command(label="Pfad einfügen", command=self.insert_media)
+        menu.add_command(label="Extern öffnen", command=self.preview_media)
+        menu.add_command(label="Datei entfernen …", command=self.delete_media)
+        more.configure(menu=menu)
         self.media = ttk.Treeview(
-            content, columns=("size", "alpha"), selectmode="browse", height=5
+            self.media_tab, columns=("size", "alpha"), selectmode="browse", height=6
         )
         self.media.heading("#0", text="Datei")
         self.media.heading("size", text="Maße / Typ")
-        self.media.heading("alpha", text="Transparenz")
-        self.media.column("#0", width=150, stretch=True)
-        self.media.column("size", width=90, stretch=False)
-        self.media.column("alpha", width=80, stretch=False)
-        self.media.pack(fill="both", expand=True)
+        self.media.heading("alpha", text="Transparent")
+        self.media.column("#0", width=145)
+        self.media.column("size", width=90)
+        self.media.column("alpha", width=75)
         self.media.bind("<<TreeviewSelect>>", self.media_selected)
-        gallery_frame = ttk.Frame(content)
-        gallery_frame.pack(fill="both", expand=True)
-        self.gallery = tk.Canvas(gallery_frame, height=140, highlightthickness=0)
-        scroll = ttk.Scrollbar(gallery_frame, command=self.gallery.yview)
-        self.gallery.configure(yscrollcommand=scroll.set)
-        scroll.pack(side="right", fill="y")
+        self.gallery_frame = ttk.Frame(self.media_tab)
+        self.gallery = tk.Canvas(
+            self.gallery_frame, height=170, highlightthickness=0, width=130
+        )
+        scrollbar = ttk.Scrollbar(self.gallery_frame, command=self.gallery.yview)
+        self.gallery.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
         self.gallery.pack(fill="both", expand=True)
         self.gallery_body = ttk.Frame(self.gallery)
         self.gallery_window = self.gallery.create_window(
@@ -659,38 +845,110 @@ class MiniworldsView(ttk.Frame):
             lambda e: self.gallery.configure(scrollregion=self.gallery.bbox("all")),
         )
         self.gallery.bind("<Configure>", self.resize_gallery)
-        self.media_info = self.note(content, "")
+        self.media_info = self.note(
+            self.media_tab, "Hier erscheinen die Dateien deines Projekts."
+        )
+        self.media_actions = ttk.Frame(self.media_tab)
+        self.media_actions.pack(fill="x")
+        self.note(self.media_actions, "Verwenden für")
         self.media_target = tk.StringVar(value="player")
         self.media_target_box = self.combo(
-            content,
+            self.media_actions,
             self.media_target,
             ["player", "world", "self", "self.world"],
             readonly=False,
         )
-        for title, action in [
-            ("Pfad am Cursor einfügen", self.insert_media),
-            ("Als Kostüm einfügen …", lambda: self.insert_media_call("Kostüm")),
-            (
-                "Als Hintergrund einfügen …",
-                lambda: self.insert_media_call("Hintergrund"),
-            ),
-            ("Sound-Aufruf einfügen …", lambda: self.insert_media_call("Sound")),
-        ]:
-            self.button(content, title, action)
-        controls = ttk.Frame(content)
-        controls.pack(fill="x")
-        ttk.Button(controls, text="▶ Sound", command=self.play_audio).pack(side="left")
-        ttk.Button(controls, text="■ Stopp", command=self.stop_audio).pack(side="left")
-        self.volume = tk.DoubleVar(value=60)
-        ttk.Scale(
-            controls, from_=0, to=100, variable=self.volume, command=self.set_volume
-        ).pack(side="left", fill="x", expand=True)
-        self.note(
-            content,
-            "Lautstärke: 0–100 % · Tonvorschau läuft in einem separaten Prozess.",
+        self.media_purpose = tk.StringVar(value="Kostüm")
+        self.purpose_box = self.combo(
+            self.media_actions,
+            self.media_purpose,
+            ["Kostüm", "Hintergrund"],
+            self.media_purpose_changed,
         )
-        self.button(content, "Extern öffnen", self.preview_media)
-        self.button(content, "Datei entfernen …", self.delete_media)
+        self.media_insert_button = self.button(
+            self.media_actions, "In Code einfügen …", self.insert_selected_media
+        )
+        self.media_insert_button.configure(state="disabled")
+        self.sound_controls = ttk.Frame(self.media_tab)
+        ttk.Button(
+            self.sound_controls, text="▶ Abspielen", command=self.play_audio
+        ).pack(side="left")
+        ttk.Button(self.sound_controls, text="■ Stopp", command=self.stop_audio).pack(
+            side="left"
+        )
+        self.volume = tk.DoubleVar(value=60)
+        self.volume_scale = ttk.Scale(
+            self.sound_controls,
+            from_=0,
+            to=100,
+            variable=self.volume,
+            command=self.set_volume,
+        )
+        self.volume_scale.pack(side="left", fill="x", expand=True)
+        more.pack(fill="x", pady=3)
+        self.apply_media_view()
+
+    def apply_media_view(self):
+        self.media.pack_forget()
+        self.gallery_frame.pack_forget()
+        self.sound_controls.pack_forget()
+        images = self.media_kind.get() == "Bilder"
+        for iid in self.media_rows:
+            is_image = Path(iid).suffix.lower() in IMAGE_EXTENSIONS
+            if is_image == images:
+                self.media.move(iid, "", "end")
+            else:
+                self.media.detach(iid)
+        if images and not self.media_list_mode.get():
+            self.gallery_frame.pack(fill="both", expand=True, before=self.media_info)
+        else:
+            self.media.pack(fill="both", expand=True, before=self.media_info)
+        if not images:
+            self.sound_controls.pack(fill="x")
+            self.purpose_box.pack_forget()
+        elif not self.purpose_box.winfo_manager():
+            self.purpose_box.pack(fill="x", before=self.media_insert_button)
+        selection = self.media.selection()
+        if (
+            selection
+            and (Path(selection[0]).suffix.lower() in IMAGE_EXTENSIONS) != images
+        ):
+            self.media.selection_remove(*selection)
+            self.media_insert_button.configure(state="disabled")
+        if not self.media_rows:
+            self.media_info.configure(
+                text="Noch keine Dateien. Füge Bilder oder Sounds hinzu."
+            )
+
+    def insert_selected_media(self):
+        path = self.selected_media()
+        if path:
+            purpose = (
+                "Sound"
+                if path.suffix.lower() in SOUND_EXTENSIONS
+                else self.media_purpose.get()
+            )
+            self.insert_media_call(purpose)
+
+    def media_purpose_changed(self):
+        editor = self.editor(False)
+        if not editor:
+            return
+        desired = (
+            "Actor"
+            if self.media_purpose.get() == "Kostüm"
+            and self.media_kind.get() == "Bilder"
+            else "World"
+        )
+        try:
+            targets = targets_for(editor.get_content(), "E2")
+            candidates = [
+                name for name, target in targets.items() if target.kind == desired
+            ]
+            if candidates and self.media_target.get() not in candidates:
+                self.media_target.set(candidates[0])
+        except SyntaxError:
+            pass
 
     def project_dir(self):
         editor = self.editor()
@@ -705,7 +963,8 @@ class MiniworldsView(ttk.Frame):
         return project_root(filename)
 
     def clear_media(self):
-        self.media.delete(*self.media.get_children())
+        self.media.delete(*self.media_rows)
+        self.media_rows = []
         for child in self.gallery_body.winfo_children():
             child.destroy()
         self.gallery_images = []
@@ -714,6 +973,7 @@ class MiniworldsView(ttk.Frame):
             text="Dateiliste aktualisieren, um dieses Projekt anzuzeigen."
         )
         self.media_project = None
+        self.media_insert_button.configure(state="disabled")
 
     def import_files(self):
         project = self.project_dir()
@@ -731,12 +991,21 @@ class MiniworldsView(ttk.Frame):
             ],
         )
         errors = []
+        imported = []
         for filename in files:
             try:
-                import_media(filename, project)
+                imported.append(import_media(filename, project))
             except (OSError, ValueError) as error:
                 errors.append(f"{Path(filename).name}: {error}")
+        if imported:
+            self.media_kind.set(
+                "Sounds"
+                if Path(imported[-1]).suffix.lower() in SOUND_EXTENSIONS
+                else "Bilder"
+            )
         self.refresh_media()
+        if imported:
+            self.select_media(imported[-1])
         if errors:
             self.info("\n".join(errors))
 
@@ -788,6 +1057,7 @@ class MiniworldsView(ttk.Frame):
                 self.media.insert(
                     "", "end", iid=relative, text=relative, values=(size, alpha)
                 )
+                self.media_rows.append(relative)
                 if thumbnail:
                     self.gallery_images.append(thumbnail)
                     tile = ttk.Frame(self.gallery_body, padding=2)
@@ -820,6 +1090,8 @@ class MiniworldsView(ttk.Frame):
             )
         except SyntaxError:
             pass
+        self.apply_media_view()
+        self.media_purpose_changed()
 
     def resize_gallery(self, event):
         self.gallery.itemconfigure(self.gallery_window, width=event.width)
@@ -843,6 +1115,12 @@ class MiniworldsView(ttk.Frame):
         if not selection or not self.media_project:
             return
         path = self.media_project / selection[0]
+        kind = "Sounds" if path.suffix.lower() in SOUND_EXTENSIONS else "Bilder"
+        if self.media_kind.get() != kind:
+            self.media_kind.set(kind)
+            self.apply_media_view()
+        self.media_insert_button.configure(state="normal")
+        self.media_purpose_changed()
         try:
             self.media_info.configure(
                 text=f"{path.name} · {path.stat().st_size:,} Bytes"
@@ -956,7 +1234,7 @@ class MiniworldsView(ttk.Frame):
             self.audio_path = path
             self.media_info.configure(text=f"Wiedergabe: {path.name}")
             process = self.audio_process
-            self.after(100, lambda: self.poll_audio(process))
+            self.audio_job = self.after(100, lambda: self.poll_audio(process))
         except OSError as error:
             self.info(str(error))
 
@@ -973,7 +1251,7 @@ class MiniworldsView(ttk.Frame):
         if self.audio_process is not process:
             return
         if process.poll() is None:
-            self.after(100, lambda: self.poll_audio(process))
+            self.audio_job = self.after(100, lambda: self.poll_audio(process))
             return
         output = process.stdout.read()
         error = ""
@@ -992,6 +1270,8 @@ class MiniworldsView(ttk.Frame):
     def stop_audio(self):
         process = self.audio_process
         self.audio_process = None
+        if hasattr(self, "audio_job"):
+            self.after_cancel(self.audio_job)
         if process:
             if process.poll() is None:
                 process.terminate()
@@ -1010,7 +1290,7 @@ class MiniworldsView(ttk.Frame):
             self.check_tab,
             "Fehler sind konkret feststellbar. Hinweise können durch weitere Dateien oder dynamischen Code erklärt sein.",
         )
-        self.button(self.check_tab, "Aktuellen Code prüfen", self.check)
+        self.button(self.check_tab, "Erneut prüfen", self.check)
         self.findings = ttk.Treeview(
             self.check_tab, columns=("line", "severity"), height=6, selectmode="browse"
         )
@@ -1106,7 +1386,8 @@ class MiniworldsView(ttk.Frame):
         self.status_output = self.output(self.status_tab)
 
     def show_status(self):
-        self.tabs.select(self.status_tab)
+        self.settings_dialog.deiconify()
+        self.settings_dialog.lift()
         self.refresh_status()
 
     def refresh_status(self):
@@ -1177,7 +1458,9 @@ print(json.dumps(result))"""
                 encoding="utf-8",
             )
             self.status_started = time.monotonic()
-            self.after(100, lambda: self.poll_status(generation, executable))
+            self.status_job = self.after(
+                100, lambda: self.poll_status(generation, executable)
+            )
         except OSError as error:
             self.display(self.status_output, self.frontend_status + str(error))
 
@@ -1204,7 +1487,9 @@ print(json.dumps(result))"""
                     + "Zeitüberschreitung beim Lesen des Interpreters.",
                 )
             else:
-                self.after(100, lambda: self.poll_status(generation, executable))
+                self.status_job = self.after(
+                    100, lambda: self.poll_status(generation, executable)
+                )
             return
         output, error = process.communicate()
         self.status_process = None
@@ -1232,6 +1517,8 @@ print(json.dumps(result))"""
             )
 
     def stop_status(self):
+        if hasattr(self, "status_job"):
+            self.after_cancel(self.status_job)
         process = self.status_process
         self.status_process = None
         if process:

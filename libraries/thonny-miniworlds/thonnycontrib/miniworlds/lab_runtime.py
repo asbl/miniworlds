@@ -118,7 +118,9 @@ class Laboratory:
                 if depth >= 4 or id(obj) in containers_seen:
                     return
                 containers_seen.add(id(obj))
-                entries = list(obj.items())[:50] if type(obj) is dict else enumerate(obj[:50])
+                entries = (
+                    list(obj.items())[:50] if type(obj) is dict else enumerate(obj[:50])
+                )
                 for key, value in entries:
                     if type(key) in (str, int):
                         add(value, f"{name}[{key!r}]", depth + 1)
@@ -227,7 +229,8 @@ class Laboratory:
                         "name": name,
                         "owner": cls.__name__,
                         "inherited": cls is not type(obj),
-                        "signature": signature, "parameters": parameter_schema(getattr(obj, name)),
+                        "signature": signature,
+                        "parameters": parameter_schema(getattr(obj, name)),
                     }
                 )
         # @register functions live on instances, not on the Actor class.
@@ -242,10 +245,36 @@ class Laboratory:
                         "name": name,
                         "owner": type(obj).__name__,
                         "inherited": False,
-                        "signature": str(inspect.signature(member)), "parameters": parameter_schema(member),
+                        "signature": str(inspect.signature(member)),
+                        "parameters": parameter_schema(member),
                     }
                 )
         return result
+
+    def thumbnail(self, obj):
+        """Bounded visual metadata; pygame stays in the execution backend."""
+        if not isinstance(obj, self.mw.Actor):
+            return None
+        import base64
+        import io
+
+        import pygame
+
+        try:
+            surface = obj.image
+            width, height = surface.get_size()
+            if not width or not height:
+                return None
+            scale = min(48 / width, 48 / height, 1)
+            preview = pygame.transform.smoothscale(
+                surface, (max(1, int(width * scale)), max(1, int(height * scale)))
+            )
+            buffer = io.BytesIO()
+            pygame.image.save(preview, buffer, "preview.png")
+            return base64.b64encode(buffer.getvalue()).decode("ascii")
+        except Exception:  # noqa: BLE001 -- user costume properties may raise; previews are optional
+            # An unavailable costume must not make the object bank unusable.
+            return None
 
     def snapshot(self):
         self.sync()
@@ -266,6 +295,7 @@ class Laboratory:
                     type=type(obj).__name__,
                     fields=fields,
                     methods=self.methods(obj),
+                    thumbnail=self.thumbnail(obj) if len(result) < 80 else None,
                     **{
                         k: v
                         for k, v in session.describe(handle).items()
@@ -290,7 +320,13 @@ class Laboratory:
                     signature = str(inspect.signature(cls))
                 except (ValueError, TypeError):
                     signature = "(...)"
-                classes.append({"name": name, "signature": signature, "parameters": parameter_schema(cls)})
+                classes.append(
+                    {
+                        "name": name,
+                        "signature": signature,
+                        "parameters": parameter_schema(cls),
+                    }
+                )
         return {
             "objects": result,
             "classes": classes,

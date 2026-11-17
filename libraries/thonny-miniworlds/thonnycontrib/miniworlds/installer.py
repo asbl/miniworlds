@@ -119,7 +119,7 @@ class LibraryDialog(tk.Toplevel):
         self.close_button.pack(side="right")
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.bind("<Escape>", lambda e: self.close())
-        self.after(50, self.poll)
+        self.poll_job = self.after(50, self.poll)
         self.check()
 
     def append(self, text):
@@ -305,7 +305,7 @@ class LibraryDialog(tk.Toplevel):
                     self.set_busy(False)
         except queue.Empty:
             pass
-        self.after(50, self.poll)
+        self.poll_job = self.after(50, self.poll)
 
     def save_log(self):
         from tkinter import filedialog
@@ -333,4 +333,5 @@ class LibraryDialog(tk.Toplevel):
         if self.busy and self.operation in {"install", "repair"}:
             return
         self.closed = True
+        self.after_cancel(self.poll_job)
         self.destroy()

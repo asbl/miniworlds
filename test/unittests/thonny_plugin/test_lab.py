@@ -34,6 +34,7 @@ world.run()
 @pytest.fixture
 def lab(tmp_path):
     from miniworlds import App
+
     original = sys.modules["__main__"]
     filename = tmp_path / "main.py"
     filename.write_text(SOURCE)
@@ -79,6 +80,30 @@ def test_object_identity_methods_and_paused_state(lab):
         }
     )
     assert result["history"][-1]["result"] == "True"
+
+
+def test_card_previews_are_bounded_pngs_and_follow_costume_changes(lab):
+    import base64
+    import io
+
+    from PIL import Image
+
+    player = lab.namespace["player"]
+    player.add_costume((255, 0, 0))
+    lab.refresh()
+    first = player_row(lab)["thumbnail"]
+    assert first
+    image = Image.open(io.BytesIO(base64.b64decode(first)))
+    assert image.format == "PNG" and max(image.size) <= 48
+    player.add_costume((0, 0, 255))
+    player.switch_costume(1)
+    lab.refresh()
+    assert player_row(lab)["thumbnail"] != first
+    assert all(
+        row["thumbnail"] is None
+        for row in lab.snapshot()["objects"]
+        if row["type"] == "World"
+    )
 
 
 def test_source_versions_and_generation_invalidation(lab):
@@ -167,14 +192,58 @@ def test_nested_reference_arguments_and_unsaved_helper_revision(tmp_path):
 
 
 def test_failed_constructor_disables_replay_after_partial_changes(lab):
-    exec('''class Broken(Actor):
+    exec(  # noqa: S102 -- controlled constructor failure fixture
+        """class Broken(Actor):
     def __init__(self, position=(60, 60)):
         super().__init__(position)
         player.x = 70
         raise ValueError("constructor failed")
-''', lab.namespace)
+""",
+        lab.namespace,
+    )
     with pytest.raises(ValueError, match="constructor failed"):
         lab.command({"action": "create", "class": "Broken", "name": "broken"})
     assert lab.namespace["player"].x == 70
     assert lab.worlds()[0].is_paused
     assert not lab.snapshot()["replay_complete"]
+
+
+def test_parameter_schema_and_form_arguments_support_defaults_and_references():
+    def method(distance: int = 1, direction=None, label: str = "Spieler", other=None):
+        pass
+
+    schema = model.parameter_schema(method)
+    refs = {"other_player": object()}
+    values = {
+        "distance": ("20", "value"),
+        "direction": ("right", "value"),
+        "label": ("Hallo Welt", "value"),
+        "other": ("other_player", "object"),
+    }
+    code = model.form_arguments(schema, values, refs)
+    args, kwargs = model.arguments(code, refs)
+    assert args == [] and kwargs == {
+        "distance": 20,
+        "direction": "right",
+        "label": "Hallo Welt",
+        "other": refs["other_player"],
+    }
+    with pytest.raises(ValueError, match="Zahl"):
+        model.form_arguments(schema, {"distance": ("Hallo", "value")}, refs)
+    from miniworlds import Actor, World
+
+    assert any(p["name"] == "position" for p in model.parameter_schema(Actor))
+    assert any(p["name"] == "x" for p in model.parameter_schema(World))
+
+
+def test_form_positional_only_optional_gaps_and_required_values():
+    def method(a=1, b=2, /, *, required):
+        pass
+
+    schema = model.parameter_schema(method)
+    code = model.form_arguments(
+        schema, {"b": ("3", "value"), "required": ("True", "value")}, {}
+    )
+    assert code == "1, 3, required=True"
+    with pytest.raises(ValueError, match="required"):
+        model.form_arguments(schema, {}, {})

@@ -10,12 +10,12 @@ Die veröffentlichte Version erhältst du über **Extras → Plug-ins verwalten*
 nach dem vollständigen Namen **thonny-miniworlds** suchen und installieren.
 Danach Thonny neu starten und **Ansicht → miniworlds** öffnen.
 
-Version 0.4.1 lokal installieren:
+Version 0.10.0 lokal installieren:
 
 1. Vom Repository-Stamm `venv/bin/python -m build libraries/thonny-miniworlds` ausführen.
 2. In Thonny **Extras → Plug-ins verwalten → Installieren aus lokaler Datei** öffnen
    (je nach Sprache/Version im Menü für weitere Aktionen).
-3. `libraries/thonny-miniworlds/dist/thonny_miniworlds-0.4.1-py3-none-any.whl` auswählen.
+3. `libraries/thonny-miniworlds/dist/thonny_miniworlds-0.10.0-py3-none-any.whl` auswählen.
 4. Thonny neu starten.
 
 Auf Linux mit einer vom Betriebssystem verwalteten Python-Installation kann
@@ -30,7 +30,7 @@ python -m venv ~/.venvs/thonny
 ```
 
 Ein lokales Wheel lässt sich mit `~/.venvs/thonny/bin/python -m pip install
-/pfad/zum/thonny_miniworlds-0.4.1-py3-none-any.whl` aktualisieren.
+/pfad/zum/thonny_miniworlds-0.10.0-py3-none-any.whl` aktualisieren.
 Für die Entwicklung kann mit demselben Python stattdessen
 `pip install -e /pfad/zu/libraries/thonny-miniworlds` verwendet werden.
 
@@ -40,8 +40,7 @@ Die Spielebibliothek selbst bleibt eine getrennte Backend-Installation.
 
 ## Unterrichtsmodus und Projekt
 
-Oben zwischen **E2 · Programmieren mit Objekten** und **Q1 · Programmieren mit
-Klassen** wählen. Hilfe, Aufgaben, Vorlagen, Beispiele und Ereignisse passen
+Unter **Mehr** zwischen **Objekte (E2)** und **Klassen (Q1)** wählen. Hilfe, Aufgaben, Vorlagen, Beispiele und Ereignisse passen
 sich daran an. Bestehender Schülercode wird nicht automatisch konvertiert.
 
 Bei einer gespeicherten lokalen Datei wird die Wahl in `.miniworlds.json`
@@ -55,54 +54,49 @@ sichtbar und wird beim Wechsel zwischen gespeicherten Dateien geladen.
 {"mode": "Q1"}
 ```
 
-Die Bereichsauswahl unter dem Modus macht alle Funktionen auch in schmalen
-Seitenleisten erreichbar. Der Medienbereich ist zusätzlich scrollbar.
+Die Seitenleiste zeigt die drei Bereiche **Start**, **Code** und **Medien**.
+Der aktive Modus bleibt als E2/Q1-Kennung sichtbar. **Objektlabor starten** lädt
+das aktuelle Programm direkt im Labor. Installation, Updates und Interpreter
+stehen unter **Mehr**.
 
-## Bereiche
+## Die kurzen Wege
 
-- **Installation:** Zeigt Version und Installationsort des Plugins, Thonnys
-  Python sowie Version/Installationsort der Bibliothek im ausgewählten lokalen
-  Ausführungsinterpreter. Erkennt venvs, PEP 668 und zu alte Python-Versionen.
-  Der Status wird ausdrücklich aktualisiert; Schülercode wird nicht ausgeführt.
-  Die Bibliotheksinstallation öffnet den exakten PyPI-Paketnamen `miniworlds`
-  und umgeht die Top-1000-Suche. Download/Installation benötigt Internet;
-  das laufende Programm zunächst stoppen. MicroPython wird nicht unterstützt.
-- **Hilfe:** Thema wählen oder **Strg+F1** am Wort im Editor drücken.
-  World/Actor, eigene Unterklassen, Importaliasnamen sowie `self` und
-  `self.world` werden soweit statisch möglich erkannt. Zuerst erscheinen
-  Erklärung, Parameter und Rückgabewert. Ein weiterer Klick zeigt einen
-  Hinweis, danach ein vollständiges Beispiel. E2 erklärt Objektzustand und
-  Registrierung; Q1 erklärt Instanzen, Vererbung und überschreibbare Methoden.
-- **Vorlagen:** Pixel- und Kachelwelten mit einer Aufgabe und Kommentaren
-  erstellen. Jedes Projekt erhält `main.py`, `images/`, `sounds/` und seine
-  Unterrichtseinstellung. Bestehende Projektordner werden nicht überschrieben.
-- **Ereignisse:** Nur erkannte miniworlds-Worlds/Actors beziehungsweise deren
-  Klassen anbieten. Actor-Ereignisse werden für Worlds ausgeblendet. E2 fügt
-  registrierte Funktionen vor `.run()` ein, Q1 Methoden in die ausgewählte
-  Klasse. Bestehende Ereignisse werden geöffnet. Vor dem Einfügen erscheint
-  eine Änderungsvorschau; Kommentare und Einrückung bleiben erhalten.
-  Einzeilige Klassen zuerst auf mehrere Zeilen verteilen.
-- **Beispiele:** Nach Thema und Schwierigkeit filtern; der aktive
-  Unterrichtsmodus bestimmt die Codevariante. Erwartetes Verhalten und Aufgabe
-  stehen vor Hinweis und Lösungscode. Beispiele als eigenständiges Projekt
-  öffnen. Enthalten: Grundgerüst, Bewegung, Tastatur und Maus.
-- **Bilder & Sounds:** Dateien importieren, Miniaturen auf Schachbretthintergrund
-  ansehen sowie Bildmaße und Transparenz prüfen. PNG, JPG/JPEG, GIF, BMP und
-  WebP sowie WAV, OGG und MP3 werden aufgelistet. Namenskonflikte erhalten eine
-  Nummer. Ein relativer Pfad lässt sich am Cursor einfügen; fertige Kostüm-,
-  Hintergrund- und Soundaufrufe werden für ein angegebenes Ziel als Vorschau
-  angeboten. Den Cursor dafür auf eine leere, passend eingerückte Codezeile
-  setzen. Pfade beziehen sich auf die bearbeitete Python-Datei, auch in
-  Unterordnern. Sounds separat abspielen, stoppen und ihre Lautstärke ändern;
-  sie belegen keinen laufenden Schülerprozess. Externes Öffnen und Entfernen
-  mit Bestätigung sind ebenfalls möglich.
-- **Prüfung:** Unterscheidet konkret feststellbare Fehler von Hinweisen.
-  Mehrzeilige Erklärungen und Sprünge zur Codezeile ergänzen Syntaxprüfung,
-  Ereignissignaturen, vermutete fehlende Registrierung, `.run()` und fehlende
-  Mediendateien. Für geeignete Signaturfehler und einen fehlenden Startaufruf
-  gibt es eine Korrekturvorschau. Jede übernommene Änderung ist genau ein
-  Rückgängig-Schritt. Wurde der Code inzwischen bearbeitet, wird die alte
-  Änderung nicht angewendet.
+- **Start:** Eigenes Pixel-/Kachelprojekt oder ein Beispiel auswählen. Ein
+  gemeinsamer Dialog fragt Projektname und Speicherort ab. Jedes neue Projekt
+  erhält `main.py`, `images/`, `sounds/` und seine E2/Q1-Einstellung. Bestehende
+  Ordner werden nicht überschrieben. Codevorschau und Beispielfilter werden
+  erst auf Wunsch eingeblendet.
+- **Code → Hilfe:** Erklärung zum Wort am Cursor oder Thema auswählen.
+  **Strg+F1** springt direkt hierher. „Hinweis zeigen“ und „Beispielcode zeigen“
+  öffnen die Hilfe schrittweise.
+- **Code → Aktion:** Erkanntes World-/Actor-Ziel und Ereignis auswählen.
+  Die Ziele werden beim Öffnen und nach Codeänderungen automatisch aktualisiert.
+  E2 fügt eine registrierte Funktion vor `.run()` ein, Q1 eine Klassenmethode.
+  Bereits vorhandene Ereignisse werden geöffnet; sonst erscheint eine Vorschau.
+- **Code → Prüfen:** Die aktuelle Datei wird beim Öffnen automatisch geprüft.
+  Erklärungen, Sprünge zur Codezeile und geeignete Korrekturvorschauen helfen
+  bei Syntax, Ereignissignaturen, fehlenden Dateien und vermuteten Startfehlern.
+  „Erneut prüfen“ aktualisiert die Ergebnisse nach eigenen Änderungen.
+- **Medien:** Bildgalerie oder Soundliste wählen. Dateien werden beim ersten
+  Öffnen für das aktuelle Projekt automatisch geladen. „Dateien hinzufügen“
+  importiert Medien ohne Überschreiben vorhandener Dateien; die neue Datei wird
+  ausgewählt. Ziel und Verwendung wählen und **In Code einfügen** drücken.
+  Bilder bieten Kostüm/Hintergrund, Sounds den passenden Sound-Aufruf. Für
+  vollständige Aufrufe den Cursor auf eine leere, passend eingerückte Codezeile
+  setzen. Unter **Dateiaktionen** liegen Pfad-Einfügung, externe Vorschau,
+  Entfernen, manuelle Aktualisierung und die alternative Bild-Dateiliste.
+  Galerie und Tabelle werden nicht mehr gleichzeitig gezeigt.
+- **Objektlabor starten:** Ein Klick öffnet das Labor und lädt das aktuelle
+  Programm. Ein bereits geöffnetes Labor wird nur in den Vordergrund geholt,
+  damit seine Objekte erhalten bleiben. Ungespeicherte Dateien und ein bereits
+  laufendes Programm müssen gegebenenfalls zuerst gespeichert bzw. gestoppt
+  werden. Das Labor verwendet den ausgewählten lokalen Thonny-Interpreter.
+- **Mehr:** E2/Q1 wechseln, Installation/Updates oder Interpreter/Einstellungen
+  öffnen. Installationsstatus und Paketdetails belegen keinen Platz mehr in
+  der normalen Navigation.
+
+Alle drei Hauptbereiche und die drei Code-Werkzeuge werden auch bei einer
+184 Pixel breiten Seitenleiste auf sichtbare, erreichbare Tab-Köpfe geprüft.
 
 ## Grenzen
 
@@ -194,14 +188,14 @@ venv/bin/invoke tests.thonny --network
 
 ## Objektlabor / BlueJ-artiges Experimentieren (0.4.0)
 
-Unter **Objektlabor → Objektlabor öffnen** steht ein eigener Experimentierdialog
+Über **Objektlabor starten** steht ein angedocktes Objektlabor
 zur Verfügung. Voraussetzung im ausgewählten lokalen Ausführungsinterpreter ist
 miniworlds ab 4.4.0.12 mit der internen IDE-Anbindung. Ältere Installationen erhalten einen
 Updatehinweis. Das Plugin importiert die Engine weiterhin nicht in die Oberfläche.
 
 - **Q1:** Klassendiagramm mit Vererbung und Sprung zur Klassendefinition in der
   aktuellen Datei. **E2:** Die Objektbank steht im Vordergrund.
-- Programm mit **Programm neu laden** ausführen. Die Bibliotheksfunktion
+- Programm mit **Laden / Neu laden** ausführen. Die Bibliotheksfunktion
   `World.run()` läuft regulär im ausgewählten Thonny-Interpreter. Nach der
   Einrichtung werden die Welten vor dem ersten Simulationsschritt pausiert.
   Der Editorstand wird unter dem ursprünglichen Dateinamen ausgeführt.
@@ -299,3 +293,133 @@ Abnahmelauf; diese Plattformen wurden hier nicht tatsächlich getestet.
 venv/bin/invoke tests.thonny
 venv/bin/invoke tests.thonny-backend
 ```
+
+## Schüleroberfläche im Objektlabor (0.5.0)
+
+Der Ablauf lautet **Objekt auswählen → Methode wählen → Parameter eingeben →
+Ausführen**. Für bekannte Parameter erscheinen eigene, beschriftete Felder mit
+Standardwerten und einer Wahl zwischen **Wert** und **Objekt**. Der Objektwähler
+pro Parameter ist unabhängig vom Empfänger in der Objektbank. Pflichtfelder
+und einfache Zahl-/Text-/Wahrheitswert-Eingaben werden vor dem Aufruf geprüft.
+Die Vorschau zeigt den tatsächlichen Python-Aufruf. Für dynamische Signaturen,
+zusätzliche Argumente und erfahrenere Lernende bleibt die **Python-Eingabe**
+verfügbar. Sie wertet weiterhin keine beliebigen Funktionsaufrufe aus.
+
+Die Zustandsansicht zeigt **Vorher** und **Nachher**. Geänderte Attribute erhalten
+einen Punkt; dieser Vergleich bleibt beim Auswählen und Aktualisieren erhalten,
+bis die nächste bewusste Aktion einen neuen Vergleich beginnt. Nach Fehlern
+werden mögliche Teiländerungen ebenfalls sichtbar.
+
+**Stopp** verwendet Thonnys Stop/Restart. **Ausblenden** erhält die laufende
+Sitzung samt Objektbank. Die Anzeige
+unterscheidet Laden, laufende Aufrufe, pausierte Bereitschaft und geänderten Code.
+Aufrufe und Konstruktoren sind während einer laufenden Simulation gesperrt;
+zuerst pausieren. Die Objekterzeugung ist zunächst eingeklappt. E2 verwendet
+„Figur“ und „Methode ausprobieren“, Q1 „Instanz“ und „Konstruktor“.
+
+Fehler erhalten einen kurzen Hinweis außerhalb des Aufrufprotokolls. Der
+vollständige Fehlerbericht ist unter **Fehlerdetails** erreichbar.
+Das Labor ist unter dem Editor angedockt; Aufrufbereich und Tabellen sind scrollbar. Die erste Implementierung verwendet Thonnys
+native Tk/ttk-Oberfläche und benötigt keine weitere Grafikbibliothek.
+
+## Angedocktes Objektlabor (0.8.0)
+
+**Objektlabor starten** öffnet einen breiten Arbeitsbereich unter dem Editor,
+ohne Zusatzfenster. Links bleiben die Figurenkarten sichtbar, in der Mitte stehen
+Methodenauswahl, Parameter und Ergebnis. Q1 ergänzt rechts Klassenkarten mit
+Vererbungslinien. Die Trennlinie lässt sich verschieben.
+Beim ersten Öffnen erhält das Labor ausreichend Höhe; anschließend bleibt die
+von dir eingestellte Aufteilung erhalten. Auch **Ansicht → miniworlds · Objektlabor**
+öffnet den Bereich, ohne automatisch Schülercode zu starten.
+
+Für Actors sind vorhandene Methoden wie `move`, `turn_left` und `turn_right`
+direkt erreichbar. Unter **Weitere Methoden** versteht die Suche Python-Namen und die angebotenen
+deutschen Beschreibungen, etwa „bewegen“. Gruppen filtern Bewegung, Aussehen
+oder eigene Methoden. Es werden ausschließlich Methoden der ausgewählten Instanz angeboten.
+E2 beginnt bei Actors mit `move`; Q1 bevorzugt eine eigene Methode und zeigt
+vollständige Signaturen sowie das Klassendiagramm.
+
+Benötigte Parameter und das erste optionale Feld stehen direkt im Formular.
+**Weitere Parameter** öffnet zusätzliche optionale Eingaben. Ihre Werte gelten
+auch im eingeklappten Zustand und sind in der Python-Vorschau sichtbar.
+Eingaben bleiben beim Wechsel zwischen Methoden und Objekten erhalten.
+**Enter** im Parameterfeld führt den Aufruf aus. Unter **Mehr** sind
+**Vorhersage** und **Argumente als Python eingeben** zuschaltbar.
+
+Ergebnis und geänderte Attribute erscheinen unmittelbar unter der Aktion.
+Unter **Mehr → Alle Eigenschaften** öffnet sich der vollständige
+Vorher/Nachher-Vergleich.
+**Aufrufe in Code übernehmen …** öffnet die bestehende Vorschau für den gesamten
+Experimentablauf. Unter **Mehr → Verlauf** lassen sich die Aufrufe lesen und der letzte
+Methodenaufruf mit seinen ursprünglichen Argumenten und seinem ursprünglichen
+Empfänger wiederholen. Konstruktoren werden nicht automatisch wiederholt.
+Fehler stehen direkt beim Formular, ohne die Eingaben zu löschen; der komplette
+Bericht lässt sich über **Fehlerdetails** öffnen.
+
+**Start / Pause** ist ein gemeinsamer Schalter in der festen Steuerleiste. Die Weltwahl erscheint nur,
+wenn mehrere Welten vorhanden sind. **Zurücksetzen** beendet den eigenen Laborlauf,
+wartet auf Thonnys Backend-Neustart und startet den aktuellen Editorstand.
+**Stopp** beendet das Programm und bricht auch einen geplanten Neustart ab.
+
+**Ausblenden** erhält Verbindung, Objekte, Eingaben und Ergebnisse. Der erneute
+Laboraufruf zeigt dieselbe Sitzung. Beim Entfernen der Ansicht werden Verbindung,
+Ereignisbindungen und Hintergrundabfragen freigegeben.
+
+Das pygame-Weltfenster wird weiterhin von der Engine dargestellt. Eingebettet
+ist die Bedienoberfläche des Objektlabors; Einstellungen und Codeänderungs-
+vorschauen behalten ihre bisherigen Dialoge.
+
+
+## Werkstattoberfläche (0.9.0)
+
+Die Objektbank zeigt Karten mit Figurenvorschau, Variablenname und Klasse.
+Eine markierte Karte erhält einen Rahmen und ein Häkchen. Klick oder
+Pfeiltasten wählen eine Figur; Home/End springen zur ersten/letzten Karte.
+Lange Namen werden auf der Karte gekürzt und im Aufrufbereich vollständig
+angezeigt. Kostümvorschauen kommen als kleine PNGs aus dem Backend; Thonnys
+Oberfläche importiert weiterhin weder miniworlds noch pygame. Fehlt ein
+Vorschaubild, erscheint der Anfangsbuchstabe der Klasse.
+
+Im Q1-Modus stehen rechts Klassenkarten mit Vererbungslinien. Ein Klick wählt
+die Klasse im bestehenden Konstruktorformular, ein Doppelklick öffnet ihre
+Definition in der aktuellen Datei. E2 blendet diesen Bereich aus und zeigt
+Methoden mit kurzen deutschen Beschreibungen statt Vererbungsangaben.
+
+Im Aufrufbereich stehen Methode und Eingaben über der Python-Vorschau mit
+**Ausführen**. Darunter fasst ein eigener Ergebnisbereich den Aufruf und seine
+Wirkung zusammen. Suche und Methodengruppen werden über **Weitere Methoden**
+geöffnet. **Mehr** bündelt Vorhersage, Python-Eingabe, Eigenschaften, Verlauf,
+Fehlerdetails und ausführliche Hinweise. Die Wahl **Wert/Objekt** erscheint
+bei untypisierten Parametern mit verfügbaren Objektreferenzen; einfache Zahlen-,
+Text- und Richtungsfelder bleiben kompakt.
+
+Unten bleiben **Laden / Zurücksetzen**, **Stopp**, **Start / Pause** und ein
+kurzer Status sichtbar, auch wenn oben Formulare oder Details gescrollt werden.
+**Zurücksetzen** führt den aktuellen Editorstand neu aus und verwirft dabei den
+bisherigen Experimentzustand. Die Welt bleibt im vorhandenen pygame-Fenster;
+die Werkstatt ist weiterhin direkt in Thonny angedockt.
+
+
+## Weniger Umwege im Labor (0.10.0)
+
+Die Werkstatt passt ihre Bedienelemente an die verfügbare Breite an: Häufige
+Methoden werden umgebrochen, der Ausführen-Button rückt bei wenig Platz unter
+den Python-Aufruf und die feste Steuerleiste nutzt bei Bedarf zwei Zeilen.
+Im Q1-Modus lässt sich die Klassenübersicht über **Klassen anzeigen** ein- und
+ausblenden. Diese Wahl bleibt innerhalb der Sitzung auch bei E2/Q1-Wechseln
+bestehen.
+
+Das Labor merkt sich die zuletzt gewählte Methode und ihre Eingaben pro Figur.
+Beim Wechsel zurück wird dieser Arbeitsstand wieder angezeigt. Ab sieben
+Objekten erscheint eine Suche nach Namen, Alias oder Klasse. Sie filtert nur
+die Karten, ohne den Empfänger eines Methodenaufrufs stillschweigend zu ändern.
+Ein Hinweis zeigt eine ausgeblendete Auswahl an. **×** oder **Escape** leeren
+die Suche; die Pfeiltasten bewegen sich durch die sichtbaren Treffer.
+
+Ungültige Eingaben erhalten Hinweise direkt am Feld. Solange Werte fehlen oder
+ungültig sind, ist **Ausführen** gesperrt. Eine kurze Erklärung zeigt auch bei
+laufender Simulation oder geändertem Code, welcher nächste Schritt nötig ist.
+Der Ergebnisbereich nennt ausdrücklich den Empfänger des letzten Aufrufs und
+behält dessen Änderungen beim Wechsel zu einer anderen Figur bei. Der komplette
+Eigenschaftenvergleich unter **Mehr** bezieht sich weiterhin auf die aktuell
+ausgewählte Figur.

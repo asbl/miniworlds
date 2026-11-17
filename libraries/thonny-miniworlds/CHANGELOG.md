@@ -1,5 +1,70 @@
 # Änderungen
 
+## 0.10.0
+
+- Methodenleiste, Python-Aufruf und feste Steuerleiste passen sich schmalen Ansichten an.
+- Klassenübersicht in Q1 mit einem Klick ein-/ausblendbar.
+- Letzte Methode und Eingaben pro Figur beim Wechsel erhalten.
+- Objektkartensuche ab sieben Objekten mit Trefferzahl und Hinweis auf ausgeblendete Auswahl.
+- Feldbezogene Eingabefehler und gesperrtes Ausführen bei ungültigen Werten; nächste Schritte unmittelbar erklären.
+- Ergebnis mit eindeutigem Empfänger; Änderungen bleiben beim Wechsel zu anderen Figuren dem richtigen Aufruf zugeordnet.
+- Wiederholen auf einem anderen Empfänger ohne konkurrierenden Auswahlaufruf; Weltmarkierung nach Rückmeldungen synchronisieren.
+
+## 0.9.0
+
+- Werkstattaufteilung mit Figurenkarten links, Aufruf/Ergebnis in der Mitte und Klassenkarten rechts im Q1-Modus.
+- Figurenkarten mit echten Kostümvorschauen, Klasse, Auswahlrahmen und Häkchen; Auswahl auch per Tastatur.
+- Klassenkarten zeigen Vererbung, öffnen den bestehenden Konstruktor und führen zur Klassendefinition.
+- Suche und Methodengruppen unter Weitere Methoden; Vorhersage, Python-Eingabe, Eigenschaften und Verlauf unter Mehr.
+- Einfache Parameter ohne dauerhaften Wert/Objekt-Umschalter; Referenzwahl bei passenden Parametern erhalten.
+- Gemeinsamer Bereich für Python-Aufruf und Ausführen, Ergebnis in einem eigenen Rahmen.
+- Feste Steuerleiste mit Laden/Zurücksetzen, Stopp, Start/Pause und kurzem Status.
+- Vorschauen werden ausschließlich im Backend erzeugt, begrenzt und ohne zusätzliche Abhängigkeiten übertragen.
+
+## 0.8.0
+
+- Breites, angedocktes Objektlabor unter dem Editor statt Reitern in der Seitenleiste.
+- Objekte, Methodenformular und unmittelbares Ergebnis gleichzeitig erreichbar.
+- Häufige Methoden als Schaltflächen, Suche über Python-Namen und deutsche Beschreibungen sowie Methodengruppen.
+- Kompakte Parameterformulare: zusätzliche optionale Parameter und Vorhersage aufklappbar, Eingaben pro Objekt/Methode behalten, Enter zum Ausführen.
+- Änderungen direkt beim Ergebnis; Eigenschaften, Verlauf und Fehlerdetails bei Bedarf öffnen.
+- Aufrufe direkt in Code übernehmen und letzten Methodenaufruf wiederholen.
+- Pause/Weiter als gemeinsamer Schalter; Weltwahl nur bei mehreren Welten.
+- Neu laden startet den eigenen Backend-Lauf neu; Stopp bricht auch einen geplanten Neustart ab.
+- Q1 zeigt Klassen und vollständige Methodensignaturen; Moduswechsel aktualisiert das laufende Labor.
+- Labor nach dem Programmstart sichtbar halten und beim ersten Öffnen ausreichend Platz einräumen.
+
+## 0.7.0
+
+- Objektlabor direkt in die miniworlds-Ansicht eingebettet, ohne Zusatzfenster.
+- Kompakte Bereiche Objekte, Aufruf und Log für schmale Seitenleisten.
+- Zurück/erneut öffnen erhält die Sitzung ohne erneute Programmausführung.
+- Verbindung und Backend-Ereignisbindungen werden beim Entfernen der Ansicht freigegeben.
+
+
+## 0.6.0
+
+- Drei sichtbare Bereiche Start, Code und Medien statt acht Einträge im Auswahlmenü.
+- Objektlabor mit einem Klick öffnen und laden; laufende Sitzung beibehalten.
+- E2/Q1, Installation und Interpreter unter Mehr zusammengefasst.
+- Projektvorlagen und Beispiele auf einer Startseite; ein gemeinsamer Anlegedialog.
+- Code-Hilfe, Ereignisse und Prüfung direkt unter Code; Ziele und Prüfung automatisch laden.
+- Galerie/Soundliste mit einer passenden Einfügeaktion statt vieler gleichzeitiger Knöpfe.
+- Medien nach Import automatisch auswählen; Zusatzaktionen in einem Dateimenü.
+- Hintergrundabfragen beim Schließen zuverlässig abmelden.
+
+
+## 0.5.0
+
+- Parameterformulare mit Standardwerten, Eingabeprüfung und Python-Vorschau.
+- Objektparameter unabhängig vom Methodenempfänger auswählen.
+- Dauerhafter Vorher/Nachher-Vergleich der letzten Aktion.
+- Programm stoppen und Labor schließen als getrennte Aktionen.
+- E2/Q1-Beschriftungen und eingeklappte Objekterzeugung.
+- Bildschirmabhängige Fenstergröße und scrollbarere Aktionsansicht.
+- Verständliche Fehlerhinweise mit separaten technischen Details.
+
+
 ## 0.4.1
 
 - Experimentiermodus im echten Thonny-CPython-Backend mit unverändertem Schülercode.

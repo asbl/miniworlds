@@ -69,7 +69,10 @@ def arguments(text, references):
             return ast.literal_eval(node)
         except (ValueError, TypeError):
             name = ast.unparse(node)
-            if isinstance(node, (ast.Name, ast.Attribute, ast.Subscript)) and name in references:
+            if (
+                isinstance(node, (ast.Name, ast.Attribute, ast.Subscript))
+                and name in references
+            ):
                 return references[name]
             raise ValueError(
                 "Nutze Zahlen, Texte, Tupel/Listen oder einen Objektnamen aus der Objektbank."
@@ -113,17 +116,41 @@ def export_calls(source, calls):
 def parameter_schema(callback):
     """JSON-safe signature data, without evaluating annotations or defaults."""
     import inspect
+
     try:
         signature = inspect.signature(callback)
     except (TypeError, ValueError):
         return None
+    if (
+        inspect.isclass(callback)
+        and signature.parameters
+        and all(
+            p.kind in (p.VAR_POSITIONAL, p.VAR_KEYWORD)
+            for p in signature.parameters.values()
+        )
+    ):
+        signature = inspect.signature(callback.__init__)
+        signature = signature.replace(
+            parameters=[p for p in signature.parameters.values() if p.name != "self"]
+        )
     result = []
+    dynamic = False
     for parameter in signature.parameters.values():
         if parameter.kind in (parameter.VAR_POSITIONAL, parameter.VAR_KEYWORD):
-            return None  # Preserve the Python-entry escape hatch for dynamic signatures.
+            dynamic = True
+            continue
         default = parameter.default
         code = None
-        if default is not parameter.empty and type(default) in (str, int, float, bool, type(None), tuple, list, dict):
+        if default is not parameter.empty and type(default) in (
+            str,
+            int,
+            float,
+            bool,
+            type(None),
+            tuple,
+            list,
+            dict,
+        ):
             try:
                 candidate = repr(default)
                 if len(candidate) <= 200:
@@ -132,58 +159,92 @@ def parameter_schema(callback):
             except (ValueError, TypeError, RecursionError):
                 pass
         annotation = parameter.annotation
-        hint = 'literal'
+        hint = "literal"
         if annotation is str or type(default) is str:
-            hint = 'text'
+            hint = "text"
         elif annotation is bool or type(default) is bool:
-            hint = 'boolean'
-        elif annotation in (int, float) or type(default) in (int, float):
-            hint = 'number'
-        result.append({'name':parameter.name, 'kind':parameter.kind.name,
-                       'required':default is parameter.empty, 'default':code, 'hint':hint})
-    return result
+            hint = "boolean"
+        elif annotation in (int, float, "int", "float") or (
+            annotation is parameter.empty and type(default) in (int, float)
+        ):
+            hint = "number"
+        if parameter.name == "direction":
+            hint = "direction"
+        result.append(
+            {
+                "name": parameter.name,
+                "kind": parameter.kind.name,
+                "required": default is parameter.empty,
+                "default": code,
+                "hint": hint,
+            }
+        )
+    return None if dynamic and not result else result
 
 
 def form_arguments(parameters, values, references):
     """Build explicit keywords and validate literal/reference inputs locally."""
     pieces = []
-    positional = [p for p in parameters if p['kind']=='POSITIONAL_ONLY']
-    last = max((i for i,p in enumerate(positional) if values.get(p['name'],('', 'value'))[0].strip()), default=-1)
+    positional = [p for p in parameters if p["kind"] == "POSITIONAL_ONLY"]
+    last = max(
+        (
+            i
+            for i, p in enumerate(positional)
+            if values.get(p["name"], ("", "value"))[0].strip()
+        ),
+        default=-1,
+    )
     for parameter in parameters:
-        name = parameter['name']
-        raw, mode = values.get(name, ('', 'value'))
+        name = parameter["name"]
+        raw, mode = values.get(name, ("", "value"))
         raw = raw.strip()
         if not raw:
-            if parameter['required']:
-                raise ValueError(f'Bitte „{name}“ ausfüllen.')
-            if parameter['kind']=='POSITIONAL_ONLY' and positional.index(parameter) <= last:
-                if parameter['default'] is None:
-                    raise ValueError(f'Bitte „{name}“ angeben oder die Python-Eingabe verwenden.')
-                raw = parameter['default']
+            if parameter["required"]:
+                raise ValueError(f"Bitte „{name}“ ausfüllen.")
+            if (
+                parameter["kind"] == "POSITIONAL_ONLY"
+                and positional.index(parameter) <= last
+            ):
+                if parameter["default"] is None:
+                    raise ValueError(
+                        f"Bitte „{name}“ angeben oder die Python-Eingabe verwenden."
+                    )
+                raw = parameter["default"]
             else:
                 continue
-        if mode=='object':
+        if mode == "object":
             if raw not in references:
-                raise ValueError(f'Bitte für „{name}“ ein vorhandenes Objekt wählen.')
-        elif parameter['hint']=='text':
+                raise ValueError(f"Bitte für „{name}“ ein vorhandenes Objekt wählen.")
+        elif parameter["hint"] == "direction" and raw in {
+            "right",
+            "left",
+            "up",
+            "down",
+        }:
+            raw = repr(raw)
+        elif parameter["hint"] == "text":
             try:
                 value = ast.literal_eval(raw)
             except (ValueError, SyntaxError):
                 value = raw
-            if not isinstance(value,str):
-                raise ValueError(f'„{name}“ erwartet einen Text.')
+            if not isinstance(value, str):
+                raise ValueError(f"„{name}“ erwartet einen Text.")
             raw = repr(value)
         else:
             try:
                 args, _ = arguments(raw, references)
             except (ValueError, SyntaxError) as error:
-                raise ValueError(f'„{name}“: Zahl, True/False, Tupel oder Liste eingeben; Objekte über „Objekt“ auswählen.') from error
-            if len(args)!=1:
-                raise ValueError(f'Bitte für „{name}“ genau einen Wert angeben.')
-            value=args[0]
-            if parameter['hint']=='number' and (type(value) not in (int,float)):
-                raise ValueError(f'„{name}“ erwartet eine Zahl.')
-            if parameter['hint']=='boolean' and type(value) is not bool:
-                raise ValueError(f'„{name}“ erwartet True oder False.')
-        pieces.append(raw if parameter['kind']=='POSITIONAL_ONLY' else name+'='+raw)
-    return ', '.join(pieces)
+                raise ValueError(
+                    f"„{name}“: Zahl, True/False, Tupel oder Liste eingeben; Objekte über „Objekt“ auswählen."
+                ) from error
+            if len(args) != 1:
+                raise ValueError(f"Bitte für „{name}“ genau einen Wert angeben.")
+            value = args[0]
+            if parameter["hint"] == "number" and (type(value) not in (int, float)):
+                raise ValueError(f"„{name}“ erwartet eine Zahl.")
+            if parameter["hint"] == "boolean" and type(value) is not bool:
+                raise ValueError(f"„{name}“ erwartet True oder False.")
+        pieces.append(
+            raw if parameter["kind"] == "POSITIONAL_ONLY" else name + "=" + raw
+        )
+    return ", ".join(pieces)

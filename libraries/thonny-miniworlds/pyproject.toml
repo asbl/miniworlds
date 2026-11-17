@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "thonny-miniworlds"
-version = "0.4.1"
+version = "0.10.0"
 description = "Deutschsprachige miniworlds-Lernhilfen für Thonny (E2/Q1)"
 readme = "README.md"
 requires-python = ">=3.10"

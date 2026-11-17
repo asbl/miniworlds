@@ -14,37 +14,31 @@ from .live_connection import Connection
 
 
 class ConnectedLabDialog(LabDialog):
-    def __init__(self, owner):
+    def __init__(self, owner, parent=None):
         self.connection = None
         self.pending = None
         self.revision_tick = 0
-        super().__init__(owner)
-        self.title("miniworlds · Experimentieren im Thonny-Interpreter")
-        bar = ttk.Frame(self)
-        bar.pack(fill="x", before=self.log, padx=10)
+        super().__init__(owner, parent)
+        bar = ttk.Frame(self.world_controls)
+        bar.pack(fill="x", padx=4)
         self.world_choice = tk.StringVar(value="Alle Welten")
         self.world_box = ttk.Combobox(
-            bar, state="readonly", textvariable=self.world_choice
+            bar, state="readonly", textvariable=self.world_choice, width=14
         )
-        self.world_box.pack(side="left")
         self.world_box.configure(values=["Alle Welten"])
         self.world_handles = {}
         self.pause_button = ttk.Button(
-            bar, text="Pausieren", command=lambda: self.control("pause")
+            bar, text="▶ Start", command=self.toggle_pause, width=9
         )
         self.pause_button.pack(side="left", padx=4)
-        self.resume_button = ttk.Button(
-            bar, text="Fortsetzen", command=lambda: self.control("resume")
-        )
-        self.resume_button.pack(side="left")
         self.inspect_button = ttk.Button(
-            bar,
-            text="Zustand aktualisieren",
+            self.properties_frame,
+            text="Aktualisieren",
             command=lambda: self.send({"action": "inspect"}),
         )
-        self.inspect_button.pack(side="left", padx=4)
+        self.inspect_button.pack(anchor="w")
         self.status.set(
-            "Programm hier neu laden; Schülercode bleibt unverändert. Thonnys Stop/Restart beendet die Sitzung."
+            "Wähle eine Figur und probiere eine Methode aus. Ausblenden erhält deine Sitzung."
         )
         self.bindings = []
         wb = get_workbench()
@@ -52,6 +46,21 @@ class ConnectedLabDialog(LabDialog):
             handler = lambda e, name=event: self.backend_event(name, e)
             wb.bind(event, handler, True)
             self.bindings.append((event, handler))
+
+    def toggle_pause(self):
+        self.control(
+            "resume" if self.data and self.data.get("paused", True) else "pause"
+        )
+
+    def wait_for_restart(self):
+        self.reload_job = None
+        runner = get_runner()
+        if runner and runner.is_waiting_toplevel_command():
+            self.start()
+        elif time.monotonic() < self.reload_deadline:
+            self.reload_job = self.after(100, self.wait_for_restart)
+        else:
+            self.status.set("Neustart dauert zu lange. Bitte erneut Laden wählen.")
 
     def current_revision(self):
         buffers = {
@@ -64,6 +73,8 @@ class ConnectedLabDialog(LabDialog):
         )
 
     def start(self):
+        if getattr(self, "reload_job", None):
+            return
         try:
             from thonny.common import ToplevelCommand
             from thonny.plugins.cpython_frontend.cp_front import LocalCPythonProxy
@@ -75,6 +86,14 @@ class ConnectedLabDialog(LabDialog):
                 runner.get_backend_proxy(), LocalCPythonProxy
             ):
                 raise ValueError("Wähle einen lokalen CPython-Interpreter.")
+            if not runner.is_waiting_toplevel_command() and self.connection:
+                self.stop_program()
+                self.reload_deadline = time.monotonic() + 10
+                self.reload_job = self.after(100, self.wait_for_restart)
+                self.busy = True
+                self.status.set("Programm wird neu geladen …")
+                self.controls()
+                return
             if not runner.is_waiting_toplevel_command():
                 raise ValueError(
                     "Bitte zuerst Thonnys Stop/Restart verwenden und dann neu laden."
@@ -138,6 +157,7 @@ class ConnectedLabDialog(LabDialog):
                 command = dict(
                     command, world=self.world_handles[self.world_choice.get()]
                 )
+            self.begin_action(command)
             self.pending = self.connection.send(command)
             self.busy = True
         except OSError as error:
@@ -151,18 +171,35 @@ class ConnectedLabDialog(LabDialog):
         self.send(command)
 
     def controls(self):
-        ready = bool(self.connection and self.data and not self.busy and not self.stale)
-        self.invoke_button.configure(
-            state="normal" if ready and self.bank.selection() else "disabled"
+        ready = bool(
+            self.connection
+            and self.data
+            and not self.busy
+            and not self.stale
+            and self.data.get("paused", True)
         )
-        self.create_button.configure(state="normal" if ready else "disabled")
+        self.common_controls(ready)
+        self.invoke_button.configure(
+            state="normal" if self.action_ready(ready) else "disabled"
+        )
+        self.create_button.configure(
+            state="normal"
+            if ready
+            and self.class_name.get() in self.classes
+            and self.constructor_form.valid()
+            else "disabled"
+        )
         if hasattr(self, "pause_button"):
             self.pause_button.configure(
                 state="normal"
                 if self.connection and self.data and not self.busy
                 else "disabled"
             )
-            self.resume_button.configure(state="normal" if ready else "disabled")
+            self.pause_button.configure(
+                text="▶ Start"
+                if not self.data or self.data.get("paused", True)
+                else "Ⅱ Pause"
+            )
             self.inspect_button.configure(
                 state="normal"
                 if self.connection and self.data and not self.busy
@@ -176,6 +213,10 @@ class ConnectedLabDialog(LabDialog):
             for i, w in enumerate(data.get("worlds", []))
         }
         self.world_box.configure(values=["Alle Welten", *self.world_handles])
+        if len(self.world_handles) > 1:
+            self.world_box.pack(side="left", before=self.pause_button)
+        else:
+            self.world_box.pack_forget()
         if self.world_choice.get() not in self.world_handles:
             self.world_choice.set("Alle Welten")
 
@@ -198,7 +239,10 @@ class ConnectedLabDialog(LabDialog):
                     self.pending = None
                     self.busy = False
                     if "data" in response:
+                        first_snapshot = self.data is None
                         self.show_data(response["data"])
+                        if first_snapshot:
+                            self.owner.lab_ready()
                     self.status.set(
                         (
                             "Welt pausiert · Methoden einzeln ausprobieren."
@@ -206,12 +250,10 @@ class ConnectedLabDialog(LabDialog):
                             else "Simulation läuft."
                         )
                         if response.get("ok")
-                        else response.get("error", "Verbindungsfehler")
+                        else "Aufruf fehlgeschlagen · Prüfe die Hinweise unten."
                     )
-                    if response.get("traceback"):
-                        self.log.configure(state="normal")
-                        self.log.insert("end", response["traceback"] + "\n")
-                        self.log.configure(state="disabled")
+                    self.set_outcome(response)
+                    self.select_object()
             except queue.Empty:
                 pass
         if (
@@ -239,7 +281,7 @@ class ConnectedLabDialog(LabDialog):
                 self.stale = True
                 self.status.set("Projektstand nicht lesbar. Bitte neu laden.")
         self.controls()
-        self.after(250, self.poll)
+        self.poll_job = self.after(250, self.poll)
 
     def backend_event(self, name, event):
         # A fresh CPython backend also returns environment information before
@@ -253,7 +295,8 @@ class ConnectedLabDialog(LabDialog):
             self.stop()
             self.status.set(
                 "Thonny-Ausführung beendet oder neu gestartet. Objektbank geleert."
-                if loaded else "Experiment konnte nicht gestartet werden. Benötigt werden miniworlds mit IDE-Host-API 1 und das aktuelle Backend-Plugin. Details stehen in der Shell."
+                if loaded
+                else "Experiment konnte nicht gestartet werden. Benötigt werden miniworlds mit IDE-Host-API 1 und das aktuelle Backend-Plugin. Details stehen in der Shell."
             )
 
     def stop(self):
@@ -265,15 +308,39 @@ class ConnectedLabDialog(LabDialog):
         self.busy = False
         self.stale = False
         self.highlighted = None
+        self.last_error = None
         self.fields_before.clear()
-        self.bank.delete(*self.bank.get_children())
+        self.comparison_before.clear()
+        self.comparison_after.clear()
+        self.field_detail.set("")
+        self._viewed_handle = None
+        self.receiver.set("Noch kein Objekt ausgewählt")
+        self.last_call.set("")
+        self.result_summary.set("")
+        self.result_panel.configure(text="Ergebnis")
+        self.chosen_methods.clear()
+        self.bank.clear()
         self.fields.delete(*self.fields.get_children())
         self.status.set(
             "Verbindung beendet. Die Objektbank wurde geleert; Thonnys Stop/Restart beendet das Programm."
         )
         self.controls()
 
+    def stop_program(self):
+        if getattr(self, "reload_job", None):
+            self.after_cancel(self.reload_job)
+            self.reload_job = None
+        runner = get_runner()
+        self.stop()
+        if runner:
+            runner.cmd_stop_restart()
+        self.status.set("Programm gestoppt. Zum Weiterarbeiten neu laden.")
+
     def close(self):
+        if getattr(self, "reload_job", None):
+            self.after_cancel(self.reload_job)
+        if hasattr(self, "poll_job"):
+            self.after_cancel(self.poll_job)
         self.stop()
         for name, handler in self.bindings:
             get_workbench().unbind(name, handler)
