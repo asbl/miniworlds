@@ -60,6 +60,37 @@ class PlatformAdapter:
             pygame.display.init()
         return pygame.display.set_mode(size, flags)
 
+    def set_video_driver(self, driver: str) -> None:
+        """Force an SDL video driver such as ``"x11"`` or ``"wayland"``.
+
+        Equivalent to starting the program with ``SDL_VIDEODRIVER=<driver>``.
+        pygame already initialised the display with the automatically chosen
+        driver when miniworlds was imported, so the display is re-initialised.
+        If the driver is not available, the previous one is restored.
+        """
+        if self.is_web():
+            return
+        driver = driver.strip().lower()
+        if not driver:
+            raise ValueError("video_driver must not be empty.")
+        if pygame.display.get_init() and pygame.display.get_driver() == driver:
+            return
+        previous = os.environ.get("SDL_VIDEODRIVER")
+        os.environ["SDL_VIDEODRIVER"] = driver
+        pygame.display.quit()
+        try:
+            pygame.display.init()
+        except pygame.error as error:
+            if previous is None:
+                os.environ.pop("SDL_VIDEODRIVER", None)
+            else:
+                os.environ["SDL_VIDEODRIVER"] = previous
+            pygame.display.init()
+            raise RuntimeError(
+                f"The video driver {driver!r} is not available: {error}. "
+                "Try another one, for example 'x11' or 'wayland'."
+            ) from error
+
     def set_window_position(self, position: tuple[int, int]) -> None:
         try:
             from pygame._sdl2 import Window as SDLWindow

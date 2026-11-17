@@ -755,9 +755,13 @@ def tests_unit(c):
 
 
 @task(name="thonny")
-def tests_thonny(c, network=False):
+def tests_thonny(c, network=False, match=""):
     """Validate the Thonny plugin; --network also repairs a disposable venv via PyPI."""
-    run_pytest_in_container(c, "test/unittests/thonny_plugin -v", rebuild=False,
+    import shlex
+    arguments = "test/unittests/thonny_plugin -v"
+    if match:
+        arguments += " -k " + shlex.quote(match)
+    run_pytest_in_container(c, arguments, rebuild=False,
                             extra_env={"MINIWORLDS_TEST_INSTALLER_NETWORK": "1"} if network else None)
 
 

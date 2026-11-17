@@ -81,7 +81,13 @@ class WorldRuntimeFacade:
         replit: bool = False,
         event: Optional[str] = None,
         data: Optional[object] = None,
+        video_driver: Optional[str] = None,
     ) -> None:
+        if video_driver is not None:
+            self.world.app.platform.set_video_driver(video_driver)
+            # The display was re-initialised: the window must create a new
+            # surface instead of reusing the one of the previous driver.
+            self.world.app.window.mode = False
         self.world.app.prepare_mainloop()
         self.world.backgrounds._init_display()
         self.world._mainloop.dirty_all()

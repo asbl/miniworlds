@@ -142,7 +142,24 @@ class TestWorldValidation(unittest.TestCase):
             replit=True,
             event=None,
             data=None,
+            video_driver=None,
         )
+
+    def test_run_passes_video_driver_and_rejects_non_string(self):
+        world = self._bare_world()
+
+        World.run(world, video_driver="x11")
+
+        world._runtime_facade.run.assert_called_once_with(
+            fullscreen=False,
+            fit_desktop=False,
+            replit=False,
+            event=None,
+            data=None,
+            video_driver="x11",
+        )
+        with self.assertRaises(TypeError):
+            World.run(world, video_driver=5)
 
     def test_learning_mode_rejects_non_bool(self):
         world = self._bare_world()
@@ -177,23 +194,6 @@ class TestWorldValidation(unittest.TestCase):
 
         self.assertTrue(result)
 
-    def test_beginner_aliases_delegate_to_existing_methods(self):
-        world = self._bare_world()
-        world.contains_position = MagicMock(return_value=True)
-        world.send_message = MagicMock(return_value=None)
-        world.detect_actors = MagicMock(return_value=["actor"])
-
-        self.assertTrue(World.contains(world, (1, 2)))
-        world.contains_position.assert_called_once_with((1, 2))
-
-        World.broadcast(world, "hello")
-        world.send_message.assert_called_once_with("hello", None)
-
-        self.assertEqual(World.actors_at(world, (3, 4)), ["actor"])
-        world.detect_actors.assert_called_once_with((3, 4))
-
-    def test_switch_world_rejects_invalid_inputs(self):
-        world = self._bare_world()
     def test_contains_position_checks_world_bounds(self):
         world = self._bare_world()  # 100 x 80
 
@@ -218,6 +218,23 @@ class TestWorldValidation(unittest.TestCase):
         self.assertFalse(World.contains_rect_any(world, (100, 0, 10, 10)))
         self.assertFalse(World.contains_rect_any(world, (-20, -20, 10, 10)))
 
+    def test_beginner_aliases_delegate_to_existing_methods(self):
+        world = self._bare_world()
+        world.contains_position = MagicMock(return_value=True)
+        world.send_message = MagicMock(return_value=None)
+        world.detect_actors = MagicMock(return_value=["actor"])
+
+        self.assertTrue(World.contains(world, (1, 2)))
+        world.contains_position.assert_called_once_with((1, 2))
+
+        World.broadcast(world, "hello")
+        world.send_message.assert_called_once_with("hello", None)
+
+        self.assertEqual(World.actors_at(world, (3, 4)), ["actor"])
+        world.detect_actors.assert_called_once_with((3, 4))
+
+    def test_switch_world_rejects_invalid_inputs(self):
+        world = self._bare_world()
 
         with self.assertRaises(TypeError):
             World.switch_world(world, object())

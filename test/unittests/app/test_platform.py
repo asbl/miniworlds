@@ -142,6 +142,56 @@ class TestPlatformFramePacing(unittest.TestCase):
 
         sleep_mock.assert_awaited_once_with(0)
 
+    def test_set_video_driver_reinitialises_display_with_driver(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: False
+
+        with patch.dict(os.environ, {}, clear=False), \
+                patch("miniworlds.base.platform.pygame.display") as display:
+            display.get_init.return_value = True
+            display.get_driver.return_value = "wayland"
+            adapter.set_video_driver(" X11 ")
+
+            self.assertEqual(os.environ["SDL_VIDEODRIVER"], "x11")
+        display.quit.assert_called_once_with()
+        display.init.assert_called_once_with()
+
+    def test_set_video_driver_keeps_display_if_driver_already_active(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: False
+
+        with patch("miniworlds.base.platform.pygame.display") as display:
+            display.get_init.return_value = True
+            display.get_driver.return_value = "x11"
+            adapter.set_video_driver("x11")
+
+        display.quit.assert_not_called()
+
+    def test_set_video_driver_restores_previous_driver_if_unavailable(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: False
+
+        with patch.dict(os.environ, {"SDL_VIDEODRIVER": "wayland"}), \
+                patch("miniworlds.base.platform.pygame.display") as display:
+            display.get_init.return_value = True
+            display.get_driver.return_value = "wayland"
+            display.init.side_effect = [pygame.error("x11 not available"), None]
+            with self.assertRaises(RuntimeError) as context:
+                adapter.set_video_driver("x11")
+
+            self.assertEqual(os.environ["SDL_VIDEODRIVER"], "wayland")
+        self.assertIn("x11", str(context.exception))
+        self.assertEqual(display.init.call_count, 2)
+
+    def test_set_video_driver_is_ignored_in_the_browser(self):
+        adapter = PlatformAdapter()
+        adapter.is_web = lambda: True
+
+        with patch("miniworlds.base.platform.pygame.display") as display:
+            adapter.set_video_driver("x11")
+
+        display.quit.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()

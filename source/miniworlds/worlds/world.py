@@ -811,6 +811,7 @@ class World(world_base.WorldBase):
         replit: bool = False,
         event: Optional[str] = None,
         data: Optional[object] = None,
+        video_driver: Optional[str] = None,
     ) -> None:
         """Start the Miniworlds main loop.
 
@@ -822,12 +823,21 @@ class World(world_base.WorldBase):
             replit: Whether to use Replit-specific display adjustments.
             event: Optional event name to queue at startup.
             data: Optional data to include with the startup event.
+            video_driver: Force an SDL video driver, for example `"x11"` or
+                `"wayland"`. Use it if the window stays black, e.g. on some
+                Linux systems. It has the same effect as starting the program
+                with the environment variable `SDL_VIDEODRIVER`, which also
+                works. Ignored in the browser.
 
         Examples:
             ::
 
                 world = World(800, 600)
                 world.run()
+
+            Force the X11 driver::
+
+                world.run(video_driver="x11")
         """
         fullscreen = self._coerce_bool_learning(fullscreen, "fullscreen")
         fit_desktop = self._coerce_bool_learning(fit_desktop, "fit_desktop")
@@ -839,6 +849,10 @@ class World(world_base.WorldBase):
             raise TypeError(
                 f"event must be str or None, got {type(event).__name__}: {event!r}"
             )
+        if video_driver is not None and not isinstance(video_driver, str):
+            raise TypeError(
+                f"video_driver must be str or None, got {type(video_driver).__name__}: {video_driver!r}"
+            )
         self._run_project_validation()
         self._runtime_facade.run(
             fullscreen=fullscreen,
@@ -846,6 +860,7 @@ class World(world_base.WorldBase):
             replit=replit,
             event=event,
             data=data,
+            video_driver=video_driver,
         )
 
     def _run_project_validation(self) -> None:

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 14:38+0100\n"
+"POT-Creation-Date: 2026-11-17 14:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -112,7 +112,7 @@ msgstr ""
 #: miniworlds.worlds.world.World.quit:8
 #: miniworlds.worlds.world.World.remove_background:9
 #: miniworlds.worlds.world.World.reset:4 miniworlds.worlds.world.World.rows:4
-#: miniworlds.worlds.world.World.run:14
+#: miniworlds.worlds.world.World.run:19
 #: miniworlds.worlds.world.World.send_message:12
 #: miniworlds.worlds.world.World.set_background:10
 #: miniworlds.worlds.world.World.set_columns:8
@@ -207,7 +207,8 @@ msgstr ""
 #: miniworlds.worlds.world.World.send_message:6
 #: miniworlds.worlds.world.World.set_columns:3
 #: miniworlds.worlds.world.World.set_rows:3
-#: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.stop:3
+#: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.step:7
+#: miniworlds.worlds.world.World.stop:3
 #: miniworlds.worlds.world.World.switch_world:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
@@ -593,6 +594,18 @@ msgstr ""
 msgid "Optional data to include with the startup event."
 msgstr ""
 
+#: miniworlds.worlds.world.World.run:12 of
+msgid ""
+"Force an SDL video driver, for example `\"x11\"` or `\"wayland\"`. Use it"
+" if the window stays black, e.g. on some Linux systems. It has the same "
+"effect as starting the program with the environment variable "
+"`SDL_VIDEODRIVER`, which also works. Ignored in the browser."
+msgstr ""
+
+#: miniworlds.worlds.world.World.run:25 of
+msgid "Force the X11 driver::"
+msgstr ""
+
 #: miniworlds.worlds.world.World.send_message:1 of
 msgid "Broadcast a message to the world and its actors."
 msgstr ""
@@ -650,6 +663,16 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.start:1 of
 msgid "Start or resume world updates."
+msgstr ""
+
+#: miniworlds.worlds.world.World.step:1 of
+msgid "Advance a paused world by exactly ``frames`` simulation frames."
+msgstr ""
+
+#: miniworlds.worlds.world.World.step:3 of
+msgid ""
+"The world stays paused afterwards (\"Act\" in a stepping IDE). The frames"
+" are executed by the mainloop, one per loop iteration."
 msgstr ""
 
 #: miniworlds.worlds.world.World.stop:1 of

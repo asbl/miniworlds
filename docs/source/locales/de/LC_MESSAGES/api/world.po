@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 14:38+0100\n"
+"POT-Creation-Date: 2026-11-17 14:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -29,23 +29,23 @@ msgstr "Die Basisklasse für all deine Welten."
 
 #: ../../source/api/world.md:5
 msgid ""
-"Use `world.send_message(\"name\")` for simple broadcasts between the world, "
-"actors, and docked GUI worlds."
+"Use `world.send_message(\"name\")` for simple broadcasts between the "
+"world, actors, and docked GUI worlds."
 msgstr ""
-"Verwende `world.send_message(\"name\")` fuer einfache Broadcasts zwischen "
-"Welt, Actors und angedockten GUI-Welten."
+"Verwende `world.send_message(\"name\")` fuer einfache Broadcasts zwischen"
+" Welt, Actors und angedockten GUI-Welten."
 
 #: ../../source/api/world.md:8
 msgid ""
-"For beginner classes, set `world.learning_mode = True`. This enables soft "
-"conversions for common mistakes in selected public APIs (for example bool-"
-"like strings such as `\"yes\"`/`\"no\"` in some flags, and list positions "
-"where tuple positions are expected)."
+"For beginner classes, set `world.learning_mode = True`. This enables soft"
+" conversions for common mistakes in selected public APIs (for example "
+"bool-like strings such as `\"yes\"`/`\"no\"` in some flags, and list "
+"positions where tuple positions are expected)."
 msgstr ""
 "Für Einsteigerklassen setze `world.learning_mode = True`. Das aktiviert "
-"weiche Umwandlungen für typische Fehler in ausgewählten öffentlichen APIs, "
-"zum Beispiel bool-ähnliche Zeichenketten wie `\"yes\"`/`\"no\"` bei einigen "
-"Flags und Listenpositionen, wo Tupelpositionen erwartet werden."
+"weiche Umwandlungen für typische Fehler in ausgewählten öffentlichen "
+"APIs, zum Beispiel bool-ähnliche Zeichenketten wie `\"yes\"`/`\"no\"` bei"
+" einigen Flags und Listenpositionen, wo Tupelpositionen erwartet werden."
 
 #: ../../source/api/world.md:13
 msgid "Useful beginner aliases on World include:"
@@ -70,8 +70,8 @@ msgstr "`set_bg(...)`, `add_bg(...)`, `next_bg()` für Background-Helfer"
 #: ../../source/api/world.md:20
 msgid ""
 "For interactive IDE calls, see [Experimentieren aus einer "
-"IDE](experiment.md) for `pause()`, `invoke()`, `refresh()`, `resume()`, and "
-"versioned object handles."
+"IDE](experiment.md) for `pause()`, `invoke()`, `refresh()`, `resume()`, "
+"and versioned object handles."
 msgstr ""
 "Für interaktive IDE-Aufrufe siehe [Experimentieren aus einer "
 "IDE](experiment.md): `pause()`, `invoke()`, `refresh()`, `resume()` und "
@@ -93,8 +93,8 @@ msgid ""
 "top-left position by default unless their origin is changed."
 msgstr ""
 "Positionen in einer `World` sind Pixelkoordinaten. Actor werden "
-"standardmäßig über ihre linke obere Position platziert, sofern ihr Ursprung "
-"nicht geändert wurde."
+"standardmäßig über ihre linke obere Position platziert, sofern ihr "
+"Ursprung nicht geändert wurde."
 
 #: miniworlds.worlds.world.World:7 of
 msgid "Notes"
@@ -122,15 +122,17 @@ msgstr "Kollisionsprüfungen verwenden standardmäßig Sprite-Masken."
 #: miniworlds.worlds.world.World.has_background:4
 #: miniworlds.worlds.world.World.is_in_world:10
 #: miniworlds.worlds.world.World.learning_mode:4
-#: miniworlds.worlds.world.World.on_setup:8 miniworlds.worlds.world.World.quit:8
+#: miniworlds.worlds.world.World.on_setup:8
+#: miniworlds.worlds.world.World.quit:8
 #: miniworlds.worlds.world.World.remove_background:9
 #: miniworlds.worlds.world.World.reset:4 miniworlds.worlds.world.World.rows:4
-#: miniworlds.worlds.world.World.run:14
+#: miniworlds.worlds.world.World.run:19
 #: miniworlds.worlds.world.World.send_message:12
 #: miniworlds.worlds.world.World.set_background:10
 #: miniworlds.worlds.world.World.set_columns:8
-#: miniworlds.worlds.world.World.set_rows:8 miniworlds.worlds.world.World.size:4
-#: miniworlds.worlds.world.World.start:6 miniworlds.worlds.world.World.stop:8
+#: miniworlds.worlds.world.World.set_rows:8
+#: miniworlds.worlds.world.World.size:4 miniworlds.worlds.world.World.start:6
+#: miniworlds.worlds.world.World.stop:8
 #: miniworlds.worlds.world.World.switch_background:12
 #: miniworlds.worlds.world.World.to_pixel:10
 #: miniworlds.worlds.world.World.world_size_x:4
@@ -185,8 +187,8 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.act:6 of
 msgid ""
-"The base implementation does nothing, so `super().act()` is never required "
-"in an overwritten `act` method."
+"The base implementation does nothing, so `super().act()` is never "
+"required in an overwritten `act` method."
 msgstr ""
 "Die Basisimplementierung tut nichts, daher ist `super().act()` in einer "
 "überschriebenen `act`-Methode nie nötig."
@@ -212,15 +214,18 @@ msgstr ""
 msgid "Return type"
 msgstr "Rückgabetyp"
 
-#: miniworlds.worlds.world.World.act:9 miniworlds.worlds.world.World.broadcast:4
-#: miniworlds.worlds.world.World.on_setup:5 miniworlds.worlds.world.World.pause:4
-#: miniworlds.worlds.world.World.play_sound:6 miniworlds.worlds.world.World.quit:3
-#: miniworlds.worlds.world.World.refresh:4
+#: miniworlds.worlds.world.World.act:9
+#: miniworlds.worlds.world.World.broadcast:4
+#: miniworlds.worlds.world.World.on_setup:5
+#: miniworlds.worlds.world.World.pause:4
+#: miniworlds.worlds.world.World.play_sound:6
+#: miniworlds.worlds.world.World.quit:3 miniworlds.worlds.world.World.refresh:4
 #: miniworlds.worlds.world.World.remove_background:3
 #: miniworlds.worlds.world.World.resume:4 miniworlds.worlds.world.World.run:5
 #: miniworlds.worlds.world.World.send_message:6
 #: miniworlds.worlds.world.World.set_columns:3
-#: miniworlds.worlds.world.World.set_rows:3 miniworlds.worlds.world.World.start:3
+#: miniworlds.worlds.world.World.set_rows:3
+#: miniworlds.worlds.world.World.start:3 miniworlds.worlds.world.World.step:7
 #: miniworlds.worlds.world.World.stop:3
 #: miniworlds.worlds.world.World.switch_world:3 of
 msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
@@ -288,11 +293,12 @@ msgstr "Schülerfreundlicher Alias für `add_background(source)`."
 msgid "Currently active world background."
 msgstr "Der aktuell aktive Welt-Hintergrund."
 
-#: miniworlds.worlds.world.World.background miniworlds.worlds.world.World.columns
-#: miniworlds.worlds.world.World.debug
+#: miniworlds.worlds.world.World.background
+#: miniworlds.worlds.world.World.columns miniworlds.worlds.world.World.debug
 #: miniworlds.worlds.world.World.has_background
-#: miniworlds.worlds.world.World.learning_mode miniworlds.worlds.world.World.rows
-#: miniworlds.worlds.world.World.size miniworlds.worlds.world.World.world_size_x
+#: miniworlds.worlds.world.World.learning_mode
+#: miniworlds.worlds.world.World.rows miniworlds.worlds.world.World.size
+#: miniworlds.worlds.world.World.world_size_x
 #: miniworlds.worlds.world.World.world_size_y of
 msgid "type"
 msgstr "Typ"
@@ -422,14 +428,14 @@ msgstr "Frames pro Sekunde der Render-Schleife."
 
 #: miniworlds.worlds.world.World.fps:3 of
 msgid ""
-"This controls redraw frequency. Logic frequency can be tuned independently "
-"via `world.tick_rate`."
+"This controls redraw frequency. Logic frequency can be tuned "
+"independently via `world.tick_rate`."
 msgstr ""
 "Dies steuert die Zeichenfrequenz. Die Logikfrequenz kann unabhängig über "
 "`world.tick_rate` eingestellt werden."
 
-#: miniworlds.worlds.world.World.fps:7 miniworlds.worlds.world.World.tick_rate:7
-#: of
+#: miniworlds.worlds.world.World.fps:7
+#: miniworlds.worlds.world.World.tick_rate:7 of
 msgid "Example"
 msgstr "Beispiel"
 
@@ -465,12 +471,12 @@ msgstr "Wandelt eine Bildschirmpixelposition in eine Weltposition um."
 
 #: miniworlds.worlds.world.World.get_from_pixel:3 of
 msgid ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
-"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 msgstr ""
-":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\ "
-"\\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
+":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Optional\\`\\\\"
+" \\\\\\[\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`float\\`\\, \\:py\\:class\\:\\`float\\`\\]\\]`"
 
 #: miniworlds.worlds.world.World.get_from_pixel:5
@@ -516,8 +522,8 @@ msgstr "Abwärtskompatible Docking-API für älteren Beispielcode."
 #: miniworlds.worlds.world.World.layout:3 of
 msgid ""
 "The actual layout manager remains internal on ``world._layout``. Public "
-"docking helpers continue to live on ``world.camera`` and are exposed here as"
-" a compatibility alias for existing teaching material."
+"docking helpers continue to live on ``world.camera`` and are exposed here"
+" as a compatibility alias for existing teaching material."
 msgstr ""
 "Der eigentliche Layout-Manager bleibt intern unter ``world._layout``. "
 "Öffentliche Docking-Hilfen liegen weiterhin unter ``world.camera`` und "
@@ -552,8 +558,8 @@ msgstr "Schülerfreundlicher Alias für `sound.play(path, volume)`."
 
 #: miniworlds.worlds.world.World.play_sound:3 of
 msgid ""
-"Students often try `world.play_sound(...)` first, so this alias exists for "
-"discoverability. Prefer `world.sound.play(...)`."
+"Students often try `world.play_sound(...)` first, so this alias exists "
+"for discoverability. Prefer `world.sound.play(...)`."
 msgstr ""
 "Schüler:innen probieren oft zuerst `world.play_sound(...)` aus, daher "
 "existiert dieser Alias zur besseren Auffindbarkeit. Bevorzugt sollte "
@@ -586,7 +592,9 @@ msgid "Remove a background."
 msgstr "Entfernt einen Hintergrund."
 
 #: miniworlds.worlds.world.World.remove_background:5 of
-msgid "Background index or `Appearance`. If omitted, the last background is removed."
+msgid ""
+"Background index or `Appearance`. If omitted, the last background is "
+"removed."
 msgstr ""
 "Hintergrundindex oder `Appearance`. Wenn nichts angegeben wird, wird der "
 "letzte Hintergrund entfernt."
@@ -630,6 +638,23 @@ msgstr "Optionaler Ereignisname, der beim Start eingereiht wird."
 #: miniworlds.worlds.world.World.run:11 of
 msgid "Optional data to include with the startup event."
 msgstr "Optionale Daten für das Startereignis."
+
+#: miniworlds.worlds.world.World.run:12 of
+msgid ""
+"Force an SDL video driver, for example `\"x11\"` or `\"wayland\"`. Use it"
+" if the window stays black, e.g. on some Linux systems. It has the same "
+"effect as starting the program with the environment variable "
+"`SDL_VIDEODRIVER`, which also works. Ignored in the browser."
+msgstr ""
+"Erzwingt einen SDL-Videotreiber, zum Beispiel `\"x11\"` oder "
+"`\"wayland\"`. Nutze das, wenn das Fenster schwarz bleibt, z. B. auf "
+"manchen Linux-Systemen. Es hat dieselbe Wirkung wie ein Programmstart mit"
+" der Umgebungsvariable `SDL_VIDEODRIVER`, die ebenfalls funktioniert. "
+"Wird im Browser ignoriert."
+
+#: miniworlds.worlds.world.World.run:25 of
+msgid "Force the X11 driver::"
+msgstr "Den X11-Treiber erzwingen::"
 
 #: miniworlds.worlds.world.World.send_message:1 of
 msgid "Broadcast a message to the world and its actors."
@@ -692,6 +717,21 @@ msgstr "tuple[int, int]"
 msgid "Start or resume world updates."
 msgstr "Startet oder setzt die Welt-Aktualisierungen fort."
 
+#: miniworlds.worlds.world.World.step:1 of
+msgid "Advance a paused world by exactly ``frames`` simulation frames."
+msgstr ""
+"Schaltet eine pausierte Welt um genau ``frames`` Simulationsschritte "
+"weiter."
+
+#: miniworlds.worlds.world.World.step:3 of
+msgid ""
+"The world stays paused afterwards (\"Act\" in a stepping IDE). The frames"
+" are executed by the mainloop, one per loop iteration."
+msgstr ""
+"Die Welt bleibt danach pausiert (\"Act\" in einer Einzelschritt-IDE). Die"
+" Schritte werden von der Mainloop ausgeführt, einer pro "
+"Schleifendurchlauf."
+
 #: miniworlds.worlds.world.World.stop:1 of
 msgid "Stop world updates immediately or after a number of frames."
 msgstr "Stoppt Weltaktualisierungen sofort oder nach einer Anzahl von Frames."
@@ -707,8 +747,8 @@ msgstr "Wechselt zu einem anderen Hintergrund."
 #: miniworlds.worlds.world.World.switch_background:3 of
 msgid "Pass an index, an existing appearance, or `-1` for the next background."
 msgstr ""
-"Übergebe einen Index, eine vorhandene Darstellung oder `-1` für den nächsten"
-" Hintergrund."
+"Übergebe einen Index, eine vorhandene Darstellung oder `-1` für den "
+"nächsten Hintergrund."
 
 #: miniworlds.worlds.world.World.switch_background:7 of
 msgid "Background index, `Appearance`, or `-1`."
@@ -732,11 +772,11 @@ msgstr "Wie oft die Weltlogik relativ zur Frame-Schleife läuft."
 
 #: miniworlds.worlds.world.World.tick_rate:3 of
 msgid ""
-"A value of `1` runs game logic every frame. A value of `30` runs it every "
-"30th frame."
+"A value of `1` runs game logic every frame. A value of `30` runs it every"
+" 30th frame."
 msgstr ""
-"Ein Wert von `1` führt die Spiellogik in jedem Frame aus. Ein Wert von `30` "
-"führt sie in jedem 30. Frame aus."
+"Ein Wert von `1` führt die Spiellogik in jedem Frame aus. Ein Wert von "
+"`30` führt sie in jedem 30. Frame aus."
 
 #: miniworlds.worlds.world.World.tick_rate:8 of
 msgid "from miniworlds import World"
@@ -776,9 +816,9 @@ msgstr "Ausnahmen"
 
 #: ../../source/api/world.md:32
 msgid ""
-"These exceptions are exported by `miniworlds` for code that wants to catch "
-"specific Miniworlds errors. They are documented here but intentionally do "
-"not have their own navigation entry."
+"These exceptions are exported by `miniworlds` for code that wants to "
+"catch specific Miniworlds errors. They are documented here but "
+"intentionally do not have their own navigation entry."
 msgstr ""
 "Diese Ausnahmen werden von `miniworlds` exportiert, damit Code gezielt "
 "Miniworlds-Fehler abfangen kann. Sie sind hier dokumentiert, haben aber "
@@ -787,9 +827,11 @@ msgstr ""
 #~ msgid ""
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
 #~ " \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
-#~ "\\:py\\:class\\:\\`float\\`\\] \\| \\:py\\:obj\\:\\`None\\``"
+#~ "\\:py\\:class\\:\\`float\\`\\] \\| "
+#~ "\\:py\\:obj\\:\\`None\\``"
 #~ msgstr ""
 #~ ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\"
 #~ " \\\\\\[\\:py\\:class\\:\\`float\\`\\, "
-#~ "\\:py\\:class\\:\\`float\\`\\] \\| \\:py\\:obj\\:\\`None\\``"
+#~ "\\:py\\:class\\:\\`float\\`\\] \\| "
+#~ "\\:py\\:obj\\:\\`None\\``"
 
