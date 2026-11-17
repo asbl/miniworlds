@@ -30,6 +30,13 @@ class Lobster(Crab):
     pass
 
 
+class Ball(Actor):
+    def __init__(self, position=(0, 0), radius=5, *, tag="red"):
+        super().__init__(position)
+        self.radius = radius
+        self.tag = tag
+
+
 class Keyed(Actor):
     def go(self, speed, *, turbo=False, label="x"):
         return f"{speed}:{turbo}:{label}"
@@ -138,6 +145,26 @@ class TestScenarioHost(unittest.TestCase):
             runtime_host.poll(self.world.app)
         finally:
             runtime_host.install(None)
+
+    def test_constructor_lists_parameters_after_the_position(self):
+        self.host.bind_program({"Ball": Ball, "Crab": Crab})
+        params = self.send("constructor", "Ball")["value"]
+        self.assertEqual(
+            [(p["name"], p["required"], p["default"], p["keyword_only"]) for p in params],
+            [("radius", False, "5", False), ("tag", False, "'red'", True)],
+        )
+        self.assertEqual(self.send("constructor", "Crab")["value"], [])
+        self.assertFalse(self.send("constructor", "Nope")["ok"])
+
+    def test_place_passes_constructor_values(self):
+        self.host.bind_program({"Ball": Ball})
+        handle = self.send("place", "Ball", 30, 40, ["9", "'blue'"])["value"]
+        actor = self.host.scenario.resolve(handle)
+        self.assertEqual((actor.radius, actor.tag), (9, "blue"))
+        handle = self.send("place", "Ball", 30, 40, ["", "'green'"])["value"]
+        actor = self.host.scenario.resolve(handle)
+        self.assertEqual((actor.radius, actor.tag), (5, "green"))
+        self.assertFalse(self.send("place", "Ball", 1, 1, ["1", "'x'", "3"])["ok"])
 
     def test_call_rejects_surplus_values(self):
         handle = self.send("place", "Crab", 10, 10)["value"]

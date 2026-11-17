@@ -1,3 +1,7 @@
+4.4.0.15
+  * Neues Modul `miniworlds.tools.code_hints`: `check(files)` findet typische Anfängerfehler aus dem Quelltext, ohne etwas auszuführen: nirgends definierte Namen (mit Vorschlag), `self.mov(2)` statt `self.move(2)`, vergessenes `self` vor einer Methode oder in `def act():`, ein Programm ohne `welt.run()`. Die Prüfung ist vorsichtig und schweigt bei Basisklassen, die sie nicht sehen kann, und bei Erweiterungspaketen (`miniworlds_*`).
+  * Neues Modul `miniworlds.tools.api_index`: `build_index()` listet je öffentlicher Actor-/World-Klasse ihre Basisklasse sowie Methoden (mit Signatur) und Eigenschaften mit der ersten Docstring-Zeile, als Grundlage für Autovervollständigung.
+  * `ScenarioHost`: neues Kommando `constructor` (Parameter von `__init__` nach der Position); `place` nimmt Konstruktorwerte entgegen (`place(Klasse, x, y, ["8", "'blau'"])`). `Scenario.place(cls, x, y, *args, **kwargs)` ruft `cls((x, y), *args, **kwargs)` auf.
 4.4.0.14
   * Neues Modul `miniworlds.tools.class_model`: `analyze(files)` liefert aus Python-Quelltexten ein statisches Klassenmodell (Klassen mit Datei und Zeilen, Attribute, Methoden, Vererbung auch über Dateien hinweg bis zu den öffentlichen miniworlds-Klassen, Art Actor/World). Es wird nur mit `ast` gelesen, nichts wird ausgeführt; Dateien mit Syntaxfehlern werden gemeldet und übersprungen. Grundlage für ein UML-Klassendiagramm in Greenfoot-artigen IDEs.
   * `ScenarioHost`-Status liefert zusätzlich `by_class` (Anzahl Actors je Klassenname) für Live-Zähler.

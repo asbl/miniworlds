@@ -35,6 +35,59 @@ def _short(value: Any) -> str:
     return text if len(text) <= MAX_TEXT else text[: MAX_TEXT - 1] + "…"
 
 
+def _describe_parameters(function: Any, skip: int) -> list[dict]:
+    """Parameters of ``function`` after the first ``skip`` positional ones."""
+    signature = inspect.signature(function)
+    params = []
+    for parameter in list(signature.parameters.values())[skip:]:
+        if parameter.kind in (parameter.VAR_POSITIONAL, parameter.VAR_KEYWORD):
+            continue
+        params.append(
+            {
+                "name": parameter.name,
+                "keyword_only": parameter.kind is parameter.KEYWORD_ONLY,
+                "required": parameter.default is parameter.empty,
+                "default": None
+                if parameter.default is parameter.empty
+                else _short(parameter.default),
+            }
+        )
+    return params
+
+
+def _parse_values(function_name: str, params: list[dict], texts: list) -> tuple[list, dict]:
+    """Turn field texts into ``(positional, keywords)`` for ``params``.
+
+    Values are Python literals (``ast.literal_eval``); anything else is taken
+    as plain text. Empty optional fields keep their default, later ones are
+    passed by name so a gap never drops a value.
+    """
+    if len(texts) > len(params):
+        raise ValueError(
+            f"{function_name} erwartet höchstens {len(params)} Wert(e), "
+            f"bekommen: {len(texts)}."
+        )
+    arguments: list = []
+    keywords: dict = {}
+    skipped_optional = False
+    for parameter, text in zip(params, texts):
+        text = str(text).strip()
+        if text == "":
+            if parameter["required"]:
+                raise ValueError(f"Wert für „{parameter['name']}“ fehlt.")
+            skipped_optional = True
+            continue
+        try:
+            value = ast.literal_eval(text)
+        except (ValueError, SyntaxError):
+            value = text
+        if parameter["keyword_only"] or skipped_optional:
+            keywords[parameter["name"]] = value
+        else:
+            arguments.append(value)
+    return arguments, keywords
+
+
 def _describe_value(value: Any) -> str:
     if isinstance(value, SIMPLE):
         return _short(value)
@@ -169,11 +222,26 @@ class ScenarioHost:
             for name, cls in classes.items()
         ]
 
-    def cmd_place(self, class_name: str, x: float, y: float):
+    def _class(self, class_name: str) -> type:
         cls = self._user_classes().get(class_name)
         if cls is None:
             raise ValueError(f"Unbekannte Klasse: {class_name}")
-        return self.scenario.place(cls, x, y)
+        return cls
+
+    def cmd_constructor(self, class_name: str):
+        """Constructor parameters after the position, for a "new object" dialog."""
+        init = self._class(class_name).__init__
+        try:
+            return _describe_parameters(init, 2)  # self, position
+        except (TypeError, ValueError):
+            return []
+
+    def cmd_place(self, class_name: str, x: float, y: float, texts: Optional[list] = None):
+        cls = self._class(class_name)
+        arguments, keywords = _parse_values(
+            class_name, self.cmd_constructor(class_name), list(texts or [])
+        )
+        return self.scenario.place(cls, x, y, *arguments, **keywords)
 
     def cmd_pick(self, x: float, y: float):
         return self.scenario.pick(x, y)
@@ -212,23 +280,9 @@ class ScenarioHost:
                 return
             seen.add(name)
             try:
-                signature = inspect.signature(function)
+                params = _describe_parameters(function, 1)
             except (TypeError, ValueError):
                 return
-            params = []
-            for parameter in list(signature.parameters.values())[1:]:
-                if parameter.kind in (parameter.VAR_POSITIONAL, parameter.VAR_KEYWORD):
-                    continue
-                params.append(
-                    {
-                        "name": parameter.name,
-                        "keyword_only": parameter.kind is parameter.KEYWORD_ONLY,
-                        "required": parameter.default is parameter.empty,
-                        "default": None
-                        if parameter.default is parameter.empty
-                        else _short(parameter.default),
-                    }
-                )
             methods.append({"name": name, "origin": origin, "params": params})
 
         for cls in type(obj).__mro__:
@@ -248,30 +302,6 @@ class ScenarioHost:
         listed = {m["name"]: m for m in self.cmd_methods(handle)}
         if method not in listed:
             raise ValueError(f"Methode nicht verfügbar: {method}")
-        params = listed[method]["params"]
-        if len(texts) > len(params):
-            raise ValueError(
-                f"{method} erwartet höchstens {len(params)} Wert(e), "
-                f"bekommen: {len(texts)}."
-            )
-        arguments: list = []
-        keywords: dict = {}
-        skipped_optional = False
-        for parameter, text in zip(params, texts):
-            text = str(text).strip()
-            if text == "":
-                if parameter["required"]:
-                    raise ValueError(f"Wert für „{parameter['name']}“ fehlt.")
-                skipped_optional = True
-                continue  # this parameter keeps its default
-            try:
-                value = ast.literal_eval(text)
-            except (ValueError, SyntaxError):
-                value = text  # plain text is accepted as a string
-            if parameter["keyword_only"] or skipped_optional:
-                # a positional gap is not allowed, so pass by name from here on
-                keywords[parameter["name"]] = value
-            else:
-                arguments.append(value)
+        arguments, keywords = _parse_values(method, listed[method]["params"], list(texts))
         result = self.scenario.world.invoke(getattr(obj, method), *arguments, **keywords)
         return {"result": None if result is None else _describe_value(result)}

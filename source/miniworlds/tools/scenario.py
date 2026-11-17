@@ -100,13 +100,17 @@ class Scenario:
         top = max(enumerate(found), key=lambda item: (getattr(item[1], "layer", 0), item[0]))
         return self.handle(top[1])
 
-    def place(self, cls, x: float, y: float) -> str:
-        """Create ``cls`` centered at (x, y); returns its handle."""
+    def place(self, cls, x: float, y: float, *args, **kwargs) -> str:
+        """Create ``cls`` centered at (x, y); returns its handle.
+
+        ``args``/``kwargs`` follow the position in the constructor call, like
+        ``Krabbe((x, y), 16)``.
+        """
         if not (inspect.isclass(cls) and issubclass(cls, self._actor_type())):
             raise TypeError("place expects an Actor subclass")
 
         def create():
-            actor = cls((x, y))
+            actor = cls((x, y), *args, **kwargs)
             actor.center = (x, y)
             return actor
 
