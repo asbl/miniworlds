@@ -341,8 +341,21 @@ class TiledWorld(world.World):
 
                 borders = world.borders(actor.position)
         """
-        position = value
-        return self.get_borders_from_position(position)
+        if isinstance(value, pygame.Rect):
+            left, top, right, bottom = value.left, value.top, value.right - 1, value.bottom - 1
+        else:
+            left = right = value[0]
+            top = bottom = value[1]
+        borders = []
+        if left <= 0:
+            borders.append("left")
+        if bottom >= self.world_size_y - 1:
+            borders.append("bottom")
+        if right >= self.world_size_x - 1:
+            borders.append("right")
+        if top <= 0:
+            borders.append("top")
+        return borders
 
     def _update_actor_positions(self):
         """Updates the dynamic_actors_dict.

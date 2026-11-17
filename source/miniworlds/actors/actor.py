@@ -280,6 +280,18 @@ class Actor(actor_base.ActorBase):
         del parameter_name
         return api_validation.DirectionInput.normalize(value)
 
+    @classmethod
+    def _direction_to_degrees(cls, value, parameter_name: str = "direction"):
+        """Normalize a direction and turn names like ``"right"`` into degrees.
+
+        Sensors compute with degrees, so every sensor entry point converts
+        direction names here; numbers, vectors and ``None`` pass through.
+        """
+        value = cls._normalize_direction_input(value, parameter_name)
+        if isinstance(value, str):
+            return actor_position_manager.Positionmanager.validate_direction(value)
+        return value
+
     @property
     def origin(self):
         """Current origin mode used for size and position operations."""
@@ -1409,6 +1421,7 @@ class Actor(actor_base.ActorBase):
                 walls_ahead = player.detect_all(Wall, direction="right", distance=10)
         """
         self._ensure_actor_filter(actors, "actors")
+        direction = self._direction_to_degrees(direction, "direction")
         self._ensure_real(direction, "direction")
         self._ensure_real(distance, "distance")
         return self._sensor_facade.detect_all(actors, direction, distance)
@@ -1435,6 +1448,10 @@ class Actor(actor_base.ActorBase):
                     player.score += 1
                     coin.remove()
         """
+        if len(args) >= 3:
+            args = args[:2] + (self._direction_to_degrees(args[2], "direction"),) + args[3:]
+        if "direction" in kwargs:
+            kwargs["direction"] = self._direction_to_degrees(kwargs["direction"], "direction")
         return self._sensor_facade.detect(*args, **kwargs)
 
     def detect_borders(
@@ -1574,7 +1591,7 @@ class Actor(actor_base.ActorBase):
 
                 color = actor.detect_color_at("right", 5)
         """
-        direction = self._normalize_direction_input(direction, "direction")
+        direction = self._direction_to_degrees(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         return self._sensor_facade.detect_color_at(direction, distance)
@@ -1598,7 +1615,7 @@ class Actor(actor_base.ActorBase):
                     if not self.detect_actors_at("right", 20, Wall):
                         self.move_in_direction("right", 5)
         """
-        direction = self._normalize_direction_input(direction, "direction")
+        direction = self._direction_to_degrees(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         self._ensure_actor_filter(actors, "actors")
@@ -1622,7 +1639,7 @@ class Actor(actor_base.ActorBase):
                 if wall:
                     player.undo_move()
         """
-        direction = self._normalize_direction_input(direction, "direction")
+        direction = self._direction_to_degrees(direction, "direction")
         self._ensure_direction_value(direction, "direction", allow_none=True)
         self._ensure_real(distance, "distance")
         self._ensure_actor_filter(actors, "actors")
@@ -2033,7 +2050,7 @@ class Actor(actor_base.ActorBase):
         """
         self._unimplemented_event_hook("on_mouse_motion")
 
-    def on_mouse_left_released(self, position: tuple):
+    def on_mouse_left_up(self, position: tuple):
         """Called when the left mouse button is released.
 
         Args:
@@ -2043,18 +2060,18 @@ class Actor(actor_base.ActorBase):
             ::
 
                 @actor.register
-                def on_mouse_left_released(self, position):
+                def on_mouse_left_up(self, position):
                     self.center = position
         """
-        self._unimplemented_event_hook("on_mouse_left_released")
+        self._unimplemented_event_hook("on_mouse_left_up")
 
-    def on_mouse_right_released(self, position: tuple):
+    def on_mouse_right_up(self, position: tuple):
         """Called when the right mouse button is released.
 
         Args:
             position: Current mouse position as `(x, y)`.
         """
-        self._unimplemented_event_hook("on_mouse_right_released")
+        self._unimplemented_event_hook("on_mouse_right_up")
 
     def on_clicked_left(self, position: tuple):
         """Called when the actor is clicked with the left mouse button.

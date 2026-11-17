@@ -381,7 +381,7 @@ class TestActorLifecycle(unittest.TestCase):
 
     def test_last_position_and_last_direction_delegate_to_position_manager(self):
         actor = Actor.__new__(Actor)
-        pm = SimpleNamespace(last_center=(5, 10), last_direction=45)
+        pm = SimpleNamespace(last_position=(5, 10), last_direction=45)
         actor._position_manager = pm
 
         self.assertEqual(Actor.last_position.__get__(actor, Actor), (5, 10))

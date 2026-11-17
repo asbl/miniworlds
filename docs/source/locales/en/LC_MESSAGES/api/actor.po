@@ -134,7 +134,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_key_pressed:11
 #: miniworlds.actors.actor.Actor.on_key_up:6
 #: miniworlds.actors.actor.Actor.on_mouse_leave:6
-#: miniworlds.actors.actor.Actor.on_mouse_left_released:6
+#: miniworlds.actors.actor.Actor.on_mouse_left_up:6
 #: miniworlds.actors.actor.Actor.on_mouse_over:6
 #: miniworlds.actors.actor.Actor.on_not_detecting_world:6
 #: miniworlds.actors.actor.Actor.on_setup:10
@@ -247,7 +247,7 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_key_pressed
 #: miniworlds.actors.actor.Actor.on_key_up
 #: miniworlds.actors.actor.Actor.on_mouse_leave
-#: miniworlds.actors.actor.Actor.on_mouse_left_released
+#: miniworlds.actors.actor.Actor.on_mouse_left_up
 #: miniworlds.actors.actor.Actor.on_mouse_over
 #: miniworlds.actors.actor.Actor.point_towards
 #: miniworlds.actors.actor.Actor.point_towards_actor
@@ -1065,12 +1065,12 @@ msgstr ""
 #: miniworlds.actors.actor.Actor.on_clicked_right:3
 #: miniworlds.actors.actor.Actor.on_mouse_left:7
 #: miniworlds.actors.actor.Actor.on_mouse_left_down:3
-#: miniworlds.actors.actor.Actor.on_mouse_left_released:3
+#: miniworlds.actors.actor.Actor.on_mouse_left_up:3
 #: miniworlds.actors.actor.Actor.on_mouse_motion:6
 #: miniworlds.actors.actor.Actor.on_mouse_over:3
 #: miniworlds.actors.actor.Actor.on_mouse_right:6
 #: miniworlds.actors.actor.Actor.on_mouse_right_down:3
-#: miniworlds.actors.actor.Actor.on_mouse_right_released:3 of
+#: miniworlds.actors.actor.Actor.on_mouse_right_up:3 of
 msgid "Current mouse position as `(x, y)`."
 msgstr ""
 
@@ -1176,7 +1176,7 @@ msgstr ""
 msgid "Called when the left mouse button is pressed down."
 msgstr ""
 
-#: miniworlds.actors.actor.Actor.on_mouse_left_released:1 of
+#: miniworlds.actors.actor.Actor.on_mouse_left_up:1 of
 msgid "Called when the left mouse button is released."
 msgstr ""
 
@@ -1206,7 +1206,7 @@ msgstr ""
 msgid "Called when the right mouse button is pressed down."
 msgstr ""
 
-#: miniworlds.actors.actor.Actor.on_mouse_right_released:1 of
+#: miniworlds.actors.actor.Actor.on_mouse_right_up:1 of
 msgid "Called when the right mouse button is released."
 msgstr ""
 

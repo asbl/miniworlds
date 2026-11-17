@@ -70,7 +70,7 @@ class ActorSizeFacade:
     # --- history ---
 
     def get_last_center(self):
-        return self.actor.position_manager.last_center
+        return self.actor.position_manager.last_position
 
     def get_last_direction(self) -> int:
         return self.actor.position_manager.last_direction

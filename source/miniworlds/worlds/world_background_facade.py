@@ -42,7 +42,7 @@ class WorldBackgroundFacade:
     def remove_background(
         self, background: Optional[Union[int, appearance.Appearance]] = None
     ) -> None:
-        self.world.backgrounds.remove_appearance(background)
+        self.world.backgrounds.remove_appearance(-1 if background is None else background)
 
     def set_background(
         self, source: Union[str, Tuple[int, int, int]]
@@ -63,4 +63,4 @@ class WorldBackgroundFacade:
             raise exc_value.with_traceback(None)
 
     def has_background(self) -> bool:
-        return self.world.backgrounds.has_appearance()
+        return bool(self.world.backgrounds.has_appearance)
