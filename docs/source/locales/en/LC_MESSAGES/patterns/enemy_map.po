@@ -1,0 +1,252 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2023, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-17 12:40+0000\n"
+"PO-Revision-Date: 2026-11-17 12:00+0000\n"
+"Last-Translator: Claude\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/patterns/enemy_map.md:1
+msgid "Tutorial: Place Enemies on a Canvas"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:3
+msgid "In the [maze game](maze_game.md) the level is a **tilemap**: a 2D list in which every cell holds a number, and every number stands for an actor class. That works well for a `TiledWorld`, where everything sits on a fixed grid."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:7
+msgid "Many games have no grid. Enemies stand wherever the level designer wants them. In this tutorial you use a normal `World` as a free **canvas**, place different enemy types on it with the mouse, and store the result in a **data structure**. From that data you can rebuild the level at any time."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:12
+msgid "The idea is the same as in the maze game:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "Maze game (`TiledWorld`)"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "This tutorial (`World`)"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "2D list of numbers"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "list of dictionaries"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "`tiles = [None, Wall, Player]`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "`ENEMY_TYPES = {\"zombie\": Zombie, ...}`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "position = `(column, row)`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md
+msgid "position = `(x, y)` in pixels"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:20
+msgid "The tutorial needs no image files. Enemies are drawn as colored squares. Later you can replace them with `add_costume(\"...\")`."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:25
+msgid "Step 1: A canvas and different enemy types"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:27
+msgid "A `World(width, height)` is a free canvas measured in pixels. Create one subclass of `Actor` for each **type** of enemy:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:62
+msgid "`Zombie((80, 80))` creates an enemy at pixel position `x=80`, `y=80`. Every enemy type has its own look, but all share the same base class."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:67
+msgid "Step 2: Store the enemies in a data structure"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:69
+msgid "If you create enemies directly in the code, you cannot save them or change them later. Better: **first** describe the level as data, **then** create the actors from that data."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:73
+msgid "An enemy is described by its type and its position. A dictionary is a good fit for this, and a list holds all enemies of the level:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:84
+msgid "Just like `tiles` in the maze game, a second structure translates the text in `\"type\"` into a class:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:95
+msgid "Now one function builds the whole level from the data:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:109
+msgid "First all existing actors are removed, so you can call the function again at any time, for example to load a different level."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:113
+msgid "`list(world.actors)` creates a copy of the list. Without the copy you would change the list while looping over it."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:119
+msgid "Step 3: Place enemies with the mouse"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:121
+msgid "Now the level is created interactively. The player (here: the level designer) selects an enemy type with the keys `1`, `2` and `3` and places it with a left click. Each click does two things:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:125
+msgid "It adds a new entry to `enemy_data`."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:126
+msgid "It creates the matching actor."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:150
+msgid "Use `on_mouse_left_down` here and not `on_mouse_left`. `on_mouse_left` is called again and again **as long as** the button is held, so one click would create several enemies. `on_mouse_left_down` fires exactly once per click."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:157
+msgid "Step 4: Remove enemies"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:159
+msgid "A right click removes the enemy closest to the mouse. Remove the entry from the **data** and rebuild the level, so data and actors always match:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:174
+msgid "`reversed(...)` checks the enemy placed last first. That is the one drawn on top."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:177
+msgid "The important design rule: **the data is the truth.** The actors are only a view of it. Whenever something changes, change the data first."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:182
+msgid "Step 5: Save and load"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:184
+msgid "Because the level is a list of dictionaries made of text and numbers, you can store it directly as a JSON file with the standard module `json`:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:203
+msgid "Call them from the key handler, for example with `s` for save and `l` for load:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:222
+msgid "The file contains your level as readable text:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:228
+msgid "You can keep several levels in a dictionary, like the rooms in [Level Loading](04_level_loading.md):"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:242
+msgid "Step 6: Give each enemy type its own behavior"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:244
+msgid "Because every type is its own class, each one can behave differently. Add an `act` method. It is called once per frame:"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:272
+msgid "Zombies patrol horizontally, bats fly up and down, ghosts stay in place. Because `build_enemies` only needs the type and the position, the data structure does not change when you add behavior."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:278
+msgid "Complete example"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "Input"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "Action"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "`1`, `2`, `3`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "select zombie, bat or ghost"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "left click"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "place the selected enemy"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "right click"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "remove the enemy under the mouse"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "`s` / `l`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:149
+msgid "save / load `enemies.json`"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:387
+msgid "Summary"
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:389
+msgid "A normal `World` is a free canvas, positions are pixels."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:390
+msgid "A **list of dictionaries** describes the level. A **dictionary of classes** translates type names into actors, like `tiles` in the maze game."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:392
+msgid "One function `build_enemies(data)` creates all actors from the data."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:393
+msgid "Change the data first, then rebuild. Then saving, loading and switching levels come almost for free."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:395
+msgid "Use `on_mouse_left_down` for single clicks."
+msgstr ""
+
+#: ../../source/patterns/enemy_map.md:397
+msgid "Ideas to continue: add a fourth enemy type, store extra properties such as `\"speed\"` or `\"health\"` in each dictionary, or add a player and a \"play\" mode that starts the enemies moving only after you press a key."
+msgstr ""
+

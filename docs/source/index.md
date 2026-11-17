@@ -435,6 +435,7 @@ patterns/02_scrolling
 patterns/03_game_over
 patterns/04_level_loading
 patterns/maze_game
+patterns/enemy_map
 patterns/red_baron
 patterns/flappy_physics
 patterns/hex_world_catan
