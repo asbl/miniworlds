@@ -66,6 +66,11 @@ class TestScenarioHost(unittest.TestCase):
             (0, True, 1, 1.0),
         )
 
+    def test_status_counts_actors_per_class(self):
+        for cls in ("Crab", "Crab", "Lobster"):
+            self.send("place", cls, 10, 10)
+        self.assertEqual(self.send("status")["value"]["by_class"], {"Crab": 2, "Lobster": 1})
+
     def test_classes_list_user_classes_with_bases(self):
         classes = {c["name"]: c for c in self.send("classes")["value"]}
         self.assertEqual(set(classes), {"Crab", "Lobster"})

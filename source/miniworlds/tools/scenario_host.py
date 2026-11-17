@@ -15,6 +15,7 @@ import ast
 import inspect
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -141,7 +142,7 @@ class ScenarioHost:
         return self.scenario.snapshot()
 
     def cmd_status(self):
-        """Cheap poll: no per-actor data."""
+        """Cheap poll: counts only (actors per class name), no per-actor data."""
         world = self.scenario.world
         return {
             "frame": world.frame,
@@ -149,6 +150,7 @@ class ScenarioHost:
             "fps": world.fps,
             "speed": self.scenario.speed,
             "actors": len(world.actors),
+            "by_class": dict(Counter(type(actor).__name__ for actor in world.actors)),
         }
 
     def cmd_classes(self):
