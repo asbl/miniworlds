@@ -18,13 +18,21 @@ class WorldRuntimeFacade:
     def __init__(self, world: "world_mod.World"):
         self.world = world
         self.is_paused = False
+        self._pending_steps = 0
         self._runtime_thread = threading.get_ident()
 
     def pause(self) -> None:
         self.is_paused = True
         self.world.is_running = False
 
+    def step(self, frames: int = 1) -> None:
+        if isinstance(frames, bool) or not isinstance(frames, int) or frames < 1:
+            raise ValueError("frames must be a positive integer")
+        self.pause()
+        self._pending_steps += frames
+
     def resume(self) -> None:
+        self._pending_steps = 0
         self.is_paused = False
         self.world.is_running = True
 

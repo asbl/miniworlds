@@ -40,6 +40,22 @@ class TestSelfDetection(unittest.TestCase):
                 other.collision_type = collision_type
                 self.assertIs(actor.detect(other), other)
 
+    def test_detect_accepts_actor_class_as_filter(self):
+        class Worm(Actor):
+            pass
+
+        actor = Actor((80, 80), world=self.world)
+        worm = Worm((85, 80), world=self.world)
+        far_worm = Worm((180, 180), world=self.world)
+        for item in (actor, worm, far_worm):
+            item.size = (40, 40)
+            item.add_costume((255, 0, 0))
+
+        self.assertIs(actor.detect(Worm), worm)
+        self.assertEqual(actor.detect_all(Worm), [worm])
+        worm.remove()
+        self.assertIsNone(actor.detect(Worm))
+
     def test_moose_group_avoidance_does_not_move_isolated_enemies(self):
         enemies = [Actor(position, world=self.world) for position in ((40, 40), (150, 40), (40, 150))]
         for enemy in enemies:

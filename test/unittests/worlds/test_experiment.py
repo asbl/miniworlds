@@ -189,3 +189,30 @@ def test_resume_delivers_first_key_event_after_pause_inside_handler():
         assert calls == [['a'], ['b']]
     finally:
         App.reset()
+
+
+def test_step_runs_exactly_n_frames_and_stays_paused():
+    world = MagicMock(is_paused=True, is_running=False, frame=3, fps=60, tick_rate=1)
+    facade = WorldRuntimeFacade(world)
+    world._runtime_facade = facade
+    manager = MainloopManager(world, MagicMock())
+    facade.step(2)
+    for _ in range(4):
+        asyncio.run(manager.update())
+    assert world.frame == 5  # only the two queued frames advanced
+    assert world.event_manager.act_all.call_count == 2
+    assert facade._pending_steps == 0
+
+
+def test_step_rejects_invalid_frame_counts():
+    _, facade = runtime()
+    for bad in (0, -1, 1.5, True, "2"):
+        with pytest.raises(ValueError):
+            facade.step(bad)
+
+
+def test_resume_discards_queued_steps():
+    _, facade = runtime()
+    facade.step(5)
+    facade.resume()
+    assert facade._pending_steps == 0 and not facade.is_paused

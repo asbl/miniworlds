@@ -54,6 +54,15 @@ class MainloopManager:
         finally:
             self._profile_add(name, time.perf_counter() - start)
     
+    def _consume_step(self) -> bool:
+        """Take one queued single step (``World.step``) while paused."""
+        facade = getattr(self.world, "_runtime_facade", None)
+        pending = getattr(facade, "_pending_steps", 0)
+        if isinstance(pending, int) and pending > 0:
+            facade._pending_steps = pending - 1
+            return True
+        return False
+
     async def update(self):
         """The mainloop, called once per frame.
 
@@ -66,17 +75,22 @@ class MainloopManager:
             awaiting it here would multiply the frame delay by the number of
             docked worlds (e.g. world + toolbar).
         """
+        stepping = False
         if getattr(self.world, "is_paused", False) is True:
-            self.world.event_manager.update()
-            return 1 / self.world.fps
-        if not self.world.is_running and self.world.frame != 0:
+            stepping = self._consume_step()
+            if not stepping:
+                self.world.event_manager.update()
+                return 1 / self.world.fps
+        elif not self.world.is_running and self.world.frame != 0:
             self.world.event_manager.update()
             return None
         start = 0
-        if self.world.is_running or self.world.frame == 0:
+        if stepping or self.world.is_running or self.world.frame == 0:
             start = time.perf_counter()
             # Acting for all actors@static
-            if self.world.frame > 0 and self.world.frame % self.world.tick_rate == 0:
+            # A manual step acts even on the initial frame (a stepping IDE
+            # expects the first "Act" to call every actor's act()).
+            if (self.world.frame > 0 or stepping) and self.world.frame % self.world.tick_rate == 0:
                 self._profile_call("event.act_all", self.world.event_manager.act_all)
             self._profile_call(
                 "collision.handle_all",

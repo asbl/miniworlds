@@ -44,8 +44,11 @@ class ActorSensorFacade:
         if not distance:
             if actors is self.actor:
                 return None
-            if hasattr(actors, "position_manager") and hasattr(
-                actors, "collision_type"
+            # A class has these names too (as properties); only instances qualify.
+            if (
+                not isinstance(actors, type)
+                and hasattr(actors, "position_manager")
+                and hasattr(actors, "collision_type")
             ):
                 actor_rect = self.actor.position_manager.get_global_rect()
                 other_rect = actors.position_manager.get_global_rect()

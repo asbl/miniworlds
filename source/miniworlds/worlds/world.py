@@ -386,7 +386,7 @@ class World(world_base.WorldBase):
         """
         pos = self._coerce_position_learning(pos, "pos")
         self._ensure_position_tuple(pos, "pos")
-        return self.sensor_manager.contains_position(pos)
+        return 0 <= pos[0] < self.world_size_x and 0 <= pos[1] < self.world_size_y
 
     def contains(self, pos):
         """Return whether a position lies inside the world.
@@ -411,7 +411,13 @@ class World(world_base.WorldBase):
                     actor.move()
         """
         self._ensure_rect_like(rect, "rect")
-        return self.sensor_manager.contains_rect_all(rect)
+        rectangle = pygame.Rect(rect)
+        return (
+            rectangle.left >= 0
+            and rectangle.top >= 0
+            and rectangle.right <= self.world_size_x
+            and rectangle.bottom <= self.world_size_y
+        )
 
     def contains_rect_any(self, rect: Union[Tuple[int, int, int, int], pygame.Rect]):
         """Return whether any part of a rectangle is inside the world.
@@ -429,7 +435,10 @@ class World(world_base.WorldBase):
                     actor.remove()
         """
         self._ensure_rect_like(rect, "rect")
-        return self.sensor_manager.contains_rect_any_(rect)
+        rectangle = pygame.Rect(rect)
+        return pygame.Rect(0, 0, self.world_size_x, self.world_size_y).colliderect(
+            rectangle
+        )
 
     @property
     def tick_rate(self) -> int:
@@ -747,6 +756,14 @@ class World(world_base.WorldBase):
     def resume(self) -> None:
         """Leave experiment mode and resume normal simulation."""
         self._runtime_facade.resume()
+
+    def step(self, frames: int = 1) -> None:
+        """Advance a paused world by exactly ``frames`` simulation frames.
+
+        The world stays paused afterwards ("Act" in a stepping IDE). The
+        frames are executed by the mainloop, one per loop iteration.
+        """
+        self._runtime_facade.step(frames)
 
     def refresh(self) -> None:
         """Render current state without advancing animation, timers, or physics."""

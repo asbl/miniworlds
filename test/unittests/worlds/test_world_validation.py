@@ -24,11 +24,6 @@ class TestWorldValidation(unittest.TestCase):
             get_from_pixel=MagicMock(return_value=(1, 2)),
             to_pixel=MagicMock(return_value=(1, 2)),
         )
-        world.sensor_manager = SimpleNamespace(
-            contains_position=MagicMock(return_value=True),
-            contains_rect_all=MagicMock(return_value=True),
-            contains_rect_any_=MagicMock(return_value=True),
-        )
         world.camera = SimpleNamespace(
             width=100,
             height=80,
@@ -180,7 +175,6 @@ class TestWorldValidation(unittest.TestCase):
 
         result = World.contains_position(world, [10, 20])
 
-        world.sensor_manager.contains_position.assert_called_once_with((10, 20))
         self.assertTrue(result)
 
     def test_beginner_aliases_delegate_to_existing_methods(self):
@@ -200,6 +194,30 @@ class TestWorldValidation(unittest.TestCase):
 
     def test_switch_world_rejects_invalid_inputs(self):
         world = self._bare_world()
+    def test_contains_position_checks_world_bounds(self):
+        world = self._bare_world()  # 100 x 80
+
+        self.assertTrue(World.contains_position(world, (0, 0)))
+        self.assertTrue(World.contains_position(world, (99, 79)))
+        self.assertFalse(World.contains_position(world, (100, 10)))
+        self.assertFalse(World.contains_position(world, (-1, 10)))
+        self.assertFalse(World.contains_position(world, (10, 80)))
+
+    def test_contains_rect_requires_full_containment(self):
+        world = self._bare_world()
+
+        self.assertTrue(World.contains_rect(world, (0, 0, 100, 80)))
+        self.assertFalse(World.contains_rect(world, (90, 0, 20, 10)))
+        self.assertFalse(World.contains_rect(world, (-5, 0, 10, 10)))
+
+    def test_contains_rect_any_accepts_partial_overlap(self):
+        world = self._bare_world()
+
+        self.assertTrue(World.contains_rect_any(world, (90, 70, 50, 50)))
+        self.assertTrue(World.contains_rect_any(world, (-50, -50, 60, 60)))
+        self.assertFalse(World.contains_rect_any(world, (100, 0, 10, 10)))
+        self.assertFalse(World.contains_rect_any(world, (-20, -20, 10, 10)))
+
 
         with self.assertRaises(TypeError):
             World.switch_world(world, object())
