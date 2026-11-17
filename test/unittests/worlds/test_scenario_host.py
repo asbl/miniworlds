@@ -30,6 +30,14 @@ class Lobster(Crab):
     pass
 
 
+class Keyed(Actor):
+    def go(self, speed, *, turbo=False, label="x"):
+        return f"{speed}:{turbo}:{label}"
+
+    def gap(self, a=1, b=2):
+        return f"{a}:{b}"
+
+
 class TestScenarioHost(unittest.TestCase):
     def setUp(self):
         App.reset(unittest=True, file=__file__)
@@ -94,8 +102,8 @@ class TestScenarioHost(unittest.TestCase):
         self.assertEqual(
             methods["eat"]["params"],
             [
-                {"name": "amount", "required": True, "default": None},
-                {"name": "label", "required": False, "default": "'x'"},
+                {"name": "amount", "keyword_only": False, "required": True, "default": None},
+                {"name": "label", "keyword_only": False, "required": False, "default": "'x'"},
             ],
         )
         self.assertIn("move", methods)
@@ -125,3 +133,39 @@ class TestScenarioHost(unittest.TestCase):
             runtime_host.poll(self.world.app)
         finally:
             runtime_host.install(None)
+
+    def test_call_rejects_surplus_values(self):
+        handle = self.send("place", "Crab", 10, 10)["value"]
+        reply = self.send("call", handle, "eat", ["1", "x", "3"])
+        self.assertFalse(reply["ok"])
+        self.assertIn("höchstens 2", reply["error"])
+
+    def test_call_passes_keyword_only_and_skipped_parameters_by_name(self):
+        self.host.bind_program({"Keyed": Keyed})
+        handle = self.send("place", "Keyed", 10, 10)["value"]
+        reply = self.send("call", handle, "go", ["3", "True", "'hi'"])
+        self.assertEqual(reply["value"]["result"], "'3:True:hi'")
+        # an empty optional field keeps its default, a later one is still used
+        reply = self.send("call", handle, "gap", ["", "7"])
+        self.assertEqual(reply["value"]["result"], "'1:7'")
+
+    def test_modules_match_whole_path_components(self):
+        import sys
+        import types
+
+        inside = types.ModuleType("gf_inside")
+        inside.__file__ = "/gf_project/inside.py"
+        near = types.ModuleType("gf_near")
+        near.__file__ = "/gf_project2/near.py"
+        sys.modules.update({"gf_inside": inside, "gf_near": near})
+        try:
+            self.host.bind_program({}, "/gf_project")
+            spaces = list(self.host._modules())
+        finally:
+            del sys.modules["gf_inside"], sys.modules["gf_near"]
+        self.assertIn(vars(inside), spaces)
+        self.assertNotIn(vars(near), spaces)
+
+
+if __name__ == "__main__":
+    unittest.main()

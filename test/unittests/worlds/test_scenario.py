@@ -82,6 +82,38 @@ class TestScenario(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(TypeError):
             self.scenario.set_speed("fast")
 
+    def test_speed_follows_a_frame_rate_the_program_changed(self):
+        self.world.fps = 20
+        self.scenario.set_speed(2)
+        self.assertEqual(self.world.fps, 40)
+        self.world.fps = 10  # the program lowers the base rate itself
+        self.scenario.set_speed(2)
+        self.assertEqual(self.world.fps, 20)
+        self.scenario.set_speed(1)
+        self.assertEqual(self.world.fps, 10)
+
+    def test_handles_of_removed_actors_are_released(self):
+        first = self.scenario.place(Walker, 10, 10)
+        handles = [self.scenario.place(Walker, 20 + i, 20) for i in range(40)]
+        for handle in handles[:35]:
+            self.world.invoke(self.scenario.resolve(handle).remove)
+        # registering past the threshold (64) prunes the dead actors
+        for i in range(30):
+            self.scenario.place(Walker, 5 + i, 5)
+        with self.assertRaises(LookupError):
+            self.scenario.resolve(handles[0])
+        self.assertIsNotNone(self.scenario.resolve(first))
+        self.assertIsNotNone(self.scenario.resolve(handles[-1]))
+        self.assertLess(len(self.scenario.session._objects), 50)
+
+    def test_deleted_handles_are_not_reused(self):
+        first = self.scenario.place(Walker, 10, 10)
+        self.scenario.delete(first)
+        second = self.scenario.place(Walker, 10, 10)
+        self.assertNotEqual(first, second)
+        with self.assertRaises(LookupError):
+            self.scenario.resolve(first)
+
     def test_snapshot_lists_actors_with_stable_handles(self):
         handle = self.scenario.place(Walker, 10, 20)
         first = self.scenario.snapshot()

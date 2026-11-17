@@ -88,7 +88,8 @@ class ScenarioHost:
             root = str(Path(self.project_dir))
             for module in list(sys.modules.values()):
                 file = getattr(module, "__file__", None)
-                if file and str(file).startswith(root):
+                # "/proj" must not match "/proj2/x.py": compare whole path parts
+                if file and (str(file) == root or str(file).startswith(root + "/")):
                     yield vars(module)
 
     def _user_classes(self) -> dict[str, type]:
@@ -219,6 +220,7 @@ class ScenarioHost:
                 params.append(
                     {
                         "name": parameter.name,
+                        "keyword_only": parameter.kind is parameter.KEYWORD_ONLY,
                         "required": parameter.default is parameter.empty,
                         "default": None
                         if parameter.default is parameter.empty
@@ -245,16 +247,29 @@ class ScenarioHost:
         if method not in listed:
             raise ValueError(f"Methode nicht verfügbar: {method}")
         params = listed[method]["params"]
-        arguments = []
+        if len(texts) > len(params):
+            raise ValueError(
+                f"{method} erwartet höchstens {len(params)} Wert(e), "
+                f"bekommen: {len(texts)}."
+            )
+        arguments: list = []
+        keywords: dict = {}
+        skipped_optional = False
         for parameter, text in zip(params, texts):
             text = str(text).strip()
             if text == "":
                 if parameter["required"]:
                     raise ValueError(f"Wert für „{parameter['name']}“ fehlt.")
-                break  # later optional parameters keep their defaults
+                skipped_optional = True
+                continue  # this parameter keeps its default
             try:
-                arguments.append(ast.literal_eval(text))
+                value = ast.literal_eval(text)
             except (ValueError, SyntaxError):
-                arguments.append(text)  # plain text is accepted as a string
-        result = self.scenario.world.invoke(getattr(obj, method), *arguments)
+                value = text  # plain text is accepted as a string
+            if parameter["keyword_only"] or skipped_optional:
+                # a positional gap is not allowed, so pass by name from here on
+                keywords[parameter["name"]] = value
+            else:
+                arguments.append(value)
+        result = self.scenario.world.invoke(getattr(obj, method), *arguments, **keywords)
         return {"result": None if result is None else _describe_value(result)}

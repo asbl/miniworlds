@@ -15,6 +15,7 @@ from miniworlds.tools.experiment import ExperimentSession
 
 MIN_SPEED = 0.1
 MAX_SPEED = 8.0
+PRUNE_MIN = 64  # registered handles before dead actors are forgotten
 
 
 class Scenario:
@@ -23,7 +24,9 @@ class Scenario:
         self.session = ExperimentSession(world, source_version)
         self._handles: dict[int, str] = {}
         self._base_fps = world.fps
+        self._applied_fps = world.fps
         self._speed = 1.0
+        self._prune_at = PRUNE_MIN
 
     # --- run control -----------------------------------------------------
 
@@ -46,8 +49,12 @@ class Scenario:
         """Scale the frame rate; returns the clamped factor actually used."""
         if isinstance(factor, bool) or not isinstance(factor, (int, float)):
             raise TypeError("speed must be a number")
+        if self.world.fps != self._applied_fps:
+            # the program changed the frame rate itself: that is the new base
+            self._base_fps = self.world.fps
         self._speed = min(MAX_SPEED, max(MIN_SPEED, float(factor)))
         self.world.fps = max(1, round(self._base_fps * self._speed))
+        self._applied_fps = self.world.fps
         return self._speed
 
     # --- objects ---------------------------------------------------------
@@ -57,11 +64,33 @@ class Scenario:
         key = id(obj)
         handle = self._handles.get(key)
         if handle is None:
+            if len(self._handles) >= self._prune_at:
+                self._prune()
             handle = self._handles[key] = self.session.register(obj)
         return handle
 
+    def _prune(self) -> None:
+        """Forget handles of actors that left the world (the session keeps
+        objects alive, so long sessions with many spawned and removed actors
+        would otherwise grow without bound)."""
+        alive = {id(actor) for actor in self.world.actors}
+        actor_type = self._actor_type()
+        for key, handle in list(self._handles.items()):
+            try:
+                obj = self.session.resolve(handle)
+            except KeyError:
+                del self._handles[key]
+                continue
+            if isinstance(obj, actor_type) and key not in alive:
+                self.session.release(handle)
+                del self._handles[key]
+        self._prune_at = max(PRUNE_MIN, 2 * len(self._handles))
+
     def resolve(self, handle: str):
-        return self.session.resolve(handle)
+        try:
+            return self.session.resolve(handle)
+        except KeyError:
+            raise LookupError("Das Objekt existiert nicht mehr.") from None
 
     def pick(self, x: float, y: float) -> Optional[str]:
         """Handle of the topmost actor at world position (x, y), if any."""
@@ -94,7 +123,9 @@ class Scenario:
     def delete(self, handle: str) -> None:
         actor = self.resolve(handle)
         self.world.invoke(actor.remove)
-        self._handles.pop(id(actor), None)
+        handle = self._handles.pop(id(actor), None)
+        if handle is not None:
+            self.session.release(handle)
 
     # --- views -----------------------------------------------------------
 
