@@ -48,6 +48,15 @@ class TestApiIndex:
         assert {"register", "remove"} <= set(self.members("Actor"))
         assert {"width", "height", "register"} <= set(self.members("World"))
 
+    def test_engine_plumbing_is_hidden_not_listed(self):
+        from miniworlds.tools.api_index import INTERNAL_MEMBERS
+
+        for cls in ("Actor", "World", "Circle", "TiledWorld"):
+            listed = {m["name"] for m in self.index[cls]["members"]}
+            assert not listed & INTERNAL_MEMBERS, (cls, sorted(listed & INTERNAL_MEMBERS))
+        assert {"position_manager", "costume_manager"} <= set(self.index["Actor"]["hidden"])
+        assert "move" in self.members("Actor")  # student API stays
+
     def test_nothing_public_is_unknown_to_the_index(self):
         import miniworlds
 

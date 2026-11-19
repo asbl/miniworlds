@@ -1,3 +1,5 @@
+4.4.0.17
+  * Fehler behoben (`tools.api_index`): Reine Engine-Technik (`position_manager`, `costume_manager`, `sensor_manager`, `get_costume_class`, `get_world_connector`, `get_events`, `registered_events`, `dirty`, `rect`) taucht nicht mehr in Referenz und Autovervollständigung der Editoren auf. Die Namen bleiben in `hidden`, werden also weiter nicht als Tippfehler gemeldet.
 4.4.0.16
   * Fehler behoben (`tools.api_index`): Alle Einträge zeigten als Hilfetext den Docstring von `str`; jetzt steht dort die erste Zeile der eigenen Dokumentation. Mitglieder aus internen Basisklassen (`register`, `remove`, `World.width`/`height` …) fehlten; sie werden jetzt bei der nächsten öffentlichen Klasse geführt. Je Klasse gibt es zusätzlich eine Liste `hidden` mit bekannten, aber nie vorgeschlagenen Namen.
   * Fehler behoben (`tools.code_hints`): Spalten sind jetzt UTF-16-Einheiten statt UTF-8-Bytes, sodass Umlaute oder Emojis vor einem Tippfehler die Markierung nicht mehr verschieben. Keine Hinweise mehr für Hooks, die nur Unterklassen definieren (Template-Methode), und für `@world.register`-Handler mit eigenem `self` innerhalb einer Methode.

@@ -13,6 +13,23 @@ from typing import Any, Optional
 
 MAX_DOC = 140
 
+# Engine plumbing that is public only because other engine modules call it.
+# Pupils never need these: not listed (so not in the reference or completion),
+# but still "hidden" (known), so code_hints does not call them typos.
+INTERNAL_MEMBERS = frozenset(
+    {
+        "costume_manager",
+        "position_manager",
+        "sensor_manager",
+        "get_costume_class",
+        "get_world_connector",
+        "get_events",
+        "registered_events",
+        "dirty",
+        "rect",
+    }
+)
+
 
 def _first_line(doc: Optional[str]) -> str:
     # cleandoc, not getdoc: getdoc(<str>) would return the docstring of ``str``.
@@ -85,7 +102,7 @@ def build_index() -> dict[str, Any]:
         seen: set[str] = set()
         for source in _own_classes(cls):
             for member_name, member in sorted(vars(source).items()):
-                if member_name.startswith("_") or member_name in seen:
+                if member_name.startswith("_") or member_name in seen or member_name in INTERNAL_MEMBERS:
                     continue
                 if isinstance(member, (property, functools.cached_property)):
                     seen.add(member_name)
