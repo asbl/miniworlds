@@ -7,6 +7,7 @@ import base64
 import functools
 import http.server
 import json
+import math
 import os
 from pathlib import Path
 import secrets
@@ -171,13 +172,86 @@ def wait_for_result(client: DevToolsClient, timeout: int) -> dict:
     )
 
 
+BUDGET_FILE = HERE / "performance_budget.json"
+CALIBRATION = "pyodide calibration"
+
+
+def _ratios(measurements: list[dict]) -> dict[str, float]:
+    """Cost of each measurement relative to the calibration workload."""
+    by_name = {item["name"]: item for item in measurements}
+    if len(by_name) != len(measurements):
+        raise RuntimeError("The performance suite reported duplicate measurements")
+    calibration = by_name.get(CALIBRATION)
+    if calibration is None:
+        raise RuntimeError("The performance suite did not report a calibration run")
+    base = calibration["elapsed_ms"]
+    if not math.isfinite(base) or base <= 0:
+        raise RuntimeError("The performance calibration must be finite and positive")
+    for name, item in by_name.items():
+        value = item.get("avg_ms", item["elapsed_ms"])
+        if not math.isfinite(value) or value < 0:
+            raise RuntimeError(f"Invalid performance measurement: {name}")
+    return {
+        name: item.get("avg_ms", item["elapsed_ms"]) / base
+        for name, item in by_name.items()
+        if name != CALIBRATION
+    }
+
+
+def write_budget(measurements: list[dict]) -> None:
+    budget = json.loads(BUDGET_FILE.read_text(encoding="utf-8"))
+    headroom = budget.get("headroom", 6.0)
+    budget["budgets"] = {
+        name: round(ratio * headroom, 3) for name, ratio in sorted(_ratios(measurements).items())
+    }
+    BUDGET_FILE.write_text(json.dumps(budget, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {len(budget['budgets'])} budgets to {BUDGET_FILE}")
+
+
+def check_budget(measurements: list[dict]) -> int:
+    budget = json.loads(BUDGET_FILE.read_text(encoding="utf-8"))["budgets"]
+    ratios = _ratios(measurements)
+    failures = 0
+    for name in ratios.keys() - budget.keys():
+        print(f"BUDGET {name}: no recorded budget")
+        failures += 1
+    for name, limit in budget.items():
+        if not math.isfinite(limit) or limit <= 0:
+            print(f"BUDGET {name}: limit must be finite and positive")
+            failures += 1
+        elif name not in ratios:
+            print(f"BUDGET {name}: missing from this run")
+            failures += 1
+        elif ratios[name] > limit:
+            print(f"BUDGET {name}: {ratios[name]:.3f} > {limit} (relative to calibration)")
+            failures += 1
+    if failures:
+        print(f"{failures} performance budget(s) exceeded")
+        return 1
+    print(f"All {len(budget)} performance budgets hold")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--chromium")
     parser.add_argument("--pyodide-base")
     parser.add_argument("--timeout", type=int, default=240)
     parser.add_argument("--performance", action="store_true")
+    budget_action = parser.add_mutually_exclusive_group()
+    budget_action.add_argument(
+        "--check",
+        action="store_true",
+        help="run performance tests and fail when a measurement exceeds performance_budget.json",
+    )
+    budget_action.add_argument(
+        "--write-budget",
+        action="store_true",
+        help="run performance tests and record the current run as the new budget",
+    )
     args = parser.parse_args()
+    if args.check or args.write_budget:
+        args.performance = True
 
     chromium = find_chromium(args.chromium or os.environ.get("MINIWORLDS_CHROMIUM"))
     pyodide_base = args.pyodide_base or os.environ.get("MINIWORLDS_PYODIDE_BASE")
@@ -250,7 +324,12 @@ def main() -> int:
     if result.get("error"):
         print(result["error"])
     print(f"{result.get('passed', 0)} passed, {result.get('failed', 0)} failed")
-    return 0 if result["status"] == "passed" else 1
+    exit_code = 0 if result["status"] == "passed" else 1
+    if exit_code == 0 and args.write_budget:
+        write_budget(result.get("measurements", []))
+    if exit_code == 0 and args.check:
+        exit_code = check_budget(result.get("measurements", []))
+    return exit_code
 
 
 if __name__ == "__main__":

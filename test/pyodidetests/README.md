@@ -45,3 +45,21 @@ It measures actor creation/removal, repeated world queries, message broadcasts,
 rendered canvas frame updates, and the objects-first solar scene with 1000
 orbiting circles. Compare these values only on the same machine and browser
 version.
+
+## Performance regression gate
+
+```sh
+invoke tests.pyodide-gate        # in Docker, used by CI
+python test/pyodidetests/run.py --check
+```
+
+`--check` runs the performance suite and compares every measurement with
+`performance_budget.json`. Budgets are ratios against a fixed pure-Python
+calibration workload measured in the same run, reducing differences in CPU speed.
+Rendering and browser overhead can still vary; the budget keeps generous headroom
+against CI noise. Missing measurements and measurements without a budget fail the
+gate, as do non-finite timings or invalid calibration results. The suite also
+asserts that the web render path stays in dirty-rect mode (the 4.9 FPS
+regression fixed in 4.3.1.8). After an intentional performance change, record a
+new baseline with `python test/pyodidetests/run.py --write-budget` and review
+the diff.

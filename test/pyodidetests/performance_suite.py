@@ -25,6 +25,27 @@ def _measurement(name: str, elapsed: float, operations: int) -> dict:
     }
 
 
+def benchmark_calibration() -> list[dict]:
+    """Fixed pure-Python workload; budgets are expressed relative to it.
+
+    This reduces CPU-speed differences between machines running the gate;
+    browser rendering overhead can still vary independently.
+    """
+    best = None
+    for _ in range(3):
+        start = time.perf_counter()
+        total = 0.0
+        table: dict[int, float] = {}
+        for index in range(200_000):
+            value = (index * 31 % 977) * 0.5
+            table[index % 512] = value
+            total += value
+        elapsed = time.perf_counter() - start
+        best = elapsed if best is None else min(best, elapsed)
+    assert best is not None and total > 0
+    return [_measurement("pyodide calibration", best, 200_000)]
+
+
 class EverydayActor(Actor):
     def act(self) -> None:
         return None
@@ -128,6 +149,11 @@ async def benchmark_canvas_frame_updates() -> list[dict]:
         frame_times.append((time.perf_counter() - start) * 1000)
 
     assert world.frame >= 20
+    # Regression guard: in the browser every draw exceeds pygame's default
+    # 12.5 ms threshold; unless the threshold is lifted the group falls back
+    # to repainting every sprite each frame (4.9 FPS instead of 60 FPS).
+    assert world.actors._time_threshold >= 1000, "LayeredDirty threshold was lowered"
+    assert world.actors._use_update, "LayeredDirty left dirty-rect mode"
     return [
         {
             "name": "pyodide canvas frame updates",
@@ -257,6 +283,7 @@ async def benchmark_solar_orbit_scene() -> list[dict]:
 
 
 BENCHMARKS = [
+    benchmark_calibration,
     benchmark_actor_lifecycle,
     benchmark_world_queries,
     benchmark_event_communication,

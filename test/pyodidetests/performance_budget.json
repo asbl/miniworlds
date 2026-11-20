@@ -1,0 +1,15 @@
+{
+  "_comment": "Budgets are ratios against 'pyodide calibration' (elapsed_ms) measured in the same run to reduce CPU-speed differences. Rendering and browser overhead can still vary. Regenerate with: python test/pyodidetests/run.py --write-budget",
+  "headroom": 6.0,
+  "budgets": {
+    "pyodide actor creation": 5.702,
+    "pyodide actor removal": 1.642,
+    "pyodide canvas frame updates": 0.178,
+    "pyodide message broadcasts": 13.706,
+    "pyodide solar orbit logic": 55.184,
+    "pyodide solar rendered frames": 5.926,
+    "pyodide solar scene setup": 100.784,
+    "pyodide solar vector math": 27.528,
+    "pyodide world queries": 0.968
+  }
+}

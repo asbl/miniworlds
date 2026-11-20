@@ -884,10 +884,22 @@ def benchmarks_hotspots(c):
     )
 
 
-@task(name="pyodide")
-def benchmarks_pyodide(c):
+@task(name="pyodide", help={"check": "Fail when a measurement exceeds performance_budget.json"})
+def benchmarks_pyodide(c, check=False):
     """Run everyday performance benchmarks in Pyodide and headless Chromium."""
-    c.run(f"{sys.executable} test/pyodidetests/run.py --performance")
+    flag = "--check" if check else "--performance"
+    c.run(f"{sys.executable} test/pyodidetests/run.py {flag}")
+
+
+@task(name="pyodide-gate")
+def tests_pyodide_gate(c):
+    """Performance regression gate: Pyodide benchmarks against the recorded budget."""
+    run_python_in_container(
+        c,
+        "test/pyodidetests/run.py --check",
+        rebuild=False,
+        extra_env={"HOME": "/tmp"},
+    )
 
 
 @task(
@@ -1249,6 +1261,7 @@ tests.add_task(tests_thonny_backend)
 tests.add_task(tests_experiment)
 tests.add_task(tests_visual)
 tests.add_task(tests_pyodide)
+tests.add_task(tests_pyodide_gate)
 tests.add_task(tests_profile)
 tests.add_task(tests_physics)
 tests.add_task(tests_docs)
