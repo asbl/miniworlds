@@ -18,6 +18,9 @@ This suite runs core miniworlds behavior in a real Pyodide browser runtime:
   text (TEXTINPUT events) reaches the focused widget
 - screenshots written to Pyodide's virtual filesystem
 - missing sound files and their error behavior
+- lazy audio initialization and sound loading after pygame shutdown/restart
+- camera-independent swarm queries, collision groups, actor pooling and shared
+  transform cache mutation/eviction
 
 Run it from the repository root:
 
@@ -46,6 +49,11 @@ rendered canvas frame updates, and the objects-first solar scene with 1000
 orbiting circles. Compare these values only on the same machine and browser
 version.
 
+Survivor benchmarks additionally cover nearest-target queries over 1000 enemies,
+grouped projectile collision events, a prewarmed pool of 100 projectiles and a
+rendered scene of 500 moving enemies. Pool timings exclude construction and
+targeting timings exclude the first lazy index build.
+
 ## Performance regression gate
 
 ```sh
@@ -59,7 +67,9 @@ calibration workload measured in the same run, reducing differences in CPU speed
 Rendering and browser overhead can still vary; the budget keeps generous headroom
 against CI noise. Missing measurements and measurements without a budget fail the
 gate, as do non-finite timings or invalid calibration results. The suite also
-asserts that the web render path stays in dirty-rect mode (the 4.9 FPS
-regression fixed in 4.3.1.8). After an intentional performance change, record a
+asserts that sparse web scenes stay in dirty-rect mode (the 4.9 FPS
+regression fixed in 4.3.1.8). Dense moving scenes use an adaptive full redraw;
+a paired benchmark compares both modes and checks identical canvas pixels.
+After an intentional performance change, record a
 new baseline with `python test/pyodidetests/run.py --write-budget` and review
 the diff.

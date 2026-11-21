@@ -36,7 +36,10 @@ if TYPE_CHECKING:
     import miniworlds.worlds.world as world_mod
 
 
-class Actor(actor_base.ActorBase):
+from miniworlds.actors.actor_performance import ActorPerformance
+
+
+class Actor(ActorPerformance, actor_base.ActorBase):
     """Interactive object placed in a world.
 
     Actors can move, change costumes, detect collisions, send messages, and

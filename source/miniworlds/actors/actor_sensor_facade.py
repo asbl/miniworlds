@@ -20,11 +20,15 @@ class ActorSensorFacade:
         direction: int = 0,
         distance: int = 0,
     ) -> List["actor_mod.Actor"]:
+        if not self.actor.active:
+            return []
         if distance == 0:
             return self.actor.sensor_manager.detect_actors(actors)
         return self.actor.sensor_manager.detect_actors_at(actors, direction, distance)
 
     def detect(self, *args, **kwargs) -> Union["actor_mod.Actor", None]:
+        if not self.actor.active:
+            return None
         if not args:
             actors = kwargs.pop("filter") if "filter" in kwargs else None
             distance = kwargs.pop("distance") if "distance" in kwargs else None
@@ -50,6 +54,11 @@ class ActorSensorFacade:
                 and hasattr(actors, "position_manager")
                 and hasattr(actors, "collision_type")
             ):
+                if not getattr(actors, "active", True):
+                    return None
+                targets = self.actor.collision_targets
+                if targets is not None and actors.collision_group not in targets:
+                    return None
                 actor_rect = self.actor.position_manager.get_global_rect()
                 other_rect = actors.position_manager.get_global_rect()
                 if not actor_rect.colliderect(other_rect):

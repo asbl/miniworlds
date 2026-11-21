@@ -432,6 +432,7 @@ hidden: true
 ---
 patterns/01_drag_and_drop
 patterns/02_scrolling
+patterns/survivors
 patterns/03_game_over
 patterns/04_level_loading
 patterns/maze_game

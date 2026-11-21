@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-11-21 11:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -98,8 +98,8 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.alpha:3 of
 msgid ""
-"Use values from `0` to `255`: - `0` means fully transparent - `255` means "
-"fully visible"
+"Use values from `0` to `255`: - `0` means fully transparent - `255` means"
+" fully visible"
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.alpha:7 of
@@ -160,6 +160,10 @@ msgstr ""
 #: miniworlds.appearances.appearance.Appearance.color:3
 #: miniworlds.appearances.appearance.Appearance.stroke_color:3 of
 msgid "tuple"
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance.clear_shared_cache:1 of
+msgid "Release cached shared scale and rotation results."
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.color:1 of
@@ -232,8 +236,8 @@ msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.get_image:1 of
 msgid ""
-"If dirty, the image will be reloaded. The image pipeline will be  processed, "
-"defined by \"set_dirty\""
+"If dirty, the image will be reloaded. The image pipeline will be  "
+"processed, defined by \"set_dirty\""
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.get_manager:1
@@ -358,6 +362,14 @@ msgstr ""
 msgid ""
 "Supported keyword arguments include `mode`, `texture_size`, and "
 "`animation_speed`."
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance.set_shared_cache_budget:1 of
+msgid "Set the process-wide shared transform budget in bytes (default 32 MiB)."
+msgstr ""
+
+#: miniworlds.appearances.appearance.Appearance.shared_transform_cache:1 of
+msgid "Opt in to reusing content-identical scale/rotation results across actors."
 msgstr ""
 
 #: miniworlds.appearances.appearance.Appearance.stroke_color:1 of

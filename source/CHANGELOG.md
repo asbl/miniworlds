@@ -1,3 +1,10 @@
+4.4.0.18
+  * Performance für Pyodide und dichte Szenen: adaptives Neuzeichnen anhand sichtbarer Änderungen, wiederverwendete Fonts, bedarfsgesteuerte Audio-Initialisierung und bereinigte Transformations-Caches. Gemeinsame Skalierungs- und Rotationsergebnisse lassen sich mit begrenztem Speicherbudget optional wiederverwenden.
+  * Neue optionale Funktionen für Survivors-artige Spiele: räumliche Rechteck-, Radius- und Nächster-Nachbar-Abfragen, Kollisionsgruppen, kameraunabhängige Kollisionen, getrennte Denk-/Bewegungs-/Animationsintervalle und `move_towards_fast()` ohne Richtungsänderung.
+  * Neuer `ActorPool` für Pixelwelten: Actors behalten beim Wiederverwenden ihre Manager und Kostüme. Inaktive Actors verlassen Simulation, Zeichnung und räumliche Indizes; gebundene Timer werden bei Pool-Freigabe oder fehlgeschlagenem Reset entfernt.
+  * Framebudget korrigiert: Ereignisverarbeitung, Aktualisierung aller Welten und vollständiges Zeichnen werden vor der gemeinsamen Wartephase berücksichtigt. Das bisherige framebasierte Bewegungs-, Timer-, Pause- und Einzelschrittverhalten bleibt erhalten.
+  * Projektvalidator untersucht verschachtelte Dateien und Assets, überspringt Entwicklungsumgebungen und meldet Threads, blockierende Warteaufrufe und Endlosschleifen für den Webexport. Hinweise zu requests und SQLite präzisiert.
+  * Regressionstests für Pool-Lebenszyklen, eigene Zeichengruppen, Kollisionsfilter, Rendering und Frame-Pacing sowie zusätzliche Pyodide-Performance-Grenzen ergänzt. Dokumentation und deutsche API-Übersetzungen erweitert; Thonny-Integrationstests liefern bei einem CI-Timeout Backend-Thread-Stacks.
 4.4.0.17
   * Fehler behoben (`tools.api_index`): Reine Engine-Technik (`position_manager`, `costume_manager`, `sensor_manager`, `get_costume_class`, `get_world_connector`, `get_events`, `registered_events`, `dirty`, `rect`) taucht nicht mehr in Referenz und Autovervollständigung der Editoren auf. Die Namen bleiben in `hidden`, werden also weiter nicht als Tippfehler gemeldet.
 4.4.0.16

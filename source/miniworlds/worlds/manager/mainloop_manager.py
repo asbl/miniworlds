@@ -69,9 +69,9 @@ class MainloopManager:
         Called in app.update() when reload_all_worlds is called.
 
         Returns:
-            The remaining frame budget in seconds (for the app-level frame
-            pacing), or None if the world is not running. The frame wait
-            itself happens once per app frame in App._update, not per world:
+            The target frame duration in seconds (for app-level pacing), or
+            None if the world is not running. App._update subtracts the whole
+            frame's work, including drawing, before waiting once per app frame:
             awaiting it here would multiply the frame delay by the number of
             docked worlds (e.g. world + toolbar).
         """
@@ -110,7 +110,7 @@ class MainloopManager:
         elapsed = time.perf_counter() - start
         if self._profile_enabled:
             self._profile_add("mainloop.update", elapsed)
-        return max(0, (1 / self.world.fps) - elapsed)
+        return 1 / self.world.fps
         
     def refresh(self):
         """Present state without invoking simulation or animation updates."""
@@ -150,7 +150,9 @@ class MainloopManager:
 
     def _tick_timed_objects(self):
         for obj in self.world._timed_objects:
-            obj.tick()
+            owner = getattr(getattr(obj, "method", None), "__self__", None)
+            if getattr(owner, "_active", True) is not False:
+                obj.tick()
 
     def handle_event(self, event, data=None):
         """

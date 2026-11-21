@@ -160,7 +160,11 @@ class AppearanceRenderingFacade:
             self.owner.is_animated
             and self.owner._animation_start_frame != self.owner.world.frame
         ):
-            if self.owner.world.frame != 0 and self.owner.world.frame % self.owner.animation_speed == 0:
+            parent = self.owner.parent
+            interval = getattr(parent, "animation_interval", 1)
+            speed = interval if interval > 1 else self.owner.animation_speed
+            phase = getattr(parent, "actor_id", 0) if interval > 1 else 0
+            if self.owner.world.frame != 0 and (self.owner.world.frame + phase) % speed == 0:
                 self.owner.image_manager.next_image()
         self.get_image()
 

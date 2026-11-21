@@ -72,7 +72,7 @@ class TransformationsManager:
     def process_transformation_pipeline(self, image: pygame.Surface, appearance) -> pygame.Surface:
         """Process and cache a complete transformation pipeline result."""
         size = self.get_size()
-        cache_key = (id(image), size, self._render_revision)
+        cache_key = (image, size, self._render_revision)
         if cache_key in self._pipeline_cache:
             self._pipeline_cache.move_to_end(cache_key)
             self.reset_reload_transformations()
@@ -96,6 +96,8 @@ class TransformationsManager:
     def flag_reload_actions_for_transformation_pipeline(self, transformation_string):
         """Flags all transformations starting from the given one to be reloaded."""
         self._render_revision += 1
+        # Earlier revisions can never be hit again, so don't retain their images.
+        self._pipeline_cache.clear()
         # Dirty input may have been modified in place, retaining its identity.
         self._rotation_cache.clear()
         reload = False
@@ -120,7 +122,7 @@ class TransformationsManager:
         else:
             texture_height = appearance.parent.tile_size if hasattr(appearance.parent, "tile_size") and appearance.parent.tile_size != 1 else image.get_height()
 
-        image = pygame.transform.scale(image, (texture_width, texture_height))
+        image = self._scale(image, (texture_width, texture_height))
         background.fill((255, 255, 255))
         i, j, width, height = 0, 0, 0, 0
         while width < appearance.parent.width:
@@ -141,12 +143,12 @@ class TransformationsManager:
             scale_factor = min(scale_factor_x, scale_factor_y)
             new_width = int(image.get_width() * scale_factor)
             new_height = int(image.get_height() * scale_factor)
-            image = pygame.transform.scale(image, (new_width, new_height))
+            image = self._scale(image, (new_width, new_height))
         self.blit(image)
         return self.surface
 
     def transformation_scale(self, image: pygame.Surface, appearance) -> pygame.Surface:
-        image = pygame.transform.scale(image, self.get_size())
+        image = self._scale(image, self.get_size())
         self.blit(image)
         return self.surface
 
@@ -154,7 +156,7 @@ class TransformationsManager:
         scale_factor = self.get_height() / image.get_height()
         new_width = int(image.get_width() * scale_factor)
         new_height = int(image.get_height() * scale_factor)
-        image = pygame.transform.scale(image, (new_width, new_height))
+        image = self._scale(image, (new_width, new_height))
         self.blit(image)
         return self.surface
 
@@ -162,7 +164,7 @@ class TransformationsManager:
         scale_factor = self.get_width() / image.get_width()
         new_width = int(image.get_width() * scale_factor)
         new_height = int(image.get_height() * scale_factor)
-        image = pygame.transform.scale(image, (new_width, new_height))
+        image = self._scale(image, (new_width, new_height))
         self.blit(image)
         return self.surface
 
@@ -175,7 +177,8 @@ class TransformationsManager:
                 self._rotation_cache.move_to_end(cache_key)
                 self.surface = cached[1]
                 return cached[1]
-            rotated_image = pygame.transform.rotozoom(image, -direction, 1)
+            rotated_image = self._shared_transform("rotate", image, direction,
+                                                   lambda: pygame.transform.rotozoom(image, -direction, 1))
             self._rotation_cache[cache_key] = (image, rotated_image)
             while len(self._rotation_cache) > self._pipeline_cache_max:
                 self._rotation_cache.popitem(last=False)
@@ -183,6 +186,18 @@ class TransformationsManager:
             return rotated_image
         self.surface = image
         return image
+
+    def _shared_transform(self, stage, image, parameters, render):
+        if getattr(self.appearance, "shared_transform_cache", False):
+            from miniworlds.appearances.managers.surface_cache import shared_surface_cache
+            return shared_surface_cache.transform(stage, image, parameters, render)
+        return render()
+
+    def _scale(self, image, size):
+        if not getattr(self.appearance, "shared_transform_cache", False):
+            return pygame.transform.scale(image, size)
+        return self._shared_transform("scale", image, size,
+                                      lambda: pygame.transform.scale(image, size))
 
     def transformation_set_orientation(self, image: pygame.Surface, appearance) -> pygame.Surface:
         if appearance.parent.orientation != 0:
@@ -211,7 +226,7 @@ class TransformationsManager:
         image = image.copy()
         for draw_action in appearance.draw_images:
             surface, rect = draw_action
-            surface = pygame.transform.scale(surface, (rect[2], rect[3]))
+            surface = self._scale(surface, (rect[2], rect[3]))
             image.blit(surface, rect)
         self.surface = image
         return image

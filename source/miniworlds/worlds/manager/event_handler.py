@@ -291,10 +291,16 @@ class EventHandler:
 
     def act_all(self):
         """Calls all registered 'act' methods for actors currently acting."""
+        for method in _iter_event_methods(self.event_registry, "on_think"):
+            instance = method.__self__
+            if instance._is_acting and instance._update_due("think"):
+                method_caller.call_method(method, None, False)
         registered_act_methods = _iter_event_methods(self.event_registry, "act")
         for method in registered_act_methods:
             instance = method.__self__
-            if instance._is_acting:
+            if instance._is_acting and (
+                not hasattr(instance, "_update_due") or instance._update_due("act")
+            ):
                 method_caller.call_method(method, None, False)
 
     def handle_event(self, event: str, data: Any):

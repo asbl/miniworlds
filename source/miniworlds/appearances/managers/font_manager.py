@@ -9,6 +9,8 @@ class FontManager:
         self.font_style = "monospace"
         self.text = ""
         self.appearance = appearance
+        self._font_key = None
+        self._font = None
 
     @property
     def font(self):
@@ -19,11 +21,25 @@ class FontManager:
         # between runs (e.g. web player stop -> restart).
         if not pygame.font.get_init():
             pygame.font.init()
-        font_size = self.font_size
+            self._font = None
+        font_size = int(self.font_size)
+        key = (self.font_path, self.font_style, font_size)
+        if self._font is not None and key == self._font_key:
+            try:
+                # Another manager or host may already have reinitialized the
+                # module after quit(), leaving get_init() true but this Font
+                # invalid. pygame-ce checks the font's lifetime here.
+                self._font.get_height()
+            except pygame.error:
+                self._font = None
+            else:
+                return self._font
         if self.font_path is None:
             font = pygame.font.SysFont(self.font_style, int(font_size))
         else:
             font = pygame.font.Font(self.font_path, font_size)
+        self._font_key = key
+        self._font = font
         return font
 
     def get_text_width(self, text=None):

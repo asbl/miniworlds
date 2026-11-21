@@ -14,10 +14,12 @@ class CollisionManager:
         # detect_actors(filter=None) results cached per actor for the duration
         # of one _handle_all_collisions call, until the scene changes.
         self._detect_cache = {}
+        self._filtered_cache = {}
 
     def invalidate(self):
         """Discard detections when geometry, membership or collision mode changes."""
         self._detect_cache.clear()
+        self._filtered_cache.clear()
 
     def _detected_actors(self, actor):
         """Unfiltered result cached per actor until the scene changes.
@@ -47,7 +49,16 @@ class CollisionManager:
         filter_actors = getattr(sensor_manager, "filter_actors", None)
         if filter_actors is None:
             return sensor_manager.detect_actors(filter=actor_filter)
-        return filter_actors(self._detected_actors(actor), actor_filter)
+        if id(actor) in self._detect_cache:
+            return filter_actors(self._detected_actors(actor), actor_filter)
+        key = (id(actor), actor_filter)
+        try:
+            hash(key)
+        except TypeError:
+            return sensor_manager.detect_actors(filter=actor_filter) or []
+        if key not in self._filtered_cache:
+            self._filtered_cache[key] = sensor_manager.detect_actors(filter=actor_filter) or []
+        return self._filtered_cache[key]
 
     def _get_event_view(self) -> collision_event_view.CollisionEventView:
         event_manager = self.world.event_manager
@@ -57,6 +68,7 @@ class CollisionManager:
 
     def _handle_all_collisions(self):
         self._detect_cache = {}
+        self._filtered_cache = {}
         event_view = self._get_event_view()
         if event_view.has_group_methods("on_detecting"):
             self._handle_actor_detecting_actor_methods(event_view)

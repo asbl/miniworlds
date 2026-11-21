@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 05:53+0200\n"
+"POT-Creation-Date: 2026-11-21 11:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -32,8 +32,8 @@ msgid ""
 "Backgrounds and costumes are appearances as well, so they inherit all "
 "attributes and methods defined in this class."
 msgstr ""
-"Backgrounds und Costumes sind ebenfalls Appearances und erben daher alle "
-"in dieser Klasse definierten Attribute und Methoden."
+"Backgrounds und Costumes sind ebenfalls Appearances und erben daher alle in "
+"dieser Klasse definierten Attribute und Methoden."
 
 #: ../../source/api/appearance.md:8
 msgid "API Reference"
@@ -49,8 +49,8 @@ msgid ""
 "normally access it through `actor.costume` or `world.background`."
 msgstr ""
 "`Appearance` ist die Basisklasse von `Costume` und `Background`. "
-"Normalerweise greifst du über `actor.costume` oder `world.background` "
-"darauf zu."
+"Normalerweise greifst du über `actor.costume` oder `world.background` darauf"
+" zu."
 
 #: miniworlds.appearances.appearance.Appearance:7
 #: miniworlds.appearances.appearance.Appearance.add_images:6
@@ -91,9 +91,7 @@ msgstr "Jede Quelle in `sources` muss eine gültige Eingabe für `add_image` sei
 
 #: miniworlds.appearances.appearance.Appearance.after_animation:1 of
 msgid "Hook called after a non-looping animation finishes."
-msgstr ""
-"Hook, der nach dem Ende einer nicht wiederholten Animation aufgerufen "
-"wird."
+msgstr "Hook, der nach dem Ende einer nicht wiederholten Animation aufgerufen wird."
 
 #: miniworlds.appearances.appearance.Appearance.after_init:1 of
 msgid "Finalize initialization after the metaclass constructor hook."
@@ -105,11 +103,11 @@ msgstr "Transparenzwert der Darstellung."
 
 #: miniworlds.appearances.appearance.Appearance.alpha:3 of
 msgid ""
-"Use values from `0` to `255`: - `0` means fully transparent - `255` means"
-" fully visible"
+"Use values from `0` to `255`: - `0` means fully transparent - `255` means "
+"fully visible"
 msgstr ""
-"Verwende Werte von `0` bis `255`: - `0` bedeutet vollständig transparent "
-"- `255` bedeutet vollständig sichtbar"
+"Verwende Werte von `0` bis `255`: - `0` bedeutet vollständig transparent - "
+"`255` bedeutet vollständig sichtbar"
 
 #: miniworlds.appearances.appearance.Appearance.alpha:7 of
 msgid ""
@@ -172,6 +170,12 @@ msgstr "Rahmenfarbe."
 #: miniworlds.appearances.appearance.Appearance.stroke_color:3 of
 msgid "tuple"
 msgstr "tuple"
+
+#: miniworlds.appearances.appearance.Appearance.clear_shared_cache:1 of
+msgid "Release cached shared scale and rotation results."
+msgstr ""
+"Gibt zwischengespeicherte gemeinsame Skalierungs- und Rotationsergebnisse "
+"frei."
 
 #: miniworlds.appearances.appearance.Appearance.color:1 of
 msgid "Alias for `fill_color`."
@@ -243,8 +247,8 @@ msgstr "Gibt die Farbe an einer lokalen Pixelposition zurück."
 
 #: miniworlds.appearances.appearance.Appearance.get_image:1 of
 msgid ""
-"If dirty, the image will be reloaded. The image pipeline will be  "
-"processed, defined by \"set_dirty\""
+"If dirty, the image will be reloaded. The image pipeline will be  processed,"
+" defined by \"set_dirty\""
 msgstr ""
 "Wenn verschmutzt, wird das Bild neu geladen. Die Bildpipeline wird "
 "verarbeitet, definiert durch \"set_dirty\""
@@ -303,8 +307,8 @@ msgstr ""
 #: miniworlds.appearances.appearance.Appearance.is_scaled_to_height:1 of
 msgid "Whether the image is scaled to parent height and keeps aspect ratio."
 msgstr ""
-"Ob das Bild auf die Höhe des Parents skaliert wird und das "
-"Seitenverhältnis behält."
+"Ob das Bild auf die Höhe des Parents skaliert wird und das Seitenverhältnis "
+"behält."
 
 #: miniworlds.appearances.appearance.Appearance.is_scaled_to_width:1 of
 msgid "Whether the image is scaled to parent width and keeps aspect ratio."
@@ -387,6 +391,18 @@ msgstr ""
 "Unterstützte Schlüsselwortargumente sind `mode`, `texture_size` und "
 "`animation_speed`."
 
+#: miniworlds.appearances.appearance.Appearance.set_shared_cache_budget:1 of
+msgid "Set the process-wide shared transform budget in bytes (default 32 MiB)."
+msgstr ""
+"Legt das prozessweite Speicherbudget für gemeinsame Transformationen in "
+"Bytes fest (Standard: 32 MiB)."
+
+#: miniworlds.appearances.appearance.Appearance.shared_transform_cache:1 of
+msgid "Opt in to reusing content-identical scale/rotation results across actors."
+msgstr ""
+"Aktiviert die Wiederverwendung inhaltsgleicher Skalierungs- und "
+"Rotationsergebnisse zwischen Actors."
+
 #: miniworlds.appearances.appearance.Appearance.stroke_color:1 of
 msgid "Alias for `border_color`."
 msgstr "Alias für `border_color`."
@@ -414,4 +430,3 @@ msgstr "Ob Alpha-Transparenz aktiviert ist."
 #: miniworlds.appearances.appearance.Appearance.transparency:3 of
 msgid "The actual opacity is controlled by `alpha`."
 msgstr "Die tatsächliche Deckkraft wird über `alpha` gesteuert."
-

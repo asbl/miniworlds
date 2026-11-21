@@ -82,6 +82,27 @@ class World(world_base.WorldBase):
     def _type_name(value) -> str:
         return api_validation.type_name(value)
 
+    @cached_property
+    def _spatial_queries(self):
+        from miniworlds.worlds.manager.spatial_queries import SpatialQueries
+        return SpatialQueries(self)
+
+    def query_rect(self, rect, actor_type=None, *, collision_group=None, exclude=None):
+        """Return active actors overlapping a world-pixel rect, including offscreen actors."""
+        return self._spatial_queries.query_rect(rect, actor_type, collision_group, exclude)
+
+    def query_radius(self, position, radius, actor_type=None, *, collision_group=None, exclude=None):
+        """Return actors whose centers lie within a world-pixel radius."""
+        return self._spatial_queries.query_radius(position, radius, actor_type, collision_group, exclude)
+
+    def find_nearest(self, position, actor_type=None, *, radius=None, collision_group=None, exclude=None):
+        """Find the nearest active actor by center, independently of the camera.
+
+        An omitted radius searches the whole world using expanding grid queries.
+        Pass ``exclude=player`` when searching from the player's center.
+        """
+        return self._spatial_queries.find_nearest(position, actor_type, radius, collision_group, exclude)
+
     @staticmethod
     def _with_try_hint(message: str, example: str | None = None) -> str:
         return api_validation.with_try_hint(message, example)

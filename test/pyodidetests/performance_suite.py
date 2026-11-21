@@ -9,7 +9,9 @@ import statistics
 import time
 import traceback
 
-from miniworlds import Actor, App, Circle, Rectangle, Vector, World
+import pygame
+
+from miniworlds import Actor, ActorPool, App, Circle, Rectangle, Vector, World
 
 
 def _reset() -> None:
@@ -183,6 +185,41 @@ def _prepare_rendered_world(world: World) -> None:
     world._mainloop.dirty_all()
 
 
+async def benchmark_dense_canvas_updates() -> list[dict]:
+    """Compare modes in one browser run, including identical canvas output."""
+    measurements = []
+    outputs = []
+    for mode in ("dirty", "adaptive"):
+        _reset()
+        world = World(400, 400)
+        world.add_background((20, 30, 40))
+        actors = [
+            Rectangle((12 + column * 24, 12 + row * 24), 18, 18, world=world)
+            for row in range(16) for column in range(16)
+        ]
+        if mode == "dirty":
+            def draw_dirty(surface, bgd=None):
+                world.actors._use_update = True
+                return pygame.sprite.LayeredDirty.draw(world.actors, surface, bgd)
+            world.actors.draw = draw_dirty
+        _configure_fast_browser_loop(world)
+        _prepare_rendered_world(world)
+        frame_times = []
+        for frame in range(23):
+            for actor in actors:
+                actor.move(1 if frame % 2 else -1)
+            start = time.perf_counter()
+            await world.app._update()
+            if frame >= 3:
+                frame_times.append(time.perf_counter() - start)
+        measurements.append(_measurement(
+            f"pyodide dense canvas {mode}", sum(frame_times), len(frame_times)
+        ))
+        outputs.append(pygame.image.tostring(world.app.window.surface, "RGB"))
+    assert outputs[0] == outputs[1], "adaptive redraw changed canvas pixels"
+    return measurements
+
+
 class SolarPlanet(Circle):
     def __init__(self, position, color, radius, sun, **kwargs):
         self.sun = sun
@@ -282,13 +319,98 @@ async def benchmark_solar_orbit_scene() -> list[dict]:
     ]
 
 
+class SurvivorEnemy(Actor):
+    def act(self):
+        self.move_towards_fast((201, 199), 0.5)
+
+
+class SurvivorShot(Actor):
+    def on_detecting_survivorenemy(self, enemy):
+        self.hits = getattr(self, "hits", 0) + 1
+
+
+def benchmark_survivor_targeting_and_collisions():
+    _reset()
+    world = World(400, 400)
+    enemies = [SurvivorEnemy((10 + i % 40 * 9, 10 + i // 40 * 14), world=world)
+               for i in range(1000)]
+    for enemy in enemies:
+        enemy.size = (12, 12)
+        enemy.collision_group = "enemy"
+    player = Actor((201, 201), world=world)
+    _prepare_rendered_world(world)
+    expected = min(enemies, key=player.get_distance_to)
+    # Warm the lazily created typed index outside the measured query loop.
+    assert world.find_nearest(player, SurvivorEnemy) is expected
+    start = time.perf_counter()
+    for _ in range(100):
+        assert world.find_nearest(player, SurvivorEnemy) is expected
+    targeting = time.perf_counter() - start
+    shots = [SurvivorShot((150 + i % 10 * 4, 150 + i // 10 * 4), world=world)
+             for i in range(60)]
+    for shot in shots:
+        shot.size = (6, 6)
+        shot.collision_type = "rect"
+        shot.collision_targets = {"enemy"}
+    world._collision_manager._handle_all_collisions()
+    start = time.perf_counter()
+    for _ in range(10):
+        world._collision_manager._handle_all_collisions()
+    collisions = time.perf_counter() - start
+    assert sum(shot.hits for shot in shots) > 0
+    return [_measurement("pyodide survivor nearest queries", targeting, 100),
+            _measurement("pyodide survivor grouped collisions", collisions, 600)]
+
+
+def benchmark_survivor_pool_lifecycle():
+    _reset()
+    world = World(400, 400)
+    for i in range(500):
+        SurvivorEnemy((10 + i % 25 * 14, 10 + i // 25 * 14), world=world)
+    pool = ActorPool(lambda: SurvivorShot((20, 20), world=world), initial_size=100, max_size=100)
+    _prepare_rendered_world(world)
+    start = time.perf_counter()
+    for _ in range(5):
+        shots = [pool.acquire((30 + i % 20 * 16, 30 + i // 20 * 16)) for i in range(100)]
+        for shot in shots:
+            pool.release(shot)
+    elapsed = time.perf_counter() - start
+    assert pool.available == 100 and len(world.actors) == 500
+    pool.clear()
+    return [_measurement("pyodide survivor pooled lifecycle", elapsed, 500)]
+
+
+async def benchmark_survivor_rendered_scene():
+    _reset()
+    world = World(400, 400)
+    for i in range(500):
+        enemy = SurvivorEnemy((20 + i % 25 * 14, 20 + i // 25 * 8), world=world)
+        enemy.size = (16, 16)
+    _configure_fast_browser_loop(world)
+    _prepare_rendered_world(world)
+    for _ in range(3):
+        await world.app._update()
+    times = []
+    for _ in range(10):
+        start = time.perf_counter()
+        await world.app._update()
+        times.append((time.perf_counter() - start) * 1000)
+    return [{"name": "pyodide survivor rendered frames", "elapsed_ms": sum(times),
+             "avg_ms": statistics.fmean(times), "operations": 10,
+             "p95_ms": sorted(times)[-1]}]
+
+
 BENCHMARKS = [
     benchmark_calibration,
     benchmark_actor_lifecycle,
     benchmark_world_queries,
     benchmark_event_communication,
     benchmark_canvas_frame_updates,
+    benchmark_dense_canvas_updates,
     benchmark_solar_orbit_scene,
+    benchmark_survivor_targeting_and_collisions,
+    benchmark_survivor_pool_lifecycle,
+    benchmark_survivor_rendered_scene,
 ]
 
 

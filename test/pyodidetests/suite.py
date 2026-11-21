@@ -9,6 +9,8 @@ import math
 from pathlib import Path
 import sys
 import traceback
+import wave
+from unittest.mock import patch
 
 import pygame
 
@@ -16,6 +18,7 @@ from miniworlds import (
     ActionTimer,
     Actor,
     App,
+    ActorPool,
     HexWorld,
     Input,
     LoopActionTimer,
@@ -25,6 +28,7 @@ from miniworlds import (
     World,
 )
 from miniworlds.base.project_validator import IssueCode, ProjectValidator, Severity
+from miniworlds.appearances.managers.font_manager import FontManager
 
 
 def _reset() -> None:
@@ -257,6 +261,62 @@ async def test_timers_fire_during_browser_frame_updates() -> None:
     assert calls.count("loop") == 2
 
 
+async def test_frame_budget_includes_rendering_without_changing_actor_steps() -> None:
+    _reset()
+    world = World(100, 80)
+    world.fps = 50
+
+    class MovingActor(Actor):
+        def act(self):
+            self.move(1)
+
+    actor = MovingActor((20, 20), world=world)
+    app = world.app
+    app.platform.poll_events = lambda: []
+    app.platform.get_mouse_pos = lambda: (0, 0)
+    app._skip_frame_delay = True
+    await app._update()
+    frame_before = world.frame
+    position_before = actor.position
+    clock = [100.0]
+    render_cost = [0.008]
+    waits = []
+
+    def timed(callback, seconds):
+        def run():
+            callback()
+            clock[0] += seconds()
+        return run
+
+    async def record_wait(seconds, skip_delay):
+        waits.append(seconds)
+
+    async def yield_once():
+        await asyncio.sleep(0)
+
+    app_module = importlib.import_module("miniworlds.base.app")
+    with (
+        patch.object(app_module.time, "perf_counter", lambda: clock[0]),
+        patch.object(world.event_manager, "act_all",
+                     timed(world.event_manager.act_all, lambda: 0.005)),
+        patch.object(world._mainloop, "repaint",
+                     timed(world._mainloop.repaint, lambda: render_cost[0])),
+        patch.object(app, "display_repaint",
+                     timed(app.display_repaint, lambda: 0.003)),
+        patch.object(app.platform, "wait_for_frame", record_wait),
+        patch.object(app.platform, "yield_mainloop", yield_once),
+    ):
+        await app._update()
+        render_cost[0] = 0.030
+        await app._update()
+
+    assert len(waits) == 2
+    assert abs(waits[0] - 0.004) < 1e-9
+    assert waits[1] == 0
+    assert world.frame == frame_before + 2
+    assert actor.position == (position_before[0], position_before[1] - 2)
+
+
 async def test_event_dispatch() -> None:
     _reset()
 
@@ -435,6 +495,37 @@ def test_missing_sound_reports_export_problem_without_crashing_app() -> None:
     assert world.app.running_world is world
 
 
+def test_font_cache_survives_host_font_restart() -> None:
+    manager = FontManager(None)
+    manager.font_size = 16
+    previous = manager.font
+    assert manager.font is previous
+    pygame.font.quit()
+    pygame.font.init()
+    assert manager.font is not previous
+    assert manager.get_text_width("Score") > 0
+
+
+def test_audio_is_lazy_and_sound_loading_survives_restart() -> None:
+    path = "/project/silence.wav"
+    with wave.open(path, "wb") as sound:
+        sound.setnchannels(1)
+        sound.setsampwidth(2)
+        sound.setframerate(22050)
+        sound.writeframes(b"\x00\x00" * 2205)
+    for _ in range(2):
+        pygame.quit()
+        _reset()
+        world = World(80, 60)
+        assert pygame.display.get_init()
+        assert pygame.font.get_init()
+        assert not pygame.mixer.get_init(), "World eagerly initialized audio"
+        world.app.sound_manager.register_sound(path)
+        assert pygame.mixer.get_init()
+        assert pygame.mixer.get_num_channels() == 64
+    Path(path).unlink()
+
+
 async def test_world_run_schedules_inside_pyodide_loop() -> None:
     _reset()
     world = World(128, 96)
@@ -479,7 +570,60 @@ async def test_web_frame_updates_and_canvas_rendering() -> None:
     assert world.background.surface.get_size() == (128, 96)
 
 
+def test_survivor_queries_pooling_and_offscreen_collisions() -> None:
+    _reset()
+    world = World(160, 120)
+    class SwarmEnemy(Actor):
+        def act(self):
+            self.moves = getattr(self, "moves", 0) + 1
+        def on_think(self):
+            self.thoughts = getattr(self, "thoughts", 0) + 1
+    enemy = SwarmEnemy((900, 900), world=world)
+    enemy.collision_group = "enemy"
+    enemy.think_interval = 3
+    assert world.find_nearest((0, 0), SwarmEnemy) is enemy
+    assert world.query_radius((900, 900), 0, SwarmEnemy) == [enemy]
+    pool = ActorPool(lambda: Actor((0, 0), world=world), initial_size=2, max_size=2)
+    shot = pool.acquire((900, 900))
+    manager = shot.position_manager
+    shot.collision_type = "rect"
+    shot.collision_targets = {"enemy"}
+    shot.collision_worldwide = True
+    assert shot.detect_all() == [enemy]
+    pool.release(shot)
+    assert shot not in world.query_radius((900, 900), 30)
+    assert shot.detect_collisions() == []
+    assert pool.acquire((900, 900)) is shot
+    assert shot.position_manager is manager
+    shot.move_towards_fast((903, 904), 100)
+    assert shot.position == (903, 904)
+    for frame in range(12):
+        world.frame = frame
+        world.event_manager.act_all()
+    assert enemy.moves == 12 and enemy.thoughts == 4
+    pool.clear()
+
+
+def test_shared_sprite_transforms_survive_mutation_and_budget_eviction() -> None:
+    from miniworlds.appearances.managers.surface_cache import SurfaceCache
+    cache = SurfaceCache(4096)
+    source = pygame.Surface((8, 8), pygame.SRCALPHA)
+    source.fill((255, 0, 0))
+    render = lambda: pygame.transform.scale(source, (32, 32))
+    first = cache.transform("scale", source, (32, 32), render)
+    first.fill((0, 0, 255))
+    second = cache.transform("scale", source, (32, 32), render)
+    assert second.get_at((0, 0))[:3] == (255, 0, 0)
+    source.fill((0, 255, 0))
+    assert cache.transform("scale", source, (32, 32), render).get_at((0, 0))[:3] == (0, 255, 0)
+    assert cache.bytes_used <= 4096
+    cache.set_budget(0)
+    assert cache.bytes_used == 0
+
+
 TESTS = [
+    test_survivor_queries_pooling_and_offscreen_collisions,
+    test_shared_sprite_transforms_survive_mutation_and_budget_eviction,
     test_pixel_world_actor_and_costume,
     test_collision_and_removal,
     test_self_detection_and_moose_group_avoidance,
@@ -494,6 +638,7 @@ TESTS = [
     test_project_validator_reports_typical_web_export_problems,
     test_reset_and_reload_of_uploaded_assets,
     test_timers_fire_during_browser_frame_updates,
+    test_frame_budget_includes_rendering_without_changing_actor_steps,
     test_event_dispatch,
     test_browser_keyboard_event_reaches_student_handler,
     test_browser_mouse_click_and_wheel_reach_student_handlers,
@@ -501,6 +646,8 @@ TESTS = [
     test_docked_toolbar_input_widget_gets_focus_and_text,
     test_screenshot_writes_to_virtual_browser_filesystem,
     test_missing_sound_reports_export_problem_without_crashing_app,
+    test_audio_is_lazy_and_sound_loading_survives_restart,
+    test_font_cache_survives_host_font_restart,
     test_world_run_schedules_inside_pyodide_loop,
     test_web_frame_updates_and_canvas_rendering,
 ]

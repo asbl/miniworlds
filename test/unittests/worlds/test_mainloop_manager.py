@@ -24,7 +24,7 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
         world._timed_objects = []
         return world
 
-    async def test_update_returns_remaining_frame_budget(self):
+    async def test_update_returns_target_frame_duration(self):
         world = self._create_world()
         app = MagicMock()
         app.platform = SimpleNamespace(wait_for_frame=AsyncMock())
@@ -42,7 +42,7 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
         app.platform.wait_for_frame.assert_not_awaited()
         self.assertEqual(world.frame, 1)
 
-    async def test_update_subtracts_elapsed_time_from_frame_budget(self):
+    async def test_update_leaves_elapsed_time_accounting_to_app(self):
         world = self._create_world()
         app = MagicMock()
         app.platform = SimpleNamespace(wait_for_frame=AsyncMock())
@@ -54,7 +54,7 @@ class TestMainloopManager(unittest.IsolatedAsyncioTestCase):
         ):
             frame_wait = await manager.update()
 
-        self.assertAlmostEqual(frame_wait, 1 / world.fps - 0.01)
+        self.assertEqual(frame_wait, 1 / world.fps)
 
     async def test_update_returns_none_for_paused_world(self):
         world = self._create_world()

@@ -1,4 +1,5 @@
 from miniworlds.base.app import App
+from miniworlds.tools.actor_pool import ActorPool
 from miniworlds.tools.experiment import ExperimentSession
 
 from miniworlds.worlds.world import World
@@ -57,6 +58,7 @@ from miniworlds.base.exceptions import CostumeOutOfBoundsError
 from miniworlds.base.exceptions import OriginException
 
 __all__ = []
+__all__.append("ActorPool")
 
 
 __all__.append(App.__name__)

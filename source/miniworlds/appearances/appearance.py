@@ -212,6 +212,29 @@ class Appearance(metaclass=MetaAppearance):
         """Frames between animation steps."""
         return self._animation_speed
 
+    @property
+    def shared_transform_cache(self):
+        """Opt in to reusing content-identical scale/rotation results across actors."""
+        return getattr(self, "_shared_transform_cache", False)
+
+    @shared_transform_cache.setter
+    def shared_transform_cache(self, value):
+        if not isinstance(value, bool):
+            raise TypeError("shared_transform_cache must be bool")
+        self._shared_transform_cache = value
+
+    @staticmethod
+    def set_shared_cache_budget(max_bytes):
+        """Set the process-wide shared transform budget in bytes (default 32 MiB)."""
+        from miniworlds.appearances.managers.surface_cache import shared_surface_cache
+        shared_surface_cache.set_budget(max_bytes)
+
+    @staticmethod
+    def clear_shared_cache():
+        """Release cached shared scale and rotation results."""
+        from miniworlds.appearances.managers.surface_cache import shared_surface_cache
+        shared_surface_cache.clear()
+
     @animation_speed.setter
     def animation_speed(self, value):
         if not isinstance(value, (int, float)):

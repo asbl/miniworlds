@@ -19,6 +19,8 @@ class EventSensorDispatcher:
         for target, methods in sensor_handlers:
             for method in methods:
                 actor = method.__self__
+                if hasattr(actor, "_update_due") and not actor._update_due("collision"):
+                    continue
                 if self._detect is not None:
                     found = self._detect(actor, target)
                 else:

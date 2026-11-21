@@ -1,0 +1,182 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 5, Andreas Siebel
+# This file is distributed under the same license as the miniworlds package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: miniworlds 4.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-21 11:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/patterns/survivors.md:1
+msgid "Dense scenes and survivors-style games"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:3
+msgid ""
+"Pixel worlds provide optional simulation controls for games with many "
+"enemies, projectiles and pickups. Existing `act()`, `detect()` and "
+"`detect_all()` calls keep their default behavior. Spatial simulation "
+"queries and actor pooling currently require a pixel `World`; pooling uses"
+" its standard world connector."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:8
+msgid "Collision groups and offscreen simulation"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:10
+msgid "Assign groups explicitly and select which groups a projectile can hit:"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:25
+msgid ""
+"`collision_targets` is directional: it restricts what the querying actor "
+"detects. `None` allows every group and an empty set detects none. Sprite "
+"`layer` still only controls drawing order. A group's typed spatial index "
+"is built on its first query, then updated when actors move, change group,"
+" deactivate or leave the world."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:30
+msgid ""
+"Ordinary actor collision queries remain camera-filtered unless "
+"`collision_worldwide` is enabled. `actor.detect_collisions(Enemy)` "
+"explicitly checks overlaps independently of the camera and uses the "
+"actor's hitbox mode. Use rectangles or circles when pixel-perfect mask "
+"collisions are unnecessary."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:35
+msgid "Neighbors and nearest targets"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:37
+msgid ""
+"`world.query_rect(rect, Enemy)` finds overlapping hitboxes. "
+"`world.query_radius(position, radius, Enemy)` finds actor **centers** in "
+"a circle. `world.find_nearest(position, Enemy, radius=300)` finds a "
+"center within that radius, or returns `None`. Omitting the radius "
+"searches the entire world with expanding spatial queries. These APIs use "
+"world pixel coordinates, include offscreen actors and accept "
+"`collision_group=\"enemy\"` and `exclude=player`. The position may also "
+"be an Actor, in which case its center is used. Equal-distance nearest "
+"targets are resolved by `actor_id`. Query result lists otherwise have no "
+"ordering contract."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:46
+msgid ""
+"Keep a target between updates while it remains active and in range, "
+"rather than reacquiring it for every projectile and every frame."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:49
+msgid "Pooling projectiles"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:78
+msgid ""
+"`acquire()` returns `None` when the configured capacity is exhausted. "
+"Call `release()` instead of `remove()` to reuse an actor. The reset "
+"callback runs before activation and must reset game state such as health,"
+" damage, lifetime and hit history. Construction and `on_setup()` run once"
+" per pooled actor. Position, sensor and costume managers are retained "
+"across releases."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:84
+msgid ""
+"Inactive actors leave drawing groups, spatial indices, blocking and event"
+" dispatch. `actor.active = False` pauses timers bound directly to that "
+"actor; reactivation restores its subscriptions. Pool release instead "
+"cancels such timers to prevent them from firing during the next lifetime."
+" Timers or closures owned by other objects must be managed by the game. "
+"`clear()` permanently removes all pool-owned actors. Do not transfer "
+"pooled actors between worlds."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:91
+msgid "Movement, thinking and animation"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:93
+msgid ""
+"`actor.move_towards_fast(target, distance)` moves without changing its "
+"facing direction. It clamps the step at the target and respects "
+"destination blocking. It has the same discrete destination-blocking "
+"limitation as normal movement; fast projectiles may require a swept "
+"collision test in the game."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:98
+msgid ""
+"`move_towards()` continues to update direction; its scalar movement and "
+"the scalar `get_distance_to()` implementation avoid creating small NumPy "
+"arrays."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:101
+msgid ""
+"Use `on_think()` for expensive decisions and `act()` for continuous "
+"movement:"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:120
+msgid ""
+"Thinking runs before movement. `act_interval` and `think_interval` count "
+"world logic ticks, so they combine with `world.tick_rate` without "
+"starving actors. `offscreen_act_interval` sets a minimum interval for "
+"both hooks outside the camera. Intervals are staggered by actor ID. "
+"Slower movement updates reduce travel speed unless the game compensates "
+"for elapsed ticks."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:126
+msgid ""
+"`collision_interval` optionally reduces automatic collision-event checks,"
+" in rendered frames; direct collision queries remain immediate. This also"
+" reduces temporal collision precision. `animation_interval > 1` overrides"
+" the costume's animation frame interval and staggers actors. The default "
+"value `1` preserves the existing `costume.animation_speed` behavior. "
+"Dirty costume changes still render immediately."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:133
+msgid "Sharing transform work and bounding memory"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:135
+msgid ""
+"Set `actor.costume.shared_transform_cache = True` for repeated "
+"scale/rotation work across identical sprite frames. This is opt-in "
+"because hashing source pixels can outweigh cheap transforms. Content keys"
+" detect source pixel changes; returned surfaces remain independently "
+"mutable. The process-wide cache defaults to **32 MiB** and evicts least "
+"recently used results:"
+msgstr ""
+
+#: ../../source/patterns/survivors.md:148
+msgid ""
+"Per-appearance pipeline caches discard previous dirty revisions "
+"immediately. Keep decorative enemies non-rotatable unless their artwork "
+"needs rotation; the default is already `is_rotatable = False`."
+msgstr ""
+
+#: ../../source/patterns/survivors.md:152
+msgid ""
+"Run `invoke benchmarks.pyodide` to measure targeting, grouped collision "
+"events, pooled projectiles and a rendered swarm. Timings depend on scene "
+"density, browser and machine; use the same environment for comparisons."
+msgstr ""

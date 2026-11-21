@@ -56,7 +56,7 @@ class CollisionEventView:
     ) -> tuple[tuple[str, tuple[Callable, ...]], ...]:
         self._refresh_cache_if_needed()
         if event_group in self._group_cache:
-            return self._group_cache[event_group]
+            return self._due_methods(self._group_cache[event_group])
         class_events = self.event_manager.definition.class_events.get(event_group, set())
         registered_methods = []
         for event_name in class_events:
@@ -64,10 +64,19 @@ class CollisionEventView:
             if methods:
                 registered_methods.append((event_name, methods))
         self._group_cache[event_group] = tuple(registered_methods)
-        return self._group_cache[event_group]
+        return self._due_methods(self._group_cache[event_group])
+
+    def _due_methods(self, groups):
+        if not getattr(getattr(self.event_manager, "world", None), "_collision_interval_enabled", False):
+            return groups
+        return tuple((event, tuple(method for method in methods
+                     if not hasattr(method.__self__, "_update_due")
+                     or method.__self__._update_due("collision")))
+                     for event, methods in groups)
 
     def copy_registered_methods(self, event_name: str) -> set[Callable]:
-        return self.event_manager.registry.copy_event_methods(event_name)
+        methods = self.event_manager.registry.copy_event_methods(event_name)
+        return set(self._due_methods(((event_name, tuple(methods)),))[0][1])
 
     def has_group_methods(self, event_group: str) -> bool:
         return bool(self.iter_registered_methods(event_group))

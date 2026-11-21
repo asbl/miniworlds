@@ -35,6 +35,9 @@ class ActorEventFacade:
         return decorator
 
     def set_world(self, new_world: "world_mod.World") -> "actor_mod.Actor":
+        if (getattr(self.actor, "_is_deleted", False)
+                or (not self.actor.active and getattr(self.actor, "_has_position_manager", False))):
+            raise ValueError("activate the actor before transferring it to another world")
         world_connector = new_world.get_world_connector(self.actor)
         world_connector.set_world(self.actor.world, new_world)
         return self.actor

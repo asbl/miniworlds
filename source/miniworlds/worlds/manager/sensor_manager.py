@@ -212,6 +212,10 @@ class SensorManager:
         return actor_type
 
     def _prefilter_detectable_actors(self, visible_actors, actor_filter):
+        targets = getattr(self.actor, "collision_targets", None)
+        if targets is not None:
+            visible_actors = [actor for actor in visible_actors
+                              if getattr(actor, "collision_group", "default") in targets]
         resolved_filter, filter_applied = self._resolved_detectable_actor_filter_from_cache(actor_filter)
         if not filter_applied:
             return visible_actors, False
@@ -253,7 +257,7 @@ class SensorManager:
             actor_list.remove(self.actor)
         return actor_list
 
-    def _query_spatial_rect(self, rect: pygame.Rect):
+    def _query_spatial_rect(self, rect: pygame.Rect, actor_filter=None):
         world = self.world
         spatial_index = getattr(world, "_spatial_index", None)
         is_tiled = getattr(world, "is_tiled", False)
@@ -281,10 +285,21 @@ class SensorManager:
                         )
                     }
             return world.camera.get_actors_in_view()
+        resolved, _ = self._resolved_detectable_actor_filter_from_cache(actor_filter)
+        actor_type = resolved if isinstance(resolved, type) else None
+        targets = getattr(self.actor, "collision_targets", None)
+        if targets is None:
+            candidates = spatial_index.partition(actor_type).query_rect(rect)
+        else:
+            candidates = set()
+            for group in targets:
+                candidates.update(spatial_index.partition(actor_type, group).query_rect(rect))
+        if getattr(self.actor, "collision_worldwide", False):
+            return candidates
         camera_rect = world.camera.rect
         return {
             actor
-            for actor in spatial_index.query_rect(rect)
+            for actor in candidates
             if camera_rect.colliderect(actor.position_manager.get_global_rect())
         }
 
@@ -485,11 +500,13 @@ class SensorManager:
         Returns:
             List[Actor]: A list of actors that collide with the current actor and match the filter.
         """
+        if not getattr(self.actor, "active", True):
+            return []
         if not self.world.backgrounds._is_display_initialized:
             self.world.backgrounds._init_display()
 
         actor_rect = self.actor.position_manager.get_global_rect()
-        visible_actors = self._query_spatial_rect(actor_rect)
+        visible_actors = self._query_spatial_rect(actor_rect, filter)
         collision_candidates, filter_applied = self._prefilter_detectable_actors(
             visible_actors, filter
         )
@@ -551,11 +568,13 @@ class SensorManager:
         Returns:
             Optional[Actor]: The first detected actor that matches the filter, or None if no match is found.
         """
+        if not getattr(self.actor, "active", True):
+            return None
         if not self.world.backgrounds._is_display_initialized:
             return
         
         actor_rect = self.actor.position_manager.get_global_rect()
-        visible_actors = self._query_spatial_rect(actor_rect)
+        visible_actors = self._query_spatial_rect(actor_rect, filter)
         collision_candidates, filter_applied = self._prefilter_detectable_actors(
             visible_actors, filter
         )
@@ -731,11 +750,9 @@ class SensorManager:
     def get_distance_to(
         self, obj: Union["actor_mod.Actor", Tuple[float, float]]
     ) -> float:
-        if isinstance(obj, actor_mod.Actor):
-            vec = world_vector.Vector.from_actors(self.actor, obj)
-        else:
-            vec = world_vector.Vector.from_actor_and_position(self.actor, obj)
-        return vec.length()
+        target = obj.center if isinstance(obj, actor_mod.Actor) else obj
+        center = self.actor.center
+        return math.hypot(target[0] - center[0], target[1] - center[1])
 
     def contains_position(self, pos):
         """Checks if position is in the world.

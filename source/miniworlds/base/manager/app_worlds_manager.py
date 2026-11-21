@@ -30,24 +30,24 @@ class WorldsManager:
         If dirty, worlds are updated and repainted.
 
         Returns:
-            The smallest remaining frame budget (seconds) of all updated
+            The smallest target frame duration (seconds) of all updated
             worlds, or None if no world requested frame pacing. The caller
-            (App._update) awaits the frame wait once per app frame.
+            (App._update) subtracts all frame work and waits once per app frame.
         """
-        frame_wait = None
+        frame_budget = None
         for world in self.worlds:
             if world.dirty:
                 # Background reloads during update are presented by the final repaint.
                 world._mainloop._defer_background_repaint = world.frame > 0
                 try:
-                    world_wait = await world._mainloop.update()
+                    world_budget = await world._mainloop.update()
                 finally:
                     world._mainloop._defer_background_repaint = False
                 world._mainloop.repaint()
                 world._mainloop.blit_surface_to_window_surface()
-                if world_wait is not None:
-                    frame_wait = world_wait if frame_wait is None else min(frame_wait, world_wait)
-        return frame_wait
+                if world_budget is not None:
+                    frame_budget = world_budget if frame_budget is None else min(frame_budget, world_budget)
+        return frame_budget
 
     def add_topleft_if_empty(
         self, new_world: "world_mod.World"

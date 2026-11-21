@@ -114,6 +114,8 @@ class WorldConnector:
             return
         if value is None:
             value = bool(getattr(self.actor, "is_blocking", False))
+        if getattr(self.actor, "_active", True) is False:
+            value = False
         if previous_value is not None and previous_value == value:
             return
 
@@ -167,6 +169,7 @@ class WorldConnector:
             self.actor.costume_manager._is_display_initialized = True
 
         self.actor._world = self.world
+        self.actor._active = True
         self.init_managers(position)
         self.world.camera._clear_camera_cache()
 
@@ -214,15 +217,20 @@ class WorldConnector:
         self.actor._is_acting = False
         self.world.camera._clear_camera_cache()
 
-        # Mark any colliding actors as dirty (trigger visual update)
+        # LayeredDirty tracks the removed sprite's old rect and redraws
+        # intersecting sprites itself. Only custom groups need this fallback.
         try:
-            for colliding_actor in self.actor.sensor_manager.detect_actors():
-                colliding_actor.dirty = 1
+            import pygame
+            if not isinstance(self.world.actors, pygame.sprite.LayeredDirty):
+                for colliding_actor in self.actor.sensor_manager.detect_actors():
+                    colliding_actor.dirty = 1
         except AttributeError:
             pass  # Sensor manager might not be initialized
 
+        self.actor._active = False
         # Unregister event methods
         unregistered_methods = self.world.event_manager.unregister_instance(self.actor)
+        self.actor._inactive_subscriptions = []
 
         # Remove from reload queue if present
         if self.actor in self.world._mainloop.reload_costumes_queue:
@@ -335,5 +343,7 @@ class WorldConnector:
             self.world._dynamic_actors.remove(self.actor)
 
     def add_dynamic_actor(self):
+        if getattr(self.actor, "_active", True) is False:
+            return
         if self.actor not in self.world._dynamic_actors:
             self.world._dynamic_actors.add(self.actor)

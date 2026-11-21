@@ -38,7 +38,13 @@ def connected_backend(tmp_path):
     ).Connection
     connection = Connection()
     filename = tmp_path / "main.py"
-    source = """from miniworlds import World, Actor
+    source = """import faulthandler
+import sys
+# Keep the existing response timeout, but include all backend thread stacks
+# in its diagnostics if the live SDL/Thonny loop stalls on a CI runner.
+faulthandler.enable(file=sys.__stderr__)
+faulthandler.dump_traceback_later(10, repeat=True, file=sys.__stderr__)
+from miniworlds import World, Actor
 class Player(Actor):
     def advance(self, steps):
         self.x += steps
@@ -106,7 +112,9 @@ world.run()
         try:
             message = connection.events.get(timeout=15)
         except queue.Empty:
-            pytest.fail("No backend response: " + "".join(output))
+            pytest.fail(
+                f"No backend response (exit={process.poll()}): " + "".join(output)
+            )
         assert not message.get("ended"), "".join(output)
         return message
 

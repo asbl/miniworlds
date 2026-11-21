@@ -5,11 +5,17 @@
     "pyodide actor creation": 5.702,
     "pyodide actor removal": 1.642,
     "pyodide canvas frame updates": 0.178,
+    "pyodide dense canvas adaptive": 13.849,
+    "pyodide dense canvas dirty": 24.148,
     "pyodide message broadcasts": 13.706,
     "pyodide solar orbit logic": 55.184,
     "pyodide solar rendered frames": 5.926,
     "pyodide solar scene setup": 100.784,
     "pyodide solar vector math": 27.528,
+    "pyodide survivor nearest queries": 2.658,
+    "pyodide survivor grouped collisions": 3.684,
+    "pyodide survivor pooled lifecycle": 4.266,
+    "pyodide survivor rendered frames": 2.414,
     "pyodide world queries": 0.968
   }
 }

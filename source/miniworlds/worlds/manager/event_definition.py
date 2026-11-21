@@ -70,6 +70,11 @@ class EventDefinition:
                 "on_not_detecting_" + actor_cls.__name__.lower()
             )
 
+        # Different projects/reloads may define classes with the same name.
+        # A named collision event must still be dispatched only once.
+        detecting_actor_methods = list(dict.fromkeys(detecting_actor_methods))
+        not_detecting_actor_methods = list(dict.fromkeys(not_detecting_actor_methods))
+
         self.actor_class_events = {
             "mouse": [
                 "on_mouse_left",
@@ -100,6 +105,7 @@ class EventDefinition:
             "specific_key": specific_key_events,
             "message": ["on_message"],
             "act": ["act"],
+            "think": ["on_think"],
             "setup": ["on_setup"],
             "border": [
                 "on_detecting_borders",

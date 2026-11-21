@@ -48,6 +48,23 @@ class EventRegistry:
         self._message_iter_cache: dict[str, tuple[Callable, ...]] = {}
         self._sensor_iter_cache: tuple[tuple[str, tuple[Callable, ...]], ...] | None = None
         self._warned_event_handler_typos: set[str] = set()
+        self._subscriptions_by_instance = {}
+
+    def _track_subscription(self, subscription):
+        owner = getattr(subscription.method, "__self__", None)
+        if owner is not None:
+            entry = self._subscriptions_by_instance.setdefault(id(owner), (owner, set()))
+            entry[1].add(subscription)
+
+    @staticmethod
+    def _defer_inactive(subscription):
+        owner = getattr(subscription.method, "__self__", None)
+        if getattr(owner, "_active", True) is False:
+            pending = owner._inactive_subscriptions
+            if subscription not in pending:
+                pending.append(subscription)
+            return True
+        return False
 
     def _mark_changed(self) -> None:
         self.change_counter += 1
@@ -81,16 +98,7 @@ class EventRegistry:
         return names
 
     def has_instance_handlers(self, instance: Any) -> bool:
-        for method_set in self._event_handlers.values():
-            if any(getattr(method, "__self__", None) == instance for method in method_set):
-                return True
-        for method_set in self._message_handlers.values():
-            if any(getattr(method, "__self__", None) == instance for method in method_set):
-                return True
-        for method_set in self._sensor_handlers.values():
-            if any(getattr(method, "__self__", None) == instance for method in method_set):
-                return True
-        return False
+        return id(instance) in self._subscriptions_by_instance
 
     def has_registered_event(self, event_name: str) -> bool:
         if event_name == "message":
@@ -140,21 +148,33 @@ class EventRegistry:
             self._restore_subscription(subscription)
 
     def _add_event_method(self, event_name: str, method: Callable) -> None:
+        subscription = EventSubscription.event(event_name, method)
+        if self._defer_inactive(subscription):
+            return
         previous_len = len(self._event_handlers[event_name])
         self._event_handlers[event_name].add(method)
         if len(self._event_handlers[event_name]) != previous_len:
+            self._track_subscription(subscription)
             self._mark_changed()
 
     def _add_message_method(self, message: str, method: Callable) -> None:
+        subscription = EventSubscription.message(message, method)
+        if self._defer_inactive(subscription):
+            return
         previous_len = len(self._message_handlers[message])
         self._message_handlers[message].add(method)
         if len(self._message_handlers[message]) != previous_len:
+            self._track_subscription(subscription)
             self._mark_changed()
 
     def _add_sensor_method(self, target: str, method: Callable) -> None:
+        subscription = EventSubscription.sensor(target, method)
+        if self._defer_inactive(subscription):
+            return
         previous_len = len(self._sensor_handlers[target])
         self._sensor_handlers[target].add(method)
         if len(self._sensor_handlers[target]) != previous_len:
+            self._track_subscription(subscription)
             self._mark_changed()
 
     def _restore_subscription(self, subscription: EventSubscription) -> None:
@@ -312,39 +332,21 @@ class EventRegistry:
         Returns:
             A list of structured event subscriptions that can later be restored.
         """
-        removed_methods: list[EventSubscription] = []
-        registry_changed = False
-
-        for event_name, method_set in list(self._event_handlers.items()):
-            for method in list(method_set):
-                if getattr(method, "__self__", None) == instance:
-                    method_set.remove(method)
-                    removed_methods.append(EventSubscription.event(event_name, method))
-                    registry_changed = True
-            if not method_set:
-                del self._event_handlers[event_name]
-
-        for message, method_set in list(self._message_handlers.items()):
-            for method in list(method_set):
-                if getattr(method, "__self__", None) == instance:
-                    method_set.remove(method)
-                    removed_methods.append(EventSubscription.message(message, method))
-                    registry_changed = True
-            if not method_set:
-                del self._message_handlers[message]
-
-        for target, method_set in list(self._sensor_handlers.items()):
-            for method in list(method_set):
-                if getattr(method, "__self__", None) == instance:
-                    method_set.remove(method)
-                    removed_methods.append(EventSubscription.sensor(target, method))
-                    registry_changed = True
-            if not method_set:
-                del self._sensor_handlers[target]
-
-        if registry_changed:
-            self._mark_changed()
-
+        entry = self._subscriptions_by_instance.pop(id(instance), None)
+        if entry is None:
+            return []
+        removed_methods = list(entry[1])
+        registries = {"event": self._event_handlers, "message": self._message_handlers,
+                      "sensor": self._sensor_handlers}
+        for subscription in removed_methods:
+            registry = registries[subscription.kind]
+            key = subscription.event_name if subscription.kind == "event" else subscription.route_key
+            methods = registry.get(key)
+            if methods is not None:
+                methods.discard(subscription.method)
+                if not methods:
+                    del registry[key]
+        self._mark_changed()
         return removed_methods
 
 

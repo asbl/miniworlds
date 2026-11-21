@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import ast
 import mimetypes
+import os
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -43,6 +44,8 @@ class IssueCode(Enum):
     LARGE_TOTAL_ASSETS = "large_total_assets"
     UNSUPPORTED_IMAGE_FORMAT = "unsupported_image_format"
     UNSUPPORTED_SOUND_FORMAT = "unsupported_sound_format"
+    UNSUPPORTED_WEB_CALL = "unsupported_web_call"
+    BLOCKING_WEB_CODE = "blocking_web_code"
 
 
 @dataclass
@@ -61,12 +64,12 @@ _PROBLEMATIC_IMPORTS: dict[str, tuple[Severity, Severity, str]] = {
     "multiprocessing": (Severity.NONE, Severity.ERROR,   "multiprocessing ist im Browser nicht verfügbar."),
     "ctypes":          (Severity.NONE, Severity.ERROR,   "ctypes ist im Browser nicht verfügbar."),
     "socket":          (Severity.NONE, Severity.WARNING, "socket hat im Browser eingeschränkte Funktion."),
-    "requests":        (Severity.NONE, Severity.ERROR,   "requests ist im Browser nicht verfügbar."),
+    "requests":        (Severity.NONE, Severity.WARNING, "requests muss im Player geladen werden; Browser-Netzwerkzugriffe unterliegen CORS und unterstützen Streaming nur eingeschränkt. Für asynchrone Zugriffe pyodide.http.pyfetch verwenden."),
     "urllib":          (Severity.NONE, Severity.WARNING, "urllib ist im Browser eingeschränkt verfügbar."),
     "http":            (Severity.NONE, Severity.WARNING, "http ist im Browser eingeschränkt verfügbar."),
     "ftplib":          (Severity.NONE, Severity.ERROR,   "ftplib ist im Browser nicht verfügbar."),
     "smtplib":         (Severity.NONE, Severity.ERROR,   "smtplib ist im Browser nicht verfügbar."),
-    "sqlite3":         (Severity.NONE, Severity.ERROR,   "sqlite3 ist im Browser nicht verfügbar."),
+    "sqlite3":         (Severity.NONE, Severity.WARNING, "sqlite3 muss im Player geladen werden; Datenbanken im virtuellen Dateisystem sind ohne zusätzliche Speicherung nicht persistent."),
     "PyQt5":           (Severity.NONE, Severity.ERROR,   "PyQt5 ist im Browser nicht verfügbar."),
     "PyQt6":           (Severity.NONE, Severity.ERROR,   "PyQt6 ist im Browser nicht verfügbar."),
     "PySide2":         (Severity.NONE, Severity.ERROR,   "PySide2 ist im Browser nicht verfügbar."),
@@ -83,6 +86,38 @@ _TOTAL_SIZE_WARN_BYTES = 25 * 1024 * 1024  # 25 MB total
 _RE_WRITE_OPEN = re.compile(r"""open\s*\(.*?["'](w|a|x|wb|ab|xb)["']""")
 _RE_ABS_PATH = re.compile(r"""["'](/(?:[^/\s"'][^"']*))["']|["']([A-Za-z]:\\[^"']+)["']""")
 
+_IGNORED_PROJECT_DIRS = frozenset({
+    "__pycache__", "venv", "env", "node_modules", "build", "dist",
+    "site-packages",
+})
+
+
+def _project_files(folder: Path, pattern: str):
+    # Prune before descending: an exported project may contain a large venv.
+    for root, dirs, files in os.walk(folder):
+        dirs[:] = sorted(
+            name for name in dirs
+            if not name.startswith(".") and name not in _IGNORED_PROJECT_DIRS
+        )
+        for name in sorted(files):
+            path = Path(root) / name
+            if not name.startswith(".") and path.match(pattern):
+                yield path
+
+
+def _loop_yields_or_exits(loop: ast.While) -> bool:
+    def visit(node, nested_loop=False):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+            return False
+        if isinstance(node, (ast.Await, ast.Return, ast.Raise)):
+            return True
+        if isinstance(node, ast.Break):
+            return not nested_loop
+        nested_loop = nested_loop or isinstance(node, (ast.For, ast.AsyncFor, ast.While))
+        return any(visit(child, nested_loop) for child in ast.iter_child_nodes(node))
+
+    return any(visit(statement) for statement in loop.body)
+
 
 def _mime(path: Path) -> str:
     mime, _ = mimetypes.guess_type(str(path))
@@ -94,13 +129,12 @@ def _collect_assets(folder: Path) -> list[dict]:
         return []
     return [
         {
-            "path": f"{folder.name}/{f.name}",
-            "name": f.name,
+            "path": f"{folder.name}/{f.relative_to(folder).as_posix()}",
+            "name": f.relative_to(folder).as_posix(),
             "mimeType": _mime(f),
             "size": f.stat().st_size,
         }
-        for f in sorted(folder.iterdir())
-        if f.is_file() and not f.name.startswith(".")
+        for f in _project_files(folder, "*")
     ]
 
 
@@ -112,9 +146,7 @@ class ProjectValidator:
         self.entry_file = Path(entry_file)
 
     def validate(self) -> list[ValidationIssue]:
-        py_files = sorted(
-            f for f in self.project_dir.glob("*.py") if not f.name.startswith(".")
-        )
+        py_files = list(_project_files(self.project_dir, "*.py"))
         images = _collect_assets(self.project_dir / "images")
         sounds = _collect_assets(self.project_dir / "sounds")
 
@@ -122,6 +154,7 @@ class ProjectValidator:
         issues += self._check_syntax(py_files)
         issues += self._check_entry_name()
         issues += self._check_problematic_imports(py_files)
+        issues += self._check_web_calls(py_files)
         issues += self._check_miniworlds_import(py_files)
         issues += self._check_file_io(py_files)
         issues += self._check_asset_sizes(images, sounds)
@@ -129,6 +162,74 @@ class ProjectValidator:
         return issues
 
     # ------------------------------------------------------------------
+
+    def _filename(self, path: Path) -> str:
+        return path.relative_to(self.project_dir).as_posix()
+
+    def _check_web_calls(self, py_files: list[Path]) -> list[ValidationIssue]:
+        """Report statically identifiable calls; ambiguous code stays a warning."""
+        issues = []
+        thread_factories = {
+            "threading.Thread", "threading.Timer", "_thread.start_new_thread",
+            "concurrent.futures.ThreadPoolExecutor", "asyncio.to_thread",
+        }
+        for path in py_files:
+            try:
+                tree = ast.parse(path.read_text(encoding="utf-8"))
+            except (UnicodeError, SyntaxError):
+                continue
+            aliases = {}
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    for alias in node.names:
+                        aliases[alias.asname or alias.name.split(".")[0]] = (
+                            alias.name if alias.asname else alias.name.split(".")[0]
+                        )
+                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                    for alias in node.names:
+                        aliases[alias.asname or alias.name] = f"{node.module}.{alias.name}"
+
+            def qualified_name(node):
+                if isinstance(node, ast.Name):
+                    return aliases.get(node.id, node.id)
+                if isinstance(node, ast.Attribute):
+                    return f"{qualified_name(node.value)}.{node.attr}"
+                return ""
+
+            for node in ast.walk(tree):
+                message = None
+                code = IssueCode.BLOCKING_WEB_CODE
+                if isinstance(node, ast.Call):
+                    name = qualified_name(node.func)
+                    if name in thread_factories:
+                        code = IssueCode.UNSUPPORTED_WEB_CALL
+                        message = (
+                            f"{name}: Das Starten von Threads wird vom Pyodide-Player "
+                            "nicht unterstützt. asyncio für kooperative Aufgaben verwenden."
+                        )
+                    elif name == "time.sleep":
+                        message = (
+                            "time.sleep() gibt die Kontrolle nicht an den Browser zurück. "
+                            "Timer oder in asynchronem Code await asyncio.sleep() verwenden."
+                        )
+                elif (
+                    isinstance(node, ast.While)
+                    and isinstance(node.test, ast.Constant)
+                    and bool(node.test.value)
+                    and not _loop_yields_or_exits(node)
+                ):
+                    message = (
+                        "Möglicherweise blockierende Dauerschleife ohne await oder Ausstieg. "
+                        "Spiel-Logik in act() oder Timer verlagern."
+                    )
+                if message:
+                    issues.append(ValidationIssue(
+                        code=code,
+                        message=f"{self._filename(path)}:{node.lineno}: {message}",
+                        local_severity=Severity.NONE,
+                        web_severity=Severity.WARNING,
+                    ))
+        return issues
 
     def _check_syntax(self, py_files: list[Path]) -> list[ValidationIssue]:
         issues: list[ValidationIssue] = []
@@ -138,7 +239,7 @@ class ProjectValidator:
             except UnicodeDecodeError:
                 issues.append(ValidationIssue(
                     code=IssueCode.ENCODING_ERROR,
-                    message=f"{f.name}: Datei ist nicht UTF-8-kodiert.",
+                    message=f"{self._filename(f)}: Datei ist nicht UTF-8-kodiert.",
                     local_severity=Severity.ERROR,
                     web_severity=Severity.ERROR,
                 ))
@@ -148,7 +249,7 @@ class ProjectValidator:
             except SyntaxError as exc:
                 issues.append(ValidationIssue(
                     code=IssueCode.SYNTAX_ERROR,
-                    message=f"{f.name}: Syntaxfehler in Zeile {exc.lineno} – {exc.msg}",
+                    message=f"{self._filename(f)}: Syntaxfehler in Zeile {exc.lineno} – {exc.msg}",
                     local_severity=Severity.ERROR,
                     web_severity=Severity.ERROR,
                 ))
@@ -178,19 +279,19 @@ class ProjectValidator:
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     tops = [alias.name.split(".")[0] for alias in node.names]
-                elif isinstance(node, ast.ImportFrom):
+                elif isinstance(node, ast.ImportFrom) and node.level == 0:
                     tops = [node.module.split(".")[0]] if node.module else []
                 else:
                     continue
                 for top in tops:
                     if top in _PROBLEMATIC_IMPORTS:
-                        key = (f.name, top)
+                        key = (self._filename(f), top)
                         if key not in seen:
                             seen.add(key)
                             local_sev, web_sev, desc = _PROBLEMATIC_IMPORTS[top]
                             issues.append(ValidationIssue(
                                 code=IssueCode.PROBLEMATIC_IMPORT,
-                                message=f"{f.name}: {desc}",
+                                message=f"{self._filename(f)}: {desc}",
                                 local_severity=local_sev,
                                 web_severity=web_sev,
                             ))
@@ -227,7 +328,7 @@ class ProjectValidator:
                 issues.append(ValidationIssue(
                     code=IssueCode.FILE_WRITE_IO,
                     message=(
-                        f"{f.name}: open() mit Schreibmodus ('w'/'a') – "
+                        f"{self._filename(f)}: open() mit Schreibmodus ('w'/'a') – "
                         "Datei-Schreibzugriffe sind im Browser nicht persistent."
                     ),
                     local_severity=Severity.NONE,
@@ -239,7 +340,7 @@ class ProjectValidator:
                 issues.append(ValidationIssue(
                     code=IssueCode.ABSOLUTE_PATH,
                     message=(
-                        f'{f.name}: Absoluter Dateipfad gefunden ("{path_str}") – '
+                        f'{self._filename(f)}: Absoluter Dateipfad gefunden ("{path_str}") – '
                         "absolute Pfade funktionieren im Browser nicht."
                     ),
                     local_severity=Severity.NONE,

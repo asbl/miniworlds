@@ -116,3 +116,4 @@ def test_pipeline_cache_invalidates_changed_draw_actions():
 
     blue = mgr.process_transformation_pipeline(src, app)
     assert blue.get_at((5, 5))[:3] == (0, 0, 255)
+    assert len(mgr._pipeline_cache) == 1

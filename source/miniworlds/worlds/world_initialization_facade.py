@@ -35,12 +35,13 @@ class WorldInitializationFacade:
         self, x: Union[int, Tuple[int, int]] = 400, y: int = 400
     ) -> None:
         x, y = self.world._normalize_constructor_dimensions(x, y)
-        # pygame.init() runs once at miniworlds import time. When a host
-        # (e.g. the web player) calls pygame.quit() between runs while the
-        # interpreter keeps living, all pygame modules must be re-initialized
-        # before a new world is built.
-        if not pygame.get_init():
-            pygame.init()
+        # Initialize only the subsystems a world needs. pygame.init() would
+        # also open the audio device for programs that never play sound.
+        # These checks also support hosts calling pygame.quit() between runs.
+        if not pygame.display.get_init():
+            pygame.display.init()
+        if not pygame.font.get_init():
+            pygame.font.init()
         self.world._validate_parameters(x, y)
         self.world.camera = self.world._get_camera_manager_class()(x, y, self.world)
         self.world.actors = OrderedActorGroup()
@@ -49,7 +50,8 @@ class WorldInitializationFacade:
         # by default). On slow targets (Pyodide/wasm) the first draw always
         # exceeds it, so the group would stay in full-redraw mode forever and
         # each frame would cost O(all actors) blits. miniworlds tracks dirty
-        # state itself, so always keep the group in dirty-rect mode.
+        # state itself. Disable this timing heuristic; OrderedActorGroup
+        # chooses full redraws only for dense changes in the visible scene.
         self.world.actors.set_timing_threshold(1_000_000.0)
 
     def initialize_post_base_state(self) -> None:

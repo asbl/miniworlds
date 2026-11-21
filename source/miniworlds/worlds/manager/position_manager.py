@@ -36,8 +36,17 @@ class Positionmanager:
         self._cached_global_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
         self._cached_local_rect = (-1, pygame.Rect(0, 0, 1, 1)) # frame, rect
 
-    def _invalidate_rect_cache(self) -> None:
-        self._cached_global_rect = (-1, self._cached_global_rect[1])
+    def _invalidate_rect_cache(self, position_only=False) -> None:
+        if (position_only and not getattr(self.actor.world, "is_tiled", False)
+                and self._cached_global_rect[0] >= 0):
+            rect = self._cached_global_rect[1].copy()
+            if self._origin == "center":
+                rect.center = self.position
+            else:
+                rect.topleft = self.position
+            self._cached_global_rect = (self.actor.world.frame, rect)
+        else:
+            self._cached_global_rect = (-1, self._cached_global_rect[1])
         self._cached_local_rect = (-1, self._cached_local_rect[1])
 
         # Keep world-level static blocking caches coherent when a blocking static actor changes.
@@ -323,7 +332,7 @@ class Positionmanager:
         if old_position == value:
             return self
         self.position = value
-        self._invalidate_rect_cache()
+        self._invalidate_rect_cache(position_only=True)
 
         if int(old_position[0]) != int(value[0]) or int(old_position[1]) != int(value[1]):
             camera = self.actor.world.camera
@@ -436,7 +445,15 @@ class Positionmanager:
         else:
             direction = self.direction_from_two_points(self.actor.position, position)
             self.set_direction(direction)
-            self.move(distance)
+            if self.is_blockable or distance == 0:
+                self.move(distance)
+            else:
+                x, y = self.position
+                dx, dy = position[0] - x, position[1] - y
+                length = math.hypot(dx, dy)
+                if length:
+                    self.set_position((x + dx / length * distance, y + dy / length * distance))
+                    self.last_direction = self.get_direction()
             return self.actor
 
     def move_away_from_position(

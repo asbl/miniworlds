@@ -13,7 +13,6 @@ class SoundManager:
         self.audio = self.app.platform
         self.volume = 100
         self._has_music = False
-        self.audio.ensure_audio(reserved_channels=2, channel_count=64)
 
     def register_sound(self, path) -> pygame.mixer.Sound:
         """
@@ -27,6 +26,7 @@ class SoundManager:
 
         """
         try:
+            self.audio.ensure_audio(reserved_channels=2, channel_count=64)
             effect: pygame.mixer.Sound = self.audio.load_sound(path)
             self.sound_effects[path] = effect
             return effect

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 14:02+0100\n"
+"POT-Creation-Date: 2026-11-21 11:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -402,6 +402,16 @@ msgstr ""
 msgid "Distance between both positions."
 msgstr ""
 
+#: miniworlds.worlds.world.World.find_nearest:1 of
+msgid "Find the nearest active actor by center, independently of the camera."
+msgstr ""
+
+#: miniworlds.worlds.world.World.find_nearest:3 of
+msgid ""
+"An omitted radius searches the whole world using expanding grid queries. "
+"Pass ``exclude=player`` when searching from the player's center."
+msgstr ""
+
 #: miniworlds.worlds.world.World.fps:1 of
 msgid "Frames per second of the render loop."
 msgstr ""
@@ -530,6 +540,16 @@ msgstr ""
 
 #: miniworlds.worlds.world.World.play_sound:9 of
 msgid "Volume between `0` and `100`."
+msgstr ""
+
+#: miniworlds.worlds.world.World.query_radius:1 of
+msgid "Return actors whose centers lie within a world-pixel radius."
+msgstr ""
+
+#: miniworlds.worlds.world.World.query_rect:1 of
+msgid ""
+"Return active actors overlapping a world-pixel rect, including offscreen "
+"actors."
 msgstr ""
 
 #: miniworlds.worlds.world.World.quit:1 of
@@ -760,4 +780,3 @@ msgstr ""
 #~ "\\:py\\:class\\:\\`float\\`\\] \\| "
 #~ "\\:py\\:obj\\:\\`None\\``"
 #~ msgstr ""
-

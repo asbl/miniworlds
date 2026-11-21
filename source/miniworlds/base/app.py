@@ -4,6 +4,7 @@ import os
 import sys
 import warnings
 import asyncio
+import time
 import miniworlds.base.runtime_host as runtime_host
 import logging
 
@@ -280,6 +281,7 @@ class App:
         A single iteration of the mainloop.
         Handles events, updates worlds, redraws screen.
         """
+        frame_start = time.perf_counter()
         runtime_host.poll(self)
         self.event_manager.pygame_events_to_event_queue()
 
@@ -288,11 +290,14 @@ class App:
 
         if not self._quit:
             self.event_manager.handle_event_queue()
-            frame_wait = await self.worlds_manager.reload_all_worlds()
+            frame_budget = await self.worlds_manager.reload_all_worlds()
             self.display_repaint()
-            if frame_wait is not None:
+            if frame_budget is not None:
                 # One frame wait per app frame for all worlds together
-                # (a per-world wait would multiply the frame delay).
+                # (a per-world wait would multiply the frame delay). Include
+                # event handling, every world's update/draw and presentation
+                # before calculating the remaining time.
+                frame_wait = max(0, frame_budget - (time.perf_counter() - frame_start))
                 await self.platform.wait_for_frame(frame_wait, self._skip_frame_delay)
             await self.platform.yield_mainloop()
 
