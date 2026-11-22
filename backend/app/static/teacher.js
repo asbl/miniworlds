@@ -258,7 +258,7 @@
   $("project-create-form").addEventListener("submit",guarded(async e=>{
     const f=e.target;
     const result=await write("/api/teacher/projects","POST",{count:Number(f.count.value),course_id:Number(f.course_id.value)||null,template_project_id:Number(f.template_project_id.value)||null,access_mode:f.access_mode.value,code_readonly_days:Number(f.code_readonly_days.value),writable_until:f.writable_until.value ? new Date(f.writable_until.value).toISOString() : null,code_expires_at:f.code_expires_at.value ? new Date(f.code_expires_at.value).toISOString() : null});
-    $("new-codes").textContent="Öffnen auf editor.opencoding.de → Projekt mit Code öffnen\n"+result.projects.map(p=>p.code).join("\n");$("new-codes").classList.remove("hidden");await refresh();await renderTemplateCodes();
+    $("new-codes").textContent=result.projects.map(p=>p.code).join("\n");$("new-codes").classList.remove("hidden");await refresh();await renderTemplateCodes();
   }));
   $("task-create-form").addEventListener("submit",guarded(async e=>{
     const f=e.target;await write("/api/teacher/tasks","POST",{title:f.elements.namedItem("title").value,description:f.description.value,course_id:Number(f.course_id.value)||null,is_template_for_new_projects:f.is_template_for_new_projects.checked});f.reset();await refresh();
