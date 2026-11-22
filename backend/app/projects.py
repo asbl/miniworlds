@@ -2,7 +2,7 @@
 from fastapi import HTTPException
 from sqlalchemy import or_, update
 
-from .models import Course, Project, Save, Submission, Task, TaskAssignment, Workspace, utcnow
+from .models import Course, Project, Save, Submission, Task, TaskAssignment, Workspace, aware, utcnow
 from .security import encrypt_code, gen_code, hash_code
 from .services import compute_used_bytes, default_quota
 
@@ -20,7 +20,44 @@ def read_only_reason(db, p):
         return "Die Klasse ist archiviert. Die Lehrkraft kann sie wieder aktivieren."
     if p.read_only:
         return "Das Projekt ist schreibgeschützt. Ansehen und Herunterladen bleiben möglich."
+    if p.writable_until and aware(p.writable_until) <= utcnow():
+        return "Die Bearbeitungszeit ist abgelaufen. Ansehen und Herunterladen bleiben möglich."
     return None
+
+
+def set_read_only(p, value, now=None):
+    if value and not p.read_only:
+        p.read_only_at = now or utcnow()
+    elif not value:
+        p.read_only_at = None
+    p.read_only = value
+
+
+def code_expiry(db, p):
+    from datetime import timedelta
+    starts = [aware(p.read_only_at)] if p.read_only and p.read_only_at else []
+    if p.writable_until and aware(p.writable_until) <= utcnow():
+        starts.append(aware(p.writable_until))
+    course = db.get(Course, p.course_id) if p.course_id else None
+    if course and course.archived and course.archived_at:
+        starts.append(aware(course.archived_at))
+    dates = [aware(p.code_expires_at)] if p.code_expires_at else []
+    if starts and p.code_readonly_days is not None:
+        dates.append(min(starts) + timedelta(days=p.code_readonly_days))
+    return min(dates) if dates else None
+
+
+def require_active_code(db, p):
+    expiry = code_expiry(db, p)
+    if expiry and expiry <= utcnow():
+        raise HTTPException(401, "Zugang ungültig oder abgelaufen. Bitte die Lehrkraft fragen.")
+
+
+def student_binding(db, p):
+    import hashlib
+    workspace = db.get(Workspace, p.workspace_id) if p.workspace_id else None
+    version = workspace.credential_version if workspace else 0
+    return hashlib.sha256(f"{p.code_hash}:{version}".encode()).hexdigest() if version else p.code_hash
 
 
 def require_writable(db, p):
@@ -55,7 +92,8 @@ def new_project(db, settings, teacher_id, course_id=None, workspace_id=None, tit
     code = gen_code(10)
     p = Project(teacher_id=teacher_id, workspace_id=workspace_id, course_id=course_id,
                 title=title, revision=0, code_hash=hash_code(code),
-                code_enc=encrypt_code(code, settings.secret_key), quota_bytes=default_quota(db, settings))
+                code_enc=encrypt_code(code, settings.secret_key), quota_bytes=default_quota(db, settings),
+                code_readonly_days=settings.code_readonly_days)
     db.add(p)
     db.flush()
     assign_templates(db, p)

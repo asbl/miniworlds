@@ -33,6 +33,10 @@ def migrate(engine) -> None:
     additions = {
         "audit_log": {"teacher_id": "INTEGER REFERENCES users(id) ON DELETE CASCADE"},
         "projects": {
+            "read_only_at": "DATETIME",
+            "writable_until": "DATETIME",
+            "code_expires_at": "DATETIME",
+            "code_readonly_days": "INTEGER DEFAULT 365",
             "workspace_id": "INTEGER REFERENCES workspaces(id) ON DELETE SET NULL",
             "course_id": "INTEGER REFERENCES courses(id) ON DELETE SET NULL",
             "title": "VARCHAR(120) NOT NULL DEFAULT 'Mein Projekt'",
@@ -43,6 +47,8 @@ def migrate(engine) -> None:
             "course_id": "INTEGER REFERENCES courses(id) ON DELETE SET NULL",
         },
         "submission_versions": {"project_snapshot": "BLOB"},
+        "workspaces": {"password_hash": "VARCHAR(255)", "credential_version": "INTEGER NOT NULL DEFAULT 0"},
+        "courses": {"archived_at": "DATETIME"},
     }
     with engine.begin() as conn:
         for column in ("teacher_note", "feedback", "reviewed_at"):
@@ -61,8 +67,10 @@ def migrate(engine) -> None:
                 if name not in existing:
                     conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {name} {definition}"))
         # Bestehende Codes erhalten jeweils einen eigenen, namenlosen Arbeitsbereich.
+        conn.execute(text("UPDATE projects SET read_only_at=CURRENT_TIMESTAMP WHERE read_only=1 AND read_only_at IS NULL"))
+        conn.execute(text("UPDATE courses SET archived_at=CURRENT_TIMESTAMP WHERE archived=1 AND archived_at IS NULL"))
         for pid, teacher_id in conn.execute(text("SELECT id, teacher_id FROM projects WHERE workspace_id IS NULL")).all():
-            result = conn.execute(text("INSERT INTO workspaces (teacher_id) VALUES (:teacher)"), {"teacher": teacher_id})
+            result = conn.execute(text("INSERT INTO workspaces (teacher_id, credential_version) VALUES (:teacher, 0)"), {"teacher": teacher_id})
             conn.execute(text("UPDATE projects SET workspace_id=:workspace WHERE id=:pid"), {"workspace": result.lastrowid, "pid": pid})
         for table, column in (("projects", "course_id"), ("projects", "workspace_id"), ("tasks", "course_id"), ("audit_log", "teacher_id")):
             conn.execute(text(f"CREATE INDEX IF NOT EXISTS ix_{table}_{column} ON {table} ({column})"))

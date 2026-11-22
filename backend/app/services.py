@@ -53,7 +53,8 @@ def compute_used_bytes(db: Session, project: Project) -> int:
 
 
 def serialize_project(db: Session, p: Project, settings: Settings | None = None, with_code: bool = False) -> dict:
-    from .projects import read_only_reason
+    from .projects import read_only_reason, code_expiry
+    from .models import Workspace
     d = {
         "id": p.id,
         "title": p.title,
@@ -67,6 +68,12 @@ def serialize_project(db: Session, p: Project, settings: Settings | None = None,
         "read_only_reason": read_only_reason(db, p),
         "created_at": p.created_at.isoformat() if p.created_at else None,
         "last_save_at": p.last_save_at.isoformat() if p.last_save_at else None,
+        "writable_until": p.writable_until.isoformat() if p.writable_until else None,
+        "read_only_at": p.read_only_at.isoformat() if p.read_only_at else None,
+        "code_expires_at": p.code_expires_at.isoformat() if p.code_expires_at else None,
+        "effective_code_expires_at": code_expiry(db, p).isoformat() if code_expiry(db, p) else None,
+        "code_readonly_days": p.code_readonly_days,
+        "password_protected": bool(db.get(Workspace, p.workspace_id).password_hash) if p.workspace_id else False,
         "tasks_assigned": db.query(TaskAssignment).filter_by(project_id=p.id).count(),
     }
     if with_code and settings is not None:

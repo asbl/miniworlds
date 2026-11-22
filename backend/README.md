@@ -144,6 +144,44 @@ Die User-Systemd-Dateien in `deploy/` aktivieren tägliche Sicherungen bei Insta
 | `SUBMISSION_MAX_VERSIONS` | 10 | Höchstens so viele eingereichte Fassungen je Aufgabe aufbewahren |
 | `SUBMISSION_MAX_BYTES` | 100 MiB | Gesamtbudget der Abgabeversionen je Projekt (komprimierte Snapshots plus Checkboxwerte) |
 | `MAX_REQUEST_BYTES` | 64 MiB | Maximale Save-Anfrage; sonstige API-Anfragen höchstens 1 MiB, Medien 25 MiB plus Formular-Metadaten |
+| `FRONTEND_ORIGINS` | `https://editor.opencoding.de` | Kommagetrennte exakte Editor-Origins für CORS, ohne Cookie-Freigabe |
+| `CODE_READONLY_DAYS` | 365 | Standard für neue Projekte: Code läuft so viele Tage nach Beginn des Schreibschutzes ab; pro Projekt änderbar |
+
+## Eigenständiger Editor und Projektzugänge
+
+Der statische Editor wird separat auf `editor.opencoding.de` betrieben. Seine optionale öffentliche
+`config.json` enthält `backendUrl`; ohne diese Einstellung funktioniert er mit lokalem Speicher und
+Import/Export. Python, Miniworlds-Wheel und Laufzeit benötigen keine FastAPI-Anmeldung. Lehrer- und
+Adminverwaltung bleiben auf der Backend-Domain. Der Editor verwendet ausschließlich Schüler-Bearer-Tokens,
+keine Lehrer-Cookies. Bei einem anderen Frontend-Host `FRONTEND_ORIGINS` und dessen CSP passend konfigurieren.
+
+Projekt-Codes öffnen weiterhin direkt Projekte. Die Lehrkraft stellt unter „Zugang einstellen“ ein:
+optionales Bearbeitungsende, Code-Gültigkeit nach Schreibschutz (Standard 365 Tage, leer unbegrenzt),
+und optional ein festes Ablaufdatum. Das frühere Ablaufdatum gilt. Ein festes Bearbeitungsende ersetzt für
+dieses Projekt den jährlichen Standard-Schreibschutz am 31.07. Ein abgelaufener Code sperrt auch bereits
+ausgestellte Tokens und Projektwechsel zu diesem Projekt. Die Aufbewahrungs-/Löschfristen bleiben eigenständige
+Regeln: Eine längere Code-Gültigkeit verlängert sie nicht. Bei der Migration beginnt für bereits
+schreibgeschützte Projekte ohne bekannten Zeitpunkt die relative Zugangsfrist mit dem Migrationszeitpunkt.
+
+„Einmalig eine Kopie erstellen“ erzeugt pro Code genau eine Kopie eines Startprojekts in dessen Klasse.
+Die Einlösung wird über Prozesse hinweg exklusiv verarbeitet. Die Antwort enthält einen neuen persönlichen
+Projekt-Code; der Vorlagencode verfällt unmittelbar. Passwörter, Tokens, Antworten und Abgaben des Originals
+werden nicht übernommen. Verfügbare/eingelöste Vorlagencodes sind im Lehrer-Dashboard sichtbar und löschbar.
+Kopien erhalten die Standard-Zugangsfrist; diese lässt sich anschließend wie bei normalen Projekten ändern.
+
+Schüler können einen Passwortschutz setzen/ändern (`PUT /api/play/password`, mindestens 12 Zeichen,
+aktuelles Passwort bei Änderungen erforderlich). Gespeichert wird ein Argon2-Hash im namenlosen Arbeitsbereich.
+Passwortänderungen und Lehrer-Resets widerrufen alle Arbeitsbereichs-Tokens. Die Lehrkraft kann das Passwort
+entfernen (`DELETE /api/teacher/projects/{id}/password`), es aber niemals auslesen. Code-/Passwortversuche
+werden zusätzlich zur IP-Begrenzung je Code auf fünf Fehlversuche pro fünf Minuten begrenzt; diese kurzlebigen
+Zähler überleben Worker-/App-Neustarts und werden anschließend gelöscht. Keine Schülerkonten oder E-Mails.
+
+Mehrdateiprojekte verwenden zusätzlich `files` im Save-Payload (relative Pfade → Base64). Pfade und Inhalte
+werden validiert; absolute Pfade, Traversal, Git-Verwaltungsdateien und Datei-/Ordnerkollisionen sind gesperrt.
+Die Dateiliste bleibt bei alten Single-File-Speicheranfragen erhalten. Kopien, Abgaben, Versionswiederherstellung
+und ZIP-Downloads erhalten alle Dateien. Der Editor hält fehlgeschlagene Speicherungen lokal zurück und
+überschreibt bei Versionskonflikten keinen Serverstand. Checkbox-Entwürfe bleiben ebenfalls lokal erhalten;
+freie Antworttexte oder Feedback sind weiterhin ausgeschlossen.
 
 ## Rollen & Rechte
 

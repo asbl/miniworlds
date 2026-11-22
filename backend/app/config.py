@@ -31,8 +31,12 @@ class Settings:
     submission_max_versions: int = 10
     submission_max_bytes: int = 100 * 1024 * 1024
     max_request_bytes: int = 64 * 1024 * 1024
+    frontend_origins: str = "https://editor.opencoding.de"
+    code_readonly_days: int = 365
 
     def validate(self) -> None:
+        if self.code_readonly_days < 1:
+            raise ValueError("CODE_READONLY_DAYS muss mindestens 1 sein.")
         if not self.secret_key.strip():
             raise ValueError("SECRET_KEY fehlt. Einen dauerhaften Schlüssel konfigurieren und mit den Sicherungen aufbewahren.")
         for name in ("audit_retention_days", "history_max_bytes", "submission_max_versions", "submission_max_bytes", "max_request_bytes"):
@@ -71,6 +75,8 @@ def load_settings() -> Settings:
         submission_max_versions=int(os.environ.get("SUBMISSION_MAX_VERSIONS", "10")),
         submission_max_bytes=int(os.environ.get("SUBMISSION_MAX_BYTES", str(100 * 1024 * 1024))),
         max_request_bytes=int(os.environ.get("MAX_REQUEST_BYTES", str(64 * 1024 * 1024))),
+        frontend_origins=os.environ.get("FRONTEND_ORIGINS", "https://editor.opencoding.de"),
+        code_readonly_days=int(os.environ.get("CODE_READONLY_DAYS", "365")),
     )
     settings.validate()
     return settings

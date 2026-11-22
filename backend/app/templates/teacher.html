@@ -25,10 +25,18 @@
     <label>Anzahl <input name="count" type="number" min="1" max="200" value="10" required></label>
     <label>Klasse <select name="course_id" class="course-picker"></select></label>
     <label>Startprojekt <select name="template_project_id" id="starter-project"><option value="">Leeres Projekt</option></select></label>
+    <label>Code dient zum <select name="access_mode"><option value="project">Projekt öffnen</option><option value="template_once">Einmalig eine Kopie erstellen</option></select></label>
+    <details><summary>Zugangszeit einstellen</summary>
+      <label>Bearbeitbar bis (optional) <input type="datetime-local" name="writable_until"></label>
+      <label>Code gültig nach Schreibschutz (Tage) <input type="number" name="code_readonly_days" min="1" max="36500" value="365"></label>
+      <label>Festes Ablaufdatum (optional) <input type="datetime-local" name="code_expires_at"></label>
+      <p>Das frühere Ablaufdatum gilt. Bei Einmalcodes gilt nur das feste Ablaufdatum; die Kopie erhält einen eigenen Zugang.</p>
+    </details>
     <button>Codes erzeugen</button>
   </form>
   <p class="muted">Ein Startprojekt übernimmt Code, Medien und zugewiesene Aufgaben. Antworten und Abgaben werden nicht übernommen.</p>
   <div id="new-codes" class="code-box hidden"></div>
+  <details class="panel"><summary>Einmalige Vorlagencodes</summary><p>Jeder Code erstellt genau eine eigene Kopie in der Klasse des Startprojekts. Danach verwendet der Schüler seinen neuen Projektcode. Die Kopie erhält die Standard-Zugangsfrist von einem Jahr nach Schreibschutz.</p><div id="template-codes"></div></details>
   <details class="panel">
     <summary>Export und lokale Namenszuordnung</summary>
     <p><a href="/api/teacher/projects.xlsx">Excel herunterladen</a> · <a href="/api/teacher/projects.csv">CSV herunterladen</a></p>

@@ -8,6 +8,7 @@
     try { await fn(event); } catch (error) { status(error.message); $("dashboard-status").classList.add("error"); }
   };
   let courses = [], projects = [], tasks = [], shares = [];
+  let codeDefaultsLoaded = false;
   const nameMap = new Map(), workspaceNames = new Map();
   const fmtDate = value => value ? new Date(value).toLocaleString("de-DE") : "Noch nicht gespeichert";
   const courseName = id => courses.find(c => c.id === id)?.title || "Ohne Klasse";
@@ -43,6 +44,10 @@
   async function refresh() {
     const result = await Promise.all([api("/api/teacher/courses"), api("/api/teacher/projects" + (nameMap.size ? "?with_code=true" : "")), api("/api/teacher/tasks"), api("/api/teacher/share-requests")]);
     courses = result[0].courses; projects = result[1].projects; tasks = result[2].tasks; shares = result[3].requests;
+    if (!codeDefaultsLoaded && result[1].code_defaults) {
+      $("project-create-form").code_readonly_days.value=result[1].code_defaults.readonly_days;
+      codeDefaultsLoaded=true;
+    }
     const policy = result[1].storage_policy;
     $("archive-policy").textContent = policy ? `Archivspeicher pro Projekt: ${(policy.submission_max_bytes/1048576).toFixed(0)} MB, bis zu ${policy.submission_max_versions} eingereichte Fassungen je Aufgabe. Bei vollem Speicher werden ältere Fassungen entfernt; die letzte Abgabe jeder Aufgabe bleibt erhalten.` : "";
     const starter = $("starter-project"), selectedStarter = starter.value;
@@ -66,6 +71,11 @@
         row.querySelector(".local-name").textContent = personName(p);
       }));
       const actions = row.querySelector(".project-actions");
+      actions.append(button("Zugang einstellen", async () => editAccess(p)));
+      if (p.password_protected) actions.append(button("Passwort zurücksetzen", async () => {
+        if (!confirm("Schülerpasswort entfernen? Bestehende Sitzungen werden abgemeldet. Der Projektcode bleibt erhalten.")) return;
+        await api(`/api/teacher/projects/${p.id}/password`, {method:"DELETE"}); await refresh();
+      }));
       actions.append(link("Ansehen / Starten", "/player?teacher=" + p.id), document.createTextNode(" "), link("ZIP", `/api/teacher/projects/${p.id}/download`));
       const approved = shares.find(s => s.project_id === p.id && s.status === "approved");
       if (approved?.slug) actions.append(document.createTextNode(" "), link("Öffentlich", "/p/" + approved.slug));
@@ -94,6 +104,40 @@
     const project_ids = [...document.querySelectorAll(".project-select:checked")].map(c => Number(c.value));
     if (!project_ids.length) throw new Error("Bitte zuerst Projekte auswählen.");
     await write("/api/teacher/projects/bulk", "PATCH", {project_ids, ...change}); await refresh();
+  }
+  function localDate(value) {
+    if (!value) return "";
+    const date = new Date(value); date.setMinutes(date.getMinutes()-date.getTimezoneOffset());
+    return date.toISOString().slice(0,16);
+  }
+  async function editAccess(p) {
+    const dialog = document.createElement("dialog"); dialog.className="panel";
+    dialog.innerHTML=`<form><h3>Zugang einstellen · ${esc(p.title)}</h3>
+      <label><input name="read_only" type="checkbox" ${p.manual_read_only ? "checked" : ""}> Jetzt schreibgeschützt</label>
+      <label>Bearbeitbar bis (optional) <input name="writable_until" type="datetime-local" value="${localDate(p.writable_until)}"></label>
+      <label>Code gültig nach Schreibschutz (Tage; leer = unbegrenzt) <input name="days" type="number" min="1" max="36500" value="${p.code_readonly_days ?? ""}"></label>
+      <label>Festes Ablaufdatum (optional) <input name="expires" type="datetime-local" value="${localDate(p.code_expires_at)}"></label>
+      <p>Das frühere Ablaufdatum gilt. Aktuell: ${esc(p.effective_code_expires_at ? fmtDate(p.effective_code_expires_at) : "kein festes Ablaufdatum")}.</p>
+      <p>Archivierte Klassen sind ebenfalls schreibgeschützt. Nach der jährlichen Umstellung gilt dieselbe Zugangsfrist.</p>
+      <p role="alert"></p><button>Speichern</button> <button type="button" data-cancel>Abbrechen</button></form>`;
+    const close=()=>{dialog.close();dialog.remove();};
+    dialog.querySelector("[data-cancel]").onclick=close;dialog.addEventListener("cancel",()=>dialog.remove());
+    dialog.querySelector("form").addEventListener("submit",async event=>{
+      event.preventDefault(); const f=event.target;
+      try {
+        await write(`/api/teacher/projects/${p.id}`,"PATCH",{read_only:f.read_only.checked,writable_until:f.writable_until.value ? new Date(f.writable_until.value).toISOString() : null,code_readonly_days:f.days.value ? Number(f.days.value) : null,code_expires_at:f.expires.value ? new Date(f.expires.value).toISOString() : null});
+        close();await refresh();
+      } catch(error) {dialog.querySelector('[role="alert"]').textContent=error.message;}
+    });
+    document.body.append(dialog);dialog.showModal();
+  }
+  async function renderTemplateCodes() {
+    const {codes}=await api("/api/teacher/template-codes"), box=$("template-codes");box.replaceChildren();
+    for(const code of codes) {
+      const line=document.createElement("p");
+      line.textContent=`${code.code} · Projekt #${code.project_id} · ${code.used_at ? "Eingelöst" : code.expires_at && new Date(code.expires_at)<new Date() ? "Abgelaufen" : "Noch verfügbar"}${code.expires_at ? " · gültig bis "+fmtDate(code.expires_at) : ""} `;
+      line.append(button("Entfernen",async()=>{await api(`/api/teacher/template-codes/${code.id}`,{method:"DELETE"});await renderTemplateCodes();}));box.append(line);
+    }
   }
   function renderTasks() {
     $("tasks-list").replaceChildren();
@@ -212,8 +256,9 @@
   })));
   $("course-create-form").addEventListener("submit",guarded(async e=>{await write("/api/teacher/courses","POST",{title:e.target.elements.namedItem("title").value,school_year:e.target.school_year.value});e.target.reset();await refresh();}));
   $("project-create-form").addEventListener("submit",guarded(async e=>{
-    const result=await write("/api/teacher/projects","POST",{count:Number(e.target.count.value),course_id:Number(e.target.course_id.value)||null,template_project_id:Number(e.target.template_project_id.value)||null});
-    $("new-codes").textContent=result.projects.map(p=>p.code).join("\n");$("new-codes").classList.remove("hidden");await refresh();
+    const f=e.target;
+    const result=await write("/api/teacher/projects","POST",{count:Number(f.count.value),course_id:Number(f.course_id.value)||null,template_project_id:Number(f.template_project_id.value)||null,access_mode:f.access_mode.value,code_readonly_days:Number(f.code_readonly_days.value),writable_until:f.writable_until.value ? new Date(f.writable_until.value).toISOString() : null,code_expires_at:f.code_expires_at.value ? new Date(f.code_expires_at.value).toISOString() : null});
+    $("new-codes").textContent="Öffnen auf editor.opencoding.de → Projekt mit Code öffnen\n"+result.projects.map(p=>p.code).join("\n");$("new-codes").classList.remove("hidden");await refresh();await renderTemplateCodes();
   }));
   $("task-create-form").addEventListener("submit",guarded(async e=>{
     const f=e.target;await write("/api/teacher/tasks","POST",{title:f.elements.namedItem("title").value,description:f.description.value,course_id:Number(f.course_id.value)||null,is_template_for_new_projects:f.is_template_for_new_projects.checked});f.reset();await refresh();
@@ -233,5 +278,5 @@
     nameMap.clear();workspaceNames.clear();for(const row of rows){const code=String(row[codeIndex]||"").trim().toUpperCase(),name=String(row[nameIndex]||"").trim();if(code&&name)nameMap.set(code,name);}
     $("namejoin-status").textContent=nameMap.size+" Zuordnungen lokal geladen.";await refresh();
   }));
-  guarded(async()=>{const session=await api("/api/auth/session");sessionStorage.setItem("csrf",session.csrf);await refresh();})();
+  guarded(async()=>{const session=await api("/api/auth/session");sessionStorage.setItem("csrf",session.csrf);await refresh();await renderTemplateCodes();})();
 })();

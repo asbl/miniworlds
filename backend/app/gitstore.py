@@ -192,12 +192,17 @@ def commit_save(
     source: str,
     db_bytes: bytes | None,
     message: str,
+    files: dict[str, str] | None = None,
 ) -> str | None:
     """Schreibt main.py/save.db/media ins Repo und committet. None bei leerem Commit."""
     if not git_available():
         return None
     repo = ensure_repo(settings, project_id)
     _check_worktree(repo)
+    if files is not None:
+        from .editor_files import MANIFEST, validate_files
+        validate_files(files)
+        (repo / MANIFEST).write_text(json.dumps(files), encoding="utf-8")
     (repo / "main.py").write_text(source, encoding="utf-8")
     db_file = repo / "save.db"
     if db_bytes is None:
@@ -264,7 +269,13 @@ def read_save_at(settings: Settings, project_id: int, commit: str) -> bytes:
     source = _out(_checked(repo, "show", f"{commit}:main.py"))
     db_result = _git(repo, "show", f"{commit}:save.db")
     db_b64 = base64.b64encode(db_result.stdout).decode() if db_result.returncode == 0 and db_result.stdout else None
-    return json.dumps({"source": source, "db": db_b64}).encode()
+    from .editor_files import MANIFEST, save_payload
+    manifest = _git(repo, "show", f"{commit}:{MANIFEST}")
+    try:
+        files = json.loads(manifest.stdout) if manifest.returncode == 0 else None
+        return json.dumps(save_payload(source, db_b64, files)).encode()
+    except Exception as error:
+        raise GitError("Ungültige Editor-Projektdateien im Versionsverlauf") from error
 
 
 # ---------- Remotes (Push/Pull, z. B. GitHub) ----------
@@ -358,23 +369,12 @@ def _askpass(token: str | None):
     if not token:
         yield {**os.environ, "GIT_TERMINAL_PROMPT": "0"}
         return
-    with tempfile.TemporaryDirectory(prefix="mw-askpass-") as tmp:
-        script = Path(tmp) / "askpass.sh"
-        script.write_text(
-            "#!/bin/sh\n"
-            'case "$1" in\n'
-            '  *sername*|*Username*) echo "${MW_GIT_USER:-x-access-token}" ;;\n'
-            '  *) echo "$MW_GIT_TOKEN" ;;\n'
-            "esac\n",
-            encoding="utf-8",
-        )
-        script.chmod(0o700)
-        yield {
-            **os.environ,
-            "GIT_ASKPASS": str(script),
-            "GIT_TERMINAL_PROMPT": "0",
-            "MW_GIT_TOKEN": token,
-        }
+    yield {
+        **os.environ,
+        "GIT_ASKPASS": str(Path(__file__).with_name("git-askpass.sh")),
+        "GIT_TERMINAL_PROMPT": "0",
+        "MW_GIT_TOKEN": token,
+    }
 
 
 def _remote_error(op: str, stderr: str) -> str:

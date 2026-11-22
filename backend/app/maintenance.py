@@ -16,5 +16,8 @@ def run_maintenance(session_factory, settings):
         except BlockingIOError:
             return
         with session_factory() as db:
+            from .models import CodeAttempt, utcnow
+            db.query(CodeAttempt).filter(CodeAttempt.expires_at < utcnow()).delete(synchronize_session=False)
+            db.commit()
             maybe_yearly_reset(db)
             maybe_retention(db, settings)

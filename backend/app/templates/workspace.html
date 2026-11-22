@@ -2,9 +2,11 @@
   <h2>Dein Projekt öffnen</h2>
   <form id="claim-form">
     <label>Projekt-Code <input name="code" required maxlength="64" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+    <label>Passwort (falls eingerichtet) <input name="password" type="password" maxlength="256" autocomplete="current-password"></label>
     <button type="submit">Öffnen</button>
   </form>
 </div>
+<p id="personal-code" class="notice hidden"></p>
 <p id="workspace-status" role="status" aria-live="polite"></p>
 <div id="workspace" class="hidden">
   <div class="workspace-bar">

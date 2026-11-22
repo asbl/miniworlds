@@ -138,7 +138,11 @@
   async function mediaFiles() {
     if (runtimeFiles) return runtimeFiles;
     const files = [];
+    for (const [name, content] of Object.entries(project.save?.files || {})) {
+      if (name !== "main.py" && name !== "save.db") files.push({name, content:Uint8Array.from(atob(content), c => c.charCodeAt(0)).buffer});
+    }
     for (const asset of project.media || []) {
+      if (project.save?.files && Object.hasOwn(project.save.files, asset.filename || asset.orig_name)) continue;
       let buffer;
       if (asset.content != null) buffer = Uint8Array.from(atob(asset.content), c => c.charCodeAt(0)).buffer;
       else {
@@ -377,7 +381,8 @@
   };
   window.addEventListener("miniworlds:logout", () => { loggingOut = true; clearTimeout(saveTimer); taskTimers.forEach(clearTimeout); });
   $("claim-form").addEventListener("submit", guarded(async ev => {
-    const result = await write("/api/claim", "POST", {code:ev.target.code.value});
+    const result = await write("/api/claim", "POST", {code:ev.target.code.value, password:ev.target.password.value});
+    if (result.personal_code) { $("personal-code").textContent="Dein eigener Projektcode: "+result.personal_code+". Bitte sicher aufbewahren; der Vorlagencode ist verbraucht."; $("personal-code").classList.remove("hidden"); }
     token = result.token; sessionStorage.setItem("stoken", token); message(""); await load();
   }));
   $("source").addEventListener("input", changed);

@@ -76,7 +76,11 @@ os.environ['SDL_AUDIODRIVER'] = 'dummy'
 `);
     pyodide.FS.writeFile("/project/main.py", data.source);
     if (data.db) pyodide.FS.writeFile("/project/save.db", decode(data.db));
-    for (const file of data.files) pyodide.FS.writeFile("/project/" + file.name, new Uint8Array(file.content));
+    for (const file of data.files) {
+      const path = "/project/" + file.name;
+      pyodide.FS.mkdirTree(path.slice(0, path.lastIndexOf("/")));
+      pyodide.FS.writeFile(path, new Uint8Array(file.content));
+    }
     self.mwAudio = raw => {
       const command = JSON.parse(raw);
       if (command.action === "play" || command.action === "resume") audioStates.set(command.channel, {busy:true});

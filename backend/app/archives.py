@@ -37,12 +37,15 @@ def project_snapshot(db, settings, p, task=None):
                         "items": [{"id": i.id, "kind": i.kind, "prompt": i.prompt, "position": i.position}
                                   for i in sorted(task.items, key=lambda i: i.position)]}
     for a in db.query(MediaAsset).filter_by(project_id=p.id).order_by(MediaAsset.id):
+        if data["save"] and data["save"].get("files") is not None and media_name(a.id, a.orig_name) not in data["save"]["files"]:
+            continue
         path = project_media_dir(settings, p.id) / a.stored_name
-        if not path.is_file():
+        editor_content = (data["save"] or {}).get("files", {}).get(media_name(a.id, a.orig_name))
+        if editor_content is None and not path.is_file():
             raise HTTPException(409, f"Die Mediendatei {a.orig_name} fehlt. Bitte erneut hochladen.")
         data["media"].append({"id": a.id, "orig_name": a.orig_name, "filename": media_name(a.id, a.orig_name),
                               "mime": a.mime, "license": a.license, "license_text": a.license_text,
-                              "source": a.source, "content": base64.b64encode(path.read_bytes()).decode()})
+                              "source": a.source, "content": editor_content if editor_content is not None else base64.b64encode(path.read_bytes()).decode()})
     return data
 
 
@@ -51,8 +54,16 @@ def project_zip(data, answers=None):
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         save = data.get("save") or {}
-        archive.writestr("main.py", save.get("source", ""))
-        if save.get("db"):
+        files = save.get("files")
+        written = set()
+        if files is not None:
+            from .editor_files import validate_files
+            for name, content in validate_files(files).items():
+                archive.writestr(name, base64.b64decode(content, validate=True))
+                written.add(name)
+        if "main.py" not in written:
+            archive.writestr("main.py", save.get("source", ""))
+        if save.get("db") and "save.db" not in written:
             try:
                 db_bytes = base64.b64decode(save["db"], validate=True)
             except (ValueError, binascii.Error):
@@ -60,11 +71,14 @@ def project_zip(data, answers=None):
             archive.writestr("save.db", db_bytes)
         licenses = []
         for asset in data.get("media", []):
-            archive.writestr(asset["filename"], base64.b64decode(asset["content"]))
+            if asset["filename"] not in written:
+                archive.writestr(asset["filename"], base64.b64decode(asset["content"]))
             licenses.append({k: asset[k] for k in ("filename", "license", "license_text", "source")})
-        archive.writestr("licenses.json", json.dumps(licenses, ensure_ascii=False, indent=2))
+        if "licenses.json" not in written:
+            archive.writestr("licenses.json", json.dumps(licenses, ensure_ascii=False, indent=2))
         manifest = {k: v for k, v in data.items() if k not in ("save", "media")}
         if answers is not None:
             manifest["answers"] = checkbox_answers(answers)
-        archive.writestr("project.json", json.dumps(manifest, ensure_ascii=False, indent=2))
+        if "project.json" not in written:
+            archive.writestr("project.json", json.dumps(manifest, ensure_ascii=False, indent=2))
     return buf.getvalue()

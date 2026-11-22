@@ -15,13 +15,14 @@ from sqlalchemy.orm import Session
 
 from .. import gitstore
 from ..archives import media_name, pack_snapshot, project_snapshot, project_zip, unpack_snapshot
-from ..projects import new_project, read_only_reason, require_writable, store_save
+from ..projects import new_project, read_only_reason, require_writable, store_save, require_active_code, student_binding, copy_project_content, code_expiry
 from ..audit import log_audit
 from ..config import Settings
 from ..deps import get_db, get_settings, get_student_project
-from ..models import MediaAsset, Project, ProjectRemote, Save, ShareRequest, Submission, SubmissionVersion, Task, TaskAssignment, utcnow
-from ..security import decrypt_secret, encrypt_secret, hash_code, make_student_token
+from ..models import MediaAsset, Project, ProjectRemote, Save, ShareRequest, Submission, SubmissionVersion, Task, TaskAssignment, TemplateCode, Workspace, CodeAttempt, aware, utcnow
+from ..security import decrypt_secret, encrypt_secret, hash_code, make_student_token, hash_password, verify_password
 from ..storage import limit_submissions, storage_policy
+from ..editor_files import save_payload
 from ..services import (
     ALLOWED_MEDIA,
     LICENSE_CHOICES,
@@ -36,7 +37,8 @@ router = APIRouter(prefix="/api", tags=["play"])
 
 
 class ClaimIn(BaseModel):
-    code: str
+    code: str = Field(min_length=1, max_length=128)
+    password: str = Field(default="", max_length=256)
 
 
 @router.post("/claim")
@@ -46,14 +48,57 @@ def claim_code(body: ClaimIn, request: Request, db: Session = Depends(get_db), s
     if not request.app.state.rate_limiter.allow(f"claim-request:{ip}", 600, 60):
         raise HTTPException(429, "Zu viele Versuche")
     ch = hash_code(body.code)
+    attempt = db.get(CodeAttempt, ch)
+    if attempt and aware(attempt.expires_at) > utcnow() and attempt.failures >= 5:
+        raise HTTPException(429, "Zu viele Fehlversuche für diesen Zugang. Bitte fünf Minuten warten.")
     if request.app.state.rate_limiter.limited(f"claim-failed:{ip}", 20, 60):
         raise HTTPException(429, "Zu viele ungültige Codes. Bitte eine Minute warten.")
     p = db.query(Project).filter_by(code_hash=ch).first()
-    if not p:
+    personal_code = None
+    invite = db.query(TemplateCode).filter_by(code_hash=ch).first() if not p else None
+    if invite and not invite.used_at and (not invite.expires_at or aware(invite.expires_at) > utcnow()):
+        source = db.get(Project, invite.project_id)
+        snapshot = project_snapshot(db, settings, source)
+        p, personal_code = new_project(db, settings, source.teacher_id, source.course_id, title=source.title)
+        try:
+            copy_project_content(db, settings, p, snapshot)
+            for task in db.query(Task).join(TaskAssignment).filter(TaskAssignment.project_id == source.id):
+                if not db.query(TaskAssignment).filter_by(project_id=p.id, task_id=task.id).first():
+                    assignment = TaskAssignment(project_id=p.id, task_id=task.id)
+                    db.add(assignment)
+                    db.flush()
+                    db.add(Submission(assignment_id=assignment.id, project_id=p.id))
+            if compute_used_bytes(db, p) > p.quota_bytes:
+                raise HTTPException(413, "Die Vorlage ist zu groß. Bitte die Lehrkraft fragen.")
+            invite.used_at = utcnow()
+            db.commit()
+        except Exception:
+            pid = p.id
+            db.rollback()
+            from ..services import delete_project_files
+            delete_project_files(settings, pid)
+            raise
+    workspace = db.get(Workspace, p.workspace_id) if p and p.workspace_id else None
+    valid = p is not None and (not workspace or not workspace.password_hash or verify_password(body.password, workspace.password_hash))
+    if not valid:
+        from datetime import timedelta
         request.app.state.rate_limiter.allow(f"claim-failed:{ip}", 20, 60)
-        raise HTTPException(401, "Code ungültig")
-    token = make_student_token(settings.secret_key, p.id, p.code_hash, settings.student_token_hours)
-    return {"token": token, "project_id": p.id, "read_only": bool(read_only_reason(db, p))}
+        if not attempt or aware(attempt.expires_at) <= utcnow():
+            if attempt:
+                db.delete(attempt)
+                db.flush()
+            attempt = CodeAttempt(key=ch, failures=0, expires_at=utcnow()+timedelta(minutes=5))
+            db.add(attempt)
+        attempt.failures += 1
+        db.query(CodeAttempt).filter(CodeAttempt.expires_at < utcnow()).delete(synchronize_session=False)
+        db.commit()
+        raise HTTPException(401, "Code oder Passwort ungültig, oder Zugang abgelaufen.")
+    require_active_code(db, p)
+    if attempt:
+        db.delete(attempt)
+        db.commit()
+    token = make_student_token(settings.secret_key, p.id, student_binding(db, p), settings.student_token_hours)
+    return {"token": token, "project_id": p.id, "read_only": bool(read_only_reason(db, p)), "personal_code": personal_code}
 
 
 @router.get("/play/project")
@@ -103,6 +148,8 @@ def get_project(p: Project = Depends(get_student_project), db: Session = Depends
         "media": [_serialize_media(a) for a in media],
         "license_choices": LICENSE_CHOICES,
         "share": {"status": sr.status, "slug": sr.slug} if sr else None,
+        "code_expires_at": code_expiry(db, p),
+        "password_protected": bool(db.get(Workspace, p.workspace_id).password_hash) if p.workspace_id else False,
     }
 
 
@@ -125,7 +172,7 @@ def create_student_project(body: StudentProjectIn, p: Project = Depends(get_stud
         raise HTTPException(409, "In diesem Arbeitsbereich sind bereits 30 Projekte vorhanden")
     project, _ = new_project(db, settings, p.teacher_id, p.course_id, p.workspace_id, body.title.strip())
     db.commit()
-    return {"project_id": project.id, "token": make_student_token(settings.secret_key, project.id, project.code_hash, settings.student_token_hours)}
+    return {"project_id": project.id, "token": make_student_token(settings.secret_key, project.id, student_binding(db, project), settings.student_token_hours)}
 
 
 @router.post("/play/projects/{pid}/open")
@@ -133,7 +180,26 @@ def open_student_project(pid: int, p: Project = Depends(get_student_project), db
     project = db.get(Project, pid)
     if not project or not p.workspace_id or project.workspace_id != p.workspace_id or project.teacher_id != p.teacher_id:
         raise HTTPException(404, "Projekt nicht gefunden")
-    return {"project_id": project.id, "token": make_student_token(settings.secret_key, project.id, project.code_hash, settings.student_token_hours)}
+    require_active_code(db, project)
+    return {"project_id": project.id, "token": make_student_token(settings.secret_key, project.id, student_binding(db, project), settings.student_token_hours)}
+
+
+class PasswordIn(BaseModel):
+    current_password: str = Field(default="", max_length=256)
+    password: str = Field(min_length=12, max_length=256)
+
+
+@router.put("/play/password")
+def protect_project(body: PasswordIn, request: Request, p: Project = Depends(get_student_project), db: Session = Depends(get_db), settings: Settings = Depends(get_settings)):
+    workspace = db.get(Workspace, p.workspace_id)
+    if not request.app.state.rate_limiter.allow(f"password:{workspace.id}", 5, 300):
+        raise HTTPException(429, "Bitte fünf Minuten warten.")
+    if workspace.password_hash and not verify_password(body.current_password, workspace.password_hash):
+        raise HTTPException(401, "Aktuelles Passwort ungültig")
+    workspace.password_hash = hash_password(body.password)
+    workspace.credential_version += 1
+    db.commit()
+    return {"ok": True, "token": make_student_token(settings.secret_key, p.id, student_binding(db, p), settings.student_token_hours)}
 
 
 class SaveIn(BaseModel):
@@ -141,6 +207,7 @@ class SaveIn(BaseModel):
     source: str
     db: str | None = None
     message: str | None = None  # optionaler Commit-Kommentar für den Versionsverlauf
+    files: dict[str, str] | None = None  # relative Pfade → Base64, für den eigenständigen Editor
 
 
 def _decode_db(db: str | None) -> bytes | None:
@@ -160,7 +227,7 @@ def _commit_save_to_git(db: Session, settings: Settings, p: Project, body: SaveI
     try:
         db_bytes = _decode_db(body.db)
         message = (body.message or "").strip() or f"Speichern am {utcnow():%d.%m.%Y, %H:%M} Uhr"
-        return gitstore.commit_save(settings, p.id, body.source, db_bytes, message), None
+        return gitstore.commit_save(settings, p.id, body.source, db_bytes, message, body.files), None
     except gitstore.GitError as error:
         log_audit(db, "code", f"project:{p.id}", "git_commit_failed", meta={"error": str(error)})
         db.commit()
@@ -178,9 +245,22 @@ def put_save(
     require_writable(db, p)
     if not request.app.state.rate_limiter.allow(f"save:{p.id}", 60, 60):
         raise HTTPException(429, "Zu viele Speicher-Vorgänge")
-    payload = json.dumps({"source": body.source, "db": body.db}).encode()
+    old = db.get(Save, p.id)
+    # Alte Player dürfen ergänzende Dateien nicht versehentlich entfernen.
+    files = body.files if body.files is not None else (json.loads(old.payload).get("files") if old else None)
+    data = save_payload(body.source, body.db, files)
+    body.files = data.get("files")
+    removed_media = []
+    if body.files is not None:
+        for asset in db.query(MediaAsset).filter_by(project_id=p.id).all():
+            if media_name(asset.id, asset.orig_name) not in body.files:
+                removed_media.append(project_media_dir(settings, p.id) / asset.stored_name)
+                db.delete(asset)
+    payload = json.dumps(data).encode()
     revision = store_save(db, p, payload, body.base_revision)
     db.commit()
+    for path in removed_media:
+        path.unlink(missing_ok=True)
     commit_hash, warning = _commit_save_to_git(db, settings, p, body)
     return {"ok": True, "used_bytes": compute_used_bytes(db, p), "quota_bytes": p.quota_bytes, "commit": commit_hash, "revision": revision, "warning": warning}
 
@@ -265,7 +345,7 @@ def play_restore(
     commit_hash = None
     try:
         db_bytes = _decode_db(data.get("db"))
-        commit_hash = gitstore.commit_save(settings, p.id, data["source"], db_bytes, f"Wiederhergestellt: {commit[:8]}")
+        commit_hash = gitstore.commit_save(settings, p.id, data["source"], db_bytes, f"Wiederhergestellt: {commit[:8]}", data.get("files"))
     except gitstore.GitError as error:
         log_audit(db, "code", f"project:{p.id}", "git_commit_failed", meta={"error": str(error)})
     log_audit(db, "code", f"project:{p.id}", "git_restore", target=commit[:8], meta={"commit": commit_hash})
@@ -541,6 +621,21 @@ def list_media(p: Project = Depends(get_student_project), db: Session = Depends(
     return {"media": [_serialize_media(a) for a in rows], "license_choices": LICENSE_CHOICES}
 
 
+def _update_editor_media(db, p, name, content):
+    save = db.get(Save, p.id)
+    data = json.loads(save.payload) if save else {}
+    if data.get("files") is None:
+        return None
+    files = data["files"]
+    if content is None:
+        files.pop(name, None)
+    else:
+        files[name] = base64.b64encode(content).decode()
+    data = save_payload(data["source"], data.get("db"), files)
+    store_save(db, p, json.dumps(data).encode(), p.revision)
+    return SaveIn(source=data["source"], db=data.get("db"), files=data["files"])
+
+
 @router.post("/play/media")
 async def upload_media(
     request: Request,
@@ -586,12 +681,16 @@ async def upload_media(
     db.flush()
     asset.stored_name = f"{asset.id}{ext}"
     db.flush()
+    editor_save = _update_editor_media(db, p, media_name(asset.id, asset.orig_name), content)
     target_dir = project_media_dir(settings, p.id)
     target_dir.mkdir(parents=True, exist_ok=True)
     (target_dir / asset.stored_name).write_bytes(content)
     db.commit()
     try:
-        gitstore.commit_media(settings, p.id, f"Medien hochgeladen: {asset.orig_name}")
+        if editor_save:
+            _commit_save_to_git(db, settings, p, editor_save)
+        else:
+            gitstore.commit_media(settings, p.id, f"Medien hochgeladen: {asset.orig_name}")
     except gitstore.GitError as error:
         log_audit(db, "code", f"project:{p.id}", "git_commit_failed", meta={"error": str(error)})
         db.commit()
@@ -627,12 +726,16 @@ def delete_media(asset_id: int, p: Project = Depends(get_student_project), db: S
         raise HTTPException(404, "Medium nicht gefunden")
     require_writable(db, p)
     path = project_media_dir(settings, p.id) / a.stored_name
-    if path.exists():
-        path.unlink()
     db.delete(a)
+    db.flush()
+    editor_save = _update_editor_media(db, p, media_name(a.id, a.orig_name), None)
     db.commit()
+    path.unlink(missing_ok=True)
     try:
-        gitstore.commit_media(settings, p.id, f"Medien gelöscht: {a.orig_name}")
+        if editor_save:
+            _commit_save_to_git(db, settings, p, editor_save)
+        else:
+            gitstore.commit_media(settings, p.id, f"Medien gelöscht: {a.orig_name}")
     except gitstore.GitError as error:
         log_audit(db, "code", f"project:{p.id}", "git_commit_failed", meta={"error": str(error)})
         db.commit()
@@ -644,6 +747,13 @@ def media_file(asset_id: int, p: Project = Depends(get_student_project), db: Ses
     a = db.get(MediaAsset, asset_id)
     if not a or a.project_id != p.id:
         raise HTTPException(404, "Medium nicht gefunden")
+    save = db.get(Save, p.id)
+    files = json.loads(save.payload).get("files") if save else None
+    if files is not None:
+        content = files.get(media_name(a.id, a.orig_name))
+        if content is None:
+            raise HTTPException(404, "Medium nicht gefunden")
+        return Response(base64.b64decode(content), media_type=a.mime, headers={"X-Content-Type-Options": "nosniff"})
     path = project_media_dir(settings, p.id) / a.stored_name
     if not path.exists():
         raise HTTPException(404, "Datei fehlt auf dem Datenträger")

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 from pydantic import BaseModel, ConfigDict, Field
@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 from .. import gitstore
 from ..archives import project_snapshot, project_zip, unpack_snapshot
-from ..projects import assign_templates, copy_project_content, new_project, owned_course
+from ..projects import assign_templates, copy_project_content, new_project, owned_course, set_read_only
 from ..task_data import checkbox_answers
 from ..audit import log_audit
 from ..config import Settings
@@ -28,6 +28,8 @@ from ..models import (
     TaskAssignment,
     TaskItem,
     User,
+    Workspace,
+    TemplateCode,
     utcnow,
 )
 from ..security import decrypt_code, encrypt_code, encrypt_secret, gen_code, hash_code
@@ -81,6 +83,16 @@ class ProjectCreateIn(BaseModel):
     count: int = Field(default=1, ge=1, le=200)
     course_id: int | None = None
     template_project_id: int | None = None
+    access_mode: str = Field(default="project", pattern="^(project|template_once)$")
+    code_readonly_days: int | None = Field(default=365, ge=1, le=36500)
+    code_expires_at: datetime | None = None
+    writable_until: datetime | None = None
+
+
+def utc_date(value):
+    if value is not None and value.tzinfo is None:
+        raise HTTPException(422, "Datumsangaben müssen eine Zeitzone enthalten.")
+    return value.astimezone(timezone.utc) if value else None
 
 
 @router.post("/projects")
@@ -88,6 +100,21 @@ def create_projects(body: ProjectCreateIn, teacher: User = Depends(require_teach
     """Erzeugt Projekt-Codes. Klartext-Codes werden nur einmalig zurückgegeben (später: GET /projects/{id}/code)."""
     count = body.count
     owned_course(db, teacher.id, body.course_id)
+    if body.access_mode == "template_once":
+        if body.template_project_id is None:
+            raise HTTPException(422, "Bitte ein Startprojekt auswählen.")
+        source = _owned_project(db, teacher, body.template_project_id)
+        if body.course_id is not None and body.course_id != source.course_id:
+            raise HTTPException(422, "Vorlagencodes verwenden die Klasse des Startprojekts. Bitte diese Klasse auswählen.")
+        out = []
+        for _ in range(count):
+            code = gen_code(16)
+            row = TemplateCode(project_id=source.id, code_hash=hash_code(code), code_enc=encrypt_code(code, settings.secret_key), expires_at=utc_date(body.code_expires_at))
+            db.add(row)
+            db.flush()
+            out.append({"id": row.id, "code": code})
+        db.commit()
+        return {"projects": out, "access_mode": "template_once"}
     snapshot, template_tasks = None, []
     if body.template_project_id is not None:
         source = _owned_project(db, teacher, body.template_project_id)
@@ -114,6 +141,9 @@ def create_projects(body: ProjectCreateIn, teacher: User = Depends(require_teach
             p, code = new_project(db, settings, teacher.id, body.course_id,
                                   title=source.title if snapshot else "Mein Projekt")
             created_ids.append(p.id)
+            p.code_readonly_days = body.code_readonly_days if "code_readonly_days" in body.model_fields_set else settings.code_readonly_days
+            p.code_expires_at = utc_date(body.code_expires_at)
+            p.writable_until = utc_date(body.writable_until)
             if snapshot:
                 copy_project_content(db, settings, p, snapshot)
                 for task in template_tasks:
@@ -141,7 +171,8 @@ def list_projects(course_id: int | None = None, with_code: bool = False, teacher
         owned_course(db, teacher.id, course_id)
         query = query.filter_by(course_id=course_id)
     rows = query.order_by(Project.id).all()
-    return {"projects": [serialize_project(db, p, settings, with_code) for p in rows], "storage_policy": storage_policy(settings)}
+    return {"projects": [serialize_project(db, p, settings, with_code) for p in rows], "storage_policy": storage_policy(settings),
+            "code_defaults": {"readonly_days": settings.code_readonly_days}}
 
 
 class CourseIn(BaseModel):
@@ -175,6 +206,10 @@ class CoursePatchIn(BaseModel):
 @router.patch("/courses/{cid}")
 def archive_course(cid: int, body: CoursePatchIn, teacher: User = Depends(require_teacher), db: Session = Depends(get_db)):
     c = owned_course(db, teacher.id, cid)
+    if body.archived and not c.archived:
+        c.archived_at = utcnow()
+    elif not body.archived:
+        c.archived_at = None
     c.archived = body.archived
     db.query(Project).filter_by(course_id=c.id).update({Project.revision: Project.revision + 1}, synchronize_session=False)
     log_audit(db, "teacher", f"user:{teacher.id}", "course_archived" if body.archived else "course_reactivated", target=f"course:{cid}")
@@ -196,7 +231,7 @@ def bulk_projects(body: ProjectBulkIn, teacher: User = Depends(require_teacher),
     for p in rows:
         p.revision += 1
         if body.read_only is not None:
-            p.read_only = body.read_only
+            set_read_only(p, body.read_only)
         if "course_id" in body.model_fields_set:
             p.course_id = body.course_id
             assign_templates(db, p)
@@ -243,6 +278,9 @@ class ProjectPatchIn(BaseModel):
     course_id: int | None = None
     quota_bytes: int | None = None
     read_only: bool | None = None
+    writable_until: datetime | None = None
+    code_expires_at: datetime | None = None
+    code_readonly_days: int | None = Field(default=None, ge=1, le=36500)
 
 
 @router.patch("/projects/{pid}")
@@ -268,11 +306,44 @@ def patch_project(pid: int, body: ProjectPatchIn, teacher: User = Depends(requir
         changes["quota_bytes"] = body.quota_bytes
     if body.read_only is not None:
         p.revision += 1
-        p.read_only = body.read_only
+        set_read_only(p, body.read_only)
         changes["read_only"] = body.read_only
+    for name in ("writable_until", "code_expires_at", "code_readonly_days"):
+        if name in body.model_fields_set:
+            value = getattr(body, name)
+            setattr(p, name, utc_date(value) if name.endswith("_at") or name == "writable_until" else value)
+            p.revision += 1
     log_audit(db, "teacher", f"user:{teacher.id}", "project_updated", target=f"project:{pid}", meta=changes)
     db.commit()
     return {"ok": True, "project": serialize_project(db, p), "changes": changes}
+
+
+@router.get("/template-codes")
+def template_codes(teacher: User = Depends(require_teacher), db: Session = Depends(get_db), settings: Settings = Depends(get_settings)):
+    rows = db.query(TemplateCode).join(Project).filter(Project.teacher_id == teacher.id).order_by(TemplateCode.id.desc()).all()
+    return {"codes": [{"id": r.id, "project_id": r.project_id, "code": decrypt_code(r.code_enc, settings.secret_key), "used_at": r.used_at, "expires_at": r.expires_at} for r in rows]}
+
+
+@router.delete("/template-codes/{cid}")
+def revoke_template_code(cid: int, teacher: User = Depends(require_teacher), db: Session = Depends(get_db)):
+    row = db.get(TemplateCode, cid)
+    if not row:
+        raise HTTPException(404, "Code nicht gefunden")
+    _owned_project(db, teacher, row.project_id)
+    db.delete(row)
+    db.commit()
+    return {"ok": True}
+
+
+@router.delete("/projects/{pid}/password")
+def reset_student_password(pid: int, teacher: User = Depends(require_teacher), db: Session = Depends(get_db)):
+    p = _owned_project(db, teacher, pid)
+    workspace = db.get(Workspace, p.workspace_id)
+    workspace.password_hash = None
+    workspace.credential_version += 1
+    log_audit(db, "teacher", f"user:{teacher.id}", "student_password_reset", target=f"project:{pid}")
+    db.commit()
+    return {"ok": True}
 
 
 class RemoteIn(BaseModel):

@@ -31,7 +31,13 @@ def maybe_yearly_reset(db: Session, now: datetime | None = None) -> bool:
     now = now or utcnow()
     last = int(get_setting(db, "last_yearly_reset", "0") or 0)
     if now >= yearly_reset_point(now.year) and last < now.year:
-        updated = db.query(Project).update({Project.read_only: True, Project.revision: Project.revision + 1})
+        from .projects import set_read_only
+        # Eine explizite Bearbeitungsfrist ersetzt den jährlichen Standardtermin.
+        rows = db.query(Project).filter_by(read_only=False, writable_until=None).all()
+        for p in rows:
+            set_read_only(p, True, now)
+            p.revision += 1
+        updated = len(rows)
         set_setting(db, "last_yearly_reset", str(now.year))
         log_audit(
             db,

@@ -11,6 +11,7 @@ from .config import Settings
 from .models import Project, Session as DbSession, User, aware, utcnow
 from .security import csrf_token, hash_token, verify_student_token
 from .locking import project_write_lock
+from .projects import require_active_code, student_binding
 
 
 def get_db(request: Request):
@@ -78,6 +79,7 @@ async def get_student_project(request: Request, db: Session = Depends(get_db)):
     lock = project_write_lock(settings, int(payload["pid"])) if request.method in {"POST", "PUT", "PATCH", "DELETE"} else nullcontext()
     async with lock:
         project = await run_in_threadpool(db.get, Project, int(payload["pid"]))
-        if not project or not hmac.compare_digest(project.code_hash[:16], str(payload["ch"])):
+        if not project or not hmac.compare_digest(student_binding(db, project)[:16], str(payload["ch"])):
             raise HTTPException(401, "Token passt nicht mehr zum Code (Code wurde geändert?)")
+        require_active_code(db, project)
         yield project

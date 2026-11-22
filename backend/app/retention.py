@@ -39,7 +39,8 @@ def maybe_retention(db: Session, settings: Settings, now: datetime | None = None
             log_audit(db, "system", "", "retention_deleted", target=f"project:{pid}", teacher_id=p.teacher_id)
             deleted += 1
         elif ref < ro_limit and not p.read_only:
-            p.read_only = True
+            from .projects import set_read_only as mark_read_only
+            mark_read_only(p, True, now)
             p.revision += 1
             log_audit(db, "system", "", "retention_read_only", target=f"project:{p.id}", teacher_id=p.teacher_id)
             set_read_only += 1

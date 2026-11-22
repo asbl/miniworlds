@@ -63,6 +63,7 @@ class Course(Base):
     title: Mapped[str] = mapped_column(String(120))
     school_year: Mapped[str] = mapped_column(String(32), default="")
     archived: Mapped[bool] = mapped_column(Boolean, default=False)
+    archived_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 
@@ -71,6 +72,8 @@ class Workspace(Base):
     __tablename__ = "workspaces"
     id: Mapped[int] = mapped_column(primary_key=True)
     teacher_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    password_hash: Mapped[str | None] = mapped_column(String(255))
+    credential_version: Mapped[int] = mapped_column(Integer, default=0)
 
 
 class Project(Base):
@@ -85,12 +88,35 @@ class Project(Base):
     revision: Mapped[int] = mapped_column(Integer, default=0)
     quota_bytes: Mapped[int] = mapped_column(Integer, default=10 * 1024 * 1024)
     read_only: Mapped[bool] = mapped_column(Boolean, default=False)
+    read_only_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    writable_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    code_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    code_readonly_days: Mapped[int | None] = mapped_column(Integer, default=365)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_save_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     teacher: Mapped[User] = relationship(back_populates="projects")
     assignments: Mapped[list["TaskAssignment"]] = relationship(cascade="all, delete-orphan")
     remote: Mapped["ProjectRemote | None"] = relationship(uselist=False, cascade="all, delete-orphan")
+
+
+class TemplateCode(Base):
+    """Einmaliger Zugang zum Erstellen einer eigenen Kopie, kein Zugang zum Original."""
+    __tablename__ = "template_codes"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    project_id: Mapped[int] = mapped_column(ForeignKey("projects.id", ondelete="CASCADE"), index=True)
+    code_hash: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    code_enc: Mapped[str] = mapped_column(String(512))
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class CodeAttempt(Base):
+    """Kurzlebige Fehlversuchszähler; keine IPs oder Zugangscodes im Klartext."""
+    __tablename__ = "code_attempts"
+    key: Mapped[str] = mapped_column(String(64), primary_key=True)
+    failures: Mapped[int] = mapped_column(Integer, default=0)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
 
 class ProjectRemote(Base):

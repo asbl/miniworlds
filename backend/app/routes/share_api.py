@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import base64
 import re
 import secrets
 from pathlib import Path
@@ -162,6 +163,21 @@ def approve_share(
     p = db.get(Project, sr.project_id)
     save = db.get(Save, p.id)
     media_rows = db.query(MediaAsset).filter_by(project_id=p.id).order_by(MediaAsset.id).all()
+    from ..archives import media_name
+    files = json.loads(save.payload).get("files") if save else None
+    frozen_media = {}
+    for asset in media_rows:
+        name = media_name(asset.id, asset.orig_name)
+        if files is not None:
+            if name not in files:
+                continue
+            frozen_media[asset.id] = base64.b64decode(files[name])
+        else:
+            path = project_media_dir(settings, p.id) / asset.stored_name
+            if not path.is_file():
+                raise HTTPException(409, "Eine Mediendatei fehlt. Bitte erneut hochladen.")
+            frozen_media[asset.id] = path.read_bytes()
+    media_rows = [a for a in media_rows if a.id in frozen_media]
     payload = {
         "project_id": p.id,
         "frozen_at": utcnow().isoformat(),
@@ -172,7 +188,7 @@ def approve_share(
                 "stored_name": a.stored_name,
                 "orig_name": a.orig_name,
                 "mime": a.mime,
-                "size_bytes": a.size_bytes,
+                "size_bytes": len(frozen_media[a.id]),
                 "license": a.license,
                 "license_text": a.license_text,
                 "source": a.source,
@@ -192,13 +208,10 @@ def approve_share(
     db.add(snap)
     db.flush()
     # Mediendateien in den Snapshot-Ordner kopieren (unabhängig vom Projekt)
-    src_dir = project_media_dir(settings, p.id)
     dst_dir = snapshot_media_dir(settings, snap.id)
     dst_dir.mkdir(parents=True, exist_ok=True)
     for a in media_rows:
-        src = src_dir / a.stored_name
-        if src.exists():
-            (dst_dir / a.stored_name).write_bytes(src.read_bytes())
+        (dst_dir / a.stored_name).write_bytes(frozen_media[a.id])
     sr.status = "approved"
     sr.slug = slug
     sr.decided_at = utcnow()
