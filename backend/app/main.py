@@ -134,11 +134,6 @@ def create_app(settings: Settings | None = None, enable_yearly_task: bool = True
     app.include_router(gallery_api.router)
     app.include_router(gallery_api.admin_router)
     app.include_router(player_api.router)
-    # Nur Schülerzugriffe benötigen CORS; Cookie-Sitzungen werden nicht freigegeben.
-    app.add_middleware(CORSMiddleware,
-        allow_origins=[origin.strip() for origin in settings.frontend_origins.split(",") if origin.strip()],
-        allow_credentials=False, allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
-        allow_headers=["Authorization", "Content-Type"], expose_headers=["Content-Disposition"])
 
     @app.middleware("http")
     async def security_headers(request: Request, call_next):
@@ -182,4 +177,10 @@ def create_app(settings: Settings | None = None, enable_yearly_task: bool = True
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         return response
 
+    # Außen registrieren: Auch vor dem Routing abgefangene Größenfehler müssen
+    # für den Editor lesbar sein. Cookie-Sitzungen werden nicht freigegeben.
+    app.add_middleware(CORSMiddleware,
+        allow_origins=[origin.strip() for origin in settings.frontend_origins.split(",") if origin.strip()],
+        allow_credentials=False, allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allow_headers=["Authorization", "Content-Type"], expose_headers=["Content-Disposition"])
     return app

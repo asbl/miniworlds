@@ -30,6 +30,7 @@ from ..models import (
     User,
     Workspace,
     TemplateCode,
+    aware,
     utcnow,
 )
 from ..security import decrypt_code, encrypt_code, encrypt_secret, gen_code, hash_code
@@ -321,7 +322,7 @@ def patch_project(pid: int, body: ProjectPatchIn, teacher: User = Depends(requir
 @router.get("/template-codes")
 def template_codes(teacher: User = Depends(require_teacher), db: Session = Depends(get_db), settings: Settings = Depends(get_settings)):
     rows = db.query(TemplateCode).join(Project).filter(Project.teacher_id == teacher.id).order_by(TemplateCode.id.desc()).all()
-    return {"codes": [{"id": r.id, "project_id": r.project_id, "code": decrypt_code(r.code_enc, settings.secret_key), "used_at": r.used_at, "expires_at": r.expires_at} for r in rows]}
+    return {"codes": [{"id": r.id, "project_id": r.project_id, "code": decrypt_code(r.code_enc, settings.secret_key), "used_at": aware(r.used_at), "expires_at": aware(r.expires_at)} for r in rows]}
 
 
 @router.delete("/template-codes/{cid}")

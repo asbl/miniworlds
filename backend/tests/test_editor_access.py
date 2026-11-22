@@ -60,6 +60,13 @@ def test_scheduled_readonly_and_no_deadline_bypass(client, teacher_csrf):
     assert client.get('/api/play/project', headers=auth(token)).status_code == 401
 
 
+def test_deadlines_roundtrip_with_timezone(client, teacher_csrf):
+    p = create_project(client, teacher_csrf)[0]
+    result = patch(client, teacher_csrf, p['id'], writable_until='2028-07-31T15:00:00+02:00', code_expires_at='2029-07-31T15:00:00+02:00')
+    assert result['project']['writable_until'] == '2028-07-31T13:00:00+00:00'
+    assert result['project']['code_expires_at'] == '2029-07-31T13:00:00+00:00'
+
+
 def test_archiving_starts_and_reactivation_removes_archive_deadline(client, teacher_csrf):
     headers = {'X-CSRF-Token': teacher_csrf}
     cid = client.post('/api/teacher/courses', headers=headers, json={'title': '7a'}).json()['id']
@@ -196,6 +203,8 @@ def test_cors_exact_origin_preflight_and_errors(client, teacher_csrf):
     assert client.options('/api/play/save', headers=headers).status_code == 400
     response = client.get('/api/play/project', headers={'Origin': 'https://editor.opencoding.de'})
     assert response.status_code == 401 and response.headers['Access-Control-Allow-Origin'] == 'https://editor.opencoding.de'
+    response = client.put('/api/play/save', content=b'{}', headers={'Origin': 'https://editor.opencoding.de', 'Content-Length': str(100*1024*1024)})
+    assert response.status_code == 413 and response.headers['Access-Control-Allow-Origin'] == 'https://editor.opencoding.de'
 
 
 def test_other_teacher_cannot_change_access_or_reset_password(client, teacher_csrf):
