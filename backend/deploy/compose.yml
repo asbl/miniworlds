@@ -2,6 +2,7 @@ name: miniworlds-backend
 
 x-runtime: &runtime
   image: ${BACKEND_IMAGE:?BACKEND_IMAGE muss auf ein getestetes Release zeigen}
+  runtime: ${BACKEND_RUNTIME:-runc}
   init: true
   read_only: true
   cap_drop: [ALL]

@@ -111,6 +111,9 @@ schreibgeschützt bleiben. Schreibzugriffe benötigen nur `/data` und `/tmp`.
 `https://backend.editor.opencoding.de` am vorhandenen Traefik-Netz `traefik_default`.
 Im Deployment-Verzeichnis werden `compose.yml`, eine geschützte `backend.env` mit dauerhaftem
 Schlüssel und Admin-Seed sowie `release.env` mit `BACKEND_IMAGE=miniworlds-backend:<Commit>` benötigt.
+Optional wählt `BACKEND_RUNTIME` eine bereits konfigurierte OCI-Runtime. Auf dem Zielserver
+ist derzeit `php-security-compat` nötig: Sie verwendet den dort vorhandenen kompatiblen
+containerd-Shim, ohne den Docker-Daemon und andere Dienste neu starten zu müssen.
 `docker compose --env-file release.env -f compose.yml up -d backend` startet das Release;
 `docker compose --env-file release.env -f compose.yml run --rm backup` erstellt eine geprüfte Sicherung.
 Die User-Systemd-Dateien in `deploy/` aktivieren tägliche Sicherungen bei Installation unter
