@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}miniworlds backend{% endblock %}</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="{{ page }}">
+<header>
+  <h1>miniworlds backend</h1>
+  <nav>
+    <a href="/play">Schüler</a>
+    <a href="/teacher">Lehrer</a>
+    <a href="/admin">Admin</a>
+    <button id="logout-btn" type="button">Abmelden</button>
+  </nav>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+{% block scripts %}{% endblock %}
+<script src="/static/app.js"></script>
+</body>
+</html>

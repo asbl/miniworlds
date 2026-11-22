@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Lehrercode einlösen{% endblock %}
+{% block content %}
+<h2>Lehrercode einlösen</h2>
+<form id="claim-form">
+  <label>Lehrercode <input name="invite_code" required autocomplete="off" placeholder="z. B. ABCD-EFGH-…"></label>
+  <label>Schule <input name="school" disabled placeholder="wird aus dem Code übernommen" id="school-field"></label>
+  <label>E-Mail <input type="email" name="email" required autocomplete="username"></label>
+  <label>Passwort (min. 8 Zeichen) <input type="password" name="password" required minlength="8" autocomplete="new-password"></label>
+  <button type="submit">Account erstellen</button>
+  <p class="error" id="err"></p>
+</form>
+<p><a href="/teacher/login">Zum Login</a></p>
+{% endblock %}

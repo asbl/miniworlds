@@ -1,0 +1,4 @@
+/data/
+/app/static/wheel/*.whl
+.env
+*.env

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+<h2>Admin: {{ user.email }}</h2>
+
+<section>
+  <h3>Lehrercodes</h3>
+  <form id="invite-form">
+    <input name="school" placeholder="Schule" required>
+    <input name="email" type="email" placeholder="E-Mail (optional, nur diese darf den Code einlösen)">
+    <button type="submit">Code erzeugen</button>
+  </form>
+  <div id="new-code" class="code-box hidden"></div>
+  <table id="invites-table"><thead><tr><th>Schule</th><th>E-Mail</th><th>Erstellt</th><th>Ablauf</th><th>Eingelöst</th><th></th></tr></thead><tbody></tbody></table>
+</section>
+
+<section>
+  <h3>Einstellungen</h3>
+  <form id="settings-form">
+    <label>Max. Quota pro Projekt (Bytes, Admin-Cap für Lehrer)
+      <input name="teacher_quota_cap" type="number" min="1" required></label>
+    <label>Default-Quota neuer Schüler-Codes (Bytes)
+      <input name="student_default_quota" type="number" min="1" required></label>
+    <button type="submit">Speichern</button>
+  </form>
+</section>
+
+<section>
+  <h3>Lehrer</h3>
+  <table id="teachers-table"><thead><tr><th>E-Mail</th><th>Schule</th><th>Projekte</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+</section>
+
+<section>
+  <h3>Öffentliche Aufgaben (Moderation)</h3>
+  <ul id="public-tasks-list"></ul>
+</section>
+
+<section>
+  <h3>Audit-Log</h3>
+  <ul id="audit-list" class="audit"></ul>
+</section>
+{% endblock %}

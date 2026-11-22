@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ role }} Login{% endblock %}
+{% block content %}
+<h2>{{ "Admin" if role == "admin" else "Lehrer" }} — Login</h2>
+<form id="login-form" data-role="{{ role }}">
+  <label>E-Mail <input type="email" name="email" required autocomplete="username"></label>
+  <label>Passwort <input type="password" name="password" required autocomplete="current-password"></label>
+  <button type="submit">Anmelden</button>
+  <p class="error" id="err"></p>
+</form>
+{% if role == "teacher" %}<p><a href="/teacher/claim">Lehrercode einlösen</a></p>{% endif %}
+{% endblock %}

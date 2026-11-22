@@ -1,0 +1,56 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; }
+body { margin: 0; background: #f6f7f9; color: #1c1e21; }
+header { display: flex; justify-content: space-between; align-items: center; background: #2b3a67; color: #fff; padding: 0.6rem 1rem; }
+header h1 { font-size: 1.1rem; margin: 0; }
+header nav a, header nav button { color: #dbe4ff; margin-left: 0.8rem; background: none; border: none; cursor: pointer; font-size: 0.9rem; }
+main { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
+section { background: #fff; border: 1px solid #e0e3e8; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+form label { display: block; margin: 0.4rem 0; }
+input, textarea, select { padding: 0.35rem; border: 1px solid #c3c9d1; border-radius: 4px; font: inherit; }
+button { background: #2b3a67; color: #fff; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; }
+button.secondary { background: #6b7280; }
+button.danger { background: #b3261e; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #e5e7eb; padding: 0.35rem 0.5rem; text-align: left; font-size: 0.9rem; }
+.error { color: #b3261e; }
+.hidden { display: none; }
+.code-box { background: #eef2ff; border: 1px dashed #2b3a67; border-radius: 6px; padding: 0.6rem; margin: 0.6rem 0; font-family: ui-monospace, monospace; white-space: pre-wrap; }
+.badge { background: #b3261e; color: #fff; border-radius: 4px; padding: 0.1rem 0.4rem; font-size: 0.8rem; }
+.audit { font-size: 0.85rem; max-height: 300px; overflow: auto; }
+.tabs button.tab { background: #d7dce5; color: #1c1e21; margin-right: 0.3rem; }
+.tabs button.tab.active { background: #2b3a67; color: #fff; }
+.tab-panel.hidden { display: none; }
+pre { background: #f0f1f3; padding: 0.6rem; border-radius: 6px; overflow: auto; max-height: 300px; }
+.task-card { border: 1px solid #d6dae0; border-radius: 6px; padding: 0.6rem; margin: 0.5rem 0; }
+.task-card h4 { margin: 0.2rem 0; }
+.muted { color: #6b7280; font-size: 0.85rem; }
+button:disabled { opacity:.5; cursor:default; }
+.workspace-bar,.toolbar,.filter-bar { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+.workspace-bar h2 { margin-right:auto; }
+.workspace-grid { display:grid; grid-template-columns:minmax(0, 2fr) minmax(260px, 1fr); gap:1rem; }
+.workspace-grid section { min-width:0; }
+.notice { background:#fff7db; border-left:4px solid #a76b00; padding:.8rem; margin:.6rem 0; }
+.panel { background:white; border:1px solid #e0e3e8; padding:1rem; margin-bottom:1rem; border-radius:8px; }
+.panel summary { cursor:pointer; font-weight:600; }
+.panel label,.task-card label { display:block; margin:.7rem 0; }
+.task-description { white-space:pre-wrap; }
+#runner-host iframe { width:100%; height:400px; border:1px solid #d6dae0; background:white; }
+#output { min-height:2rem; white-space:pre-wrap; overflow-wrap:anywhere; }
+.editor-shell { position:relative; height:350px; border:1px solid #c3c9d1; border-radius:5px; overflow:hidden; }
+.editor-shell pre,.editor-shell textarea { box-sizing:border-box; position:absolute; inset:0; width:100%; height:100%; margin:0; padding:.8rem; border:0; border-radius:0; font:14px/1.55 ui-monospace,monospace; tab-size:4; white-space:pre; overflow:auto; max-height:none; letter-spacing:normal; }
+.editor-shell pre { pointer-events:none; background:#f9fafb; color:#182333; }
+.editor-shell textarea { background:transparent; color:transparent; caret-color:#182333; resize:none; }
+.editor-shell textarea::selection { background:rgba(90,130,210,.25); }
+.py-keyword { color:#7b2fa0; font-weight:bold; }
+.py-string { color:#126c3e; }.py-comment { color:#667583; }.py-number { color:#b04c00; }
+.table-wrap { overflow-x:auto; }
+.task-controls { display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0; }
+.answers-view { white-space:pre-wrap; }
+dialog { width:min(1050px,90vw); max-height:90vh; overflow:auto; border:1px solid #c3c9d1; border-radius:8px; }
+dialog::backdrop { background:rgba(15,25,45,.45); }
+.comparison-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.comparison-grid label { min-width:0; }
+.comparison-grid textarea { display:block; box-sizing:border-box; width:100%; min-height:300px; white-space:pre; overflow:auto; font:14px/1.5 ui-monospace,monospace; }
+@media (max-width:650px) { .comparison-grid { grid-template-columns:1fr; } }
+@media (max-width:850px) { .workspace-grid { grid-template-columns:1fr; } header { flex-wrap:wrap; gap:.5rem; } }
+@media (forced-colors:active) { .editor-shell textarea { color:CanvasText; } .editor-shell pre { visibility:hidden; } }
