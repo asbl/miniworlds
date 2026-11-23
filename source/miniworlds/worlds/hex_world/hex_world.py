@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from numbers import Real
 from typing import Callable, Dict, List, Optional, Tuple
 
 import miniworlds.base.api_validation as api_validation
@@ -15,6 +16,58 @@ import miniworlds.worlds.hex_world.hex_world_sensor_manager as hex_world_sensor_
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
 import miniworlds.worlds.tiled_world.tile_elements as tile_elements
 import miniworlds.worlds.tiled_world.tiled_world as tiled_world
+
+
+def _components_2d(value, parameter_name: str, what: str):
+    """Return the two numeric components of a 2D value, validating the input.
+
+    Accepts `(x, y)` sequences and objects with numeric `x`/`y` attributes
+    (like `pygame.Vector2`).
+    """
+    example = f"{parameter_name} = (80, 120)" if what == "pixel" else f"{parameter_name} = (2, 3)"
+
+    def invalid():
+        raise TypeError(
+            api_validation.with_try_hint(
+                f"{parameter_name} must be a {what}, got "
+                f"{type(value).__name__}: {value!r}",
+                example,
+            )
+        )
+
+    if isinstance(value, (str, bytes)):
+        invalid()
+    if hasattr(value, "__len__"):
+        if len(value) != 2:
+            invalid()
+        components = (value[0], value[1])
+    elif hasattr(value, "x") and hasattr(value, "y"):
+        components = (value.x, value.y)
+    else:
+        invalid()
+    for index, component in enumerate(components):
+        api_validation.ensure_real(
+            component, f"{parameter_name}[{index}]", api_validation.with_try_hint, example
+        )
+    return components
+
+
+def _ensure_pixel(position, parameter_name: str = "position") -> None:
+    """Validate a screen pixel `(x, y)` with a beginner-friendly error."""
+    _components_2d(position, parameter_name, "pixel (x, y)")
+
+
+def _as_tile_list(tiles):
+    """Accept a single tile or hex position, or an iterable of them."""
+    if hasattr(tiles, "position"):
+        return [tiles]
+    if (
+        isinstance(tiles, tuple)
+        and len(tiles) == 2
+        and all(isinstance(component, Real) and not isinstance(component, bool) for component in tiles)
+    ):
+        return [tiles]
+    return tiles
 
 
 class HexWorld(tiled_world.TiledWorld):
@@ -148,23 +201,77 @@ class HexWorld(tiled_world.TiledWorld):
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
         self._tile_structure_version += 1
 
-    def to_pixel(self, position, size=(0, 0), origin=(0, 0)):
-        """Convert a hex position to the pixel position of its center.
+    def add_tile_to_world(self, position):
+        """Create and register a hex tile at a world grid position.
 
         Args:
-            position: Hex position as `(column, row)`.
+            position: Tile position as `(column, row)` of whole numbers.
+
+        Returns:
+            The created tile instance.
+
+        Raises:
+            TypeError: If `position` is not a `(column, row)` pair of
+                whole numbers.
+
+        Examples:
+            ::
+
+                tile = world.add_tile_to_world((2, 3))
+        """
+        position = hex_coords.to_offset(position)
+        return super().add_tile_to_world(position)
+
+    def to_pixel(self, position, size=(0, 0), origin=(0, 0)):
+        """Convert a hex position to its pixel position.
+
+        Args:
+            position: Hex position as `(column, row)`, or a corner/edge
+                key (3-tuple) of this world, which maps to the corner or
+                edge pixel (e.g. `world.to_pixel(actor.position)` also
+                works for actors on corners and edges).
             size: Reserved for compatibility.
             origin: Pixel offset added to the converted position.
 
         Returns:
             Pixel position as `(x, y)`.
 
+        Raises:
+            TypeError: If `position` is neither a `(column, row)` pair nor
+                a corner/edge key of this world.
+
         Examples:
             ::
 
                 pixel = world.to_pixel((2, 3))
         """
-        center = hex_coords.hex_center(position, self.tile_size)
+        if (
+            not isinstance(position, (str, bytes))
+            and hasattr(position, "__len__")
+            and len(position) == 3
+        ):
+            if self.is_corner(position):
+                pixel = self.corners[position].to_pixel()
+            elif self.is_edge(position):
+                pixel = self.edges[position].to_pixel()
+            else:
+                raise TypeError(
+                    f"{position!r} is not a corner or edge position of this world.\n"
+                    "Try: world.to_pixel((2, 3)) or "
+                    "world.to_pixel(world.get_corner((2, 3), 'n').position)"
+                )
+            return (pixel[0] + origin[0], pixel[1] + origin[1])
+        try:
+            column, row = _components_2d(position, "position", "(column, row) position")
+        except TypeError:
+            raise TypeError(
+                api_validation.with_try_hint(
+                    f"position must be a (column, row) tuple, a corner key, or an "
+                    f"edge key, got {type(position).__name__}: {position!r}",
+                    "world.to_pixel((2, 3))",
+                )
+            ) from None
+        center = hex_coords.hex_center((column, row), self.tile_size)
         return (center[0] + origin[0], center[1] + origin[1])
 
     def _world_pixel_from_screen(self, position) -> Tuple[float, float]:
@@ -180,6 +287,7 @@ class HexWorld(tiled_world.TiledWorld):
         With an unscrolled camera at the window origin the translation
         is the identity.
         """
+        _ensure_pixel(position)
         topleft = self.camera.topleft
         window_topleft = self.camera.screen_topleft
         return (
@@ -481,7 +589,13 @@ class HexWorld(tiled_world.TiledWorld):
             position = hex_coords.corner_position(position, direction)
         if position in self.corners:
             return self.corners[position]
-        raise miniworlds_exception.CornerNotFoundError(position)
+        hint = ""
+        if direction is None and self.is_tile(position):
+            hint = (
+                "A tile position needs a corner direction, "
+                "e.g. world.get_corner((3, 3), 'n')."
+            )
+        raise miniworlds_exception.CornerNotFoundError(position, hint)
 
     def get_edge(self, position, direction=None):
         """Return an edge by edge position or hex position plus direction.
@@ -505,7 +619,13 @@ class HexWorld(tiled_world.TiledWorld):
             position = hex_coords.edge_position(position, direction)
         if position in self.edges:
             return self.edges[position]
-        raise miniworlds_exception.EdgeNotFoundError(position)
+        hint = ""
+        if direction is None and self.is_tile(position):
+            hint = (
+                "A tile position needs an edge direction, "
+                "e.g. world.get_edge((3, 3), 'o')."
+            )
+        raise miniworlds_exception.EdgeNotFoundError(position, hint)
 
     def get_tiles_in_radius(
         self, position, radius: int, include_center: bool = True
@@ -852,7 +972,7 @@ class HexWorld(tiled_world.TiledWorld):
         stay until `clear_highlights` is called.
 
         Args:
-            tiles: Tiles or hex positions.
+            tiles: A single tile or hex position, or a list of them.
             color: RGB or RGBA color; with RGB a default transparency is used.
 
         Examples:
@@ -862,7 +982,7 @@ class HexWorld(tiled_world.TiledWorld):
         """
         color = self._normalize_highlight_color(color)
         changed = False
-        for tile in tiles:
+        for tile in _as_tile_list(tiles):
             position = hex_pathfinding._to_position(tile)
             if self._tile_highlights.get(position) != color:
                 self._tile_highlights[position] = color
@@ -874,8 +994,8 @@ class HexWorld(tiled_world.TiledWorld):
         """Remove highlights.
 
         Args:
-            tiles: Tiles or hex positions to clear. Without it, all
-                highlights are removed.
+            tiles: A single tile or hex position, or a list of them, to
+                clear. Without it, all highlights are removed.
 
         Examples:
             ::
@@ -887,19 +1007,44 @@ class HexWorld(tiled_world.TiledWorld):
             self._tile_highlights.clear()
         else:
             changed = False
-            for tile in tiles:
+            for tile in _as_tile_list(tiles):
                 if self._tile_highlights.pop(hex_pathfinding._to_position(tile), None) is not None:
                     changed = True
         if changed:
             self._refresh_highlights()
 
     @staticmethod
+    def _ensure_color_component(value, parameter_name: str) -> None:
+        api_validation.ensure_real(
+            value, parameter_name, api_validation.with_try_hint, f"{parameter_name} = 255"
+        )
+
+    @staticmethod
     def _normalize_highlight_color(color) -> Tuple[int, ...]:
+        if isinstance(color, list):
+            color = tuple(color)
+        if not isinstance(color, tuple):
+            raise TypeError(
+                api_validation.with_try_hint(
+                    f"color must be a tuple like (r, g, b) or (r, g, b, a), got "
+                    f"{type(color).__name__}: {color!r}",
+                    "color = (255, 0, 0)",
+                )
+            )
+        if len(color) not in (3, 4):
+            raise ValueError(f"A highlight color needs 3 or 4 components, got {color!r}")
+        for index, component in enumerate(color):
+            HexWorld._ensure_color_component(component, f"color[{index}]")
+        if any(not 0 <= component <= 255 for component in color):
+            raise ValueError(
+                api_validation.with_try_hint(
+                    f"color components must be between 0 and 255, got {color!r}",
+                    "color = (255, 255, 0)",
+                )
+            )
         color = tuple(int(component) for component in color)
         if len(color) == 3:
             return color + (90,)
-        if len(color) != 4:
-            raise ValueError(f"A highlight color needs 3 or 4 components, got {color!r}")
         return color
 
     def _refresh_highlights(self) -> None:

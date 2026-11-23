@@ -11,7 +11,7 @@
     const status = document.getElementById("status");
     const params = new URLSearchParams(window.location.search);
     const pyodideBase = params.get("pyodide-base")
-      || "https://cdn.jsdelivr.net/pyodide/v0.27.0/full/";
+      || "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/";
 
     function finish(state, result) {
       status.dataset.state = state;

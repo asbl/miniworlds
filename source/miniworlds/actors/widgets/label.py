@@ -1,11 +1,12 @@
-import miniworlds.actors.widgets.button as widget
+import miniworlds.actors.widgets.single_widget as single_widget
 
 
-class Label(widget.Button):
+class Label(single_widget.SingleWidget):
     """Text label for use in a `Toolbar`.
 
     `Label` is usually used for headings, status text, scores, or other
-    information that should be shown inside a toolbar.
+    information that should be shown inside a toolbar. Unlike `Button`,
+    a label is not clickable and does not send messages.
 
     Args:
         text: The text to display in the label.
@@ -27,5 +28,9 @@ class Label(widget.Button):
             text: The text displayed by the label.
             image: Optional image path.
         """
-        super().__init__(text, image)
-        self.background_color = (255, 255, 255, 0)
+        super().__init__(text=text)
+        if image:
+            self.set_image(image)
+        # Same background as Button; kept explicit because Label no longer
+        # inherits from Button.
+        self.set_background_color((60, 60, 60))

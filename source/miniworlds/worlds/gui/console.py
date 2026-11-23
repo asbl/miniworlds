@@ -71,13 +71,11 @@ class Console(toolbar.Toolbar):
         """Removes the oldest lines until at most ``max_lines`` remain."""
         trimmed = False
         while len(self.widgets) > self.max_lines:
-            oldest_key = next(iter(self.widgets))
-            oldest_widget = self.widgets.pop(oldest_key)
-            self._unregister_widget(oldest_widget)
-            oldest_widget.remove()
+            self.remove(next(iter(self.widgets)))
             trimmed = True
         if trimmed:
-            self.reorder()
+            # Clamp even when fixed_camera is set: the console must never
+            # stay scrolled past lines that no longer exist.
             total_height = self._widgets_total_height()
             self.camera.world_size_y = max(self.camera.height, total_height)
             self.camera.y = max(0, total_height - self.camera.height)

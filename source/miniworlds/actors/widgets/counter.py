@@ -34,4 +34,4 @@ class CounterLabel(mod_label.Label):
         self.update_text()
 
     def update_text(self):
-        self.set_text(f"{self.description} : {str(self.value)}")
+        self.set_text(str(self))

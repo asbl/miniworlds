@@ -287,14 +287,18 @@ class TileNotFoundError(MiniworldsError):
 
 
 class CornerNotFoundError(MiniworldsError):
-    def __init__(self, position):
+    def __init__(self, position, hint: str = ""):
         self.message = f"No valid Corner found for position {position}"
+        if hint:
+            self.message += f"\n{hint}"
         super().__init__(self.message)
 
 
 class EdgeNotFoundError(MiniworldsError):
-    def __init__(self, position):
+    def __init__(self, position, hint: str = ""):
         self.message = f"No valid Edge found for position {position}"
+        if hint:
+            self.message += f"\n{hint}"
         super().__init__(self.message)
 
 

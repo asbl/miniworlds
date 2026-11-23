@@ -29,7 +29,11 @@ class FPSLabel(label.Label):
         self._base_text = text
         self._last_update = None
         self.value = 0
-        self.set_text(f"{text} : {self.value}")
+        self.set_text(self.display_text)
+
+    @property
+    def display_text(self) -> str:
+        return f"{self._base_text} : {self.value}"
 
     def update(self):
         """Updates the displayed value; called once per frame by the toolbar."""
@@ -39,4 +43,4 @@ class FPSLabel(label.Label):
             if elapsed > 0:
                 self.value = round(1 / elapsed)
         self._last_update = now
-        self.set_text(f"{self._base_text} : {self.value}")
+        self.set_text(self.display_text)

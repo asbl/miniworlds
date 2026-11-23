@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import abc
 import math
+import weakref
 from typing import List, Dict, Tuple, TYPE_CHECKING
 
 import miniworlds.base.app as app
@@ -17,11 +18,15 @@ class TileBase(abc.ABC):
     corner_vectors: dict = {}
     tile_vectors: dict = {}
 
-    # Cache: maps world id to a dict of tile positions and their corresponding pixel coordinates
-    _position_pixel_cache: Dict[int, Dict[Tuple[int, int], Tuple[float, float]]] = {}
+    # Cache: maps world to a dict of tile positions and their corresponding
+    # pixel coordinates. Weak keys: the entry disappears when the world is
+    # garbage collected, so a recycled id() can never serve the stale
+    # pixels of a dead world to a new one.
+    _position_pixel_cache: "weakref.WeakKeyDictionary" = weakref.WeakKeyDictionary()
 
-    # Cache: maps world id to a list of (tile position, pixel coordinate) tuples for fast iteration
-    _position_pixel_list_cache: Dict[int, List[Tuple[Tuple[int, int], Tuple[float, float]]]] = {}
+    # Cache: maps world to a list of (tile position, pixel coordinate) tuples
+    # for fast iteration
+    _position_pixel_list_cache: "weakref.WeakKeyDictionary" = weakref.WeakKeyDictionary()
 
     def __init__(self, position: Tuple[int, int], world: world_mod.World = None):
         self._neighbour_tiles = None
@@ -143,8 +148,8 @@ class TileBase(abc.ABC):
         corners, or edges are added or removed, otherwise lookups
         return stale positions.
         """
-        cls._position_pixel_cache.pop(id(world), None)
-        cls._position_pixel_list_cache.pop(id(world), None)
+        cls._position_pixel_cache.pop(world, None)
+        cls._position_pixel_list_cache.pop(world, None)
 
     @staticmethod
     def _structure_version(world: "world_mod.World") -> int:
@@ -187,17 +192,15 @@ class TileBase(abc.ABC):
         Returns:
             TileBase: The tile object closest to the given pixel position.
         """
-        world_id = id(world)
-
-        if world_id not in cls._position_pixel_cache:
+        if world not in cls._position_pixel_cache:
             # Compute and cache the pixel positions for all tiles in the world
             position_pixel_dict = cls.get_position_pixel_dict(world)
-            cls._position_pixel_cache[world_id] = position_pixel_dict
-            cls._position_pixel_list_cache[world_id] = list(position_pixel_dict.items())
+            cls._position_pixel_cache[world] = position_pixel_dict
+            cls._position_pixel_list_cache[world] = list(position_pixel_dict.items())
 
         # Find the tile position with the smallest squared distance to the pixel
         nearest_pos = min(
-            cls._position_pixel_list_cache[world_id],
+            cls._position_pixel_list_cache[world],
             key=lambda item: (item[1][0] - pixel_position[0]) ** 2 + (item[1][1] - pixel_position[1]) ** 2
         )[0]
 

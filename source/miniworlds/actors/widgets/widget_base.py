@@ -19,7 +19,7 @@ class BaseWidget(parent_actor.ParentActor):
         self.fixed_width: bool = True
         # additional
         self.timed = False  # e.g. for counters
-        self.origin = kwargs.get("origin") if kwargs.get("origin") else "topleft"
+        self.origin = "topleft"
         self._resize = True # Should widget be resized?
 
     def new_costume(self):

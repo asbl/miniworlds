@@ -5,6 +5,7 @@ import pygame
 
 import miniworlds.actors.actor as actor_mod
 import miniworlds.appearances.background as background_mod
+import miniworlds.base.api_validation as api_validation
 import miniworlds.base.exceptions as miniworlds_exception
 import miniworlds.worlds.manager.camera_manager as world_camera_manager
 import miniworlds.worlds.tiled_world.corner as corner_mod
@@ -58,6 +59,23 @@ class TiledWorld(world.World):
                 world = TiledWorld(8, 6)
                 empty_world = TiledWorld(8, 6, empty=True)
         """
+        if (
+            isinstance(x, bool)
+            or isinstance(y, bool)
+            or not isinstance(x, int)
+            or not isinstance(y, int)
+        ):
+            raise miniworlds_exception.WorldArgumentsError(x, y)
+        api_validation.ensure_real(
+            tile_size, "tile_size", api_validation.with_try_hint, "TiledWorld(20, 16, tile_size=40)"
+        )
+        if tile_size <= 0:
+            raise ValueError(
+                api_validation.with_try_hint(
+                    f"tile_size must be > 0, got {tile_size!r}",
+                    "TiledWorld(20, 16, tile_size=40)",
+                )
+            )
         self._tile_size: int = tile_size
         "TiledWorld.tile_size Defines the size of a single tile (All Tiles are square)"
         self.default_actor_speed: int = 1
@@ -74,7 +92,7 @@ class TiledWorld(world.World):
         # so cached neighbour lists of tile elements can be invalidated.
         self._tile_structure_version = 0
         if x > 1000 or y > 1000:
-            raise TiledWorldTooBigError(x, y, 40)
+            raise TiledWorldTooBigError(x, y, tile_size)
         super().__init__(x=x, y=y)
         self.tick_rate = 20
         self._dynamic_actors_dict: defaultdict = defaultdict(
@@ -680,11 +698,29 @@ class TiledWorld(world.World):
         return x, y
 
     def set_columns(self, value: int):
+        api_validation.ensure_int(
+            value, "columns", api_validation.with_try_hint, "world.columns = 8"
+        )
+        if value < 1:
+            raise ValueError(
+                api_validation.with_try_hint(
+                    f"columns must be >= 1, got {value!r}", "world.columns = 8"
+                )
+            )
         self._columns = value
         self.camera.width = value  # * self.tile_size
         self.world_size_x = value
 
     def set_rows(self, value: int):
+        api_validation.ensure_int(
+            value, "rows", api_validation.with_try_hint, "world.rows = 8"
+        )
+        if value < 1:
+            raise ValueError(
+                api_validation.with_try_hint(
+                    f"rows must be >= 1, got {value!r}", "world.rows = 8"
+                )
+            )
         self._rows = value
         self.camera.height = value  # * self.tile_size
         self.world_size_y = value
@@ -730,7 +766,21 @@ class TiledWorld(world.World):
             ::
 
                 world.set_tile_size(32)
+
+        Raises:
+            TypeError: If `value` is not a number.
+            ValueError: If `value` is not positive (a zero or negative tile
+                size breaks pixel conversion and rendering).
         """
+        api_validation.ensure_real(
+            value, "tile_size", api_validation.with_try_hint, "world.tile_size = 32"
+        )
+        if value <= 0:
+            raise ValueError(
+                api_validation.with_try_hint(
+                    f"tile_size must be > 0, got {value!r}", "world.tile_size = 32"
+                )
+            )
         self._tile_size = value
         tile_elements.TileBase.invalidate_position_pixel_cache(self)
         self.camera._reload_camera()

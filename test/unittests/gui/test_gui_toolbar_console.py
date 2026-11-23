@@ -74,7 +74,7 @@ class TestToolbar(unittest.TestCase):
         first.remove = Mock()
         second.remove = Mock()
         toolbar.widgets = OrderedDict([(0, first), (1, second)])
-        toolbar.timed_widgets = {}
+        toolbar.timed_widgets = []
         toolbar.fixed_camera = True
 
         with patch.object(Toolbar, "reorder") as reorder_mock:
@@ -105,7 +105,7 @@ class TestConsole(unittest.TestCase):
         console.row_margin = 7
         console.max_lines = 2
         console.widgets = OrderedDict()
-        console.timed_widgets = {}
+        console.timed_widgets = []
         widget = Mock()
 
         with patch(
@@ -124,7 +124,7 @@ class TestToolbarWidgetKeys(unittest.TestCase):
     def _make_toolbar(self):
         toolbar = Toolbar.__new__(Toolbar)
         toolbar.widgets = OrderedDict()
-        toolbar.timed_widgets = {}
+        toolbar.timed_widgets = []
         toolbar.fixed_camera = True
         toolbar._padding_top = 0
         toolbar._padding_left = 0
@@ -194,13 +194,13 @@ class TestToolbarWidgetKeys(unittest.TestCase):
 
         self.assertFalse(toolbar.remove(stranger))
 
-    def test_timed_widget_is_registered_by_id(self):
+    def test_timed_widget_is_registered(self):
         toolbar = self._make_toolbar()
         widget = self._make_widget(timed=True)
 
         toolbar._add_widget(widget)
 
-        self.assertIs(toolbar.timed_widgets[id(widget)], widget)
+        self.assertIn(widget, toolbar.timed_widgets)
 
     def test_remove_by_key_removes_widget_from_world(self):
         toolbar = self._make_toolbar()
@@ -211,7 +211,7 @@ class TestToolbarWidgetKeys(unittest.TestCase):
         Toolbar.remove(toolbar, 0)
 
         self.assertNotIn(0, toolbar.widgets)
-        self.assertNotIn(id(widget), toolbar.timed_widgets)
+        self.assertNotIn(widget, toolbar.timed_widgets)
         widget.remove.assert_called_once_with()
 
     def test_remove_by_key_reorders_remaining_widgets(self):
@@ -245,7 +245,7 @@ class TestToolbarWidgetKeys(unittest.TestCase):
             Toolbar.on_remove_actor(toolbar, widget)
 
         self.assertNotIn(0, toolbar.widgets)
-        self.assertNotIn(id(widget), toolbar.timed_widgets)
+        self.assertNotIn(widget, toolbar.timed_widgets)
 
     def test_on_remove_actor_ignores_unknown_actor(self):
         toolbar = self._make_toolbar()
@@ -281,7 +281,7 @@ class TestToolbarCameraClamping(unittest.TestCase):
     def _make_toolbar(self, fixed_camera=False):
         toolbar = Toolbar.__new__(Toolbar)
         toolbar.widgets = OrderedDict()
-        toolbar.timed_widgets = {}
+        toolbar.timed_widgets = []
         toolbar.fixed_camera = fixed_camera
         toolbar._padding_top = 0
         toolbar._padding_bottom = 0
@@ -378,7 +378,7 @@ class TestConsoleTrimming(unittest.TestCase):
         console.max_lines = max_lines
         console.row_margin = 5
         console.widgets = OrderedDict()
-        console.timed_widgets = {}
+        console.timed_widgets = []
         console.fixed_camera = True
         console._padding_top = 0
         console._padding_bottom = 0

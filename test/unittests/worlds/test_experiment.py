@@ -143,7 +143,7 @@ def test_paused_toolbar_does_not_update_timed_widgets():
     from miniworlds.worlds.gui.toolbar_mainloop_manager import ToolbarMainloopManager
 
     widget = MagicMock()
-    world = MagicMock(is_paused=True, fps=60, timed_widgets={1: widget})
+    world = MagicMock(is_paused=True, fps=60, timed_widgets=[widget])
     manager = ToolbarMainloopManager(world, MagicMock())
     assert asyncio.run(manager.update()) == 1 / 60
     widget.update.assert_not_called()

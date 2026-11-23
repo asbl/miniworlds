@@ -9,6 +9,6 @@ class ToolbarMainloopManager(mainloop_manager.MainloopManager):
             return frame_budget
         # Iterate over a copy: a timed widget may add or remove (timed)
         # widgets during update(), e.g. by rebuilding a toolbar menu.
-        for widget in list(self.world.timed_widgets.values()):
+        for widget in list(self.world.timed_widgets):
             widget.update()
         return frame_budget

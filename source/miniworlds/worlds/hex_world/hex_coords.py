@@ -12,6 +12,7 @@ All functions are pure and free of pygame or world dependencies.
 
 import functools
 import math
+from numbers import Real
 from typing import Dict, List, Tuple
 
 import miniworlds.base.exceptions as miniworlds_exception
@@ -89,8 +90,16 @@ def nearest_axis_degrees(direction: float) -> int:
     clockwise). Any other angle is snapped to the nearest axis, so one
     movement step is always exactly one hex. Ties round towards the next
     higher axis.
+
+    Raises:
+        ValueError: If `direction` is not a finite number.
     """
-    index = math.floor((float(direction) - 30) / 60 + 0.5)
+    direction = float(direction)
+    if not math.isfinite(direction):
+        raise ValueError(
+            f"direction must be a finite number of degrees, got {direction!r}"
+        )
+    index = math.floor((direction - 30) / 60 + 0.5)
     return (30 + 60 * index) % 360
 
 # The two corners that enclose an edge, keyed by edge direction.
@@ -249,14 +258,37 @@ def cube_line(start: Cube, end: Cube) -> List[Cube]:
 
 
 def to_offset(value) -> Offset:
-    """Return the offset position of a position tuple, tile, or actor."""
+    """Return the offset position of a position tuple, tile, or actor.
+
+    Only `(column, row)` pairs are accepted. Corner and edge keys are
+    3-tuples and are rejected on purpose: they are not tile positions,
+    so silently reading their first two components would compute a wrong
+    tile. Use `world.get_corner(...)` / `world.get_edge(...)` or the
+    actor's sensor manager for positions on corners and edges.
+
+    Raises:
+        TypeError: If `value` is not a `(column, row)` pair of whole numbers.
+    """
     position = getattr(value, "position", value)
-    try:
-        return (int(position[0]), int(position[1]))
-    except (TypeError, ValueError, IndexError):
+    message = f"Expected a position (column, row), a tile, or an actor, got {value!r}"
+    if isinstance(position, (str, bytes)) or not hasattr(position, "__len__"):
+        raise TypeError(message)
+    if len(position) == 3:
         raise TypeError(
-            f"Expected a position (column, row), a tile, or an actor, got {value!r}"
-        ) from None
+            message
+            + " - corner and edge positions are 3-tuples, not tile positions;"
+            " use world.get_corner(...)/world.get_edge(...) or the actor's"
+            " sensor manager for them."
+        )
+    if len(position) != 2:
+        raise TypeError(message)
+    column, row = position
+    for component in (column, row):
+        if isinstance(component, bool) or not isinstance(component, Real):
+            raise TypeError(message)
+        if isinstance(component, float) and not component.is_integer():
+            raise TypeError(f"Tile positions must be whole numbers, got {value!r}")
+    return (int(column), int(row))
 
 
 def cube_destination(start: Tuple[int, int], direction: str, distance: int) -> Offset:
@@ -310,16 +342,24 @@ def hex_center(position: Tuple[int, int], tile_size: float) -> Tuple[float, floa
 
     The layout leaves half a hex margin at the top and left so that the
     top tip of the first row and the left edge of the first column are
-    fully visible.
+    fully visible. Components are coerced with `int()` like in
+    `offset_to_cube`, so float positions such as `(2.0, 3.0)` work.
     """
-    column, row = position[0], position[1]
+    column, row = int(position[0]), int(position[1])
     x = hex_width(tile_size) * (column + 0.5 * (row & 1)) + hex_width(tile_size) / 2
     y = 1.5 * tile_size * row + tile_size
     return (x, y)
 
 
 def pixel_to_cube(pixel: Tuple[float, float], tile_size: float) -> Cube:
-    """Return the cube coordinates of the hex containing a pixel position."""
+    """Return the cube coordinates of the hex containing a pixel position.
+
+    Raises:
+        ValueError: If `tile_size` is not positive (a zero or negative
+            tile size would divide by zero below).
+    """
+    if tile_size <= 0:
+        raise ValueError(f"tile_size must be > 0, got {tile_size!r}")
     x = pixel[0] - hex_width(tile_size) / 2
     y = pixel[1] - tile_size
     q = (SQRT3 / 3.0 * x - 1.0 / 3.0 * y) / tile_size
@@ -329,27 +369,34 @@ def pixel_to_cube(pixel: Tuple[float, float], tile_size: float) -> Cube:
 
 # Corner and edge pixel offsets are pure functions of the tile size, but
 # they are read on hot paths (corner/edge picking, grid rendering). They
-# are cached per tile size (few distinct values per program).
+# are cached per tile size. The cache is bounded: tile_size can change at
+# runtime (e.g. a zoom), and an unbounded cache would grow with every
+# distinct value.
+_GEOMETRY_CACHE_MAX_ENTRIES = 128
 _CORNER_OFFSETS_CACHE: Dict[float, Dict[str, Tuple[float, float]]] = {}
 _EDGE_OFFSETS_CACHE: Dict[float, Dict[str, Tuple[float, float]]] = {}
 
 
+def _cached_geometry(cache, tile_size, build):
+    offsets = cache.get(tile_size)
+    if offsets is None:
+        if len(cache) >= _GEOMETRY_CACHE_MAX_ENTRIES:
+            cache.clear()
+        offsets = build()
+        cache[tile_size] = offsets
+    return offsets
+
+
 def corner_pixel_offsets(tile_size: float) -> Dict[str, Tuple[float, float]]:
     """Return the pixel offsets of the six hex corners (relative to center)."""
-    offsets = _CORNER_OFFSETS_CACHE.get(tile_size)
-    if offsets is None:
-        half_width = hex_width(tile_size) / 2.0
-        half = tile_size / 2.0
-        offsets = {
-            "n": (0.0, -tile_size),
-            "no": (half_width, -half),
-            "so": (half_width, half),
-            "s": (0.0, tile_size),
-            "sw": (-half_width, half),
-            "nw": (-half_width, -half),
-        }
-        _CORNER_OFFSETS_CACHE[tile_size] = offsets
-    return offsets
+    return _cached_geometry(_CORNER_OFFSETS_CACHE, tile_size, lambda: {
+        "n": (0.0, -tile_size),
+        "no": (hex_width(tile_size) / 2.0, -tile_size / 2.0),
+        "so": (hex_width(tile_size) / 2.0, tile_size / 2.0),
+        "s": (0.0, tile_size),
+        "sw": (-hex_width(tile_size) / 2.0, tile_size / 2.0),
+        "nw": (-hex_width(tile_size) / 2.0, -tile_size / 2.0),
+    })
 
 
 def corner_pixel_offset(direction: str, tile_size: float) -> Tuple[float, float]:
@@ -368,18 +415,16 @@ def corner_pixel_points(position: Tuple[int, int], tile_size: float) -> List[Tup
 
 def edge_pixel_offsets(tile_size: float) -> Dict[str, Tuple[float, float]]:
     """Return the pixel offsets of the six edge centers (relative to center)."""
-    offsets = _EDGE_OFFSETS_CACHE.get(tile_size)
-    if offsets is None:
+    def build():
         corner_offsets = corner_pixel_offsets(tile_size)
-        offsets = {
+        return {
             direction: (
                 (corner_offsets[first][0] + corner_offsets[second][0]) / 2.0,
                 (corner_offsets[first][1] + corner_offsets[second][1]) / 2.0,
             )
             for direction, (first, second) in EDGE_CORNERS.items()
         }
-        _EDGE_OFFSETS_CACHE[tile_size] = offsets
-    return offsets
+    return _cached_geometry(_EDGE_OFFSETS_CACHE, tile_size, build)
 
 
 def edge_pixel_offset(direction: str, tile_size: float) -> Tuple[float, float]:

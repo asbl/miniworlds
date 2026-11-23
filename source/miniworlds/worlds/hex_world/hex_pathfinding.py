@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import heapq
 import itertools
+from numbers import Real
 from typing import Callable, Dict, List, Optional, Set, Tuple, TYPE_CHECKING
 
 import miniworlds.worlds.hex_world.hex_coords as hex_coords
@@ -27,9 +28,12 @@ CostCallback = Callable[["HexTile"], float]
 
 
 def _to_position(value) -> Tuple[int, int]:
-    """Return a hex position for a position tuple, tile, or actor."""
-    position = getattr(value, "position", value)
-    return (int(position[0]), int(position[1]))
+    """Return a hex position for a position tuple, tile, or actor.
+
+    Raises the same `TypeError` as `hex_coords.to_offset` for anything
+    that is not a `(column, row)` pair (in particular corner/edge keys).
+    """
+    return hex_coords.to_offset(value)
 
 
 def _blocking_actor_positions(world: HexWorld) -> Set[Tuple[int, int]]:
@@ -57,11 +61,16 @@ def _make_cost(cost: Optional[CostCallback]) -> CostCallback:
 
 def _checked_cost(cost_callback: CostCallback, tile: HexTile) -> float:
     step_cost = cost_callback(tile)
+    if isinstance(step_cost, bool) or not isinstance(step_cost, Real):
+        raise TypeError(
+            f"cost(tile) must return a number, got {step_cost!r} for {tile}.\n"
+            "Try: cost=lambda tile: tile.cost"
+        )
     if step_cost < 0:
         raise ValueError(
             f"The cost of {tile} is {step_cost}, but path finding needs costs >= 0."
         )
-    return step_cost
+    return float(step_cost)
 
 
 def _minimum_cost(world: HexWorld, cost: Optional[CostCallback], min_cost: Optional[float]):
@@ -291,7 +300,26 @@ def get_path_cost(path, cost: Optional[CostCallback] = None) -> float:
     Args:
         path: A list of tiles, for example the result of `find_path`.
         cost: Optional `cost(tile) -> float`, see `find_path`.
+
+    Raises:
+        TypeError: If `path` is not an iterable of tiles.
     """
+    if path is None or isinstance(path, (str, bytes)) or not hasattr(path, "__iter__"):
+        raise TypeError(
+            f"path must be a list of tiles, for example the result of "
+            f"world.find_path(...), got {path!r}"
+        )
     cost_callback = _make_cost(cost)
-    return sum(_checked_cost(cost_callback, tile) for tile in list(path)[1:])
+    tiles = list(path)
+    if cost is None:
+        for tile in tiles:
+            if not hasattr(tile, "cost"):
+                raise TypeError(
+                    f"path must contain tiles (with a .cost attribute), got {tile!r}.\n"
+                    "Try: path = world.find_path(start, goal)"
+                )
+    total = 0.0
+    for tile in tiles[1:]:
+        total += _checked_cost(cost_callback, tile)
+    return total
 

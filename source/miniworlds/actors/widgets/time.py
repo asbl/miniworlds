@@ -24,10 +24,14 @@ class TimeLabel(label.Label):
         self._base_text = text
         self._observed_world = world
         self.value = 0
-        self.set_text(f"{text} : {self.value}")
+        self.set_text(self.display_text)
+
+    @property
+    def display_text(self) -> str:
+        return f"{self._base_text} : {self.value}"
 
     def update(self):
         """Updates the displayed value; called once per frame by the toolbar."""
         world = self._observed_world or self.world
         self.value = world.frame
-        self.set_text(f"{self._base_text} : {self.value}")
+        self.set_text(self.display_text)

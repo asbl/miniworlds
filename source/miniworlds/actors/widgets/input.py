@@ -1,13 +1,13 @@
 import logging
 from typing import Union
 import miniworlds.actors.shapes.shapes as shapes
-import miniworlds.actors.widgets.button as widget
+import miniworlds.actors.widgets.label as label
 
 
 logger = logging.getLogger(__name__)
 
 
-class Input(widget.Button):
+class Input(label.Label):
     """Text input field for use inside a `Toolbar`.
 
     Click into the field to focus it, then type to enter text. The
@@ -30,7 +30,7 @@ class Input(widget.Button):
 
     def __init__(self, position):
         super().__init__("")
-        self.background_color = (255, 255, 255, 0)
+        self.set_background_color((60, 60, 60))
         self.position = position
         self._max_chars = 10
         self.current_input = ""
@@ -88,25 +88,33 @@ class Input(widget.Button):
         self.current_input = text
         super().set_text(text)
 
+    def _insert_at_cursor(self, text: str):
+        """Inserts *text* at the cursor and moves the cursor behind it."""
+        self.set_text(
+            self.current_input[0 : self.cursor_position]
+            + text
+            + self.current_input[self.cursor_position :]
+        )
+        self.cursor_position += len(text)
+
+    def _delete_at(self, index: int):
+        """Deletes the character at *index* without moving the cursor."""
+        self.set_text(
+            self.current_input[0:index] + self.current_input[index + 1 :]
+        )
+
     def on_key_down(self, keys):
-        if self.has_focus:
-            if "LEFT" in keys and self.cursor_position > 0:
-                self.cursor_position -= 1
-            elif "RIGHT" in keys and self.cursor_position < len(self.current_input):
-                self.cursor_position += 1
-            elif "BACKSPACE" in keys:
-                if 0 < self.cursor_position <= len(self.current_input):
-                    self.cursor_position -= 1
-                    self.set_text(
-                        self.current_input[0 : self.cursor_position]
-                        + self.current_input[self.cursor_position + 1 :]
-                    )
-            elif "DELETE" in keys:
-                if self.cursor_position < len(self.current_input):
-                    self.set_text(
-                        self.current_input[0 : self.cursor_position]
-                        + self.current_input[self.cursor_position + 1 :]
-                    )
+        if not self.has_focus:
+            return
+        if "LEFT" in keys and self.cursor_position > 0:
+            self.cursor_position -= 1
+        elif "RIGHT" in keys and self.cursor_position < len(self.current_input):
+            self.cursor_position += 1
+        elif "BACKSPACE" in keys and 0 < self.cursor_position <= len(self.current_input):
+            self.cursor_position -= 1
+            self._delete_at(self.cursor_position)
+        elif "DELETE" in keys and self.cursor_position < len(self.current_input):
+            self._delete_at(self.cursor_position)
 
     def on_text_input(self, text):
         """Inserts composed text (including umlauts and spaces) at the cursor.
@@ -118,12 +126,7 @@ class Input(widget.Button):
             return
         if len(self.current_input) >= self.max_chars:
             return
-        self.set_text(
-            self.current_input[0 : self.cursor_position]
-            + text
-            + self.current_input[self.cursor_position :]
-        )
-        self.cursor_position += 1
+        self._insert_at_cursor(text)
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(
                 "Updated input cursor to x=%s y=%s width=%s height=%s",

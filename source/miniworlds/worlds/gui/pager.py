@@ -23,9 +23,10 @@ class PagerHorizontal(toolbar.Toolbar):
         self.pager_buttons.world = self
 
     def act(self):
-        down_visible = self.gui.can_scroll_down(10)
-        if self.pager_buttons.down.visible != down_visible:
-            self.pager_buttons.down.visible = down_visible
-        up_visible = self.gui.can_scroll_up(10)
-        if self.pager_buttons.up.visible != up_visible:
-            self.pager_buttons.up.visible = up_visible
+        for btn, can_scroll in (
+            (self.pager_buttons.down, self.gui.can_scroll_down),
+            (self.pager_buttons.up, self.gui.can_scroll_up),
+        ):
+            visible = can_scroll(10)
+            if btn.visible != visible:
+                btn.visible = visible

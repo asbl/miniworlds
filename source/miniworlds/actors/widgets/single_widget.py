@@ -34,12 +34,9 @@ class SingleWidget(widget_base.BaseWidget):
             self._img_widget.layer = self.layer + 1
             self._img_widget.size = ( self._img_width, self._font_size)
         if not self.fixed_width:
-            # no image: Set width/height by text and img width
-            if self._widget_text_align in ("left", "center", "right") and not self._img_widget:
-                self.width = self._widget_text.width
-            elif (
-                self._widget_text_align == "left" and self._img_widget or self._widget_text_align == "image"
-            ):
+            # Set width by text width, plus image width when an image is shown
+            has_img = self._img_widget is not None
+            if self._widget_text_align == "image" or (has_img and self._widget_text_align == "left"):
                 self.width = (
                     self._widget_text.width
                     + self._padding_left
@@ -47,6 +44,8 @@ class SingleWidget(widget_base.BaseWidget):
                     + self._img_width
                     + self.img_padding_right
                 )
+            elif not has_img and self._widget_text_align in ("left", "center", "right"):
+                self.width = self._widget_text.width
         self.height = self._widget_text.font_size + self._padding_top + self._padding_bottom
         self.update_positions()
         self.cut_widget_text()
@@ -102,11 +101,6 @@ class SingleWidget(widget_base.BaseWidget):
             self._widget_text.topleft = (x, self.topleft[1] + self.padding_top)
         self._widget_text.costume._update_draw_shape()
 
-    def get_local_pos(self, position):
-        x = position[0] - self.topleft[0]
-        y = position[1] - self.topleft[1]
-        return x, y
-
     def set_row_height(self, value=20):
         super().set_row_height(value)
         self._widget_text.font_by_size(
@@ -140,9 +134,6 @@ class SingleWidget(widget_base.BaseWidget):
         self._resize = False
         super().set_world(new_world)
         self._resize = True
-        for child in self.children:
-            if child not in self.world.actors: #@todo: needed?
-                self.world.actors.add(child)
         self.resize()
         return self
         
