@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-23 06:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: gpt-po v1.1.1\n"
 "Language: de\n"
@@ -104,8 +104,7 @@ msgstr ""
 msgid "Parameters"
 msgstr "Parameter"
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:3
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:3 of
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:3 of
 msgid "Number of pixels to scroll by."
 msgstr "Anzahl der Pixel, um die gescrollt wird."
 
@@ -128,7 +127,21 @@ msgstr ""
 "Gibt True zurück, wenn die Toolbar um *value* Pixel nach oben scrollen "
 "kann."
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:5 of
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:3 of
+msgid ""
+"Scrolling up always clamps at the top, so only the current camera "
+"position matters, not *value*."
+msgstr ""
+"Beim Scrollen nach oben wird immer am oberen Rand angehalten. Daher ist "
+"nur die aktuelle Kameraposition entscheidend, nicht *value*."
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:6 of
+msgid "Number of pixels to scroll by (kept for symmetry with `can_scroll_down`)."
+msgstr ""
+"Anzahl der zu scrollenden Pixel. Dieser Parameter bleibt aus Gründen der "
+"Symmetrie mit `can_scroll_down` erhalten."
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:9 of
 msgid "True if upward scrolling is possible, otherwise False."
 msgstr "True, wenn Scrollen nach oben möglich ist, sonst False."
 

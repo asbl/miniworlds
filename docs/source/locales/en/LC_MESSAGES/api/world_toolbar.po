@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-23 06:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -90,8 +90,7 @@ msgstr ""
 msgid "Parameters"
 msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:3
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:3 of
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_down:3 of
 msgid "Number of pixels to scroll by."
 msgstr ""
 
@@ -112,7 +111,17 @@ msgstr ""
 msgid "Returns True if the toolbar can scroll upward by *value* pixels."
 msgstr ""
 
-#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:5 of
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:3 of
+msgid ""
+"Scrolling up always clamps at the top, so only the current camera "
+"position matters, not *value*."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:6 of
+msgid "Number of pixels to scroll by (kept for symmetry with `can_scroll_down`)."
+msgstr ""
+
+#: miniworlds.worlds.gui.toolbar.Toolbar.can_scroll_up:9 of
 msgid "True if upward scrolling is possible, otherwise False."
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 14:35+0100\n"
+"POT-Creation-Date: 2026-11-23 06:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -81,6 +81,7 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_ring:6
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:11
 #: miniworlds.worlds.hex_world.hex_world.HexWorld:23
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world:10
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:9
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:20
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:25
@@ -100,7 +101,7 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.has_line_of_sight:13
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:12
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.hovered_tile:7
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:10
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:15
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges:17 of
 msgid "Examples"
 msgstr ""
@@ -115,6 +116,7 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.get_tiles_in_radius
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
@@ -152,6 +154,56 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.__init__:6 of
 msgid "If `True`, tiles, edges, and corners are not created automatically."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world:1 of
+msgid "Create and register a hex tile at a world grid position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world:3 of
+msgid "Tile position as `(column, row)` of whole numbers."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges of
+msgid "Returns"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world:5 of
+msgid "The created tile instance."
+msgstr ""
+
+#: ../../source/api/world_hex.md
+#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel of
+msgid "Raises"
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.add_tile_to_world:7 of
+msgid "If `position` is not a `(column, row)` pair of     whole numbers."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:1 of
@@ -195,7 +247,9 @@ msgid ":sphinx_autodoc_typehints_type:`\\:py\\:obj\\:\\`None\\``"
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.clear_highlights:5 of
-msgid "Tiles or hex positions to clear. Without it, all highlights are removed."
+msgid ""
+"A single tile or hex position, or a list of them, to clear. Without it, "
+"all highlights are removed."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:1 of
@@ -265,27 +319,6 @@ msgstr ""
 msgid "If `True`, the start hex can be the target."
 msgstr ""
 
-#: ../../source/api/world_hex.md
-#: miniworlds.worlds.hex_world.hex_camera_manager.HexCameraManager.get_world_rect
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_actors_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_distance
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_reachable_tiles
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_line
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges of
-msgid "Returns"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_pathfinding.find_nearest:17
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_nearest:16 of
 msgid ""
@@ -337,15 +370,6 @@ msgid ""
 " no path."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_tile.HexTile.get_neighbour
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_corner
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_radius
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tiles_in_ring of
-msgid "Raises"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.find_path:22 of
 msgid "If start or goal is not a tile of the world."
 msgstr ""
@@ -374,7 +398,7 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_edge_from_pixel:9
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_from_pixel:7
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.get_tile_from_pixel:7
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:10 of
 msgid "Pixel position as `(x, y)`."
 msgstr ""
 
@@ -448,7 +472,7 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_distance:4
 #: miniworlds.worlds.hex_world.hex_coords.hex_distance:7
-#: miniworlds.worlds.hex_world.hex_coords.nearest_axis_degrees:9
+#: miniworlds.worlds.hex_world.hex_coords.nearest_axis_degrees:8
 #: miniworlds.worlds.hex_world.hex_corner.HexCorner.start_angle:4
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge.start_angle:4
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.distance_to:8
@@ -671,7 +695,7 @@ msgid ""
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.highlight_tiles:8 of
-msgid "Tiles or hex positions."
+msgid "A single tile or hex position, or a list of them."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_tile.HexTile.highlight:8
@@ -690,20 +714,29 @@ msgid ""
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:1 of
-msgid "Convert a hex position to the pixel position of its center."
+msgid "Convert a hex position to its pixel position."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_coords.cube_destination:5
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:3 of
-msgid "Hex position as `(column, row)`."
+msgid ""
+"Hex position as `(column, row)`, or a corner/edge key (3-tuple) of this "
+"world, which maps to the corner or edge pixel (e.g. "
+"`world.to_pixel(actor.position)` also works for actors on corners and "
+"edges)."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:4 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:7 of
 msgid "Reserved for compatibility."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:5 of
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:8 of
 msgid "Pixel offset added to the converted position."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_world.HexWorld.to_pixel:12 of
+msgid ""
+"If `position` is neither a `(column, row)` pair nor     a corner/edge key"
+" of this world."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld.view_position_ranges:1 of
@@ -816,7 +849,7 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.corner_pixel_offset:4
 #: miniworlds.worlds.hex_world.hex_coords.edge_pixel_offset:4
-#: miniworlds.worlds.hex_world.hex_coords.hex_center:8
+#: miniworlds.worlds.hex_world.hex_coords.hex_center:9
 #: miniworlds.worlds.hex_world.hex_coords.world_pixel_size:4
 #: miniworlds.worlds.hex_world.hex_corner.HexCorner.to_pixel:4
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge.to_pixel:4
@@ -1142,7 +1175,7 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_destination:3
 #: miniworlds.worlds.hex_world.hex_coords.cube_to_offset:4
-#: miniworlds.worlds.hex_world.hex_coords.to_offset:4
+#: miniworlds.worlds.hex_world.hex_coords.to_offset:9
 #: miniworlds.worlds.hex_world.hex_world_position_manager.HexWorldPositionManager.get_size:2
 #: of
 msgid ""
@@ -1304,7 +1337,7 @@ msgstr ""
 #: miniworlds.worlds.hex_world.hex_coords.direction_vector:4
 #: miniworlds.worlds.hex_world.hex_coords.edge_position:7
 #: miniworlds.worlds.hex_world.hex_coords.offset_to_cube:4
-#: miniworlds.worlds.hex_world.hex_coords.pixel_to_cube:4 of
+#: miniworlds.worlds.hex_world.hex_coords.pixel_to_cube:3 of
 msgid ""
 ":sphinx_autodoc_typehints_type:`\\:py\\:data\\:\\`\\~typing.Tuple\\`\\\\ "
 "\\\\\\[\\:py\\:class\\:\\`int\\`\\, \\:py\\:class\\:\\`int\\`\\, "
@@ -1334,6 +1367,10 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_destination:1 of
 msgid "Return the hex position reached from `start` moving along a hex axis."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.cube_destination:5 of
+msgid "Hex position as `(column, row)`."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.cube_destination:6 of
@@ -1450,7 +1487,8 @@ msgstr ""
 msgid ""
 "The layout leaves half a hex margin at the top and left so that the top "
 "tip of the first row and the left edge of the first column are fully "
-"visible."
+"visible. Components are coerced with `int()` like in `offset_to_cube`, so"
+" float positions such as `(2.0, 3.0)` work."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.hex_distance:1 of
@@ -1483,6 +1521,10 @@ msgid ""
 "higher axis."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.nearest_axis_degrees:10 of
+msgid "If `direction` is not a finite number."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.neighbour_offset_deltas:1 of
 msgid "Return the offset deltas of the six neighbours for a row parity."
 msgstr ""
@@ -1502,6 +1544,12 @@ msgstr ""
 msgid "Return the cube coordinates of the hex containing a pixel position."
 msgstr ""
 
+#: miniworlds.worlds.hex_world.hex_coords.pixel_to_cube:5 of
+msgid ""
+"If `tile_size` is not positive (a zero or negative     tile size would "
+"divide by zero below)."
+msgstr ""
+
 #: miniworlds.worlds.hex_world.hex_coords.ring_offset_deltas:1 of
 msgid "Return the offset deltas of all hexes at exactly `radius` distance."
 msgstr ""
@@ -1515,6 +1563,19 @@ msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.to_offset:1 of
 msgid "Return the offset position of a position tuple, tile, or actor."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.to_offset:3 of
+msgid ""
+"Only `(column, row)` pairs are accepted. Corner and edge keys are "
+"3-tuples and are rejected on purpose: they are not tile positions, so "
+"silently reading their first two components would compute a wrong tile. "
+"Use `world.get_corner(...)` / `world.get_edge(...)` or the actor's sensor"
+" manager for positions on corners and edges."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_coords.to_offset:11 of
+msgid "If `value` is not a `(column, row)` pair of whole numbers."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_coords.world_pixel_size:1 of
@@ -1612,6 +1673,10 @@ msgstr ""
 msgid ""
 "Return the cost of a path: the sum of the costs of all hexes but the "
 "first."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_pathfinding.get_path_cost:8 of
+msgid "If `path` is not an iterable of tiles."
 msgstr ""
 
 #: miniworlds.worlds.hex_world.hex_pathfinding.get_reachable_tiles:1 of
@@ -1731,5 +1796,24 @@ msgstr ""
 #~ "If `radius` is not an int or "
 #~ "`position` is no     position, tile, or"
 #~ " actor."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Tiles or hex positions to clear. "
+#~ "Without it, all highlights are removed."
+#~ msgstr ""
+
+#~ msgid "Tiles or hex positions."
+#~ msgstr ""
+
+#~ msgid "Convert a hex position to the pixel position of its center."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The layout leaves half a hex "
+#~ "margin at the top and left so "
+#~ "that the top tip of the first "
+#~ "row and the left edge of the "
+#~ "first column are fully visible."
 #~ msgstr ""
 

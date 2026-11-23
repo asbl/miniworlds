@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 07:16+0200\n"
+"POT-Creation-Date: 2026-11-23 06:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -45,9 +45,8 @@ msgid ""
 "world. The world or any actor can react with `on_message`."
 msgstr ""
 
-#: ../../source/api/actor_widgets.md miniworlds.actors.widgets.fps.FPSLabel
-#: miniworlds.actors.widgets.input.Input.on_key_down
-#: miniworlds.actors.widgets.time.TimeLabel of
+#: ../../source/api/actor_widgets.md
+#: miniworlds.actors.widgets.input.Input.on_key_down of
 msgid "Parameters"
 msgstr ""
 
@@ -66,7 +65,7 @@ msgstr ""
 #: miniworlds.actors.widgets.fps.FPSLabel:12
 #: miniworlds.actors.widgets.input.Input:12
 #: miniworlds.actors.widgets.input.Input.on_key_down:13
-#: miniworlds.actors.widgets.label.Label:10
+#: miniworlds.actors.widgets.label.Label:11
 #: miniworlds.actors.widgets.time.TimeLabel:9
 #: miniworlds.actors.widgets.yesno.YesNoButton:10 of
 msgid "Examples"
@@ -123,14 +122,15 @@ msgstr ""
 #: miniworlds.actors.widgets.label.Label:3 of
 msgid ""
 "`Label` is usually used for headings, status text, scores, or other "
-"information that should be shown inside a toolbar."
-msgstr ""
-
-#: miniworlds.actors.widgets.label.Label:6 of
-msgid "The text to display in the label."
+"information that should be shown inside a toolbar. Unlike `Button`, a "
+"label is not clickable and does not send messages."
 msgstr ""
 
 #: miniworlds.actors.widgets.label.Label:7 of
+msgid "The text to display in the label."
+msgstr ""
+
+#: miniworlds.actors.widgets.label.Label:8 of
 msgid "Optional path to an image to show instead of (or alongside) text."
 msgstr ""
 
@@ -294,4 +294,11 @@ msgstr ""
 #: miniworlds.actors.widgets.time.TimeLabel:5 of
 msgid "Prefix displayed before the frame number."
 msgstr ""
+
+#~ msgid ""
+#~ "`Label` is usually used for headings,"
+#~ " status text, scores, or other "
+#~ "information that should be shown inside"
+#~ " a toolbar."
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 08:22+0100\n"
+"POT-Creation-Date: 2026-11-23 06:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -90,7 +90,6 @@ msgstr ""
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile_from_pixel
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_columns
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_rows
-#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.to_pixel of
 msgid "Parameters"
 msgstr ""
@@ -317,6 +316,7 @@ msgstr ""
 msgid "The matching corner."
 msgstr ""
 
+#: ../../source/api/world_tiled.md
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_corner
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.get_tile of
 msgid "Raises"
@@ -433,6 +433,16 @@ msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size:3 of
 msgid "New tile size in pixels."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size:11 of
+msgid "If `value` is not a number."
+msgstr ""
+
+#: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.set_tile_size:12 of
+msgid ""
+"If `value` is not positive (a zero or negative tile     size breaks pixel"
+" conversion and rendering)."
 msgstr ""
 
 #: miniworlds.worlds.tiled_world.tiled_world.TiledWorld.tile_size:1 of
