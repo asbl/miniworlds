@@ -73,6 +73,10 @@ world.run()
         PYTHONPATH=os.pathsep.join(p for p in paths if p),
         SDL_VIDEODRIVER="dummy",
         SDL_AUDIODRIVER="dummy",
+        # Exercise the real IDE loop with its normal frame pacing. The unit
+        # runner's fast mode otherwise spins paused worlds without a delay
+        # while the socket reader and Thonny share the process's CPU budget.
+        MINIWORLDS_TEST_FAST="0",
     )
     launcher = Path(thonny.__file__).parent / "plugins/cpython_backend/cp_launcher.py"
     process = subprocess.Popen(
@@ -115,7 +119,19 @@ world.run()
             pytest.fail(
                 f"No backend response (exit={process.poll()}): " + "".join(output)
             )
-        assert not message.get("ended"), "".join(output)
+        if message.get("ended"):
+            # EOF can precede Thonny's final traceback and process exit. Let
+            # the output drainers collect those before reporting the failure.
+            try:
+                process.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                pass
+            for thread in threads:
+                thread.join(timeout=0.2)
+            pytest.fail(
+                f"Backend connection ended (exit={process.poll()}): "
+                + "".join(output)
+            )
         return message
 
     try:
