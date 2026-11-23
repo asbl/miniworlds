@@ -121,3 +121,13 @@ After the push step, GitHub Actions handle deployment automatically:
 
 There is no manual docs upload task in `tasks.py`; docs deployment is owned
 by the GitHub workflow.
+
+
+## Repository boundaries
+
+This checkout owns the Python engine, its documentation and desktop/Pyodide validation.
+The browser editor is developed in `asbl/miniworlds-editor`; classroom APIs, administration,
+storage and deployment are developed in `asbl/miniworlds-editor-backend`.
+The backend was extracted with its history and is no longer built or tested here.
+Editor/backend compatibility and their joint browser tests run in those two repositories.
+The engine's Pyodide platform adapter and browser-runtime tests remain here.

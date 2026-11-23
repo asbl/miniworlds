@@ -1,8 +1,0 @@
-[Unit]
-Description=Miniworlds backup with full recovery verification
-
-[Service]
-Type=oneshot
-WorkingDirectory=%h/projects/miniworlds-backend
-Environment=DOCKER_HOST=unix://%t/docker.sock
-ExecStart=/usr/bin/docker compose --env-file release.env -f compose.yml run --rm backup

@@ -68,3 +68,12 @@ Thonny plugin
 A German learning plugin with E2/Q1 modes, project templates, event assistance,
 media management and code checks is available in
 [libraries/thonny-miniworlds](libraries/thonny-miniworlds/README.md).
+
+
+Browser editor and optional classroom backend
+---------------------------------------------
+
+The browser editor lives in [miniworlds-editor](https://github.com/asbl/miniworlds-editor).
+Its optional classroom storage lives in [miniworlds-editor-backend](https://github.com/asbl/miniworlds-editor-backend).
+Both are independent applications. This repository contains the Python engine and its desktop/Pyodide tests;
+installing or developing the engine does not require the editor or backend.
