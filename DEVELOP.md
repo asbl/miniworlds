@@ -122,7 +122,6 @@ After the push step, GitHub Actions handle deployment automatically:
 There is no manual docs upload task in `tasks.py`; docs deployment is owned
 by the GitHub workflow.
 
-
 ## Repository boundaries
 
 This checkout owns the Python engine, its documentation and desktop/Pyodide validation.
