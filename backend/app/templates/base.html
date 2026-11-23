@@ -3,20 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}miniworlds backend{% endblock %}</title>
+<title>{% block title %}miniworlds{% endblock %}</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body data-page="{{ page }}">
 <header>
-  <h1>miniworlds backend</h1>
-  <nav>
-    <a href="/play">Schüler</a>
-    <a href="/teacher">Lehrer</a>
-    <a href="/admin">Admin</a>
-    <button id="logout-btn" type="button">Abmelden</button>
+  <a class="brand" href="/play">miniworlds</a>
+  <nav aria-label="Hauptnavigation">
+    <a href="/play"{% if page in ('play', 'player') %} aria-current="page"{% endif %}>Projekt öffnen</a>
+    {% if user is defined and user.role == 'admin' %}
+    <a href="/admin" aria-current="page">Verwaltung</a>
+    {% else %}
+    <a href="/teacher"{% if page == 'teacher' %} aria-current="page"{% endif %}>Lehrerbereich</a>
+    {% endif %}
+    <button id="logout-btn" type="button"{% if user is not defined %} hidden{% endif %}>Abmelden</button>
   </nav>
 </header>
 <main>
+<p id="app-status" role="status" aria-live="polite"></p>
 {% block content %}{% endblock %}
 </main>
 {% block scripts %}{% endblock %}

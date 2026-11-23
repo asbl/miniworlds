@@ -117,7 +117,7 @@
       highlight(); persistDraft();
       if (await save()) {
         $("conflict-comparison").close(); $("conflict").classList.add("hidden"); $("recovery").classList.add("hidden");
-        message("Dein bearbeiteter Entwurf wurde gespeichert.");
+        message("Entwurf gespeichert.");
       } else {
         const reason = $("workspace-status").textContent;
         conflict = true;
@@ -133,7 +133,7 @@
     frame?.remove(); frame = null;
     running = false;
     $("run-btn").disabled = false; $("stop-btn").disabled = true;
-    $("player-status").textContent = "Gestoppt. Beim nächsten Start wird die Laufzeit neu geladen.";
+    $("player-status").textContent = "Gestoppt";
   }
   async function mediaFiles() {
     if (runtimeFiles) return runtimeFiles;
@@ -186,7 +186,7 @@
           running = false; $("run-btn").disabled = false; $("stop-btn").disabled = false;
           if (data.type === "error") {
             $("output").textContent = String(data.text || "Unbekannter Fehler").slice(0, 64000);
-            $("player-status").textContent = "Fehler im Programm. Die letzte Zeile der Ausgabe beschreibt die Ursache.";
+            $("player-status").textContent = "Programmfehler.";
             const line = String(data.text).match(/File ["'](?:\/project\/)?main.py["'], line (\d+)/);
             if (line) $("player-status").textContent += " Prüfe Zeile " + line[1] + ".";
           }
@@ -244,7 +244,7 @@
         card.append(label);
       }
       if (!preview && !project.read_only && task.status !== "submitted") {
-        const submit = document.createElement("button"); submit.textContent = "Projekt und Antworten abgeben";
+        const submit = document.createElement("button"); submit.textContent = "Projekt abgeben";
         submit.addEventListener("click", guarded(async () => {
           submit.disabled = true;
           try {
@@ -254,7 +254,7 @@
             const result = await write(`/api/play/tasks/${task.assignment_id}/submit?base_revision=${project.revision}`, "POST", {});
             sessionStorage.removeItem(answersKey(task.assignment_id));
             task.status = result.status; task.submitted_at = result.submitted_at;
-            renderTasks(); message("Abgegeben. Programm, Medien und Aufgaben wurden als fester Stand gesichert.");
+            renderTasks(); message("Projekt abgegeben.");
           } finally { submit.disabled = false; }
         }));
         card.append(submit);
@@ -292,7 +292,7 @@
       row.append(open, document.createTextNode(" · " + asset.license + (asset.source ? " · " + asset.source : "")));
       if (!preview && !project.read_only) {
         const edit = document.createElement("details");
-        edit.innerHTML = '<summary>Lizenz/Quelle bearbeiten</summary><form><label>Lizenz <select name="license"></select></label><label>Lizenzangabe <input name="license_text" maxlength="2000"></label><label>Quelle <input name="source" maxlength="2000"></label><button>Angaben speichern</button></form>';
+        edit.innerHTML = '<summary>Angaben bearbeiten</summary><form><label>Lizenz <select name="license"></select></label><label>Lizenzangabe <input name="license_text" maxlength="2000"></label><label>Quelle <input name="source" maxlength="2000"></label><button>Angaben speichern</button></form>';
         const form = edit.querySelector("form");
         form.elements.license.replaceChildren(...(project.license_choices || []).map(value => new Option(value, value)));
         form.elements.license.value = asset.license;
@@ -326,13 +326,14 @@
       const result = await json(`/api/teacher/projects/${encodeURIComponent(teacherProject)}/snapshot`); project = {...result.snapshot, project_id:result.snapshot.project_id};
     } else if (publicSlug) project = await json("/api/public/" + encodeURIComponent(publicSlug));
     else project = await json("/api/play/project");
+    $("logout-btn").hidden=!!publicSlug;
     project.read_only = preview || project.read_only;
     runtimeFiles = null; dbData = project.save?.db || null;
     $("source").value = project.save?.source ?? (preview ? "" : "from miniworlds import *\n\nworld = World()\nworld.run()\n");
     $("source").readOnly = !!project.read_only;
     $("project-title").textContent = project.title || "miniworlds Projekt";
     $("storage").textContent = preview ? "Vorschau" : bytes(project.used_bytes) + " von " + bytes(project.quota_bytes);
-    $("submission-policy").textContent = project.storage_policy ? `Es bleiben bis zu ${project.storage_policy.submission_max_versions} eingereichte Fassungen je Aufgabe erhalten. Bei vollem Archivspeicher werden ältere Fassungen entfernt; die letzte Abgabe jeder Aufgabe bleibt erhalten.` : "";
+    $("submission-policy").textContent = project.storage_policy ? `Bis zu ${project.storage_policy.submission_max_versions} Versionen je Aufgabe. Bei Platzmangel werden ältere Versionen gelöscht; die letzte Abgabe bleibt.` : "";
     $("save-state").textContent = "Geladen";
     $("entry").classList.add("hidden"); $("workspace").classList.remove("hidden");
     $("read-only-notice").classList.toggle("hidden", !project.read_only);
@@ -359,7 +360,7 @@
         } catch (_) { sessionStorage.removeItem(draftKey()); }
       }
       if (!project.save && !recovering && !project.read_only) changed();
-      $("share-status").textContent = project.share ? "Status: " + project.share.status + (project.share.slug ? " · /p/" + project.share.slug : "") : "Noch nicht veröffentlicht.";
+      $("share-status").textContent = project.share ? ({pending:"Prüfung ausstehend",approved:"Öffentlich",rejected:"Abgelehnt",revoked:"Zurückgezogen"}[project.share.status] || project.share.status) + (project.share.slug ? " · /p/" + project.share.slug : "") : "Noch nicht veröffentlicht.";
     }
   }
   async function flush() {
@@ -398,7 +399,7 @@
       if (local && sessionStorage.getItem(answersKey(task.assignment_id))) task.version = local.task.version;
     }
     project.tasks = result.tasks;
-    renderTasks(); message("Aufgaben aktualisiert. Dein Programm bleibt erhalten.");
+    renderTasks(); message("Aufgaben aktualisiert.");
   }));
   $("download-source").addEventListener("click", () => downloadBlob(new Blob([$("source").value], {type:"text/x-python"}), "main.py"));
   $("save-btn").addEventListener("click", guarded(save));
@@ -441,7 +442,7 @@
   }));
   $("media-form").addEventListener("submit", guarded(async event => {
     await api("/api/play/media", {method:"POST", body:new FormData(event.target)});
-    event.target.reset(); await refreshMedia(); message("Medium hochgeladen. Dein Code bleibt erhalten.");
+    event.target.reset(); await refreshMedia(); message("Datei hochgeladen.");
   }));
   $("share-btn").addEventListener("click", guarded(async () => {
     await flush(); await write("/api/play/share-request", "POST", {declaration_accepted:$("share-declaration").checked});
@@ -470,7 +471,7 @@
     if (!confirm("Alle gespeicherten Git-Versionen endgültig löschen? Lade den Verlauf vorher herunter. Der aktuelle Programmstand, Medien und Abgaben bleiben erhalten.")) return;
     const result = await json(`/api/play/history?base_revision=${project.revision}`, {method:"DELETE"});
     project.revision = result.revision; $("history-list").replaceChildren(); $("history-storage").textContent = "Verlauf gelöscht. Neue Änderungen werden wieder versioniert.";
-    message("Der Versionsverlauf wurde gelöscht. Dein aktuelles Projekt bleibt erhalten.");
+    message("Versionsverlauf gelöscht.");
   }));
   $("remote-form").addEventListener("submit", guarded(async () => {
     await write("/api/play/remote", "PUT", {url:$("remote-url").value, token:$("remote-token").value || null});

@@ -2,7 +2,7 @@
   "use strict";
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const status = text => { $("dashboard-status").textContent = text; };
+  const status = text => { $("dashboard-status").textContent = text; $("dashboard-status").classList.remove("error"); };
   const guarded = fn => async event => {
     event?.preventDefault();
     try { await fn(event); } catch (error) { status(error.message); $("dashboard-status").classList.add("error"); }
@@ -10,7 +10,7 @@
   let courses = [], projects = [], tasks = [], shares = [];
   let codeDefaultsLoaded = false;
   const nameMap = new Map(), workspaceNames = new Map();
-  const fmtDate = value => value ? new Date(value).toLocaleString("de-DE") : "Noch nicht gespeichert";
+  const fmtDate = value => value ? new Date(value).toLocaleString("de-DE") : "—";
   const courseName = id => courses.find(c => c.id === id)?.title || "Ohne Klasse";
   const personName = p => nameMap.get(p.code) || workspaceNames.get(p.workspace_id) || "";
   async function api(path, options = {}) {
@@ -34,7 +34,7 @@
     });
     $("courses-list").replaceChildren();
     for (const c of courses) {
-      const row = document.createElement("p"); row.append(document.createTextNode(c.title + " · " + c.school_year + " · " + c.projects + " Projekte "));
+      const row = document.createElement("p"); row.append(document.createTextNode([c.title, c.school_year, c.projects + " Projekte"].filter(Boolean).join(" · ") + " "));
       row.append(button(c.archived ? "Reaktivieren" : "Archivieren", async () => {
         if (!c.archived && !confirm("Klasse archivieren? Projekte bleiben lesbar und herunterladbar, Änderungen werden gesperrt.")) return;
         await write("/api/teacher/courses/" + c.id, "PATCH", {archived:!c.archived}); await refresh();
@@ -49,7 +49,7 @@
       codeDefaultsLoaded=true;
     }
     const policy = result[1].storage_policy;
-    $("archive-policy").textContent = policy ? `Archivspeicher pro Projekt: ${(policy.submission_max_bytes/1048576).toFixed(0)} MB, bis zu ${policy.submission_max_versions} eingereichte Fassungen je Aufgabe. Bei vollem Speicher werden ältere Fassungen entfernt; die letzte Abgabe jeder Aufgabe bleibt erhalten.` : "";
+    $("archive-policy").textContent = policy ? `${(policy.submission_max_bytes/1048576).toFixed(0)} MB pro Projekt · ${policy.submission_max_versions} Versionen je Aufgabe. Bei Platzmangel werden ältere Versionen gelöscht; die letzte Abgabe bleibt.` : "";
     const starter = $("starter-project"), selectedStarter = starter.value;
     starter.replaceChildren(new Option("Leeres Projekt", ""), ...projects.map(p => new Option(p.title + " #" + p.id, p.id)));
     if ([...starter.options].some(o => o.value === selectedStarter)) starter.value = selectedStarter;
@@ -70,15 +70,17 @@
         if (nameMap.has(data.code)) workspaceNames.set(p.workspace_id, nameMap.get(data.code));
         row.querySelector(".local-name").textContent = personName(p);
       }));
-      const actions = row.querySelector(".project-actions");
+      const actions = document.createElement("div"); actions.className="action-items";
+      const menu=document.createElement("details"); menu.className="action-menu"; menu.innerHTML="<summary>Verwalten</summary>"; menu.append(actions);
+      row.querySelector(".local-name").hidden = !nameMap.size;
       actions.append(button("Zugang einstellen", async () => editAccess(p)));
       if (p.password_protected) actions.append(button("Passwort zurücksetzen", async () => {
         if (!confirm("Schülerpasswort entfernen? Bestehende Sitzungen werden abgemeldet. Der Projektcode bleibt erhalten.")) return;
         await api(`/api/teacher/projects/${p.id}/password`, {method:"DELETE"}); await refresh();
       }));
-      actions.append(link("Ansehen / Starten", "/player?teacher=" + p.id), document.createTextNode(" "), link("ZIP", `/api/teacher/projects/${p.id}/download`));
+      row.querySelector(".project-actions").append(link("Ansehen", "/player?teacher=" + p.id), document.createTextNode(" "), link("ZIP", `/api/teacher/projects/${p.id}/download`));
       const approved = shares.find(s => s.project_id === p.id && s.status === "approved");
-      if (approved?.slug) actions.append(document.createTextNode(" "), link("Öffentlich", "/p/" + approved.slug));
+      if (approved?.slug) row.querySelector(".project-actions").append(document.createTextNode(" "), link("Öffentlich", "/p/" + approved.slug));
       actions.append(button("Umbenennen", async () => {
         const title = prompt("Projekttitel (keine Personennamen):", p.title); if (!title?.trim()) return;
         await write(`/api/teacher/projects/${p.id}`, "PATCH", {title:title.trim()}); await refresh();
@@ -97,8 +99,20 @@
         if (!confirm("Projekt samt Medien und Abgaben endgültig löschen?")) return;
         await api(`/api/teacher/projects/${p.id}`, {method:"DELETE"}); await refresh();
       }, "danger"));
+      row.querySelector(".project-actions").append(menu);
       tbody.append(row);
     }
+    document.querySelector("[data-local-names]").hidden=!nameMap.size;
+    if (!rows.length) tbody.innerHTML=`<tr><td class="empty-row" colspan="${nameMap.size ? 9 : 8}">${projects.length ? "Keine passenden Projekte." : "Noch keine Projekte."}</td></tr>`;
+    updateSelection();
+  }
+  function updateSelection() {
+    const all=[...document.querySelectorAll(".project-select")], count=all.filter(c=>c.checked).length;
+    for (const id of ["bulk-lock","bulk-unlock","bulk-move"]) $(id).disabled=!count;
+    $("selection-count").hidden=!count; $("selection-count").textContent=count+" ausgewählt";
+    $("select-all-projects").checked=all.length>0 && count===all.length;
+    $("select-all-projects").indeterminate=count>0 && count<all.length;
+    $("select-all-projects").disabled=!all.length;
   }
   async function bulk(change) {
     const project_ids = [...document.querySelectorAll(".project-select:checked")].map(c => Number(c.value));
@@ -111,14 +125,13 @@
     return date.toISOString().slice(0,16);
   }
   async function editAccess(p) {
-    const dialog = document.createElement("dialog"); dialog.className="panel";
-    dialog.innerHTML=`<form><h3>Zugang einstellen · ${esc(p.title)}</h3>
-      <label><input name="read_only" type="checkbox" ${p.manual_read_only ? "checked" : ""}> Jetzt schreibgeschützt</label>
-      <label>Bearbeitbar bis (optional) <input name="writable_until" type="datetime-local" value="${localDate(p.writable_until)}"></label>
-      <label>Code gültig nach Schreibschutz (Tage; leer = unbegrenzt) <input name="days" type="number" min="1" max="36500" value="${p.code_readonly_days ?? ""}"></label>
-      <label>Festes Ablaufdatum (optional) <input name="expires" type="datetime-local" value="${localDate(p.code_expires_at)}"></label>
+    const dialog = document.createElement("dialog"); dialog.className="panel access-dialog"; dialog.setAttribute("aria-labelledby","access-title");
+    dialog.innerHTML=`<form><h3 id="access-title">Zugang · ${esc(p.title)}</h3>
+      <label><input name="read_only" type="checkbox" ${p.manual_read_only ? "checked" : ""}> Schreibgeschützt</label>
+      <label>Bearbeitbar bis <input name="writable_until" type="datetime-local" value="${localDate(p.writable_until)}"></label>
+      <label>Tage nach Schreibschutz (leer = unbegrenzt) <input name="days" type="number" min="1" max="36500" value="${p.code_readonly_days ?? ""}"></label>
+      <label>Code gültig bis <input name="expires" type="datetime-local" value="${localDate(p.code_expires_at)}"></label>
       <p>Das frühere Ablaufdatum gilt. Aktuell: ${esc(p.effective_code_expires_at ? fmtDate(p.effective_code_expires_at) : "kein festes Ablaufdatum")}.</p>
-      <p>Archivierte Klassen sind ebenfalls schreibgeschützt. Nach der jährlichen Umstellung gilt dieselbe Zugangsfrist.</p>
       <p role="alert"></p><button>Speichern</button> <button type="button" data-cancel>Abbrechen</button></form>`;
     const close=()=>{dialog.close();dialog.remove();};
     dialog.querySelector("[data-cancel]").onclick=close;dialog.addEventListener("cancel",()=>dialog.remove());
@@ -133,15 +146,17 @@
   }
   async function renderTemplateCodes() {
     const {codes}=await api("/api/teacher/template-codes"), box=$("template-codes");box.replaceChildren();
+    if (!codes.length) box.textContent="Keine Vorlagencodes.";
     for(const code of codes) {
       const line=document.createElement("p");
-      line.textContent=`${code.code} · Projekt #${code.project_id} · ${code.used_at ? "Eingelöst" : code.expires_at && new Date(code.expires_at)<new Date() ? "Abgelaufen" : "Noch verfügbar"}${code.expires_at ? " · gültig bis "+fmtDate(code.expires_at) : ""} `;
+      line.textContent=`${code.code} · Projekt #${code.project_id} · ${code.used_at ? "Eingelöst" : code.expires_at && new Date(code.expires_at)<new Date() ? "Abgelaufen" : "Verfügbar"}${code.expires_at ? " · gültig bis "+fmtDate(code.expires_at) : ""} `;
       line.append(button("Entfernen",async()=>{await api(`/api/teacher/template-codes/${code.id}`,{method:"DELETE"});await renderTemplateCodes();}));box.append(line);
     }
   }
   function renderTasks() {
     $("tasks-list").replaceChildren();
     const filter = $("task-filter-course").value;
+    if (!tasks.some(t=>!filter || t.course_id===Number(filter))) $("tasks-list").textContent="Keine Aufgaben.";
     for (const task of tasks.filter(t => !filter || t.course_id === Number(filter))) {
       const card = document.createElement("article"); card.className = "task-card";
       card.innerHTML = `<h4>${esc(task.title)}</h4><p>${esc(courseName(task.course_id))} · ${task.assignments_count} Zuweisungen${task.is_template_for_new_projects ? " · automatisch für neue Projekte" : ""}</p><p class="task-description">${esc(task.description)}</p>`;
@@ -153,7 +168,7 @@
       })); card.append(edit);
       const list = document.createElement("ol");
       task.items.forEach((item, index) => {
-        const li = document.createElement("li"); li.append(document.createTextNode(item.prompt + " (" + item.kind + ") "));
+        const li = document.createElement("li"); li.append(document.createTextNode((item.kind === "checkbox" ? "☐ " : "") + item.prompt + " "));
         li.append(button("Bearbeiten", async () => {
           const promptText = prompt("Aufgabentext:", item.prompt); if (promptText === null) return;
           await write(`/api/teacher/tasks/${task.id}/items/${item.id}`, "PATCH", {prompt:promptText}); await refresh();
@@ -173,7 +188,7 @@
         await write(`/api/teacher/tasks/${task.id}/items`, "POST", {kind:event.target.kind.value, prompt:event.target.prompt.value}); await refresh();
       })); card.append(add);
       const controls = document.createElement("div"); controls.className = "task-controls";
-      controls.append(button(task.course_id ? "Klasse inkl. künftiger Projekte zuweisen" : "Allen inkl. künftiger Projekte zuweisen", async () => {
+      controls.append(button(task.course_id ? "Klasse und neuen Projekten zuweisen" : "Allen und neuen Projekten zuweisen", async () => {
         await write(`/api/teacher/tasks/${task.id}/assign`, "POST", {all:true}); await refresh();
       }), button("Ausgewählten Projekten zuweisen", async () => {
         const ids = [...document.querySelectorAll(".project-select:checked")].map(c=>Number(c.value));
@@ -195,15 +210,15 @@
     box.replaceChildren();
     const label = document.createElement("label");label.textContent="Abgaben filtern ";
     const filter = document.createElement("select"); filter.add(new Option("Alle", "")); filter.add(new Option("Noch nicht abgegeben", "missing")); filter.add(new Option("Abgegeben, offen", "submitted")); filter.add(new Option("Erledigt", "done")); label.append(filter);box.append(label);
-    const table = document.createElement("table"); box.append(table);
+    const table = document.createElement("table"), wrap=document.createElement("div"); wrap.className="table-wrap"; wrap.append(table); box.append(wrap);
     function draw() {
-      table.innerHTML = "<thead><tr><th>Projekt / Code</th><th>Name (lokal)</th><th>Status</th><th>Erledigt</th><th>Projektstand und Antworten</th><th>Aktion</th></tr></thead><tbody></tbody>";
+      table.innerHTML = "<thead><tr><th>Projekt / Code</th><th class=local-name>Name</th><th>Status</th><th>Erledigt</th><th>Abgabe</th><th>Aktion</th></tr></thead><tbody></tbody>";
       for (const s of submissions.filter(s => !filter.value || (filter.value === "missing" ? s.status !== "submitted" : filter.value === "done" ? s.done : s.status === "submitted" && !s.done))) {
         const row = document.createElement("tr");
-        row.innerHTML = `<td>${esc(s.project_title)} #${s.project_id}<br><code>${esc(s.code)}</code></td><td>${esc(nameMap.get(s.code) || "")}</td><td>${s.status === "submitted" ? "Abgegeben am " + esc(fmtDate(s.submitted_at)) : s.submitted_at ? "Wieder geöffnet" : "Noch nicht abgegeben"}</td><td class="done-cell"></td><td class="answers-cell"></td><td class="action-cell"></td>`;
+        row.innerHTML = `<td>${esc(s.project_title)} #${s.project_id}<br><code>${esc(s.code)}</code></td><td class="local-name">${esc(nameMap.get(s.code) || "")}</td><td>${s.status === "submitted" ? "Abgegeben am " + esc(fmtDate(s.submitted_at)) : s.submitted_at ? "Wieder geöffnet" : "Noch nicht abgegeben"}</td><td class="done-cell"></td><td class="answers-cell"></td><td class="action-cell"></td>`;
         const done = document.createElement("input"); done.type="checkbox";done.checked=s.done;done.setAttribute("aria-label","Abgabe als erledigt markieren");
         done.addEventListener("change",guarded(async()=>{await write(`/api/teacher/submissions/${s.submission_id}`,"PATCH",{done:done.checked});s.done=done.checked;})); row.querySelector(".done-cell").append(done);
-        const detail = document.createElement("details"); detail.innerHTML="<summary>Abgegebene Versionen und Antworten</summary>";
+        const detail = document.createElement("details"); detail.innerHTML="<summary>Versionen</summary>";
         detail.addEventListener("toggle",guarded(async()=>{
           if (!detail.open || detail.dataset.loaded) return;
           const {versions} = await api(`/api/teacher/submissions/${s.submission_id}/versions`);
@@ -219,7 +234,7 @@
                 const text = document.createElement("p");text.className="answers-view";
                 text.textContent = item.prompt + ": " + (answer.checked ? "Ja" : "Nein");entry.append(text);
               }
-            } else entry.append(document.createTextNode("Altbestand: kein eingefrorener Programmstand vorhanden."));
+            } else entry.append(document.createTextNode("Programmstand nicht verfügbar."));
             detail.append(entry);
           }
           detail.dataset.loaded="true";
@@ -228,17 +243,18 @@
         table.querySelector("tbody").append(row);
       }
     }
-    filter.addEventListener("change",draw);draw();
+    filter.addEventListener("change",()=>{draw();table.querySelectorAll(".local-name").forEach(c=>c.hidden=!nameMap.size);});draw();
+    table.querySelectorAll(".local-name").forEach(c=>c.hidden=!nameMap.size);
   }
   function renderShares() {
     $("share-list").replaceChildren();
-    if (!shares.length) $("share-list").textContent="Keine Freigabe-Anträge.";
+    if (!shares.length) $("share-list").textContent="Keine Freigaben.";
     for(const s of shares) {
       const card=document.createElement("article");card.className="task-card";
       const p=projects.find(p=>p.id===s.project_id);
-      card.innerHTML=`<h4>Projekt #${s.project_id} · ${esc(s.status)}</h4><p>${esc(p?.title || "")} · beantragt ${esc(fmtDate(s.declared_at))}</p>`;
+      card.innerHTML=`<h4>${esc(p?.title || "Projekt #"+s.project_id)}</h4><p>${esc({pending:"Prüfung ausstehend",approved:"Öffentlich",rejected:"Abgelehnt",revoked:"Zurückgezogen"}[s.status] || s.status)} · ${esc(fmtDate(s.declared_at))}</p>`;
       card.append(link("Programm prüfen", "/player?teacher="+s.project_id));
-      for (const m of s.media) {const text=document.createElement("p");text.textContent=m.orig_name+" · "+m.license+" · "+m.source;card.append(text);}
+      for (const m of s.media) {const text=document.createElement("p");text.textContent=[m.orig_name,m.license,m.source].filter(Boolean).join(" · ");card.append(text);}
       if(s.status==="pending") card.append(button("Freigeben",async()=>{await write(`/api/teacher/share-requests/${s.id}/approve`,"POST",{});await refresh();}),button("Ablehnen",async()=>{await write(`/api/teacher/share-requests/${s.id}/reject`,"POST",{});await refresh();}));
       if(s.status==="approved") card.append(link("Öffentlich ansehen","/p/"+s.slug),button("Widerrufen",async()=>{await write(`/api/teacher/share-requests/${s.id}/revoke`,"POST",{});await refresh();},"danger"));
       $("share-list").append(card);
@@ -246,12 +262,13 @@
   }
   async function loadGallery() {
     const result=await api("/api/teacher/gallery?q="+encodeURIComponent($("gallery-q").value));$("gallery").replaceChildren();
+    if (!result.tasks.length) $("gallery").textContent="Keine passenden Aufgaben.";
     for(const t of result.tasks) {const card=document.createElement("article");card.className="task-card";card.innerHTML=`<h4>${esc(t.title)}</h4><p>${esc(t.description)}</p>`;card.append(button("Für mich kopieren",async()=>{await write(`/api/teacher/gallery/${t.id}/copy`,"POST",{});await refresh();}));$("gallery").append(card);}
   }
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",guarded(async()=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
     document.querySelectorAll(".tab-panel").forEach(p=>p.classList.toggle("hidden",p.id!=="tab-"+b.dataset.tab));
-    if(b.dataset.tab==="audit") {const result=await api("/api/teacher/audit?limit=100");$("audit-list").replaceChildren(...result.entries.map(e=>{const li=document.createElement("li");li.textContent=fmtDate(e.ts)+" · "+e.action+" · "+e.target;return li;}));}
+    if(b.dataset.tab==="audit") {const result=await api("/api/teacher/audit?limit=100");$("audit-list").replaceChildren(...result.entries.map(e=>{const li=document.createElement("li");li.textContent=fmtDate(e.ts)+" · "+window.miniworldsAuditLabel(e.action)+(e.target ? " · "+e.target : "");return li;}));}
     if(b.dataset.tab==="tasks") await loadGallery();
   })));
   $("course-create-form").addEventListener("submit",guarded(async e=>{await write("/api/teacher/courses","POST",{title:e.target.elements.namedItem("title").value,school_year:e.target.school_year.value});e.target.reset();await refresh();}));
@@ -266,7 +283,14 @@
   for (const id of ["project-filter-course","project-filter-state"]) $(id).addEventListener("change",renderProjects);
   $("project-search").addEventListener("input",renderProjects);$("task-filter-course").addEventListener("change",renderTasks);
   $("refresh-projects").addEventListener("click",guarded(refresh));
-  $("select-all-projects").addEventListener("change",e=>document.querySelectorAll(".project-select").forEach(c=>c.checked=e.target.checked));
+  $("select-all-projects").addEventListener("change",e=>{document.querySelectorAll(".project-select").forEach(c=>c.checked=e.target.checked);updateSelection();});
+  $("projects-table").addEventListener("change",updateSelection);
+  const updateCodeMode=()=>{
+    const template=$("project-create-form").access_mode.value==="template_once";
+    document.querySelectorAll(".project-access-field").forEach(label=>label.hidden=template);
+    $("code-expiry-hint").textContent=template ? "Einmal gültig; die Kopie erhält einen eigenen Code." : "Das frühere Ablaufdatum gilt. Ohne Datum bleibt die relative Frist bestehen.";
+  };
+  $("project-create-form").access_mode.addEventListener("change",updateCodeMode);updateCodeMode();
   $("bulk-lock").addEventListener("click",guarded(()=>bulk({read_only:true})));$("bulk-unlock").addEventListener("click",guarded(()=>bulk({read_only:false})));
   $("bulk-move").addEventListener("click",guarded(()=>bulk({course_id:Number($("bulk-course").value)||null})));
   $("gallery-search").addEventListener("click",guarded(loadGallery));

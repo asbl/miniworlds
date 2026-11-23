@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}miniworlds Projekt: {{ slug }}{% endblock %}
 {% block content %}
-<h2>Öffentliches miniworlds-Projekt: <code>{{ slug }}</code></h2>
-<p class="muted">Snapshot Version {{ version }} — eingefroren am {{ frozen_at }}. Änderungen am Original ändern diese Seite nicht.</p>
-<p><a href="/player?public={{ slug }}" target="_blank">Im Player ausführen</a></p>
+<h2>{{ slug }}</h2>
+<p class="muted">Veröffentlichte Version {{ version }} · {{ frozen_at }}</p>
+<p><a href="/player?public={{ slug }}" target="_blank" rel="noopener">Projekt starten</a></p>
 
 {% if save and save.source %}
 <h3>Programm</h3>
@@ -11,8 +11,8 @@
 {% endif %}
 
 {% if media %}
-<h3>Medien, Quellen &amp; Lizenzen</h3>
-<table>
+<h3>Medien</h3>
+<div class="table-wrap"><table>
   <thead><tr><th>Datei</th><th>Vorschau</th><th>Lizenz</th><th>Quelle</th></tr></thead>
   <tbody>
   {% for m in media %}
@@ -29,13 +29,14 @@
     </tr>
   {% endfor %}
   </tbody>
-</table>
+</table></div>
 {% endif %}
 
-<h3>Missbrauch melden</h3>
+<details class="panel"><summary>Projekt melden</summary>
 <form id="report-form">
-  <input name="reason" placeholder="Grund der Meldung" required>
+  <label>Grund <input name="reason" required></label>
   <button type="submit">Melden</button>
 </form>
-<p id="report-msg"></p>
+<p id="report-msg" role="status"></p>
+</details>
 {% endblock %}

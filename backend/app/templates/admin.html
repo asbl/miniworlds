@@ -1,42 +1,43 @@
 {% extends "base.html" %}
 {% block title %}Admin{% endblock %}
 {% block content %}
-<h2>Admin: {{ user.email }}</h2>
+<h2>Verwaltung</h2>
 
 <section>
   <h3>Lehrercodes</h3>
-  <form id="invite-form">
-    <input name="school" placeholder="Schule" required>
-    <input name="email" type="email" placeholder="E-Mail (optional, nur diese darf den Code einlösen)">
+  <form id="invite-form" class="filter-bar">
+    <label>Schule <input name="school" required></label>
+    <label>E-Mail (optional) <input name="email" type="email" aria-describedby="invite-email-hint"></label>
     <button type="submit">Code erzeugen</button>
   </form>
+  <p class="muted" id="invite-email-hint">Mit E-Mail ist der Code nur für diese Adresse gültig.</p>
   <div id="new-code" class="code-box hidden"></div>
-  <table id="invites-table"><thead><tr><th>Schule</th><th>E-Mail</th><th>Erstellt</th><th>Ablauf</th><th>Eingelöst</th><th></th></tr></thead><tbody></tbody></table>
+  <div class="table-wrap"><table id="invites-table"><thead><tr><th>Schule</th><th>E-Mail</th><th>Erstellt</th><th>Gültig bis</th><th>Eingelöst</th><th>Aktion</th></tr></thead><tbody></tbody></table></div>
 </section>
 
 <section>
-  <h3>Einstellungen</h3>
-  <form id="settings-form">
-    <label>Max. Quota pro Projekt (Bytes, Admin-Cap für Lehrer)
-      <input name="teacher_quota_cap" type="number" min="1" required></label>
-    <label>Default-Quota neuer Schüler-Codes (Bytes)
-      <input name="student_default_quota" type="number" min="1" required></label>
+  <h3>Speicher</h3>
+  <form id="settings-form" class="filter-bar">
+    <label>Obergrenze pro Projekt (MB)
+      <input name="teacher_quota_cap" type="number" min="0.000001" step="any" required></label>
+    <label>Standard für neue Projekte (MB)
+      <input name="student_default_quota" type="number" min="0.000001" step="any" required></label>
     <button type="submit">Speichern</button>
   </form>
 </section>
 
 <section>
   <h3>Lehrer</h3>
-  <table id="teachers-table"><thead><tr><th>E-Mail</th><th>Schule</th><th>Projekte</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+  <div class="table-wrap"><table id="teachers-table"><thead><tr><th>E-Mail</th><th>Schule</th><th>Projekte</th><th>Status</th><th>Aktion</th></tr></thead><tbody></tbody></table></div>
 </section>
 
 <section>
-  <h3>Öffentliche Aufgaben (Moderation)</h3>
+  <h3>Öffentliche Aufgaben</h3>
   <ul id="public-tasks-list"></ul>
 </section>
 
-<section>
-  <h3>Audit-Log</h3>
+<details class="panel">
+  <summary>Protokoll</summary>
   <ul id="audit-list" class="audit"></ul>
-</section>
+</details>
 {% endblock %}

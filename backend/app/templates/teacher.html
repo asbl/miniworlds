@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Lehrer-Dashboard{% endblock %}
+{% block title %}Lehrerbereich{% endblock %}
 {% block scripts %}<script src="/static/vendor/xlsx.full.min.js"></script><script src="/static/teacher.js" defer></script>{% endblock %}
 {% block content %}
-<h2>Meine Klassen und Projekte</h2>
+<h2>Klassen und Projekte</h2>
 <p id="dashboard-status" role="status" aria-live="polite"></p>
-<p id="archive-policy" class="muted"></p>
 <nav class="tabs" aria-label="Bereiche">
-  <button data-tab="projects" class="tab active">Klassen und Projekte</button>
-  <button data-tab="tasks" class="tab">Aufgaben und Abgaben</button>
+  <button data-tab="projects" class="tab active">Projekte</button>
+  <button data-tab="tasks" class="tab">Aufgaben</button>
   <button data-tab="shares" class="tab">Freigaben</button>
   <button data-tab="audit" class="tab">Protokoll</button>
 </nav>
@@ -18,32 +17,23 @@
     <label>Schuljahr <input name="school_year" placeholder="2026/27" maxlength="32"></label>
     <button>Klasse anlegen</button>
   </form>
-  <p class="muted">Keine Personenlisten oder Rückmeldungen. Namen bleiben in deiner lokalen Zuordnungsdatei.</p>
   <div id="courses-list"></div>
-  <h3>Projekt-Codes erzeugen</h3>
+  <h3>Codes erstellen</h3>
   <form id="project-create-form" class="filter-bar">
     <label>Anzahl <input name="count" type="number" min="1" max="200" value="10" required></label>
     <label>Klasse <select name="course_id" class="course-picker"></select></label>
     <label>Startprojekt <select name="template_project_id" id="starter-project"><option value="">Leeres Projekt</option></select></label>
-    <label>Code dient zum <select name="access_mode"><option value="project">Projekt öffnen</option><option value="template_once">Einmalig eine Kopie erstellen</option></select></label>
-    <details><summary>Zugangszeit einstellen</summary>
-      <label>Bearbeitbar bis (optional) <input type="datetime-local" name="writable_until"></label>
-      <label>Code gültig nach Schreibschutz (Tage) <input type="number" name="code_readonly_days" min="1" max="36500" value="365"></label>
-      <label>Festes Ablaufdatum (optional) <input type="datetime-local" name="code_expires_at"></label>
-      <p>Das frühere Ablaufdatum gilt. Bei Einmalcodes gilt nur das feste Ablaufdatum; die Kopie erhält einen eigenen Zugang.</p>
+    <label>Zugang <select name="access_mode"><option value="project">Projekt öffnen</option><option value="template_once">Vorlage einmalig kopieren</option></select></label>
+    <details><summary>Gültigkeit</summary>
+      <label class="project-access-field">Bearbeitbar bis <input type="datetime-local" name="writable_until"></label>
+      <label class="project-access-field">Tage nach Schreibschutz <input type="number" name="code_readonly_days" min="1" max="36500" value="365"></label>
+      <label>Code gültig bis <input type="datetime-local" name="code_expires_at"></label>
+      <p class="muted" id="code-expiry-hint">Das frühere Ablaufdatum gilt. Ohne Datum bleibt die relative Frist bestehen.</p>
     </details>
     <button>Codes erzeugen</button>
   </form>
-  <p class="muted">Codes auf editor.opencoding.de unter „Projekt mit Code öffnen“ eingeben. Ein Startprojekt übernimmt Code, Medien und zugewiesene Aufgaben. Antworten und Abgaben werden nicht übernommen.</p>
+  <p class="muted">Codes auf <a href="https://editor.opencoding.de" target="_blank" rel="noopener">editor.opencoding.de</a> eingeben.</p>
   <div id="new-codes" class="code-box hidden"></div>
-  <details class="panel"><summary>Einmalige Vorlagencodes</summary><p>Jeder Code erstellt genau eine eigene Kopie in der Klasse des Startprojekts. Danach verwendet der Schüler seinen neuen Projektcode. Die Kopie erhält die Standard-Zugangsfrist von einem Jahr nach Schreibschutz.</p><div id="template-codes"></div></details>
-  <details class="panel">
-    <summary>Export und lokale Namenszuordnung</summary>
-    <p><a href="/api/teacher/projects.xlsx">Excel herunterladen</a> · <a href="/api/teacher/projects.csv">CSV herunterladen</a></p>
-    <p class="muted">Excel/CSV mit den Spalten „Code“ und „Name“ laden. Die Datei wird nicht hochgeladen und nach dem Schließen der Seite vergessen.</p>
-    <label>Zuordnungsdatei <input type="file" id="namejoin-file" accept=".xlsx,.xls,.csv"></label>
-    <span id="namejoin-status" role="status"></span>
-  </details>
   <h3>Projekte</h3>
   <div class="filter-bar">
     <label>Klasse <select id="project-filter-course" class="course-picker" data-all="true"></select></label>
@@ -52,14 +42,24 @@
     <button id="refresh-projects" type="button" class="secondary">Aktualisieren</button>
   </div>
   <div class="filter-bar">
-    <button id="bulk-lock" type="button" class="secondary">Auswahl schreibschützen</button>
-    <button id="bulk-unlock" type="button" class="secondary">Auswahl freigeben</button>
+    <span id="selection-count" role="status" hidden></span>
+    <button id="bulk-lock" type="button" class="secondary" disabled>Schreibschützen</button>
+    <button id="bulk-unlock" type="button" class="secondary" disabled>Freigeben</button>
     <label>Zielklasse <select id="bulk-course" class="course-picker"></select></label>
-    <button id="bulk-move" type="button" class="secondary">Auswahl zuordnen</button>
+    <button id="bulk-move" type="button" class="secondary" disabled>Zuordnen</button>
   </div>
   <div class="table-wrap"><table id="projects-table">
-    <thead><tr><th><input id="select-all-projects" type="checkbox" aria-label="Alle sichtbaren Projekte auswählen"></th><th>Projekt</th><th>Name (lokal)</th><th>Code</th><th>Klasse</th><th>Speicher</th><th>Status</th><th>Letzter Stand</th><th>Aktionen</th></tr></thead><tbody></tbody>
+    <thead><tr><th><input id="select-all-projects" type="checkbox" aria-label="Alle sichtbaren Projekte auswählen"></th><th>Projekt</th><th data-local-names hidden>Name</th><th>Code</th><th>Klasse</th><th>Speicher</th><th>Status</th><th>Letzter Stand</th><th>Aktionen</th></tr></thead><tbody></tbody>
   </table></div>
+  <details class="panel">
+    <summary>Export und Namenszuordnung</summary>
+    <p><a href="/api/teacher/projects.xlsx">Excel</a> · <a href="/api/teacher/projects.csv">CSV</a></p>
+    <p class="muted">Datei mit den Spalten „Code“ und „Name“. Bleibt nur in diesem Tab.</p>
+    <label>Zuordnungsdatei <input type="file" id="namejoin-file" accept=".xlsx,.xls,.csv"></label>
+    <span id="namejoin-status" role="status"></span>
+  </details>
+  <details class="panel"><summary>Vorlagencodes</summary><p class="muted">Jeder Code erstellt eine eigene Kopie und verfällt danach.</p><div id="template-codes"></div></details>
+  <details class="panel"><summary>Abgabespeicher</summary><p id="archive-policy" class="muted"></p></details>
 </section>
 <section id="tab-tasks" class="tab-panel hidden">
   <h3>Aufgabe erstellen</h3>
@@ -67,15 +67,16 @@
     <label>Titel <input name="title" required maxlength="255"></label>
     <label>Beschreibung <textarea name="description"></textarea></label>
     <label>Klasse <select name="course_id" class="course-picker"></select></label>
-    <label><input type="checkbox" name="is_template_for_new_projects"> Künftigen Projekten in dieser Klasse automatisch zuweisen (ohne Klasse: allen)</label>
+    <label><input type="checkbox" name="is_template_for_new_projects"> Neuen Projekten automatisch zuweisen</label>
     <button>Aufgabe anlegen</button>
   </form>
   <h3>Meine Aufgaben</h3>
   <label>Klasse <select id="task-filter-course" class="course-picker" data-all="true"></select></label>
   <div id="tasks-list"></div>
-  <h3>Aufgaben-Galerie</h3>
-  <label>Titelsuche <input id="gallery-q"></label><button id="gallery-search" type="button">Suchen</button><div id="gallery"></div>
+  <details class="panel"><summary>Aufgabengalerie</summary>
+    <div class="filter-bar"><label>Suche <input id="gallery-q"></label><button id="gallery-search" type="button">Suchen</button></div><div id="gallery"></div>
+  </details>
 </section>
-<section id="tab-shares" class="tab-panel hidden"><h3>Freigabe-Anträge</h3><div id="share-list"></div></section>
-<section id="tab-audit" class="tab-panel hidden"><h3>Aktionsprotokoll</h3><ul id="audit-list" class="audit"></ul></section>
+<section id="tab-shares" class="tab-panel hidden"><h3>Freigaben</h3><div id="share-list"></div></section>
+<section id="tab-audit" class="tab-panel hidden"><h3>Protokoll</h3><ul id="audit-list" class="audit"></ul></section>
 {% endblock %}

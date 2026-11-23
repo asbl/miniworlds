@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Aufgabe: {{ title }}{% endblock %}
 {% block content %}
-<h2>{{ title }} <span class="muted">(v{{ version }})</span></h2>
-<p class="muted">von {{ author_alias or school or "anonym" }}{% if school and author_alias %} ({{ school }}){% endif %} · Lizenz: {{ license }} · veröffentlicht {{ published_at }}</p>
+<h2>{{ title }}</h2>
+<p class="muted">{{ author_alias or school or "anonym" }}{% if school and author_alias %} · {{ school }}{% endif %} · {{ license }} · Version {{ version }}</p>
 {% if description %}<p>{{ description }}</p>{% endif %}
 <ol>
 {% for item in items %}
-  <li>[{{ item.kind }}] {{ item.prompt }}</li>
+  <li>{% if item.kind == 'checkbox' %}<label><input type="checkbox" disabled> {{ item.prompt }}</label>{% else %}{{ item.prompt }}{% endif %}</li>
 {% endfor %}
 </ol>
-<p class="muted">Öffentliche Leseansicht der Aufgabe „{{ slug }}“. Als Lehrer eingeloggt, kannst du sie im Dashboard aus der Galerie kopieren.</p>
 {% endblock %}
