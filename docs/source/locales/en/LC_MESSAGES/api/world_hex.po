@@ -23,10 +23,6 @@ msgstr ""
 msgid "World > HexWorld"
 msgstr ""
 
-#: ../../source/api/world_hex.md:3
-msgid "API Reference"
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_world.HexWorld:1 of
 msgid "A world that consists of hexagonal tiles."
 msgstr ""
@@ -1046,10 +1042,6 @@ msgstr ""
 msgid "Return the pixel position of the corner."
 msgstr ""
 
-#: miniworlds.worlds.hex_world.hex_edge.HexEdge:1 of
-msgid "An edge of a hex, shared by exactly two hexes."
-msgstr ""
-
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge:3 of
 msgid ""
 "The edge position is a unique key in doubled cube coordinates: both hexes"
@@ -1695,6 +1687,137 @@ msgstr ""
 msgid ""
 "Only the hexes strictly between start and goal count, so a blocked goal "
 "(for example an enemy that blocks its own hex) can be seen."
+msgstr ""
+
+#: ../../source/api/world_hex.md:3
+msgid ""
+"Start with the [Hex Worlds tutorial](../tutorial/hex_world.md) for "
+"runnable examples or the [board game "
+"pattern](../patterns/hex_world_catan.md) for an example that combines "
+"tiles, corners, and edges."
+msgstr ""
+
+#: ../../source/api/world_hex.md:7
+msgid "Common operations"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Task"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "API"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Look up a tile by grid position"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "`world.get_tile((column, row))`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Pick a tile, corner, or edge under the mouse"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "`get_tile_from_pixel`, `get_corner_from_pixel`, `get_edge_from_pixel`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Find a neighbor, corner, or edge of a tile"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid ""
+"`tile.get_neighbour(direction)`, `tile.get_corner(direction)`, "
+"`tile.get_edge(direction)`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Measure distance and get a set of nearby tiles"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "`get_distance`, `get_tiles_in_radius`, `get_tiles_in_ring`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Plan movement with obstacles and a budget"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "`find_path`, `get_reachable_tiles`, `find_nearest`, `get_path_cost`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Test a straight line for blockers"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "`get_tiles_in_line`, `has_line_of_sight`"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid "Display or remove tile overlays"
+msgstr ""
+
+#: ../../source/api/world_hex.md
+msgid ""
+"`highlight_tiles`, `clear_highlights`, `tile.highlight()`, "
+"`tile.clear_highlight()`"
+msgstr ""
+
+#: ../../source/api/world_hex.md:19
+msgid "World and board elements"
+msgstr ""
+
+#: ../../source/api/world_hex.md:21
+msgid ""
+"`world.tiles`, `world.corners`, and `world.edges` map positions to their "
+"registered objects. Tile positions are `(column, row)` pairs. Corners and"
+" edges use three-number keys. Keep separate dictionaries for corners and "
+"edges because a key can occur in both."
+msgstr ""
+
+#: ../../source/api/world_hex.md:26
+msgid ""
+"If a key occurs in both, actor placement and `world.to_pixel(key)` "
+"resolve it as a corner. To get the midpoint of a specific edge, use "
+"`edge.to_pixel()`. The [board game "
+"example](../patterns/hex_world_catan.md) draws roads between the two "
+"corner objects returned by `edge.get_neighbour_corners()`."
+msgstr ""
+
+#: ../../source/api/world_hex.md:32
+msgid ""
+"For a sparse board, create the world with `empty=True`. Add the tiles "
+"with `add_tile_to_world(position)`, then register any needed vertices and"
+" sides with `add_corner_to_world(position, direction)` and "
+"`add_edge_to_world(position, direction)`. To use corner or edge picking, "
+"register all six corners and edges for each tile. Shared vertices and "
+"sides are merged by position."
+msgstr ""
+
+#: ../../source/api/world_hex.md:44
+msgid ""
+"Tiles also provide the inherited attributes `data` (a dictionary for game"
+" data), `terrain` (the value stored under `data[\"terrain\"]`), `cost` "
+"(the nonnegative cost to enter a tile, default 1), and `is_blocking` "
+"(whether the tile blocks pathfinding by default)."
+msgstr ""
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge:1 of
+msgid "An edge of a hex, shared by two hexes where they meet."
+msgstr ""
+
+#: ../../source/api/world_hex.md:64
+msgid "Actor integration and camera"
+msgstr ""
+
+#: ../../source/api/world_hex.md:86
+msgid "Geometry and pathfinding functions"
 msgstr ""
 
 #~ msgid "The nearest corner."

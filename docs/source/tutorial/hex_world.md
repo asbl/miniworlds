@@ -1,385 +1,318 @@
 # Tutorial: Hex Worlds
 
-In this tutorial you build a world made of hexagons, step by step.
-Hexagonal worlds are used for board games like *Catan*:
-land hexes, settlements on corners, and roads on edges.
+In a `HexWorld`, actors can stand on hexagonal tiles, on the corners of
+those tiles, or on their edges. The examples below are complete scripts.
+Run them one at a time. Each `world.run()` starts the window and the event loop.
 
-If you have never worked with worlds before, start with the chapter
-[Die erste Welt](https://github.com/copilotstudent/course-sync/tree/main/courses/miniworlds_examples)
-in the interactive course.
+If this is your first Miniworlds program, start with
+the chapter “Die erste Welt” in the [interactive course](index.md).
 
-## Step 1: Create a hex world
+## Create a world and place an actor
 
-A `HexWorld` is created with `(columns, rows)` and a `tile_size`:
+`HexWorld(7, 5, tile_size=40)` creates seven columns and five rows. The
+first tile is `(0, 0)` and the last is `(6, 4)`. The hexagons have a
+point at the top. Here `tile_size=40` means 40 pixels from the center of
+a hexagon to a vertex.
 
 ```python
-import miniworlds
+from miniworlds import Actor, HexWorld
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
+world = HexWorld(7, 5, tile_size=40)
 world.background.grid = True
+
+marker = Actor((2, 3))
+marker.fill_color = (0, 120, 0)
 
 world.run()
 ```
 
-Hexes are addressed with `(column, row)` coordinates, like tiles in a
-`TiledWorld`. Odd rows are shifted half a hex to the right.
+You will see a green hexagon in column 2, row 3. The actor provides the
+visible marker. The tile at the same position belongs to the grid and
+can store game data such as terrain, movement cost, or a resource.
 
-## Step 2: Place actors on hexes
+## Read positions and move between neighbors
 
-An actor placed on a hex position is drawn as a hexagon:
+Tile positions have the form `(column, row)`. Columns increase to the
+right and rows increase downwards. Odd rows (1, 3, 5, …) are shifted
+half a hex width to the right. For example, northeast of `(2, 2)` is
+`(2, 1)`, and northeast of `(2, 3)` is `(3, 2)`.
+
+| Direction | Name | Angle | Neighbor of `(2, 2)` | Neighbor of `(2, 3)` |
+| --- | --- | --- | --- | --- |
+| `"no"` | Northeast | 30° | `(2, 1)` | `(3, 2)` |
+| `"o"` | East | 90° | `(3, 2)` | `(3, 3)` |
+| `"so"` | Southeast | 150° | `(2, 3)` | `(3, 4)` |
+| `"sw"` | Southwest | 210° | `(1, 3)` | `(2, 4)` |
+| `"w"` | West | 270° | `(1, 2)` | `(1, 3)` |
+| `"nw"` | Northwest | 330° | `(1, 1)` | `(2, 2)` |
+
+`world.get_tile(position)` returns the tile at a known position and
+raises `TileNotFoundError` for a missing tile. Use
+`tile.get_neighbour(direction)` to look up a neighbor. It returns
+`None` at the board boundary or beside a gap. Use
+`tile.get_neighbour_tiles()` to get all existing neighbors.
+
+Press the right or left arrow to move one tile east or west. The
+neighbor check keeps the actor on the board. The angle equivalents in
+the table can also be passed to `move_in_direction`.
 
 ```python
-import miniworlds
+from miniworlds import Actor, HexWorld
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
+world = HexWorld(7, 5, tile_size=40)
 world.background.grid = True
 
-forest = miniworlds.Actor((2, 3))
-forest.fill_color = (0, 120, 0)
+robot = Actor((2, 3))
+robot.fill_color = (200, 30, 30)
 
-desert = miniworlds.Actor((4, 2))
-desert.fill_color = (230, 210, 160)
+@robot.register
+def on_key_down(self, keys):
+    directions = {"right": "o", "left": "w"}
+    for key in keys:
+        direction = directions.get(key.lower())
+        if direction is not None:
+            tile = world.get_tile(self.position)
+            if tile.get_neighbour(direction) is not None:
+                self.move_in_direction(direction)
+            break
 
 world.run()
 ```
 
-## Step 3: Query neighbors
+## Measure distance, radius, and lines
 
-`world.get_tile(position)` returns a single hex.
-`tile.get_neighbour_tiles()` returns the up to six neighboring hexes.
+`world.get_distance(a, b)` gives the number of steps on an open hex grid.
+It accounts for the staggered rows and ignores obstacles and movement
+costs. You can supply tile positions, tiles, or actors standing on tiles.
+A tile also offers `tile.get_distance_to(other)`.
 
-The example colors the center hex and all its neighbors:
+`world.get_tiles_in_radius(center, 2)` returns existing tiles up to two
+steps away, starting with the center. Pass `include_center=False` to
+leave it out. The tile method `center.get_tiles_in_radius(2)` leaves the
+center out by default. A ring contains tiles at exactly the given
+distance. Radii must be whole numbers, and negative radii give an empty list.
 
-```python
-import miniworlds
-
-world = miniworlds.HexWorld(7, 7, tile_size=40)
-world.background.grid = True
-
-center = world.get_tile((3, 3))
-center_actor = miniworlds.Actor(center.position)
-center_actor.fill_color = (200, 30, 30)
-
-for tile in center.get_neighbour_tiles():
-    actor = miniworlds.Actor(tile.position)
-    actor.fill_color = (0, 120, 0)
-
-world.run()
-```
-
-`world.get_tiles_in_radius(position, radius)` returns all hexes within
-a given hex distance, ordered from the center outwards.
-`world.get_tiles_in_ring(position, radius)` returns only the hexes at
-exactly the given distance, in ring traversal order.
-
-You can pass a position, a tile, or an actor. With
-`include_center=False` the hex itself is left out. A tile also knows its
-surroundings:
+The example marks tiles within two steps in blue and tiles exactly three
+steps away in orange. A gray wall interrupts the straight line between
+`(1, 4)` and `(7, 4)`. The terminal shows a distance of 6 and
+`Visible: False`.
 
 ```python
-import miniworlds
+from miniworlds import HexWorld
 
-world = miniworlds.HexWorld(9, 9, tile_size=30)
+world = HexWorld(9, 9, tile_size=30)
 world.background.grid = True
 
 center = world.get_tile((4, 4))
-for tile in center.get_tiles_in_radius(2):
-    tile.highlight((0, 120, 255, 90))
-for tile in center.get_tiles_in_ring(3):
-    tile.highlight((255, 120, 0, 90))
+world.highlight_tiles(world.get_tiles_in_radius(center, 2), (0, 120, 255, 90))
+world.highlight_tiles(world.get_tiles_in_ring(center, 3), (255, 120, 0, 90))
 
-east = center.get_neighbour("o")
-if east is not None:
-    east.highlight((255, 0, 0, 120))
+start, goal = (1, 4), (7, 4)
+line = world.get_tiles_in_line(start, goal)
+world.highlight_tiles(line, (200, 0, 0, 90))
+center.is_blocking = True
+center.highlight((90, 90, 90, 200))
 
-world.run()
-```
-
-`tile.get_neighbour(direction)` returns the neighbor in one direction
-(`"o"`, `"so"`, `"sw"`, `"w"`, `"nw"`, `"no"`) or `None` at the border
-of the world.
-
-### Distances and lines
-
-`world.get_distance(a, b)` returns the number of steps between two hexes.
-It does not depend on the row parity, so it is the right way to measure
-distances on a hex grid (`tile.get_distance_to(other)` does the same).
-Do not compare the offset coordinates `(column, row)` directly, because
-the shifted rows make them misleading.
-
-`world.get_tiles_in_line(start, end)` returns the hexes on the straight
-line between two hexes. Together with `tile.is_blocking` this answers
-line-of-sight questions:
-
-```python
-import miniworlds
-
-world = miniworlds.HexWorld(9, 7, tile_size=30)
-world.background.grid = True
-
-wall = world.get_tile((4, 3))
-wall.is_blocking = True
-wall.highlight((90, 90, 90, 200))
-
-line = world.get_tiles_in_line((1, 3), (7, 3))
-visible = world.has_line_of_sight((1, 3), (7, 3))
-for tile in line:
-    tile.highlight((0, 200, 0, 90) if visible else (200, 0, 0, 90))
-
-print("Distance:", world.get_distance((1, 3), (7, 3)), "visible:", visible)
+print("Distance:", world.get_distance(start, goal))
+print("Visible:", world.has_line_of_sight(start, goal))
 
 world.run()
 ```
 
-The queries accept only whole numbers as radius; a negative radius
-returns an empty list.
+`get_tiles_in_line` returns the existing tiles along the straight line,
+including both endpoints when present. `has_line_of_sight` checks for
+blockers strictly between those endpoints. A blocked target can still
+be visible.
 
-## Step 4: Move actors from hex to hex
+## Pick tiles, corners, and edges with the mouse
 
-Actors move from hex to hex with the six hex directions `"no"`, `"o"`,
-`"so"`, `"sw"`, `"w"`, and `"nw"`:
+Mouse handlers receive a window pixel `(x, y)`. Use
+`world.get_tile_from_pixel(mouse_pos)` for the tile under the pointer,
+`world.get_corner_from_pixel(mouse_pos)` for a nearby vertex, or
+`world.get_edge_from_pixel(mouse_pos)` for a nearby edge midpoint.
+Check for `None` before accessing the result. Use
+`world.get_from_pixel(mouse_pos)` when you only need the tile position
+within the visible camera area.
 
-```python
-import miniworlds
+From a known tile you can also get a corner with `tile.get_corner("n")`
+or an edge with `tile.get_edge("o")`. Corner directions are `"n"`,
+`"no"`, `"so"`, `"s"`, `"sw"`, and `"nw"`. Edge directions are the
+same as the six movement directions. Adjacent tiles share the same
+corner or edge object where they meet. Use its `.position` as a key
+in a dictionary for that type of board element.
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
-world.background.grid = True
-
-robot = miniworlds.Actor((3, 3))
-robot.fill_color = (200, 30, 30)
-
-@robot.register
-def act(self):
-    if world.frame % 20 == 0:
-        self.move_in_direction("no")
-
-world.run()
-```
-
-Every `move_in_direction` call moves the actor exactly one hex,
-independent of the row parity. The directions can also be given as
-degrees: `"no"` is 30, `"o"` is 90, `"so"` is 150, `"sw"` is 210,
-`"w"` is 270, and `"nw"` is 330.
-
-## Step 5: React to clicks
-
-With `@world.register` you can react to mouse clicks.
-`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse,
-or `None` if the click is outside the world:
+In the example, left-click near a corner to place a red marker and
+right-click near an edge to place a brown marker. The camera shows
+only part of the board. Click positions still resolve to the visible
+tiles, corners, and edges.
 
 ```python
-import miniworlds
+from miniworlds import Actor, HexWorld
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
+world = HexWorld(12, 10, tile_size=36)
 world.background.grid = True
+world.camera.width = 7
+world.camera.height = 5
+world.camera.topleft = (2, 2)
 
 @world.register
-def on_mouse_left(self, mouse_pos):
-    tile = world.get_tile_from_pixel(mouse_pos)
-    if tile is None:
+def on_mouse_left_down(self, mouse_pos):
+    corner = self.get_corner_from_pixel(mouse_pos)
+    if corner is None:
         return
-    actor = miniworlds.Actor(tile.position)
-    actor.fill_color = (0, 120, 0)
-
-world.run()
-```
-
-## Step 6: Settlements and roads
-
-Corners and edges are positions, too.
-`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner,
-`world.get_edge_from_pixel(mouse_pos)` the nearest edge.
-Both return `None` if the pixel is outside the world, for example when
-a toolbar or console is attached to the world.
-
-A left click places a settlement (small circle) on a corner,
-a right click places a road (small rectangle) on an edge:
-
-```python
-import miniworlds
-
-world = miniworlds.HexWorld(7, 7, tile_size=40)
-world.background.grid = True
-
-@world.register
-def on_mouse_left(self, mouse_pos):
-    corner = world.get_corner_from_pixel(mouse_pos)
-    settlement = miniworlds.Actor(corner.position)
+    settlement = Actor(corner.position)
     settlement.fill_color = (200, 30, 30)
-    settlement.size = (0.3, 0.3)
+    settlement.size = (0.25, 0.25)
 
 @world.register
-def on_mouse_right(self, mouse_pos):
-    edge = world.get_edge_from_pixel(mouse_pos)
-    road = miniworlds.Actor(edge.position)
-    road.fill_color = (90, 60, 30)
-    road.size = (0.6, 0.15)
+def on_mouse_right_down(self, mouse_pos):
+    edge = self.get_edge_from_pixel(mouse_pos)
+    if edge is None:
+        return
+    x, y = edge.to_pixel()
+    left, top = self.camera.topleft
+    self.background.draw_dot((x - left, y - top), 10, (90, 60, 30))
 
 world.run()
 ```
 
-## Step 7: A mini-Catan board
+Set `camera.width`, `camera.height`, and `camera.topleft` in grid units.
+Reading those properties gives pixel values. Read `camera.x` and
+`camera.y` for the camera offset in grid units.
+`world.to_pixel((column, row))` gives the tile center in **world pixels**.
+On a corner or edge object, `.to_pixel()` gives the vertex or edge
+midpoint. The example subtracts the fixed camera offset before drawing
+the dot because background drawings use pixels relative to the camera.
+The mouse methods take **window pixels**. When scrolling or docking the
+world, pass them the original event position.
 
-A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:
+## Store terrain and find a route
 
-```python
-import miniworlds
+Use `tile.data` as a dictionary for your game. Setting `tile.terrain`
+stores a value under `tile.data["terrain"]`. In this example, water
+blocks the route and entering a swamp costs three movement points.
+Every other tile costs one point to enter.
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
-world.background.grid = True
-
-land_positions = [
-    (2, 1), (3, 1), (4, 1),
-    (2, 2), (3, 2), (4, 2), (5, 2),
-    (1, 3), (2, 3), (3, 3), (4, 3), (5, 3),
-    (1, 4), (2, 4), (3, 4), (4, 4),
-    (2, 5), (3, 5), (4, 5),
-]
-terrain_colors = [
-    (0, 120, 0),      # forest
-    (220, 180, 60),   # field
-    (120, 200, 60),   # meadow
-    (150, 150, 150),  # mountain
-    (200, 90, 30),    # hill
-    (230, 210, 160),  # desert
-]
-
-for number, position in enumerate(land_positions):
-    actor = miniworlds.Actor(position)
-    actor.fill_color = terrain_colors[number % len(terrain_colors)]
-    actor.border = 1
-
-world.run()
-```
-
-## Step 8: Store data on hexes
-
-Every hex can carry game data. `tile.data` is a dictionary for anything
-your game needs, `tile.terrain` is a shortcut for `tile.data["terrain"]`:
+Click a destination to show the cheapest route in yellow and move the
+robot along it. Clicking water clears the old route and stops the robot.
 
 ```python
-import miniworlds
+from collections import deque
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
+from miniworlds import Actor, HexWorld
+
+world = HexWorld(9, 7, tile_size=36)
 world.background.grid = True
 
-for position, tile in world.tiles.items():
-    tile.terrain = "forest" if position[0] % 2 == 0 else "field"
-    tile.data["dice_number"] = 2 + (position[0] + position[1]) % 11
-
-tile = world.get_tile((3, 3))
-print(tile.terrain, tile.data["dice_number"])
-
-world.run()
-```
-
-## Step 9: Find paths
-
-`world.find_path(start, goal)` returns the cheapest way from one hex to
-another as a list of hexes. Stepping onto a hex costs `tile.cost`
-(default `1`). A hex with `tile.is_blocking = True` cannot be entered, and
-neither can a hex with a blocking actor (`actor.is_blocking = True`).
-
-Click a hex to walk the robot there around the water:
-
-```python
-import miniworlds
-
-world = miniworlds.HexWorld(9, 9, tile_size=36)
-world.background.grid = True
-
-for position in [(3, 3), (4, 3), (5, 3), (3, 4), (5, 4)]:
+for position in [(4, 2), (4, 3), (4, 4)]:
     water = world.get_tile(position)
+    water.terrain = "water"
     water.is_blocking = True
     water.highlight((0, 80, 200, 160))
 
-robot = miniworlds.Actor((1, 4))
+swamp = world.get_tile((3, 3))
+swamp.terrain = "swamp"
+swamp.cost = 3
+swamp.highlight((120, 90, 30, 160))
+
+robot = Actor((1, 3))
 robot.fill_color = (200, 30, 30)
-route = []
+steps = deque()
+shown_path = []
 
 @world.register
-def on_mouse_left(self, mouse_pos):
-    goal = world.get_tile_from_pixel(mouse_pos)
+def on_mouse_left_down(self, mouse_pos):
+    goal = self.get_tile_from_pixel(mouse_pos)
     if goal is None:
         return
-    route[:] = world.find_path(robot, goal)[1:]
+
+    self.clear_highlights(shown_path)
+    swamp.highlight((120, 90, 30, 160))
+    path = self.find_path(robot, goal)
+    steps.clear()
+    steps.extend(path[1:])
+    shown_path[:] = path[1:]
+    self.highlight_tiles(shown_path)
+
+    if path:
+        print("Movement cost:", self.get_path_cost(path))
+    else:
+        print("No route")
 
 @robot.register
 def act(self):
-    if route and world.frame % 10 == 0:
-        self.position = route.pop(0).position
+    if steps and world.frame % 10 == 0:
+        self.position = steps.popleft().position
 
 world.run()
 ```
 
-`find_path` returns an empty list if there is no way. Slow terrain is just
-a higher cost, for example `swamp.cost = 3`.
+`find_path` includes both the start and the goal, so `path[1:]`
+contains the steps still to take. A start equal to the goal gives a
+one-tile path. An unreachable goal gives an empty list. The start tile
+is free, and later steps add their destination tile's cost. Costs can
+be zero or fractional. The default search also treats a tile with a
+blocking actor as blocked.
 
-`world.get_reachable_tiles(start, max_cost)` returns every hex the actor
-can reach with a movement budget, walking around blocked hexes:
+Path queries return a plan. The example advances along that plan by
+assigning positions. If terrain or blockers change while a unit is
+moving, recompute its route before taking the next step.
 
-```python
-import miniworlds
+### Show a movement budget and find the cheapest target
 
-world = miniworlds.HexWorld(9, 9, tile_size=36)
-world.background.grid = True
-world.get_tile((4, 3)).is_blocking = True
-
-for tile in world.get_reachable_tiles((4, 4), 2):
-    tile.highlight((0, 200, 0, 90))
-
-world.run()
-```
-
-`world.find_nearest(start, is_target)` finds the cheapest way to the
-nearest hex that satisfies a condition. The target may be blocked, for
-example an enemy that blocks its own hex:
+`get_reachable_tiles(start, 3)` lists every tile you can reach with
+three movement points, including the start. `find_nearest` accepts a
+function that identifies eligible targets. It chooses by total
+movement cost. Here the adjacent forest costs four points to enter,
+so the search chooses the forest two steps away. The terminal shows
+`Target: (3, 5) Cost: 2.0`.
 
 ```python
-import miniworlds
+from miniworlds import HexWorld
 
-world = miniworlds.HexWorld(9, 9, tile_size=36)
+world = HexWorld(7, 7, tile_size=40)
 world.background.grid = True
 
-for position in [(7, 2), (2, 7)]:
-    world.get_tile(position).terrain = "forest"
-    world.get_tile(position).highlight((0, 120, 0, 150))
+start = world.get_tile((3, 3))
+near_forest = world.get_tile((4, 3))
+near_forest.terrain = "forest"
+near_forest.cost = 4
+far_forest = world.get_tile((3, 5))
+far_forest.terrain = "forest"
 
-path = world.find_nearest((4, 4), lambda tile: tile.terrain == "forest")
-for tile in path:
-    tile.highlight((255, 255, 0, 120))
-print("cost:", world.get_path_cost(path))
+reachable = world.get_reachable_tiles(start, 3)
+world.highlight_tiles(reachable, (0, 120, 255, 100))
+near_forest.highlight((0, 120, 0, 150))
 
-world.run()
-```
+def is_forest(tile):
+    return tile.terrain == "forest"
 
-`world.has_line_of_sight(start, goal)` answers whether a blocked hex hides
-the goal on the straight line between two hexes:
-
-```python
-import miniworlds
-
-world = miniworlds.HexWorld(9, 9, tile_size=36)
-world.background.grid = True
-world.get_tile((4, 4)).is_blocking = True
-world.get_tile((4, 4)).highlight((0, 80, 200, 160))
-
-print(world.has_line_of_sight((1, 4), (7, 4)))  # False: the wall is in the way
-print(world.has_line_of_sight((1, 1), (7, 1)))  # True
+path = world.find_nearest(start, is_forest, max_cost=3)
+if path:
+    world.highlight_tiles(path)
+    print("Target:", path[-1].position, "Cost:", world.get_path_cost(path))
 
 world.run()
 ```
 
-## Step 10: Highlight the hex under the mouse
+With `find_nearest`, a blocked target can be the final tile. Stop one
+step before it if you want the actor to stand next to the target.
+For a unit with its own movement rules, pass `blocked(tile)` or
+`cost(tile)` callbacks to replace the default rules for that query.
+If you use a custom cost function, pass the same function to
+`get_path_cost` when you total the route.
 
-A world can react when the mouse enters or leaves a hex.
-`tile.highlight(color)` colors a hex below the actors;
-`tile.clear_highlight()` removes the color again:
+## Highlight the tile under the mouse
+
+Register `on_tile_enter` and `on_tile_leave` to update the highlight as
+the pointer crosses a tile boundary. The fourth color component
+controls opacity. Each tile has one highlight, drawn below actors.
+Applying a new highlight replaces its previous color.
 
 ```python
-import miniworlds
+from miniworlds import HexWorld
 
-world = miniworlds.HexWorld(7, 7, tile_size=40)
+world = HexWorld(7, 5, tile_size=40)
 world.background.grid = True
 
 @world.register
@@ -393,12 +326,10 @@ def on_tile_leave(self, tile):
 world.run()
 ```
 
-`world.hovered_tile` always holds the hex under the mouse, or `None`.
+`world.hovered_tile` holds the current tile or `None` while hover is
+tracked by a tile enter, tile leave, or mouse motion handler.
 
-From here you can continue in the pattern
-[Hex Worlds and a Mini-Catan Board](../patterns/hex_world_catan.md)
-and add your own game rules: dice, resources, and trading are not part
-of the framework — they belong in your game code.
-
-The full interface is documented in the
-[HexWorld API reference](../api/world_hex.md).
+Continue with the [board game example](../patterns/hex_world_catan.md)
+to combine tiles, corners, edges, and tile data. See the
+[HexWorld API reference](../api/world_hex.md) for method signatures
+and options.

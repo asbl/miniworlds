@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 14:35+0100\n"
+"POT-Creation-Date: 2026-11-27 19:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -25,263 +25,361 @@ msgstr ""
 
 #: ../../source/tutorial/hex_world.md:3
 msgid ""
-"In this tutorial you build a world made of hexagons, step by step. "
-"Hexagonal worlds are used for board games like *Catan*: land hexes, "
-"settlements on corners, and roads on edges."
+"In a `HexWorld`, actors can stand on hexagonal tiles, on the corners of "
+"those tiles, or on their edges. The examples below are complete scripts. "
+"Run them one at a time. Each `world.run()` starts the window and the "
+"event loop."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:7
 msgid ""
-"If you have never worked with worlds before, start with the chapter [Die "
-"erste Welt](https://github.com/copilotstudent/course-"
-"sync/tree/main/courses/miniworlds_examples) in the interactive course."
+"If this is your first Miniworlds program, start with the chapter “Die "
+"erste Welt” in the [interactive course](index.md)."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:11
-msgid "Step 1: Create a hex world"
+#: ../../source/tutorial/hex_world.md:10
+msgid "Create a world and place an actor"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:13
-msgid "A `HexWorld` is created with `(columns, rows)` and a `tile_size`:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:24
+#: ../../source/tutorial/hex_world.md:12
 msgid ""
-"Hexes are addressed with `(column, row)` coordinates, like tiles in a "
-"`TiledWorld`. Odd rows are shifted half a hex to the right."
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:27
-msgid "Step 2: Place actors on hexes"
+"`HexWorld(7, 5, tile_size=40)` creates seven columns and five rows. The "
+"first tile is `(0, 0)` and the last is `(6, 4)`. The hexagons have a "
+"point at the top. Here `tile_size=40` means 40 pixels from the center of "
+"a hexagon to a vertex."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:29
-msgid "An actor placed on a hex position is drawn as a hexagon:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:46
-msgid "Step 3: Query neighbors"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:48
 msgid ""
-"`world.get_tile(position)` returns a single hex. "
-"`tile.get_neighbour_tiles()` returns the up to six neighboring hexes."
+"You will see a green hexagon in column 2, row 3. The actor provides the "
+"visible marker. The tile at the same position belongs to the grid and can"
+" store game data such as terrain, movement cost, or a resource."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:51
-msgid "The example colors the center hex and all its neighbors:"
+#: ../../source/tutorial/hex_world.md:33
+msgid "Read positions and move between neighbors"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:70
+#: ../../source/tutorial/hex_world.md:35
 msgid ""
-"`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
-"given hex distance, ordered from the center outwards. "
-"`world.get_tiles_in_ring(position, radius)` returns only the hexes at "
-"exactly the given distance, in ring traversal order."
+"Tile positions have the form `(column, row)`. Columns increase to the "
+"right and rows increase downwards. Odd rows (1, 3, 5, …) are shifted half"
+" a hex width to the right. For example, northeast of `(2, 2)` is `(2, "
+"1)`, and northeast of `(2, 3)` is `(3, 2)`."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:75
+#: ../../source/tutorial/hex_world.md
+msgid "Direction"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Name"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Angle"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Neighbor of `(2, 2)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Neighbor of `(2, 3)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"no\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Northeast"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "30°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(2, 1)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(3, 2)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"o\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "East"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "90°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(3, 3)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"so\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Southeast"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "150°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(2, 3)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(3, 4)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"sw\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Southwest"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "210°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(1, 3)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(2, 4)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"w\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "West"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "270°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(1, 2)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`\"nw\"`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "Northwest"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "330°"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(1, 1)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md
+msgid "`(2, 2)`"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:49
 msgid ""
-"You can pass a position, a tile, or an actor. With `include_center=False`"
-" the hex itself is left out. A tile also knows its surroundings:"
+"`world.get_tile(position)` returns the tile at a known position and "
+"raises `TileNotFoundError` for a missing tile. Use "
+"`tile.get_neighbour(direction)` to look up a neighbor. It returns `None` "
+"at the board boundary or beside a gap. Use `tile.get_neighbour_tiles()` "
+"to get all existing neighbors."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:98
+#: ../../source/tutorial/hex_world.md:55
 msgid ""
-"`tile.get_neighbour(direction)` returns the neighbor in one direction "
-"(`\"o\"`, `\"so\"`, `\"sw\"`, `\"w\"`, `\"nw\"`, `\"no\"`) or `None` at "
-"the border of the world."
+"Press the right or left arrow to move one tile east or west. The neighbor"
+" check keeps the actor on the board. The angle equivalents in the table "
+"can also be passed to `move_in_direction`."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:102
-msgid "Distances and lines"
+#: ../../source/tutorial/hex_world.md:82
+msgid "Measure distance, radius, and lines"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:104
+#: ../../source/tutorial/hex_world.md:84
 msgid ""
-"`world.get_distance(a, b)` returns the number of steps between two hexes."
-" It does not depend on the row parity, so it is the right way to measure "
-"distances on a hex grid (`tile.get_distance_to(other)` does the same). Do"
-" not compare the offset coordinates `(column, row)` directly, because the"
-" shifted rows make them misleading."
+"`world.get_distance(a, b)` gives the number of steps on an open hex grid."
+" It accounts for the staggered rows and ignores obstacles and movement "
+"costs. You can supply tile positions, tiles, or actors standing on tiles."
+" A tile also offers `tile.get_distance_to(other)`."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:110
+#: ../../source/tutorial/hex_world.md:89
 msgid ""
-"`world.get_tiles_in_line(start, end)` returns the hexes on the straight "
-"line between two hexes. Together with `tile.is_blocking` this answers "
-"line-of-sight questions:"
+"`world.get_tiles_in_radius(center, 2)` returns existing tiles up to two "
+"steps away, starting with the center. Pass `include_center=False` to "
+"leave it out. The tile method `center.get_tiles_in_radius(2)` leaves the "
+"center out by default. A ring contains tiles at exactly the given "
+"distance. Radii must be whole numbers, and negative radii give an empty "
+"list."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:134
+#: ../../source/tutorial/hex_world.md:95
 msgid ""
-"The queries accept only whole numbers as radius; a negative radius "
-"returns an empty list."
+"The example marks tiles within two steps in blue and tiles exactly three "
+"steps away in orange. A gray wall interrupts the straight line between "
+"`(1, 4)` and `(7, 4)`. The terminal shows a distance of 6 and `Visible: "
+"False`."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:122
+msgid ""
+"`get_tiles_in_line` returns the existing tiles along the straight line, "
+"including both endpoints when present. `has_line_of_sight` checks for "
+"blockers strictly between those endpoints. A blocked target can still be "
+"visible."
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:127
+msgid "Pick tiles, corners, and edges with the mouse"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:129
+msgid ""
+"Mouse handlers receive a window pixel `(x, y)`. Use "
+"`world.get_tile_from_pixel(mouse_pos)` for the tile under the pointer, "
+"`world.get_corner_from_pixel(mouse_pos)` for a nearby vertex, or "
+"`world.get_edge_from_pixel(mouse_pos)` for a nearby edge midpoint. Check "
+"for `None` before accessing the result. Use "
+"`world.get_from_pixel(mouse_pos)` when you only need the tile position "
+"within the visible camera area."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:137
-msgid "Step 4: Move actors from hex to hex"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:139
 msgid ""
-"Actors move from hex to hex with the six hex directions `\"no\"`, "
-"`\"o\"`, `\"so\"`, `\"sw\"`, `\"w\"`, and `\"nw\"`:"
+"From a known tile you can also get a corner with `tile.get_corner(\"n\")`"
+" or an edge with `tile.get_edge(\"o\")`. Corner directions are `\"n\"`, "
+"`\"no\"`, `\"so\"`, `\"s\"`, `\"sw\"`, and `\"nw\"`. Edge directions are "
+"the same as the six movement directions. Adjacent tiles share the same "
+"corner or edge object where they meet. Use its `.position` as a key in a "
+"dictionary for that type of board element."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:159
+#: ../../source/tutorial/hex_world.md:144
 msgid ""
-"Every `move_in_direction` call moves the actor exactly one hex, "
-"independent of the row parity. The directions can also be given as "
-"degrees: `\"no\"` is 30, `\"o\"` is 90, `\"so\"` is 150, `\"sw\"` is 210,"
-" `\"w\"` is 270, and `\"nw\"` is 330."
+"In the example, left-click near a corner to place a red marker and right-"
+"click near an edge to place a brown marker. The camera shows only part of"
+" the board. Click positions still resolve to the visible tiles, corners, "
+"and edges."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:164
-msgid "Step 5: React to clicks"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:166
+#: ../../source/tutorial/hex_world.md:179
 msgid ""
-"With `@world.register` you can react to mouse clicks. "
-"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
-"or `None` if the click is outside the world:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:187
-msgid "Step 6: Settlements and roads"
+"Set `camera.width`, `camera.height`, and `camera.topleft` in grid units. "
+"Reading those properties gives pixel values. Read `camera.x` and "
+"`camera.y` for the camera offset in grid units. `world.to_pixel((column, "
+"row))` gives the tile center in **world pixels**. On a corner or edge "
+"object, `.to_pixel()` gives the vertex or edge midpoint. The example "
+"subtracts the fixed camera offset before drawing the dot because "
+"background drawings use pixels relative to the camera. The mouse methods "
+"take **window pixels**. When scrolling or docking the world, pass them "
+"the original event position."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:189
+msgid "Store terrain and find a route"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:191
 msgid ""
-"Corners and edges are positions, too. "
-"`world.get_corner_from_pixel(mouse_pos)` returns the nearest corner, "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. Both return "
-"`None` if the pixel is outside the world, for example when a toolbar or "
-"console is attached to the world."
+"Use `tile.data` as a dictionary for your game. Setting `tile.terrain` "
+"stores a value under `tile.data[\"terrain\"]`. In this example, water "
+"blocks the route and entering a swamp costs three movement points. Every "
+"other tile costs one point to enter."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:195
+#: ../../source/tutorial/hex_world.md:196
 msgid ""
-"A left click places a settlement (small circle) on a corner, a right "
-"click places a road (small rectangle) on an edge:"
+"Click a destination to show the cheapest route in yellow and move the "
+"robot along it. Clicking water clears the old route and stops the robot."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:221
-msgid "Step 7: A mini-Catan board"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:223
-msgid "A Catan board has 19 land hexes, arranged in rows of 3, 4, 5, 4, and 3:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:255
-msgid "Step 8: Store data on hexes"
+#: ../../source/tutorial/hex_world.md:250
+msgid ""
+"`find_path` includes both the start and the goal, so `path[1:]` contains "
+"the steps still to take. A start equal to the goal gives a one-tile path."
+" An unreachable goal gives an empty list. The start tile is free, and "
+"later steps add their destination tile's cost. Costs can be zero or "
+"fractional. The default search also treats a tile with a blocking actor "
+"as blocked."
 msgstr ""
 
 #: ../../source/tutorial/hex_world.md:257
 msgid ""
-"Every hex can carry game data. `tile.data` is a dictionary for anything "
-"your game needs, `tile.terrain` is a shortcut for "
-"`tile.data[\"terrain\"]`:"
+"Path queries return a plan. The example advances along that plan by "
+"assigning positions. If terrain or blockers change while a unit is "
+"moving, recompute its route before taking the next step."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:276
-msgid "Step 9: Find paths"
+#: ../../source/tutorial/hex_world.md:261
+msgid "Show a movement budget and find the cheapest target"
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:278
+#: ../../source/tutorial/hex_world.md:263
 msgid ""
-"`world.find_path(start, goal)` returns the cheapest way from one hex to "
-"another as a list of hexes. Stepping onto a hex costs `tile.cost` "
-"(default `1`). A hex with `tile.is_blocking = True` cannot be entered, "
-"and neither can a hex with a blocking actor (`actor.is_blocking = True`)."
+"`get_reachable_tiles(start, 3)` lists every tile you can reach with three"
+" movement points, including the start. `find_nearest` accepts a function "
+"that identifies eligible targets. It chooses by total movement cost. Here"
+" the adjacent forest costs four points to enter, so the search chooses "
+"the forest two steps away. The terminal shows `Target: (3, 5) Cost: 2.0`."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:283
-msgid "Click a hex to walk the robot there around the water:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:315
+#: ../../source/tutorial/hex_world.md:298
 msgid ""
-"`find_path` returns an empty list if there is no way. Slow terrain is "
-"just a higher cost, for example `swamp.cost = 3`."
+"With `find_nearest`, a blocked target can be the final tile. Stop one "
+"step before it if you want the actor to stand next to the target. For a "
+"unit with its own movement rules, pass `blocked(tile)` or `cost(tile)` "
+"callbacks to replace the default rules for that query. If you use a "
+"custom cost function, pass the same function to `get_path_cost` when you "
+"total the route."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:318
+#: ../../source/tutorial/hex_world.md:305
+msgid "Highlight the tile under the mouse"
+msgstr ""
+
+#: ../../source/tutorial/hex_world.md:307
 msgid ""
-"`world.get_reachable_tiles(start, max_cost)` returns every hex the actor "
-"can reach with a movement budget, walking around blocked hexes:"
+"Register `on_tile_enter` and `on_tile_leave` to update the highlight as "
+"the pointer crosses a tile boundary. The fourth color component controls "
+"opacity. Each tile has one highlight, drawn below actors. Applying a new "
+"highlight replaces its previous color."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:334
+#: ../../source/tutorial/hex_world.md:329
 msgid ""
-"`world.find_nearest(start, is_target)` finds the cheapest way to the "
-"nearest hex that satisfies a condition. The target may be blocked, for "
-"example an enemy that blocks its own hex:"
+"`world.hovered_tile` holds the current tile or `None` while hover is "
+"tracked by a tile enter, tile leave, or mouse motion handler."
 msgstr ""
 
-#: ../../source/tutorial/hex_world.md:356
+#: ../../source/tutorial/hex_world.md:332
 msgid ""
-"`world.has_line_of_sight(start, goal)` answers whether a blocked hex "
-"hides the goal on the straight line between two hexes:"
+"Continue with the [board game example](../patterns/hex_world_catan.md) to"
+" combine tiles, corners, edges, and tile data. See the [HexWorld API "
+"reference](../api/world_hex.md) for method signatures and options."
 msgstr ""
-
-#: ../../source/tutorial/hex_world.md:373
-msgid "Step 10: Highlight the hex under the mouse"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:375
-msgid ""
-"A world can react when the mouse enters or leaves a hex. "
-"`tile.highlight(color)` colors a hex below the actors; "
-"`tile.clear_highlight()` removes the color again:"
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:396
-msgid "`world.hovered_tile` always holds the hex under the mouse, or `None`."
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:398
-msgid ""
-"From here you can continue in the pattern [Hex Worlds and a Mini-Catan "
-"Board](../patterns/hex_world_catan.md) and add your own game rules: dice,"
-" resources, and trading are not part of the framework — they belong in "
-"your game code."
-msgstr ""
-
-#: ../../source/tutorial/hex_world.md:403
-msgid ""
-"The full interface is documented in the [HexWorld API "
-"reference](../api/world_hex.md)."
-msgstr ""
-
-#~ msgid ""
-#~ "`world.get_tiles_in_radius(position, radius)` returns "
-#~ "all hexes within a given hex "
-#~ "distance."
-#~ msgstr ""
-
-#~ msgid "Step 4: React to clicks"
-#~ msgstr ""
-
-#~ msgid "Step 5: Settlements and roads"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Corners and edges are positions, too."
-#~ " `world.get_corner_from_pixel(mouse_pos)` returns the"
-#~ " nearest corner, `world.get_edge_from_pixel(mouse_pos)`"
-#~ " the nearest edge."
-#~ msgstr ""
-
-#~ msgid "Step 6: A mini-Catan board"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "With `@world.register` you can react to"
-#~ " mouse clicks. `world.get_tile_from_pixel(mouse_pos)`"
-#~ " returns the hex under the mouse:"
-#~ msgstr ""
 
