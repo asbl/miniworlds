@@ -353,7 +353,7 @@ class HexWorld(tiled_world.TiledWorld):
 
                 tile = world.get_tile_from_pixel((80, 120))
                 if tile is not None:
-                    tile.fill_color = (255, 0, 0)
+                    tile.highlight()
         """
         return self._tile_from_world_pixel(self._world_pixel_from_screen(position))
 
@@ -1063,9 +1063,8 @@ class HexWorld(tiled_world.TiledWorld):
             ::
 
                 @world.register
-                def on_mouse_left(self, mouse_pos):
-                    if world.hovered_tile is not None:
-                        print(world.hovered_tile.position)
+                def on_tile_enter(self, tile):
+                    print(tile.position)
         """
         return self._hovered_tile
 

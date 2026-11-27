@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the miniworlds package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
@@ -22,10 +21,6 @@ msgstr ""
 #: ../../source/api/world_hex.md:1
 msgid "World > HexWorld"
 msgstr "Welt > HexWorld"
-
-#: ../../source/api/world_hex.md:3
-msgid "API Reference"
-msgstr "API-Referenz"
 
 #: miniworlds.worlds.hex_world.hex_world.HexWorld:1 of
 msgid "A world that consists of hexagonal tiles."
@@ -1245,10 +1240,6 @@ msgstr "Überschreiben: Start-Winkelversatz für das Layout (z. B. Hex-Rotation)
 msgid "Return the pixel position of the corner."
 msgstr "Gibt die Pixelposition der Ecke zurück."
 
-#: miniworlds.worlds.hex_world.hex_edge.HexEdge:1 of
-msgid "An edge of a hex, shared by exactly two hexes."
-msgstr "Eine Kante eines Hexfelds, die von genau zwei Hexfeldern geteilt wird."
-
 #: miniworlds.worlds.hex_world.hex_edge.HexEdge:3 of
 msgid ""
 "The edge position is a unique key in doubled cube coordinates: both hexes"
@@ -2091,6 +2082,168 @@ msgstr ""
 "Es zählen nur die Hexfelder echt zwischen Start und Ziel, daher kann ein "
 "blockiertes Ziel (zum Beispiel ein Gegner, der sein eigenes Hexfeld "
 "blockiert) gesehen werden."
+
+#: ../../source/api/world_hex.md:3
+msgid ""
+"Start with the [Hex Worlds tutorial](../tutorial/hex_world.md) for "
+"runnable examples or the [board game "
+"pattern](../patterns/hex_world_catan.md) for an example that combines "
+"tiles, corners, and edges."
+msgstr ""
+"Im [Tutorial zu Hex-Welten](../tutorial/hex_world.md) findest du "
+"ausführbare Beispiele. Das "
+"[Brettspielbeispiel](../patterns/hex_world_catan.md) kombiniert Felder, "
+"Ecken und Kanten."
+
+#: ../../source/api/world_hex.md:7
+msgid "Common operations"
+msgstr "Häufige Aufgaben"
+
+#: ../../source/api/world_hex.md
+msgid "Task"
+msgstr "Aufgabe"
+
+#: ../../source/api/world_hex.md
+msgid "API"
+msgstr "API"
+
+#: ../../source/api/world_hex.md
+msgid "Look up a tile by grid position"
+msgstr "Feld über seine Rasterposition abfragen"
+
+#: ../../source/api/world_hex.md
+msgid "`world.get_tile((column, row))`"
+msgstr "`world.get_tile((column, row))`"
+
+#: ../../source/api/world_hex.md
+msgid "Pick a tile, corner, or edge under the mouse"
+msgstr "Feld, Ecke oder Kante mit der Maus auswählen"
+
+#: ../../source/api/world_hex.md
+msgid "`get_tile_from_pixel`, `get_corner_from_pixel`, `get_edge_from_pixel`"
+msgstr "`get_tile_from_pixel`, `get_corner_from_pixel`, `get_edge_from_pixel`"
+
+#: ../../source/api/world_hex.md
+msgid "Find a neighbor, corner, or edge of a tile"
+msgstr "Nachbarfeld, Ecke oder Kante eines Felds abfragen"
+
+#: ../../source/api/world_hex.md
+msgid ""
+"`tile.get_neighbour(direction)`, `tile.get_corner(direction)`, "
+"`tile.get_edge(direction)`"
+msgstr ""
+"`tile.get_neighbour(direction)`, `tile.get_corner(direction)`, "
+"`tile.get_edge(direction)`"
+
+#: ../../source/api/world_hex.md
+msgid "Measure distance and get a set of nearby tiles"
+msgstr "Entfernung messen und Felder in der Umgebung ermitteln"
+
+#: ../../source/api/world_hex.md
+msgid "`get_distance`, `get_tiles_in_radius`, `get_tiles_in_ring`"
+msgstr "`get_distance`, `get_tiles_in_radius`, `get_tiles_in_ring`"
+
+#: ../../source/api/world_hex.md
+msgid "Plan movement with obstacles and a budget"
+msgstr "Bewegung mit Hindernissen und einem Budget planen"
+
+#: ../../source/api/world_hex.md
+msgid "`find_path`, `get_reachable_tiles`, `find_nearest`, `get_path_cost`"
+msgstr "`find_path`, `get_reachable_tiles`, `find_nearest`, `get_path_cost`"
+
+#: ../../source/api/world_hex.md
+msgid "Test a straight line for blockers"
+msgstr "Gerade Linie auf Hindernisse prüfen"
+
+#: ../../source/api/world_hex.md
+msgid "`get_tiles_in_line`, `has_line_of_sight`"
+msgstr "`get_tiles_in_line`, `has_line_of_sight`"
+
+#: ../../source/api/world_hex.md
+msgid "Display or remove tile overlays"
+msgstr "Feldmarkierungen anzeigen oder entfernen"
+
+#: ../../source/api/world_hex.md
+msgid ""
+"`highlight_tiles`, `clear_highlights`, `tile.highlight()`, "
+"`tile.clear_highlight()`"
+msgstr ""
+"`highlight_tiles`, `clear_highlights`, `tile.highlight()`, "
+"`tile.clear_highlight()`"
+
+#: ../../source/api/world_hex.md:19
+msgid "World and board elements"
+msgstr "Welt und Spielfeldelemente"
+
+#: ../../source/api/world_hex.md:21
+msgid ""
+"`world.tiles`, `world.corners`, and `world.edges` map positions to their "
+"registered objects. Tile positions are `(column, row)` pairs. Corners and"
+" edges use three-number keys. Keep separate dictionaries for corners and "
+"edges because a key can occur in both."
+msgstr ""
+"`world.tiles`, `world.corners` und `world.edges` ordnen Positionen die "
+"registrierten Objekte zu. Feldpositionen sind Paare der Form `(Spalte, "
+"Zeile)`. Ecken und Kanten verwenden Schlüssel aus drei Zahlen. Führe "
+"getrennte Wörterbücher für Ecken und Kanten, weil ein Schlüssel in beiden"
+" vorkommen kann."
+
+#: ../../source/api/world_hex.md:26
+msgid ""
+"If a key occurs in both, actor placement and `world.to_pixel(key)` "
+"resolve it as a corner. To get the midpoint of a specific edge, use "
+"`edge.to_pixel()`. The [board game "
+"example](../patterns/hex_world_catan.md) draws roads between the two "
+"corner objects returned by `edge.get_neighbour_corners()`."
+msgstr ""
+"Wenn ein Schlüssel in beiden vorkommt, verwenden die Platzierung eines "
+"Actors und `world.to_pixel(key)` die Ecke. Mit `edge.to_pixel()` erhältst"
+" du den Mittelpunkt einer bestimmten Kante. Das "
+"[Brettspielbeispiel](../patterns/hex_world_catan.md) zeichnet Straßen "
+"zwischen den beiden Ecken, die `edge.get_neighbour_corners()` liefert."
+
+#: ../../source/api/world_hex.md:32
+msgid ""
+"For a sparse board, create the world with `empty=True`. Add the tiles "
+"with `add_tile_to_world(position)`, then register any needed vertices and"
+" sides with `add_corner_to_world(position, direction)` and "
+"`add_edge_to_world(position, direction)`. To use corner or edge picking, "
+"register all six corners and edges for each tile. Shared vertices and "
+"sides are merged by position."
+msgstr ""
+"Erstelle die Welt für ein Spielfeld mit Lücken mit `empty=True`. Füge die"
+" Felder mit `add_tile_to_world(position)` hinzu. Registriere dann die "
+"benötigten Ecken mit `add_corner_to_world(position, direction)` und "
+"Kanten mit `add_edge_to_world(position, direction)`. Um Ecken und Kanten "
+"mit der Maus auszuwählen, registriere alle sechs Ecken und Kanten pro "
+"Feld. Gemeinsame Ecken und Kanten werden anhand ihrer Position "
+"zusammengeführt."
+
+#: ../../source/api/world_hex.md:44
+msgid ""
+"Tiles also provide the inherited attributes `data` (a dictionary for game"
+" data), `terrain` (the value stored under `data[\"terrain\"]`), `cost` "
+"(the nonnegative cost to enter a tile, default 1), and `is_blocking` "
+"(whether the tile blocks pathfinding by default)."
+msgstr ""
+"Felder bieten außerdem die geerbten Attribute `data` (ein Wörterbuch für "
+"Spieldaten), `terrain` (der Wert unter `data[\"terrain\"]`), `cost` "
+"(nichtnegative Kosten für das Betreten des Felds, standardmäßig 1) und "
+"`is_blocking` (ob das Feld bei der Standard-Wegsuche blockiert ist)."
+
+#: miniworlds.worlds.hex_world.hex_edge.HexEdge:1 of
+msgid "An edge of a hex, shared by two hexes where they meet."
+msgstr ""
+"Eine Kante eines Hexfelds. Wo zwei Felder aneinandergrenzen, teilen sie "
+"sich die Kante."
+
+#: ../../source/api/world_hex.md:64
+msgid "Actor integration and camera"
+msgstr "Actors und Kamera"
+
+#: ../../source/api/world_hex.md:86
+msgid "Geometry and pathfinding functions"
+msgstr "Funktionen für Geometrie und Wegsuche"
 
 #~ msgid "The nearest corner."
 #~ msgstr ""

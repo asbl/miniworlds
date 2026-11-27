@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: miniworlds 4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 13:39+0100\n"
+"POT-Creation-Date: 2026-11-27 19:43+0100\n"
 "PO-Revision-Date: 2026-10-21 20:00+0200\n"
 "Last-Translator: Andreas Siebel\n"
 "Language: de\n"
@@ -24,175 +24,147 @@ msgstr "Hex-Welten und ein Mini-Catan-Brett"
 
 #: ../../source/patterns/hex_world_catan.md:3
 msgid ""
-"A `HexWorld` consists of hexagonal tiles. Hexes are addressed with "
-"`(column, row)` coordinates, like tiles in a `TiledWorld`. Odd rows are "
-"shifted half a hex to the right."
+"This example combines 19 land tiles with settlements on vertices and "
+"roads on edges. It builds on the [Hex Worlds "
+"tutorial](../tutorial/hex_world.md)."
 msgstr ""
-"Eine `HexWorld` besteht aus sechseckigen Kacheln. Hexfelder werden wie "
-"Kacheln in einer `TiledWorld` über `(Spalte, Zeile)`-Koordinaten "
-"angesprochen. Ungerade Zeilen sind um ein halbes Hexfeld nach rechts "
-"verschoben."
+"Dieses Beispiel kombiniert 19 Landfelder mit Siedlungen auf Ecken und "
+"Straßen auf Kanten. Es baut auf dem [Tutorial zu Hex-"
+"Welten](../tutorial/hex_world.md) auf."
 
 #: ../../source/patterns/hex_world_catan.md:7
-msgid "Actors can be placed on three kinds of positions:"
-msgstr "Actors können auf drei Arten von Positionen platziert werden:"
+msgid "Build the island"
+msgstr "Die Insel aufbauen"
 
 #: ../../source/patterns/hex_world_catan.md:9
-msgid "**Tiles** (the hexes themselves), e.g. `(2, 3)`"
-msgstr "**Kacheln** (die Hexfelder selbst), z. B. `(2, 3)`"
-
-#: ../../source/patterns/hex_world_catan.md:10
 msgid ""
-"**Corners** (shared by up to three hexes), e.g. the `\"no\"` corner of a "
-"hex"
+"The grid is seven columns by seven rows. Only the positions listed in "
+"`land_rows` belong to the island. The five land rows contain 3, 4, 5, 4, "
+"and 3 tiles. Both even rows start at column 2, so they are centered "
+"between the shifted odd rows."
 msgstr ""
-"**Ecken** (werden von bis zu drei Hexfeldern geteilt), z. B. die Ecke "
-"`\"no\"` eines Hexfelds"
+"Das Raster ist sieben Spalten breit und sieben Zeilen hoch. Zur Insel "
+"gehören die Positionen in `land_rows`. Ihre fünf Zeilen bestehen aus 3, "
+"4, 5, 4 und 3 Feldern. Beide geraden Zeilen beginnen bei Spalte 2 und "
+"liegen so mittig zwischen den versetzten ungeraden Zeilen."
 
-#: ../../source/patterns/hex_world_catan.md:11
-msgid "**Edges** (shared by two hexes), e.g. the `\"o\"` edge of a hex"
-msgstr ""
-"**Kanten** (werden von zwei Hexfeldern geteilt), z. B. die Kante `\"o\"` "
-"eines Hexfelds"
-
-#: ../../source/patterns/hex_world_catan.md:13
+#: ../../source/patterns/hex_world_catan.md:14
 msgid ""
-"This is exactly the structure of a Catan board: land hexes, settlements "
-"on corners, and roads on edges."
+"Each land tile stores a terrain name and a dice number. Its six corners "
+"form the polygon that shows the terrain. The `land` dictionary also lets "
+"the placement rules test whether a corner or edge touches the island."
 msgstr ""
-"Das ist genau die Struktur eines Catan-Bretts: Landhexfelder, Siedlungen "
-"auf Ecken und Straßen auf Kanten."
+"Jedes Landfeld speichert eine Geländeart und eine Würfelzahl. Seine sechs"
+" Ecken bilden das Polygon, das das Gelände anzeigt. Anhand des "
+"Wörterbuchs `land` prüfen die Platzierungsregeln, ob eine Ecke oder Kante"
+" die Insel berührt."
 
-#: ../../source/patterns/hex_world_catan.md:16
-msgid "Create a hex world"
-msgstr "Eine Hex-Welt erstellen"
+#: ../../source/patterns/hex_world_catan.md:18
+msgid "Place pieces on shared corners and edges"
+msgstr "Spielsteine auf gemeinsamen Ecken und Kanten platzieren"
+
+#: ../../source/patterns/hex_world_catan.md:20
+msgid "Run the script below and use these controls."
+msgstr "Starte das Skript und probiere die Steuerung aus."
+
+#: ../../source/patterns/hex_world_catan.md:22
+msgid ""
+"Left-click near a land corner to place a settlement. The corner and its "
+"immediate neighbors must be free."
+msgstr ""
+"Klicke mit der linken Maustaste nahe einer Landecke, um eine Siedlung zu "
+"platzieren. Die Ecke und ihre direkten Nachbarecken müssen frei sein."
+
+#: ../../source/patterns/hex_world_catan.md:24
+msgid ""
+"Right-click near an edge to place a road. The edge must touch land, have "
+"a settlement at one end, and be free."
+msgstr ""
+"Klicke mit der rechten Maustaste nahe einer Kante, um eine Straße zu "
+"platzieren. Die Kante muss Land berühren, an einem Ende eine Siedlung "
+"haben und frei sein."
 
 #: ../../source/patterns/hex_world_catan.md:26
-msgid "Build a Catan-like board"
-msgstr "Ein Catan-ähnliches Brett bauen"
-
-#: ../../source/patterns/hex_world_catan.md:28
 msgid ""
-"The 19 land hexes of a Catan board are arranged in rows of 3, 4, 5, 4, "
-"and 3 hexes. Actors placed on hexes are drawn as hexagons."
+"Press Space to distribute resources for a sample roll of 8. The center "
+"tile has number 8. Place a settlement on one of its corners to see a gain"
+" printed in the terminal."
 msgstr ""
-"Die 19 Landhexfelder eines Catan-Bretts sind in Zeilen aus 3, 4, 5, 4 und"
-" 3 Hexfeldern angeordnet. Actors auf Hexfeldern werden als Sechsecke "
-"gezeichnet."
+"Drücke die Leertaste, um die Rohstoffe für einen Beispielwurf von 8 zu "
+"verteilen. Das mittlere Feld trägt die Zahl 8. Platziere eine Siedlung "
+"auf einer seiner Ecken, um den Ertrag im Terminal zu sehen."
 
-#: ../../source/patterns/hex_world_catan.md:61
-msgid "Click hexes, corners, and edges"
-msgstr "Auf Hexfelder, Ecken und Kanten klicken"
-
-#: ../../source/patterns/hex_world_catan.md:63
+#: ../../source/patterns/hex_world_catan.md:30
 msgid ""
-"`world.get_tile_from_pixel(mouse_pos)` returns the hex under the mouse, "
-"`world.get_corner_from_pixel(mouse_pos)` the nearest corner, and "
-"`world.get_edge_from_pixel(mouse_pos)` the nearest edge. All three "
-"queries return `None` if the pixel is outside the world."
+"A shared corner has one `.position`, even if you look it up from "
+"different land tiles. The same applies to edges. The script uses these "
+"positions as keys in `settlements` and `roads`, so both sides of a tile "
+"boundary refer to the same piece."
 msgstr ""
-"`world.get_tile_from_pixel(mouse_pos)` gibt das Hexfeld unter der Maus "
-"zurück, `world.get_corner_from_pixel(mouse_pos)` die nächstgelegene Ecke "
-"und `world.get_edge_from_pixel(mouse_pos)` die nächstgelegene Kante. Alle"
-" drei Abfragen geben `None` zurück, wenn der Pixel außerhalb der Welt "
-"liegt."
+"Eine gemeinsame Ecke hat eine einzige `.position`, auch wenn du sie von "
+"verschiedenen Landfeldern aus abfragst. Dasselbe gilt für Kanten. Das "
+"Skript nutzt diese Positionen als Schlüssel in `settlements` und `roads`."
+" So verweisen beide Seiten einer Feldgrenze auf denselben Spielstein."
 
-#: ../../source/patterns/hex_world_catan.md:68
+#: ../../source/patterns/hex_world_catan.md:138
+msgid "Follow a placement or resource payout"
+msgstr "Platzierung und Rohstoffverteilung nachvollziehen"
+
+#: ../../source/patterns/hex_world_catan.md:140
 msgid ""
-"The example places a settlement (small circle) on the clicked corner and "
-"a road (small rectangle) on the clicked edge:"
+"`get_neighbour_tiles()` on a corner or edge answers which existing tiles "
+"touch it. `corner.get_neighbour_corners()` follows one edge in each "
+"direction from the corner. `edge.get_neighbour_corners()` gives the two "
+"endpoints. The script draws the road as a line between them. The full "
+"board is visible here, so the endpoints' world pixels can be used "
+"directly on the background. These queries work both in the middle of the "
+"island and on its coast."
 msgstr ""
-"Das Beispiel platziert eine Siedlung (kleiner Kreis) auf der angeklickten"
-" Ecke und eine Straße (kleines Rechteck) auf der angeklickten Kante:"
+"`get_neighbour_tiles()` gibt für eine Ecke oder Kante die angrenzenden "
+"Felder zurück. `corner.get_neighbour_corners()` folgt von der Ecke aus "
+"jeweils einer Kante. `edge.get_neighbour_corners()` liefert die beiden "
+"Endpunkte. Das Skript zeichnet die Straße als Linie zwischen diesen "
+"beiden Punkten. Hier ist das ganze Spielfeld sichtbar. Deshalb können die"
+" Weltpixel der Endpunkte direkt für die Zeichnung auf dem Hintergrund "
+"verwendet werden. Die Abfragen funktionieren im Inneren der Insel ebenso "
+"wie an der Küste."
 
-#: ../../source/patterns/hex_world_catan.md:94
-msgid "Query the neighborhood"
-msgstr "Die Nachbarschaft abfragen"
-
-#: ../../source/patterns/hex_world_catan.md:96
+#: ../../source/patterns/hex_world_catan.md:148
 msgid ""
-"`world.get_tiles_in_radius(position, radius)` returns all hexes within a "
-"given hex distance. `tile.get_neighbour_tiles()` returns the up to six "
-"neighbors of a hex. This is useful for Catan rules such as \"the robber "
-"blocks all hexes around the desert\"."
+"For a payout, the script starts from the tile that matches the roll and "
+"visits its six corners with `tile.get_neighbour_corners()`. Each occupied"
+" corner contributes one `(owner, terrain)` pair. For example, with one "
+"settlement on the center tile the output is `Gains for roll 8: [('Red', "
+"'hill')]`."
 msgstr ""
-"`world.get_tiles_in_radius(position, radius)` gibt alle Hexfelder "
-"innerhalb einer bestimmten Hex-Distanz zurück. "
-"`tile.get_neighbour_tiles()` gibt die bis zu sechs Nachbarn eines "
-"Hexfelds zurück. Das ist nützlich für Catan-Regeln wie „der Räuber "
-"blockiert alle Hexfelder um die Wüste“."
+"Für die Rohstoffverteilung sucht das Skript das Feld mit der gewürfelten "
+"Zahl und prüft seine sechs Ecken mit `tile.get_neighbour_corners()`. Jede"
+" besetzte Ecke liefert ein Paar `(owner, terrain)`. Steht zum Beispiel "
+"eine Siedlung auf einer Ecke des mittleren Felds, lautet die Ausgabe "
+"`Gains for roll 8: [('Red', 'hill')]`."
 
-#: ../../source/patterns/hex_world_catan.md:115
-msgid "Build rules with corners and edges"
-msgstr "Bauregeln mit Ecken und Kanten"
-
-#: ../../source/patterns/hex_world_catan.md:117
+#: ../../source/patterns/hex_world_catan.md:154
 msgid ""
-"Corners and edges know their neighbours, so the placement rules of Catan "
-"need only a few lines:"
+"The example uses one player and a fixed roll so you can reproduce the "
+"placement and payout. For a playable version, store the current player in"
+" the piece dictionaries, apply ownership when checking connections, roll "
+"two dice, and add the returned gains to inventories."
 msgstr ""
-"Ecken und Kanten kennen ihre Nachbarn, deshalb brauchen die Bauregeln von"
-" Catan nur wenige Zeilen:"
+"Das Beispiel verwendet einen Spieler und einen festen Würfelwurf. Damit "
+"kannst du die Platzierung und die Rohstoffverteilung nachvollziehen. "
+"Speichere für eine spielbare Variante den aktuellen Spieler in den "
+"Wörterbüchern der Spielsteine, berücksichtige den Besitzer bei der "
+"Prüfung von Verbindungen, würfle mit zwei Würfeln und addiere die Erträge"
+" zum jeweiligen Vorrat."
 
-#: ../../source/patterns/hex_world_catan.md:120
+#: ../../source/patterns/hex_world_catan.md:159
 msgid ""
-"`corner.get_neighbour_corners()` returns the up to three corners one hex "
-"side away,"
+"The [HexWorld API reference](../api/world_hex.md) lists the other "
+"adjacency methods, including the edges incident to a corner and the edges"
+" that share an endpoint."
 msgstr ""
-"`corner.get_neighbour_corners()` gibt die bis zu drei Ecken zurück, die "
-"eine Hexfeld-Seite entfernt sind,"
-
-#: ../../source/patterns/hex_world_catan.md:122
-msgid ""
-"`corner.get_neighbour_edges()` returns the up to three edges that meet at"
-" the corner,"
-msgstr ""
-"`corner.get_neighbour_edges()` gibt die bis zu drei Kanten zurück, die an"
-" der Ecke zusammentreffen,"
-
-#: ../../source/patterns/hex_world_catan.md:124
-msgid ""
-"`edge.get_neighbour_corners()` returns the two corners at the ends of an "
-"edge,"
-msgstr ""
-"`edge.get_neighbour_corners()` gibt die beiden Ecken an den Enden einer "
-"Kante zurück,"
-
-#: ../../source/patterns/hex_world_catan.md:126
-msgid "`edge.get_neighbour_edges()` returns the edges that touch the edge,"
-msgstr ""
-"`edge.get_neighbour_edges()` gibt die Kanten zurück, die die Kante "
-"berühren,"
-
-#: ../../source/patterns/hex_world_catan.md:127
-msgid ""
-"`tile.get_neighbour_corners()` and `tile.get_neighbour_edges()` return "
-"the six corners and edges of a hex."
-msgstr ""
-"`tile.get_neighbour_corners()` und `tile.get_neighbour_edges()` geben die"
-" sechs Ecken und Kanten eines Hexfelds zurück."
-
-#: ../../source/patterns/hex_world_catan.md:130
-msgid ""
-"The distance rule (\"no settlement next to another settlement\") and the "
-"connection rule (\"a road must touch one of your settlements\") look like"
-" this:"
-msgstr ""
-"Die Abstandsregel (\"keine Siedlung neben einer anderen Siedlung\") und "
-"die Anschlussregel (\"eine Straße muss eine deiner Siedlungen berühren\")"
-" sehen so aus:"
-
-#: ../../source/patterns/hex_world_catan.md:175
-msgid "Resources and dice with tile data"
-msgstr "Rohstoffe und Würfel mit Kachel-Daten"
-
-#: ../../source/patterns/hex_world_catan.md:177
-msgid ""
-"Each hex can store its terrain and dice number in `tile.data`. After a "
-"dice roll, the settlements on the corners of the matching hexes collect "
-"the resource:"
-msgstr ""
-"Jedes Hexfeld kann sein Gelände und seine Würfelzahl in `tile.data` "
-"speichern. Nach einem Würfelwurf sammeln die Siedlungen an den Ecken der "
-"passenden Hexfelder den Rohstoff ein:"
+"Die [HexWorld-API-Referenz](../api/world_hex.md) listet die weiteren "
+"Nachbarschaftsmethoden auf. Damit findest du beispielsweise die Kanten, "
+"die an einer Ecke zusammentreffen, oder die Kanten mit einem gemeinsamen "
+"Endpunkt."
 

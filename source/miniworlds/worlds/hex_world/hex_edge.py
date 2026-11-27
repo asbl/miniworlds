@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class HexEdge(hex_neighbour_cache.HexNeighbourCacheMixin, edge_mod.Edge):
-    """An edge of a hex, shared by exactly two hexes.
+    """An edge of a hex, shared by two hexes where they meet.
 
     The edge position is a unique key in doubled cube coordinates: both
     hexes that share the edge compute the same key, so edges are merged
