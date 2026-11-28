@@ -1,8 +1,31 @@
 # Tutorials
 
-Die interaktiven miniworlds Tutorials findest du jetzt im [miniworlds_examples Kurs](https://github.com/copilotstudent/course-sync/tree/main/courses/miniworlds_examples).
+## Kapitel in dieser Dokumentation
 
-## Kursinhalte
+Diese Kapitel sind frei verfügbar:
+
+| Kapitel | Thema |
+|---------|-------|
+| [Konzepte und erste Schritte](../concepts/concept_imports.md) | Imports, Schleifen, Funktionen, `self` |
+| [Zeichnen mit Processing](../processing/01_first_steps_drawing.md) | Formen, Farben, Variablen, Bewegung, Listen, Bildverarbeitung |
+| [Hex-Welten](hex_world.md) | Sechseckige Welten für Brettspiele wie Catan |
+| [API-Referenz: World](../api/world.md) | Alle Eigenschaften und Methoden einer Welt |
+
+Vollständige, lauffähige Programme liegen in der Beispielsammlung
+[miniworlds_examples](https://github.com/asbl/miniworlds_examples).
+
+## Hex-Welten
+
+Ein Schritt-für-Schritt-Tutorial für sechseckige Welten (für Brettspiele wie
+Catan) findest du hier: [Tutorial: Hex Worlds](hex_world.md).
+
+## Interaktiver Kurs (Objects First)
+
+Der interaktive Kurs "Objects First" liegt außerhalb dieser Dokumentation im
+Kurs-Ordner `courses/miniworlds_examples` des Werkzeugs `course-sync`. Er ist
+nur mit Zugriff auf dieses Repository erreichbar.
+
+Kursinhalte:
 
 | Kapitel | Thema |
 |---------|-------|
@@ -15,14 +38,10 @@ Die interaktiven miniworlds Tutorials findest du jetzt im [miniworlds_examples K
 | 007 | Fortgeschrittene Themen |
 | 008 | Tiled Worlds |
 
-## Hex-Welten
-
-Ein Schritt-für-Schritt-Tutorial für sechseckige Welten (für Brettspiele wie Catan) findest du hier: [Tutorial: Hex Worlds](hex_world.md).
-
 ## Lokale Vorschau
 
 ```bash
-cd /home/sbl/code-git/course-sync
+cd <pfad-zu>/course-sync
 course-sync serve
 ```
 

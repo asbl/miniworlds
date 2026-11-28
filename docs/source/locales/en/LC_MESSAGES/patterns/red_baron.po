@@ -76,11 +76,11 @@ msgstr ""
 #: ../../source/patterns/red_baron.md:51
 #, fuzzy
 msgid ""
-"(You can find the images here: [miniworlds-cookbook - red "
-"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+"(You can find the images in the examples repository: "
+"[classes_first/red_baron](https://github.com/asbl/miniworlds_examples/tree/main/classes_first/red_baron))"
 msgstr ""
-"(You can find the images in this repository: [miniworlds-cookbook - red "
-"baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))"
+"(You can find the images in the examples repository: "
+"[classes_first/red_baron](https://github.com/asbl/miniworlds_examples/tree/main/classes_first/red_baron))"
 
 #: ../../source/patterns/red_baron.md:55
 msgid "Create Backgrounds"

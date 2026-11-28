@@ -48,7 +48,7 @@ my_code
 |----shipyellow.png
 ```
 
-(You can find the images here: [miniworlds-cookbook - red baron](https://codeberg.org/a_siebel/miniworlds_cookbook/src/branch/main/classes_first/red_baron))
+(You can find the images in the examples repository: [classes_first/red_baron](https://github.com/asbl/miniworlds_examples/tree/main/classes_first/red_baron))
 
 ---
 

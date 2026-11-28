@@ -13,9 +13,6 @@
 [submodule "libraries/miniworlds_turtle"]
 	path = libraries/miniworlds_turtle
 	url = https://github.com/asbl/miniworlds-turtle.git
-[submodule "miniworlds_examples"]
-	path = libraries/miniworlds_examples
-	url = https://github.com/asbl/miniworlds_examples.git
 [submodule "libraries/miniworlds_data"]
 	path = libraries/miniworlds_data
 	url = https://github.com/asbl/miniworlds-data.git
