@@ -1,3 +1,5 @@
+4.4.0.19
+  * Fehler behoben (Browser/Pyodide): Programme mit `world.run(fullscreen=True)` blieben im Editor bzw. in der WebAssembly-Umsetzung hängen. SDL gibt im Pyodide-Worker bei `set_mode(..., pygame.SCALED)` nicht zurück. Browser-Programme verwenden jetzt die normale, weltgroße Canvas-Fläche; `fullscreen`, `fit_desktop` und `replit` bleiben dort ohne Wirkung, Vollbild bietet weiterhin die einbettende Seite an.
 4.4.0.18
   * Performance für Pyodide und dichte Szenen: adaptives Neuzeichnen anhand sichtbarer Änderungen, wiederverwendete Fonts, bedarfsgesteuerte Audio-Initialisierung und bereinigte Transformations-Caches. Gemeinsame Skalierungs- und Rotationsergebnisse lassen sich mit begrenztem Speicherbudget optional wiederverwenden.
   * Neue optionale Funktionen für Survivors-artige Spiele: räumliche Rechteck-, Radius- und Nächster-Nachbar-Abfragen, Kollisionsgruppen, kameraunabhängige Kollisionen, getrennte Denk-/Bewegungs-/Animationsintervalle und `move_towards_fast()` ohne Richtungsänderung.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import builtins
 import importlib
 import json
 import math
@@ -542,6 +543,43 @@ async def test_world_run_schedules_inside_pyodide_loop() -> None:
     assert app_run_called
 
 
+async def test_web_fullscreen_program_keeps_world_sized_canvas() -> None:
+    _reset()
+    world = World(128, 96)
+    world.add_background((10, 20, 30))
+    Rectangle((20, 20), 30, 20, world=world)
+
+    # Capture the mainloop task that world.run() schedules in Pyodide's
+    # running loop. SDL's SCALED mode used to block inside the editor's
+    # worker before the first frame could be drawn.
+    tasks = []
+    previous_hook = getattr(builtins, "_h5p_register_background_task", None)
+    builtins._h5p_register_background_task = tasks.append
+    try:
+        world.run(fullscreen=True)
+        for _ in range(200):
+            if tasks:
+                break
+            await asyncio.sleep(0.01)
+        assert tasks, "run() did not schedule its mainloop"
+        for _ in range(300):
+            if world.app._mainloop_started and world.frame >= 2:
+                break
+            await asyncio.sleep(0.01)
+
+        assert pygame.display.get_surface().get_size() == (128, 96)
+        assert world.frame >= 2
+
+        world.app.quit()
+        await asyncio.wait_for(tasks[0], timeout=5)
+        assert not world.app._mainloop_started
+    finally:
+        if previous_hook is None:
+            delattr(builtins, "_h5p_register_background_task")
+        else:
+            builtins._h5p_register_background_task = previous_hook
+
+
 async def test_web_frame_updates_and_canvas_rendering() -> None:
     _reset()
     world = World(128, 96)
@@ -649,6 +687,7 @@ TESTS = [
     test_audio_is_lazy_and_sound_loading_survives_restart,
     test_font_cache_survives_host_font_restart,
     test_world_run_schedules_inside_pyodide_loop,
+    test_web_fullscreen_program_keeps_world_sized_canvas,
     test_web_frame_updates_and_canvas_rendering,
 ]
 

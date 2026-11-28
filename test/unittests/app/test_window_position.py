@@ -5,6 +5,8 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
+import pygame
+
 from miniworlds.base.window import Window
 
 
@@ -51,6 +53,48 @@ class TestWindowPosition(unittest.TestCase):
 
         platform.set_mode.assert_called_once_with((1, 1))
         platform.set_window_position.assert_called_once_with((300, 250))
+        surface.set_alpha.assert_called_once_with(None)
+
+    def test_web_ignores_desktop_window_modes(self):
+        surface = Mock()
+        platform = SimpleNamespace(
+            is_web=Mock(return_value=True),
+            set_mode=Mock(return_value=surface),
+            toggle_fullscreen=Mock(),
+        )
+        window = Window.__new__(Window)
+        window.app = SimpleNamespace(init=True, platform=platform)
+        window.worlds_manager = SimpleNamespace(worlds_total_width=400, worlds_total_height=300)
+        window._fullscreen = True
+        window._fit_desktop = True
+        window._replit = True
+        window.mode = False
+
+        window._update_surface()
+
+        platform.set_mode.assert_called_once_with((400, 300))
+        platform.toggle_fullscreen.assert_not_called()
+        surface.set_alpha.assert_called_once_with(None)
+
+    def test_desktop_fullscreen_keeps_scaled_mode(self):
+        surface = Mock()
+        platform = SimpleNamespace(
+            is_web=Mock(return_value=False),
+            set_mode=Mock(return_value=surface),
+            toggle_fullscreen=Mock(),
+        )
+        window = Window.__new__(Window)
+        window.app = SimpleNamespace(init=True, platform=platform)
+        window.worlds_manager = SimpleNamespace(worlds_total_width=400, worlds_total_height=300)
+        window._fullscreen = True
+        window._fit_desktop = False
+        window._replit = False
+        window.mode = False
+
+        window._update_surface()
+
+        platform.set_mode.assert_called_once_with((400, 300), pygame.SCALED)
+        platform.toggle_fullscreen.assert_called_once_with()
         surface.set_alpha.assert_called_once_with(None)
 
 
