@@ -7,6 +7,7 @@ This suite runs core miniworlds behavior in a real Pyodide browser runtime:
 - tiled-world movement and detection
 - event dispatch
 - the asynchronous web mainloop and canvas rendering
+- web programs calling `run(fullscreen=True)` keep a normal world-sized canvas
 - uploaded multi-file student projects with local imports and JSON data
 - relative, extensionless, missing, case-sensitive, and desktop-only asset paths
 - project-validator warnings and errors relevant to browser export

@@ -82,15 +82,23 @@ class Window:
         Defaults to containers_width/height
 
         Depends on the values of self.fullscreen, self.fit_desktop and self.replit
+
+        In the browser the embedding page owns the canvas, and SDL under
+        Emscripten cannot use the desktop window modes: ``set_mode(...,
+        pygame.SCALED)`` blocks inside a Pyodide worker instead of returning.
+        Programs using ``fullscreen``, ``fit_desktop`` or ``replit`` therefore
+        get the normal world-sized canvas there. Fullscreen itself is offered
+        by the host page.
         """
-        if self.fullscreen:
+        web = self.app.platform.is_web()
+        if self.fullscreen and not web:
             self._surface = self.app.platform.set_mode(
                 (self.width, self.height), pygame.SCALED
             )
             self.app.platform.toggle_fullscreen()
-        elif self.fit_desktop:
+        elif self.fit_desktop and not web:
             self._surface = self.app.platform.set_mode((0, 0))
-        elif self.replit:
+        elif self.replit and not web:
             self._surface = self.app.platform.set_mode((800, 600), pygame.SCALED)
         else:
             self._place_window_within_screen(self.width, self.height)
